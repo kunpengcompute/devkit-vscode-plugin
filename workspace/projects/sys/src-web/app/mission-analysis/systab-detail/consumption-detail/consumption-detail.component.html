@@ -1,0 +1,17 @@
+<div class="cpu-detail" >
+    <div class="cpu-usage" *ngIf="consumptionShow">
+        <span class="box-title" style="position: relative;display: block">{{i18n.sys_summary.cpupackage_tabel.consumption}}
+        </span>
+        <div class="table-box" [appLoading]='okLoading'>
+          <div *ngIf="consumptionEchartData.length>0">
+            <div *ngFor="let item of consumptionEchartData" >
+             <app-tables #consumption [timeLine]='timeLine' (loading)="okLoading = false" [datas]='item'  [isHave]="'consumption'" (dataZoom)='dataZoom($event)' (echartsInstOut)='echartsInstOut($event)'></app-tables>
+            </div>
+          </div>
+             <div class="nodata" *ngIf="consumptionEchartData.length==0 && !okLoading">
+                    <img style='width:15%;display:block' src='./assets/img/projects/nodata.png' />
+                    <div style="font-size: 1rem">{{i18n.common_term_task_nodata}}</div>
+                </div>
+        </div>
+    </div>
+</div>

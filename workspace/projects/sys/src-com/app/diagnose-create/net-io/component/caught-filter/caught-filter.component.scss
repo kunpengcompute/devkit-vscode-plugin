@@ -1,0 +1,45 @@
+.light {
+  --netio-filter-mask-bg: #f8fafd;
+}
+.dark {
+  --netio-filter-mask-bg: #252525;
+}
+
+.warpper {
+  padding: 20px 24px 0;
+  width: 483px;
+  background-color: var(--netio-filter-mask-bg);
+
+  .radios{
+    display: flex;
+    align-items: center;
+    width: 345px;
+    height: 28px;
+
+    .radio-item {
+      display: inline-block;
+      + .radio-item {
+        margin-left: 32px;
+      }
+    }
+  }
+}
+.flex{
+  display: flex;
+  align-items: center;
+  width: fit-content;
+
+  img{
+    width: 14px;
+    height: 14px;
+    margin-left: 8px;
+  }
+}
+
+:host ::ng-deep .warpper .form-warpper .ti3-form .ti3-form-label {
+  padding: 0 var(--ti-formfield-item-label-padding-right)
+    var(--ti-formfield-item-padding-bottom) 0 !important; 
+  min-width: unset;
+  max-width: unset;
+  display: inline-block;
+}

@@ -1,0 +1,221 @@
+<div class="io-warpper">
+  <div class="io-form-warpper">
+    <div>
+      <ti-formfield
+        vertical
+        [formGroup]="formGroup"
+        [labelWidth]="labelWidth"
+        class="taskForm"
+      >
+        <!-- 选择节点 -->
+        <ti-item *ngIf="formOption.selectNodeList.display" [required]="true">
+          <ti-item-label>
+            {{ i18n.node.selectNode }}
+            <span class="tint">{{ 'project.HPCSelectNodeTxt' | i18n : ('mission_create.io' | i18n )}}</span>
+          </ti-item-label>
+          <app-not-hpc-select-nodes
+            [nodeList]="nodeList"
+            [isSelectNodeDisabled]="isSelectNodeDisabled"
+            formControlName="nodeList"
+          ></app-not-hpc-select-nodes>
+        </ti-item>
+      </ti-formfield>
+    </div>
+    <div class="part-one">
+      <ti-formfield
+        [formGroup]="formGroup"
+        [labelWidth]="labelWidth"
+        class="taskForm"
+      >
+        <!-- 采样时长（秒） -->
+        <ti-item
+          [label]="i18n.storageIO.mission_create.duration"
+          [required]="true"
+        >
+          <ti-spinner
+            formControlName="duration"
+            format="N0"
+            placeholder="2-300"
+            [appSpinnerBlur]="samplingDurationBlur"
+            style="width: 140px"
+            tiValidation
+            [errorMessageWrapper]="durationErrorMsgWrapper"
+          >
+          </ti-spinner>
+          <span class="spinner-domain"
+            >{{ i18n.common_term_sign_left }}2~300{{
+              i18n.common_term_sign_right
+            }}</span
+          >
+          <div #durationErrorMsgWrapper></div>
+        </ti-item>
+
+        <!-- 统计周期（秒） -->
+        <ti-item
+          [label]="i18n.storageIO.mission_create.statistical"
+          [required]="true"
+        >
+          <ti-spinner
+            formControlName="statistical"
+            format="N0"
+            placeholder="1-5"
+            [appSpinnerBlur]="intervalBlur"
+            style="width: 140px"
+            tiValidation
+            [errorMessageWrapper]="statisticalErrorMsgWrapper"
+          >
+          </ti-spinner>
+          <span class="spinner-domain"
+            >{{ i18n.common_term_sign_left }}1~5{{
+              i18n.common_term_sign_right
+            }}</span
+          >
+          <div #statisticalErrorMsgWrapper></div>
+        </ti-item>
+
+        <!-- 采集文件大小（MB） -->
+        <ti-item [required]="true">
+          <ti-item-label>
+            <span>{{ i18n.storageIO.mission_create.collection_size }}</span>
+            <ti-icon
+              [tiTip]="i18n.falsesharing.filesizeTips"
+              style="position: relative; top: 2px"
+              tiTipMaxWidth="370px"
+              tiTipPosition="bottom"
+            >
+              <img src="./assets/img/summary/tooltip.png" alt="" />
+            </ti-icon>
+          </ti-item-label>
+          <ti-spinner
+            formControlName="size"
+            format="N0"
+            placeholder="10-500"
+            [appSpinnerBlur]="collectFileBlur"
+            style="width: 140px"
+            tiValidation
+            [errorMessageWrapper]="sizeErrorMsgWrapper"
+          >
+          </ti-spinner>
+          <span class="spinner-domain"
+            >{{ i18n.common_term_sign_left }}10~500{{
+              i18n.common_term_sign_right
+            }}</span
+          >
+          <div #sizeErrorMsgWrapper></div>
+        </ti-item>
+
+        <!--采集调用栈-->
+        <ti-item [label]="i18n.storageIO.mission_create.stack">
+          <ti-switch formControlName="stack"></ti-switch>
+        </ti-item>
+
+        <!-- 配置节点参数 -->
+        <ti-item
+          *ngIf="formOption.doNodeConfig.display"
+          [label]="i18n.storageIO.mission_create.node_config"
+        >
+          <ti-switch formControlName="doNodeConfig"></ti-switch>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <div
+      class="node-config-tip"
+      *ngIf="!formOption.nodeConfig.display && formOption.doNodeConfig.display"
+    >
+      <img src="./assets/img/tip/tip.svg" />
+      <span>{{ i18n.nodeConfig.nodeTip }}</span>
+    </div>
+
+    <div
+      *ngIf="formOption.nodeConfig.display"
+      class="part-two"
+      [formGroup]="formGroup"
+    >
+      <!-- 配置节点编辑控件 -->
+      <div [formGroup]="formGroup">
+        <app-mission-io-node-config
+          [analysisMode]="analysisMode"
+          formControlName="nodeConfig"
+          [labelWidth]="labelWidth"
+          [runUserData]="runUserData"
+          [isModifySchedule]="isModifySchedule"
+        ></app-mission-io-node-config>
+      </div>
+    </div>
+
+    <div class="part-three" *ngIf="actionType === 'create'">
+      <ti-formfield
+        [formGroup]="formGroup"
+        [labelWidth]="labelWidth"
+        class="taskForm"
+      >
+        <!-- 预约定时启动 -->
+        <ti-item [label]="i18n.storageIO.mission_create.order">
+          <div
+            [tiTip]="
+              isShowReserveAndImmedia ? i18n.mission_create.disableeTip : ''
+            "
+          >
+            <ti-switch formControlName="doOrder" id="myswitch"></ti-switch>
+          </div>
+        </ti-item>
+        <!-- 预约定时编辑控件 -->
+        <ti-item *ngIf="formOption.orderConfig.display">
+          <app-mission-reservation-plus
+            formControlName="orderConfig"
+            [labelWidth]="labelWidth"
+          >
+          </app-mission-reservation-plus>
+        </ti-item>
+      </ti-formfield>
+    </div>
+    <div class="part-four" *ngIf="formOption.taskStartNow.display">
+      <!-- 立即 -->
+      <div [formGroup]="formGroup" class="immediately">
+        <div
+          *ngIf="isShowReserveAndImmedia"
+          [tiTip]="i18n.mission_create.disableeTip"
+        >
+          <input
+            type="checkbox"
+            formControlName="taskStartNow"
+            tiCheckbox
+            [disabled]="true"
+          />
+        </div>
+        <div>
+          <input
+            *ngIf="!isShowReserveAndImmedia"
+            type="checkbox"
+            formControlName="taskStartNow"
+            tiCheckbox
+          />
+        </div>
+        <span class="start-now">{{ i18n.common_term_task_start_now }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="opreation">
+    <button
+      tiButton
+      [disabled]="!opreationEnable"
+      type="button"
+      color="primary"
+      (click)="onCreateMission()"
+    >
+      {{ i18n.common_term_operate_ok }}
+    </button>
+    <button tiButton type="button" (click)="onClose()">
+      {{ i18n.common_term_operate_cancel }}
+    </button>
+    <button
+      tiButton
+      [disabled]="!opreationEnable"
+      type="button"
+      (click)="onSaveTemplate()"
+    >
+      {{ i18n.mission_modal.saveTemplates }}
+    </button>
+  </div>
+</div>

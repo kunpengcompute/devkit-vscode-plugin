@@ -1,0 +1,32 @@
+<app-alert-modal #modal>
+  <div class="content" *ngIf="isOpen">
+    <div class="header">
+      <span>{{i18n.common_term_admin_change_pwd}}</span>
+      <img class="close" (mousedown)="close()" (mouseenter)="onHoverClose('closer')" (mouseleave)="onHoverClose('')"
+        [src]="hoverClose==='closer'?'./assets/img/newSvg/close_hover.svg':' ./assets/img/header/close_icon.svg'">
+    </div>
+    <div class="main">
+      <ti-formfield [formGroup]='pwdFormGroup'>
+        <ti-item [label]="pwdForm.oldPwd.title" [required]='pwdForm.oldPwd.required'>
+          <input class="changePwd-input" tiText [tiValidation]='validation' formControlName='oldPwd'
+            autocomplete="new-password" type="password" oncopy="return false" oncut="return false"
+            (keydown)="disableCtrlZ($event)">
+        </ti-item>
+        <ti-item [label]="pwdForm.newPwd.title" [required]='pwdForm.newPwd.required'>
+          <input class="changePwd-input" tiText [tiValidation]='validation' formControlName='pwd' type="password"
+            oncopy="return false" oncut="return false" (keydown)="disableCtrlZ($event)"
+            (ngModelChange)='updateConfirmValidator2()'>
+        </ti-item>
+        <ti-item [label]="pwdForm.confirmPwd.title" [required]='pwdForm.confirmPwd.required'>
+          <input class="changePwd-input" tiText [tiValidation]='validation' formControlName='cpwd' type="password"
+            oncopy="return false" oncut="return false" (keydown)="disableCtrlZ($event)">
+        </ti-item>
+      </ti-formfield>
+    </div>
+    <div class="foot">
+      <button class="confirm" type="button" color="primary" tiButton (click)="confirm()"
+        [disabled]="!pwdFormGroup.valid">{{i18n.common_term_ok}}</button>
+      <button type="button" tiButton (mousedown)="close()">{{i18n.common_term_operate_cancel}}</button>
+    </div>
+  </div>
+</app-alert-modal>

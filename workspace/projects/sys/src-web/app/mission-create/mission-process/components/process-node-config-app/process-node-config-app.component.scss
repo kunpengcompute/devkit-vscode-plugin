@@ -1,0 +1,38 @@
+.analysis-target-application {
+    display: flex;
+    flex-direction: column;
+    z-index: -1;
+    .analysis-target-app-notice,
+    .analysis-target-pid-notice {
+        font-size: 12px;
+        color: #616161;
+        margin-bottom: 11px;
+    }
+    .analysis-target-content {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 20px;
+
+        .analysis-target-content-label{
+            margin-right: 16px;
+            color: #666;
+            font-size: 14px;
+            height: 32px;
+            line-height: 32px;
+        }
+        .analysis-target-content-value{
+            ti-switch{
+                margin-top: 5px;
+            }
+            input {
+                width: 350px;
+            }
+            .mission-app-warn,
+            .mission-pid-warn {
+                width: 350px;
+                line-height: 24px;
+                color: red;
+            }
+        }
+    }
+}

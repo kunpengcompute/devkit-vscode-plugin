@@ -1,0 +1,129 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Web Server Certificate Management">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001224201265.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (Tuning Assistant)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001224201249">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Web Server Certificate Management</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001224201249"></a><a name="EN-US_TOPIC_0000001224201249"></a>
+
+<h1 class="topictitle1">Web Server Certificate Management</h1>
+<div id="body1591786100926"><p id="EN-US_TOPIC_0000001224201249__p03111641141319">The web server certificate is used for communication between the <span id="EN-US_TOPIC_0000001224201249__ph1331116578362">Kunpeng Hyper Tuner</span> web server and web browser.</p>
+<div class="section" id="EN-US_TOPIC_0000001224201249__section11470129119"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0000001224201249__p2444451164517">You have logged in to the <span id="EN-US_TOPIC_0000001224201249__ph732716913408">Kunpeng Hyper Tuner</span>.</p>
+<div class="note" id="EN-US_TOPIC_0000001224201249__note15470104415378"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001224201249__p4642155955813">The administrator (<strong id="EN-US_TOPIC_0000001224201249__b3793152134720">tunadmin</strong>) can generate certificate signing request (CSR) files, import certificates, update working keys, and restart services. Common users can only view web server certificate information.</p>
+</div></div>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001224201249__section4333162310508"><h4 class="sectiontitle">Viewing Web Server Certificate Information</h4><p id="EN-US_TOPIC_0000001224201249__p125861440102911">Click <span><img id="EN-US_TOPIC_0000001224201249__image558634014295" src="en-us_image_0000001224122759.png"></span> on the <span id="EN-US_TOPIC_0000001224201249__ph1461213125402">Kunpeng Hyper Tuner</span> page and choose <strong id="EN-US_TOPIC_0000001224201249__b36122127405">Web Server Certificates</strong>.</p>
+<div class="p" id="EN-US_TOPIC_0000001224201249__p17925169122913">The <strong id="EN-US_TOPIC_0000001224201249__b881415731215">Web Server Certificates</strong> page is displayed, as shown in <a href="#EN-US_TOPIC_0000001224201249__fig5819165365616">Figure 1</a>. For details about the parameters, see <a href="#EN-US_TOPIC_0000001224201249__table54168271502">Table 1</a>.<div class="fignone" id="EN-US_TOPIC_0000001224201249__fig5819165365616"><a name="EN-US_TOPIC_0000001224201249__fig5819165365616"></a><a name="fig5819165365616"></a><span class="figcap"><b>Figure 1 </b>Web Server Certificates page</span><br><span><img id="EN-US_TOPIC_0000001224201249__image614872314318" src="en-us_image_0000001224122755.png"></span></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0000001224201249__table54168271502"></a><a name="table54168271502"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0000001224201249__table54168271502" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Parameter description</caption><colgroup><col style="width:24.01%"><col style="width:75.99000000000001%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0000001224201249__row94164276501"><th align="left" class="cellrowborder" valign="top" width="24.01%" id="mcps1.3.3.3.5.2.3.1.1"><p id="EN-US_TOPIC_0000001224201249__p10416182720502">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.99000000000001%" id="mcps1.3.3.3.5.2.3.1.2"><p id="EN-US_TOPIC_0000001224201249__p134163278503">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0000001224201249__row134171127145012"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.3.5.2.3.1.1 "><p id="EN-US_TOPIC_0000001224201249__p46161922193918">Certificate Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.3.5.2.3.1.2 "><p id="EN-US_TOPIC_0000001224201249__p104171527115013">Name of the certificate.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001224201249__row3903267398"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.3.5.2.3.1.1 "><p id="EN-US_TOPIC_0000001224201249__p691162673916">Certificate Expiration Time</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.3.5.2.3.1.2 "><p id="EN-US_TOPIC_0000001224201249__p99213269393">Time when the certificate will expire.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001224201249__row189214268399"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.3.5.2.3.1.1 "><p id="EN-US_TOPIC_0000001224201249__p199212264392">Status</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.3.5.2.3.1.2 "><p id="EN-US_TOPIC_0000001224201249__p8926268396">Certificate status. The values are as follows:</p>
+<ul id="EN-US_TOPIC_0000001224201249__ul1887513313011"><li id="EN-US_TOPIC_0000001224201249__en-us_topic_0253410802_li93344359384"><strong id="EN-US_TOPIC_0000001224201249__b33462016429">Valid</strong>: The remaining validity period is greater than the certificate expiration alarm threshold.</li><li id="EN-US_TOPIC_0000001224201249__en-us_topic_0253410802_li1833483512382"><strong id="EN-US_TOPIC_0000001224201249__b144267318424">About to expire</strong>: The remaining validity period is less than or equal to the certificate expiration alarm threshold.</li><li id="EN-US_TOPIC_0000001224201249__en-us_topic_0253410802_li03341435123814"><strong id="EN-US_TOPIC_0000001224201249__b8358172613428">Expired</strong>: The certificate has expired.</li></ul>
+<div class="note" id="EN-US_TOPIC_0000001224201249__note8372183212259"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0000001224201249__ul11721546502"><li id="EN-US_TOPIC_0000001224201249__li7172154610017">The tool automatically checks and updates the certificate status at 02:00 every day.</li><li id="EN-US_TOPIC_0000001224201249__li131737464019">By default, the expiration alarm threshold of web server certificates is 90 days. The administrator can click <span><img id="EN-US_TOPIC_0000001224201249__image149931854134918" src="en-us_image_0000001178563086.png"></span> and choose <strong id="EN-US_TOPIC_0000001224201249__b072974324810">System Settings</strong> to change the value of <strong id="EN-US_TOPIC_0000001224201249__b37837417511">Web Service Certificate Expiration Alarm Threshold (days)</strong>. The value ranges from 7 to 180 days.</li></ul>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001224201249__section177554714587"><h4 class="sectiontitle">Customizing and Importing a Server Certificate</h4><p id="EN-US_TOPIC_0000001224201249__p1843962518250">The SSL certificate sets up an SSL security channel over HTTPS between the web browser on the client and the web server to transmit encrypted data between the client and server and prevent data disclosure. For security purposes, you are advised to replace the original certificate and keys with your customized certificate and public and private key pair, and promptly update the certificate.</p>
+<ol id="EN-US_TOPIC_0000001224201249__ol1664717253519"><li id="EN-US_TOPIC_0000001224201249__li070016561753"><a name="EN-US_TOPIC_0000001224201249__li070016561753"></a><a name="li070016561753"></a><span>On the <strong id="EN-US_TOPIC_0000001224201249__b20199182815319">Web Server Certificates</strong> page, click <strong id="EN-US_TOPIC_0000001224201249__b1234264912317">Generate CSR File</strong>.</span><p><p id="EN-US_TOPIC_0000001224201249__p052417579719">The <span class="wintitle" id="EN-US_TOPIC_0000001224201249__wintitle166391741061"><b>Generate CSR File</b></span> dialog box is displayed, as shown in <a href="#EN-US_TOPIC_0000001224201249__fig4221265106">Figure 2</a>. For details about the parameters, see <a href="#EN-US_TOPIC_0000001224201249__table1859442711214">Table 2</a>.</p>
+<div class="fignone" id="EN-US_TOPIC_0000001224201249__fig4221265106"><a name="EN-US_TOPIC_0000001224201249__fig4221265106"></a><a name="fig4221265106"></a><span class="figcap"><b>Figure 2 </b>Generating a CSR File</span><br><span><img id="EN-US_TOPIC_0000001224201249__image961083613145" src="en-us_image_0000001179041530.png"></span></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0000001224201249__table1859442711214"></a><a name="table1859442711214"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0000001224201249__table1859442711214" frame="border" border="1" rules="all"><caption><b>Table 2 </b>Parameter description</caption><colgroup><col style="width:24.03%"><col style="width:75.97%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0000001224201249__row759412718127"><th align="left" class="cellrowborder" valign="top" width="24.03%" id="mcps1.3.4.3.1.2.3.2.3.1.1"><p id="EN-US_TOPIC_0000001224201249__p185940272125">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.97%" id="mcps1.3.4.3.1.2.3.2.3.1.2"><p id="EN-US_TOPIC_0000001224201249__p35947271122">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0000001224201249__row1159452712126"><td class="cellrowborder" valign="top" width="24.03%" headers="mcps1.3.4.3.1.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001224201249__p056103214123">Country</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.97%" headers="mcps1.3.4.3.1.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001224201249__p59651910136">The user's country code.</p>
+<p id="EN-US_TOPIC_0000001224201249__p0962191136">This parameter is mandatory. The value contains only two letters, for example, <strong id="EN-US_TOPIC_0000001224201249__b142086526305">CN</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001224201249__row1759402771211"><td class="cellrowborder" valign="top" width="24.03%" headers="mcps1.3.4.3.1.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001224201249__p14551832141213">Province</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.97%" headers="mcps1.3.4.3.1.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001224201249__p14824322131317">Province of the user.</p>
+<p id="EN-US_TOPIC_0000001224201249__p1824422141313">The value can contain a maximum of 128 characters, including letters, digits, hyphens (-), underscores (_), periods (.), and spaces.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001224201249__row859418279129"><td class="cellrowborder" valign="top" width="24.03%" headers="mcps1.3.4.3.1.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001224201249__p654632191218">City</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.97%" headers="mcps1.3.4.3.1.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001224201249__p46396262136">City of the user.</p>
+<p id="EN-US_TOPIC_0000001224201249__p96399266139">The value can contain a maximum of 128 characters, including letters, digits, hyphens (-), underscores (_), periods (.), and spaces.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001224201249__row5594327111217"><td class="cellrowborder" valign="top" width="24.03%" headers="mcps1.3.4.3.1.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001224201249__p850432201217">Company</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.97%" headers="mcps1.3.4.3.1.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001224201249__p1946413304135">Company of the user.</p>
+<p id="EN-US_TOPIC_0000001224201249__p144641730191311">The value can contain a maximum of 64 characters, including letters, digits, hyphens (-), underscores (_), periods (.), and spaces.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001224201249__row17011331317"><td class="cellrowborder" valign="top" width="24.03%" headers="mcps1.3.4.3.1.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001224201249__p14701832131">Department</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.97%" headers="mcps1.3.4.3.1.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001224201249__p114311834131318">Department of the user.</p>
+<p id="EN-US_TOPIC_0000001224201249__p243110341139">The value can contain a maximum of 64 characters, including letters, digits, hyphens (-), underscores (_), periods (.), and spaces.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001224201249__row1323021014135"><td class="cellrowborder" valign="top" width="24.03%" headers="mcps1.3.4.3.1.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001224201249__p423071051312">Common Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.97%" headers="mcps1.3.4.3.1.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001224201249__p15118193812133">Name of the user.</p>
+<p id="EN-US_TOPIC_0000001224201249__p911823813133">This parameter is mandatory. The value can contain a maximum of 64 characters, including letters, digits, hyphens (-), underscores (_), periods (.), and spaces.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="EN-US_TOPIC_0000001224201249__li526917501775"><span>Click <strong id="EN-US_TOPIC_0000001224201249__b1692383820389">OK</strong>.</span></li><li id="EN-US_TOPIC_0000001224201249__li114791710151414"><span>Send the exported CSR file to the SSL certificate issuer to apply for an SSL certificate.</span><p><p id="EN-US_TOPIC_0000001224201249__p2365320201416">After obtaining the official certificate file (*.crt), save it to the local PC.</p>
+</p></li><li id="EN-US_TOPIC_0000001224201249__li381903220142"><span>Click <strong id="EN-US_TOPIC_0000001224201249__b46015221480">Import Web Server Certificate</strong>.</span><p><p id="EN-US_TOPIC_0000001224201249__p19386141371514">The <strong id="EN-US_TOPIC_0000001224201249__b20182332134814">Import Web Server Certificate</strong> page is displayed.</p>
+</p></li><li id="EN-US_TOPIC_0000001224201249__li534363861610"><span>Click <strong id="EN-US_TOPIC_0000001224201249__b72592431114">Import</strong> and select the certificate file.</span><p><div class="note" id="EN-US_TOPIC_0000001224201249__note214692011228"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0000001224201249__ul3146102019223"><li id="EN-US_TOPIC_0000001224201249__li8146420102220">The certificate file to be imported must be in *.crt, *.cer, or *.pem format and cannot exceed 1 MB.</li><li id="EN-US_TOPIC_0000001224201249__li11461203221">The CSR file generated in <a href="#EN-US_TOPIC_0000001224201249__li070016561753">1</a> correlates with the server certificate applied from the CA organization. Do not generate a new CSR file before importing the server certificate. Otherwise, the original CSR file is overwritten by the new CSR file and cannot be recovered. You have to use the new CSR file to apply for a new server certificate from the CA organization.</li></ul>
+</div></div>
+</p></li><li id="EN-US_TOPIC_0000001224201249__li1533213911155"><span>Click <strong id="EN-US_TOPIC_0000001224201249__b62691826181212">OK</strong>.</span></li><li id="EN-US_TOPIC_0000001224201249__li12171215179"><span>(Optional) Choose <strong id="EN-US_TOPIC_0000001224201249__b9194342191217">More</strong> &gt; <strong id="EN-US_TOPIC_0000001224201249__b1350119113137">Restart Server</strong> to activate the certificate. If you do not restart the server immediately, the certificate will automatically take effect after the service restarts.</span></li></ol>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001224201249__section11871203225813"><h4 class="sectiontitle">Updating the Working Key</h4><p id="EN-US_TOPIC_0000001224201249__p15906192135412">The working key is used to encrypt the password for starting the NGINX service, and the root key is used to encrypt the working key. For security purposes, you are advised to update the working key periodically.</p>
+<ol id="EN-US_TOPIC_0000001224201249__ol1627484229"><li id="EN-US_TOPIC_0000001224201249__li195313342150"><span>Click <span><img id="EN-US_TOPIC_0000001224201249__image449070507" src="en-us_image_0000001178723048.png"></span> in the upper right corner and choose <strong id="EN-US_TOPIC_0000001224201249__b13124265146">Web Server Certificates</strong>.</span></li><li id="EN-US_TOPIC_0000001224201249__li1566452017185"><span>Choose <span class="menucascade" id="EN-US_TOPIC_0000001224201249__menucascade15959113520165"><b><span class="uicontrol" id="EN-US_TOPIC_0000001224201249__uicontrol189592352166">More</span></b> &gt; <b><span class="uicontrol" id="EN-US_TOPIC_0000001224201249__uicontrol129591035141613">Update Working Key</span></b></span>.</span></li><li id="EN-US_TOPIC_0000001224201249__li7515105282013"><span>(Optional) Choose <strong id="EN-US_TOPIC_0000001224201249__b478411439156">More</strong> &gt; <strong id="EN-US_TOPIC_0000001224201249__b672705371513">Restart Server</strong> to restart the NGINX service for the working key to take effect. If you do not restart the server immediately, the working key will automatically take effect after the service restarts.</span></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001224201265.html">Service Certificate Management</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

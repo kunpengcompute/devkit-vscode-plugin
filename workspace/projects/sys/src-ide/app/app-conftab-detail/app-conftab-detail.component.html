@@ -1,0 +1,26 @@
+<div id="detail-container">
+  <ti-tabs>
+    <ti-tab [(active)]="item.active" *ngFor="let item of detailList; let index = index" [disabled]="item.disable">
+      <ti-tab-header>
+        <span>{{item.title}}</span>
+        <span [ngClass]="{'detail-item': (index < detailList.length - 1)}"
+          *ngIf="index < detailList.length - 1">|</span>
+      </ti-tab-header>
+      <div class="content-container" *ngIf="item.title == i18n.common_term_task_tab_congration && item.disable==false"
+        [ngClass]="{showDetail: item.active}">
+        <app-configuration [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+          [analysisType]='analysisType' [taskid]='id'></app-configuration>
+      </div>
+      <div class="content-container" *ngIf="item.title == i18n.common_term_task_tab_log && item.disable==false"
+        [ngClass]="{showDetail: item.active}">
+        <app-configuration-log [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+          [analysisType]='analysisType' [status]='status' [taskid]='id'></app-configuration-log>
+      </div>
+      <div class="content-container" *ngIf="item.title == i18n.common_term_task_tab_summary && item.disable==false"
+        [ngClass]="{showDetail: item.active}">
+        <app-system-config [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+          [analysisType]='analysisType' [taskid]='id'></app-system-config>
+      </div>
+    </ti-tab>
+  </ti-tabs>
+</div>

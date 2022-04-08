@@ -1,0 +1,15 @@
+@import "projects/sys/src-web/assets/styles/custemTabs.scss";
+@import "projects/sys/src-web/assets/styles/custemDetailContainer.scss";
+.detail-item {
+  padding-left: 15px;
+  color: #ddd;
+}
+
+#detail-container {
+  .content-container {
+    opacity: 0;
+  }
+}
+.showDetail {
+  opacity: 1 !important;
+}

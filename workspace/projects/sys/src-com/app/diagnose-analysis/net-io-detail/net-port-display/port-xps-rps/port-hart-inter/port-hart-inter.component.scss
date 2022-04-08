@@ -1,0 +1,15 @@
+.port-hart-inter {
+
+  .inter-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    .title {
+      margin-bottom: 0;
+    }
+    .inter-selected {
+      width: 140px;
+      margin: 0 24px 0 16px;
+    }
+  }
+}

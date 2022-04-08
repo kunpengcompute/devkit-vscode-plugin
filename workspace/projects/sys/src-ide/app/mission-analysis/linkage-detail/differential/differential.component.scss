@@ -1,0 +1,298 @@
+.config-content{
+    --ti-icon-blue: #0067ff;
+    --ti-icon-green: #3ad53e;
+    --ti-icon-red: #e2253b;
+  }
+  //浅色主题样式
+  ::ng-deep .vscode-light {
+  --select-box-color: #282b33;
+  --filter-box-bg: #fff;
+  --table-left-border: #f0f3fa;
+  --filter-bg: #fff;
+  --ti3-selected-tr-bg: #fff;
+  --ti3-table-fixed-head-filler-bg: #f5f9ff;
+  --ti3-selected-tr-hover-bg: #f5f9ff;
+  --filter-button-bg: #fff;
+  --filter-button-txt-close-hover-color: #0067ff;
+  --filter-button-border-color: 1px solid #979797;
+  --filter-button-border-hover-color: 1px solid #0067ff;
+  --filter-button-txt-ok-color: #fff;
+  --table-tr-border-color: 1px solid #e1e6ee;
+  --table-shadow-color: #e6ebf5;
+  --icon-border-color: 1px solid #aaa;
+  --icon-border-hover-color: 1px solid #0067ff;
+  --select-txt-color: #222;
+  --select-title-txt-color: #282b33;
+  --ti-filter-bg-color: #fff;
+  --ti-filter-border-color: #0067ff;
+  --ti-filter-span-bg: #fff;
+  --ti-filter-span-hover-bg: #f5f9ff;
+  --msg-border: 1px solid #D7DBE7;
+  --msg-bgc: #edf4ff;
+  --section-title-border: dashed 1px #e1e6ee;
+  --select-title-color: #616161;
+  --header-title-bottom: #e1e6ee;
+  --flame-background: #ffffff;
+  }
+  
+  //深色主题样式
+  ::ng-deep .vscode-dark {
+    --select-box-color: #e8e8e8;
+    --filter-box-bg: #252526;
+    --table-left-border: #252526;
+    --filter-bg: #313131;
+    --ti3-selected-tr-bg: #161616;
+    --ti3-table-fixed-head-filler-bg: #2a2a2a;
+    --ti3-selected-tr-hover-bg: #2a2a2a;
+    --filter-button-bg: #252526;
+    --filter-button-txt-close-hover-color: #0067ff;
+    --filter-button-border-color: 1px solid #ddd;
+    --filter-button-border-hover-color: 1px solid #0067ff;
+    --filter-button-txt-ok-color: #fff;
+    --table-tr-border-color: 1px solid #545454;
+    --table-shadow-color: #545454;
+    --icon-border-color: 1px solid #313131;
+    --icon-border-hover-color: 1px solid #313131;
+    --select-txt-color: #e8e8e8;
+    --select-title-txt-color: #aaa;
+    --ti-filter-bg-color: #252526;
+    --ti-filter-border-color: #0067ff;
+    --ti-filter-span-bg: #252526;
+    --ti-filter-span-hover-bg: #313131;
+    --msg-border: 0px solid #D7DBE7;
+    --msg-bgc: #152133;
+    --section-title-border: solid 1px #484a4e;
+    --select-title-color: #aaaaaa;
+    --header-title-bottom: #4b4b4b;
+    --flame-background: #161616;
+  }
+
+.help-info{
+    display: flex;
+    margin-top: 32px;
+    align-items: flex-end;
+    .msg-title {
+        display: flex;
+        align-items: center;
+        background: var(--msg-bgc);
+        box-sizing: border-box;
+        height: 40px;
+        width: calc(100% - 86px);
+        border: 1px solid #15395b;
+        border-radius: 2px;
+        .ti-icon{
+            flex-shrink: 0;
+            margin-left:8px;
+            font-size: 16px;
+            &.blue{
+                color:  #0067ff; 
+            }
+            &.green{
+                color: #3ad53e;
+            }
+            &.red{
+              margin-bottom: -2px;
+            }
+        }
+        .white-icon {
+            background-color: #ffffff;
+            border-radius: 8px;
+        }
+        .des {
+            flex: 1;
+            margin-left:8px;
+        } 
+    }
+    .img-wrapper{
+        flex-shrink: 0;
+        margin-left: 64px;
+        height: 22px;
+        width: 22px;
+        .img-tip{
+            width: 100%;
+            height: 100%;
+        }         
+    }
+   
+}
+
+.diff-box{
+     background-color: var(--flame-background);
+     margin-top: 8px;
+    .top-colum{
+        padding: 16px 16px 0;
+        display: flex;
+        justify-content: space-between;
+        .left-top{
+            ti-select{
+                width: 150px;
+            }
+            ti-select + ti-select {
+                margin-left: 8px;
+            }  
+            .ti-button-diff{
+                margin-left: 8px;
+                padding: 0 20px;
+                box-sizing: border-box;
+                background-color: var(--button-color-background-secondary);
+                height: 28px;
+                line-height: 26px;
+                font-size: 12px;
+                color: var(--common-color-font-primary);
+                border: 1px solid var(--button-color-border-secondary);
+                cursor: pointer;
+
+                &[disabled] {
+                    border-color: var(--common-color-background-disabled);
+                    color: var(--common-color-font-secondary);
+                    cursor: not-allowed;
+                }
+            }    
+           
+        }
+        .searchbox{
+            width: 320px;
+            height: 28px;
+            border-radius: 2px;
+            ::ng-deep input {
+                height: 100% !important;
+                background: none !important;
+            }
+        } 
+    }
+
+    .show-icon{
+        float: right;
+        margin-right: 16px;
+        margin-top: 16px;
+        .legned{
+            display: flex;
+            justify-content: flex-end;
+            .l1{
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                .pic{
+                    width: 8px;
+                    height: 8px;
+                    margin-right: 8px;
+                }
+                .til{
+                    font-size: 12px;
+                    color: #222;
+                }
+
+                & + .l1 {
+                    margin-left: 24px;
+                } 
+            }
+        }    
+    }  
+
+    .nodata {
+        margin-top: 229px;
+        margin-left:579px;
+        display: flex;
+        width: 320px;
+        height: 156px;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .flame-box{
+        margin-top:8px;
+        text-align: center;
+        display: -ms-flexbox;
+        display: flex; 
+        -ms-flex-align: center;
+        align-items: center;
+        position: relative; 
+        justify-content: center;
+        width: 1478px;
+        height: 613px;
+        .d3-container{
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+        }
+        .svgContent{
+            svg{
+                width: 100% !important;   
+            }
+        }
+    }
+
+}
+#flame-menu{
+    position: fixed;
+    border: 1px solid #ccc;
+    background: #eee;
+    padding: 5px 10px;
+    top:0px;
+    display: flex;
+    justify-content: center;
+    .functionName{
+        max-width: 271px;
+        line-height: 18px;
+        font-size: 12px;
+        color: #616161;
+        border-right: 1px solid #D7DEEE;
+        padding-right: 12px;
+        white-space: nowrap;
+    }
+    .menu-item{
+        white-space: nowrap;
+        font-size: 12px;
+        cursor: pointer;
+        color: #222222 ;
+        padding-left: 12px;
+        line-height: 18px;
+        color: #267DFF;
+        
+    }
+}
+#flame-menu.notStack{
+    .functionName{
+        padding-right: 0px;
+        border-right: 0px solid #D7DEEE;
+    }
+}
+
+
+.linkage-table-box{
+    padding-top: 10px;
+  }
+
+  :host ::ng-deep .ti3-table > .ti3-table-fixed-head + .ti3-table-container {
+    background: #FFF;
+    max-height: 300px;
+}
+
+.fire-icon {
+	width: 8px;
+	height: 8px;
+	background-color: #1890ff;
+	border-radius: 4px;
+}
+
+.global-loading {
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    top: 0;
+    left: 0;
+}
+
+:host ::ng-deep .diff-box {
+    .ti3-select-dominator-container {
+        background-color: var(--common-color-background-secondary);
+        border: 1px solid var(--common-color-font-tip);
+        border-radius: 2px;
+        .ti3-select-dominator-text {
+            color: var(--common-color-font-primary);
+        }
+    }
+}
+::ng-deep .vscode-dark ti-drop > ti-list > ul > li.ti3-dropdown-option-disabled > .ti3-overflow-padding {
+    background-color: transparent !important;
+}

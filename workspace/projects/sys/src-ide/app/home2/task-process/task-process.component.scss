@@ -1,0 +1,96 @@
+::ng-deep {
+  
+    .vscode-light .tuninghelper-content-box.gradient-bg {
+        --color-tuninghelper-content-box-background: #ffffff;
+    }
+  
+    .vscode-dark .tuninghelper-content-box.gradient-bg {
+        --color-tuninghelper-content-box-background: linear-gradient(90deg, #1e1e1e 0%, #1e1e1e 97%, #232323 98%, #232323 100%);
+    }
+  }
+
+//浅色主题样式
+::ng-deep .vscode-light {
+    --color-process-static-bar: #e6ebf5;
+}
+
+//深色主题样式
+::ng-deep .vscode-dark {
+    --color-process-static-bar:  #484A4E;
+}
+
+.task-content-box {
+    padding: 24px 32px;
+    height: 100%;
+    box-sizing: border-box;
+}
+.tuninghelper-content-box {
+    padding: 0 2%;
+    height: 100%;
+
+    &.gradient-bg {
+        background: var(--color-tuninghelper-content-box-background);
+    }
+}
+.process {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .status-text {
+        text-align: center;
+        margin-top: 32px;
+    }
+
+    .process-anim {
+        width: 33%;
+        height: 6px;
+        margin-top: 14px;
+        position: relative;
+        overflow: hidden;
+    
+        .process-static-bar {
+            height: 2px;
+            margin-top: 2px;
+            border-radius: 3px;
+            background-color: var(--color-process-static-bar);
+        }
+    
+        .process-bar {
+            width: 30%;
+            background: #36BC80;
+            height: 2px;
+            position: relative;
+            top: -2px;
+            border-radius: 3px;
+            box-shadow: 0 0 6px  rgba(100, 208, 147,0.8);
+            animation: processAnime 1.5s linear 0s infinite ;
+        }
+    }   
+}
+
+.analyzing-gif {
+    width: 226px;
+    height: 130px;
+}
+.darkkAnalyze{
+    position: relative;
+    .analyzing-gif1 {
+        width: 226px;
+        height: 130px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+}
+
+@keyframes processAnime {
+    0% {
+        left: 0;
+    }
+    100% {
+        left: 100%;
+    }
+}

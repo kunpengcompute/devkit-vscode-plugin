@@ -1,0 +1,63 @@
+::ng-deep .vscode-light {
+    --box-title-bg: #ffffff;
+    --titlebox-bg: #F5F9FF;
+    --font-color: #222222;
+    --formtitle-color: #616161;
+    --configtitle-bg: #EDF4FF;
+    --border-bottom-color: #E1E6EE;
+    --node-warpper-bg: #fff;
+    --ip-addr-color: #616161;
+    --ip-addr-hover: #222222;
+    --ti-tip-bg-color: #ffffff;
+    --box-first-child-border-top: #E1E6EE;
+    --viewDetail-border: #000;
+    --ti-table-tr-bg-color: #ffffff;
+    --line-bg: #EDF4FF;
+    --scrollbar-bg: #616161;
+}
+
+::ng-deep .vscode-dark {
+    --box-title-bg: #383838;
+    --titlebox-bg: #12223B;
+    --font-color: #E8E8E8;
+    --formtitle-color: #aaaaaa;
+    --configtitle-bg: #252526;
+    --border-bottom-color: #6e6e6e;
+    --node-warpper-bg: #161616;
+    --ip-addr-color: #aaaaaa;
+    --ip-addr-hover: #E8E8E8;
+    --ti-tip-bg-color: #424242;
+    --box-first-child-border-top: #4b4b4b;
+    --viewDetail-border: none;
+    --ti-table-tr-bg-color: #161616;
+    --line-bg: #484a4e;
+    --scrollbar-bg: #eae9e9;
+}
+
+.typical-config-container {
+    font-size: 14px;
+
+    .node-list {
+        font-size: 20px;
+        color: var(--font-color);
+        line-height: 26px;
+        margin: 32px 0 20px 0;
+    }
+}
+
+::ng-deep .typical-config-container {
+    & ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    & ::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-bg);
+        opacity: 0.2;
+        border-radius: 4px;
+    }
+
+    & ::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+}

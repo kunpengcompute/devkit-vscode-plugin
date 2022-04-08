@@ -1,0 +1,55 @@
+<div class="analysis-target-content">
+    <div class="analysis-target-item">
+        <div class="analysis-target-item-label" [ngStyle]="{width: labelWidth}">
+            <ti-icon name="staricon" class="opacity"></ti-icon>
+            <!-- 不适用span可能左右会有空格 影响显示 -->
+            <span>{{ i18n.common_term_task_crate_app_runUser }}</span>
+            <ti-icon [tiTip]="i18n.mission_create.modeAppRunUser" class="margin_left" tiTipMaxWidth='370px'
+                tiTipPosition="bottom">
+                <img src='./assets/img/template/icon_question.svg'>
+            </ti-icon>
+        </div>
+        <div class="analysis-target-item-value">
+            <ti-switch id="myswitch" [(ngModel)]="switchState" (ngModelChange)="checkUserOrPassWord('switch')">
+            </ti-switch>
+        </div>
+    </div>
+    <div class="analysis-target-item" *ngIf="switchState">
+        <div class="analysis-target-item-label" [ngStyle]="{width: labelWidth}">
+            <ti-icon name="staricon" class="red"></ti-icon>
+            <!-- 不适用span可能左右会有空格 影响显示 -->
+            <span>{{ i18n.common_term_task_crate_app_user }}</span>
+        </div>
+        <div class="analysis-target-item-value">
+            <input type="text" #like tiText [(ngModel)]="modeApplicationUser"
+                (ngModelChange)="checkUserOrPassWord('user')" />
+            <div class="ti3-unifyvalid-error-container" *ngIf="!runUserValid">
+                <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                {{ runUserMsg }}
+            </div>
+        </div>
+    </div>
+    <div class="analysis-target-item" *ngIf="switchState">
+        <div class="analysis-target-item-label" [ngStyle]="{width: labelWidth}">
+            <ti-icon name="staricon" class="red"></ti-icon>
+            <!-- 不适用span可能左右会有空格 影响显示 -->
+            <span>{{ i18n.common_term_task_crate_app_passWord }}</span>
+        </div>
+        <div class="analysis-target-item-value password-value">
+            <input [type]="passwordInputType" #like tiText [(ngModel)]="modeApplicationPassWord"
+                (ngModelChange)="checkUserOrPassWord('password')">
+            <div class="ti3-unifyvalid-error-container" *ngIf="!runPasswordValid">
+                <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                {{ i18n.tip_msg.system_setting_input_empty_judge }}
+            </div>
+            <div class="eye">
+                <span (click)="passwordInputType = 'password'" *ngIf="passwordInputType === 'text'">
+                    <img src="./assets/img/common/icon-view.svg" />
+                </span>
+                <span (click)="passwordInputType = 'text'" *ngIf="passwordInputType === 'password'">
+                    <img src="./assets/img/common/icon-hide.svg" />
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

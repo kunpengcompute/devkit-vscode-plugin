@@ -1,0 +1,41 @@
+<div class="login-box">
+    <div class='login'>
+      <div class="header-left">
+        <img src='./assets/img/header/logo.png' class="logo" />
+        <span class="title">{{i18n.common_term_pro_name}}</span>
+      </div>
+      <div class="header-right">
+        <span class="user-container">
+          <div class="header-lang header-common"></div>
+          <span>{{langSelected.label}}</span>
+          <div class="header-up"></div>
+        </span>
+        <ul class='user-list-box'>
+          <li *ngFor="let item of langOptions" (click)="langChange(item)">{{item.label}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="login-form">
+      <p class="login-title1">
+        {{i18n.common_term_welcometo}}</p>
+      <span class="login-title2">{{i18n.common_term_pro_name}}</span>
+      <form [formGroup]='form' style=" margin-top: 2.18vw;">
+        <div class='login-form-item'>
+          <div class='login-form-item-label'>{{i18n.common_term_login_name}}</div>
+          <input tiValidation formControlName='name' [errorMessageWrapper]='name' clearable
+            [tiValidation]='nameValidation' name='loginname' tiText />
+          <span #name></span>
+        </div>
+        <div class='login-form-item'>
+          <div class='login-form-item-label'>{{i18n.common_term_login_password}}</div>
+          <input tiValidation formControlName='pwd' id='password' type="password" [tiValidation]='pwdValidation'
+            [errorMessageWrapper]='pwd' autocomplete="new-password" name='loginpwd' id='loginpwd' (keyup.enter)="login()"
+            tiText />
+          <span #pwd></span>
+        </div>
+        <span (click)='login()' class="login-btn">{{i18n.common_term_login_btn}}</span>
+      </form>
+    </div>
+    <div class="footer">{{i18n.common_term_copyright.replace('year',year)}}</div>
+  </div>
+  

@@ -1,0 +1,106 @@
+<div class="box" >
+  <div class="box-title" (click)='toggle.networkSubsystem=!toggle.networkSubsystem'>
+    <img src="./assets/img/summary/row.png" class='title-icon'[ngClass]="{active: toggle.networkSubsystem}">
+    {{i18n.sys_summary.net_subsystem_text}}
+    <div class="titleDetail">
+      <div tiOverflow *ngFor="let item of titleDetail">{{item.title}}<span>{{item.data | thousandSeparator}}</span></div>
+    </div>
+  </div>
+  <div class="box-content" [ngClass]="{active: toggle.networkSubsystem}">
+
+       <!-- 网坡 -->
+       <div class="box">
+        <div class="box-title" (click)='toggle.networkCard=!toggle.networkCard'>
+          <img src="./assets/img/summary/row.png" class='title-icon' [ngClass]="{active: toggle.networkCard}">
+          {{i18n.sys_cof.sum.network}}
+        </div>
+        <div class="box-content" [ngClass]="{active: toggle.networkCard}">
+          <ti-table [(displayedData)]="networkDisplayData" [srcData]="networkContentData" [columns]="networkTitle">
+            <table>
+              <thead>
+                <tr>
+                  <th tiOverflow *ngFor="let column of networkTitle;index as i" >
+                    <span [ngClass]="{'tableFirstData': i == 0}">{{column.title}}</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody *ngIf="!ifnetwork">
+                <tr *ngFor="let row of networkDisplayData;">
+                  <td tiOverflow><span class="tableFirstData">{{row.name}}</span></td>
+                  <td tiOverflow>{{row.rxpck | thousandSeparator}}</td>
+                  <td tiOverflow>{{row.txpck | thousandSeparator}}</td>
+                  <td tiOverflow>{{row.rxkB | thousandSeparator}}</td>
+                  <td tiOverflow>{{row.txkB | thousandSeparator}}</td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="ifnetwork">
+                <tr class="ti3-table-nodata-simple">
+                    <td tiColspan>
+                      <img style='width:198px;' src='./assets/img/projects/nodata.png' />
+                    <div style="font-size: 1rem" >{{network}}</div>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+            <ti-pagination *ngIf="networkTotalNumber > 10" [(currentPage)]="networkCurrentPage" style="padding-left: 10px;"
+              [pageSize]="networkPageSize"
+              [(totalNumber)]="networkTotalNumber">
+            </ti-pagination>
+          </ti-table>
+        </div>
+      </div>
+    <!-- 网坣 -->
+    <div class="box">
+      <div class="box-title" (click)='toggle.networkPort=!toggle.networkPort'>
+        <img src="./assets/img/summary/row.png" class='title-icon' [ngClass]="{active: toggle.networkPort}">
+        {{i18n.sys_summary.cpupackage_tabel.network_port}}
+      </div>
+      <div class="box-content" [ngClass]="{active: toggle.networkPort}">
+        <ti-table [(displayedData)]="networkPortDisplayData" [srcData]="networkPortContentData" [columns]="networkPortTitle">
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let column of networkPortTitle;index as i" >
+                  <div class="questionMark">
+                  <span tiOverflow [ngClass]="{'tableFirstData': i == 0}">
+                     {{column.title}}
+                  </span>
+                  <img src="./assets/img/summary/compass.svg" class='rocket' class="system-tip blockCls" [tiTip]='column.tipStr'
+                  tiTipMaxWidth='550px' *ngIf="column.tipStr && column.tipStr !='NULL'" tiTipPosition="top-left" />
+                </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngIf="!ifnetworkPortTotal">
+              <tr *ngFor="let row of networkPortDisplayData;">
+                <td tiOverflow><span class="tableFirstData">{{row.name}}</span></td>
+                <td tiOverflow>{{row.device}}</td>
+                <td tiOverflow>{{row.hardware}}</td>
+                <td tiOverflow>{{row.txkB | thousandSeparator}}</td>
+                <td tiOverflow>{{row.rxkB | thousandSeparator}}</td>
+                <td tiOverflow>{{row.txpck | thousandSeparator}}</td>
+                <td tiOverflow>{{row.rxpck | thousandSeparator}}</td>
+                <td tiOverflow>{{row.maxEfficiency | thousandSeparator}}</td>
+                <td tiOverflow>{{row.currentEfficiency | thousandSeparator}}</td>
+                <td tiOverflow>{{row.load | thousandSeparator}}</td>
+                <td tiOverflow>{{row.details}}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="ifnetworkPortTotal">
+              <tr class="ti3-table-nodata-simple">
+                  <td tiColspan>
+                    <img style='width:198px;' src='./assets/img/projects/nodata.png' />
+                  <div style="font-size: 1rem" >{{networkPortTotal}}</div>
+                  </td>
+              </tr>
+          </tbody>
+          </table>
+          <ti-pagination *ngIf="networkPortTotalNumber > 10" [(currentPage)]="networkPortCurrentPage" style="padding-left: 10px;"
+            [pageSize]="networkPortPageSize"
+            [(totalNumber)]="networkPortTotalNumber">
+          </ti-pagination>
+        </ti-table>
+      </div>
+    </div>
+  </div>
+</div>

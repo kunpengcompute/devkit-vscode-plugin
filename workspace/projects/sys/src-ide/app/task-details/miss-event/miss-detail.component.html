@@ -1,0 +1,46 @@
+<div id="detail-container" class="taskDetailsTabs customContainer">
+  <ti-tabs class="customTabsContainer">
+    <ti-tab [(active)]="item.active" *ngFor="let item of detailList; let index = index" [disabled]="item.disable" (activeChange)='change()'>
+      <ti-tab-header>
+        <span>{{item.title}}</span>
+      </ti-tab-header>
+
+      <!-- 配置信息【为了不重复获取配置信息，子组件会返回配置信息上来，改成懒加载请注意！！！】 -->
+      <div class="content-container" [ngClass]="{showDetail: item.active}" *ngIf="item.prop == 'configuration' && item.disable==false">
+        <app-configuration
+          [nodeid]='nodeid'
+          [projectName]='projectName'
+          [taskName]='taskName'
+          [analysisType]='analysisType'
+          [taskid]='taskid'
+          (returnConfigInfo)="returnConfigInfo($event)"
+        ></app-configuration>
+      </div>
+
+      <!-- 采集日志 -->
+      <div class="content-container" [ngClass]="{showDetail: item.active}" *ngIf="item.prop == 'log' && item.disable==false">
+        <app-configuration-log
+          [nodeid]='nodeid'
+          [taskName]='taskName'
+          [analysisType]='analysisType'
+          [taskid]='taskid'
+          [status]='status'
+          [collectionLog]="collectionLog"
+        ></app-configuration-log>
+      </div>
+
+      <!-- Miss事件统计 -->
+      <div class="content-container" [ngClass]="{showDetail: item.active}" *ngIf="item.prop == 'missEventStatistics' && item.disable==false">
+        <app-miss-statistics
+          #missStatistics
+          [taskid]='taskid'
+          [nodeid]='nodeid'
+          [formEl]="formEl"
+          [parentFormEl]="parentFormEl"
+          [values]="values"
+          [analysisType]="analysisType"
+        ></app-miss-statistics>
+      </div>
+    </ti-tab>
+  </ti-tabs>
+</div>

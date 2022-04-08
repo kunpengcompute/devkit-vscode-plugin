@@ -1,0 +1,19 @@
+::ng-deep #hpc-node-params app-app-params-input .analysis-target-content > .analysis-target-item > .analysis-target-item-label{
+    margin-right: calc(var(--ti-formfield-item-label-padding-right) + 14px);
+}
+
+.model-body{
+    .analysis-target-item{
+        display: flex;
+        .analysis-target-item-label{
+            margin-left: 14px;
+            span{
+                font-size: 14px;
+                color: #666;
+            }
+        }
+        .analysis-target-item-value{
+            margin-left: 24px;
+        }
+    }
+}

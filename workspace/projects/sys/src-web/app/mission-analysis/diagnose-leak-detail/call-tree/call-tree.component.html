@@ -1,0 +1,28 @@
+<div id="call-tree">
+  <div class="call-tree-left">
+    <app-mem-leak-func-list
+      [taskId]="taskId"
+      [nodeId]="nodeId"
+      [currActiveFunc]="currActiveFunc"
+      (listInited)="funcMap = $event"
+      (functionClick)="handleFuncClick($event)"
+      (pidChange)="pid = $event"
+      (memLeakTypeChange)="onMemLeakTypeChange($event)"
+    >
+    </app-mem-leak-func-list>
+  </div>
+  <div class="call-tree-right">
+    <div class="call-stack">
+      <app-fun-stack
+        [memLeakType]="memLeakType"
+        [currActiveFunc]="currActiveFunc"
+        (functionClick)="handleFuncClick($event)"
+        [stackNodeInfoList]="stackNodeInfoList">
+      </app-fun-stack>
+    </div>
+    <app-mem-leak-table *ngIf="memLeakType !== 2" [funcInfo]="memLeakData"></app-mem-leak-table>
+    <app-mem-release-table *ngIf="memLeakType === 2" [funcInfo]="memReleaseData"></app-mem-release-table>
+  </div>
+</div>
+
+<app-source-code-viewer-slider #sourceCodeSlider></app-source-code-viewer-slider>

@@ -1,0 +1,103 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="结构体字节对齐检查">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0249523736.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏代码迁移工具">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0264880574">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>结构体字节对齐检查</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0264880574"></a><a name="ZH-CN_TOPIC_0264880574"></a>
+
+<h1 class="topictitle1">结构体字节对齐检查</h1>
+<div id="body1595831235458"><p id="ZH-CN_TOPIC_0264880574__p11711162915413">结构体字节对齐检查就是在需要考虑字节对齐时，检查源码中结构体类型变量的字节对齐检查。</p>
+<div class="section" id="ZH-CN_TOPIC_0264880574__section641662874317"><h4 class="sectiontitle">前提条件</h4><div class="p" id="ZH-CN_TOPIC_0264880574__p12373143711718">已成功登录<span id="ZH-CN_TOPIC_0264880574__ph997750104712">鲲鹏代码迁移工具</span>。<div class="notice" id="ZH-CN_TOPIC_0264880574__note8799192914203"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-zh-cn.png"> </span><div class="noticebody"><ul id="ZH-CN_TOPIC_0264880574__zh-cn_topic_0189775177_ul15320134212322"><li id="ZH-CN_TOPIC_0264880574__zh-cn_topic_0189775177_li173203424323">任务运行过程中会执行上传源码包中构建文件的构建命令，请确保上传的内容为需要进行分析检查的内容且不存在安全问题，避免影响服务器正常运行。</li><li id="ZH-CN_TOPIC_0264880574__zh-cn_topic_0189775177_li18103195014339"><span class="filepath" id="ZH-CN_TOPIC_0264880574__zh-cn_topic_0189775177_filepath18250394441">“/opt/portadv”</span>为工具默认安装目录，下文以此默认路径为例，请根据实际情况替换。</li></ul>
+</div></div>
+</div>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0264880574__section8124135420196"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0264880574__ol166651423121620"><li id="ZH-CN_TOPIC_0264880574__li10102950192018"><span>在左边标题栏中，选择“增强功能”。</span><p><p id="ZH-CN_TOPIC_0264880574__p152451647202216">检查类型选择“字节对齐”，如<a href="#ZH-CN_TOPIC_0264880574__fig145674894612">图1</a>所示。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0264880574__fig145674894612"><a name="ZH-CN_TOPIC_0264880574__fig145674894612"></a><a name="fig145674894612"></a><span class="figcap"><b>图1 </b>结构体字节对齐检查</span><br><span><img id="ZH-CN_TOPIC_0264880574__image58823121217" src="zh-cn_image_0000001164936407.png" height="409.9725" width="523.6875"></span></div>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0264880574__table28711415124712" frame="border" border="1" rules="all"><caption><b>表1 </b>结构类型定义对齐检查参数说明</caption><colgroup><col style="width:24.22%"><col style="width:75.78%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0264880574__row0871151554715"><th align="left" class="cellrowborder" valign="top" width="24.22%" id="mcps1.3.3.2.1.2.3.2.3.1.1"><p id="ZH-CN_TOPIC_0264880574__p5871111564711">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.78%" id="mcps1.3.3.2.1.2.3.2.3.1.2"><p id="ZH-CN_TOPIC_0264880574__p1787171554712">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0264880574__row98712015104719"><td class="cellrowborder" valign="top" width="24.22%" headers="mcps1.3.3.2.1.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0264880574__p68710156478">源码文件存放路径</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.78%" headers="mcps1.3.3.2.1.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0264880574__p08711151478">需要填写相对路径，可以通过以下两种方式实现：</p>
+<ul id="ZH-CN_TOPIC_0264880574__ul19401982235"><li id="ZH-CN_TOPIC_0264880574__li1740158112318">单击“上传”按钮上传压缩包（上传过程中自动解压）或者文件夹。</li><li id="ZH-CN_TOPIC_0264880574__li134020818235">先将源码文件手动上传到服务器上本工具的指定路径下（例如：/opt/portadv/portadmin/bytecheck/），给porting用户开读写和执行权限，再单击填写框选择下拉框中的源码路径即可，也可以手动填写源码路径名称。</li></ul>
+<div class="note" id="ZH-CN_TOPIC_0264880574__note71591932201218"><span class="notetitle"> 说明： </span><div class="notebody"><ul id="ZH-CN_TOPIC_0264880574__ul83501941185112"><li id="ZH-CN_TOPIC_0264880574__li95517327205">支持上传tar，tar.bz，tar.bz2，tar.gz，tar.xz，tbz，tbz2，tgz，txz，zip格式的压缩包，只允许同时上传一个压缩包。源码文件压缩包小于或等于1GB，解压后小于或等于剩余磁盘空间的一半。</li><li id="ZH-CN_TOPIC_0264880574__li7242101791010">只允许同时上传一个文件夹，文件夹小于或等于剩余磁盘空间的一半。</li><li id="ZH-CN_TOPIC_0264880574__li993192614101">IE浏览器不兼容文件夹上传功能，上传文件夹需要使用其他浏览器，如Google Chrome，Microsoft Edge。</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0264880574__row188711515124720"><td class="cellrowborder" valign="top" width="24.22%" headers="mcps1.3.3.2.1.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0264880574__p15871171510477">构建工具</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.78%" headers="mcps1.3.3.2.1.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0264880574__p1987118151478">选择构建工具。可选择：</p>
+<ul id="ZH-CN_TOPIC_0264880574__ul799594405010"><li id="ZH-CN_TOPIC_0264880574__li4995114495017">make</li><li id="ZH-CN_TOPIC_0264880574__li39951446503">cmake</li><li id="ZH-CN_TOPIC_0264880574__li299584445016">automake</li></ul>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0264880574__row3519181185119"><td class="cellrowborder" valign="top" width="24.22%" headers="mcps1.3.3.2.1.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0264880574__p65196115512">编译命令</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.78%" headers="mcps1.3.3.2.1.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0264880574__p65641018175116">源码编译命令。</p>
+<p id="ZH-CN_TOPIC_0264880574__p477810216411">编译命令需根据构建工具配置文件确定，具体请参考<a href="zh-cn_topic_0320090988.html">通过构建工具配置文件识别编译命令</a>。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0264880574__li3412112212331"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0264880574__uicontrol18806121557">“对齐检查”</span>，开始字节对齐检查。检查完成后，单击<span class="parmname" id="ZH-CN_TOPIC_0264880574__parmname12904126692">“查看报告”</span>可进入<span class="wintitle" id="ZH-CN_TOPIC_0264880574__wintitle13575894592">“对齐检查报告”</span>界面，如<a href="#ZH-CN_TOPIC_0264880574__fig19340174216515">图2</a>所示。</span><p><div class="notice" id="ZH-CN_TOPIC_0264880574__note338144885110"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-zh-cn.png"> </span><div class="noticebody"><p id="ZH-CN_TOPIC_0264880574__zh-cn_topic_0189800508_p461752353216">若用户需要在原始代码中进行修改操作，务必随时对编辑的源码进行保存,否则可能会因为会话超时而丢失修改的代码。</p>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0264880574__fig19340174216515"><a name="ZH-CN_TOPIC_0264880574__fig19340174216515"></a><a name="fig19340174216515"></a><span class="figcap"><b>图2 </b>对齐检查报告</span><br><span><img id="ZH-CN_TOPIC_0264880574__image8340174275116" src="zh-cn_image_0319641728.png" height="256.3575" width="523.6875"></span></div>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0264880574__table4340174210515" frame="border" border="1" rules="all"><caption><b>表2 </b>对齐检查报告参数说明</caption><colgroup><col style="width:25.629999999999995%"><col style="width:74.37%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0264880574__row1934084214517"><th align="left" class="cellrowborder" valign="top" width="25.629999999999995%" id="mcps1.3.3.2.2.2.3.2.3.1.1"><p id="ZH-CN_TOPIC_0264880574__p15340642115119">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="74.37%" id="mcps1.3.3.2.2.2.3.2.3.1.2"><p id="ZH-CN_TOPIC_0264880574__p1434014217515">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0264880574__row834004215118"><td class="cellrowborder" valign="top" width="25.629999999999995%" headers="mcps1.3.3.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0264880574__p12340942205111">文件列表</p>
+</td>
+<td class="cellrowborder" valign="top" width="74.37%" headers="mcps1.3.3.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0264880574__p153409421512">分析的源码文件名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0264880574__row11340184285113"><td class="cellrowborder" valign="top" width="25.629999999999995%" headers="mcps1.3.3.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0264880574__p1340184212519">原始源代码</p>
+</td>
+<td class="cellrowborder" valign="top" width="74.37%" headers="mcps1.3.3.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0264880574__p4340194217511">原始源代码。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0264880574__row634044214514"><td class="cellrowborder" valign="top" width="25.629999999999995%" headers="mcps1.3.3.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0264880574__p13340144215111">结构变量内存空间分配</p>
+</td>
+<td class="cellrowborder" valign="top" width="74.37%" headers="mcps1.3.3.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0264880574__p9340542155120">显示代码中需要对齐的32位和64位字节内存空间。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note" id="ZH-CN_TOPIC_0264880574__note7340114285119"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0264880574__ul203401442125117"><li id="ZH-CN_TOPIC_0264880574__li9340124285112">支持多个用户同时创建字节对齐检查任务。</li><li id="ZH-CN_TOPIC_0264880574__li1340104214515">用户可在任务进行过程中单击关闭，取消任务。</li><li id="ZH-CN_TOPIC_0264880574__li1340154205118">对于64位运行模式检查和结构体字节对齐检查，在同一时刻同一用户只能进行其中一个。</li><li id="ZH-CN_TOPIC_0264880574__li3340542105112">用户可以单击原始源代码模块右上角的上下键，进行上下切换。</li><li id="ZH-CN_TOPIC_0264880574__li199342603515">分析结果可能因环境不同而产生差异，属于正常情况。</li></ul>
+</div></div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0249523736.html">增强功能</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

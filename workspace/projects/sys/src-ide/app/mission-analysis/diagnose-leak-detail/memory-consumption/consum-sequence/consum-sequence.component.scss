@@ -1,0 +1,29 @@
+.select-mapTitle{
+    font-size: 14px;
+    color: var(--d-e8e8e8-l-222222);
+    line-height: 30px;
+    padding-right: 16px;
+}
+.select-map{
+    display: flex;
+    margin: 24px 0 -26px 0;
+}
+.hidden-select{
+    z-index: 1;
+}
+.nodata {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+:host ::ng-deep ti-select {
+    width: 20% !important;
+}
+
+::ng-deep {
+    ti-drop ti-searchbox-notsearch {
+      --ti-searchbox-select-bg-color: var(--vscode-editor-background);
+      --ti-searchbox-select-bg-color-hover: var(--vscode-editor-background);
+    }
+}

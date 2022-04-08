@@ -1,0 +1,233 @@
+<!--component html goes here -->
+<app-banner></app-banner>
+<div *ngIf="installing==-1" class="install-form">
+    <p class="install-title-gen title">{{ i18n.plugins_common_title_installTool }}
+        <a [href]="pluginUrlCfg.sysInstall_openFAQ1">
+            <img *ngIf="currTheme == 1" class="help-icon" src="./assets/img/common/icon-help-dark.svg">
+            <img *ngIf="currTheme == 2" class="help-icon" src="./assets/img/common/icon-help-light.svg">
+        </a>
+    </p>
+    <div class="install-title-det">
+        <img src="./assets/img/common/icon-information.png">
+        <p [innerHtml]="installToolInfo" style="display: inline; margin-left: 6px;"></p>
+    </div>
+    <p class="install-title-gent title">{{ i18n.plugins_common_title_targetServer }}</p>
+    <div class="install-form-item">
+        <div class="ti3-icon ti3-icon-staricon install-form-item-label">{{ i18n.plugins_common_label_ip }}
+        </div>
+        <input type="text" tiText [(ngModel)]="tempIP" (blur)="checkIP()" (change)="connected=false" />
+        <div *ngIf="ipCheck" class="ti3-unifyvalid-error-container">
+            <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+            <span class="ti3-validate-text">{{ i18n.plugins_common_message_ipError }}</span>
+        </div>
+    </div>
+    <div class="install-form-item">
+        <div class="ti3-icon ti3-icon-staricon install-form-item-label">{{ i18n.plugins_common_label_port }}
+        </div>
+        <input type="text" tiText [(ngModel)]="tempPort" (blur)="checkPort()" placeholder="22"
+            (change)="connected=false" />
+        <div *ngIf="tempPortCheck" class="ti3-unifyvalid-error-container">
+            <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+            <span class="ti3-validate-text">{{ i18n.plugins_common_message_installPortError }}</span>
+        </div>
+    </div>
+    <div class="install-form-item">
+        <div class="ti3-icon ti3-icon-staricon install-form-item-label">{{ i18n.plugins_common_label_installUser }}
+        </div>
+        <input id="username" type="text" tiText [(ngModel)]="username" (blur)="checkUsername()"
+            (change)="connected=false"
+            oncopy="return false"
+            onkeyup="if(event.ctrlKey&&event.keyCode==90){ return false;}"
+            onkeydown="if(event.ctrlKey&&event.keyCode==90){return false;}"
+            onpaste="return true"
+            oncut="return false" />
+        <div *ngIf="usernameCheckNull" class="ti3-unifyvalid-error-container">
+            <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+            <span class="ti3-validate-text tip-tem">{{ i18n.plugins_perf_tips_isRequired }}</span>
+        </div>
+    </div>
+    <div class="ssh-type">
+        <ti-formfield>
+            <!-- radio -->
+            <ti-item>
+                <div class="ti3-icon ti3-icon-staricon install-form-item-label ssh-type-title">{{ i18n.plugins_common_label_selectSSHType }}
+                    <a [href]="pluginUrlCfg.sysInstall_openFAQ2">
+                        <img *ngIf="currTheme == 1" class="help-icon" src="./assets/img/common/icon-help-dark.svg">
+                        <img *ngIf="currTheme == 2" class="help-icon" src="./assets/img/common/icon-help-light.svg">
+                    </a>
+                </div>
+                <div *ngFor="let item of radioList" style="display: inline-block;margin-right: 40px">
+                    <label class="ra-label" [for]="item.key">
+                        <input tiRadio type="radio" name="sshType" [(ngModel)]="sshTypeSelected" [value]="item.key"
+                            [id]="item.key" (change)="sshTypeSelected == item.key" />
+                        <span style="display: inline-block; font-size: 14px;">{{item.value}}</span>
+                    </label>
+                </div>
+            </ti-item>
+        </ti-formfield>
+    </div>
+    <div *ngIf="sshTypeSelected == 'usepwd'" class="install-form-item">
+        <div class="ti3-icon ti3-icon-staricon install-form-item-label">{{ i18n.plugins_common_label_installPwd }}
+        </div>
+        <div style="position: relative;">
+            <input id="pwd" [type]="installType" tiText noeye [(ngModel)]="pwd" (blur)="checkPwd()" (change)="connected=false" 
+            oncopy="return false"
+            onkeyup="if(event.ctrlKey&&event.keyCode==90){ return false;}"
+            onkeydown="if(event.ctrlKey&&event.keyCode==90){return false;}"
+            onpaste="return true"
+            oncut="return false" style="padding-right: 32px;"/>
+            <div class="eye">
+                <span (click)="installType0()" *ngIf="installType == 'text'">
+                    <img src="./assets/img/common/icon-view.svg" />
+                </span>
+                <span (click)="installType1()" *ngIf="installType == 'password'">
+                    <img src="./assets/img/common/icon-hide.svg" />
+                </span>
+            </div>
+        </div>
+        <div *ngIf="pwdCheckNull" class="ti3-unifyvalid-error-container">
+            <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+            <span class="ti3-validate-text tip-tem">{{ i18n.plugins_perf_tips_isRequired }}</span>
+        </div>
+    </div>
+    <div *ngIf="sshTypeSelected == 'usekey'" class="install-form-item">
+        <div class="ti3-icon ti3-icon-staricon install-form-item-label">{{ i18n.plugins_common_label_installsshkey }}
+        </div>
+        <textarea style="resize: none; width: 290px; height: 28px; line-height: 26px; " (blur)="checkShhKey()" tiText
+            name="" id="" cols="30" rows="1" [tiValidation]="validation" [placeholder]="sshUploadKey"
+            [(ngModel)]="localfilepath">
+        </textarea>
+        <div style="display: inline-block;">
+            <button type="button" class="little-minor-btn" (click)="fileUpload()"
+                style="display: inline-block; width: 100px; height: 28px; margin-left: 10px;">{{i18n.plugins_common_message_sshkeyUpload}}
+                <input type="file" id="uploadFile" style="display: none;" (change)="uploadFile()" />
+            </button>
+        </div>
+        <div *ngIf="sshkeyCheckNull" class="ti3-unifyvalid-error-container">
+            <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+            <span class="ti3-validate-text tip-tem">{{ i18n.plugins_common_message_sshkeyFail }}</span>
+        </div>
+        <div class="install-form-item-label mt20">{{ i18n.plugins_common_label_passphrase }}
+        </div>
+        <div class="eye-box">
+            <input [type]="passphraseType" tiText noeye placeholder="{{i18n.plugins_common_message_passphrase}}"
+                [(ngModel)]="passphrase"
+                (change)="connected = false"
+                oncopy="return false" 
+                onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
+                onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" 
+                onpaste="return true"
+                oncut="return false">
+            <div class="eye">
+                <span (click)="changInputType('password')" *ngIf="passphraseType === 'text'">
+                    <img src="./assets/img/common/icon-view.svg">
+                </span>
+                <span (click)="changInputType('text')" *ngIf="passphraseType === 'password'">
+                    <img src="./assets/img/common/icon-hide.svg">
+                </span>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="secondary-btn check-conn-btn" (click)="checkConn()" [disabled]="connectChecking">
+        <hy-theme-content *ngIf="connectChecking">
+            <img dark src="./assets/img/loading-disabled.gif">
+            <img light src="./assets/img/loading-white.gif">
+        </hy-theme-content>
+        <span>{{ i18n.plugins_common_button_checkConn }}</span>
+    </button>
+    <button type="button" class="operation-anal" id="confim-btn" (click)="install()" [disabled]="!connected">
+        <span>{{ i18n.plugins_common_button_startDeploy }}</span>
+    </button>
+</div>
+
+<div *ngIf="installing !=- 1" class="install-form">
+    <div *ngIf="installing == 0" class="install-title-installing">
+        <div>
+            <p>{{ i18n.plugins_common_message_installingInfo }}</p>
+        </div>
+    </div>
+    <div *ngIf="installing == 1" class="install-title-installed">
+        <img *ngIf=" installing == 1" class="img_install" src="./assets/img/common/icon-success.png" />
+        <p> {{ i18n.plugins_common_title_installed }} </p>
+    </div>
+    <div *ngIf="installing == 2" class="install-title-failed">
+        <img *ngIf=" installing == 2" class="img_install" src="./assets/img/common/icon-error.png" />
+        <p> {{ i18n.plugins_common_title_installFailed }} </p>
+        <p [innerHtml]="installFailedInfo"></p>
+    </div>
+
+    <div *ngIf="installing == 1" class="install-message-installed">
+        <div>
+            <ti-formfield>
+                <ti-item>
+                    <p class="tipText" [innerHtml]="selectIPInfo"></p>
+                    <div *ngFor="let item of ipList index as i">
+                        <label class=" ra-label" [for]="item.key" style="margin-top: 10px;">
+                            <i class=" ra-common ra-check" *ngIf="ipSelected == item.key"></i>
+                            <i class="ra-common ra-uncheck" *ngIf="ipSelected != item.key"></i>
+                            <input type="radio" name="ipType" [(ngModel)]="ipSelected" [value]="item.key"
+                                [id]="item.key" (change)="ipSelected == item.key" />
+                            <span style="margin-left: 30px; ">{{item.value}}</span>
+                        </label>
+                        <div *ngIf="ipSelected == 2 && i == ipList.length - 1">
+                            <input type="text" tiText [(ngModel)]="extraIP" (blur)="checkExtraIP()"
+                                style="margin-top: 10px;" />
+                            <div *ngIf="extraIpCheck" class="ti3-unifyvalid-error-container">
+                                <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                                <span class="ti3-validate-text">{{ i18n.plugins_common_message_ipError }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </ti-item>
+            </ti-formfield>
+        </div>
+    </div>
+
+    <div *ngIf="this.installing == 1" id="login-btn" class="primary-btn" (click)="goLogin()">
+        <span>
+            {{ i18n.plugins_common_button_login }}
+        </span>
+    </div>
+    <div *ngIf="this.installing == 2" id="login-btn" class="primary-btn" (click)="retry()">
+        <span>
+            {{ i18n.plugins_sysperf_button_install_failed_retry }}
+        </span>
+    </div>
+    <div class="showLoading" *ngIf="showLoading">
+        <app-loading [height]="'100%'" [size]="'max'"></app-loading>
+    </div>
+</div>
+<app-messagebox #installTip *ngIf="needFlag">
+    <div class="content tip-box">
+        <div class="tip-title">
+            <span class="title-content">{{i18n.plugins_common_message_beforeInstall}}</span>
+            <img src="./assets/img/common/icon-close.png" (click)="cancelMsgTip()">
+        </div>
+        <div class="tip-title-border"></div>
+        <div class="tip-dsc">
+            <img class="img_box" src="./assets/img/common/icon-information.png">
+            <p>
+                {{i18n.plugins_common_message_beforeInstallDsc4}} <br />
+                {{i18n.plugins_common_message_beforeInstallDsc5}} <br />
+                {{i18n.plugins_porting_message_beforeInstallDsc6}} <br />
+                <a [href]="pluginUrlCfg.sysInstall_openFAQ4">
+                    {{i18n.plugins_porting_message_pg_download_link}}</a>
+                <span>;</span>
+                <a
+                    [href]="pluginUrlCfg.sysInstall_openFAQ5">
+                    {{i18n.plugins_porting_message_pg_vfc_tool_download_link}}</a>
+                <span>;</span>
+            </p>
+        </div>
+        <div class="tip-select"><input type="checkbox" tiCheckbox
+                [(ngModel)]="flag">{{i18n.plugins_common_message_beforeInstallOption}}
+        </div>
+        <div class="tip-confirm">
+            <button type="button" (click)="confirmMsgTip()"
+                [disabled]="!flag">{{i18n.plugins_common_message_beforeInstallConfirm}}</button>
+            <button type="button" (click)="cancelMsgTip()">{{i18n.plugins_common_message_beforeInstallCancel}}</button>
+        </div>
+    </div>
+</app-messagebox>
+<app-messagebox #installModal>
+</app-messagebox>

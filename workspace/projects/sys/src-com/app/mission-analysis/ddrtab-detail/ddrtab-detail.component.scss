@@ -1,0 +1,13 @@
+@import '../styles/custemTabs.scss';
+@import '../styles/custemDetailContainer.scss';
+
+:host .custemDetailContainer {
+  padding-top: 0;
+}
+
+::ng-deep {
+  ti-drop ti-searchbox-notsearch {
+    --ti-searchbox-select-bg-color: var(--vscode-editor-background);
+    --ti-searchbox-select-bg-color-hover: var(--vscode-editor-background);
+  }
+}

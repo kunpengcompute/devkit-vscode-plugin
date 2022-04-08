@@ -1,0 +1,204 @@
+.overview-container {
+    padding-bottom: 50px;
+
+    .thread-tabs {
+        line-height: 26px;
+        width: 100%;
+        font-size: 20px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+
+        .item-tab {
+            display: inline-block;
+
+            .tab-label {
+                padding: 0 20px;
+                border-right: 1px solid #ccc;
+            }
+
+            .tab-label-first {
+                padding-left: 0;
+            }
+
+            .item-split-none {
+                border-right: none;
+            }
+        }
+
+        .tab-active {
+            padding-bottom: 5px;
+            border-bottom: 2px solid #7599fb;
+            color: #7599fb;
+        }
+    }
+
+    .thread-content {
+        height: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+
+        .input {
+            height: 26px !important;
+            padding: 0 10px;
+            outline: none;
+        }
+
+        .graph-btn {
+            background: #6c92fa;
+            padding: 8px 25px;
+            border: none;
+            border-radius: 2px;
+            color: #fff;
+            cursor: pointer;
+
+            &:hover {
+                background: #5b7ede;
+            }
+        }
+
+        .hot-tree {
+            height: 290px;
+            margin-top: 20px;
+            overflow: auto;
+            box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.4) inset;
+            border-radius: 1px;
+            border-bottom: 1px solid var(--ti-table-border-bottom-color);
+
+        }
+    }
+
+    .real-graph {
+        margin-top: 35px;
+    }
+
+    .real-content {
+        margin: -25px 0 0 25px;
+    }
+
+    .loadData {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 60px
+    }
+}
+
+.snap_title {
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+    font-weight: bold;
+}
+
+.snap_content {
+    font-size: 12px;
+    line-height: 18px;
+    color: #616161;
+}
+
+.red_count {
+    width: 14px;
+    height: 14px;
+    background-color: #ed4b4b;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -7px;
+    right: -6px;
+}
+
+.operation-anal {
+    margin-left: unset !important;
+    border-radius: 2px;
+    color: #e8e8e8;
+}
+
+:host .no-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #888888;
+    text-align: center;
+    line-height: 20px;
+    height: 600px;
+
+    img {
+        margin-bottom: 8px;
+    }
+}
+
+.unfolder_data {
+    display: flex;
+    justify-content: center;
+    height: 12px;
+    width: 100%;
+    line-height: 12px;
+
+    hy-theme-content {
+        cursor: pointer;
+    }
+}
+
+
+
+:host ::ng-deep>ti-spinner {
+    background: transparent !important;
+    height: 28px !important;
+    border: 0 !important;
+}
+
+:host ::ng-deep .ti3-spinner-downicon {
+    display: none;
+}
+
+:host ::ng-deep .ti3-spinner-upicon {
+    display: none;
+}
+
+:host ::ng-deep .ti3-spinner-input-box {
+    left: -1px !important;
+    width: 80px !important;
+    margin-top: -1px !important;
+    border-radius: 2px !important;
+    overflow: hidden !important;
+}
+
+:host ::ng-deep .ti3-spinner-input-box>input {
+    text-align: left !important;
+    padding: 0px 10px !important;
+    height: 28px;
+    color: var(--text-color-d-e8-l-2) !important;
+}
+
+:host ::ng-deep [tiText][disabled]:disabled {
+    color: #aaa !important;
+}
+
+:host ::ng-deep .ti3-tree-node-text {
+    display: inline !important;
+}
+
+:host ::ng-deep #httpcontent .ti3-tree-item-leaf {
+    margin-left: 0px !important;
+}
+
+:host ::ng-deep #httpcontent .ti3-tree-container {
+    overflow: inherit;
+}
+.http-threshold{
+    width: 80px;
+    height: 28px !important;
+    background-color: transparent;
+}
+
+.httpForm{
+    display: inline-block;
+    vertical-align: middle;
+}

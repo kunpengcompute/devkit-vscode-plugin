@@ -1,0 +1,132 @@
+<!-- 依赖文件 多文件上传 modal -->
+<ng-template #relayFileModal let-context="context">
+  <ti-modal-header>{{ i18n.software_relay_file.title }}</ti-modal-header>
+  <ti-modal-body>
+    <div class="content">
+      <div class="drag-box" (dragover)="relayFileDragover($event)" (drop)="relayFileDrop($event)">
+          <div class="drag-table-container" *ngIf="relayFileSrcData.data.length">
+              <ti-table [(displayedData)]="relayFileTableData" [srcData]="relayFileSrcData">
+                  <div class="ti3-table-fixed-head">
+                      <table>
+                          <thead>
+                          <tr>
+                              <!--实际显示的表头。注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+                              <th tiOverflow *ngFor="let column of relayFileColumns;let index = index" width="{{column.width}}">
+                                  <ti-cell-text>{{column.title}}</ti-cell-text>
+                                  <ti-head-sort [sortKey]="column.sortKey" *ngIf="column.sortKey"></ti-head-sort>
+                              </th>
+                          </tr>
+                          </thead>
+                      </table>
+                  </div>
+                  <div class="ti3-table-container" style="max-height:266px;">
+                      <table>
+                          <thead>
+                              <tr>
+                                  <th tiOverflow *ngFor="let column of relayFileColumns" width="{{column.width}}"></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+                              <tr *ngFor="let row of relayFileTableData;let index = index">
+                                  <td tiOverflow [ngClass]="{'file-error': row.error && row.msg}">{{row.fileName}}</td>
+                                  <td tiOverflow [ngClass]="{'file-error': row.error && row.msg}">{{row.fileSize | handleByte}}</td>
+                                  <td tiOverflow *ngIf="isUploadRelayFile && row.status" class="success-status p-relative" [ngClass]="{'fail-status': row.status === i18n.common_term_upload_fail}">
+                                      <span>{{row.status}}</span>
+                                  </td>
+                                  <td tiOverflow *ngIf="isUploadRelayFile || relayFileColumns.length === 4">{{row.msg}}</td>
+                                  <td tiOverflow *ngIf="!disabledReplace" class="cursor-link">
+                                    <!-- 删除 -->
+                                    <span *ngIf="row.type === i18n.common_term_operate_del" (click)="delRelayFile(index)">{{ row.type }}</span>
+                                    <!-- 替换 -->
+                                    <span *ngIf="row.type === i18n.analysis_center.exit.replace" (click)="openReplaceModal(replaceFileModal, row, false)">{{ row.type }}</span>
+                                    <!-- 重试 -->
+                                    <span *ngIf="row.type === i18n.analysis_center.retry.title" (click)="openReplaceModal('', row, true)">{{ row.type }}</span>
+                                  </td>
+                                  <td tiOverflow *ngIf="disabledReplace" class="cursor-link-disabled">
+                                      <!-- 禁用替换 -->
+                                      <span *ngIf="row.type === i18n.analysis_center.exit.replace">{{ row.type }}</span>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </ti-table>
+          </div>
+          <div class="drag-no-data flex-center flex-column" *ngIf="!relayFileSrcData.data.length">
+              <img src="./assets/img/common/drag_upload.svg" />
+              <p class="text">
+                  <span>{{ i18n.software_relay_file.des1 }}</span>
+                  <label class="cursor-link" for="files">{{ i18n.software_relay_file.des2 }}</label>
+                  <input type="file" id="files" class="dis-none" multiple (change)="relayFileClick($event)" />
+              </p>
+              <p class="tip">({{ i18n.software_relay_file.tip }})</p>
+          </div>
+      </div>
+      <div class="file-info flex flex-row-reverse">
+          <div class="file-num" *ngIf="!isUploadRelayFile">
+              <span>{{ relayUploadTotal }}{{ i18n.software_relay_file.fileTitle }}</span>
+              <span *ngIf="relayFileSrcData.data.length">{{ i18n.software_relay_file.successSize }}{{ relayFileTotalSize | handleByte }}</span>
+          </div>
+          <div class="file-num" *ngIf="isUploadRelayFile">
+              <span>{{ relaySuccessFile }} {{ i18n.software_relay_file.successFile }}</span>
+              <span *ngIf="relaySuccessFile">{{ i18n.software_relay_file.successSize }}{{ relaySuccessSize | handleByte }}</span>
+          </div>
+          <div class="progress-bar-container flex-center" *ngIf="relayUploadProgress">
+              <span>{{ i18n.software_relay_file.progressTitle }}</span>
+              <div class="progress-bar">
+                  <ti-progressbar [value]="barValue" [max]="maxBarValue"></ti-progressbar>
+              </div>
+              <span>{{ barValue }}%</span>
+          </div>
+      </div>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <ng-container *ngIf="!isUploadRelayFile || relayUploadProgress || !isDone">
+      <button type="button" color="primary" (click)="uploadRelayFile()" tiButton [disabled]="!relayFileSrcData.data.length || relayUploadProgress || !isDone">{{ i18n.common_term_upload_resource }}</button>
+      <label class="addFile-disabled" for="filesTwoDisabled" *ngIf="relayUploadProgress || !isDone">{{ i18n.software_relay_file.des3 }}</label>
+      <input type="file" id="filesTwoDisabled" class="dis-none" multiple [disabled]="true" />
+      <label class="addFile" for="filesTwo" *ngIf="!relayUploadProgress && isDone">{{ i18n.software_relay_file.des3 }}</label>
+      <input type="file" id="filesTwo" class="dis-none" multiple (change)="relayFileClick($event)" />
+      <button type="button" [disabled]="isDataBlank" (click)="context.dismiss()" tiButton>{{ i18n.common_term_operate_cancel }}</button>
+    </ng-container>
+    <ng-container *ngIf="isUploadRelayFile && !relayUploadProgress && isDone">
+      <button type="button" (click)="context.dismiss()" tiButton>{{ i18n.common_term_operate_close }}</button>
+    </ng-container>
+  </ti-modal-footer>
+</ng-template>
+
+<!-- 替换依赖文件 modal -->
+<ng-template #replaceFileModal let-context="context">
+  <ti-modal-header>{{ i18n.analysis_center.exit.replaceTitle }}</ti-modal-header>
+  <ti-modal-body>
+    <div class="content">
+      <div class="img-box">
+        <img src="./assets/img/home/icon_tip.png" />
+      </div>
+      <p style="max-width: 300px;">{{ context.tip }}</p>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" color="primary" (click)="checkRelayFile('override', context.fileList, true, context)" tiButton>{{ i18n.common_term_operate_ok }}</button>
+    <button type="button" (click)="context.dismiss()" tiButton>{{ i18n.common_term_operate_cancel }}</button>
+  </ti-modal-footer>
+</ng-template>
+
+<!-- 取消上传任务 modal -->
+<ng-template #cancelTaskModal let-context="context">
+  <ti-modal-header>{{ i18n.analysis_center.exit.cancel_title }}</ti-modal-header>
+  <ti-modal-body>
+    <div class="content">
+      <div class="img-box">
+        <img src="./assets/img/home/icon_warn.png" />
+      </div>
+      <p>{{ i18n.analysis_center.exit.cancel_content }}</p>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" tiButton (click)="context.close()">{{ i18n.common_term_operate_ok }}</button>
+    <button type="button" color="primary" (click)="context.dismiss()" tiButton>{{ i18n.common_term_operate_cancel }}</button>
+  </ti-modal-footer>
+</ng-template>

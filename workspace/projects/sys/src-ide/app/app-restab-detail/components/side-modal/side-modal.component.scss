@@ -1,0 +1,219 @@
+
+ //浅色主题样式
+::ng-deep .vscode-light {
+    --select-box-color: #282b33;
+    --filter-box-bg: #fff;
+    --filter-bg: #fff;
+    --ti3-selected-tr-bg: #fff;
+    --ti3-table-fixed-head-filler-bg: #f5f9ff;
+    --ti3-selected-tr-hover-bg: #f5f9ff;
+    --filter-button-bg: #fff;
+    --filter-button-txt-close-color: #222;
+    --filter-button-txt-close-hover-color: #0067ff;
+    --filter-button-border-color: 1px solid #979797;
+    --filter-button-border-hover-color: 1px solid #0067ff;
+    --filter-button-txt-ok-color: #fff;
+    --table-tr-border-color: 1px solid #e1e6ee;
+    --icon-border-color: 1px solid #aaa;
+    --icon-border-hover-color: 1px solid #0067ff;
+    --select-txt-color: #222;
+    --select-title-txt-color: #282b33;
+    --ti-filter-bg-color: #fff;
+    --ti-filter-border-color: #0067ff;
+    --ti-filter-span-bg: #fff;
+    --ti-filter-span-hover-bg: #f5f9ff;
+    --ti-table-tr-bg-color-selected: #161616;
+    --select-option-box-color: #fff;
+    --select-option-box-hover-color: #f0f3fa;
+}
+
+//深色主题样式
+::ng-deep .vscode-dark {
+    --select-option-box-color: #252626;
+    --select-option-box-hover-color: #222;
+    --ti-table-tr-bg-color-selected: #fff;
+    --select-box-color: #e8e8e8;
+    --filter-box-bg: #252526;
+    --filter-bg: #313131;
+    --ti3-selected-tr-bg: #161616;
+    --ti3-table-fixed-head-filler-bg: #2a2a2a;
+    --ti3-selected-tr-hover-bg: #2a2a2a;
+    --filter-button-bg: #252526;
+    --filter-button-txt-close-color: #e8e8e8;
+    --filter-button-txt-close-hover-color: #0067ff;
+    --filter-button-border-color: 1px solid #ddd;
+    --filter-button-border-hover-color: 1px solid #0067ff;
+    --filter-button-txt-ok-color: #fff;
+    --table-tr-border-color: 1px solid #545454;
+    --icon-border-color: 1px solid #313131;
+    --icon-border-hover-color: 1px solid #313131;
+    --select-txt-color: #e8e8e8;
+    --select-title-txt-color: #aaa;
+    --ti-filter-bg-color: #252526;
+    --ti-filter-border-color: #0067ff;
+    --ti-filter-span-bg: #252526;
+    --ti-filter-span-hover-bg: #313131;
+}
+ ::ng-deep #selectCpuModal {
+    z-index: 999999999 !important;
+
+    .ti3-modal-dialog {
+        margin: 212px auto 0 !important;
+        height: 700px !important;
+    }
+}
+  ::ng-deep .vscode-dark {
+    .timeChartConfigModal .ti3-modal-content {
+        width: 660px !important;
+        background-color: #252526 !important;
+        box-shadow: 0 3px 6px 0 #000 !important;
+    }
+  }
+
+  .switch {
+    position: relative;
+    width: 60px;
+    height: 24px;
+    background-color: #b8becc;
+    border-radius: 12px;
+    opacity: 0.7;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    line-height: 24px;
+    margin-bottom: 20px;
+    margin-left: 0px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+   .selectedLeft {
+    position: absolute;
+    width: 38px;
+    height: 24px;
+    background-color: #6c92fa;
+    border-radius: 12px;
+    right: 0px;
+    transition: all 0.25s linear;
+    text-align: center;
+    cursor: pointer;
+  }
+  .selectedRight {
+    position: absolute;
+    width: 38px;
+    height: 24px;
+    background-color: #6c92fa;
+    border-radius: 12px;
+    right: 48px;
+    transition: all .25s linear;
+    text-align: center;
+    cursor: pointer;
+  }
+::ng-deep  .selectTableBox{
+    position: relative;
+    .headerFilter{
+      position: absolute;
+      top: 7px;
+      right: 10px;
+      z-index: 1;
+    .statusFilter {
+        min-width: 200px;
+        font-size: 14px;
+        display: none;
+        position: relative;
+        position: absolute;
+        top: 25px;
+        right: 5px;
+        min-width: 150px;
+        background-color: var(--select-option-box-color);
+        box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+        padding-top: 15px;
+
+        .filter-cell {
+          display: flex;
+          align-items: center;
+          height: 30px;
+          padding: 0 15px;
+          box-sizing: border-box;
+          width: 100%;
+          &:hover {
+            background-color: var(--select-option-box-hover-color);
+          }
+          input[type=checkbox][tiCheckbox] + .ti3-checkbox {
+            display: flex;
+          }
+          .ti3-checkbox-label {
+            width: auto;
+          }
+        }
+      }
+      .statusFilter.active {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      img{
+        cursor: pointer;
+        height: 9px;
+        width: 9px;
+      }
+      ::ng-deep input[type=checkbox][tiCheckbox] + .ti3-checkbox .ti3-checkbox-label{
+        white-space: nowrap;
+      }
+    }
+    
+  }
+
+  .selectTh th:last-child{
+    padding-right: 30px;
+  }
+  ::ng-deep .timeChartConfigModal .ti3-close {
+    position: absolute;
+    top: 15px !important;
+    right: 40px !important;
+}
+
+::ng-deep .timeChartConfigModal .ti3-modal-header {
+    padding: 20px 0px !important;
+    color: #e8e8e8 !important;
+    font-size: 20px !important;
+}
+
+::ng-deep .timeChartConfigModal .ti3-modal-body {
+    max-height: 458px !important;
+    .ti3-table>.ti3-table-fixed-head>.ti3-table-fixed-head-filler {
+      background-color: var(--d-2a2a2a-l-f5f9ff);
+      height: calc(100% - 1px);
+      border-bottom: 1px solid var(--ti-th-border-color);
+    }
+}
+
+::ng-deep .timeChartConfigModal .ti3-modal-footer {
+    height: 75px;
+    padding: 23px 0 24px !important;
+    box-sizing: border-box;
+    .little-minor-btn {
+      margin-left: 16px;
+  }
+}
+::ng-deep {
+  .ti3-table>.ti3-resize-wrapper>table>tbody>tr>td:first-child[checkbox-column], 
+  .ti3-table>.ti3-resize-wrapper>table>tbody>tr>td:first-child[radio-column], 
+  .ti3-table>.ti3-table-container>table>tbody>tr>td:first-child[checkbox-column]{
+    width: var(--ti-table-column-icon-width) !important;
+  }
+}
+::ng-deep .timeChartConfigModal ::-webkit-scrollbar {
+    width: 5px !important;
+}
+
+::ng-deep .timeChartConfigModal .ti3-multiselect-container .ti3-select-dominator-text {
+    height: auto;
+    min-height: 26px !important;
+    max-height: 26px !important;
+    align-items: center;
+}
+::ng-deep .side-modal-pop {
+  z-index: 1051;
+}

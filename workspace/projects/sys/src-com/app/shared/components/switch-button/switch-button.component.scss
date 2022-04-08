@@ -1,0 +1,32 @@
+.switch{
+    width: 64px;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 9px;
+    background-color: var(--color-switch-bgc);
+    color: var(--common-color-font-primary);
+    font-size: 12px;
+    margin-bottom: 10px;
+    position: relative;
+    .switchNode{
+      position: absolute;
+      top: 0;
+      width: 32px;
+        height: 18px;
+        background-color: transparent;
+        border-radius: 9px;
+      display: block;
+      text-align: center;
+      cursor: pointer;
+      &.active{
+        background-color: rgba(0,103,255);
+        color: #fff;
+      }
+    }
+    .switchRight{
+      right: 0;
+    }
+    .switchLeft{
+      left: 0;
+    }
+  }

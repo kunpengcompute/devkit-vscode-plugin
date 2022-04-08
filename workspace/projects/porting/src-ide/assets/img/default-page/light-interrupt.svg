@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="130px" viewBox="0 0 320 130" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #FFFFFF;">
+    <title>缺省页/插画/网络异常</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#4294FF" stop-opacity="0.119072334" offset="0%"></stop>
+            <stop stop-color="#87BDFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="115.428439%" y1="48.6621134%" x2="43.6425371%" y2="50.5145978%" id="linearGradient-2">
+            <stop stop-color="#F7FBFF" offset="0%"></stop>
+            <stop stop-color="#63A1FF" offset="100%"></stop>
+        </linearGradient>
+        <path d="M5.29772668,0 L5.47638498,0 L5.47638498,0 L63.2116593,0 L63.8612447,0 C65.3407263,1.84164185e-14 66.667064,0.912123376 67.1964754,2.29364045 L67.1964754,2.29364045 L67.1964754,2.29364045 L69,7 L3.26849658e-13,7 L2.46947036,1.7894074 C2.98736703,0.696643315 4.08844991,-2.21948671e-16 5.29772668,0 Z" id="path-3"></path>
+        <pattern id="pattern-5" patternUnits="objectBoundingBox" y="-442.857143%" height="542.857143%" width="100%">
+            <use xlink:href="#image-6" transform="scale(0.134765625,0.134765625)"></use>
+        </pattern>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-7">
+            <stop stop-color="#D1E9FF" offset="0%"></stop>
+            <stop stop-color="#6BB5FF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <polygon id="path-8" points="0 43 55 80.5 121 43 55.5 0 10 16"></polygon>
+        <linearGradient x1="56.137461%" y1="0%" x2="50.0325248%" y2="49.7350306%" id="linearGradient-10">
+            <stop stop-color="#D7EBFF" offset="0%"></stop>
+            <stop stop-color="#61A0FF" offset="100%"></stop>
+        </linearGradient>
+        <path d="M59.5,0 C92.3609426,0 119,26.6390574 119,59.5 C119,92.3609426 92.3609426,119 59.5,119 C26.6390574,119 0,92.3609426 0,59.5 C0,26.6390574 26.6390574,0 59.5,0 Z M59.5,8 C31.0573354,8 8,31.0573354 8,59.5 C8,87.9426646 31.0573354,111 59.5,111 C87.9426646,111 111,87.9426646 111,59.5 C111,31.0573354 87.9426646,8 59.5,8 Z M59.5,18 C82.4198171,18 101,36.5801829 101,59.5 C101,82.4198171 82.4198171,101 59.5,101 C36.5801829,101 18,82.4198171 18,59.5 C18,36.5801829 36.5801829,18 59.5,18 Z M59.5,26 C40.9984609,26 26,40.9984609 26,59.5 C26,78.0015391 40.9984609,93 59.5,93 C78.0015391,93 93,78.0015391 93,59.5 C93,40.9984609 78.0015391,26 59.5,26 Z M59.5,37.5 C71.9022513,37.5 82,47.3248366 82,59.5 C82,71.6751634 71.9022513,81.5 59.5,81.5 C47.0977487,81.5 37,71.6751634 37,59.5 C37,47.3248366 47.0977487,37.5 59.5,37.5 Z M59.5,45.5 C51.4677155,45.5 45,51.7929124 45,59.5 C45,67.2070876 51.4677155,73.5 59.5,73.5 C67.5322845,73.5 74,67.2070876 74,59.5 C74,51.7929124 67.5322845,45.5 59.5,45.5 Z" id="path-11"></path>
+        <pattern id="pattern-13" patternUnits="objectBoundingBox" x="0%" width="100%" height="100%">
+            <use xlink:href="#image-14" transform="scale(0.232421875,0.232421875)"></use>
+        </pattern>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-15">
+            <stop stop-color="#D1E9FF" offset="0%"></stop>
+            <stop stop-color="#6BB5FF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="缺省页/插画/网络异常" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FFFFFF" x="0" y="0" width="320" height="130"></rect>
+        <g id="编组-2备份" transform="translate(30.000000, 7.000000)">
+            <path d="M183,16 L183,42 L197,42 L197,98 L90,98 L90,42 L127,42 L127,16 L183,16 Z M236,64 L236,98 L202,98 L202,64 L236,64 Z M88,64.8948055 L88,98 L32,98 L32,64.8948055 L88,64.8948055 Z" id="形状结合" fill-opacity="0.0320968094" fill="#008CFF"></path>
+            <path d="M0,98 L260,98 C230.747341,110 185.907166,116 125.479476,116 C65.0517857,116 23.2252938,110 0,98 Z" id="路径-44备份" fill="url(#linearGradient-1)"></path>
+            <g id="矩形" transform="translate(95.000000, 91.000000)">
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <g id="蒙版" fill-rule="nonzero">
+                    <use fill="url(#linearGradient-2)" xlink:href="#path-3"></use>
+                    <use fill-opacity="0.4" fill="url(#pattern-5)" style="mix-blend-mode: color-burn;" xlink:href="#path-3"></use>
+                </g>
+                <polygon fill="url(#linearGradient-7)" mask="url(#mask-4)" points="-1.47082346e-12 4.4408921e-16 69 4.4408921e-16 69 7 -1.47082346e-12 7"></polygon>
+            </g>
+            <rect id="矩形" fill="#DBECFF" x="103" y="81" width="4" height="10"></rect>
+            <rect id="矩形备份-5" fill="#DBECFF" x="116" y="81" width="4" height="10"></rect>
+            <rect id="矩形备份-6" fill="#DBECFF" x="139" y="81" width="4" height="10"></rect>
+            <rect id="矩形备份-7" fill="#DBECFF" x="152" y="81" width="4" height="10"></rect>
+            <rect id="矩形" fill-opacity="0.544389205" fill="#0063E4" x="148" y="94" width="4" height="2" rx="1"></rect>
+            <rect id="矩形备份-8" fill-opacity="0.544389205" fill="#0063E4" x="154" y="94" width="3" height="2" rx="1"></rect>
+            <g id="编组" transform="translate(74.000000, 0.000000)">
+                <mask id="mask-9" fill="white">
+                    <use xlink:href="#path-8"></use>
+                </mask>
+                <g id="蒙版"></g>
+                <g mask="url(#mask-9)" id="矩形">
+                    <g transform="translate(-4.000000, 18.500000)">
+                        <mask id="mask-12" fill="white">
+                            <use xlink:href="#path-11"></use>
+                        </mask>
+                        <g id="蒙版" fill-rule="nonzero">
+                            <use fill="url(#linearGradient-10)" xlink:href="#path-11"></use>
+                            <use fill-opacity="0.4" fill="url(#pattern-13)" style="mix-blend-mode: color-burn;" xlink:href="#path-11"></use>
+                        </g>
+                        <polygon fill="url(#linearGradient-15)" mask="url(#mask-12)" points="4 23.5 31 -2.5 94 -1.9673152e-13 118 28 94 43 30.5 43"></polygon>
+                        <polygon id="路径-2" fill="#F7FBFF" mask="url(#mask-12)" points="80 -2.5 59.5 14 71 25.5 61 48.5 78 25.5 71 14 93 2.5"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,55 @@
+.light {
+  --netio-table-txt-color: #222;
+  --netio-table-label-color: #616161;
+  --netio-table-bg: #fff;
+}
+.dark {
+  --netio-table-txt-color: #aaa;
+  --netio-table-label-color: #aaa;
+  --netio-table-bg: #161616;
+}
+
+.warpper {
+  padding: 20px 0 20px 24px;
+  background: var(--netio-table-bg);
+  .common {
+    margin-bottom: 20px;
+    .itemParam {
+      display: flex;
+      height: 18px;
+      line-height: 18px;
+      color: var(--netio-table-txt-color);
+      font-size: 12px;
+      margin-bottom: 20px;
+      .label {
+        width: 180px;
+        color: var(--netio-table-label-color);
+        box-sizing: border-box;
+        margin-right: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        img {
+          width: 15px;
+          height: 15px;
+          margin-right: 8px;
+          transform: rotateZ(90deg);
+        }
+      }
+    }
+  }
+}
+.padding {
+  padding-left: 16px;
+}
+.warpper > .common:last-child {
+  margin-bottom: 0;
+}
+.warpper > .common > .itemParam:last-child {
+  margin-bottom: 0;
+}
+.flex{
+  display: flex;
+  align-items: center;
+}

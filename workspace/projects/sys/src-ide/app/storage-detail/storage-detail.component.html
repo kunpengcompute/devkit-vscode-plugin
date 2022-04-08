@@ -1,0 +1,42 @@
+<div id="detail-container">
+    <ti-tabs>
+        <ti-tab [(active)]="item.active" *ngFor="let item of detailList; let index = index" [disabled]="item.disable"
+            (activeChange)='change(item)'>
+            <ti-tab-header>
+                <span>{{item.title}}</span>
+            </ti-tab-header>
+            <ng-template #tiTabContent>
+                <div class="content-container"
+                    *ngIf="item.title == i18n.common_term_task_tab_congration && item.disable==false"
+                    [ngClass]="{showDetail: item.active}">
+                    <app-configuration [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                        [status]='status' [analysisType]='analysisType' [taskid]='id'></app-configuration>
+                </div>
+                <div class="content-container"
+                    *ngIf="item.title == i18n.common_term_task_tab_log && item.disable==false"
+                    [ngClass]="{showDetail: item.active}">
+                    <app-configuration-log [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                        [analysisType]='analysisType' [status]='status' [taskid]='id'></app-configuration-log>
+                </div>
+                <div class="content-container"
+                    *ngIf="item.title == i18n.common_term_task_tab_summary && item.disable==false"
+                    [ngClass]="{showDetail: item.active}">
+                    <app-storage-summury [nodeid]='nodeid' [taskid]='id' [projectName]='projectName'
+                        [taskName]='taskName' [analysisType]='analysisType'></app-storage-summury>
+                </div>
+
+                <div class="content-container" *ngIf="item.title == i18n.storageIO.apis_title && item.disable==false"
+                    [ngClass]="{showDetail: item.active}">
+                    <app-ioapis #functionModal [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                        [select]='selectDetail' [analysisType]='analysisType' [taskid]='id'></app-ioapis>
+                </div>
+                <div class="content-container"
+                    *ngIf="item.title == i18n.storageIO.disk_title && item.disable==false"
+                    [ngClass]="{showDetail: item.active}">
+                    <app-diskio #appDiskIoRef [nodeid]='nodeid'  [projectName]='projectName' [taskName]='taskName' [select]='selectDetail'
+                        [taskid]='id'></app-diskio>
+                </div>
+            </ng-template>
+        </ti-tab>
+    </ti-tabs>
+</div>

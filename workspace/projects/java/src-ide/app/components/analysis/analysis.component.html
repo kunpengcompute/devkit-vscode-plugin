@@ -1,0 +1,96 @@
+<ng-template #analysis let-context='context'>
+  <ti-modal-header id="weakHeader">
+    <div class="header">
+            <span class="suggest-title">
+                {{i18n.protalserver_sampling_tab.suggestions}} &nbsp;
+                <span *ngIf="suggestArr.length !== 0">({{suggestArr.length}})</span>
+            </span>
+      <span class="tip-close" (click)="context.close()">
+                <img src="./assets/img/newSvg/close_icon.svg" />
+                <img src="./assets/img/newSvg/close_hover.svg">
+            </span>
+    </div>
+  </ti-modal-header>
+  <ti-modal-body id="addWeakBody">
+    <div *ngIf="suggestArr.length !== 0" class="set-body">
+      <div *ngIf="type !== 0 " class="ctx">
+        <div *ngFor="let item of suggestArr;let idx=index">
+          <div *ngIf="item.uiType === 0">
+            <div class="sug-header">
+                            <span class="arow" (click)="changeHeight(idx)">
+                                <img src="./assets/img/newSvg/down_arrow.svg" [ngClass]="{'toggle-up':!item.sugHeight}">
+                            </span>
+              <div class="sug-div" tiOverflow>
+                <img class="dark-icon" src="./assets/img/projects/one_config_info.svg">
+                <img class="light-icon" src="./assets/img/projects/one_config_info_hover.svg">
+                <span>{{item.name}}{{i18n.protalserver_sampling_leak.tabMark}}</span>
+                <span>{{item.title}}</span>
+              </div>
+            </div>
+            <div *ngIf="item.sugHeight" class="sug-border">
+              <div class="left-color">
+              </div>
+              <div class="sug-content">
+                            <span>
+                                <span [innerHtml]="item.suggestion"></span>
+                                <a *ngIf="isIntellij && suggestList[idx]?.isLink && isZhCn" style="color:rgb(47, 101, 202);" (click)="openUrl(pluginUrlCfg)">{{i18n.protalserver_sampling_leak.viewDetails}}</a>
+                                <a *ngIf="isIntellij && suggestList[idx]?.isLink && !isZhCn" style="color:rgb(47, 101, 202);" (click)="openUrl(pluginUrlCfg)">{{i18n.protalserver_sampling_leak.viewDetail}}</a>
+                            </span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="item.uiType === 1">
+            <div class="sug-header">
+                            <span class="arow" (click)="changeHeight(idx)">
+                                <img src="./assets/img/newSvg/down_arrow.svg" [ngClass]="{'toggle-up':!item.sugHeight}">
+                            </span>
+              <div class="sug-div" tiOverflow>
+                <img class="dark-icon" src="./assets/img/projects/one_config_info.svg">
+                <img class="light-icon" src="./assets/img/projects/one_config_info_hover.svg">
+                <span>{{item.name}}{{i18n.protalserver_sampling_leak.tabMark}}</span>
+                <span>{{item.title ||item.configKey}}</span>
+              </div>
+            </div>
+            <div *ngIf="item.sugHeight" class="sug-border">
+              <div class="left-color">
+              </div>
+              <div class="sug-content" style="display: block;">
+                <div class="opti_title">{{ i18n.jdbcpool_optimization_title }} {{
+                  item.potentialStuff[0]}}</div>
+                <ti-table [(displayedData)]="configPoolDisplayed" [srcData]="configPoolSrcData"
+                          class="sug-table" [columns]="configPoolColumns">
+                  <table>
+                    <thead>
+                    <tr>
+                      <th tiOverflow *ngFor="let column of configPoolColumns"
+                          width="{{ column.width }}">
+                        {{ column.title }}
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let row of item.detail">
+                      <td tiOverflow>{{ row.key }}</td>
+                      <td tiOverflow>{{ row.value * 100 }}%</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </ti-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="suggestArr.length === 0" class="noData">
+      <app-default-page [height]="'100%'" [bgColor]="'#252526'" [text]="i18n.protalserver_sampling_leak.noSugget">
+      </app-default-page>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer id="weakFooter">
+    <div class="sug-btn">
+      <button type="button" class="sug-button" tiButton
+              (click)="context.close()">{{i18n.common_term_operate_close}}</button>
+    </div>
+  </ti-modal-footer>
+</ng-template>

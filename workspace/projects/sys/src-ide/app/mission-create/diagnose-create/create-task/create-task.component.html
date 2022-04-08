@@ -1,0 +1,348 @@
+<app-banner></app-banner>
+<div id="createTaskInfo">
+  <div class="taskParams">
+    <div class="taskBox" [ngClass]="{'flex': this.diagnoseTarget !== this.selectList[0].txt}">
+      <div class="label">
+        <ti-icon style="color: red;" name="staricon" [ngStyle]="{'opacity': taskName.require?1:0}"></ti-icon>
+        <span class="labelText" tiOverflow>{{taskName.label}}</span>
+      </div>
+      <div class="detail">
+        <!-- 任务名称 -->
+        <input *ngIf="actionType === 'create'" class="inputBox" tiText type="text" [(ngModel)]="taskParams.taskName"
+          [tiValidation]='validation' [formControl]="taskNameValid" [errorMessageWrapper]="errorTaskName"
+          [placeholder]="i18n.diagnostic.taskParams.taskName_placeholder" (ngModelChange)="taskNameChange($event)" />
+        <span *ngIf="actionType !== 'create'" class="diagnoseType">{{taskParams.taskName}}</span>
+        <div class="importModel" *ngIf="actionType === 'create'">
+          <button [disabled]="restartDisable" class="small-secondary-button"
+            (click)="importTemplate()">{{i18n.mission_modal.importTemplates}}</button>
+        </div>
+        <span class="location" #errorTaskName></span>
+      </div>
+    </div>
+  </div>
+  <!-- 诊断对象 -->
+  <div class="diagnoseTarget">
+    <div class="createDiagnose" *ngIf="actionType === 'create'; else editOrResetDiagnose">
+      <div class="title">{{ i18n.diagnostic.taskParams.diagnosticTarget }}</div>
+      <div class="select-box">
+        <div class="select-item" *ngFor="let item of selectList; index as i" (mouseenter)="onMouseEnter(i)"
+          (click)="onSelect(i)" (mouseleave)="onMouseLeave(i)" [ngClass]="{
+              'select': item.select,
+              'disabled-status': taskDetail.isFromTuningHelper && !item.select
+            }">
+          <img [src]="sanitizer.bypassSecurityTrustResourceUrl(item.src)">
+          <p [ngClass]="{'txtColor': item.select }">{{ item.txt }}</p>
+        </div>
+      </div>
+    </div>
+    <ng-template #editOrResetDiagnose>
+      <div class="editOrResetDiagnose">
+        <div class="diagnoseLabel">{{i18n.diagnostic.taskParams.diagnosticTarget}}</div>
+        <div class="diagnoseValue">{{currentDiagnoseObj}}</div>
+      </div>
+    </ng-template>
+  </div>
+  <ng-container *ngIf="diagnoseTarget === selectList[0].txt; else Network">
+    <div class="taskParams" *ngFor="let item of taskInfo">
+      <div class="taskBox"
+        *ngIf="item.show && (item.id !== 'switch' || (item.id === 'switch' && nodeList?.length > 1))">
+        <div class="label" *ngIf="item.label && item.show">
+          <ti-icon style="color: red;" name="staricon" [ngStyle]="{'opacity': item.require?1:0}"></ti-icon>
+          <span class="labelText" tiOverflow>{{item.label}}</span>
+          <ti-icon *ngIf="item.tipMsg !== undefined" [tiTip]="item.tipMsg" style="margin-left:10px;"
+            tiTipMaxWidth='370px' tiTipPosition="right">
+            <img src='./assets/img/summary/tooltip_dark.svg'>
+          </ti-icon>
+        </div>
+        <div class="detail">
+
+          <!-- 模式 -->
+          <ng-container *ngIf="item.id === 'mode'">
+            <div class="mode-detail" *ngIf="actionType === 'create'; else modeText">
+              <ng-container *ngFor="let mode of item.modeList; index as i">
+                <div *ngIf="mode.display" class="choose-list" [ngClass]="{'choose':modeClicked===i}">
+                  <input type="radio" tiRadio [(ngModel)]="modeClicked" (ngModelChange)='onModeClick(i)'
+                    [value]="mode.value" [label]="mode.name" />
+                </div>
+              </ng-container>
+            </div>
+            <ng-template #modeText>
+              <span>{{taskParams.analysisTarget}}</span>
+            </ng-template>
+          </ng-container>
+
+          <!-- Launch Application -->
+          <ng-container *ngIf="!modeClicked">
+            <!-- 应用路径 -->
+            <ng-container *ngIf="item.id === 'app_dir'">
+              <div *ngIf="!nodeParams">
+                <input class="inputBox" type="text" [(ngModel)]="taskParams.appDir" tiText [tiValidation]='validation'
+                  [formControl]="appPathValid" [placeholder]="appPathPlaceholder"
+                  (ngModelChange)="appDirChange($event)" />
+              </div>
+              <div *ngIf="nodeParams">
+                <input class="inputBox" type="text" [(ngModel)]="taskParams.appDir" tiText [disabled]="nodeParams" />
+              </div>
+              <div class="bottomTip">{{i18n.mission_create.modeAppPathSaftWarn}}</div>
+              <div class="bottomTip">{{appPathTip}}</div>
+            </ng-container>
+
+            <!-- 应用参数 -->
+            <ng-container *ngIf="item.id === 'app_parameters'">
+              <textarea tiTextarea type="text" class="textarea-params" style="width: 326px;height: 56px;"
+                resize="'vertical'" [placeholder]="i18n.mission_create.modeAppParamsHolder" [disabled]="nodeParams"
+                (ngModelChange)='appParameterChange($event)' [(ngModel)]="taskParams.appParameters"></textarea>
+            </ng-container>
+
+            <!-- 应用运行用户 -->
+            <ng-container *ngIf="item.id === 'app_runUser'">
+              <ti-switch id="myswitch" [(ngModel)]="runUserSwitch" (ngModelChange)='runUserSwitchChange($event)'
+                [disabled]="nodeParams">
+              </ti-switch>
+              <!-- 指定运行用户表单 -->
+              <div *ngIf="runUserSwitch" class="run-user">
+                <ti-formfield [formGroup]='runUserFormGroup' class="runUserForm" *ngIf="!nodeParams">
+                  <ti-item [label]="i18n.diagnostic.taskParams.app_user" [required]='true'>
+                    <input class="inputBox" [placeholder]='i18n.diagnostic.taskParams.app_runUser_pwdPlaceholder'
+                      type="text" tiText [(ngModel)]="runUserParams.user_name" [tiValidation]='validation'
+                      formControlName='userName' (ngModelChange)='runUserparamChange($event)'>
+                  </ti-item>
+                  <ti-item [label]="i18n.diagnostic.taskParams.app_passWord" [required]='true'
+                    style="position: relative;">
+                    <input #passwordInput class="inputBox"
+                      [placeholder]='i18n.diagnostic.taskParams.app_passWord_pwdPlaceholder' type="password" tiText
+                      [(ngModel)]="runUserParams.password" [tiValidation]='validation' formControlName='pwd'
+                      appDisableCtrl (ngModelChange)='runUserparamChange($event)'>
+                    <img class="password-eyes" [src]="getEyesImg(passwordInput)" alt="">
+                  </ti-item>
+                </ti-formfield>
+                <ti-formfield class="runUserForm" *ngIf="nodeParams" vertical>
+                  <ti-item [label]="i18n.common_term_task_crate_app_user" [required]='true'>
+                    <input class="inputBox" [disabled]="nodeParams" type="text" tiText
+                      [(ngModel)]="runUserParams.user_name">
+                  </ti-item>
+                  <ti-item [label]="i18n.common_term_task_crate_app_passWord" [required]='true'>
+                    <input class="inputBox" [disabled]="nodeParams" type="password" tiText
+                      [(ngModel)]="runUserParams.password">
+                  </ti-item>
+                </ti-formfield>
+              </div>
+            </ng-container>
+          </ng-container>
+
+          <!-- Attach to Process -->
+          <ng-container *ngIf="modeClicked && item.id === 'attachProcess'">
+            <!-- attach to process 的描述 -->
+            <p class="analysis-target-pid-notice" *ngIf="actionType === 'create'">{{
+              i18n.diagnostic.taskParams.attachTip }}</p>
+            <div class="di-analysis-target-pid-input" [ngClass]="{'restart': actionType !== 'create'}"
+              [formGroup]="pidProcessGroup">
+              <app-mem-process-pid formControlName="pidProcess" [disabled]="nodeParams"></app-mem-process-pid>
+            </div>
+          </ng-container>
+
+          <!-- 诊断内容 -->
+          <ng-container *ngIf="item.id === 'memory_diagnose'">
+            <div class="memoryCheck" (click)="clickDiagnoseType(0);$event.stopPropagation()">
+              <div class="memory-leak" [ngClass]="{
+                            'activeColor': !currentCreateType && !modeClicked,
+                            'no-bg-color': modeClicked
+                          }">
+                <div *ngFor="let item of memoryDiagnoseType" class="checkBox">
+                  <input type="checkbox" class='checkboxb' tiCheckbox [name]='item.title' [disabled]='item.disable'
+                    [(ngModel)]="item.checked" [label]='item.title' (ngModelChange)="diagnoseTypeChange()">
+                </div>
+                <div class="allCheck" *ngIf="!modeClicked">
+                  <img src="./assets/img/memDiagnose/selected_circle.png" *ngIf="!currentCreateType">
+                  <hy-theme-content *ngIf="currentCreateType">
+                    <img src="./assets/img/memDiagnose/unSelected_circle.png" dark>
+                    <img src="./assets/img/memDiagnose/unSelected_circle_light.png" light>
+                  </hy-theme-content>
+                </div>
+              </div>
+              <div class="memory-abnoemal" (click)="clickDiagnoseType(1);$event.stopPropagation()"
+                [ngClass]="{'activeColor': currentCreateType}" *ngIf="!modeClicked">
+                <div>{{i18n.diagnostic.taskParams.memory_abnormal}}</div>
+                <div class="allCheck">
+                  <img src="./assets/img/memDiagnose/selected_circle.png" *ngIf="currentCreateType">
+                  <hy-theme-content *ngIf="!currentCreateType">
+                    <img src="./assets/img/memDiagnose/unSelected_circle.png" dark>
+                    <img src="./assets/img/memDiagnose/unSelected_circle_light.png" light>
+                  </hy-theme-content>
+                </div>
+              </div>
+            </div>
+            <div class="bottomTip" *ngIf="memoryDiagnoseType[2].checked">
+              <img class="tipImg" src="./assets/img/tip/tip.svg" />
+              <span class="text">{{ i18n.diagnostic.taskParams.oomTip }}</span>
+            </div>
+            <div class="bottomTip" *ngIf="currentCreateType">
+              <div class="tipWidth" [tiTip]="exceptionTip" tiTipMaxWidth='500px'>
+                <img class="tipImg" src="./assets/img/tip/tip.svg">
+                <span>{{i18n.diagnostic.taskParams.exception_tip}}</span>
+              </div>
+              <ng-template #exceptionTip>
+                <div [innerHtml]="i18n.diagnostic.taskParams.exception_tip_detail"></div>
+              </ng-template>
+            </div>
+          </ng-container>
+
+          <!-- 二进制/符号文件路径 -->
+          <ng-container *ngIf="item.id === 'assemblyLocation' && item.show">
+            <div *ngIf="!nodeParams">
+              <input class="inputBox" tiText type="text" [(ngModel)]="taskParams.assemblyLocation"
+                (ngModelChange)="assemblyLocationChange($event)" [tiValidation]='validation' [formControl]="pathValid">
+            </div>
+            <div *ngIf="nodeParams">
+              <input class="inputBox" type="text" [(ngModel)]="taskParams.assemblyLocation" tiText
+                [disabled]="nodeParams" />
+            </div>
+          </ng-container>
+
+          <!-- c/c++源文件路径 -->
+          <ng-container *ngIf="item.id === 'sourceLocation'">
+            <div *ngIf="!nodeParams">
+              <input class="inputBox" tiText type="text" [(ngModel)]="taskParams.sourceLocation"
+                (ngModelChange)="sourceLocationChange($event)" [formControl]="pathCValid" [tiValidation]='validation'>
+            </div>
+            <div *ngIf="nodeParams">
+              <input class="inputBox" tiText type="text" [(ngModel)]="taskParams.sourceLocation"
+                [disabled]="nodeParams">
+            </div>
+          </ng-container>
+
+          <!-- 诊断开始时间 -->
+          <ng-container *ngIf="item.id === 'samplingDelay' && item.show">
+            <ti-spinner name='spinner' [format]="'N0'" [(ngModel)]='taskParams.samplingDelay'
+              [min]='samplingDelayRange.min' (ngModelChange)="samplingDelayChange($event)" (blur)="paramsBlur(item.id)"
+              tiValidation tiRequired [formControl]="samplingDelayValid">
+            </ti-spinner>
+          </ng-container>
+
+          <!-- 诊断时长 -->
+          <ng-container *ngIf="item.id === 'duration' && item.show">
+            <input class="inputBox" tiText tiNumber type="text" [format]="'N0'"
+              [placeholder]="i18n.diagnostic.taskParams.duration_placeholder" [(ngModel)]="taskParams.duration"
+              (ngModelChange)="durationChange($event)" (blur)="paramsBlur(item.id)">
+          </ng-container>
+
+          <!-- 采样间隔 -->
+          <ng-container *ngIf="item.id === 'interval' && item.show && memoryDiagnoseType[1].checked">
+            <ti-spinner name='spinner' [format]="'N0'" [(ngModel)]='taskParams.interval'
+              (ngModelChange)="intervalChange($event)" [max]='interval.max' [min]='interval.min' [maxlength]="5"
+              (blur)="paramsBlur(item.id)" tiValidation tiRequired [formControl]="intervalValid">
+            </ti-spinner>
+            <span class="rangeTip">{{i18n.diagnostic.taskParams.duration_range}}</span>
+            <div class="bottomTip">{{i18n.diagnostic.taskParams.interval_tip}}</div>
+          </ng-container>
+
+          <!-- 采集调用栈 -->
+          <ng-container *ngIf="item.id === 'collectStack' && item.show">
+            <ti-switch id="collectStack" [(ngModel)]="taskParams.collectStack"
+              (ngModelChange)="collectStackChange($event)">
+            </ti-switch>
+          </ng-container>
+
+          <!-- 异常后中止分析 -->
+          <ng-container *ngIf="item.id === 'stopException' && item.show">
+            <ti-switch id="stopException" [(ngModel)]="taskParams.stopException"
+              (ngModelChange)="stopExceptionChange($event)">
+            </ti-switch>
+          </ng-container>
+
+          <!-- 配置指定节点参数 -->
+          <ng-container *ngIf="item.id === 'switch'">
+            <div class="nodeConfig">
+              <ti-switch id="nodeParams" [(ngModel)]="nodeParams" (ngModelChange)="nodeSwitchChange($event)"
+                [disabled]="nodeConfigDisabled" tiTipPosition="right"
+                [tiTip]="nodeConfigDisabled ? i18n.mission_create.paramsConfigNotice : ''"
+                (mouseenter)='getDisabledStatus()'>
+              </ti-switch>
+              <span class="nodeTip">{{i18n.nodeConfig.nodeTip}}</span>
+            </div>
+            <div class="node-config" *ngIf="nodeParams">
+              <div class="table">
+                <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th tiOverflow *ngFor="let row of columns">{{row.title}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of displayed;index as i;">
+                        <td tiOverflow>{{row.nickName}}</td>
+                        <td tiOverflow>{{row.node}}</td>
+                        <td tiOverflow>
+                          <span class="status-icon" [ngClass]="statusFormat(row.params.status)"></span>
+                          <span>{{row.params.status ? i18n.nodeConfig.configed :
+                            i18n.nodeConfig.noConfig}}</span>
+                        </td>
+                        <td tiOverflow><span (click)="onConfigParams(row)"
+                            class="config-btn">{{i18n.nodeConfig.configParams}}</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </ti-table>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- 采集文件大小 -->
+          <ng-container *ngIf="item.id === 'collectSize'">
+            <ti-spinner name='spinner' [format]="'N0'" [(ngModel)]='taskParams.collectSize' [max]='collectSize.max'
+              [min]='collectSize.min' (ngModelChange)="collectSizeChange($event)" (blur)="paramsBlur(item.id)"
+              tiValidation tiRequired [formControl]="collectSizeValid">
+            </ti-spinner>
+            <span class="rangeTip">{{i18n.diagnostic.taskParams.collectSize_range}}</span>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <!-- 预约定时启动 -->
+    <div class="scheduled" [hidden]="actionType !== 'create' || taskDetail.isFromTuningHelper">
+      <app-mission-reservation #switchScheduled [labelWidth]="labelWidth" [switch]='runUserSwitch || nodeConfigUser'>
+      </app-mission-reservation>
+    </div>
+
+    <!-- 立即启动 -->
+    <div class="immediately" *ngIf='!switchScheduled.switchState && actionType !== "restart"'>
+      <ti-icon style="color: red;opacity:0" name="staricon"></ti-icon>
+      <span [tiTip]="runUserSwitch || nodeConfigUser?i18n.mission_create.disableeTip:''">
+        <input type="checkbox" [(ngModel)]="startCheckRes.checked" tiCheckbox
+          [disabled]='runUserSwitch || nodeConfigUser || taskDetail.isFromTuningHelper'>
+      </span>
+      <span class="start-now"
+        [ngStyle]="{'color': runUserSwitch?'#616161':'#aaaaaa'}">{{i18n.common_term_task_start_now}}</span>
+    </div>
+    <div class="operateBtn">
+      <button class="btn little-primary-btn" type="button" tiButton color="primary"
+        [disabled]='isSure || !switchScheduled.previewState'
+        (click)="createResAnalysis()">{{i18n.common_term_operate_ok}}</button>
+      <button class="btn little-minor-btn" type="button" tiButton (click)="cancalTab({})">
+        {{i18n.common_term_operate_cancel}}</button>
+      <button *ngIf="!taskDetail.isFromTuningHelper" class="btn little-minor-btn" type="button" tiButton
+        [disabled]='isSure || !switchScheduled.previewState'
+        (click)="showTemplateModal()">{{i18n.mission_modal.saveTemplates}}</button>
+    </div>
+  </ng-container>
+  <ng-template #Network>
+    <app-diagnose-create [networkinfo]="networkInfo" [storageIoInfo]="storageIoInfo"
+      [diagnoseTarget]="diagnoseTargetValue" [taskName]="this.taskParams.taskName" [projectName]="projectName"
+      [projectId]="projectId" [actionType]="actionType" [taskDetail]="taskDetail" (sendMissionKeep)="onSendMissionKeep($event)"
+      (closeTab)="cancalTab($event)">
+    </app-diagnose-create>
+  </ng-template>
+</div>
+
+<!-- 保存模板 -->
+<app-mission-template-save #saveTemplateModal [data]="keepData"></app-mission-template-save>
+<!-- 导入模板 -->
+<app-mission-templates #template (outer)="getTemplateData($event)" [typeId]="1+modeClicked"
+  [type]="i18n.diagnostic.analysis_type">
+</app-mission-templates>
+
+<!-- 多节点配置滑窗-内存诊断-attach -->
+<app-mission-diagnosis-launch #diagnoseAttach [nodeConfigedData]="nodeConfigedData" [appPathTip]="appPathTip"
+  [diagnoseContent]="currentCreateType" (handleConfigData)="handleConfigData($event)">
+</app-mission-diagnosis-launch>

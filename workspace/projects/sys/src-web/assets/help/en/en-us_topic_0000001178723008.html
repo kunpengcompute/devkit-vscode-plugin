@@ -1,0 +1,192 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Agent Service Certificate Management">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001179041500.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (System Profiler)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001178723008">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Agent Service Certificate Management</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001178723008"></a><a name="EN-US_TOPIC_0000001178723008"></a>
+
+<h1 class="topictitle1">Agent Service Certificate Management</h1>
+<div id="body1591786100926"><p id="EN-US_TOPIC_0000001178723008__p03111641141319">The agent service certificate is used for communication between the <span id="EN-US_TOPIC_0000001178723008__ph1331116578362">Kunpeng Hyper Tuner</span> server and agent.</p>
+<div class="section" id="EN-US_TOPIC_0000001178723008__section11470129119"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0000001178723008__p2444451164517">You have logged in to the <span id="EN-US_TOPIC_0000001178723008__ph1359340104618">System Profiler</span> WebUI.</p>
+<div class="note" id="EN-US_TOPIC_0000001178723008__note15470104415378"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001178723008__p4642155955813">The administrator (<strong id="EN-US_TOPIC_0000001178723008__b02416443572">tunadmin</strong>) can generate certificates, replace certificates, and change working keys. Common users can only view Agent service certificate information.</p>
+</div></div>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001178723008__section779091785010"><h4 class="sectiontitle">Viewing Agent Service Certificate Information</h4><ol id="EN-US_TOPIC_0000001178723008__ol1095132424619"><li id="EN-US_TOPIC_0000001178723008__li1423863018444"><span>Click <span><img id="EN-US_TOPIC_0000001178723008__image1625273016250" src="en-us_image_0000001224201479.png"></span> on the <span id="EN-US_TOPIC_0000001178723008__ph710162218338">System Profiler</span> page and choose <strong id="EN-US_TOPIC_0000001178723008__b621153816151">Agent Service Certificates</strong>.</span></li><li id="EN-US_TOPIC_0000001178723008__li83348358386"><span>View certificate details on the <strong id="EN-US_TOPIC_0000001178723008__b203211582101">Agent Service Certificates</strong> page, as shown in <a href="#EN-US_TOPIC_0000001178723008__fig7333113553819">Figure 1</a>. For details about the parameters, see <a href="#EN-US_TOPIC_0000001178723008__table15334193513810">Table 1</a>.</span><p><div class="fignone" id="EN-US_TOPIC_0000001178723008__fig7333113553819"><a name="EN-US_TOPIC_0000001178723008__fig7333113553819"></a><a name="fig7333113553819"></a><span class="figcap"><b>Figure 1 </b>Agent Service Certificates page</span><br><span><img id="EN-US_TOPIC_0000001178723008__image2360113011528" src="en-us_image_0000001224361405.png"></span></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0000001178723008__table15334193513810"></a><a name="table15334193513810"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0000001178723008__table15334193513810" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Parameters on the Agent Service Certificates page</caption><colgroup><col style="width:24.01%"><col style="width:75.99000000000001%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0000001178723008__row18333235133817"><th align="left" class="cellrowborder" valign="top" width="24.01%" id="mcps1.3.3.2.2.2.2.2.3.1.1"><p id="EN-US_TOPIC_0000001178723008__p11333203573818">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.99000000000001%" id="mcps1.3.3.2.2.2.2.2.3.1.2"><p id="EN-US_TOPIC_0000001178723008__p16333835193813">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0000001178723008__row333323519388"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p103331835143815">Node IP Address</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p93331435203815">IP address of the node.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723008__row13331935163814"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p183337351388">Node Alias</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p533363533814">Alias of the node.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723008__row1433303510387"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p1633373515380">Certificate Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p5333133515389">Name of the certificate.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723008__row1433353516382"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p033313357381">Certificate Expiration Time</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p1233312354384">Time when the certificate will expire.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723008__row43341335153812"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p93331435143819">Status</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p23342352380">Certificate status. The values are as follows:</p>
+<ul id="EN-US_TOPIC_0000001178723008__ul5334103519385"><li id="EN-US_TOPIC_0000001178723008__li93344359384"><strong id="EN-US_TOPIC_0000001178723008__b15771548156">Valid</strong>: The remaining validity period is greater than the certificate expiration alarm threshold.</li><li id="EN-US_TOPIC_0000001178723008__li1833483512382"><strong id="EN-US_TOPIC_0000001178723008__b67815481153">About to expire</strong>: The remaining validity period is less than or equal to the certificate expiration alarm threshold.</li><li id="EN-US_TOPIC_0000001178723008__li03341435123814"><strong id="EN-US_TOPIC_0000001178723008__b5788489515">Expired</strong>: The certificate has expired.</li></ul>
+<div class="note" id="EN-US_TOPIC_0000001178723008__note8372183212259"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0000001178723008__ul10406921161"><li id="EN-US_TOPIC_0000001178723008__li340615211863">The tool automatically checks and updates the certificate status at 02:00 every day.</li><li id="EN-US_TOPIC_0000001178723008__li1840614213618">By default, the expiration alarm threshold of agent service certificates is 90 days. The administrator can click <span><img id="EN-US_TOPIC_0000001178723008__image11417102004920" src="en-us_image_0000001178563226.png"></span> in the upper right corner on the home page of the <span id="EN-US_TOPIC_0000001178723008__ph969811414323">System Profiler</span> and choose <strong id="EN-US_TOPIC_0000001178723008__b14699181419322">System Settings</strong> to change the value of <span class="parmname" id="EN-US_TOPIC_0000001178723008__parmname10699191483217"><b>Agent Service Certificate Expiration Alarm Threshold (days)</b></span>. The value ranges from 7 to 180 days.</li></ul>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li></ol>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001178723008__section11727115812173"><h4 class="sectiontitle">Creating and Replacing a Certificate</h4><p id="EN-US_TOPIC_0000001178723008__p1041243914363">The SSL certificate sets up an SSL security channel over HTTPS between the Hyper Tuner server and an agent to transmit encrypted data between them and prevent data disclosure. For security purposes, you are advised to update the certificates periodically.</p>
+<div class="notice" id="EN-US_TOPIC_0000001178723008__note5122850172215"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-en-us.png"> </span><div class="noticebody"><ul id="EN-US_TOPIC_0000001178723008__ul1799590151317"><li id="EN-US_TOPIC_0000001178723008__li899516018133">The certificate cannot be replaced during the execution of an analysis task.</li><li id="EN-US_TOPIC_0000001178723008__li39951803130">Replace the certificate on the day when the certificate is generated.</li><li id="EN-US_TOPIC_0000001178723008__li12939122832320">The dialog box for replacing a certificate is displayed only when you replace a certificate on an Agent node.</li></ul>
+</div></div>
+<ol id="EN-US_TOPIC_0000001178723008__ol1381745402014"><li id="EN-US_TOPIC_0000001178723008__li18176547203"><span>On the <span class="wintitle" id="EN-US_TOPIC_0000001178723008__wintitle142101153153417"><b>Agent Service Certificates</b></span> page, click <span class="uicontrol" id="EN-US_TOPIC_0000001178723008__uicontrol1455725713410"><b>Create Certificate</b></span>.</span></li><li id="EN-US_TOPIC_0000001178723008__li2436668250"><span>Click <span class="uicontrol" id="EN-US_TOPIC_0000001178723008__uicontrol930861319320"><b>Update Certificate</b></span> in the <span class="parmname" id="EN-US_TOPIC_0000001178723008__parmname53132131630"><b>Operation</b></span> column of a node.</span><p><div class="p" id="EN-US_TOPIC_0000001178723008__p1461214711250">The <strong id="EN-US_TOPIC_0000001178723008__b93944492918">Update Certificate</strong> dialog box is displayed, as shown in <a href="#EN-US_TOPIC_0000001178723008__fig7886194012615">Figure 2</a> (The node installed by the <strong id="EN-US_TOPIC_0000001178723008__b104393346225">root</strong> user is used as an example.). For details about the parameters, see <a href="#EN-US_TOPIC_0000001178723008__table240219472097">Table 2</a>.<div class="fignone" id="EN-US_TOPIC_0000001178723008__fig7886194012615"><a name="EN-US_TOPIC_0000001178723008__fig7886194012615"></a><a name="fig7886194012615"></a><span class="figcap"><b>Figure 2 </b>Replacing a certificate</span><br><span><img id="EN-US_TOPIC_0000001178723008__image128681177539" src="en-us_image_0000001223882955.png"></span></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0000001178723008__table240219472097"></a><a name="table240219472097"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0000001178723008__table240219472097" frame="border" border="1" rules="all"><caption><b>Table 2 </b>Parameters for updating a certificate</caption><colgroup><col style="width:24%"><col style="width:76%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0000001178723008__row1240320474914"><th align="left" class="cellrowborder" valign="top" width="24%" id="mcps1.3.4.4.2.2.1.6.2.3.1.1"><p id="EN-US_TOPIC_0000001178723008__p417212031911">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="76%" id="mcps1.3.4.4.2.2.1.6.2.3.1.2"><p id="EN-US_TOPIC_0000001178723008__p191721420201911">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0000001178723008__row15573144916101"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.4.4.2.2.1.6.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p1582884911175">Node IP Address</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.4.4.2.2.1.6.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p92379548170">IP address of the server where the node is installed.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723008__row3697122473010"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.4.4.2.2.1.6.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p15697202403016">User Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.4.4.2.2.1.6.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p069792423014">User name of the installation node. The default value is <strong id="EN-US_TOPIC_0000001178723008__b1872163055817">root</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723008__row331350203519"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.4.4.2.2.1.6.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p11819164911712">Authentication Mode</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.4.4.2.2.1.6.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p1581517493171">Authentication mode. The values are as follows:</p>
+<ul id="EN-US_TOPIC_0000001178723008__ul112081334142519"><li id="EN-US_TOPIC_0000001178723008__li78323520252">Password authentication</li><li id="EN-US_TOPIC_0000001178723008__li1320853415255">Key authentication</li></ul>
+<div class="note" id="EN-US_TOPIC_0000001178723008__note5774215236"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_p11547468012">If you select <strong id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_b185569462478">Key authentication</strong>, configure SSH authentication information on the server where the <span id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_ph4280142612414">Kunpeng Hyper Tuner</span> is installed. For details, see <strong id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_b4335102117584">Common Operations</strong> &gt; <strong id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_b18561162511584">Configuring SSH Authentication Information on a Node Server</strong>.</p>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723008__row12417180172315"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.4.4.2.2.1.6.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p84181906239">Password</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.4.4.2.2.1.6.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p194185052320">Password used when the node is added.</p>
+<div class="note" id="EN-US_TOPIC_0000001178723008__note152101712114115"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0000001178723008__ul1943273284010"><li id="EN-US_TOPIC_0000001178723008__li13432113254016">This parameter is displayed when <strong id="EN-US_TOPIC_0000001178723008__b119612219237">Authentication Mode</strong> is set to <strong id="EN-US_TOPIC_0000001178723008__b39621212237">Password authentication</strong>.</li><li id="EN-US_TOPIC_0000001178723008__li19799103354019">If the node is installed by the <strong id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_b1552123716191">root</strong> user, you need to enter the password of the <strong id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_b145573371190">root</strong> user. If the node is installed by a common user, you need to enter the passwords of both the common user and <strong id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_b1155711374198">root</strong> user.</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723008__row9654427132314"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.4.4.2.2.1.6.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p1965417279239">Private Key File</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.4.4.2.2.1.6.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p20655627102315">Absolute path of the SSH private key file for logging in to the node server.</p>
+<div class="note" id="EN-US_TOPIC_0000001178723008__note171520415411"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0000001178723008__p115154194114">This parameter is displayed when <strong id="EN-US_TOPIC_0000001178723008__b179481413218">Authentication Mode</strong> is set to <strong id="EN-US_TOPIC_0000001178723008__b196278151218">Key authentication</strong>.</p>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723008__row12655182712320"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.4.4.2.2.1.6.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p16655027162319">Passphrase</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.4.4.2.2.1.6.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p56556273236">Password of the SSH private key file for logging in to the node server. If the SSH private key password is not configured, you do not need to set this parameter.</p>
+<div class="note" id="EN-US_TOPIC_0000001178723008__note189496413416"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0000001178723008__p13949104134113">This parameter is displayed when <strong id="EN-US_TOPIC_0000001178723008__b35331753114120">Authentication Mode</strong> is set to <strong id="EN-US_TOPIC_0000001178723008__b553475364112">Key authentication</strong>.</p>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</p></li><li id="EN-US_TOPIC_0000001178723008__li158061029122517"><span>Click <strong id="EN-US_TOPIC_0000001178723008__b1826914243211">OK</strong>.</span></li></ol>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001178723008__section1674931063418"><h4 class="sectiontitle">Updating the Working Key</h4><p id="EN-US_TOPIC_0000001178723008__p15906192135412">The working key is used to encrypt the private key files of the server and agent. For security purposes, you are advised to update the working key periodically.</p>
+<div class="notice" id="EN-US_TOPIC_0000001178723008__note12750111933410"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-en-us.png"> </span><div class="noticebody"><p id="EN-US_TOPIC_0000001178723008__p81221350132211">The working key cannot be replaced during the execution of an analysis task.</p>
+</div></div>
+<ol id="EN-US_TOPIC_0000001178723008__ol1627484229"><li id="EN-US_TOPIC_0000001178723008__li195313342150"><span>Click <span><img id="EN-US_TOPIC_0000001178723008__image9756203194916" src="en-us_image_0000001224122903.png"></span> in the upper right corner and choose <strong id="EN-US_TOPIC_0000001178723008__b17503933125210">Agent Service Certificates</strong>.</span></li><li id="EN-US_TOPIC_0000001178723008__li163261542123914"><span>Click <strong id="EN-US_TOPIC_0000001178723008__b11781047475">Update WorkKey</strong> in the <strong id="EN-US_TOPIC_0000001178723008__b1078654174719">Operation</strong> column of a node.</span><p><div class="p" id="EN-US_TOPIC_0000001178723008__p229972415267">The <strong id="EN-US_TOPIC_0000001178723008__b9905182115518">Update Working Key</strong> dialog box is displayed, as shown in <a href="#EN-US_TOPIC_0000001178723008__fig1117893017369">Figure 3</a>. For details about the parameters, see <a href="#EN-US_TOPIC_0000001178723008__table117813304362">Table 3</a>.<div class="fignone" id="EN-US_TOPIC_0000001178723008__fig1117893017369"><a name="EN-US_TOPIC_0000001178723008__fig1117893017369"></a><a name="fig1117893017369"></a><span class="figcap"><b>Figure 3 </b>Updating a working key</span><br><span><img id="EN-US_TOPIC_0000001178723008__image15284475311" src="en-us_image_0000001179041680.png"></span></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0000001178723008__table117813304362"></a><a name="table117813304362"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0000001178723008__table117813304362" frame="border" border="1" rules="all"><caption><b>Table 3 </b>Working key parameters</caption><colgroup><col style="width:24%"><col style="width:76%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0000001178723008__row15178153014366"><th align="left" class="cellrowborder" valign="top" width="24%" id="mcps1.3.5.4.2.2.1.5.2.3.1.1"><p id="EN-US_TOPIC_0000001178723008__p10178123013361">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="76%" id="mcps1.3.5.4.2.2.1.5.2.3.1.2"><p id="EN-US_TOPIC_0000001178723008__p117883018366">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0000001178723008__row61784306363"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.5.4.2.2.1.5.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p6178153016367">Node IP Address</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.5.4.2.2.1.5.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p3178183073611">IP address of the server where the node is installed.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723008__row19868109193712"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.5.4.2.2.1.5.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p1686919183710">User Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.5.4.2.2.1.5.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p68691190375">User name of the installation node. The default value is <strong id="EN-US_TOPIC_0000001178723008__en-us_topic_0253410802_b1872163055817">root</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723008__row181781830123617"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.5.4.2.2.1.5.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p201781930143611">Authentication Mode</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.5.4.2.2.1.5.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p16178173033611">Authentication mode. The values are as follows:</p>
+<ul id="EN-US_TOPIC_0000001178723008__ul201781301361"><li id="EN-US_TOPIC_0000001178723008__li1817816303366">Password authentication</li><li id="EN-US_TOPIC_0000001178723008__li917812303363">Key authentication</li></ul>
+<div class="note" id="EN-US_TOPIC_0000001178723008__note16593282512"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_p11547468012_1">If you select <strong id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_b185569462478_1">Key authentication</strong>, configure SSH authentication information on the server where the <span id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_ph4280142612414_1">Kunpeng Hyper Tuner</span> is installed. For details, see <strong id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_b4335102117584_1">Common Operations</strong> &gt; <strong id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_b18561162511584_1">Configuring SSH Authentication Information on a Node Server</strong>.</p>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723008__row11781030133610"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.5.4.2.2.1.5.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p1917819305362">Password</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.5.4.2.2.1.5.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p91789306363">Password used when the node is added.</p>
+<div class="note" id="EN-US_TOPIC_0000001178723008__note3178143073612"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0000001178723008__ul1281451434211"><li id="EN-US_TOPIC_0000001178723008__li1481511149423">This parameter is displayed when <strong id="EN-US_TOPIC_0000001178723008__b1913210521118">Authentication Mode</strong> is set to <strong id="EN-US_TOPIC_0000001178723008__b056316110217">Password authentication</strong>.</li><li id="EN-US_TOPIC_0000001178723008__li18756816184215">If the node is installed by the <strong id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_b1552123716191_1">root</strong> user, you need to enter the password of the <strong id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_b145573371190_1">root</strong> user. If the node is installed by a common user, you need to enter the passwords of both the common user and <strong id="EN-US_TOPIC_0000001178723008__en-us_topic_0262786934_b1155711374198_1">root</strong> user.</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723008__row15178103017361"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.5.4.2.2.1.5.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p1017873023612">Private Key File</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.5.4.2.2.1.5.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p1917873083615">Absolute path of the SSH private key file for logging in to the node server.</p>
+<div class="note" id="EN-US_TOPIC_0000001178723008__note18178113013619"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0000001178723008__p1817843073610">This parameter is displayed when <strong id="EN-US_TOPIC_0000001178723008__b317314517527">Authentication Mode</strong> is set to <strong id="EN-US_TOPIC_0000001178723008__b10174144510528">Key authentication</strong>.</p>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723008__row51789300361"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.5.4.2.2.1.5.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723008__p3178330103615">Passphrase</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.5.4.2.2.1.5.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723008__p1417811305364">Password of the SSH private key file for logging in to the node server. If the SSH private key password is not configured, you do not need to set this parameter.</p>
+<div class="note" id="EN-US_TOPIC_0000001178723008__note161782030163612"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0000001178723008__p121786301362">This parameter is displayed when <strong id="EN-US_TOPIC_0000001178723008__b583694610527">Authentication Mode</strong> is set to <strong id="EN-US_TOPIC_0000001178723008__b483634611528">Key authentication</strong>.</p>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</p></li><li id="EN-US_TOPIC_0000001178723008__li15543132277"><span>Click <strong id="EN-US_TOPIC_0000001178723008__b1790914513106">OK</strong>.</span></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001179041500.html">Service Certificate Management</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

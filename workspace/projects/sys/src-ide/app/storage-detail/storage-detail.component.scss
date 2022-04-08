@@ -1,0 +1,45 @@
+
+#detail-container {
+    position: relative;
+
+    .content-container {
+        opacity: 0;
+        padding-top: 50px;
+    }
+}
+
+.showDetail {
+    opacity: 1 !important;
+}
+
+::ng-deep .ti3-tabs {
+    width: 93.5%;
+    position: fixed !important;
+    height: 80px !important;
+    background: var(--vscode-editor-background) !important;
+    z-index: 99;
+    padding-top: 30px !important;
+
+    .ti3-tab-li:not(:last-child):after {
+        background-color: var(--vscode-editor-background) !important;
+    }
+}
+
+::ng-deep .ti3-tabs+.ti3-tab-slider {
+    position: fixed !important;
+    margin-top: 56px;
+    margin-left: 80px;
+    z-index: 999;
+}
+
+::ng-deep #detail-container .ti3-tabs-container .ti3-tabs>li {
+    margin-right: 30px;
+
+    a {
+        padding: 10px 0 !important;
+        ti-tab-header {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+    }
+}

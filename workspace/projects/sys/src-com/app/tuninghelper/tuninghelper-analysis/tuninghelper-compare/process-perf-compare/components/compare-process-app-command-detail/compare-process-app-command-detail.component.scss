@@ -1,0 +1,77 @@
+:host ::ng-deep #compare-process-app-command-detail-container {
+    padding: 24px 0;
+    
+    .basic-info-box {
+        margin-bottom: 24px;
+        padding: 0 24px;
+        background-color: var(--ti-table-th-bg-color);
+        color: var(--common-color-font-primary);
+        height: 24px;
+        line-height: 24px;
+        font-size: 12px;
+      
+        span + span {
+            margin-left: 32px;
+        }
+    }
+
+    .custom-expand-tree {
+        .ti3-tree-node-text-wrapper {
+            width: 100%;
+        }
+        .ti3-tree-content-box {
+            height: auto;
+            &.ti3-tree-item-leaf {
+                padding: 0;
+                .expand-icon {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .noPagination .ti3-table>.ti3-table-fixed-head+.ti3-table-container {
+        border-bottom: none;
+        max-height: unset;
+    }
+
+    .ti3-table>.ti3-resize-wrapper>table>thead>tr,
+    .ti3-table>.ti3-table-container>table>thead>tr,
+    .ti3-table>.ti3-table-fixed-head>table>thead>tr,
+    .ti3-table>table>thead>tr:first-child>th {
+        &:first-child > th:first-child {
+            padding-left: 24px;
+        }
+        th {
+            background-color: var(--ti-table-tr-bg-color);
+        }
+    }
+
+    .ti3-table>.ti3-resize-wrapper>table>tbody>tr>td,
+    .ti3-table>.ti3-table-container>table>tbody>tr>td,
+    .ti3-table>.ti3-table-fixed-head>table>tbody>tr>td,
+    .ti3-table>table>tbody>tr>td {
+        &:first-child {
+            padding-left: 24px;
+        }
+    }
+
+    .body-compare-table {
+        .ti3-table table tbody  {
+            tr:nth-of-type(odd) td:first-child {
+                border-right: 1px solid var(--ti-table-border-bottom-color);
+            }
+            tr:nth-of-type(even) td:first-child {
+                padding: var(--ti-table-td-padding);
+            }
+            tr:nth-of-type(4n + 3), tr:nth-of-type(4n + 4) {
+                background-color: var(--ti-table-expand-children-margin-background-color);
+            }
+        }
+    }
+
+    ti-pagination {
+        line-height: initial;
+        margin-left: 24px;
+    }
+}

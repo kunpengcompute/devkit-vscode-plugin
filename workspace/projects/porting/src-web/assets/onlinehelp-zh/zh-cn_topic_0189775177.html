@@ -1,0 +1,121 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="创建分析任务">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0212788391.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏代码迁移工具">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0189775177">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>创建分析任务</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0189775177"></a><a name="ZH-CN_TOPIC_0189775177"></a>
+
+<h1 class="topictitle1">创建分析任务</h1>
+<div id="body1567562641461"><div class="section" id="ZH-CN_TOPIC_0189775177__section11470129119"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0189775177__p9917148805">已成功登录<span id="ZH-CN_TOPIC_0189775177__ph997750104712">鲲鹏代码迁移工具</span>。</p>
+<div class="notice" id="ZH-CN_TOPIC_0189775177__note2019283518329"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-zh-cn.png"> </span><div class="noticebody"><ul id="ZH-CN_TOPIC_0189775177__ul15320134212322"><li id="ZH-CN_TOPIC_0189775177__li173203424323">任务运行过程中会执行上传源码包中构建文件的构建命令，请确保上传的内容为需要进行分析检查的内容且不存在安全问题，避免影响服务器正常运行。</li><li id="ZH-CN_TOPIC_0189775177__li18103195014339"><span class="filepath" id="ZH-CN_TOPIC_0189775177__filepath18250394441">“/opt/portadv”</span>为工具默认安装目录，下文以此默认路径为例，请根据实际情况替换。</li></ul>
+</div></div>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0189775177__section570312135117"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0189775177__ol166651423121620"><li id="ZH-CN_TOPIC_0189775177__li766592361616"><span>在页面左侧，选择“源码迁移”。</span></li><li id="ZH-CN_TOPIC_0189775177__li1344272820248"><span>在创建分析任务区对以下参数进行配置。</span><p><div class="fignone" id="ZH-CN_TOPIC_0189775177__fig18659185274220"><span class="figcap"><b>图1 </b>源码迁移</span><br><span><img id="ZH-CN_TOPIC_0189775177__image565925274213" src="zh-cn_image_0000001213344739.png" height="447.8775" width="523.6875"></span></div>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0189775177__table101671324172818" frame="border" border="1" rules="all"><caption><b>表1 </b>源码迁移参数说明</caption><colgroup><col style="width:24.09%"><col style="width:75.91%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0189775177__row171675241281"><th align="left" class="cellrowborder" valign="top" width="24.09%" id="mcps1.3.2.2.2.2.2.2.3.1.1"><p id="ZH-CN_TOPIC_0189775177__p1316713247285">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.91%" id="mcps1.3.2.2.2.2.2.2.3.1.2"><p id="ZH-CN_TOPIC_0189775177__p10167132422819">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0189775177__row131671248283"><td class="cellrowborder" valign="top" width="24.09%" headers="mcps1.3.2.2.2.2.2.2.3.1.1 "><p id="ZH-CN_TOPIC_0189775177__p1230912478920">源码文件存放路径</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.91%" headers="mcps1.3.2.2.2.2.2.2.3.1.2 "><p id="ZH-CN_TOPIC_0189775177__p139051594311">需要填写相对路径，可以通过以下两种方式实现：</p>
+<ul id="ZH-CN_TOPIC_0189775177__ul67531648142019"><li id="ZH-CN_TOPIC_0189775177__li975374852019">单击“上传”按钮上传压缩包（上传过程中自动解压）或文件夹。</li><li id="ZH-CN_TOPIC_0189775177__li127537484205">先将源码文件手动上传到服务器上本工具的指定路径下（例如：/opt/portadv/portadmin/sourcecode/），给porting用户开读写和执行权限，再单击填写框选择下拉框中的源码路径即可，也可以手动填写源码路径。<div class="note" id="ZH-CN_TOPIC_0189775177__note4613123483111"><span class="notetitle"> 说明： </span><div class="notebody"><p id="ZH-CN_TOPIC_0189775177__p1061383483116">在扫描含全汇编的源码时，用户需要先在源码文件的根目录下编译生成make.log，然后再打包上传。例如：用户要扫描含纯汇编的源码example，需要先在/opt/portadv/用户名/sourcecode/example/下生成make.log，再填写相对路径example。</p>
+</div></div>
+</li></ul>
+<div class="p" id="ZH-CN_TOPIC_0189775177__p163111535184810">在“上传”下拉菜单中可选择：<ul id="ZH-CN_TOPIC_0189775177__ul14530153619494"><li id="ZH-CN_TOPIC_0189775177__li753063614492">压缩包：选择上传源码文件压缩包，工具会自动解压。<div class="note" id="ZH-CN_TOPIC_0189775177__note11634821791"><span class="notetitle"> 说明： </span><div class="notebody"><ul id="ZH-CN_TOPIC_0189775177__ul83501941185112"><li id="ZH-CN_TOPIC_0189775177__li95517327205">支持上传tar，tar.bz，tar.bz2，tar.gz，tar.xz，tbz，tbz2，tgz，txz，zip格式的压缩包，只允许同时上传一个压缩包。源码文件压缩包小于或等于1GB，解压后小于或等于剩余磁盘空间的一半。</li><li id="ZH-CN_TOPIC_0189775177__li0350841185116">工具会自动将压缩包解压至和压缩包同名的文件夹。例如上传的压缩包为test.zip，工具会自动解压至test文件夹。</li></ul>
+</div></div>
+</li><li id="ZH-CN_TOPIC_0189775177__li29044481493">文件夹：选择上传本地解压的源码文件夹。<div class="note" id="ZH-CN_TOPIC_0189775177__note20614104351210"><span class="notetitle"> 说明： </span><div class="notebody"><ul id="ZH-CN_TOPIC_0189775177__ul11431963189"><li id="ZH-CN_TOPIC_0189775177__li84313631812">只允许同时上传一个文件夹，文件夹小于或等于剩余磁盘空间的一半。</li><li id="ZH-CN_TOPIC_0189775177__li7439671810">IE浏览器不兼容文件夹上传功能，上传文件夹需要使用其他浏览器，如Google Chrome，Microsoft Edge。</li></ul>
+</div></div>
+</li></ul>
+</div>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0189775177__row98722111567"><td class="cellrowborder" valign="top" width="24.09%" headers="mcps1.3.2.2.2.2.2.2.3.1.1 "><p id="ZH-CN_TOPIC_0189775177__p1087317145615">源码类型</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.91%" headers="mcps1.3.2.2.2.2.2.2.3.1.2 "><p id="ZH-CN_TOPIC_0189775177__p56421512132">选择源码类型。可选择：</p>
+<ul id="ZH-CN_TOPIC_0189775177__ul114111441415"><li id="ZH-CN_TOPIC_0189775177__li15737201119194">C/C++/ASM</li><li id="ZH-CN_TOPIC_0189775177__li13151214171415">Fortran</li><li id="ZH-CN_TOPIC_0189775177__li93941299259">Go</li><li id="ZH-CN_TOPIC_0189775177__li112185125253">解释型语言<p id="ZH-CN_TOPIC_0189775177__p69339159219"><a name="ZH-CN_TOPIC_0189775177__li112185125253"></a><a name="li112185125253"></a>目前支持的解释型语言包括Python、Java和Scala。</p>
+</li></ul>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0189775177__row1660095413593"><td class="cellrowborder" valign="top" width="24.09%" headers="mcps1.3.2.2.2.2.2.2.3.1.1 "><p id="ZH-CN_TOPIC_0189775177__p41127316014">编译器版本</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.91%" headers="mcps1.3.2.2.2.2.2.2.3.1.2 "><p id="ZH-CN_TOPIC_0189775177__p18113143405">选择编译器版本。</p>
+<p id="ZH-CN_TOPIC_0189775177__p1011303202">目标系统默认的编译器版本：</p>
+<ul id="ZH-CN_TOPIC_0189775177__ul14113103409"><li id="ZH-CN_TOPIC_0189775177__li942217411138">BC-Linux 7.6默认为GCC 4.8.5</li><li id="ZH-CN_TOPIC_0189775177__li12946171818131">BC-Linux 7.7默认为GCC 4.8.5</li><li id="ZH-CN_TOPIC_0189775177__li4113183602">CentOS 7.4默认为GCC 4.8.5</li><li id="ZH-CN_TOPIC_0189775177__li10113193701">CentOS 7.5默认为GCC 4.8.5</li></ul>
+<ul id="ZH-CN_TOPIC_0189775177__ul161131531009"><li id="ZH-CN_TOPIC_0189775177__li6113931012">CentOS 7.6默认为GCC 4.8.5</li><li id="ZH-CN_TOPIC_0189775177__li15113039014">CentOS 7.7默认为GCC 4.8.5</li><li id="ZH-CN_TOPIC_0189775177__li131131631508">CentOS 8.0默认为GCC 8.2</li><li id="ZH-CN_TOPIC_0189775177__li13113238020">CentOS 8.1默认为GCC 8.3</li><li id="ZH-CN_TOPIC_0189775177__li574183914192">CentOS 8.2默认为GCC 8.3</li><li id="ZH-CN_TOPIC_0189775177__li13113113805">Deepin 15.2默认为GCC 6.3</li><li id="ZH-CN_TOPIC_0189775177__li31131533013">Debian 10默认为GCC 8.3</li><li id="ZH-CN_TOPIC_0189775177__li91131032010">EulerOS 2.8默认为GCC 7.3</li><li id="ZH-CN_TOPIC_0189775177__li368713811411">iSoft 5.1默认为GCC 7.3</li><li id="ZH-CN_TOPIC_0189775177__li21132031307">Kylin V10 SP1默认为GCC 7.3</li><li id="ZH-CN_TOPIC_0189775177__li71139315019">LinxOS 6.0.90默认为GCC 6.3</li><li id="ZH-CN_TOPIC_0189775177__li01131133014">NeoKylin V7U5默认为GCC 4.8.5</li><li id="ZH-CN_TOPIC_0189775177__li19113123203">NeoKylin V7U6默认为GCC 4.8.5</li><li id="ZH-CN_TOPIC_0189775177__li12286323162018">openEuler 20.03默认为GCC 7.3</li><li id="ZH-CN_TOPIC_0189775177__li1593254218541">openEuler 20.03 SP1默认为GCC 7.3</li><li id="ZH-CN_TOPIC_0189775177__li363273025515">openEuler 20.03 SP2默认为GCC 7.3</li><li id="ZH-CN_TOPIC_0189775177__li71131139013">SUSE SLES 15.1默认为GCC 7.4</li><li id="ZH-CN_TOPIC_0189775177__li111316313019">Ubuntu 18.04.x默认为GCC 7.3</li><li id="ZH-CN_TOPIC_0189775177__li1858112710200">Ubuntu 20.04.x默认为GCC 9.3</li><li id="ZH-CN_TOPIC_0189775177__li121138320020">UOS 20 SP1默认为GCC 8.3</li><li id="ZH-CN_TOPIC_0189775177__li9552145451412">uosEuler 20默认为GCC 7.3</li></ul>
+<p id="ZH-CN_TOPIC_0189775177__p3113231703">C/C++/ASM和Go可选择：</p>
+<ul id="ZH-CN_TOPIC_0189775177__ul41131137016"><li id="ZH-CN_TOPIC_0189775177__li16113931602">GCC 4.8.5/4.9.3/5.1/5.2/5.3/5.4/5.5/6.1/6.2/6.3/6.4/6.5/7.1/7.2/7.3/7.4/8.1/8.2/8.3/9.1/9.2/9.3<div class="note" id="ZH-CN_TOPIC_0189775177__note3892144610311"><span class="notetitle"> 说明： </span><div class="notebody"><p id="ZH-CN_TOPIC_0189775177__p889214653112"><span style="color:#666666;">C/C++/ASM与GO语言共用编译器版本</span>。</p>
+</div></div>
+</li></ul>
+<p id="ZH-CN_TOPIC_0189775177__p01131831308">Fortran可选择：</p>
+<ul id="ZH-CN_TOPIC_0189775177__ul21139317016"><li id="ZH-CN_TOPIC_0189775177__li81131939015">GFORTRAN 7</li><li id="ZH-CN_TOPIC_0189775177__li191131831504">GFORTRAN 8</li><li id="ZH-CN_TOPIC_0189775177__li151131331405">GFORTRAN 9</li></ul>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0189775177__row467741111295"><td class="cellrowborder" valign="top" width="24.09%" headers="mcps1.3.2.2.2.2.2.2.3.1.1 "><p id="ZH-CN_TOPIC_0189775177__p728619922915">构建工具</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.91%" headers="mcps1.3.2.2.2.2.2.2.3.1.2 "><p id="ZH-CN_TOPIC_0189775177__p116775112292">选择构建工具。可选择：</p>
+<ul id="ZH-CN_TOPIC_0189775177__ul780623613180"><li id="ZH-CN_TOPIC_0189775177__zh-cn_topic_0189700310_li208061736191819">make</li><li id="ZH-CN_TOPIC_0189775177__zh-cn_topic_0189700310_li19806173617180">cmake</li><li id="ZH-CN_TOPIC_0189775177__zh-cn_topic_0189700310_li10806193615188">automake</li><li id="ZH-CN_TOPIC_0189775177__li1198245573211">go<div class="note" id="ZH-CN_TOPIC_0189775177__note557911917332"><span class="notetitle"> 说明： </span><div class="notebody"><p id="ZH-CN_TOPIC_0189775177__p557917943319"><span class="parmvalue" id="ZH-CN_TOPIC_0189775177__parmvalue131511224123314">“go”</span>选项只在<span class="parmname" id="ZH-CN_TOPIC_0189775177__parmname13819181514349">“源码类型”</span>仅勾选<span class="parmvalue" id="ZH-CN_TOPIC_0189775177__parmvalue19610199343">“Go”</span>或同时勾选<span class="parmvalue" id="ZH-CN_TOPIC_0189775177__parmvalue127354919512">“Go”</span>与<span class="parmvalue" id="ZH-CN_TOPIC_0189775177__parmvalue14442161316518">“解释型语言”</span>时可用。</p>
+</div></div>
+</li></ul>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0189775177__row67137126298"><td class="cellrowborder" valign="top" width="24.09%" headers="mcps1.3.2.2.2.2.2.2.3.1.1 "><p id="ZH-CN_TOPIC_0189775177__p11350171602913">编译命令</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.91%" headers="mcps1.3.2.2.2.2.2.2.3.1.2 "><p id="ZH-CN_TOPIC_0189775177__p1271341212918">源码编译命令。</p>
+<p id="ZH-CN_TOPIC_0189775177__p477810216411">编译命令需根据构建工具配置文件确定，具体请参考<a href="zh-cn_topic_0320090988.html">通过构建工具配置文件识别编译命令</a>。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0189775177__row116485319301"><td class="cellrowborder" valign="top" width="24.09%" headers="mcps1.3.2.2.2.2.2.2.3.1.1 "><p id="ZH-CN_TOPIC_0189775177__p2083013305018">目标操作系统</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.91%" headers="mcps1.3.2.2.2.2.2.2.3.1.2 "><p id="ZH-CN_TOPIC_0189775177__p1683073019018">选择目标系统版本。可选择：</p>
+<ul id="ZH-CN_TOPIC_0189775177__ul1783010301019"><li id="ZH-CN_TOPIC_0189775177__li1117503411517">BC-Linux 7.6/7.7</li><li id="ZH-CN_TOPIC_0189775177__li208305301707">CentOS 7.4/7.5/7.6/7.7/8.0/8.1/8.2</li><li id="ZH-CN_TOPIC_0189775177__li4830330609">Deepin V15.2</li><li id="ZH-CN_TOPIC_0189775177__li28301530208">Debian 10</li><li id="ZH-CN_TOPIC_0189775177__li983183015019">EulerOS 2.8</li><li id="ZH-CN_TOPIC_0189775177__li868615021512">iSoft 5.1</li><li id="ZH-CN_TOPIC_0189775177__li20831193020014">Kylin V10 SP1</li><li id="ZH-CN_TOPIC_0189775177__li15831173014019">LinxOS 6.0.90</li><li id="ZH-CN_TOPIC_0189775177__li88311430208">NeoKylin V7U5</li><li id="ZH-CN_TOPIC_0189775177__li198314301107">NeoKylin V7U6</li><li id="ZH-CN_TOPIC_0189775177__li4331310162419">openEuler 20.03</li><li id="ZH-CN_TOPIC_0189775177__li41851110135518">openEuler 20.03 SP1</li><li id="ZH-CN_TOPIC_0189775177__li74142875512">openEuler 20.03 SP2</li><li id="ZH-CN_TOPIC_0189775177__li12831430909">SUSE SLES 15.1</li><li id="ZH-CN_TOPIC_0189775177__li208310301103">Ubuntu 18.04.x</li><li id="ZH-CN_TOPIC_0189775177__li577171402416">Ubuntu 20.04.x</li><li id="ZH-CN_TOPIC_0189775177__li10831173010016">UOS 20 SP1</li><li id="ZH-CN_TOPIC_0189775177__li271821220164">uosEuler 20</li><li id="ZH-CN_TOPIC_0189775177__li44675019477">更多</li></ul>
+<div class="note" id="ZH-CN_TOPIC_0189775177__note16396193494120"><span class="notetitle"> 说明： </span><div class="notebody"><p id="ZH-CN_TOPIC_0189775177__p1839615342413">点击<span class="uicontrol" id="ZH-CN_TOPIC_0189775177__uicontrol193145483411">“更多”</span>后，根据页面上的步骤升级依赖字典，然后查看更新后的操作系统列表。</p>
+</div></div>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0189775177__row1859510612119"><td class="cellrowborder" valign="top" width="24.09%" headers="mcps1.3.2.2.2.2.2.2.3.1.1 "><p id="ZH-CN_TOPIC_0189775177__p9595146916">目标系统内核版本</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.91%" headers="mcps1.3.2.2.2.2.2.2.3.1.2 "><p id="ZH-CN_TOPIC_0189775177__p957713213325">目标操作系统对应的内核版本。</p>
+<ul id="ZH-CN_TOPIC_0189775177__ul6648171674219"><li id="ZH-CN_TOPIC_0189775177__li45472961620">BC-Linux 7.6支持4.19.25</li><li id="ZH-CN_TOPIC_0189775177__li6606256191619">BC-Linux 7.7支持4.19.25</li><li id="ZH-CN_TOPIC_0189775177__li1435815344119">CentOS 7.4支持4.11.0</li><li id="ZH-CN_TOPIC_0189775177__li1176532041320">CentOS 7.5支持4.14.0</li><li id="ZH-CN_TOPIC_0189775177__li5298192824319">CentOS 7.6支持4.14.0</li><li id="ZH-CN_TOPIC_0189775177__li73262711130">CentOS 7.7支持4.18.0</li><li id="ZH-CN_TOPIC_0189775177__li1680414975816">CentOS 8.0支持4.18.0</li><li id="ZH-CN_TOPIC_0189775177__li58931035155718">CentOS 8.1支持4.18.0</li><li id="ZH-CN_TOPIC_0189775177__li1335542742414">CentOS 8.2支持4.18.0</li><li id="ZH-CN_TOPIC_0189775177__li13601848171312">Deepin V15.2支持4.19.34</li><li id="ZH-CN_TOPIC_0189775177__li3958559132">Debian 10支持4.14.0</li><li id="ZH-CN_TOPIC_0189775177__li3177515958">EulerOS 2.8支持4.19.36</li><li id="ZH-CN_TOPIC_0189775177__li661317101718">iSoft 5.1支持4.19.90</li><li id="ZH-CN_TOPIC_0189775177__li2635325144315">Kylin V10 SP1支持4.19.90</li><li id="ZH-CN_TOPIC_0189775177__li1039728104311">LinxOS 6.0.90支持4.19.0</li><li id="ZH-CN_TOPIC_0189775177__li14300114164313">NeoKylin V7U5支持4.14.0</li><li id="ZH-CN_TOPIC_0189775177__li464841614429">NeoKylin V7U6支持4.14.0</li><li id="ZH-CN_TOPIC_0189775177__li5592155132515">openEuler 20.03支持4.19.90</li><li id="ZH-CN_TOPIC_0189775177__li222393516560">openEuler 20.03 SP1支持4.19.90</li><li id="ZH-CN_TOPIC_0189775177__li5443134855617">openEuler 20.03 SP2支持4.19.90</li><li id="ZH-CN_TOPIC_0189775177__li166410247449">SUSE SLES 15.1支持4.12.14</li><li id="ZH-CN_TOPIC_0189775177__li1394795112422">Ubuntu 18.04.x支持4.15.0</li><li id="ZH-CN_TOPIC_0189775177__li252421052517">Ubuntu 20.04.x支持5.4.0</li><li id="ZH-CN_TOPIC_0189775177__li166431854714">UOS 20 SP1支持4.19.0</li><li id="ZH-CN_TOPIC_0189775177__li4629543101711">uosEuler 20支持4.19.90</li></ul>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0189775177__row199771229193019"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.2.2.3.1.1 mcps1.3.2.2.2.2.2.2.3.1.2 "><div class="note" id="ZH-CN_TOPIC_0189775177__note3985104133016"><span class="notetitle"> 说明： </span><div class="notebody"><p id="ZH-CN_TOPIC_0189775177__p169852041193010">如果用户所处的环境Glibc版本低于2.28，则无法使用最新的汇编文件自动翻译功能，如有需要，请单击页面上的<span class="uicontrol" id="ZH-CN_TOPIC_0189775177__uicontrol14571200193312">“查看安装指导”</span>，按照指示进行操作。</p>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0189775177__li240693381816"><span>单击<span class="parmname" id="ZH-CN_TOPIC_0189775177__parmname169272211282">“开始分析”</span>，生成分析报告。</span><p><p id="ZH-CN_TOPIC_0189775177__p87218527385">弹窗页面显示任务分析进度，分析完成后，单击<span class="parmname" id="ZH-CN_TOPIC_0189775177__parmname1823315141382">“查看报告”</span>进入<span class="wintitle" id="ZH-CN_TOPIC_0189775177__wintitle1336984514219">“迁移报告”</span>界面。</p>
+<div class="note" id="ZH-CN_TOPIC_0189775177__note17373252125816"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0189775177__ul154981251646"><li id="ZH-CN_TOPIC_0189775177__li20498145119416">用户可在任务进行过程中单击关闭，取消任务。</li><li id="ZH-CN_TOPIC_0189775177__li7498951745">支持多个用户同时创建分析任务。</li><li id="ZH-CN_TOPIC_0189775177__li20518122916422">任务分析失败或评估结果为无需迁移时会产生空白报告。</li><li id="ZH-CN_TOPIC_0189775177__li13147134363418">分析结果可能因环境不同而产生差异，属于正常情况。</li></ul>
+</div></div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0212788391.html">源码迁移</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

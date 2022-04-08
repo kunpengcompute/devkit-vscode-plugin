@@ -1,0 +1,5 @@
+<div class="net-capture-packet">
+  <button [disabled]="!captureData.length" type="button"  tiButton class="download-btn" (click)="downloadCap()">{{ 'net_capture_loss.capture.download_report' | i18n }}</button>
+
+  <app-capture-packet-table [captureData]="captureData"></app-capture-packet-table>
+</div>

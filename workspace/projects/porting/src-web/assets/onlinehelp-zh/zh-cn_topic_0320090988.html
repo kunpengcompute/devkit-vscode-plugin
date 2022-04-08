@@ -1,0 +1,44 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="通过构建工具配置文件识别编译命令">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0222610839.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏代码迁移工具">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0320090988">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>通过构建工具配置文件识别编译命令</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0320090988"></a><a name="ZH-CN_TOPIC_0320090988"></a>
+
+<h1 class="topictitle1">通过构建工具配置文件识别编译命令</h1>
+<div id="body1614928072293"><div class="section" id="ZH-CN_TOPIC_0320090988__section16999175618597"><h4 class="sectiontitle">现象描述</h4><p id="ZH-CN_TOPIC_0320090988__p9413651603">在使用代码迁移工具过程中，存在对构建文件配置分析场景时，<span class="uicontrol" id="ZH-CN_TOPIC_0320090988__uicontrol159181833514">“编译命令”</span>可能不是默认的make/cmake，用户需要根据自己的构建配置文件来确定<span class="uicontrol" id="ZH-CN_TOPIC_0320090988__uicontrol132101635306">“编译命令”</span>，进而填写<span class="uicontrol" id="ZH-CN_TOPIC_0320090988__uicontrol39751834103512">“编译命令”</span>。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0320090988__section177591042102416"><h4 class="sectiontitle">参考说明</h4><ul id="ZH-CN_TOPIC_0320090988__ul17608194223"><li id="ZH-CN_TOPIC_0320090988__li17306103918407">“构建工具”选择<span class="parmvalue" id="ZH-CN_TOPIC_0320090988__parmvalue1089775923712">“make”</span>时，默认为make，支持以make开头的自定义编译命令。make工具支持参数-C和-f，其中-C用于指定工作目录，-f用于指定makefile。如果用户的Makefile中使用了标签，则<span class="uicontrol" id="ZH-CN_TOPIC_0320090988__uicontrol1030703974016">“编译命令”</span>需要根据用户使用标签的情况来确定。<ul id="ZH-CN_TOPIC_0320090988__ul7561728105011"><li id="ZH-CN_TOPIC_0320090988__li19813393502">常见场景下，用户会在Makefile中设置clean和all标签，如<a href="#ZH-CN_TOPIC_0320090988__fig182938396541">图1</a>所示。<div class="fignone" id="ZH-CN_TOPIC_0320090988__fig182938396541"><a name="ZH-CN_TOPIC_0320090988__fig182938396541"></a><a name="fig182938396541"></a><span class="figcap"><b>图1 </b>场景一</span><br><span><img id="ZH-CN_TOPIC_0320090988__image20293103965410" src="zh-cn_image_0000001134268831.png" height="136.977631" width="470.022"></span></div>
+<p id="ZH-CN_TOPIC_0320090988__p1526119409501">这种情况下，make clean表示执行clean标签下的编译命令，make表示执行all标签或者all标签关联的其它标签下的编译命令，此时，用户在<span class="uicontrol" id="ZH-CN_TOPIC_0320090988__uicontrol119411727204016">“编译命令”</span>中填写make即可。</p>
+</li><li id="ZH-CN_TOPIC_0320090988__li73949525614">如果用户设置了自定义的mpp标签，如<a href="#ZH-CN_TOPIC_0320090988__fig1788482054311">图2</a>所示。<div class="fignone" id="ZH-CN_TOPIC_0320090988__fig1788482054311"><a name="ZH-CN_TOPIC_0320090988__fig1788482054311"></a><a name="fig1788482054311"></a><span class="figcap"><b>图2 </b>场景二</span><br><span><img id="ZH-CN_TOPIC_0320090988__image28841420174317" src="zh-cn_image_0000001134529137.png" height="273.06043800000003" width="470.022"></span></div>
+<p id="ZH-CN_TOPIC_0320090988__p94479612563">这种情况下，make mpp表示执行mpp标签下的编译命令，此时，用户需要在<span class="uicontrol" id="ZH-CN_TOPIC_0320090988__uicontrol197671227185216">“编译命令”</span>中填写make mpp，如<a href="#ZH-CN_TOPIC_0320090988__fig14243919266">图3</a>所示。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0320090988__fig14243919266"><a name="ZH-CN_TOPIC_0320090988__fig14243919266"></a><a name="fig14243919266"></a><span class="figcap"><b>图3 </b>make mpp</span><br><span><img id="ZH-CN_TOPIC_0320090988__image124414152614" src="zh-cn_image_0000001193733971.png" height="252.3675" width="523.6875"></span></div>
+</li></ul>
+</li><li id="ZH-CN_TOPIC_0320090988__zh-cn_topic_0189700310_li57404423337">“构建工具”选择<span class="parmvalue" id="ZH-CN_TOPIC_0320090988__parmvalue1315145133720">“cmake”</span>时，默认为cmake，支持以cmake开头的自定义编译命令。cmake工具支持的参数请参考cmake 3.13.4官方使用手册。</li><li id="ZH-CN_TOPIC_0320090988__zh-cn_topic_0189700310_li37402424333">“构建工具”选择<span class="parmvalue" id="ZH-CN_TOPIC_0320090988__parmvalue5558154893711">“automake”</span>时，默认为make，且不可修改。automake工具不支持任何参数。使用automake时，需要确保用户的项目源码中存在可以正常使用的软件构建配置文件Makefile，Makefile文件需要和源码文件一起上传，或者用户在上传待分析软件后手动执行automake相关命令，然后将生成的Makefile属主改为porting，以便工具能正常读取Makefile。</li><li id="ZH-CN_TOPIC_0320090988__li1693919347362">“构建工具”选择<span class="parmvalue" id="ZH-CN_TOPIC_0320090988__parmvalue129481525373">“go”</span>时（此时，<span class="parmname" id="ZH-CN_TOPIC_0320090988__parmname37681039133714">“源码类型”</span>只勾选了<span class="parmvalue" id="ZH-CN_TOPIC_0320090988__parmvalue3607104215377">“Go”</span>），默认为go build。可以更改编译命令，但命令必须以go开头。</li></ul>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0222610839.html">常用操作</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

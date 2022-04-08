@@ -1,0 +1,137 @@
+<div class="fix-container">
+    <!-- 支持的操作系统和版本 start -->
+    <div class="version">
+        <p class="title des-title">{{ i18n.check_weak.auto_fix.version }}</p>
+        <div class="step" *ngFor="let step of versionStep; let index = index">
+            <div class="step-title">
+                <div class="step-title-left" (click)="showOperating(step)">
+                    <img src="./assets/img/header/arrow_bottom.svg" [ngClass]="{'img-active': step.active}" class="tip-img" />
+                    <span>{{ step.label }}</span>
+                </div>
+            </div>
+            <div class="step-content" *ngIf="step.active">
+                <div class="content">
+                    <div class="tip">
+                        <img src="./assets/img/home/icon_home_tip.svg" class="tip-img" />
+                        <span>{{ i18n.check_weak.auto_fix.desc }}</span>
+                        <span>{{ i18n.check_weak.auto_fix.question }}</span>
+                    </div>
+                    <div class="table-content ti3-table-container">
+                        <ti-table [(displayedData)]="versionDisplayed" [srcData]="versionSrcData">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th tiOverflow *ngFor="let column of versionColumns" width="{{ column.width }}">{{ column.title }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of versionDisplayed;">
+                                        <td tiOverflow>{{ row.system }}</td>
+                                        <td tiOverflow>{{ row.version }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ti-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 支持的操作系统和版本 end -->
+
+    <!-- 环境准备 -->
+    <div class="operating">
+        <p class="title des-title">{{ i18n.check_weak.auto_fix.operating }}</p>
+        <div class="step" *ngFor="let step of operatingStep; let index = index">
+            <div class="step-title">
+                <div class="step-title-left" (click)="showOperating(step)">
+                    <img src="./assets/img/header/arrow_bottom.svg" [ngClass]="{'img-active': step.active}" class="tip-img" />
+                    <span>{{ step.label }}</span>
+                </div>
+                <a class="fr" (click)="help()">{{ i18n.common_term_help_tip }}</a>
+            </div>
+            <div class="step-content" *ngIf="operatingStep[0].active && index === 0">
+                <div class="content">
+                    <ul>
+                        <li>
+                            <div class="title">{{ i18n.check_weak.auto_fix.step1.title_1 }}</div>
+                            <p [innerHTML]="fixHTML | html"></p>
+                        <li>
+                            <div class="title">{{ i18n.check_weak.auto_fix.step1.title_2 }}</div>
+                            <p>tar xf gcctool.tar.gz</p>
+                            <p>{{ i18n.check_weak.auto_fix.step1.title_2_content }}</p>
+                        </li>
+                        <li>
+                            <div class="title">{{ i18n.check_weak.auto_fix.step1.title_3 }}</div>
+                            <p>{{ i18n.check_weak.auto_fix.step1.title_3_content }}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="step-content" *ngIf="operatingStep[1].active && index === 1">
+                <div class="content">
+                    <ul>
+                        <li>
+                            <div class="title">{{ i18n.check_weak.auto_fix.step2.title_1 }}</div>
+                            <p>{{ i18n.check_weak.auto_fix.step2.title_1_content_1 }}<a target="_blank" [href]="autoFixUrl.gccCodeUrl">{{ autoFixUrl.gccCodeUrl }}</a>{{ i18n.check_weak.auto_fix.step2.title_1_content_2 }}</p>
+                            <p>{{ i18n.check_weak.auto_fix.step2.title_1_content_3 }}<a target="_blank" [href]="autoFixUrl.gccPatchUrl">{{ autoFixUrl.gccPatchUrl }}</a>{{ i18n.check_weak.auto_fix.step2.title_1_content_4 }}</p>
+                        </li>
+                        <li>
+                            <div class="title">{{ i18n.check_weak.auto_fix.step2.title_2 }}</div>
+                            <div class="desc">
+                                <img src="./assets/img/home/icon_home_tip.svg" class="tip-img" /><span>{{ i18n.check_weak.auto_fix.desc }}</span>
+                                <div class="desc-content" style="padding-left: 21px;font-size: 14px;color: #616161;">
+                                    <p>{{ i18n.check_weak.auto_fix.step2.title_2_content_1 }}</p>
+                                    <p class="spec">{{ i18n.check_weak.auto_fix.step2.title_2_content_2 }}apt install patch</p>
+                                    <p class="spec">{{ i18n.check_weak.auto_fix.step2.title_2_content_3 }}yum install patch</p>
+                                    <p>cd /gcc/source/root/dir</p>
+                                    <p>patch -p1 < /path/to/gcc/patch/file</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="title">{{ i18n.check_weak.auto_fix.step2.title_3 }}</div>
+                            <p>
+                                {{ i18n.check_weak.auto_fix.step2.title_3_content_1 }}
+                                <a target="_blank" [href]="autoFixUrl.GNU_URL">{{ i18n.check_weak.auto_fix.step2.title_3_content_2 }}</a>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 工具使用 start -->
+    <div class="use">
+        <p class="title des-title">{{ i18n.check_weak.auto_fix.use.title }}</p>
+        <div class="step" *ngFor="let use of useList; let index = index">
+            <p class="use-title">{{ use.title }}</p>
+            <div class="step-container" *ngIf="index !== 1">
+                <ul>
+                    <li *ngFor="let content of use.contentList">
+                        <span>{{ content.content }}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="step-container" *ngIf="index === 1">
+                <ul *ngIf="!use.active" class="no-use-active">
+                    <li class="use-title">
+                        <span>{{ i18n.check_weak.auto_fix.use.title_2_subTitle }}</span>
+                        <a class="click-link" (click)="use.active = !use.active">{{ i18n.check_weak.auto_fix.use.link }}</a>
+                    </li>
+                </ul>
+                <ul *ngIf="use.active" class="use-active">
+                    <li *ngFor="let content of use.contentList; let index = index">
+                        <p class="active-title use-title">{{ content.title }}</p>
+                        <p *ngFor="let detail of content.detailList; let i = index" [ngClass]="{'text-indent': index === 2 && i}">
+                            <span class="detail-title">{{ detail }}</span>
+                        </p>
+                    </li>
+                    <a class="click-link" (click)="use.active = !use.active">{{ i18n.automake_evn_check.hide_guide }}</a>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 工具使用 end -->
+</div>

@@ -1,0 +1,78 @@
+.advice-contain{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba($color: #000000, $alpha: 0.3);
+    z-index: 9998;
+    left: 0;
+    top: 0;
+
+    .advice-mask{
+      background: #fff;
+      width: 560px;
+      height: 446px;
+      position: relative;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      -webkit-transform: translate(-50%,-50%);
+      z-index: 9999;
+      font-size: 14px;
+      padding: 20px 32px;
+      .advice-head{
+          position: relative;
+          display: flex;
+          padding-bottom: 18px;
+          border-bottom: 1px solid #e1e6ee;
+          .title{
+              flex: auto;
+              font-size: 20px;
+              color: #222;
+          }
+          .close-img{
+              width: 20px;
+              height: 20px;
+              cursor: pointer;
+          }
+      }
+      .advice-content{
+          margin-top: 20px;
+          .failtext1{
+              img{
+                  width: 16px;
+                  height: 16px;
+                  margin-right: 6px;
+                  display: inline-block;
+              }
+          }
+          .failtext2{
+            margin-top: 16px;
+          }
+          .failtext3{
+            margin-top: 16px;
+          }
+          .qr-code{
+              margin-top: 16px;
+              img{
+                  width: 160px;
+                  height: 160px;
+              }
+          }
+      }
+      .state_btns {
+          margin: auto;
+          margin-top: 32px;
+          width: 88px;
+          height: 28px;
+          .cancel_left {
+            margin-left: 16px;
+          }
+          .cancel_left:hover {
+            border-color: var(--infor-detail-button-hover-color) !important;
+          }
+          .cancel_left:active {
+              border-color: var(--infor-detail-button-hover-color) !important;
+            }
+      }
+  }
+}

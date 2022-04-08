@@ -1,0 +1,56 @@
+<div id="detail-container" class="custemDetailContainer">
+  <ti-tabs class="custemTabs tabsWithSplitLine tabsWithUnderline">
+    <ti-tab [(active)]="item.active" *ngFor="let item of detailList; let index = index" [disabled]="item.disable">
+      <ti-tab-header>
+        <span>{{ item.title }}</span>
+      </ti-tab-header>
+
+      <!-- 任务信息 -->
+      <div *ngIf="item.title == i18n.common_term_task_tab_congration && item.disable==false" class="content-container"
+        [ngClass]="{showDetail: item.active}">
+        <app-configuration (returnConfigInfo)="getConfigInfo($event)" [nodeid]='nodeId' [projectName]='projectName'
+          [taskName]='taskName' [status]='status' [analysisType]='analysisType' [taskid]='taskId' [taskDetail]="taskDetail">
+        </app-configuration>
+      </div>
+
+      <div *ngIf="item.title == 'Call Tree' && item.disable == false" class="content-container"
+        [ngClass]="{ showDetail: item.active }">
+        <app-call-tree [taskId]="taskId" [nodeId]="nodeId" [isActive]="item.active">
+        </app-call-tree>
+      </div>
+
+      <div *ngIf="item.title == this.i18n.diagnostic.tab.sourceCode && item.disable == false"
+        class="content-container" [ngClass]="{ showDetail: item.active }">
+        <app-source-code [taskId]="taskId" [nodeId]="nodeId" [isActive]="item.active">
+        </app-source-code>
+      </div>
+
+      <div *ngIf="item.title === i18n.diagnostic.taskParams.memory_overwriting && item.disable == false" class="content-container"
+        [ngClass]="{ showDetail: item.active }">
+        <app-mem-exception-detail [taskId]="taskId" [nodeId]="nodeId" [isActive]="item.active" [diagnosticType]='diagnosticType'>
+        </app-mem-exception-detail>
+      </div>
+
+      <!--懒加载的内容区必须使用ng-template标签包裹，并且加上#tiTabContent的标识-->
+      <ng-template #tiTabContent>
+        <!-- 任务日志 -->
+        <div *ngIf="item.title == i18n.common_term_task_tab_log && item.disable == false" class="content-container"
+          [ngClass]="{ showDetail: item.active }">
+          <app-configuration-log [status]="status" [nodeid]="nodeId" [projectName]="projectName" [taskName]="taskName"
+            [analysisType]="analysisType" [taskid]="taskId">
+          </app-configuration-log>
+        </div>
+        <div *ngIf="item.title == 'OOM' && item.disable == false" class="content-container"
+          [ngClass]="{ showDetail: item.active }">
+          <app-oom-details [taskId]="taskId" [nodeId]="nodeId">
+          </app-oom-details>
+        </div>
+        <div *ngIf="item.prop == 'consumption' && item.disable == false" class="content-container"
+          [ngClass]="{ showDetail: item.active }">
+          <app-memory-consumption [taskId]="taskId" [nodeId]="nodeId">
+          </app-memory-consumption>
+        </div>
+      </ng-template>
+    </ti-tab>
+  </ti-tabs>
+</div>

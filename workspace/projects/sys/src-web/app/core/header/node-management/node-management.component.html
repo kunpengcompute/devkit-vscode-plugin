@@ -1,0 +1,470 @@
+<!-- 节点配置页面 -->
+<div class="config-container">
+    <div class="left">
+        <header>
+            <div class="return" (click)="closeLeftMenu()">
+                <img src="./assets/img/header/return-7.png" alt="">
+                {{i18n.common_term_return}}
+            </div>
+        </header>
+
+        <ul class="config-leftmenu">
+            <li routerLink="/nodeManagement/nodeManagement" routerLinkActive="active"
+                (click)="onSwitchMenu('nodeManagement')">
+                <span>{{ i18n.nodeManagement.nodeManagement }}</span>
+            </li>
+            <li routerLink="/nodeManagement/agentTitle" routerLinkActive="active" (click)="onSwitchMenu('agentTitle')">
+                <span>{{ i18n.certificate.agentTitle }}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="right">
+        <div class="right-top">{{ title }}</div>
+
+        <div class="right-content">
+            <!-- 节点管理 -->
+            <div *ngIf="ifLeftMenuShow === 'nodeManagement'" class="nodeManagementComponent">
+                <div class="toolbar" *ngIf="role === 'Admin'">
+                    <button
+                        [disabled]="isMaxNodeAllow"
+                        type="button"
+                        tiButton
+                        color="primary"
+                        style="margin-right: 10px;"
+                        id="addNodeBtn"
+                        (click)="openAddNodeModal()">
+                        {{ i18n.nodeManagement.addNode }}
+                    </button>
+                    <button
+                        [disabled]="isMaxNodeAllow"
+                        type="button"
+                        (click)="onBatchImportClick($event)"
+                        tiButton style="margin-right: 10px;">
+                        {{ i18n.nodeManagement.batchImport }}
+                    </button>
+                    <button
+                        type="button"
+                        (click)="onBatchDeleteClick($event)"
+                        tiButton>
+                        {{ i18n.nodeManagement.batchDelete }}
+                    </button>
+                </div>
+                <main>
+                    <app-node-list #nodeListComponent class="nodeListComponent" [hasNodeDetails]="true"
+                        [hasOperate]="true" [hasAlarmInfo]="true" [hasPagination]="true"
+                        (editNodeName)="showEditNodeNameModal($event)" (deleteNode)="showDeleteNodeModal($event)"
+                        (viewLogs)="viewLogs($event)" (maxNodeAllow)="onMaxNodeAllow($event)"></app-node-list>
+                </main>
+            </div>
+
+            <!-- Agent服务证书 -->
+            <ng-container *ngIf="ifLeftMenuShow === 'agentTitle'">
+                <div class="sys-item">
+                    <app-sys-setting-item [config]="sysTuningConfig.agentWarnDeadline" [value]="agentWarnDeadlineValue"
+                        (confirm)="onAgentWarnDeadlineConfirm($event)">
+                    </app-sys-setting-item>
+                </div>
+                <app-header-certificate-agent></app-header-certificate-agent>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<!-- add node modal -->
+<ng-template #addNodeModalComponent let-context='context'>
+    <ti-modal-header>
+        {{ i18n.nodeManagement.addNodeDialogTitle }}
+    </ti-modal-header>
+
+    <!-- 弹框内容定义 -->
+    <ti-modal-body class="addNodeModalBody">
+        <ti-formfield labelWidth="120px" [formGroup]="addNodeForm.formGroup" class="taskForm">
+            <!-- 节点名称 -->
+            <ti-item [label]="i18n.nodeManagement.nodeName">
+                <input type="text" tiText formControlName='nodeName'
+                    [placeholder]="i18n.nodeManagement.nodeNamePlaceholder" [tiValidation]="validation">
+            </ti-item>
+
+            <!-- 安装路径 -->
+            <ti-item [label]="i18n.nodeManagement.installPath">
+                <input type="text" tiText formControlName='installPath' [tiValidation]="validation">
+            </ti-item>
+        </ti-formfield>
+
+        <!-- SSH登录信息 -->
+        <div class="title sshTitle">{{ i18n.nodeManagement.sshSettings }}</div>
+        <ti-formfield labelWidth="120px" [formGroup]="addNodeForm.formGroup" class="taskForm">
+            <!-- 节点IP -->
+            <ti-item [label]="i18n.nodeConfig.node" [required]="true">
+                <ti-ip tiIpv4 [version]="4" formControlName="nodeIP" [tiValidation]="validation"></ti-ip>
+            </ti-item>
+
+            <!-- 端口 -->
+            <ti-item [label]="i18n.nodeManagement.nodePort" [required]="true">
+                <div class="formContent">
+                    <input tiText formControlName="port" [tiValidation]="validation"
+                        [errorMessageWrapper]="portErrorMsgWrapper">
+
+                    <!-- 尾后提示 -->
+                    <span class="tailPrompt">{{i18n.common_term_sign_left}}1~65535{{i18n.common_term_sign_right}}</span>
+                </div>
+
+                <!-- 自定义错误提示位置 -->
+                <div #portErrorMsgWrapper></div>
+            </ti-item>
+
+            <!-- 用户名 -->
+            <ti-item [label]="i18n.common_term_login_name" [required]="true">
+                <input type="text" tiText formControlName="username" [tiValidation]='validation' oncopy="return false"
+                    oncut="return false">
+            </ti-item>
+
+            <!-- 认证方式 -->
+            <ti-item [required]="true">
+                <ti-item-label>
+                    <span tiOverflow class="labelWidth">{{i18n.nodeManagement.authenticationMode}}</span>
+                </ti-item-label>
+                <ti-select formControlName="authenticationMode" [options]="authenticationModeList"
+                    [tiValidation]="validation">
+                </ti-select>
+            </ti-item>
+
+            <!-- 口令 -->
+            <ti-item [label]="i18n.nodeManagement.password" [required]="true"
+                [show]="addNodeForm.formGroup.value?.authenticationMode?.prop === 'password'">
+                <input type="password" tiText formControlName='password'
+                    [placeholder]="i18n.nodeManagement.pwdPlaceholder" [tiValidation]='validation' appDisableCtrl>
+            </ti-item>
+
+            <!-- 私钥文件 -->
+            <ti-item [label]="i18n.nodeManagement.keyFile" [required]="true"
+                [show]="addNodeForm.formGroup.value?.authenticationMode?.prop !== 'password'">
+                <input type="password" tiText formControlName='keyFile' [tiValidation]='validation' appDisableCtrl>
+            </ti-item>
+
+            <!-- 密码短语 -->
+            <ti-item [label]="i18n.nodeManagement.passphrase"
+                [show]="addNodeForm.formGroup.value?.authenticationMode?.prop !== 'password'">
+                <input type="password" tiText formControlName='passphrase' [tiValidation]='validation'
+                    [placeholder]="i18n.nodeManagement.passphrasePlaceholder" appDisableCtrl>
+            </ti-item>
+        </ti-formfield>
+
+        <div *ngIf="addNodeForm.formGroup.value?.username !== 'root'" class="tip-content tip-content-tip rootPwdTip">
+            <img src='./assets/img/tip/tip.svg' class="tip-icon" />
+            <span>{{ i18n.nodeManagement.rootPwdTip }}</span>
+        </div>
+        <ti-formfield labelWidth="120px" [formGroup]="addNodeForm.formGroup" class="taskForm">
+            <!-- root口令 -->
+            <ti-item [label]="i18n.nodeManagement.rootPwd" [required]="true"
+                [show]="addNodeForm.formGroup.value?.username !== 'root'">
+                <input type="password" tiText formControlName='rootPassword'
+                    [placeholder]="i18n.nodeManagement.rootPwdPlaceholder" [tiValidation]='validation' appDisableCtrl>
+            </ti-item>
+        </ti-formfield>
+        <div class="sshSafeTip">
+            <ti-formfield [formGroup]="addNodeForm.formGroup" class="taskForm">
+                <ti-item [required]="true">
+                    <ti-item-label>
+                        <span tiOverflow class="sshTipLabel">{{i18n.nodeManagement.ssh_Transmission}}</span>
+                    </ti-item-label>
+                    <p class="sshTipText">{{i18n.common_term_certificate_tip_ssh}}</p>
+                    <input type="checkbox" tiCheckbox [label]='i18n.common_term_read' formControlName='sshTip'>
+                </ti-item>
+            </ti-formfield>
+        </div>
+    </ti-modal-body>
+
+    <ti-modal-footer>
+        <button tiButton type="button" color="primary" (click)="context.confirm(context)"
+            [disabled]="!addNodeForm.formGroup.valid || context.interfacing">{{ i18n.common_term_operate_ok }}</button>
+
+        <button type="button" (mousedown)="context.dismiss()" tiButton>
+            {{ i18n.common_term_operate_cancel }}
+        </button>
+    </ti-modal-footer>
+</ng-template>
+
+<!-- edit nodeName modal -->
+<ng-template #editNodeNameModalComponent let-context='context'>
+    <ti-modal-header>
+        {{ i18n.nodeManagement.modifyNode }}
+    </ti-modal-header>
+
+    <!-- 弹框内容定义 -->
+    <ti-modal-body>
+        <ti-formfield labelWidth="144px" [formGroup]="editNodeNameForm.formGroup" class="taskForm">
+            <!-- 节点IP -->
+            <ti-item [label]="i18n.nodeConfig.node">
+                <span class="textFomContent">{{ context.nodeIP }}</span>
+            </ti-item>
+
+            <!-- 节点名称 -->
+            <ti-item [label]="i18n.nodeManagement.nodeName" [required]="true">
+                <input type="text" tiText formControlName='nodeName' [tiValidation]="validation"
+                    [placeholder]="i18n.nodeManagement.nodeNamePlaceholder">
+            </ti-item>
+        </ti-formfield>
+    </ti-modal-body>
+
+    <ti-modal-footer>
+        <button tiButton type="button" (click)="context.confirm(context)"
+            [disabled]="!editNodeNameForm.formGroup.valid || context.interfacing">{{ i18n.common_term_operate_ok
+            }}</button>
+
+        <button type="button" color="primary" (mousedown)="context.dismiss()" tiButton>
+            {{ i18n.common_term_operate_cancel }}
+        </button>
+    </ti-modal-footer>
+</ng-template>
+
+<!-- delete node modal -->
+<ng-template #deleteNodeModalComponent let-context='context'>
+    <ti-modal-header>
+        {{ i18n.nodeManagement.deleteNode }}
+    </ti-modal-header>
+
+    <!-- 弹框内容定义 -->
+    <ti-modal-body class="deleteNodeModalBody">
+        <p class="tipInfo">
+            <img src="./assets/img/weakPassword/warn.svg" alt="" />
+            {{ deleteNodeTip }}
+        </p>
+
+        <ti-formfield labelWidth="120px" [formGroup]="deleteNodeForm.formGroup" class="taskForm">
+            <!-- 用户名 -->
+            <ti-item [label]="i18n.common_term_login_name" [required]="true">
+                <input type="text" tiText formControlName="username" [tiValidation]='validation' oncopy="return false"
+                    oncut="return false">
+            </ti-item>
+
+            <!-- 认证方式 -->
+            <ti-item [required]="true">
+                <ti-item-label>
+                    <span tiOverflow class="labelWidth">{{i18n.nodeManagement.authenticationMode}}</span>
+                </ti-item-label>
+                <ti-select formControlName="authenticationMode" [options]="authenticationModeList"
+                    [tiValidation]="validation">
+                </ti-select>
+            </ti-item>
+
+            <!-- 口令 -->
+            <ti-item [label]="i18n.nodeManagement.password" [required]="true"
+                [show]="deleteNodeForm.formGroup.value?.authenticationMode?.prop === 'password'">
+                <input type="password" tiText formControlName='password'
+                    [placeholder]="i18n.nodeManagement.pwdPlaceholder" [tiValidation]='validation' appDisableCtrl>
+            </ti-item>
+
+            <!-- 私钥文件 -->
+            <ti-item [label]="i18n.nodeManagement.keyFile" [required]="true"
+                [show]="deleteNodeForm.formGroup.value?.authenticationMode?.prop !== 'password'">
+                <input type="password" tiText formControlName='keyFile' [tiValidation]='validation' appDisableCtrl>
+            </ti-item>
+
+            <!-- 密码短语 -->
+            <ti-item [label]="i18n.nodeManagement.passphrase"
+                [show]="deleteNodeForm.formGroup.value?.authenticationMode?.prop !== 'password'">
+                <input type="password" tiText formControlName='passphrase' [tiValidation]='validation'
+                    [placeholder]="i18n.nodeManagement.passphrasePlaceholder" appDisableCtrl>
+            </ti-item>
+        </ti-formfield>
+
+        <div *ngIf="deleteNodeForm.formGroup.value?.username !== 'root'" class="tip-content tip-content-tip rootPwdTip">
+            <img src='./assets/img/tip/tip.svg' class="tip-icon" />
+            <span>{{ i18n.nodeManagement.rootPwdTip }}</span>
+        </div>
+        <ti-formfield labelWidth="120px" [formGroup]="deleteNodeForm.formGroup" class="taskForm">
+            <!-- root口令 -->
+            <ti-item [label]="i18n.nodeManagement.rootPwd" [required]="true"
+                [show]="deleteNodeForm.formGroup.value?.username !== 'root'">
+                <input type="password" tiText formControlName='rootPassword'
+                    [placeholder]="i18n.nodeManagement.rootPwdPlaceholder" [tiValidation]='validation' appDisableCtrl>
+            </ti-item>
+        </ti-formfield>
+        <div class="sshSafeTip">
+            <ti-formfield [formGroup]="deleteNodeForm.formGroup" class="taskForm">
+                <ti-item [required]="true">
+                    <ti-item-label>
+                        <span tiOverflow class="sshTipLabel">{{i18n.nodeManagement.ssh_Transmission}}</span>
+                    </ti-item-label>
+                    <p class="sshTipText">{{i18n.common_term_certificate_tip_ssh}}</p>
+                    <input type="checkbox" tiCheckbox [label]='i18n.common_term_read' formControlName='sshTip'>
+                </ti-item>
+            </ti-formfield>
+        </div>
+    </ti-modal-body>
+
+    <ti-modal-footer>
+        <button tiButton type="button" (click)="context.confirm(context)"
+            [disabled]="!deleteNodeForm.formGroup.valid || context.interfacing">{{ i18n.common_term_operate_ok
+            }}</button>
+
+        <button type="button" color="primary" (mousedown)="context.dismiss()" tiButton>
+            {{ i18n.common_term_operate_cancel }}
+        </button>
+    </ti-modal-footer>
+</ng-template>
+
+<!-- delete node failed modal -->
+<ng-template #deleteNodeFailedModalComponent let-context='context'>
+    <ti-modal-header>
+        {{ i18n.nodeManagement.deleteNodeFailed }}
+    </ti-modal-header>
+
+    <!-- 弹框内容定义 -->
+    <ti-modal-body>
+        <p class="tipInfo">
+            <img src="./assets/img/tip/error.svg" alt="" />
+            {{ i18n.nodeManagement.deleteNodeFailedTip }}
+        </p>
+
+        <ti-table [(displayedData)]="deleteNodeFailedReason.displayed" [srcData]="deleteNodeFailedReason.srcData"
+            [columns]="deleteNodeFailedReason.columns">
+            <table>
+                <thead>
+                    <tr>
+                        <th tiOverflow *ngFor="let column of deleteNodeFailedReason.columns" width="{{column.width}}">{{
+                            column.title }}</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let row of deleteNodeFailedReason.displayed">
+                        <td tiOverflow *ngFor="let column of deleteNodeFailedReason.columns">{{ row[column.prop] }}</td>
+                        <td tiOverflow *ngFor="let column of deleteNodeFailedReason.columns">{{ row[column.tool] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ti-table>
+    </ti-modal-body>
+
+    <ti-modal-footer>
+        <button type="button" (click)="context.dismiss()" tiButton>
+            {{ i18n.common_term_operate_close }}
+        </button>
+    </ti-modal-footer>
+</ng-template>
+
+<!-- Viewing Installation Logs -->
+<ng-template #viewLogsModalComponent let-context='context'>
+    <ti-modal-header>
+        {{ i18n.nodeManagement.installationLog.format(context.nodeIP) }}
+
+        <span class="copy" [tiTip]="i18n.nodeManagement.copyAll" tiTipPosition="top" (click)="context.copy()"></span>
+    </ti-modal-header>
+
+    <!-- 弹框内容定义 -->
+    <ti-modal-body>
+        <pre *ngIf="context.content; else noData" [innerHTML]="context.content" class="pre-box"></pre>
+
+        <!-- 无数据 -->
+        <ng-template #noData>
+            <div class='chen-nodata-td unsetPosition'>
+                <img src='./assets/img/projects/nodata.png' />
+                <div>{{ i18n.common_term_task_nodata }}</div>
+            </div>
+        </ng-template>
+    </ti-modal-body>
+
+    <ti-modal-footer>
+        <button tiButton type="button" color="primary" (click)="context.download()" [disabled]="!context.content">{{
+            i18n.operationLog.download }}</button>
+
+        <button type="button" (mousedown)="context.dismiss()" tiButton>
+            {{ i18n.common_term_operate_cancel }}
+        </button>
+    </ti-modal-footer>
+</ng-template>
+
+<!-- 确认指纹/root用户二次确认弹框 -->
+<ng-template #fingerPrintConfirmationModalComponent let-context='context'>
+    <ti-modal-header>
+        {{ i18n.nodeManagement.information }}
+    </ti-modal-header>
+
+    <!-- 弹框内容定义 -->
+    <ti-modal-body>
+        <p class="tipInfo">
+            <img src="./assets/img/tip/tip.svg" alt="" />
+            {{ context.tipInfo }}
+        </p>
+
+        <ti-table [(displayedData)]="fingerPrintConfirmationTable.displayed"
+            [srcData]="fingerPrintConfirmationTable.srcData" [columns]="fingerPrintConfirmationTable.columns">
+            <table>
+                <thead>
+                    <tr>
+                        <th tiOverflow *ngFor="let column of fingerPrintConfirmationTable.columns"
+                            width="{{column.width}}">{{
+                            column.title }}</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let row of fingerPrintConfirmationTable.displayed">
+                        <td tiOverflow *ngFor="let column of fingerPrintConfirmationTable.columns">{{ row[column.prop]
+                            }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ti-table>
+    </ti-modal-body>
+
+    <ti-modal-footer>
+        <button tiButton type="button" color="primary" (click)="context.confirm(context)">{{ i18n.common_term_operate_ok
+            }}</button>
+        <button type="button" (mousedown)="context.dismiss()" tiButton>{{ i18n.common_term_operate_cancel }}</button>
+    </ti-modal-footer>
+</ng-template>
+
+<!-- agent服务证书弹窗 -->
+<app-pop-mask #agentMaskTip>
+    <div class="agent-mask content">
+        <div class="mask-tip-title">
+            <div class="mask-tip-title-text">{{i18n.certificate.notice}}</div>
+            <img class="mask-tip-close-icon" src="./assets/img/header/close_icon.svg" (click)="onClickAgentMaskTip()" />
+        </div>
+        <div class="diliver"></div>
+        <div class="mask-tip-content">
+            <div class="mask-tip-content-one">
+                <img class="mask-tip-warn-icon" src="./assets/img/tip/warn_triangle.svg" />
+                <div class="mask-tip-content-text">{{agentMaskTipData.warnText}}</div>
+            </div>
+            <div class="mask-tip-content-two">
+                <ti-table [(displayedData)]="agentMaskTipData.displayed" [srcData]="agentMaskTipData.srcData"
+                    [columns]="agentMaskTipData.columns" class="ti3-table-small">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th tiOverflow *ngFor="let column of agentMaskTipData.columns" width="{{column.width}}">
+                                    {{column.title}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let row of agentMaskTipData.displayed">
+                                <td tiOverflow>{{row.nodeIp}}</td>
+                                <td tiOverflow>{{row.certName}}</td>
+                                <td tiOverflow>{{row.certExpTime}}</td>
+                                <td tiOverflow>
+                                    <div
+                                        [ngClass]="{'cert-status-spot': true, 'status1': row.certStatus === '1', 'status2': row.certStatus === '2'}">
+                                    </div>{{row.certStatusText}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ti-table>
+            </div>
+        </div>
+        <div class="mask-tip-operation">
+            <button type="button" tiButton class="user-close-btn"
+                (click)="onClickAgentMaskTip()">{{i18n.certificate.close}}</button>
+        </div>
+    </div>
+</app-pop-mask>
+
+<app-batch-node-operation
+  (inited)="onBatchInited($event)"
+  (dispatch)="onBatchDispatsh($event)">
+</app-batch-node-operation>

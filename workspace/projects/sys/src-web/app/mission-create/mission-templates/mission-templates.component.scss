@@ -1,0 +1,122 @@
+.header .title {
+  -webkit-font-smoothing: none;
+  font-size: 20px;
+  font-weight: 700;
+  font-stretch: normal;
+  line-height: 20px;
+  letter-spacing: 0px;
+  color: #222222;
+}
+.nav-1 {
+  width: 100%;
+  height: 49px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f7faff;
+  border: solid 1px #E8E8E8;
+  border-radius: 1px;
+  box-sizing: border-box;
+  cursor: pointer;
+  .head-radio {
+    margin-left: 24px;
+    height: 16px;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+}
+.clicked{
+  border: solid 1px #94B1FF;
+}
+.collapsed {
+  width: 100%;
+  padding-left: 24px;
+  border: solid 1px #94B1FF;
+  overflow: hidden;
+  box-sizing: border-box;
+  .table {
+    width: 100%;
+    padding: 10px 0px;
+    box-sizing: border-box;
+    .table-left,
+    .table-right {
+      p, ul li p {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+    .net_io_temp{
+      margin-left: 32px;
+      border-left: 2px solid #0067ff;
+    }
+  }
+  .table-left {
+    width: 33%;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 40px;
+    color: grey;
+  }
+  .table-right {
+    width: 67%;
+    display: inline-block;
+    padding-left: 5px;
+    box-sizing: border-box;
+  }
+}
+.isShow {
+  display: none;
+}
+
+.content-list {
+  .lable-right {
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 20px 0px;
+    .label {
+      width: 188px;
+      color: #9ea4b3;
+    }
+  }
+}
+.infomation{
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  .info{
+    display: flex;
+    flex-direction: column;
+    color: #6C7280;
+    font-size: 16px;
+    line-height: 32px;
+    .label{
+      margin-right: 24px;
+    }
+  }
+}
+.nodata-temp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  .no-data {
+    font-size: 1rem;
+  }
+  img{
+    width: 320px;
+  }
+}

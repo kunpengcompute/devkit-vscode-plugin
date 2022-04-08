@@ -1,0 +1,6 @@
+.vscode/**
+build
+out/**/*.map
+src/extension/src
+src/webview
+tsconfig.json

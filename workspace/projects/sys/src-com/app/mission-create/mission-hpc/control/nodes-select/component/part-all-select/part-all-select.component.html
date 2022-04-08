@@ -1,0 +1,18 @@
+<div class="select-boxs" *ngIf="isAll; else part">
+  <div class="select chosen" (click)="onPartClick()">
+    {{ data[0] }}
+  </div>
+  <div class="all chosen select-chosen">
+    {{ data[1] }}
+  </div>
+</div>
+<ng-template #part>
+  <div class="select-boxs">
+    <div class="select chosen select-chosen">
+      {{ data[0] }}
+    </div>
+    <div class="all chosen" (click)="onAllClick()">
+      {{ data[1] }}
+    </div>
+  </div>
+</ng-template>

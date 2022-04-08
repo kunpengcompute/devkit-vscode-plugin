@@ -1,0 +1,123 @@
+.struck-top {
+    margin-bottom: 24px;
+    display: flex;
+
+    .source-area {
+        flex: 1;
+    }
+
+    .advised-area {
+        width: 1;
+    }
+
+    .advised-title {
+        font-size: 20px;
+        line-height: 20px;
+        letter-spacing: 0px;
+        color: #282b33;
+    }
+}
+
+.struct-content {
+    height: calc(100% - 41px);
+    position: relative;
+   
+    .struck-assign {
+        height: 99%;
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        border: solid 1px #d4d9e6;
+        box-sizing: border-box;
+        overflow: hidden;
+     
+        overflow-x: auto;
+        overflow-y: auto;
+        white-space: nowrap;
+        position: relative;
+    }
+    .struck-box {
+        width: 100%;
+        position: relative;
+        margin-top:30px
+    }
+    .struck-title {
+        text-align: center;
+        width: 140px;
+        height: 32px;
+        line-height: 32px;
+        border: 1px solid #6B708B;
+        border-radius: 4px;
+        margin-left: 50px;
+        position: absolute;
+        top: -26px;
+        left: -39px;
+        background: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    .struck-left {
+        position: absolute;
+        left: -60px;
+        top: 39%;    
+    }
+    .struck-value {
+        width: 160px;
+        border-radius: 4px;
+        border: 1px solid #6B708B;
+        border-bottom: none;
+    }
+    .struck-span {
+        margin: 5px 0;
+        width: 100%;
+        text-align: center;
+        display: inline-block;
+        color: #616161;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        cursor: default;
+    }
+}
+
+.d2h-file-side-diff{
+    overflow: none !important;
+}
+#line{
+    position: absolute;
+}
+#instructions {
+    position: fixed;
+    left: 50%;
+}
+.siblings {
+    position: absolute;
+    left: -100px;
+    top: -21px;
+    width: 1000px;
+    height: 1px;
+    background-color: #ccc;
+}
+
+.decorationsOverviewRuler {
+    width: 7px !important;
+}
+.vertical {
+    .slider {
+        left: 8px !important;
+        width: 6px !important;
+        border-radius: 14px !important;
+    }
+}
+
+.horizontal {
+    .slider {
+        top: 4px !important;
+        height: 6px !important;
+        border-radius: 14px !important;
+    }
+}
+
+.vs .monaco-scrollable-element>.scrollbar>.slider {
+    background: #979797;
+}

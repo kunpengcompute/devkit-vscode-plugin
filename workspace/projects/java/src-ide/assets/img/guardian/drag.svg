@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="12px" viewBox="0 0 80 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>分组 34</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0 8 0 4 5"></polygon>
+    </defs>
+    <g id="页面-1备份" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="53IO分析-文件IO" transform="translate(-1084.000000, -518.000000)">
+            <g id="编组-18" transform="translate(384.000000, 246.000000)">
+                <g id="分组-34" transform="translate(740.000000, 278.000000) rotate(-270.000000) translate(-740.000000, -278.000000) translate(734.000000, 238.000000)">
+                    <path d="M0.5,1.3516287 L0.5,78.6483713 L8.73145093,69.0450119 C10.5179901,66.9607161 11.5,64.3060907 11.5,61.5609111 L11.5,18.4390889 C11.5,15.6939093 10.5179901,13.0392839 8.73145093,10.9549881 L0.5,1.3516287 Z" id="矩形" stroke="#484A4E" fill="#313131"></path>
+                    <g id="icon-下展" transform="translate(6.000000, 40.500000) scale(-1, 1) rotate(90.000000) translate(-6.000000, -40.500000) translate(2.000000, 38.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="蒙版" fill="#DDDDDD" xlink:href="#path-1"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,187 @@
+<div class="env-main sample-lock">
+    <div class="gc_config gc-box">
+        <!-- 监视器 -->
+        <div style="width: 56%; margin-right: 30px;">
+            <table style="width:100%;">
+                <div class="config-title">
+                    {{ i18n.protalserver_sampling_lock_monitor_title }}
+                </div>
+                <app-table-search-box [searchOptions]="leftTable.searchOptions" (searchEvent)="searchEvent($event, 'left')"></app-table-search-box>
+                <ti-table [(displayedData)]="displayedMonitor" [srcData]="srcDataMonitor" [columns]="columnsMonitor"
+                    [closeOtherDetails]="closeOtherDetails" tiColsResizable [searchWords]="leftTable.searchWords"
+                    [searchKeys]="leftTable.searchKeys" class="ti3-table-all tiTableDmo">
+                    <div class="ti3-table-fixed-head">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <ng-container *ngFor="let column of columnsMonitor; let idx = index">
+                                        <th width="{{ column.width }}"
+                                            [ngStyle]="{'padding-left': idx === 0 ? '52px' :'10px'}" >
+                                            <ti-cell-text>{{i18n.protalserver_sampling_lock_monitor[column.title]}}
+                                            </ti-cell-text>
+                                            <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey">
+                                            </ti-head-sort>
+                                        </th>
+                                    </ng-container>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="ti3-table-container ti3-resize-wrapper table-body"
+                        [ngStyle]="{'height': displayedMonitor.length === 0 ? '160px' : 'auto'}">
+                        <table>
+                            <tbody>
+                                <ng-container *ngFor="let row of displayedMonitor; index as i">
+                                    <tr (click)="getThreadByClass(row)"
+                                        (click)="onSelected(onSelectedClass, row.className)"
+                                        [ngStyle]="{'background-color': row.className === isSelectedClass ? '#545454 !important' : ''}"
+                                        [ngClass]="{'tr-active': row.className === isSelectedClass}">
+
+                                        <td style="width:34%; padding-left: 52px; position: relative;" tiOverflow>
+                                            <div
+                                                style=" position: absolute; left: 0;padding: 12px;top: 0; padding-left: 15px;">
+                                                <ti-details-icon [row]="row" [index]="i"
+                                                    (beforeToggle)="beforeToggle(2, $event)"> </ti-details-icon>
+                                            </div>
+                                            {{ row.className }}
+                                        </td>
+                                        <td style="width:20%;" tiOverflow>
+                                            {{ onChangeTime(row.totalDuration) }}
+                                        </td>
+                                        <td style="width:20%;" tiOverflow>
+                                            {{ row.diffThreads }}
+                                        </td>
+                                        <td style="width:25%;  padding: 1px;" tiOverflow>
+                                            <div style="position: relative;"
+                                                [ngStyle]="{width: (row.count / totalCountMonitor) * 100 + '%'}"
+                                                class="count-fill">{{ row.count }}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr *tiDetailsTr="row" class="expandAllRow">
+                                        <td tiColspan style="padding: 0px;">
+                                            <div class="right-table">
+                                                <ti-table [(displayedData)]="currentInstances"
+                                                    [srcData]="currentInstances" class="ti3-table-nest">
+                                                    <table>
+                                                        <tbody style="width: '100%';">
+                                                            <tr class="expandRow"
+                                                                *ngFor="let addr of currentInstances; let idx = index"
+                                                                (click)="getThreadList(addr, i, idx)"
+                                                                (click)="onSelected(onSelectedInstance, addr.address)"
+                                                                [ngStyle]="{'background-color': addr.address === isSelectedInstance ? '#545454 !important' : ''}"
+                                                                [ngClass]="{'tr-active': addr.address === isSelectedInstance}">
+
+                                                                <td
+                                                                    style="width: 34%; padding-left: 52px; position: relative; border-bottom: none;">
+                                                                    <div details-icon-column class="fillDiv"
+                                                                        style="width: 42px; border-right: 2px solid #3266C3;
+                                                                         position: absolute; left: 0; height: 45px;top: 0;">
+                                                                    </div>
+                                                                    <div class="nameRow"
+                                                                        style="width: calc(100% - 42px); height: 100%; 
+                                                                        line-height: 44px;position: absolute;left: 42px; top: 0; padding-left: 10px;">
+                                                                        {{ addr.address}}
+                                                                    </div>
+                                                                </td>
+                                                                <td style="width: 20%;padding-left:10px;">
+
+                                                                    {{ onChangeTime(addr.totalDuration) }}
+                                                                </td>
+                                                                <td style="width: 20%;padding-left:10px;">
+                                                                    {{ addr.diffThreads.length }}</td>
+                                                                <td style="width: 25%; padding: 1px;">
+                                                                    <div style="position: relative;"
+                                                                        [ngStyle]="{width:(addr.count / totalCountMonitor) * 100 +'%'}"
+                                                                        class="count-fill">{{addr.count}}
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </ti-table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                        <app-default-page *ngIf="displayedMonitor.length === 0" [height]="'100%'"></app-default-page>
+                    </div>
+                    <!-- 在表格中使用分页组件时必须保证其父元素是ti-table -->
+                <ti-pagination [(currentPage)]="leftCurrentPage"
+                            [pageSize]="leftPageSize"
+                            [(totalNumber)]="leftTotalNumber">
+                </ti-pagination>
+                </ti-table>
+            </table>
+        </div>
+        <!-- 线程 -->
+        <div style="width: 44%;">
+            <div class="config-title">
+                {{ i18n.protalserver_sampling_lock_thread.label }}
+            </div>
+            <app-table-search-box [searchOptions]="rightTable.searchOptions" (searchEvent)="searchEvent($event, 'right')"></app-table-search-box>
+            <ti-table class="tiTableDmo" [(displayedData)]="displayedThread" [srcData]="srcDataThread" [columns]="columnsThread"
+                tiColsResizable [searchWords]="rightTable.searchWords" [searchKeys]="rightTable.searchKeys">
+                <div class="ti3-table-fixed-head">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th width="{{ column.width }}" tiOverflow *ngFor="let column of columnsThread">
+                                    <ti-cell-text>{{i18n.protalserver_sampling_lock_thread[column.title]}}
+                                    </ti-cell-text>
+                                    <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="ti3-table-container ti3-resize-wrapper table-body"
+                    [ngStyle]="{'height': displayedThread.length === 0 ? '160px' : 'auto'}">
+                    <table>
+                        <thead>
+                            <tr [ngStyle]="{'opacity': 0}">
+                                <th *ngFor="let column of columnsThread" tiOverflow width="{{ column.width }}"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let row of displayedThread; let idx = index"
+                                (click)="onSelected(onSelectedThread, row.threadName)"
+                                [ngStyle]="{'background-color': row.threadName === isSelectedThread ? '#545454 !important' : ''}"
+                                [ngClass]="{'tr-active': row.threadName === isSelectedThread}">
+                                <td style="width: 30%; padding-left: 10px;" tiOverflow>
+                                    {{ row.threadName }}
+                                </td>
+                                <td style="width: 30%; padding-left: 10px;" tiOverflow>
+                                    {{ onChangeTime(row.totalDuration) }}
+                                </td>
+                                <td style="width: 40%;padding: 1px;" tiOverflow>
+                                    <div style="position: relative; padding: 0px;"
+                                        [ngStyle]="{width: (row.count / totalCountThr) * 100 + '%'}" class="count-fill">
+                                        {{ row.count }}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <app-default-page *ngIf="displayedThread.length === 0" [height]="'99%'"></app-default-page>
+                </div>
+                <!-- 在表格中使用分页组件时必须保证其父元素是ti-table -->
+                <ti-pagination [(currentPage)]="rightCurrentPage"
+                    [pageSize]="rightPageSize"
+                    [(totalNumber)]="rightTotalNumber">
+                </ti-pagination>
+            </ti-table>
+        </div>
+    </div>
+    <!-- 栈跟踪 -->
+    <div class="gc-box">
+        <div class="config-title1">{{ i18n.protalserver_sampling_lock_stack }}</div>
+        <app-stack-tree #stackTrace [recordId]="recordId" [eventType]="eventType"></app-stack-tree>
+    </div>
+
+    <div *ngIf="showLoading" class="global-loading">
+        <app-loading [size]="'max'" [height]="'80vh'"></app-loading>
+    </div>
+</div>

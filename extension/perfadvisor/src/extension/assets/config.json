@@ -1,0 +1,13 @@
+{
+    "hostVerifier": [],
+    "javaPerfConfig": [],
+    "javaPerfVersion": [],
+    "sysPerfConfig": [],
+    "sysPerfVersion": [
+      "2.3.0"
+    ],
+    "autoLoginConfig": [],
+    "disclaimer": [],
+    "pkg_url": "https://mirror.iscas.ac.cn/kunpeng/archive/Tuning_kit/Packages/Hyper-tuner_2.3.0_linux.tar.gz",
+    "key": "https://download.huawei.com/edownload/e/download.do?actionFlag=download%26mid=SUPE_SERTOOL_VERSION%26nid=TV1100000147%26partNo=2005"
+}

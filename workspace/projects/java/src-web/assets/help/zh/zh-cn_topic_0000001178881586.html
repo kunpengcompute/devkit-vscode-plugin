@@ -1,0 +1,252 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="查看GC分析结果">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001178723010.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具 (Java性能分析)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001178881586">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>查看GC分析结果</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001178881586"></a><a name="ZH-CN_TOPIC_0000001178881586"></a>
+
+<h1 class="topictitle1">查看GC分析结果</h1>
+<div id="body1575358439534"><div class="section" id="ZH-CN_TOPIC_0000001178881586__section235913672417"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0000001178881586__zh-cn_topic_0209366689_p38001313195916">已创建采样分析记录，并完成分析。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001178881586__section1162443182418"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0000001178881586__ol6989126171715"><li id="ZH-CN_TOPIC_0000001178881586__li1235910362244"><span>登录<span id="ZH-CN_TOPIC_0000001178881586__ph12594180204619">Java性能分析</span>Web界面，单击首页界面“采样分析记录”列表中指定分析任务的名称。</span><p><p id="ZH-CN_TOPIC_0000001178881586__p189784151819">打开“概览”页签。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001178881586__li37031246114311"><span>单击“GC”页签。</span><p><div class="p" id="ZH-CN_TOPIC_0000001178881586__p334412471439">查看GC分析结果，如<a href="#ZH-CN_TOPIC_0000001178881586__fig5934122311913">图1</a>、<a href="#ZH-CN_TOPIC_0000001178881586__fig1440514456399">图2</a>所示，参数说明如<a href="#ZH-CN_TOPIC_0000001178881586__table1891357185">表1</a>所示。<div class="note" id="ZH-CN_TOPIC_0000001178881586__note886384711263"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001178881586__p13863124717268">点击<span><img id="ZH-CN_TOPIC_0000001178881586__image113602036152413" src="zh-cn_image_0000001178723156.png"></span>按钮可查看当前任务的优化建议。</p>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001178881586__fig5934122311913"><a name="ZH-CN_TOPIC_0000001178881586__fig5934122311913"></a><a name="fig5934122311913"></a><span class="figcap"><b>图1 </b>GC</span><br><span><img id="ZH-CN_TOPIC_0000001178881586__image5810193945919" src="zh-cn_image_0000001179041644.png"></span></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001178881586__fig1440514456399"><a name="ZH-CN_TOPIC_0000001178881586__fig1440514456399"></a><a name="fig1440514456399"></a><span class="figcap"><b>图2 </b>GC（采集GC事件信息）</span><br><span><img id="ZH-CN_TOPIC_0000001178881586__image91255463249" src="zh-cn_image_0000001224122875.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001178881586__table1891357185"></a><a name="table1891357185"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001178881586__table1891357185" frame="border" border="1" rules="all"><caption><b>表1 </b>GC配置参数说明</caption><colgroup><col style="width:32.32%"><col style="width:67.67999999999999%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001178881586__row117117571989"><th align="left" class="cellrowborder" valign="top" width="32.32%" id="mcps1.3.2.2.2.2.1.7.2.3.1.1"><p id="ZH-CN_TOPIC_0000001178881586__p817117571787">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="67.67999999999999%" id="mcps1.3.2.2.2.2.1.7.2.3.1.2"><p id="ZH-CN_TOPIC_0000001178881586__p91711257486">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001178881586__row21711457188"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p111719571887">GC配置</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row17171657383"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p1081919132112">YoungCollector</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p08519281468">显示年轻代垃圾收集器名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row51716571814"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p13795390219">OldCollector</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p1485328184617">显示年老代垃圾收集器名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row20171195715815"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p145964616213">ConcGCThreads</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p984105264618">显示并发GC线程数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row1817175711813"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p867219718229">ParallelGCThreads</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p19842105244619">显示并行GC线程数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row14171657387"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p231725182218">ExplicitGCInvokesConcurrent</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p4315252227">显示GC是否为并发执行。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row9172115716814"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p19711246152213">DisableExplicitGC</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p1671104610224">显示是否禁用触发GC。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row31721557881"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p1034316022311">UseDynamicNumberOfGCThreads</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p10343130202310">显示是否动态调节GC线程数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row517245712818"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p1380614221233">GCTimeRatio</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p158061622102319">显示垃圾收集时间占总时间的比率。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row101721857980"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p151726571381">堆配置</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row9172157782"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p15651123132615">InitialHeapSize</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p412562218501">显示初始堆大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row217225711814"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p175641323182612">MinHeapSize</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p10125422115014">显示最小堆大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row19172185720815"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p1442897102712">MaxHeapSize</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p612522219509">显示最大堆大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row01721757287"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p74611828182810">UseCompressedOops</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p514874072715">显示是否启用压缩指针。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row2017213574811"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p392818465214">PrintCompressedOopsMode</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p1446119284289">显示使用的压缩指针模式。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row2017225715818"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p1961712430517">heapAddressBits</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p15776160162919">显示堆地址大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row1817210573810"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p13180174918520">ObjectAlignmentInBytes</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p9112316162913">显示Java对象的内存对齐方式（字节）。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row1617213571684"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p1317205714813">年轻代配置</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row2017216572089"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p1415755863212">NewSize</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p18193123814495">显示最小年轻代大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row1617285714818"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p1715645813328">MaxNewSize</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p121941338164916">显示最大年轻代大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row16172357281"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p172068231767">NewRatio</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p1671725520326">显示年轻代和年老代大小的比率。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row653116222613"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p17577203952319">InitialTenuringThreshold</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p9577839142314">显示对象被提升到老年代在年轻代存活的初始次数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row698785917257"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p4431123616234">MaxTenuringThreshold</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p33551728278">显示对象被提升到老年代在年轻代存活的最大次数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row31723575814"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p14313204510614">UseTLAB</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p571785518327">是否使用线程本地分配缓存。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row161726571584"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p17170451269">MinTLABSize</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p11750145135920">显示线程本地分配缓存大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row191721957983"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p102101581560">TLABRefillWasteFraction</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p1751124505911">显示允许TLAB浪费内存空间的大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row51721571682"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p1617217571686">GC活动</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row1617213571820"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p54946181079">GC活动</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p132251344183714">显示GC活动编号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row101721657187"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p019819111386">原因</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p12862019799">显示触发GC的原因。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row11541415300"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p919811113811">收集器名称</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p168621191918">显示垃圾收集器名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row186488233017"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p1772945241016">GC前内存大小</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p17291552111017">显示GC前内存大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row20172657983"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p1727205514102">GC后内存大小</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p19272455151018">显示GC后内存大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row2172105720819"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p51978173817">最长暂停时间</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p208622195920">显示此次GC的最长暂停时间。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row5172125718816"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p21721572816">暂停阶段</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row917219571287"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p15332182020430">事件类型</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p2068314183911">显示暂停阶段的事件类型。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row11172457786"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p15131173417393">名称</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p768315116390">显示阶段名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row61724570815"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p4130183433918">暂停时间 (&micro;s)</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p10153911111013">显示暂停时间。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row31721576812"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p4198101215814">开始时间</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p14154111112102">显示暂停阶段开始时间。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row74914491308"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p204591431313">采集GC事件信息</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row83125663018"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p125819812125">暂停时间 (ms)</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p19581187124">显示暂停时间。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row10139125333011"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p85858151217">堆内存 (MiB)</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p1758487127">显示堆内存。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881586__row1491995013011"><td class="cellrowborder" valign="top" width="32.32%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881586__p145815813128">元空间 (MiB)</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.67999999999999%" headers="mcps1.3.2.2.2.2.1.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881586__p185816820125">显示元空间。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001178723010.html">查看分析结果</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

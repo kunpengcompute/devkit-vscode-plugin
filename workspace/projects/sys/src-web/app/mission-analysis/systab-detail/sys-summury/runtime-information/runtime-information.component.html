@@ -1,0 +1,168 @@
+<div class="box">
+  <div class="box-title" [ngClass]="{'borderShow': borderShow}"
+    (click)='toggle.environmentalInformation=!toggle.environmentalInformation'>
+    <img src="./assets/img/summary/row.png" class='title-icon' [ngClass]="{active: toggle.environmentalInformation}">
+    {{i18n.sys.environment}}
+  </div>
+  <div class="box-content" [ngClass]="{active: toggle.environmentalInformation}">
+    <div class="box">
+      <div class="box-title" id="box-title">
+        <!-- 基础系统信息 -->
+        <div class="content">
+          <div class="content-left">
+            <p>{{i18n.sys.baseInfo}}</p>
+            <div *ngFor="let item of noralMsgData.baseInfo[0]">
+              <span tiOverflow tiTipPosition='left'>{{item.title}}
+                <img src="./assets/img/summary/tooltip.png" *ngIf="item.tipStr && item.tipStr !=='NULL'"
+                  [tiTip]='item.tipStr' tiTipMaxWidth='700px' tiTipPosition="top-left">
+              </span>
+              <div tiOverflow tiTipPosition='left'>{{item.data}}</div>
+            </div>
+
+          </div>
+          <div class="content-intermediate">
+            <p></p>
+            <div *ngFor="let item of noralMsgData.baseInfo[1];index as i">
+              <span tiOverflow tiTipPosition='left' class="middleTitle">{{item.title}}</span>
+              <em style="font-style: normal;" tiOverflow tiTipPosition='left' (click)='viewDetail(item,i)'
+                [ngClass]="{'ifClick': item.ifClick}">{{item.data}}</em>
+            </div>
+          </div>
+          <div class="content-right">
+            <p></p>
+            <div *ngFor="let item of noralMsgData.baseInfo[2]">
+              <span tiOverflow tiTipPosition='left'>{{item.title}}</span>
+              <div tiOverflow tiTipPosition='left'>{{item.data}}</div>
+            </div>
+
+          </div>
+        </div>
+        <!-- 内存管理系统   -->
+        <div class="content">
+          <div class="content-left">
+            <p>{{i18n.sys.memManage}}</p>
+            <div *ngFor="let item of noralMsgData.memManage[0];index as i">
+              <span tiOverflow tiTipPosition='left'>{{item.title}}
+                <img src="./assets/img/summary/compass.svg" *ngIf="item.tipStr && item.tipStr !=='NULL'"
+                  [tiTip]='item.tipStr' tiTipMaxWidth='700px' tiTipPosition="top-left">
+              </span>
+              <div tiOverflow tiTipPosition='left'>{{item.data | thousandSeparator}}
+                <img src="./assets/img/rocket.svg" class='rocket' *ngIf="item.tipStr2 && item.tipStr2 !=='NULL'"
+                  [tiTip]='tipContent' [tiTipContext]='item.tipStr2' tiTipMaxWidth='700px' tiTipPosition="top-left">
+              </div>
+            </div>
+          </div>
+          <div class="content-intermediate mem-sys-content">
+            <p></p>
+            <em style="font-style: normal;">
+              <div *ngFor="let item of noralMsgData.memManage[1];index as i" class="mem-sys">
+                <span class="left-title">
+                  <span tiOverflow tiTipPosition='left'>{{item.title}}
+                  </span><img style="margin-right: 5px;" src="./assets/img/summary/compass.svg"
+                    *ngIf="item.tipStr && item.tipStr !=='NULL'" [tiTip]='item.tipStr' tiTipMaxWidth='700px'
+                    tiTipPosition="top-left">
+                </span>
+                <div tiOverflow tiTipPosition='left' [ngClass]="{'viewDetail':item.data === i18n.sys.viewDetails}">
+                  {{item.data | thousandSeparator}}</div>
+              </div>
+            </em>
+
+          </div>
+        </div>
+        <!-- 网卡固件版本 -->
+        <div class="content">
+          <div class="content-left">
+            <p>{{i18n.sys_cof.sum.firmware_info.nic_version}}</p>
+            <div *ngFor="let item of noralMsgData.netWorks[0]">
+              <span tiOverflow tiTipPosition='left'>{{item.title}}</span>
+              <div tiOverflow tiTipPosition='left'>{{item.data}}</div>
+            </div>
+          </div>
+          <div class="content-intermediate">
+            <p></p>
+            <div *ngFor="let item of noralMsgData.netWorks[1]">
+              <span tiOverflow tiTipPosition='left' class="middleTitle">{{item.title}}</span>
+              <div tiOverflow tiTipPosition='left'>{{item.data}}</div>
+            </div>
+          </div>
+          <div class="content-right">
+            <p></p>
+            <div *ngFor="let item of noralMsgData.netWorks[2]">
+              <span tiOverflow tiTipPosition='left'>{{item.title}}</span>
+              <div tiOverflow tiTipPosition='left'>{{item.data}}</div>
+            </div>
+          </div>
+        </div>
+        <!-- 虚拟机/容器 -->
+        <div class="content">
+          <div class="virtual">
+            <p>{{i18n.sys_cof.sum.docker}}</p>
+            <div>
+              <span tiOverflow tiTipPosition='left'>{{dockerData[0].title}}</span>
+              <div tiOverflow tiTipPosition='right' style="line-height: 34px;">{{dockerData[0].data}}</div>
+            </div>
+            <div>
+              <span tiOverflow tiTipPosition='left'>{{dockerData[1].title}}</span>
+              <div tiOverflow tiTipPosition='right' style="line-height: 34px;" *ngIf="nodeKvmData">
+                {{dockerData[1].data}}</div>
+              <div *ngIf="!nodeKvmData">
+                <i *ngFor="let item of dockerData[1].data;index as i" (click)="kvmConfig(item.title,i)"
+                  [ngClass]="{'virtualName':true,'ifClick': item.ifClick}">{{item.title.slice(13)}}</i>
+              </div>
+            </div>
+            <div>
+              <span tiOverflow tiTipPosition='left'>{{dockerData[2].title}}</span>
+              <div tiOverflow tiTipPosition='right' style="line-height: 34px;">{{dockerData[2].data}}</div>
+            </div>
+          </div>
+        </div>
+        <!-- kernel内核参数 -->
+        <div class="content" style="border: none;">
+          <div class="content-left">
+            <p>{{i18n.sys.kernelParams}}</p>
+            <div *ngFor="let item of noralMsgData.memManage[2];index as i" [ngClass]="{'displayTime': item.display}">
+              <span>
+                <span tiOverflow tiTipPosition='left'>{{item.title}}</span>
+                <img src="./assets/img/summary/compass.svg" *ngIf="item.tipStr && item.tipStr !=='NULL'"
+                  [tiTip]='item.tipStr' tiTipMaxWidth='700px' tiTipPosition="top-left">
+              </span>
+              <div tiOverflow tiTipPosition='left'
+                [ngClass]="{'viewDetail':item.data === i18n.sys.viewDetails,'ifClick': cmdIfClick&&i===2}"
+                (click)='viewDetail(item,-1)'>{{item.data}}
+                <img src="./assets/img/rocket.svg" class='rocket' *ngIf="item.tipStr2 && item.tipStr2 !=='NULL'"
+                  [tiTip]='item.tipStr2' tiTipMaxWidth='700px' tiTipPosition="top-left">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-pop-mask #viewDetailMask>
+  <div class="content viewDetail-mask">
+    <div class="viewDetail-title">
+      <span class="create-title">{{configDetailItem.title}}</span>
+      <img class="incorrect" (click)="viewDetailMask.Close()" src="./assets/img/header/close_icon.svg"
+        style="cursor:pointer;">
+    </div>
+    <div *ngIf="configDetailItem.data === i18n.common_term_task_nodata" class="viewDetail-content">
+      <img src='./assets/img/projects/nodata.png' />
+      <div class="viewDetail-content-nodata">{{ configDetailItem.data }}</div>
+    </div>
+    <div *ngIf="configDetailItem.data !== i18n.common_term_task_nodata"class="viewDetail-content">{{configDetailItem.data}}</div>
+    <div class="bottom-close">
+      <button class="closeBtn" type="button" tiButton (click)="viewDetailMask.Close()">{{i18n.message_close}}</button>
+    </div>
+  </div>
+</app-pop-mask>
+<ng-template #tipContent1 let-context='context'>
+  <div class="suggest_content">
+    <div [innerHTML]="context.tipPage" class="sug_content"></div>
+  </div>
+</ng-template>
+<ng-template #tipContent let-context='context'>
+  <span [innerHtml]="context"></span>
+</ng-template>

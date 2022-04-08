@@ -1,0 +1,57 @@
+<div id="detail-container" class="custemDetailContainer">
+  <ti-tabs class="custemTabs tabsWithSplitLine tabsWithUnderline">
+    <ti-tab [(active)]="item.active" *ngFor="let item of detailList; let index = index" [disabled]="item.disable"
+      (activeChange)='change()'>
+      <ti-tab-header>
+        <span>{{item.title}}</span>
+      </ti-tab-header>
+      <!-- UCD要求下钻页面下载图标不显示 -->
+      <!--懒加载的内容区必须使用ng-template标签包裹，并且加上#tiTabContent的标识-->
+      <ng-template #tiTabContent>
+        <div class="content-container" *ngIf="item.title == i18n.common_term_task_tab_congration && item.disable==false"
+          [ngClass]="{showDetail: item.active}">
+          <app-configuration [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName' [status]='status'
+            [analysisType]='analysisType' [taskid]='id'></app-configuration>
+        </div>
+        <div class="content-container"
+          *ngIf="item.title == i18n.sys_summary.distributed.typicalConfiguration && item.disable === false"
+          [ngClass]="{showDetail: item.active}">
+          <app-typical-config [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+            [analysisType]='analysisType' [taskid]='id' [tabShowing]="tabShowing" [sceneSolution]="sceneSolution">
+          </app-typical-config>
+        </div>
+        <div class="content-container" *ngIf="item.title === i18n.common_term_task_tab_log && item.disable === false"
+          [ngClass]="{showDetail: item.active}">
+          <app-configuration-log [status]='status' [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+            [analysisType]='analysisType' [taskid]='id'></app-configuration-log>
+        </div>
+        <div class="content-container"
+          *ngIf="item.title === i18n.common_term_task_tab_summary && item.disable === false"
+          [ngClass]="{showDetail: item.active}" appContentScroll>
+          <app-sys-summury [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+            [analysisType]='analysisType' [isActive]="item.active" [taskid]='id' [tabShowing]="tabShowing" #summury>
+          </app-sys-summury>
+        </div>
+        <div id="echartContainer" class="content-container"
+          *ngIf="item.title === i18n.sys.performance && item.disable === false" [ngClass]="{showDetail: item.active}"
+          appContentScroll>
+          <app-performance-detail [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+            [analysisType]='analysisType' [isActive]="item.active" [taskid]='id' #performance1></app-performance-detail>
+        </div>
+        <div class="content-container" *ngIf="item.prop === 'tracing' && item.disable === false"
+          [ngClass]="{showDetail: item.active}">
+          <app-tracing [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName' [analysisType]='analysisType'
+            [taskid]='id' [tabShowing]="tabShowing" [sceneSolution]="sceneSolution"></app-tracing>
+        </div>
+        <div class="content-container" *ngIf="item.prop === 'topData' && item.disable === false"
+          [ngClass]="{showDetail: item.active}">
+          <app-top-data [taskId]='id' [nodeId]='nodeid'></app-top-data>
+        </div>
+        <div class="content-container" *ngIf="item.title === i18n.common_term_task_tab_pcie && item.disable === false"
+          [ngClass]="{showDetail: item.active}" tiScroll>
+          <app-pcie-detail [taskId]='id' [nodeId]='nodeid'></app-pcie-detail>
+        </div>
+      </ng-template>
+    </ti-tab>
+  </ti-tabs>
+</div>

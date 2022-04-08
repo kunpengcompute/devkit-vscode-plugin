@@ -1,0 +1,17 @@
+/*
+ * Copyright 2022 Huawei Technologies Co., Ltd
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+searchDataKey="<?xml version=\"1.0\" encoding=\"UTF-8\"?><data><h i=\"1\" t=\"Welcome to the &lt;span id=&quot;ph1625710835310&quot;&gt;System Diagnosis&lt;/span&gt; Help\"/><h i=\"2\" t=\"Login\"/><h i=\"3\" t=\"WebUI Description\"/><h i=\"4\" t=\"Node Management\"/><h i=\"5\" t=\"Project Management\"/><h i=\"6\" t=\"Task Management\"/><h i=\"7\" t=\"Memory Leak Diagnosis\"/><h i=\"8\" t=\"Memory Overwriting Diagnosis\"/><h i=\"9\" t=\"Network I/O Diagnosis\"/><h i=\"10\" t=\"Storage I/O Diagnosis\"/><h i=\"11\" t=\"User Management\"/><h i=\"12\" t=\"Log Management\"/><h i=\"13\" t=\"Service Certificate Management\"/><h i=\"14\" t=\"Weak Password Dictionary Management\"/><h i=\"15\" t=\"Editing a Password\"/><h i=\"16\" t=\"Viewing Tool Release Information\"/><h i=\"17\" t=\"Common Operations\"/><h i=\"18\" t=\"FAQ\"/><h i=\"19\" t=\"Call Tree\"/><h i=\"20\" t=\"Source Code\"/><h i=\"21\" t=\"Memory Usage\"/><h i=\"22\" t=\"OOM\"/><h i=\"23\" t=\"Operation Log Management\"/><h i=\"24\" t=\"Run Log Management\"/><h i=\"25\" t=\"Agent Service Certificate Management\"/><h i=\"26\" t=\"Web Server Certificate Management\"/><h i=\"27\" t=\"Importing the Root Certificate for the &lt;span id=&quot;en-us_topic_0232989349_ph1356624774718&quot;&gt;Kunpeng Hyper Tuner&lt;/span&gt;\"/><h i=\"28\" t=\"Disabling SELinux\"/><h i=\"29\" t=\"Configuring SSH Authentication Information on a Node Server\"/><h i=\"30\" t=\"Changing the IP Address and Port of the Kunpeng Hyper Tuner\"/><h i=\"31\" t=\"Restarting the Kunpeng Hyper Tuner\"/><h i=\"32\" t=\"Viewing Logs\"/><h i=\"33\" t=\"Replacing the SSL Certificate of the Kunpeng Hyper Tuner\"/><h i=\"34\" t=\"Configuring SSH Authentication Information on a Node Server\"/><h i=\"35\" t=\"Running the Installation or Uninstallation Script on the CLI\"/><h i=\"36\" t=\"Configuring the SPE Environment\"/><h i=\"37\" t=\"Configuring the OS Installation Dependencies\"/><h i=\"38\" t=\"Changing an Internal Port\"/><h i=\"39\" t=\"Querying the Physical IP Address of a Server\"/><h i=\"40\" t=\"WARNING or FAIL Returned in the Software Package Integrity Verification\"/><h i=\"41\" t=\"Failed to Install Library Files\"/><h i=\"42\" t=\"Common Upgrade Failures\"/><h i=\"43\" t=\"Failed to Run Analysis Tasks on HUAWEI Public Cloud\"/><h i=\"44\" t=\"Failed to Add a Node\"/><h i=\"45\" t=\"Node Status Changes to Version Unmatched After an Upgrade\"/><h i=\"46\" t=\"Insufficient Drive Space\"/><h i=\"47\" t=\"Node Status Changes to Offline\"/><h i=\"48\" t=\"The Device Is Displayed as Offline After Kunpeng Hyper Tuner Is Installed in Ubuntu\"/></data>"

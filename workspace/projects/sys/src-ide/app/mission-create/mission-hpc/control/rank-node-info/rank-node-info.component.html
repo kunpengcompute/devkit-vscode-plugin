@@ -1,0 +1,29 @@
+<ti-table [(displayedData)]="displayed" [srcData]="srcData">
+  <table>
+    <thead>
+      <tr>
+        <th tiOverflow *ngFor="let column of columns">
+          {{ column.title }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let form of formArray?.controls || []; index as i">
+        <td tiOverflow>{{ displayed[i]?.nodeIp }}</td>
+        <td tiOverflow>{{ displayed[i]?.nickName }}</td>
+        <td tiOverflow [formGroup]="form">
+          <ti-spinner
+            formControlName="rank"
+            format="N0"
+            [hySpinnerBlur]="{
+              control: form.get('rank'),
+              min: 1,
+              max: 128
+            }"
+            tiValidation
+          >
+          </ti-spinner>
+        </td>
+      </tr>
+    </tbody></table
+></ti-table>

@@ -1,0 +1,72 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="64位运行模式检查">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0249523736.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏代码迁移工具">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0264880573">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>64位运行模式检查</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0264880573"></a><a name="ZH-CN_TOPIC_0264880573"></a>
+
+<h1 class="topictitle1">64位运行模式检查</h1>
+<div id="body1595831235458"><p id="ZH-CN_TOPIC_0264880573__p7751251517">64位运行模式检查就是将<span style="color:#616161;">GCC 4.8.5~GCC 9.3.0版本</span>原32位的应用迁移到64位平台上，进行迁移检查并给出修改建议。</p>
+<div class="section" id="ZH-CN_TOPIC_0264880573__section641662874317"><h4 class="sectiontitle">前提条件</h4><div class="p" id="ZH-CN_TOPIC_0264880573__p12373143711718">已成功登录<span id="ZH-CN_TOPIC_0264880573__ph997750104712">鲲鹏代码迁移工具</span>。<div class="notice" id="ZH-CN_TOPIC_0264880573__note8799192914203"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-zh-cn.png"> </span><div class="noticebody"><ul id="ZH-CN_TOPIC_0264880573__zh-cn_topic_0189775177_ul15320134212322"><li id="ZH-CN_TOPIC_0264880573__zh-cn_topic_0189775177_li173203424323">任务运行过程中会执行上传源码包中构建文件的构建命令，请确保上传的内容为需要进行分析检查的内容且不存在安全问题，避免影响服务器正常运行。</li><li id="ZH-CN_TOPIC_0264880573__zh-cn_topic_0189775177_li18103195014339"><span class="filepath" id="ZH-CN_TOPIC_0264880573__zh-cn_topic_0189775177_filepath18250394441">“/opt/portadv”</span>为工具默认安装目录，下文以此默认路径为例，请根据实际情况替换。</li></ul>
+</div></div>
+</div>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0264880573__section8124135420196"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0264880573__ol166651423121620"><li id="ZH-CN_TOPIC_0264880573__li10102950192018"><span>在左边标题栏中，选择“增强功能”。</span><p><p id="ZH-CN_TOPIC_0264880573__p152451647202216">检查类型选择“运行模式”，如<a href="#ZH-CN_TOPIC_0264880573__fig145674894612">图1</a>所示。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0264880573__fig145674894612"><a name="ZH-CN_TOPIC_0264880573__fig145674894612"></a><a name="fig145674894612"></a><span class="figcap"><b>图1 </b>64位运行模式检查</span><br><span><img id="ZH-CN_TOPIC_0264880573__image670871510129" src="zh-cn_image_0000001164616445.png" height="313.21500000000003" width="523.6875"></span></div>
+</p></li><li id="ZH-CN_TOPIC_0264880573__li10914142205212"><span>填写<span class="parmname" id="ZH-CN_TOPIC_0264880573__parmname512111823415">“源码文件存放路径”</span>。可以通过以下两种方式实现：</span><p><ul id="ZH-CN_TOPIC_0264880573__ul14639651202212"><li id="ZH-CN_TOPIC_0264880573__li12639145122217">单击“上传”按钮上传压缩包（上传过程中自动解压）或者文件夹。<div class="note" id="ZH-CN_TOPIC_0264880573__note06621371915"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0264880573__ul83501941185112"><li id="ZH-CN_TOPIC_0264880573__li95517327205">支持上传tar，tar.bz，tar.bz2，tar.gz，tar.xz，tbz，tbz2，tgz，txz，zip格式的压缩包，只允许同时上传一个压缩包。源码文件压缩包小于或等于1GB，解压后小于或等于剩余磁盘空间的一半。</li><li id="ZH-CN_TOPIC_0264880573__li7242101791010">只允许同时上传一个文件夹，文件夹小于或等于剩余磁盘空间的一半。</li><li id="ZH-CN_TOPIC_0264880573__li993192614101">IE浏览器不兼容文件夹上传功能，上传文件夹需要使用其他浏览器，如Google Chrome，Microsoft Edge。</li></ul>
+</div></div>
+</li><li id="ZH-CN_TOPIC_0264880573__li16391151112215">先将源码文件手动上传到服务器上本工具的指定路径下（例如：/opt/portadv/portadmin/precheck/），给porting用户开读写和执行权限，再单击填写框选择下拉框中的源码路径即可，也可以手动填写源码路径名称。</li></ul>
+</p></li><li id="ZH-CN_TOPIC_0264880573__li3412112212331"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0264880573__uicontrol18806121557">“迁移检查”</span>，开始迁移检查。迁移预检完成后，单击<span class="parmname" id="ZH-CN_TOPIC_0264880573__parmname12904126692">“查看报告”</span>可进入<span class="wintitle" id="ZH-CN_TOPIC_0264880573__wintitle13575894592">“迁移预检报告”</span>界面，如<a href="#ZH-CN_TOPIC_0264880573__fig117508276498">图2</a>所示。</span><p><div class="notice" id="ZH-CN_TOPIC_0264880573__note424363519494"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-zh-cn.png"> </span><div class="noticebody"><p id="ZH-CN_TOPIC_0264880573__zh-cn_topic_0189800508_p461752353216">若用户需要在原始代码中进行修改操作，务必随时对编辑的源码进行保存,否则可能会因为会话超时而丢失修改的代码。</p>
+</div></div>
+<div class="p" id="ZH-CN_TOPIC_0264880573__p199451329154912"><div class="fignone" id="ZH-CN_TOPIC_0264880573__fig117508276498"><a name="ZH-CN_TOPIC_0264880573__fig117508276498"></a><a name="fig117508276498"></a><span class="figcap"><b>图2 </b>迁移预检报告</span><br><span><img id="ZH-CN_TOPIC_0264880573__image37504272491" src="zh-cn_image_0313465419.png" height="250.3725" width="523.6875"></span></div>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0264880573__table775122713490" frame="border" border="1" rules="all"><caption><b>表1 </b>迁移预检报告参数说明</caption><colgroup><col style="width:24.01%"><col style="width:75.99000000000001%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0264880573__row9751192734910"><th align="left" class="cellrowborder" valign="top" width="24.01%" id="mcps1.3.3.2.3.2.2.2.2.3.1.1"><p id="ZH-CN_TOPIC_0264880573__p15750112704918">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.99000000000001%" id="mcps1.3.3.2.3.2.2.2.2.3.1.2"><p id="ZH-CN_TOPIC_0264880573__p13751132764910">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0264880573__row2751427124914"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.2.3.2.2.2.2.3.1.1 "><p id="ZH-CN_TOPIC_0264880573__p1775182714496">文件列表</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.2.3.2.2.2.2.3.1.2 "><p id="ZH-CN_TOPIC_0264880573__p575116273498">分析的源码文件名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0264880573__row19751122718492"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.2.3.2.2.2.2.3.1.1 "><p id="ZH-CN_TOPIC_0264880573__p197511727114914">原始源代码</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.2.3.2.2.2.2.3.1.2 "><p id="ZH-CN_TOPIC_0264880573__p1875162754911">原始源代码。用户可以将鼠标置于有红色波浪线的代码上，在悬浮的提示中单击Peek Problem查看源码建议。用户可以直接在原始源代码中进行修改，修改完之后，可单击右上角的保存，回退或取消。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note" id="ZH-CN_TOPIC_0264880573__note67515277493"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0264880573__ul77516277497"><li id="ZH-CN_TOPIC_0264880573__li1775110270497">支持多个用户同时创建64位运行模式检查任务。</li><li id="ZH-CN_TOPIC_0264880573__li2751172716497">用户可在任务进行过程中单击关闭，取消任务。</li><li id="ZH-CN_TOPIC_0264880573__li3751327164911">若检测结果为源码不需要修改，则会弹出成功界面，不会出现预检报告界面。</li><li id="ZH-CN_TOPIC_0264880573__li157516276495">选中左侧的文件，单击下载按钮可下载用户所需要的源码文件。</li></ul>
+</div></div>
+</div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0249523736.html">增强功能</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

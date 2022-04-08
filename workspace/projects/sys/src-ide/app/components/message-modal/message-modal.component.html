@@ -1,0 +1,35 @@
+<ti-modal-header>
+    {{ title }}
+</ti-modal-header>
+
+<ti-modal-body>
+    <div class="content">
+        <i class="ti3-msg-icon ti3-icon" [ngClass]="iconClass"></i>
+        <p [innerHTML]="content"></p>
+    </div>
+</ti-modal-body>
+
+<ti-modal-footer>
+    <button
+        tiButton
+        class="okButtonStyle"
+        type="button"
+        [hidden]="!okButton.show"
+        [disabled]="okButton.disabled"
+        [autofocus]="okButton.autofocus"
+        [color]="okButton.primary ? 'primary' : ''"
+        (click)="close()">
+        {{ okButton.text || i18n.common_term_operate_ok }}
+    </button>
+    <button
+        class="little-minor-btn"
+        tiButton
+        type="button"
+        [hidden]="!cancelButton.show"
+        [disabled]="cancelButton.disabled"
+        [autofocus]="cancelButton.autofocus"
+        [color]="cancelButton.primary ? 'primary' : ''"
+        (click)="dismiss()">
+        {{ cancelButton.text || i18n.common_term_operate_cancel }}
+    </button>
+</ti-modal-footer>

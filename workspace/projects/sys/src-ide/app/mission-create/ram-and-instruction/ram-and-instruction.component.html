@@ -1,0 +1,46 @@
+<div class="box">
+    <div class="ram" [ngClass]="{'onlyRam' : !isHaveInstruct}">
+        <div class="title">{{i18n.mission_modal.hpc.ram.memoryBandwidth}}</div>
+        <div class="ramBox">
+            <ul class="ramLeft">
+                <li *ngFor="let item of ramLeft">
+                    <span [ngStyle]="{'padding-left': item.indentation ? '24px' : '5px'}">{{item.label}}</span>
+                    <span>{{item.value}}</span>
+                </li>
+            </ul>
+            <ul class="ramRight">
+                <li *ngFor="let item of ramRight">
+                    <span>{{item.label}}</span>
+                    <span>{{item.value}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="instruction" *ngIf="isHaveInstruct">
+        <div class="title">{{i18n.mission_modal.hpc.instruction.instructionDistribution}}</div>
+        <div class="instructionBox">
+            <ul class="instructionLeft">
+                <li *ngFor="let item of instructionLeft">
+                    <div *ngIf="item.value">
+                        <span class="item-name" [ngStyle]="{'padding-left': item.indentation ? '24px' : '5px'}">
+                          <span tiOverflow>{{item.label}}</span>
+                          <img class="imgLeft" *ngIf="item.tips" [tiTip]="item.tips" src="./assets/img/mission/iconTip.png">
+                        </span>
+                        <span class="item-value" tiOverflow>{{item.value}}</span>
+                    </div>
+                </li>
+            </ul>
+            <ul class="instructionRight">
+                <li *ngFor="let item of instructionRight">
+                    <div *ngIf="item.value">
+                        <span class="item-name" [ngStyle]="{'padding-left': item.indentation ? '24px' : '5px'}">
+                          <span tiOverflow>{{item.label}}</span>
+                          <img class="imgLeft" *ngIf="item.tips" [tiTip]="item.tips" src="./assets/img/mission/iconTip.png">
+                        </span>
+                        <span class="item-value" tiOverflow>{{item.value}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

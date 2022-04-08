@@ -1,0 +1,41 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="如何使用PGO优化程序编译">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001214027145.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="user guide">
+<meta name="DC.Publisher" content="20210630">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="kunpengfaq_06_0014">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>如何使用PGO优化程序编译</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="kunpengfaq_06_0014"></a><a name="kunpengfaq_06_0014"></a>
+
+<h1 class="topictitle1">如何使用PGO优化程序编译</h1>
+<div id="body8662426"><div class="section" id="kunpengfaq_06_0014__zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_zh-cn_topic_0220116450_section13779133512387"><h4 class="sectiontitle">现象描述</h4><p id="kunpengfaq_06_0014__zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_zh-cn_topic_0220116450_p08780389510">新建微架构任务后，查看分析结果<span class="wintitle" id="kunpengfaq_06_0014__zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_zh-cn_topic_0250422238_wintitle15533627163219">“总览 ”</span>页签时，解决方案提示“使用PGO优化程序编译”。</p>
+</div>
+<div class="section" id="kunpengfaq_06_0014__zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_zh-cn_topic_0220116450_section1439194518389"><h4 class="sectiontitle">可能原因</h4><p id="kunpengfaq_06_0014__zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_p088716152136">需要使用PGO程序编译。</p>
+<p id="kunpengfaq_06_0014__zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_p15774649163718">PGO（Profile-Guided Optimization），即<span style="color:#4D4D4D;">配置文件引导优化</span>，PGO主要通过降低指令快取置换 (cache-thrashing)、重组代码布局、缩减代码长度并减少分支预测失误来提高应用程序性能。</p>
+</div>
+<div class="section" id="kunpengfaq_06_0014__zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_section692115811487"><h4 class="sectiontitle">处理步骤</h4><ol id="kunpengfaq_06_0014__zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_ol946611484334"><li id="kunpengfaq_06_0014__zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_li54668484332"><span>编译时增加<strong id="kunpengfaq_06_0014__zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_b258819408345">-fprofile-generate=&lt;profile_dir&gt;</strong>选项。</span></li><li id="kunpengfaq_06_0014__zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_li136001127184219"><a name="kunpengfaq_06_0014__zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_li136001127184219"></a><a name="zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_li136001127184219"></a><span>编译并运行软件，收集配置文件。</span></li><li id="kunpengfaq_06_0014__zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_li862625018429"><span>通过编译选项<strong id="kunpengfaq_06_0014__zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_b1329234373413">-fprofile-use=&lt;profile_dir&gt;</strong>重新编译<a href="#kunpengfaq_06_0014__zh-cn_topic_0000001116382402_zh-cn_topic_0310248377_li136001127184219">2</a>收集的配置文件，完成PGO优化编译。</span></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001214027145.html">FAQ</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

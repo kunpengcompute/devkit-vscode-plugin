@@ -1,0 +1,43 @@
+.port-software-inter {
+  .port-software-table {
+    .ti3-icon-search {
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    .pagination {
+      margin-top: 18px;
+    }
+  }
+}
+
+.map-modal {
+  .ti3-modal-content {
+    width: 832px;
+    .ti3-close {
+      margin-top: 8px;
+    }
+
+    .ti3-modal-header {
+      margin: 0 32px 20px;
+      padding: 23px 0 22px;
+      border-bottom: 1px solid #e1e6ee;
+    }
+
+    .ti3-modal-body {
+      overflow-y: hidden;
+      min-height: 430px;
+    }
+
+    .body-header {
+      display: flex;
+      margin-bottom: 20px;
+      .text {
+        margin-right: 24px
+      }
+      .modal-detail {
+        margin-left: 48px;
+      }
+    }
+  }
+}

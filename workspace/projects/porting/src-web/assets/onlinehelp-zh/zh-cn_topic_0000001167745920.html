@@ -1,0 +1,72 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="缓存行对齐检查">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0249523736.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏代码迁移工具">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001167745920">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>缓存行对齐检查</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001167745920"></a><a name="ZH-CN_TOPIC_0000001167745920"></a>
+
+<h1 class="topictitle1">缓存行对齐检查</h1>
+<div id="body8662426"><p id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_p8060118">缓存行对齐检查是对C/C++源码中结构体变量进行128字节对齐检查，提升访存性能。</p>
+<div class="section" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_section168581536335"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_p51944520335">已成功登录<span id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_ph20778412204020">鲲鹏代码迁移工具</span>。</p>
+<div class="notice" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_note2019283518329"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-zh-cn.png"> </span><div class="noticebody"><p id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_p514913555530"><span class="filepath" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_filepath18250394441">“/opt/portadv”</span>为工具默认安装目录，下文以此默认路径为例，请根据实际情况替换。</p>
+</div></div>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_section3447205124211"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_ol19389724194216"><li id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_li138962484211"><span>在左侧标题栏中，选择<span class="uicontrol" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_uicontrol475962018453">“增强功能”</span>。</span><p><p id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_p236193614431">检查类型选择<span class="uicontrol" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_uicontrol14122215446">“缓存行对齐”</span>，如<a href="#ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_fig20973203110440">图1</a>所示。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_fig20973203110440"><a name="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_fig20973203110440"></a><a name="zh-cn_topic_0000001168061968_fig20973203110440"></a><span class="figcap"><b>图1 </b>缓存行对齐检查</span><br><span><img id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_image19973231174410" src="zh-cn_image_0000001167765014.png" height="308.2275" width="523.6875"></span></div>
+</p></li><li id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_li10914142205212"><span>填写<span class="parmname" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_parmname512111823415">“源码文件存放路径”</span>。可以通过以下两种方式实现：</span><p><ul id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_ul14639651202212"><li id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_li12639145122217">单击“上传”按钮上传压缩包（上传过程中自动解压）或者文件夹。<div class="note" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_note06621371915"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_ul83501941185112"><li id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_li95517327205">支持上传tar，tar.bz，tar.bz2，tar.gz，tar.xz，tbz，tbz2，tgz，txz，zip格式的压缩包，只允许同时上传一个压缩包。源码文件压缩包小于或等于1GB，解压后小于或等于剩余磁盘空间的一半。</li><li id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_li7242101791010">只允许同时上传一个文件夹，文件夹小于或等于剩余磁盘空间的一半。</li><li id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_li993192614101">IE浏览器不兼容文件夹上传功能，上传文件夹需要使用其他浏览器，如Google Chrome，Microsoft Edge。</li></ul>
+</div></div>
+</li><li id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_li16391151112215">先将源码文件手动上传到服务器上本工具的指定路径下（例如：/opt/portadv/portadmin/cachecheck/），给porting用户开读写和执行权限，再单击填写框选择下拉框中的源码路径即可，也可以手动填写源码路径名称。</li></ul>
+</p></li><li id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_li3412112212331"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_uicontrol18806121557">“迁移检查”</span>，开始迁移检查。迁移预检完成后，单击<span class="parmname" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_parmname12904126692">“查看报告”</span>可进入<span class="wintitle" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_wintitle13575894592">“缓存行检查报告”</span>界面，如<a href="#ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_fig117508276498">图2</a>所示。</span><p><div class="notice" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_note424363519494"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-zh-cn.png"> </span><div class="noticebody"><p id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_zh-cn_topic_0189800508_p461752353216">若用户需要在原始代码中进行修改操作，务必随时对编辑的源码进行保存,否则可能会因为会话超时而丢失修改的代码。</p>
+</div></div>
+<div class="p" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_p199451329154912"><div class="fignone" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_fig117508276498"><a name="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_fig117508276498"></a><a name="zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_fig117508276498"></a><span class="figcap"><b>图2 </b>缓存行检查报告</span><br><span><img id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_image37504272491" src="zh-cn_image_0000001167765388.png" height="246.38250000000002" width="523.6875"></span></div>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_table775122713490" frame="border" border="1" rules="all"><caption><b>表1 </b>缓存行检查报告参数说明</caption><colgroup><col style="width:24.01%"><col style="width:75.99000000000001%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_row9751192734910"><th align="left" class="cellrowborder" valign="top" width="24.01%" id="mcps1.3.3.2.3.2.2.2.2.3.1.1"><p id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_p15750112704918">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.99000000000001%" id="mcps1.3.3.2.3.2.2.2.2.3.1.2"><p id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_p13751132764910">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_row2751427124914"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.2.3.2.2.2.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_p1775182714496">文件列表</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.2.3.2.2.2.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_p575116273498">分析的源码文件名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_row19751122718492"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.2.3.2.2.2.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_p197511727114914">原始源代码</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.2.3.2.2.2.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_p1875162754911">原始源代码。用户可以将鼠标置于有红色波浪线的代码上，在悬浮的提示中单击Peek Problem查看源码建议。用户可以直接在原始源代码中进行修改，修改完之后，可单击右上角的保存，回退或取消。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note" id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_note67515277493"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_ul77516277497"><li id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_li1775110270497">支持多个用户同时创建缓存行检查任务。</li><li id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_li2751172716497">用户可在任务进行过程中单击关闭，取消任务。</li><li id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_li3751327164911">若检测结果为源码不需要修改，则会弹出成功界面，不会出现预检报告界面。</li><li id="ZH-CN_TOPIC_0000001167745920__zh-cn_topic_0000001168061968_zh-cn_topic_0266691931_zh-cn_topic_0264880573_li157516276495">选中左侧的文件，单击下载按钮可下载用户所需要的源码文件。</li></ul>
+</div></div>
+</div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0249523736.html">增强功能</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

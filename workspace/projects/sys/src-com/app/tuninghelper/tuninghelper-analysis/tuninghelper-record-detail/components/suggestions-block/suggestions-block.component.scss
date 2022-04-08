@@ -1,0 +1,93 @@
+::ng-deep {
+    :root{
+        --color-content-background: #f8fafd;
+        --color-block-background: #fff;
+        --color-border-bottom: #e1e6ee;
+        --color-border-botton: #616161;
+        --color-botton: #616161;
+    }
+    .vscode-dark{
+        .suggest-section{
+            --color-content-background: #161616;
+            --color-block-background: #252526;
+            --color-border-bottom: #1e1e1e;
+            --color-border-botton: #979797;
+            --color-botton: #e8e8e8;
+        }
+    }
+}
+.suggest-section{
+    background: var(--color-block-background);
+    padding: 16px;
+    padding-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    box-sizing: border-box;
+    border: 12px solid var(--color-content-background);
+    break-inside: avoid;
+}
+.suggest-title{
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--color-border-bottom);
+    margin-bottom: 16px;
+}
+.action{
+    padding-bottom: 24px;
+}
+.action-title{
+    padding-bottom: 8px;
+}
+.button {
+	width: 84px;
+	height: 24px;
+	background-color: transparent;
+    border: solid 1px var(--color-border-botton);
+	border-radius: 16px;
+    display: inline-block;
+    margin-right: 8px;
+    box-sizing: border-box;
+    font-size: 12px;
+    line-height: 23px;
+    color: var(--color-botton);
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+}
+
+.button input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0; 
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+.right.checked{
+    border-color: #20aa52;
+    color: #20aa52;
+    ti-icon{
+        color: #20aa52;
+    }
+}
+.right .close{
+    display: inline-block;
+    transform: scale(1.2);
+}
+.error.checked{
+    color: #e2253b;
+    border-color: #e2253b;
+    ti-icon{
+        color: #e2253b;
+    }
+}
+.close{
+    padding-right: 6px;
+}
+.button.isNotOwner{
+    cursor: default;
+    input{
+        display: none;
+    }
+}

@@ -1,0 +1,21 @@
+.warpper {
+    display: flex;
+    font-size: 14px;
+    flex-wrap: wrap;
+
+    .crumb-item {
+        margin-left: 2px;
+        .title {
+            cursor: pointer;
+        }
+        .arrow {
+            cursor: default;
+        }
+
+        &:last-child {
+            .arrow {
+                opacity: 0;
+            }
+        }
+    }
+}

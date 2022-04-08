@@ -1,0 +1,64 @@
+::ng-deep {
+  :root {
+    --color-form-text: #616161;
+  }
+  .vscode-dark #helpercreateProject {
+    --color-form-text: #aaaaaa;
+    .nodeListTable,
+    .nodeListTip {
+      margin-left: 0px !important;
+    }
+    .footer {
+      margin-left: 0px !important;
+    }
+  }
+  .vscode-light #helpercreateProject {
+    .nodeListTable,
+    .nodeListTip {
+      margin-left: 0px !important;
+    }
+    .footer {
+      margin-left: 0px !important;
+    }
+  }
+}
+
+#helpercreateProject {
+  margin: 24px;
+  .project-table {
+    .proName {
+      margin-bottom: 20px;
+      .bigInput {
+        width: 480px;
+        height: 28px;
+      }
+    }
+    .nodeList {
+      .nodeListTip,
+      .nodeListTable {
+        margin-left: 16px;
+      }
+    }
+
+    .nodeListTip {
+      font-size: 14px;
+      color: #979797;
+      margin-bottom: 10px;
+      a {
+        color: #0067ff;
+      }
+    }
+  }
+  .footer {
+    margin: 40px 0px 0px 16px;
+    .cancalBtn {
+      margin-left: 24px;
+    }
+  }
+}
+:host ::ng-deep .ti3-form .ti3-form-label {
+  color: var(--color-form-text) !important;
+}
+:host ::ng-deep .ti3-form .ti3-form-top-text {
+  color: var(--color-form-text) !important;
+}

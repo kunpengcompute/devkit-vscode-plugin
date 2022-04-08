@@ -1,0 +1,67 @@
+<div id="itemConfiguration">
+    <!-- 内部通信证书自动告警时间（天） -->
+    <div class="certificate-info">
+        <div class='title'>{{ i18n.newHeader.setting.javaSetting }}</div>
+        <div class="setting-title">
+            <img class="required-icon" src="./assets/img/input-required.png" />
+            {{ i18n.newHeader.setting.javaCertificate }}
+        </div>
+        <div class="setting-list">
+            <app-setting-item [config]="sysTuningConfig.agentWarnDeadline"
+                [value]="certificateFormItems.javaCertificate.value" (confirm)="handleJavaCertificateConfirm($event)">
+            </app-setting-item>
+        </div>
+    </div>
+
+    <!-- 运行日志级别 -->
+    <div class="run-log">
+        <div class="middle-font">
+            <img class="required-icon" src="./assets/img/input-required.png" />
+            {{i18n.plugins_perf_javaperfsetting.runLogLeve}}
+            <img *ngIf="currTheme == ColorTheme.Dark" class="help-icon" src="./assets/img/mission/icon-help-dark.png"
+                [tiTip]='javaManageLog' tiTipPosition="right" tiTipMaxWidth='500px' />
+            <img *ngIf="currTheme == ColorTheme.Light" class="help-icon" src="./assets/img/mission/icon-help-light.svg"
+                [tiTip]='javaManageLog' tiTipPosition="right" tiTipMaxWidth='500px' />
+        </div>
+        <div style="margin-bottom: 20px">
+            <div>
+                <div *ngIf="!isLogModify">
+                    <ti-formfield>
+                        <ti-item>
+                            <ti-select class='inputstyle-select-disable' [options]='runLogFormItems.runLogLevel.options'
+                                [(ngModel)]="runLogFormItems.runLogLevel.value"
+                                [disabled]="!runLogFormItems.runLogLevel.isModify">
+                            </ti-select>
+                            <button class="little-primary-btn" (click)="onSettingChange('runLogLevel', true)"
+                                *ngIf="!runLogFormItems.runLogLevel.isModify && isOperate">{{i18n.plugins_perf_javaperfsetting.logModify}}</button>
+                        </ti-item>
+                    </ti-formfield>
+                </div>
+                <div *ngIf="isLogModify">
+                    <ti-formfield>
+                        <ti-item>
+                            <ti-select class='inputstyle-select' [options]='runLogFormItems.runLogLevel.options'
+                                [(ngModel)]="runLogFormItems.runLogLevel.value">
+                            </ti-select>
+                            <div class="error-message"
+                                *ngIf="!runLogFormItems.runLogLevel.valid && runLogFormItems.runLogLevel.isModify">
+                                {{ runLogFormItems.runLogLevel.errMsg }}</div>
+                            <button *ngIf="runLogFormItems.runLogLevel.isModify" class="little-primary-btn"
+                                [disabled]="!runLogFormItems.runLogLevel.valid" style="margin-right: 10px;"
+                                (click)="onSettingConfim('runLogLevel',runLogFormItems.runLogLevel.value)">{{i18n.plugins_perf_javaperfsetting.logConfirm}}</button>
+                            <button *ngIf="runLogFormItems.runLogLevel.isModify" class="little-minor-btn"
+                                (click)="cancelModifyLevel()">{{i18n.plugins_perf_javaperfsetting.logCancel}}</button>
+                        </ti-item>
+                    </ti-formfield>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 栈深度配置 -->
+    <app-javaperf-analyzes-setting></app-javaperf-analyzes-setting>
+</div>
+
+<ng-template #javaManageLog>
+    <div [innerHtml]="i18n.plugins_perf_javaperfsetting.runLogTip"></div>
+</ng-template>

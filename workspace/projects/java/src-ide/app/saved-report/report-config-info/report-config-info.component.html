@@ -1,0 +1,6 @@
+<div class="info-box">
+    <div [ngClass]="{'tab-cell': true, 'split': item.isSplit}" *ngFor="let item of configInfoList">
+        <div class="cell-title">{{ item.title }}</div>
+        <div class="detail-text">{{ item.detailText }}</div>
+    </div>
+</div>

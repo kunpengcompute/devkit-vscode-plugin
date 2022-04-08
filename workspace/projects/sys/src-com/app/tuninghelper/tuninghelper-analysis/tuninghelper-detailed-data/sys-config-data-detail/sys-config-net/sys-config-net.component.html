@@ -1,0 +1,77 @@
+<div class="sys-config-net">
+  <section>
+    <h1>{{ tableData.netInterface.title }}</h1>
+    <app-common-table [commonTableData]="tableData.netInterface" [isFilters]="true"></app-common-table>
+  </section>
+  <section>
+    <h1>{{ tableData.bondInfoDict.title }}</h1>
+    <app-common-table [commonTableData]="tableData.bondInfoDict"></app-common-table>
+  </section>
+  <section>
+    <h1>{{ ethIrqAffinityInfo.title }}</h1>
+    <app-common-table [commonTableData]="ethIrqAffinityInfo" [isFilters]="ethIrqAffinityInfo.isFilters">
+      <ng-template let-displayed let-tabcolumns="columns">
+        <tbody>
+          <ng-container *ngFor="let row of displayed">
+            <tr>
+              <td *ngIf="tabcolumns[0].show || tabcolumns[0].show === undefined" tiOverflow>
+                <button class="hy-btn-text" (click)="openNumberMapModal(row, softNumberMapModal)">
+                  {{ row.irqNumber }}
+                </button>
+              </td>
+              <td *ngIf="tabcolumns[1].show || tabcolumns[1].show === undefined" tiOverflow>{{ row.deviceName }}</td>
+              <td *ngIf="tabcolumns[2].show || tabcolumns[2].show === undefined" tiOverflow>{{ row.bdf }}</td>
+              <td *ngIf="tabcolumns[3].show || tabcolumns[3].show === undefined" tiOverflow>{{ row.eventName }}</td>
+              <td *ngIf="tabcolumns[4].show || tabcolumns[4].show === undefined" tiOverflow>{{ row.affinityMask }}</td>
+              <td *ngIf="tabcolumns[5].show || tabcolumns[5].show === undefined" tiOverflow>
+                <button class="hy-btn-text" (click)="openNameMapModal(row, softNameMapModal)">
+                  {{ row.ethName }}
+                </button>
+              </td>
+              <td *ngIf="tabcolumns[6].show || tabcolumns[6].show === undefined" tiOverflow>{{ row.queueName }}</td>
+              <td *ngIf="tabcolumns[7].show || tabcolumns[7].show === undefined" tiOverflow>{{ row.xpsCpus }}</td>
+              <td *ngIf="tabcolumns[8].show || tabcolumns[8].show === undefined" tiOverflow>{{ row.rpxCpus }}</td>
+              <td *ngIf="tabcolumns[9].show || tabcolumns[9].show === undefined" tiOverflow>{{ row.rpsFlowCnt }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </ng-template>
+    </app-common-table>
+  </section>
+</div>
+
+<!-- 硬中断编号 分布图 -->
+<ng-template #softNumberMapModal let-context='context'>
+  <ti-modal-header>{{ 'tuninghelper.sysConfigDetail.irqDistribute' | i18n }}</ti-modal-header>
+  <ti-modal-body>
+    <div class="content-warpper">
+      <app-hard-irq-affinity-dist 
+        [hardIrqData]="context.hartData"
+        [bodyTitle]="context.bodyTitle"
+      ></app-hard-irq-affinity-dist>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" (click)="context.close()" tiButton>
+      {{ 'common_term_operate_close' | i18n }}
+    </button>
+  </ti-modal-footer>
+</ng-template>
+
+<!-- 网络设备名称中断 分布图 -->
+<ng-template #softNameMapModal let-context='context'>
+  <ti-modal-header>{{ 'tuninghelper.sysConfigDetail.netportIrqDistribute' | i18n }}</ti-modal-header>
+  <ti-modal-body>
+    <div class="content-warpper">
+      <app-netport-irq-affinity-dist
+        [irqData]="context.irqData"
+        [bodyTitle]="context.bodyTitle"
+      ></app-netport-irq-affinity-dist>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" (click)="context.close()" tiButton>
+      {{ 'common_term_operate_close' | i18n }}
+    </button>
+  </ti-modal-footer>
+</ng-template>

@@ -1,0 +1,160 @@
+<div class="weidheight" id="itemCertificateRevocationList">
+  <div id="certificateRevocationList" class="titleset">
+    <div style="display: flex;">
+      <div class='title_20'>{{i18n.plugins_porting_menu_crl_settings}}</div>
+    </div>
+    <p class="title_14">{{i18n.plugins_certificate_revocation_list.webNotice}}</p>
+    <div class='secondheight'>
+      <!-- 上传压缩包 -->
+      <button type="button" [disabled]="isUploading" *ngIf="role" class="little-primary-btn import-btn" (click)="importCRL()"
+              onkeyup="if(event.keyCode==13 || event.keyCode == 32){ return false;}"
+              onkeydown="if(event.keyCode==13 || event.keyCode == 32){ return false;}"
+      >{{i18n.plugins_certificate_revocation_list.import_btn}}
+      </button>
+      <input type="file" id="crlload" class="secondary-btn-input"
+             [disabled]="isUploading" (change)="uploadFile('normal')"
+             [accept]="acceptType" style="display: none;"/>
+    </div>
+    <div class="webserver-table">
+      <ti-table [(displayedData)]="CRLDisplayed"
+                [srcData]="CRLSrcData"
+                [columns]="columns"
+                tiColsResizable>
+        <div class="ti3-table-fixed-head ti3-table">
+          <table>
+            <thead>
+            <tr>
+              <th tiOverflow width="5%"></th>
+              <th tiOverflow width="15%">{{i18n.plugins_certificate_revocation_list.name}}</th>
+              <th tiOverflow width="20%">{{i18n.plugins_certificate_revocation_list.issuedBy}}</th>
+              <th tiOverflow width="15%">{{i18n.plugins_certificate_revocation_list.validTime}}</th>
+              <th tiOverflow width="15%">{{i18n.plugins_certificate_revocation_list.updateTime}}</th>
+              <th tiOverflow width="20%">{{i18n.plugins_certificate_revocation_list.certStatus}}</th>
+              <th tiOverflow width="10%" *ngIf="role">{{i18n.plugins_certificate_revocation_list.options}}</th>
+            </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="ti3-table-container ti3-resize-wrapper">
+          <table>
+            <thead>
+            <tr>
+              <th *ngFor="let column of columns" width="{{column.width}}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+            <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+            <ng-container *ngFor="let row of CRLDisplayed;">
+              <tr>
+                <!-- tiOverflow指令的作用是使文本溢出时出'...'，且hover时出tip-->
+                <td tiOverflow style="text-align: center;">
+                  <img *ngIf=" !row.showDetails && row.crlDetail.length !== 0"
+                       src="./assets/img/home/row.svg"
+                       class="path_more row_collapse_icon img-active"
+                       (click)="row.showDetails = !row.showDetails" />
+                  <img *ngIf=" row.showDetails && row.crlDetail.length !== 0"
+                       src="./assets/img/home/row_dark.svg"
+                       class="path_more row_collapse_icon tip-img"
+                       (click)="row.showDetails = !row.showDetails" />
+                </td>
+                <td tiOverflow>{{ row.name }}</td>
+                <td tiOverflow>{{ row.issuedBy }}</td>
+                <td tiOverflow>{{ row.validTime }}</td>
+                <td tiOverflow>{{ row.updateTime }}</td>
+                <td tiOverflow><span class="status-icon" [ngClass]=row.color></span>{{row.certStatus}}
+                </td>
+                <td tiOverflow *ngIf="role">
+                  <a class="del-txt"
+                     (click)="deleteCRL(row)">{{i18n.plugins_certificate_revocation_list.delete}}</a>
+                </td>
+              </tr>
+              <tr *tiDetailsTr="row"> <!--详情内容行tiDetailsTr，传入行数据-->
+                <!-- tiColspan是为了使得该td（详情内容）占据表格整个宽度(列合并)，tiColspan列合并的值为columns接口传入的对象数组中中show属性值不为false的对象的个数 -->
+                <td tiColspan class="nested-table-container">
+                  <div>
+                    <app-crl-info [data]="row.crlDetail">
+                    </app-crl-info>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+            </tbody>
+          </table>
+          <app-loading *ngIf="CRLDisplayed.length === 0 && showLoading"></app-loading>
+          <app-default-page *ngIf="CRLDisplayed.length === 0 && !showLoading"></app-default-page>
+        </div>
+      </ti-table>
+    </div>
+  </div>
+</div>
+
+<!-- 上传重复文件 modal start -->
+<app-messagebox #exitmask>
+  <div class="content config-modal">
+    <p class="mask-title">
+      <span>{{i18n.plugins_certificate_revocation_list.importDuplicateTitle}}</span>
+      <span class="close-btn" (click)="closeMaskExit()">
+                <img class="tip-title-close" alt="" src="./assets/img/install/icon-close.svg" /></span>
+    </p>
+    <div class="mask-container">
+      <div class="des">
+        <img class="des-warn-icon noSpace" alt="" src="./assets/img/home/warn.png" />
+        <p>{{exitFileNameReplace}}</p>
+      </div>
+    </div>
+    <div class="btn-box">
+      <button type="button" color="primary" tiButton class="user-sure-btn user-little-btn primary-btn"
+              (click)="uploadAgain('override')">{{i18n.plugins_porting_message_analysis_center.exit.replace}}</button>
+      <button type="button" tiButton class="user-little-btn little-minor-btn"
+              (click)="closeMaskExit()">{{i18n.plugins_common_button_term_operate_cancel}}</button>
+    </div>
+  </div>
+</app-messagebox>
+<!-- 上传重复文件 modal end -->
+<!-- 删除CRL文件提示 modal start -->
+<app-messagebox #deleteMask style="max-width: 400px;max-height: 222px">
+  <div class="content config-modal">
+    <p class="mask-title">
+      <span>{{i18n.plugins_certificate_revocation_list.deletCRL}}</span>
+      <span class="close-btn" (click)="closeDeleteMask()">
+                <img class="tip-title-close" alt="" src="./assets/img/install/icon-close.svg" /></span>
+    </p>
+    <div class="mask-container">
+      <div class="des">
+        <img class="des-warn-icon noSpace" alt="" src="./assets/img/home/warn.png" />
+        <p>{{i18n.plugins_certificate_revocation_list.deleteCRLTips}}</p>
+      </div>
+    </div>
+    <div class="btn-box">
+      <button type="button" color="primary" tiButton class="user-sure-btn user-little-btn primary-btn"
+              (click)="deleteCRLAction()">{{i18n.plugins_certificate_revocation_list.confirm}}</button>
+      <button type="button" tiButton class="user-little-btn little-minor-btn"
+              (click)="closeDeleteMask()">{{i18n.plugins_common_button_term_operate_cancel}}</button>
+    </div>
+  </div>
+</app-messagebox>
+<!-- 删除CRL文件提示 modal end -->
+<!-- 删除CRL文件提示 modal start -->
+<app-messagebox #crlLimitMask>
+  <div class="content config-modal">
+    <p class="mask-title">
+      <span>{{i18n.plugins_certificate_revocation_list.maxLimitTitle}}</span>
+      <span class="close-btn" (click)="closeCrlLimitMask()">
+                <img class="tip-title-close" alt="" src="./assets/img/install/icon-close.svg" /></span>
+    </p>
+    <div class="mask-container">
+      <div class="des">
+        <img class="des-warn-icon noSpace" alt="" src="./assets/img/home/icon_tip.svg" />
+        <p>{{i18n.plugins_certificate_revocation_list.maxLimitTips}}</p>
+      </div>
+    </div>
+    <div class="btn-box">
+      <button type="button" color="primary" tiButton class="user-sure-btn user-little-btn primary-btn"
+              (click)="closeCrlLimitMask()">{{i18n.plugins_certificate_revocation_list.confirm}}</button>
+    </div>
+  </div>
+</app-messagebox>
+<!-- 上传重复文件 modal end -->
+
+

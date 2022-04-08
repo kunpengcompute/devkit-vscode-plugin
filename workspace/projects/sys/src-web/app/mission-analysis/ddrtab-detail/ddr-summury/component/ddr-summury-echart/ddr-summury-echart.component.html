@@ -1,0 +1,55 @@
+<div class="ddr-summury" [appLoading]="isLoading">
+  <div class="echart-header">
+    <title>{{ title }}</title>
+    <button *ngIf="!noData" class="show-average" (click)="showAverage(averageModal)">{{ i18n.ddr_summury.showAverage }}</button>
+  </div>
+  <div class="echart-box" *ngIf="!noData">
+    <div class="y-axis-header">
+      <span>{{ currYAxisUnit?.label }}</span>
+      <ti-select
+        *ngIf="yAxisUnits.length > 1"
+        [options]="yAxisUnits"
+        [(ngModel)]="currYAxisUnit"
+        panelWidth="auto"
+      >
+      </ti-select>
+    </div>
+    <div
+      echarts
+      class="echarts"
+      [options]="options"
+      [merge]="merges[currYAxisUnit?.unit] || {}"
+      (chartInit)="onChartInit($event)"
+      (chartDataZoom)="onChartDataZoom($event)"
+    >
+    </div>
+  </div>
+  <div class="echart-box" *ngIf="noData" [appNoData]="noData"></div>
+</div>
+
+<ng-template #averageModal let-context='context'>
+  <ti-modal-header>
+    {{ title }}{{ i18n.ddr_summury.average }}
+  </ti-modal-header>
+  <ti-modal-body>
+    <ti-table [(displayedData)]="context.displayed" [srcData]="srcData" [columns]="columns">
+      <table>
+        <thead>
+          <tr>
+            <th tiOverflow *ngFor="let column of columns">{{column.title}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of context.displayed">
+            <td tiOverflow>{{row.target}}</td>
+            <td tiOverflow>{{row.average}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ti-pagination [(currentPage)]="context.currentPage" [(totalNumber)]="context.totalNumber"></ti-pagination>
+    </ti-table>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" (click)="context.dismiss()" tiButton>{{ i18n.common_term_operate_close }}</button>
+  </ti-modal-footer>
+</ng-template>

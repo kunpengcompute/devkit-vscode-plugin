@@ -1,0 +1,74 @@
+<div class="top_down" [appLoading]="isLoading">
+    <div class="top_down_bar">
+        <div class="left_top_down">
+            <p>{{i18n.hpc.hpc_target.hpc_top_down}}</p>
+        </div>
+        <div class="right_switch">
+            <app-icon-react name="chartView" *ngIf="isTable" (click)="isTable = false"></app-icon-react>
+            <app-icon-react name="chartViewSelected" *ngIf="!isTable" (click)="isTable = false"></app-icon-react>
+            <app-icon-react name="tableView" *ngIf="!isTable" (click)="isTable = true"></app-icon-react>
+            <app-icon-react name="tableViewSelected" *ngIf="isTable" (click)="isTable = true"></app-icon-react>
+        </div>
+    </div>
+    <!-- 表格数据 -->
+    <div class="top-table" *ngIf="isTable">
+        <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns" class="ti3-table-small">
+            <div class="ti3-table-fixed-head">
+                <table>
+                    <thead>
+                        <tr>
+                            <th *ngFor="let column of columns" width="{{column.width}}" tiOverflow>
+                                {{column.title}}</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="ti3-table-container top-table-box">
+                <table>
+                    <tr>
+                        <th tiOverflow *ngFor="let column of columns" width="{{column.width}}"></th>
+                    </tr>
+                    <tbody>
+                        <tr *ngFor="let row of displayed">
+                            <td tiOverflow [ngStyle]="{'padding-left':30*row.levelIndex+'px'}" class="top-down-tr">
+                                <ng-container *ngFor="let item of [].constructor(row.levelIndex);index as index">
+                                    <div [style.width.px]="32*(row.levelIndex-index)" class="topLine"></div>
+                                </ng-container>
+                                <div class="" [ngStyle]="{'padding-left':20+(row.children?0:20)+'px'}">
+                                    <img *ngIf="row.children" src="./assets/img/summary/row.png" class="title-icon"
+                                        (click)="toggle(row)" [ngClass]="{active:row.expand}">
+                                    <span class="td-name"> {{row.name}}</span>
+                                </div>
+                            </td>
+                            <td tiOverflow>{{row.value}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="topDownData.length===0  && !isLoading">
+                        <div class="nodata">
+                            <img src='./assets/img/projects/nodata.png' />
+                            <div>{{i18n.common_term_task_nodata}}</div>
+                        </div>
+                    </tbody>
+                </table>
+            </div>
+        </ti-table>
+    </div>
+    <!-- 图表数据 -->
+
+    <div *ngIf="topDownData" [hidden]="isTable" id="echartsSvg"
+        [ngStyle]="{'height': onIcicleHeightChange + 'px', 'overflow': 'hidden'}">
+        <ng-container *ngIf="!isIE">
+            <app-icicle-summary [data]="echartsData" [hidden]="!topDownData.length"
+                (changeHeight)="changeHeight($event)">
+            </app-icicle-summary>
+            <div class="noData" *ngIf="!topDownData.length && !isLoading">
+                <img src='./assets/img/projects/nodata.png' />
+                <div>{{i18n.common_term_task_nodata}}</div>
+            </div>
+        </ng-container>
+        <span class="ie-box" *ngIf="isIE">
+            <span class="ie-info">{{i18n.common_term_task_tab_pcie_notsupport}}</span>
+        </span>
+    </div>
+
+</div>

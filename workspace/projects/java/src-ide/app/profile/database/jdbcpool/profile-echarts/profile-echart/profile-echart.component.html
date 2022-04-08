@@ -1,0 +1,15 @@
+<div class="profile-echarts">
+  <div class="right-legend">
+    <div class="green-legend"><span class="green circle"></span><span>{{i18n.jdbcpool.normalRun}}</span></div>
+    <div><span class="red circle"></span><span>{{i18n.jdbcpool.thresholdAlert}}</span></div>
+  </div>
+  <div class="echart">
+    <div 
+      class="mychart" 
+      id="main"
+      echarts
+      [options]="echartsOption"
+      [merge]="updateOptions"
+    ></div>
+  </div>
+</div>

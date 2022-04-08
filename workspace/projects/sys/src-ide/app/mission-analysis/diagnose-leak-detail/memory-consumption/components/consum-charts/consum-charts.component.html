@@ -1,0 +1,11 @@
+<div class="memory-detail" [id]='uuid'>
+    <div class="table-box" *ngIf="datas.time && datas.time.length > 0">
+        <div class="table">
+            <div echarts [options]="tableData" class="echart-content" (chartInit)="onChartInit($event)" style="height: 100%"></div>
+        </div>
+    </div>
+    <div class="show-no-data" *ngIf="!datas.time || datas.time.length === 0">
+        <div class="table-title">{{datas.title}}</div>
+        <app-default-page [scene]="'noData'"></app-default-page>
+    </div>
+</div>

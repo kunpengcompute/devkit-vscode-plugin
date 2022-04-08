@@ -1,0 +1,329 @@
+.btn-header {
+    display: flex;
+    margin: 20px 0 20px 0;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .pro-title {
+        font-size: 16px;
+        text-overflow: ellipsis;
+        display: flex;
+        align-items: center;
+
+        .pro_text {
+            height: 16px;
+            display: flex;
+            line-height: 16px;
+            justify-content: center;
+
+            .pro_text_img {
+                display: flex;
+                margin-left: 5px;
+                height: 16px;
+                width: 16px;
+            }
+        }
+
+        .toggleSnapshot {
+            margin: 0 5px;
+            height: 16px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .formula_text {
+        margin-left: 16px;
+        height: 16px;
+        display: flex;
+        line-height: 16px;
+        justify-content: center;
+        font-size: 14px;
+
+        .formula_text_img {
+            display: flex;
+            margin-left: 5px;
+            height: 16px;
+            width: 16px;
+        }
+    }
+}
+
+.threshold {
+    height: 24px;
+    line-height: 24px;
+    background: var(--snapshot-compare-threshold-background-color);
+    color: var(--ti-table-td-text-color);
+
+    .thresholdBlock {
+        margin-left: 26px;
+
+        .thresholdText {
+            margin-right: 10px;
+        }
+    }
+}
+
+.count-fill-red {
+    color: #E85D54;
+}
+
+.count-fill-greed {
+    color: #45CC90;
+}
+
+:host ::ng-deep .ti3-table-column-fixed-left.ti3-table-floating-fixed-column {
+    box-shadow: 3px 0 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+:host ::ng-deep .ti3-table-column-fixed-right.ti3-table-floating-fixed-column {
+    box-shadow: inherit;
+    ;
+}
+
+.jdbcpool {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px 20px;
+
+    .head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .control {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 20px;
+
+            .btntip {
+                display: flex;
+                align-items: center;
+            }
+
+            .tip {
+                margin-left: 10px;
+                margin-right: 24px;
+            }
+
+            .control-value {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                font-size: 14px;
+
+                .control-value-title,
+                .control-value-input {
+                    margin-right: 8px;
+                    color: #6c7280;
+                }
+
+                .control-value-input {
+                    height: 32px;
+                }
+            }
+
+            .visible-type {
+                display: flex;
+                justify-content: flex-start;
+                color: #6c7280;
+
+                .visible-type-label {
+                    font-size: 14px;
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+    }
+
+    .jdbcpool-table {
+        display: flex;
+
+        .row-select-bg {
+            background-color: var(--table-select-background-color) !important;
+        }
+
+        .jdbcpool-table-content {
+            border-left: none !important;overflow-x: auto;width: 100%
+        }
+
+        .row-left {
+            border-right: 2px solid #0067ff;
+            border-bottom: hidden !important;
+            background: var(--table-td-left-color);
+        }
+    }
+
+    .jdbcpool-echarts {
+        display: none;
+
+        .x-labels {
+            padding: 25px 0px 0px 40px;
+            display: flex;
+            color: var(--d-e8e8e8-l-222222);
+            font-size: 12px;
+            text-align: center;
+            box-sizing: border-box;
+            margin-right: 60px;
+        }
+    }
+
+    .show {
+        display: flex;
+    }
+
+    .stack {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 20px;
+
+        .jdbcpool-tack {
+            width: 100%;
+            padding: 20px;
+            overflow: hidden;
+
+            .config-title {
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+
+            .config-border {
+                height: 1px;
+                width: 100%;
+            }
+        }
+    }
+
+    .report-tips {
+        margin-left: 32px;
+    }
+}
+
+.profile-echarts {
+    height: 360px;
+    position: relative;
+
+    .right-legend {
+        width: 100%;
+        margin-bottom: 8px;
+        margin-top: 8px;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        z-index: 10;
+        height: 16px;
+        line-height: 16px;
+        font-size: 12px;
+
+        .green-legend {
+            margin-right: 16px;
+        }
+    }
+
+    .echart {
+        width: 100%;
+        height: 375px;
+        position: relative;
+
+        .mychart {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.green {
+    background-color: #7adfa0;
+}
+
+.red {
+    background-color: #f45c5e;
+}
+
+.blue {
+    background-color: #037DFF;
+}
+
+.orange {
+    background-color: #E88B00;
+}
+
+.write {
+    box-shadow: 0 0 1px #000000;
+}
+
+.black {
+    box-shadow: 0 0 1px #ffffff;
+}
+
+.circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 8px;
+}
+
+.link-position {
+    color: #9ea4b3;
+    font-size: 12px;
+    position: absolute;
+    top: 26px;
+    left: 22px;
+}
+
+.box-echarts {
+    width: 100%;
+    height: 340px;
+    overflow: auto;
+    position: absolute;
+    top: 32px;
+}
+
+.childrenTable {
+    .ti3-table {
+        border-left: solid 2px #0067ff !important;
+    }
+}
+
+:host ::ng-deep .setfirsttd {
+    width: 40px;
+}
+
+:host ::ng-deep .ti3-icon-angle-right:before {
+    content: "\e919" !important;
+}
+
+:host ::ng-deep .ti3-icon-angle-transform-up-thin {
+    display: inline-block;
+    transform: rotate(270deg) !important;
+}
+
+:host ::ng-deep .ti3-icon-angle-transform-down-thin {
+    display: inline-block;
+    transform: rotate(180deg) !important;
+}
+
+:host ::ng-deep .ti3-cols-toggle-container .ti3-cols-toggle-menu-container {
+    height: 32px !important;
+    background: transparent !important;
+    border: snow !important;
+    margin-top: -12px;
+}
+
+:host ::ng-deep .space_th {
+    width: 32px !important;
+}
+
+:host ::ng-deep .ti3-icon-config:before {
+    color: transparent;
+}
+.expandAll {
+    img {
+        vertical-align: middle;
+        margin-right: 4px;
+    }
+}

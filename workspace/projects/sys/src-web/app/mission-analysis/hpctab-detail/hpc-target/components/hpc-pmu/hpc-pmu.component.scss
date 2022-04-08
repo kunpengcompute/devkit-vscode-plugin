@@ -1,0 +1,43 @@
+.pmu {
+  margin-top: 32px;
+  margin-bottom: 40px;
+  p {
+    font-size: 20px;
+    color: #222222;
+  }
+  .pmu-box {
+    margin-top: 20px;
+    display: flex;
+    .core-title {
+      font-size: 16px;
+      color: #222222;
+      margin-bottom: 10px;
+    }
+  }
+  .core {
+    width: 48%;
+  }
+  .uncore {
+    width: 50%;
+    margin-left: 32px;
+  }
+  .core-box {
+    max-height: 319px;
+  }
+  .nodata {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 50%;
+    transform: translateX(50%);
+    margin-bottom: 32px;
+    margin-top: 32px !important;
+    img {
+      width: 20%;
+      display: block;
+    }
+    div {
+      font-size: 0.8rem;
+    }
+  }
+}

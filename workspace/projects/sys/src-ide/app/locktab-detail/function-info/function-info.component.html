@@ -1,0 +1,194 @@
+<div class="content-container" [id]='boxID'>
+    <div class="header" *ngIf="headers">
+        <span *ngFor="let header of headers" class="group-list">
+            <span class="function-label">{{ header.label }}</span>
+            <span class="function-content">{{ (header.content || '--') | thousandSeparator }}</span>
+        </span>
+    </div>
+
+    <div class="body">
+        <div class="func-main">
+            <div class="source-left table-container">
+                <div class="title">
+                    <h2>{{i18n.common_term_task_tab_function_source}}</h2>
+                </div>
+
+                <ti-table [(displayedData)]="sourceData.displayed" [srcData]="sourceData.srcData"
+                    [columns]="sourceData.columns" tiColsResizable>
+                    <div class="ti3-table-fixed-head">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let column of sourceData.columns; let index = index" tiOverflow
+                                        [width]="column.width">
+                                        {{ column.label }}</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <div class="ti3-table-container ti3-resize-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let column of sourceData.columns; let index = index"
+                                        [width]="column.width"></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let row of sourceData.displayed" [ngClass]="{ active: row.active }"
+                                    [id]="row.id"
+                                    (click)="highlightSourceCodeTr({ row: row }); highlightAssemblerCodeTr({ line: row.line, scrollIntoView: true });">
+                                    <ng-container *ngFor="let column of sourceData.columns">
+                                        <td *ngIf="column.prop === 'countAndProportion'; else sourceOtherTd" tiOverflow>
+                                            {{ row.count | thousandSeparator }}({{ row.proportion }})
+                                        </td>
+
+                                        <ng-template #sourceOtherTd>
+                                            <td [ngClass]="{codeLine: column.prop === 'line_code'}" tiOverflow>
+                                                {{ row[column.prop] }}</td>
+                                        </ng-template>
+                                    </ng-container>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- 无数据 -->
+                        <div *ngIf="!sourceData.displayed.length" class='chen-nodata-td'>
+                            <img style='width:13%;display:block' src='./assets/img/projects/nodata-dark.png' />
+                            <div style="font-size: 1.3rem">{{ i18n.common_term_task_nodata }}</div>
+                        </div>
+                    </div>
+                </ti-table>
+            </div>
+
+            <div class="assembly-right table-container">
+                <div class="title">
+                    <h2 style="display: inline-block;">{{i18n.common_term_task_tab_function_assembley}}</h2>
+
+                    <div class="operate-box" *ngIf="functionDetails.assemblyCode.hasCodeBlock !== false">
+                        <img src="./assets/img/projects/preBlock.png" [tiTip]='i18n.common_term_preBlock'
+                            tiTipPosition="top" (click)='preBlock("pre")' />
+                        <img src="./assets/img/projects/nextBlock.png" [tiTip]='i18n.common_term_nextBlock'
+                            tiTipPosition="top" (click)='preBlock("next")' />
+                    </div>
+                </div>
+
+                <ti-table [(displayedData)]="assemblerData.displayed" [srcData]="assemblerData.srcData"
+                    [columns]="assemblerData.columns" tiColsResizable>
+                    <div class="ti3-table-fixed-head">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <ng-container *ngFor="let column of assemblerData.columns; let index = index">
+                                        <!--使用展开详情图标时，需要给展开详情图标列加 details-icon-column 属性-->
+                                        <th *ngIf="column.prop === 'detailsIcon'; else otherTh" details-icon-column>
+                                        </th>
+
+                                        <ng-template #otherTh>
+                                            <th tiOverflow [width]="column.width">{{ column.label }} </th>
+                                        </ng-template>
+                                    </ng-container>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <div class="ti3-table-container ti3-resize-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <ng-container *ngFor="let column of assemblerData.columns; let index = index">
+                                        <!--使用展开详情图标时，需要给展开详情图标列加 details-icon-column 属性-->
+                                        <th *ngIf="column.prop === 'detailsIcon'; else otherTh" details-icon-column>
+                                        </th>
+
+                                        <ng-template #otherTh>
+                                            <th tiOverflow [width]="column.width"></th>
+                                        </ng-template>
+                                    </ng-container>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <!--第一级-->
+                                <ng-container *ngFor="let row of assemblerData.displayed;index as i">
+                                    <tr [ngClass]="{ active: row.active }" [id]="row.id"
+                                        (click)="highlightSourceCodeTr({ line: row.line, scrollIntoView: true }); highlightAssemblerCodeTr({ row: row });">
+                                        <ng-container *ngFor="let column of assemblerData.columns; let index = index">
+                                            <td tiOverflow style="display: flex;"
+                                                *ngIf="!index; else asmCountAndProportionTd">
+                                                <span *ngIf="row.children" class="ti3-table-tree"
+                                                    (click)="row.showChildren = !row.showChildren">
+                                                    <img src='./assets/img/header/select-right.png'
+                                                        [ngClass]="{active: row.showChildren}">
+                                                </span>
+
+                                                <span>{{ row[column.prop] }}</span>
+                                            </td>
+
+                                            <ng-template #asmCountAndProportionTd>
+                                                <td *ngIf="column.prop === 'countAndProportion'; else asmOtherTd"
+                                                    tiOverflow>
+                                                    {{ row.count | thousandSeparator }}({{ row.proportion }})
+                                                </td>
+                                            </ng-template>
+
+                                            <ng-template #asmOtherTd>
+                                                <td tiOverflow>{{ row[column.prop] }}</td>
+                                            </ng-template>
+                                        </ng-container>
+                                    </tr>
+
+                                    <!--第二级-->
+                                    <ng-container *ngIf="row.showChildren">
+                                        <tr *ngFor="let child of row.children" class="childTr"
+                                            [ngClass]="{ active: child.active }" [id]="child.id"
+                                            (click)="highlightSourceCodeTr({ line: child.line, scrollIntoView: true }); highlightAssemblerCodeTr({ row: child });">
+                                            <ng-container
+                                                *ngFor="let column of assemblerData.columns; let index = index">
+                                                <td tiOverflow *ngIf="!index; else asmChildCountAndProportionTd">
+                                                    <div>{{ child[column.prop] }}</div>
+                                                </td>
+
+                                                <ng-template #asmChildCountAndProportionTd>
+                                                    <td *ngIf="column.prop === 'countAndProportion'; else asmChildOtherTd"
+                                                        tiOverflow>
+                                                        {{ child.count | thousandSeparator }}({{ child.proportion }})
+                                                    </td>
+                                                </ng-template>
+
+                                                <ng-template #asmChildOtherTd>
+                                                    <td tiOverflow>{{ child[column.prop] }}</td>
+                                                </ng-template>
+                                            </ng-container>
+                                        </tr>
+                                    </ng-container>
+                                </ng-container>
+                            </tbody>
+                        </table>
+
+                        <!-- 无数据 -->
+                        <div *ngIf="!assemblerData.displayed.length" class='chen-nodata-td'>
+                            <img style='width:13%;display:block' src='./assets/img/projects/nodata-dark.png' />
+                            <div style="font-size: 1.3rem">{{ i18n.common_term_task_nodata }}</div>
+                        </div>
+                    </div>
+                </ti-table>
+            </div>
+        </div>
+
+        <div class="source-img" id='source-img' *ngIf="functionDetails.codeStream">
+            <div class='svg-title'>
+                <h2 style="font-size: 20px">{{i18n.common_term_task_tab_function_flow}}</h2>
+                <span>
+                    <img src='./assets/img/header/da.png' (click)="scale(true)">
+                    <img src='./assets/img/header/xiao.png' (click)="scale(false)">
+                </span>
+            </div>
+
+            <div id='insvg'></div>
+        </div>
+    </div>
+</div>

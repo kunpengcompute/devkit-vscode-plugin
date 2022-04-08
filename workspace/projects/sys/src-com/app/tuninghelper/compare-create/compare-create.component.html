@@ -1,0 +1,58 @@
+<div class="create-linkage tuningHelper">
+  <div class="compare-name">
+    <div class="compare-title">{{i18n.linkage.choseObject}}</div>
+    <div class="compare-tip">{{i18n.compareCreate.createTip}}</div>
+  </div>
+  <div class="linkage-task">
+    <div class="linkage-tree">
+      <div class="tab-header">
+        <div class="left-tab normal-tab" [ngClass]="{'active-tab':activeTab}" (click)="changeTab(true)">
+          <span>{{i18n.linkage.horizontal}}</span>
+          <img class="img-tip" src='./assets/img/summary/tooltip.png' [tiTip]="i18n.linkage.horizontal_analysis_tip2" />
+        </div>
+        <div class="right-tab normal-tab" [ngClass]="{'active-tab':!activeTab}" (click)="changeTab(false)">
+          <span>{{i18n.linkage.hvertical}}</span>
+          <img class="img-tip" src='./assets/img/summary/tooltip.png' [tiTip]="i18n.linkage.vertical_analysis_tip" />
+        </div>
+      </div>
+      <div class="tab-content">
+        <ti-tree *ngIf="activeTab" id="horizontalTree" [data]="horizontalTree" [multiple]="multiple"
+          [parentCheckable]="parentCheckable" (select)="onHorizontalTreeSelect($event)">
+          <ng-template let-item let-i=index>
+            <span tiOverflow tiTipPosition="right" style="width:100%;">
+              {{item.label}}
+            </span>
+          </ng-template>
+        </ti-tree>
+        <ti-tree *ngIf="!activeTab" id="verticalTree" [data]="verticalTree" [multiple]="multiple"
+          [parentCheckable]="parentCheckable" (select)="onVerticalTreeSelect($event)">
+          <ng-template let-item let-i=index>
+            <span tiOverflow tiTipPosition="right" style="width:100%;">
+              {{item.label}}
+            </span>
+          </ng-template>
+        </ti-tree>
+      </div>
+    </div>
+  </div>
+  <div class="object-exchange">
+    <div class="object-title">
+      <span class="title-span">{{i18n.compareCreate.object1}}</span>
+      <span class="title-span">{{i18n.compareCreate.object2}}</span>
+    </div>
+    <div class="object-msg">
+      <div class="object-left" tiOverflow>{{currentcompareList[0]?.objectName}}</div>
+      <hy-theme-content>
+        <app-icon-react name="exchangeDark" class="refresh" (click)="exchangeObj()" dark></app-icon-react>
+        <app-icon-react name="exchange" class="refresh" (click)="exchangeObj()" light></app-icon-react>
+      </hy-theme-content>
+      <div class="object-left" tiOverflow>{{currentcompareList[1]?.objectName}}</div>
+    </div>
+  </div>
+  <div class="button-bottom">
+    <button type="button" tiButton color="primary" [disabled]="!treeSelectValid" (click)="addNewLinkage()">
+      {{i18n.mission_modal.confirm}}
+    </button>
+    <button type="button" (click)="closeTask()" tiButton>{{i18n.mission_modal.cancle}}</button>
+  </div>
+</div>

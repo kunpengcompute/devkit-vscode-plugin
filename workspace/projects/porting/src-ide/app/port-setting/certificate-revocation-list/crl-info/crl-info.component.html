@@ -1,0 +1,36 @@
+<ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns" class="ti3-table-nest"><!--嵌套表格需要加ti-table-nest这个样式类-->
+  <div class="ti3-table-fixed-head">
+    <table>
+      <thead>
+      <tr>
+        <!--实际显示的表头。注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+        <th tiOverflow *ngFor="let column of columns" width="{{column.width}}">{{column.title}}</th>
+      </tr>
+      </thead>
+    </table>
+  </div>
+  <!--.ti3-table-container是表体的容器，它的子元素中的table的thead是用来控制各列宽度，实际不显示；tbody是实际显示的表体-->
+  <!--注意1:此处一定要使用.ti3-table-container样式类-->
+  <!--注意2:用户在有.ti3-table-container样式类的容器上来设置表体的高度或最大高度-->
+  <div class="ti3-table-container" style="max-height:320px;">
+    <table>
+      <thead>
+      <tr>
+        <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+        <th *ngFor="let column of columns" width="{{column.width}}"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of displayed">
+        <td tiOverflow>{{row.serial_number}}</td>
+        <td tiOverflow>{{row.revoke_date}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <ti-pagination  [(currentPage)]="currentPage"
+                  [pageSize]="pageSize"
+                  [(totalNumber)]="totalNumber"
+                  [showGotoLink]="showGotoLink">
+  </ti-pagination>
+</ti-table>

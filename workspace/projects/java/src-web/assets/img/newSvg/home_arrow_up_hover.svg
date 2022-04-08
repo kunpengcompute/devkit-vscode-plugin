@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="9px" viewBox="0 0 16 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>4.组件/2.通用/icon/主页面向下箭头</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M12.3069805,8.89797077 L6.73851461,14.4664367 C6.29917479,14.9057765 5.58686418,14.9057765 5.14752436,14.4664367 C4.70818453,14.0270968 4.70818453,13.3147862 5.14752436,12.8754464 L11.5114854,6.51148539 C11.9508252,6.07214556 12.6631358,6.07214556 13.1024756,6.51148539 L19.4664367,12.8754464 C19.9057765,13.3147862 19.9057765,14.0270968 19.4664367,14.4664367 C19.0270968,14.9057765 18.3147862,14.9057765 17.8754464,14.4664367 L12.3069805,8.89797077 Z" id="path-1"></path>
+    </defs>
+    <g id="1230-TI2需求设计-11月" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="不再配置名称" transform="translate(-952.000000, -362.000000)">
+            <g id="4.组件/1.导航/0.顶部导航/banner">
+                <g id="dependency-banner-背景">
+                    <g id="4.组件/2.通用/icon/主页面箭头/向上" transform="translate(948.000000, 356.000000)">
+                        <rect id="frame" x="0" y="0" width="24" height="24"></rect>
+                        <mask id="mask-2" fill="#267dff">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="路径" fill="#267dff" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g id="3.颜色/15.白色选中" mask="url(#mask-2)" fill="#267dff" fill-rule="evenodd">
+                            <rect id="矩形备份-6" x="0" y="0" width="24" height="24"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

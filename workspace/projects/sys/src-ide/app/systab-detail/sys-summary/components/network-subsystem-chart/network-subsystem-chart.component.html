@@ -1,0 +1,767 @@
+<div>
+    <div class="titleDetail">
+        <div tiOverflow *ngFor="let item of titleDetail">{{item.title}}<span>{{item.data}}</span></div>
+    </div>
+    <div class="box" #netWorkWarpper [appNiceTooltip]="niceTooltipInfo" [niceTooltipShow]="niceTooltipShowCopy">
+        <svg *ngFor="let item of tipsData;index as index" viewBox="0 0 1480 499" version="1.1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+                <filter x="-25.0%" y="-37.7%" width="149.4%" height="175.5%" filterUnits="objectBoundingBox"
+                    id="filter-1">
+                    <feOffset dx="0" dy="10" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.000295382082%" y1="50.0080767%" x2="100%" y2="50.0080767%" id="linearGradient-2">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-58.8%" y="-58.8%" width="217.6%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-3">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.0340233781%" y1="50.0005931%" x2="99.9447811%" y2="50.0005931%"
+                    id="linearGradient-4">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-57.1%" y="-58.8%" width="214.3%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-5">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.0628137736%" y1="50.0010135%" x2="99.9430072%" y2="50.0010135%"
+                    id="linearGradient-6">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-57.1%" y="-58.8%" width="214.3%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-7">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.03748319%" y1="50.0018319%" x2="100.040565%" y2="50.0018319%"
+                    id="linearGradient-8">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-55.6%" y="-58.8%" width="211.1%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-9">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.00410080992%" y1="50%" x2="99.9318939%" y2="50%" id="linearGradient-10">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-26.5%" y="-37.7%" width="152.9%" height="175.5%" filterUnits="objectBoundingBox"
+                    id="filter-11">
+                    <feOffset dx="0" dy="10" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.000180831058%" y1="50.0088882%" x2="99.9935065%" y2="50.0088882%"
+                    id="linearGradient-12">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-64.5%" y="-58.8%" width="229.0%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-13">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.0106384698%" y1="50.0000122%" x2="99.9782459%" y2="50.0000122%"
+                    id="linearGradient-14">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-62.5%" y="-58.8%" width="225.0%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-15">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="-0.00485268985%" y1="50.0000547%" x2="99.9946006%" y2="50.0000547%"
+                    id="linearGradient-16">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-62.5%" y="-58.8%" width="225.0%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-17">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.0140551588%" y1="50.0001792%" x2="99.9729887%" y2="50.0001792%"
+                    id="linearGradient-18">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-60.6%" y="-58.8%" width="221.2%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-19">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.00736331527%" y1="50.0006088%" x2="99.9457314%" y2="50.0006088%"
+                    id="linearGradient-20">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-26.5%" y="-39.0%" width="152.9%" height="177.1%" filterUnits="objectBoundingBox"
+                    id="filter-21">
+                    <feOffset dx="0" dy="10" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0%" y1="50.0000133%" x2="99.9845289%" y2="50.0000133%" id="linearGradient-22">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-64.5%" y="-58.8%" width="229.0%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-23">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.031906227%" y1="50%" x2="99.9820362%" y2="50%" id="linearGradient-24">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-64.5%" y="-58.8%" width="229.0%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-25">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="-0.149015194%" y1="49.999969%" x2="100.092139%" y2="49.999969%"
+                    id="linearGradient-26">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-66.7%" y="-58.8%" width="233.3%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-27">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.00332423735%" y1="50.0000001%" x2="99.9997928%" y2="50.0000001%"
+                    id="linearGradient-28">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-66.7%" y="-58.8%" width="233.3%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-29">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.239390174%" y1="50.0000001%" x2="100.407033%" y2="50.0000001%"
+                    id="linearGradient-30">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-58.8%" y="-58.8%" width="217.6%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-31">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.158854174%" y1="50.0004262%" x2="99.9654157%" y2="50.0004262%"
+                    id="linearGradient-32">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-58.8%" y="-58.8%" width="217.6%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-33">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.0110751674%" y1="49.9999883%" x2="99.991741%" y2="49.9999883%"
+                    id="linearGradient-34">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-60.6%" y="-58.8%" width="221.2%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-35">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.0341208484%" y1="50.0007453%" x2="100.044481%" y2="50.0007453%"
+                    id="linearGradient-36">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-62.5%" y="-58.8%" width="225.0%" height="217.6%" filterUnits="objectBoundingBox"
+                    id="filter-37">
+                    <feOffset dx="0" dy="6" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0.0135085028%" y1="50.0001144%" x2="99.8842547%" y2="50.0001144%"
+                    id="linearGradient-38">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <filter x="-26.1%" y="-39.0%" width="151.6%" height="177.1%" filterUnits="objectBoundingBox"
+                    id="filter-39">
+                    <feOffset dx="0" dy="10" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                    <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                    <feColorMatrix
+                        values="0 0 0 0 0.0899253136   0 0 0 0 0.096150009   0 0 0 0 0.139549366  0 0 0 0.1 0"
+                        type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+                    <feMerge>
+                        <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+                <linearGradient x1="0%" y1="50.0058488%" x2="99.9787185%" y2="50.0058488%" id="linearGradient-40">
+                    <stop stop-color="#3C3E44" offset="0%"></stop>
+                    <stop stop-color="#505259" offset="100%"></stop>
+                </linearGradient>
+                <linearGradient x1="50.2856625%" y1="0.49788672%" x2="50.2856625%" y2="100%" id="linearGradient-41">
+                    <stop stop-color="#5F6267" offset="0%"></stop>
+                    <stop stop-color="#9398A3" stop-opacity="0" offset="100%"></stop>
+                </linearGradient>
+                <linearGradient x1="-0.782505309%" y1="50.0000577%" x2="100%" y2="49.9999423%" id="linearGradient-42">
+                    <stop stop-color="#0067FF" stop-opacity="0" offset="0%"></stop>
+                    <stop stop-color="#0067FF" offset="3.92736486%"></stop>
+                    <stop stop-color="#0067FF" offset="97.5137247%"></stop>
+                    <stop stop-color="#0067FF" stop-opacity="0" offset="100%"></stop>
+                </linearGradient>
+            </defs>
+            <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="8-网络子系统下钻" transform="translate(-394.000000, -285.000000)">
+                    <g id="NIC-TOPO" transform="translate(394.000000, 285.000000)">
+                        <image id="蜂窝-透视" x="0" y="0" width="1480" height="499"
+                            xlink:href="./assets/img/summary/honeycombBg_dark.png" />
+                        <polygon id="Big-Border" stroke="#434549" stroke-width="4"
+                            points="280.538704 86 1198.08282 86 1377 420 100 418.187824"></polygon>
+                        <g [id]="networkCard411.id" transform="translate(1054.000000, 107.000000)">
+                            <path d="M30,200 L178,200 L30,200 L30,200 Z" id="网口总线" stroke="#0067FF" stroke-width="4"
+                                opacity="0.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <line x1="19" y1="0" x2="106" y2="200" id="连接cpu" stroke="#0067FF" stroke-width="4"
+                                opacity="0.5"></line>
+                            <g [id]="networkCard41.id" filter="url(#filter-1)"
+                                transform="translate(0.000000, 60.000000)">
+                                <g id="NIC" transform="translate(-0.000482, 0.994994)" fill-rule="nonzero">
+                                    <path
+                                        d="M123.910482,48.4750058 L109.000482,52.4750058 C108.647914,52.4899838 108.313554,52.3180286 108.120658,52.0225295 C107.927763,51.7270304 107.904894,51.3517403 108.060482,51.0350058 L68.6104818,40.7150058 C68.6699111,40.5931299 68.7039339,40.460441 68.7104818,40.3250058 L69.4904818,27.8650058 L28.0004818,30.2450058 C27.61891,30.2854942 27.2478198,30.1040752 27.0454103,29.7780894 C26.8430008,29.4521035 26.8449713,29.0390456 27.0504818,28.7150058 L27.6004818,14.1850058 C27.8804818,13.6950058 32.0004818,0.845005794 32.0004818,0.845005794 L0.120481799,0.675005794 L0.120481799,30.3550058 L18.0004818,90.5450058 C17.8037961,90.9120296 17.4167256,91.1365305 17.0004818,91.1250058 L12.1104818,100.005006 C11.6914237,99.9930005 11.3026172,100.222396 11.1104818,100.595006 L9.2504818,104.355006 L149.250482,104.355006 L162.340482,103.005006 L157.650482,100.685006 C157.693473,100.579616 157.720439,100.468383 157.730482,100.355006 L153.320482,89.8650058 L152.730482,100.005006 C152.405683,99.9995817 152.103757,99.8367291 151.920823,99.5682921 C151.737888,99.2998551 151.696741,98.9592863 151.810482,98.6550058 L122.810482,61.1650058 C122.860295,61.0543509 122.890737,60.935964 122.900482,60.8150058 L123.910482,48.4750058 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M161.760482,104.355006 L10.5104818,104.355006 C9.82012586,104.355006 9.2604818,103.795362 9.2604818,103.105006 L9.2604818,92.3250058 L163.000482,92.3250058 L163.000482,103.105006 C163.000482,103.791475 162.446929,104.349514 161.760482,104.355006 L161.760482,104.355006 Z"
+                                        id="路径" fill="#3c3e44"></path>
+                                    <path
+                                        d="M127.000482,41.4950058 L90.7404818,41.4950058 C89.8975279,41.4558873 89.1949062,40.8364161 89.0504818,40.0050058 L82.0504818,20.1150058 C81.8951129,19.2617841 81.1762597,18.6255577 80.3104818,18.5750058 L46.6804818,18.5750058 C45.7957398,18.5109739 45.0588848,17.8718234 44.8704818,17.0050058 L39.2004818,1.66500579 C39.0451433,0.752573609 38.2840357,0.0659221665 37.3604818,0.00500579386 L0.730481799,0.00500579386 C0.541169249,-0.0186160757 0.351037561,0.0421239869 0.210482807,0.171126295 C0.0699280535,0.300128603 -0.006856415,0.484366383 7.10542736e-14,0.675005794 L22.1704818,88.1450058 C22.1704818,88.4850058 21.9104818,88.7050058 21.4904818,88.7050058 L9.8004818,88.7050058 C9.3704818,88.7050058 9.1104818,88.9250058 9.1304818,89.2750058 L9.2604818,92.8950058 L163.110482,92.8950058 L163.000482,90.0050058 C162.870505,89.2651156 162.23166,88.722938 161.480482,88.7150058 L151.590482,88.7150058 C150.829869,88.7029553 150.184347,88.1538426 150.050482,87.4050058 L128.620482,42.9350058 C128.488894,42.1323408 127.813039,41.5315806 127.000482,41.4950058 Z"
+                                        id="路径" fill="#62646B"></path>
+                                </g>
+                                <polygon [id]="networkCard41.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="-2.89546165e-13 1 40 1 46 19 81 19 89 42 127 42 150 89 163 89 163 105 8 105 8 95 10 90 17 90 0 30">
+                                </polygon>
+                            </g>
+                            <path d="M27.25,214 L26.25,205 C26.0833333,201.666667 27.3333333,200 30,200"
+                                [id]="networkCard422.id" stroke="#0067FF" opacity="0.5" stroke-width="4"
+                                stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M177,214 L180,205 C180.666667,201.666667 183,200 187,200" [id]="networkCard455.id"
+                                stroke="#0067FF" opacity="0.5" stroke-width="4" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                transform="translate(182.000000, 207.000000) scale(-1, 1) translate(-182.000000, -207.000000) ">
+                            </path>
+                            <line x1="78" y1="201" x2="81" y2="215" [id]="networkCard433.id" stroke="#0067FF"
+                                opacity="0.5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></line>
+                            <line x1="128" y1="201" x2="132" y2="215" [id]="networkCard444.id" stroke="#0067FF"
+                                opacity="0.5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></line>
+                            <g id="网口4" transform="translate(14.000000, 211.000000)">
+                                <g [id]="networkCard42.id" filter="url(#filter-3)"
+                                    transform="translate(1.988629, -0.000623)" fill-rule="nonzero">
+                                    <path
+                                        d="M24.3313706,15.5306225 L23.0113706,10.9306225 C22.8660113,10.4597603 22.4433523,10.1288103 21.9513706,10.1006225 L19.4913706,10.1006225 C19.0020431,10.073917 18.5801509,9.74754755 18.4313706,9.28062254 L17.1813706,4.87062254 C17.0329479,4.4091882 16.6153667,4.08705412 16.1313706,4.06062254 L5.51137055,4.06062254 C5.30808772,4.04758176 5.11207292,4.13857005 4.99082465,4.30225521 C4.86957639,4.46594037 4.83965745,4.67996262 4.91137055,4.87062254 L6.12137055,9.28062254 C6.1966163,9.47068545 6.16992021,9.68598088 6.05053239,9.85190972 C5.93114457,10.0178386 5.73549311,10.1115685 5.53137055,10.1006225 L3.06137055,10.1006225 C2.85650315,10.0934995 2.66175632,10.1897533 2.54298876,10.3568331 C2.4242212,10.5239129 2.39731551,10.7394754 2.47137055,10.9306225 L3.72137055,15.5306225 C3.79510225,15.7245494 3.76694844,15.9425027 3.64635868,16.1113283 C3.52576892,16.280154 3.32872788,16.3774735 3.12137055,16.3706225 L0.641370553,16.3706225 C0.434764219,16.3599847 0.236847064,16.4547889 0.115647029,16.6224489 C-0.00555300523,16.790109 -0.0335155905,17.0077718 0.0413705533,17.2006225 L4.13137055,32.4606225 C4.27099484,32.9426642 4.70024011,33.2836534 5.20137055,33.3106225 L32.7813706,33.3106225 C32.9914933,33.3207972 33.1920305,33.2219846 33.311986,33.0491674 C33.4319414,32.8763502 33.4543849,32.6539195 33.3713706,32.4606225 L28.9413706,17.2006225 C28.7897929,16.7299144 28.3649856,16.400391 27.8713706,16.3706225 L25.3913706,16.3706225 C24.8977975,16.3381372 24.4757853,16.0037124 24.3313706,15.5306225 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M24.3313706,11.4806225 L23.0113706,6.87062254 C22.8601626,6.40540104 22.439659,6.08010585 21.9513706,6.05062254 L19.4913706,6.05062254 C18.9983073,6.02531458 18.5741934,5.69322547 18.4313706,5.22062254 L17.1813706,0.820622542 C17.0339006,0.356953973 16.6169552,0.0313394699 16.1313706,0.00062254176 L5.51137055,0.00062254176 C5.30731304,-0.00859123547 5.11218763,0.0849421753 4.99156685,0.249790567 C4.87094608,0.414638958 4.84084176,0.628919509 4.91137055,0.820622542 L6.12137055,5.22062254 C6.1954256,5.41176971 6.16851991,5.62733222 6.04975235,5.79441201 C5.93098478,5.9614918 5.73623796,6.05774554 5.53137055,6.05062254 L3.06137055,6.05062254 C2.857248,6.03967655 2.66159654,6.13340653 2.54220872,6.29933537 C2.42282089,6.46526421 2.3961248,6.68055963 2.47137055,6.87062254 L3.72137055,11.4806225 C3.7962567,11.6734733 3.76829411,11.8911361 3.64709408,12.0587962 C3.52589404,12.2264562 3.32797689,12.3212603 3.12137055,12.3106225 L0.641370553,12.3106225 C0.434764219,12.2999847 0.236847064,12.3947889 0.115647029,12.5624489 C-0.00555300523,12.730109 -0.0335155905,12.9477718 0.0413705533,13.1406225 L4.13137055,28.4006225 C4.27007952,28.8848549 4.69863773,29.2293036 5.20137055,29.260898 L32.7813706,29.260898 C32.9921971,29.2668995 33.1917538,29.1655651 33.3110743,28.9916403 C33.4303949,28.8177154 33.4531104,28.5950597 33.3713706,28.4006225 L28.9413706,13.1406225 C28.7897929,12.6699144 28.3649856,12.340391 27.8713706,12.3106225 L25.3913706,12.3106225 C24.8993889,12.2824348 24.4767298,11.9514848 24.3313706,11.4806225 Z"
+                                        id="路径" fill="#62646B"></path>
+                                </g>
+                                <g [id]="networkCard43.id" filter="url(#filter-5)"
+                                    transform="translate(54.308605, -0.000908)" fill-rule="nonzero">
+                                    <path
+                                        d="M24.2813949,15.5309082 L22.7713949,10.9309082 C22.6091792,10.4635853 22.1847246,10.1373841 21.6913949,10.1009082 L19.2213949,10.1009082 C18.725901,10.0725157 18.2960177,9.74911729 18.1313949,9.28090825 L16.6913949,4.87090825 C16.5249679,4.4098193 16.1006398,4.09157327 15.6113949,4.06090825 L4.99139488,4.06090825 C4.78925434,4.04533854 4.59405706,4.13831156 4.47876293,4.30507628 C4.3634688,4.47184101 4.34543224,4.68729552 4.43139488,4.87090825 L5.82139488,9.28090825 C5.90576969,9.46569594 5.88731963,9.68115885 5.77275682,9.84891153 C5.65819402,10.0166642 5.46421708,10.1122551 5.26139488,10.1009082 L2.79139488,10.1009082 C2.58789489,10.0935951 2.39500802,10.1917367 2.28111673,10.3605399 C2.16722545,10.529343 2.14843042,10.7449442 2.23139488,10.9309082 L3.69139488,15.5309082 C3.77907422,15.7178204 3.76267522,15.9369667 3.64815438,16.1087479 C3.53363355,16.2805292 3.337652,16.3799537 3.13139488,16.3709082 L0.621394878,16.3709082 C0.416148585,16.3599721 0.220003064,16.4566382 0.10364683,16.6260692 C-0.012709404,16.7955002 -0.0325047202,17.0132743 0.0513948783,17.2009082 L4.76139488,32.4609082 C4.92217208,32.9408034 5.35646199,33.2763911 5.86139488,33.3109082 L33.4413949,33.3109082 C33.6504694,33.3218278 33.8496725,33.2211322 33.9648532,33.0463043 C34.080034,32.8714764 34.09394,32.6487028 34.0013949,32.4609082 L29.0013949,17.2009082 C28.8341039,16.7288661 28.4012233,16.4022381 27.9013949,16.3709082 L25.3813949,16.3709082 C24.8800016,16.3353842 24.447688,16.0052538 24.2813949,15.5309082 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M24.2813949,11.4809082 L22.7713949,6.87090825 C22.6038155,6.40909059 22.1812555,6.08825793 21.6913949,6.05090825 L19.2213949,6.05090825 C18.7223502,6.02362606 18.2904186,5.69472403 18.1313949,5.22090825 L16.6913949,0.820908249 C16.5274319,0.360638304 16.1084659,0.0395616164 15.6213949,0.000908249492 L4.99139488,0.000908249492 C4.78857267,-0.0104386167 4.59459574,0.0851522882 4.48003293,0.252904969 C4.36547013,0.420657649 4.34702006,0.636120564 4.43139488,0.820908249 L5.82139488,5.22090825 C5.90435934,5.4068723 5.88556431,5.62247348 5.77167302,5.79127664 C5.65778174,5.96007979 5.46489487,6.05822142 5.26139488,6.05090825 L2.79139488,6.05090825 C2.58857267,6.03956138 2.39459574,6.13515229 2.28003293,6.30290497 C2.16547013,6.47065765 2.14702006,6.68612056 2.23139488,6.87090825 L3.69139488,11.4809082 C3.78062425,11.6666103 3.76464356,11.8857093 3.64941238,12.0564984 C3.53418119,12.2272874 3.33699729,12.3241288 3.13139488,12.3109082 L0.621394878,12.3109082 C0.416148585,12.2999721 0.220003064,12.3966382 0.10364683,12.5660692 C-0.012709404,12.7355002 -0.0325047202,12.9532743 0.0513948783,13.1409082 L4.76139488,28.4009082 C4.92118031,28.8831029 5.35489332,29.2221877 5.86139488,29.2609082 L33.4413949,29.2609082 C33.6510986,29.267696 33.849115,29.1644496 33.9636046,28.9886262 C34.0780943,28.8128028 34.0924239,28.5899465 34.0013949,28.4009082 L29.0013949,13.1409082 C28.8341039,12.6688661 28.4012233,12.3422381 27.9013949,12.3109082 L25.3813949,12.3109082 C24.8815664,12.2795784 24.4486859,11.9529504 24.2813949,11.4809082 Z"
+                                        id="路径" fill="#62646B"></path>
+                                </g>
+                                <g [id]="networkCard44.id" filter="url(#filter-7)"
+                                    transform="translate(106.637009, -0.001072)" fill-rule="nonzero">
+                                    <path
+                                        d="M24.2229913,15.5310721 L22.5229913,10.9310721 C22.3340412,10.4496988 21.8795879,10.1245296 21.3629913,10.1010721 L18.8929913,10.1010721 C18.3936243,10.064251 17.9589288,9.74599179 17.7729913,9.28107206 L16.1729913,4.87107206 C15.9860159,4.40852705 15.5508238,4.09378994 15.0529913,4.06107206 L4.47299127,4.06107206 C4.2715768,4.04402227 4.07704076,4.13882791 3.96636636,4.30797181 C3.85569195,4.47711572 3.84671628,4.6933374 3.94299127,4.87107206 L5.50299127,9.28107206 C5.59734346,9.46012151 5.58774388,9.67614866 5.47788212,9.84612346 C5.36802036,10.0160983 5.17499343,10.1135687 4.97299127,10.1010721 L2.51299127,10.1010721 C2.31039901,10.092894 2.11871265,10.1929518 2.00959093,10.3638405 C1.90046921,10.5347292 1.89034051,10.7507215 1.98299127,10.9310721 L3.60299127,15.5310721 C3.70072664,15.7121737 3.69325436,15.9318959 3.58344127,16.1059393 C3.47362817,16.2799827 3.27852715,16.3813201 3.07299127,16.3710721 L0.592991273,16.3710721 C0.390399007,16.362894 0.198712646,16.4629518 0.0895909275,16.6338405 C-0.0195307909,16.8047292 -0.0296594907,17.0207215 0.0629912732,17.2010721 L5.36299127,32.4610721 C5.53915952,32.9423918 5.98169647,33.2752735 6.49299127,33.3110721 L34.0829913,33.3110721 C34.5429913,33.3110721 34.7729913,32.9310721 34.6029913,32.4610721 L28.9629913,17.2010721 C28.7749887,16.7276043 28.3313159,16.4045794 27.8229913,16.3710721 L25.3629913,16.3710721 C24.8513582,16.3382713 24.4058808,16.0100248 24.2229913,15.5310721 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M24.2229913,11.4810721 L22.5229913,6.87107206 C22.3309572,6.39361641 21.8771582,6.07282746 21.3629913,6.05107206 L18.8929913,6.05107206 C18.3912234,6.01250122 17.9559073,5.68990088 17.7729913,5.22107206 L16.1729913,0.821072064 C15.9934703,0.368183645 15.577459,0.0523232291 15.0929913,0.00107206439 L4.47299127,0.00107206439 C4.27098911,-0.0114245975 4.07796219,0.0860458645 3.96810043,0.256020665 C3.85823867,0.425995465 3.84863908,0.642022621 3.94299127,0.821072064 L5.50299127,5.22107206 C5.66299127,5.68107206 5.43299127,6.05107206 4.97299127,6.05107206 L2.51299127,6.05107206 C2.31098911,6.0385754 2.11796219,6.13604586 2.00810043,6.30602066 C1.89823867,6.47599547 1.88863908,6.69202262 1.98299127,6.87107206 L3.60299127,11.4810721 C3.69564204,11.6614227 3.68551334,11.8774149 3.57639162,12.0483036 C3.4672699,12.2191923 3.27558354,12.3192501 3.07299127,12.3110721 L0.592991273,12.3110721 C0.390399007,12.302894 0.198712646,12.4029518 0.0895909275,12.5738405 C-0.0195307909,12.7447292 -0.0296594907,12.9607215 0.0629912732,13.1410721 L5.36299127,28.4010721 C5.53814013,28.8847347 5.98014512,29.2211279 6.49299127,29.2610721 L34.0829913,29.2610721 C34.5429913,29.2610721 34.7729913,28.8710721 34.6029913,28.4010721 L28.9629913,13.1410721 C28.7749887,12.6676043 28.3313159,12.3445794 27.8229913,12.3110721 L25.3629913,12.3110721 C24.8529134,12.2824413 24.4068914,11.957706 24.2229913,11.4810721 L24.2229913,11.4810721 Z"
+                                        id="路径" fill="#62646B"></path>
+                                </g>
+                                <g [id]="networkCard45.id" filter="url(#filter-9)"
+                                    transform="translate(158.968551, 0.000000)" fill-rule="nonzero">
+                                    <path
+                                        d="M24.151449,15.53 L22.271449,10.93 C22.0741331,10.4595374 21.6301159,10.1390728 21.121449,10.1 L18.651449,10.1 C18.1459011,10.0605577 17.7034867,9.74509698 17.501449,9.28 L15.711449,4.87 C15.5136438,4.40739679 15.0733784,4.09457666 14.571449,4.06 L3.94144904,4.06 C3.49144904,4.06 3.27144904,4.42 3.45144904,4.87 L5.19144904,9.28 C5.37144904,9.73 5.19144904,10.1 4.69144904,10.1 L2.23144904,10.1 C1.78144904,10.1 1.55144904,10.47 1.73144904,10.93 L3.54144904,15.53 C3.72144904,15.99 3.54144904,16.37 3.04144904,16.37 L0.561449042,16.37 C0.111449042,16.37 -0.118550958,16.74 0.0614490423,17.2 L6.03144904,32.46 C6.22987623,32.941359 6.68232964,33.2700644 7.20144904,33.31 L34.781449,33.31 C35.241449,33.31 35.461449,32.93 35.261449,32.46 L28.961449,17.2 C28.7553659,16.7279163 28.3051129,16.408506 27.791449,16.37 L25.321449,16.37 C24.8062801,16.3274713 24.3564651,16.0045272 24.151449,15.53 L24.151449,15.53 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M24.151449,11.48 L22.271449,6.87 C22.0694114,6.40490302 21.626997,6.08944233 21.121449,6.05 L18.651449,6.05 C18.1427822,6.01092718 17.698765,5.69046261 17.501449,5.22 L15.711449,0.82 C15.5146988,0.35498363 15.0748955,0.0386338906 14.571449,-8.01136935e-13 L3.94144904,-8.01136935e-13 C3.49144904,-8.01136935e-13 3.27144904,0.37 3.45144904,0.82 L5.19144904,5.22 C5.37144904,5.68 5.19144904,6.05 4.69144904,6.05 L2.23144904,6.05 C2.02965821,6.03533989 1.83660188,6.13471023 1.73127121,6.30745254 C1.62594053,6.48019485 1.62600917,6.69732432 1.73144904,6.87 L3.54144904,11.48 C3.72144904,11.94 3.54144904,12.31 3.04144904,12.31 L0.561449042,12.31 C0.111449042,12.31 -0.118550958,12.68 0.0614490423,13.14 L6.03144904,28.4 C6.22881798,28.8837804 6.6808116,29.2160151 7.20144904,29.26 L34.781449,29.26 C35.241449,29.26 35.461449,28.87 35.261449,28.4 L28.991449,13.14 C28.7853659,12.6679163 28.3351129,12.348506 27.821449,12.31 L25.351449,12.31 C24.8267221,12.2823867 24.3624163,11.9612418 24.151449,11.48 Z"
+                                        id="路径" fill="#62646B"></path>
+                                </g>
+                                <polygon [id]="networkCard42.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="6 0 19 3.22752242e-13 20 5 24 5 26 12 31 12 35 29 35 33 26 33 5 33 0.651904638 14.7379995 1 12 4 12 3 5 7 5">
+                                </polygon>
+                                <polygon [id]="networkCard43.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="59.3480954 0 72.3480954 3.22752242e-13 73.3480954 5 77.3480954 5 79.3480954 12 84.3480954 12 88.3480954 29 88.3480954 33 79.3480954 33 58.3480954 33 54 14.7379995 54.3480954 12 57.3480954 12 56.3480954 5 60.3480954 5">
+                                </polygon>
+                                <polygon [id]="networkCard44.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="111.348095 0 124.348095 3.22752242e-13 125.348095 5 129.348095 5 131.348095 12 136.348095 12 140.348095 29 140.348095 33 131.348095 33 110.348095 33 106 14.7379995 106.348095 12 109.348095 12 108.348095 5 112.348095 5">
+                                </polygon>
+                                <polygon [id]="networkCard45.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="164.348095 0 176 0 177 5 182.348095 5 184.348095 12 189.348095 12 193.348095 29 193.348095 33 184.348095 33 163.348095 33 159 14.7379995 159.348095 12 162.348095 12 161.348095 5 165 5">
+                                </polygon>
+                            </g>
+                        </g>
+                        <g [id]="networkCard311.id" transform="translate(783.000000, 107.000000)">
+                            <line x1="67" y1="5.91171556e-12" x2="90" y2="200" id="连接cpu" stroke="#0067FF" opacity="0.5"
+                                stroke-width="4" stroke-linecap="round"></line>
+                            <path d="M15,200 L163,200 L15,200 L15,200 Z" id="网口总线" stroke="#0067FF" opacity="0.5"
+                                stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path
+                                d="M13.0147059,214 L12.0147059,205 C11.8480392,201.666667 13.0980392,200 15.7647059,200"
+                                [id]="networkCard322.id" stroke="#0067FF" opacity="0.5" stroke-width="4"
+                                stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M162,214 L163,205 C163.666667,201.666667 166,200 170,200" [id]="networkCard355.id"
+                                stroke="#0067FF" opacity="0.5" stroke-width="4" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                transform="translate(166.000000, 207.000000) scale(-1, 1) translate(-166.000000, -207.000000) ">
+                            </path>
+                            <line x1="65" y1="201" x2="66" y2="215" [id]="networkCard333.id" stroke="#0067FF"
+                                opacity="0.5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></line>
+                            <line x1="117" y1="201" x2="118" y2="215" [id]="networkCard344.id" stroke="#0067FF"
+                                opacity="0.5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></line>
+                            <g [id]="networkCard31.id" filter="url(#filter-11)"
+                                transform="translate(4.000000, 60.000000)">
+                                <g id="NIC" transform="translate(-0.000278, 0.993486)" fill-rule="nonzero">
+                                    <path
+                                        d="M128.230278,48.4765136 L113.330278,52.4765136 C112.977711,52.4914916 112.64335,52.3195364 112.450455,52.0240373 C112.25756,51.7285382 112.234691,51.3532482 112.390278,51.0365136 L72.9402785,40.7165136 C72.9911998,40.5922451 73.0215957,40.4605296 73.0302785,40.3265136 L73.8102785,27.8665136 L32.3602785,30.2465136 C31.9804504,30.2826981 31.613133,30.0995907 31.413402,29.7744966 C31.2136709,29.4494025 31.2163385,29.0389841 31.4202785,28.7165136 L32.0002785,14.1865136 C32.2102785,13.6965136 36.2902785,0.846513646 36.2902785,0.846513646 L4.45027848,0.676513646 L4.45027848,30.3565136 L8.91027848,90.5465136 C8.71359277,90.9135375 8.32652232,91.1380383 7.91027848,91.1265136 L3.00027848,100.006514 C2.5812204,99.9945084 2.19241389,100.223904 2.00027848,100.596514 L0.14027848,104.356514 L140.140278,104.356514 L153.140278,103.016514 L148.450278,100.696514 C148.497876,100.592667 148.525037,100.480628 148.530278,100.366514 L144.130278,89.8765136 L143.600278,100.006514 C143.27726,99.9979127 142.978305,99.8337567 142.797691,99.5658132 C142.617077,99.2978698 142.577067,98.9591657 142.690278,98.6565136 L127.140278,61.1665136 C127.190092,61.0558587 127.220534,60.9374719 127.230278,60.8165136 L128.230278,48.4765136 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M152.630278,104.356514 L1.38027848,104.356514 C0.689922543,104.356514 0.13027848,103.79687 0.13027848,103.106514 L0.13027848,92.3265136 L153.880278,92.3265136 L153.880278,103.106514 C153.880278,103.79687 153.320634,104.356514 152.630278,104.356514 L152.630278,104.356514 Z"
+                                        id="路径" fill="#3c3e44"></path>
+                                    <path
+                                        d="M131.320278,41.4965136 L88.8602785,41.4965136 C88.0188117,41.4537315 87.3181514,40.8359895 87.1702785,40.0065136 L86.3802785,20.1165136 C86.2291705,19.2648565 85.5137053,18.6279684 84.6502785,18.5765136 L45.5502785,18.5765136 C44.6655365,18.5124818 43.9286814,17.8733312 43.7402785,17.0065136 L43.5302785,1.66651365 C43.3740477,0.750640598 42.6076643,0.0629668637 41.6802785,0.00651364635 L5.06027848,0.00651364635 C4.87022063,-0.0208005015 4.67794106,0.0386605984 4.53648016,0.168494576 C4.39501925,0.298328553 4.31932529,0.48481577 4.33027848,0.676513646 L13.0002785,88.1465136 C13.0002785,88.4865136 12.7402785,88.7065136 12.3202785,88.7065136 L0.67027848,88.7065136 C0.25027848,88.7065136 -0.00972151967,88.9265136 -1.56319402e-13,89.2765136 L0.13027848,92.8965136 L154.000278,92.8965136 L153.920278,89.9965136 C153.786651,89.2587223 153.149979,88.7183889 152.400278,88.7065136 L142.500278,88.7065136 C141.756336,88.672157 141.134469,88.1290597 141.000278,87.3965136 L133.000278,42.9365136 C132.872038,42.1078837 132.158773,41.4965136 131.320278,41.4965136 Z"
+                                        id="路径" fill="#62646B"></path>
+                                </g>
+                                <polygon [id]="networkCard31.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="3 1 44 1 44 19 87 19 89 42 131 42 142 89 155 89 155 101 152 105 0 105 0 95 2 90 9 90 3 11">
+                                </polygon>
+                            </g>
+                            <g id="网口3" transform="translate(0.000000, 210.000000)">
+                                <g [id]="networkCard32.id" filter="url(#filter-13)"
+                                    transform="translate(-0.003234, -0.000007)" fill-rule="nonzero">
+                                    <path
+                                        d="M24.6132341,15.5300072 L24.1832341,10.9300072 C24.133328,10.4670419 23.7487179,10.112346 23.2832341,10.1000072 L20.8232341,10.1000072 C20.3594054,10.0926648 19.9735985,9.74115185 19.9232341,9.28000716 L19.5232341,4.87000716 C19.4729196,4.41438566 19.0915671,4.06731199 18.6332341,4.0598869 L8.00323408,4.0598869 C7.79248938,4.05621039 7.59012638,4.14246389 7.44692151,4.29712515 C7.30371664,4.45178642 7.23326134,4.66017668 7.25323408,4.87000716 L7.61323408,9.28000716 C7.63627009,9.49146917 7.56719482,9.70261807 7.42363282,9.85957918 C7.28007083,10.0165403 7.07590711,10.1041327 6.86323408,10.1000072 L4.39323408,10.1000072 C4.17965212,10.0987882 3.9756818,10.1886895 3.8324845,10.3471612 C3.68928721,10.5056328 3.62044815,10.7176406 3.64323408,10.9300072 L4.00323408,15.5300072 C4.02599809,15.7450319 3.95609392,15.9595734 3.81102477,16.119913 C3.66595561,16.2802526 3.45945711,16.3712088 3.24323408,16.3700072 L0.763234079,16.3700072 C0.548933783,16.369096 0.344208552,16.4587027 0.199485507,16.6167555 C0.0547624628,16.7748083 -0.0165062218,16.986616 0.00323407856,17.2000072 L1.15323408,32.4600072 C1.19369334,32.9308562 1.58084309,33.2964976 2.05323408,33.3100372 L29.6432341,33.3100372 C29.8607498,33.3119506 30.0683942,33.2193614 30.2123131,33.0562533 C30.3562319,32.8931453 30.422246,32.6755882 30.3932341,32.4600072 L28.9032341,17.2000072 C28.8486464,16.7354693 28.4608211,16.3817386 27.9932341,16.3700072 L25.5232341,16.3700072 C25.0621555,16.3341188 24.6858352,15.9867461 24.6132341,15.5300072 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M24.6132341,11.4800072 L24.1832341,6.87000716 C24.1287078,6.41099069 23.7453301,6.06169102 23.2832341,6.05000716 L20.8232341,6.05000716 C20.35597,6.04208273 19.9688841,5.68510351 19.9232341,5.22000716 L19.5232341,0.820007161 C19.4733818,0.362563036 19.0932223,0.0123037047 18.6332341,-7.67386155e-13 L8.00323408,-7.67386155e-13 C7.79157755,-0.000916935187 7.58938433,0.0876350869 7.44653403,0.24381809 C7.30368372,0.400001092 7.23347726,0.60927271 7.25323408,0.820007161 L7.61323408,5.22000716 C7.63602,5.43237368 7.56718095,5.64438148 7.42398365,5.80285316 C7.28078635,5.96132484 7.07681604,6.05122607 6.86323408,6.05000716 L4.39323408,6.05000716 C4.18056105,6.04588162 3.97639733,6.13347402 3.83283533,6.29043514 C3.68927334,6.44739625 3.62019806,6.65854515 3.64323408,6.87000716 L4.00323408,11.4800072 C4.02624418,11.6941273 3.95610237,11.9078072 3.81066973,12.066635 C3.6652371,12.2254627 3.45854794,12.3141114 3.24323408,12.3100072 L0.763234079,12.3100072 C0.548933783,12.309096 0.344208552,12.3987027 0.199485507,12.5567555 C0.0547624628,12.7148083 -0.0165062218,12.926616 0.00323407856,13.1400072 L1.15323408,28.4000072 C1.19324693,28.8727062 1.57920531,29.2415108 2.05323408,29.2600072 L29.6432341,29.2600072 C29.8616415,29.2590326 30.0690729,29.1641414 30.2126254,28.9995345 C30.3561779,28.8349276 30.4219744,28.6165175 30.3932341,28.4000072 L28.9032341,13.1400072 C28.8486464,12.6754693 28.4608211,12.3217386 27.9932341,12.3100072 L25.5232341,12.3100072 C25.055647,12.2982758 24.6678218,11.944545 24.6132341,11.4800072 Z"
+                                        id="路径" fill="#62646B"></path>
+                                </g>
+                                <g [id]="networkCard33.id" filter="url(#filter-15)"
+                                    transform="translate(52.331505, -0.000034)" fill-rule="nonzero">
+                                    <path
+                                        d="M24.5484947,15.5300339 L23.9284947,10.9300339 C23.8499426,10.4703662 23.4641017,10.1260136 22.9984947,10.1000339 L20.5384947,10.1000339 C20.0760044,10.0750546 19.6911902,9.73575604 19.6084947,9.28003393 L19.0284947,4.87003393 C18.9417117,4.4182596 18.5579053,4.08397659 18.0984947,4.05982743 L7.47849469,4.05982743 C7.2697801,4.05500366 7.06942988,4.14208896 6.93072719,4.29812949 C6.7920245,4.45417001 6.72902912,4.66334851 6.75849469,4.87003393 L7.29849469,9.28003393 C7.32761918,9.48762621 7.26482572,9.69760371 7.12651466,9.85512464 C6.9882036,10.0126456 6.78811019,10.102067 6.57849469,10.1000339 L4.10849469,10.1000339 C3.89685728,10.097547 3.69484543,10.1883053 3.55615474,10.3481848 C3.41746405,10.5080644 3.35614435,10.7208688 3.38849469,10.9300339 L3.93849469,15.5300339 C3.97079744,15.7418651 3.9083987,15.9571914 3.76784044,16.1189296 C3.62728217,16.2806679 3.42276064,16.3724827 3.20849469,16.3700339 L0.738494687,16.3700339 C0.525126076,16.364553 0.320322841,16.4540214 0.17936262,16.6142913 C0.0384023992,16.7745611 -0.0241844339,16.9891115 0.00849468738,17.2000339 L1.76849469,32.4600339 C1.83937979,32.9310917 2.23270246,33.2867558 2.70849469,33.3101317 L30.2884947,33.3101317 C30.5042676,33.3135861 30.7102563,33.2201665 30.8497388,33.0554996 C30.9892214,32.8908327 31.0474882,32.672284 31.0084947,32.4600339 L28.8984947,17.2000339 C28.8190978,16.7368711 28.4279241,16.3914731 27.9584947,16.3700339 L25.4884947,16.3700339 C25.0159029,16.3476563 24.6236646,15.9971456 24.5484947,15.5300339 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M24.5484947,11.4800339 L23.9284947,6.87003393 C23.8457992,6.41431182 23.4609849,6.07501322 22.9984947,6.05003393 L20.5384947,6.05003393 C20.0728876,6.02405428 19.6870468,5.67970167 19.6084947,5.22003393 L19.0284947,0.820033929 C18.9457992,0.36431182 18.5609849,0.0250132222 18.0984947,1.36779477e-12 L7.47849469,1.36779477e-12 C7.26887918,-0.00199914879 7.06878577,0.087422292 6.93047471,0.244943221 C6.79216365,0.40246415 6.72937019,0.612441646 6.75849469,0.820033929 L7.29849469,5.22003393 C7.33084502,5.42919901 7.26952533,5.6420035 7.13083464,5.80188304 C6.99214395,5.96176259 6.79013209,6.05252086 6.57849469,6.05003393 L4.10849469,6.05003393 C3.89887918,6.04800085 3.69878577,6.13742229 3.56047471,6.29494322 C3.42216365,6.45246415 3.35937019,6.66244165 3.38849469,6.87003393 L3.93849469,11.4800339 C3.97117381,11.6909564 3.90858698,11.9055068 3.76762675,12.0657766 C3.62666653,12.2260464 3.4218633,12.3155149 3.20849469,12.3100339 L0.738494687,12.3100339 C0.525126076,12.304553 0.320322841,12.3940214 0.17936262,12.5542913 C0.0384023992,12.7145611 -0.0241844339,12.9291115 0.00849468738,13.1400339 L1.76849469,28.4000339 C1.83503628,28.8750348 2.22946351,29.2358938 2.70849469,29.2600358 L30.2884947,29.2600358 C30.5051442,29.2605292 30.7108211,29.1647677 30.8498967,28.9986496 C30.9889724,28.8325315 31.0470768,28.6132209 31.0084947,28.4000339 L28.8984947,13.1400339 C28.8190978,12.6768711 28.4279241,12.3314731 27.9584947,12.3100339 L25.4884947,12.3100339 C25.0190652,12.2885948 24.6278916,11.9431967 24.5484947,11.4800339 Z"
+                                        id="路径" fill="#62646B"></path>
+                                </g>
+                                <g [id]="networkCard34.id" filter="url(#filter-17)"
+                                    transform="translate(104.655551, -0.000157)" fill-rule="nonzero">
+                                    <path
+                                        d="M24.4944489,15.5301571 L23.6844489,10.9301571 C23.6008215,10.4450813 23.1766286,10.0930012 22.6844489,10.1001571 L20.2144489,10.1001571 C19.7254451,10.1081334 19.3024162,9.76124963 19.2144489,9.28015711 L18.4644489,4.87015711 C18.3721998,4.3930489 17.9503131,4.05132073 17.4644489,4.06015711 L6.95444888,4.06015711 C6.74787611,4.05247806 6.54932464,4.14058303 6.41641275,4.29890455 C6.28350085,4.45722608 6.23111193,4.6680354 6.27444888,4.87015711 L6.98444888,9.28015711 C7.03139466,9.48373999 6.9806848,9.69756966 6.84732011,9.85839179 C6.71395542,10.0192139 6.51320306,10.1086181 6.30444888,10.1001571 L3.83444888,10.1001571 C3.62439119,10.0957774 3.42378265,10.1873437 3.28946933,10.348909 C3.15515601,10.5104743 3.10177356,10.7244334 3.14444888,10.9301571 L3.87444888,15.5301571 C3.92065911,15.7373528 3.86892234,15.9542866 3.73417589,16.1183257 C3.59942943,16.2823649 3.3966741,16.3752476 3.18444888,16.3701571 L0.714448879,16.3701571 C0.502662438,16.3626502 0.299172908,16.4528809 0.162547851,16.6148791 C0.0259227935,16.7768774 -0.028682269,16.9926732 0.0144488792,17.2001571 L2.39444888,32.4601571 C2.4692183,32.9531952 2.89580551,33.3157943 3.39444888,33.3104157 L30.9444489,33.3104157 C31.1588763,33.316023 31.3638357,33.2218291 31.4990289,33.0552867 C31.634222,32.8887444 31.68427,32.6687989 31.6344489,32.4601571 L28.9144489,17.2001571 C28.8308215,16.7150813 28.4066286,16.3630012 27.9144489,16.3701571 L25.4344489,16.3701571 C24.9618571,16.3477795 24.5696188,15.9972687 24.4944489,15.5301571 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M24.4944489,11.4801571 L23.6844489,6.87015711 C23.5964815,6.38906458 23.1734526,6.04218086 22.6844489,6.05015711 L20.2144489,6.05015711 C19.7222691,6.05731303 19.2980763,5.70523295 19.2144489,5.22015711 L18.5444489,0.820157109 C18.4564815,0.339064582 18.0334526,-0.00781914409 17.5444489,2.77111667e-13 L6.95444888,2.77111667e-13 C6.74699848,-0.00429824842 6.54886622,0.0862085235 6.41641265,0.245931946 C6.28395908,0.40565537 6.23168082,0.617114224 6.27444888,0.820157109 L6.98444888,5.22015711 C7.03076785,5.42466661 6.9801443,5.6391079 6.84725475,5.80131132 C6.7143652,5.96351474 6.51407415,6.05533686 6.30444888,6.05015711 L3.83444888,6.05015711 C3.62652476,6.04642643 3.42800804,6.13667131 3.29411489,6.2957907 C3.16022174,6.4549101 3.105235,6.6659302 3.14444888,6.87015711 L3.87444888,11.4801571 C3.92127246,11.6864273 3.86944379,11.9027405 3.73422615,12.0653936 C3.5990085,12.2280467 3.39580163,12.3185154 3.18444888,12.3101571 L0.714448879,12.3101571 C0.502662438,12.3026502 0.299172908,12.3928809 0.162547851,12.5548791 C0.0259227935,12.7168774 -0.028682269,12.9326732 0.0144488792,13.1401571 L2.39444888,28.4001571 C2.46469846,28.8971734 2.89251685,29.2650972 3.39444888,29.2602094 L30.9444489,29.2602094 C31.1597311,29.2627847 31.3642466,29.1661986 31.4989804,28.9982696 C31.6337141,28.8303406 31.6836759,28.609752 31.6344489,28.4001571 L28.9144489,13.1401571 C28.8308215,12.6550813 28.4066286,12.3030012 27.9144489,12.3101571 L25.4344489,12.3101571 C24.9650194,12.2887179 24.5738458,11.9433199 24.4944489,11.4801571 Z"
+                                        id="路径" fill="#62646B"></path>
+                                </g>
+                                <g [id]="networkCard35.id" filter="url(#filter-19)"
+                                    transform="translate(156.987622, -0.000399)" fill-rule="nonzero">
+                                    <path
+                                        d="M24.4323776,15.5303985 L23.4323776,10.9303985 C23.3214191,10.4616956 22.9134991,10.123122 22.4323776,10.1003985 L20.0123776,10.1003985 C19.5316054,10.0856105 19.1210558,9.7489598 19.0123776,9.28039855 L18.0123776,4.87039855 C17.9029474,4.40383134 17.4914984,4.07055768 17.0123776,4.06039855 L6.43237761,4.06039855 C6.22688106,4.04971451 6.02878131,4.13849033 5.89999376,4.29897942 C5.77120622,4.45946851 5.72744131,4.67209327 5.78237761,4.87039855 L6.67237761,9.28039855 C6.72713185,9.48141117 6.68221433,9.69648872 6.55158538,9.8587853 C6.42095644,10.0210819 6.22044788,10.1109276 6.01237761,10.1003985 L3.55237761,10.1003985 C3.34345509,10.093313 3.14352766,10.1856216 3.01342114,10.3492404 C2.88331462,10.5128592 2.83841318,10.7284415 2.89237761,10.9303985 L3.81237761,15.5303985 C3.8656431,15.7333212 3.82078197,15.9494783 3.69116481,16.1144456 C3.56154765,16.2794129 3.3621413,16.3741417 3.15237761,16.3703985 L0.682377607,16.3703985 C0.473455095,16.363313 0.273527662,16.4556216 0.14342114,16.6192404 C0.013314618,16.7828592 -0.0315868244,16.9984415 0.0223776072,17.2003985 L3.02237761,32.4603985 C3.12240842,32.938898 3.5340132,33.2887621 4.02237761,33.3106451 L31.6123776,33.3106451 C31.8242124,33.3161825 32.0259406,33.2198968 32.1546676,33.0515615 C32.2833946,32.8832262 32.323462,32.6633175 32.2623776,32.4603985 L28.9123776,17.2003985 C28.8014191,16.7316956 28.3934991,16.393122 27.9123776,16.3703985 L25.4323776,16.3703985 C24.9496313,16.3431849 24.5425086,16.0012018 24.4323776,15.5303985 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M24.4323776,11.4803985 L23.4323776,6.87039855 C23.3176155,6.40564727 22.9106054,6.07189902 22.4323776,6.05039855 L20.0123776,6.05039855 C19.5286466,6.03447531 19.1171329,5.69291894 19.0123776,5.22039855 L18.0123776,0.82039855 C17.9036994,0.351837303 17.4931498,0.0151866138 17.0123776,0.000398549702 L6.43237761,0.000398549702 C6.226031,-0.00682241012 6.02852685,0.0844216961 5.90026745,0.246225864 C5.77200805,0.408030031 5.72825069,0.6211466 5.78237761,0.82039855 L6.67237761,5.22039855 C6.72634204,5.42235563 6.6814406,5.6379379 6.55133407,5.8015567 C6.42122755,5.96517551 6.22130012,6.0574841 6.01237761,6.05039855 L3.55237761,6.05039855 C3.34571987,6.04420807 3.14810277,6.13521543 3.0184683,6.29627643 C2.88883384,6.45733743 2.84216359,6.6698386 2.89237761,6.87039855 L3.81237761,11.4803985 C3.86634204,11.6823556 3.8214406,11.8979379 3.69133407,12.0615567 C3.56122755,12.2251755 3.36130012,12.3174841 3.15237761,12.3103985 L0.682377607,12.3103985 C0.473455095,12.303313 0.273527662,12.3956216 0.14342114,12.5592404 C0.013314618,12.7228592 -0.0315868244,12.9384415 0.0223776072,13.1403985 L3.02237761,28.4003985 C3.12163433,28.8809526 3.53238024,29.2341941 4.02237761,29.2604408 L31.6123776,29.2604408 C31.825023,29.2627846 32.026174,29.1640792 32.1543996,28.9944268 C32.2826253,28.8247744 32.3226972,28.6043233 32.2623776,28.4003985 L28.9123776,13.1403985 C28.8014191,12.6716956 28.3934991,12.333122 27.9123776,12.3103985 L25.4323776,12.3103985 C24.9512561,12.2876751 24.5433362,11.9491015 24.4323776,11.4803985 L24.4323776,11.4803985 Z"
+                                        id="路径" fill="#62646B"></path>
+                                </g>
+                                <polygon [id]="networkCard32.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="8 1 22 1 22 6 26 6 26 12 30 12 30 34 0 34 8.18095591e-14 13 4 13 4 6 8 6">
+                                </polygon>
+                                <polygon [id]="networkCard33.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="60 1 72 1 73 6 77 6 78 12 82 12 83 34 54 34 52 13 56 13 56 6 60 6">
+                                </polygon>
+                                <polygon [id]="networkCard34.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="112 1 124 1 125 6 129 6 130 12 134 12 135 34 106 34 104 13 108 13 108 6 112 6">
+                                </polygon>
+                                <polygon [id]="networkCard35.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="163 1 176 1 177 6 181 6 183 12 186 12 190 29 190 34 160 34 158 13 161 13 160 6 164 6">
+                                </polygon>
+                            </g>
+                        </g>
+                        <g [id]="networkCard211.id" transform="translate(497.000000, 107.000000)">
+                            <line x1="95" y1="5.91171556e-12" x2="120" y2="200" id="连接cpu" stroke="#0067FF"
+                                opacity="0.5" stroke-width="4" stroke-linecap="round"
+                                transform="translate(107.500000, 100.000000) scale(-1, 1) translate(-107.500000, -100.000000) ">
+                            </line>
+                            <path d="M24,200 L169,200 L24,200 L24,200 Z" id="网口总线" stroke="#0067FF" stroke-width="4"
+                                opacity="0.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M17,214 L18.0147059,205 C18.6715686,201.666667 20.6666667,200 24,200"
+                                [id]="networkCard222.id" stroke="#0067FF" opacity="0.5" stroke-width="4"
+                                stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M168,214 L169,205 C169.666667,201.666667 172,200 176,200" [id]="networkCard255.id"
+                                stroke="#0067FF" stroke-width="4" opacity="0.5" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                transform="translate(172.000000, 207.000000) scale(-1, 1) translate(-172.000000, -207.000000) ">
+                            </path>
+                            <line x1="72" y1="201" x2="70" y2="215" [id]="networkCard233.id" stroke="#0067FF"
+                                stroke-width="4" opacity="0.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                            <line x1="123" y1="201" x2="122" y2="215" [id]="networkCard244.id" stroke="#0067FF"
+                                opacity="0.5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></line>
+                            <g [id]="networkCard21.id" filter="url(#filter-21)"
+                                transform="translate(21.000000, 61.000000)">
+                                <g id="NIC" transform="translate(0.980000, -0.000024)" fill-rule="nonzero">
+                                    <path
+                                        d="M127.62,40.0000245 L86.72,51.0000245 C86.3708429,50.9987227 86.0442826,50.8271446 85.8451234,50.5403554 C85.6459643,50.2535663 85.5992602,49.8876436 85.72,49.5600245 L92.72,30.7000245 C92.7678158,30.5791132 92.7915929,30.4500374 92.79,30.3200245 L92.79,18.2100245 L56.02,29.0800245 C55.6551105,29.0869445 55.3118583,28.907407 55.1094176,28.6037461 C54.906977,28.3000851 54.8732702,27.914184 55.02,27.5800245 L61.25,13.5200245 C61.46,13.0500245 61.32,0.800024483 61.32,0.800024483 C61.32,0.800024483 57.53,7.90002448 57.32,7.90002448 L27.33,12.0000245 C26.9067148,11.9822139 26.5134778,12.2181561 26.33,12.6000245 L15.33,99.1300245 C15.1435276,99.5104076 14.7535503,99.7482937 14.33,99.7400245 L2.86,99.7400245 C2.43346725,99.7310382 2.04161702,99.9739854 1.86,100.360024 L4.26325641e-14,104.360024 L140.02,104.360024 L152.69,103.980024 L153.86,100.500024 C153.899561,100.391027 153.92,100.275979 153.92,100.160024 L153.92,88.6200245 L143.15,99.7700245 C142.805108,99.7631125 142.484268,99.5918611 142.286579,99.3091652 C142.088889,99.0264692 142.038138,98.6663448 142.15,98.3400245 L143.43,41.6500245 C143.47072,41.5378716 143.491041,41.4193364 143.49,41.3000245 L127.62,40.0000245 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M0.02,92.3200245 L152.93,92.3200245 L152.93,103.100024 C152.93,103.79038 152.370356,104.350024 151.68,104.350024 L1.27,104.350024 C0.938479388,104.350024 0.620536997,104.218328 0.386116524,103.983908 C0.15169605,103.749487 0.02,103.431545 0.02,103.100024 L0.02,92.3200245 Z"
+                                        id="路径" fill="#3c3e44"></path>
+                                    <path
+                                        d="M139.75,39.2200245 L93.36,38.2200245 C92.9998619,38.2560567 92.6483624,38.094677 92.4409449,37.79807 C92.2335274,37.501463 92.2025694,37.1159284 92.36,36.7900245 L93.52,18.0000245 C93.6674133,17.6759342 93.6313914,17.2979077 93.4254221,17.007491 C93.2194529,16.7170744 92.8746045,16.5580738 92.52,16.5900245 L63.52,16.5900245 C63.1622352,16.6035264 62.8245486,16.4247369 62.6346131,16.121253 C62.4446776,15.8177692 62.4314762,15.4359005 62.6,15.1200245 L63.02,1.45002448 C63.1767797,1.13891512 63.1603468,0.768635214 62.9766239,0.472637234 C62.792901,0.176639255 62.4683719,-0.00240851332 62.12,1.18660637e-12 L30.2,1.18660637e-12 C29.7988881,0.00688408392 29.4339645,0.233520857 29.25,0.590024483 L15.57,87.0000245 C15.3873768,87.3864747 14.9974231,87.6321455 14.57,87.6300245 L3.02,87.6300245 C2.59171306,87.6345979 2.20353759,87.8830302 2.02,88.2700245 L0.02,92.3200245 L152.93,92.3200245 L153.93,89.0500245 C154.036158,88.7216265 153.98382,88.3625334 153.787579,88.0784179 C153.591638,87.7943025 153.274688,87.6174945 152.93,87.6000245 L143.16,87.6000245 C142.812876,87.5834454 142.493551,87.4052514 142.297172,87.1185372 C142.100792,86.8318229 142.050026,86.4696845 142.16,86.1400245 L142.35,40.6300245 C141.791342,39.7357707 140.804232,39.2004531 139.75,39.2200245 Z"
+                                        id="路径" fill="#62646B"></path>
+                                </g>
+                                <polygon [id]="networkCard21.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="30 0 64 0 64 18 94 18 94 39 144 39 145 89 155 89 155 100 152 104 0 104 0 94 2 89 15 89">
+                                </polygon>
+                            </g>
+                            <g id="网卡下钻-网卡2-网口" transform="translate(0.000000, 211.000000)">
+                                <g [id]="networkCard22.id" filter="url(#filter-23)"
+                                    transform="translate(0.990052, 0.000000)" fill-rule="nonzero">
+                                    <path
+                                        d="M26.7399476,15.53 L27.1999476,10.93 C27.2258471,10.718678 27.1594742,10.5064392 27.0177915,10.3475248 C26.8761088,10.1886104 26.6728449,10.0984188 26.4599476,10.1 L24.0099476,10.1 C23.7986006,10.1049934 23.5957384,10.0168503 23.4551685,9.85894976 C23.3145985,9.70104924 23.2505267,9.48934875 23.2799476,9.28 L23.7199476,4.87 C23.7456869,4.66573123 23.6827482,4.46021555 23.5470374,4.30539048 C23.4113265,4.15056541 23.2158279,4.06124423 23.0099476,4.06 L12.3399476,4.06 C11.8795103,4.06671309 11.4949568,4.41281122 11.4399476,4.87 L10.9499476,9.28 C10.868161,9.73227603 10.4886156,10.0705665 10.0299476,10.1 L7.56994764,10.1 C7.10817071,10.1304582 6.7276169,10.4737839 6.64994764,10.93 L6.12994764,15.53 C6.05645218,15.9901535 5.67487123,16.3385535 5.20994764,16.37 L2.72994764,16.37 C2.26817071,16.4004582 1.8876169,16.7437839 1.80994764,17.2 L0.00994763931,32.46 C-0.0256340913,32.6733872 0.0352617356,32.8915655 0.176208635,33.0556817 C0.317155535,33.219798 0.523634226,33.3129462 0.739947639,33.3100678 L28.3399476,33.3100678 C28.8143638,33.2970167 29.2046854,32.9324305 29.2499476,32.46 L30.7099476,17.2 C30.7361041,16.9869231 30.6684394,16.7729891 30.5245107,16.613708 C30.3805821,16.454427 30.1745768,16.3654995 29.9599476,16.37 L27.4899476,16.37 C27.2744128,16.3715582 27.0686258,16.2803112 26.9250724,16.1195314 C26.7815191,15.9587516 26.7140771,15.7439823 26.7399476,15.53 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M26.7399476,11.48 L27.1999476,6.87 C27.2227561,6.66029189 27.1549825,6.45081752 27.013657,6.29421354 C26.8723314,6.13760955 26.6708888,6.04876329 26.4599476,6.05 L24.0099476,6.05 C23.7976993,6.05200227 23.5950897,5.96152485 23.4549095,5.80214195 C23.3147294,5.64275904 23.2508618,5.43025555 23.2799476,5.22 L23.7199476,0.82 C23.7488209,0.614140638 23.6873122,0.40584803 23.5512419,0.248696441 C23.4151716,0.0915448528 23.2178202,0.000872162784 23.0099476,-8.01136935e-13 L12.3399476,-8.01136935e-13 C11.8778516,0.0116838582 11.4944739,0.360983534 11.4399476,0.82 L10.9499476,5.22 C10.8722784,5.67621609 10.4917246,6.01954181 10.0299476,6.05 L7.56994764,6.05 C7.11127965,6.07943352 6.73173427,6.41772397 6.64994764,6.87 L6.12994764,11.48 C6.05227838,11.9362161 5.67172457,12.2795418 5.20994764,12.31 L2.72994764,12.31 C2.26817071,12.3404582 1.8876169,12.6837839 1.80994764,13.14 L0.00994763931,28.4 C-0.0252732899,28.6143209 0.0354397779,28.833294 0.175994404,28.9988789 C0.31654903,29.1644638 0.522751969,29.26 0.739947639,29.26 L28.3399476,29.26 C28.8074196,29.2221959 29.185814,28.8645924 29.2499476,28.4 L30.7099476,13.14 C30.7361041,12.9269231 30.6684394,12.7129891 30.5245107,12.553708 C30.3805821,12.394427 30.1745768,12.3054995 29.9599476,12.31 L27.4899476,12.31 C27.2753185,12.3145005 27.0693132,12.225573 26.9253845,12.066292 C26.7814559,11.9070109 26.7137912,11.6930769 26.7399476,11.48 Z"
+                                        id="路径" fill="#62646B"></path>
+                                </g>
+                                <g [id]="networkCard23.id" filter="url(#filter-25)"
+                                    transform="translate(53.994629, 0.000000)" fill-rule="nonzero">
+                                    <path
+                                        d="M26.0053706,15.53 L26.2753706,10.93 C26.2921289,10.7156025 26.2184644,10.5039659 26.0722053,10.34631 C25.9259462,10.1886541 25.720421,10.099346 25.5053706,10.1 L23.0053706,10.1 C22.7912349,10.1034887 22.5855661,10.0164673 22.4389638,9.86034542 C22.2923615,9.70422351 22.2184345,9.49349343 22.2353706,9.28 L22.5053706,4.87 C22.5225304,4.65738647 22.4483472,4.44752431 22.3013835,4.29292606 C22.1544197,4.1383278 21.9485801,4.05362052 21.7353706,4.06 L11.1453706,4.06 C10.6891071,4.0678601 10.310936,4.41594941 10.2653706,4.87 L10.0053706,9.28 C9.96907911,9.74018608 9.58697019,10.0962421 9.1253706,10.1 L6.6153706,10.1 C6.15211867,10.1088995 5.77132248,10.4680595 5.7353706,10.93 L5.3953706,15.53 C5.35067497,15.9932485 4.97042729,16.352134 4.5053706,16.37 L2.0053706,16.37 C1.54195574,16.3829112 1.16054243,16.7386113 1.1153706,17.2 L0.00537060228,32.46 C-0.0207210502,32.6783968 0.0490835115,32.8973866 0.196751184,33.0603964 C0.344418857,33.2234062 0.555465738,33.3144471 0.775370602,33.3101556 L28.3153706,33.3101556 C28.7857986,33.3002649 29.1693308,32.9298076 29.1953706,32.46 L30.0053706,17.2 C30.0222928,16.9838515 29.9473054,16.7705847 29.7988303,16.612592 C29.6503553,16.4545994 29.4421526,16.3665229 29.2253706,16.37 L26.7853706,16.37 C26.5676738,16.3706451 26.359613,16.2802828 26.2114803,16.1207553 C26.0633476,15.9612278 25.9886237,15.7470527 26.0053706,15.53 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M26.0053706,11.48 L26.2753706,6.87 C26.2892141,6.65726706 26.2142429,6.44831498 26.0683123,6.29290838 C25.9223817,6.13750178 25.718553,6.04955004 25.5053706,6.05 L23.0053706,6.05 C22.7903202,6.05065395 22.584795,5.9613459 22.4385359,5.80368999 C22.2922768,5.64603407 22.2186124,5.43439747 22.2353706,5.22 L22.5053706,0.82 C22.521924,0.611691426 22.451977,0.405757241 22.3119777,0.250622877 C22.1719784,0.0954885124 21.9742797,0.0048424086 21.7653706,-8.8817842e-14 L11.1453706,-8.8817842e-14 C10.6874557,0.0128740872 10.3104958,0.36413211 10.2653706,0.82 L10.0053706,5.22 C9.97402831,5.68413083 9.59053979,6.04583022 9.1253706,6.05 L6.6153706,6.05 C6.15563599,6.05840474 5.77616591,6.41200186 5.7353706,6.87 L5.3953706,11.48 C5.35019877,11.9413887 4.96878546,12.2970888 4.5053706,12.31 L2.0053706,12.31 C1.54195574,12.3229112 1.16054243,12.6786113 1.1153706,13.14 L0.00537060228,28.4 C-0.0204442998,28.6193023 0.0491341666,28.8391336 0.196429324,29.0036451 C0.343724481,29.1681566 0.55455938,29.2615142 0.775370602,29.2600181 L28.3153706,29.2600181 C28.7894588,29.2499262 29.1744023,28.8737314 29.1953706,28.4 L30.0053706,13.14 C30.0222928,12.9238515 29.9473054,12.7105847 29.7988303,12.552592 C29.6503553,12.3945994 29.4421526,12.3065229 29.2253706,12.31 L26.7853706,12.31 C26.5685886,12.3134771 26.3603859,12.2254006 26.2119109,12.067408 C26.0634358,11.9094153 25.9884484,11.6961485 26.0053706,11.48 Z"
+                                        id="路径" fill="#62646B"></path>
+                                </g>
+                                <g [id]="networkCard24.id" filter="url(#filter-27)"
+                                    transform="translate(106.899020, -0.000000)" fill-rule="nonzero">
+                                    <path
+                                        d="M25.3709797,15.53 L25.4509797,10.93 C25.4563707,10.7117307 25.3734176,10.5005284 25.2209249,10.3442704 C25.0684322,10.1880125 24.8593156,10.0999335 24.6409797,10.1 L22.1809797,10.1 C21.9652954,10.1000675 21.7587216,10.0130421 21.6081041,9.85865916 C21.4574866,9.70427621 21.3755876,9.49561695 21.3809797,9.28000004 L21.4709797,4.87000004 C21.4764353,4.6552893 21.394234,4.44761226 21.2433078,4.29479948 C21.0923815,4.1419867 20.8857416,4.05721201 20.6709797,4.05993338 L10.1009797,4.05993338 C9.6467251,4.05949679 9.27235611,4.41624842 9.25097969,4.87000004 L9.10097969,9.28000004 C9.07979922,9.7354332 8.70687973,10.0951908 8.25097969,10.1 L5.79097969,10.1 C5.3292385,10.0998722 4.95184417,10.4683867 4.94097969,10.93 L4.78097969,15.53 C4.77023281,15.9932769 4.39435125,16.3647363 3.93097969,16.37 L1.45097969,16.37 C0.993444332,16.3800417 0.621910681,16.7428334 0.600979687,17.2 L0.0309796873,32.46 C0.0228777787,32.6809025 0.104305758,32.8957194 0.256801735,33.0557461 C0.409297711,33.2157727 0.619943354,33.3074528 0.840979687,33.31 L28.4209797,33.31 C28.888166,33.3045985 29.2655781,32.9271864 29.2709797,32.46 L29.5010407,17.2 C29.5036531,16.9807951 29.4184422,16.7696466 29.2643716,16.6136972 C29.1103011,16.4577477 28.900201,16.3699837 28.6809797,16.37 L26.2109797,16.37 C25.9856965,16.3785105 25.7670587,16.2927468 25.6076458,16.1333339 C25.448233,15.973921 25.3624692,15.7552832 25.3709797,15.53 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M25.3709797,11.48 L25.4509797,6.87000004 C25.4564333,6.65263703 25.3731777,6.44241752 25.2203765,6.28772997 C25.0675754,6.13304241 24.8583933,6.04721374 24.6409797,6.05000004 L22.1809797,6.05000004 C21.9635049,6.05015301 21.7553398,5.96176194 21.6044177,5.80518025 C21.4534956,5.64859856 21.3728243,5.43732192 21.3809797,5.22000004 L21.4709797,0.820000039 C21.4763718,0.604383127 21.3944728,0.395723864 21.2438553,0.241340918 C21.0932378,0.0869579727 20.886664,2.57571742e-13 20.6709797,2.57571742e-13 L10.1009797,2.57571742e-13 C9.64507964,0.00480925183 9.27216016,0.364566874 9.25097969,0.820000039 L9.10097969,5.22000004 C9.08004869,5.67716667 8.70851504,6.03995836 8.25097969,6.05000004 L5.79097969,6.05000004 C5.33300812,6.04971471 4.9571433,6.41231371 4.94097969,6.87000004 L4.78097969,11.48 C4.77011521,11.9416134 4.39272087,12.3101279 3.93097969,12.31 L1.45097969,12.31 C0.993444332,12.3200417 0.621910681,12.6828334 0.600979687,13.14 L0.000979687345,28.4 C-0.00990508543,28.6225954 0.070280756,28.840033 0.223080887,29.0022652 C0.375881018,29.1644974 0.58813183,29.2575482 0.810979687,29.26 L28.3909797,29.26 C28.859779,29.2492498 29.235713,28.8688931 29.2409797,28.4 L29.4710407,13.14 C29.4736531,12.9207951 29.3884422,12.7096466 29.2343716,12.5536972 C29.0803011,12.3977477 28.870201,12.3099837 28.6509797,12.31 L26.1809797,12.31 C25.9626438,12.3100666 25.7535272,12.2219876 25.6010345,12.0657297 C25.4485418,11.9094717 25.3655887,11.6982694 25.3709797,11.48 Z"
+                                        id="路径" fill="#62646B"></path>
+                                </g>
+                                <g [id]="networkCard25.id" filter="url(#filter-29)"
+                                    transform="translate(159.730000, -0.000000)" fill-rule="nonzero">
+                                    <path
+                                        d="M24.81,15.53 L24.7,10.93 C24.6945233,10.4699908 24.3200419,10.0999674 23.86,10.1 L21.4,10.1 C20.94591,10.0949394 20.5759995,9.73383628 20.56,9.28000003 L20.48,4.87000003 C20.4690801,4.415518 20.0945786,4.0543916 19.64,4.05993558 L9.02000003,4.05993558 C8.57264938,4.05993558 8.21000003,4.42264939 8.21000003,4.87000003 L8.21000003,9.28000003 C8.21267373,9.49655278 8.12851648,9.7051578 7.97632125,9.85923197 C7.82412603,10.0133062 7.61656928,10.1000165 7.40000003,10.1 L4.94000003,10.1 C4.72077876,10.0999837 4.51067865,10.1877477 4.3566081,10.3436972 C4.20253755,10.4996466 4.1173266,10.7107951 4.12000003,10.93 L4.12000003,15.53 C4.12266823,15.7501344 4.03777084,15.962311 3.88398759,16.119845 C3.73020433,16.2773791 3.52013481,16.3673638 3.30000003,16.37 L0.830000032,16.37 C0.609870346,16.37 0.398756598,16.4574462 0.243101404,16.6131014 C0.0874462096,16.7687566 3.21024647e-08,16.9798703 3.21024647e-08,17.2 L3.21024647e-08,32.46 C3.21024647e-08,32.9255644 0.374467889,33.3045228 0.840000032,33.31 L28.43,33.31 C28.6510364,33.3074528 28.861682,33.2157727 29.014178,33.0557461 C29.166674,32.8957194 29.2481019,32.6809025 29.24,32.46 L28.97,17.2 C28.9591356,16.7383867 28.5817412,16.3698722 28.12,16.37 L25.65,16.37 C25.1883361,16.3645999 24.8154002,15.9916639 24.81,15.53 L24.81,15.53 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M24.81,11.48 L24.7,6.87000003 C24.6891377,6.41390972 24.3162197,6.0498707 23.86,6.05000003 L21.4,6.05000003 C20.9421499,6.04473926 20.5707435,5.67775434 20.56,5.22000003 L20.48,0.820000034 C20.4691377,0.363909722 20.0962197,2.48689958e-14 19.64,2.48689958e-14 L9.02000003,2.48689958e-14 C8.5710366,0.00547560423 8.20996664,0.371003212 8.21000003,0.820000034 L8.21000003,5.22000003 C8.21539105,5.43826938 8.13243791,5.64947171 7.97994521,5.80572966 C7.8274525,5.96198762 7.61833594,6.0500666 7.40000003,6.05000003 L4.94000003,6.05000003 C4.48712654,6.05000003 4.12000003,6.41712654 4.12000003,6.87000003 L4.12000003,11.48 C4.12267346,11.699205 4.03746251,11.9103534 3.88339196,12.0663029 C3.72932142,12.2222524 3.51922131,12.3100163 3.30000003,12.31 L0.830000032,12.31 C0.37160369,12.31 -9.76996262e-14,12.6816037 -9.76996262e-14,13.14 L-9.76996262e-14,28.4 C-9.76996262e-14,28.8672628 0.372863616,29.2491335 0.840000032,29.26 L28.43,29.26 C28.6528479,29.2575482 28.8650987,29.1644974 29.0178988,29.0022652 C29.170699,28.8400329 29.2508848,28.6225954 29.24,28.4 L28.85,13.14 C28.8391356,12.6783867 28.4617412,12.3098722 28,12.31 L25.53,12.31 C25.1172389,12.2504237 24.8106874,11.897038 24.81,11.48 Z"
+                                        id="路径" fill="#62646B"></path>
+                                </g>
+                                <polygon [id]="networkCard22.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="12 1 25 1 25 6 29 6 29 12 33 12 33 17 31 34 0 34 0 29 2 13 6 13 7 6 12 6">
+                                </polygon>
+                                <polygon [id]="networkCard23.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="64 1 77 1 77 6 81 6 81 12 85 12 85 17 84 34 53 34 53 29 54 13 58 13 59 6 64 6">
+                                </polygon>
+                                <polygon [id]="networkCard24.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="116 1 129 1 129 6 133 6 133 12 137 12 137 34 106 34 106 13 110 13 111 6 116 6">
+                                </polygon>
+                                <polygon [id]="networkCard25.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="167 1 181 1 181 6 185 6 185 12 189 12 189 34 159 34 159 13 163 13 163 6 167 6">
+                                </polygon>
+                            </g>
+                        </g>
+                        <g [id]="networkCard111.id" transform="translate(209.000000, 107.000000)">
+                            <line x1="103" y1="0" x2="169" y2="200" id="连接cpu" stroke="#0067FF" opacity="0.5"
+                                stroke-width="4" stroke-linecap="round"
+                                transform="translate(136.000000, 100.000000) scale(-1, 1) translate(-136.000000, -100.000000) ">
+                            </line>
+                            <path d="M32,200 L177,200 L32,200 L32,200 Z" id="网口总线" stroke="#0067FF" opacity="0.5"
+                                stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M23,214 L26.0147059,205 C26.6715686,201.666667 28.6666667,200 32,200"
+                                [id]="networkCard122.id" stroke="#0067FF" opacity="0.5" stroke-width="4"
+                                stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path
+                                d="M178,214 L176.217223,205.977506 C176.03622,205.162985 176.114462,204.312251 176.440995,203.544408 C177.445861,201.181469 179.632196,200 183,200"
+                                [id]="networkCard155.id" stroke="#0067FF" opacity="0.5" stroke-width="4"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                transform="translate(179.500000, 207.000000) scale(-1, 1) translate(-179.500000, -207.000000) ">
+                            </path>
+                            <line x1="80" y1="201" x2="76" y2="215" [id]="networkCard133.id" stroke="#0067FF"
+                                opacity="0.5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></line>
+                            <line x1="131" y1="201" x2="127" y2="215" [id]="networkCard144.id" stroke="#0067FF"
+                                opacity="0.5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></line>
+                            <g id="Network-port-" transform="translate(0.000000, 212.000000)">
+                                <g [id]="networkCard12.id" filter="url(#filter-31)"
+                                    transform="translate(0.945198, -0.000403)" fill-rule="nonzero">
+                                    <path
+                                        d="M30.0548017,15.5304027 L31.3948017,10.9304027 C31.479726,10.7410795 31.458955,10.5210624 31.3401003,10.3509771 C31.2212456,10.1808919 31.0217813,10.0857448 30.8148017,10.1004027 L28.3848017,10.1004027 C28.1824176,10.1078105 27.9899533,10.0126232 27.8730053,9.84728306 C27.7560574,9.68194287 27.730409,9.46876385 27.8048017,9.2804027 L29.1048017,4.8704027 C29.1804236,4.68313459 29.1550044,4.47019785 29.0374256,4.30599296 C28.9198468,4.14178807 28.7264475,4.04913342 28.5248017,4.0604027 L17.9048017,4.0604027 C17.4163829,4.08708954 16.993046,4.40755952 16.8348017,4.8704027 L15.4948017,9.2804027 C15.3375296,9.74550538 14.9147996,10.0694667 14.4248017,10.1004027 L11.9648017,10.1004027 C11.4684774,10.1289329 11.0401101,10.458141 10.8848017,10.9304027 L9.47480168,15.5304027 C9.31811621,16.0032684 8.89168638,16.334936 8.39480168,16.3704027 L5.91480168,16.3704027 C5.41949082,16.401644 4.99246913,16.7298181 4.83480168,17.2004027 L0.0548016826,32.4604027 C-0.0323955059,32.6501732 -0.0146412234,32.8716324 0.101675587,33.0450873 C0.217992398,33.2185421 0.416135235,33.3190349 0.624801683,33.3104027 L28.2548017,33.3104027 C28.7553303,33.2760871 29.1838206,32.9388493 29.3348017,32.4604027 L33.7248017,17.2004027 C33.809726,17.0110795 33.788955,16.7910624 33.6701003,16.6209771 C33.5512456,16.4508919 33.3517813,16.3557448 33.1448017,16.3704027 L30.6648017,16.3704027 C30.4538729,16.3862579 30.2497861,16.2917091 30.1254949,16.120554 C30.0012038,15.949399 29.9744517,15.7260713 30.0548017,15.5304027 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M30.0548017,11.4804027 L31.3948017,6.8704027 C31.4750034,6.68207761 31.4518637,6.46563964 31.3336616,6.2985262 C31.2154594,6.13141276 31.0190866,6.03750551 30.8148017,6.0504027 L28.3848017,6.0504027 C28.1797966,6.05931841 27.9844526,5.96284953 27.8669148,5.79464892 C27.7493771,5.62644832 27.7259483,5.40984589 27.8048017,5.2204027 L29.1048017,0.820402698 C29.1791944,0.632041551 29.153546,0.418862531 29.0365981,0.25352234 C28.9196501,0.0881821487 28.7271858,-0.00700512707 28.5248017,0.00040269839 L17.9048017,0.00040269839 C17.4148037,0.031338705 16.9920738,0.355300012 16.8348017,0.820402698 L15.4948017,5.2204027 C15.34084,5.68943508 14.9173864,6.01790848 14.4248017,6.0504027 L11.9648017,6.0504027 C11.4710715,6.07738922 11.0434384,6.4020736 10.8848017,6.8704027 L9.47480168,11.4804027 C9.31713424,11.9509873 8.89011254,12.2791614 8.39480168,12.3104027 L5.91480168,12.3104027 C5.41949082,12.341644 4.99246913,12.6698181 4.83480168,13.1404027 L0.0548016826,28.4004027 C-0.0310630874,28.5913689 -0.0129838488,28.813029 0.102691692,28.987557 C0.218367233,29.162085 0.41547204,29.2650886 0.624801683,29.260556 L28.2548017,29.260556 C28.7569077,29.2218508 29.184795,28.8811258 29.3348017,28.4004027 L33.7248017,13.1404027 C33.809726,12.9510795 33.788955,12.7310624 33.6701003,12.5609771 C33.5512456,12.3908919 33.3517813,12.2957448 33.1448017,12.3104027 L30.6648017,12.3104027 C30.454631,12.3304478 30.2493916,12.2385576 30.1243626,12.0684362 C29.9993337,11.8983148 29.9729169,11.6750008 30.0548017,11.4804027 Z"
+                                        id="路径" fill="url(#linearGradient-32)"></path>
+                                </g>
+                                <g [id]="networkCard13.id" filter="url(#filter-33)"
+                                    transform="translate(53.955369, -0.000439)" fill-rule="nonzero">
+                                    <path
+                                        d="M29.3446312,15.5304389 L30.5046312,10.9304389 C30.5703987,10.7344348 30.535813,10.5186366 30.4120863,10.3530025 C30.2883597,10.1873684 30.0912403,10.0929809 29.8846312,10.1004389 L27.4246312,10.1004389 C27.218846,10.113187 27.0205473,10.0211199 26.897486,9.85569323 C26.7744247,9.69026656 26.7432568,9.47387042 26.8146312,9.28043887 L27.9346312,4.87043887 C28.0017043,4.67819913 27.968442,4.46516858 27.8459581,4.302526 C27.7234742,4.13988342 27.5279186,4.04907379 27.3246312,4.06043887 L16.6946312,4.06043887 C16.2250938,4.09572286 15.8266486,4.41846349 15.6946312,4.87043887 L14.5046312,9.28043887 C14.3711131,9.73305713 13.9746351,10.0581691 13.5046312,10.1004389 L11.0446312,10.1004389 C10.5542166,10.1269302 10.1336341,10.4593906 9.99463119,10.9304389 L8.76463119,15.5304389 C8.63555032,15.9893079 8.23889321,16.3224998 7.76463119,16.3704389 L5.20463119,16.3704389 C4.73416417,16.4195229 4.33953661,16.7470638 4.20463119,17.2004389 L0.0446311887,32.4604389 C-0.0343479879,32.657187 -0.00731908592,32.8806505 0.116291343,33.0528945 C0.239901771,33.2251386 0.442953735,33.3222796 0.654631189,33.3104389 L28.2246312,33.3104389 C28.7016135,33.2610371 29.0990314,32.9232318 29.2246312,32.4604389 L33.0446312,17.2004389 C33.1103987,17.0044348 33.075813,16.7886366 32.9520863,16.6230025 C32.8283597,16.4573684 32.6312403,16.3629809 32.4246312,16.3704389 L29.9646312,16.3704389 C29.7555532,16.3791493 29.5557951,16.2834765 29.4315259,16.1151118 C29.3072567,15.9467471 29.2746967,15.7276663 29.3446312,15.5304389 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M29.3446312,11.4804389 L30.5046312,6.87043887 C30.5663373,6.67569907 30.5297894,6.46312864 30.4065851,6.30018101 C30.2833808,6.13723337 30.0888163,6.04413901 29.8846312,6.05043887 L27.4246312,6.05043887 C27.2180661,6.05939536 27.0206294,5.96479188 26.8981856,5.79818802 C26.7757418,5.63158415 26.7444058,5.41490668 26.8146312,5.22043887 L27.9346312,0.82043887 C28.0006544,0.627180444 27.9672713,0.413803684 27.8453767,0.249945277 C27.723482,0.0860868705 27.5287121,-0.00723384274 27.3246312,0.0004388696 L16.6946312,0.0004388696 C16.2235128,0.0399719624 15.825684,0.366191567 15.6946312,0.82043887 L14.5346312,5.22043887 C14.4045574,5.67698436 14.0073243,6.00668779 13.5346312,6.05043887 L11.0446312,6.05043887 C10.5579898,6.07836194 10.1396467,6.40506796 9.99463119,6.87043887 L8.76463119,11.4804389 C8.63455739,11.9369844 8.23732435,12.2666878 7.76463119,12.3104389 L5.20463119,12.3104389 C4.73416417,12.3595229 4.33953661,12.6870638 4.20463119,13.1404389 L0.0446311887,28.4004389 C-0.0331231297,28.5982762 -0.00586872584,28.8219839 0.117111395,28.9953657 C0.240091516,29.1687475 0.442212651,29.2684218 0.654631189,29.2604389 L28.2246312,29.2604389 C28.7031789,29.2068711 29.1000334,28.8655763 29.2246312,28.4004389 L33.0446312,13.1404389 C33.1103987,12.9444348 33.075813,12.7286366 32.9520863,12.5630025 C32.8283597,12.3973684 32.6312403,12.3029809 32.4246312,12.3104389 L29.9646312,12.3104389 C29.7563378,12.3229076 29.5557436,12.2297629 29.4308663,12.0625885 C29.3059891,11.8954142 29.2735811,11.6766364 29.3446312,11.4804389 Z"
+                                        id="路径" fill="url(#linearGradient-34)"></path>
+                                </g>
+                                <g [id]="networkCard14.id" filter="url(#filter-35)"
+                                    transform="translate(106.908932, -0.000529)" fill-rule="nonzero">
+                                    <path
+                                        d="M28.6610677,15.5305291 L29.6610677,10.9305291 C29.7144789,10.7303093 29.6707543,10.5166287 29.542989,10.3534823 C29.4152237,10.1903358 29.2182531,10.0966672 29.0110677,10.1005291 L26.5510677,10.1005291 C26.3432479,10.1122813 26.1426948,10.022233 26.0133925,9.85911313 C25.8840902,9.69599331 25.8421929,9.48018116 25.9010677,9.28052914 L26.8410677,4.87052914 C26.9001594,4.67359661 26.8594349,4.46021897 26.7319671,4.29889255 C26.6044993,4.13756612 26.4063278,4.04859102 26.2010677,4.06052914 L15.5510677,4.06052914 C15.0757017,4.08077588 14.6695859,4.40972971 14.5510677,4.87052914 L13.5510677,9.28052914 C13.4363055,9.74528041 13.0292955,10.0790287 12.5510677,10.1005291 L10.0910677,10.1005291 C9.60994616,10.1232526 9.2020262,10.4618262 9.09106766,10.9305291 L8.09106766,15.5305291 C7.97799908,15.9995206 7.57253636,16.3401093 7.09106766,16.3705291 L4.61106766,16.3705291 C4.13121544,16.3965086 3.72499269,16.7336735 3.61106766,17.2005291 L0.101067657,32.4605291 C0.0357820182,32.6620124 0.0727546607,32.8826687 0.200150745,33.0518666 C0.32754683,33.2210645 0.529388818,33.3175839 0.741067657,33.3105291 L28.3210677,33.3105291 C28.8054309,33.2788643 29.211784,32.9334642 29.3210677,32.4605291 L32.4810677,17.2005291 C32.5390569,16.9999203 32.4971333,16.7836662 32.3683811,16.6192596 C32.2396289,16.454853 32.0397282,16.3623159 31.8310677,16.3705291 L29.3610677,16.3705291 C29.1416059,16.3977184 28.9233759,16.3114648 28.7818058,16.1415807 C28.6402357,15.9716966 28.594749,15.7414902 28.6610677,15.5305291 L28.6610677,15.5305291 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M28.6610677,11.4805291 L29.6610677,6.87052914 C29.7151946,6.67127719 29.6714372,6.45816062 29.5431778,6.29635645 C29.4149184,6.13455228 29.2174143,6.04330818 29.0110677,6.05052914 L26.5510677,6.05052914 C26.3424071,6.05874237 26.1425064,5.96620532 26.0137542,5.80179869 C25.885002,5.63739205 25.8430784,5.421138 25.9010677,5.22052914 L26.8410677,0.820529137 C26.8992508,0.62263681 26.8584895,0.408832526 26.7315786,0.246227899 C26.6046677,0.0836232719 26.4071659,-0.00784692612 26.2010677,0.000529136637 L15.5510677,0.000529136637 C15.0728399,0.0220296075 14.6658298,0.355777859 14.5510677,0.820529137 L13.5510677,5.22052914 C13.4401091,5.68923208 13.0321892,6.02780565 12.5510677,6.05052914 L10.0910677,6.05052914 C9.61283986,6.07202961 9.20582979,6.40577786 9.09106766,6.87052914 L8.09106766,11.4805291 C7.97714262,11.9473848 7.57091988,12.2845496 7.09106766,12.3105291 L4.61106766,12.3105291 C4.13121544,12.3365086 3.72499269,12.6736735 3.61106766,13.1405291 L0.0310676566,28.4005291 C-0.0333577383,28.6030331 0.00366370043,28.8241701 0.13053165,28.994649 C0.257399601,29.1651278 0.458592212,29.2640909 0.671067657,29.2606221 L28.2510677,29.2606221 C28.7370407,29.2244505 29.1426505,28.8756261 29.2510677,28.4005291 L32.4110677,13.1405291 C32.4690569,12.9399203 32.4271333,12.7236662 32.2983811,12.5592596 C32.1696289,12.394853 31.9697282,12.3023159 31.7610677,12.3105291 L29.2910677,12.3105291 C29.0858899,12.3122422 28.8919494,12.2169759 28.7678953,12.0535395 C28.6438412,11.8901032 28.6042401,11.6776877 28.6610677,11.4805291 Z"
+                                        id="路径" fill="url(#linearGradient-36)"></path>
+                                </g>
+                                <g [id]="networkCard15.id" filter="url(#filter-37)"
+                                    transform="translate(159.728375, -0.000218)" fill-rule="nonzero">
+                                    <path
+                                        d="M28.101625,15.5302176 L28.891625,10.9302176 C28.937944,10.7257081 28.8873204,10.5112668 28.7544309,10.3490634 C28.6215413,10.18686 28.4212503,10.0950379 28.211625,10.1002176 L25.751625,10.1002176 C25.5428708,10.1086786 25.3421185,10.0192744 25.2087538,9.85845231 C25.0753891,9.69763018 25.0246792,9.48380051 25.071625,9.28021763 L25.831625,4.87021763 C25.8786974,4.66932345 25.8291087,4.45797508 25.6975961,4.29898226 C25.5660836,4.13998943 25.3677824,4.05165017 25.161625,4.06021763 L14.531625,4.06021763 C14.0457608,4.05138125 13.6238741,4.39310942 13.531625,4.87021763 L12.721625,9.28021763 C12.6336577,9.76131016 12.2106288,10.1081939 11.721625,10.1002176 L9.25162502,10.1002176 C8.75944528,10.0930617 8.3352524,10.4451418 8.25162502,10.9302176 L7.39162502,15.5302176 C7.29084293,16.0066965 6.87834804,16.3531922 6.39162502,16.3702176 L3.91162502,16.3702176 C3.42655245,16.3825872 3.01313462,16.725724 2.91162502,17.2002176 L0.0216250211,32.4602176 C-0.0314998205,32.6658412 0.0144948836,32.8844773 0.14596478,33.0512675 C0.277434676,33.2180576 0.479280663,33.3138463 0.691625021,33.3103171 L28.281625,33.3103171 C28.7802684,33.3158548 29.2068556,32.9532557 29.281625,32.4602176 L31.841625,17.2002176 C31.8884486,16.9939474 31.8366199,16.7776342 31.7014023,16.6149811 C31.5661846,16.452328 31.3629778,16.3618593 31.151625,16.3702176 L28.681625,16.3702176 C28.4890458,16.3442822 28.3163294,16.2383462 28.2059198,16.0784427 C28.0955102,15.9185392 28.0576435,15.7194926 28.101625,15.5302176 L28.101625,15.5302176 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M28.101625,11.4802176 L28.891625,6.87021763 C28.9385708,6.66663475 28.8878609,6.45280508 28.7544962,6.29198295 C28.6211316,6.13116083 28.4203792,6.04175664 28.211625,6.05021763 L25.751625,6.05021763 C25.5406535,6.05953007 25.3376388,5.96883287 25.2038064,5.80547866 C25.069974,5.64212444 25.0209893,5.42523403 25.071625,5.22021763 L25.831625,0.82021763 C25.8780565,0.618395658 25.8285483,0.406444943 25.697515,0.246075806 C25.5664817,0.0857066686 25.3686521,-0.00505455796 25.161625,-1.59872116e-14 L14.531625,-1.59872116e-14 C14.0426213,-0.00775862258 13.6195924,0.339125104 13.531625,0.82021763 L12.721625,5.22021763 C12.6379976,5.70529347 12.2138048,6.05737355 11.721625,6.05021763 L9.25162502,6.05021763 C8.76262129,6.04224138 8.33959235,6.3891251 8.25162502,6.87021763 L7.39162502,11.4802176 C7.29011542,11.9547113 6.87669759,12.2978481 6.39162502,12.3102176 L3.91162502,12.3102176 C3.42655245,12.3225872 3.01313462,12.665724 2.91162502,13.1402176 L0.161625021,28.4002176 C0.104751422,28.6072234 0.148969193,28.8289299 0.280904122,28.9982793 C0.412839051,29.1676286 0.616995943,29.2647313 0.831625021,29.2603683 L28.421625,29.2603683 C28.923557,29.2651577 29.3513754,28.8972339 29.421625,28.4002176 L31.981625,13.1402176 C32.0284486,12.9339474 31.9766199,12.7176342 31.8414023,12.5549811 C31.7061846,12.392328 31.5029778,12.3018593 31.291625,12.3102176 L28.821625,12.3102176 C28.6051728,12.3285227 28.3930011,12.2423138 28.2506586,12.0782246 C28.1083162,11.9141354 28.0529351,11.6919154 28.101625,11.4802176 Z"
+                                        id="路径" fill="url(#linearGradient-38)"></path>
+                                </g>
+                                <polygon [id]="networkCard12.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="18 -3.40383971e-13 30 0 29 6 34 6 32 12 35 12 35 17 29 33 -2.17603713e-14 33 -2.17603713e-14 29 6 12 10 12 12 6 16 6">
+                                </polygon>
+                                <polygon [id]="networkCard13.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="69 -3.40383971e-13 81 0 80 6 84 6 83 12 86 12 86 17 84 33 54 33 54 29 57 12 61 12 63 6 67 6">
+                                </polygon>
+                                <polygon [id]="networkCard14.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="121 -3.40383971e-13 133 0 132 6 136 6 135 12 138 12 138 17 136 33 106 33 106 29 109 12 113 12 115 6 119 6">
+                                </polygon>
+                                <polygon [id]="networkCard15.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="174 -3.40383971e-13 186 0 185 6 189 6 188 12 191 12 191 17 189 33 159 33 159 29 162 12 166 12 168 6 172 6">
+                                </polygon>
+                            </g>
+                            <g [id]="networkCard11.id" filter="url(#filter-39)"
+                                transform="translate(39.000000, 61.000000)">
+                                <g id="NIC" transform="translate(0.000000, -0.000866)" fill-rule="nonzero">
+                                    <path
+                                        d="M156.15,41.320866 L113.2,52.430866 C112.847432,52.445844 112.513072,52.2738887 112.320177,51.9783896 C112.127281,51.6828905 112.104412,51.3076005 112.26,50.990866 L120.7,31.900866 C120.753598,31.7774638 120.784103,31.6452759 120.79,31.510866 L121.58,19.050866 L82.58,30.240866 C82.1984282,30.2813543 81.827338,30.0999354 81.6249285,29.7739496 C81.422519,29.4479637 81.4244895,29.0349058 81.63,28.710866 L88.77,14.180866 C89.02,13.690866 89.47,0.840865968 89.47,0.840865968 C89.47,0.840865968 85.12,8.30086597 84.92,8.30086597 L53.24,12.620866 C52.8179397,12.6367664 52.4365632,12.8770336 52.24,13.250866 L15.42,99.420866 C15.2269048,99.7913416 14.8374571,100.017221 14.42,100.000866 L2.85,100.000866 C2.43094192,99.9888607 2.04213541,100.218257 1.85,100.590866 L4.26325641e-14,104.350866 L140,104.350866 L152.7,103.990866 L154.15,100.690866 C154.192991,100.585476 154.219957,100.474243 154.23,100.360866 L155.15,89.360866 L143.47,100.000866 C143.146981,99.9922651 142.848026,99.828109 142.667413,99.5601656 C142.486799,99.2922221 142.446789,98.953518 142.56,98.650866 L155.05,54.000866 C155.099813,53.890211 155.130255,53.7718242 155.14,53.650866 L156.15,41.320866 Z"
+                                        id="路径" fill="#3f4148"></path>
+                                    <path
+                                        d="M4.26325641e-14,92.320866 L152.91,92.320866 L152.91,103.100866 C152.91,103.791222 152.350356,104.350866 151.66,104.350866 L1.25,104.350866 C0.918479388,104.350866 0.600536997,104.21917 0.366116524,103.984749 C0.13169605,103.750329 4.26325641e-14,103.432387 4.26325641e-14,103.100866 L4.26325641e-14,92.320866 Z"
+                                        id="路径" fill="#3c3e44"></path>
+                                    <path
+                                        d="M155.17,40.320866 L113.9,40.320866 C113.541663,40.3398145 113.200644,40.1653129 113.006391,39.8636007 C112.812138,39.5618885 112.794434,39.1792249 112.96,38.860866 L121.56,19.340866 C121.750116,19.0106353 121.736036,18.6010593 121.523691,18.2846642 C121.311345,17.9682691 120.937643,17.80005 120.56,17.850866 L83.08,17.850866 C82.698239,17.8685023 82.3360542,17.6811881 82.129811,17.3594487 C81.9235678,17.0377093 81.9045812,16.6303962 82.08,16.290866 L89.28,1.58086597 C89.4588171,1.23925794 89.441949,0.828228791 89.235742,0.502421688 C89.0295349,0.176614584 88.6652715,-0.0145441301 88.28,9.16600129e-13 L53.57,9.16600129e-13 C53.143801,0.0123343824 52.7589241,0.258655616 52.57,0.640865968 L15.5,87.900866 C15.3078646,88.2734754 14.9190581,88.5028712 14.5,88.490866 L2.85,88.490866 C2.42805224,88.478245 2.0374275,88.7126198 1.85,89.090866 L1.42108547e-14,92.890866 L153.86,92.890866 L155.13,89.890866 C155.243741,89.5865854 155.202594,89.2460167 155.019659,88.9775797 C154.836724,88.7091427 154.534799,88.5462901 154.21,88.540866 L144.35,88.540866 C144.020042,88.5378911 143.712792,88.3723365 143.528835,88.0984005 C143.344877,87.8244644 143.307897,87.4774146 143.43,87.170866 L156.09,41.800866 C156.26366,41.4842803 156.25316,41.0986627 156.062529,40.7919964 C155.871899,40.4853301 155.53075,40.3052511 155.17,40.320866 Z"
+                                        id="路径" fill="url(#linearGradient-40)"></path>
+                                </g>
+                                <polygon [id]="networkCard11.outId" display="none" pointer-events='none'
+                                    stroke="#E8E8E8" stroke-width="3" stroke-linejoin="round"
+                                    points="53 -7.11541936e-13 89 0 87 18 121 18 121 31 117 41 156 41 156 51 145 89 155 89 155 100 152 104 0 104 0 94 2 89 15 89">
+                                </polygon>
+                            </g>
+                        </g>
+                        <text [id]="networkCard2555.id" font-size="14" font-weight="normal" line-spacing="14"
+                            fill="#E8E8E8">
+                            <tspan x="518" y="294">网卡-2</tspan>
+                        </text>
+                        <g [id]="networkCard1555.id" transform="translate(248.000000, 281.000000)" fill="#E8E8E8"
+                            font-size="14" font-weight="normal" line-spacing="14">
+                            <text id="网卡-1">
+                                <tspan x="0" y="13">网卡-1</tspan>
+                            </text>
+                        </g>
+                        <g [id]="networkCard3555.id" transform="translate(787.000000, 281.000000)" fill="#E8E8E8"
+                            font-size="14" font-weight="normal" line-spacing="14">
+                            <text id="网卡-3">
+                                <tspan x="0" y="13">网卡-3</tspan>
+                            </text>
+                        </g>
+                        <g [id]="networkCard4555.id" transform="translate(1064.000000, 281.000000)" fill="#E8E8E8"
+                            font-size="14" font-weight="normal" line-spacing="14">
+                            <text>
+                                <tspan x="0" y="13">网卡-4</tspan>
+                            </text>
+                        </g>
+                        <rect id="矩形" fill="url(#linearGradient-41)" opacity="0.5"
+                            transform="translate(740.000000, 43.000000) scale(1, -1) translate(-740.000000, -43.000000) "
+                            x="612" y="21" width="256" height="44" rx="6"></rect>
+                        <text id="CPU" font-size="18" font-weight="normal" fill="#AAAAAA">
+                            <tspan x="721.244" y="50">CPU</tspan>
+                        </text>
+                        <g id="Lines" transform="translate(276.000000, 64.000000)">
+                            <polygon id="路径-19" fill="#0067FF" opacity="0.25" fill-rule="nonzero"
+                                points="930.150661 40.5 930.150661 44.5 0.150660793 44.5 0.150660793 40.5"></polygon>
+                            <line x1="464" y1="0" x2="464" y2="43" id="路径-16" stroke="#0067FF" stroke-width="10"
+                                opacity="0.25"></line>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+</div>

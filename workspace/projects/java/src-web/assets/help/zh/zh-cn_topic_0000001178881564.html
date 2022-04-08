@@ -1,0 +1,55 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="版本升级后节点状态为版本不匹配">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001224201273.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具 (Java性能分析)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001178881564">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>版本升级后节点状态为版本不匹配</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001178881564"></a><a name="ZH-CN_TOPIC_0000001178881564"></a>
+
+<h1 class="topictitle1">版本升级后节点状态为版本不匹配</h1>
+<div id="body8662426"><div class="section" id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_zh-cn_topic_0220292241_section13779133512387"><h4 class="sectiontitle">现象描述</h4><p id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_p15674201915107">版本升级后，<span class="wintitle" id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_wintitle74016354105">“节点管理”</span>页面显示节点状态为<span class="parmvalue" id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_parmvalue558310258491">“版本不匹配”</span>。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_zh-cn_topic_0220292241_section1439194518389"><h4 class="sectiontitle">可能原因</h4><p id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_p97081112141010">升级过程中输入错误的节点服务器认证信息，导致节点升级失败。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_section65722055101613"><h4 class="sectiontitle">处理步骤</h4><div class="p" id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_p91981834194318">在Web服务器上执行版本不匹配节点的升级脚本。<ol id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_ol45151141402"><li id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_li451511141007">执行如下命令进入工具安装目录（“/opt/hyper_tuner”为工具安装目录，请根据实际情况替换）。<p id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_p45421181599"><a name="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_li451511141007"></a><a name="zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_li451511141007"></a><strong id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_b208129277598">cd</strong> <em id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_i1273920358598">/opt/hyper_tuner</em></p>
+</li><li id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_li4136171810012">执行如下命令升级版本不匹配的节点。<div class="p" id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_p209535391507"><a name="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_li4136171810012"></a><a name="zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_li4136171810012"></a><strong id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_b139451341807">bash deal_agent_mismatch.sh</strong><div class="note" id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_note017611449442"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_p31756449444">升级过程中请根据实际情况输入添加节点时的用户名、安装节点的绝对路径、登录节点服务器的SSH私钥文件的绝对路径、SSH私钥文件的口令或者<strong id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_b4175194418445">root</strong>用户密码依次升级所有的版本不匹配的节点。</p>
+</div></div>
+</div>
+</li></ol>
+</div>
+<p id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_p0859112467"><strong id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_b1488245134618">如以上步骤执行失败，则执行下列步骤；如以上步骤执行成功，请忽略以下步骤。</strong></p>
+<p id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_p511118379432">在<span class="wintitle" id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_wintitle122053922416">“节点管理”</span>页面删除节点后重新添加节点。如果在Web界面删除节点失败，需要登录节点服务器手动卸载节点。</p>
+<p id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_p132513171911">卸载节点步骤如下：</p>
+<ol id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_ol457093920510"><li id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_li14570139205117">使用SSH远程登录工具，以系统用户登录节点服务器Linux操作系统命令行界面。<div class="note" id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_note18775162110515"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0228009037_p839111901719">该步骤必须在<strong id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0228009037_b13764559112216">root</strong>用户下执行，若以普通系统用户登录，需要执行<strong id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0228009037_b11403125814246">su</strong>切换到<strong id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0228009037_b152921618182912">root</strong>用户下执行后续操作。</p>
+</div></div>
+</li><li id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_li1757011395516">执行如下命令进入节点安装目录（“/opt/malluma”为节点安装目录，请根据实际情况替换）。<p id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_p10542112153715"><a name="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_li1757011395516"></a><a name="zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_li1757011395516"></a><strong id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_b178891520122512">cd</strong> <em id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_i122941523182510">/opt/malluma</em></p>
+</li><li id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_li9570139205118">执行如下命令卸载节点。<p id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_p1443618717266"><a name="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_li9570139205118"></a><a name="zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_li9570139205118"></a><strong id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_b1166799142613">./malluma_uninstall.sh</strong></p>
+<div class="note" id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0274640758_note11634144310290"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0268045597_p52581221122912">如果节点卸载失败，需要手动删除失败Agent节点下的“/home/malluma/malluma_conf/malluma_install.ini”文件、<strong id="ZH-CN_TOPIC_0000001178881564__zh-cn_topic_0000001153639336_zh-cn_topic_0268045597_b1416182222914">malluma</strong>用户、“/home/malluma”和“/opt/malluma”文件夹。</p>
+</div></div>
+</li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001224201273.html">FAQ</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

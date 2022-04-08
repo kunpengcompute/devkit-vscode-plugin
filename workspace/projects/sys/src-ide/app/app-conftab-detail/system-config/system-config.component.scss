@@ -1,0 +1,146 @@
+.config-container {
+    min-height: 67.2vh;
+    background-color: #ffffff;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 1px;
+    border: solid 1px #d4d9e6;
+    opacity: 0.69;
+    display: flex;
+    text-align: left;
+    position: relative;
+
+    .config-leftmenu {
+        min-width: 130px;
+        padding: 32px;
+    }
+    .config-line {
+        width: 2px;
+        min-height: 37.8vw;
+        background-color: #d8d8d8;
+        opacity: 0.69;
+    }
+    .config-detail {
+        position: relative;
+        padding-top: 3vh;
+        padding-left: 2vw;
+        width: 100%;
+        ::ng-deep .system-content-table {
+            width: 100% !important;
+            color: #282b33;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+    }
+}
+.leftmenu-level {
+    .leftmenu-level1 {
+        position: relative;
+        padding-bottom: 32px;
+        cursor: pointer;
+        p {
+            font-family: FZLTZHJW--GB1-0;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: 20px;
+            letter-spacing: 0px;
+            color: #282b33;
+        }
+        div {
+            position: absolute;
+            right: 0;
+            top: 7px;
+            &::before {
+                content: "";
+                display: block;
+                width: 0;
+                height: 0;
+                border: 5px solid transparent;
+            }
+        }
+        .upArr {
+            top: 2px;
+            &::before {
+                border-bottom-color: #282b33;
+            }
+        }
+        .downArr {
+            &::before {
+                border-top-color: #282b33;
+            }
+        }
+    }
+
+    .leftmenu-leve2-box {
+        padding-left: 20px;
+        position: relative;
+        overflow: hidden;
+        max-height: 0px;
+        transition: max-height 0.5s ease;
+        &::before {
+            content: "";
+            width: 3px;
+            height: calc(100% - 32px);
+            position: absolute;
+            left: 20px;
+            top: 0;
+            background-color: #e6ebf5;
+        }
+        .leftmenu-level2 {
+            font-family: FZLTHJW--GB1-0;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            line-height: 14px;
+            letter-spacing: 0px;
+            color: #6c7280;
+            padding-bottom: 32px;
+            padding-left: 11px;
+            cursor: pointer;
+        }
+        .leftmenu-level2.activeLevel2 {
+            font-family: FZLTZHJW--GB1-0;
+            color: #282b33;
+            position: relative;
+            &::before {
+                position: absolute;
+                top: -3px;
+                left: 0;
+                content: "";
+                width: 3px;
+                height: 20px;
+                background-color: #6c92fa;
+                z-index: 999;
+            }
+        }
+    }
+    .activebox.leftmenu-leve2-box {
+        max-height: 400px;
+        transition: max-height 0.5s ease;
+    }
+}
+.no_drop {
+    cursor: no-drop !important;
+}
+.no_drop p {
+    color: #999 !important;
+}
+.no_drop .downArr::before {
+    border-top-color: #999 !important;
+}
+.nodata {
+    img {
+        width: 198px;
+        display: block;
+    }
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 15%;
+}
+::ng-deep .ti3-tooltip {
+    white-space: pre-wrap !important;
+    max-height: 600px;
+}

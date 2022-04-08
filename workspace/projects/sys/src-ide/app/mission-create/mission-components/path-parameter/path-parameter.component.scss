@@ -1,0 +1,32 @@
+.analysis-target-value {
+    color: #333;
+    input {
+        width: 400px;
+        height: 32px;
+        padding: 0 10px;
+        box-sizing: border-box;
+        border: 1px solid var(--ti-input-border-color);
+        border-radius: 2px;
+        background-color: var(--ti-input-bg-color);
+        color: var(--ti-input-text-color);
+    }
+    ti-spinner {
+        width: 165px;
+    }
+    .user,
+    .password{
+        width: 400px;
+    }
+    .mission-app-warn,
+    .mission-app-input-tip {
+        max-width: 356px;
+        color: #ff0000;
+    }
+    span{
+        color: #888888;
+        padding-left: 10px;
+    }
+}
+.margin {
+    margin-left: 10px;
+}

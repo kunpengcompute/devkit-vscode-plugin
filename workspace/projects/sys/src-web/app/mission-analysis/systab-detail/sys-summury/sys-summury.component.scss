@@ -1,0 +1,514 @@
+.downloadButton{
+  position: absolute;
+  top:10px;
+  right:0px;
+
+  >a {
+    display: block;
+
+    >app-icon-react {
+      display: block;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+.ifShow.svgPage{
+  display:block;
+}
+.svgPage{
+  display:none;
+  left: 10000px;
+  overflow: visible;
+}
+.summury-box-download{
+  color: #282b33;
+  padding-bottom: 20px;
+  overflow-y: auto;
+}
+.loadingHeight{
+  height: 63vh;
+}
+.back{
+  height: 21px;
+  line-height: 21px;
+  font-size: 21px;
+  color: #252c3c;
+  display: flex;
+  align-items: center;
+  .backCursor{
+    cursor: pointer;
+  }
+  img{
+    height: 16px;
+    width: 16px;
+  }
+}
+.rocket{
+  margin-bottom: -4px;
+  margin-left: 8px;
+}
+.box{
+  background: #f0f3fa;
+  .raidConfig{
+    padding-bottom: 20px;
+    .raidConfigContent{
+      height: 20px;
+      margin-top: 20px;
+      display: flex;
+      margin-left: 24px;
+      span{
+        min-width: 100px;
+        font-family: "huawei sans";
+        font-size: 12px;
+        color: #616161;
+        margin-right: 24px;
+        line-height: 20px;
+      }
+      div{
+        font-size: 14px;
+        font-family: "huawei sans";
+        color: #222222;
+        line-height: 20px;
+      }
+    }
+  }
+
+}
+.blockCls{
+  img{
+      vertical-align: middle;
+  }
+}
+.box-title{
+  position: relative;
+  padding-left: 21px;
+  height: 48px;
+  line-height: 48px;
+  background: white;
+  border-bottom: 1px solid #e6ebf5;
+  .titleDetail{
+    display: flex;
+    align-items: center;
+    height: 18px;
+    top: 15px;
+    position: absolute;
+    right:0px;
+    z-index: 99;
+    div{
+      width: 130px;
+      border-left: 2px solid #e1e6ee;
+      padding:0px 15px;
+      font-size: 12px;
+      line-height: 18px;
+    }
+  }
+  .left-box{
+    width:72%;
+    margin-right: 7%;
+  }
+  .right-box{
+    width: 21px;
+  }
+}
+#box-title{
+  height: 100%;
+  height: max-content;
+  .content{
+    width: 100%;
+    border-bottom: 2px dashed #d4d9e6;
+    display: flex;
+    padding: 32px 0px 22px 0px;
+    .content-left,.content-intermediate,.content-right{
+      font-family: "huawei sans";
+      font-size: 14px;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 34px;
+      letter-spacing: 0px;
+      color: #282b33;
+      p{
+        height: 14px;
+        margin-bottom:22px;
+      }
+      div{
+        height: 34px;
+        display: flex;
+        align-items: center;
+        span{
+          color: #9ea4b3;
+          img{
+            height: 14px;
+            width: 14px;
+            margin-left: 8px;
+            margin-bottom: -2px;
+          }
+        }
+        div{
+          display: block;
+          line-height: 34px;
+          max-width:180px;
+        }
+        em{
+          color: #0067FF;
+          min-width: 56px;
+          cursor: pointer;
+        }
+        em:hover{
+          color: #267DFF;
+        }
+        .ifClick{
+          color:#004EC1 !important;
+        }
+      }
+    }
+    .content-left{
+      width: 34%;
+      div{
+        >span{
+          width: 136px;
+          padding-right: 20px;
+          display: flex;
+          align-items: center;
+        }
+        .nohz-title{
+          padding-right: 0;
+        }
+
+      }
+    }
+    .virtual{
+      width: 100%;
+      font-family: "huawei sans";
+      font-size: 14px;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 14px;
+      letter-spacing: 0px;
+      color: #282b33;
+      p{
+        height: 14px;
+        margin-bottom:22px;
+      }
+      div{
+        min-height: 34px;
+        display: flex;
+        span{
+          width: 156px;
+          line-height: 34px;
+          color: #9ea4b3;
+        }
+        div{
+          display: flex;
+          flex-wrap: wrap;
+          flex: 1;
+          .virtualName{
+            margin:12px 16px 12px 0px;
+            color: #0067FF;
+            cursor: pointer;
+            line-height: 14px;
+            font-style: normal;
+          }
+          .virtualName:hover{
+            color: #267DFF;
+          }
+          .ifClick{
+            color:#004EC1 !important;
+          }
+        }
+
+      }
+    }
+    .content-intermediate{
+      width: 34%;
+      div{
+        span{
+          width: 256px;
+        }
+      }
+      .mem-sys .left-title{
+        padding-right: 30px;
+        display: flex;
+        align-items: center;
+        span{
+          width: auto;
+        }
+      }
+     
+    }
+    .mem-sys-content{
+      width: 40%;
+    }
+    .content-right{
+      width: 32%;
+      div{
+        span{
+          width: 153px;
+        }
+      }
+      .displayTime{
+        display: none;
+      }
+    }
+    .viewDetail{
+      cursor: pointer;
+      color: #0067FF;
+    }
+    .viewDetail:hover{
+      color: #267DFF;
+    }
+  }
+  #content{
+    .content-left{
+      div{
+        span{
+          width: 280px;
+        }
+        div{
+          max-width:197px;
+        }
+      }
+    }
+    .content-intermediate{
+      div{
+        span{
+          width: 291px;
+        }
+      }
+    }
+    .content-right{
+      div{
+        span{
+          width: 233px;
+        }
+      }
+    }
+  }
+}
+.box-content{
+  background: white;
+  margin-left: 41px;
+  border-left: solid 2px #6c92fa;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0,1,0,1);
+}
+.box-content.active{
+  max-height: 6000px;
+  transition: max-height 0.1s cubic-bezier(1,0,1,0);
+}
+.title-icon{
+  margin-right: 5px;
+  transition: 0.5s linear;
+  position: relative;
+  top: 1px;
+}
+.title-icon.active{
+  transform: rotate(90deg);
+}
+.table-body{
+  border-bottom: 1px solid #e6ebf5;
+}
+.table{
+  font-size: 0.8rem;
+  width: 100%;
+}
+
+:host ::ng-deep .box-content .ti3-table>table>tbody>tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr){  //隔行不换色
+  background: white;
+}
+:host ::ng-deep .box-content .ti3-table>table>tbody>tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover{
+  background: #eaf6f9;
+}
+:host ::ng-deep .box-content .ti3-table>table>thead>tr>th{   //表头颜色
+  background: white;
+}
+//表头分割线颜色
+:host ::ng-deep .box-content .ti3-table>.ti3-resize-wrapper>table>thead>tr>th:not(:last-child)::after, .ti3-table>.ti3-table-container>table>thead>tr>th:not(:last-child)::after, .ti3-table>.ti3-table-fixed-head>table>thead>tr>th:not(:last-child)::after, .ti3-table>table>thead>tr>th:not(:last-child)::after{
+  background: #e6ebf5;
+}
+
+//tr上边线
+:host ::ng-deep .box-content .ti3-table>.ti3-resize-wrapper>table>tbody>tr>td, .ti3-table>.ti3-table-container>table>tbody>tr>td, .ti3-table>.ti3-table-fixed-head>table>tbody>tr>td, .ti3-table>table>tbody>tr>td {
+  border-bottom: 1px solid #e6ebf5;
+}
+:host ::ng-deep .ti3-table > table > thead > tr > th{
+  border-bottom: 1px solid #e6ebf5;
+
+}
+.above{
+  color: #f45c5e;
+}
+.viewDetail-mask {
+  width: 700px;
+  max-height: 600px;
+  box-sizing: border-box;
+  padding:20px 40px;
+  position: relative;
+  .viewDetail-title{
+      display:flex;
+      justify-content: space-between;
+      border-bottom: dashed 1px #d4d9e6;
+      padding-bottom:20px;
+      height:20px;
+      font-size:20px;
+      margin-bottom:20px;
+  }
+  .viewDetail-content{
+      max-height: 450px;
+      overflow-y:auto;
+      font-size: 14px;
+      white-space: pre-line; //使换行符生效
+      img{
+        display:block;
+        margin: 0 auto;
+      }
+      .viewDetail-content-nodata{
+        margin-top: 10px;
+        text-align: center;
+      }
+  }
+  .bottom-close{
+    height: 28px;
+    margin-top: 20px;
+  }
+  .closeBtn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    margin-left: -35px;
+  }
+}
+.th-tip-icon{
+  position: relative;
+  top: 1px ;
+  margin-left: 6px;
+}
+.nodata{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10%;
+}
+.sort-title{
+  vertical-align: top;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inline-block;
+  max-width: calc(100% - 23px);
+}
+
+:host ::ng-deep .summury-box-download .ti3-sort-container{
+  padding-left: 5px;
+}
+
+:host ::ng-deep .ti3-table {
+  .thContent {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    height: 32px;
+
+      .ti3-cell-text-container {
+          overflow: hidden;
+          height: 100%;
+
+          .ti3-cell-text {
+            max-width: 100% !important;
+          }
+      }
+
+      &.center {
+          justify-content: center;
+      }
+
+      // ti-head-sort不在th下一级，css不生效
+      .ti3-sort-container {
+        cursor: pointer;
+        padding-left: 10px;
+        position: relative;
+        height: 100%;
+        width: 8px;
+        display: inline-block;
+        vertical-align: top;
+
+    &:hover {
+      .ti3-sort-up{
+        border-bottom-color: #39f;
+      }
+      .ti3-sort-down{
+        border-top-color: #39f;
+      }
+    }
+
+    .ti3-sort-up {
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      display: block;
+      position: absolute;
+      border-bottom: 5px solid #666;
+      top: calc(50% - 5px - 1.5px);
+      cursor: pointer;
+          }
+
+    .ti3-sort-down {
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      display: block;
+      position: absolute;
+      border-top: 5px solid #666;
+      top: calc(50% + 1.5px);
+      cursor: pointer;
+          }
+      }
+  .ti3-sort-container.ti3-sort-ascent .ti3-sort-up {
+    border-bottom-color: #39f;
+  }
+  .ti3-sort-container.ti3-sort-descent .ti3-sort-down {
+    border-top-color: #39f;
+  }
+  }
+
+}
+.redColor{
+  color:#f45c5e;
+}
+.borderShow{
+  border-top: 1px solid #e6ebf5;
+}
+.questionMark{
+  display: flex;
+  align-items: center;
+}
+.tableFirstData{
+  margin-left: 14px;
+}
+:host ::ng-deep  .ti3-table>table>thead>tr>th{
+  background-color: #fff !important;
+}
+:host ::ng-deep .box thead th img{
+  height: 14px;
+  width: 14px;
+  margin-bottom: -3px;
+  margin-left: 8px;
+} 
+:host ::ng-deep  .compass{
+  margin-bottom: -3px;
+  margin-left: 8px;
+
+}
+
+@media only screen and (max-height: 900px){
+  .content-intermediate div span.middleTitle{
+    width: 180px !important;
+  }
+  #box-title .content .content-left div div{
+    max-width: 128px !important;
+  }
+}

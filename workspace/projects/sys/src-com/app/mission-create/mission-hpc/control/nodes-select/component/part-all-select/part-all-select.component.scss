@@ -1,0 +1,31 @@
+.select-boxs {
+  position: relative;
+  width: 61px;
+  height: 18px;
+  margin-top: 2px;
+  border-radius: 9px;
+  background: rgba(0, 103, 255, 0.1);
+
+  .chosen {
+    position: absolute;
+    top: 0;
+    width: 32px;
+    height: 18px;
+    color: var(--common-color-font-primary);
+    border-radius: 9px;
+    font-size: 11px;
+    text-align: center;
+    line-height: 18px;
+    cursor: pointer;
+  }
+  .has {
+    left: 0;
+  }
+  .all {
+    right: 0;
+  }
+  .select-chosen {
+    background: #0067ff;
+    color: #fff;
+  }
+}

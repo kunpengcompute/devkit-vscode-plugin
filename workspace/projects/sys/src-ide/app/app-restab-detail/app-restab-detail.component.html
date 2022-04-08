@@ -1,0 +1,46 @@
+<div id="detail-container">
+    <ti-tabs>
+        <ti-tab [(active)]="item.active" *ngFor="let item of detailList;" [disabled]="item.disable"
+            (activeChange)='change()'>
+            <ti-tab-header>
+                <span>{{item.title}}</span>
+            </ti-tab-header>
+            <!--懒加载的内容区必须使用ng-template标签包裹，并且加上#tiTabContent的标识-->
+            <ng-template #tiTabContent>
+                <div class="content-container"
+                    *ngIf="item.title == i18n.common_term_task_tab_congration && item.disable==false"
+                    [ngClass]="{showDetail: item.active}">
+                    <app-configuration [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                        [status]='status' [analysisType]='analysisType' [taskid]='id'></app-configuration>
+                </div>
+                <div class="content-container"
+                    *ngIf="item.title == i18n.common_term_task_tab_log && item.disable==false"
+                    [ngClass]="{showDetail: item.active}">
+                    <app-configuration-log [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                        [analysisType]='analysisType' [status]='status' [taskid]='id'></app-configuration-log>
+                </div>
+                <div class="content-container"
+                    *ngIf="item.title == i18n.common_term_task_tab_summary && item.disable==false"
+                    [ngClass]="{showDetail: item.active}">
+                    <app-msg-suggestion *ngIf="suggestMsg.length" [suggestMsg]="suggestMsg"></app-msg-suggestion>
+                    <app-res-summury [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                        [analysisType]='analysisType' [isActive]="item.active" [taskid]='id'></app-res-summury>
+                    <app-numa-detail [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                        [analysisType]='analysisType' [isActive]="item.active" [taskid]='id'></app-numa-detail>
+                </div>
+                <div class="content-container" *ngIf="item.title == this.i18n.sys_res.tab.cpu && item.disable==false"
+                    [ngClass]="{showDetail: item.active}">
+                    <app-res-cpu-sche #cpuSche [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                        [configuration]="configuration" [analysisType]='analysisType' [taskid]='id' [item]='tpItem'
+                        [isActive]="item.active">
+                    </app-res-cpu-sche>
+                </div>
+                <div class="content-container" *ngIf="item.title == this.i18n.sys_res.tab.pro && item.disable==false"
+                    [ngClass]="{showDetail: item.active}">
+                    <app-res-process-sche [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                        [isActive]="item.active" [analysisType]='analysisType' [taskid]='id'></app-res-process-sche>
+                </div>
+            </ng-template>
+        </ti-tab>
+    </ti-tabs>
+</div>

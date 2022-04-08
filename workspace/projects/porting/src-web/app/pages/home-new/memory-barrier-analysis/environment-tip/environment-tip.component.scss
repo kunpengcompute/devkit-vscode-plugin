@@ -1,0 +1,48 @@
+$col222: #222;
+$col0067ff: #0067ff;
+
+.environment-container {
+    margin-top: -8px;
+    margin-bottom: 16px;
+    padding: 10px 12px;
+    border: 1px solid $col0067ff;
+    background-color: #F0F6FF;
+    color: $col222;
+    font-size: 14px;
+    border-radius: 2px;
+
+    .decoration {
+        text-decoration: underline;
+    }
+
+    /* 关闭图标 */
+    .close-tip {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        cursor: pointer;
+    }
+
+    .top-container {
+        align-items: flex-start;
+        .img-box {
+            margin-top: 2px;
+            margin-right: 8px;
+        }
+    }
+
+    .bottom-container {
+        margin: 4px 22px;
+        p {
+            &:first-child {
+                margin-left: -2px
+            }
+        }
+        .cursor-link {
+            &:last-child {
+                margin-left: 10px;
+            }
+        }
+    }
+
+}

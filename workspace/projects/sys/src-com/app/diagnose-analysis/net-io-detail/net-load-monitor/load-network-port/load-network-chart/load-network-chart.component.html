@@ -1,0 +1,8 @@
+<div class="memory-detail" [id]='uuid'>
+    <div class="echarts-box">
+        <div echarts [options]="tableData" *ngIf="tableData" (chartInit)="onChartInit($event)" [theme]="currTheme"
+            class="echarts">
+        </div>
+    </div>
+    <div class="echarts-box" *ngIf="!tableData" hyNodata [nodataShow]="!tableData"></div>
+</div>

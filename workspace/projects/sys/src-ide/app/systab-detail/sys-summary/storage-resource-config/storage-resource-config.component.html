@@ -1,0 +1,293 @@
+<div class="box">
+    <div class="box-title" (click)="toggle.storageResource = !toggle.storageResource">
+        <img *ngIf="currTheme == ColorTheme.Dark" src="./assets/img/summary/row_dark.svg" class="title-icon"
+            [ngClass]="{ active: toggle.storageResource }" />
+        <img *ngIf="currTheme == ColorTheme.Light" src="./assets/img/summary/row.png" class="title-icon"
+            [ngClass]="{ active: toggle.storageResource }" />
+        {{ i18n.sys.storageConfig }}
+        <div class="titleDetail">
+            <div tiOverflow>
+                {{ Raid.title }}: <span>{{ Raid.data }}</span>
+            </div>
+            <div tiOverflow>
+                {{ storage.title }}: <span>{{ storage.data }}</span>
+            </div>
+            <div tiOverflow>
+                {{ fill.title }}: <span>{{ fill.data }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="box-content" [ngClass]="{ active: toggle.storageResource }">
+        <!-- RAID控制卡 -->
+        <div class="box">
+            <div class="box-title" (click)="toggle.raidControlCard = !toggle.raidControlCard">
+                <img *ngIf="currTheme == ColorTheme.Dark" src="./assets/img/summary/row_dark.svg" class="title-icon"
+                    [ngClass]="{ active: toggle.raidControlCard }" />
+                <img *ngIf="currTheme == ColorTheme.Light" src="./assets/img/summary/row.png" class="title-icon"
+                    [ngClass]="{ active: toggle.raidControlCard }" />
+                {{ i18n.sys_cof.sum.raid_level }}
+                <img *ngIf="currTheme == ColorTheme.Dark && raidTipStr != 'NULL'"
+                    src="./assets/img/summary/tooltip_dark.svg" class="system-tip blockCls" [tiTip]="raidTipStr"
+                    tiTipMaxWidth="550px" tiTipPosition="top-left" />
+                <img *ngIf="
+                        currTheme == ColorTheme.Light && raidTipStr != 'NULL'
+                    " src="./assets/img/summary/tooltip.png" class="system-tip blockCls" [tiTip]="raidTipStr"
+                    tiTipMaxWidth="550px" tiTipPosition="top-left" />
+            </div>
+            <div class="box-content" [ngClass]="{ active: toggle.raidControlCard }">
+                <ti-table [(displayedData)]="raidControlCardDisplayData" [srcData]="raidControlCardContentData"
+                    [columns]="raidControlCardTitle" tiColsResizable>
+                    <div class="ti3-resize-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th tiOverflow *ngFor="
+                                            let column of raidControlCardTitle;
+                                            index as i
+                                        " width="{{ column.width }}">
+                                        <span [ngClass]="{ tableFirstData: i == 0 }">{{ column.title }}</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="!ifraid">
+                                <tr *ngFor="let item of raidControlCardDisplayData">
+                                    <td tiOverflow tiTipPosition="left">
+                                        <span class="tableFirstData">{{
+                                            item.data1
+                                            }}</span>
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        {{ item.data2 }}
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        {{ item.data3 }}
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        {{ item.data4 }}
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        {{ item.data5 }}
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        {{ item.data6 }}
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        {{ item.data7 }}
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        {{ item.data8 }}
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        {{ item.data9 }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <app-loading *ngIf="showLoading"></app-loading>
+                        <app-default-page *ngIf="ifraid" [text]="raid"></app-default-page>
+                    </div>
+                    <ti-pagination *ngIf="raidControlCardTotalNumber > 10" [(currentPage)]="raidControlCardCurrentPage"
+                        style="padding-left: 10px" [pageSize]="raidControlCardPageSize"
+                        [(totalNumber)]="raidControlCardTotalNumber">
+                    </ti-pagination>
+                </ti-table>
+            </div>
+        </div>
+        <!-- RAID配置 -->
+        <div class="box">
+            <div class="box-title" (click)="toggle.raidConfig = !toggle.raidConfig">
+                <img *ngIf="currTheme == ColorTheme.Dark" src="./assets/img/summary/row_dark.svg" class="title-icon"
+                    [ngClass]="{ active: toggle.raidConfig }" />
+                <img *ngIf="currTheme == ColorTheme.Light" src="./assets/img/summary/row.png" class="title-icon"
+                    [ngClass]="{ active: toggle.raidConfig }" />
+                {{ i18n.sys_summary.cpupackage_tabel.raid_config }}
+            </div>
+            <div class="box-content" [ngClass]="{ active: toggle.raidConfig }">
+                <div class="raidConfig">
+                    <div *ngFor="let item of raidConfigData" class="raidConfigContent">
+                        <div style="margin-right: 24px;">
+                            <span class="raid-config-title" style="margin-right: 10px;">{{ item.title }}</span>
+                            <img *ngIf="currTheme == ColorTheme.Dark" src="./assets/img/summary/tooltip_dark.svg"
+                                [tiTip]='item.tipStr' tiTipPosition="top-left">
+                            <img *ngIf="currTheme == ColorTheme.Light" src="./assets/img/summary/tooltip.png"
+                                [tiTip]='item.tipStr' tiTipPosition="top-left">
+                        </div>
+                        <div class="raid-config-content">{{ item.data }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 存储信息 -->
+        <div class="box">
+            <div class="box-title" (click)="toggle.storageInformation = !toggle.storageInformation">
+                <img *ngIf="currTheme == ColorTheme.Dark" src="./assets/img/summary/row_dark.svg" class="title-icon"
+                    [ngClass]="{ active: toggle.storageInformation }" />
+                <img *ngIf="currTheme == ColorTheme.Light" src="./assets/img/summary/row.png" class="title-icon"
+                    [ngClass]="{ active: toggle.storageInformation }" />
+                {{ i18n.sys_cof.sum.storage_msg }}
+            </div>
+            <div class="box-content" [ngClass]="{ active: toggle.storageInformation }">
+                <ti-table [(displayedData)]="storageInformationDisplayData" [srcData]="storageInformationContentData"
+                    [columns]="storageInformationTitle" tiColsResizable>
+                    <div class="ti3-resize-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th tiOverflow *ngFor="
+                                            let column of storageInformationTitle;
+                                            index as i
+                                        " width="{{ column.width }}">
+                                        <span [ngClass]="{ tableFirstData: i == 0 }">
+                                            {{ column.title }}
+                                            <img *ngIf="
+                                                    column.tipStr &&
+                                                    column.tipStr != 'NULL'
+                                                " src="./assets/img/summary/compass.svg" class="system-tip blockCls"
+                                                class="compass" [tiTip]="column.tipStr" tiTipMaxWidth="550px"
+                                                tiTipPosition="top-left" />
+                                        </span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="!ifstorage">
+                                <tr *ngFor="
+                                        let item of storageInformationDisplayData
+                                    ">
+                                    <td tiOverflow tiTipPosition="left">
+                                        <span class="tableFirstData">{{
+                                            item.name
+                                            }}</span>
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        {{ item.parameter }}
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        <span [ngClass]="{
+                                                redColor:
+                                                    item.tipStr &&
+                                                    item.tipStr != 'NULL'
+                                            }">{{ item.mechanism }}</span>
+                                        <img *ngIf="
+                                                currTheme == ColorTheme.Dark &&
+                                                item.tipStr &&
+                                                item.tipStr != 'NULL'
+                                            " src="./assets/img/rocket_dark.svg" class="rocket" [tiTip]="tipContent"
+                                            [tiTipContext]="item.tipStr" tiTipMaxWidth="550px"
+                                            tiTipPosition="top-left" />
+                                        <img *ngIf="
+                                                currTheme == ColorTheme.Light &&
+                                                item.tipStr &&
+                                                item.tipStr != 'NULL'
+                                            " src="./assets/img/rocket.svg" class="rocket" [tiTip]="tipContent"
+                                            [tiTipContext]="item.tipStr" tiTipMaxWidth="550px"
+                                            tiTipPosition="top-left" />
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        {{ item.affinity }}
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        {{ item.config }}
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        {{ item.depth }}
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        {{ item.IO }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <app-loading *ngIf="showLoading"></app-loading>
+                        <app-default-page *ngIf="ifstorage" [text]="storageInformation"></app-default-page>
+                    </div>
+                    <ti-pagination autoHide="true" [(currentPage)]="storageInformationCurrentPage"
+                        style="padding-left: 10px" [pageSize]="storageInformationPageSize"
+                        [(totalNumber)]="storageInformationTotalNumber">
+                    </ti-pagination>
+                </ti-table>
+            </div>
+        </div>
+        <!-- 文件信息 -->
+        <div class="box">
+            <div class="box-title" (click)="toggle.fileInformation = !toggle.fileInformation">
+                <img *ngIf="currTheme == ColorTheme.Dark" src="./assets/img/summary/row_dark.svg" class="title-icon"
+                    [ngClass]="{ active: toggle.fileInformation }" />
+                <img *ngIf="currTheme == ColorTheme.Light" src="./assets/img/summary/row.png" class="title-icon"
+                    [ngClass]="{ active: toggle.fileInformation }" />
+                {{ i18n.sys_cof.sum.file_system_msg }}
+            </div>
+            <div class="box-content" [ngClass]="{ active: toggle.fileInformation }">
+                <ti-table [(displayedData)]="filleInformationDisplayData" [srcData]="filleInformationContentData"
+                    [columns]="filleInformationTitle" tiColsResizable>
+                    <div class="ti3-resize-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th tiOverflow *ngFor="
+                                            let column of filleInformationTitle;
+                                            index as i
+                                        " width="{{ column.width }}">
+                                        <span [ngClass]="{ tableFirstData: i == 0 }">
+                                            {{ column.title }}
+                                            <img *ngIf="
+                                                    column.tipStr &&
+                                                    column.tipStr != 'NULL'
+                                                " src="./assets/img/summary/compass.svg" class="system-tip blockCls"
+                                                class="compass" [tiTip]="column.tipStr" tiTipMaxWidth="550px"
+                                                tiTipPosition="top-left" />
+                                        </span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="!iffille">
+                                <tr *ngFor="let item of filleInformationDisplayData">
+                                    <td tiOverflow tiTipPosition="left">
+                                        <span class="tableFirstData">{{
+                                            item.name
+                                            }}</span>
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        <span [ngClass]="{
+                                                redColor:
+                                                    item.tipStr &&
+                                                    item.tipStr != 'NULL'
+                                            }">{{ item.type }}</span>
+                                        <img *ngIf="
+                                                currTheme == ColorTheme.Dark &&
+                                                item.tipStr &&
+                                                item.tipStr != 'NULL'
+                                            " src="./assets/img/rocket_dark.svg" class="rocket" [tiTip]="tipContent"
+                                            [tiTipContext]="item.tipStr" tiTipMaxWidth="550px"
+                                            tiTipPosition="top-left" />
+                                        <img *ngIf="
+                                                currTheme == ColorTheme.Light &&
+                                                item.tipStr &&
+                                                item.tipStr != 'NULL'
+                                            " src="./assets/img/rocket.svg" class="rocket" [tiTip]="tipContent"
+                                            [tiTipContext]="item.tipStr" tiTipMaxWidth="550px"
+                                            tiTipPosition="top-left" />
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        {{ item.mountDot }}
+                                    </td>
+                                    <td tiOverflow tiTipPosition="left">
+                                        {{ item.mountInfo }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <app-loading *ngIf="showLoading"></app-loading>
+                        <app-default-page *ngIf="iffille" [text]="fille"></app-default-page>
+                    </div>
+                    <ti-pagination autoHide="true" [(currentPage)]="filleInformationCurrentPage"
+                        style="padding-left: 10px" [pageSize]="filleInformationPageSize"
+                        [(totalNumber)]="filleInformationTotalNumber">
+                    </ti-pagination>
+                </ti-table>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #tipContent let-context="context">
+    <span [innerHtml]="context"></span>
+</ng-template>

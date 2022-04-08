@@ -1,0 +1,153 @@
+
+.target-model{
+    margin:40px 0 0 57px;
+}
+::ng-deep #targetEnviroiment .guardian-tip {
+    display: flex;
+    font-size: 12px;
+    color: #888888;
+    line-height: 18px;
+    margin-bottom: 10px;
+    img {
+        margin-right: 10px;
+    }
+}
+.help-icon {
+    position: relative;
+    top: 2px;
+}
+
+.eyes {
+    position: absolute;
+    left: 375px;
+    top: 6px;
+    width: 20px;
+    height: 20px;
+}
+.templateTop{
+    border-bottom: 0px;
+    padding: 0 0 4px 10px;
+    font-size: 20px;
+    display: block;
+}
+.templateBody{
+    padding-left: 10px;
+    font-size: 14px;
+    margin: 4px 0 0 0;
+    display: block;
+    ti-formfield ::ng-deep table > tbody > tr{
+        td:not(:first-child){
+            display: block;
+        }
+        td:nth-child(2){
+            padding-bottom: 0px;
+        }
+    }
+}
+.templateTop{
+    .title{
+        padding-left: 10px;
+    }
+}
+.root-warn {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    width: 400px;
+    line-height: 18px;
+    img {
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+      margin-top: -6px;
+    }
+    span {
+      font-size: 12px;
+      color: #616161;
+    }
+  }
+.templateFooter{
+    margin-top: 50px;
+    display: block;
+    text-align: left;
+    background: var(--vscode-editor-background) !important;
+    padding: 0 0 0 10px; 
+    button{
+        background-color: #0067ff;
+        color: #e8e8e8;
+        font-size: 14px;
+        width: 160px;
+        height: 32px;
+        border: 0;
+        border-radius: 2px;
+        cursor: pointer;
+    }
+    button:hover:not([disabled]){
+        background: #267dff;
+    }
+}
+.timodalbody{
+    display:flex;
+    font-size: 12px;
+    color: #888888;
+    line-height: 18px;
+    margin-left: -32px;
+}
+
+::ng-deep .ti3-modal-footer {
+    padding-top: 0 !important;
+}
+
+::ng-deep .ti3-modal-dialog {
+    margin: 0 auto !important;
+}
+
+::ng-deep .ti3-modal-open .ti3-modal {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+::ng-deep .vscode-dark .templateFooter {
+    button[disabled]{
+        cursor: not-allowed;
+        background-color: #313131;
+        color: #616161;
+    }
+}
+::ng-deep .vscode-light .templateFooter {
+    button[disabled]{
+        cursor: not-allowed;
+        background-color: #f5f5f5;
+        color: #ccc;
+    }
+}
+
+.radios {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    .radio-box {
+        display: flex;
+        input{
+          flex: 1;
+        }
+        &:last-child {
+            margin-left: 30px;
+        }
+    }
+  }
+  // 浅色主题
+  ::ng-deep .vscode-light {
+    input[type=radio][tiRadio]+.ti3-radio .ti3-radio-label{
+      color: #222 !important;
+    }
+  }
+  // 浅色主题
+  ::ng-deep .vscode-dark {
+    input[type=radio][tiRadio]+.ti3-radio .ti3-radio-label{
+      color: #888 !important;
+    }
+  }

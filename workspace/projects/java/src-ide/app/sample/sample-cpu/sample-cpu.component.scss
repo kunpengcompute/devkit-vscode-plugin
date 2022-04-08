@@ -1,0 +1,49 @@
+::ng-deep .cpu-detail-tab {
+    margin-top: 20px;
+
+    .tab-content {
+        position: relative;
+
+        .item-tab {
+            padding: 0 16px;
+
+            .tab-title {
+                display: inline-block;
+                cursor: pointer;
+                box-sizing: border-box;
+                font-size: 14px;
+                line-height: 20px;
+                position: relative;
+
+                .tab-active {
+                    display: inline-block;
+                    padding-bottom: 6px;
+                    color: #267dff;
+                    border-bottom: 2px solid #267dff
+                }
+            }
+        }
+
+        .item-tab:hover {
+            color: #0067ff;
+        }
+    }
+
+    .tab-content:nth-of-type(1) {
+        .item-tab {
+            padding-left: 0;
+        }
+    }
+
+    .tab-content:not(:last-child) {
+        .item-tab:after {
+            content: "";
+            position: absolute;
+            height: 10px;
+            width: 1px;
+            right: 0;
+            top: calc(50% - 5px);
+            background-color: #888;
+        }
+    }
+}

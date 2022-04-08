@@ -1,0 +1,145 @@
+:root {
+    --ti-tree-node-icon-font-size: 16px;
+    --ti-tree-node-icon-space: calc(var(--ti-tree-square-icon-font-size) + var(--ti-tree-node-icon-font-size) + var(--ti-tree-icon-right-space) * 2); // 展开收起图标大小 + 复选图标大小 + 展开收起图标右侧间距 + 复选图标右侧间距
+    --ti-tree-item-guide-line-first-child-space: var(--ti-common-space-2x);
+    --ti-tree-item-guide-line-width: 8px; // 导航线宽度
+}
+.custom-expand-tree {
+  .ti3-tree-node-text {
+    max-width: 100%;
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  
+  &.ti3-tree-parent-node {
+    font-size: var(--ti-common-font-size-base);
+    position: relative;
+    border-top: 1px solid var(--common-color-divider);
+    min-width: 100%;
+    width: min-content;
+  }
+  
+  .ti3-tree-node-icon {
+    text-align: center;
+    font-size: var(--ti-tree-node-icon-font-size);
+    margin-right: var(--ti-tree-icon-right-space);
+  }
+  
+  .ti3-tree-leaf-node {
+    padding-left: 36px;
+    position: relative;
+  }
+  
+  .ti3-tree-node-text-wrapper {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  
+  .ti3-tree-content-box {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    height: var(--ti-tree-item-height);
+    line-height: var(--ti-tree-item-lineheight);
+    padding-left: 22px;
+    border-bottom: 1px solid var(--common-color-divider);
+
+  }
+  
+  .ti3-tree-content-box-disabled {
+    color: var(--ti-common-color-text-disabled);
+    cursor: not-allowed;
+  }
+  
+  .ti3-tree-item-leaf {
+    .expand-icon {
+      visibility: hidden;
+    }
+  }
+  
+  .ti3-tree-checkbox-wrapper {
+    display:inline-block;
+    font-size: 0; // 解决图标溢出问题
+  }
+  
+  &.ti3-tree-container {
+    .expand-icon {
+        color: #979797;
+        cursor: pointer;
+        margin-right: 20px;
+
+        &.active {
+          display: inline-block;
+          transform: rotate(90deg);
+        }
+    }
+    .ti3-icon-minus-square {
+      color: var(--ti-tree-minus-square-color);
+    }
+  
+    .ti3-icon-plus-square{
+      color: var(--ti-tree-plus-square-color);
+    }
+  
+    .ti3-icon-minus-square, .ti3-icon-plus-square {
+      margin-right: var(--ti-tree-icon-right-space);
+      font-size: var(--ti-tree-square-icon-font-size);
+       // i标签元素如果不设置具体宽度，在浏览器缩放小于100%的时候，宽度会变大，导致后面的文本区域换行。
+       display: inline-block;
+       width: var(--ti-tree-square-icon-font-size);
+       // 由于line-height继承性，图标按下时，整个图标节点背景色会变化
+       line-height: var(--ti-tree-square-icon-font-size);
+  
+      &:hover {
+        cursor: pointer;
+        color: var(--ti-tree-icon-color-active);
+      }
+  
+      &:active {
+        color: var(--ti-tree-icon-color-active);
+        background: var(--ti-tree-icon-bg-color-active);
+      }
+    }
+  }
+  
+  /* -----------------------------------------------左侧导航线样式--------------------------------------------*/
+  .ti3-tree-leaf-node{
+    // 导航线基础样式
+    & > .ti3-tree-content-box > .ti3-tree-item-guide-line {
+      position: absolute;
+      width: var(--ti-tree-item-guide-line-width);
+      height: var(--ti-tree-item-height);
+      box-sizing: border-box;
+      border-left: 1px solid var(--ti-tree-item-guide-line-color);
+      border-bottom: 1px solid var(--ti-tree-item-guide-line-color);
+      top: calc(-1 * var(--ti-tree-item-height) / 2);
+      left: calc(-1 * var(--ti-tree-square-icon-font-size) / 2);
+    }
+  
+    // 第一个子节点的导航线样式
+    &:first-child > .ti3-tree-content-box > .ti3-tree-item-guide-line {
+      height: calc(var(--ti-tree-item-height) - var(--ti-tree-square-icon-font-size) / 2 - var(--ti-tree-item-guide-line-first-child-space));
+      top: calc(var(--ti-tree-square-icon-font-size) / 2 + var(--ti-tree-item-guide-line-first-child-space) - var(--ti-tree-item-height) / 2);
+    }
+  }
+}
+
+.ti3-tree-parent-node:not(.custom-expand-tree) {
+  position: relative;
+  min-width: 100%;
+  width: min-content;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 34px;  
+    background-color: var(--ti-table-expand-children-margin-background-color);
+    border-right: 2px solid #0067ff;
+    border-bottom: 1px solid var(--common-color-divider);
+  }
+}

@@ -1,0 +1,50 @@
+::ng-deep html,body {
+    min-width: 1062px !important;
+    overflow-x: auto !important;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .main {
+        flex: 1;
+        display: flex;
+        flex: auto;
+        flex-direction: row;
+        overflow-y: auto;
+        overflow-x: auto;
+
+        .router-content {
+            flex: 1;
+            width: 100%;
+        }
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 8px 0 8px;
+    background: #2e3243;
+    color: white;
+
+    line-height: 26px;
+    font-size: 12px;
+    color: #ffffff;
+}
+.bg {
+    width: 56px;
+    height: 56px;
+    background-color: red;
+}
+
+.chartTip {
+    background: rgba(50, 50, 50, 0.8);
+    border: 1px solid rgba(50, 50, 50, 0.8);
+    padding: 10px;
+    position: fixed;
+    display: none;
+}
+.ti3-table>.ti3-table-fixed-head>table>thead>tr>th {
+    border-bottom: 1px solid #4b4b4b!important;
+}

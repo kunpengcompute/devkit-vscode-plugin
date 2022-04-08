@@ -1,0 +1,14 @@
+.search-box {
+  margin-bottom: 10px;
+}
+
+.search-icon {
+  margin-left: 10px;
+  cursor: pointer;
+  &:hover {
+    color: #267dff;
+  }
+  &.active {
+    color: #0057d9;
+  }
+}

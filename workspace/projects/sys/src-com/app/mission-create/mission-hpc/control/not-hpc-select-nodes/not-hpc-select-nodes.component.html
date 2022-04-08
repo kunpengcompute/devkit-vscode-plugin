@@ -1,0 +1,158 @@
+<div class="select-nodes" hyThemeClass>
+  <div class="select-boxs" *ngIf="isShowAll; else showSelect">
+    <div class="select chosen" (click)="onChangeTableInfo(false)">
+      {{ checkedList.length }}
+    </div>
+    <div class="all chosen select-chosen">
+      {{ nodeList.length }}
+    </div>
+  </div>
+  <ng-template #showSelect>
+    <div class="select-boxs">
+      <div class="select chosen select-chosen">
+        {{ checkedList.length }}
+      </div>
+      <div class="all chosen" (click)="onChangeTableInfo(true)">
+        {{ nodeList.length }}
+      </div>
+    </div>
+  </ng-template>
+  <div
+    class="nodes-table"
+    [ngStyle]="{ width: width }"
+  >
+    <div class="keep" *ngIf="!isHPC"></div>
+    <ti-table
+      [(displayedData)]="displayed"
+      [srcData]="srcData"
+      [columns]="columns"
+    >
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr>
+              <th checkbox-column width="10%">
+                <input
+                  type="checkbox"
+                  tiCheckgroup
+                  [items]="displayed"
+                  [(checkeds)]="checkedList"
+                  [disabled]="isSelectNodeDisabled"
+                  (checkedsChange)="onCheckedsChange($event)"
+                />
+              </th>
+              <ng-container *ngFor="let column of columns; index as i">
+                <th tiOverflow width="{{ column.width }}">
+                  <ti-cell-text>{{ column.title }}</ti-cell-text>
+                  <ti-head-filter
+                    *ngIf="column.showFilter"
+                    [options]="column.options"
+                    [(ngModel)]="column.selected"
+                    valueKey="value"
+                    [ngClass]="{
+                      'ti3-head-filtered':
+                        column.selected && column.selected.length
+                    }"
+                    [multiple]="column.multiple"
+                    [searchable]="true"
+                    (select)="onSelect($event)"
+                  ></ti-head-filter>
+                  <ng-container *ngIf="column.showSearch">
+                    <ti-icon
+                      name="search"
+                      class="search-icon"
+                      [ngClass]="{
+                        active:
+                          processSearchPop.isShow ||
+                          searchWordsSave[column.searchKey]
+                      }"
+                      [pop]="searchTip"
+                      #processSearchPop="pop"
+                      [popOffset]="{ x: -40, y: 24 }"
+                      popClass="common-table-search-pop"
+                      [popContext]="column"
+                    >
+                    </ti-icon>
+
+                    <ng-template #searchTip let-context="context">
+                      <ti-searchbox
+                        [ngModel]="searchWordsSave[column.searchKey]"
+                        (clear)="onTableHeaderSearch('', context)"
+                        (search)="onTableHeaderSearch($event, context)"
+                      >
+                      </ti-searchbox>
+                    </ng-template>
+                  </ng-container>
+                </th>
+              </ng-container>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="ti3-table-container ti3-resize-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th checkbox-column [ngStyle]="{ height: 0 }" width="10%"></th>
+              <ng-container *ngFor="let column of columns; index as i">
+                <th
+                  [ngStyle]="{ height: 0 }"
+                  tiOverflow
+                  width="{{ column.width }}"
+                ></th>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let row of displayed; index as i; trackBy: trackByFn"
+              [ngClass]="{ 'ti3-selected-tr': checkedList.indexOf(row) !== -1 }"
+            >
+              <td
+                checkbox-column
+                [ngClass]="{
+                  'ti3-disabled-cell': row.disabled
+                }"
+              >
+                <input
+                  type="checkbox"
+                  tiCheckitem
+                  [item]="row"
+                  [disabled]="row.disabled"
+                  (checkedsChange)="onCheckedsChange($event)"
+                />
+              </td>
+              <td>{{ row.nickName }}</td>
+              <td>
+                <span
+                  class="status-icon"
+                  [ngClass]="{ 'reserve-icon': taskStatus.On !== row.nodeState }"
+                ></span
+                >{{
+                  taskStatus.On === row.nodeState
+                    ? ("status_Online" | i18n)
+                    : ("status_Offline" | i18n)
+                }}
+              </td>
+              <td>{{ row.node }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          class="nodata"
+          *ngIf="!srcData.data.length"
+          [hyNodata]="{ text: 'common_term_task_nodata' | i18n }"
+          [nodataShow]="true"
+        ></div>
+      </div>
+
+      <ti-pagination
+        *ngIf="srcData.data.length > 10"
+        [(currentPage)]="currentPage"
+        [pageSize]="pageSize"
+        [(totalNumber)]="totalNumber"
+        [showGotoLink]="true"
+      ></ti-pagination>
+    </ti-table>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+/** table滚动条样式 start **/
+.ti3-table-container {
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--thumb-d-424242-l-aaaaaa);
+        border-radius: 3px;
+        opacity: 0.9;
+    }
+    &::-webkit-scrollbar-track {
+        border: none !important;
+        background-color: var(--td-bg-d-161616-l-ffffff);
+    }
+}
+/** table滚动条样式 end **/

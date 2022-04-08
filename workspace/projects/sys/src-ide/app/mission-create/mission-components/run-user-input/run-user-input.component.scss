@@ -1,0 +1,44 @@
+.analysis-target-content {
+    margin-top: 8px;
+
+    .analysis-target-item{
+        display: flex;
+        padding-bottom: 20px;
+
+        .analysis-target-item-label{
+            display: flex;
+            margin-right: 20px;
+            flex-shrink: 0;
+            color: #aaa;
+            font-size: 12px;
+
+            .red {
+                color: #ff4c4c;
+            }
+            .margin_left {
+                margin-left: 10px;
+            }
+            .opacity {
+                opacity: 0;
+            }
+        }
+        .analysis-target-item-value{
+            display: flex;
+            flex-direction: column;
+            
+            input {
+                width: 400px;
+            }
+        }
+        .password-value{
+            position: relative;
+            .eye {
+                position: absolute;
+                left: 370px;
+                top: 6px;
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+}

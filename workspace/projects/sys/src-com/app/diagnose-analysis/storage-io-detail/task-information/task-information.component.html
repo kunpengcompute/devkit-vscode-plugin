@@ -1,0 +1,45 @@
+<div class="mission-configuration" [ngClass]="theme$ | async">
+    <header>
+        <section *ngFor="let item of configInfo?.header">
+            <p class="label">{{ item.label }}</p>
+            <div class="value">
+                <span [ngClass]="{
+            'status-icon': item.status,
+            'status-success': item.status === 'Completed',
+            'status-failed':
+              item.status === 'Failed' || item.status === 'Cancelled',
+            'status-created': item.status === 'Created'
+          }"></span>
+                <span>{{ item.value }}</span>
+                <ti-icon *ngIf="item.status === 'Failed'" [name]="showReason ? 'accordion-unfold' : 'accordion-fold'"
+                    (click)="showReason = !showReason">
+                </ti-icon>
+                <div *ngIf="item.status && showReason">
+                    <p class="reason-title">
+                        {{ "common_term_task_fail_reason" | i18n }}
+                    </p>
+                    <p class="reason-content">{{ item.statusCode }}</p>
+                </div>
+            </div>
+        </section>
+    </header>
+    <div class="divider" *ngIf="showMain"></div>
+    <main *ngIf="showMain">
+        <section *ngFor="let item of configInfo?.main">
+            <div *ngIf="item.show" class="mainsItem">
+                <p class="label">{{ item.label }}</p>
+                <p class="value">{{ item.value }}</p>
+                <div *ngIf="item.valueList" class="value">
+                    <p *ngFor="let model of item.valueList">{{model}}</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div class="divider" *ngIf="showFooter"></div>
+    <footer *ngIf="showFooter">
+        <section *ngFor="let item of configInfo?.footer">
+            <p class="label">{{ item.label }}</p>
+            <p class="value">{{ item.value }}</p>
+        </section>
+    </footer>
+</div>

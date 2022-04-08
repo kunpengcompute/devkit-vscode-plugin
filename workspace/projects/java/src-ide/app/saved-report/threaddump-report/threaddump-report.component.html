@@ -1,0 +1,17 @@
+<div class="report-container" id="savedThreaddump">
+    <ti-tabs>
+        <ti-tab *ngFor="let item of tabList; let index = index" [(active)]="item.active">
+            <ti-tab-header>
+                <span>{{item.title}}</span>
+            </ti-tab-header>
+            <ng-template #tiTabContent>
+                <div class="tab-content" *ngIf="item.title === i18n.plugins_common_report.thread_dump">
+                    <app-profile-thread offlineThreadDump="true" [offlineThreadDumpId]="threaddumpId"></app-profile-thread>
+                </div>
+                <div class="tab-content" *ngIf="item.title === i18n.plugins_common_report.report_info">
+                    <app-report-config-info [reportType]="'threaddump'" [reportId]="threaddumpId"></app-report-config-info>
+                </div>
+            </ng-template>
+        </ti-tab>
+    </ti-tabs>
+</div>

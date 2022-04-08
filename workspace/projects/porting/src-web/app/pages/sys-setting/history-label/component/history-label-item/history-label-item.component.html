@@ -1,0 +1,40 @@
+<div class="warpper">
+    <div class="input-warpper">
+        <div class="input-form">
+            <ti-formfield [formGroup]='sysConfForm'>
+                <ti-item [label]="config[0].label" [required]='isAdmin' class="p-relative flex flex-column">
+                    <input tiText [tiValidation]='validation' formControlName='inputValue' type="text"
+                    class="inp-width300" maxlength="2" />
+                    <span class="input-range">
+                        ({{config[0].range[0]}}
+                        <span *ngIf="currLang === 'zh-cn'">~</span>
+                        <span *ngIf="currLang === 'en-us'">-</span>
+                        {{config[0].range[1]}})
+                    </span>
+                    <span class="tip">{{config[0].msg}}</span>
+                </ti-item>
+                <ti-item [label]="config[1].label" [required]='isAdmin' class="p-relative flex flex-column">
+                    <input tiText [tiValidation]='validation' formControlName='inputValue2' type="text"
+                    class="inp-width300" maxlength="2" />
+                    <span class="input-range">
+                        ({{config[1].range[0]}}
+                        <span *ngIf="currLang === 'zh-cn'">~</span>
+                        <span *ngIf="currLang === 'en-us'">-</span>
+                        {{config[1].range[1]}})
+                    </span>
+                    <span class="tip">{{config[1].msg}}</span>
+                </ti-item>
+                <ti-button-item *ngIf="isAdmin">
+                    <div *ngIf="mode === 'read'">
+                        <button type="button" tiButton (click)="onFixConfig()">{{ i18n.common_term_changeConfig }}</button>
+                    </div>
+                    <div *ngIf="mode === 'write'">
+                        <button type="button" tiButton color="primary" (click)="onSubmit()"
+                            [disabled]="!sysConfForm.valid">{{ i18n.common_term_operate_ok }}</button>
+                        <button type="button" tiButton (mousedown)="onCancel($event)">{{ i18n.common_term_operate_cancel }}</button>
+                    </div>
+                </ti-button-item>
+            </ti-formfield>
+        </div>
+    </div>
+</div>

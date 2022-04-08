@@ -1,0 +1,85 @@
+<div class="threshold" id="itemReportManage">
+  <div class="title">{{ i18n.plugins_perf_javaperfsetting.samplingReportManage }}</div>
+  <!-- 采样分析阈值 -->
+  <div class="threshold-list">
+    <div class="header-title">{{ i18n.newHeader.threshold.samplingAnalysis }}</div>
+    <div class="subtip1 ti3-icon ti3-icon-staricon">{{ i18n.newHeader.threshold.tip1 }}</div>
+    <div class="common-item">
+      <app-setting-item [config]="config.tips" [hideRange]="true" [value]="formItems.tips.value"
+        (confirm)="handleTipsConfirm($event)">
+      </app-setting-item>
+    </div>
+    <div class="subtip2">{{ i18n.newHeader.threshold.tips_content }}</div>
+    <div class="subtip3 ti3-icon ti3-icon-staricon">{{ i18n.newHeader.threshold.tip2 }}</div>
+    <div class="common-item">
+      <app-setting-item [config]="config.warn" [hideRange]="true" [value]="formItems.warn.value"
+        (confirm)="handleWarnConfirm($event)">
+      </app-setting-item>
+    </div>
+    <div class="subtip4">{{ i18n.newHeader.threshold.warn_content }}</div>
+  </div>
+
+  <!-- 线程转储 -->
+  <div class="threshold-list">
+    <div class="header-title">{{ i18n.newHeader.threshold.threadDumpThreshold }}</div>
+    <div class="subtip1 ti3-icon ti3-icon-staricon">{{ threaddumpTexts.histReportHints }}</div>
+    <div class="common-item">
+      <app-setting-item [config]="config.threaddumpTips" [hideRange]="true" [value]="formItems.threaddumpTips.value"
+        (confirm)="handleThreaddumpTipsConfirm($event)">
+      </app-setting-item>
+    </div>
+    <div class="subtip2">{{ i18n.newHeader.threshold.threadDump.histReportHintsText }}</div>
+    <div class="subtip1 ti3-icon ti3-icon-staricon">{{ threaddumpTexts.histReportMax }}</div>
+    <div class="common-item">
+      <app-setting-item [config]="config.threaddumpWarn" [hideRange]="true" [value]="formItems.threaddumpWarn.value"
+        (confirm)="handleThreaddumpWarnConfirm($event)">
+      </app-setting-item>
+    </div>
+    <div class="subtip2">{{ i18n.newHeader.threshold.threadDump.histReportMaxText }}</div>
+  </div>
+
+  <!-- 内存转储 -->
+  <div class="threshold-list">
+    <div class="header-title">{{ i18n.newHeader.threshold.heapDumpThreshold }}</div>
+    <div class="subtip1 ti3-icon ti3-icon-staricon">{{ heapdumpTexts.histReportHints }}</div>
+    <div class="common-item">
+      <app-setting-item [config]="config.heapdumpTips" [hideRange]="true" [value]="formItems.heapdumpTips.value"
+        (confirm)="handleHeapdumpTipsConfirm($event)">
+      </app-setting-item>
+    </div>
+    <div class="subtip2">{{ i18n.newHeader.threshold.heapDump.histReportHintsText }}</div>
+    <div class="subtip1 ti3-icon ti3-icon-staricon">{{ heapdumpTexts.histReportMax }}</div>
+    <div class="common-item">
+      <app-setting-item [config]="config.heapdumpWarn" [hideRange]="true" [value]="formItems.heapdumpWarn.value"
+        (confirm)="handleHeapdumpWarnConfirm($event)">
+      </app-setting-item>
+    </div>
+    <div class="subtip2">{{ i18n.newHeader.threshold.heapDump.histReportMaxText }}</div>
+    <div class="subtip1 ti3-icon ti3-icon-staricon">{{ heapdumpTexts.importReportSize }}</div>
+    <div class="common-item">
+      <app-setting-item [config]="config.heapdumpSize" [hideRange]="true" [value]="formItems.heapdumpSize.value"
+        (confirm)="handleHeapdumpSizeConfirm($event)">
+      </app-setting-item>
+    </div>
+    <div class="subtip2">{{ i18n.newHeader.threshold.heapDump.importReportSizeText }}</div>
+  </div>
+
+  <!-- 线程转储 -->
+  <div class="threshold-list">
+    <div class="header-title">{{ i18n.newHeader.threshold.gclogThreshold }}</div>
+    <div class="subtip1 ti3-icon ti3-icon-staricon">{{ gclogTexts.histReportHints }}</div>
+    <div class="common-item">
+      <app-setting-item [config]="config.gclogTips" [hideRange]="true" [value]="formItems.gclogTips.value"
+        (confirm)="handleGclogTipsConfirm($event)">
+      </app-setting-item>
+    </div>
+    <div class="subtip2">{{ i18n.newHeader.threshold.gclog.histReportHintsText }}</div>
+    <div class="subtip1 ti3-icon ti3-icon-staricon">{{ gclogTexts.histReportMax }}</div>
+    <div class="common-item">
+      <app-setting-item [config]="config.gclogWarn" [hideRange]="true" [value]="formItems.gclogWarn.value"
+        (confirm)="handleGclogWarnConfirm($event)">
+      </app-setting-item>
+    </div>
+    <div class="subtip2">{{ i18n.newHeader.threshold.gclog.histReportMaxText }}</div>
+  </div>
+</div>

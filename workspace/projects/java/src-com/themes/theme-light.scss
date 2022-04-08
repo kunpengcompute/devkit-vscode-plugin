@@ -1,0 +1,76 @@
+:root,
+:root .vscode-light {
+  --ti-default-body-bg: var(--ti-base-color-white);
+  --ti-default-font-color: #222222;
+  --ti-button-primary-normal-color: var(--ti-base-color-white);
+  // 高亮背景色，如table选中某一行
+  --highlight-bg-color: #f5f9ff;
+  // 采集信息背景色
+  --infor-bg-color: #f5f9ff;
+  --infor-key-font-color: #616161;
+  --infor-value-font-color: #222222;
+  --infor-url-font-color: #0067ff;
+  --infor-detail-button-bg-color: #ffffff;
+  --infor-detail-button-hover-color: #267dff;
+
+  // lock-graph图颜色
+  --lock-graph-address-bg-color: #dae0ec;
+  --lock-graph-address-border-color: #000000;
+  --lock-graph-attr-border-color: #282b33;
+  --lock-graph-green-color: rgba(122, 223, 160, 0.75);
+  --lock-graph-red-color: rgba(244, 92, 94, 0.75);
+  --lock-graph-yellow-color: rgba(236, 232, 95, 1);
+  --lock-graph-orange-color: rgba(232, 153, 84, 1);
+  --lock-graph-text-overflow-color: #222;
+
+
+  --default-border-color: #979797;
+  --disabled-color: #cccccc;
+  --disabled-font-color: #cccccc;
+  --disabled-border-color: #cccccc;
+  --disabled-bg-color: #f5f5f5;
+  --table-header-bg-color: var(--highlight-bg-color);
+  --table-header-text-color: #616161;
+  --input-placeholder-color: #979797;
+  --table-border-bottom-color: #e1e6ee;
+  --table-count-bg-color: #5d89d8;
+  --select-bg-color-hover: var(--highlight-bg-color);
+  --ti-tree-item-guide-line-color: #e1e6ee;
+  --ti-tree-node-bg-color-checked: rgba(0, 103, 255, 0.08);
+  --ti-tree-content-box-color-hover: var(--highlight-bg-color);
+  --button-default-bg-color: var(--ti-base-color-white);
+  --ti-modal-content-bg-color: var(--ti-base-color-white);
+  --linenumber-font-color: var(--ti-default-font-color);
+  --ti-modal-header-text-color: #333;
+  --ti-dropdown-bg-color: var(--ti-base-color-white);
+  --ti-table-th-spacing-line-color: var(--ti-base-color-white);
+  --ti-table-tr-bg-color: var(--ti-base-color-white);
+  --ti-tip-bg-color: var(--ti-base-color-white);
+  --ti-tip-text-color: #666666;
+
+  /*-------------------------公共组件--------------------------------*/
+  // timeline
+  --shared-tl-box-border: #d4d9e6;
+  --shared-tl-font-color: #282b33;
+  --shared-tl-select-bg: rgba(0, 108, 255, 0.15);
+  --shared-tl-box-bg: var(--ti-base-color-white);
+  // suggestion-tip
+  --shared-st-bg-color: #f0f6ff;
+  --shared-st-border-color: #0067ff;
+  --shared-st-alarm-bg-color: #ffeeed;
+  --shared-st-alarm-border-color: #ff9b00;
+  --shared-st-error-bg-color: #ffeeed;
+  --shared-st-error-border-color: #ed4b4b;
+  --shared-st-text-color: var(--ti-default-font-color);
+  //分割组件背景色
+  --divider-bg-color:#eff0f5;
+
+  --alert-message-box-shadow: rgba(252, 252, 252, 0.5);
+  --sample-tip: #222222;
+  --spinner-right-text:#979797;
+
+  --disabled-tip-icon:#b8becc;
+  --anchor-point-bg:#F7FAFF;
+  /* 热点分析，switch滑块背景色 */
+  --hot-analysis-switch: #979797;
+}

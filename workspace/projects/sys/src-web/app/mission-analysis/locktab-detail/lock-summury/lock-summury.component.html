@@ -1,0 +1,142 @@
+<div class="lock-summury">
+  <div class="left" [appLoading]="obtainingSummaryData">
+    <span class="title">
+      <span>
+        {{i18n.mission_modal.lockSummary.lock_and_wait_info}}
+        <img src='./assets/img/summary/tooltip.png' [tiTip]='leftTip' tiTipMaxWidth='500px'
+          style="margin-left: 8px;" tiTipMaxWidth='370px' tiTipPosition="right" />
+      </span>
+    </span>
+    <div class="numa-table">
+      <!-- (stateUpdate)="stateUpdate($event)" 【由于排序问题，先改成前端分页】 -->
+      <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns"
+        (displayedDataChange)="displayedDataChange($event)">
+        <div class="ti3-table-fixed-head">
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let column of columns" width="{{column.width}}">
+                  <span tiOverflow class="sort-title"> {{column.title}}</span>
+                  <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <!--通过原生table实现表格的表头和表体-->
+        <div class="ti3-table-container">
+          <table id="selected">
+            <thead>
+              <tr>
+                <th tiOverflow *ngFor="let column of columns" width="{{column.width}}"></th>
+              </tr>
+            </thead>
+            <tbody class="transform first">
+              <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+              <tr *ngFor="let row of displayed" (click)='getdetail(row)'>
+                <td tiOverflow>{{row.lock_comm}}(TID:{{row.lock_tid}})</td>
+                <td tiOverflow>{{row.lock_dso}}</td>
+                <td tiOverflow *ngIf='!row.lock_suggestion'>
+                  {{row.lock_symbol}}
+                </td>
+                <td *ngIf='row.lock_suggestion' class="tip-span" [tiTip]='tipContent' [tiTipContext]='row'
+                  tiTipMaxWidth='400px' tiTipPosition="right">
+                  <span tiOverflow class="funcName">{{row.lock_symbol}}</span>
+                  <img class="tip-icon" src='./assets/img/rocket.svg' />
+                </td>
+                <td tiOverflow>{{row.lock_call_time | thousandSeparator}}</td>
+                <td tiOverflow class="operate-btn" (click)="addFunctionTab(row,'sum');$event.stopPropagation()">
+                  <a [ngClass]="{'visited': row.visited}">{{i18n.common_term_view}}</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="nodata" *ngIf="!obtainingSummaryData && !srcData.data.length">
+          <img style='width:20%;display:block' src='./assets/img/projects/nodata.png' />
+          <div style="font-size: 0.8rem">{{i18n.common_term_task_nodata}}</div>
+        </div>
+        </div>
+        
+        <!--tiPagination实现分页功能-->
+        <!-- 在表格中使用分页组件时必须保证其父元素是ti-table -->
+        <ti-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber">
+        </ti-pagination>
+      </ti-table>
+    </div>
+  </div>
+
+  <div class="right" [appLoading]="obtainingDetailData">
+    <span class="title">
+      <span>
+        {{i18n.mission_modal.lockSummary.call_site_info}}
+        <img src='./assets/img/summary/tooltip.png' [tiTip]='rightTip' tiTipMaxWidth='500px' *ngIf='rightSug'
+          style="margin-left: 8px;" tiTipMaxWidth='370px' tiTipPosition="right" />
+      </span>
+
+    </span>
+    <div class="numa-table">
+      <!-- (stateUpdate)="stateUpdatePoint($event)" 【由于排序问题，先改成前端分页】 -->
+      <ti-table [(displayedData)]="displayedPoint" [srcData]="srcPointData" [columns]="columnsPoint">
+        <div class="ti3-table-fixed-head">
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let column of columnsPoint" width="{{column.width}}">
+                  <span tiOverflow class="sort-title"> {{column.title}}</span>
+                  <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <!--通过原生table实现表格的表头和表体-->
+        <div class="ti3-table-container">
+          <table>
+            <thead>
+              <tr>
+                <th tiOverflow *ngFor="let column of columnsPoint" width="{{column.width}}"></th>
+              </tr>
+            </thead>
+            <tbody class="transform">
+              <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+              <tr *ngFor="let row of displayedPoint">
+                <td tiOverflow>{{row.lock_time | threePoint:6}}</td>
+                <td tiOverflow>{{row.lock_call_dso}}</td>
+                <td tiOverflow>{{row.lock_call_symbol}}</td>
+                <td tiOverflow>{{row.lock_code}}</td>
+                <td tiOverflow>{{row.lock_line}}</td>
+                <td tiOverflow class="operate-btn" (click)="addFunctionTab(row,'detail');$event.stopPropagation()">
+                  <a [ngClass]="{'visited': row.visited}">{{i18n.common_term_view}}</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="nodata" *ngIf="!obtainingDetailData && !srcPointData.data.length">
+            <img style='width:20%;display:block' src='./assets/img/projects/nodata.png' />
+            <div style="font-size: 0.8rem">{{pointNoData}}</div>
+          </div>
+        </div>
+        <!--tiPagination实现分页功能-->
+        <!-- 在表格中使用分页组件时必须保证其父元素是ti-table -->
+        <ti-pagination *ngIf="displayedPoint.length" [(currentPage)]="currentPagePoint" [pageSize]="pageSizePoint"
+          [(totalNumber)]="totalNumberPoint">
+        </ti-pagination>
+      </ti-table>
+    </div>
+  </div>
+  <ng-template #leftTip let-context='context'>
+    <div class="stack-tip" [innerHTML]="leftSug | html"></div>
+  </ng-template>
+  <ng-template #rightTip let-context='context'>
+    <div class="stack-tip" [innerHTML]="rightSug | html"></div>
+  </ng-template>
+  <ng-template #tipContent let-context='context'>
+    <div style="margin-bottom: 5px;">{{i18n.mission_modal.lockSummary.function_name}}:
+      <span style="margin-left: 4px">{{context.lock_symbol}}</span>
+    </div>
+    <div>{{i18n.sys.sug}}:
+      <span style="color:#000000;margin-left: 4px" *ngIf="lang=='ch'">{{context.lock_suggestion_zh}}</span>
+      <span style="color:#000000;margin-left: 4px" *ngIf="lang=='en'">{{context.lock_suggestion}}</span>
+    </div>
+  </ng-template>
+</div>

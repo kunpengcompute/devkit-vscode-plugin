@@ -1,0 +1,6 @@
+<div class="legend">
+  <div class="content" *ngFor="let item of legendList">
+    <span class="color-block" [ngStyle]="{'background-color': item.bgColor}"></span>
+    <span class="text">{{item.label}}</span>
+  </div>
+</div>

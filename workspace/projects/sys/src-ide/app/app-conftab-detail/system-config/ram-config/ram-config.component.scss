@@ -1,0 +1,108 @@
+*{
+    font-family: FZLTHJW--GB1-0;
+    font-weight: normal;
+	font-stretch: normal;
+    letter-spacing: 0px;
+    margin: 0;
+    padding: 0;
+}
+
+
+.system-content-title{
+    font-size: 20px;
+    color: #282b33;
+    font-weight: 600;
+}
+
+
+
+.system-titlebar{
+    height: 32px;
+	background-color: #f0f3fa;
+	box-shadow: inset 0px -1px 0px 0px 
+        #e6ebf5;
+    font-size: 12px;
+    line-height: 32px;
+}
+
+
+
+.system-word{
+    height: 32px;
+    font-size: 14px;
+    box-shadow: inset 0px -1px 0px 0px 
+    #e6ebf5;
+    line-height: 32px;
+}
+
+.system-info{
+    margin-top: 2.8vh;
+    margin-bottom: 4.7vh;
+    display: flex;
+}
+
+.system-info-right {
+    margin-left: 1.8vw;
+}
+
+.system-info-title{
+    font-size: 12px;
+    color: #6c7280;
+    margin-bottom: 12px;
+    max-width:140px;
+}
+.total_title{
+    max-width: 120px;
+}
+
+.system-info-text{
+    font-size: 24px;
+    line-height: 22px;
+}
+
+.system-slot-btn span{
+    font-size: 14px;
+    color: #6c7280;
+    text-align: center;
+    display: inline-block;
+    min-width: 2.5vw;
+    height: 2.6vh;
+    line-height: 2.6vh;
+	border-radius: 1px;
+    border: dashed  1px #6c7280;
+    margin-right: 0.4vw;
+}
+.system-slot-btn span.active{
+    background-color: #6c7280; color: #ffffff;
+    min-width: 2.5vw;
+}
+
+
+tr th,tr td{
+    overflow:hidden; //超出的文本隐藏
+    text-overflow:ellipsis; //溢出用省略号显示
+    white-space:nowrap; //溢出不换行
+    padding-left:1.7vw;
+}
+
+ table tr th{
+    position: relative;
+    &::after{
+        position: absolute;
+        width: 2px;
+        height: 11px;
+        background-color: #d4d9e6;
+        top: 50%;
+        transform: translateY(-50%);
+        left:0;
+        content: '';
+       
+    } 
+    &:first-child{
+        &::after{
+             width:0;
+        }
+           
+        }
+}
+

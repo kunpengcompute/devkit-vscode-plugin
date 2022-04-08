@@ -1,0 +1,83 @@
+<div class="pmu">
+    <p>{{i18n.hpc.hpc_target.pmu}}</p>
+    <div class="pmu-box">
+        <div class="core" [appLoading]="isLoading">
+            <div class="core-title">{{i18n.hpc.hpc_target.core_pmu}}</div>
+            <ti-table [(displayedData)]="coreDisplayed" [srcData]="coreData" [columns]="coreColumns" tiColsResizable
+                class="ti3-table-small">
+                <div class="ti3-table-fixed-head">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th *ngFor="let column of coreColumns" width="{{column.width}}" tiOverflow>
+                                    <ti-cell-text>{{column.title}}</ti-cell-text>
+                                    <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="core-box ti3-table-container ti3-resize-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th tiOverflow *ngFor="let item of coreColumns" width="{{item.width}}"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let core of coreDisplayed">
+                                <td tiOverflow>{{core.event_name}}</td>
+                                <td tiOverflow>{{core.count | thousandSeparator}}</td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="coreData.data.length===0&&!isLoading">
+                            <div class="nodata">
+                                <img src='./assets/img/projects/nodata.png' />
+                                <div>{{i18n.common_term_task_nodata}}</div>
+                            </div>
+                        </tbody>
+                    </table>
+                </div>
+            </ti-table>
+        </div>
+        <div class="uncore" [appLoading]="isLoading">
+            <div class="core-title">{{i18n.hpc.hpc_target.uncore_pmu}}</div>
+            <ti-table [(displayedData)]="uncoreDisplayed" [srcData]="uncoreData" [columns]="uncoreColumns"
+                class="ti3-table-small" tiColsResizable>
+                <div class="ti3-table-fixed-head">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th *ngFor="let column of uncoreColumns" width="{{column.width}}" tiOverflow>
+                                    <ti-cell-text>{{column.title}}</ti-cell-text>
+                                    <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="core-box ti3-table-container ti3-resize-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th tiOverflow *ngFor="let item of uncoreColumns" width="{{item.width}}"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let core of uncoreDisplayed">
+                                <td tiOverflow>{{core.event_name}}</td>
+                                <td tiOverflow>{{core.count | thousandSeparator}}</td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="uncoreData.data.length===0&&!isLoading">
+                            <div class="nodata">
+                                <img src='./assets/img/projects/nodata.png' />
+                                <div>{{i18n.common_term_task_nodata}}</div>
+                            </div>
+                        </tbody>
+                    </table>
+                </div>
+            </ti-table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,253 @@
+<div class="env-main">
+  <div [ngClass]="{ 'report-header': suggestArr.length > 0 }">
+    <app-suggestion-tip [suggetNum]="suggestArr.length" (openSuggest)="openSuggest()"></app-suggestion-tip>
+    <app-suggestion-tip [suggetNum]="suggestArr.length" (openSuggest)="openSuggest()" [type]="'icon'"></app-suggestion-tip>
+  </div>
+  <div>
+    <div class="config-data">
+      <div class="config-child">
+        <img src="./assets/img/newSvg/fill_triangle_down.svg" [ngClass]="fold1 ? '' : 'rotate'" alt=""
+          (click)="unfold()" style="width: 10px; height: 16px; cursor: pointer;">
+        <span class="span-info">{{ i18n.protalserver_sampling_memory_gc.config_info }}</span>
+      </div>
+    </div>
+    <div class="gc_config_title" id="configData" style="margin-bottom: 16px;">
+      <div class="gc-first-title">
+        <div class="config-title" style="width: 33%; font-size: 14px;">
+          <img src="./assets/img/newSvg/config_inf_default.svg" alt="" style="margin-right: 14px;">
+          {{ i18n.protalserver_sampling_memory_gc.config }}
+        </div>
+        <div class="config-title" style="width: 34%; font-size: 14px;">
+          <img src="./assets/img/newSvg/config_inf_default.svg" alt="" style="margin-right: 14px;">
+          {{ i18n.protalserver_sampling_memory_heap.config }}
+        </div>
+        <div class="config-title" style="width: 33%;display: flex;justify-content: space-between; font-size: 14px;">
+          <div>
+            <img src="./assets/img/newSvg/config_inf_default.svg" alt="" style="margin-right: 14px;">
+            {{ i18n.protalserver_sampling_memory_generation.config }}
+          </div>
+          <img style="margin-right: 10px; cursor: pointer;" src="./assets/img/newSvg/arrow_up.svg"
+            [ngClass]="fold2 ? '' : 'rotate2'" alt="" (click)="unfoldTable()">
+        </div>
+      </div>
+      <div class="gc_config" id="gcConfig">
+        <div class="item-config" style="width: 33%;">
+          <div class="config-box" *ngFor="let item of baseConfig">
+            <div class="config-left">
+              <div tiOverflow>{{ i18n.protalserver_sampling_memory_gc[item.label] }}</div>
+              <span style="margin-left: 8px;" *ngIf="item.msg">
+                <img src="./assets/img/newSvg/hollowTip.svg" style="height: 14px;width: 14px;" alt="" [tiTip]="item.msgValue" tiTipPosition="right">
+              </span>
+            </div>
+            <div class="config-value">{{ item.value }}</div>
+          </div>
+        </div>
+        <div class="item-config" style="width: 34%;">
+          <div class="config-box" *ngFor="let item of heapConfig">
+            <div class="config-left">
+              <div tiOverflow>{{ i18n.protalserver_sampling_memory_heap[item.label] }}</div>
+              <span style="margin-left: 8px;" *ngIf="item.msg">
+                <img src="./assets/img/newSvg/hollowTip.svg" style="height: 14px;width: 14px;" alt="" [tiTip]="item.msgValue" tiTipPosition="right">
+              </span>
+            </div>
+            <div class="config-value">{{ item.value }}</div>
+          </div>
+        </div>
+        <div class="item-config" style="width: 33%;">
+          <div class="config-box" *ngFor="let item of youngGenConfig">
+            <div class="config-left">
+              <div tiOverflow>{{ i18n.protalserver_sampling_memory_generation[item.label] }}</div>
+              <span style="margin-left: 8px;" *ngIf="item.msg">
+                <img src="./assets/img/newSvg/hollowTip.svg" style="height: 14px;width: 14px;" alt="" [tiTip]="item.msgValue" tiTipPosition="right">
+              </span>
+            </div>
+            <div class="config-value">{{ item.value }}</div>
+          </div>
+          <div class="config-box" *ngFor="let item of survivorConfig">
+            <div class="config-left">
+              <div tiOverflow>{{ i18n.protalserver_sampling_memory_generation[item.label] }}</div>
+              <span style="margin-left: 8px;" *ngIf="item.msg">
+                <img src="./assets/img/newSvg/hollowTip.svg" style="height: 14px;width: 14px;" alt="" [tiTip]="item.msgValue" tiTipPosition="right">
+              </span>
+            </div>
+            <div class="config-value">{{ item.value }}</div>
+          </div>
+          <div class="config-box" *ngFor="let item of tlabConfig">
+            <div class="config-left">
+              <div tiOverflow>{{ i18n.protalserver_sampling_memory_generation[item.label] }}</div>
+              <span style="margin-left: 8px;" *ngIf="item.msg">
+                <img src="./assets/img/newSvg/hollowTip.svg" style="height: 14px;width: 14px;" alt="" [tiTip]="item.msgValue" tiTipPosition="right">
+              </span>
+            </div>
+            <div class="config-value">{{ item.value }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+
+    <div id="tableHeight" style="display: flex;margin-bottom: 16px;">
+      <div style="flex: 1; margin-right: 16px;width: 45%;" class="gc-box">
+        <div class="config-title">
+          {{ i18n.protalserver_sampling_memory_gc_activity.label }}
+        </div>
+        <div class="search-box">
+          <ti-select class="select" [options]="selectData.searchOptions" [(ngModel)]="selectData.searchKey"
+            id="myselect">
+          </ti-select>
+          <ti-searchbox class="search" [placeholder]="searchActive.placeholder" (clear)="activeClear($event)"
+            (search)="activeSearch($event)" [(ngModel)]="searchActive.value"></ti-searchbox>
+        </div>
+        <ti-table [(displayedData)]="displayedActivity" [srcData]="srcDataActivity" [columns]="columnsActivity"
+          [searchWords]="searchWords" [searchKeys]="searchKeys" tiColsResizable>
+          <div class="ti3-table-fixed-head">
+            <table>
+              <thead>
+                <tr>
+                  <th *ngFor="let column of columnsActivity index as i" width="{{ column.width }}">
+                    <ti-cell-text>{{ i18n.protalserver_sampling_memory_gc_activity[column.title] }}</ti-cell-text>
+                    <ti-head-sort *ngIf="column.isSort" [sortKey]="column.sortKey"></ti-head-sort>
+                  </th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="ti3-table-container ti3-resize-wrapper" [ngStyle]="{ height: expandFlag ? '600px' : '240px' }">
+            <table>
+              <thead>
+                <tr [ngStyle]="{'opacity': 0}">
+                  <th *ngFor="let column of columnsActivity" width="{{ column.width }}"></th>
+                </tr>
+              </thead>
+              <tbody id="gc_activity_body">
+                <tr *ngFor="let row of displayedActivity; let idx = index;" (click)="getphase(row, idx)"
+                  [ngStyle]="{'background-color': row.isSelect ? '#F7FAFF' : ''}">
+                  <td style="padding-left: 12px;" tiOverflow>
+                    {{ row.activity }}
+                  </td>
+                  <td style="padding-left: 12px;" tiOverflow>{{ row.cause }}</td>
+                  <td style="padding-left: 12px;" tiOverflow>
+                    {{ row.collector_name }}
+                  </td>
+                  <td style="padding-left: 12px;" tiOverflow>
+                    {{ libService.onChangeUnit(row.before_memory) }}
+                  </td>
+                  <td style="padding-left: 12px;" tiOverflow>
+                    {{ libService.onChangeUnit(row.after_memory) }}
+                  </td>
+                  <td style="padding-left: 12px;" tiOverflow>
+                    {{ (row.longest_pause / 1000 / 1000).toFixed(3) | separator }} ms
+                  </td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="displayedActivity.length === 0">
+                <tr class="noHover">
+                    <td tiColspan>
+                        <div class="noData noDataRight">
+                            <div >
+                                <img class='newNoData' src="./assets/img/projects/noData.svg" />
+                                <p>{{i18n.common_term_task_nodata}}</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ti-pagination [(currentPage)]="leftCurrentPage" [pageSize]="leftPageSize" [(totalNumber)]="leftTotalNumber">
+          </ti-pagination>
+        </ti-table>
+      </div>
+      <div style="flex: 1;width: 45%;" class="gc-box">
+        <div class="config-title">
+          {{ i18n.protalserver_sampling_memory_pause.label }}
+        </div>
+        <div class="search-box">
+          <ti-select class="select" [options]="selectDataRight.searchOptions" [(ngModel)]="selectDataRight.searchKey"
+            id="myselect">
+          </ti-select>
+          <ti-searchbox class="search" [placeholder]="searchPause.placeholder" (clear)="pauseClear($event)"
+            (search)="pauseSearch($event)" [(ngModel)]="searchPause.value"></ti-searchbox>
+        </div>
+        <ti-table [(displayedData)]="displayedPhase" [srcData]="srcDataPhase" [columns]="columnsPhase"
+          [searchWords]="pauseSearchWords" [searchKeys]="pauseSearchKeys" tiColsResizable>
+          <div class="ti3-table-fixed-head">
+            <table>
+              <thead>
+                <tr>
+                  <th *ngFor="let column of columnsPhase index as i" tiOverflow width="{{ column.width }}">
+                    <ti-cell-text>{{ i18n.protalserver_sampling_memory_pause[column.title] }}</ti-cell-text>
+                    <ti-head-sort *ngIf="column.isSort" [sortKey]="column.sortKey"></ti-head-sort>
+
+                  </th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="ti3-table-container ti3-resize-wrapper" [ngStyle]="{ height: expandFlag ? '600px' : '240px' }">
+            <table>
+              <thead>
+                <tr [ngStyle]="{'opacity': 0}">
+                  <th *ngFor="let column of columnsPhase" tiOverflow width="{{ column.width }}"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of displayedPhase">
+                  <td style="padding-left: 12px;" tiOverflow>{{ row.gcId }}</td>
+                  <td style="padding-left: 12px;" tiOverflow>{{ row.name }}</td>
+                  <td style="padding-left: 12px;" tiOverflow>
+                    {{ (row.duration / 1000).toFixed(2) | separator }}
+                  </td>
+                  <td style="padding-left: 12px;" tiOverflow>
+                    {{ row.startTime }}
+                  </td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="displayedPhase.length === 0">
+                <tr class="noHover">
+                    <td tiColspan>
+                        <div class="noData noDataRight">
+                            <div >
+                                <img class='newNoData' src="./assets/img/projects/noData.svg" />
+                                <p>{{i18n.common_term_task_nodata}}</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ti-pagination [(currentPage)]="rightCurrentPage" [pageSize]="rightPageSize" [(totalNumber)]="rightTotalNumber">
+          </ti-pagination>
+        </ti-table>
+      </div>
+    </div>
+  </div>
+  <div class="config-title">{{ i18n.profikeGC.CollectedGCEventInfo }}</div>
+  <div class="gc-box-message">
+    <div class="gc-box-total" *ngIf="showEcharts">
+      <div class="memory-detail" [id]="uuid">
+        <div class="ax-box-timeLine">
+          <app-time-line [timeData]='timeData' (timeLineData)='timeLineData($event)' #TimeLine>
+          </app-time-line>
+        </div>
+        <div class="table-box">
+          <div class="table">
+            <div echarts [options]="overViewOption" (chartInit)="onChartInit($event)"
+              (chartClick)="chartClick($event)" (chartDataZoom)="handleDatazoom($event)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="loadData" *ngIf="noDataFlag">
+      <img class='newNoData' src="./assets/img/projects/noData.svg" />
+      <div style="font-size: 1.1rem; position: relative; color: #333;">
+        {{ i18n.common_term_task_nodata }}
+      </div>
+    </div>
+  </div>
+</div>
+<app-analysis #analysis [isSuggest]="isSuggest" [type]="sugtype" (closeHandle)="closeHandle($event)"
+  [suggestArr]="suggestArr">
+</app-analysis>

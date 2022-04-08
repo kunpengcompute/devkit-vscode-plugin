@@ -1,0 +1,212 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Failed to Perform an I/O Analysis Task">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001214027145.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="user guide">
+<meta name="DC.Publisher" content="20210630">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="kunpengfaq_06_0012">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Failed to Perform an I/O Analysis Task</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="kunpengfaq_06_0012"></a><a name="kunpengfaq_06_0012"></a>
+
+<h1 class="topictitle1">Failed to Perform an I/O Analysis Task</h1>
+<div id="body8662426"><div class="section" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_section1990762624820"><h4 class="sectiontitle">Symptom</h4><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p3575133619486">An I/O analysis task fails. The error message is "system not support, please open ftrace." Check whether the system supports ftrace and whether ftrace is enabled.</p>
+</div>
+<div class="section" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_section594883104913"><h4 class="sectiontitle">Possible Causes</h4><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p14426915184920">The OS kernel version does not support Ftrace.</p>
+</div>
+<div class="section" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_section15377201496"><h4 class="sectiontitle">Procedure</h4><div class="note" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_note7403154018117"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p84039401210">Ftrace is a tracing tool built in the Linux kernel and has been added to mainstream kernels since the kernel version 2.6.27. You can use Ftrace to debug or analyze events that occur in the kernel. Ftrace provides different tracers for different scenarios, such as tracing kernel function calls, tracing context switching, viewing the duration when interrupts are disabled, tracing the delay in the kernel mode, and tracing performance problems. System developers can use Ftrace to trace and debug kernels to find the root causes of the problems in the kernels and rectify the problems. In addition, users who are interested in kernels can use Ftrace to observe the activities in kernels and understand the working mechanism of kernels.</p>
+</div></div>
+<p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p14320122264911">Perform the following steps to recompile the kernel:</p>
+<ol id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_ol4500181185114"><li id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_li175003114517"><span>Enable the kernel to support Ftrace.</span><p><ol type="a" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_ol1113317365719"><li id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_li5133153175710">Before using Ftrace, compile it into the kernel. The <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b67684073717">kernel/trace/Makefile</strong> file in the kernel source code directory provides configuration items related to Ftrace, as listed in <a href="#kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_table2768152155116">Table 1</a>.
+<div class="tablenoborder"><a name="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_table2768152155116"></a><a name="en-us_topic_0000001163022249_en-us_topic_0304388866_table2768152155116"></a><table cellpadding="4" cellspacing="0" summary="" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_table2768152155116" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Configuration items related to Ftrace</caption><colgroup><col style="width:6.69%"><col style="width:93.31%"></colgroup><thead align="left"><tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row13769952155118"><th align="left" class="cellrowborder" valign="top" width="6.69%" id="mcps1.3.3.4.1.2.1.1.3.2.3.1.1"><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p4769135215514">No.</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="93.31%" id="mcps1.3.3.4.1.2.1.1.3.2.3.1.2"><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p19769552175111">Configuration Item</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row1076945219519"><td class="cellrowborder" valign="top" width="6.69%" headers="mcps1.3.3.4.1.2.1.1.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p11769155285120">1</p>
+</td>
+<td class="cellrowborder" valign="top" width="93.31%" headers="mcps1.3.3.4.1.2.1.1.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p1457171312519">CONFIG_FUNCTION_TRACER</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row15769552105112"><td class="cellrowborder" valign="top" width="6.69%" headers="mcps1.3.3.4.1.2.1.1.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p10769852105119">2</p>
+</td>
+<td class="cellrowborder" valign="top" width="93.31%" headers="mcps1.3.3.4.1.2.1.1.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p276935211511">CONFIG_FUNCTION_GRAPH_TRACER</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row17692052165113"><td class="cellrowborder" valign="top" width="6.69%" headers="mcps1.3.3.4.1.2.1.1.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p276945212512">3</p>
+</td>
+<td class="cellrowborder" valign="top" width="93.31%" headers="mcps1.3.3.4.1.2.1.1.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p1976912523517">CONFIG_CONTEXT_SWITCH_TRACER</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row15769145217515"><td class="cellrowborder" valign="top" width="6.69%" headers="mcps1.3.3.4.1.2.1.1.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p576910522515">4</p>
+</td>
+<td class="cellrowborder" valign="top" width="93.31%" headers="mcps1.3.3.4.1.2.1.1.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p19769155235120">CONFIG_NOP_TRACER</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row5769452125111"><td class="cellrowborder" valign="top" width="6.69%" headers="mcps1.3.3.4.1.2.1.1.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p18769205215119">5</p>
+</td>
+<td class="cellrowborder" valign="top" width="93.31%" headers="mcps1.3.3.4.1.2.1.1.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p77691052155112">CONFIG_SCHED_TRACER</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row976995285117"><td class="cellrowborder" valign="top" width="6.69%" headers="mcps1.3.3.4.1.2.1.1.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p97692523519">6</p>
+</td>
+<td class="cellrowborder" valign="top" width="93.31%" headers="mcps1.3.3.4.1.2.1.1.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p47698520511">...</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p878135316534">Many configuration items are related to Ftrace. Different tracers have different configuration items. Different configuration items have different dependencies. The <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b2523105164010">kernel/trace/Kconfig</strong> file in the kernel source code directory describes these dependencies. You can refer to the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b830852564113">Makefile</strong> and <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b126115216413">Konfig</strong> files and select the required tracer.</p>
+</li><li id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_li8375419115720">Generally, it is more intuitive to use make menuconfig when configuring the kernel. Take kernel 2.6.33.1 as an example. To compile Ftrace into the kernel, select <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b93271053104315">Kernel hacking</strong> and <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b1873223112446">Tracers</strong>, as shown in <a href="#kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig17544559195411">Figure 1</a> and <a href="#kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig144311571561">Figure 2</a>.<div class="fignone" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig17544559195411"><a name="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig17544559195411"></a><a name="en-us_topic_0000001163022249_en-us_topic_0304388866_fig17544559195411"></a><span class="figcap"><b>Figure 1 </b>Linux Kernel Configuration – Kernel hacking</span><br><span><img id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_image082851105415" src="en-us_image_0304389193.gif"></span></div>
+<div class="fignone" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig144311571561"><a name="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig144311571561"></a><a name="en-us_topic_0000001163022249_en-us_topic_0304388866_fig144311571561"></a><span class="figcap"><b>Figure 2 </b>Linux Kernel Configuration – Tracers</span><br><span><img id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_image3879746563" src="en-us_image_0304389244.gif"></span></div>
+</li><li id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_li154143965718">The <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b963601505">Tracers</strong> menu lists the tracers supported by the kernel, as shown in <a href="#kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig8498359145715">Figure 3</a>. You can select the tracers as required.<div class="fignone" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig8498359145715"><a name="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig8498359145715"></a><a name="en-us_topic_0000001163022249_en-us_topic_0304388866_fig8498359145715"></a><span class="figcap"><b>Figure 3 </b>Tracers supported by the kernel</span><br><span><img id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_image18686125214575" src="en-us_image_0304389251.gif"></span></div>
+<div class="caution" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_note14829931591"><span class="cautiontitle"><img src="public_sys-resources/caution_3.0-en-us.png"> </span><div class="cautionbody"><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p18292316599">On a 32-bit x86 server, do not select <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b15042665210">Optimize for size</strong> (see <a href="#kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig12580205216599">Figure 5</a>) in the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b1350883215213">General setup</strong> menu (see <a href="#kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig694614175596">Figure 4</a>) during compilation. Otherwise, the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b1177142815537">Kernel Function Graph Tracer</strong> option in is not displayed on the screen shown in <a href="#kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig8498359145715">Figure 3</a>. This is because in the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b163461195413">Konfig</strong> file, the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b83394200548">FUNCTION_GRAPH_TRACER</strong> configuration item has a special dependency condition <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b1284613501543">depends on !X86_32 || !CC_OPTIMIZE_FOR_SIZE</strong> for a 32-bit x86 server.</p>
+</div></div>
+<div class="fignone" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig694614175596"><a name="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig694614175596"></a><a name="en-us_topic_0000001163022249_en-us_topic_0304388866_fig694614175596"></a><span class="figcap"><b>Figure 4 </b>General setup</span><br><span><img id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_image1154317152594" src="en-us_image_0304392920.gif"></span></div>
+<div class="fignone" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig12580205216599"><a name="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig12580205216599"></a><a name="en-us_topic_0000001163022249_en-us_topic_0304388866_fig12580205216599"></a><span class="figcap"><b>Figure 5 </b>Optimize for size</span><br><span><img id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_image811317509597" src="en-us_image_0304395189.gif"></span></div>
+</li><li id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_li199184281615">Ftrace provides access interfaces for the user mode through debugfs. Therefore, debugfs needs to be compiled into the kernel. To activate the support for debugfs for the kernel, set <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b81691970589">CONFIG_DEBUG_FS</strong> to <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b1786315845817">y</strong> in the kernel configuration file (<strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b10547746195515">.config</strong>). You can also run the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b62397558543">make menuconfig</strong> command and select <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b758036800">Debug Filesystem</strong> in the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b11842195310017">Kernel hacking</strong> menu to support debugfs, as shown in <a href="#kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig667716167219">Figure 6</a>.<div class="fignone" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig667716167219"><a name="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig667716167219"></a><a name="en-us_topic_0000001163022249_en-us_topic_0304388866_fig667716167219"></a><span class="figcap"><b>Figure 6 </b>Debug Filesystem</span><br><span><img id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_image164944124216" src="en-us_image_0304400360.gif"></span></div>
+</li><li id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_li92493461212">After the configuration is complete, compile and install the new kernel, and then start the new kernel.<p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p19303235318"><a name="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_li92493461212"></a><a name="en-us_topic_0000001163022249_en-us_topic_0304388866_li92493461212"></a>After the support for Ftrace is activated for the kernel, the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b5104920121710">-pg</strong> option of the compiler is used during kernel compilation. This option is defined in the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b1491513120172">kernel/trace/Makefile</strong> file, as shown in the following figure.</p>
+<pre class="screen" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_screen172411023121915">ifdef CONFIG_FUNCTION_TRACER 
+ORIG_CFLAGS := $(KBUILD_CFLAGS) 
+KBUILD_CFLAGS = $(subst -pg,,$(ORIG_CFLAGS)) 
+... 
+endif 
+...</pre>
+<p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p1795772012415">Using the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b17134131641813">-pg</strong> option adds a lot of debugging information to the compiled kernel image. Generally, the support for Ftrace is activated only in the development and test phase to debug the kernel and fix bugs. The kernel eventually used for release will disable the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b1824143412228">-pg</strong> option and will not be able to use Ftrace.</p>
+</li></ol>
+</p></li><li id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_li19461654518"><span>Access Ftrace through debugfs.</span><p><ol type="a" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_ol9231156512"><li id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_li1970925319518">Ftrace provides access interfaces for the user mode through debugfs. After debugfs is activated during kernel configuration, the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b1120013250243">/sys/kernel/debug</strong> directory is created. The debugfs file system is mounted to this directory.<div class="p" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p7901455452">To mount debugfs to the directory, add the following content to the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b16641254252">/etc/fstab</strong> file:<pre class="screen" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_screen17695471556">debugfs  /sys/kernel/debug  debugfs  defaults  0  0</pre>
+</div>
+<p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p1700175915517">You can also mount debugfs to the directory when the operating system is running.</p>
+<pre class="screen" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_screen189941081162">mount  -t  debugfs  nodev  /sys/kernel/debug</pre>
+</li><li id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_li1889013358516">After the support for Ftrace is activated for the kernel, the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b1319184962911">/sys/kernel/debug/tracing</strong> directory is created in debugfs. This directory contains the Ftrace control and output files, as shown in <a href="#kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig16585185910619">Figure 7</a>. The files and directories in this directory vary according to the settings of Ftrace during kernel compilation.<div class="fignone" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig16585185910619"><a name="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig16585185910619"></a><a name="en-us_topic_0000001163022249_en-us_topic_0304388866_fig16585185910619"></a><span class="figcap"><b>Figure 7 </b>Files in the tracing directory</span><br><span><img id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_image5727135315620" src="en-us_image_0304403855.gif"></span></div>
+</li></ol>
+</p></li></ol>
+</div>
+<div class="section" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_section15405999815"><h4 class="sectiontitle">Data Files of Ftrace</h4><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p387720311584">There are many files and directories in the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b6858142303519">/sys/kernel/debug/trace</strong> directory. Some of them are shared by various tracers, and some are used by a specific tracer. Generally, the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b38835093610">echo</strong> command is used to change the values of these data files. You can also use the functions related to file reading and writing in the program to change the values of these files. <a href="#kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_table98081925897">Table 2</a> describes only some data files of Ftrace. For details about the usage of other data files of Ftrace, see the documents in the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b19239141134113">Documentation/trace</strong> directory in the kernel source code package and the source files in the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b953811352414">kernel/trace</strong> directory.</p>
+
+<div class="tablenoborder"><a name="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_table98081925897"></a><a name="en-us_topic_0000001163022249_en-us_topic_0304388866_table98081925897"></a><table cellpadding="4" cellspacing="0" summary="" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_table98081925897" frame="border" border="1" rules="all"><caption><b>Table 2 </b>Data files of Ftrace</caption><colgroup><col style="width:22.82%"><col style="width:77.18%"></colgroup><thead align="left"><tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row7808425497"><th align="left" class="cellrowborder" valign="top" width="22.82%" id="mcps1.3.4.3.2.3.1.1"><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p0808112511910">File</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="77.18%" id="mcps1.3.4.3.2.3.1.2"><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p4808102513912">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row58081254914"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p1680811259912">README</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p88084253917">Provides a short usage guide that shows the sequence of Ftrace operation commands. You can run the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b1395113812425">cat</strong> command to view the file to understand the general operation process.</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row15808132513910"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p1680810251999">current_tracer</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p9808172518919">Used to set or display the current tracer. You can run the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b93811453125015">echo</strong> command to write the name of another tracer to this file to switch to the tracer. After the system starts, the default value of the file is <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b328444085218">nop</strong>, that is, no tracing operation is performed. After a trace task is executed for a period of time, you can reset the tracer by writing <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b265272817545">nop</strong> to the file.</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row78087256911"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p1380816251492">available_tracers</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p168085251696">Records the list of tracers that are compiled into the kernel. You can run the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b1141192518554">cat</strong> command to view the content. The tracers contained in this file correspond to the options activated in <a href="#kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig8498359145715">Figure 3</a>. The tracer name written into the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b098069125712">current_tracer</strong> file must be in the tracer name list in the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b5693347135718">available_tracers</strong> file.</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row980820259917"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p17809025895">trace</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p48091025392">Provides an interface for viewing the obtained trace information. You can run the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b1831416138591">cat</strong> command to view the traced kernel activity records in this file. You can also save the content of the file as a record file for future use.</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row108098254915"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p380962517912">tracing_enabled</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p16963252191211">Used to configure whether the tracer specified in the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b944021917019">current_tracer</strong> file can trace the calling of kernel functions.</p>
+<ul id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_ul148491758191215"><li id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_li584913581127"><strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b938615401117">0</strong>: disables tracing.</li><li id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_li15849175813121"><strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b15501743629">1</strong> (default value): enables tracing.</li></ul>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row98090250913"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p48096251892">set_graph_function</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p128093255915">The setting of <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b917174911415">set_graph_function</strong> must clearly display the function of the calling relationship. The displayed information structure is similar to the code of the C language. In this way, the kernel operation process can be analyzed more intuitively. This file is used when the function_graph tracer is used. By default, a calling relationship sequence is generated for all functions. You can write this file to specify the functions that require special attention.</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row380915251999"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p380915259918">buffer_size_kb</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p2520935121317">Used to set the size of the trace buffer used by a single CPU. Tracers write traced information into the buffer. The trace buffer of each CPU is of the same size. The trace buffer is a ring buffer. If too much information is traced, historical information will be overwritten by new information.</p>
+<div class="note" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_note148565370138"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p1985615378130">To change the value of the file, set the value in the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b2062117319913">current_tracer</strong> file to <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b10849145092">nop</strong>.</p>
+</div></div>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row1851216381102"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p2051333891012">tracing_on</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p165135383109">Used to control the pause of tracing. Sometimes, you can write <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b8908105451413">0</strong> to the file to disable the trace function temporarily when observing certain events. In such case, the newer part in the trace buffer is related to the concerned events. You can write <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b16540224101616">1</strong> to the file to continue the tracing.</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row26934435107"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p14693154341010">available_filter_functions</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p869354314106">Records the kernel functions that can be traced currently. The activities of the functions that are not listed in this file cannot be traced.</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row1857584041019"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p45751940181017">set_ftrace_filter and set_ftrace_notrace</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p137334018141">Used after dynamic Ftrace is enabled (<strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b1424810413204">CONFIG_DYNAMIC_FTRACE</strong> is selected) during kernel compilation. The <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b5147318122020">set_ftrace_filter</strong> file is used to specify the functions to be traced, and the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b14950433142011">set_ftrace_notrace</strong> file is used to specify the functions not to be traced. If a function name appears in both files, the execution of the function is not traced. The two files also support simple expressions with wildcards so that you can specify multiple target functions at a time with one expression. The value of <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b994315196257">set_ftrace_notrace</strong> is null by default, that is, all kernel functions can be traced.</p>
+<div class="note" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_note25761742161416"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p185761942141414">The names of the functions to be written into the two files must be included in the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b1280931342610">available_filter_functions</strong> file.</p>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_section17349101431512"><h4 class="sectiontitle">Ftrace Tracers</h4><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p16438732121518">Ftrace contains multiple tracers to trace different types of information, such as information about process scheduling and interrupt disabling. You can obtain from the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b566976142820">available_tracers</strong> file the list of trackers supported by the kernel. When compiling the kernel, you can see the options corresponding to the trackers supported by the kernel, as described in <a href="#kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_fig8498359145715">Figure 3</a>.</p>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_table9366121218164" frame="border" border="1" rules="all"><caption><b>Table 3 </b>Ftrace tracers</caption><colgroup><col style="width:16.6%"><col style="width:83.39999999999999%"></colgroup><thead align="left"><tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row1736612120169"><th align="left" class="cellrowborder" valign="top" width="16.6%" id="mcps1.3.5.3.2.3.1.1"><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p163667126166">Tracer</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="83.39999999999999%" id="mcps1.3.5.3.2.3.1.2"><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p336619122168">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row3366141251616"><td class="cellrowborder" valign="top" width="16.6%" headers="mcps1.3.5.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p1636661231617">nop</p>
+</td>
+<td class="cellrowborder" valign="top" width="83.39999999999999%" headers="mcps1.3.5.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p83661712151617">The nop tracer does not trace any kernel activities. You can write <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b0185151616341">nop</strong> to the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b13259112283414">current_tracer</strong> file to delete the previously used tracers and clear the previously collected trace information, that is, refresh the trace file.</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row13366111221615"><td class="cellrowborder" valign="top" width="16.6%" headers="mcps1.3.5.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p036641214168">function</p>
+</td>
+<td class="cellrowborder" valign="top" width="83.39999999999999%" headers="mcps1.3.5.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p137808451167">The function tracer can trace the execution of kernel functions. In the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b652341993515">set_ftrace_filter</strong> file, you can specify the functions to be traced.</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row193661112111616"><td class="cellrowborder" valign="top" width="16.6%" headers="mcps1.3.5.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p3366912121619">function_graph</p>
+</td>
+<td class="cellrowborder" valign="top" width="83.39999999999999%" headers="mcps1.3.5.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p103661512151618">The function_graph tracer can display the call relationship diagram of functions similar to C source code. In this way, the function call relationship diagram is intuitive. In the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b83113895918">set_graph_function</strong> file, you can specify the functions for which call flowcharts are to be generated.</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row17366912151612"><td class="cellrowborder" valign="top" width="16.6%" headers="mcps1.3.5.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p13366161261615">sched_switch</p>
+</td>
+<td class="cellrowborder" valign="top" width="83.39999999999999%" headers="mcps1.3.5.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p27587513189">The sched_switch tracer can trace process scheduling activities in the kernel.</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_row163661112191616"><td class="cellrowborder" valign="top" width="16.6%" headers="mcps1.3.5.3.2.3.1.1 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p43668125169">irqsoff and preemptoff</p>
+</td>
+<td class="cellrowborder" valign="top" width="83.39999999999999%" headers="mcps1.3.5.3.2.3.1.2 "><p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p336610127167">The irqsoff and preemptoff trackers respectively trace the code for disabling interrupts and the code for forbidding process preemption, and record the maximum duration for disabling interrupts. The preemptirqsoff tracker can be considered as a combination of the two trackers.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_p0439133212151">Ftrace also supports other tracers, such as initcall, ksym_tracer, mmiotrace, and sysprof. The Ftrace framework allows users to add new tracers. You can refer to the documents in the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b945519151441">Documentation/trace</strong> directory of the kernel source code package and the source files in the <strong id="kunpengfaq_06_0012__en-us_topic_0000001163022249_en-us_topic_0304388866_b3466525840">kernel/trace</strong> directory to understand the usage of other tracers and the method for adding new tracers.</p>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001214027145.html">FAQ</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

@@ -1,0 +1,212 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="I/O分析任务执行失败">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001214027145.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="user guide">
+<meta name="DC.Publisher" content="20210630">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="kunpengfaq_06_0012">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>I/O分析任务执行失败</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="kunpengfaq_06_0012"></a><a name="kunpengfaq_06_0012"></a>
+
+<h1 class="topictitle1">I/O分析任务执行失败</h1>
+<div id="body8662426"><div class="section" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_section1990762624820"><h4 class="sectiontitle">现象描述</h4><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p3575133619486">I/O分析任务执行失败，失败原因是：任务采集失败，系统暂不支持。请检查系统是否支持或是否已开启ftrace。</p>
+</div>
+<div class="section" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_section594883104913"><h4 class="sectiontitle">可能原因</h4><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p14426915184920">系统内核版本不支持ftrace的采集。</p>
+</div>
+<div class="section" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_section15377201496"><h4 class="sectiontitle">处理步骤</h4><div class="note" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_note7403154018117"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p84039401210"><span style="color:#323232;">ftrace</span><span style="color:#323232;">是内建于Linux内核的跟踪工具，从2.6.27开始加入主流内核。使用ftrace可以调试或者分析内核中发生的事情。ftrace提供了不同的跟踪器，以用于不同的场合，例如跟踪内核函数调用、对上下文切换进行跟踪、查看中断被关闭的时长、跟踪内核态中的延迟以及性能问题等。系统开发人员可以使用ftrace对内核进行跟踪调试，以找到内核中出现的问题的根源，方便对其进行修复。另外，对内核感兴趣的用户还可以通过ftrace来观察内核中发生的活动，了解内核的工作机制。</span></p>
+</div></div>
+<p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p14320122264911">重新编译内核，详细操作如下：</p>
+<ol id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_ol4500181185114"><li id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_li175003114517"><span><span style="color:#3F3F3F;">让内核支持ftrace</span>。</span><p><ol type="a" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_ol1113317365719"><li id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_li5133153175710"><span style="color:#323232;">使用ftrace，首先要将其编译进内核。内核源码目录下的</span><span class="filepath" style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_filepath121105319511">“kernel/trace/Makefile”</span><span style="color:#323232;">文件给出了ftrace相关的编译选项，如</span><a href="#kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_table2768152155116">表1</a><span style="color:#323232;">所示。</span>
+<div class="tablenoborder"><a name="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_table2768152155116"></a><a name="zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_table2768152155116"></a><table cellpadding="4" cellspacing="0" summary="" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_table2768152155116" frame="border" border="1" rules="all"><caption><b>表1 </b><span style="color:#323232;">ftrace相关的配置选项列表</span></caption><colgroup><col style="width:6.69%"><col style="width:93.31%"></colgroup><thead align="left"><tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row13769952155118"><th align="left" class="cellrowborder" valign="top" width="6.69%" id="mcps1.3.3.4.1.2.1.1.6.2.3.1.1"><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p4769135215514">序号</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="93.31%" id="mcps1.3.3.4.1.2.1.1.6.2.3.1.2"><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p19769552175111">配置选项</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row1076945219519"><td class="cellrowborder" valign="top" width="6.69%" headers="mcps1.3.3.4.1.2.1.1.6.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p11769155285120">1</p>
+</td>
+<td class="cellrowborder" valign="top" width="93.31%" headers="mcps1.3.3.4.1.2.1.1.6.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p1457171312519">CONFIG_FUNCTION_TRACER</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row15769552105112"><td class="cellrowborder" valign="top" width="6.69%" headers="mcps1.3.3.4.1.2.1.1.6.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p10769852105119">2</p>
+</td>
+<td class="cellrowborder" valign="top" width="93.31%" headers="mcps1.3.3.4.1.2.1.1.6.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p276935211511">CONFIG_FUNCTION_GRAPH_TRACER</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row17692052165113"><td class="cellrowborder" valign="top" width="6.69%" headers="mcps1.3.3.4.1.2.1.1.6.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p276945212512">3</p>
+</td>
+<td class="cellrowborder" valign="top" width="93.31%" headers="mcps1.3.3.4.1.2.1.1.6.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p1976912523517">CONFIG_CONTEXT_SWITCH_TRACER</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row15769145217515"><td class="cellrowborder" valign="top" width="6.69%" headers="mcps1.3.3.4.1.2.1.1.6.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p576910522515">4</p>
+</td>
+<td class="cellrowborder" valign="top" width="93.31%" headers="mcps1.3.3.4.1.2.1.1.6.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p19769155235120">CONFIG_NOP_TRACER</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row5769452125111"><td class="cellrowborder" valign="top" width="6.69%" headers="mcps1.3.3.4.1.2.1.1.6.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p18769205215119">5</p>
+</td>
+<td class="cellrowborder" valign="top" width="93.31%" headers="mcps1.3.3.4.1.2.1.1.6.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p77691052155112">CONFIG_SCHED_TRACER</p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row976995285117"><td class="cellrowborder" valign="top" width="6.69%" headers="mcps1.3.3.4.1.2.1.1.6.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p97692523519">6</p>
+</td>
+<td class="cellrowborder" valign="top" width="93.31%" headers="mcps1.3.3.4.1.2.1.1.6.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p47698520511">...</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p878135316534"><span style="color:#323232;">ftrace</span><span style="color:#323232;">相关的配置选项比较多，针对不同的跟踪器有各自对应的配置选项。不同的选项有不同的依赖关系，内核源码目录下的</span><span class="filepath" style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_filepath253018912540">“kernel/trace/Kconfig”</span><span style="color:#323232;">文件描述了这些依赖关系。用户可以参考Makefile文件和Konfig文件，然后选中自己所需要的跟踪器。</span></p>
+</li><li id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_li8375419115720"><span style="color:#323232;">通常在配置内核时，使用make menuconfig会更直观一些。以2.6.33.1版本的内核为例，要将ftrace编译进内核，可以按照</span><a href="#kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig17544559195411">图1</a><span style="color:#323232;">选择Kernel hacking</span>，按照<a href="#kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig144311571561">图2</a><span style="color:#323232;">选择 Tracers 菜单项。</span><div class="fignone" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig17544559195411"><a name="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig17544559195411"></a><a name="zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig17544559195411"></a><span class="figcap"><b>图1 </b>Linux内核配置-<span style="color:#323232;">Kernel hacking</span></span><br><span><img id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_image082851105415" src="zh-cn_image_0304389193.gif"></span></div>
+<div class="fignone" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig144311571561"><a name="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig144311571561"></a><a name="zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig144311571561"></a><span class="figcap"><b>图2 </b>Linux内核配置-<span style="color:#323232;">Tracers</span></span><br><span><img id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_image3879746563" src="zh-cn_image_0304389244.gif"></span></div>
+</li><li id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_li154143965718"><span style="color:#323232;">进入Tracers菜单下，可以看到内核支持的跟踪器列表。如</span><a href="#kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig8498359145715">图3</a><span style="color:#323232;">所示，这里选中了所有的跟踪器，用户可以根据自己的需要选中特定的跟踪器。</span><div class="fignone" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig8498359145715"><a name="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig8498359145715"></a><a name="zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig8498359145715"></a><span class="figcap"><b>图3 </b><span style="color:#323232;">内核支持的跟踪器列表</span></span><br><span><img id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_image18686125214575" src="zh-cn_image_0304389251.gif"></span></div>
+<div class="caution" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_note14829931591"><span class="cautiontitle"><img src="public_sys-resources/caution_3.0-zh-cn.png"> </span><div class="cautionbody"><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p18292316599"><span style="color:#323232;">如果是在32位x86机器上，编译时不要选中</span><a href="#kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig694614175596">图4</a><span style="color:#323232;">General setup菜单项下的Optimize for size选项，如</span><a href="#kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig12580205216599">图5</a><span style="color:#323232;">所示，否则就无法看到</span><a href="#kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig8498359145715">图3</a><span style="color:#323232;">中的Kernel Function Graph Tracer选项。这是因为在Konfig文件中，针对32 位x86机器，表项FUNCTION_GRAPH_TRACER有一个特殊的依赖条件</span><span class="parmvalue" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_parmvalue1457011177119">“depends on !X86_32 || !CC_OPTIMIZE_FOR_SIZE”</span>。</p>
+</div></div>
+<div class="fignone" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig694614175596"><a name="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig694614175596"></a><a name="zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig694614175596"></a><span class="figcap"><b>图4 </b><span style="color:#323232;">General setup</span></span><br><span><img id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_image1154317152594" src="zh-cn_image_0304392920.gif"></span></div>
+<div class="fignone" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig12580205216599"><a name="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig12580205216599"></a><a name="zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig12580205216599"></a><span class="figcap"><b>图5 </b><span style="color:#323232;">Optimize for size</span></span><br><span><img id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_image811317509597" src="zh-cn_image_0304395189.gif"></span></div>
+</li><li id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_li199184281615"><span style="color:#323232;">ftrace</span><span style="color:#323232;">通过debugfs向用户态提供了访问接口，所以还需要将debugfs编译进内核。激活对debugfs的支持，可以直接编辑内核配置文件.config ，设置CONFIG_DEBUG_FS=y；或者在make menuconfig时到Kernel hacking菜单下选中对debugfs文件系统的支持，如</span><a href="#kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig667716167219">图6</a><span style="color:#323232;">所示。</span><div class="fignone" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig667716167219"><a name="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig667716167219"></a><a name="zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig667716167219"></a><span class="figcap"><b>图6 </b><span style="color:#323232;">debugfs</span><span style="color:#323232;">编译选项</span></span><br><span><img id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_image164944124216" src="zh-cn_image_0304400360.gif"></span></div>
+</li><li id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_li92493461212"><span style="color:#323232;">配置完成后，编译安装新内核，然后启动到新内核。</span><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p19303235318"><span style="color:#323232;">激活ftrace支持后，编译内核时会使用编译器的-pg选项，这是在</span><span class="filepath" style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_filepath88611015334">“kernel/trace/Makefile”</span><span style="color:#323232;">文件中定义的，如下所示。</span></p>
+<pre class="screen" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_screen172411023121915">ifdef CONFIG_FUNCTION_TRACER 
+ORIG_CFLAGS := $(KBUILD_CFLAGS) 
+KBUILD_CFLAGS = $(subst -pg,,$(ORIG_CFLAGS)) 
+... 
+endif 
+...</pre>
+<p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p1795772012415"><span style="color:#323232;">使用-pg选项会在编译得到的内核映像中加入大量的调试信息。一般情况下，只是在开发测试阶段激活ftrace支持，以调试内核，修复bug 。最终用于发行版的内核则会关闭-pg选项，也就无法使用ftrace。</span></p>
+</li></ol>
+</p></li><li id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_li19461654518"><span><span style="color:#3F3F3F;">通过debugfs访问ftrace</span>。</span><p><ol type="a" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_ol9231156512"><li id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_li1970925319518"><span style="color:#323232;">ftrace</span><span style="color:#323232;">通过debugfs向用户态提供访问接口。配置内核时激活debugfs后会创建目录</span><span class="filepath" style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_filepath17709175314511">“/sys/kernel/debug”</span><span style="color:#323232;">，debugfs文件系统就是挂载到该目录。</span><div class="p" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p7901455452"><span style="color:#323232;">要挂载该目录，需要将如下内容添加到</span><span class="filepath" style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_filepath46341833353">“/etc/fstab”</span><span style="color:#323232;">文件：</span><pre class="screen" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_screen17695471556">debugfs  /sys/kernel/debug  debugfs  defaults  0  0</pre>
+</div>
+<p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p1700175915517"><span style="color:#323232;">或者可以在运行时挂载：</span></p>
+<pre class="screen" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_screen189941081162">mount  -t  debugfs  nodev  /sys/kernel/debug</pre>
+</li><li id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_li1889013358516"><span style="color:#323232;">激活内核对ftrace的支持后会在debugfs下创建一个tracing目录</span><span class="filepath" style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_filepath11572541060">“/sys/kernel/debug/tracing”</span><span style="color:#323232;">。该目录下包含了ftrace的控制和输出文件，如</span><a href="#kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig16585185910619">图7</a><span style="color:#323232;">所示。根据编译内核时针对ftrace的设定不同，该目录下实际显示的文件和目录与这里也会不同。</span><div class="fignone" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig16585185910619"><a name="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig16585185910619"></a><a name="zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig16585185910619"></a><span class="figcap"><b>图7 </b><span style="color:#323232;">tracing</span><span style="color:#323232;">目录下的文件</span></span><br><span><img id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_image5727135315620" src="zh-cn_image_0304403855.gif"></span></div>
+</li></ol>
+</p></li></ol>
+</div>
+<div class="section" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_section15405999815"><h4 class="sectiontitle">ftrace的数据文件</h4><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p387720311584"><span class="filepath" style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_filepath39690409814">“/sys/kernel/debug/trace”</span><span style="color:#323232;">目录下文件和目录比较多，有些是各种跟踪器共享使用的，有些是特定于某个跟踪器使用的。在操作这些数据文件时，通常使用 </span><strong style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b143163523814">echo</strong><span style="color:#323232;">命令来修改其值，也可以在程序中通过文件读写相关的函数来操作这些文件的值。</span><a href="#kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_table98081925897">表2</a><span style="color:#323232;">只对部分文件进行描述，用户可以参考内核源码包中 </span><span class="filepath" style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_filepath13532351191">“Documentation/trace”</span><span style="color:#323232;">目录下的文档以及</span><span class="filepath" style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_filepath14421512393">“kernel/trace”</span><span style="color:#323232;">下的源文件以了解其余文件的用途。</span></p>
+
+<div class="tablenoborder"><a name="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_table98081925897"></a><a name="zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_table98081925897"></a><table cellpadding="4" cellspacing="0" summary="" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_table98081925897" frame="border" border="1" rules="all"><caption><b>表2 </b>ftrace的数据文件</caption><colgroup><col style="width:22.82%"><col style="width:77.18%"></colgroup><thead align="left"><tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row7808425497"><th align="left" class="cellrowborder" valign="top" width="22.82%" id="mcps1.3.4.3.2.3.1.1"><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p0808112511910">文件</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="77.18%" id="mcps1.3.4.3.2.3.1.2"><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p4808102513912">用途</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row58081254914"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p1680811259912"><span style="color:#323232;">README</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p88084253917"><strong id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b18771631586"><span style="color:#323232;">README</span></strong><span style="color:#323232;">文件提供了一个简短的使用说明，展示了ftrace的操作命令序列。可以通过</span><strong style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b18608751161112">cat</strong><span style="color:#323232;">命令查看该文件以了解概要的操作流程。</span></p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row15808132513910"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p1680810251999"><span style="color:#323232;">current_tracer</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p9808172518919"><strong id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b168774311384"><span style="color:#323232;">current_tracer</span></strong><span style="color:#323232;">用于设置或显示当前使用的跟踪器；使用echo将跟踪器名字写入该文件可以切换到不同的跟踪器。系统启动后，其缺省值为nop，即不做任何跟踪操作。在执行完一段跟踪任务后，可以通过向该文件写入nop来重置跟踪器。</span></p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row78087256911"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p1380816251492"><span style="color:#323232;">available_tracers</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p168085251696"><strong id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b0877231383"><span style="color:#323232;">available_tracers</span></strong><span style="color:#323232;">记录了当前编译进内核的跟踪器的列表，可以通过</span><strong style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b5359104001218">cat</strong><span style="color:#323232;">查看其内容；其包含的跟踪器与</span><a href="#kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig8498359145715">图3</a><span style="color:#323232;">中所激活的选项是对应的。写current_tracer文件时用到的跟踪器名字必须在该文件列出的跟踪器名字列表中。</span></p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row980820259917"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p17809025895"><span style="color:#323232;">trace</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p48091025392"><strong id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b19877831288"><span style="color:#323232;">trace</span></strong><span style="color:#323232;">文件提供了查看获取到的跟踪信息的接口。可以通过</span><strong style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b66156384128">cat</strong><span style="color:#323232;">等命令查看该文件以查看跟踪到的内核活动记录，也可以将其内容保存为记录文件以备后续查看。</span></p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row108098254915"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p380962517912"><span style="color:#323232;">tracing_enabled</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p16963252191211"><strong id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b1296365213129"><span style="color:#323232;">tracing_enabled</span></strong><span style="color:#323232;">用于控制current_tracer中的跟踪器是否可以跟踪内核函数的调用情况。</span></p>
+<ul id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_ul148491758191215"><li id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_li584913581127"><span style="color:#323232;">写入0会关闭跟踪活动。</span></li><li id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_li15849175813121"><span style="color:#323232;">写入1则激活跟踪功能，</span><span style="color:#323232;">其缺省值为 1 。</span></li></ul>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row98090250913"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p48096251892"><span style="color:#323232;">set_graph_function</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p128093255915"><strong id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b98771131886"><span style="color:#323232;">set_graph_function</span></strong><span style="color:#323232;">设置要清晰显示调用关系的函数，显示的信息结构类似于C语言代码，这样在分析内核运作流程时会更加直观一些。在使用function_graph跟踪器时使用；缺省为对所有函数都生成调用关系序列，可以通过写该文件来指定需要特别关注的函数。</span></p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row380915251999"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p380915259918"><span style="color:#323232;">buffer_size_kb</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p2520935121317"><strong id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b165209358136"><span style="color:#323232;">buffer_size_kb</span></strong><span style="color:#323232;">用于设置单个CPU所使用的跟踪缓存的大小。跟踪器会将跟踪到的信息写入缓存，每个CPU的跟踪缓存是一样大的。跟踪缓存实现为环形缓冲区的形式，如果跟踪到的信息太多，则旧的信息会被新的跟踪信息覆盖掉。</span></p>
+<div class="note" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_note148565370138"><span class="notetitle"> 说明： </span><div class="notebody"><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p1985615378130"><span style="color:#323232;">要更改该文件的值需要先将</span><span class="parmname" style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_parmname1193154921314">“current_tracer”</span><span style="color:#323232;">设置为</span><span class="parmvalue" style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_parmvalue1778635318133">“nop”</span><span style="color:#323232;">才可以。</span></p>
+</div></div>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row1851216381102"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p2051333891012"><span style="color:#323232;">tracing_on</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p165135383109"><strong id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b287773115812"><span style="color:#323232;">tracing_on</span></strong><span style="color:#323232;">用于控制跟踪的暂停。有时候在观察到某些事件时想暂时关闭跟踪，可以将0写入该文件以停止跟踪，这样跟踪缓冲区中比较新的部分是与所关注的事件相关的；写入1可以继续跟踪。</span></p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row26934435107"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p14693154341010"><span style="color:#323232;">available_filter_functions</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p869354314106"><strong id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b08776311087"><span style="color:#323232;">available_filter_functions</span></strong><span style="color:#323232;">记录了当前可以跟踪的内核函数。对于不在该文件中列出的函数，无法跟踪其活动。</span></p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row1857584041019"><td class="cellrowborder" valign="top" width="22.82%" headers="mcps1.3.4.3.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p45751940181017"><span style="color:#323232;">set_ftrace_filter</span><span style="color:#323232;">和 set_ftrace_notrace</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="77.18%" headers="mcps1.3.4.3.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p137334018141"><strong id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b97374016148"><span style="color:#323232;">set_ftrace_filter</span></strong><span style="color:#323232;">和 </span><strong style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b27312403143">set_ftrace_notrace</strong><span style="color:#323232;">在编译内核时配置了动态ftrace（选中 CONFIG_DYNAMIC_FTRACE 选项）后使用。前者用于显示指定要跟踪的函数，后者则作用相反，用于指定不跟踪的函数。如果一个函数名同时出现在这两个文件中，则这个函数的执行状况不会被跟踪。这些文件还支持简单形式的含有通配符的表达式，这样可以用一个表达式一次指定多个目标函数。</span><span style="color:#323232;">缺省为可以跟踪所有内核函数，文件set_ftrace_notrace的值则为空。</span></p>
+<div class="note" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_note25761742161416"><span class="notetitle"> 说明： </span><div class="notebody"><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p185761942141414"><span style="color:#323232;">要写入这两个文件的函数名必须可以在文件available_filter_functions中看到</span>。</p>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_section17349101431512"><h4 class="sectiontitle">ftrace跟踪器</h4><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p16438732121518"><span style="color:#323232;">ftrace</span><span style="color:#323232;">当前包含多个跟踪器，用于跟踪不同类型的信息，例如进程调度、中断关闭等。可以查看文件available_tracers获取内核当前支持的跟踪器列表。在编译内核时，也可以看到内核支持的跟踪器对应的选项，如</span><a href="#kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_fig8498359145715">图3</a><span style="color:#323232;">所示。</span></p>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_table9366121218164" frame="border" border="1" rules="all"><caption><b>表3 </b>ftrace跟踪器</caption><colgroup><col style="width:16.6%"><col style="width:83.39999999999999%"></colgroup><thead align="left"><tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row1736612120169"><th align="left" class="cellrowborder" valign="top" width="16.6%" id="mcps1.3.5.3.2.3.1.1"><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p163667126166">跟踪器</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="83.39999999999999%" id="mcps1.3.5.3.2.3.1.2"><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p336619122168">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row3366141251616"><td class="cellrowborder" valign="top" width="16.6%" headers="mcps1.3.5.3.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p1636661231617"><span style="color:#323232;">nop</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="83.39999999999999%" headers="mcps1.3.5.3.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p83661712151617"><strong id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b154381032121513"><span style="color:#323232;">nop</span></strong><span style="color:#323232;">跟踪器不会跟踪任何内核活动，将nop写入current_tracer文件可以删除之前所使用的跟踪器，并清空之前收集到的跟踪信息，即刷新trace文件。</span></p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row13366111221615"><td class="cellrowborder" valign="top" width="16.6%" headers="mcps1.3.5.3.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p036641214168"><span style="color:#323232;">function</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="83.39999999999999%" headers="mcps1.3.5.3.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p137808451167"><strong id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b20316104441619"><span style="color:#323232;">function</span></strong><span style="color:#323232;">跟踪器可以跟踪内核函数的执行情况，可以通过文件set_ftrace_filter显示指定要跟踪的函数。</span></p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row193661112111616"><td class="cellrowborder" valign="top" width="16.6%" headers="mcps1.3.5.3.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p3366912121619"><span style="color:#323232;">function_graph</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="83.39999999999999%" headers="mcps1.3.5.3.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p103661512151618"><strong id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b243815323152"><span style="color:#323232;">function_graph</span></strong><span style="color:#323232;">跟踪器可以显示类似C源码的函数调用关系图，这样查看起来比较直观一些，可以通过文件 set_grapch_function显示指定要生成调用流程图的函数。</span></p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row17366912151612"><td class="cellrowborder" valign="top" width="16.6%" headers="mcps1.3.5.3.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p13366161261615"><span style="color:#323232;">sched_switch</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="83.39999999999999%" headers="mcps1.3.5.3.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p27587513189"><strong id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b184388329157"><span style="color:#323232;">sched_switch</span></strong><span style="color:#323232;">跟踪器可以对内核中的进程调度活动进行跟踪。</span></p>
+</td>
+</tr>
+<tr id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_row163661112191616"><td class="cellrowborder" valign="top" width="16.6%" headers="mcps1.3.5.3.2.3.1.1 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p43668125169"><span style="color:#323232;">irqsoff</span><span style="color:#323232;">和preemptoff</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="83.39999999999999%" headers="mcps1.3.5.3.2.3.1.2 "><p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p336610127167"><strong id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b1143933261512"><span style="color:#323232;">irqsoff</span></strong><span style="color:#323232;">跟踪器和 </span><strong style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b143912324153">preemptoff</strong><span style="color:#323232;">跟踪器分别跟踪关闭中断的代码和禁止进程抢占的代码，并记录关闭的最大时长，</span><strong style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_b15439163221512">preemptirqsoff</strong><span style="color:#323232;">跟踪器则可以看做它们的组合。</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_p0439133212151"><span style="color:#323232;">ftrace</span><span style="color:#323232;">还支持其它一些跟踪器，例如initcall、ksym_tracer、mmiotrace、sysprof等。ftrace框架支持扩展添加新的跟踪器。用户可以参考内核源码包中 </span><span class="filepath" style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_filepath2096823517183">“Documentation/trace”</span><span style="color:#323232;">目录下的文档以及</span><span class="filepath" style="color:#323232;" id="kunpengfaq_06_0012__zh-cn_topic_0000001163022249_zh-cn_topic_0304388866_filepath12150164320189">“kernel/trace”</span><span style="color:#323232;">下的源文件，以了解其它跟踪器的用途和如何添加新的跟踪器。</span></p>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001214027145.html">FAQ</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

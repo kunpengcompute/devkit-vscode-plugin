@@ -1,0 +1,33 @@
+.view-stacks{
+    cursor: pointer;
+    color: #0067FF;
+}
+.pid-modal-class .ti3-modal-content{
+    width: 900px;
+}
+.table-title{
+    font-size: 16px;
+	line-height: 24px;
+	color: var(--common-color-font-primary);
+    padding-top: 32px;
+    padding-bottom: 10px;
+    &:nth-child(1){
+        padding-top: 0;
+    }
+}
+.ti3-modal-body{
+    padding-top: -8px;
+}
+
+.search-icon {
+  cursor: pointer;
+  margin-left: 10px;
+
+  &:hover {
+    color: #267dff;
+  }
+
+  &.active {
+    color: #0057d9;
+  }
+}

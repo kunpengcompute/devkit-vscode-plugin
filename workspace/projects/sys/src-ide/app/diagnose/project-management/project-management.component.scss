@@ -1,0 +1,117 @@
+.content-main {
+  padding-top: 40px;
+  padding-left: 80px;
+  padding-right: 80px;
+  min-width: 800px;
+
+  title {
+    display: block;
+    padding-bottom: 20px;
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  ti-formfield {
+    input {
+      width: 400px;
+    }
+  }
+
+  .node-list {
+    font-size: 12px;
+
+    .node-list-tip {
+      color: var(--ti-common-color-text-secondary);
+      margin-bottom: 10px;
+    }
+
+    button {
+      border: none;
+      background: none;
+      color: #0067ff;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+
+    .node-status {
+      display: flex;
+      align-items: center;
+  
+      > div {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 8px;
+  
+        &.online {
+          background: #7adfa0;
+        }
+  
+        &.offline {
+          background: #b8becc;
+        }
+      }
+  
+      .running {
+        width: 8px;
+        height: 8px;
+        margin-right: 8px;
+        animation: loading 1s linear infinite;
+      }
+  
+      @keyframes loading {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+
+  footer {
+    margin-top: 40px;
+
+    button + button {
+      margin-left: 20px;
+    }
+  }
+
+}
+.ti3-icon-staricon{
+  padding-left: 4px;
+  color: var(--ti-common-color-text-secondary);
+  padding-bottom: 10px;
+}
+:host ::ng-deep{
+  .ti3-table-fixed-head > table > thead > tr > th.notShow[checkbox-column] {
+    cursor: auto;
+    input[type="checkbox"][tiCheckbox] + label.ti3-checkbox {
+      cursor: auto;
+      display: none;
+    }
+  }
+  .ti3-table .ti3-table-fixed-head .thContent {
+    height: 32px;
+    display: flex;
+  }
+}
+.ti3-icon-search{
+  padding-left: 8px;
+  cursor: pointer;
+  position: relative;
+  color: var(--common-color-font-secondary);
+&:hover{
+  color: var(--ti-table-sort-color-hover);
+}
+&.active{
+  color: var(--ti-table-sort-color-hover);
+}
+}
+.ti3-searchbox-container.search-box{
+  top: -7px;
+  left: -1px;
+  position: absolute;
+  z-index: 1;
+}

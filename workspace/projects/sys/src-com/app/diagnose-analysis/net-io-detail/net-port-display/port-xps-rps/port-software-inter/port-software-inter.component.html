@@ -1,0 +1,53 @@
+<div class="port-software-inter">
+  <div class="port-software-table">
+    <ti-table 
+      [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns"
+      tiColsResizable
+    >
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr>
+              <th tiOverflow *ngFor="let column of columns;index as index" width="{{column.width}}">{{column.title}}</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <div class="ti3-table-container ti3-resize-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of columns" width="{{column.width}}"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of displayed;index as i">
+              <td tiOverflow>
+                <a (click)="openMapModal(row, softMapModal)">{{ row.type }}</a>
+              </td>
+              <td tiOverflow>{{ row.frequency }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ti-table>
+  </div>
+</div>
+
+<!-- 软中断 分布图 -->
+<ng-template #softMapModal let-context='context'>
+  <ti-modal-header>{{ 'net_io.xps_rps.hard_info.software_info' | i18n }}</ti-modal-header>
+  <ti-modal-body>
+    <div class="content-warpper">
+      <app-soft-irq-dist 
+        [softIrqData]="context.softIrqData"
+        [bodyTitle]="context.bodyTitle"
+      ></app-soft-irq-dist>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" (click)="context.close()" tiButton>{{ 'common_term_operate_close' | i18n }}</button>
+  </ti-modal-footer>
+</ng-template>
+

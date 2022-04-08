@@ -1,0 +1,64 @@
+::ng-deep {
+    .map-modal {
+        .ti3-modal-content {
+            width: 912px;
+            padding: 0 32px;
+            .ti3-close {
+              margin-top: 8px;
+            }
+        
+            .ti3-modal-header {
+              margin: 0 0 26px;
+              padding: 22px 0 21px;
+              border-bottom: 1px dashed var(--common-color-divider);
+            }
+        
+            .ti3-modal-body {
+              overflow-y: auto;
+              height: 422px;
+              padding: 0 !important;
+              margin: 0;
+            }
+            .ti3-modal-footer {
+              border-top: 1px dashed var(--common-color-divider) !important;
+              box-sizing: border-box;
+              padding: 32px 0 0 0 !important;
+              height: 88px;
+            }
+            .body-header {
+                display: flex;
+                margin-bottom: 20px;
+                .text {
+                    margin-right: 24px;
+                }
+                .modal-detail {
+                    margin-left: 48px;
+                }
+            }
+        }
+    }
+    .hart-name-map-modal {
+        .ti3-modal-content {
+            .ti3-modal-body {
+                overflow-y: auto;
+                max-height: 600px !important;
+            }
+        }
+    }
+    :root .vscode-dark,
+    :root .vscode-light {
+        .map-modal {
+            .ti3-modal-header {
+                margin: 0 0 20px;
+            }
+        }
+        .ti3-modal-content {
+            max-height: 100%;
+        }
+    }
+}
+:host .hardIrq ::ng-deep app-common-table {
+    .ti3-table-container {
+        max-height: 410px;
+    }
+}

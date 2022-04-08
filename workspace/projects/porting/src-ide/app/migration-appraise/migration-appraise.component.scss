@@ -1,0 +1,814 @@
+::ng-deep html {
+    min-width: 1062px !important;
+    overflow-x: auto !important;
+}
+
+::ng-deep body {
+    overflow: hidden !important;
+}
+
+::ng-deep .vscode-dark {
+    --color-dark-e8-light-2: #E8E8E8;
+    --color-dark-8-light-61: #888888;
+    --color-dark-8-light-97: #888888;
+    --color-dark-a-light-61: #AAAAAA;
+    --color-dark-61-light-c: #616161;
+    --color-dark-31-light-c: #313131;
+    --color-dark-31-light-f5: #313131;
+    --color-dark-61-light-97: #616161;
+    
+}
+
+::ng-deep .vscode-light {
+    --color-dark-e8-light-2: #222222;
+    --color-dark-8-light-61: #616161;
+    --color-dark-8-light-97: #979797;
+    --color-dark-a-light-61: #616161;
+    --color-dark-61-light-c: #CCCCCC;
+    --color-dark-31-light-c: #CCCCCC;
+    --color-dark-31-light-f5: #F5F5F5;
+    --color-dark-61-light-97: #979797;
+
+}
+
+.color-dark-e8-light-2 {
+    color: var(--color-dark-e8-light-2);
+}
+
+.color-dark-8-light-61 {
+    color: var(--color-dark-8-light-61);
+}
+
+.color-dark-a-light-61 {
+    color: var(--color-dark-a-light-61);
+}
+
+.color-dark-8-light-97 {
+    color: var(--color-dark-8-light-97);
+}
+
+.home-container {
+    width: 100%;
+    position: relative;
+    min-width: 1062px;
+
+    .project-container {
+        padding: 40px 80px 30px 80px;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        height: auto;
+
+        .project-left {
+            flex: 4;
+            height: 100%;
+            position: relative;
+            box-sizing: border-box;
+
+            .left-container {
+                position: relative;
+
+                .migration-title {
+                    font-size: 20px;
+                    height: 26px;
+                    line-height: 30px;
+                    margin-bottom: 4px;
+                }
+
+                .otherul {
+                    width: 52%;
+                    min-width: 550px;
+                    float: left;
+                }
+
+                a.help-tips-icon {
+                    position: absolute;
+                    top: 2px;
+                    padding-left: 8px;
+                    outline: none;
+                }
+
+                .en-otherul {
+                    min-width: unset;
+                }
+
+                .targetEnv {
+                    position: absolute;
+                    left: 60%;
+                }
+
+                .otherli {
+                    margin-top: 10px;
+
+                    .common-select,
+                    .command-input {
+                        height: 28px;
+                        width: 400px;
+                    }
+
+                    .common-select {
+                        margin-bottom: 10px;
+                    }
+
+                    .enCommonInput {
+                        width: 400px;
+                    }
+
+                    .ml-26 {
+                        margin-left: 26px;
+                    }
+
+                    .title {
+                        margin-left: 26px;
+                    }
+                }
+
+                .tipinfo {
+                    margin-bottom: 20px;
+                    font-size: 14px;
+                    display: inline-block;
+                    line-height: 20px;
+                }
+
+                .content-title {
+                    .checkbox {
+                        display: inline-block;
+                        vertical-align: top;
+
+                        p {
+                            position: relative;
+                            font-size: 16px;
+                            line-height: 24px;
+                            display: inline-block;
+                            vertical-align: middle;
+                        }
+
+                        a.help-tips-icon {
+                            position: absolute;
+                            top: 5px;
+                            right: -28px;
+                            outline: none;
+                        }
+                    }
+
+                    .analyzeSrc {
+                        .srcRadio {
+                            width: 32%;
+                            display: inline-block;
+                        }
+
+                        .ensrcRadio {
+                            width: 39%;
+                            display: inline-block;
+                        }
+                    }
+                }
+
+                .content-title .title {
+                    span {
+                        width: 100%;
+                        word-wrap: normal;
+                        word-break: normal;
+                    }
+                }
+
+                .form-content {
+                    margin-top: 20px;
+                    font-size: 14px;
+                    line-height: 14px;
+
+                    input::-webkit-input-placeholder {
+                        font-size: 12px;
+                    }
+
+                    input:-moz-placeholder {
+                        font-size: 12px;
+                    }
+
+                    input::-moz-placeholder {
+                        font-size: 12px;
+                    }
+
+                    input:-ms-input-placeholder {
+                        font-size: 12px;
+                    }
+
+                    input {
+                        width: 420px;
+                        box-sizing: border-box;
+                        word-wrap: break-word;
+                        word-break: break-all;
+                        white-space: normal
+                    }
+
+                    textarea {
+                        height: 46px;
+                        resize: vertical;
+                        border: 1px solid var(--border-d-888888-l-979797);
+                        width: 400px;
+                        padding-top: 3px;
+                        min-height: 28px;
+                        line-height: 18px;
+                        box-sizing: border-box;
+                        padding-left: 10px;
+                    }
+
+                    input {
+                        height: 28px;
+                    }
+
+                    ti-select {
+                        width: 420px;
+                    }
+
+                    .fileTypeArea {
+                        position: relative;
+                        display: inline-block;
+                        margin-bottom: 22px;
+
+                        .radioType {
+                            width: 20px;
+                            height: 20px;
+                            display: none;
+                            margin-top: 6px;
+                        }
+                    }
+
+                    .srcTextArea {
+                        height: auto;
+                        width: 400px;
+                        text-align: left;
+                        resize: vertical;
+                        line-height: 18px !important;
+                        padding-top: 4px;
+                        padding-bottom: 4px;
+                        box-sizing: border-box;
+                        word-wrap: break-word;
+                        white-space: normal;
+                        font-size: 0.875rem;
+                        position: relative;
+                    }
+
+                    .commonTextArea {
+                        height: 28px;
+                        width: 400px;
+                        position: relative;
+                        min-height: 28px;
+                    }
+
+                    .areaMatchCode {
+                        height: 80px;
+                        width: 400px;
+                        text-align: left;
+                        line-height: 18px !important;
+                        padding-top: 4px;
+                        padding-bottom: 4px;
+                    }
+
+                    .softPackPath {
+                        margin-top: 14px;
+                        margin-bottom: 10px;
+                        display: flex;
+                    }
+
+                    .srcTypeLabel {
+                        margin: 16px 0 10px;
+                    }
+
+                    .pathTip,
+                    .labelBottom {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+
+            .left-container::-webkit-scrollbar {
+                width: 8px;
+                height: 4px;
+            }
+
+            .left-container::-webkit-scrollbar-thumb {
+                border-radius: 5px;
+            }
+
+            .left-container::-webkit-scrollbar-track {
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .title {
+                color: var(--vscode-editor-foreground) !important;
+            }
+        }
+    }
+
+    .loading {
+        position: fixed;
+        top: 400px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.left-container {
+    .common-ipt {
+        margin-top: 50px;
+        margin-bottom: 0;
+
+        .sys-lable {
+            font-size: 20px;
+            margin-bottom: 20px;
+            height: 26px;
+            line-height: 30px;
+        }
+    }
+}
+
+.src-path-tip {
+    color: #888888;
+    font-size: 12px;
+    width: calc(100% + 70px);
+    margin: 5px 0;
+}
+
+textarea:focus,
+textarea:hover {
+    outline: unset;
+}
+
+@media (max-width: 1500px) {
+    html {
+        font-size: 1rem;
+    }
+
+    .right-title {
+        font-size: 1.1rem;
+        font-weight: normal;
+        padding-bottom: 15px;
+        border-bottom: 1px dashed #DADADC;
+        font-weight: 500;
+    }
+}
+
+.selectItem {
+    text-align: center;
+    background-color: #252526;
+    width: 100%;
+}
+
+.selectItem:hover {
+    background-color: #1C314F;
+    width: 100%;
+}
+
+.selectItem:active {
+    background-color: #0067FF;
+    width: 100%;
+}
+
+.info {
+    width: calc(100%-20px);
+    font-size: 14px;
+    line-height: 20px;
+    color: #B7B7B7;
+    margin-top: 10px;
+}
+
+::ng-deep .home_checkbox_item {
+    margin-bottom: 6px;
+    .ti3-checkbox-skin {
+        border-color: #888888 !important;
+
+        &:hover {
+            border-color: #0067ff !important;
+        }
+
+        &:active {
+            animation: none !important;
+        }
+    }
+
+    input:checked+.ti3-checkbox .ti3-checkbox-skin::before {
+        content: '';
+        display: block;
+        width: 9px;
+        height: 4.5px;
+        transform: rotate(-45deg) translate(0, 3px);
+        border-left: 1px solid #fff;
+        border-bottom: 1px solid #fff;
+    }
+}
+
+::ng-deep .vscode-dark {
+    input[type=checkbox][tiCheckbox][disabled]:not(:checked)+.ti3-checkbox .ti3-checkbox-skin {
+        background-color: #313131 !important;
+        border: 1px solid #616161 !important;
+    }
+
+    .intellij-color {
+        color: #dcdcdc;
+    }
+
+    .intellij-tipinfo {
+        color: #BBBBBB !important;
+    }
+
+    .ti3-tooltip {
+        color: #AAAAAA !important;
+        background-color: #424242 !important;
+        border-color: #424242 !important;
+        font-size: 14px !important;
+    }
+
+    .ti3-tooltip-top::after,
+    .ti3-tooltip-right::after {
+        background-color: #424242 !important;
+    }
+
+    .ti3-tooltip-top::before,
+    .ti3-tooltip-right::before {
+        background-color: #424242 !important;
+        border-color: #424242 !important;
+    }
+
+    --disclaimer-background-clr: #252526;
+    --disclaimer-font-clr: #aaaaaa;
+    --disclaimer-title-clr: #dddddd;
+    --diclaimer-border-clr: #4b4b4b;
+    --disclaimer-notice-clr: #dddddd;
+
+    --disclaimer-confirm-btn-dft-bkgrd-clr: #0067ff;
+    --disclaimer-confirm-btn-dft-border-clr: #0067ff;
+    --disclaimer-confirm-btn-dft-font-clr: #e8e8e8;
+    --disclaimer-confirm-btn-hover-bkgrd-clr: #267dff;
+    --disclaimer-confirm-btn-hover-border-clr: #267dff;
+    --disclaimer-confirm-btn-hover-font-clr: #e8e8e8;
+    --disclaimer-confirm-btn-active-bkgrd-clr: #0057d9;
+    --disclaimer-confirm-btn-active-border-clr: #0057d9;
+    --disclaimer-confirm-btn-active-font-clr: #e8e8e8;
+
+    --disclaimer-reject-btn-dft-bkgrd-clr: #313131;
+    --disclaimer-reject-btn-dft-border-clr: #dddddd;
+    --disclaimer-reject-btn-dft-font-clr: #e8e8e8;
+    --disclaimer-reject-btn-hover-bkgrd-clr: #313131;
+    --disclaimer-reject-btn-hover-border-clr: #267dff;
+    --disclaimer-reject-btn-hover-font-clr: #267dff;
+    --disclaimer-reject-btn-active-bkgrd-clr: #313131;
+    --disclaimer-reject-btn-active-border-clr: #0057d9;
+    --disclaimer-reject-btn-active-font-clr: #0057d9;
+    --install-color-separator: #4b4b4b;
+
+    --modal-title-clr: #dddddd;
+    --modal-color-separator: #4b4b4b;
+    --modal-confirm-btn-clr: #e8e8e8;
+    --modal-cancel-btn-bgc: #313131;
+    --modal-cancel-btn-bc: #dddddd;
+    --modal-cancel-btn-clr: #e8e8e8;
+
+    --inpput-check-lable-color: #E8E8E8;
+    --inpput-notcheck-lable-color: #AAAAAA;
+}
+
+::ng-deep .vscode-light {
+    input[type=checkbox][tiCheckbox][disabled]:not(:checked)+.ti3-checkbox .ti3-checkbox-skin {
+        background-color: #f0f0f0 !important;
+        border-color: #ccc !important;
+    }
+
+    .otherli {
+
+        .common-select,
+        .command-input {
+            border: 1px solid #A4A4A4;
+        }
+    }
+
+    .form-content {
+        textarea {
+            min-height: 28px;
+            font-size: 12px !important;
+        }
+
+        .commonTextArea,
+        textarea,
+        .select_operation,
+        #verselect,
+        #verselect2 {
+            border: 1px solid #A4A4A4;
+        }
+
+        .softPackPath,
+        .pathTip,
+        .pathLabel,
+        .labelBottom {
+            color: #616161;
+        }
+    }
+
+    .content-title {
+        .checkbox p {
+            color: #222222 !important;
+        }
+
+        .softPackUpload {
+            display: flex;
+            height: 18px;
+            line-height: 20px;
+            margin-top: 14px;
+        }
+    }
+
+    .ti3-tooltip {
+        font-size: 14px !important;
+    }
+
+    --disclaimer-background-clr: #ffffff;
+    --disclaimer-font-clr: #222222;
+    --disclaimer-title-clr: #222222;
+    --diclaimer-border-clr: #e1e6ee;
+    --disclaimer-notice-clr: #222222;
+
+    --disclaimer-confirm-btn-dft-bkgrd-clr: #0067ff;
+    --disclaimer-confirm-btn-dft-border-clr: #0067ff;
+    --disclaimer-confirm-btn-dft-font-clr: #ffffff;
+    --disclaimer-confirm-btn-hover-bkgrd-clr: #267dff;
+    --disclaimer-confirm-btn-hover-border-clr: #267dff;
+    --disclaimer-confirm-btn-hover-font-clr: #ffffff;
+    --disclaimer-confirm-btn-active-bkgrd-clr: #0057d9;
+    --disclaimer-confirm-btn-active-border-clr: #0057d9;
+    --disclaimer-confirm-btn-active-font-clr: #ffffff;
+
+    --disclaimer-reject-btn-dft-bkgrd-clr: #ffffff;
+    --disclaimer-reject-btn-dft-border-clr: #979797;
+    --disclaimer-reject-btn-dft-font-clr: #444444;
+    --disclaimer-reject-btn-hover-bkgrd-clr: #ffffff;
+    --disclaimer-reject-btn-hover-border-clr: #267dff;
+    --disclaimer-reject-btn-hover-font-clr: #267dff;
+    --disclaimer-reject-btn-active-bkgrd-clr: #ffffff;
+    --disclaimer-reject-btn-active-border-clr: #0057d9;
+    --disclaimer-reject-btn-active-font-clr: #0057d9;
+    --install-color-separator: #e1e6ee;
+
+    --modal-title-clr: #222222;
+    --modal-color-separator: #e1e6ee;
+    --modal-confirm-btn-clr: #ffffff;
+    --modal-cancel-btn-bgc: #ffffff;
+    --modal-cancel-btn-bc: #979797;
+    --modal-cancel-btn-clr: #444444;
+
+    --inpput-check-lable-color: #222222;
+    --inpput-notcheck-lable-color: #222222;
+}
+
+.tiradio {
+    position: relative;
+    display: inline-block;
+
+    span {
+        display: inline-block;
+        margin-left: 30px;
+        font-size: 14px;
+    }
+}
+
+.uploadBut {
+    float: right;
+    position: absolute;
+    top: 0px;
+    left: 400px !important;
+    z-index: 20;
+}
+
+.modal-box {
+    .modal-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 20px;
+        line-height: 26px;
+        height: 26px;
+        font-size: 20px;
+        color: var(--btn-font-d-e8e8e8-l-222222);
+        border-bottom: 1px dashed var(--modal-color-separator);
+
+        .title-content {
+            font-size: 20px;
+            height: 26px;
+            color: var(--modal-title-clr);
+        }
+
+        .modal-close-icon {
+
+            &>img:nth-of-type(1) {
+                display: block;
+            }
+
+            &>img:nth-of-type(2) {
+                display: none;
+            }
+
+            &:hover,
+            &.active {
+                &>img:nth-of-type(1) {
+                    display: none;
+                }
+
+                &>img:nth-of-type(2) {
+                    display: block;
+                }
+            }
+        }
+
+    }
+
+    .tip-dsc {
+        overflow: auto;
+        height: 389px;
+        display: flex;
+        .content {
+          float: left;
+          width: 97%;
+          .disclaimer-notice {
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 20px;
+                margin-top: 24px;
+                margin-bottom: 8px;
+                color: var(--disclaimer-notice-clr);
+                .warn-img {
+                  width:16px; 
+                  margin-right: 4px; 
+                  vertical-align: middle;
+                  transform: rotate(180deg);
+                }
+            }
+
+            p {
+                font-size: 14px;
+                color: var(--disclaimer-font-clr);
+                margin-bottom: 8px;
+                line-height: 20px;
+            }
+        }
+
+    }
+
+    .modal-tip-dsc {
+        display: flex;
+        padding-top: 20px;
+
+        img {
+            margin-right: 10px;
+        }
+
+        p {
+            font-size: 14px;
+            color: #888888;
+            height: 20px;
+            line-height: 20px;
+        }
+    }
+
+    .checkBox {
+        padding-top: 10px;
+        font-size: 14px;
+    }
+
+    .modal-group-btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 32px;
+
+        button {
+            width: 160px;
+            height: 32px;
+            line-height: 18px;
+            font-size: 14px;
+            letter-spacing: 0;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 2px;
+            border-width: 1px;
+            border-style: solid;
+        }
+
+        .btn-confirm {
+            margin-right: 20px;
+            background-color: #0067ff;
+            border-color: #0067ff;
+            color: var(--modal-confirm-btn-clr);
+
+            &:hover {
+                background-color: #267dff;
+                border-color: #267dff;
+            }
+
+            &:active {
+                background-color: #0057d9;
+                border-color: #0057d9;
+            }
+        }
+
+        .btn-cancel {
+            background-color: var(--modal-cancel-btn-bgc);
+            border-color: var(--modal-cancel-btn-bc);
+            color: var(--modal-cancel-btn-clr);
+
+            &:hover {
+                border-color: #267dff;
+                color: #267dff;
+            }
+
+            &:active {
+                border-color: #0057d9;
+                color: #0057d9;
+            }
+        }
+
+        ::ng-deep .ti3-btn-primary[disabled] {
+            color: var(--color-dark-61-light-c) !important;
+            border-width: 1px !important;
+            border-style: solid !important;
+            border-color: var(--color-dark-31-light-c) !important;
+            background: var(--color-dark-31-light-f5) !important;
+        }
+    }
+}
+
+:host ::ng-deep [type='checkbox'][tiCheckbox][disabled]+.ti3-checkbox .ti3-checkbox-label {
+    color: var(--color-dark-61-light-c) !important;
+}
+
+:host ::ng-deep .intellij-color [type='checkbox'][tiCheckbox][disabled]+.ti3-checkbox .ti3-checkbox-label {
+    color: #4a4a4a !important;
+}
+
+:host ::ng-deep {
+
+    // 勾选时label颜色
+    input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-label {
+        color: var(--inpput-check-lable-color) !important;
+    }
+
+    input[type="radio"][tiRadio]:not(:disabled):not(:checked)+.ti3-radio .ti3-radio-label {
+        color: var(--inpput-notcheck-lable-color) !important;
+    }
+
+    input[type='radio'][tiRadio] + .ti3-radio {
+        margin-right: 40px;
+    }
+}
+
+.config-modal {
+  .mask-container {
+      color: var(--font-d-aaaaaa-l-222222);
+      .saveAs {
+          height: auto;
+          display: flex;
+          flex-direction: row;
+      
+          .save-label {
+              padding-right: 20px;
+              line-height: 30px;
+          }
+      
+          .formArea {
+              position: relative;
+              left: 0;
+      
+              .save-item {
+                  position: relative;
+            
+                  .suffix {
+                      position: absolute;
+                      top: 4px;
+                      left: 404px;
+                      width: 100%;
+                      font-size: 14px;
+                      color: var(--font-d-aaaaaa-l-979797);
+                  }
+          
+                  &::ng-deep .ti3-validate-text {
+                      color: #ED4B4B
+                  }
+              }
+          }
+      }
+  }
+}
+
+
+.content-title {
+    .softPackUpload {
+        display: flex;
+        height: 18px;
+        line-height: 20px;
+        margin-top: 14px;
+    }
+}
+
+::ng-deep .form-content .ti3-error-icon{
+    position: relative;
+}

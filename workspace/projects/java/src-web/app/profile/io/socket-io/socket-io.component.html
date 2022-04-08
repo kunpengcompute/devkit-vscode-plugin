@@ -1,0 +1,373 @@
+<div class="control">
+  <div style="display: flex;">
+    <div>
+      <button class="control-button" tiButton type="button" color="primary" (click)="onControlAnalysis()"
+        [disabled]="startBtnDisabled || snapShot" class="ioBtn">
+        {{ !beginFileIo ? i18n.io.beginFileIo : i18n.io.endFileIo }}
+      </button>
+      <img [tiTip]="socketIoBtnTip" tiTipPosition="right"
+        style="position: relative;top: 4px; width: 12px; height: 12px;margin: 0 24px 0 10px;"
+        src="./assets/img/newSvg/hollowTip.svg" alt="">
+    </div>
+    <div class="control-value" style="line-height: 28px;">
+      <div class="control-value-title" style="font-size: 14px;">{{i18n.io.threshold}}</div>
+      <ti-formfield class="formList" [formGroup]="socketIOGroup">
+        <ti-item>
+          <ti-spinner class="fileIO-threshold" name="spinner" [format]="threshold.format"
+            [tiRangeValue]="threshold.rangeValue" tiValidation tiRequired
+            [disabled]="startBtnDisabled || snapShot || beginFileIo" (blur)="verifySpinnerValue(socketIOBlur)"
+            formControlName="socketIO_threshold">
+          </ti-spinner>
+        </ti-item>
+      </ti-formfield>
+      <div class="tip"><img [tiTip]='tipStr' style="width: 12px;" tiTipPosition="right"
+          src="./assets/img/newSvg/hollowTip.svg"></div>
+    </div>
+  </div>
+  <div style="position: relative;cursor: pointer;" *ngIf="!snapShot">
+    <div [ngClass]="isDownload?'notSnapshot':'snapshotBg'" (click)="doSnap('pSocketIO')"
+      [tiTip]='i18n.snapshot_analysis_content1' tiTipMaxWidth="221px" [tiTipContext]='tip1Context'
+      tiTipPosition='top-right'></div>
+    <span [ngClass]="isDownload?'count_disabled':'red_count'" *ngIf="snapCount > 0">{{snapCount}}</span>
+  </div>
+</div>
+<div *ngIf="srcDataTable.data.length === 0" class="nodata-io">
+  <div *ngIf="!beginFileIo">
+    <img class='newNoData' src="./assets/img/projects/noData.svg" />
+  </div>
+  <div class="analyz-svg" *ngIf="beginFileIo">
+    <img class="browser-img" src="./assets/img/profiling/browserPreview.gif">
+  </div>
+  <p>
+    {{ beginFileIo ? i18n.profileNoData.socketIo2 : noDadaInfo }}
+  </p>
+</div>
+<div *ngIf="srcDataTable.data.length!==0">
+  <div class="file-io">
+    <div class="table">
+      <div class="table-content">
+        <div class="search-box">
+          <ti-searchbox class="search" [placeholder]="searchValue.placeholder" (clear)="searchClear($event)"
+            (search)="keySearch($event)" [(ngModel)]="searchValue.value"></ti-searchbox>
+        </div>
+        <ti-table [(displayedData)]="displayedTable" [srcData]="srcDataTable" [columns]="columnsTable"
+          [searchWords]="searchWords" [searchKeys]="searchKeys" [closeOtherDetails]="closeOtherDetails" tiColsResizable>
+          <div class="ti3-table-fixed-head ">
+            <table>
+              <thead>
+                <tr>
+                  <ng-container *ngFor="let column of columnsTable; let idx = index">
+                    <th width="{{ column.width }}">
+                      <ti-cell-text>
+                        {{ column.title }}
+                        <span *ngIf="idx == 1" style="vertical-align: middle;">
+                          <span>{{'(' + spinnerValue + ')'}}</span>
+                          <img src="./assets/img/home/tableFilter.svg" alt="" [tiTip]="configTwo" />
+                        </span>
+                      </ti-cell-text>
+                      <ti-head-sort *ngIf="column.isSort" [sortKey]="column.sortKey"></ti-head-sort>
+                    </th>
+                  </ng-container>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="ti3-table-container ti3-resize-wrapper"
+            [ngStyle]="{'height': expand ? '520px' : '240px', 'min-height': '240px'}">
+            <table>
+              <thead>
+                <tr [ngStyle]="{ opacity: 0 }">
+                  <ng-container *ngFor="let column of columnsTable; let idx = index">
+                    <th width="{{ column.width }}"></th>
+                  </ng-container>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- 第一级 -->
+                <ng-container *ngFor="let row of displayedTable; index as i">
+                  <tr (click)="handleIpClicked(row, i)"
+                    [ngStyle]="{'background-color': row.showDetails || row.isSelect ? '#F7FAFF' : ''}">
+                    <td style="left: 0px;" tiOverflow width="{{ columnsTable[0].width }}">
+                      <ti-details-icon [row]="row" [index]="i" (beforeToggle)="beforeToggle($event)"></ti-details-icon>
+                      <span style="margin-left: 4px;">{{ row.ip }}</span>
+                    </td>
+                    <td tiOverflow>
+                      {{ onChangeTime(row.duration) }}
+                    </td>
+                    <td width="25%">
+                      <div style="position: relative;">
+                        <span *ngIf="row.count > 0" [ngStyle]="{
+                            width:
+                              (row.count / row.count) * 100 +
+                              '%'
+                          }" class="count-fill"></span>
+                        <span class="count-right">{{row.count | separator}}</span>
+                      </div>
+                    </td>
+                    <td tiOverflow>
+                      {{ row.rCount | separator }}
+                    </td>
+                    <td tiOverflow>
+                      {{ row.wCount | separator }}
+                    </td>
+                    <td tiOverflow>
+                      {{ libService.onChangeUnit(row.rByte) }}
+                    </td>
+                    <td tiOverflow>
+                      {{ libService.onChangeUnit(row.wByte) }}
+                    </td>
+                  </tr>
+                  <!--第二级-->
+                  <ng-container *ngIf="row.showDetails">
+                    <ng-container *ngFor="let subRow of row.children; let idx = index">
+                      <tr (click)="handleHostClicked(subRow, i, idx)"
+                        [ngStyle]="{'background-color': subRow.showDetails || subRow.isSelect ? '#F7FAFF' : 'white'}">
+                        <td style="padding-left: 0px!important;margin-left: 0px!important;position: sticky!important;"
+                          tiOverflow details-icon-column>
+                          <span>
+                            <span class="headbg"></span>
+                            <span class="downicon" (click)="beforeToggleSecond(subRow)">
+                              <img src="./assets/img/projects/expand-down.png"
+                                [ngClass]="{'open': subRow.showDetailsH}">
+                            </span>
+                            <span style="margin-left: 4px;">{{subRow.host}}</span>
+                          </span>
+                        </td>
+                        <td tiOverflow>
+                          {{ onChangeTime(subRow.duration) }}
+                        </td>
+                        <td tiOverflow>
+                          <div style="position: relative;">
+                            <span *ngIf="subRow.count > 0" [ngStyle]="{
+                                width:
+                                  (subRow.count / row.count) * 100 +
+                                  '%'
+                              }" class="count-fill"></span>
+                            <span class="count-right">{{subRow.count | separator}}</span>
+                          </div>
+                        </td>
+                        <td tiOverflow>
+                          {{ subRow.rCount | separator }}
+                        </td>
+                        <td tiOverflow>
+                          {{ subRow.wCount | separator }}
+                        </td>
+                        <td tiOverflow>
+                          {{ libService.onChangeUnit(subRow.rByte) }}
+                        </td>
+                        <td tiOverflow>
+                          {{ libService.onChangeUnit(subRow.wByte) }}
+                        </td>
+                      </tr>
+                      <!--第三级-->
+                      <ng-container *ngIf="subRow.showDetailsH">
+                        <tr *ngFor="let fdRow of subRow.children; let fi = index"
+                          (click)="hanldeFdClicked(fdRow, i, idx, fi)"
+                          [ngStyle]="{'background-color': fdRow.isSelect ? '#F7FAFF' : 'white'}">
+                          <td style="padding-left: 0px!important;margin-left: 0px!important;position: sticky!important;"
+                            tiOverflow>
+                            <span>
+                              <span class="headbgfirst"></span>
+                              <span class="headbgsecond"></span>
+                              <span style="margin-left: 85px;">{{fdRow.fileDes}}</span>
+                            </span>
+                          </td>
+                          <td tiOverflow>
+                            {{ onChangeTime(fdRow.duration) }}
+                          </td>
+                          <td tiOverflow>
+                            <div style="position: relative;">
+                              <span *ngIf="fdRow.count > 0" [ngStyle]="{
+                                  width:
+                                    (fdRow.count / row.count) * 100 +
+                                    '%'
+                                }" class="count-fill"></span>
+                              <span class="count-right">{{fdRow.count | separator}}</span>
+                            </div>
+                          </td>
+                          <td tiOverflow>
+                            {{ fdRow.rCount | separator }}
+                          </td>
+                          <td tiOverflow>
+                            {{ fdRow.wCount | separator }}
+                          </td>
+                          <td tiOverflow>
+                            {{ libService.onChangeUnit(fdRow.rByte) }}
+                          </td>
+                          <td tiOverflow>
+                            {{ libService.onChangeUnit(fdRow.wByte) }}
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </tbody>
+              <tbody *ngIf="displayedTable.length === 0">
+                <tr class="noHover">
+                  <td tiColspan>
+                    <div class="noData">
+                      <img class='newNoData' src="./assets/img/projects/noData.svg" />
+                      <p>{{i18n.common_term_task_nodata}}</p>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <ti-pagination class="pagination-bottom" id="pagination" [(currentPage)]="leftcurrentPage"
+            [pageSize]="leftpageSize" [(totalNumber)]="lefttotalNumber">
+          </ti-pagination>
+        </ti-table>
+      </div>
+      <div class="table-time">
+        <div class="search-box">
+          <ti-searchbox class="search" [placeholder]="searchThreadValue.placeholder" (clear)="threadClear($event)"
+            (search)="threadSearch($event)" [(ngModel)]="searchThreadValue.value"></ti-searchbox>
+        </div>
+        <ti-table [(displayedData)]="displayedTableTime" [srcData]="srcDataTableTime" [columns]="columnsTableTime"
+          [searchWords]="searchThreadWords" [searchKeys]="searchThreadKeys" tiColsResizable>
+          <div class="ti3-table-fixed-head ">
+            <table>
+              <thead>
+                <tr>
+                  <ng-container *ngFor="let column of columnsTableTime;let i = index">
+                    <th width="{{column.width}}">
+                      <ti-cell-text>{{ column.title }}</ti-cell-text>
+                      <ti-head-sort *ngIf="column.isSort" [sortKey]="column.sortKey"></ti-head-sort>
+                      <ti-head-filter *ngIf="column.filter" [options]="column.options" [(ngModel)]="column.selected"
+                        (select)="onTypeSelect()"
+                        [ngClass]="{'ti3-head-filtered': column.selected && column.selected.length}"
+                        [multiple]="column.multiple" [selectAll]="column.selectAll" [searchable]="column.searchable">
+                      </ti-head-filter>
+                    </th>
+                  </ng-container>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="ti3-table-container ti3-resize-wrapper" style="height: 240px"
+            [ngStyle]="{'height': expand ? '520px' : '240px', 'min-height': '240px'}">
+            <table>
+              <thead>
+                <tr [ngStyle]="{'opacity': 0}">
+                  <th *ngFor="let column of columnsTableTime" width="{{ column.width }}"></th>
+                </tr>
+              </thead>
+              <tbody id="gc_activity_body">
+                <ng-container *ngFor="let item of displayedTableTime; let idx = index;">
+                  <tr [ngStyle]="{'background-color': item.isSelect ? '#F7FAFF' : ''}"
+                    (click)="onClickRightTable(item, idx)">
+                    <td tiOverflow>{{ item.threadName }}</td>
+                    <td tiOverflow>{{ item.type }}</td>
+                    <td tiOverflow>{{ item.start }}</td>
+                    <td tiOverflow>{{ libService.onChangeUnit(item.byte) }}</td>
+                    <td tiOverflow>{{ item.rate + ' ' + i18n.common_unit_kibs }}</td>
+                    <td tiOverflow>{{ onChangeTime(item.duration) }}</td>
+                  </tr>
+                </ng-container>
+
+              </tbody>
+              <tbody *ngIf="displayedTableTime.length === 0">
+                <tr class="noHover">
+                  <td tiColspan>
+                    <div class="noData">
+                      <img class='newNoData' src="./assets/img/projects/noData.svg" />
+                      <p>{{i18n.common_term_task_nodata}}</p>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <ti-pagination [ngClass]="{'pagination-bottom-right': !leftState}" class="pagination-bottom" id="pagination"
+            [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber">
+          </ti-pagination>
+        </ti-table>
+      </div>
+      <img (click)="onClickExpand()" class="table-expand" *ngIf="expand"
+        (mouseenter)="libService.onHoverIcon('expand-up')" (mouseleave)="libService.onHoverIcon()"
+        [src]="libService.hoverIcon === 'expand-up' ? './assets/img/home/expand_up_hover.svg' : './assets/img/home/expand_up.svg'">
+      <img (click)="onClickExpand()" class="table-expand" *ngIf="!expand"
+        (mouseenter)="libService.onHoverIcon('expand-down')" (mouseleave)="libService.onHoverIcon()"
+        [src]="libService.hoverIcon === 'expand-down' ? './assets/img/home/expand_down_hover.svg' : './assets/img/home/expand_down.svg'">
+    </div>
+    <div class="echarts">
+      <div class="echarts-title">
+        <span>{{echartsTitle}}</span>
+        <span style="margin-left: 16px;color: #979797;font-size: 16px;">{{currentEchartsIPName}}</span>
+        <span *ngIf="currentEchartsAddrName" style="color: #979797;font-size: 16px;">{{ ' ( ' + currentEchartsAddrName
+          }}
+          <span *ngIf="currentEchartsFdName" style="color: #979797;font-size: 16px;">{{ ' [ ' + currentEchartsFdName + '
+            ] ' }}</span>
+          {{ ' ) ' }}</span>
+      </div>
+      <div class='timeLine'>
+        <app-time-line [timeData]='timeData' (timeLineData)='timeLineData($event)' #ioTimeLine>
+        </app-time-line>
+      </div>
+      <div class="echarts-content">
+        <div class="echarts-label" *ngIf="echartsLabelTop">
+          <div class="echarts-label-top">
+            {{ echartsLabelTop | separator }}{{i18n.common_unit_kibs}}
+          </div>
+          <div class="echarts-label-bottom">
+            {{echartsLabelBottom}}
+          </div>
+        </div>
+        <div id="socketIOEcharts" style="width: 100%;height: 250px;"></div>
+      </div>
+
+    </div>
+    <div class="stack" id="stackData">
+      <div class="config-title">{{ i18n.protalserver_sampling_lock_stack }}
+        <app-stack-tip [depth]="downloadService.downloadItems.pSocketIO.stackDepth"></app-stack-tip>
+      </div>
+      <div class="config-border"></div>
+      <div class="config-tree" id="stackData">
+        <ti-tree *ngIf="stackTranceData.length>0" class="socketIOtree" [data]="stackTranceData" (select)="onSelect($event)">
+          <ng-template let-item let-i="index">
+            <span tiOverflow tiTipPosition="right" style="vertical-align: middle;">
+              <span class="expandAll" *ngIf="!item.expanded  && item.children && item.children.length"
+                (click)="expandAllNode(item)">
+                <img src="./assets/img/profiling/expand.svg">
+              </span>
+              <span class="expandAll" *ngIf="item.expanded && item.children && item.children.length"
+                (click)="expandAllNode(item)">
+                <img src="./assets/img/profiling/noExpand.svg">
+              </span>
+              <span [ngStyle]="{ width: '0px' }" style="
+                  display: inline-block;
+                  min-width: 0.1px;
+                  max-width: 150px;
+                  height: 10px;
+                  background: var(--table-count-bg-color);
+                  margin-right: 5px;
+                "></span>
+              <span style="cursor: pointer; padding-right: 10px;">{{
+                item.label
+                }}</span>
+            </span>
+          </ng-template>
+        </ti-tree>
+        <div *ngIf="stackTranceData.length === 0" class="noData">
+          <img class='newNoData' src="./assets/img/projects/noData.svg" />
+          <p>{{i18n.common_term_task_nodata}}</p>
+        </div>
+      </div>
+      <div class="config-border"></div>
+    </div>
+  </div>
+</div>
+
+<ng-template #configTwo let-context="context">
+  <div class="config_title">{{ i18n.io.fileIo.subDataLimit }}</div>
+  <div class="spinner_content">
+    <div style="margin-right: 7px;">{{ i18n.jdbcpool_config_top }}</div>
+    <ti-spinner class="spinner2" style="width: 150px;" name="spinner2" [min]="spinner.min" [max]="spinner.max"
+      [format]="spinner.format" [(ngModel)]="spinnerValue" [tiRangeValue]="spinner.rangeValue"
+      (ngModelChange)="onModelChange($event)" tiValidation tiRequired [disabled]="startBtnDisabled || snapShot">
+    </ti-spinner>
+  </div>
+</ng-template>

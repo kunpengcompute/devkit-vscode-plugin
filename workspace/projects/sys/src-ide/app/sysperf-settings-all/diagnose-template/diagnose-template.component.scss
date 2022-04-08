@@ -1,0 +1,50 @@
+// 深色
+::ng-deep .vscode-dark {
+    --bg-color-warpper: #161616;
+    --color-form-label: #aaaaaa;
+}
+
+// 浅色
+::ng-deep .vscode-light {
+    --bg-color-warpper: #fff;
+    --color-form-label: #9ea4b3;
+}
+
+:host ::ng-deep #diagnoseTem {
+    display: flex;
+    background-color: var(--bg-color-warpper);
+    .list-warpper {
+        width: 100%;
+        margin-left: 20px;
+        .nodeDetail {
+            margin-top: 20px;
+            margin-left: 14px;
+        }
+
+        table.ti3-form tbody tr {
+            &:hover {
+                background-color: var(--bg-color-warpper) !important;
+            }
+            .ti3-form-content {
+                line-height: var(--ti-formfield-item-required-label-line-height);
+            }
+            td {
+                border-bottom: none !important;
+            }
+        }
+    }
+}
+
+:host ::ng-deep .ti3-form {
+    width: 100%;
+    font-size: 14px;
+    .ti3-form-label,
+    .ti3-text-form-label {
+        width: 25%;
+        color: var(--color-form-label);
+    }
+}
+
+.labelTem {
+    color: var(--color-form-label) !important;
+}

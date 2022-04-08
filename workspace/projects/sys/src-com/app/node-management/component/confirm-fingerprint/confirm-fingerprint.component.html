@@ -1,0 +1,142 @@
+<ng-template #batchModal let-context="context">
+  <ti-modal-header>
+    {{
+      (batchOptTypeEnum.Import === batchOptType
+        ? "nodeManagement.batchImportNodes"
+        : "nodeManagement.batchDeleteNodes"
+      ) | i18n
+    }}
+    <span class="tip-nodeclose" (click)="onCancel($event)">
+      <img class="ti3-close" src="./assets/img/analyzing/images/close_icon.svg" />
+      <img class="ti3-close" src="./assets/img/analyzing/images/close_hover.svg">
+    </span>
+  </ti-modal-header>
+  <ti-modal-body>
+    <div class="warpper-line"></div>
+    <div>
+      <div class="tip">
+        <span class="imgTip"><img src="./assets/img/tip/tip.svg" /></span>
+        <span>{{ "nodeManagement.confirmFp" | i18n }}</span>
+      </div>
+      <div class="tbBox confirm-fingerprint-warpper">
+        <ti-searchbox
+          *ngIf="isShowSearchBox"
+          [(ngModel)]="searchInput"
+          (blur)="hideSearchBox()"
+          (clear)="onClear()"
+          (search)="setSearch($event)"
+          [placeholder]=""
+          [ngStyle]="searchKeys[0] === 'nodeName' ? nodeNameStyle : nodeIpStyle"
+          #tiSearch
+        >
+        </ti-searchbox>
+        <ti-table
+          [(displayedData)]="table.displayed"
+          [srcData]="table.srcData"
+          [columns]="table.columns"
+          [closeOtherDetails]="closeOtherDetails"
+          tiColsResizable
+          class="custemTable"
+          [searchWords]="searchWords"
+          [searchKeys]="searchKeys"
+        >
+          <div class="ti3-table-fixed-head">
+            <table>
+              <thead>
+                <tr>
+                  <th details-icon-column tiOverflow>
+                    <ti-cell-text>{{ table.columns[0].label }} </ti-cell-text>
+                  </th>
+                  <th tiOverflow width="{{ table.columns[1].width }}">
+                    <ti-cell-text
+                      >{{ table.columns[1].label }}
+                      <ti-icon
+                        class="pcie-table-search"
+                        name="search"
+                        (click)="onSearchNode('nodeName')"
+                      ></ti-icon>
+                    </ti-cell-text>
+                  </th>
+                  <th tiOverflow width="{{ table.columns[2].width }}">
+                    <ti-cell-text
+                      >{{ table.columns[2].label }}
+                      <ti-icon
+                        class="pcie-table-search"
+                        name="search"
+                        (click)="onSearchNode('nodeIp')"
+                      ></ti-icon>
+                    </ti-cell-text>
+                  </th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div
+            class="ti3-table-container ti3-resize-wrapper"
+            style="max-height: 345px"
+          >
+            <table>
+              <thead>
+                <tr>
+                  <ng-container *ngFor="let column of table.columns">
+                    <th width="{{ column.width }}"></th>
+                  </ng-container>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let row of table.displayed; index as i">
+                  <tr>
+                    <td details-icon-column>
+                      <ti-details-icon
+                        [row]="row"
+                        [index]="i"
+                        (beforeToggle)="beforeToggle($event)"
+                      >
+                      </ti-details-icon>
+                      <!--详情图标设置，传入行数据-->
+                    </td>
+                    <td tiOverflow width="{{ table.columns[1].width }}">
+                      {{ row.nodeName || "--" }}
+                    </td>
+                    <td tiOverflow width="{{ table.columns[2].width }}">
+                      {{ row.nodeIp || "--" }}
+                    </td>
+                  </tr>
+                  <tr *tiDetailsTr="row">
+                    <td tiColspan class="nested-table-container">
+                      <div class="ti3-table-detail-container">
+                        <app-nested-table
+                          [data]="row.fingerprint"
+                        ></app-nested-table>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+            <!-- 无数据 -->
+            <div class="nodata" *ngIf="!table.displayed.length">
+              <img src="./assets/img/projects/nodata.png" />
+              <div>{{ "common_term_task_nodata" | i18n }}</div>
+            </div>
+          </div>
+          <ti-pagination
+            *ngIf="table.srcData.total > 10"
+            [(currentPage)]="table.srcData.pageNo"
+            [pageSize]="table.srcData.pageSize"
+            [(totalNumber)]="table.srcData.total"
+            [showGotoLink]="true"
+          ></ti-pagination>
+        </ti-table>
+      </div>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" color="primary" (click)="onConfirm($event)" tiButton>
+      {{ "operationLog.confirm" | i18n }}
+    </button>
+    <button type="button" (click)="onCancel($event)" tiButton>
+      {{ "operationLog.cancle" | i18n }}
+    </button>
+  </ti-modal-footer>
+</ng-template>

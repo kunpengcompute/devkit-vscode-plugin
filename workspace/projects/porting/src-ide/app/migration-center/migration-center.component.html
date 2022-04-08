@@ -1,0 +1,83 @@
+<app-banner></app-banner>
+<div class="migration-container">
+    <div class="banner-container">
+        <div class="welcome">
+            <p>{{i18n.plugins_porting_migration_header}}
+                <a target="_blank"
+                    *ngIf="currLang === 'zh-cn'"
+                    (click)="openHyperlinks(pluginUrlCfg.faqFourteenZn)">
+                    <img *ngIf="currTheme == 1" src="./assets/img/icon-help-dark.svg">
+                    <img *ngIf="currTheme == 2" src="./assets/img/icon-help-light.svg">
+                </a>
+                <a target="_blank"
+                *ngIf="currLang === 'en' || currLang === 'en-us'"
+                (click)="openHyperlinks(pluginUrlCfg.faqFourteenEn)">
+                <img *ngIf="currTheme == 1" src="./assets/img/icon-help-dark.svg">
+                <img *ngIf="currTheme == 2" src="./assets/img/icon-help-light.svg">
+            </a>
+            </p>
+            <p class="tip-color">{{i18n.plugins_porting_migration_desc}}</p>
+        </div>
+    </div>
+    <div class="migration-content">
+        <div class="tab">
+            <ul>
+                <li [ngClass]="{'intellij-active': intelliJFlagDef && isClick == index, 'active': !intelliJFlagDef && isClick == index}"
+                    *ngFor="let item of firstSortData;let index = index" (click)="showSecondData(item.key,index)" class="tap-bottom">
+                    {{item.label}}
+                </li>
+            </ul>
+        </div>
+        <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns" tiColsResizable>
+            <div class="ti3-resize-wrapper" [ngClass]="{'intellij':intelliJFlagDef}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th tiOverflow *ngFor="let column of columns" width="{{column.width}}">{{column.title}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of displayed">
+                            <td tiOverflow>{{item.name}}</td>
+                            <td tiOverflow>{{item.version}}</td>
+                            <td *ngIf="currLang == 'zh-cn'" [innerHTML]="item.description_cn" tiOverflow tiTipMaxWidth="550px"></td>
+                            <td *ngIf="currLang != 'zh-cn'" [innerHTML]="item.description_en" tiOverflow tiTipMaxWidth="550px"></td>
+                            <td (click)="showDetail(item)" tiOverflow class="normal-btn">{{i18n.plugins_porting_migration_table_label4_content}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <app-loading *ngIf="displayed.length === 0 && showLoading"></app-loading>
+                <app-default-page *ngIf="displayed.length === 0 && !showLoading"></app-default-page>
+            </div>
+            <ti-pagination *ngIf="totalNumber > 10 && !showLoading" [(currentPage)]="currentPage" [pageSize]="pageSize"
+                [(totalNumber)]="totalNumber" [ngClass]="{'intellij':intelliJFlagDef}">
+            </ti-pagination>
+        </ti-table>
+    </div>
+</div>
+<app-messagebox #migrationTip *ngIf="needFlag" [ngClass]="{'intellij-tip':intelliJFlagDef}">
+    <div class="content tip-box">
+        <div class="tip-title">
+            <span class="title-content">{{i18n.plugins_porting_migration_tip_title}}</span>
+            <img src="./assets/img/install/icon-close.svg" (click)="cancelMsgTip()">
+        </div>
+        <div [ngClass]="{'tip-title-border':!intelliJFlagDef}"></div>
+        <div class="tip-dsc">
+            <img *ngIf="!intelliJFlagDef" src="./assets/img/install/icon-information.png" alt="">
+            <img *ngIf="intelliJFlagDef" src="./assets/img/migration-center/icon-info-intellij.png" alt="">
+            <p>{{i18n.plugins_porting_migration_tip_dsc}}</p>
+        </div>
+        <div class="tip-select"><input type="checkbox" tiCheckbox
+                [(ngModel)]="flag">{{i18n.plugins_porting_migration_tip_option}}
+        </div>
+        <div class="tip-confirm">
+            <button type="button" (click)="confirmMsgTip()" [ngClass]="{'intellij-button': intelliJFlagDef}"
+                [disabled]="!flag">{{i18n.plugins_common_button_term_operate_ok}}</button>
+            <button type="button" (click)="cancelMsgTip()" [ngClass]="{'intellij-cancel': intelliJFlagDef}">
+                {{i18n.plugins_porting_migration_tip_cancel}}</button>
+        </div>
+    </div>
+</app-messagebox>
+<app-messagebox #migrationModal></app-messagebox>

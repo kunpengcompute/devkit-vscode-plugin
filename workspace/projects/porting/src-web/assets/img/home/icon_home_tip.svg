@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>4.组件/2.通用/icon/清除</title>
+    <defs>
+        <path d="M8,1 C11.8659932,1 15,4.13400675 15,8 C15,11.8659932 11.8659932,15 8,15 C4.13400675,15 1,11.8659932 1,8 C1,4.13400675 4.13400675,1 8,1 Z M8.703125,6.825 L7.71875,6.825 L7.5,12.7 L8.9765625,12.7 L8.703125,6.825 Z M8.921875,4.2 L7.5546875,4.2 L7.5546875,5.6765625 L8.921875,5.6765625 L8.921875,4.2 Z" id="path-1"></path>
+    </defs>
+    <g id="dep&amp;port合入" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="源码迁移-全汇编-展开" transform="translate(-417.000000, -498.000000)">
+            <g id="中心内容" transform="translate(390.000000, 415.000000)">
+                <g id="4.组件/5.反馈/2.Alert告警提示/页面级提示/4.提示" transform="translate(10.000000, 70.000000)">
+                    <g id="编组" transform="translate(16.000000, 12.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="形状结合" fill="#3AD53E" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g mask="url(#mask-2)" fill="#0067FF" id="3.颜色/2.成功-安全">
+                            <g>
+                                <rect id="矩形" x="0" y="0" width="16" height="16"></rect>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

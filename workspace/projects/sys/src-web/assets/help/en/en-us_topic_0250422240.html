@@ -1,0 +1,234 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Viewing Analysis Results">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0269716237.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="user guide">
+<meta name="DC.Publisher" content="20210630">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0250422240">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Viewing Analysis Results</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0250422240"></a><a name="EN-US_TOPIC_0250422240"></a>
+
+<h1 class="topictitle1">Viewing Analysis Results</h1>
+<div id="body1590719496407"><div class="section" id="EN-US_TOPIC_0250422240__en-us_topic_0189293077_section11470129119"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0250422240__en-us_topic_0189293077_en-us_topic_0189293076_p5336201013112">A memory access statistics analysis task is complete.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0250422240__section71241582339"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0250422240__ol654731511314"><li id="EN-US_TOPIC_0250422240__li1454719155315"><span>In the <strong id="EN-US_TOPIC_0250422240__en-us_topic_0250279621_b5751437916">Project Management</strong> area, click <span><img id="EN-US_TOPIC_0250422240__en-us_topic_0250279621_image4105155811375" src="en-us_image_0255826439.png"></span> before the target project and analysis task.</span><p><p id="EN-US_TOPIC_0250422240__en-us_topic_0250279621_p198319584430">The node list is displayed.</p>
+</p></li><li id="EN-US_TOPIC_0250422240__li135252039183111"><span>Click the name of the target node to view the analysis result.</span><p><ul id="EN-US_TOPIC_0250422240__ul1126005818328"><li id="EN-US_TOPIC_0250422240__li3260358133212">Click the node name. The <strong id="EN-US_TOPIC_0250422240__b1418201113274">Summary</strong> tab page is displayed by default, as shown in <a href="#EN-US_TOPIC_0250422240__fig1951913614245">Figure 1</a>. For details about the parameters, see <a href="#EN-US_TOPIC_0250422240__table79691052171111">Table 1</a>, <a href="#EN-US_TOPIC_0250422240__table0511719541">Table 2</a>, and <a href="#EN-US_TOPIC_0250422240__table1249114645511">Table 3</a>.<div class="note" id="EN-US_TOPIC_0250422240__note3894133083911"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0250422240__ul14793812216"><li id="EN-US_TOPIC_0250422240__li6605175101617">The <strong id="EN-US_TOPIC_0250422240__b13439144819116">Overview</strong> page displays the summary data of each metric, including the system information, core cache miss, iCache bandwidth, dCache bandwidth, L3 hit rate and bandwidth, TBL miss, and DDR bandwidth.</li><li id="EN-US_TOPIC_0250422240__li17776147391">Click <strong id="EN-US_TOPIC_0250422240__b192001727639">View Average</strong> to view the details of each metric. Click <span><img id="EN-US_TOPIC_0250422240__image93861518131315" src="en-us_image_0000001113958832.png"></span> to switch between the percentage view and MPKI view.</li><li id="EN-US_TOPIC_0250422240__li2482135414351">To collect L3C and DDR data, the operating system must be openEuler (the kernel version must be 4.19 or later) or CentOS 7.6 (the kernel version must be 4.14.0-115.el7a.0.1/4.15 or later). Kunpeng 916 servers do not support collecting L3C and DDR data.</li><li id="EN-US_TOPIC_0250422240__li13811185914010">You can click <span><img id="EN-US_TOPIC_0250422240__image1622017159509" src="en-us_image_0000001113295428.png"></span> in the upper right corner to switch between the sequence diagram and table view.</li></ul>
+</div></div>
+<div class="fignone" id="EN-US_TOPIC_0250422240__fig1951913614245"><a name="EN-US_TOPIC_0250422240__fig1951913614245"></a><a name="fig1951913614245"></a><span class="figcap"><b>Figure 1 </b>Summary tab page</span><br><span><img id="EN-US_TOPIC_0250422240__image17131164314620" src="en-us_image_0000001161659033.png"></span></div>
+<div class="fignone" id="EN-US_TOPIC_0250422240__fig8385154041017"><span class="figcap"><b>Figure 2 </b>Summary tab page – L3</span><br><span><img id="EN-US_TOPIC_0250422240__image1738518405101" src="en-us_image_0000001111153984.png"></span></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0250422240__table79691052171111"></a><a name="table79691052171111"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0250422240__table79691052171111" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Parameters in the System Information area</caption><colgroup><col style="width:22.14%"><col style="width:77.86%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0250422240__row45001815012"><th align="left" class="cellrowborder" valign="top" width="22.14%" id="mcps1.3.2.2.2.2.1.1.9.2.3.1.1"><p id="EN-US_TOPIC_0250422240__p550018151113">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="77.86%" id="mcps1.3.2.2.2.2.1.1.9.2.3.1.2"><p id="EN-US_TOPIC_0250422240__p115006151412">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0250422240__row14451514539"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.1.9.2.3.1.1 mcps1.3.2.2.2.2.1.1.9.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p149756429311">System Information</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row10589729379"><td class="cellrowborder" valign="top" width="22.14%" headers="mcps1.3.2.2.2.2.1.1.9.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p45202056155118">Linux Kernel Version</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.86%" headers="mcps1.3.2.2.2.2.1.1.9.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p147001320115819">Version of the Linux kernel</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row115003151113"><td class="cellrowborder" valign="top" width="22.14%" headers="mcps1.3.2.2.2.2.1.1.9.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p1751575635119">CPU Type</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.86%" headers="mcps1.3.2.2.2.2.1.1.9.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p127001120125812">CPU type.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row155058391634"><td class="cellrowborder" valign="top" width="22.14%" headers="mcps1.3.2.2.2.2.1.1.9.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p19725111571920">NUMA NODE</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.86%" headers="mcps1.3.2.2.2.2.1.1.9.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p1172491571913">NUMA node name.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row16930048737"><td class="cellrowborder" valign="top" width="22.14%" headers="mcps1.3.2.2.2.2.1.1.9.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p1872341501914">NUMA NODE0 CPUS</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.86%" headers="mcps1.3.2.2.2.2.1.1.9.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p772111518191">CPUs on NUMA node 0.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row1499865715319"><td class="cellrowborder" valign="top" width="22.14%" headers="mcps1.3.2.2.2.2.1.1.9.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p2316155921919">NUMA NODE1 CPUS</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.86%" headers="mcps1.3.2.2.2.2.1.1.9.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p187201315181912">CPUs on NUMA node 1.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row56721125317"><td class="cellrowborder" valign="top" width="22.14%" headers="mcps1.3.2.2.2.2.1.1.9.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p6195110142018">NUMA NODE2 CPUS</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.86%" headers="mcps1.3.2.2.2.2.1.1.9.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p6718915121913">CPUs on NUMA node 2.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row276910411538"><td class="cellrowborder" valign="top" width="22.14%" headers="mcps1.3.2.2.2.2.1.1.9.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p157571016202">NUMA NODE3 CPUS</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.86%" headers="mcps1.3.2.2.2.2.1.1.9.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p1271518159190">CPUs on NUMA node 3.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li><li id="EN-US_TOPIC_0250422240__li1470103694310">Click the <strong id="EN-US_TOPIC_0250422240__b87819149133">Cache Access</strong> tab page. The cache access line charts are displayed, as shown in <a href="#EN-US_TOPIC_0250422240__fig6939854172515">Figure 3</a>. For details about the parameters, see <a href="#EN-US_TOPIC_0250422240__table0511719541">Table 2</a>.<div class="note" id="EN-US_TOPIC_0250422240__note162981816204620"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0250422240__ul25821169816"><li id="EN-US_TOPIC_0250422240__li10127711287">On the <strong id="EN-US_TOPIC_0250422240__b6526347123616">Cache Access</strong> tab page, the time sequence data of the access bandwidth and hit rate of L1C, L2C, L3C, and TLB is shown in line charts.</li><li id="EN-US_TOPIC_0250422240__li312711111682">You can specify the CPU and type to view the analysis result line charts of <strong id="EN-US_TOPIC_0250422240__b1686016574346">Bandwidth</strong>, <strong id="EN-US_TOPIC_0250422240__b8987200203520">Hit Rate</strong>, or <strong id="EN-US_TOPIC_0250422240__b16173552352">Hit Bandwidth</strong>.</li><li id="EN-US_TOPIC_0250422240__li231453432418">You can specify the NUMA node and type to view the analysis result line charts of <strong id="EN-US_TOPIC_0250422240__b1279804785320">Bandwidth</strong>, <strong id="EN-US_TOPIC_0250422240__b87991547105310">Hit Rate</strong>, or <strong id="EN-US_TOPIC_0250422240__b479904712533">Hit Bandwidth</strong>.</li><li id="EN-US_TOPIC_0250422240__li56071054101617">Click <span><img id="EN-US_TOPIC_0250422240__image193191254525" src="en-us_image_0000001113959638.png"></span> to filter the number of CPU cores, bandwidth, or hit rate.</li><li id="EN-US_TOPIC_0250422240__li15757195134515">You can click <span><img id="EN-US_TOPIC_0250422240__image14159252204512" src="en-us_image_0000001159866921.png"></span> in the upper right corner to switch between the sequence diagram and table view.</li><li id="EN-US_TOPIC_0250422240__li1664713464177">To collect L3C and DDR data, the operating system must be openEuler (the kernel version must be 4.19 or later) or CentOS 7.6 (the kernel version must be 4.14.0-115.el7a.0.1/4.15 or later). Kunpeng 916 servers do not support collecting L3C and DDR data.</li></ul>
+</div></div>
+<div class="fignone" id="EN-US_TOPIC_0250422240__fig6939854172515"><a name="EN-US_TOPIC_0250422240__fig6939854172515"></a><a name="fig6939854172515"></a><span class="figcap"><b>Figure 3 </b>Cache Access tab page</span><br><span><img id="EN-US_TOPIC_0250422240__image1216227181617" src="en-us_image_0000001161380925.png"></span></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0250422240__table0511719541"></a><a name="table0511719541"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0250422240__table0511719541" frame="border" border="1" rules="all"><caption><b>Table 2 </b>Parameters in the Cache Access area</caption><colgroup><col style="width:22.29%"><col style="width:77.71000000000001%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0250422240__row45177105419"><th align="left" class="cellrowborder" valign="top" width="22.29%" id="mcps1.3.2.2.2.2.1.2.6.2.3.1.1"><p id="EN-US_TOPIC_0250422240__p255775417">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="77.71000000000001%" id="mcps1.3.2.2.2.2.1.2.6.2.3.1.2"><p id="EN-US_TOPIC_0250422240__p1065715541">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0250422240__row126679540"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p3687195412">L1C/L2C/TLB Access Bandwidth and Hit Rate</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row163361848185520"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p18336548185515">CPU</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p1533654875518">Select a CPU ID.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row11985845125520"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p39863456553">Type</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p18986164514559">Select a data type.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row15615716544"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p16463055414">Bandwidth (MB/s)</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p6611717546">Access bandwidth.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row7618715544"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p133130205415">Hit Rate</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p166274544">Access hit rate.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row19614717540"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p11343710145519">L3C Access Bandwidth and Hit Rate</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row48283318141"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p283123331419">NUMA NODE</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p13838338146">Select a NUMA NODE ID.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row127978542"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p1199992912540">Type</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p16280103914020">Access type.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row1693412267554"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p2934226145514">Hit Bandwidth (MB/s)</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p4293239204">Access hit bandwidth.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row589073412558"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p19891934165520">Bandwidth (MB/s)</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p1130373910012">Access bandwidth.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row715514366551"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="EN-US_TOPIC_0250422240__p215573635510">Hit Rate</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="EN-US_TOPIC_0250422240__p63121639307">Access hit rate.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li><li id="EN-US_TOPIC_0250422240__li89732513536">Click the <strong id="EN-US_TOPIC_0250422240__b1265797172118">DDR Access</strong> tab. The DDR access line charts are displayed, as shown in <a href="#EN-US_TOPIC_0250422240__fig5592161992716">Figure 4</a>. For details about the parameters, see <a href="#EN-US_TOPIC_0250422240__table1249114645511">Table 3</a>.<div class="note" id="EN-US_TOPIC_0250422240__note1531318340915"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0250422240__ul44711289429"><li id="EN-US_TOPIC_0250422240__li183065111918">On the <strong id="EN-US_TOPIC_0250422240__b487601018376">DDR Access</strong> tab page, the time sequence data of the DDR access bandwidth and times is shown in line charts.</li><li id="EN-US_TOPIC_0250422240__li96212129342">In the <strong id="EN-US_TOPIC_0250422240__b185121711553">DDR Access Bandwidth</strong> area, you can specify the NUMA node, DDR channel ID, and type to view the analysis result line charts.</li><li id="EN-US_TOPIC_0250422240__li1068516144348">In the <strong id="EN-US_TOPIC_0250422240__b1527920284556">DDR Access</strong> area, you can specify the NUMA node or type to view the analysis result line charts.</li><li id="EN-US_TOPIC_0250422240__li1570014247268">To collect L3C and DDR data, the operating system must be openEuler (the kernel version must be 4.19 or later) or CentOS 7.6 (the kernel version must be 4.14.0-115.el7a.0.1/4.15 or later). Kunpeng 916 servers do not support collecting L3C and DDR data.</li></ul>
+</div></div>
+<div class="fignone" id="EN-US_TOPIC_0250422240__fig5592161992716"><a name="EN-US_TOPIC_0250422240__fig5592161992716"></a><a name="fig5592161992716"></a><span class="figcap"><b>Figure 4 </b>DDR Access tab page</span><br><span><img id="EN-US_TOPIC_0250422240__image166509961017" src="en-us_image_0305058628.png"></span></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0250422240__table1249114645511"></a><a name="table1249114645511"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0250422240__table1249114645511" frame="border" border="1" rules="all"><caption><b>Table 3 </b>Parameters in the DDR Access area</caption><colgroup><col style="width:9%"><col style="width:15%"><col style="width:76%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0250422240__row22494464555"><th align="left" class="cellrowborder" colspan="2" valign="top" id="mcps1.3.2.2.2.2.1.3.6.2.4.1.1"><p id="EN-US_TOPIC_0250422240__p182491446195517">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" id="mcps1.3.2.2.2.2.1.3.6.2.4.1.2"><p id="EN-US_TOPIC_0250422240__p92491746195510">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0250422240__row10249446105512"><td class="cellrowborder" colspan="3" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="EN-US_TOPIC_0250422240__p824954675514">DDR Access Bandwidth</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row107001229523"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p2070814325216">NUMA NODE</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="EN-US_TOPIC_0250422240__p187087316524">Select a NUMA node ID.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row1224913468552"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p571091219566">DDR Channel ID</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="EN-US_TOPIC_0250422240__p12491346185517">DDR channel ID.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row1024917463552"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p16709812165616">Type</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="EN-US_TOPIC_0250422240__p5249174615518">DDR access type. Possible values are <strong id="EN-US_TOPIC_0250422240__b164973322565">Read DDR</strong> and <strong id="EN-US_TOPIC_0250422240__b193815361564">Write DDR</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row724984675516"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p470812128564">Bandwidth (MB/s)</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="EN-US_TOPIC_0250422240__p42491346165512">DDR access bandwidth.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row1325013462553"><td class="cellrowborder" colspan="3" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="EN-US_TOPIC_0250422240__p2743133315610">DDR Access</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row12250646105516"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p4697101214568">NUMA NODE</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="EN-US_TOPIC_0250422240__p182501346185511">Select a NUMA node ID.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row4250184605517"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p5239103918325">Type</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="EN-US_TOPIC_0250422240__p202395393328">DDR access type. Possible values are <strong id="EN-US_TOPIC_0250422240__b1347135945714">Read DDR</strong> and <strong id="EN-US_TOPIC_0250422240__b95319595570">Write DDR</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row4871152383214"><td class="cellrowborder" rowspan="5" valign="top" width="9%" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p1828153122417">DDR Access</p>
+</td>
+<td class="cellrowborder" valign="top" width="15%" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p1587111233329">Total Accesses/s</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="EN-US_TOPIC_0250422240__p08721923103215">Total number of DDR accesses per second.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row17250134620552"><td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p0692151215565">Local DDR Accesses/s (%)</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p185861150593">Number of local DDR access times per second and the percentage of the number of local DDR access times to the total number of access times.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row156195112563"><td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p136175175614">Cross-Die DDR Accesses/s (%)</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p1458611501597">Number of cross-die DDR access times per second and the percentage of the number of cross-die DDR access times to the total number of access times.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row46454552566"><td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p26451955155617">Cross-Chip DDR Accesses/s (%)</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p85861507920">Number of cross-processor DDR access times per second and the percentage of the number of cross-processor DDR access times to the total number of access times.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422240__row98538581811"><td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p208531458882">DDR Access Times/s (%)</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="EN-US_TOPIC_0250422240__p685723781615">Sum of <strong id="EN-US_TOPIC_0250422240__b1877384963711">Local DDR Accesses/s (%)</strong>, <strong id="EN-US_TOPIC_0250422240__b974072803718">Cross-Die DDR Accesses/s (%)</strong>, and <strong id="EN-US_TOPIC_0250422240__b1965316503814">Cross-Chip DDR Accesses/s (%)</strong>, as well as the percentage of this sum to the total number of access times.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li><li id="EN-US_TOPIC_0250422240__li48715314359">Click the <strong id="EN-US_TOPIC_0250422240__en-us_topic_0250279621_b126915568593">Task Information</strong> tab to view the detailed configuration and sampling information about the task on the current node.<div class="note" id="EN-US_TOPIC_0250422240__en-us_topic_0250279621_note1344019461351"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0250422240__en-us_topic_0250279621_p84406467353">If the task fails to be executed, the failure cause is displayed on the <strong id="EN-US_TOPIC_0250422240__en-us_topic_0250279621_b79600717421">Task Information</strong> tab page.</p>
+</div></div>
+</li><li id="EN-US_TOPIC_0250422240__li82901056564">Click the <strong id="EN-US_TOPIC_0250422240__en-us_topic_0250279621_b111751117509">Task Logs</strong> tab to view the logs about the sampling and analysis processes.</li></ul>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0269716237.html">Memory Access Statistics Analysis</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

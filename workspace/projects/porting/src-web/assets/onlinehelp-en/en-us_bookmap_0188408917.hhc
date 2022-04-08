@@ -1,0 +1,128 @@
+
+<html>
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+   
+<!-- Sitemap 1.0 -->
+</head>
+<body>
+<OBJECT type="text/site properties">
+<param value="0x800025" name="Window Styles">
+<param value="Arial,9,1" name="Font">
+</OBJECT>
+
+<UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Welcome to Kunpeng Porting Advisor Online Help"><param name="Local" value="en-us_topic_0188408913.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Logging In to the Kunpeng Porting Advisor WebUI"><param name="Local" value="en-us_topic_0188408926.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="WebUI Description"><param name="Local" value="en-us_topic_0188408909.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Configuration Before Using the Tool"><param name="Local" value="en-us_topic_0263147772.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Creating a User"><param name="Local" value="en-us_topic_0189814930.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Uploading Files"><param name="Local" value="en-us_topic_0290794906.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Configuring a Proxy"><param name="Local" value="en-us_topic_0290794907.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Configuring Scan Parameters"><param name="Local" value="en-us_topic_0214565774.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Configuring Alarm Thresholds for Historical Reports"><param name="Local" value="en-us_topic_0251744868.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Software Porting Assessment"><param name="Local" value="en-us_topic_0284159759.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Creating an Analysis Task"><param name="Local" value="en-us_topic_0284246214.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Viewing Analysis Results"><param name="Local" value="en-us_topic_0284251757.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Managing Analysis Reports"><param name="Local" value="en-us_topic_0284254025.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Source Code Porting"><param name="Local" value="en-us_topic_0212788391.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Creating an Analysis Task"><param name="Local" value="en-us_topic_0189775177.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Viewing Analysis Results"><param name="Local" value="en-us_topic_0189800507.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Viewing a Porting Report"><param name="Local" value="en-us_topic_0189775178.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Viewing Source Code Porting Suggestions"><param name="Local" value="en-us_topic_0189800508.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Managing Analysis Reports"><param name="Local" value="en-us_topic_0189814929.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Software Package Rebuilding"><param name="Local" value="en-us_topic_0212788399.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Dedicated Software Porting"><param name="Local" value="en-us_topic_0212788392.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Enhanced Functions"><param name="Local" value="en-us_topic_0249523736.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="64-bit Mode Check"><param name="Local" value="en-us_topic_0264880573.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Structure Byte Alignment Check"><param name="Local" value="en-us_topic_0264880574.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Cache Line Alignment Check"><param name="Local" value="en-us_topic_0000001167745920.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Memory Consistency Check"><param name="Local" value="en-us_topic_0292866532.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="User Management"><param name="Local" value="en-us_topic_0189775179.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Resetting a User Password"><param name="Local" value="en-us_topic_0189814931.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Deleting a User"><param name="Local" value="en-us_topic_0189814932.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Log Management"><param name="Local" value="en-us_topic_0243962814.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Log Description"><param name="Local" value="en-us_topic_0254628243.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Operation Log Management"><param name="Local" value="en-us_topic_0237992755.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Run Log Management"><param name="Local" value="en-us_topic_0239539015.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Dependency Dictionary Management"><param name="Local" value="en-us_topic_0220268915.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Restoring the Dependency Dictionary"><param name="Local" value="en-us_topic_0220268917.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Updating the Dependency Dictionary"><param name="Local" value="en-us_topic_0220268918.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Software Porting Template Management"><param name="Local" value="en-us_topic_0220268919.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Restoring a Software Porting Template"><param name="Local" value="en-us_topic_0220268921.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Updating a Software Porting Template"><param name="Local" value="en-us_topic_0220268922.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Weak Password Dictionary Management"><param name="Local" value="en-us_topic_0269630302.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Changing the Login User Password"><param name="Local" value="en-us_topic_0189814933.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Querying the Tool Release Information"><param name="Local" value="en-us_topic_0224501691.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Viewing the Disclaimer"><param name="Local" value="en-us_topic_0251460189.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Web Server Certificate Management"><param name="Local" value="en-us_topic_0251823105.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="CRL Management"><param name="Local" value="en-us_topic_0000001133831864.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Common Operations"><param name="Local" value="en-us_topic_0222610839.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Importing the Root Certificate for Kunpeng Porting Advisor"><param name="Local" value="en-us_topic_0000001132444575.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Identifying Compile Commands Using the Build Tool Configuration File"><param name="Local" value="en-us_topic_0320090988.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="FAQs"><param name="Local" value="en-us_topic_0000001191872229.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Common Software Package Rebuild Failures"><param name="Local" value="en-us_topic_0222610840.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Common Issues of Dependency Dictionary Management"><param name="Local" value="en-us_topic_0000001188634639.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Common Issues in Software Porting Template Management"><param name="Local" value="en-us_topic_0000001142714726.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="File Scanning Permissions"><param name="Local" value="en-us_topic_0000001188754467.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Yum Commands Cannot Be Executed During Dedicated Software Porting"><param name="Local" value="en-us_topic_0000001155123910.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Task Timed Out"><param name="Local" value="en-us_topic_0000001205475985.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Failed to Compile Source Code After a Quick Fix Upon a Memory Consistency Check"><param name="Local" value="en-us_topic_0000001202657509.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI></UL>
+</body>
+</html>

@@ -1,0 +1,366 @@
+<div>
+  <div class="btn-header">
+    <img (mouseenter)="onContrastHoverList('hover')" (mouseleave)="onContrastHoverList()" [src]="ContrastHover==='hover' ?
+            './assets/img/newSvg/back_hover.svg':
+            './assets/img/projects/back.svg'" alt="" style="cursor: pointer;margin-right: 10px;" (click)="goBack()"
+      [tiTip]="i18n.profileMemorydump.histogram.common_term_back" />
+    <span class="pro-title">
+      <span class="pro_text">
+        <span class="pro_text_img"><img src="./assets/img/newSvg/Bsnap.svg" alt=""></span>
+        <span>{{i18n.squareBracketL}}{{snapshotB}}{{i18n.squareBracketR}}</span>
+      </span>
+      <span class="toggleSnapshot" (click)="toggleSnapshot()">
+        <img src="./assets/img/newSvg/toggle_clicked.svg" alt="">
+      </span>
+      <span class="pro_text">
+        <span class="pro_text_img"><img src="./assets/img/newSvg/Asnap.svg" alt=""></span>
+        <span>{{i18n.squareBracketL}}{{snapshotA}}{{i18n.squareBracketR}}{{i18n.profileMemorydump.snapShot.snapshotContrast}}</span>
+      </span>
+    </span>
+    <span class="formula_text">
+      <span>{{i18n.profileMemorydump.snapShot.formulaSnapshot}}</span>
+      <span class="formula_text_img">
+        <img src="./assets/img/newSvg/Bsnap.svg" alt="">
+      </span>
+      <span>{{i18n.profileMemorydump.snapShot.subtracted}}</span>
+      <span class="formula_text_img">
+        <img src="./assets/img/newSvg/Asnap.svg" alt="">
+      </span>
+    </span>
+  </div>
+  <div class="jdbcpool">
+    <div class="head">
+      <div class="control">
+        <div class="visible-type">
+          <div class="visible-type-label">{{ i18n.jdbcpool.visibleType }}</div>
+          <ti-select style="width: 200px; margin-left: 16px;height: 32px;" [options]="typeOptions"
+            [(ngModel)]="typeSelected" id="myselect">
+          </ti-select>
+        </div>
+      </div>
+    </div>
+    <div class="jdbcpool-table" [ngStyle]="{ display: typeSelected.value === 'form' ?'block':'none' }"
+      *ngIf="srcDataTable.data.length !== 0">
+      <ti-table [(displayedData)]="displayedTable" [srcData]="srcDataTable" [columns]="columnsTable"
+        style="border-left: none !important;overflow-x: auto;width: 100%">
+        <div class="ti3-table-fixed-head" style="overflow-y:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th tiColumnFixed='left' details-icon-column class="setfirsttd">
+                </th>
+                <ng-container *ngFor="let column of columnsTable; let idx = index">
+                  <th [tiColumnFixed]="column.fixed" width="{{ column.width }}" tiOverflow
+                    *ngIf="column.show || column.show === undefined">
+                    <ti-cell-text>{{ column.title }}
+                      <span *ngIf="idx == 1"><span style="margin-right: 5px;">{{i18n.common_term_java_parentheses_left}}{{ spinnerValue }}{{i18n.common_term_java_parentheses_right}}</span><img
+                          src="./assets/img/home/tableFilter.svg" alt="" [tiTip]="configTwo"
+                          [tiTipContext]="tipContext" /></span>
+                    </ti-cell-text>
+                    <ti-head-sort *ngIf="column.isSort" [sortKey]="column.sortKey"></ti-head-sort>
+                  </th>
+                </ng-container>
+                <th tiColumnFixed='right' width="20px">
+                  <span>
+                    <ti-cols-toggle style="float:right;" [searchable]="searchable" [panelWidth]="panelWidth"
+                      [selectAll]="selectAll" [tipPosition]='tipPosition' [disabled]="disabled"
+                      (select)="onSelectToggle($event)">
+                    </ti-cols-toggle>
+                  </span>
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="ti3-table-container ti3-resize-wrapper" style="height: 300px;">
+          <table>
+            <thead>
+              <tr [ngStyle]="{ opacity: 0 }">
+                <th details-icon-column></th>
+                <ng-container *ngFor="let column of columnsTable; let idx = index">
+                  <th *ngIf="column.show || column.show === undefined" style="height: 0px;" tiOverflow
+                    width="{{ column.width }}"></th>
+                </ng-container>
+                <th style="height: 0px;width: 20px;" tiColumnFixed='right' tiOverflow></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!--???-->
+              <ng-container *ngFor="let row of displayedTable; index as i">
+                <tr [ngStyle]="{
+                      'background-color':
+                      row.showDetails || row.isSelect ?
+                      '#F7FAFF' : ''
+                      }">
+                  <td tiColumnFixed='left' class="setfirsttd" details-icon-column>
+                    <ti-details-icon [row]="row" [index]="i" (beforeToggle)="beforeToggle($event)">
+                    </ti-details-icon>
+                  </td>
+                  <td tiColumnFixed='left' tiOverflow width="{{ columnsTable[0].width }}">
+                    <span>{{ row.linkId || "--" }}</span>
+                  </td>
+                  <td tiOverflow width="{{ columnsTable[1].width }}">
+                    <span>{{ row.url || "--" }}</span>
+                  </td>
+                  <td tiOverflow width="{{ columnsTable[2].width }}" *ngIf="columnsTable[2].show">
+                    <span *ngIf="row.own==='A'">--</span>
+                    <span *ngIf="row.own==='A&B' || row.own==='B'">{{ row.startTime || "--" }}</span>
+                  </td>
+                  <td tiOverflow width="{{ columnsTable[3].width }}" *ngIf="columnsTable[3].show">
+                    <span *ngIf="row.own==='A'">--{{i18n.profileMemorydump.snapShot.onlyASnapshot}}</span>
+                    <span *ngIf="row.own==='B'">--{{i18n.profileMemorydump.snapShot.onlyBSnapshot}}</span>
+                    <span *ngIf="row.own==='A&B'">{{ row.compare.startTime || "--" }}</span>
+                  </td>
+                  <td tiOverflow width="{{ columnsTable[4].width }}" *ngIf="columnsTable[4].show">
+                    <span *ngIf="row.own==='A'">--</span>
+                    <span *ngIf="row.own==='A&B' || row.own==='B'">{{ row.endTime || "--" }}</span>
+                  </td>
+                  <td tiOverflow width="{{ columnsTable[5].width }}" *ngIf="columnsTable[5].show">
+                    <span *ngIf="row.own==='A'">--{{i18n.profileMemorydump.snapShot.onlyASnapshot}}</span>
+                    <span *ngIf="row.own==='B'">--{{i18n.profileMemorydump.snapShot.onlyBSnapshot}}</span>
+                    <span *ngIf="row.own==='A&B'">{{ row.compare.endTime || "--" }}</span>
+                  </td>
+                  <td tiOverflow width="{{ columnsTable[6].width }}" *ngIf="columnsTable[6].show">
+                    <span *ngIf="row.own==='A'">--</span>
+                    <span *ngIf="row.own==='A&B' || row.own==='B'">{{ row.count }}</span>
+                  </td>
+                  <td tiOverflow width="{{ columnsTable[7].width }}" *ngIf="columnsTable[7].show">
+                    <span *ngIf="row.own==='A'">--{{i18n.profileMemorydump.snapShot.onlyASnapshot}}</span>
+                    <span *ngIf="row.own==='B'">--{{i18n.profileMemorydump.snapShot.onlyBSnapshot}}</span>
+                    <span *ngIf="row.own==='A&B'">
+                      <span *ngIf="row.compare.Ccount>= 0" class="count-fill-red">
+                        <span>+</span>
+                        <span>{{ row.compare.Ccount }}</span>
+                      </span>
+                      <span *ngIf="row.compare.Ccount<0" class="count-fill-greed">
+                        <span>{{ row.compare.Ccount }}</span>
+                      </span>
+                    </span>
+                  </td>
+                  <td tiOverflow width="{{ columnsTable[8].width }}" *ngIf="columnsTable[8].show">
+                    <span *ngIf="row.own==='A'">--</span>
+                    <span *ngIf="row.own==='A&B' || row.own==='B'">{{ row.duration + "ms" }}</span>
+                  </td>
+                  <td tiOverflow width="{{ columnsTable[9].width }}" *ngIf="columnsTable[9].show">
+                    <span *ngIf="row.own==='A'">--{{i18n.profileMemorydump.snapShot.onlyASnapshot}}</span>
+                    <span *ngIf="row.own==='B'">--{{i18n.profileMemorydump.snapShot.onlyBSnapshot}}</span>
+                    <span *ngIf="row.own==='A&B'">
+                      <span *ngIf="row.compare.Cduration>= 0" class="count-fill-red">
+                        <span>+</span>
+                        <span>{{ row.compare.Cduration + "ms" }}</span>
+                      </span>
+                      <span *ngIf="row.compare.Cduration<0" class="count-fill-greed">
+                        <span>{{ row.compare.Cduration + "ms" }}</span>
+                      </span>
+                    </span>
+                  </td>
+                  <td width="20px"></td>
+                </tr>
+                <!--??-->
+                <ng-container *ngIf="row.showDetails">
+                  <tr *ngFor="let subRow of currentFdTableListTop ; let idx=index" (click)="onClickTableRow(subRow)"
+                    [ngStyle]="{
+                        'background-color': subRow.isSelect
+                          ? '#F7FAFF'
+                          : ''
+                      }">
+                    <td tiColumnFixed='left'
+                      style="border-right: solid 2px #0067ff;border-bottom:hidden!important;background: #f5f9ff;"></td>
+                    <td tiColumnFixed='left' tiOverflow width="{{ columnsTable[0].width }}">
+                      <span>{{ subRow["sessId"] }}</span>
+                    </td>
+                    <td tiOverflow width="{{ columnsTable[1].width }}">
+                      <span>{{ subRow["url"] }}</span>
+                    </td>
+                    <td tiOverflow width="{{ columnsTable[2].width }}" *ngIf="columnsTable[2].show">
+                      <span *ngIf="subRow.own==='A'">--</span>
+                      <span *ngIf="subRow.own==='A&B' || subRow.own==='B'">{{ handleTimeFormat(subRow["startTime"])
+                        }}</span>
+                    </td>
+                    <td tiOverflow width="{{ columnsTable[3].width }}" *ngIf="columnsTable[3].show">
+                      <span *ngIf="subRow.own==='A'">--{{i18n.profileMemorydump.snapShot.onlyASnapshot}}</span>
+                      <span *ngIf="subRow.own==='B'">--{{i18n.profileMemorydump.snapShot.onlyBSnapshot}}</span>
+                      <span *ngIf="subRow.own==='A&B'">
+                        <span *ngIf="subRow.compare['startTime']>= 0" class="count-fill-red">
+                          <span>+</span>
+                          <span>{{ subRow.compare["startTime"] }}</span>
+                        </span>
+                        <span *ngIf="subRow.compare['startTime']<0" class="count-fill-greed">
+                          <span>{{ subRow.compare["startTime"] }}</span>
+                        </span>
+                      </span>
+                    </td>
+                    <td tiOverflow width="{{ columnsTable[4].width }}" *ngIf="columnsTable[4].show">
+                      <span *ngIf="subRow.own==='A'">--</span>
+                      <span *ngIf="subRow.own==='A&B' || subRow.own==='B'">{{ handleTimeFormat(subRow["endTime"])
+                        }}</span>
+                    </td>
+                    <td tiOverflow width="{{ columnsTable[5].width }}" *ngIf="columnsTable[5].show">
+                      <span *ngIf="subRow.own==='A'">--{{i18n.profileMemorydump.snapShot.onlyASnapshot}}</span>
+                      <span *ngIf="subRow.own==='B'">--{{i18n.profileMemorydump.snapShot.onlyBSnapshot}}</span>
+                      <span *ngIf="subRow.own==='A&B'">
+                        <span *ngIf="subRow.compare['endTime']>= 0" class="count-fill-red">
+                          <span>+</span>
+                          <span>{{ subRow.compare["endTime"] }}</span>
+                        </span>
+                        <span *ngIf="subRow.compare['endTime']<0" class="count-fill-greed">
+                          <span>{{ subRow.compare["endTime"] }}</span>
+                        </span>
+                      </span>
+                    </td>
+                    <td tiOverflow width="{{ columnsTable[6].width }}" *ngIf="columnsTable[6].show">
+                      <span *ngIf="subRow.own==='A'">--</span>
+                      <span *ngIf="subRow.own==='A&B' || subRow.own==='B'">{{ subRow["count"] }}</span>
+                    </td>
+                    <td tiOverflow width="{{ columnsTable[7].width }}" *ngIf="columnsTable[7].show">
+                      <span *ngIf="subRow.own==='A'">--{{i18n.profileMemorydump.snapShot.onlyASnapshot}}</span>
+                      <span *ngIf="subRow.own==='B'">--{{i18n.profileMemorydump.snapShot.onlyBSnapshot}}</span>
+                      <span *ngIf="subRow.own==='A&B'">
+                        <span *ngIf="subRow.compare['Ccount']>= 0" class="count-fill-red">
+                          <span>+</span>
+                          <span>{{ subRow.compare["Ccount"] }}</span>
+                        </span>
+                        <span *ngIf="subRow.compare['Ccount']<0" class="count-fill-greed">
+                          <span>{{ subRow.compare["Ccount"] }}</span>
+                        </span>
+                      </span>
+                    </td>
+                    <td tiOverflow width="{{ columnsTable[8].width }}" *ngIf="columnsTable[8].show">
+                      <span *ngIf="subRow.own==='A'">--</span>
+                      <span *ngIf="subRow.own==='A&B' || subRow.own==='B'">{{ subRow["duration"] + "ms" }}</span>
+                    </td>
+                    <td tiOverflow width="{{ columnsTable[9].width }}" *ngIf="columnsTable[9].show">
+                      <span *ngIf="subRow.own==='A'">--{{i18n.profileMemorydump.snapShot.onlyASnapshot}}</span>
+                      <span *ngIf="subRow.own==='B'">--{{i18n.profileMemorydump.snapShot.onlyBSnapshot}}</span>
+                      <span *ngIf="subRow.own==='A&B'">
+                        <span *ngIf="subRow.compare['Cduration']>= 0" class="count-fill-red">
+                          <span>+</span>
+                          <span>{{ subRow.compare["Cduration"] }}</span>
+                        </span>
+                        <span *ngIf="subRow.compare['Cduration']<0" class="count-fill-greed">
+                          <span>{{ subRow.compare["Cduration"] }}</span>
+                        </span>
+                      </span>
+                    </td>
+                    <td width="20px"></td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </ti-table>
+    </div>
+    <div class="jdbcpool-echarts" [ngStyle]="{ display: typeSelected.value === 'view' ?'block':'none' }"
+      *ngIf="srcDataTable.data.length !== 0">
+      <div class="profile-echarts">
+        <div class="right-legend">
+          <div class="green-legend">
+            <span class="write circle"></span><span>{{ i18n.jdbcpool.idleWaiting }}</span>
+          </div>
+          <div class="green-legend">
+            <span class="green circle"></span><span>{{ this.i18n.profileMemorydump.snapShot.jdbcpool.AnormalRun
+              }}</span>
+          </div>
+          <div class="green-legend">
+            <span class="red circle"></span><span>{{ this.i18n.profileMemorydump.snapShot.jdbcpool.AthresholdAlert
+              }}</span>
+          </div>
+          <div class="green-legend">
+            <span class="blue circle"></span><span>{{ this.i18n.profileMemorydump.snapShot.jdbcpool.BnormalRun }}</span>
+          </div>
+          <div>
+            <span class="orange circle"></span><span>{{ this.i18n.profileMemorydump.snapShot.jdbcpool.BthresholdAlert
+              }}</span>
+          </div>
+        </div>
+        <div class="box-echarts">
+          <div class="echart" id="echartId">
+            <div class="link-position">{{ i18n.jdbcpool.linkId }}</div>
+            <div class="mychart" id="main" echarts [options]="echartsOption" [merge]="updateOptions"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stack" *ngIf="srcDataTable.data.length !== 0">
+      <div class="jdbcpool-tack" style="margin-right: 16px;">
+        <div class="config-title">
+          {{ i18n.protalserver_sampling_lock_stack
+          }}<span style="color: #6c7280;">{{i18n.common_term_java_parentheses_left}}{{ i18n.jdbcpool.beginTime }}{{i18n.common_term_java_parentheses_right}}</span>
+          <app-stack-tip [depth]="downloadService.downloadItems.jdbcpool.stackDepth"></app-stack-tip>
+        </div>
+        <div class="config-border"></div>
+        <div style="width: 100%;min-width: 300px;">
+          <ti-tree class="begin-tree" [data]="stackTranceData" (select)="onSelect($event)">
+            <ng-template let-item let-i="index">
+              <span tiOverflow tiTipPosition="right" style="vertical-align: middle;">
+                <span class="expandAll" *ngIf="!item.expanded && item.children && item.children.length"
+                  (click)="expandAllNode(item,0)"><img src="./assets/img/profiling/expand.svg"></span>
+                <span class="expandAll" *ngIf="item.expanded && item.children && item.children.length"
+                  (click)="expandAllNode(item,0)"><img src="./assets/img/profiling/noExpand.svg"></span>
+                <span [ngStyle]="{ width: item.count + 'px' }" style="
+                        display: inline-block;
+                        min-width: 1px;
+                        max-width: 5px;
+                        height: 10px;
+                        background: #6c92fa;
+                        margin-right: 5px;
+                      "></span>
+                <span style="cursor: pointer; padding-right: 10px;">{{
+                  item.label
+                  }}</span>
+              </span>
+            </ng-template>
+          </ti-tree>
+        </div>
+      </div>
+      <div class="jdbcpool-tack">
+        <div class="config-title">
+          {{ i18n.protalserver_sampling_lock_stack
+          }}<span style="color: #6c7280;">{{i18n.common_term_java_parentheses_left}}{{ i18n.jdbcpool.endTime }}{{i18n.common_term_java_parentheses_right}}</span>
+          <app-stack-tip [depth]="downloadService.downloadItems.jdbcpool.stackDepth"></app-stack-tip>
+        </div>
+        <div class="config-border"></div>
+        <div style="width: 100%;min-width: 300px;">
+          <ti-tree class="end-tree" [data]="stackTranceDataEnd" (select)="onSelect($event)">
+            <ng-template let-item let-i="index">
+              <span tiOverflow tiTipPosition="right" style="vertical-align: middle;">
+                <span class="expandAll" *ngIf="!item.expanded && item.children && item.children.length"
+                  (click)="expandAllNode(item,1)"><img src="./assets/img/profiling/expand.svg"></span>
+                <span class="expandAll" *ngIf="item.expanded && item.children && item.children.length"
+                  (click)="expandAllNode(item,1)"><img src="./assets/img/profiling/noExpand.svg"></span>
+                <span [ngStyle]="{ width: item.count + 'px' }" style="
+                        display: inline-block;
+                        min-width: 1px;
+                        max-width: 5px;
+                        height: 10px;
+                        background: #6c92fa;
+                        margin-right: 5px;
+                      "></span>
+                <span style="cursor: pointer; padding-right: 10px;">{{
+                  item.label
+                  }}</span>
+              </span>
+            </ng-template>
+          </ti-tree>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="srcDataTable.data.length === 0" class="newNoData-box">
+      <img class='newNoData' src="./assets/img/projects/noData.svg" />
+      <div class="newNoData-text">
+        {{ beginFileIo ? i18n.profileNoData.jdbcPoolNoDataMsg2 : noDataMsg }}</div>
+    </div>
+    <ng-template #configTwo let-context="context">
+      <div class="config_title">{{ i18n.jdbcpool_config_title }}</div>
+      <div class="spinner_content">
+        <div style="margin-right: 7px;">{{ i18n.jdbcpool_config_top }}</div>
+        <ti-spinner class="spinner2" style="width: 150px;" name="spinner2" [min]="spinner.min" [max]="spinner.max"
+          [format]="spinner.format" [(ngModel)]="spinnerValue" [tiRangeValue]="spinner.rangeValue"
+          (ngModelChange)="onModelChange($event)" tiValidation tiRequired [disabled]="startBtnDisabled || snapShot">
+        </ti-spinner>
+      </div>
+    </ng-template>
+  </div>
+
+</div>

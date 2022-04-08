@@ -1,0 +1,49 @@
+::ng-deep {
+  :root {
+    --textarea-disable-color: #cccccc;
+    --textarea-disable-border: #cccccc;
+    --textarea-disable-background: #f5f5f5;
+  }
+  .vscode-dark #appParamsForm {
+    --textarea-disable-color: #616161;
+    --textarea-disable-border: #616161;
+    --textarea-disable-background: #313131;
+  }
+  .vscode-dark,
+  .vscode-light {
+    .textarea-params:disabled:hover {
+      border: 1px solid var(--textarea-disable-border) !important;
+    }
+    .textarea-params:focus {
+      outline: 1px solid #0067ff;
+    }
+  }
+}
+
+#appParamsForm {
+  .bottomTip {
+    height: 18px;
+    align-items: center;
+    font-size: 12px;
+    line-height: 18px;
+    color: #616161;
+    margin-top: 8px;
+  }
+  .inputBox {
+    width: 480px;
+  }
+  .textarea-params {
+    width: 480px;
+    height: 84px;
+    box-sizing: border-box;
+    padding: 6px 10px 8px;
+    &:disabled {
+      color: var(--textarea-disable-color) !important;
+      border: 1px solid var(--textarea-disable-border) !important;
+      background-color: var(--textarea-disable-background) !important;
+    }
+  }
+  .appUser {
+    margin-top: 20px;
+  }
+}

@@ -1,0 +1,160 @@
+<div class="fix-container mt-15" style="margin:0">
+    <!-- 说明 -->
+    <div class="version">
+        <p class="title des-title">{{ i18n.plugins_porting_weakCheck.auto_fix.version }}</p>
+        <div class="step" *ngFor="let step of versionStep; let index = index">
+            <div class="step-table-title" (click)="showOperating(step)">
+                <img src="./assets/img/header/arrow_bottom.svg" [ngClass]="{'img-active': step.active}" class="tit-img" />
+                <span>{{ step.label }}</span>
+            </div>
+            <div class="st-content" *ngIf="step.active">
+                <div class="content" [ngStyle]="{' background-color': intellijFlag ? '#313335':'#1e1e1e'}">
+                    <div class="tip">
+                        <img src="./assets/img/home/icon_home_tip.svg" class="tip-img" />
+                        <span style="margin-right: 6px;">{{ i18n.plugins_porting_weakCheck.auto_fix.desc }}</span>
+                        <span>{{ i18n.plugins_porting_weakCheck.auto_fix.question }}</span>
+                    </div>
+                    <div class="table-content ti3-table-container">
+                        <ti-table [(displayedData)]="versionDisplayed" [srcData]="versionSrcData">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th tiOverflow *ngFor="let column of versionColumns" width="{{ column.width }}">{{ column.title }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of versionDisplayed;">
+                                        <td tiOverflow>{{ row.system }}</td>
+                                        <td tiOverflow>{{ row.version }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ti-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 操作步骤 -->
+    <div class="operating">
+        <p class="title">{{ i18n.plugins_porting_weakCheck.auto_fix.operating }}</p>
+        <div class="step" *ngFor="let step of operatingStep; let index = index">
+            <div class="step-table-title">
+                <img src="./assets/img/header/arrow_bottom.svg" [ngClass]="{'img-active': step.active}" class="tit-img"
+                    (click)="showOperating(step)" />
+                <span>{{ step.label }}</span>
+            </div>
+            <div class="step-content" *ngIf="step.active && index == 0">
+                <div class="content">
+                    <ul>
+                        <li>
+                            <div class="title">
+                                {{ i18n.plugins_porting_weakCheck.auto_fix.step1.title_downloadFixComponent }}</div>
+                            <p>{{ i18n.plugins_porting_weakCheck.auto_fix.step1.title_fixComponent }}
+                                <span style="margin-left: 3px; color: #0067ff;">tools/weakconsistency/gccchecker/gcctool.tar.gz</span></p>
+                        </li>
+                        <li>
+                            <div class="title">{{ i18n.plugins_porting_weakCheck.auto_fix.step1.title_decompress }}
+                            </div>
+                            <p>tar xf gcctool.tar.gz</p>
+                            <p>{{ i18n.plugins_porting_weakCheck.auto_fix.step1.title_confirmFiles }}gcctool，gcctool-bin，libstdc++.so.6
+                        </li>
+                        <li>
+                            <div class="title">{{ i18n.plugins_porting_weakCheck.auto_fix.step1.title_setting }}</div>
+                            <p>{{ i18n.plugins_porting_weakCheck.auto_fix.step1.title_setEvn }}export
+                                PATH=/path/to/gcctool/bin:$PATH</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="step-content" *ngIf="step.active && index == 1">
+                <div class="content">
+                    <ul>
+                        <li>
+                            <div class="title">
+                                {{ i18n.plugins_porting_weakCheck.auto_fix.step2.title_downloadGccSourceCode }}</div>
+                            <p>{{ i18n.plugins_porting_weakCheck.auto_fix.step2.title_gccSource }}<a
+                                    (click)="openUrl(pluginUrlCfg.gcc)">
+                                    {{pluginUrlCfg.gcc}}</a>{{ i18n.plugins_porting_weakCheck.auto_fix.step2.title_downloadGcc }}
+                            </p>
+                            <p>{{ i18n.plugins_porting_weakCheck.auto_fix.step2.title_gccPath }}<a
+                                (click)="openUrl(pluginUrlCfg.gccchecker)">
+                                {{pluginUrlCfg.gccchecker}}</a>{{ i18n.plugins_porting_weakCheck.auto_fix.step2.title_dependcyPack }}
+                            </p>
+                        </li>
+                        <li>
+                            <div class="title">{{ i18n.plugins_porting_weakCheck.auto_fix.step2.title_applyGcc }}</div>
+                            <div class="desc">
+                                <img src="./assets/img/home/icon_home_tip.svg"
+                                    class="tip-img" /><span>{{ i18n.plugins_porting_weakCheck.auto_fix.desc }}</span>
+                                <div class="desc-content" style="padding-left: 21px;font-size: 14px;">
+                                    <p>{{ i18n.plugins_porting_weakCheck.auto_fix.step2.title_installFirst }}</p>
+                                    <p class="spec">
+                                        {{ i18n.plugins_porting_weakCheck.auto_fix.step2.title_debian }}apt install
+                                        patch</p>
+                                    <p class="spec">
+                                        {{ i18n.plugins_porting_weakCheck.auto_fix.step2.title_radhat }}yum install
+                                        patch</p>
+                                    <p>cd /gcc/source/root/dir</p>
+                                    <p>patch -p1 < /path/to/gcc/patch/file</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="title">{{ i18n.plugins_porting_weakCheck.auto_fix.step2.title_compileGcc }}
+                            </div>
+                            <p>{{ i18n.plugins_porting_weakCheck.auto_fix.step2.title_gccTips }}<a
+                                (click)="openUrl(pluginUrlCfg.gunIndex)">
+                                {{ i18n.plugins_porting_weakCheck.auto_fix.step2.title_GNU }}</a>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 使用 -->
+    <div class="use">
+        <p class="title">{{ i18n.plugins_porting_weakCheck.auto_fix.use.title }}</p>
+        <div class="step-one step">
+            <p class="font-14">{{ i18n.plugins_porting_weakCheck.auto_fix.use.title_1 }}</p>
+            <div class="step-container">
+                <ul>
+                    <li>{{ i18n.plugins_porting_weakCheck.auto_fix.use.title_tips }}</li>
+                    <li>export HW_DEBUG=[ 0 | 1 | 2 ]</li>
+                    <li>{{ i18n.plugins_porting_weakCheck.auto_fix.use.title_level0 }}</li>
+                    <li>{{ i18n.plugins_porting_weakCheck.auto_fix.use.title_level1 }}</li>
+                    <li>{{ i18n.plugins_porting_weakCheck.auto_fix.use.title_level2 }}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="step">
+            <p class="font-14">{{ useList.title }}</p>
+            <div class="step-container">
+                <ul *ngIf="!useList.active">
+                    <li>
+                        <span>{{ i18n.plugins_porting_weakCheck.auto_fix.use.title_2_subTitle }}</span>
+                        <a class="click-link text-btn" (click)="useList.active = !useList.active">{{ i18n.plugins_porting_weakCheck.auto_fix.use.link }}</a>
+                    </li>
+                </ul>
+                <ul *ngIf="useList.active" class="use-active">
+                    <li *ngFor="let content of useList.contentList; let index = index">
+                        <p class="active-title">{{ content.title }}</p>
+                        <p *ngFor="let detail of content.detailList; let i = index" [ngClass]="{'text-indent': index === 2 && i}">
+                            <span class="detail-title">{{ detail }}</span>
+                        </p>
+                    </li>
+                    <a class="click-link text-btn" (click)="useList.active = !useList.active">{{ i18n.plugins_porting_weakCheck.auto_fix.use.hide_guide }}</a>
+                </ul>
+            </div>
+        </div>
+        <div class="step-two step">
+            <p class="font-14">{{ i18n.plugins_porting_weakCheck.auto_fix.use.title_compile }}</p>
+            <div class="step-container">
+                <ul>
+                    <li>{{ i18n.plugins_porting_weakCheck.auto_fix.use.title_compile_content }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

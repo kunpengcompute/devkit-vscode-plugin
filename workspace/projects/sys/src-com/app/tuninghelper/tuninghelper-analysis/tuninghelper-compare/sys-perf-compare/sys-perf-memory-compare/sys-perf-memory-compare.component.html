@@ -1,0 +1,114 @@
+<div class="sys-perf-memory-compare">
+    <div class="part">
+        <div>{{'net_io.memory_usage' | i18n}}</div>
+        <app-common-table [commonTableData]="memoryUsageInfo" [isFilters]="false">
+            <ng-template let-displayed let-tabcolumns="columns">
+                <tbody>
+                    <ng-container *ngFor="let row of displayed;">
+                        <tr>
+                            <ng-container *ngFor="let column of tabcolumns;">
+                                <td tiOverflow>{{ row[column.key] | thousandSeparator }}</td>
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </ng-template>
+        </app-common-table>
+    </div>
+    <div class="part">
+        <div>{{'sysPerfDetailed.statistics' | i18n}}</div>
+        <app-common-table [commonTableData]="statisticsInfo" [isFilters]="false" [isPagination]="false">
+            <ng-template let-displayed let-tabcolumns="columns">
+                <tbody>
+                    <ng-container *ngFor="let row of displayed;">
+                        <tr>
+                            <ng-container *ngFor="let column of tabcolumns;">
+                                <td tiOverflow>{{ row[column.key] | thousandSeparator }}</td>
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </ng-template>
+        </app-common-table>
+    </div>
+    <div class="part">
+        <div>{{'sysPerfDetailed.huge' | i18n}}</div>
+        <app-common-table [commonTableData]="hugeInfo" [isFilters]="false" [isPagination]="false">
+            <ng-template let-displayed let-tabcolumns="columns">
+                <tbody>
+                    <ng-container *ngFor="let row of displayed;">
+                        <tr>
+                            <ng-container *ngFor="let column of tabcolumns;">
+                                <td tiOverflow>{{ row[column.key] | thousandSeparator }}</td>
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </ng-template>
+        </app-common-table>
+    </div>
+    <div class="part">
+        <div>{{'sys.titles.memPag' | i18n}}</div>
+        <app-common-table [commonTableData]="paginationInfo" [isFilters]="false" [isPagination]="false">
+            <ng-template let-displayed let-tabcolumns="columns">
+                <tbody>
+                    <ng-container *ngFor="let row of displayed;">
+                        <tr>
+                            <ng-container *ngFor="let column of tabcolumns;">
+                                <td tiOverflow>{{ row[column.key] | thousandSeparator }}</td>
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </ng-template>
+        </app-common-table>
+    </div>
+    <div class="part">
+        <div>{{'sys.titles.memSwap' | i18n}}</div>
+        <app-common-table [commonTableData]="exchangeInfo" [isFilters]="false" [isPagination]="false">
+            <ng-template let-displayed let-tabcolumns="columns">
+                <tbody>
+                    <ng-container *ngFor="let row of displayed;">
+                        <tr>
+                            <ng-container *ngFor="let column of tabcolumns;">
+                                <td tiOverflow>{{ row[column.key] | thousandSeparator }}</td>
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </ng-template>
+        </app-common-table>
+    </div>
+    <div class="part">
+        <div>{{'sysPerfDetailed.swap' | i18n}}</div>
+        <app-common-table [commonTableData]="swapInfo" [isFilters]="false" [isPagination]="false">
+            <ng-template let-displayed let-tabcolumns="columns">
+                <tbody>
+                    <ng-container *ngFor="let row of displayed;">
+                        <tr>
+                            <ng-container *ngFor="let column of tabcolumns;">
+                                <td tiOverflow>{{ row[column.key] | thousandSeparator }}</td>
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </ng-template>
+        </app-common-table>
+    </div>
+    <div class="part">
+        <div>{{'sysPerfDetailed.numa' | i18n}}</div>
+        <app-common-table [commonTableData]="numaInfo" [isFilters]="true" [isPagination]="false">
+            <ng-template let-displayed let-tabcolumns="columns">
+                <tbody>
+                    <ng-container *ngFor="let row of displayed;">
+                        <tr>
+                            <ng-container *ngFor="let column of tabcolumns;">
+                                <td *ngIf="column.show || column.show === undefined" tiOverflow>{{ row[column.key] | thousandSeparator }}</td>
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </ng-template>
+        </app-common-table>
+    </div>
+</div>

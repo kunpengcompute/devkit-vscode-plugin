@@ -1,0 +1,38 @@
+<div class="network-bind-info">
+  <div class="bind-table">
+    <ti-table 
+      [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns"
+      tiColsResizable
+    >
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr>
+              <th tiOverflow *ngFor="let column of columns;index as index" width="{{column.width}}">{{column.title}}</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <div class="ti3-table-container ti3-resize-wrapper" hyNodata [nodataShow]="!displayed.length">
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of columns" width="{{column.width}}"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of displayed;index as i">
+              <td tiOverflow>{{ row.name }}</td>
+              <td tiOverflow>{{ row.ipV4 }}</td>
+              <td tiOverflow>{{ row.ipV6 }}</td>
+              <td tiOverflow>{{ row.mode }}</td>
+              <td tiOverflow>{{ row.network }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ti-table>
+  </div>
+</div>
+

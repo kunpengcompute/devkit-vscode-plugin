@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="8px" viewBox="0 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>4.组件/2.通用/icon/*备份</title>
+    <defs>
+        <polygon id="path-1" points="6.5825 8.3396875 7.7075 7.4959375 5.6684375 5.31625 8.4809375 4.8240625 8.129375 3.488125 5.4575 4.5428125 5.73875 1.66 4.3325 1.66 4.61375 4.5428125 1.941875 3.4178125 1.52 4.8240625 4.4028125 5.31625 2.36375 7.425625 3.48875 8.3396875 5.035625 5.738125"></polygon>
+    </defs>
+    <g id="sys-perf-ALL" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="微架构分析-配置节点参数" transform="translate(-376.000000, -978.000000)">
+            <g id="编组" transform="translate(375.000000, 977.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="蒙版" fill="#ED4B4B" fill-rule="nonzero" xlink:href="#path-1"></use>
+                <g mask="url(#mask-2)" fill="#ED4B4B" id="3.颜色/3.紧急告警色">
+                    <g>
+                        <rect id="矩形" x="0" y="0" width="10" height="10"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

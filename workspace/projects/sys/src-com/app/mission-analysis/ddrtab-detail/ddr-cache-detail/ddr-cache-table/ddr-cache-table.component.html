@@ -1,0 +1,124 @@
+<div class="config-detail" [appLoading]="isLoading">
+  <div class="tlb table">
+    <div class="title">{{i18n.ddr_summury.tlb}}</div>
+
+    <ti-table class="custemTable" [(displayedData)]="tlbData.displayed"
+      [srcData]="tlbData.srcData" [columns]="tlbData.columns" tiColsResizable>
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of tlbData.columns" [width]="column.width">
+                <ti-cell-text>{{ column.label }}</ti-cell-text>
+
+                <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+                
+                <ti-head-filter *ngIf="column.filterKey"
+                  [options]="column.options"
+                  [(ngModel)]="column.selected"
+                  (select)="onTlbSelect()"
+                  [ngClass]="{'ti3-head-filtered': column.selected?.length !== column.options.length}"
+                  [multiple]="column.multiple"
+                  [selectAll]="column.selectAll"
+                  [searchable]="column.searchable">
+                </ti-head-filter>
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <div class="ti3-table-container ti3-resize-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of tlbData.columns" [width]="column.width"></th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="tlbData.displayed.length > 0">
+            <tr *ngFor="let item of tlbData.displayed">
+              <td tiOverflow tiTipPosition='left'>{{ item.core }}</td>
+              <td tiOverflow tiTipPosition='left'>{{ typeTextMapping[item.type] || item.type }}</td>
+              <td tiOverflow tiTipPosition='left'>{{ item.bandwith | threePoint:2 }}</td>
+              <td tiOverflow tiTipPosition='left'>{{ item.hitrate | threePoint:2 }}</td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="tlbData.displayed.length === 0">
+            <tr class="ti3-table-nodata">
+              <td tiColspan>
+                <div hyNodata [nodataShow]="true" style="height: 272px;"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ti-pagination [(currentPage)]="tlbData.pageNo" [pageSize]="tlbData.pageSize" [(totalNumber)]="tlbData.total">
+      </ti-pagination>
+    </ti-table>
+
+  </div>
+
+  <div class="l3c table">
+    <div class="title">{{i18n.ddr_summury.l3c}}</div>
+
+    <ti-table class="custemTable" [(displayedData)]="l3cData.displayed"
+      [srcData]="l3cData.srcData" [columns]="l3cData.columns" tiColsResizable>
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of l3cData.columns" [width]="column.width">
+                <ti-cell-text>{{ column.label }}</ti-cell-text>
+
+                <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+                
+                <ti-head-filter *ngIf="column.filterKey"
+                  [options]="column.options"
+                  [(ngModel)]="column.selected"
+                  (select)="onL3cSelect()"
+                  [ngClass]="{'ti3-head-filtered': column.selected?.length !== column.options.length}"
+                  [multiple]="column.multiple"
+                  [selectAll]="column.selectAll"
+                  [searchable]="column.searchable">
+                </ti-head-filter>
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <div class="ti3-table-container ti3-resize-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of l3cData.columns" [width]="column.width"></th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="l3cData.displayed.length > 0">
+            <tr *ngFor="let item of l3cData.displayed">
+              <td tiOverflow tiTipPosition='left'>{{ item['NUMA node'] }}</td>
+              <td tiOverflow tiTipPosition='left'>{{ typeTextMapping[item.type] || item.type }}</td>
+              <td tiOverflow tiTipPosition='left'>{{ item.hitbandwith | hyThouSeparator }}</td>
+              <td tiOverflow tiTipPosition='left'>{{ item.bandwith | hyThouSeparator }}</td>
+              <td tiOverflow tiTipPosition='left'>{{ item.hitrate | hyThouSeparator }}</td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="l3cData.displayed.length === 0">
+            <tr class="ti3-table-nodata">
+              <td tiColspan>
+                <div [hyNodata]="{ text: l3cNoDataText }" [nodataShow]="true" style="height: 272px;"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ti-pagination [(currentPage)]="l3cData.pageNo" [pageSize]="l3cData.pageSize" [(totalNumber)]="l3cData.total">
+      </ti-pagination>
+    </ti-table>
+
+  </div>
+</div>

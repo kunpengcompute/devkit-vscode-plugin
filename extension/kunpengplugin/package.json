@@ -1,0 +1,39 @@
+{
+    "name": "kunpeng-dev-kit",
+    "displayName": "Kunpeng DevKit",
+    "description": "使能开发者，加速应用迁移和算力升级。",
+    "version": "2.3.3",
+    "publisher": "kunpengfamily",
+    "license": "SEE LICENSE IN LICENSE.md",
+    "engines": {
+        "vscode": "^1.38.0"
+    },
+    "icon": "resources/images/kunpeng.png",
+    "categories": [
+        "Extension Packs"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./out/extension/src/extension.js",
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "lint": "tslint -p ./",
+        "watch": "tsc -w -p ./"
+    },
+    "devDependencies": {
+        "@types/node": "^12.12.0",
+        "tslint": "^5.19.0",
+        "typescript": "^3.8.3",
+        "@types/vscode": "^1.38.0",
+        "codelyzer": "^5.0.0",
+        "vsce": "^1.87.1"
+    },
+    "extensionPack": [
+        "kunpengfamily.kunpeng-porting-advisor-plugin",
+        "kunpengfamily.kunpeng-library-plugin",
+        "kunpengfamily.kunpeng-compiler-plugin",
+        "kunpengfamily.kunpeng-hyper-tuner-plugin"
+    ]
+}

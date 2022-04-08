@@ -1,0 +1,160 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Creating a Process/Thread Performance Analysis Task">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0251208340.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="user guide">
+<meta name="DC.Publisher" content="20210630">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0251208341">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Creating a Process/Thread Performance Analysis Task</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0251208341"></a><a name="EN-US_TOPIC_0251208341"></a>
+
+<h1 class="topictitle1">Creating a Process/Thread Performance Analysis Task</h1>
+<div id="body1591010366918"><div class="section" id="EN-US_TOPIC_0251208341__section71672165013"><h4 class="sectiontitle">Function Description</h4><p id="EN-US_TOPIC_0251208341__p1533716474205">By using the utilization, saturation, and errors (USE) method, the tool collects information about the resources such as the CPU, memory, and storage I/O resources used by processes or threads to obtain metrics, such as the utilization, saturation, and errors and identify system bottlenecks. Then, the tool provides tuning suggestions based on existing reference values and experience. The system invoking status of a single process can be analyzed.</p>
+<div class="note" id="EN-US_TOPIC_0251208341__note3920123810526"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0251208341__p1992113815213">If the sysstat version is not later than 11.0.0, the process/thread analysis task result may contain abnormal data.</p>
+</div></div>
+</div>
+<div class="section" id="EN-US_TOPIC_0251208341__section11470129119"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0251208341__en-us_topic_0250279620_p99642151324">A project has been created, and the project does not contain a node in <span class="parmvalue" id="EN-US_TOPIC_0251208341__en-us_topic_0250279620_en-us_topic_0206925255_parmvalue11239184764819"><b>Offline</b></span> state.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0251208341__section04555504313"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0251208341__ol15971352649"><li id="EN-US_TOPIC_0251208341__li1440918227258"><span>Click <span><img id="EN-US_TOPIC_0251208341__en-us_topic_0250279620_image21541215171214" src="en-us_image_0252395926.png"></span> next to the target project in the project list.</span><p><p id="EN-US_TOPIC_0251208341__en-us_topic_0250279620_p166122471044">The <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250279620_b121531549164219">New Analysis Task</strong> page is displayed.</p>
+</p></li><li id="EN-US_TOPIC_0251208341__li15546205263216"><span>Set task parameters by referring to <strong id="EN-US_TOPIC_0251208341__b13420192965318">Task Management</strong> and <a href="#EN-US_TOPIC_0251208341__table657242932515">Table 1</a>.</span><p><div class="p" id="EN-US_TOPIC_0251208341__p18207353103211"><a href="#EN-US_TOPIC_0251208341__fig13571102916256">Figure 1</a> shows the page for creating a process/thread performance analysis task, using a project of the general scenario as an example.<div class="fignone" id="EN-US_TOPIC_0251208341__fig13571102916256"><a name="EN-US_TOPIC_0251208341__fig13571102916256"></a><a name="fig13571102916256"></a><span class="figcap"><b>Figure 1 </b>Creating a process/thread performance analysis task (general scenario)</span><br><span><img id="EN-US_TOPIC_0251208341__image87081752482" src="en-us_image_0000001100748912.png"></span></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0251208341__table657242932515"></a><a name="table657242932515"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0251208341__table657242932515" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Parameters for creating a process/thread performance analysis task</caption><colgroup><col style="width:24.060000000000002%"><col style="width:75.94%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0251208341__row357182952518"><th align="left" class="cellrowborder" valign="top" width="24.060000000000002%" id="mcps1.3.3.2.2.2.1.3.2.3.1.1"><p id="EN-US_TOPIC_0251208341__p1257114294259">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.94%" id="mcps1.3.3.2.2.2.1.3.2.3.1.2"><p id="EN-US_TOPIC_0251208341__p8571182982510">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0251208341__row4571122914252"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p5571132915258">Task Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p7571102916252">Name of the task. The task name must meet the following requirements:</p>
+<ul id="EN-US_TOPIC_0251208341__ul1557102915252"><li id="EN-US_TOPIC_0251208341__en-us_topic_0250471713_li9539192134211">Contain only letters, digits, and special characters (including @#$ %^&amp;*()[]&lt;&gt;._-!-+ and spaces).</li><li id="EN-US_TOPIC_0251208341__en-us_topic_0250471713_li1253911219425">Contain 1 to 32 characters.</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251208341__row13571132914254"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p257122917256">Analysis Object</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p145711729132511">Select <strong id="EN-US_TOPIC_0251208341__b128682357599">Systems</strong> or <strong id="EN-US_TOPIC_0251208341__b198681135115912">Application</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251208341__row554110103414"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p19541161018419">Mode</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p05419106413">Select <strong id="EN-US_TOPIC_0251208341__b15574195865219">Launch Application</strong> or <strong id="EN-US_TOPIC_0251208341__b145751358185217">Attach to Process</strong>.</p>
+<p id="EN-US_TOPIC_0251208341__p736721413479">This parameter is displayed when <strong id="EN-US_TOPIC_0251208341__b3181557185211">Analysis Object</strong> is set to <strong id="EN-US_TOPIC_0251208341__b14187957145219">Application</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251208341__row98314318415"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p151743152118">Application Path</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p1772542511310">Enter the absolute path of the application to be analyzed. For example, to analyze the <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b4393425164415">loop_test</strong> application stored in the <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b123991325134420">/home/test</strong> directory, enter <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b3403152013450">/home/test/loop_test</strong>.</p>
+<p id="EN-US_TOPIC_0251208341__p15584154362715">This parameter is displayed when <strong id="EN-US_TOPIC_0251208341__b663821655318">Analysis Object</strong> is set to <strong id="EN-US_TOPIC_0251208341__b264418166535">Application</strong> and <strong id="EN-US_TOPIC_0251208341__b26441316115316">Mode</strong> is set to <strong id="EN-US_TOPIC_0251208341__b1764519165539">Launch Application</strong>.</p>
+<div class="note" id="EN-US_TOPIC_0251208341__note9725162513132"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_ul167258259137"><li id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_li772513252139">By default, applications in the <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b1613514351456">/opt/</strong> or <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b78061738114513">/home/</strong> directory are analyzed. The administrator can click <span><img id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_image2032351371812" src="en-us_image_0293557353.png"></span> in the upper right corner on the home page of the <span id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_ph37251225181319">System Profiler</span> and choose <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b113251113141818">System Settings</strong>, and enter application paths (separated by semicolons) in the <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b21181414468">Application Path</strong> test box. Only administrators can modify this parameter. Common users can only view this parameter. <p id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_p1274014165718">You are advised to set the application path to a path such as <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b18863171519207">/home</strong> or <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b2881519162020">/opt</strong>. Do not set the application path to a system directory such as <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b2052510252207">/</strong>, <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b184016301203">/dev</strong>, <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b103341433162016">/sys</strong>, or <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b56231836102012">/boot</strong>. Otherwise, system exceptions may occur.</p>
+</li><li id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_li10725142551320">The OS running user (<strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b6290143125311">launcher</strong>) of the <span id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_ph19726725151312">Kunpeng Hyper Tuner</span> must have the read and execute permissions on the applications to be analyzed.</li><li id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_li16726425181310">In the multi-node scenario, you can enable <span class="uicontrol" id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_uicontrol344015231253"><b>Configure Node Parameters</b></span> to configure this parameter separately for each node.</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251208341__row1936719511131"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p1066812252347">(Optional) Application User</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p38061351133414">This parameter is available when <strong id="EN-US_TOPIC_0251208341__b212724217430">Analysis Object</strong> is set to <strong id="EN-US_TOPIC_0251208341__b16244481437">Application</strong> and <strong id="EN-US_TOPIC_0251208341__b419305224311">Mode</strong> is set to <strong id="EN-US_TOPIC_0251208341__b13476135614433">Launch Application</strong>. By default, this parameter is disabled.</p>
+<ul id="EN-US_TOPIC_0251208341__ul102288814402"><li id="EN-US_TOPIC_0251208341__li82299816404">Disabled: The application user is the default system user <strong id="EN-US_TOPIC_0251208341__b16717012124417">launcher</strong>.</li><li id="EN-US_TOPIC_0251208341__li7746174220401">Enabled: The application user is the configured user.</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251208341__row191491538174119"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p11275657101116">(Optional) Application Parameters</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p109821355135">Enter application parameters based on the actual scenario.</p>
+<p id="EN-US_TOPIC_0251208341__p16672195202817">This parameter is displayed when <strong id="EN-US_TOPIC_0251208341__b189858175412">Analysis Object</strong> is set to <strong id="EN-US_TOPIC_0251208341__b9990914544">Application</strong> and <strong id="EN-US_TOPIC_0251208341__b1199011155417">Mode</strong> is set to <strong id="EN-US_TOPIC_0251208341__b159911155418">Launch Application</strong>.</p>
+<div class="note" id="EN-US_TOPIC_0251208341__note0982143510137"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0251208341__p198273513138">You can enable <span class="uicontrol" id="EN-US_TOPIC_0251208341__uicontrol1189916178216"><b>Configure Node Parameters</b></span> to configure this parameter separately for each node.</p>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251208341__row105761899516"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p95761799515">Process</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p1316722135218">Enter a process name. The process name can be a regular expression.</p>
+<p id="EN-US_TOPIC_0251208341__p14801122212284">This parameter is displayed when <strong id="EN-US_TOPIC_0251208341__b1568412815547">Analysis Object</strong> is set to <strong id="EN-US_TOPIC_0251208341__b569028115415">Application</strong> and <strong id="EN-US_TOPIC_0251208341__b1169015816549">Mode</strong> is set to <strong id="EN-US_TOPIC_0251208341__b186901089546">Attach to Process</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251208341__row209711233104818"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p21419198119">PID</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p13514164581316">Enter a maximum of 10 PIDs of the processes to be analyzed. Use commas (,) to separate the PIDs. <strong id="EN-US_TOPIC_0251208341__b698175616416">PID</strong> and <strong id="EN-US_TOPIC_0251208341__b750537513">Process</strong> can be configured at the same time.</p>
+<p id="EN-US_TOPIC_0251208341__p93263882820">This parameter is displayed when <strong id="EN-US_TOPIC_0251208341__b1421121975413">Analysis Object</strong> is set to <strong id="EN-US_TOPIC_0251208341__b11271519175413">Application</strong> and <strong id="EN-US_TOPIC_0251208341__b72716198547">Mode</strong> is set to <strong id="EN-US_TOPIC_0251208341__b1127111945410">Attach to Process</strong>.</p>
+<div class="note" id="EN-US_TOPIC_0251208341__note1351413456132"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_ul11514745101316"><li id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_li85141245121316">If <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b10338182195613">Attach to Process</strong> is selected, the tool associates the ID of the process that runs an application to trace and collect the performance data of the application in real time. The OS running user <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b18892174953213">launcher</strong> of the <span id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_ph12514184521311">Kunpeng Hyper Tuner</span> must have the read permission on the application.</li><li id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_li15514194511312">To query the PID, run the <strong id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_b1924255913479">ps -ef | grep</strong> <em id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_i67631142488">Program name</em> command.</li><li id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_li1951417459130">You can enable <span class="uicontrol" id="EN-US_TOPIC_0251208341__en-us_topic_0250422243_uicontrol64213378015"><b>Configure Node Parameters</b></span> to configure this parameter separately for each node.</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251208341__row657114292254"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p1357152972518">Analysis Type</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p16571329142517">Select <strong id="EN-US_TOPIC_0251208341__b5731151215520">Process/Thread Performance</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251208341__row135711029132510"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p1457122992512">Sampling Time (s)</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p85711829112518">Sampling duration, in seconds. The default value is <strong id="EN-US_TOPIC_0251208341__b548610019142">60</strong>. The value range is 2 to 300.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251208341__row45716294253"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p1857142922516">Sampling Interval (s)</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p1157142942512">Sampling interval, in seconds. The default value is <strong id="EN-US_TOPIC_0251208341__b1275921419140">1</strong>. The value range is 1 to 10.</p>
+<div class="note" id="EN-US_TOPIC_0251208341__note1857112293256"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0251208341__p13571132922513">The <strong id="EN-US_TOPIC_0251208341__b205832719312">Sampling Interval</strong> value must be less than or equal to half of the <strong id="EN-US_TOPIC_0251208341__b1358172716314">Sampling Time</strong> value.</p>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251208341__row19572162911250"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p2057112911250">Sampling Type</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p17571152911257">Type of the analysis to be performed. The values are as follows:</p>
+<ul id="EN-US_TOPIC_0251208341__ul15572529172520"><li id="EN-US_TOPIC_0251208341__li19572112916256">CPU</li><li id="EN-US_TOPIC_0251208341__li157272917251">Memory</li><li id="EN-US_TOPIC_0251208341__li957215299256">Storage I/O</li><li id="EN-US_TOPIC_0251208341__li357211292253">Context Switch</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251208341__row9572132915259"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p16572829162517">Thread Collection</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p19572129172518">Whether to collect thread information. By default, this parameter is enabled.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251208341__row14548115718374"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p106029243814">System Call Tracing</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p46364723814">Whether to collect information about system function invoking of applications in the Linux OS. This function is disabled by default.</p>
+<p id="EN-US_TOPIC_0251208341__p1857584915284">This parameter is displayed when <strong id="EN-US_TOPIC_0251208341__b179412955415">Analysis Object</strong> is set to <strong id="EN-US_TOPIC_0251208341__b2799122918548">Application</strong>.</p>
+<div class="note" id="EN-US_TOPIC_0251208341__note206364743813"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0251208341__p146561551134013">System call tracing is not recommended for production environments because it greatly reduces the system performance when some applications are frequently called.</p>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251208341__row175729292259"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p7572102922520">Scheduled Startup</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p3572129172511">Whether to create a scheduled analysis task. For details, see <a href="en-us_topic_0250471713.html">Task Management</a>.</p>
+<p id="EN-US_TOPIC_0251208341__p1051717122510">If <strong id="EN-US_TOPIC_0251208341__b06961613315">Application User</strong> is set, a scheduled startup task cannot be created. In this case, this function is unavailable.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251208341__row3572429122512"><td class="cellrowborder" valign="top" width="24.060000000000002%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0251208341__p657262916251">Start Now</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.94%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0251208341__p145721829172514">Whether to automatically execute a task after it is created. This parameter is selected by default.</p>
+<p id="EN-US_TOPIC_0251208341__p117794819514">If <strong id="EN-US_TOPIC_0251208341__b11308184815216">Application User</strong> is set, a task must be executed immediately. In this case, this option is forcibly selected and dimmed.</p>
+<div class="note" id="EN-US_TOPIC_0251208341__note13572129102516"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0251208341__en-us_topic_0250471713_p15450171572414">This parameter is not displayed if <span class="uicontrol" id="EN-US_TOPIC_0251208341__en-us_topic_0250471713_uicontrol35519368586"><b>Scheduled Startup</b></span> is enabled.</p>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</p></li><li id="EN-US_TOPIC_0251208341__li92471127563"><span>Click <strong id="EN-US_TOPIC_0251208341__b1223845119439">OK</strong>.</span><p><p id="EN-US_TOPIC_0251208341__p891613712436">You can click the icon next to the task name to perform the following operations:</p>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0251208340.html">Process/Thread Performance Analysis</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

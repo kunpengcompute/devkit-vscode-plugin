@@ -1,0 +1,105 @@
+:host ::ng-deep .summury-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &.ie {
+    height: 100%;
+  }
+
+  .FSSummaryTable {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    thead {
+      .center {
+        text-align: center;
+      }
+  
+      th {
+        .content {
+          display: flex;
+          align-items: center;
+          overflow: hidden;
+    
+          .ti3-cell-text-container {
+            overflow: hidden;
+            height: 32px;
+    
+            .ti3-cell-text {
+              max-width: 100% !important;
+            }
+          }
+    
+          &.center {
+            justify-content: center;
+          }
+        }
+      }
+    }
+
+    >.ti3-table-container {
+      flex: 1;
+      position: relative;
+
+      >table {
+        >tbody {
+          >tr {
+            &:not(.ti3-details-tr):hover {
+                background: var(--tr-bg-hover) !important;
+                td{
+                    background: var(--tr-bg-hover) !important;
+                }
+            }
+          }
+          
+          .ti3-details-tr .ti3-details-td {
+            .ti3-table-detail-container {
+              .ti3-table {
+                >.ti3-table-container {
+                  position: relative;
+                  max-height: 30vh;
+    
+                  &.noData {
+                    height: 210px;
+                  }
+    
+                  .canClick{
+                    color: #0067ff !important;
+
+                    >span {
+                      cursor: pointer;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .FSSummaryTable ti-pagination.ti3-page-container .ti3-pag-next:not(.disabled):hover, ti-pagination.ti3-page-container .ti3-pag-prev:not(.disabled):hover{
+      background-color: #0067FF;
+      color: #FFFFFF;
+  }
+}
+  //   深色主题
+::ng-deep .vscode-dark {
+    --tr-bg-hover:#161616;
+    .chen-nodata-td {
+        .nodata_word {
+            color: #AAAAAA; 
+        }
+    }
+}
+//   浅色主题
+::ng-deep .vscode-light {
+    --tr-bg-hover:#f5f9ff;
+    .chen-nodata-td {
+        .nodata_word {
+            color: #AAAAAA; 
+        }
+    }
+}

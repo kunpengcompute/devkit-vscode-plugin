@@ -1,0 +1,393 @@
+<div class="modal-dialog configItemBox">
+  <div class="boxHeader">
+    {{ i18n.preTable.perMission }}
+  </div>
+
+  <div class="boxMain">
+    <div *ngIf="srcData.data.length !== 0" class="deleteBtn">
+      <button
+        class="delete"
+        tiButton
+        type="button"
+        (click)="multipleDelete()"
+        [disabled]="checkedList.length == 0 || !currentList"
+      >
+        {{ i18n.mission_modal.batchDelete }}
+      </button>
+    </div>
+
+    <div class="main">
+      <div class="table" [appLoading]="isLoading">
+        <ti-table
+          [(displayedData)]="displayed"
+          [srcData]="srcData"
+          [columns]="columns"
+        >
+          <div class="ti3-table-fixed-head">
+            <table>
+              <thead>
+                <tr>
+                  <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                  <th details-icon-column width="4%"></th>
+                  <th
+                    checkbox-column
+                    width="4%"
+                    *ngIf="srcData.data.length !== 0"
+                  >
+                    <!--全选按钮-->
+                    <!--如果有分页，全选需要控制当前页时，items接口传入displayed
+                        如果全选要控制表格所有数据，items接口传入srcData.data-->
+                    <input
+                      type="checkbox"
+                      tiCheckgroup
+                      [items]="srcData.data"
+                      [(checkeds)]="checkedList"
+                      [disabled]="!currentList"
+                    />
+                  </th>
+                  <ng-container *ngFor="let column of columns; index as i">
+                    <th
+                      *ngIf="column.display &&
+                        i > 0 &&
+                        i < 6 &&
+                        !(userRole !== 'Admin' && column.key === 'userName')
+                      "
+                    >
+                      <ti-cell-text>{{ column.title }}</ti-cell-text>
+                      <div class="filter-box" *ngIf="column.options.length > 0">
+                        <img src="./assets/img/header/filter.png" alt="" />
+                        <div class="filter-box-list">
+                          <span *ngFor="let item of column.options">
+                            <input
+                              type="checkbox"
+                              tiCheckitem
+                              [item]="item"
+                              [beCheckeds]="column.selected"
+                              [label]="item.text"
+                              (change)="onMyChange()"
+                            />
+                          </span>
+                        </div>
+                      </div>
+                    </th>
+                    <th
+                      *ngIf="column.display && (i == 0 || i > 5)"
+                      tiOverflow>
+                      {{ column.title }}
+                    </th>
+                  </ng-container>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <!--.ti3-table-container是表体的容器，它的子元素中的table的thead是用来控制各列宽度，实际不显示；tbody是实际显示的表体-->
+          <!--注意1:此处一定要使用.ti3-table-container样式类-->
+          <!--注意2:用户在有.ti3-table-container样式类的容器上来设置表体的高度或最大高度-->
+          <div
+            class="ti3-table-container"
+            [ngClass]="{ noDataHeight: displayed.length === 0 }"
+          >
+            <table style="border-collapse: collapse">
+              <thead>
+                <tr>
+                  <th details-icon-column width="4%"></th>
+                  <th
+                    checkbox-column
+                    width="4%"
+                    *ngIf="srcData.data.length !== 0"
+                  ></th>
+                  <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                  <ng-container *ngFor="let column of columns; index as i">
+                    <th
+                      *ngIf="
+                        !(userRole !== 'Admin' && column.key === 'userName') && column.display
+                      "></th>
+                  </ng-container>
+                </tr>
+              </thead>
+
+              <tbody>
+                <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                <ng-container
+                  *ngFor="let row of displayed; index as i; trackBy: trackByFn"
+                >
+                  <tr>
+                    <td details-icon-column>
+                      <ti-details-icon
+                        [row]="row"
+                        [index]="i"
+                        (beforeToggle)="beforeToggle($event, i)"
+                      >
+                      </ti-details-icon>
+                      <!--详情图标设置，传入行数据-->
+                    </td>
+                    <td checkbox-column *ngIf="srcData.data.length !== 0">
+                      <input
+                        type="checkbox"
+                        tiCheckitem
+                        [item]="row"
+                        [disabled]="
+                          !(
+                            userRole == 'Admin' ||
+                            (userRole == 'User' && userId == row.ownerId)
+                          )
+                        "
+                      />
+                    </td>
+                    <td tiOverflow>{{ row.taskName }}</td>
+                    <td tiOverflow>
+                      <span
+                        class="status-icon"
+                        [ngClass]="statusFormat(row.scheduleStatus)"
+                      ></span
+                      >{{ row.scheduleStatus }}
+                    </td>
+                    <td tiOverflow>{{ row.analysisTarget }}</td>
+                    <td tiOverflow *ngIf="!isDiagnose">{{ row.analysisType }}</td>
+                    <td tiOverflow>{{ row.projectName }}</td>
+                    <td tiOverflow *ngIf="userRole == 'Admin'">
+                      {{ row.userName }}
+                    </td>
+                    <td>
+                      <span
+                        *ngIf="
+                          row.scheduleStatus === i18n.preTable.reserve &&
+                          (userRole == 'Admin' ||
+                            (userRole == 'User' && userId == row.ownerId))
+                        "
+                        style="
+                          color: #0067ff;
+                          margin-right: 24px;
+                          cursor: pointer;
+                        "
+                        (click)="modify(row)"
+                        >{{ i18n.common_term_operate_edit }}</span
+                      >
+                      <span
+                        *ngIf="
+                          userRole == 'Admin' ||
+                          (userRole == 'User' && userId == row.ownerId)
+                        "
+                        style="color: #0067ff; cursor: pointer"
+                        (click)="delete(row)"
+                        >{{ i18n.mission_modal.delete }}</span
+                      >
+                      <span
+                        *ngIf="
+                          !(
+                            userRole == 'Admin' ||
+                            (userRole == 'User' && userId == row.ownerId)
+                          )
+                        "
+                        >--</span
+                      >
+                    </td>
+                  </tr>
+                  <tr
+                    *tiDetailsTr="row"
+                    class="tiDetailsTr"
+                    [ngClass]="{ active: row.showDetails }"
+                  >
+                    <td class="colsTd" colspan="8">
+                      <ng-container
+                        [ngSwitch]="
+                          row.data.analysisType || row.data['analysis-type']
+                        "
+                      >
+                        <app-mission-io-detail
+                          *ngSwitchCase="'ioperformance'"
+                          [detailTarget]="detailTarget"
+                          [taskInfo]="row.data"
+                        ></app-mission-io-detail>
+                        <app-mission-hpc-detail
+                          *ngSwitchCase="'hpc_analysis'"
+                          [detailTarget]="detailTarget"
+                          [taskInfo]="row.data"
+                        ></app-mission-hpc-detail>
+                        <!-- 诊断调试预约任务下拉列表 -->
+                        <app-mission-diagnose-detail
+                          *ngSwitchCase="'memory_diagnostic'"
+                          [taskInfo]="row.data"
+                        ></app-mission-diagnose-detail>
+                        <!-- 内存诊断下拉列表 -->
+                        <div *ngSwitchCase="'netio_diagnostic'" class="net_io_temp">
+                          <app-net-io-temp-detail
+                          [taskInfo]="row.data"
+                        ></app-net-io-temp-detail>
+                        </div>
+                        <div class='storageio_diagnostic' *ngSwitchCase="'storageio_diagnostic'">
+                          <app-storage-io-temp-detail
+                          [taskInfo]="row.data"
+                        ></app-storage-io-temp-detail>
+                        </div>
+                        
+                        <app-mission-reservation-listinfo
+                          *ngSwitchDefault
+                          [taskData]="row.data"
+                        ></app-mission-reservation-listinfo>
+                      </ng-container>
+                    </td>
+                  </tr>
+                </ng-container>
+                <ng-container>
+                  <tr *ngIf="srcData.data.length === 0" class="nodataTr">
+                    <td colspan="8" style="padding: 0px">
+                      <div
+                        class="nodata"
+                        *ngIf="srcData.data.length === 0 && !isLoading"
+                      >
+                        <img
+                          style="width: 198px; display: block"
+                          src="./assets/img/projects/nodata.png"
+                        />
+                        <div style="font-size: 0.8rem">{{ nodataTips }}</div>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+          <ti-pagination
+            [(currentPage)]="currentPage"
+            [pageSize]="pageSize"
+            [(totalNumber)]="totalNumber"
+          >
+          </ti-pagination>
+        </ti-table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 修改预约任务弹框 -->
+<app-modify-schedule
+  *ngIf="showModifyModal"
+  [taskDataModify]="taskDataModify"
+  (sendPretable)="handleUpdataPretable($event)"
+>
+</app-modify-schedule>
+<app-pop-mask #multipleDeleteMask>
+  <div class="content reservation-mask">
+    <div class="mask-title">
+      <span class="create-title">{{
+        i18n.common_term_delete_title_appointment
+      }}</span>
+      <img
+        class="incorrect"
+        (click)="closeDelete()"
+        src="./assets/img/header/close_icon.svg"
+        style="cursor: pointer"
+      />
+    </div>
+    <div class="tip_title">
+      <img src="./assets/img/tip/warn_arr.svg" alt="" />
+      <span>{{ i18n.sureDeleteTwo }}</span>
+    </div>
+    <div class="content_container">
+      <ti-table
+        [(displayedData)]="displayedOk"
+        [srcData]="srcDataOk"
+        [columns]="columns.slice(0, 5)"
+        class="ti3-table-small"
+      >
+        <div class="ti3-table-fixed-head">
+          <table style="table-layout: fixed">
+            <thead>
+              <tr>
+                <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                <th checkbox-column width="checkColum">
+                  <!--全选按钮-->
+                  <!--如果有分页，全选需要控制当前页时，items接口传入displayed
+                    如果全选要控制表格所有数据，items接口传入srcData.data-->
+                  <input
+                    type="checkbox"
+                    tiCheckgroup
+                    [items]="srcDataOk.data"
+                    [(checkeds)]="checkedListOk"
+                    (change)="toggleSelect()"
+                  />
+                </th>
+                <ng-container
+                  *ngFor="let column of columns.slice(0, 6); index as i"
+                >
+                  <th
+                    *ngIf="!(userRole !== 'Admin' && column.key === 'userName') && column.display"
+                    tiOverflow>
+                    {{ column.title }}
+                  </th>
+                </ng-container>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="ti3-table-container container-box">
+          <table style="border-collapse: collapse">
+            <thead>
+              <tr>
+                <th checkbox-column width="checkColum"></th>
+                <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                <ng-container
+                  *ngFor="let column of columns.slice(0, 6); index as i"
+                >
+                  <th
+                    *ngIf="!(userRole !== 'Admin' && column.key === 'userName') && column.display"></th>
+                </ng-container>
+              </tr>
+            </thead>
+
+            <tbody>
+              <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+              <ng-container
+                *ngFor="let row of displayedOk; index as i; trackBy: trackByFn"
+              >
+                <tr>
+                  <td checkbox-column>
+                    <input
+                      type="checkbox"
+                      tiCheckitem
+                      [item]="row"
+                      (change)="toggleSelect()"
+                    />
+                  </td>
+                  <td tiOverflow>{{ row.taskName }}</td>
+                  <td tiOverflow>
+                    <span
+                      class="status-icon"
+                      [ngClass]="statusFormat(row.scheduleStatus)"
+                    ></span
+                    >{{ row.scheduleStatus }}
+                  </td>
+                  <td tiOverflow>{{ row.analysisTarget }}</td>
+                  <td tiOverflow *ngIf="!isDiagnose">{{ row.analysisType }}</td>
+                  <td tiOverflow>{{ row.projectName }}</td>
+                  <td tiOverflow *ngIf="userRole == 'Admin'">
+                    {{ row.userName }}
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+        <ti-pagination
+          type="mini"
+          [(totalNumber)]="srcDataOk.data.length"
+        ></ti-pagination>
+      </ti-table>
+    </div>
+    <div class="footer_button">
+      <button
+        type="button"
+        tiButton
+        style="margin-right: 16px"
+        (click)="multipleDeleteOk()"
+        [disabled]="checkedListOk.length == 0"
+      >
+        {{ i18n.common_term_operate_ok }}
+      </button>
+      <button type="button" tiButton (click)="closeDelete()" color="primary">
+        {{ i18n.common_term_operate_cancel }}
+      </button>
+    </div>
+  </div>
+</app-pop-mask>

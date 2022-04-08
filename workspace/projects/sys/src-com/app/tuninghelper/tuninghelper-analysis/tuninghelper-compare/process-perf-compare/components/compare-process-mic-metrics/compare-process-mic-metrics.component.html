@@ -1,0 +1,35 @@
+<div class="compare-process-mic-metrics-container">
+    <div class="other-info-box" tiOverflow>
+        <div class="other-info-cell">
+            <div class="tip-icon" *ngIf="micMetricsData.cycles.indexOf('|') > -1">
+                <hy-theme-content>
+                    <app-icon-static [name]="'iconDifferenceNormal'" dark></app-icon-static>
+                    <app-icon-static [name]="'iconDifferenceDarkNormal'" light></app-icon-static>
+                </hy-theme-content>
+            </div>
+            <div class="info-key">Cycles</div>
+            <div class="info-value">{{ micMetricsData.cycles }}</div>
+        </div>
+        <div class="other-info-cell">
+            <div class="tip-icon" *ngIf="micMetricsData.instructions.indexOf('|') > -1">
+                <hy-theme-content>
+                    <app-icon-static [name]="'iconDifferenceNormal'" dark></app-icon-static>
+                    <app-icon-static [name]="'iconDifferenceDarkNormal'" light></app-icon-static>
+                </hy-theme-content>
+            </div>
+            <div class="info-key">Instructions</div>
+            <div class="info-value">{{ micMetricsData.instructions }}</div>
+        </div>
+        <div class="other-info-cell">
+            <div class="tip-icon" *ngIf="micMetricsData.IPC.indexOf('|') > -1">
+                <hy-theme-content>
+                    <app-icon-static [name]="'iconDifferenceNormal'" dark></app-icon-static>
+                    <app-icon-static [name]="'iconDifferenceDarkNormal'" light></app-icon-static>
+                </hy-theme-content>
+            </div>
+            <div class="info-key">IPC</div>
+            <div class="info-value">{{ micMetricsData.IPC }}</div>
+        </div>
+    </div>
+    <app-common-table class="noPagination" [commonTableData]="tableData" [isPagination]="false"></app-common-table>
+</div>

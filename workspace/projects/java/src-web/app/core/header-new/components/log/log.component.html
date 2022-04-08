@@ -1,0 +1,236 @@
+<div class="log-tab">
+  <div class="profile-tabs" *ngIf="role === 'Admin'">
+    <span class="item-tab" [ngClass]="{ 'tab-active': tab.active }" *ngFor="let tab of tab1s; let idx = index"
+      (click)="tabsToggle(idx)">{{ tab.title }}</span>
+  </div>
+  <!-- 操作日志 -->
+  <div *ngIf="tab1s[0].active">
+    <div class="tab1" *ngIf="role === 'Admin'">
+      <div class="item-tab1" *ngFor="let item of tab2s; let idx = index" (click)="tabsToggle2(idx)">
+        <span [ngClass]="{ 'tab1-active': item.active }">{{ item.title }}</span>
+      </div>
+    </div>
+    <!-- 普通用户操作日志 -->
+    <div class="profile-tabs" *ngIf="role !== 'Admin'">
+      <span class="item-tab" [ngClass]="{ 'tab-active': tab.active }" *ngFor="let tab of tab2s; let idx = index"
+        (click)="tabsToggle2(idx)">{{ tab.title }}</span>
+    </div>
+    <!-- 公共日志 -->
+    <div *ngIf="tab2s[0].active" class="tlog-box" [appLoading]="isLoadingPub">
+      <div class="log-btn">
+        <button tiButton class="operation-log-btn"
+          (click)="publicLogDownload()">{{i18n.common_term_admin_download_log}}</button>
+        <p class="max-text">{{ role === 'Admin' ? i18n.common_term_admin_maxLogs : i18n.common_term_maxLogs }}</p>
+      </div>
+      <ti-table [(displayedData)]="displayedPublicLog" class="log-table" [srcData]="publiclogList" [columns]="columsLog"
+        (stateUpdate)="statePublicUpdate($event)" style="flex: 1;">
+        <div class="ti3-table-fixed-head">
+          <table>
+            <thead>
+              <tr>
+                <!--实际显示的表头。注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+                <th tiOverflow *ngFor="let columslog of columsLog" width="{{ columslog.width }}">
+                  {{ columslog.title }}
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="ti3-table-container log-table-body">
+          <table>
+            <thead>
+              <tr [ngStyle]="{'opacity': 0}">
+                <th *ngFor="let columslog of columsLog" width="{{ columslog.width }}"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let log of displayedPublicLog">
+                <td tiOverflow>
+                  {{(log.username) || ""}}
+                </td>
+                <td tiOverflow>{{ log.module_type }}</td>
+                <td tiOverflow>
+                  <span class="status-icon success-icon"
+                        [ngClass]="{ 'failed-icon': !(log.result === 'Successful') }"></span>
+                  <span>{{ log.result }}</span>
+                </td>
+                <td tiOverflow>{{ log.ipaddr }}</td>
+                <td tiOverflow>
+                  {{ log.Time }}
+                </td>
+                <td tiOverflow>{{ log.information }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="displayedPublicLog.length === 0">
+              <tr class="noHover">
+                  <td tiColspan>
+                      <div class="noData">
+                            <img class='newNoData' src="./assets/img/projects/noData.svg" />
+                            <p>{{i18n.common_term_task_nodata}}</p>
+                      </div>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ti-pagination [(currentPage)]="currentPagePublicLog" [pageSize]="pageSizePublicLog" style="width: 100%;"
+          [(totalNumber)]="totalNumberPublicLog" [showGotoLink]="true">
+        </ti-pagination>
+      </ti-table>
+    </div>
+    <!-- java性能日志 -->
+    <div *ngIf="tab2s[1].active" class="tlog-box" [appLoading]="isLoadingJava">
+      <div class="log-btn">
+        <button tiButton class="operation-log-btn"
+          (click)="operationLogDownload()">{{i18n.common_term_admin_download_log}}</button>
+        <p class="max-text">{{i18n.common_term_maxLogs}}</p>
+      </div>
+      <ti-table [(displayedData)]="displayedLog" class="log-table" [srcData]="logList" [columns]="columsLog"
+        (stateUpdate)="stateUpdate($event)" style="flex: 1;">
+        <div class="ti3-table-fixed-head">
+          <table>
+            <thead>
+              <tr>
+                <!--实际显示的表头。注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+                <th tiOverflow *ngFor="let columslog of columsLog" width="{{ columslog.width }}">
+                  {{ columslog.title }}
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="ti3-table-container log-table-body">
+          <table>
+            <thead>
+              <tr [ngStyle]="{'opacity': 0}">
+                <th *ngFor="let columslog of columsLog" width="{{ columslog.width }}"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let log of displayedLog">
+                <td tiOverflow>
+                  {{(log.userId && log.username) || ""}}
+                </td>
+                <td tiOverflow>{{ log.operation }}</td>
+                <td tiOverflow>
+                  <span class="status-icon success-icon" [ngClass]="{ 'failed-icon': !log.succeed }"></span>
+                  <span>{{ log.succeed ? "Successful" : "Failed" }}</span>
+                </td>
+                <td tiOverflow>{{ log.clientIp }}</td>
+                <td tiOverflow>
+                  {{ libService.dateFormat(log.createTime * 1000, "yyyy/MM/dd hh:mm:ss") }}
+                </td>
+                <td tiOverflow>{{ log.resource }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="displayedLog.length === 0">
+              <tr class="noHover">
+                  <td tiColspan>
+                      <div class="noData">
+                            <img class='newNoData' src="./assets/img/projects/noData.svg" />
+                            <p>{{i18n.common_term_task_nodata}}</p>
+                      </div>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ti-pagination [(currentPage)]="currentPageLog" [pageSize]="pageSizeLog" style="width: 100%;"
+          [(totalNumber)]="totalNumberLog" [showGotoLink]="true">
+        </ti-pagination>
+      </ti-table>
+    </div>
+  </div>
+  <!-- 运行日志 -->
+  <div *ngIf="tab1s[1].active" class="tlog-box" [appLoading]="isLoadingOper">
+    <div>
+      <ti-table [(displayedData)]="displayedRunLog" [srcData]="runLogList" [columns]="columnsRunLog" class="operTable">
+        <div class="ti3-table-fixed-head">
+          <table>
+            <thead>
+              <tr>
+                <!--实际显示的表头。注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+                <th tiOverflow *ngFor="let column of columnsRunLog" width="{{ column.width }}">
+                  {{ column.title }}
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="ti3-table-container">
+          <table>
+            <thead>
+              <tr [ngStyle]="{'opacity': 0}">
+                <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                <th *ngFor="let column of columnsRunLog" width="{{ column.width }}"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of sortLog">
+                <td tiOverflow>{{ row }}</td>
+                <td tiOverflow>
+                  <a class="runLog-download"
+                    (click)="logDownload(row)">{{ i18n.common_term_admin_downLoad }}</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ti-table>
+    </div>
+  </div>
+
+  <app-alert-modal #logDown>
+    <div class="content contentBox">
+      <div class="c-title">
+        <div class="titleTxt">{{i18n.run_log.java_run_log_download}}</div>
+        <img style="cursor: pointer;" class="incorrect" (click)="closeLogDown()" (mouseenter)="onHoverClose('closer')"
+          (mouseleave)="onHoverClose('')"
+          [src]="hoverClose==='closer'?'./assets/img/newSvg/close_hover.svg':' ./assets/img/header/close_icon.svg'">
+      </div>
+      <div class="warnLog">
+        <img src="./assets/img/newSvg/tip.svg" />
+        <div class="warnTxt">{{i18n.common_term_log_download}}</div>
+      </div>
+      <ti-table [(displayedData)]="displayedDetailLog" [srcData]="detailLogData" [columns]="detailLogColumns">
+        <div class="ti3-table-fixed-head">
+          <table>
+            <thead>
+              <tr>
+                <th tiOverflow *ngFor="let column of detailLogColumns" width="{{column.width}}">{{column.title}}</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="ti3-table-container" style=" max-height:200px;overflow-y: auto;">
+          <table>
+            <thead>
+              <tr [ngStyle]="{'opacity': 0}">
+                <th tiOverflow *ngFor="let column of detailLogColumns" width="{{column.width}}"></th>
+              </tr>
+            </thead>
+            <tbody *ngIf="displayedDetailLog.length > 0">
+              <tr *ngFor="let row of displayedDetailLog;">
+                <td tiOverflow>{{row.fileName}}</td>
+                <td tiOverflow>{{row.fileSize}}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="displayedDetailLog.length === 0">
+              <div class="log-nodata">
+                <img class='newNoData' src="./assets/img/projects/noData.svg" />
+                <div style="font-size: 1rem;">
+                  {{ i18n.common_term_task_nodata }}
+                </div>
+              </div>
+            </tbody>
+          </table>
+        </div>
+      </ti-table>
+      <div class="btns">
+        <button type="button" tiButton color="primary" style="margin-right: 16px;"
+          (click)="downloadRunLog()">{{i18n.common_term_operate_ok}}</button>
+        <button type="button" tiButton (click)="closeLogDown()">{{i18n.common_term_operate_cancel}}</button>
+      </div>
+    </div>
+  </app-alert-modal>
+</div>

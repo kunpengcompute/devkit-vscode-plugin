@@ -1,0 +1,113 @@
+<div>
+    <!-- 搜索框 -->
+    <ti-searchbox [placeholder]="placeholder" (search)="onSearch($event)" (clear)="onClear($event)" [(ngModel)]='value'>
+    </ti-searchbox>
+    <!-- 添加与搜素 -->
+    <button type="button" tiButton id="mybutton" (click)="showAddmodal(myModal)"
+        *ngIf="!disabled">{{ i18n.weakPassword.addWeak }}</button>
+    <!-- 表格 -->
+    <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns" (stateUpdate)="stateUpdate($event)"
+        [appLoading]="isLoading">
+        <!--.ti3-table-fixed-head是表头的容器，它的子元素中的table(thead)是实际显示的表头-->
+        <!--注意:此处一定要使用.ti3-table-fixed-head样式类-->
+        <div class="ti3-table-fixed-head">
+            <table>
+                <thead>
+                    <tr>
+                        <!--实际显示的表头。注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+                        <th tiOverflow *ngFor="let column of columns" width="{{column.width}}">{{column.title}}</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <!--.ti3-table-container是表体的容器，它的子元素中的table的thead是用来控制各列宽度，实际不显示；tbody是实际显示的表体-->
+        <!--注意1:此处一定要使用.ti3-table-container样式类-->
+        <!--注意2:用户在有.ti3-table-container样式类的容器上来设置表体的高度或最大高度-->
+        <div class="ti3-table-container table-body">
+            <table>
+                <!-- 表头要固定 -->
+                <thead>
+                    <tr [ngStyle]="{'opacity': 0}">
+                        <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                        <th tiOverflow *ngFor="let column of columns" width="{{column.width}}"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                    <tr *ngFor="let row of displayed; let index=index">
+                        <td tiOverflow>{{row.weak_password}}</td>
+                        <td><a class="delete-btn" *ngIf="operate !== '--'"
+                                (click)='showDelmodal(row,deletemodal)'>{{ operate }}</a>
+                            <span class="delete-text" *ngIf="operate === '--'">--</span> </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="displayed.length === 0  && !isLoading">
+                    <div class="cert-nodata">
+                        <img class='newNoData' src="./assets/img/projects/noData.svg" />
+                        <div>
+                          {{ i18n.common_term_task_nodata }}
+                        </div>
+                      </div>
+                </tbody>
+            </table>
+        </div>
+        <!-- 分页区域 -->
+        <ti-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber" [showGotoLink]="true" [autoHide]="true">
+        </ti-pagination>
+    </ti-table>
+    <!-- 添加弱口令 -->
+    <ng-template #myModal let-context='context'>
+        <ti-modal-header id="weakHead">
+            <div class="titleBox">
+                <p> {{ i18n.weakPassword.addWeakPwd }}</p>
+                <img style="cursor: pointer; float: right;" (click)="context.dismiss()"
+                    (mouseenter)="onHoverClose('closer')" (mouseleave)="onHoverClose('')"
+                    [src]="hoverClose==='closer'?'./assets/img/newSvg/close_hover.svg':' ./assets/img/header/close_icon.svg'">
+            </div>
+        </ti-modal-header>
+        <ti-modal-body id="addWeakBody">
+            <div class="addWeakPwd">
+                <ti-formfield [formGroup]="WeakPad">
+                    <ti-item [label]="i18n.weakPassword.WeakPwd" [required]="true">
+                        <input tiText [tiValidation]="validation" formControlName="pwd" autofocus="autofocus"
+                            type="text" style="width: 300px;" />
+                    </ti-item>
+                </ti-formfield>
+            </div>
+        </ti-modal-body>
+        <ti-modal-footer id="weakFooter">
+            <div class="foot">
+                <button class="confirm" type="button" color='primary' tiButton (click)="addConfirm(context)" [disabled]="!WeakPad.valid">
+                    {{i18n.common_term_ok}} </button>
+                <button type="button" tiButton (mousedown)="context.dismiss()"> {{i18n.common_term_operate_cancel}}
+                </button>
+            </div>
+        </ti-modal-footer>
+    </ng-template>
+    <!-- 删除弱口令 -->
+    <ng-template #deletemodal let-context='context'>
+        <ti-modal-header id="weakHead">
+            <div class="header">
+                <p> {{ i18n.weakPassword.deleWeakPwd }}</p>
+                <img style="cursor: pointer; float: right;" (click)="context.dismiss()"
+                    (mouseenter)="onHoverClose('closer')" (mouseleave)="onHoverClose('')"
+                    [src]="hoverClose==='closer'?'./assets/img/newSvg/close_hover.svg':' ./assets/img/header/close_icon.svg'">
+            </div>
+        </ti-modal-header>
+        <ti-modal-body id="addWeakBody">
+            <div class="verify">
+                <img src="./assets/img/newSvg/warn.svg" alt="">
+                <span style="vertical-align:middle;">{{ deleteContent }}</span>
+            </div>
+        </ti-modal-body>
+        <ti-modal-footer id="weakFooter">
+            <div class="foot">
+                <button class="confirm" type="button" tiButton (click)="context.close()">
+                    {{i18n.common_term_ok}} </button>
+                <button type="button" tiButton color='primary' (click)="context.dismiss()">
+                    {{i18n.common_term_operate_cancel}}
+                </button>
+            </div>
+        </ti-modal-footer>
+    </ng-template>
+</div>

@@ -1,0 +1,17 @@
+<div class='content' id="Thor-Container">
+  <!-- 建议反馈 -->
+  <app-advice-feedback-icon *ngIf="showAdviceIcon" #adviceIcon (openAdvice)="openAdvice($event)">
+  </app-advice-feedback-icon>
+  <app-advice-error-alert #errorAlert></app-advice-error-alert>
+  <div class="header-content">
+    <app-new-header *ngIf='showHeader'></app-new-header>
+  </div>
+  <div class='main'>
+    <div class='router-content'>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div id='sample-loading-box'>
+    <app-loading #loading></app-loading>
+  </div>
+</div>

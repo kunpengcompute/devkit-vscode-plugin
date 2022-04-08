@@ -1,0 +1,26 @@
+<div class="cpu-detail container" #container>
+  <header>
+    <title>{{ i18n.ddr_summury.tabDdrTitle }}</title>
+    <div>
+      <hy-theme-content class="view-switch">
+        <app-icon-react light name="chartView" *ngIf="isTable" (click)="isTable = false"></app-icon-react>
+        <app-icon-react light name="chartViewSelected" *ngIf="!isTable" (click)="isTable = false"></app-icon-react>
+        <app-icon-react light name="tableView" *ngIf="!isTable" (click)="isTable = true"></app-icon-react>
+        <app-icon-react light name="tableViewSelected" *ngIf="isTable" (click)="isTable = true"></app-icon-react>
+
+        <app-icon-react dark name="chartViewDarkIntellij" *ngIf="isTable && ideType === 'intellij'" (click)="isTable = false"></app-icon-react>
+        <app-icon-react dark name="chartViewSelectedDarkIntellij" *ngIf="!isTable && ideType === 'intellij'" (click)="isTable = false"></app-icon-react>
+        <app-icon-react dark name="tableViewDarkIntellij" *ngIf="!isTable && ideType === 'intellij'" (click)="isTable = true"></app-icon-react>
+        <app-icon-react dark name="tableViewSelectedDarkIntellij" *ngIf="isTable && ideType === 'intellij'" (click)="isTable = true"></app-icon-react>
+        <app-icon-react dark name="chartViewDark" *ngIf="isTable && ideType !== 'intellij'" (click)="isTable = false"></app-icon-react>
+        <app-icon-react dark name="chartViewSelectedDark" *ngIf="!isTable && ideType !== 'intellij'" (click)="isTable = false"></app-icon-react>
+        <app-icon-react dark name="tableViewDark" *ngIf="!isTable && ideType !== 'intellij'" (click)="isTable = true"></app-icon-react>
+        <app-icon-react dark name="tableViewSelectedDark" *ngIf="isTable && ideType !== 'intellij'" (click)="isTable = true"></app-icon-react>
+      </hy-theme-content>
+    </div>
+	</header>
+  <main>
+    <app-ddr-ddr-echarts *ngIf="!isTable" [nodeId]="nodeid" [taskId]="taskid"></app-ddr-ddr-echarts>
+    <app-ddr-ddr-table *ngIf="isTable" [data]="tableData"></app-ddr-ddr-table>
+  </main>
+</div>

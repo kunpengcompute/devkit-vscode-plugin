@@ -1,0 +1,116 @@
+<ng-template #nodeConfigModal let-context='context'>
+  <ti-modal-header class="modal-title">
+    {{ i18n.nodeConfig.modifyNodeParameter }}
+  </ti-modal-header>
+
+  <ti-modal-body>
+    <div class="modal-content">
+      <div class="nodeInfo">
+        <ti-formfield [labelWidth]="labelWidth">
+          <!-- 节点别名 -->
+          <ti-item [label]="i18n.common_term_another_nodename">
+            <span class="nodeInfoItem">{{ nodeParams.nodeName }}</span>
+          </ti-item>
+
+          <!-- 节点IP -->
+          <ti-item [label]="i18n.common_term_node_ip">
+            <span class="nodeInfoItem">{{ nodeParams.nodeIp }}</span>
+          </ti-item>
+        </ti-formfield>
+      </div>
+      <div class="pid-name nodeConfigBox" *ngIf="isAtttach" [formGroup]="pidProcessGroup">
+        <app-mem-process-pid formControlName="pidProcess" [labelWidth]="labelWidth" [inputWidth]="'300px'"
+            [attachRadioName]="'configNodeRadio'"></app-mem-process-pid>
+      </div>
+      <ti-formfield [labelWidth]="labelWidth" [formGroup]='formGroup'>
+        <!-- 应用路径 -->
+        <ti-item [label]="form.path.label" [required]="form.path.required" *ngIf="!isAtttach">
+          <ti-item-label>
+            <span>{{form.path.label}}</span>
+            <ti-icon [tiTip]="i18n.common_term_task_c_app" tiTipMaxWidth='370px' tiTipPosition="bottom">
+              <img class="tipImg" src='./assets/img/summary/tooltip_dark.svg'>
+            </ti-icon>
+          </ti-item-label>
+          <input type="text" tiText [tiValidation]='validation' formControlName='path_ctrl'
+            style="width: 300px;margin-top:8px;" (ngModelChange)="checkValid()">
+          <div class="bottomTip" tiOverflow>{{i18n.mission_create.modeAppPathSaftWarn}}</div>
+          <div class="bottomTip" tiOverflow>{{appPathTip}}</div>
+        </ti-item>
+
+        <!-- 应用参数 -->
+        <ti-item [label]="form.params_c.label" [required]="form.params_c.required" *ngIf="!isAtttach">
+          <textarea class="tiTextarea" tiTextarea [placeholder]="i18n.mission_create.modeAppParamsHolder"
+            [tiValidation]='validation' formControlName='params_ctrl'></textarea>
+        </ti-item>
+
+        <!-- 二进制/符号文件路径 -->
+        <ti-item [required]="form.b_s.required" *ngIf="!diagnoseContent">
+          <ti-item-label>
+            <span>{{form.b_s.label}}</span>
+            <ti-icon [tiTip]="form.b_s.tip" tiTipMaxWidth='370px' tiTipPosition="bottom">
+              <img class="tipImg" src='./assets/img/summary/tooltip_dark.svg'>
+            </ti-icon>
+          </ti-item-label>
+          <input type="text" tiText [tiValidation]='validation' formControlName='b_s_ctrl'
+            style="width: 300px;margin-top:8px;" (ngModelChange)="checkValid()">
+        </ti-item>
+
+        <!-- C/C++源文件路径 -->
+        <ti-item [required]="form.c_source.required"  *ngIf="showCFile">
+          <ti-item-label>
+            <span>{{form.c_source.label}}</span>
+            <ti-icon [tiTip]="form.c_source.tip" tiTipMaxWidth='370px' tiTipPosition="bottom">
+              <img class="tipImg" src='./assets/img/summary/tooltip_dark.svg'>
+            </ti-icon>
+          </ti-item-label>
+          <input type="text" tiText [tiValidation]='validation' formControlName='source_ctrl'
+            style="width: 300px;margin-top:8px;" (ngModelChange)="checkValid()">
+        </ti-item>
+      </ti-formfield>
+      <div class="heightConfig"></div>
+      <ti-formfield class="userFormConfig" [formGroup]='userFormGroup' [labelWidth]="labelWidth" *ngIf="!isAtttach">
+        <ti-item [required]="form.runUserStatus.required">
+          <ti-item-label>
+            <span>{{ form.runUserStatus.label }}</span>
+            <ti-icon [tiTip]="form.runUserStatus.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+              tiTipPosition="bottom">
+              <img src='./assets/img/summary/tooltip_dark.svg'>
+            </ti-icon>
+          </ti-item-label>
+          <ti-switch id="myswitch" ngDefaultControl formControlName='runUserStatus' (ngModelChange)="checkValid()">
+          </ti-switch>
+        </ti-item>
+        <ti-item [required]="form.user.required" [show]="userFormGroup.controls.runUserStatus.value">
+          <ti-item-label>
+            <span>{{ form.user.label }}</span>
+          </ti-item-label>
+          <input type="text" tiText formControlName='user' style="width: 300px" [tiValidation]='validation'
+            (ngModelChange)="checkValid()" />
+        </ti-item>
+
+        <ti-item [required]="form.password.required" [show]="userFormGroup.controls.runUserStatus.value" style="position: relative;">
+          <ti-item-label>
+            <span>{{ form.password.label }}</span>
+          </ti-item-label>
+          <input [type]="passwordInputType" tiText formControlName='password' style="width: 300px" [tiValidation]='validation'
+            (ngModelChange)="checkValid()" />
+            <div class="eye">
+              <span (click)="passwordInputType = 'password'" *ngIf="passwordInputType === 'text'">
+                  <img src="./assets/img/common/icon-view.svg" />
+              </span>
+              <span (click)="passwordInputType = 'text'" *ngIf="passwordInputType === 'password'">
+                  <img src="./assets/img/common/icon-hide.svg" />
+              </span>
+          </div>
+        </ti-item>
+      </ti-formfield>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer class="footerButs">
+    <button tiButton type="button" color="primary" [disabled]='btnCheck'
+      (click)="confirm(context)">{{i18n.common_term_operate_ok}}</button>
+    <button tiButton type="button" (click)="context.dismiss()" class="little-minor-btn">
+      {{ i18n.common_term_operate_cancel }}
+    </button>
+  </ti-modal-footer>
+</ng-template> 

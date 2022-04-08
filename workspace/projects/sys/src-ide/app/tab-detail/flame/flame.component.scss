@@ -1,0 +1,88 @@
+.flame-box {
+    text-align: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+    height: 73vh;
+    .svgContent {
+        svg {
+            width: 100% !important;
+        }
+    }
+}
+.d3-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+.in-middle {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+}
+::ng-deep .vscode-light {
+    .d3-flame-graph-tip {
+        visibility: hidden;
+    }
+    #flame-menu {
+        position: fixed;
+        border: 1px solid #ccc;
+        border-radius: 1px;
+        background: #eee;
+        padding: 5px 10px;
+        top: 0px;
+        display: flex;
+        .menu-text {
+            min-width: 48px;
+            max-width: 263px;
+            padding-right: 16.5px;
+            border-right: 1px solid #ccc;
+            color: #aaa;
+            font-size: 12px;
+        }
+        .menu-item {
+            font-size: 12px;
+            cursor: pointer;
+            color: #0067FF;
+            padding-left: 16.5px;
+        }
+    }
+}
+::ng-deep .vscode-dark {
+    .d3-flame-graph-tip {
+        visibility: hidden;
+    }
+    #flame-menu {
+        position: fixed;
+        border: 1px solid #ddd;
+        border-radius: 1px;
+        background: #313131;
+        padding: 5px 10px;
+        top: 0px;
+        display: flex;
+        .menu-text {
+            padding-right: 16.5px;
+            border-right: 1px solid #ddd;
+            color: #aaa;
+        }
+        .menu-item {
+            font-size: 12px;
+            cursor: pointer;
+            color: #0067FF;
+            padding-left: 16.5px;
+        }
+        &[hidden]{
+            display: none;
+        }
+    }
+}
+.notStack {
+    padding-right: 0px !important;
+    border-right: 0px solid #d7deee !important;
+}

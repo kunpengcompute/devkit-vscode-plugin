@@ -1,0 +1,171 @@
+.warpper {
+    position: relative;
+    overflow: visible;
+    margin-bottom: 32px;
+
+    .svg-container {
+        text-align: center;
+        width: auto;
+        height: auto;
+        background-position-x: center;
+    }
+}
+
+/*
+ * 自定义的提示框
+ */
+.nice_tooltip {
+    width: 342px;
+}
+
+.cpu-tip-container {
+    color: #616161;
+    .cpu-tip-title {
+        margin-bottom: 22px;
+        font-family: PingFangSC-Regular;
+        font-size: 18px;
+        color: #2a2f35;
+    }
+
+    .cpu-tip-content-center {
+        display: flex;
+        padding: 0 10px 0 10px;
+        justify-content: space-between;
+        min-height: 80px;
+        font-size: 14px;
+
+    }
+
+    .cpu-tip-content-center .item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .cpu-tip-content-center .item .item-value {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        color: #222;
+        font-family: FZLTZHJW--GB1-0;
+    }
+
+    .cpu-tip-content-bottom {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr 1fr 1.2fr;
+        margin-top: 28px;
+        font-size: 14px;
+    }
+
+    .cpu-tip-content-bottom span {
+        color: #222;
+    }
+
+    .upright-slash {
+        border: 1px solid #dee2e9;
+        height: 56px;
+        align-self: center;
+    }
+}
+
+.memory-tip-container {
+    color: #616161;
+    .memory-tip-title {
+        margin-bottom: 26px;
+        font-family: PingFangSC-Regular;
+        font-size: 18px;
+        color: #2a2f35;
+    }
+
+    .memory-tip-content-center {
+        display: flex;
+        justify-content: space-between;
+        min-height: 50px;
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+
+    .memory-tip-content-center .item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .memory-tip-content-center .item span {
+        font-size: 18px;
+        color: #222;
+    }
+
+    .upright-slash {
+        border: 1px solid #dee2e9;
+        height: 35px;
+        align-self: center;
+    }
+}
+
+.storage-tip-container {
+    color: #616161;
+    .storage-tip-title {
+        font-family: PingFangSC-Regular;
+        font-size: 18px;
+        color: #2a2f35;
+    }
+
+    .storage-tip-content-center {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+        font-size: 14px;
+        min-height: 50px;
+        margin: 24px 0;
+    }
+
+    .storage-tip-content-center span {
+        font-size: 18px;
+        color: #222;
+    }
+
+    .storage-tip-content-bottom {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        column-gap: 10px;
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+
+    .storage-tip-content-bottom p {
+        color: #222;
+    }
+}
+
+.net-tip-container {
+    color: #616161;
+
+    .net-tip-title {
+        font-family: PingFangSC-Regular;
+        font-size: 18px;
+        color: #2a2f35;
+    }
+
+    .net-tip-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+        font-size: 14px;
+        min-height: 50px;
+        margin: 24px 0 13px 0;
+    }
+
+    .net-tip-content span {
+        font-size: 18px;
+        color: #222;
+    }
+}

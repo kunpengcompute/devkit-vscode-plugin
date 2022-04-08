@@ -1,0 +1,135 @@
+<div class="projectManagementBox">
+  <div class="add isDiagnoseAddBox">
+    <span class="addTitle" tiOverflow>{{ i18n.project_manage }}</span>
+    <span class="operate">
+      <span [tiTip]='i18n.tipMsg.createP' tiTipPosition="bottom-left" (click)="addProject()">
+        <app-icon-react name="addProject"></app-icon-react>
+      </span>
+    </span>
+  </div>
+  <div class="tree-box">
+    <ti-tree #TREE class="projectTree" [data]="tree" (select)="onSelect($event)" (beforeExpand)="beforeExpand($event)">
+      <ng-template let-item let-i="index">
+        <div class="tree-item" [ngClass]="[item.level, item.hilight ? 'mytree-checked' : '']">
+          <!-- 工程状态 -->
+          <span *ngIf="item.level === 'project'" [ngClass]="{ abnormal: item.status === 'abnormal' }" class="project-status"></span>
+
+          <!-- 工程名称 -->
+          <span *ngIf="item.level == 'project'" class="label project-label" tiOverflow tiTipPosition="bottom">
+            {{ item.label }}
+          </span>
+
+          <!-- 工程操作 -->
+          <span *ngIf="item.level === 'project' && (userInfo.role === 'Admin' || item.ownerId === userInfo.id)"
+            class="operate-box">
+            <!-- 创建任务 -->
+            <span class="icon-btn Add" *ngIf="item.ownerId === userInfo.id"
+              (click)="operateAction('createTuninghelperTask', item); $event.stopPropagation()"
+              [tiTip]="i18n.tipMsg.createM" tiTipPosition="bottom-left">
+              <app-icon-react name="createTask"></app-icon-react>
+            </span>
+            <!-- 删除工程-->
+            <span class="icon-btn Delete" (click)="deleteProject(item); $event.stopPropagation()"
+              [tiTip]="i18n.tipMsg.deleteP" tiTipPosition="bottom-left">
+              <app-icon-react name="deleteProject"></app-icon-react>
+            </span>
+          </span>
+
+          <!-- 任务名称 -->
+          <span *ngIf="item.level === 'task'" class="label task-label" [tiTip]='taskTipContent'
+            [tiTipContext]='taskTipContext' tiTipPosition="top" (mouseenter)="getTipInfo($event, item)">
+            {{ item.label }}
+          </span>
+
+          <!-- 任务操作 -->
+          <span *ngIf="item.level === 'task'" class="operate-box task">
+            <a *ngIf="(userInfo.role === 'Admin' || item.ownerId === userInfo.id) && taskOperate.stop.includes(item.status)"
+              class="icon-btn Stop" (click)="operateAction('stopTask',item);$event.stopPropagation()"
+              [tiTip]='i18n.tipMsg.stopM' tiTipPosition="bottom-left">
+              <app-icon-react name="stopTask"></app-icon-react>
+            </a>
+            <!-- 再次分析任务 -->
+            <a *ngIf="(userInfo.role === 'Admin' || item.ownerId === userInfo.id) && taskOperate.reanalyze.includes(item.status)"
+              class="icon-btn reanalyze" (click)="operateAction('reanalyzeTask', item); $event.stopPropagation()"
+              [tiTip]="i18n.tipMsg.reanalyzeTask" tiTipPosition="bottom-left">
+              <app-icon-react name="reanalyzeIcon" [freeze]="!!item.offline ? 'disabled' : null"></app-icon-react>
+            </a>
+            <!-- 查看任务分析路径 -->
+            <a class="icon-btn association" (click)="operateAction('associationNode', item); $event.stopPropagation()"
+              [tiTip]="i18n.tipMsg.associationM" tiTipPosition="bottom-left">
+              <app-icon-react name="associationNode"></app-icon-react>
+            </a>
+            <!-- 删除任务 -->
+            <a *ngIf="(userInfo.role === 'Admin' || item.ownerId === userInfo.id) && taskOperate.delete.includes(item.status)"
+              class="icon-btn Delete" (click)="operateAction('deleteTask', item); $event.stopPropagation()"
+              [tiTip]="i18n.tipMsg.deleteM" tiTipPosition="bottom-left">
+              <app-icon-react name="deleteProject"></app-icon-react>
+            </a>
+          </span>
+
+          <!-- 节点状态 -->
+          <span *ngIf="item.level === 'node'" [tiTip]="getTaskStatus(item.sampleStatus)" tiTipPosition="bottom">
+            <span *ngIf="['Created', 'Waiting'].includes(item.sampleStatus)" class="node-status waiting"></span>
+            <span *ngIf="['Completed', 'Aborted'].includes(item.sampleStatus)" class="node-status success"></span>
+            <span *ngIf="['Sampling', 'Analyzing', 'Stopping', 'Cancelling'].includes(item.sampleStatus)"
+              class="node-status running"></span>
+            <span *ngIf="['Failed', 'Cancelled'].includes(item.sampleStatus)" class="node-status failed"></span>
+          </span>
+
+          <!-- 节点名称 -->
+          <span *ngIf="item.level == 'node'" class="label nodeLabel">
+            <span tiTipPosition="bottom" class="text" tiOverflow>
+              {{ item.label }}
+            </span>
+
+            <!-- 已删除节点 -->
+            <span *ngIf="item.level === 'node' && item.nodeStatus === 'delete' && !item.isImport" class="deleted">
+              {{ i18n.common_term_left_parentheses + i18n.nodeManagement.deleted + i18n.common_term_right_parentheses }}
+            </span>
+          </span>
+
+          <!-- 节点操作 -->
+          <span *ngIf="item.level === 'node'" class="operate-box">
+            <a class="icon-btn viewInfoLog" (click)="operateAction('viewInfoLog', item); $event.stopPropagation()"
+              [tiTip]="i18n.tipMsg.viewInfoLog" tiTipPosition="bottom-left">
+              <app-icon-react name="viewTaskDetail"></app-icon-react>
+            </a>
+            <!-- 查看节点分析路径 -->
+            <a class="icon-btn association" (click)="operateAction('associationNode', item); $event.stopPropagation()"
+              [tiTip]="i18n.tipMsg.associationNodeM" tiTipPosition="bottom-left">
+              <app-icon-react name="associationNode"></app-icon-react>
+            </a>
+            <!-- 重启节点 -->
+            <a *ngIf="(userInfo.role === 'Admin' || item.ownerId === userInfo.id) && taskOperate.reanalyze.includes(item.sampleStatus)"
+              class="icon-btn reanalyze" (click)="operateAction('reanalyzeServer', item); $event.stopPropagation()"
+              [tiTip]="i18n.tipMsg.reanalyzeServer" tiTipPosition="bottom-left">
+              <app-icon-react name="reanalyzeIcon" [freeze]="!!item.offline ? 'disabled' : null"></app-icon-react>
+            </a>
+
+          </span>
+        </div>
+      </ng-template>
+    </ti-tree>
+
+    <div class="nodata2" *ngIf="tree.length === 0">
+      <img src="./assets/img/projects/no-project-light.png" />
+      <div style="text-align: center">{{ i18n.common_term_task_nodata2 }}</div>
+      <button type="button" size="small" tiButton color="primary" class="small" (click)="addProject()">
+        {{ i18n.common_term_operate_add_project }}
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- 任务悬浮tip提示 -->
+<ng-template #taskTipContent let-context='context'>
+  <div class="task-tip"><span>{{ i18n.task_info.task_name }}</span><span>{{ context.taskName }}</span></div>
+  <div class="task-tip"><span>{{ i18n.task_info.analysis_object }}</span><span>{{ context.analysisObject }}</span></div>
+  <div class="task-tip">
+    <span>{{ i18n.task_info.task_analysis_type }}</span>
+    <span>{{ i18n.common_tern_tunning_helper_name }}</span>
+  </div>
+</ng-template>
+
+<app-delete-modal (closaModal)="closeModal($event)" #deleteModal></app-delete-modal>

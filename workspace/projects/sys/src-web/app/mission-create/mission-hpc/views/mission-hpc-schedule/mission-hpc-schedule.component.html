@@ -1,0 +1,266 @@
+<div class="form-warpper">
+  <div class="form-area">
+    <!-- 任务名称 -->
+    <div class="control taskName" *ngIf="formOption.taskName.display">
+      <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+        <ti-item [label]="i18n.storageIO.mission_create.mission_name">
+          <span>{{ formGroup.get("taskName").value }}</span>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <!-- 分析类型 -->
+    <div class="control analysisType" *ngIf="formOption.analysisType.display">
+      <ti-formfield [labelWidth]="labelWidth">
+        <ti-item [label]="i18n.common_term_task_analysis_type">
+          <div style="margin-top: 4px">{{ i18n.mission_create.hpc }}</div>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <!-- 分析对象 -->
+    <div
+      class="control analysisTarget"
+      *ngIf="formOption.analysisTarget.display"
+    >
+      <ti-formfield [labelWidth]="labelWidth">
+        <ti-item [label]="i18n.mission_create.analysisTarget">
+          <div style="margin-top: 4px">{{ analysisTagValue }}</div>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <!-- 分析模式 -->
+    <div class="control analysisMode" *ngIf="formOption.analysisMode.display">
+      <ti-formfield [labelWidth]="labelWidth">
+        <ti-item [label]="i18n.mission_create.mode">
+          <div style="margin-top: 4px">{{ analysisMode }}</div>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <!-- 应用名称 和 应用参数 -->
+    <div class="control appAndParams" *ngIf="formOption.appAndParams.display">
+      <div [formGroup]="formGroup">
+        <app-app-params-input formControlName="appAndParams">
+        </app-app-params-input>
+      </div>
+    </div>
+
+    <!-- 进程名称 和 PID -->
+    <div class="control pidProcess" *ngIf="formOption.pidProcess.display">
+      <div [formGroup]="formGroup">
+        <app-pid-process-input formControlName="pidProcess">
+        </app-pid-process-input>
+      </div>
+    </div>
+
+    <!-- 选择节点 -->
+    <div [hidden]="!formOption.selectNodeList.display">
+      <ti-formfield vertical [formGroup]="formGroup" [labelWidth]="labelWidth">
+        <ti-item [required]="true">
+          <ti-item-label>
+            {{ i18n.node.selectNode }}
+          </ti-item-label>
+          <app-not-hpc-select-nodes
+            [width]="'670px'"
+            [nodeList]="nodeList"
+            formControlName="nodeList"
+            [isSelectNodeDisabled]="isSelectNodeDisabled"
+            [isHPC]="true"
+          ></app-not-hpc-select-nodes>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <!-- 采样时长（秒） -->
+    <div class="control duration" *ngIf="formOption.duration.display">
+      <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+        <ti-item
+          [label]="i18n.storageIO.mission_create.duration"
+          [required]="true"
+        >
+          <ti-spinner
+            formControlName="duration"
+            format="N0"
+            style="width: 140px"
+            placeholder="1 ~ 3600"
+            [min]="1"
+            [max]="3600"
+            [tiValidation]="{ type: 'blur' }"
+            [errorMessageWrapper]="durationErrorMsgWrapper"
+            [appSpinnerBlur]="samplingDurationBlur"
+          >
+          </ti-spinner>
+          <span class="spinner-domain">
+            {{ i18n.common_term_sign_left }}1 ~ 300{{
+              i18n.common_term_sign_right
+            }}
+          </span>
+          <div #durationErrorMsgWrapper></div>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <!-- 采样类型  -->
+    <div class="control preset" *ngIf="formOption.preset.display">
+      <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+        <ti-item
+          [label]="i18n.hpc.mission_create.analysis_type"
+          [required]="false"
+        >
+          <div class="radio-item">
+            <input
+              type="radio"
+              tiRadio
+              formControlName="preset"
+              [value]="hpcPresetOption.Summary"
+              [label]="i18n.hpc.mission_create.summary"
+            />
+          </div>
+          <div class="radio-item">
+            <input
+              type="radio"
+              tiRadio
+              formControlName="preset"
+              [value]="hpcPresetOption.InstrucMix"
+              [label]="i18n.hpc.mission_create.instr_dis"
+            />
+          </div>
+          <div class="radio-item">
+            <input
+              type="radio"
+              tiRadio
+              formControlName="preset"
+              [value]="hpcPresetOption.Topdown"
+              [label]="'HPC Top-Down'"
+            />
+          </div>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <!-- 采集类型 -->
+    <div class="control preset" *ngIf="formOption.collection.display">
+      <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+        <ti-item
+          [label]="i18n.hpc.mission_create.collectionType"
+          [required]="false"
+        >
+          <div class="radio-item">
+            <input
+              type="radio"
+              tiRadio
+              formControlName="mpiStatus"
+              [value]="false"
+              [label]="collectionType.OpenMP"
+            />
+          </div>
+          <div class="radio-item">
+            <input
+              type="radio"
+              tiRadio
+              formControlName="mpiStatus"
+              [value]="true"
+              [label]="collectionType.MPI"
+              [disabled]="true"
+            />
+          </div>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <!-- OpenMP 参数 -->
+    <div class="control openMpParams" *ngIf="formOption.openMpParams.display">
+      <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+        <ti-item>
+          <ti-item-label>
+            <span>{{ i18n.hpc.mission_create.openMpParams }}</span>
+            <img
+              [tiTip]="i18n.hpc.mission_create.openMpParams_tip"
+              class="margin_left openmp-tip-icon"
+              tiTipMaxWidth="370px"
+              tiTipPosition="bottom"
+              src="./assets/img/summary/tooltip.png"
+            />
+          </ti-item-label>
+          <input
+            tiText
+            type="text"
+            formControlName="openMpParams"
+            [tiValidation]="{ type: 'blur' }"
+            [placeholder]="i18n.hpc.mission_create.openMpParams"
+            style="width: 300px"
+          />
+        </ti-item>
+      </ti-formfield>
+    </div>
+    <!-- 配置指定节点参数 -->
+    <div
+      class="node-config-modal import-btn"
+      *ngIf="formOption.doNodeConfig.display"
+    >
+      <app-mission-node-config
+        #nodeConfigC
+        [labelWidth]="labelWidth"
+        [nodeList]="formGroup.get('nodeList').value"
+        [isAbled]="!(formGroup.valid && modePidValid)"
+        [taskType]="analysisType.Hpc"
+        [formData]="formDatas"
+        [projectId]="projectId"
+        [nodeConfigShow]="formOption.doNodeConfig.display"
+        [nodeConfigedData]="nodeConfigedData"
+        [runUserData]="runUserData"
+        [runUserDataObj]="runUserDataObj"
+        (controlNode)="onControlNode($event)"
+        (opentNode)="handleNodeEmit($event)"
+        (selectNodeDisable)="selectNodeDisable($event)"
+      >
+      </app-mission-node-config>
+    </div>
+
+    <!-- 预约定时启动 -->
+    <div class="control doOrder" *ngIf="formOption.doOrder.display">
+      <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+        <ti-item [label]="i18n.storageIO.mission_create.order">
+          <ti-switch formControlName="doOrder"></ti-switch>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <!-- 预约定时编辑控件 -->
+    <div class="control orderConfig" *ngIf="formOption.orderConfig.display">
+      <div [formGroup]="formGroup">
+        <app-mission-reservation-plus
+          formControlName="orderConfig"
+          [labelWidth]="labelWidth"
+        >
+        </app-mission-reservation-plus>
+      </div>
+    </div>
+
+    <!-- 立即启动 -->
+    <div class="control taskStartNow" *ngIf="formOption.taskStartNow.display">
+      <div [formGroup]="formGroup">
+        <input tiCheckbox type="checkbox" formControlName="taskStartNow" />
+        <span class="start-now">{{ i18n.common_term_task_start_now }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 操作 -->
+  <div class="opreation">
+    <button
+      tiButton
+      [disabled]="!(formGroup.valid && modePidValid)"
+      type="button"
+      color="primary"
+      (click)="onModifyClick()"
+    >
+      {{ i18n.common_term_operate_ok }}
+    </button>
+    <button tiButton type="button" (click)="onClose()">
+      {{ i18n.common_term_operate_cancel }}
+    </button>
+  </div>
+</div>

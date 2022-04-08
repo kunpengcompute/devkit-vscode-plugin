@@ -1,0 +1,45 @@
+<div id="detail-container" class="customContainer">
+    <ti-tabs>
+        <ti-tab [(active)]="item.active" *ngFor="let item of detailList; let index = index" [disabled]="item.disable">
+            <ng-container *ngIf="!(isSummury && item.title == this.i18n.micarch.details )">
+                <ti-tab-header>
+                    <span>{{item.title}}</span>
+                </ti-tab-header>
+                <div class="content-container" [ngClass]="{showDetail: item.active}"
+                    *ngIf="item.title == i18n.common_term_task_tab_summary && item.disable==false"
+                    [ngClass]="{showDetail: item.active}">
+                    <app-micarch-summury [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                        [analysisType]='analysisType' [taskid]='id' [app]='app' [isActive]="item.active">
+                    </app-micarch-summury>
+                </div>
+                <div class="content-container" [ngClass]="{showDetail: item.active}"
+                    *ngIf="item.title == this.i18n.micarch.timing && item.disable==false"
+                    [ngClass]="{showDetail: item.active}">
+                    <app-micarch-timing [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                        [analysisType]='analysisType' [taskid]='id' [isActive]="item.active"></app-micarch-timing>
+                </div>
+                <div class="content-container" [ngClass]="{showDetail: item.active}"
+                    *ngIf="item.title == this.i18n.micarch.details && item.disable==false"
+                    [ngClass]="{showDetail: item.active}">
+                    <app-micarch-details [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                        [analysisType]='analysisType' [taskid]='id' [isActive]="item.active"
+                        [configuration]="configuration">
+                    </app-micarch-details>
+                </div>
+                <div class="content-container" [ngClass]="{showDetail: item.active}"
+                    *ngIf="item.title == i18n.common_term_task_tab_congration && item.disable==false"
+                    [ngClass]="{showDetail: item.active}">
+                    <app-configuration [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                        [analysisType]='analysisType' [taskid]='id'></app-configuration>
+                </div>
+                <div class="content-container" [ngClass]="{showDetail: item.active}"
+                    *ngIf="item.title == i18n.common_term_task_tab_log && item.disable==false "
+                    [ngClass]="{showDetail: item.active}">
+                    <app-configuration-log [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                        [analysisType]='analysisType' [taskid]='id' [collectionLog]="collectionLog">
+                    </app-configuration-log>
+                </div>
+            </ng-container>
+        </ti-tab>
+    </ti-tabs>
+</div>

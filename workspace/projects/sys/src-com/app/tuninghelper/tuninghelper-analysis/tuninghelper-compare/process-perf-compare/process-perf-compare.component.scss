@@ -1,0 +1,25 @@
+.compare-process-perf-data-detail-container {
+    width: 100%;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+
+    .table-box {
+        margin-top: 20px;   
+        .app-process-box + .all-process-box {
+            margin-top: 32px;
+        }
+        .table-title {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: var(--common-color-font-primary);
+        }
+        .app-table {
+            width: 100%;
+        }
+
+        .all-table {
+            width: 100%;
+        }   
+    }
+    
+}

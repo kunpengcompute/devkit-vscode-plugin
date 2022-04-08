@@ -1,0 +1,92 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="修改鲲鹏性能分析的IP和端口">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0253410927.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="user guide">
+<meta name="DC.Publisher" content="20210630">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="kunpengoper_06_0001">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>修改鲲鹏性能分析的IP和端口</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="kunpengoper_06_0001"></a><a name="kunpengoper_06_0001"></a>
+
+<h1 class="topictitle1">修改鲲鹏性能分析的IP和端口</h1>
+<div id="body8662426"><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p8060118">以下命令中的“/opt/hyper_tuner”为工具安装目录，请根据实际情况替换。</p>
+<ol id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_ol323516182369"><li id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_zh-cn_topic_0197553145_li12443155544119"><span>使用SSH远程登录工具，进入Linux操作系统命令行界面。</span></li><li id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_li106101123133611"><span>进入工具安装路径<strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b4534173015561"> cd </strong><em id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_i1553415303565">/opt/hyper_tuner</em>，执行如下命令修改IP或服务端口。</span><p><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p13391926195610"><strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b139926105619">./change_ip_port.sh </strong>{<strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b1239192619566">-ip/</strong><strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b73918266561">--ip</strong>=<em id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_i13392026115612">web server IP</em> |<strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b12398264565"> -p/--port</strong>=<em id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_i1139152695619">web server port</em> | <strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b534726115613">-jip/--jip=</strong><em id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_i1934726155620">java_profiler IP</em><strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b157328342428"> </strong>|<strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b744743965617"> -jp/--jport</strong>=<em id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_i14341726195610">java_profiler port</em>}*</p>
+<p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p45636191382">命令中的参数说明如<a href="#kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_zh-cn_topic_0224252009_table04628341311">表1</a>所示，IP和服务端口请根据实际替换。如端口号被占用需要修改，请参考<a href="kunpengoper_06_0018.html#kunpengoper_06_0018">修改内部端口号</a>。</p>
+<p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p731334422917">例如：</p>
+<p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p67672033172818"><strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b113811713142919">./change_ip_port.sh </strong><strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b0381121316296">-ip</strong>=<em id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_zh-cn_topic_0190815659_i20160133833213">**.**.**.**</em> <strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b43811713142910">-p</strong>=<em id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_i3472125320294">8087</em> <strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b118321434383">-jip=</strong><em id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_i341484032910">**.**.**.**</em><strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b238191310291"> </strong><strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b1838111332910">-jp</strong>=<em id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_i54953381306">9091</em></p>
+<p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p1267192815518">如果端口在工具安装过程中已自动打开防火墙服务，修改端口后，修改前的端口会恢复至安装前的状态。工具会判断是否放开修改后的端口，当用户在交互界面输入“y”，将自动开启该端口。</p>
+<div class="note" id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_note935318317565"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p2354103185611">命令行格式的约定：</p>
+<ul id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_ul740018910011"><li id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_li12401189101"><strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b181471308581">粗体</strong>：命令行关键字（命令中保持不变、必须照输的部分）采用<strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b57282016135917">加粗</strong>字体表示。</li><li id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_li24011293016">{ x | y | ... }<sup id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_sup81924025512">*</sup>：表示从两个或多个选项中选取多个，最少选取一个，最多选取所有选项。</li></ul>
+</div></div>
+
+<div class="tablenoborder"><a name="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_zh-cn_topic_0224252009_table04628341311"></a><a name="zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_zh-cn_topic_0224252009_table04628341311"></a><table cellpadding="4" cellspacing="0" summary="" id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_zh-cn_topic_0224252009_table04628341311" frame="border" border="1" rules="all"><caption><b>表1 </b>参数说明</caption><colgroup><col style="width:14.93%"><col style="width:18.32%"><col style="width:66.75%"></colgroup><thead align="left"><tr id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_zh-cn_topic_0224252009_row955803181318"><th align="left" class="cellrowborder" valign="top" width="14.93%" id="mcps1.3.2.2.2.7.2.4.1.1"><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_zh-cn_topic_0224252009_p18736145017482">命令</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="18.32%" id="mcps1.3.2.2.2.7.2.4.1.2"><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_zh-cn_topic_0224252009_p11558238130">参数选项</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="66.75%" id="mcps1.3.2.2.2.7.2.4.1.3"><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_zh-cn_topic_0224252009_p455811316139">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_zh-cn_topic_0224252009_row25581034132"><td class="cellrowborder" valign="top" width="14.93%" headers="mcps1.3.2.2.2.7.2.4.1.1 "><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p17968185025812">-ip/--ip</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.32%" headers="mcps1.3.2.2.2.7.2.4.1.2 "><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p14966950155817"><em id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_i665865712584">web server IP</em></p>
+</td>
+<td class="cellrowborder" valign="top" width="66.75%" headers="mcps1.3.2.2.2.7.2.4.1.3 "><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p15965135011584">可选参数，表示登录<span id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_ph1178514311815">鲲鹏性能分析工具</span>Web界面的IP地址。</p>
+</td>
+</tr>
+<tr id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_row43491158115812"><td class="cellrowborder" valign="top" width="14.93%" headers="mcps1.3.2.2.2.7.2.4.1.1 "><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p2349558145814">-p/--port</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.32%" headers="mcps1.3.2.2.2.7.2.4.1.2 "><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p6349125835811"><em id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_i1466304115910">web server port</em></p>
+</td>
+<td class="cellrowborder" valign="top" width="66.75%" headers="mcps1.3.2.2.2.7.2.4.1.3 "><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p13350158125813">可选参数，表示<span id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_ph11883154417188">鲲鹏性能分析工具</span>的HTTPS端口。默认为8086，设置范围为1024~65535。</p>
+</td>
+</tr>
+<tr id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_row5517196135912"><td class="cellrowborder" valign="top" width="14.93%" headers="mcps1.3.2.2.2.7.2.4.1.1 "><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p145171267592">-jip/--jip</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.32%" headers="mcps1.3.2.2.2.7.2.4.1.2 "><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p1151736125912"><em id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_i11308995017">java_profiler IP</em></p>
+</td>
+<td class="cellrowborder" valign="top" width="66.75%" headers="mcps1.3.2.2.2.7.2.4.1.3 "><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p115171968597">可选参数，表示<span id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_ph12594180204619">Java性能分析</span>内部使用的IP。</p>
+</td>
+</tr>
+<tr id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_row7966192019"><td class="cellrowborder" valign="top" width="14.93%" headers="mcps1.3.2.2.2.7.2.4.1.1 "><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p14966189801">-jp/--jport</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.32%" headers="mcps1.3.2.2.2.7.2.4.1.2 "><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p7966179503"><em id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_i2010615189016">java_profiler port</em></p>
+</td>
+<td class="cellrowborder" valign="top" width="66.75%" headers="mcps1.3.2.2.2.7.2.4.1.3 "><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p189661491402">可选参数，表示<span id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_ph1643472952013">Java性能分析</span>内部模块通讯端口。默认为9090，设置范围为1024~65535。</p>
+</td>
+</tr>
+<tr id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_row13979647251"><td class="cellrowborder" colspan="3" valign="top" headers="mcps1.3.2.2.2.7.2.4.1.1 mcps1.3.2.2.2.7.2.4.1.2 mcps1.3.2.2.2.7.2.4.1.3 "><div class="note" id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_note17488547111112"><span class="notetitle"> 说明： </span><div class="notebody"><ul id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_ul2533416225"><li id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_li1553941152214">配置Web 服务器的IP地址时，必须输入本机IP地址（Linux操作系统下，可以通过<strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b20391931162214">ip addr</strong>命令获取）。</li><li id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_li19531141112219">如果“-ip/--ip”和“-jip/--jip”设置的IP地址相同，“-p/--port”和“-jp/--jport”不能设置为同一个端口。</li></ul>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_zh-cn_topic_0197553145_li0912172713399"><span>执行如下命令启动<span id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_ph44551246141812">鲲鹏性能分析工具</span>。</span><p><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_zh-cn_topic_0197553145_p196101735155515"><strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_zh-cn_topic_0197553145_b18610173585517">./service.sh restart</strong></p>
+<div class="note" id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_note036957295"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p12361454293">如果是在Docker容器中安装的<span id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_ph1852012478183">鲲鹏性能分析工具</span>，执行如下命令：</p>
+<p id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_p736854299"><strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b436358294">./service.sh </strong><strong id="kunpengoper_06_0001__zh-cn_topic_0000001116429068_zh-cn_topic_0237461804_b143665182910">restart -t docker</strong></p>
+</div></div>
+</p></li></ol>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0253410927.html">常用操作</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

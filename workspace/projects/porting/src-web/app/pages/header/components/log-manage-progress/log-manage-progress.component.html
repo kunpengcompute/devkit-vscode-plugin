@@ -1,0 +1,16 @@
+<div class="progress-bg">
+    <div class="progress-modal">
+        <div class="madal-content">
+            <p>
+                <span>{{ i18n.common_term_log_manage_tip }}</span>
+                <span>
+                    <span style="padding-right: 10px">{{ progessValue }}</span>
+                    <img (click)="closeTask()" style="cursor: pointer;" src="./assets/img/common/icon_close.svg" />
+                </span> 
+            </p>
+            <div class="progress-bar-bg">
+                <div class="progress-bar" style="left: 0%;"></div>
+            </div>
+        </div>
+    </div>
+</div>

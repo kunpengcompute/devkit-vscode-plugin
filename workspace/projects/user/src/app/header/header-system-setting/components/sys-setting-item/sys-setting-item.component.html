@@ -1,0 +1,26 @@
+<div class="warpper">
+  <div class="input-warpper" [lang]="language">
+    <div class="input-form">
+      <ti-formfield [formGroup]='sysConfForm'>
+        <ti-item [label]="config.label" [required]='isAdmin'>
+          <input class="input-item" tiText [tiValidation]='validation' formControlName='inputValue' type="text">
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <span class="input-range">{{i18n.common_term_sign_left}}{{config.range[0]}}~{{config.range[1]}}{{i18n.common_term_sign_right}}</span>
+  </div>
+
+  <div *ngIf="isAdmin" class="btn-warpper" [lang]="language">
+    <div *ngIf="mode === 'read'">
+      <button type="button" tiButton (click)="onFixConfig($event)">{{i18n.system_config.change_config}}</button>
+    </div>
+
+    <div *ngIf="mode === 'write'">
+      <button type="button" tiButton color="primary" (click)="onSubmit($event)"
+        [disabled]="!sysConfForm.valid">{{i18n.common_term_operate_ok}}</button>
+        
+      <button type="button" tiButton (click)="onCancel($event)">{{i18n.common_term_operate_cancel}}</button>
+    </div>
+  </div>
+</div>

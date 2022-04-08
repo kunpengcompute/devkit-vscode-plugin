@@ -1,0 +1,51 @@
+.warpper {
+  .configRankNumTop {
+    padding-bottom: 10px;
+
+    .configRankNumBtn {
+      height: 28px;
+      line-height: 26px;
+      font-size: 12px;
+      border-color: var(--hpc-btn-border-d-dddddd-l-979797);
+    }
+
+    .configRankNumBtn:hover {
+      color: #0067ff !important;
+    }
+
+    .configRankNumTip {
+      color: var(--hpc-font-d-aaaaaa-l-979797);
+      font-size: 12px;
+      padding-left: 3px;
+    }
+  }
+
+  .configRankNumBottom {
+    .configRankTable {
+      width: 952px;
+
+      tbody > tr > td {
+        font-size: 12px;
+        padding-left: 10px;
+        color: var(--hpc-td-text-d-aaaaaa-l-222222);
+        border-bottom: 1px solid var(--hpc-th-border_b-d-4b4b4b-l-e1e6ee);
+
+        .input-style {
+          width: 100px;
+          margin: 6px 0;
+        }
+      }
+
+      tbody > tr > td:first-child {
+        padding-left: 24px;
+      }
+
+      tbody > tr:last-child td {
+        border-bottom: 0 none;
+      }
+    }
+    ::ng-deep .commmon-table .ti3-table-container {
+      overflow-x: hidden;
+    }
+  }
+}

@@ -1,0 +1,85 @@
+<div class="overview-container">
+  <div class="params-env">
+    <ng-container *ngFor="let item of overviewEnv.items">
+      <span class='var-name'>{{item.label}}</span>
+      <span class='var-value'>{{ item.value || '--' }}</span>
+    </ng-container>
+  </div>
+  <div class="overview-header">
+    <div class="header-left">
+      <button type="button" color="primary" (click)="dumpHandle()" tiButton class="header-left-btn"
+        [disabled]="startBtnDisabled" [ngStyle]="{'pointer-events': clickOver? 'auto':'none'}">{{
+        i18n.protalserver_profiling_thread.dumpbtn }}</button>
+      <img [tiTip]="i18n.protalserver_profiling_thread.dumptips" tiTipPosition="right" class="helpTop"
+        src="./assets/img/newSvg/hollowTip.svg">
+      <app-suggestion-tip [suggetNum]="suggestArr.length" (openSuggest)="openSuggest()"></app-suggestion-tip>
+    </div>
+    <app-suggestion-tip [suggetNum]="suggestArr.length" (openSuggest)="openSuggest()" [type]="'icon'">
+    </app-suggestion-tip>
+  </div>
+  <div class="params-echarts" [appLoading]="isLoading">
+    <app-overview-echarts #overveiwEcharts [datas]="overViewDatas" [updateOptions]="updateOptions">
+    </app-overview-echarts>
+  </div>
+  <div class="parameters">
+    <div class="overview-prop">
+      <div class="propTitle"> {{i18n.protalserver_sampling_enviroment_ev.enviromentvariable}}</div>
+      <div class="search-box">
+        <ti-select class="select" [options]="selectData.searchOptions" [(ngModel)]="selectData.searchKey" id="myselect">
+        </ti-select>
+        <ti-searchbox class="search" placeholder="" (clear)="propClear($event)" (search)="propSearch($event)"
+          [(ngModel)]="searchProp.value"></ti-searchbox>
+      </div>
+      <ti-table [(displayedData)]="propDisplayed" [srcData]="propSrcData" [columns]="propColumns"
+        [searchWords]="searchWords" [searchKeys]="searchKeys" tiColsResizable>
+        <div class="ti3-table-fixed-head">
+          <table>
+            <thead>
+              <tr>
+                <th tiOverflow *ngFor="let column of propColumns" width="{{ column.width }}">
+                  <ti-cell-text>{{ column.title }}</ti-cell-text>
+                  <ti-head-sort *ngIf="column.isSort" [sortKey]="column.sortKey"></ti-head-sort>
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="ti3-table-container ti3-resize-wrapper" style="max-height: 420px;">
+          <table>
+            <thead>
+              <tr [ngStyle]="{'opacity': 0}">
+                <th *ngFor="let column of propColumns" width="{{ column.width }}"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of propDisplayed">
+                <td tiOverflow>{{ row.keyword }}</td>
+                <td tiOverflow>{{ row.value || '--' }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="propDisplayed.length === 0">
+              <tr class="ti3-table-nodata">
+                <td tiColspan>{{ noDadaInfo }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ti-table>
+    </div>
+    <div class="overview-params">
+      <div class="args-title">{{ i18n.protalserver_profiling_overview_parame }}</div>
+      <div class="params-args">
+        <div class="loadData_args" *ngIf="isNoArgsFlag">
+          <img class='newNoData' src="./assets/img/projects/noData.svg" />
+          <div class="newNoData-text">
+            {{ i18n.common_term_task_nodata }}
+          </div>
+        </div>
+        <div class="args-value" *ngIf="overviewArgs.value" [innerHTML]="overviewArgs.value"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-analysis #analysis [isSuggest]="isSuggest" [type]="sugtype" (closeHandle)="closeHandle($event)"
+  [suggestArr]="suggestArr" class="analysis">
+</app-analysis>

@@ -1,0 +1,251 @@
+<div class="schedule" [ngClass]="{ active: !isModifySchedule }">
+    <ti-formfield [class]="'node-select'" vertical [labelWidth]="labelWidth" [formGroup]="rCurrntFormR" class="taskForm" *ngIf="isHpcPro">
+        <!-- 选择节点 -->
+        <ti-item [required]="true">
+            <ti-item-label>
+                {{ i18n.node.selectNode }}
+                <span class="tint">{{ i18n.hpc_project_node_select_title.resourceAnalysis }}</span>
+            </ti-item-label>
+            <app-not-hpc-select-nodes
+                [width]="isModifySchedule ? '600px' : '952px'"
+                [nodeList]="allNodeList"
+                formControlName="nodeList"
+                [isSelectNodeDisabled]="isSelectNodeDisabled"
+                ></app-not-hpc-select-nodes>
+        </ti-item>
+    </ti-formfield>
+    <ti-formfield [labelWidth]="labelWidth" [formGroup]='launchItemsRForm'>
+        <ti-item [label]="commentItems.dire.label" [required]="commentItems.dire.required" [show]="isLaunch && false">
+            <ti-select style="width: 300px; margin-bottom: 10px" [options]="commentItems.dire.options"
+                [tiValidation]='validation' formControlName='dire_ctrl' (ngModelChange)="directory_change($event)"
+                id="direselectres">
+            </ti-select>
+            <input type="text" tiText [tiValidation]='validation' formControlName='dire_input_ctrl'
+                style="width: 300px">
+        </ti-item>
+
+        <ti-item [required]="commentItems.b_s.required" [show]="isLaunch">
+            <ti-item-label>
+                <span>{{commentItems.b_s.label}}</span>
+                <ti-icon [tiTip]="commentItems.b_s.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/mission/iconTip.png' alt="">
+                </ti-icon>
+            </ti-item-label>
+            <input type="text" tiText [tiValidation]='validation' formControlName='b_s_ctrl' style="width: 300px">
+        </ti-item>
+
+        <!-- 采集调用栈 -->
+        <ti-item [required]="commentItems.collectCallStack.required" [show]="isLaunch">
+            <ti-item-label>{{ commentItems.collectCallStack.label }}</ti-item-label>
+
+            <div class="formContent">
+                <ti-switch formControlName="collectCallStack"></ti-switch>
+            </div>
+        </ti-item>
+
+        <!-- 采集文件大小 -->
+        <ti-item [required]="false" [show]="isLaunch">
+            <ti-item-label style="position: relative;">
+                <span [ngClass]="{ wrap: filesizeLong }">{{ commentItems.filesize.label }}</span>
+                <ti-icon [tiTip]="commentItems.filesize.iconTip"
+                    [ngStyle]="{ 'margin-left': filesizeLong ? '' : '10px' }" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img [ngClass]="{ 'filesize-img': filesizeLong }" src='./assets/img/mission/iconTip.png'>
+                </ti-icon>
+            </ti-item-label>
+
+            <div class="formContent">
+                <ti-spinner name='spinner' [step]='commentItems.filesize.step' [correctable]="false"
+                    [format]="commentItems.filesize.format" [placeholder]='commentItems.filesize.placeholder'
+                    tiValidation [appSpinnerBlur]="collectFileBlur" formControlName='fileSize' style='width: 165px;'
+                    [errorMessageWrapper]='appDelayErrorMsgWrapper1'>
+                </ti-spinner>
+
+                <!-- 尾后提示 -->
+                <span class="tailPrompt">
+                    {{ commentItems.filesize.tailPrompt }}
+                </span>
+            </div>
+
+            <!-- 自定义错误提示位置 -->
+            <div #appDelayErrorMsgWrapper1></div>
+        </ti-item>
+    </ti-formfield>
+
+    <!-- profile System -->
+    <ti-formfield [labelWidth]="labelWidth" [formGroup]="profileItemsRForm" class="taskForm">
+        <!-- 采样时长 -->
+        <ti-item [label]="commentItems.res_d.label" [required]="commentItems.res_d.required" [show]="isProfile">
+            <div class="formContent">
+                <ti-spinner name='spinner' [step]='commentItems.res_d.step' [format]="commentItems.res_d.format"
+                    [correctable]="false" [placeholder]='commentItems.res_d.placeholder' tiValidation
+                    formControlName='c_d_ctrl' [appSpinnerBlur]="samplingDurationBlur" style='width: 165px;'
+                    [errorMessageWrapper]='res_dErrorMsgWrapper'></ti-spinner>
+
+                <!-- 尾后提示 -->
+                <span class="tailPrompt">
+                    {{ commentItems.res_d.tailPrompt }}
+                </span>
+            </div>
+
+            <!-- 自定义错误提示位置 -->
+            <div #res_dErrorMsgWrapper></div>
+        </ti-item>
+
+        <ti-item [required]="commentItems.b_s.required" [show]="isProfile">
+            <ti-item-label>
+                <span>{{commentItems.b_s.label}}</span>
+                <ti-icon [tiTip]="commentItems.b_s.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/mission/iconTip.png' alt="">
+                </ti-icon>
+            </ti-item-label>
+            <input type="text" tiText [tiValidation]='validation' formControlName='b_s_ctrl' style="width: 300px">
+        </ti-item>
+
+        <!-- 采集调用栈 -->
+        <ti-item [required]="commentItems.collectCallStack.required" [show]="isProfile">
+            <ti-item-label>{{ commentItems.collectCallStack.label }}</ti-item-label>
+
+            <div class="formContent">
+                <ti-switch formControlName="collectCallStack"></ti-switch>
+            </div>
+        </ti-item>
+
+        <!-- 采集文件大小 -->
+        <ti-item [required]="false" [show]="isProfile">
+            <ti-item-label style="position: relative;">
+                <span [ngClass]="{ wrap: filesizeLong }">{{ commentItems.filesize.label }}</span>
+                <ti-icon [tiTip]="commentItems.filesize.iconTip"
+                    [ngStyle]="{ 'margin-left': filesizeLong ? '' : '10px' }" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img [ngClass]="{ 'filesize-img': filesizeLong }" src='./assets/img/mission/iconTip.png'>
+                </ti-icon>
+            </ti-item-label>
+
+            <div class="formContent">
+                <ti-spinner name='spinner' [step]='commentItems.filesize.step' [correctable]="false"
+                    [format]="commentItems.filesize.format" [placeholder]='commentItems.filesize.placeholder'
+                    tiValidation formControlName='fileSize' [appSpinnerBlur]="collectFileBlur" style='width: 165px;'
+                    [errorMessageWrapper]='appDelayErrorMsgWrapper2'>
+                </ti-spinner>
+
+                <!-- 尾后提示 -->
+                <span class="tailPrompt">
+                    {{ commentItems.filesize.tailPrompt }}
+                </span>
+            </div>
+
+            <!-- 自定义错误提示位置 -->
+            <div #appDelayErrorMsgWrapper2></div>
+        </ti-item>
+    </ti-formfield>
+
+    <ti-formfield [labelWidth]="labelWidth" [formGroup]="attachItemsRForm" class="taskForm">
+        <!-- 采样时长 -->
+        <ti-item [label]="commentItems.c_d.label" [required]="commentItems.c_d.required" [show]="isAttach">
+            <div class="formContent">
+                <ti-spinner name='spinner' [step]='commentItems.c_d.step' [format]="commentItems.c_d.format"
+                    [correctable]="false" [placeholder]='commentItems.c_d.placeholder' tiValidation
+                    formControlName='c_d_ctrl' style='width: 165px;' [errorMessageWrapper]='c_dErrorMsgWrapper'
+                    [appSpinnerBlur]="samplingDurationBlur"></ti-spinner>
+
+                <!-- 尾后提示 -->
+                <span class="tailPrompt">
+                    {{ commentItems.c_d.tailPrompt }}
+                </span>
+            </div>
+
+            <!-- 自定义错误提示位置 -->
+            <div #c_dErrorMsgWrapper></div>
+        </ti-item>
+
+        <ti-item [required]="commentItems.b_s.required" [show]="isAttach">
+            <ti-item-label>
+                <span>{{commentItems.b_s.label}}</span>
+                <ti-icon [tiTip]="commentItems.b_s.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/mission/iconTip.png' alt="">
+                </ti-icon>
+            </ti-item-label>
+            <input type="text" tiText [tiValidation]='validation' formControlName='b_s_ctrl' style="width: 300px">
+        </ti-item>
+
+        <!-- 采集调用栈 -->
+        <ti-item [required]="commentItems.collectCallStack.required" [show]="isAttach">
+            <ti-item-label>{{ commentItems.collectCallStack.label }}</ti-item-label>
+
+            <div class="formContent">
+                <ti-switch formControlName="collectCallStack"></ti-switch>
+            </div>
+        </ti-item>
+
+        <!-- 采集文件大小 -->
+        <ti-item [required]="false" [show]="isAttach">
+            <ti-item-label style="position: relative;">
+                <span [ngClass]="{ wrap: filesizeLong }">{{ commentItems.filesize.label }}</span>
+                <ti-icon [tiTip]="commentItems.filesize.iconTip"
+                    [ngStyle]="{ 'margin-left': filesizeLong ? '' : '10px' }" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img [ngClass]="{ 'filesize-img': filesizeLong }" src='./assets/img/mission/iconTip.png'>
+                </ti-icon>
+            </ti-item-label>
+
+            <div class="formContent">
+                <ti-spinner name='spinner' [step]='commentItems.filesize.step' [correctable]="false"
+                    [format]="commentItems.filesize.format" [placeholder]='commentItems.filesize.placeholder'
+                    tiValidation formControlName='fileSize' [appSpinnerBlur]="collectFileBlur" style='width: 165px;'
+                    [errorMessageWrapper]='appDelayErrorMsgWrapper3'>
+                </ti-spinner>
+
+                <!-- 尾后提示 -->
+                <span class="tailPrompt">
+                    {{ commentItems.filesize.tailPrompt }}
+                </span>
+            </div>
+            <!-- 自定义错误提示位置 -->
+            <div #appDelayErrorMsgWrapper3></div>
+        </ti-item>
+    </ti-formfield>
+    <!-- 配置节点参数 -->
+    <div class="node-config-modal import-btn" style="margin-top: 20px;">
+        <app-mission-node-config #nodeConfigR [labelWidth]="labelWidth"
+            [isAbled]="!(rCurrntFormR.valid  && taskNameValid && appAndPidValid && modeAppRunUserValid)"
+            [taskType]="'resource_schedule'" [formData]="formDatas" [projectId]="projectId"
+            [nodeConfigShow]="nodeConfigShow" [nodeConfigedData]="nodeConfigedData" [runUserData]="runUserData"
+            (onsControlNode)="onControlNode($event)" (onsOpentNode)="handleNodeEmit($event)"
+            [modeAppPathAllow]="modeAppPathAllow" [isModifySchedule]="isModifySchedule"
+            [nodeList]="isHpcPro ? rCurrntFormR.get('nodeList').value : null" (selectNodeDisable)="selectNodeDisable($event)"></app-mission-node-config>
+    </div>
+    <!-- 预约 -->
+    <div style="margin-top: 20px; flex:1">
+        <app-mission-reservation [hidden]="taskDetail.isFromTuningHelper" #preSwitchChange [labelWidth]="labelWidth"
+            [isModifySchedule]="isModifySchedule || isRestart || isEdit" [switch]="switchState">
+        </app-mission-reservation>
+    
+        <div class="immediately" *ngIf='!preSwitchChange.switchState && !isRestart'>
+            <div *ngIf="switchState" [tiTip]="i18n.mission_create.disableeTip">
+                <input type="checkbox" tiCheckbox [name]='startCheckRes.title' [(ngModel)]="startCheckRes.checked"
+                    [disabled]="switchState">
+            </div>
+            <input *ngIf="!switchState" type="checkbox" tiCheckbox [name]='startCheckRes.title'
+                [(ngModel)]="startCheckRes.checked" [disabled]="taskDetail.isFromTuningHelper">
+            <span class="start-now">{{startCheckRes.title}}</span>
+        </div>
+    </div>
+
+    <footer [ngClass]="{ footer: isModifySchedule }">
+        <button class="little-primary-btn" tiButton type="button" color="primary" (click)="createResAnalysis(isEdit)"
+            [ngClass]="{toRight: isModifySchedule}"
+            [disabled]='!(rCurrntFormR.valid && taskNameValid && appAndPidValid && (preSwitchChange.previewState || !preSwitchChange.switchState))'>
+            {{i18n.common_term_operate_ok}}
+        </button>
+        <button class="little-minor-btn button-bgc" tiButton type="button" (click)="close()">
+            {{i18n.common_term_operate_cancel}}
+        </button>
+        <button class="little-minor-btn button-bgc" tiButton type="button" (click)="saveTemplates()"
+            *ngIf="!isModifySchedule && !taskDetail.isFromTuningHelper"
+            [disabled]='!(rCurrntFormR.valid && taskNameValid && appAndPidValid && (preSwitchChange.previewState || !preSwitchChange.switchState))'>{{i18n.mission_modal.saveTemplates}}</button>
+    </footer>
+</div>

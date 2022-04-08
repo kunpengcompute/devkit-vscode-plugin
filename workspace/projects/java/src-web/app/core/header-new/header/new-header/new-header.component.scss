@@ -1,0 +1,119 @@
+$fontColor: #ffffff;
+$hoverColor: #6c92fa;
+$tipBgc: #061829;
+$tipHoverBgc: #022547;
+$tipColor: #9EA4B3;
+$margin8: 8px;
+$margin16: 16px;
+$margin24: 24px;
+$margin32: 32px;
+.header {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0px;
+  z-index: 113;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .header-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: $margin32;
+    width: 50%;
+    min-width: 500px;
+    img {
+      width: 32px;
+      margin-right: $margin24;
+    }
+    span {
+      font-size: 16px;
+      color: $fontColor;
+    }
+  }
+  .header-right {
+    display: flex;
+    height: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+    padding-right: 20px;
+    color: $fontColor;
+    .list-style {
+      display: flex;
+      align-items: center;
+      padding: 0 12px 0 12px;
+      height: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      position: relative;
+      span {
+        margin-right: $margin8;
+      }
+      .hover-span {
+        color: $hoverColor;
+      }
+      .hover-img-rotate {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+      }
+      .tiplist {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 0px;
+        z-index: 9999;
+        &:hover {
+          display: block;
+        }
+      }
+      &:hover .tiplist {
+        display: block;
+        transform-origin: 50% 0;
+        animation: slide-down 0.25s ease-out;
+      }
+      .right-border {
+        width: 20px;
+        height: 12px;
+        border-right: 1px solid $fontColor;
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+.tipContent {
+  font-size: 14px;
+  margin: 0px;
+  background-color: $tipBgc;
+  display: flex;
+  flex-direction: column;
+  z-index: 113;
+  .content-list {
+    display: flex;
+    justify-content: flex-start;
+    min-width: 120px;
+    display: block;
+    height: 35px;
+    line-height: 35px;
+    padding: 0px $margin16;
+    color: $tipColor;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .content-list:hover {
+    color: $fontColor;
+    background-color: $tipHoverBgc;
+  }
+}
+@keyframes slide-down {
+  0% {
+    transform: scale(1, 0);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}

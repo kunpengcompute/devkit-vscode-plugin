@@ -1,0 +1,193 @@
+// 深色主题
+::ng-deep .vscode-dark {
+    --color-middle-font: #aaaaaa;
+    --color-body-background: #161616;
+    --color-body-font: #aaaaaa;
+    --color-head-font: #e8e8e8;
+    --color-tb-scrollbar: #424242;
+    --color-head-background: #2a2a2a;
+    --color-head-border: #4b4b4b;
+}
+
+// 浅色主题
+::ng-deep .vscode-light {
+    --color-middle-font: #000000;
+    --color-body-background: #ffffff;
+    --color-body-font: #222222;
+    --color-tb-scrollbar: #6b708b;
+    --color-head-font: #616161;
+    --color-head-background: #f5f9ff;
+    --color-head-border: #ffffff;
+}
+
+.aLink {
+    text-decoration: none;
+    outline: none;
+    color: #0067ff;
+    cursor: pointer;
+}
+
+.aLink:hover {
+    color: #267dff;
+}
+
+.aLink:active {
+    color: #0057d9;
+}
+
+.ti3-table {
+    .ti3-table-container {
+        display: block;
+        overflow-y: scroll;
+        table {
+            tr {
+                td {
+                    color: var(--color-body-font);
+                    background-color: var(--color-body-background) !important;
+                    border-collapse: collapse !important;
+                }
+                .ext_more {
+                    position: relative;
+                    p {
+                        margin-left: 10px;
+                    }
+                    span {
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+    .ti3-table-container::-webkit-scrollbar-thumb {
+        border-radius: 2px !important;
+        background-color: var(--color-tb-scrollbar) !important;
+    }
+    .ti3-table-container::-webkit-scrollbar {
+        width: 4px !important;
+        background: var(--vscode-editor-background) !important;
+    }
+    .ti3-table-container::-webkit-scrollbar-track {
+        border: none !important;
+    }
+    .ti3-table-fixed-head {
+        table {
+            tr {
+                th {
+                    color: var(--color-head-font);
+                    background-color: var(--color-head-background) !important;
+                }
+                th:not(:last-child)::after {
+                    background: var(--color-head-border);
+                }
+            }
+        }
+    }
+}
+::ng-deep .ti3-table-fixed-head-filler {
+    background-color: var(--color-head-background) !important;
+}
+.nodeStatus {
+    display: flex;
+    align-items: center;
+
+    .icon_nodeStatus {
+        min-width: 8px;
+        max-width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 8px;
+
+        &.online {
+            background: #7adfa0;
+        }
+
+        &.offline {
+            background: #b8becc;
+        }
+    }
+
+    .running {
+        width: 10px;
+        height: 10px;
+        margin-right: 8px;
+        background-color: transparent;
+        background-size: 105%;
+        animation: loading 1.5s linear infinite;
+    }
+    .runing-light {
+        width: 10px;
+        height: 10px;
+        margin-right: 8px;
+    }
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.operateBox {
+    span {
+        color: #0067ff;
+        cursor: pointer;
+    }
+
+    i {
+        margin: 0 8px;
+        color: #e1e6ee;
+    }
+}
+
+.alarmInfo {
+    > div {
+        display: flex;
+        align-items: center;
+
+        > span {
+            margin-left: 8px;
+        }
+    }
+}
+
+.fillGauge-span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.alarmTip {
+    font-size: 14px;
+    line-height: 20px;
+
+    > .tipLine {
+        display: flex;
+        color: var(var(--d-e8e8e8-l-222222));
+    }
+
+    > .suggestion {
+        color: var(--d-aaaaaa-l-222222);
+    }
+
+    > *:not(:first-child) {
+        margin-top: 8px;
+    }
+}
+
+.img-question {
+    width: 12px;
+    height: 12px;
+}
+
+.filter-icon {
+    display: inline-block;
+}
+
+.thContent{
+    display: inline-block;
+}

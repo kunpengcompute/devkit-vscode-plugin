@@ -1,0 +1,25 @@
+<div class="port-network-config">
+  <!-- 网口信息 -->
+  <div class="network-port-info-container info-container">
+    <p class="title">{{ 'net_io.network_config.port_info' | i18n }}</p>
+    <app-network-port-info [portInfoData]="portInfoData"></app-network-port-info>
+  </div>
+
+  <!-- 网络绑定信息 -->
+  <div class="network-bind-info-container info-container">
+    <p class="title">{{ 'net_io.network_config.bind_info' | i18n }}</p>
+    <app-network-bind-info [bondInfoData]="bondInfoData"></app-network-bind-info>
+  </div>
+
+  <!-- 路由信息 -->
+  <div class="route-info-container info-container">
+    <p class="title">{{ 'net_io.network_config.route_info' | i18n }}</p>
+    <app-route-info [routeData]="routeData"></app-route-info>
+  </div>
+
+  <!-- ARP信息 -->
+  <div class="ARP-info-container info-container">
+    <p class="title">{{ 'net_io.network_config.ARP_info' | i18n }}</p>
+    <app-arp-info [arpData]="arpData"></app-arp-info>
+  </div>
+</div>

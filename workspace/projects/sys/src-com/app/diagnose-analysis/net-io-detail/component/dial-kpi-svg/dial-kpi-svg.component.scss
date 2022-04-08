@@ -1,0 +1,44 @@
+.warpper {
+  .dial-test-common-table-l1 {
+    height: 30px;
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 10px;
+    .tooltip-icon {
+      width: 16px;
+    }
+  }
+}
+.medium-model-class {
+  width: 700px !important;
+  --ti-modal-width: auto;
+  --ti-modal-header-padding: 18px 32px;
+  --ti-common-border-radius-normal: 0px;
+  .ti3-modal-content {
+    width: 700px;
+
+    .ti3-modal-footer {
+      padding: 28px 0 !important;
+    }
+    .ti3-modal-body {
+      padding-top: 0px;
+      .divider {
+        margin-bottom: 24px;
+      }
+      .content-warpper {
+        .dial-test-common-table-l1 {
+          height: 30px;
+          font-size: 16px;
+          line-height: 30px;
+          margin-bottom: 10px;
+        }
+        .arp-title {
+          margin-top: 32px;
+        }
+      }
+    }
+  }
+}
+:host ::ng-deep .ti3-table>table>thead>tr>th{
+  border: 0 !important;
+}

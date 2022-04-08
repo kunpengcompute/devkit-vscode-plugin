@@ -1,0 +1,42 @@
+<div class="warpper">
+    <div class="input-warpper" *ngIf="mode === 'write'">
+        <div *ngIf="config.option === 2" class="input-form" style="display: flex;flex-direction: row;margin-bottom: 20px;" id="uploadId_white">
+            <label for="value">
+                <span tiOverflow class="input-form-item">{{i18n.softwarePortTem.upload}}</span>
+            </label>
+            <ti-upload
+                [ngClass]="{
+                    'btn-max-width-zh': i18nService.currLang === i18nService.langType.zh_cn,
+                    'btn-max-width-en': i18nService.currLang === i18nService.langType.en_us
+                }"
+                [url]='uploadUrl' [inputFieldWidth]='inputFieldWidth' [filters]='filters' [autoUpload]="autoUpload"
+            (addItemSuccess)="addItemSuccess($event)"
+            (completeItems)='onCompleteItems($event)' [headers]='headersConfig'
+            (beforeSendItems)='onBeforeSendItems($event)' #test [accept]="accept"></ti-upload>
+        </div>
+        <div class="input-form">
+            <ti-formfield [formGroup]='sysConfForm'>
+                <ti-item [label]="config.label" [required]='isAdmin'>
+                    <input tiText [tiValidation]='validation' formControlName='inputValue' oncopy="return false" type="password"
+                    class="inp-width300" maxlength="32" tiMaxLength="32">
+                </ti-item>
+            </ti-formfield>
+        </div>
+    </div>
+    <div *ngIf="isAdmin" class="btn-warpper">
+        <div *ngIf="mode === 'read'">
+            <button type="button" tiButton (click)="onFixConfig($event)">{{config.btnTitle}}</button>
+        </div>
+        <div  *ngIf="mode === 'write' && config.option === 2">
+            <button type="button" tiButton color="primary" (click)="onSubmit($event)"
+                [disabled]="!sysConfForm.valid || !canUpgrade">{{i18n.common_term_operate_ok}}</button>
+            <button type="button" tiButton (mousedown)="onCancel($event)">{{i18n.common_term_operate_cancel}}</button>
+        </div>
+        <div  *ngIf="mode === 'write' && config.option !== 2">
+            <button type="button" tiButton color="primary" (click)="onSubmit($event)"
+                [disabled]="!sysConfForm.valid">{{i18n.common_term_operate_ok}}</button>
+            <button type="button" tiButton (mousedown)="onCancel($event)">{{i18n.common_term_operate_cancel}}</button>
+        </div>
+    </div>
+</div>
+<app-alert-message #deleteWhiteModal (confirmHandle)="confirmHandle($event)"></app-alert-message>

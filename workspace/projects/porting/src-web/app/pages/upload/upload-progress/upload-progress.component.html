@@ -1,0 +1,23 @@
+<div class="upload-container" *ngIf="isShow">
+    <div class="top">
+        {{i18n.common_term_upload_list}}
+        <span *ngIf="isSlow" style="font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 14px;
+        letter-spacing: 0px;
+        color: #ffffff;">(&nbsp;{{i18n.common_term_upload_slow}}&nbsp;)</span>
+    </div>
+    <div class="content">
+        <div class="text-icon">
+            <div class="text">
+                <span tiOverflow class="filename">{{ info.filename }}</span>
+                <span class="size">({{ info.filesize }}MB)-{{ uploadProgress }}</span>
+            </div>
+            <img (click)="closeProgress()" src="./assets/img/common/icon_close.svg" />
+        </div>
+        <div class="progress-bar-bg">
+            <div class="progress-bar" [ngStyle]="{'width': uploadProgress}" ></div>
+        </div>
+    </div>
+</div>

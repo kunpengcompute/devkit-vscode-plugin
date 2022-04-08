@@ -1,0 +1,79 @@
+$label-width-en: 400px;
+$label-width-zh: 223px;
+.warpper {
+  .input-warpper {
+    position: relative;
+
+    .input-form {
+      display: inline-block;
+      .input-item {
+        width: 400px;
+        height: 84px;
+        box-sizing: border-box;
+        font-family: "huawei sans";
+      }
+    }
+  }
+  .btn-warpper {
+    margin-top: 5px;
+    &[lang="zh-cn"] {
+      margin-left: $label-width-zh + 32px;
+    }
+    &[lang="en-us"] {
+      margin-left: $label-width-en + 32px;
+    }
+  }
+  [tiText] {
+    font-size: 12px !important;
+  }
+  .ti3-select-dominator-text {
+    font-size: 12px !important;
+  }
+}
+
+:host .input-warpper[lang="zh-cn"] ::ng-deep .ti3-form .ti3-form-label {
+  width: $label-width-zh;
+  padding-right: 16px;
+}
+:host .input-warpper[lang="en-us"] ::ng-deep .ti3-form .ti3-form-label {
+  width: $label-width-en;
+  padding-right: 16px;
+}
+
+button + button {
+  margin-left: 16px;
+}
+
+button {
+  width: 88px;
+
+  &[tiButton] {
+    padding: 0;
+  }
+}
+
+::ng-deep .setAppPathModal {
+  .ti3-modal-content {
+    width: 560px !important;
+
+    .content {
+      display: flex;
+      align-items: flex-start;
+
+      img {
+        margin-right: 10px;
+        width: 24px;
+        height: 24px;
+        flex: 0 0 auto;
+      }
+
+      p {
+        font-family: "huawei sans";
+        color: #222222;
+        font-size: 14px;
+        line-height: 20px;
+      }
+    }
+  }
+}
+

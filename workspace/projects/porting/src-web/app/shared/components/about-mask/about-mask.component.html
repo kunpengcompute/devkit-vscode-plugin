@@ -1,0 +1,8 @@
+<div class="mask" [ngClass]="{'active':myMask}">
+    <div class='content-box' [ngClass]="{
+        'disclaimer':isDisclaimer, 'disclaimer-en':isDisclaimer && currLang === 'en-us', 
+        'firstDisclaimer': isFirstDisclaimer, 'discla-en': currLang === 'en-us' && isFirstDisclaimer}">
+        <ng-content select='.content'></ng-content>
+    </div>
+</div>
+

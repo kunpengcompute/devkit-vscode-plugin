@@ -1,0 +1,52 @@
+<div class="warpper">
+  <div class="control">
+    <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+      <!-- 采集时长（s） -->
+      <ti-item [required]="true">
+        <ti-item-label>
+          <div tiOverflow>
+            {{
+              "network_diagnositic.network_load_param.collection_time" | i18n
+            }}
+          </div>
+        </ti-item-label>
+        <div class="paramValue">
+          <ti-spinner
+            formControlName="loadDuration"
+            [hySpinnerBlur]="{
+              control: formGroup.get('loadDuration'),
+              min: 2,
+              max: 300
+            }"
+            [format]="'N0'"
+            tiValidation
+          >
+          </ti-spinner>
+          <span>{{ "common_scope_replace_teml" | i18n: "2~300" }}</span>
+        </div>
+      </ti-item>
+      <!-- 采集间隔（s） -->
+      <ti-item
+        [label]="
+          'network_diagnositic.network_load_param.collection_interval' | i18n
+        "
+        [required]="true"
+      >
+        <div class="paramValue">
+          <ti-spinner
+            formControlName="loadInterval"
+            [hySpinnerBlur]="{
+              control: formGroup.get('loadInterval'),
+              min: 1,
+              max: 10
+            }"
+            [format]="'N0'"
+            tiValidation
+          >
+          </ti-spinner>
+          <span>{{ "common_scope_replace_teml" | i18n: "1~10" }}</span>
+        </div>
+      </ti-item>
+    </ti-formfield>
+  </div>
+</div>

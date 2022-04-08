@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Web_SFW/icon/32/返回顶部/hover</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="32" height="32" rx="2"></rect>
+        <filter x="-109.4%" y="-78.1%" width="318.8%" height="318.8%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="10" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="10" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.13595389 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Web_SFW/icon/32/返回顶部/hover" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="bgc">
+            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+        </g>
+        <g id="Web_SFW/icon/16/固定" transform="translate(8.000000, 8.000000)">
+            <rect id="BOX" opacity="0.119256882" x="1" y="1" width="14" height="14"></rect>
+            <path d="M8.24695284,6.56518777 L8.3200922,6.61588936 L14.3200922,11.6158894 C14.5322306,11.7926714 14.5608927,12.1079538 14.3841106,12.3200922 C14.226971,12.5086597 13.9603991,12.5522582 13.7541093,12.4354591 L13.6799078,12.3841106 L8,7.651 L2.3200922,12.3841106 C2.13152469,12.5412502 1.86146076,12.5360636 1.67961487,12.3839795 L1.61588936,12.3200922 C1.45874977,12.1315247 1.46393636,11.8614608 1.61602054,11.6796149 L1.6799078,11.6158894 L7.6799078,6.61588936 C7.8421529,6.48068511 8.06864579,6.46378457 8.24695284,6.56518777 Z M14.5,3 C14.7761424,3 15,3.22385763 15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L1.5,4 C1.22385763,4 1,3.77614237 1,3.5 C1,3.22385763 1.22385763,3 1.5,3 L14.5,3 Z" id="形状结合" fill="#267DFF"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,29 @@
+<div class="icon-warpper">
+  <ti-icon
+    #searchTip="hyTiTip"
+    [hyTiTip]="search"
+    tiTipTrigger="click"
+    tiTipPosition="bottom-left"
+    [hyTipStyle]="{
+      transform: 'translateY(-5px)',
+      padding: 0,
+      'box-shadow': 'none',
+      border: 'none'
+    }"
+    [ngClass]="{ active: !!model || isSearchShow }"
+    (click)="onIconClick()"
+    name="search"
+    [tiTipHasArrow]="false"
+  >
+  </ti-icon>
+</div>
+
+<ng-template #search>
+  <ti-searchbox
+    (clear)="onClear($event)"
+    (search)="onSearch($event)"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    [(ngModel)]="model"
+  ></ti-searchbox>
+</ng-template>

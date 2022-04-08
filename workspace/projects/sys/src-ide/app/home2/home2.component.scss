@@ -1,0 +1,75 @@
+@import "../../../src-com/app/tuninghelper/styles/customButton.scss";
+.home2{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: hidden;
+    .ti3-modal-content{
+        width: auto !important;
+    }
+}
+// 兼容ie10+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none)  {
+    .mem-info svg{
+        transform-origin:center;
+        transform:rotate(-90deg);
+    }
+}
+.mian-box{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    .right{
+        flex: 1;
+        transition: all 100ms linear;
+        position: relative;
+        width: 0px;
+        .toggle-btn-top{
+            text-align: center;
+            cursor: pointer;
+            position: absolute;
+            width: 100%;
+            img{
+                transition: all 100ms linear;
+                &.active{
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+    .show-data{
+        height: 100%;
+        box-sizing: border-box;
+        .tab-box{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            .tab-content{
+                width: 100%;
+                height: 100vh;
+                overflow-y: auto;
+            }
+        }
+    }
+}
+.compare-box{
+    padding: 16px 80px 20px 80px;
+}
+:host ::ng-deep ti-select .ti3-select-dominator-container.ti3-multiselect-container ti-tag{
+    background: var(--d-313131-l-e6ebf5) !important;
+    border-radius: 2px;
+    color: #AAAAAA !important;
+    height: 20px;
+  }
+
+:host ::ng-deep ti-select .ti3-multiselect-box-cell .ti3-box-cell-key{
+    padding-left: 6px !important;
+  }
+
+:host ::ng-deep ti-select:not([disabled])[tiFocused]{
+    border-color: #6c92fa !important;
+}

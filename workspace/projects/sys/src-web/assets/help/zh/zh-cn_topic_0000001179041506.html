@@ -1,0 +1,106 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="创建访存统计分析任务">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001223882789.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具 (系统性能分析)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001179041506">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>创建访存统计分析任务</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001179041506"></a><a name="ZH-CN_TOPIC_0000001179041506"></a>
+
+<h1 class="topictitle1">创建访存统计分析任务</h1>
+<div id="body1590719496407"><div class="section" id="ZH-CN_TOPIC_0000001179041506__section71672165013"><h4 class="sectiontitle">功能描述</h4><p id="ZH-CN_TOPIC_0000001179041506__p10512153412574">访存统计分析基于CPU访问缓存和内存的PMU事件，分析存储的访问次数、命中率、带宽等情况。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001179041506__section11470129119"><h4 class="sectiontitle">前提条件</h4><ul id="ZH-CN_TOPIC_0000001179041506__ul35869566208"><li id="ZH-CN_TOPIC_0000001179041506__li16586456132018">已成功创建工程，且当前工程下不存在<span class="parmvalue" id="ZH-CN_TOPIC_0000001179041506__zh-cn_topic_0250279620_parmvalue11239184764819">“离线”</span>状态的节点。</li><li id="ZH-CN_TOPIC_0000001179041506__li1080725716206">访存统计分析支持openEuler（内核版本为4.19及以上）、CentOS 7.6（内核版本为4.14.0-115.el7a.0.1/4.14.0-115.2.2.el7a/4.14.0-115.5.1.el7a/4.14.0-115.6.1.el7a/4.14.0-115.7.1.el7a/4.14.0-115.8.2.el7a/4.14.0-115.10.1.el7a）操作系统，并且配置SPE（Statistical Profiling Extension）环境，详细步骤请参见<span id="ZH-CN_TOPIC_0000001179041506__ph54711458124013">《鲲鹏性能分析工具 (系统性能分析) 用户指南》</span>中“配置SPE环境”章节。</li></ul>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001179041506__section3384633721"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0000001179041506__ol15971352649"><li id="ZH-CN_TOPIC_0000001179041506__li641312772512"><span>单击工程列表中指定工程后面的<span><img id="ZH-CN_TOPIC_0000001179041506__zh-cn_topic_0250279620_image21541215171214" src="zh-cn_image_0000001179041588.png"></span>。</span><p><p id="ZH-CN_TOPIC_0000001179041506__zh-cn_topic_0250279620_p166122471044">打开“新建分析任务”页面。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001179041506__li142020114294"><span>参考“任务管理”和<a href="#ZH-CN_TOPIC_0000001179041506__table101811834111710">表1</a>配置任务参数。</span><p><div class="p" id="ZH-CN_TOPIC_0000001179041506__p896111112911">以通用场景下创建的工程为例，新建访存统计分析任务，如<a href="#ZH-CN_TOPIC_0000001179041506__fig1825823810314">图1</a>所示。<div class="fignone" id="ZH-CN_TOPIC_0000001179041506__fig1825823810314"><a name="ZH-CN_TOPIC_0000001179041506__fig1825823810314"></a><a name="fig1825823810314"></a><span class="figcap"><b>图1 </b>新建访存统计分析任务（通用场景）</span><br><span><img id="ZH-CN_TOPIC_0000001179041506__image1698855844016" src="zh-cn_image_0000001178563280.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001179041506__table101811834111710"></a><a name="table101811834111710"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001179041506__table101811834111710" frame="border" border="1" rules="all"><caption><b>表1 </b>新建访存统计分析参数说明</caption><colgroup><col style="width:24%"><col style="width:76%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001179041506__row17181133416173"><th align="left" class="cellrowborder" valign="top" width="24%" id="mcps1.3.3.2.2.2.1.3.2.3.1.1"><p id="ZH-CN_TOPIC_0000001179041506__p14181133491719">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="76%" id="mcps1.3.3.2.2.2.1.3.2.3.1.2"><p id="ZH-CN_TOPIC_0000001179041506__p1918173421713">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001179041506__row201811334171711"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041506__p5181113419170">任务名称</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041506__p2181834181719">输入分析任务的名称。名称需要满足如下要求：</p>
+<ul id="ZH-CN_TOPIC_0000001179041506__ul10181134151718"><li id="ZH-CN_TOPIC_0000001179041506__zh-cn_topic_0250471713_li9539192134211">只能由字母、数字、特殊字符（@#$%^&amp;*()[]&lt;&gt;._-!~+空格）组成</li><li id="ZH-CN_TOPIC_0000001179041506__zh-cn_topic_0250471713_li1253911219425">长度为1~32个字符</li></ul>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041506__row141814346176"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041506__p1181113418174">分析对象</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041506__p3181193416177">选择“系统”。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041506__row2181434151718"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041506__p1918183417176">分析类型</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041506__p111812034111718">选择“访存分析”。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041506__row63501518217"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041506__p1235055142119">访存分析类型</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041506__p33501520211">选择“访存统计分析”。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041506__row16181153421712"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041506__p13181113420176">采样时长(s)</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041506__p1618118342171">设置采样的时长。默认为30秒，取值范围1~300秒。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041506__row141811834131710"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041506__p181811234201713">采样间隔(ms)</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041506__p17181034161718">设置采样间隔。默认为100毫秒，可选择：</p>
+<ul id="ZH-CN_TOPIC_0000001179041506__ul11181934161711"><li id="ZH-CN_TOPIC_0000001179041506__li181814343176">100</li><li id="ZH-CN_TOPIC_0000001179041506__li81816348179">1000</li></ul>
+<div class="note" id="ZH-CN_TOPIC_0000001179041506__note2018112340176"><span class="notetitle"> 说明： </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001179041506__p13181163420172">采样间隔应当小于或等于采样时长的1/2。</p>
+</div></div>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041506__row9181183481711"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041506__p151811534121711">采样类型</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041506__p151818343179">选择需要采样的类型。可选择：</p>
+<ul id="ZH-CN_TOPIC_0000001179041506__ul11815349171"><li id="ZH-CN_TOPIC_0000001179041506__li12181334141711">缓存访问</li><li id="ZH-CN_TOPIC_0000001179041506__li1718119342176">DDR访问</li></ul>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041506__row2018133411172"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041506__p15181173461711">预约定时启动</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041506__p518123412179">是否创建预约定时启动任务，详细信息请参考<a href="zh-cn_topic_0000001178563072.html">任务管理</a>。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041506__row16181113421712"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041506__p718143410177">立即执行</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041506__p01813349174">任务创建完成后会自动开始执行，默认勾选。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001179041506__note1218133441714"><span class="notetitle"> 说明： </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001179041506__zh-cn_topic_0250471713_p15450171572414">打开“预约定时启动”将不显示该选项。</p>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0000001179041506__li15975172144218"><span>单击“确认”完成分析任务的创建。</span><p><p id="ZH-CN_TOPIC_0000001179041506__p174514374369">单击任务名称后面对应的图标可以执行如下操作：</p>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001223882789.html">访存统计分析</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

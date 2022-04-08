@@ -1,0 +1,57 @@
+.ti3-table.custemTable > .ti3-table-fixed-head > table > thead > tr > th .thContent {
+  display: flex;
+  align-items: center;
+  overflow: hidden
+}
+.ti3-table.custemTable > .ti3-table-fixed-head > table > thead > tr > th .thContent .ti3-cell-text-container {
+  height: var(--ti-table-th-height);
+}
+.ti3-table.custemTable > .ti3-table-fixed-head > table > thead > tr > th .thContent .about-mask {
+  app-icon-static {
+    display: block;
+    width: 14px;
+    height: 14px;
+    line-height: 18px;
+    margin-left: 8px;
+  }
+}
+.ti3-icon-search{
+  padding-left: 8px;
+  cursor: pointer;
+  position: relative;
+  width: 14px;
+  color: var(--common-color-font-secondary);
+&:hover{
+  color: var(--ti-table-sort-color-hover);
+}
+&.active{
+  color: var(--ti-table-sort-color-hover);
+}
+&::before{
+  position: absolute;
+  top: -14px;
+}
+}
+.ti3-icon-search.isIE{
+  top: 12px;
+}
+.ti3-searchbox-container.search-box{
+  top: 0px;
+  left: -1px;
+  position: absolute;
+  z-index: 1;
+}
+.ti3-table-container{
+  max-height: 320px;
+}
+.ti3-table > .ti3-table-container > table > tbody > tr > td.canClick{
+  color: #0057d9 !important;  
+  cursor: pointer;
+}
+
+:host .custemTable {
+  &.ti3-table>.ti3-resize-wrapper>table>thead>tr>th,
+  &.ti3-table>.ti3-table-container>table>thead>tr>th {
+    border-bottom: none;
+  }
+}

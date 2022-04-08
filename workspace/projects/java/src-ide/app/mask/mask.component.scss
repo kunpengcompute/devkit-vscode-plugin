@@ -1,0 +1,51 @@
+.mask {
+  background: rgba(0, 0, 0, 0.298);
+  position: fixed;
+  top: 0px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: none;
+  transition: 0.4s ease-out;
+  z-index: 115;
+}
+.mask.active {
+  display: block;
+}
+.content-box {
+  position: fixed;
+  top: 50%;
+  left: -200%;
+  width: auto;
+  transition: 0.4s ease-out;
+  z-index: 115;
+}
+.content-box.active {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+//黑色主题
+::ng-deep .vscode-dark {
+  .ti3-form .ti3-form-label{
+    color:#aaa !important;
+  }
+  input[type=radio][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin:focus,
+  input[type=radio][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin:hover{
+    background-color:#0067ff;
+    border-color:#0067ff;
+  }
+  input[type=radio][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin{
+    background-color:#0067ff;
+    border-color:#0067ff;
+  }
+  input[type=radio][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin:after,
+  input[type=radio][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin:after{
+    background-color:#0067ff;
+    border-color:#0067ff;
+  }
+  input[type=radio][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin:focus:after, 
+  input[type=radio][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin:hover:after{
+    background-color:#0067ff;
+    border-color:#0067ff;
+  }
+}

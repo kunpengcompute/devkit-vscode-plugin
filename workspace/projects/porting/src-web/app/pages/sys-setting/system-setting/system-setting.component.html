@@ -1,0 +1,33 @@
+<div class="modal-dialog">
+    <div class="content flex-column">
+        <span class="create-title">{{i18n.sysSetting}}</span>
+        <div class="common-warpper modal-dialog-container">
+            <div>
+                <app-sys-setting-item [config]="commonConfig.userCount" [value]="userCountValue"
+                    (confirm)="onUserCountConfirm($event)">
+                </app-sys-setting-item>
+            </div>
+            <div class="common-item">
+                <app-sys-setting-item [config]="commonConfig.timeout" [value]="timeoutValue"
+                    (confirm)="onTimeoutConfirm($event)">
+                </app-sys-setting-item>
+            </div>
+            <div class="common-item">
+                <app-sys-setting-item [config]="commonConfig.webWarnDeadline" [value]="webWarnDeadlineValue"
+                    (confirm)="onWebWarnDeadlineConfirm($event)">
+                </app-sys-setting-item>
+            </div>
+            <div class="sys-item">
+              <app-sys-setting-item-select [config]="commonConfigSel.runLogLevel" [value]="runLogLevelValue"
+                  (confirm)="onLogLevelConfirm($event)">
+              </app-sys-setting-item-select>
+          </div>
+          <div class="sys-item">
+            <!--调用 app-sys-setting-item-select 需要注意取消按钮会下发查询请求获取对应配置的值           -->
+            <app-sys-setting-item-select [config]="commonConfigSel.CRLConfig" [value]="CRLConfigration"
+                                         (confirm)="onCRLCongurationConfirm($event)">
+            </app-sys-setting-item-select>
+          </div>
+        </div>
+    </div>
+</div>

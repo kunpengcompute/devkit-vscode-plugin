@@ -1,0 +1,106 @@
+body.vscode-dark {
+  // 背景
+  --common-color-background-base: #1e1e1e;
+  --common-color-background-primary: #252526;
+  --common-color-background-secondary: #161616;
+  --common-color-background-disabled: #616161;
+  --common-color-background-f5f9ff-2a2a2a: #2a2a2a;
+  --active-edf4ff-d4d956: rgba(212, 217, 230, .17);
+  --color-select-background: rgba(0, 103, 255, 0.149);
+  --color-switch-bgc: #616161;
+
+  // 表格无数据时背景
+  // 2021-06-05 这一对颜色是参考目前表格无数据背景颜色定义，不确定是否完全正确
+  --table-color-background-nodata: #161616;
+
+  // 字体
+  --common-color-font-primary: #e8e8e8;
+  --common-color-font-secondary: #aaaaaa;
+  --common-color-font-tip: #888888;
+  --color-font-d-aaaaaa-l-222222: #AAAAAA;
+
+  // 弹框背景
+  --modal-bg-color-e1e4e8-52565a: #52565a;
+
+  // 弹框字体
+  --modal-col-e8e8e8-818181: #e8e8e8;
+
+  // 按钮
+  --button-color-background-secondary: #313131;
+  --button-color-border-secondary: #dddddd;
+
+  // 分割线
+  --common-color-divider: #484a4e;
+  --divider-style: 1px solid #484a4e;
+  --divider-d7dbe7-6e6e6e: #6e6e6e;
+  --divider-color-dashed: #4b4b4b;
+  --divider-style-dashed: 1px dashed #4b4b4b;
+  --divider-style-tabs-header: #888888;
+  hr {
+    border: none;
+    border-top: 1px solid #484a4e;
+  }
+
+  // tab下划线
+  --tab-header-underline-color: transparent;
+  // tab边框
+  --tab-border-color: transparent;
+  --tab-bgc-exchange-color: #161616;
+
+  // switch按钮
+  --switch-background-color: #616161;
+
+  // 滚动条颜色
+  --scrollbar-thumb-background-color: #424242;
+
+  // tiny表格展开距离背景颜色
+  --ti-table-expand-children-margin-background-color: #252525;
+  
+  // 表格奇数行背景色
+  --ti-table-odd-tr-background-color: #1e1e1f;
+  --sub-table-545454-e6ebf5: #545454;
+  --sub-table-transparent-e6ebf5: transparent;
+
+  // 文本按钮样式
+  .hy-btn-text {
+    background: none;
+    border: none;
+    color: #0067ff;
+    cursor: pointer;
+
+    &:hover {
+      color: #267dff;
+    }
+
+    &:active {
+      color: #0057d9;
+    }
+
+    &:disabled {
+      color: #616161;
+    }
+  }
+
+  // tiny图标通用样式
+  ti-icon {
+    color: #aaaaaa;
+
+    &:hover {
+      color: #267dff;
+    }
+
+    &.active {
+      color: #0057d9;
+    }
+
+    &:disabled {
+      color: #616161;
+    }
+  }
+
+  // 输入框
+  --color-input-border: #888888;
+  --color-input-placeholder: #616161;
+  
+
+}

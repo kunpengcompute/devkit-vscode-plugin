@@ -1,0 +1,24 @@
+<div class="msg-content">
+  <div class="msg-header" *ngIf="showHeader" (click)='msgHeaderClick()'>
+    <img src="./assets/img/summary/row.png" class='title-icon' [ngClass]="{active: toggleFlag}">
+    <span>{{ i18n.optimization }}</span>
+  </div>
+  <div class="msg-main" *ngIf="!suggestMsg.length">
+    <div class="msg-title">
+      <img src="./assets/img/summary/no-msg-dark.svg" class="msg-title-icon">
+      <div class="des">
+        <span>{{ i18n.optimization_no_msg }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="msg-main" *ngFor="let item of suggestMsg; let index = index" [ngClass]="{'isNotFirst': index !== 0 }">
+    <div class="msg-title"  (click)="msgClick(item)">
+      <img src="./assets/img/msgsuggest/suggestions.svg">
+      <div class="des">
+        <span>{{ item.title }}</span>
+      </div>
+      <img src="./assets/img/msgsuggest/arrow-icon.svg" class="arrow-icon" [ngStyle]="{'transform': item.isShow ? 'rotate(180deg)' : 'rotate(0deg)'}">
+    </div>
+    <div id="msgbody" class="msg-body" *ngIf="item.isShow" [innerHTML]="item.msgbody"></div>
+  </div>
+</div>

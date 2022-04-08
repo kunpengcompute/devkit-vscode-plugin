@@ -1,0 +1,85 @@
+$label-width-en: 400px;
+$label-width-zh: 223px;
+
+.warpper {
+  .input-warpper {
+    position: relative;
+
+    .input-form {
+      display: inline-block;
+
+      .input-item {
+        width: 400px;
+      }
+
+    }
+  }
+
+  .btn-warpper {
+    &[lang="zh-cn"] {
+      margin-left: $label-width-zh + 32px;
+    }
+
+    &[lang="en-us"] {
+      margin-left: $label-width-en + 32px;
+    }
+  }
+}
+
+:host .input-warpper[lang="zh-cn"] ::ng-deep .ti3-form .ti3-form-label {
+  width: $label-width-zh;
+}
+
+:host .input-warpper[lang="en-us"] ::ng-deep .ti3-form .ti3-form-label {
+  width: $label-width-en;
+}
+
+button+button {
+  margin-left: 16px;
+}
+
+button {
+  width: 88px;
+
+  &[tiButton] {
+    padding: 0;
+  }
+}
+
+.log-tip-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  position: relative;
+  top: -11px;
+  left: 8px;
+  background: center / contain no-repeat url("../../../../../assets/img/header/svg/help.svg");
+}
+
+ti-select {
+  &[disabled] {
+    width: 300px;
+    color: #ccc !important;
+    background: #f5f5f5 !important;
+    border: 1px solid #ccc !important;
+  }
+
+  &:not([disabled]) {
+    box-sizing: border-box;
+    width: 300px;
+    background: #fff !important;
+    border: 1px solid #ccc !important;
+  }
+}
+
+:host ::ng-deep [disabled] section.ti3-select-dominator-text .ti3-overflow-padding {
+  color: #cccccc !important;
+}
+
+::ng-deep section.ti3-select-dominator-text .ti3-overflow-padding {
+  font-size: 12px !important;
+}
+
+::ng-deep .ti3-dropdown-option {
+  font-size: 12px !important;
+}

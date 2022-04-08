@@ -1,0 +1,107 @@
+<div class="lock-graph" *ngIf="currentType === 'lock'">
+  <div class="graph1">
+    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height='100%' id='line'>
+      <defs>
+        <marker id="arrowheadGreen" viewBox="0 0 10 10" refX="3" refY="5" markerWidth="6" markerHeight="6" orient="auto" fill="#7ADFA0">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+        </marker>
+        <marker id="arrowheadRed" viewBox="0 0 10 10" refX="3" refY="5" markerWidth="6" markerHeight="6" orient="auto" fill="#F45C5E">
+          <path d="M 0 0 L 10 5 L 0 10 z" />
+      </marker>
+      <marker id="arrowheadYellow" viewBox="0 0 10 10" refX="3" refY="5" markerWidth="6" markerHeight="6" orient="auto" fill="#FDCA5A">
+          <path d="M 0 0 L 10 5 L 0 10 z" />
+      </marker>
+      <marker id="arrowheadOrange" viewBox="0 0 10 10" refX="3" refY="5" markerWidth="6" markerHeight="6" orient="auto" fill="#F4A000">
+        <path d="M 0 0 L 10 5 L 0 10 z" />
+      </marker>
+      </defs>
+      <g fill="none"  stroke="black" stroke-width="2" marker-end="url(#arrowheadGreen)" [id]="'g-box-green'+name"></g>
+      <g fill="none"  stroke="black" stroke-width="2" marker-end="url(#arrowheadRed)" [id]="'g-box-red'+name"></g>
+      <g fill="none"  stroke="black" stroke-width="2" marker-end="url(#arrowheadYellow)" [id]="'g-box-yellow'+name"></g>
+      <g fill="none"  stroke="black" stroke-width="2" marker-end="url(#arrowheadOrange)" [id]="'g-box-orange'+name"></g>
+    </svg>
+    <div class="lock-left" >
+      <div class="threadTime" *ngIf="isCompare">{{threadTime}}</div>
+      <ng-container *ngFor="let item of graphData1.threadData; let i = index">
+        <div [id]="name + item.id" class="attr thread"
+          [ngClass]="[handleThreadStatus(item.status), handleTheadOpacity(item.isActive)]" 
+          (click)="handleThreadClick(i)"
+          [tiTip]='tipContent' [tiTipContext]='currentHoverThread' tiTipPosition='right' tiTipMaxWidth="''"
+          (mouseenter)="onThreadTipChange(item.threadTip)"
+          (mouseleave)="onThreadTipChange('')"
+        >
+          <div class="deadlock-tip">
+            <img *ngIf="item.threadExistDeadLock" src="./assets/img/newSvg/errorLockTip.svg" [tiTip]='fondDeadLock' tiTipPosition='left'>
+          </div>
+          <p class="text-overflow" >{{item.threadName}}</p>
+        </div>
+      </ng-container>
+    </div>
+    <div class="lock-right">
+      <div class="deadLock" *ngIf="deadLockCount">Found {{deadLockCount}} Deadlock</div>
+      <ng-container  *ngFor="let item of graphData1.addressData; let i = index">
+        <div [id]="name + item.id" class="attr address" [ngClass]="[handleTheadOpacity(item.isActive)]" (click)="handleAddressClick(i)" >
+          <p class="text-overflow"  [tiTip]='item.waitObjName' tiTipPosition='right'>{{item.waitObjShortName}}</p>
+          <p>id:{{item.waitObjAddr}}</p>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<div class="lock-graph" *ngIf="currentType === 'thread'">
+  <div class="graph1"> 
+    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height='100%' id='line'>
+      <defs>
+        <marker id="arrowheadGreen" viewBox="0 0 10 10" refX="3" refY="5" markerWidth="6" markerHeight="6" orient="auto" fill="#7ADFA0">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+        </marker>
+        <marker id="arrowheadRed" viewBox="0 0 10 10" refX="3" refY="5" markerWidth="6" markerHeight="6" orient="auto" fill="#F45C5E">
+          <path d="M 0 0 L 10 5 L 0 10 z" />
+      </marker>
+      <marker id="arrowheadYellow" viewBox="0 0 10 10" refX="3" refY="5" markerWidth="6" markerHeight="6" orient="auto" fill="#ECE85F">
+          <path d="M 0 0 L 10 5 L 0 10 z" />
+      </marker>
+      <marker id="arrowheadOrange" viewBox="0 0 10 10" refX="3" refY="5" markerWidth="6" markerHeight="6" orient="auto" fill="#E89954">
+        <path d="M 0 0 L 10 5 L 0 10 z" />
+      </marker>
+      </defs>
+      <g fill="none"  stroke="black" stroke-width="2" marker-end="url(#arrowheadGreen)" [id]="'g-box-green'+name"></g>
+      <g fill="none"  stroke="black" stroke-width="2" marker-end="url(#arrowheadRed)" [id]="'g-box-red'+name"></g>
+      <g fill="none"  stroke="black" stroke-width="2" marker-end="url(#arrowheadYellow)" [id]="'g-box-yellow'+name"></g>
+      <g fill="none"  stroke="black" stroke-width="2" marker-end="url(#arrowheadOrange)" [id]="'g-box-orange'+name"></g>
+    </svg>
+    <div class="thread-left">
+      <div class="deadLock" *ngIf="deadLockCount">Found {{deadLockCount}} Deadlock</div>
+      <ng-container  *ngFor="let item of graphData1.addressData; let i = index">
+        <div [id]="name + item.id" class="attr address" [ngClass]="[handleTheadOpacity(item.isActive)]" (click)="handleAddressClick(i)" >
+          <p class="text-overflow"  [tiTip]='item.waitObjName' tiTipPosition='right'>{{item.waitObjShortName}}</p>
+          <p>id:{{item.waitObjAddr}}</p>
+        </div>
+      </ng-container>
+    </div>
+    <div class="thread-right" >
+      <div class="threadTime" *ngIf="isCompare">{{ threadTime }}</div>
+      <ng-container *ngFor="let item of graphData1.threadData; let i = index">
+        <div [id]="name + item.id" class="attr thread"
+          [ngClass]="[handleThreadStatus(item.status), handleTheadOpacity(item.isActive)]" 
+          (click)="handleThreadClick(i)"
+          [tiTip]='tipContent' [tiTipContext]='currentHoverThread' tiTipPosition='left' tiTipMaxWidth="''"
+          (mouseenter)="onThreadTipChange(item.threadTip)"
+          (mouseleave)="onThreadTipChange('')"
+        >
+          <div class="deadlock-tip">
+            <img *ngIf="item.threadExistDeadLock" src="./assets/img/newSvg/errorLockTip.svg" [tiTip]='fondDeadLock' tiTipPosition='right'>
+          </div>
+          <p class="text-overflow" >{{item.threadName}}</p>
+        </div>
+      </ng-container>
+    </div>
+    
+  </div>
+</div>
+
+<ng-template #tipContent let-context='context'>
+  <div class="tipcontent">
+    <div [innerHtml]="context"></div>
+  </div>
+</ng-template>

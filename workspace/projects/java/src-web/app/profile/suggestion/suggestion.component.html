@@ -1,0 +1,36 @@
+<div class="suggestion-container">
+  <div class="suggestion-check">
+    <p>{{ i18n.protalserver_profiling_jdbc.tipsone }}</p>
+    <p>
+      {{ i18n.protalserver_profiling_jdbc.tipstwo }}
+    </p>
+    <!-- <p>
+      on the right will be saved temporarily, but will not affect the source
+      file.d
+    </p> -->
+    <div class="checkbox-item">
+      <input
+        id="mycheckBox"
+        type="checkbox"
+        tiCheckbox
+        [(ngModel)]="showChecked"
+        (ngModelChange)="checkedChange($event)"
+      />
+      <label for="mycheckBox">{{
+        i18n.protalserver_profiling_jdbc.display
+      }}</label>
+    </div>
+    <div class="btn-item">
+      <button 
+        class="sure"
+        tiButton
+        color="primary"
+        [disabled]="isShowAgreeBox"
+        type="button"
+        (click)="showDiffCode()"
+      >
+        {{ i18n.common_term_operate_ok }}
+      </button>
+    </div>
+  </div>
+</div>

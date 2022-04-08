@@ -1,0 +1,33 @@
+.compare-process-mic-metrics-container {
+    background-color: var(--common-color-background-base);
+    .other-info-box {
+        padding: 0 24px;
+        height: 32px;
+        font-size: 12px;
+        border-bottom: 1px solid var(--ti-table-border-bottom-color);
+        display: flex;
+    
+        .other-info-cell {
+            display: flex;
+            align-items: center;
+            &:not(:first-child) {
+                margin-left: 32px;
+            }
+
+            .tip-icon {
+                width: 14px;
+                height: 14px;
+                line-height: 22px;
+            }
+
+            .info-key {
+                color: var(--common-color-font-secondary);
+            }
+        
+            .info-value {
+                color: var(--common-color-font-primary);
+                margin-left: 8px;
+            }
+        }
+    }
+}

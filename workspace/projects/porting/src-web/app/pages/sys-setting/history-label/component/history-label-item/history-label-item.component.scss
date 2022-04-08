@@ -1,0 +1,41 @@
+$common12: 12px;
+.warpper {
+    margin-bottom: 32px;
+    .input-warpper {
+        position: relative;
+        & ::ng-deep .ti3-form .ti3-form-require .ti3-icon, .ti3-form .ti3-form-require .ti3-table-soldout {
+          font-size: $common12;
+        }
+        .input-form {
+            display: inline-block;
+            margin-left: -12px;
+        }
+        .input-range{
+            position: absolute;
+            top: 6px;
+            left: 308px;
+            min-width: 80px;
+            margin-left: 8px;
+            color: #666;
+            font-size: 14px;
+        }
+        .tip {
+            margin-top: 4px;
+            color: #979797;
+            font-size: 12px;
+        }
+    }
+
+}
+
+button+button {
+    margin-left: 16px;
+}
+
+button {
+    min-width: 88px;
+}
+
+.ti3-icon-exclamation-circle:before {
+    top: 1 !important;
+}

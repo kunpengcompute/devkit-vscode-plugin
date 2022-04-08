@@ -1,0 +1,49 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="&quot;Without the graphviz component, the system does not support this function&quot; Displayed in the Code Flow Area of a Hotspot Function Analysis or Resource Scheduling Analysis Task">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001214027145.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="user guide">
+<meta name="DC.Publisher" content="20210630">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="kunpengfaq_06_0006">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>"Without the graphviz component, the system does not support this function" Displayed in the Code Flow Area of a Hotspot Function Analysis or Resource Scheduling Analysis Task</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="kunpengfaq_06_0006"></a><a name="kunpengfaq_06_0006"></a>
+
+<h1 class="topictitle1">"Without the graphviz component, the system does not support this function" Displayed in the Code Flow Area of a Hotspot Function Analysis or Resource Scheduling Analysis Task</h1>
+<div id="body8662426"><div class="section" id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_section3989195513596"><h4 class="sectiontitle">Symptom</h4><p id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_p642131713017">The message "Without the graphviz component, the system does not support this function" is displayed in the <strong id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_b1481112620617">Code Flow</strong> area, as shown in <a href="#kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_fig79338131314">Figure 1</a>.</p>
+<div class="fignone" id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_fig79338131314"><a name="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_fig79338131314"></a><a name="en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_fig79338131314"></a><span class="figcap"><b>Figure 1 </b>Code Flow area</span><br><span><img id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_image356885601511" src="en-us_image_0000001153799550.png"></span></div>
+</div>
+<div class="section" id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_section13779133512387"><h4 class="sectiontitle">Possible Causes</h4><p id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_p14225159206">The Graphviz component is not installed on the OS.</p>
+</div>
+<div class="section" id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_section1942413153012"><h4 class="sectiontitle">Procedure</h4><p id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_p7852930540">Installation of the Graphviz component requires a local image source or network image source of the OS.</p>
+<div class="notice" id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_note725715402437"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-en-us.png"> </span><div class="noticebody"><p id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_p4258164024311">Installing Graphviz of a later version may cause an upgrade of certain system library components (such as libc6 and libdb) to a later version. The upgraded system library components may affect running of other functions and software (for example, running of systemd may become abnormal). Consider the impact of the system library upgrade on your operating environment when determine whether to install and upgrade the Graphviz component.</p>
+</div></div>
+<p id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_p135061583512">Perform the following steps (using installing the Graphviz component on CentOS 7.6 as an example):</p>
+<ol id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_ol6712194216613"><li id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_li1357819467714"><span>Install the Graphviz component:</span><p><p id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_p362217241886"><strong id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_b7567626885">yum -y install graphviz</strong></p>
+</p></li><li id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_li6279183011814"><span>Check whether the installation is successful:</span><p><p id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_p10256647787"><strong id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_b6256347882">rpm -qa | grep graphviz</strong></p>
+<p id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_p735463917813">If the following information is displayed, the installation is successful.</p>
+<pre class="screen" id="kunpengfaq_06_0006__en-us_topic_0000001116382398_en-us_topic_0228009038_en-us_topic_0228879389_screen359918418913">graphviz-2.30.1-21.el7.aarch64</pre>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001214027145.html">FAQ</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

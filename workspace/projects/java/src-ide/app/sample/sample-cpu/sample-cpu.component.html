@@ -1,0 +1,17 @@
+<div>
+    <div class="cpu-detail-tab">
+        <span class="tab-content" *ngFor="let tab of cpuTabs; let idx = index" [routerLink]="[tab.link]"
+            (click)="activeChange(idx)">
+            <ng-container *ngIf="tab.show">
+                <span class="item-tab">
+                    <span class="tab-title">
+                        <span [ngClass]="{ 'tab-active': tab.active }">
+                            {{ i18n.protalserver_sampling_tab[tab.title] }}
+                        </span>
+                    </span>
+                </span>
+            </ng-container>
+        </span>
+    </div>
+    <router-outlet></router-outlet>
+</div>

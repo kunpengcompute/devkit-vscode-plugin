@@ -1,0 +1,191 @@
+<header [ngClass]="bannerShow?'header':'headerPureBg'">
+
+  <div class="header-left">
+    <img src="./assets/img/header/logo.svg" class="logo" />
+    <span class="title">{{i18n.common_term_pro_name}}</span>
+  </div>
+  <div class="header-right-new">
+    <div class="user-container">
+        <!-- 用户管理-修改密码、退出 -->
+        <span>{{username}}</span>
+        <div class="header-up"></div>
+        <ul class="user-list-box login">
+          <li (click)="updatePassword()">{{i18n.common_term_user_info[2]}}</li>
+          <li (click)="logOut(changeWeb)">{{i18n.common_term_user_info[5]}}</li>
+        </ul>
+    </div>
+    <div class="user-container" style="padding-right: 0">
+      <!-- 系统配置-用户管理、白名单、软件迁移模板、扫描参数配置、阈值设置、证书、日志、弱口令、系统配置 -->
+      <div class="header-config"></div>
+      <ul class="user-list-box setting">
+        <li *ngFor="let item of leftMenuList" (click)="goSettingRouter(item)" [ngClass]="{'active': item.status, 'notShow': item.admin && role !== 'Admin'}">{{item.title}}</li>
+      </ul>
+    </div>
+    <div class="user-container" style="padding-right: 0;">
+      <!-- 更多-中英文切换、系统帮助、免责声明、关于 -->
+      <div class="header-lang"></div>
+      <ul class="user-list-box lang">
+        <li *ngFor="let item of langOptions" (click)="langChange(item)" [ngClass]="{'notShow': item.id === langSelected.id}">{{item.label}}</li>
+        <li (click)="jumpCommunity()" *ngIf="currLang === 'zh-cn'">{{i18n.common_term_community}}</li>
+        <li (click)="help()">{{i18n.common_term_help_tip}}</li>
+        <li (click)="showDisclaimer()">{{i18n.user_disclaimer.title}}</li>
+        <li (click)="showAboutMask()">{{i18n.common_term_about}}</li>
+      </ul>
+    </div>
+  </div>
+
+</header>
+
+<app-creating-result *ngIf="creatingMsgList.length > 0"
+  [len]="creatingMsgList.length"
+  [resultList]="creatingMsgList"
+  [bottom]="resultContainerBottom"
+  [bcFileRes]="bcFileSrcData"
+  [bcFileResult]="bcFileResult"
+  [bcResultPartial]="bcResultPartial"
+  (resultOptions)="resultOptions($event)">
+</app-creating-result>
+<app-creating-progress *ngIf="creatingProgressList.length > 0"
+   [len]="creatingProgressList.length"
+   [list]="creatingProgressList"
+   [bottom]="creatingProgressBottom"
+   (expandChange)="expandChange($event)"
+   (taskListChange)="taskListChange($event)">
+</app-creating-progress>
+
+<app-so-situation [soSituation]="soSituation" [soinfo]="soinfo"></app-so-situation>
+<app-xml-situation [xmlSituation]="xmlsituation" [xmlinfo]="xmlinfo"></app-xml-situation>
+
+<!-- about modal start -->
+<app-about-mask #about [isDisclaimer]="false">
+  <div class="content about-box">
+    <div style="display: flex; justify-content: space-between; align-items: center;border-bottom: 1px dashed #E1E6EE; padding-bottom: 8px;margin-bottom: 4px;">
+      <div style="display: flex;align-items: center;">
+       <img class="logo" src="./assets/img/header/logo.svg">
+        <p style="font-size: 20px; color: #222;margin-left: 10px;margin-top: 0;">{{i18n.common_term_pro_name}}</p>
+      </div>
+      <img class="about-close" src="./assets/img/header/icon_header_pop_close.svg" (click)='closeAbout()' />
+    </div>
+    <p><span></span> {{i18n.aboutMsg.version}}</p>
+    <p><span></span> {{i18n.aboutMsg.time}}</p>
+    <p><span></span> {{i18n.aboutMsg.copyRight}}</p>
+  </div>
+</app-about-mask>
+<!-- about modal end -->
+
+<!-- 免责声明 modal start -->
+<app-about-mask #disclaimer [isDisclaimer]="true">
+  <div class="content">
+    <app-common-disclaimer (closeDisclaimer)="closeDisclaimer()" [isConfirm]="false"></app-common-disclaimer>
+  </div>
+</app-about-mask>
+<!-- 免责声明 modal end -->
+
+<!-- update-pwd modal start -->
+<app-pop-mask #updatePwdModal>
+  <div class="content mask2 change-password-modal update-modal" *ngIf="pwdShow">
+    <span class="create-title">{{i18n.common_term_operate_change}}</span>
+    <div class="img-box">
+      <img src="./assets/img/common/modal_close.svg" (mousedown)="closeUserPwd($event)" />
+    </div>
+    <div class="edit-box">
+      <ti-formfield [formGroup]="changePwdForm" [labelWidth]="'110px'">
+        <ti-item [label]="label.Name">
+          <input
+            tiText class="inp-width300" disabled [(ngModel)]="username"
+            [tiValidation]="validation" formControlName="userName">
+        </ti-item>
+        <ti-item [label]="label.oldPwd" [required]="true">
+          <input tiText [tiValidation]="validation" formControlName="oldPwd" autocomplete="new-password" type="password"  style="width: 300px;"
+            oncopy="return false" oncontextmenu="return false"
+            (keyup)="stopBack($event)"
+            (keydown)="stopBack($event)" oncut="return false"
+            maxlength="32"
+          >
+        </ti-item>
+        <ti-item [label]="label.newPwd" [required]="true">
+          <input tiText [tiValidation]="validation" formControlName="pwd" type="password" style="width: 300px;"
+            oncopy="return false" oncontextmenu="return false" (keyup)="stopBack($event)"
+            (keydown)="stopBack($event)" oncut="return false"
+            maxlength="32"
+          >
+        </ti-item>
+        <ti-item [label]="label.Cpwd" [required]="true">
+          <input tiText [tiValidation]="validation" formControlName="cpwd" type="password" style="width: 300px;"
+            oncopy="return false" oncontextmenu="return false" (keyup)="stopBack($event)"
+            (keydown)="stopBack($event)" oncut="return false"
+            (keyup.enter)="setUserPwd()"
+            maxlength="32"
+          >
+        </ti-item>
+      </ti-formfield>
+    </div>
+    <div class="btn-box">
+      <button type="button" color="primary" tiButton class="user-sure-btn"
+        (click)="setUserPwd()">{{i18n.common_term_operate_ok}}</button>
+      <button type="button" tiButton (mousedown)="closeUserPwd($event)">{{i18n.common_term_operate_cancel}}</button>
+    </div>
+  </div>
+</app-pop-mask>
+<!-- update-pwd modal end -->
+
+<!-- 源码迁移建议放弃修改文件 modal start -->
+<ng-template #changeWeb let-context="context">
+  <ti-modal-header>
+    {{i18n.common_term_giveup_tip4}}
+  </ti-modal-header>
+  <ti-modal-body>
+    <div class="del-content">
+      <div class="title">
+        <img src="./assets/img/home/warn-tip.svg" alt="">
+        <p class="tip1">
+          {{this.i18n.common_term_sure_giveup_tip1}}
+          <span style="font-weight: bold;">{{this.giveupfilename}}</span>
+          {{this.i18n.common_term_sure_giveup_tip3}}
+          {{i18n.common_term_leave_tip2}}
+        </p>
+      </div>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <div class="changeWeb-btn-box">
+      <button type="button" class="user-sure-btn" (click)="context.close()" tiButton>{{i18n.common_term_operate_ok}}</button>
+      <button type="button" color="primary" class="user-close-btn" (click)="context.dismiss()" tiButton>{{i18n.common_term_operate_cancel}}</button>
+    </div>
+  </ti-modal-footer>
+</ng-template>
+<!-- 源码迁移建议放弃修改文件 modal end -->
+
+<!-- 证书告警提示 modal start -->
+<ng-template #certificateModal let-context="context">
+  <ti-modal-header>{{ i18n.common_term_webcert_tip }}</ti-modal-header>
+  <ti-modal-body>
+    <div class="content">
+      <div class="img-box">
+          <img src="./assets/img/home/icon_warn.png" />
+      </div>
+      <p>{{ certExpiredTip }}</p>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" (click)="context.close()" tiButton>{{ i18n.common_term_operate_close }}</button>
+  </ti-modal-footer>
+</ng-template>
+
+<!-- logout-modal start -->
+<ng-template #logoutModal let-context="context">
+  <ti-modal-header>{{ i18n.common_term_login.logout.title }}</ti-modal-header>
+  <ti-modal-body>
+    <div class="content">
+      <div class="img-box">
+        <img src="./assets/img/home/icon_tip.png" />
+      </div>
+      <p>{{ i18n.common_term_login.logout.content }}</p>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" color="primary" (click)="context.close()" tiButton>{{ i18n.common_term_operate_ok }}</button>
+    <button type="button" (click)="context.dismiss()" tiButton>{{ i18n.common_term_operate_cancel }}</button>
+  </ti-modal-footer>
+</ng-template>
+<!-- logout-modal end -->

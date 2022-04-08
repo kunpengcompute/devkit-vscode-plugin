@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="6px" height="10px" viewBox="0 0 6 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-下展</title>
+    <defs>
+        <path d="M11.9750423,5.5 L4.02468497,5.5 C3.55928566,5.5 3.32401474,6.06187132 3.65442254,6.39042319 L7.62960121,10.3473305 C7.83401693,10.5508898 8.16571037,10.5508898 8.37012609,10.3473305 L12.3453048,6.39042319 C12.6757126,6.06187132 12.4417273,5.5 11.9750423,5.5" id="path-1"></path>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="进程线程-总览" transform="translate(-413.000000, -331.000000)">
+            <g id="CPU-Package" transform="translate(384.000000, 312.000000)">
+                <g id="分组-4备份" transform="translate(24.000000, 16.000000)">
+                    <g id="icon-下展" transform="translate(8.000000, 8.000000) scale(-1, 1) rotate(-270.000000) translate(-8.000000, -8.000000) ">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Mask" fill="#888888" xlink:href="#path-1"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,11 @@
+<app-static-tip-for-ie [tipContent]="i18n.tipsIE"></app-static-tip-for-ie>
+<div class="flame-box" *ngIf='showfire' [appLoading]="obtainingFlameData">
+  <div class="d3-container">
+    <div [id]='fireID'></div>
+  </div>
+  <div id='flame-menu' [hidden]="!showMenu" [ngStyle]="{'left': menuX,'top':menuY}" [ngClass]="{' notStack': !isStack}">
+    <div class="functionName">{{hoverFunctionName}}</div>
+    <div class="menu-item" id='menu1' (click)='clickMenu1()' *ngIf="isStack && flame !== 'offCPU'">
+      {{i18n.cjava.viewDetails}}</div>
+  </div>
+</div>

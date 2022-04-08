@@ -1,0 +1,97 @@
+[OPTIONS]
+Compiled file=zh-cn_bookmap_0000001129506028.chm
+Contents file=zh-cn_bookmap_0000001129506028.hhc
+Default Window=hwwindow
+Full-text search=Yes
+Display compile progress=No
+Binary Index=No
+Language=0x0804 Chinese (CHINA)
+Default topic=zh-cn_topic_0000001129506034.html
+Title= 鲲鹏性能分析工具 (调优助手) 联机帮助
+
+[WINDOWS]
+hwwindow=,"zh-cn_bookmap_0000001129506028.hhc","","zh-cn_topic_0000001129506034.html","zh-cn_topic_0000001129506034.html",,,,,0x62520,200,0x300E,[50,10,550,470],0xB0000,,,,,,0
+
+[INFOTYPES]
+
+[FILES]
+zh-cn_topic_0000001129506034.html
+zh-cn_topic_0000001129506032.html
+zh-cn_topic_0000001129346248.html
+zh-cn_topic_0000001129506040.html
+zh-cn_topic_0000001175465733.html
+zh-cn_topic_0000001194200665.html
+zh-cn_topic_0000001129346240.html
+zh-cn_topic_0000001129506030.html
+zh-cn_topic_0000001130798882.html
+zh-cn_topic_0000001130639108.html
+zh-cn_topic_0000001176678649.html
+zh-cn_topic_0000001176758563.html
+zh-cn_topic_0000001148360734.html
+zh-cn_topic_0000001148346374.html
+zh-cn_topic_0000001148186606.html
+zh-cn_topic_0000001175465735.html
+zh-cn_topic_0000001175305831.html
+zh-cn_topic_0000001175465731.html
+zh-cn_topic_0000001129506036.html
+zh-cn_topic_0000001129346246.html
+zh-cn_topic_0000001129346250.html
+zh-cn_topic_0000001129346242.html
+zh-cn_topic_0000001175305833.html
+zh-cn_topic_0000001175305827.html
+zh-cn_topic_0000001129506038.html
+zh-cn_topic_0000001175465739.html
+zh-cn_topic_0000001129346244.html
+zh-cn_topic_0000001175465737.html
+zh-cn_topic_0000001175305835.html
+zh-cn_topic_0000001175305829.html
+zh-cn_topic_0000001167516870.html
+zh-cn_topic_0000001212278255.html
+zh-cn_topic_0000001212676821.html
+zh-cn_topic_0000001212278253.html
+zh-cn_topic_0000001167038396.html
+zh-cn_topic_0000001212796769.html
+zh-cn_topic_0000001167198368.html
+zh-cn_topic_0000001212598299.html
+zh-cn_topic_0000001167356924.html
+zh-cn_topic_0000001167516872.html
+zh-cn_topic_0000001212676823.html
+zh-cn_topic_0000001149777754.html
+zh-cn_topic_0000001197898709.html
+zh-cn_topic_0000001197675735.html
+zh-cn_topic_0000001151939066.html
+zh-cn_topic_0000001197593983.html
+zh-cn_topic_0000001197934087.html
+zh-cn_topic_0000001152096232.html
+zh-cn_topic_0000001151246984.html
+zh-cn_topic_0000001197938601.html
+zh-cn_topic_0000001151936432.html
+zh-cn_topic_0000001197195457.html
+zh-cn_topic_0000001151275702.html
+zh-cn_topic_0000001197896077.html
+zh-cn_topic_0000001151115886.html
+zh-cn_topic_0000001151939064.html
+zh-cn_topic_0000001172597370.html
+zh-cn_topic_0000001152098870.html
+zh-cn_topic_0000001197898711.html
+zh-cn_topic_0000001151631292.html
+zh-cn_topic_0000001151114298.html
+zh-cn_topic_0000001153512350.html
+zh-cn_topic_0000001199514141.html
+zh-cn_topic_0000001199514221.html
+public_sys-resources/caution_3.0-zh-cn.png
+public_sys-resources/danger_3.0-zh-cn.png
+public_sys-resources/note_3.0-zh-cn.png
+public_sys-resources/notice_3.0-zh-cn.png
+public_sys-resources/warning_3.0-zh-cn.png
+public_sys-resources/delta.gif
+public_sys-resources/deltaend.gif
+public_sys-resources/icon-caution.gif
+public_sys-resources/icon-danger.gif
+public_sys-resources/icon-note.gif
+public_sys-resources/icon-notice.gif
+public_sys-resources/icon-tip.gif
+public_sys-resources/icon-warning.gif
+public_sys-resources/icon-arrowdn.gif
+public_sys-resources/icon-arrowrt.gif
+public_sys-resources/icon-huawei.gif

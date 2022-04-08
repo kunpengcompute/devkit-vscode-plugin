@@ -1,0 +1,217 @@
+:host ::ng-deep .icons-warpper{
+    width: 32px;
+  }
+.box-title{
+    font-size: 16px;
+    color: #222;
+}
+.select-title{
+    font-size: 14px;
+    color: #616161;
+    padding: 0 16px 0 32px;
+}
+.select-box{
+    line-height: 32px;
+    display: flex;
+    padding-bottom: 10px;
+}
+.selectIcon{
+    padding-left: 16px;
+    cursor: pointer;
+}
+.chart-content{
+    padding-bottom: 32px;
+    position: relative;
+}
+.nodata-content{
+    height: 190px;
+    .chen-nodata-td{
+        padding: 0;
+    }
+}
+
+.thread-screen {
+    padding: 18px 32px;
+    position: relative;
+    height: 100%;
+
+    .header-title {
+        font-size: 20px;
+        line-height: 30px;
+        padding-bottom: 17px;
+        margin-bottom: 20px;
+        color: #222222;
+        border-bottom: dashed 1px #e1e6ee;
+    }
+    .table-wrapper {
+        max-height: 700px;
+        overflow-y: auto;
+        width: 636px;
+    }
+    .table-wrapper.selectContent{
+      width: 596px;
+      box-shadow: -6px 0px 18px 0px	rgba(0, 0, 0, 0.1);
+    }
+    .opreation-btn {
+        position: absolute;
+        bottom: 80px;
+        width: 90%;
+        text-align: center;
+
+        button+button {
+            margin-left: 16px;
+        }
+    }
+}
+.expand-icon {
+    transition: 0.3s linear;
+    position: relative;
+    left: 22px;
+    top: 3px;
+  }
+  .expand-icon.active {
+    transform: rotate(90deg);
+  }
+.devSelectBox {
+    position: relative;
+    .box-title {
+      height: 32px;
+      line-height: 32px;
+      font-size: 12px;
+      color: #282b33;
+      border-top: solid 1px #e1e6ee;
+      box-shadow: inset 0px -1px 0px 0px #e6ebf5;
+      span {
+        padding-left: 33px;
+      }
+    }
+  
+    .summury-table {
+      position: relative;
+      max-height: 0;
+      border-left: 40px solid #f0f3fa;
+      transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+      overflow: hidden;
+      &::before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        content: "";
+        width: 2px;
+        background-color: #6c92fa;
+        z-index: 999;
+      }
+      tr th,
+      tr td {
+        height: 32px;
+        font-family: "huawei sans";
+        font-size: 14px;
+        color: #282b33;
+        line-height: 32px;
+        text-align: left;
+        font-weight: normal;
+        font-stretch: normal;
+      }
+      tr.tidTr td {
+        &:nth-child(2) {
+          padding-left: 24px;
+        }
+      }
+      thead tr,
+      tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        box-shadow: inset 0px -1px 0px 0px #e6ebf5;
+      }
+      thead {
+        tr {
+          background-color: #f0f3fa;
+        }
+        th {
+          font-size: 12px;
+          position: relative;
+  
+          &::before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 0;
+            padding-left: 2px;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #d4d9e6;
+          }
+  
+          .content {
+            display: flex;
+            align-items: center;
+  
+            .sort-title {
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              max-width: calc(100% - 23px);
+            }
+  
+            &.center {
+              justify-content: center;
+            }
+          }
+        }
+      }
+  
+      tbody tr:hover {
+        background: #f7faff;
+      }
+    }
+  
+    .summury-table.active,
+    tbody.active {
+      max-height: 5000px;
+      overflow: auto;
+      transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
+    }
+  }
+  .select{
+      width: 100px;
+      height: 28px;
+  }
+  .select-cpu{
+      width: 203px;
+  }
+  :host ::ng-deep .ti3-select-dominator-container{
+      top: -5px;
+  }
+  :host ::ng-deep .disabledInput{
+    .ti3-checkbox{
+      display: none !important;
+    }
+  }
+  .chart-box.padding{
+    padding-bottom: 60px;
+  }
+  .ti3-table>.ti3-table-container>table>tbody>tr>td{
+    padding: 0 var(--ti-table-td-padding);
+    padding-left: var(--ti-table-column-icon-left-space);
+  }
+  .devSelectBox .summury-table thead th:first-child, .ti3-table>.ti3-table-container>table>tbody>tr>td:first-child{
+    padding-left: var(--ti-table-column-icon-left-space);
+    width: 60px;
+  }
+  .ti3-table>.ti3-table-container>table>thead>tr>th:not(:last-child):after{
+      width: 0;
+  }
+  @media only screen and (max-height: 900px) and (min-height: 760px) {
+    .thread-screen .table-wrapper{
+        max-height: 520px;
+    }
+}
+
+  @media only screen and (max-height: 760px) {
+    .thread-screen .table-wrapper{
+        max-height: 390px;
+    }
+  }

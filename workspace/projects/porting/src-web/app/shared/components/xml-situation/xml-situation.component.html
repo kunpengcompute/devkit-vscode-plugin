@@ -1,0 +1,40 @@
+<div class="webpack-situation-modal" *ngIf="xmlSituation == 1">
+    <div class="progress-modal">
+        <img src="./assets/img/home/progress.gif" alt="" class="gif">
+        <div class="madal-content">
+            <p class="situation analyzing"><img class="loading" src="./assets/img/analysis/loading.png"
+                alt="">{{xmlinfo.ing}}{{xmlinfo.tip}}</p>
+            <div class="progress-bar-bg">
+                <div class="progress-bar" [ngStyle]="{'width': xmlinfo.barWidth + 'px'}"></div>
+            </div>
+            <span style="padding-left: 5px">{{xmlinfo.progessValue}}</span>
+            <div style="margin-top: 20px;">{{xmlinfo.operation}} </div>
+        </div>
+    </div>
+</div>
+
+<div class="webpack-success-modal" *ngIf="xmlSituation == 2">
+        <div class="webpack-success-wrap">
+            <div class="situation">{{xmlinfo.success}}</div>
+            <img class="close-tip" (click)="closeModal()" src="./assets/img/common/modal_close.svg" />
+            <div class="tip">
+                <p><img style="width: 16px;height: 16px;" src="./assets/img/analysis/packing_ok.png" alt=""></p>
+                <p class="analyzing" [ngStyle]="{'word-break': currLang === 'zh-cn' ? 'break-all':'keep-all'}">{{xmlinfo.tip}}</p>
+            </div>
+            <div class="close"><button  type="button" tiButton (click)="closeModal()" style="cursor:pointer">{{i18n.common_term_operate_close}}</button></div>
+        </div>
+    </div>
+    
+    <div class="webpack-fail-modal" *ngIf="xmlSituation == 3">
+        <div class="webpack-fail-wrap">
+            <div class="situation">{{xmlinfo.fail}}</div>
+            <img class="close-tip" (click)="closeModal()" src="./assets/img/common/modal_close.svg" />
+            <div class="tip">
+                <p><img style="width: 16px;height: 16px;" src="./assets/img/analysis/packing_err.png" alt=""></p>
+                <p class="analyzing" [ngStyle]="{'word-break': currLang === 'zh-cn' ? 'break-all':'keep-all'}">{{xmlinfo.tip}} {{ i18n.onlineHelp.tip }}
+                    <a style="word-break: keep-all;" (click)="help('migTemplateFaild')">{{ i18n.onlineHelp.url }}</a>
+                </p>
+            </div>
+            <div class="close"><button tiButton type="button" (click)="closeModal()" style="cursor:pointer">{{i18n.common_term_operate_close}}</button></div>
+        </div>
+    </div>

@@ -1,0 +1,129 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Web服务端证书管理">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001224122717.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具 (Java性能分析)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001224201315">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Web服务端证书管理</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001224201315"></a><a name="ZH-CN_TOPIC_0000001224201315"></a>
+
+<h1 class="topictitle1">Web服务端证书管理</h1>
+<div id="body8662426"><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p03111641141319">Web服务端证书，即<span id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_ph1331116578362">鲲鹏性能分析工具</span>的Web服务端与Web浏览器之间通讯的证书。</p>
+<div class="section" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_section11470129119"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p2444451164517">已成功登录<span id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_ph1359340104618">系统性能分析</span>。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_note15470104415378"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p4642155955813">管理员用户（<strong id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_b5202139163611">tunadmin</strong>）可以执行生成CSR文件、导入证书、更换工作密钥和重启服务的操作。普通用户只能查看Web服务端证书信息。</p>
+</div></div>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_section4333162310508"><h4 class="sectiontitle">查看当前Web服务端证书信息</h4><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p125861440102911">在<span id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_ph2707194615324">鲲鹏性能分析工具</span>首页的<span><img id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_image558634014295" src="zh-cn_image_0000001224122915.png"></span>菜单选项中单击“Web服务端证书”。</p>
+<div class="p" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p17925169122913">查看Web服务端证书，如<a href="#ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_fig5819165365616">图1</a>所示，参数描述如<a href="#ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_table54168271502">表1</a>所示。<div class="fignone" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_fig5819165365616"><a name="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_fig5819165365616"></a><a name="zh-cn_topic_0253410803_fig5819165365616"></a><span class="figcap"><b>图1 </b>Web服务端证书</span><br><span><img id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_image614872314318" src="zh-cn_image_0000001178563232.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_table54168271502"></a><a name="zh-cn_topic_0253410803_table54168271502"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_table54168271502" frame="border" border="1" rules="all"><caption><b>表1 </b>参数说明</caption><colgroup><col style="width:24.01%"><col style="width:75.99000000000001%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_row94164276501"><th align="left" class="cellrowborder" valign="top" width="24.01%" id="mcps1.3.3.3.4.2.3.1.1"><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p10416182720502">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.99000000000001%" id="mcps1.3.3.3.4.2.3.1.2"><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p134163278503">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_row134171127145012"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.3.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p46161922193918">证书名称</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.3.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p104171527115013">显示证书名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_row3903267398"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.3.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p691162673916">证书到期时间</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.3.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p99213269393">显示证书到期时间。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_row189214268399"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.3.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p199212264392">状态</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.3.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p8926268396">显示证书的当前状态。</p>
+<ul id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_ul1887513313011"><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_zh-cn_topic_0253410802_li93344359384">有效：证书剩余有效时间超过证书自动告警时间。</li><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_zh-cn_topic_0253410802_li1833483512382">即将过期：证书剩余有效时间小于等于证书自动告警时间。</li><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_zh-cn_topic_0253410802_li03341435123814">已过期：已过证书到期时间。</li></ul>
+<div class="note" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_note8372183212259"><span class="notetitle"> 说明： </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_ul11721546502"><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li7172154610017">工具每天凌晨2点自动检查并更新证书状态。</li><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li131737464019">Web服务证书自动告警时间默认为90天。管理员用户可在<span><img id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_image149931854134918" src="zh-cn_image_0000001179041686.png"></span>菜单选项中选择“系统配置”，手动配置“Web服务证书过期告警阈值”，可配置范围为7~180天。</li></ul>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_section177554714587"><h4 class="sectiontitle">自定义服务器证书信息并导入</h4><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p1843962518250">SSL证书通过在客户端浏览器和Web服务器之间建立一条SSL安全通道（访问方式为HTTPS），实现数据信息在客户端和Web服务器之间的加密传输，可以防止数据信息的泄露。为提高安全性，建议替换成自己的证书和公私钥对，并及时更新证书，保证证书的有效性。</p>
+<ol id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_ol1664717253519"><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li070016561753"><a name="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li070016561753"></a><a name="zh-cn_topic_0253410803_li070016561753"></a><span>在“Web服务端证书”页面中单击“生成CSR文件”。</span><p><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p052417579719">打开“生成CSR文件”对话框，如<a href="#ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_fig4221265106">图2</a>所示，界面参数描述如<a href="#ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_table1859442711214">表2</a>所示。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_fig4221265106"><a name="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_fig4221265106"></a><a name="zh-cn_topic_0253410803_fig4221265106"></a><span class="figcap"><b>图2 </b>生成CSR文件</span><br><span><img id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_image961083613145" src="zh-cn_image_0000001178881756.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_table1859442711214"></a><a name="zh-cn_topic_0253410803_table1859442711214"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_table1859442711214" frame="border" border="1" rules="all"><caption><b>表2 </b>CSR文件参数说明</caption><colgroup><col style="width:24.03%"><col style="width:75.97%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_row759412718127"><th align="left" class="cellrowborder" valign="top" width="24.03%" id="mcps1.3.4.3.1.2.3.2.3.1.1"><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p185940272125">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.97%" id="mcps1.3.4.3.1.2.3.2.3.1.2"><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p35947271122">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_row1159452712126"><td class="cellrowborder" valign="top" width="24.03%" headers="mcps1.3.4.3.1.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p056103214123">国家</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.97%" headers="mcps1.3.4.3.1.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p59651910136">使用者所在的国家代号。</p>
+<p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p0962191136">仅支持字母（如：CN）。长度为2个字符，为必填项。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_row1759402771211"><td class="cellrowborder" valign="top" width="24.03%" headers="mcps1.3.4.3.1.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p14551832141213">省份</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.97%" headers="mcps1.3.4.3.1.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p14824322131317">使用者所在的省份。</p>
+<p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p1824422141313">支持字母、数字、连字符、下划线、句点和空格，最大长度128个字符。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_row859418279129"><td class="cellrowborder" valign="top" width="24.03%" headers="mcps1.3.4.3.1.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p654632191218">城市</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.97%" headers="mcps1.3.4.3.1.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p46396262136">使用者所在的城市。</p>
+<p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p96399266139">支持字母、数字、连字符、下划线、句点和空格，最大长度128个字符。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_row5594327111217"><td class="cellrowborder" valign="top" width="24.03%" headers="mcps1.3.4.3.1.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p850432201217">公司</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.97%" headers="mcps1.3.4.3.1.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p1946413304135">使用者所在的公司。</p>
+<p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p144641730191311">支持字母、数字、连字符、下划线、句点和空格，最大长度64个字符。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_row17011331317"><td class="cellrowborder" valign="top" width="24.03%" headers="mcps1.3.4.3.1.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p14701832131">部门</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.97%" headers="mcps1.3.4.3.1.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p114311834131318">使用者所在部门。</p>
+<p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p243110341139">支持字母、数字、连字符、下划线、句点和空格，最大长度64个字符。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_row1323021014135"><td class="cellrowborder" valign="top" width="24.03%" headers="mcps1.3.4.3.1.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p423071051312">常用名</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.97%" headers="mcps1.3.4.3.1.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p15118193812133">使用者的名称。</p>
+<p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p911823813133">支持字母、数字、连字符、下划线、句点和空格，最大长度64个字符，为必填项。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li526917501775"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_uicontrol38821657131314">“确认”</span>生成CSR文件。</span></li><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li114791710151414"><span>将导出的CSR文件发往SSL证书颁发机构，并申请SSL证书。</span><p><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p2365320201416">获取到正式的CRT证书文件后，保存到本地。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li381903220142"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_uicontrol28361051141412">“导入Web服务端证书”</span>。</span><p><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p19386141371514">弹出<span class="wintitle" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_wintitle0894122715156">“导入Web服务端证书”</span>对话框。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li534363861610"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_uicontrol156911821192220">“导入”</span>选择并导入证书文件。</span><p><div class="note" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_note214692011228"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_ul3146102019223"><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li8146420102220">导入的证书文件不得大于1MB，支持的格式为*.crt、*.cer、*.pem。</li><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li11461203221"><a href="#ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li070016561753">1</a>中生成的CSR文件与向CA机构申请的服务器证书是一一对应的，在导入服务器证书之前请不要再次生成新的CSR文件，否则需要向CA机构重新申请服务器证书。</li></ul>
+</div></div>
+</p></li><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li1533213911155"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_uicontrol3175113417166">“确认”</span>导入Web服务端证书。</span></li><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li12171215179"><span>（可选）单击<span class="menucascade" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_menucascade264201118176">“<span class="uicontrol" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_uicontrol146421115176">更多</span> &gt; <span class="uicontrol" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_uicontrol11662812121714"> 重启服务</span>”</span>激活证书。如果不立即重启，证书会在服务下次重启后自动生效。</span></li></ol>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_section11871203225813"><h4 class="sectiontitle">更换工作密钥</h4><p id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_p15906192135412">工作密钥用于加密启动Nginx服务的口令，根密钥用于加密工作密钥。为提高系统安全性，建议定期更新。</p>
+<ol id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_ol1627484229"><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li195313342150"><span>在页面右上方<span><img id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_image449070507" src="zh-cn_image_0000001178723200.png"></span>菜单选项中单击“Web服务端证书”。</span></li><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li1566452017185"><span>单击<span class="menucascade" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_menucascade184621524111918">“<span class="uicontrol" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_uicontrol10462152471910">更多</span> &gt; <span class="uicontrol" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_uicontrol7110632121917"> 更换工作密钥</span>”</span>。</span></li><li id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_li7515105282013"><span>（可选）单击<span class="menucascade" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_menucascade18751145319264">“<span class="uicontrol" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_uicontrol975175362610">更多</span> &gt; <span class="uicontrol" id="ZH-CN_TOPIC_0000001224201315__zh-cn_topic_0253410803_uicontrol1775115533261"> 重启服务</span>”</span>重启Nginx服务使工作密钥生效。如果不立即重启，工作密钥会在服务下次重启后自动生效。</span></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001224122717.html">证书管理</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

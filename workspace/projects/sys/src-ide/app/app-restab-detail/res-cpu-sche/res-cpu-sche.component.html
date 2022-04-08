@@ -1,0 +1,124 @@
+<div class="cpu-detail" #container>
+    <div class="headerBox">
+        <div class="left">
+            <!-- 选择CPU核 -->
+            <div class="filterContainer" *ngIf="['cpuStatus', 'durationSummary'].includes(currentType)">
+                <span class="title">{{ filterCPU.title }}</span>
+
+                <div class="content">
+                    <!-- 选择CPU -->
+                    <ti-select class="cpuSelected" [multiple]="true" [selectAll]="true" [searchable]="true"
+                        [(ngModel)]="filterCPU.cpuSelected" [options]="filterCPU.cpuOption"
+                        (ngModelChange)="cpuChange()" panelWidth="auto" style="margin-left: 8px;">
+                        <ng-template #item let-item let-i=index>
+                            <span [tiTip]="item.disabledReason || ''" tiTipPosition="right">
+                                {{ item.label }}
+                            </span>
+                        </ng-template>
+                    </ti-select>
+                </div>
+            </div>
+
+            <!-- 运行时长排序 -->
+            <div class="filterContainer" *ngIf="['durationSummary'].includes(currentType)">
+                <span class="title">{{ sortDurationSummary.title }}</span>
+
+                <div class="content">
+                    <ti-select [(ngModel)]="sortDurationSummary.selected" [options]='sortDurationSummary.list'
+                        (ngModelChange)="switchDurationSummarySortBy()" panelWidth="auto" style="width: 140px;">
+                    </ti-select>
+
+                    <div class="sortContainer" style="margin-left: 4px;" (click)="switchDurationSummarySortStatus()">
+                        <ti-icon class="ti3-sort"
+                            [name]="sortDurationSummary.sortStatus === 'asc' ? 'sort-ascent' : sortDurationSummary.sortStatus === 'desc' ? 'sort-descent' : 'sort'">
+                        </ti-icon>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 选择进程/线程 -->
+            <div class="filterBox" [hidden]="!['locatePTid'].includes(currentType)">
+                <div class="icon" (click)="showSelectTaskModal()" (mouseenter)="mouseenter()"
+                    (mouseleave)="mouseleave()" [tiTip]="i18n.sys_res.selecThread">
+                    <img [src]="sanitizer.bypassSecurityTrustResourceUrl(filterSrc)">
+                </div>
+                <app-tag-box [label]='i18n.sys_res.selectedThread' [selecTag]="locatePTidData.selected"
+                    (deleteTag)="deleteTask($event)" #tagBox></app-tag-box>
+            </div>
+        </div>
+
+        <!-- 切换图标 -->
+        <div *ngIf="!noData" class="right">
+            <img id="time" [tiTip]="timeTip" tiTipPosition="top" src="./assets/img/resource/timeCheckNormal.svg"
+                (click)="switchType('cpuStatus', 'time')" (mouseenter)="changeIcon('#time', iconStatus.time.hover)"
+                (mouseleave)="changeIcon('#time', iconStatus.time.normal)"
+                (mousedown)="changeIcon('#time', iconStatus.time.press)" (mouseup)="changeMouseup(loosenIcon.time)" />
+            <div class="first-split-line split-line" *ngIf="isSelected.position"></div>
+            <img id="percentage" [tiTip]="percentageTip" tiTipPosition="top"
+                src="./assets/img/resource/percentageUncheckNormal.svg"
+                (click)="switchType('durationSummary', 'percentage')"
+                (mouseenter)="changeIcon('#percentage', iconStatus.percentage.hover)"
+                (mouseleave)="changeIcon('#percentage', iconStatus.percentage.normal)"
+                (mousedown)="changeIcon('#percentage', iconStatus.percentage.press)"
+                (mouseup)="changeMouseup(loosenIcon.percentage)" />
+            <div class="last-split-line split-line" *ngIf="isSelected.time"></div>
+            <img id="position" [tiTip]="positionTip" tiTipPosition="top"
+                src="./assets/img/resource/positionUncheckNormal.svg" (click)="switchType('locatePTid', 'position')"
+                (mouseenter)="changeIcon('#position', iconStatus.position.hover)"
+                (mouseleave)="changeIcon('#position', iconStatus.position.normal)"
+                (mousedown)="changeIcon('#position', iconStatus.position.press)"
+                (mouseup)="changeMouseup(loosenIcon.position)" />
+        </div>
+    </div>
+
+    <app-time-line #timeLineDetail *ngIf="timeLineShow && !noData" [timeData]="timeData" [lineData]="timeLine"
+        (timeLineData)="timeLineDataChange($event)" class="time-line"></app-time-line>
+
+    <div class="chartBox" [ngClass]="{ hidden: noData }" #chartBox>
+        <div *ngIf="!isFirst" class="topLine"></div>
+
+        <table class="left">
+            <thead>
+                <tr>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let cpuItem of orderlist">
+                    <td>{{ cpuItem.label }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="chart cpu-echart-content" echarts [options]="options" [merge]="updateOptions"
+            (chartInit)="onChartInit($event)"></div>
+        <div *ngIf="!isFirst" class="bottomLine"></div>
+    </div>
+
+    <ti-pagination *ngIf="!isFirst && !noData" [(currentPage)]="currentPage" [pageSize]="pageSize"
+        [(totalNumber)]="totalNumber" (pageUpdate)="onPageUpdate($event)" [showGotoLink]="true" style="margin-top: 5px;"></ti-pagination>
+
+    <div *ngIf="showLoading" class="global-loading">
+        <app-loading [size]="'max'" [height]="'100vh'" [bgColor]="'none'"></app-loading>
+    </div>
+    <div *ngIf="noData" class="noData">
+        <app-default-page [height]="'70vh'"></app-default-page>
+    </div>
+</div>
+
+<ng-template #timeTip let-context="context">
+    <span>{{i18n.sys_res.cpuStatusTime}}</span>
+</ng-template>
+
+<ng-template #percentageTip let-context="context">
+    <span>{{i18n.sys_res.cpuStatusPercentage}}</span>
+</ng-template>
+
+<ng-template #positionTip let-context="context">
+    <span>{{i18n.sys_res.cpuStatusPosition}}</span>
+</ng-template>
+
+<!-- 选择线程弹框 -->
+<app-side-modal [item]='summaryTid' (confimSelect)="confimModal($event)" [taskId]="taskid" [nodeId]="nodeid"
+    #selectTaskModal></app-side-modal>

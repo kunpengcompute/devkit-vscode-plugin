@@ -1,0 +1,17 @@
+.title{
+  height: 30px;
+	font-family: FZLTHJW--GB1-0;
+	font-size: 20px;
+	font-weight: normal;
+	font-stretch: normal;
+  padding: 20px 0 10px 0;
+  margin-bottom: 10px;
+  border-bottom: 1px dotted #e1e6ee;
+  .title-name{
+    line-height: 30px;
+	  letter-spacing: 0px;
+  }
+}
+.noneborder{
+  border-bottom: none;
+}

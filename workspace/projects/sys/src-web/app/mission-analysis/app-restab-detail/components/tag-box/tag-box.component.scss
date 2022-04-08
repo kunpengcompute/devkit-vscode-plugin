@@ -1,0 +1,90 @@
+.selectedTasks {
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+    padding-right: 6px;
+    max-width: calc(100% - 320px);
+
+    > .label {
+      float: left;
+      color: #222;
+      line-height: 32px;
+      font-size: 16px;
+      margin-right: 6px;
+      flex: 1 0 auto;
+    }
+  }
+
+  .selectedTasks.active{
+    box-shadow: 0px 0px 18px 0px  rgba(0, 0, 0, 0.1);
+    background-color: #fff; 
+    position: absolute;      
+    left: 32px;
+    top: 0;
+    padding: 12px 10px;
+    padding-bottom: 0px;
+    max-height: 100px;
+    overflow-y: auto;
+    z-index: 1;
+    align-items: flex-start;
+    > .label {
+        line-height: 20px;
+      }
+  }
+
+  .tagBox{
+    overflow: hidden;
+    height: 24px;
+    min-width: 1100px;
+  }
+  .tagBox.active{
+    display: block;
+    height: auto;
+    min-width: unset;
+    .ti3-multiselect-box-cell{
+        margin-bottom: 15px;
+    }
+  }
+
+  .filerIcon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+  :host ::ng-deep .icons-warpper{
+      width: 24px;
+    }
+
+
+  .close-box{
+      transform: rotate(180deg);
+      margin-left: 10px;
+      cursor: pointer;
+  }
+  .tagBox .ti3-multiselect-box-cell{
+      margin: 0px;
+      margin-right: 8px;
+      width: 175px;
+  }
+
+:host ::ng-deep {
+  .ti3-multiselect-box-cell .ti3-icon-close-staic{
+    cursor: pointer;
+  }
+  .ti3-multiselect-box-cell.ti3-multiselect-option-disabled .ti3-icon-close-staic{
+    cursor: not-allowed;
+  }
+}
+  @media only screen and (max-width: 1440px) and (min-width: 1367px) {
+      .tagBox{
+        min-width: 740px;
+      }
+  }
+  @media only screen and (max-width: 1366px) {
+    .tagBox{
+      min-width: 700px;
+    }
+    .tagBox .ti3-multiselect-box-cell{
+      width: 165px;
+    }
+  }

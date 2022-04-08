@@ -1,0 +1,333 @@
+{
+    "cpuUsage":{
+        "status": 0,
+        "info": "get success",
+        "data":{
+            
+            "target": "cpu_usage",
+            "spec": ["0", "1", "2"],
+            "key":["user","nice","system","lowait","lrq","soft","idle"],
+            "origin_data": {
+                "time": ["19:02:01", "19:02:02","19:02:03","19:02:04","19:02:05","19:02:06","19:02:07"], 
+                "values": {
+                    "0": {
+                        "user":[0.1, 0.2, 0.1, 0.5,0.1,0.2,0.3],
+                        "nice":[0.3, 0.4, 0.2, 0.5,0.6,0.2,0.7],
+                        "system":[0.2, 0.1, 0.3, 0.5,0.2,0.5,0.1],
+                        "lowait":[0.1, 0.6, 0.6, 0.5,0.1,0.4,0.3],
+                        "lrq":[0.5, 0.3, 0.1, 0.6,0.2,0.7,0.2],
+                        "soft":[0.1, 0.2, 0.7, 0.2,0.5,0.3,0.6],
+                        "idle":[0.3, 0.6, 0.3, 0.1,0.8,0.2,0.4]
+                    },
+                    "1": {
+                        "user":[0.1, 0.7, 0.8, 0.3,0.1,0.4,0.7],
+                        "nice":[0.2, 0.4, 0.2, 0.5,0.6,0.2,0.6],
+                        "system":[0.3, 0.1, 0.3, 0.5,0.2,0.5,0.5],
+                        "lowait":[0.4, 0.6, 0.6, 0.5,0.1,0.4,0.4],
+                        "lrq":[0.5, 0.3, 0.1, 0.6,0.2,0.7,0.3],
+                        "soft":[0.6, 0.2, 0.7, 0.2,0.5,0.3,0.2],
+                        "idle":[0.7, 0.6, 0.3, 0.1,0.8,0.2,0.1]
+                    },
+                    "2": {
+                        "user":[0.7, 0.2, 0.1, 0.5,0.1,0.2,0.1],
+                        "nice":[0.6, 0.4, 0.2, 0.5,0.6,0.2,0.2],
+                        "system":[0.5, 0.1, 0.3, 0.5,0.2,0.5,0.3],
+                        "lowait":[0.4, 0.6, 0.6, 0.5,0.1,0.4,0.4],
+                        "lrq":[0.3, 0.3, 0.1, 0.6,0.2,0.7,0.5],
+                        "soft":[0.2, 0.2, 0.7, 0.2,0.5,0.3,0.6],
+                        "idle":[0.1, 0.6, 0.3, 0.1,0.8,0.2,0.7]
+                    }
+                }
+            }
+        }
+
+    },
+   
+    "cpuAverage":{
+        "status": 0,
+        "info": "get success",
+        "data":{
+            
+            "target": "cpu_avgload",
+            "spec": [],
+            "key":["runq-sz","plist-sz","ldavg-1","ldavg-5","ldavg-15","blocked"],
+            "origin_data": {
+                "time": ["19:02:01", "19:02:02","19:02:03","19:02:04","19:02:05","19:02:06","19:02:07"], 
+                "values": {
+                   
+                        "runq-sz":[0.1, 0.2, 0.1, 0.5,0.1,0.2,0.3],
+                        "plist-sz":[0.3, 0.4, 0.2, 0.5,0.6,0.2,0.7],
+                        "ldavg-1":[0.2, 0.1, 0.3, 0.5,0.2,0.5,0.1],
+                        "ldavg-5":[0.1, 0.6, 0.6, 0.5,0.1,0.4,0.3],
+                        "ldavg-15":[0.5, 0.3, 0.1, 0.6,0.2,0.7,0.2],
+                        "blocked":[0.1, 0.2, 0.7, 0.2,0.5,0.3,0.6]
+                }
+            }
+        }
+
+    },
+    "summury":{
+        
+            "status": 0,
+            "info": "get summary results success.",
+            "data": {
+                "cpu_usage": {
+                    "specs": ["all", "PID_8", "1"],
+                    "all": {
+                        "user": 0.3,
+                        "nice": 0.3,
+                        "sys": {
+                            "value": 0.6,
+                            "ref": 0.3,
+                            "above": true,
+                            "suggestion_ch": "降低系统负载",
+                            "suggestion_en": "lower down system load"
+                        },
+                        "iowait":{
+                            "value": 0.9,
+                            "ref": 0.5,
+                            "above": true,
+                            "suggestion_ch": "降低系统负载",
+                            "suggestion_en": "lower down system load"
+                        }    ,            
+                        "steal": 0.3,
+                        "irq": 0.3,
+                        "soft": 0.3,
+                        "guest": 0.3,
+                        "gnice": 0.3,
+                        "idle": 0.3
+                    },
+                    "PID_8": {
+                        "user": 0.3,
+                        "nice": 0.3,
+                        "sys": {
+                            "value": 0.9,
+                            "ref": 0.5,
+                            "above": true,
+                            "suggestion_ch": "降低系统负载",
+                            "suggestion_en": "lower down system load"
+                        },
+                        "iowait": {
+                            "value": 0.8,
+                            "ref": 0.5,
+                            "above": true,
+                            "suggestion_ch": "降低系统负载",
+                            "suggestion_en": "lower down system load"
+                        },
+                        "steal": 0.3,
+                        "irq": 0.3,
+                        "soft": 0.3,
+                        "guest": 0.3,
+                        "gnice": 0.3,
+                        "idle": 0.3
+                    },
+                    "1": {
+                        "user": 0.3,
+                        "nice": 0.3,
+                        "sys": {
+                            "value": 0.9,
+                            "ref": 0.5,
+                            "above": true,
+                            "suggestion_ch": "降低系统负载",
+                            "suggestion_en": "lower down system load"
+                        },
+                        "iowait": {
+                            "value": 0.8,
+                            "ref": 0.5,
+                            "above": true,
+                            "suggestion_ch": "降低系统负载",
+                            "suggestion_en": "lower down system load"
+                        },
+                        "steal": 0.3,
+                        "irq": 0.3,
+                        "soft": 0.3,
+                        "guest": 0.3,
+                        "gnice": 0.3,
+                        "idle": 0.3
+                    }
+    
+                },
+                "cpu_avgload": {
+                        "runq-sz": {
+                            "value": 0.6,
+                            "ref": 0.5,
+                            "above": true,
+                            "suggestion_ch": "降低系统平均负载",
+                            "suggestion_en": "lower down system load"
+                        },
+                        "plist-sz": 0.4,
+                        "ldavg-1": 0.4,
+                        "ldavg-5": 0.4,
+                        "ldavg-15": 0.4,
+                        "blocked": 0.4
+                },
+                "mem_usage": {
+                    "kbmemfree": 0.3,
+                    "kbmemused": 0.3,
+                    "memused": 0.3,
+                    "kbbuffers": 0.3,
+                    "kbcached": 0.3,
+                    "kbcommit": 0.3,
+                    "commit": 0.3,
+                    "kbactive": 0.3,
+                    "kbinact": 0.3,
+                    "kbdirty": 0.3
+                },
+                "mem_swap": {
+                    "pswpin": 0.5,
+                    "pswpout": 0.5
+                },
+                "mem_page": {
+                    "pgpgin": 0.3,
+                    "pgpgout": 0.3,
+                    "fault": 0.3,
+                    "majflt": 0.3,
+                    "pgfree": 0.3,
+                    "pgscank": 0.3,
+                    "pgscand": 0.3,
+                    "pgsteal": 0.3,
+                    "vmeff": 0.3
+                },
+                "disk_usage": {
+                "specs": ["vda", "vdb"],
+                    "vda": {
+                        "tps": 0.3,
+                        "rd_sec": 0.3,
+                        "wr_sec": 0.3,
+                        "avgrq-sz": 0.3,
+                        "avgqu-sz": 0.3,
+                        "await": 0.3,
+                        "svctm": 0.3,
+                        "util": {
+                            "value": 0.3,
+                            "ref": 0.5,
+                            "above": false,
+                            "suggestion_ch": "提高IO利用率",
+                            "suggestion_en": "enhance IO usage"
+                        }
+                    },
+                    "vdb": {
+                        "tps": 0.3,
+                        "rd_sec": 0.3,
+                        "wr_sec": 0.3,
+                        "avgrq-sz": 0.3,
+                        "avgqu-sz": 0.3,
+                        "await": 0.3,
+                        "svctm": 0.3,
+                        "util": {
+                            "value": 0.3,
+                            "ref": 0.5,
+                            "above": false,
+                            "suggestion_ch": "提高IO利用率",
+                            "suggestion_en": "enhance IO usage"
+                        }
+                    }
+                },
+                "net_info": {
+                    "specs": ["eth", "lo"],
+                    "eth": {
+                        "rxpck": 0.2,
+                        "txpck": 0.2,
+                        "rxkB": 0.2,
+                        "txkB": 0.2,
+                        "rxcmp": 0.2,
+                        "txcmp": 0.2,
+                        "rxmcst": 0.2
+                    },
+                    "lo": {
+                        "rxpck": 0.2,
+                        "txpck": 0.2,
+                        "rxkB": 0.2,
+                        "txkB": 0.2,
+                        "rxcmp": 0.2,
+                        "txcmp": 0.2,
+                        "rxmcst": 0.2
+                    }
+                },
+                "net_error_info": {
+                    "specs": ["eth", "lo"],
+                    "eth": {
+                        "rxpck": 0.1,
+                        "txpck": 0.1,
+                        "rxkB": 0.1,
+                        "txkB": 0.1,
+                        "rxcmp": 0.1,
+                        "txcmp": 0.1,
+                        "rxmcst": 0.1
+                    },
+                    "lo": {
+                        "rxpck": 0.1,
+                        "txpck": 0.1,
+                        "rxkB": 0.1,
+                        "txkB": 0.1,
+                        "rxcmp": 0.1,
+                        "txcmp": 0.1,
+                        "rxmcst": 0.1
+                    }
+                }        
+            }
+        
+        
+    },
+    "cpuUsage-process":{
+        "status": 0,
+        "info": "get success",
+        "data":{
+            
+            "target": "cpu_usage",
+            "spec": ["pid1", "tid2", "tid3","pid4","tid5"],
+            "key":["user","nice","system","lowait","lrq","soft","idle"],
+            "origin_data": {
+                "time": ["19:02:01", "19:02:02","19:02:03","19:02:04","19:02:05","19:02:06","19:02:07"], 
+                "values": {
+                    "pid1": {
+                        "user":[0.1, 0.2, 0.1, 0.5,0.1,0.2,0.3],
+                        "nice":[0.3, 0.4, 0.2, 0.5,0.6,0.2,0.7],
+                        "system":[0.2, 0.1, 0.3, 0.5,0.2,0.5,0.1],
+                        "lowait":[0.1, 0.6, 0.6, 0.5,0.1,0.4,0.3],
+                        "lrq":[0.5, 0.3, 0.1, 0.6,0.2,0.7,0.2],
+                        "soft":[0.1, 0.2, 0.7, 0.2,0.5,0.3,0.6],
+                        "idle":[0.3, 0.6, 0.3, 0.1,0.8,0.2,0.4]
+                    },
+                    "tid2": {
+                        "user":[0.1, 0.7, 0.8, 0.3,0.1,0.4,0.7],
+                        "nice":[0.2, 0.4, 0.2, 0.5,0.6,0.2,0.6],
+                        "system":[0.3, 0.1, 0.3, 0.5,0.2,0.5,0.5],
+                        "lowait":[0.4, 0.6, 0.6, 0.5,0.1,0.4,0.4],
+                        "lrq":[0.5, 0.3, 0.1, 0.6,0.2,0.7,0.3],
+                        "soft":[0.6, 0.2, 0.7, 0.2,0.5,0.3,0.2],
+                        "idle":[0.7, 0.6, 0.3, 0.1,0.8,0.2,0.1]
+                    },
+                    "tid3": {
+                        "user":[0.7, 0.2, 0.1, 0.5,0.1,0.2,0.1],
+                        "nice":[0.6, 0.4, 0.2, 0.5,0.6,0.2,0.2],
+                        "system":[0.5, 0.1, 0.3, 0.5,0.2,0.5,0.3],
+                        "lowait":[0.4, 0.6, 0.6, 0.5,0.1,0.4,0.4],
+                        "lrq":[0.3, 0.3, 0.1, 0.6,0.2,0.7,0.5],
+                        "soft":[0.2, 0.2, 0.7, 0.2,0.5,0.3,0.6],
+                        "idle":[0.1, 0.6, 0.3, 0.1,0.8,0.2,0.7]
+                    },
+                    "pid4": {
+                        "user":[0.1, 0.2, 0.1, 0.5,0.1,0.2,0.3],
+                        "nice":[0.3, 0.4, 0.2, 0.5,0.6,0.2,0.7],
+                        "system":[0.2, 0.1, 0.3, 0.5,0.2,0.5,0.1],
+                        "lowait":[0.1, 0.6, 0.6, 0.5,0.1,0.4,0.3],
+                        "lrq":[0.5, 0.3, 0.1, 0.6,0.2,0.7,0.2],
+                        "soft":[0.1, 0.2, 0.7, 0.2,0.5,0.3,0.6],
+                        "idle":[0.3, 0.6, 0.3, 0.1,0.8,0.2,0.4]
+                    },
+                    "tid5": {
+                        "user":[0.1, 0.7, 0.8, 0.3,0.1,0.4,0.7],
+                        "nice":[0.2, 0.4, 0.2, 0.5,0.6,0.2,0.6],
+                        "system":[0.3, 0.1, 0.3, 0.5,0.2,0.5,0.5],
+                        "lowait":[0.4, 0.6, 0.6, 0.5,0.1,0.4,0.4],
+                        "lrq":[0.5, 0.3, 0.1, 0.6,0.2,0.7,0.3],
+                        "soft":[0.6, 0.2, 0.7, 0.2,0.5,0.3,0.2],
+                        "idle":[0.7, 0.6, 0.3, 0.1,0.8,0.2,0.1]
+                    }
+                }
+            }
+        }
+
+    }
+}

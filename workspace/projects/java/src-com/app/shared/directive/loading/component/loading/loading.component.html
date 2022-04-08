@@ -1,0 +1,35 @@
+<div class="maskBox" [ngClass]="[scene, showLoading ? '' : 'hidden']">
+    <div class="containerBox">
+      <div
+        class="circleBox"
+        [ngStyle]="{
+          width: circleBoxWidth + 'px',
+          height: circleBoxWidth + 'px'
+        }"
+      >
+        <ng-container *ngFor="let item of [].constructor(circleNum); index as index">
+          <div
+            class="circleItem"
+            [ngStyle]="{
+              width: circleItemWidth + 'px',
+              height: circleItemWidth + 'px',
+              position: 'absolute',
+              top: circleBoxWidth / 2 - circleItemWidth / 2 + 'px',
+              left: circleBoxWidth / 2 - circleItemWidth / 2 + 'px',
+              transform: 'rotate(' + index * 360 / circleNum + 'deg) translate(' + (circleBoxWidth / 2 - circleItemWidth / 2) + 'px)'
+            }"
+          >
+            <div
+              class="circle"
+              [ngStyle]="{
+                '-webkit-animation': 'ball-spin-fade-loader 1s ' + -(circleNum - index) / circleNum + 's infinite linear',
+                animation: 'ball-spin-fade-loader 1s ' + -(circleNum - index) / circleNum + 's infinite linear'
+              }"
+            ></div>
+          </div>
+        </ng-container>
+      </div>
+  
+      <div *ngIf="loadingText" class="loadingText">{{ loadingText }}</div>
+    </div>
+  </div>

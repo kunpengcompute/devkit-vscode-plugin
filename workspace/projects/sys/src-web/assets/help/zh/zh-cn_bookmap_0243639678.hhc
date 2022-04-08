@@ -1,0 +1,184 @@
+
+<html>
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+   
+<!-- Sitemap 1.0 -->
+</head>
+<body>
+<OBJECT type="text/site properties">
+<param value="0x800025" name="Window Styles">
+<param value="宋体,10,1" name="Font">
+</OBJECT>
+
+<UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="欢迎使用系统性能分析联机帮助"><param name="Local" value="zh-cn_topic_0187817552.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="登录"><param name="Local" value="zh-cn_topic_0253410795.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="界面说明"><param name="Local" value="zh-cn_topic_0253410796.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="节点管理"><param name="Local" value="zh-cn_topic_0262786934.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="工程管理"><param name="Local" value="zh-cn_topic_0252790537.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="任务管理"><param name="Local" value="zh-cn_topic_0250471713.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="联动分析"><param name="Local" value="zh-cn_topic_0000001111265114.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="HPC分析"><param name="Local" value="zh-cn_topic_0311508296.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="创建HPC分析任务"><param name="Local" value="zh-cn_topic_0311508297.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="查看分析结果"><param name="Local" value="zh-cn_topic_0311508298.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="全景分析"><param name="Local" value="zh-cn_topic_0250262364.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="创建全景分析任务"><param name="Local" value="zh-cn_topic_0250279620.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="查看分析结果"><param name="Local" value="zh-cn_topic_0250279621.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="微架构分析"><param name="Local" value="zh-cn_topic_0250262367.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="创建微架构分析任务"><param name="Local" value="zh-cn_topic_0250422237.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="查看分析结果"><param name="Local" value="zh-cn_topic_0250422238.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="访存分析"><param name="Local" value="zh-cn_topic_0250262368.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="访存统计分析"><param name="Local" value="zh-cn_topic_0269716237.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="创建访存统计分析任务"><param name="Local" value="zh-cn_topic_0250422239.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="查看分析结果"><param name="Local" value="zh-cn_topic_0250422240.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Miss事件分析"><param name="Local" value="zh-cn_topic_0269716238.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="创建Miss事件分析任务"><param name="Local" value="zh-cn_topic_0269716239.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="查看分析结果"><param name="Local" value="zh-cn_topic_0269716240.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="伪共享分析"><param name="Local" value="zh-cn_topic_0269716241.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="创建伪共享分析任务"><param name="Local" value="zh-cn_topic_0269716242.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="查看分析结果"><param name="Local" value="zh-cn_topic_0269716243.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="I/O分析"><param name="Local" value="zh-cn_topic_0291613558.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="创建I/O分析任务"><param name="Local" value="zh-cn_topic_0291613559.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="查看分析结果"><param name="Local" value="zh-cn_topic_0291613560.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="进程/线程性能分析"><param name="Local" value="zh-cn_topic_0251208340.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="创建进程/线程性能分析任务"><param name="Local" value="zh-cn_topic_0251208341.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="查看分析结果"><param name="Local" value="zh-cn_topic_0251208342.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="热点函数分析"><param name="Local" value="zh-cn_topic_0250262370.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="创建热点函数分析任务"><param name="Local" value="zh-cn_topic_0250422243.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="查看分析结果"><param name="Local" value="zh-cn_topic_0250422244.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="资源调度分析"><param name="Local" value="zh-cn_topic_0250262366.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="创建资源调度分析任务"><param name="Local" value="zh-cn_topic_0250422235.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="查看分析结果"><param name="Local" value="zh-cn_topic_0250422236.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="锁与等待分析"><param name="Local" value="zh-cn_topic_0250262371.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="创建锁与等待分析任务"><param name="Local" value="zh-cn_topic_0250422245.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="查看分析结果"><param name="Local" value="zh-cn_topic_0250422246.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="用户管理"><param name="Local" value="zh-cn_topic_0253410804.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="日志管理"><param name="Local" value="zh-cn_topic_0253410797.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="操作日志管理"><param name="Local" value="zh-cn_topic_0253410799.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="运行日志管理"><param name="Local" value="zh-cn_topic_0253410800.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="服务证书管理"><param name="Local" value="zh-cn_topic_0253410801.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Agent服务证书管理"><param name="Local" value="zh-cn_topic_0253410802.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Web服务端证书管理"><param name="Local" value="zh-cn_topic_0253410803.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="弱口令字典管理"><param name="Local" value="zh-cn_topic_0262626107.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="修改密码"><param name="Local" value="zh-cn_topic_0253410925.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="查看工具发布信息"><param name="Local" value="zh-cn_topic_0253410926.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="常用操作"><param name="Local" value="zh-cn_topic_0253410927.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="为鲲鹏性能分析工具导入根证书"><param name="Local" value="zh-cn_topic_0000001133864851.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="采集MySQL trace数据"><param name="Local" value="kunpengoper_06_0011.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="修改鲲鹏性能分析的IP和端口"><param name="Local" value="kunpengoper_06_0001.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="重启鲲鹏性能分析工具"><param name="Local" value="kunpengoper_06_0002.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="查看日志"><param name="Local" value="kunpengoper_06_0003.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="替换鲲鹏性能分析工具SSL证书"><param name="Local" value="kunpengoper_06_0005.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="设置节点服务器SSH认证信息"><param name="Local" value="kunpengoper_06_0006.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="以命令行方式执行安装或卸载脚本"><param name="Local" value="kunpengoper_06_0009.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="配置SPE环境"><param name="Local" value="kunpengoper_06_0010.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="配置操作系统安装依赖包"><param name="Local" value="kunpengoper_06_0012.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="查询服务器物理IP地址"><param name="Local" value="kunpengoper_06_0015.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="导出系统性能分析任务"><param name="Local" value="kunpengoper_06_0017.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="修改内部端口号"><param name="Local" value="kunpengoper_06_0018.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="FAQ"><param name="Local" value="zh-cn_topic_0000001214027145.html"></OBJECT><UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="软件包完整性校验返回WARNING或FAIL"><param name="Local" value="kunpengfaq_06_0001.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="界面提示库文件安装失败"><param name="Local" value="kunpengfaq_06_0002.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="CentOS 7.6标准内核上执行访存统计分析任务时部分页签没有采集到数据"><param name="Local" value="kunpengfaq_06_0003.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="系统资源调度分析任务（Attach to Process类型）执行失败"><param name="Local" value="kunpengfaq_06_0004.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="升级常见失败场景"><param name="Local" value="kunpengfaq_06_0005.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="热点函数性能分析/资源调度分析结果中的代码流区域显示不支持该功能"><param name="Local" value="kunpengfaq_06_0006.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="华为公有云环境上执行分析任务失败"><param name="Local" value="kunpengfaq_06_0007.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="UVP虚拟机环境热点函数性能分析/资源调度分析/微架构分析任务执行失败"><param name="Local" value="kunpengfaq_06_0008.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="添加节点时提示添加节点失败，节点已存在"><param name="Local" value="kunpengfaq_06_0009.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="版本升级后节点状态为版本不匹配"><param name="Local" value="kunpengfaq_06_0010.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="EulerOS系统上动态库热点函数关联汇编指令失败"><param name="Local" value="kunpengfaq_06_0011.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="I/O分析任务执行失败"><param name="Local" value="kunpengfaq_06_0012.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="磁盘空间已满，需要手动清理"><param name="Local" value="kunpengfaq_06_0013.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="如何使用PGO优化程序编译"><param name="Local" value="kunpengfaq_06_0014.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Ubuntu操作系统下升级失败"><param name="Local" value="kunpengfaq_06_0015.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Ubuntu系统HPC任务数据采集失败"><param name="Local" value="kunpengfaq_06_0017.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="节点状态变为离线"><param name="Local" value="kunpengfaq_06_0018.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="大数据flink、kafka、storm组件中，部分参数数据为None"><param name="Local" value="kunpengfaq_06_0019.html"><param name="ImageNumber" value="9"></OBJECT>
+</LI></UL>
+</LI></UL>
+</body>
+</html>

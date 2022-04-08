@@ -1,0 +1,152 @@
+<div class="common-container">
+
+  <!-- 头部信息 start -->
+  <div class="common-header">
+    <img src="./assets/img/header/back.svg" (click)="handleReturn()" [tiTip]='tipStr' tiTipPosition="right" />
+    <span class="com-text">{{ currentReport }}</span>
+  </div>
+  <!-- 头部信息 end -->
+
+  <!-- 配置信息 start -->
+  <div class="config-setting clearfix">
+    <p class="com-title com-text">{{ configTitle }}</p>
+    <div class="config-left fl">
+      <div class="config-left-item" *ngFor="let con of settingLeftInfo">
+        <span tiOverflow>{{ con.label }}</span>
+        <p tiOverflow>
+          <img 
+            *ngIf="con.isSuccessed" 
+            [src]="con.isSuccessed === 'true' 
+              ? './assets/img/common/success_tip_16.png' 
+              : './assets/img/common/fail_tip_16.png'
+            " 
+          />
+          <span>{{ con.value }}</span>
+        </p>
+      </div>
+    </div>
+    <div class="config-right fr flex">
+      <div class="config-right-item flex-column flex-center" *ngFor="let con of settingRightInfo" [ngClass]="{'config-right-item-en': currLang === 'en-us'}">
+        <span tiOverflow>{{ con.title }}</span>
+        <span tiOverflow>{{ con.value }}</span>
+      </div>
+    </div>
+  </div>
+  <!-- 配置信息 end -->
+
+  <!-- table-detail start -->
+  <div class="table-detail">
+    <div class="report-detail-table">
+      <div *ngFor="let item of scanItemsCopy.type">
+        <p class="table-detail-title com-text" [ngClass]="{'cfile-title': item === 'cFile'}">{{ scanItemsCopy[item].label }}</p>
+        <ng-content select=".BCFile" *ngIf="item === 'soFile'"></ng-content>
+        <div class="table-container">
+          <div *ngIf="item === 'soFile'">
+            <ti-table [(displayedData)]="soFiledisplayed" [srcData]="soFileSrcData" tiColsResizable>
+              <div class="ti3-table-fixed-head">
+                <table>
+                  <thead>
+                    <tr>
+                      <th tiOverflow *ngFor="let column of soFileColumns" width="{{column.width}}">
+                        <ti-cell-text>{{column.title}}</ti-cell-text>
+                        <ti-head-sort [sortKey]="column.sortKey" *ngIf="column.sortKey"></ti-head-sort>
+                      </th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="ti3-table-container ti3-resize-wrapper normal-height" 
+              [ngClass]="{'table-auto-height': scanItems.type.length === 1}"
+               [hyNodata]="{text: i18n.common_term_task_nodata }" [nodataShow]="soFiledisplayed.length === 0">
+                <table>
+                  <thead>
+                      <tr>
+                          <th tiOverflow *ngFor="let column of soFileColumns" width="{{column.width}}"></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                    <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+                    <ng-container *ngFor="let row of soFiledisplayed;index as i">
+                      <tr>
+                        <td details-icon-column *ngIf="type === 'BCFile'">
+                          <ti-details-icon 
+                            [row]="row"
+                            [index]="i"
+                            (beforeToggle)="beforeToggle($event)"
+                            *ngIf="row.data.length"
+                          >
+                          </ti-details-icon> <!--详情图标设置，传入行数据-->
+                        </td>
+                        <td tiOverflow>{{ row.number }}</td>
+                        <td tiOverflow>{{ row.name }}</td>
+                        <td tiOverflow>{{ row.path }}</td>
+                        <td tiOverflow *ngIf="type === 'softwarePackage'">{{ row.sourceFile }}</td>
+                        <td tiOverflow *ngIf="type === 'BCFile'">{{ row.suggTotal }}</td>
+                      </tr>
+                      <tr *tiDetailsTr="row"> <!--详情内容行tiDetailsTr，传入行数据-->
+                        <!-- tiColspan是为了使得该td（详情内容）占据表格整个宽度(列合并)，tiColspan列合并的值为columns接口传入的对象数组中中show属性值不为false的对象的个数 -->
+                        <td tiColspan class="nested-table-container">
+                            <div class="ti3-table-detail-container">
+                              <app-nested-table [data]="row.data"></app-nested-table>
+                            </div>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </ti-table>
+          </div>
+
+          <div *ngIf="item === 'cFile'">
+            <ti-table [(displayedData)]="cFiledisplayed" [srcData]="cFileSrcData" tiColsResizable>
+              <div class="ti3-table-fixed-head">
+                <table>
+                  <thead>
+                    <tr>
+                      <th tiOverflow *ngFor="let column of cFileColumns" width="{{column.width}}">{{ column.title }}</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="ti3-table-container ti3-resize-wrapper" style="max-height:161px;">
+                <table>
+                  <thead>
+                      <tr>
+                          <th tiOverflow *ngFor="let column of cFileColumns" width="{{column.width}}"></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let row of cFiledisplayed;">
+                      <td tiOverflow>{{ row.number }}</td>
+                      <td tiOverflow>{{ row.name }}</td>
+                      <td tiOverflow>{{ row.path }}</td>
+                      <td tiOverflow>{{ row.suggestion }}</td>
+                      <td *ngIf="row.url" class="down-copy">
+                        <ng-container *ngIf="row.url !== '--' && row.url.lastIndexOf('/') > -1">
+                          <a [ngClass]="{'visited': row.uploadVisited, 'isHttp': row.isHTTP}" (click)="handleSoftwareLink(row)" [tiTip]='row.isHTTP ? i18n.common_isHttp_disable : ""'>{{ i18n.common_term_operate_download }}</a>
+                          <a tiOverflow class="re-copy-link" [ngClass]="{'visited': row.copyVisited}" (click)="onCopy(row.url, '.re-copy-inp', copy, row)" [tiTip]='copySuccess' tiTipTrigger='manual' #copy='tiTip'>{{ i18n.common_term_report_detail.copyLink }}</a>
+                          <input class="re-copy-inp" />
+                        </ng-container>
+                        <span *ngIf="row.url.lastIndexOf('/') === -1" [tiTip]='i18n.common_upload_unable' class="cursor-default">--</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </ti-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- table-detail end -->
+
+  <!-- 下载按钮 start -->
+  <div class="download-btn">
+    <button tiButton type="button" *ngIf="type === 'softwarePackage' && scanItems.type.length === 1" (click)="downloadPackage()">{{ i18n.software_package_detail.packageButton }}</button>
+    <button tiButton type="button" (click)="downloadHTML()">{{ i18n.common_term_history_project_downloadh }}</button>
+  </div>
+  <!-- 下载按钮 end -->
+</div>

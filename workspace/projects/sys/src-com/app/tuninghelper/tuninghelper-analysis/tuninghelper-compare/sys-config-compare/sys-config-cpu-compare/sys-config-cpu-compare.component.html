@@ -1,0 +1,35 @@
+<app-expand-tree class="sys-config-cpu-compare" [data]="treeData">
+  <ng-template let-item let-i="index">
+    <span *ngIf="item.label">{{item.label}}</span>
+    <div class="cpu-and-numanode" *ngIf="item.type === 'cpu' || item.type === 'numaNode'">
+      <div class="summary">
+        <app-compare-text-item
+          *ngFor="let summaryItem of item.data.summary"
+          [item]="summaryItem"
+          labelWidth="158px"
+        ></app-compare-text-item>
+      </div>
+      <div class="detail">
+        <div *ngFor="let detailItem of item.data.detail">
+          <hr>
+          <p class="title">{{ detailItem.title }}</p>
+          <app-compare-text-item
+            *ngFor="let detailTargetItem of detailItem.target"
+            [item]="detailTargetItem"
+            labelWidth="158px"
+          ></app-compare-text-item>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="item.type === 'numaNodeDistance'">
+      <app-common-table [commonTableData]="numaNodeDistance"></app-common-table>
+    </div>
+    <div class="cache-info" *ngIf="item.type === 'cacheInfo'">
+      <app-compare-text-item
+        *ngFor="let cacheItem of cacheData"
+        [item]="cacheItem"
+        labelWidth="158px"
+      ></app-compare-text-item>
+    </div>
+  </ng-template>
+</app-expand-tree>

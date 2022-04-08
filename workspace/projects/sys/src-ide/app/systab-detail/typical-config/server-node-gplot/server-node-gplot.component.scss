@@ -1,0 +1,77 @@
+::ng-deep .vscode-light {
+    --link-line-color: #aaa
+}
+
+::ng-deep .vscode-dark {
+    --link-line-color: #333
+}
+
+.warpper {
+    text-align: center;
+    overflow-x: auto;
+    background-color: var(--node-warpper-bg);
+    padding: 36px;
+
+    .gplot-warpper {
+        display: inline-block;
+        width: max-content;
+        position: relative;
+
+        .namenode-area,
+        .datanode-area {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+
+            ::ng-deep app-server-node+app-server-node {
+                margin-left: 70px;
+            }
+
+        }
+
+        .datanode-area {
+            &[hidden] {
+                display: none;
+            }
+        }
+
+        .middle-area {
+            height: 50px;
+            text-align: center;
+
+            .link-line {
+                border-left: 1px solid var(--link-line-color);
+                border-right: 1px solid var(--link-line-color);
+                height: 100%;
+                display: inline-block;
+                width: 0;
+            }
+        }
+
+        .svg-area {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+    }
+
+    .noNodeData {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        line-height: 20px;
+
+        img {
+            margin-bottom: 8px;
+        }
+    }
+}
+
+:host ::ng-deep .svg-area svg g path {
+    stroke: #555;
+}

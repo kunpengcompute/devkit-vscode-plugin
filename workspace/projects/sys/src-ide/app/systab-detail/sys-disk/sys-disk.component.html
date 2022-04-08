@@ -1,0 +1,17 @@
+<div class="cpu-detail">
+    <div class="cpu-usage" *ngIf="diskShow">
+        <span class="box-title-set" style="position: relative;display: block">{{i18n.sys.titles.diskBlock}}
+        </span>
+        <div class="table-box">
+            <div *ngIf="diskEchartData.length>0">
+                <div *ngFor="let item of diskEchartData">
+                    <app-tables #disk [timeLine]='timeLine' [datas]='item' (dataZoom)='dataZoom($event)'
+                        (echartsInstOut)='echartsInstOut($event)'></app-tables>
+                </div>
+            </div>
+            <app-loading *ngIf="showLoading" [size]="'min'"></app-loading>
+            <app-default-page *ngIf="!diskData&&!showLoading" [scene]="'noData'" [text]="i18n.common_term_task_nodata">
+            </app-default-page>
+        </div>
+    </div>
+</div>

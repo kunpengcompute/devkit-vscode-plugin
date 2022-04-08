@@ -1,0 +1,379 @@
+.nodeManagementComponent {
+  background: #fff;
+  padding: 20px 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  .toolbar {
+    margin-bottom: 10px;
+  }
+
+  main {
+    overflow-y: hidden;
+    display: flex;
+
+    .nodeListComponent {
+      flex: 1;
+      overflow: hidden;
+    }
+  }
+  .agentTip{
+    margin-bottom: 10px;
+    width: 100%;
+    min-height: 40px;
+    background-color: #f0f6ff;
+    border-radius: 2px;
+    border: solid 1px #2072ea;
+    display: flex;
+    padding: 11px 0px 11px 17px;
+    align-items: flex-start;
+    box-sizing: border-box;
+    font-size: 12px;
+    .tipImg{
+        width: 14px;
+        height: 14px;
+        margin-top: 2px;
+        margin-right: 9px;
+    }
+    .div-width{
+      width: calc(100% - 34px);
+    }
+  }
+}
+
+::ng-deep .nodeManagementModal {
+  .ti3-modal-content {
+    max-height: 653px !important;
+    .ti3-modal-body {
+      .tipInfo {
+        color: #616161;
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 20px;
+
+        img {
+          margin-right: 6px;
+          vertical-align: sub;
+          width: 20px;
+        }
+      }
+    }
+  }
+
+  .textFomContent {
+    line-height: 28px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  input:not(.ti_input_ip_anchor):not(.ti_input_ip_octet),
+  ti-select {
+    width: 350px;
+  }
+
+  .ti_input_ip_container_ipv4 {
+    width: 350px !important;
+  }
+
+  .sshTitle {
+    font-size: 14px;
+    line-height: 20px;
+    color: #222;
+    margin: 20px 16px;
+  }
+
+  .rootPwdTip {
+    justify-content: flex-start;
+    margin: 20px 16px;
+    width: 524px;
+    align-items: flex-start;
+
+    span {
+      vertical-align: baseline;
+    }
+  }
+
+  .ti3-form {
+    // 解决没有required参数的表单会和带有required参数的表单不对齐的问题
+    & > tbody > tr > td:first-child {
+      width: 16px;
+    }
+
+    .formContent {
+      display: flex;
+
+      .tailPrompt {
+        color: #aaa;
+        font-size: 14px;
+        margin-left: 10px;
+        line-height: 32px;
+        white-space: nowrap;
+      }
+
+      .ti3-unifyvalid-error-container {
+        display: flex;
+      }
+    }
+  }
+
+  &.deleteNodeFailedModal {
+    // 表格加下划线
+    .ng-star-inserted {
+      border-bottom: 1px solid #e1e6ee;
+    }
+  }
+}
+
+::ng-deep .viewLogsModal {
+  .ti3-modal-header {
+    .copy {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background-image: url("../../../../assets/img/projects/copy_normal.svg");
+      background-repeat: no-repeat;
+      background-position: center center;
+      cursor: pointer;
+
+      &:hover {
+        background-image: url("../../../../assets/img/projects/copy_hover.svg");
+      }
+
+      &:active {
+        background-image: url("../../../../assets/img/projects/copy_active.svg");
+      }
+    }
+  }
+  .ti3-modal-body {
+    max-height: 441px !important; 
+  }
+
+  .chen-nodata-td {
+    width: 350px;
+  }
+}
+
+::ng-deep .ti3-modal .fingerPrintConfirmationModal {
+  .ti3-modal-content {
+    width: 680px;
+  }
+}
+::ng-deep .autoWidth {
+  width: 700px !important;
+  pre {
+    white-space: pre-wrap;
+  }
+}
+
+// 配置管理
+.config-container {
+  background-color: #fff;
+  position: relative;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 110;
+  transition: all 0.3s linear;
+  display: flex;
+
+  > .left {
+    width: 280px;
+    padding-left: 48px;
+    overflow: hidden;
+    flex: 0 0 auto;
+
+    > header {
+      height: 72px;
+      box-sizing: border-box;
+      border-bottom: 1px dashed #d4d9e6;
+      display: flex;
+      align-items: center;
+
+      > .return {
+        font-size: 20px;
+        line-height: 30px;
+        color: #222222;
+        cursor: pointer;
+
+        > span.text {
+          margin-left: 8px;
+        }
+      }
+    }
+
+    > .config-leftmenu {
+      border-right: 1px solid #cbccd0;
+      height: calc(100% - 72px);
+      padding-top: 20px;
+      box-sizing: border-box;
+
+      > li {
+        height: 48px;
+        line-height: 48px;
+        font-size: 14px;
+        color: #222;
+        padding-left: 22px;
+        position: relative;
+        cursor: pointer;
+
+        &::before {
+          content: "";
+          width: 2px;
+          height: 100%;
+          background-color: transparent;
+          position: absolute;
+          left: 0px;
+          top: 0px;
+        }
+
+        &.notShow {
+          display: none;
+        }
+
+        &.active {
+          color: #0067ff;
+          background-color: #f5f9ff;
+
+          &::before {
+            background-color: currentColor;
+          }
+        }
+      }
+    }
+  }
+
+  > .right {
+    flex: 1;
+    transition: all 100ms linear;
+    position: relative;
+    width: calc(100% - 328px);
+
+    > .right-top {
+      width: calc(100% - 48px);
+      height: 72px;
+      line-height: 72px;
+      box-sizing: border-box;
+      border-bottom: 1px dashed #d4d9e6;
+      font-size: 20px;
+      color: #222222;
+      padding-left: 48px;
+    }
+
+    > .right-content {
+      height: 100%;
+
+      .sys-item {
+        margin-top: 16px;
+        margin-left: 48px;
+      }
+    }
+  }
+
+  .toggle-btn {
+    position: absolute;
+    top: 45%;
+    left: -18px;
+    cursor: pointer;
+
+    img {
+      width: 20px;
+      height: 90px;
+    }
+
+    &.active {
+      position: absolute;
+      top: 45%;
+      left: -2px;
+      transform: rotateY(180deg);
+      z-index: 10;
+    }
+  }
+}
+:host ::ng-deep .ti3-table > .ti3-table-fixed-head > table {
+  table-layout: fixed;
+}
+:host ::ng-deep .ti3-table > .ti3-table-container > table {
+  table-layout: fixed;
+}
+.ti3-table-container table {
+  border-collapse: collapse;
+}
+.ti3-table-container table tr {
+  border-bottom: 1px solid #e2e2e2;
+}
+.ti3-table > .ti3-table-container > table > tbody > tr > td {
+  padding: 14px 10px;
+}
+:host ::ng-deep {
+  .ti3-table-container {
+    height: calc(100% - 50px)
+  }
+  .noDataHeight {
+    min-height: 160px;
+  }
+}
+
+:host ::ng-deep .nodata {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// 设置界面布局
+:host ::ng-deep .right-content .configItemBox {
+  height: calc(100% - 140px);
+  display: flex;
+  flex-direction: column;
+
+  > .boxHeader {
+    height: 72px;
+    margin-right: 48px;
+    padding-left: 48px;
+    font-size: 20px;
+    line-height: 30px;
+    color: #222;
+    box-sizing: border-box;
+    border-bottom: 1px dashed #d4d9e6;
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    font-stretch: normal;
+    -webkit-font-smoothing: none;
+  }
+
+  > .boxMain {
+    flex: 1;
+    overflow: hidden;
+    padding: 20px 48px;
+    box-sizing: border-box;
+  }
+}
+
+.sshSafeTip {
+  margin-top: 20px;
+  .sshTipLabel{
+    width: 120px;
+    display: inline-block;
+  }
+  .sshTipText {
+    max-width: 465px;
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 20px;
+  }
+}
+.addNodeModalBody{
+  min-height: 490px;
+  max-height: 500px !important;
+}
+.deleteNodeModalBody{
+  min-height: 320px;
+  max-height: 437px !important;
+}
+.labelWidth{
+  display: block;
+  max-width: 120px;
+}

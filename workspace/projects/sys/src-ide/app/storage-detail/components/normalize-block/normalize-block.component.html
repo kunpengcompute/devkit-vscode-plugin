@@ -1,0 +1,22 @@
+<div class="container" #container [flagTooltipShow]="isFollowTipShow" [appFollowTooltip]="followTipData">
+    <app-normalize-block-chart [rawData]="rawData" [currTheme]="currTheme" [colors]="colors" (blockMouseenter)="onBlockMouseenter($event)"
+        (blockMouseleave)="onBlockMouseleave()">
+    </app-normalize-block-chart>
+</div>
+
+<ng-template #followTip let-context="context">
+    <div class="tip-warpper">
+        <div class="row time">{{ context.time }}</div>
+        <div class="row time">{{ rawData.title }}</div>
+        <div class="row time line"></div>
+        <div class="row time">{{ rawData.dev }}</div>
+        <div class="row range">
+            <div class="label">{{i18n.storageIO.diskio.interval}}</div>
+            <div>{{context.key}}</div>
+        </div>
+        <div class="row count">
+            <div class="label">{{i18n.storageIO.diskio.times}}</div>
+            <div>{{context.value}}({{context.percent}}%)</div>
+        </div>
+    </div>
+</ng-template>

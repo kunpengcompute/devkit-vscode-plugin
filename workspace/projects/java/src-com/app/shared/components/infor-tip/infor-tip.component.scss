@@ -1,0 +1,33 @@
+.infor-dom {
+  background-color: var(--shared-st-bg-color);
+  border-radius: 2px;
+  border: solid 1px var(--shared-st-border-color);
+  display: flex;
+  padding: 6px 6px 5px 0;
+  position: relative;
+  justify-content: space-between;
+  min-height: 32px;
+  .infor-img{
+    display: inline-block;
+    min-width: 12px;
+    padding: 0 8px 0 14px;
+  }
+  .infor-text{
+    font-size: 12px;
+    color: var(--sample-tip);
+  }
+  .infor-close {
+    display: inline-block;
+    margin-left: 12px;
+    min-width: 12px;
+    cursor: pointer;
+  }
+}
+.infor-dom-alarm{
+  background-color: var(--shared-st-alarm-bg-color);
+  border: solid 1px var(--shared-st-alarm-border-color);
+}
+.infor-dom-error{
+  background-color: var(--shared-st-error-bg-color);
+  border: solid 1px var(--shared-st-error-border-color);
+}

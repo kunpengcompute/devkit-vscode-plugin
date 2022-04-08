@@ -1,0 +1,288 @@
+<div class="pro-main-container">
+    <div class="pro-main-content scroll-style">
+        <!-- user-guide -->
+        <header>
+            <div class="profile-tabs" id="user-guide-profile">
+                <ng-container *ngFor="let tab of profileTabs; let idx = index">
+                    <span class="item-tab"
+                        [ngClass]="{ 'tab-active': tab.active, 'snapshot': tab.tabName === 'snapshot'}"
+                        (click)="tabsToggle(idx, tab.link)">
+                        <ng-container *ngIf="tab.tabName === 'snapshot'">
+                            <img src="./assets/img/profiling/photoSnap.svg">
+                            <img src="./assets/img/profiling/photoSnap_click.svg">
+                        </ng-container>
+                        {{ i18n.protalserver_profiling_tab[tab.tabName] }}
+                    </span>
+                </ng-container>
+            </div>
+            <div class="btns-box" *ngIf="!this.isDownload">
+                <div class="clearMenu">
+                    <button type="button" tiButton>{{i18n.plugins_javaperf_button_clear}}
+                        <span class="icon"></span>
+                    </button>
+                    <div class="menuList">
+                        <ul class="listUl">
+                            <li class="listItem" *ngFor="let item of typeOptions" (click)="typeChange(item)">
+                                {{item.label}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div *ngIf="!isIntellij" class="profile-export" [ngClass]="{'active': profileExportActive}" tiTipPosition='bottom-right'
+                    (click)="profileExportActive = true" [tiTip]="i18n.plugins_perf_java_profiling_export.title">
+                    <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/export-normal.svg">
+                    <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/export-click.svg">
+                    <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/export_lightNormal.svg">
+                    <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/export_lightHover.svg">
+                </div>
+              <div *ngIf="isIntellij" class="profile-export" [ngClass]="{'active': profileExportActive}" tiTipPosition='bottom-right'
+                   (click)="profileExportActive = true" [tiTip]="i18n.plugins_perf_java_profiling_export.title">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/export-normal-intellij.svg">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/export-click-intellij.svg">
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/export_lightNormal.svg">
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/export_lightHover.svg">
+              </div>
+                <div class="config-border" *ngIf="currentTabPage === 'jdbcpool' && !isIntellij" tiTipPosition='bottom-right'
+                    [tiTip]='i18n.jdbcpool.jdbcpoolConfig' (click)="openConfig()">
+                    <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/home/data_config_border.svg">
+                    <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/home/data_config_border_click.svg">
+                    <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/config_lightNormal.svg">
+                    <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/config_lightHover.svg">
+                </div>
+              <div class="config-border" *ngIf="currentTabPage === 'jdbcpool' && isIntellij" tiTipPosition='bottom-right'
+                   [tiTip]='i18n.jdbcpool.jdbcpoolConfig' (click)="openConfig()">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/home/data_config_border-intellij.svg">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/home/data_config_border_click-intellij.svg">
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/config_lightNormal.svg">
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/config_lightHover.svg">
+              </div>
+                <div class="profile-save" *ngIf="currentTabPage === 'memoryDump' && !isIntellij"
+                    [ngClass]="{'active': heapdumpSaved, 'disabled': saveBtnDisable}" tiTipPosition='bottom'
+                    [tiTip]="saveBtnTip" (click)="savedHeapdumpReport()">
+                    <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/saved-normal-dark.svg">
+                    <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/saved-click-dark.svg">
+                    <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/saved-disabled-dark.svg">
+                    <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/saved-normal-light.svg">
+                    <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/saved-click-light.svg">
+                    <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/saved-disabled-light.svg">
+                </div>
+              <div class="profile-save" *ngIf="currentTabPage === 'memoryDump' && isIntellij"
+                   [ngClass]="{'active': heapdumpSaved, 'disabled': saveBtnDisable}" tiTipPosition='bottom'
+                   [tiTip]="saveBtnTip" (click)="savedHeapdumpReport()">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/saved-normal-dark-intellij.svg">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/saved-click-dark-intellij.svg">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/saved-disabled-dark-intellij.svg">
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/saved-normal-light.svg">
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/saved-click-light.svg">
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/saved-disabled-light.svg">
+              </div>
+                <div  class="profile-save" *ngIf="currentTabPage === 'log' && !isIntellij"
+                    [ngClass]="{'active': gclogSaved, 'disabled': gcSaveDisable}" tiTipPosition='bottom'
+                    [tiTip]="saveBtnTip" (click)="savedGClogReport()">
+                    <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/saved-normal-dark.svg">
+                    <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/saved-click-dark.svg">
+                    <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/saved-disabled-dark.svg">
+                    <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/saved-normal-light.svg">
+                    <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/saved-click-light.svg">
+                    <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/saved-disabled-light.svg">
+                </div>
+              <div class="profile-save" *ngIf="currentTabPage === 'log' && isIntellij"
+                   [ngClass]="{'active': gclogSaved, 'disabled': gcSaveDisable}" tiTipPosition='bottom'
+                   [tiTip]="saveBtnGcTip" (click)="savedGClogReport()">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/saved-normal-dark-intellij.svg">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/saved-click-dark-intellij.svg">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/saved-disabled-dark-intellij.svg">
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/saved-normal-light.svg">
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/saved-click-light.svg">
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/saved-disabled-light.svg">
+              </div>
+                <div class="photo" (click)="doSnap()" *ngIf="showPhotoRoutes.includes(currentTabPage) && !isIntellij"
+                    [tiTip]="snapshotTip" tiTipMaxWidth="450px">
+                    <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/photo.svg">
+                    <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/photo-hover.svg">
+                    <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/photo-active.svg">
+                    <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/photo_lightNormal.svg">
+                    <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/photo_lightHover.svg">
+                    <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/photo_lightHover.svg">
+                    <div class="dot" *ngIf="snapCount">{{snapCount}}</div>
+                </div>
+              <div class="photo" (click)="doSnap()" *ngIf="showPhotoRoutes.includes(currentTabPage) && isIntellij"
+                   [tiTip]="snapshotTip" tiTipMaxWidth="450px">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/photo-intellij.svg">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/photo-hover-intellij.svg">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/photo-active-intellij.svg">
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/photo_lightNormal.svg">
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/photo_lightHover.svg">
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/photo_lightHover.svg">
+                <div class="dot" *ngIf="snapCount">{{snapCount}}</div>
+              </div>
+                <div *ngIf="!isIntellij" class="profile-setting" [ngClass]="{'active': profileSettingActive}"
+                    (click)="profileSettingActive = true" tiTipPosition='bottom-right'
+                    [tiTip]="i18n.plugins_perf_java_profiling_limitation.name">
+                    <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/setting.svg">
+                    <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/setting-active.svg">
+                    <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/limit_lightNormal.svg">
+                    <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/limit_lightHover.svg">
+                </div>
+              <div *ngIf="isIntellij" class="profile-setting" [ngClass]="{'active': profileSettingActive}"
+                   (click)="profileSettingActive = true" tiTipPosition='bottom-right'
+                   [tiTip]="i18n.plugins_perf_java_profiling_limitation.name">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/setting-intellij.svg">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/profiling/setting-active-intellij.svg">
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/limit_lightNormal.svg">
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/limit_lightHover.svg">
+              </div>
+                <div *ngIf="!isIntellij" class="suggest">
+                    <span [tiTip]="i18n.protalserver_sampling_tab.suggestions" tiTipPosition='top'
+                        (click)="openSuggest()" class="tip-close">
+                        <img *ngIf="currTheme === ColorTheme.Dark" style="height: 28px;"
+                            src="./assets/img/projects/config_info_normal.svg">
+                        <img *ngIf="currTheme === ColorTheme.Dark" style="height: 28px;"
+                            src="./assets/img/projects/config_info_click.svg">
+                        <img *ngIf="currTheme === ColorTheme.Light" style="height: 28px;"
+                            src="./assets/img/profiling/suggest_lightNormal.svg">
+                        <img *ngIf="currTheme === ColorTheme.Light" style="height: 28px;"
+                            src="./assets/img/profiling/suggest_lightHover.svg">
+                    </span>
+                    <span *ngIf="suggestNum>0" class="suggestNum">
+                        <span [ngClass]="suggestNum>9? 'allNums' :'allNum'">{{suggestNum}}</span>
+                    </span>
+                </div>
+              <div *ngIf="isIntellij" class="suggest">
+                    <span [tiTip]="i18n.protalserver_sampling_tab.suggestions" tiTipPosition='top'
+                          (click)="openSuggest()" class="tip-close">
+                        <img *ngIf="currTheme === ColorTheme.Dark" style="height: 28px;"
+                             src="./assets/img/projects/config_info_normal-intellij.svg">
+                        <img *ngIf="currTheme === ColorTheme.Dark" style="height: 28px;"
+                             src="./assets/img/projects/config_info_click-intellij.svg">
+                        <img *ngIf="currTheme === ColorTheme.Light" style="height: 28px;"
+                             src="./assets/img/profiling/suggest_lightNormal.svg">
+                        <img *ngIf="currTheme === ColorTheme.Light" style="height: 28px;"
+                             src="./assets/img/profiling/suggest_lightHover.svg">
+                    </span>
+                <span *ngIf="suggestNum>0" class="suggestNum">
+                        <span [ngClass]="suggestNum>9? 'allNums' :'allNum'">{{suggestNum}}</span>
+                    </span>
+              </div>
+            </div>
+            <div class="btns-box" *ngIf="this.isDownload">
+                <div *ngIf="!isIntellij" class="suggest">
+                    <span [tiTip]="i18n.protalserver_sampling_tab.suggestions" tiTipPosition='top'
+                        (click)="openSuggest()" class="tip-close">
+                        <img *ngIf="currTheme === ColorTheme.Dark" style="height: 28px;"
+                            src="./assets/img/projects/config_info_normal.svg">
+                        <img *ngIf="currTheme === ColorTheme.Dark" style="height: 28px;"
+                            src="./assets/img/projects/config_info_click.svg">
+                        <img *ngIf="currTheme === ColorTheme.Light" style="height: 28px;"
+                            src="./assets/img/profiling/suggest_lightNormal.svg">
+                        <img *ngIf="currTheme === ColorTheme.Light" style="height: 28px;"
+                            src="./assets/img/profiling/suggest_lightHover.svg">
+                    </span>
+                    <span *ngIf="suggestNum>0" class="suggestNum">
+                        <span [ngClass]="suggestNum>9? 'allNums' :'allNum'">{{suggestNum}}</span>
+                    </span>
+                </div>
+              <div *ngIf="isIntellij" class="suggest">
+                    <span [tiTip]="i18n.protalserver_sampling_tab.suggestions" tiTipPosition='top'
+                          (click)="openSuggest()" class="tip-close">
+                        <img *ngIf="currTheme === ColorTheme.Dark" style="height: 28px;"
+                             src="./assets/img/projects/config_info_normal-intellij.svg">
+                        <img *ngIf="currTheme === ColorTheme.Dark" style="height: 28px;"
+                             src="./assets/img/projects/config_info_click-intellij.svg">
+                        <img *ngIf="currTheme === ColorTheme.Light" style="height: 28px;"
+                             src="./assets/img/profiling/suggest_lightNormal.svg">
+                        <img *ngIf="currTheme === ColorTheme.Light" style="height: 28px;"
+                             src="./assets/img/profiling/suggest_lightHover.svg">
+                    </span>
+                <span *ngIf="suggestNum>0" class="suggestNum">
+                        <span [ngClass]="suggestNum>9? 'allNums' :'allNum'">{{suggestNum}}</span>
+                    </span>
+              </div>
+            </div>
+        </header>
+        <router-outlet></router-outlet>
+    </div>
+</div>
+<app-alert-message #stopAnalysisIns [isFoolproof]="'true'" (confirmHandle)="confirmHandle_stop($event)"></app-alert-message>
+<app-alert-message #deleteAll [isFoolproof]="'true'" (confirmHandle)="confirmHandle_delAll($event)"></app-alert-message>
+<app-alert-message #deleteOne [isFoolproof]="'true'" (confirmHandle)="confirmHandle_delOne($event)"></app-alert-message>
+<app-profile-setting [(active)]="profileSettingActive" [profileTabs]="profileTabs">
+</app-profile-setting>
+<app-profile-export [active]="profileExportActive" (getActive)='getActive($event)'
+    (dismiss)="profileExportActive = false">
+</app-profile-export>
+<app-profile-heapdump-saved [active]="heapdumpSaved" [saveType]="'heapdump'" (dismiss)="heapdumpSaved = false">
+</app-profile-heapdump-saved>
+<app-profile-heapdump-saved [active]="gclogSaved" [saveType]="'gclog'" (dismiss)="gclogSaved = false">
+</app-profile-heapdump-saved>
+<!-- 实时数据限定提示弹窗 -->
+<ng-template #dataLimitMsgBox let-context="context">
+    <ti-modal-header>
+        {{ context.title }}
+        <span (click)="context.dismiss()" class="tip-close">
+            <img class="ti3-close" src="./assets/img/newSvg/close_icon.svg" />
+            <img class="ti3-close" src="./assets/img/newSvg/close_hover.svg">
+        </span>
+    </ti-modal-header>
+    <ti-modal-body>
+        <div class="tip">
+            <img src="./assets/img/tip.png" alt="">
+            <p>{{ context.content }}</p>
+        </div>
+        <input type="checkbox" tiCheckbox [(ngModel)]="noNext" [label]='context.checkboxLabel'>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <button class="primary-btn" type="button" (click)="context.close()">
+            {{ i18n.common_term_operate_ok }}
+        </button>
+        <button class="secondary-btn" type="button" (click)="context.dismiss()">
+            {{ i18n.common_term_operate_cancel }}
+        </button>
+    </ti-modal-footer>
+</ng-template>
+<!-- dbcp连接池配置参数 -->
+<ng-template #tipContent let-context="context">
+    <ti-modal-header>
+        <div class="config-header">
+            <span class="title">
+                {{ configTitle }}{{ i18n.jdbcpool.jdbcpoolConfig }}
+            </span>
+            <span class="tip-close img-display" (click)="context.close()">
+                <img src="./assets/img/newSvg/close_icon.svg" />
+                <img src="./assets/img/newSvg/close_hover.svg">
+            </span>
+        </div>
+    </ti-modal-header>
+    <ti-modal-body>
+        <div class="config-content" *ngIf="jdbcpoolConfig.length > 0">
+            <div class="label">
+                <ng-container *ngFor="let item of jdbcpoolConfig">
+                    <div class="label-box">
+                        <span class="content-label">{{ item.label }}：</span>
+                        <span class="content-value">
+                            <span>{{ item.value }}</span>
+                            <span *ngIf="item.expected" class="rocket"><img [tiTip]="optimization"
+                                    (mouseenter)="configMouse(item)" [tiTipContext]="configContext"
+                                    src="./assets/img/home/rocket.svg" /></span>
+                        </span>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+      <app-default-page *ngIf="jdbcpoolConfig.length === 0"
+                        [text]=i18n.plugins_perf_java_profileNoData.jdbcPoolNoData>
+      </app-default-page>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <button class="secondary-btn" type="button" (click)="context.dismiss()">
+            {{ i18n.common_term_operate_close }}
+        </button>
+    </ti-modal-footer>
+</ng-template>
+<ng-template #optimization let-context="context">
+    <div>
+        <p>{{i18n.jdbcpool.suggestions}}<a style="color: #0067FF;"
+                (click)="openSuggest()">{{i18n.jdbcpool.look}}</a>{{i18n.jdbcpool.info}}</p>
+    </div>
+</ng-template>
+<app-analysis #analysis [type]="sugtype" [suggestArr]="allSuggestArr" [tabName]="tabLink">
+</app-analysis>

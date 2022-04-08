@@ -1,0 +1,110 @@
+#nodeInfoTable {
+  width: 512px;
+}
+.nodeStatus {
+  display: flex;
+  align-items: center;
+
+  .icon_nodeStatus {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+
+    &.online {
+      background: #7adfa0;
+    }
+
+    &.offline {
+      background: #b8becc;
+    }
+  }
+
+  .running {
+    width: 10px;
+    height: 10px;
+    margin-right: 8px;
+    background-color: transparent;
+    background-image: url("../../../../../../src-web/assets/img/home/running.gif");
+    background-size: 105%;
+    display: flex;
+    .loadingImg{
+      max-width: 12px;
+      max-height: 12px;
+      animation: loading 1.5s linear infinite;
+    }
+  }
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.operateBox {
+  span {
+    color: #0067ff;
+    cursor: pointer;
+
+    &:not(:first-child) {
+      margin-left: 16px;
+    }
+  }
+}
+:host .ti3-table-fixed-head,
+.ti3-table-container {
+  width: 600px;
+}
+.config-btn {
+  color: #6c92fa;
+  cursor: pointer;
+}
+.status-icon {
+  border-radius: 50%;
+  vertical-align: middle;
+  display: inline-block;
+  margin-right: 5px;
+  border: 3px solid #63b6f7;
+}
+
+.success-icon {
+  border: 3px solid #7adfa0;
+}
+
+.reserve-icon {
+  border: 3px solid #63b6f7;
+}
+.ti3-table .ti3-table-fixed-head .thContent {
+  height: 32px;
+  display: flex;
+}
+.ti3-icon-search{
+  padding-left: 8px;
+  cursor: pointer;
+  position: relative;
+  color: var(--common-color-font-secondary);
+&:hover{
+  color: var(--ti-table-sort-color-hover);
+}
+&.active{
+  color: var(--ti-table-sort-color-hover);
+}
+}
+.ti3-searchbox-container.search-box{
+  top: -7px;
+  left: -1px;
+  position: absolute;
+  z-index: 1;
+}
+
+:host ::ng-deep{
+  .ti3-table-fixed-head > table > thead > tr > th.notShow[checkbox-column] {
+    cursor: auto;
+    input[type="checkbox"][tiCheckbox] + label.ti3-checkbox {
+      cursor: auto;
+      display: none;
+    }
+  }
+}

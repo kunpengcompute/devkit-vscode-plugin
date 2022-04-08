@@ -1,0 +1,35 @@
+<div class="creating-container" *ngIf="progressList.length" [ngStyle]="{'bottom': bottom + 20 + 'px'}" [ngClass]="{'show-list': !isExpandList}">
+    <div class="top">
+        {{i18n.common_task_list + ' (' + list.length + ')'}}
+        <img src="./assets/img/home/jiantou_down.svg" alt="" *ngIf="isExpandList" class="expend-btn" (click)="listToggle()">
+        <img src="./assets/img/home/jiantou_top.svg" alt="" *ngIf="!isExpandList" class="expend-btn" (click)="listToggle()">
+    </div>
+    <ng-container>
+        <div class="content"  *ngFor="let item of progressList" >
+            <app-package-porting-progress *ngIf="item.type === 'PackagePorting'" [reportId]="item.id" (createSucc)="getTaskMsg($event)"></app-package-porting-progress>
+            <!-- 源码迁移分析进度 -->
+            <app-source-code-progress *ngIf="item.type === 'SourceCode'" [reportId]="item.id" (createSucc)="getTaskMsg($event)"></app-source-code-progress>
+
+            <!-- 64位运行模式检查分析进度 -->
+            <app-pre-check-progress *ngIf="item.type === 'PortingPreCheck'" [reportId]="item.id" (createSucc)="getTaskMsg($event)"></app-pre-check-progress>
+
+            <!-- 结构体字节检查分析进度 -->
+            <app-byte-alignment-progress *ngIf="item.type === 'ByteAlignment'"  [reportId]="item.id" (createSucc)="getTaskMsg($event)"></app-byte-alignment-progress>
+
+            <!-- 结构体字节检查分析进度 -->
+            <app-cache-line-progress *ngIf="item.type === 'CachelineAlignment'"  [reportId]="item.id" (createSuccess)="getTaskMsg($event)"></app-cache-line-progress>
+
+            <app-package-progress *ngIf="item.type === 'SoftwarePackage'" [reportId]="item.id" (createSucc)="getTaskMsg($event)"></app-package-progress>
+            <app-software-porting-progress *ngIf="item.type === 'SoftwarePorting'" [reportId]="item.id" [software]="item.software" (createSucc)="getTaskMsg($event)"></app-software-porting-progress>
+            <app-log-manage-progress *ngIf="item.type === 'LogManage'" [reportId]="item.id" (createSucc)="getTaskMsg($event)"></app-log-manage-progress>
+
+            <!-- 弱内存序确认检查执行进度条 -->
+            <app-check-weak-progress *ngIf="item.type === 'weakCheck'" [reportId]="item.id" (createSucc)="getTaskMsg($event)"></app-check-weak-progress>
+
+            <!-- 弱内存序下一步编译分析进度 -->
+            <app-weak-compiler-progress *ngIf="item.type === 'weakCompiler'" [reportId]="item.id" (createSucc)="getTaskMsg($event)"></app-weak-compiler-progress>
+
+            <app-bc-check-progress *ngIf="item.type === 'bcCheck'" [reportId]="item.id" (createSucc)="getTaskMsg($event)"></app-bc-check-progress>
+        </div>
+    </ng-container>
+</div>

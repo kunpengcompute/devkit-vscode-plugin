@@ -1,0 +1,11 @@
+<div *ngIf="isOperate" class="key" id="itemWorkingkey">
+    <div class="key-title">
+        <div class="title" id="workkey">{{ i18n.common_term_work_key }}</div>
+        <img [tiTip]="i18n.newHeader.certificate.workingKey" tiTipPosition="right"
+            src="./assets/img/mission/icon-help-dark.png">
+    </div>
+    <div class="refresh">
+        <button type="button" class="little-primary-btn"
+            (click)="handleRefreshWorkingKey()">{{ i18n.newHeader.certificate.refreshKey }}</button>
+    </div>
+</div>

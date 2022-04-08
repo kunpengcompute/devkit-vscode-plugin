@@ -1,0 +1,63 @@
+.tree-root-detail {
+  height: 100%;
+  
+  .tabs {
+    .tab-item {
+      height: 24px;
+      font-size: 16px;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 24px;
+      letter-spacing: 0px;
+      color: var(--font-d-e8e8e8-l-616161);
+      display: inline-block;
+      padding-bottom: 10px;
+      cursor: pointer;
+  
+      &:first-of-type {
+        margin-right: 16px;
+        position: relative;
+  
+        &::after {
+          content: '';
+          position: absolute;
+          width: 1px;
+          height: 14px;
+          background-color: var(--line-d-888888-l-e1e6ee);
+          right: -16px;
+          top: 6px;
+        }
+      }
+  
+      &:last-of-type {
+        margin-left: 16px;
+      }
+    }
+  
+    .active-tab {
+      color: #2072ea;
+      border-bottom: 2px solid #0067ff;
+    }
+  }
+  
+  .tab-threshold-setting {
+    padding-top: 24px;
+    height: calc(100% - 36px);
+    box-sizing: border-box;
+  }
+
+  .tab-detail {
+    overflow: auto;
+    padding-top: 24px;
+    height: 100%;
+    box-sizing: border-box;
+
+    .indicator-desc {
+      margin-bottom: 50px;
+    }
+  }
+
+  .system-config-threshold {
+    height: 100%;
+  }
+}

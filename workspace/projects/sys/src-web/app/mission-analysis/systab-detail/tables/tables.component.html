@@ -1,0 +1,30 @@
+<div class="memory-detail" [id]='uuid' *ngIf="isHave != 'swap'; else isSwap">
+  <div class="table-box">
+    <div class="table">
+      <div echarts [options]="tableData" class="echart-content" *ngIf="tableData" (chartInit)="onChartInit($event)" style="height: 100%">
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #isSwap>
+	<div *ngIf="showSwap">
+  <div class="memory-detail" [id]='uuid'>
+    <div class="table-box">
+      <div class="table">
+        <div echarts [options]="tableData" class="echart-content" *ngIf="tableData" (chartInit)="onChartInit($event)" style="height: 100%">
+        </div>
+      </div>
+    </div>
+	</div>
+	</div>
+</ng-template>
+
+<ng-template #tipContent let-context='context'>
+	<span>{{ i18n.sys.baseValue }}:</span>
+	<span>{{ datas.suggestion && datas.suggestion.base_value | thousandSeparator}}</span>
+	<div>
+		<span *ngIf="language=='zh'" [innerHTML]="context"></span>
+		<span *ngIf="language=='en'" [innerHTML]="context"></span>
+	</div>
+</ng-template>

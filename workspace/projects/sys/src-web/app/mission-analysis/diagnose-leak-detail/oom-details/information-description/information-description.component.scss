@@ -1,0 +1,37 @@
+.content {
+  .content-details {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 12px;
+    .item-detail {
+      display: flex;
+      align-items: center;
+      height: 26px;
+      font-size: 14px;
+      line-height: 26px;
+      letter-spacing: 0px;
+      color: #222222;
+      margin-bottom: 16px;
+      width: 100%;
+      margin-right: 16px;
+      .detail-key {
+        display: inline-block;
+        margin-right: 16px;
+        width: 200px;
+        color: #616161;
+      }
+      .detail-value {
+        width: 300px;
+      }
+      &:hover {
+        background: #f5f9ff;
+      }
+    }
+    .more-column {
+      flex: 0 0 48%;
+      width: 50%;
+    }
+  }
+}

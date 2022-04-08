@@ -1,0 +1,201 @@
+    <div class="content" [appLoading]="isLoading">
+      <div class="content-table">
+        <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columnsTitle">
+          <table>
+              <thead>
+                  <tr>
+                     <!--使用展开详情图标时，需要给展开详情图标列加 details-icon-column 属性-->
+                      <th tiOverflow *ngFor="let column of columnsTitle" width="{{column.width}}">{{column.title}}</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <ng-container *ngFor="let row of displayed; index as i">
+                    <tr>
+                      <td *ngIf="row.params !== 'collectionLog'">
+
+                      </td>
+                      <td details-icon-column *ngIf="row.params === 'collectionLog'"> 
+                        <ti-details-icon [row]="row" [index]="i"  (beforeToggle)="beforeToggle($event)">
+                        </ti-details-icon>
+                        <!--详情图标设置，传入行数据-->
+                      </td>
+                      <td tiOverflow>{{row.fileName}}</td>
+                      <td tiOverflow>
+                        <span *ngFor="let oparate of row.oparates" class="download" (click)='oparate.onClick(row)'>{{ oparate.label }}</span>
+                      </td>
+                    </tr>
+                    <!-- 详情列 -->
+                    <tr *tiDetailsTr="row">
+                      <!--详情内容行tiDetailsTr，传入行数据-->
+                      <!-- tiColspan是为了使得该td（详情内容）占据表格整个宽度(列合并)，tiColspan列合并的值为columns接口传入的对象数组中
+                                      中show属性值不为false的对象的个数。本例中，作用相当于colspan='5' -->
+                      <td tiColspan>
+                        <!-- Tiny3.1.3版本新增，theme-ui3主题下不用加此div和类名。 -->
+                        <div class="ti3-table-detail-container" [appLoading]="collectionLog.obtaining">
+                          <ti-table [(displayedData)]="displayedDetailsOk" [srcData]="srcDataDetails" [columns]="detailColumns">
+                            <div class="ti3-table-fixed-head">
+                              <table>
+                                <thead [hidden]="true">
+                                  <tr>
+                                    <ng-container *ngFor="let column of detailColumns;index as i;">
+                                      <th tiOverflow width='{{column.width}}'>{{column.title}}</th>
+                                    </ng-container>
+                                  </tr>
+                                </thead>
+                              </table>
+                            </div>
+                            <div class="ti3-table-container">
+                              <table>
+                                <thead>
+                                  <tr>
+                                    <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                                    <th *ngFor="let column of detailColumns" width='{{column.width}}'></th>
+                                  </tr>
+                                </thead>
+                    
+                                <tbody>
+                                  <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                                  <ng-container *ngFor="let row of displayedDetailsOk;index as i;">
+                                    <tr *ngIf="(i !== 0 && row.ip !== displayedDetailsOk[i-1].ip) || i === 0">
+                                      <td tiOverflow class="fileName">{{row.file_name}}</td>
+                                      <td tiOverflow><span class="download" (click)='openNodeFiles(row)'>{{i18n.operationLog.download}}</span></td>
+                                    </tr>
+                                  </ng-container>
+                                </tbody>
+
+                                <tbody *ngIf="collectionLog.hasObtained && displayedDetailsOk.length === 0 && !isLoading">
+                                  <div class="noData">
+                                    <img src="./assets/img/projects/nodata.png" />
+                                    <div>{{ nodataTip }}</div>
+                                  </div>
+                                </tbody>
+                              </table>
+                            </div>
+                          </ti-table>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  
+              </tbody>
+          </table>
+        </ti-table>
+      </div>
+    </div>
+
+    <app-pop-mask #downLoad>
+      <div class="content downloadContent" style="width:700px;">
+        <div class="mask-title">
+          <span class="create-title">{{ modalTitle }}</span>
+          <img class="incorrect" (click)="closeDownload()" src="./assets/img/header/close_icon.svg" style="cursor:pointer;">
+        </div>
+        <div class="tip_title">
+          <img src="./assets/img/tip/warn_arr.svg" alt="">
+          <span>{{i18n.operationLog.sureDownload}}</span>
+        </div>
+        <div class="content_container">
+          <ti-table [(displayedData)]="displayedOk" [srcData]="srcDataOk" [columns]="columns">
+            <div class="ti3-table-fixed-head">
+              <table style="table-layout: fixed;">
+                <thead>
+                  <tr>
+                    <ng-container *ngFor="let column of columns;index as i;">
+                      <th tiOverflow width='{{column.width}}'>{{column.title}}</th>
+                    </ng-container>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container" style="max-height:196px;overflow-y: auto;">
+              <table style="border-collapse: collapse;">
+                <thead>
+                  <tr>
+                    <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                    <th *ngFor="let column of columns" width='{{column.width}}'></th>
+                  </tr>
+                </thead>
+    
+                <tbody>
+                  <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                  <ng-container *ngFor="let row of displayedOk;index as i;">
+                    <tr>
+                      <td tiOverflow>{{ row.name }}</td>
+                      <td tiOverflow>{{ row.size || '--' | thousandSeparator}}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+                <tbody *ngIf="displayedOk.length === 0">
+                  <div style="width: 636px;display: flex;flex-direction: column;align-items: center;margin: 24px 0; font-size: 12px;">
+                    <img style="width:20%" src="./assets/img/projects/nodata.png" />
+                    <div style="font-size: 1rem;">
+                      {{ i18n.common_term_task_nodata }}
+                    </div>
+                  </div>
+                </tbody>
+              </table>
+            </div>
+          </ti-table>
+        </div>
+        <div class="footer_button">
+          <button type="button" tiButton style="margin-right:16px;" color="primary"
+            (click)='downloadOk()' [disabled]='srcDataOk.data.length == 0'>{{i18n.common_term_operate_ok}}</button>
+          <button type="button" tiButton 
+            (click)='closeDownload()'>{{i18n.common_term_operate_cancel}}</button>
+        </div>
+      </div>
+    </app-pop-mask>
+    <app-pop-mask #CollectDownLoad>
+      <div class="content downloadContent" style="width:700px;">
+        <div class="mask-title">
+          <span class="create-title">{{ modalTitle }}</span>
+          <img class="incorrect" (click)="closeDownload()" src="./assets/img/header/close_icon.svg" style="cursor:pointer;">
+        </div>
+        <div class="tip_title">
+          <img src="./assets/img/tip/warn_arr.svg" alt="">
+          <span>{{i18n.operationLog.sureDownload}}</span>
+        </div>
+        <div class="content_container">
+          <ti-table [(displayedData)]="displayedCollectData" [srcData]="srcCollectData" [columns]="columnsCollect">
+            <table>
+              <thead>
+                  <tr>
+                      <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                      <th checkbox-column>
+                          <!--全选按钮-->
+                          <!--如果有分页，全选需要控制当前页时，items接口传入displayed
+                              如果全选要控制表格所有数据，items接口传入srcData.data-->
+                          <input type="checkbox"
+                                 tiCheckgroup
+                                 [items]="srcCollectData.data"
+                                 [(checkeds)]="checkedList"/>
+                      </th>
+                      <th tiOverflow width="{{columnsCollect[1].width}}">{{columnsCollect[1].title}}</th>
+                    <th tiOverflow width="{{columnsCollect[2].width}}">{{columnsCollect[2].title}}</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                  <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+                  <tr *ngFor="let row of displayedCollectData;index as i;trackBy: trackByFn"
+                      [ngClass]="{'ti3-selected-tr': checkedList.indexOf(row) !== -1}">
+                      <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                      <td checkbox-column style="padding-left: 20px;">
+                          <input type="checkbox"
+                                 tiCheckitem
+                                 [item]="row"/>
+                      </td>
+                      <td tiOverflow>{{ row.name }}</td>
+                      <td tiOverflow>{{ row.size || '--' | thousandSeparator}}</td>
+                  </tr>
+              </tbody>
+          </table>
+          </ti-table>
+        </div>
+        <div class="footer_button">
+          <button type="button" tiButton style="margin-right:16px;" color="primary"
+            (click)='downloadSureOk()' [disabled]='srcDataOk.data.length == 0'>{{i18n.common_term_operate_ok}}</button>
+          <button type="button" tiButton 
+            (click)='closeDownload()'>{{i18n.common_term_operate_cancel}}</button>
+        </div>
+      </div>
+    </app-pop-mask>

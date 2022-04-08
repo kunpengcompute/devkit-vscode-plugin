@@ -1,0 +1,340 @@
+<div class="home-container">
+  <div class="project-container page-container">
+    <div class="project-left scroll-style">
+      <div class="left-container">
+        <div class="left-content">
+          <div class="left-content-header" style="margin-left: 16px;color:#000;font-size: 20px;">
+            <p class="title" style="margin-bottom: 8px;">{{ i18n.common_term_headerTab1_labe_1 }}</p>
+            <p style="margin-bottom:24px;font-size: 14px;color:#616161;">{{ i18n.common_term_headerTab1_label_tip }}</p>
+            <!-- 安装指导 start -->
+            <div class="arm-tip-container" *ngIf="chkArmEnv.isOk">
+              <div class="tip-top-container flex">
+                <div class="img-box">
+                  <img src="./assets/img/home/icon_home_tip.svg" />
+                </div>
+                <div class="arm-content">
+                  <span class="close-arm-tip" (click)="closeArmTip()">
+                    <img src="./assets/img/home/icon_close_system_tip_light.svg" />
+                  </span>
+                  <span *ngIf="chkArmEnv.tip">{{chkArmEnv.tip}}</span>
+                  <span *ngIf="!chkArmEnv.tip" style="vertical-align: middle;">
+                    {{i18n.automake_evn_check.tip}}
+                    <a (click)="chkArmEnv.showGuide = true" *ngIf="!chkArmEnv.showGuide">{{i18n.automake_evn_check.link}}</a>
+                  </span>
+                </div>
+              </div>
+              <div *ngIf="chkArmEnv.showGuide" style="margin-left: 25px;font-size: 12px;">
+                <p style="margin: 6px 0;font-size: 14px;" [ngStyle]="{'margin-left':currLang==='zh-cn'?'-7px':'0px'}">{{i18n.automake_evn_check.guide_title}}</p>
+                <p>{{chkArmEnv.guideTip}}</p>
+                <p>{{chkArmEnv.installGuide}}</p>
+                <p>
+                  <a style="padding-left: 10px" [href]="chkArmEnv.glibcLink" class="link" target="_blank">glibc</a>
+                </p>
+                <p style="margin-top:5px"><a (click)="chkArmEnv.showGuide=false">{{i18n.automake_evn_check.hide_guide}}</a></p>
+              </div>
+            </div>
+            <!-- 安装指导 end -->
+          </div>
+          <ti-formfield>
+            <ti-item [label]="inputItems.path.label" [required]="inputItems.path.required">
+              <div class="ti-item-right-content p-relative" [ngClass]="{ 'ti-item-en-right-content': currLang === 'en-us' }">
+                <p class="user-path" tiOverflow>{{ userPath }}</p>
+                <textarea tiText autocomplete='off'
+                  [ngStyle]="{'height': (this.currLang == 'zh-cn') ? '142px' : '180px',
+                              'border-color': (uploadResultTip.content && uploadResultTip.state==='error') || noFileSelected ? '#ED4B4B' : '' }"
+                  [(ngModel)]="inputItems.path.value" resize="none"
+                  placeholder="{{i18n.common_term_analysis_sourcecode_path1}}&#10;{{i18n.common_term_analysis_sourcecode_path2}}&#10;{{inputPrompt1}}"
+                  class="areaMatch"
+                  [ngClass]="{'areaMatch-zh': inputItems.path.value !== ''}"
+                  (focus)="areaMatchDis()"
+                  (blur)="blurAreaMatch()"
+                  (keyup)="keyupAreaMatch()"
+                  [tiValidation]="validationChange" [formControl]="maxFilenameLength"
+                ></textarea>
+                <!-- 未选择文件 -->
+                <p class="no-file-selected" *ngIf="noFileSelected">
+                  <img src="./assets/img/home/icon_error.png" alt="">
+                  <span>{{ i18n.common_term_source_code_path_empty }}</span>
+                </p>
+                <!-- Mac -->
+                <p class="mac-info" *ngIf="isMac">{{ i18n.source_code_info.mac_info }}</p>
+                <!-- 上传报错 -->
+                <p class="upload-restule-tip" *ngIf="uploadResultTip.content">
+                  <img [src]="uploadResultTip.state === 'success'? './assets/img/home/success-tip.svg': './assets/img/home/icon_error.png'" alt="">
+                  <span [ngStyle]="{'color': uploadResultTip.state === 'success' ? '#616161':'#ED4B4B'}">{{uploadResultTip.content}}</span>
+                  <!-- 文件超过 1g -->
+                  <ng-container *ngIf="fileExceed">
+                    <span *ngIf="currLang === 'zh-cn'" class="file-err-help"><a (click)="goFileHelp()">{{ i18n.common_term_help_tip }}</a>。</span>
+                    <span *ngIf="currLang === 'en-us'" class="file-err-help"><a (click)="goFileHelp()">online help</a>.</span>
+                  </ng-container>
+                </p>
+                <!-- 输入自动匹配 -->
+                <div class="areaMatchDiv" *ngIf="displayAreaMatch && pathlist.length" [ngClass]="{'areaMatchMac': isMac, 'areaMatchMacEn': isMac && currLang === 'en-us'}">
+                  <ul>
+                    <li *ngFor="let path of pathlist" style="cursor: pointer;">
+                     <p (mousedown)="clickAreaMatch(path)">{{path}}</p>
+                     <div (mousedown)="isDeleteAreaMatch(path)"></div>
+                    </li>
+                  </ul>
+                </div>
+                <!-- 上传按钮 禁用 -->
+                <div *ngIf="isShow || isCompress" class="selectUpload-disabled" [ngClass]="{ enSelectUpload: currLang === 'en-us' }" [tiTip]="i18n.common_term_upload_file_resource" style="height: 28px;line-height: 28px;">
+                  <p >
+                    {{ i18n.common_term_upload_code}}
+                    <img src="./assets/img/header/select-down.png" style="vertical-align: middle; margin-left: 8px;" />
+                  </p>
+                </div>
+                <!-- 按钮激活 -->
+                <div *ngIf="!isShow && !isCompress" class="selectUpload" (mouseenter)="showUpload()" (mouseleave)="hideUpload()"
+                  [ngClass]="{ enSelectUpload: currLang === 'en-us' }">
+                  <ul>
+                    <li class="hoverButton" style="height: 28px;">
+                      <p style="margin: 0 auto;">
+                        {{ i18n.common_term_upload_code}}
+                        <img src="./assets/img/header/select-down.png" style="vertical-align: middle; margin-left: 8px;" />
+                      </p>
+                    </li>
+                    <li *ngIf="hoverFlag" class="selectItem" (click)="zipUpload()">
+                      <p tiOverflow>{{ i18n.common_term_upload_compressed }}</p>
+                    </li>
+                    <input type="file" id="zipload" style="display: none;" (change)="uploadFile('normal')"
+                    [accept]="accrptType" />
+                    <label for="files" *ngIf="hoverFlag && !isIe" class="selectItem" (click)="clearUploadTip()" >
+                      {{ i18n.common_term_upload_directory }}
+                    </label>
+                    <input type="file" id="files" webkitdirectory style="display: none;" (change)="toZip('normal', $event)" />
+                  </ul>
+                </div>
+              </div>
+            </ti-item>
+
+            <!-- 源码类型 -->
+            <ti-item [label]="inputItems.fortran.label" [required]="inputItems.command.required">
+              <div class="ti-item-right-content" [ngClass]="{ 'ti-item-en-right-content': currLang === 'en-us' }">
+                <span class="source-type" [ngClass]="{'source-type-en': currLang === 'en-us' }" *ngFor="let item of dataArray1; index as i"
+                  [tiTip]="i === 3 ? i18n.common_term_interpreted_language_tip : i18n.source_code_type_tip"
+                >
+                  <input type="checkbox" tiCheckitem [item]="item" [beCheckeds]="checkedArray1" [label]="item.text"
+                    (click)="onEditChange()" />
+                </span>
+                <p class="port-tip" [ngStyle]="{'margin-bottom': currLang === 'zh-cn' ? '0' : '16px'}" *ngIf="showInfo">
+                  <span>
+                      {{i18n.common_term_porting_tip}}
+                  </span>
+                </p>
+              </div>
+            </ti-item>
+            <!-- 目标操作系统 -->
+            <ti-item [label]="inputItems.linuxOS.label" [required]="inputItems.linuxOS.required">
+              <div class="ti-item-right-content" [ngClass]="{ 'ti-item-en-right-content': currLang === 'en-us' }">
+                <ti-select [searchable]="true" labelKey="label" class="common-size os-select"
+                  [options]="inputItems.linuxOS.options"
+                  [(ngModel)]="inputItems.linuxOS.selected" id="linuxOSselect"
+                  (ngModelChange)="osSelectChange($event)"
+                  (beforeOpen)="onBeforeOpen($event)">
+                  <ng-template #footer let-item>
+                    <div class="btn-about-more">
+                      <span (mousedown)="openAboutMask()">{{i18n.about_more.about_more_btn}}</span>
+                    </div>
+                  </ng-template>
+                </ti-select>
+              </div>
+            </ti-item>
+            <!-- 目标系统内核版本 -->
+            <ti-item [label]="inputItems.kernelVersion.label">
+              <div class="ti-item-right-content" [ngClass]="{ 'ti-item-en-right-content': currLang === 'en-us' }">
+                <input class="kernel-input common-size" type="text" tiText [(ngModel)]="inputItems.kernelVersion.selected.label" disabled />
+              </div>
+            </ti-item>
+
+            <!-- 编译器版本 -->
+            <ti-item [label]="inputItems.version.label" [required]="inputItems.version.required" [show]="interpretedShow">
+                <div *ngIf="editorSelect === 'two'" class="ti-item-right-content" [ngClass]="{ 'ti-item-en-right-content': currLang === 'en-us' }">
+                  <ti-select [searchable]="true" labelKey="label" class="version-select common-size"
+                    [options]="inputItems.version.options" id="verselect1" [(ngModel)]="inputItems.version.selected">
+                  </ti-select>
+                  <ti-select style="margin-left: 16px;" [searchable]="true" labelKey="label" class="version-select common-size"
+                    [options]="inputItems.fortran.options" [(ngModel)]="inputItems.fortran.selected" id="verselect2">
+                  </ti-select>
+                </div>
+                <div *ngIf="editorSelect === 'one'" class="ti-item-right-content">
+                  <ti-select [options]="singleSys.options" [searchable]="true" labelKey="label" [(ngModel)]="singleSys.selected" class="common-size"
+                    id="toolselect" [placeholder]="needCodeType" [disabled]="checkedArray1.length === 0">
+                  </ti-select>
+                </div>
+            </ti-item>
+            <!-- 构建工具 -->
+            <ti-item [label]="inputItems.tool.label" [required]="inputItems.tool.required" [show]="interpretedShow">
+              <div class="ti-item-right-content" [ngClass]="{ 'ti-item-en-right-content': currLang === 'en-us' }">
+                  <ti-select [options]="inputItems.tool.options" class="common-size"
+                  [(ngModel)]="inputItems.tool.selected" id="toolselect" (ngModelChange)="commandChange($event)">
+                  </ti-select>
+              </div>
+            </ti-item>
+            <!-- 编译命令 -->
+            <ti-item [label]="inputItems.command.label" [required]="inputItems.command.required" [show]="interpretedShow">
+                <div class="ti-item-right-content" [ngClass]="{ 'ti-item-en-right-content': currLang === 'en-us' }">
+                  <input class="command-input common-size" type="text" tiText [(ngModel)]="inputItems.command.value"
+                  [tiValidation]="validation" [formControl]="commandControl" maxlength="32" tiMaxLength="32"/>
+                  <p class="command-tip">
+                    <span>{{ i18n.common_term_ipt_label.command_tip }}</span>
+                    <span *ngIf="currLang === 'zh-cn'"><a (click)="goHelp()">{{ i18n.common_term_help_tip }}</a>。</span>
+                    <span *ngIf="currLang === 'en-us'"><a (click)="goHelp()">online help</a>.</span>
+                  </p>
+                </div>
+            </ti-item>
+            <ti-item [label]="' '">
+              <div class="generate-btn ti-item-right-content" [ngClass]="{ 'ti-item-en-right-content': currLang === 'en-us' }">
+                <div class="dis-inline-block" [tiTip]="createBtnDisabledTip"  tiTipPosition="right">
+                  <button tiButton (click)="checkAnalyzeForm()" type="button" color="primary" class="operation"
+                    [disabled]="isCommit || createBtnDisabled || !inputItems.linuxOS.options.length"
+                    onkeyup="if(event.keyCode==13 || event.keyCode == 32){ return false;}"
+                    onkeydown="if(event.keyCode==13 || event.keyCode == 32){ return false;}" [tiTip]='toomany' tiTipPosition="right">
+                    {{ i18n.common_term_analysis_btn }}
+                  </button>
+                </div>
+              </div>
+            </ti-item>
+          </ti-formfield>
+        </div>
+      </div>
+    </div>
+    <div class="project-right page-history-right">
+      <h2 class="right-title" style="height:32px; font-size: 20px;">
+        {{ i18n.common_term_history_project_label }} ({{ reportTotalNum }})
+        <button  tiButton (click)="deleteAll()" type="button" class="operation"
+           style="float: right;width: 88px;" [disabled]="!HisoricalReportList.length">
+          {{ i18n.common_term_clear_btn }}
+        </button>
+      </h2>
+      <div class="right-list scroll-style">
+        <p class="reportLimit" *ngIf="safeFlag">
+          <img src="./assets/img/home/icon_tip.png" />
+          {{i18n.common_term_report_safe_tit}}
+        </p>
+        <p class="reportLimiterror" *ngIf="dangerFlag">
+          <img src="./assets/img/system/icon_system_error.svg" />
+          {{ i18n.common_term_report_danger_tit }}
+        </p>
+        <ul>
+          <li *ngFor="let item of HisoricalReportList">
+            <a (click)="goReportDetail(item)">{{ item.created }}
+            </a>
+            <span class="p-relative">
+              <span class="tip-instruct" [ngClass]="{'tip-instruct-en': currLang !== 'zh-cn', 'tip-instruct-show': item.showTip}">
+                <span class="tip-span" [tiTip]="tipContent" tiTipPosition="bottom">
+                    <app-icon-react name="uploadHistory" (mouseenter)="changeHistoryImgSrc(0,false,item)" (mouseleave)="changeHistoryImgSrc(0,true,item)"></app-icon-react>
+                </span>
+                <ng-template #tipContent let-context="context" >
+                  <span style="display: block; min-width: 100px;" class="ti-tip" (mouseenter)="changeHistoryImgSrc(0,false,item)" (mouseleave)="changeHistoryImgSrc(0,true,item)">
+                    <a style="display: block; margin-bottom: 5px;"
+                      (click)="download(item, 'csv')">{{ i18n.common_term_history_project_downloadc }}</a>
+                    <a style="display: block;"
+                      (click)="download(item, 'html')">{{ i18n.common_term_history_project_downloadh }}</a>
+                  </span>
+                </ng-template>
+              </span>
+
+              <span class="delete-img">
+                <app-icon-react name="deleteProject"  (click)="deleteReport(item.id)"
+                (mouseenter)="changeHistoryImgSrc(1,false,item)" (mouseleave)="changeHistoryImgSrc(1,true,item)"></app-icon-react>
+              </span>
+            </span>
+          </li>
+        </ul>
+        <div *ngIf="!HisoricalReportList.length" class="hs-no-data" [hyNodata] = "{text: i18n.common_term_no_report.sourceNoData}" [nodataShow]="!HisoricalReportList.length">
+        </div>
+      </div>
+    </div>
+    <app-upload-progress
+      [isShow]="isShow"
+      [isSlow]="isSlow"
+      [info]="info"
+      [uploadProgress]="uploadProgress"
+      (closeRequest)="closeRequest()"
+    ></app-upload-progress>
+    <app-zip-progress *ngIf="isCompress" [info]="info" [waiting]='waiting' (closeRequest)="closeRequest()"></app-zip-progress>
+  </div>
+</div>
+
+<!-- check_upload情况已存在 -->
+<app-pop-mask #exitmask>
+  <div class="content config-modal exit-modal-560">
+      <p class="mask-title">
+          <span>{{i18n.analysis_center.exit.title}}</span>
+          <span class="close-btn" (click)="closeMaskExit()"><img src="./assets/img/header/icon_header_pop_close.svg" /></span>
+      </p>
+      <div class="mask-container">
+        <div class="img-box">
+          <img src="./assets/img/tip/warn.svg" />
+        </div>
+        <p style="max-width: 460px;">{{exitFileNameReplace}}</p>
+      </div>
+  <div class="btn-box">
+      <button type="button" tiButton color="primary" (click)="uploadAgain('override')">{{i18n.analysis_center.exit.replace}}</button>
+      <button type="button" tiButton (click)="uploadAgain('save_as')">{{i18n.analysis_center.exit.save_as}}</button>
+      <button type="button" tiButton (click)="closeMaskExit()">{{i18n.common_term_operate_cancel}}</button>
+    </div>
+  </div>
+</app-pop-mask>
+
+<!-- 另存为弹框 -->
+<app-pop-mask #saveasmask>
+  <div class="content config-modal exit-modal-560">
+      <p class="mask-title">
+          <span>{{i18n.analysis_center.exit.save_as}}</span>
+          <span class="close-btn" (click)="closeMaskSaveAs()"><img src="./assets/img/header/icon_header_pop_close.svg" alt=""></span>
+      </p>
+      <div class="mask-container">
+        <ti-formfield class="save-as-field">
+          <ti-item [label]="confirmName.zip.label" [required]="confirmName.zip.required">
+            <input class="command-input saveAs-input" type="text" tiText [(ngModel)]="exitFileName"
+                [tiValidation]="validation" [formControl]="confirmUploadZip"  [errorMessageWrapper]="wrapper"/>
+            <div #wrapper></div>
+          </ti-item>
+        </ti-formfield>
+      </div>
+    <div class="btn-box">
+      <button type="button" tiButton color="primary" (click)="saveAs('save_as')">{{i18n.common_term_operate_ok}}</button>
+      <button type="button" tiButton (click)="closeMaskSaveAs()">{{i18n.common_term_operate_cancel}}</button>
+    </div>
+  </div>
+</app-pop-mask>
+
+<!-- 了解更多 -->
+<app-pop-mask #aboutmore class="mask-about-more">
+  <div class="content config-modal">
+    <p class="mask-title">
+      <span>{{i18n.about_more.title}}</span>
+      <span class="close-btn" (click)="closeAboutMoreMask()"><img src="./assets/img/header/icon_header_pop_close.svg" alt=""></span>
+    </p>
+    <div class="mask-container">
+      <app-about-more-system></app-about-more-system>
+    </div>
+    <div class="mask-footer">
+      <button type="button" tiButton color="default"
+      (click)="closeAboutMoreMask()">{{i18n.common_term_operate_close}}</button>
+    </div>
+  </div>
+</app-pop-mask>
+
+<!-- 点击下载是旧报告弹窗 -->
+<ng-template #ieShowModal let-context="context">
+  <ti-modal-header>
+    <p style="font-size: 20px; color: #222;">{{i18n.common_term_operate_lockedTitle}}</p>
+  </ti-modal-header>
+  <ti-modal-body>
+    <div class="del-content">
+      <div class="title">
+        <img src="./assets/img/home/icon_home_tip.svg" alt="">
+        <p>{{ showModalWarn}}</p>
+      </div>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <div class="btn-box-down">
+      <button type="button" class="user-close-btn ti3-btn-primary ti3-btn-middle" (click)="goHome(context)"
+        tiButton>{{showModalBtn}}</button>
+    </div>
+  </ti-modal-footer>
+</ng-template>

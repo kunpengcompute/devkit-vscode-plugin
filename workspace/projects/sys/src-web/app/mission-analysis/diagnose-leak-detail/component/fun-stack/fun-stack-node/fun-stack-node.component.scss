@@ -1,0 +1,162 @@
+.fun-stack-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: max-content;
+  margin: 30px 0;
+}
+
+.fun-stack-node {
+  position: relative;
+  height: 40px;
+  background-color: #e0ecff;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #222222;
+  width: fit-content;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  margin: 5px 0;
+
+  .func-stack-node-content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: fit-content;
+
+    .text-left {
+      max-width: 350px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .text-right {
+      white-space: nowrap;
+    }
+
+    .slef {
+      width: 8px;
+      height: 8px;
+      background-color: #ed4b4b;
+      border-radius: 4px;
+      margin-right: 8px;
+    }
+
+    .divider {
+      width: 1px;
+      height: 14px;
+      background-color: #9ba4b1;
+      margin: 0 8px;
+    }
+  }
+
+  &.active,
+  &:hover {
+    border: 2px solid #056aff;
+  }
+
+  &:hover {
+    .fun-stack-node-tip {
+      display: block;
+    }
+  }
+}
+
+.end-arrow {
+  width: 7px;
+  height: 5px;
+  background-color: #ffffff;
+  border: solid 2px #ffffff;
+
+  .arrow {
+    border-top: 5px solid #cdcece;
+    border-left: 3.5px solid #ffffff;
+    border-right: 3.5px solid #ffffff;
+  }
+
+  &.hidden {
+    opacity: 0;
+  }
+}
+
+.start-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #cdcece;
+  border: solid 2px #ffffff;
+  border-radius: 6px;
+
+  &.hidden {
+    opacity: 0;
+  }
+}
+
+.fun-stack-node-tip {
+  display: none;
+  position: absolute;
+  color: #222222;
+  left: calc(100% - 10px);
+  background: #ffffff;
+  padding: 7px 16px 10px;
+  min-width: 300px;
+  max-width: 440px;
+  box-shadow: var(--ti-tip-box-shadow);
+  z-index: 1;
+
+  &:hover {
+    display: block;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: -6px;
+    transform: rotate(45deg);
+  }
+
+  .name {
+    span:last-of-type {
+      margin-left: 10px;
+    }
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background-color: #e1e6ee;
+    margin: 8px 0;
+  }
+
+  .leak-type {
+    display: grid;
+    grid-template-columns: 170px 170px;
+    grid-column-gap: 24px;
+
+    span {
+      font-size: 12px;
+      line-height: 18px;
+    }
+  }
+
+  button {
+    border: none;
+    background: none;
+    font-size: 12px;
+    line-height: 18px;
+    color: #0067ff;
+    margin-top: 10px;
+    min-width: auto !important;
+    cursor: pointer;
+  }
+}
+

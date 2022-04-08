@@ -1,0 +1,21 @@
+
+<div class="webpack-situation-modal" *ngIf="situation == 5">
+    <div class="progress-modal">
+        <div class="madal-content">
+            <p>
+                <span>{{progressStatus === portWorkerStatusService.progressWaitWorkerStatus ? i18n.common_alignment_check.byteWaiting : i18n.common_alignment_check.statusIng}}</span>
+                <span>
+                    <span style="padding-right: 10px" *ngIf="progressStatus !== portWorkerStatusService.progressWaitWorkerStatus">{{progressValue}}</span>
+                    <img (click)="closeTask()" style="cursor: pointer;" src="./assets/img/common/icon_close.svg" />
+                </span> 
+            </p>
+            <div class="progress-bar-bg">
+                <div class="progress-bar" [ngStyle]="{'width': barWidth + 'px'}"></div>
+            </div>
+            <div *ngIf="portWorkerStatusService.workerStatusByte === portWorkerStatusService.createTaskLackWorkerStatus"
+                style="margin-top: 16px;">
+                <app-user-guide-bar [status]="portWorkerStatusService.workerStatusByte"></app-user-guide-bar>
+            </div>
+        </div>
+    </div>
+</div>

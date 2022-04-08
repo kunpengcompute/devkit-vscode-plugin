@@ -1,0 +1,91 @@
+.network-io-packet-loss {
+  padding-top: 20px;
+
+  .title {
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .search-icon {
+    margin-left: 8px;
+    cursor: pointer;
+  }
+
+  .searchIcon {
+    display: inline-block;
+  }
+
+  .cell-icon {
+    img {
+      position: relative;
+      top: 2px;
+      margin-left: 8px;
+      cursor: pointer;
+    }
+  }
+
+  tbody tr td.no-border {
+    display: flex;
+    padding: 0 !important;
+    border-bottom: none !important;
+
+    div {
+      height: 32px;
+      &:first-child {
+        box-sizing: border-box;
+        width: 30px;
+      }
+      &:last-child {
+        flex: 1;
+        border-bottom: 1px solid var(--sub-table-545454-e6ebf5);
+      }
+    }
+
+    .ext_more {
+      position: relative;
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: calc(100% + 1px);
+        border-right: 2px solid #0067ff;
+        background-color: var(
+          --ti-table-expand-children-margin-background-color
+        );
+      }
+    }
+  }
+  .pagination {
+    margin-top: 20px;
+  }
+}
+
+::ng-deep .search-io-pop {
+  width: 180px;
+  padding: 0 !important;
+  border: none;
+
+  .ti3-tooltip-content {
+    padding: 0;
+
+    .search-input {
+      --ti-searchbox-container-width: 178px;
+    }
+  }
+}
+
+:host ::ng-deep .network-io-packet-loss {
+  .ti3-table > .ti3-table-fixed-head > table > thead > tr > th:first-child:after {
+    width: 0;
+  }
+  .ti3-table > .ti3-table-container > table > tbody > .ti3-details-tr > td {
+    padding: 0px;
+  }
+
+  .ti3-table > .ti3-table-fixed-head > table > thead > tr > th:nth-child(2),
+  .ti3-table > .ti3-table-container > table > tbody > tr > td:nth-of-type(2) {
+    padding-left: 24px;
+  }
+}

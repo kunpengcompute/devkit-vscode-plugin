@@ -1,0 +1,129 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Node Management">
+<meta name="product" content="">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (System Profiler)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001178722970">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Node Management</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001178722970"></a><a name="EN-US_TOPIC_0000001178722970"></a>
+
+<h1 class="topictitle1">Node Management</h1>
+<div id="body1594980321671"><p id="EN-US_TOPIC_0000001178722970__p2984183395317">This section describes how to install nodes on the server to be analyzed. By default, a node is installed on the web server (server where the <span id="EN-US_TOPIC_0000001178722970__ph1331116578362">Kunpeng Hyper Tuner</span> is installed). If the server to be analyzed is the web server, skip this section.</p>
+<div class="section" id="EN-US_TOPIC_0000001178722970__section11470129119"><h4 class="sectiontitle">Prerequisites</h4><ul id="EN-US_TOPIC_0000001178722970__ul54627243912"><li id="EN-US_TOPIC_0000001178722970__li184622210395">You have logged in to the <span id="EN-US_TOPIC_0000001178722970__ph1359340104618">System Profiler</span> WebUI.</li><li id="EN-US_TOPIC_0000001178722970__li722615437406">The SELinux function has been disabled on the server to which a node is to be added. For details, see "Common Operations &gt; Disabling SELinux".</li></ul>
+<div class="note" id="EN-US_TOPIC_0000001178722970__note43463558452"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0000001178722970__ul999716298526"><li id="EN-US_TOPIC_0000001178722970__li159971729165218">A maximum of 101 nodes, including the default node installed on the web server, can be added.</li><li id="EN-US_TOPIC_0000001178722970__li113777172711">A Docker container cannot be added as a node.<p id="EN-US_TOPIC_0000001178722970__p86965716277"><a name="EN-US_TOPIC_0000001178722970__li113777172711"></a><a name="li113777172711"></a>Agent nodes cannot be added to Docker containers created in port mapping mode, but can be added to Docker containers created in host mode.</p>
+</li><li id="EN-US_TOPIC_0000001178722970__li115621211174410">If a node fails to be added, view the log file named after the IP address in the <span class="filepath" id="EN-US_TOPIC_0000001178722970__filepath19337632155112"><b>/opt/hyper_tuner/sys_perf/logs/backend/agent_logs</b></span> directory on the web server. If the following information is displayed, manually disable SELinux on the node:<p id="EN-US_TOPIC_0000001178722970__p14416185913478">"The SELinux enforcing mode is enabled on the server, which will cause a tool installation failure".</p>
+</li></ul>
+</div></div>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001178722970__section10901257318"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0000001178722970__ol2575193651210"><li id="EN-US_TOPIC_0000001178722970__li2575123615121"><span>Click <span><img id="EN-US_TOPIC_0000001178722970__image2877113812377" src="en-us_image_0000001224361291.png"></span> in the upper right corner and choose <strong id="EN-US_TOPIC_0000001178722970__b5514628121414">Node Management</strong>.</span><p><p id="EN-US_TOPIC_0000001178722970__p1987042231612">The <strong id="EN-US_TOPIC_0000001178722970__b115416262154">Node Management</strong> page is displayed.</p>
+</p></li><li id="EN-US_TOPIC_0000001178722970__li14765819161618"><span>Click <strong id="EN-US_TOPIC_0000001178722970__b27165122196">Add</strong>.</span><p><p id="EN-US_TOPIC_0000001178722970__p29271447161610">User <strong id="EN-US_TOPIC_0000001178722970__b794043351817">root</strong> is used as an example, as shown in <a href="#EN-US_TOPIC_0000001178722970__fig1931061882915">Figure 1</a>. <a href="#EN-US_TOPIC_0000001178722970__table240219472097">Table 1</a> describes the parameters.</p>
+<div class="fignone" id="EN-US_TOPIC_0000001178722970__fig1931061882915"><a name="EN-US_TOPIC_0000001178722970__fig1931061882915"></a><a name="fig1931061882915"></a><span class="figcap"><b>Figure 1 </b>Adding a node</span><br><span><img id="EN-US_TOPIC_0000001178722970__image839635310247" src="en-us_image_0000001223882833.png"></span></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0000001178722970__table240219472097"></a><a name="table240219472097"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0000001178722970__table240219472097" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Parameters for adding a node</caption><colgroup><col style="width:24%"><col style="width:76%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0000001178722970__row1240320474914"><th align="left" class="cellrowborder" valign="top" width="24%" id="mcps1.3.3.2.2.2.3.2.3.1.1"><p id="EN-US_TOPIC_0000001178722970__p417212031911">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="76%" id="mcps1.3.3.2.2.2.3.2.3.1.2"><p id="EN-US_TOPIC_0000001178722970__p191721420201911">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0000001178722970__row04031471914"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178722970__p1540344714914">(Optional) Node Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001178722970__p114034478915">Name of the node to be added. The default value is the IP address of the node server. The name must meet the following requirements:</p>
+<ul id="EN-US_TOPIC_0000001178722970__ul167062992518"><li id="EN-US_TOPIC_0000001178722970__li9539192134211">Contain only letters, digits, and special characters (including <strong id="EN-US_TOPIC_0000001178722970__b19021013153213">@#$%^&amp;*()[]&lt;&gt;._-!~+</strong> and spaces).</li><li id="EN-US_TOPIC_0000001178722970__li1253911219425">Contain 1 to 32 characters.</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178722970__row1631618549216"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178722970__p62531213221">(Optional) Installation Path</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001178722970__p112532211225">Absolute path where the node is installed. The default value is <strong id="EN-US_TOPIC_0000001178722970__b145651351405">/opt</strong>.</p>
+<div class="note" id="EN-US_TOPIC_0000001178722970__note12535212210"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0000001178722970__p11253102182217">The entered path cannot be <strong id="EN-US_TOPIC_0000001178722970__b961916273555">/home</strong>.</p>
+<ul id="EN-US_TOPIC_0000001178722970__ul162531725229"><li id="EN-US_TOPIC_0000001178722970__li112538210228">If the entered path belongs to the <strong id="EN-US_TOPIC_0000001178722970__b128240562316">root</strong> user group, common users must have the read (r) and execute (x) permissions on the paths of all levels.</li><li id="EN-US_TOPIC_0000001178722970__li025332152215">If the entered path belongs to the <strong id="EN-US_TOPIC_0000001178722970__b105218610192">malluma</strong> user group, user <strong id="EN-US_TOPIC_0000001178722970__b1852619612193">malluma</strong> must have the read (r) and execute (x) permissions on the paths of all levels.</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178722970__row15573144916101"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178722970__p1582884911175">Node IP Address</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001178722970__p92379548170">IP address of the server where the node is to be installed.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178722970__row3468179111417"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178722970__p682634911716">Port</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001178722970__p19824154951717">SSH port of the server where the node is to be installed. The default value is <strong id="EN-US_TOPIC_0000001178722970__b76111721114">22</strong>. The value range is 1 to 65535.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178722970__row3976049161518"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178722970__p182224910172">User Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001178722970__p1482004916170">User name for logging in to the node server. The default value is <strong id="EN-US_TOPIC_0000001178722970__b2061171731113">root</strong>.</p>
+<div class="note" id="EN-US_TOPIC_0000001178722970__note13568191515557"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0000001178722970__p4569191595512">To ensure SSH channel security, you are advised to log in as a non-root user.</p>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178722970__row331350203519"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178722970__p11819164911712">Authentication Mode</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001178722970__p1581517493171">Authentication mode. The values are as follows:</p>
+<ul id="EN-US_TOPIC_0000001178722970__ul112081334142519"><li id="EN-US_TOPIC_0000001178722970__li78323520252">Password authentication</li><li id="EN-US_TOPIC_0000001178722970__li1320853415255">Key authentication<div class="note" id="EN-US_TOPIC_0000001178722970__note454164619012"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0000001178722970__p11547468012">If you select <strong id="EN-US_TOPIC_0000001178722970__b185569462478">Key authentication</strong>, configure SSH authentication information on the server where the <span id="EN-US_TOPIC_0000001178722970__ph4280142612414">Kunpeng Hyper Tuner</span> is installed. For details, see <strong id="EN-US_TOPIC_0000001178722970__b4335102117584">Common Operations</strong> &gt; <strong id="EN-US_TOPIC_0000001178722970__b18561162511584">Configuring SSH Authentication Information on a Node Server</strong>.</p>
+</div></div>
+</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178722970__row12417180172315"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178722970__p84181906239">Password</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001178722970__p194185052320">Password of the user for logging in to the node server.</p>
+<div class="note" id="EN-US_TOPIC_0000001178722970__note152101712114115"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0000001178722970__ul19404815105913"><li id="EN-US_TOPIC_0000001178722970__li17404815115910">This parameter is displayed when <strong id="EN-US_TOPIC_0000001178722970__b1467932010190">Authentication Mode</strong> is set to <strong id="EN-US_TOPIC_0000001178722970__b468002013198">Password authentication</strong>.</li><li id="EN-US_TOPIC_0000001178722970__li14344017125917">If the node is installed by the <strong id="EN-US_TOPIC_0000001178722970__b1552123716191">root</strong> user, you need to enter the password of the <strong id="EN-US_TOPIC_0000001178722970__b145573371190">root</strong> user. If the node is installed by a common user, you need to enter the passwords of both the common user and <strong id="EN-US_TOPIC_0000001178722970__b1155711374198">root</strong> user.</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178722970__row9654427132314"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178722970__p1965417279239">Private Key File</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001178722970__p20655627102315">Absolute path of the SSH private key file, for example, <span class="filepath" id="EN-US_TOPIC_0000001178722970__filepath1912714784616"><b>/home/malluma/is_rsa</b></span>, for logging in to the node server.</p>
+<div class="note" id="EN-US_TOPIC_0000001178722970__note171520415411"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0000001178722970__p115154194114">This parameter is displayed when <strong id="EN-US_TOPIC_0000001178722970__b179481413218">Authentication Mode</strong> is set to <strong id="EN-US_TOPIC_0000001178722970__b196278151218">Key authentication</strong>.</p>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178722970__row12655182712320"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178722970__p16655027162319">(Optional) Passphrase</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.3.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001178722970__p56556273236">Password of the SSH private key file for logging in to the node server. If the SSH private key password is not configured, you do not need to set this parameter.</p>
+<div class="note" id="EN-US_TOPIC_0000001178722970__note189496413416"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0000001178722970__p13949104134113">This parameter is displayed when <strong id="EN-US_TOPIC_0000001178722970__b1712010715216">Authentication Mode</strong> is set to <strong id="EN-US_TOPIC_0000001178722970__b683018217216">Key authentication</strong>.</p>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="EN-US_TOPIC_0000001178722970__li1141874413161"><span>Set node parameters (see <a href="#EN-US_TOPIC_0000001178722970__table240219472097">Table 1</a> for parameter description) and click <strong id="EN-US_TOPIC_0000001178722970__b74568113542">OK</strong>.</span><p><p id="EN-US_TOPIC_0000001178722970__p115601035124716">The following functions are provided for the added node:</p>
+<ul id="EN-US_TOPIC_0000001178722970__ul756023544714"><li id="EN-US_TOPIC_0000001178722970__li14560103514474">Changing the node name</li><li id="EN-US_TOPIC_0000001178722970__li1856063511475">Viewing installation logs: You can view the components that are not installed in the system and the handling suggestions. The log content can be copied and downloaded.<div class="note" id="EN-US_TOPIC_0000001178722970__note143481230105116"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001178722970__p63482300518">You can view installation logs only when multiple nodes are added.</p>
+</div></div>
+</li><li id="EN-US_TOPIC_0000001178722970__li10944518134414">Deleting the node<div class="note" id="EN-US_TOPIC_0000001178722970__note1056023504719"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0000001178722970__ul1656093514715"><li id="EN-US_TOPIC_0000001178722970__li135603352476">The default node installed on the web server cannot be deleted.</li><li id="EN-US_TOPIC_0000001178722970__li20560235174713">An analysis task created after a node is deleted will not analyze this node. However, you can still view the historical analysis report of this node. (If the node is occupied by a project, modify the project before deleting the node.)</li><li id="EN-US_TOPIC_0000001178722970__li192506553523">For a node installed as user <strong id="EN-US_TOPIC_0000001178722970__b96841428102016">root</strong>, enter the passwords of user <strong id="EN-US_TOPIC_0000001178722970__b668716852018">root</strong> when deleting the node. For a node installed as a common user, enter the passwords of both the common user and user <strong id="EN-US_TOPIC_0000001178722970__b361385422011">root</strong> when deleting the node.</li></ul>
+</div></div>
+</li><li id="EN-US_TOPIC_0000001178722970__li1434813012519">Monitoring the capacity of the running directory and run log directory: The WebUI displays the alarm and recovery information about the drive space capacity of the node.<div class="note" id="EN-US_TOPIC_0000001178722970__note441725111525"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0000001178722970__ul2095017540523"><li id="EN-US_TOPIC_0000001178722970__li91875244315">The maximum space of the running directory is 2 GB, and the maximum space of the run log directory is 150 MB.</li><li id="EN-US_TOPIC_0000001178722970__li144718334919">When the remaining drive space is less than 10% of the maximum drive space, the space used by the tool reaches 90%, or the remaining drive space of the server is less than 5 GB, the background stops the tasks running on the node. If a task does not contain the node, or a task contains the node but the task is being analyzed, the task is not stopped. If a new task contains the node, the task fails to be created.</li><li id="EN-US_TOPIC_0000001178722970__li17950165415218">When the remaining drive space is less than 20% of the maximum drive space or the space used by the tool reaches 80% of the maximum drive space, an alarm is generated.</li><li id="EN-US_TOPIC_0000001178722970__li697905810422">When the remaining drive space is greater than 25% of the maximum drive space and the space used by the tool is less than 75% of the maximum drive space, the WebUI shows that the alarm is cleared.</li></ul>
+</div></div>
+</li></ul>
+</p></li><li id="EN-US_TOPIC_0000001178722970__li975937111110"><span>Import nodes in a batch.</span><p><p id="EN-US_TOPIC_0000001178722970__p1765157121117">Click <strong id="EN-US_TOPIC_0000001178722970__b462142515817">Batch Import</strong>, and then click the template table to download the template.</p>
+<div class="fignone" id="EN-US_TOPIC_0000001178722970__fig833525714145"><a name="EN-US_TOPIC_0000001178722970__fig833525714145"></a><a name="fig833525714145"></a><span class="figcap"><b>Figure 2 </b>Importing nodes in a batch</span><br><span><img id="EN-US_TOPIC_0000001178722970__image143351957111419" src="en-us_image_0000001178563098.png"></span></div>
+<div class="fignone" id="EN-US_TOPIC_0000001178722970__fig161411722201512"><span class="figcap"><b>Figure 3 </b>Template</span><br><span><img id="EN-US_TOPIC_0000001178722970__image2014102261519" src="en-us_image_0000001179041560.png"></span></div>
+<p id="EN-US_TOPIC_0000001178722970__p39755611159">Fill in the information of the nodes to be imported, and upload the template on the page as shown in <a href="#EN-US_TOPIC_0000001178722970__fig833525714145">Figure 2</a> to add the nodes.</p>
+<div class="note" id="EN-US_TOPIC_0000001178722970__note52184171177"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001178722970__p521941714174">Do not upload empty tables, error tables, or non-standard tables. Fill in the tables in strict accordance with the template before uploading them. If the uploaded file is incorrect, an error message will be displayed.</p>
+</div></div>
+</p></li><li id="EN-US_TOPIC_0000001178722970__li1281662616116"><span>Delete nodes in a batch.</span><p><p id="EN-US_TOPIC_0000001178722970__p167631112185">Click <strong id="EN-US_TOPIC_0000001178722970__b1903859212">Batch Delete</strong>, and then click the template table to download the template.</p>
+<div class="fignone" id="EN-US_TOPIC_0000001178722970__fig10381548121911"><a name="EN-US_TOPIC_0000001178722970__fig10381548121911"></a><a name="fig10381548121911"></a><span class="figcap"><b>Figure 4 </b>Deleting nodes in a batch</span><br><span><img id="EN-US_TOPIC_0000001178722970__image13381144817191" src="en-us_image_0000001224201357.png"></span></div>
+<div class="fignone" id="EN-US_TOPIC_0000001178722970__fig156967310209"><span class="figcap"><b>Figure 5 </b>Template</span><br><span><img id="EN-US_TOPIC_0000001178722970__image11696103142019" src="en-us_image_0000001179041552.png"></span></div>
+<p id="EN-US_TOPIC_0000001178722970__p1129220521237">Fill in the information of nodes to be deleted following instructions on the template, and upload the template on the page as shown in <a href="#EN-US_TOPIC_0000001178722970__fig10381548121911">Figure 4</a> to delete the nodes.</p>
+</p></li></ol>
+</div>
+</div>
+<div></div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

@@ -1,0 +1,70 @@
+<div class="process-detail" #container [appLoading]="obtainingChartData">
+  <app-static-tip-for-ie [tipContent]="i18n.tipsIE"></app-static-tip-for-ie>
+  <div class="headerBox">
+    <!-- 选择进程/线程 -->
+    <div class="left"  [hidden]="!['status', 'durationSummary'].includes(currentType)"
+      [ngClass]="{durationSummary: ['durationSummary'].includes(currentType)}">
+      <app-icon-react name="filter" [freeze]="null" class="filerIcon" [tiTip]="i18n.sys_res.selecThread"
+        (click)="showSelectTaskModal()"></app-icon-react>
+      <app-tag-box [label]='i18n.sys_res.selectedThread' [selecTag]="locatePTid.selected"
+        (deleteTag)="deleteTask($event)" #tagBox></app-tag-box>
+    </div>
+
+    <!-- 切换图标 -->
+    <div class="right">
+      <!-- 运行时长排序 -->
+      <div class="filterContainer" *ngIf="['durationSummary'].includes(currentType)">
+        <span class="title">{{ sortDurationSummary.title }}</span>
+
+        <div class="content">
+          <ti-select [(ngModel)]="sortDurationSummary.selected" [options]='sortDurationSummary.list'
+            (ngModelChange)="switchDurationSummarySortBy()" panelWidth='auto' style="width: 140px;"></ti-select>
+
+          <div class="sortContainer" style="margin-left: 4px;" (click)="switchDurationSummarySortStatus()">
+            <ti-icon class="ti3-sort"
+              [name]="sortDurationSummary.sortStatus === 'asc' ? 'sort-ascent' : sortDurationSummary.sortStatus === 'desc' ? 'sort-descent' : 'sort'">
+            </ti-icon>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let typeItem of typeList"
+        [ngClass]="['iconBtn', typeItem.prop + 'Icon', typeItem.prop === currentType ? 'active' : '']"
+        (click)="switchType(typeItem)" [tiTip]="typeItem.tip" [tiTipHasArrow]="false"></div>
+    </div>
+  </div>
+
+  <app-time-line #timeLineDetail [hidden]="!timeLineShow" [timeData]='timeData' [lineData]='timeLine'
+    (timeLineData)='timeLineDataChange($event)' style="margin-top: 20px;"
+    [ngStyle]="{display: ['durationSummary'].includes(currentType) ? 'none' : 'block'}"></app-time-line>
+
+  <div class="chartBox" [ngClass]="{'noDataBox': !totalNumber}" #chartBox>
+    <div class="topLine"></div>
+    <div class="left" *ngIf="totalNumber">
+      <div class="left-title">
+        <div>{{ i18n.sys_res.threadName }}</div>
+        <div *ngFor="let item of orderlist">{{ item.taskname }}</div>
+      </div>
+      <div class="left-content">
+        <div>TID/PID</div>
+        <div *ngFor="let item of orderlist">{{ item.pid == null ? '--' : item.pid }} / {{ item.ppid == null ? '--' : item.ppid }}</div>
+      </div>
+    </div>
+
+    <div class="chart" echarts [ngClass]="{ifShow: totalNumber}" [options]="options" [merge]="updateOptions"
+      (chartInit)="onChartInit($event)"></div>
+
+    <!-- 无数据 -->
+    <div *ngIf="!obtainingChartData && !totalNumber" class='chen-nodata-td unsetPosition'>
+      <img src='./assets/img/projects/nodata.png' />
+      <div>{{ noData }}</div>
+    </div>
+
+    <div class="bottomLine"></div>
+  </div>
+
+  <ti-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber" [showGotoLink]="true"
+    (pageUpdate)="onPageUpdate($event)" style="margin-top: 5px;"></ti-pagination>
+</div>
+<!-- 选择线程侧滑框 -->
+<app-side-modal [type]="'numa'" [item]="'numa'" (confimSelect)="confimModal($event)" [taskId]="taskid" [nodeId]="nodeid"
+  #selectTaskModal></app-side-modal>

@@ -1,0 +1,124 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Common Software Package Rebuild Failures">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001191872229.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.T21">
+<meta name="brand" content="Huawei Kunpeng Porting Advisor">
+<meta name="DC.Publisher" content="20201230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0222610840">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/pygments.css">
+<title>Common Software Package Rebuild Failures</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0222610840"></a><a name="EN-US_TOPIC_0222610840"></a>
+
+
+  
+  
+<h1 class="topictitle1">Common Software Package Rebuild Failures</h1>
+<div id="body1581076744749"><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p8060118"><a href="#EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_table2012413504013">Table 1</a> provides the common software package rebuild failures and handling suggestions.</p>
+<div class="note" id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_note108951558183714"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_p389555823719"><strong id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_b2572101374617">/opt/portadv</strong> is the tool installation directory. Replace it with the actual directory.</p>
+</div></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_table2012413504013"></a><a name="en-us_topic_0228242418_en-us_topic_0219642917_table2012413504013"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_table2012413504013" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Common software package rebuild failures</caption><colgroup><col style="width:24%"><col style="width:23%"><col style="width:53%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_row212513519408"><th align="left" class="cellrowborder" valign="top" width="24%" id="mcps1.3.3.2.4.1.1"><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p9125535154012">Issue</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="23%" id="mcps1.3.3.2.4.1.2"><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p141251235194019">Possible Causes</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="53%" id="mcps1.3.3.2.4.1.3"><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p51251235104015">Handling Suggestions</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_row94941462516"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.4.1.1 "><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p3274132354315">The SO, static library, JAR, or binary files are missing.</p>
+</td>
+<td class="cellrowborder" valign="top" width="23%" headers="mcps1.3.3.2.4.1.2 "><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p527422312435">SO, static library, JAR, or binary files cannot be automatically downloaded.</p>
+</td>
+<td class="cellrowborder" valign="top" width="53%" headers="mcps1.3.3.2.4.1.3 "><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p12414195255811">Manually download the SO, static library, JAR, or binary files to the <strong id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_b142415167555">/opt/portadv/<em id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_i64181316205513">xx</em>/data</strong> directory (<em id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_i14247162558">xx</em> indicates the user name), and perform software package rebuilding again.</p>
+<div class="note" id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_note25711831145913"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_ul12302151614917"><li id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_li1630313161892">You can view details in the software package rebuild report and perform operations as prompted.</li><li id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_li1052371715915">If the SO, static library, or binary files are missing, obtain the corresponding files (decompress the downloaded RPM or DEB package to obtain the corresponding SO, static library, or binary files), save them to the <strong id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_b129111632175516">/opt/portadv/<em id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_i1290463285511">xx</em>/data</strong> directory (<em id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_i34167279572">xx</em> indicates the user name), and perform software package rebuilding again. </li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_row18273152394320"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.4.1.1 "><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p9273172344315">Failed to download the JAR file.</p>
+</td>
+<td class="cellrowborder" valign="top" width="23%" headers="mcps1.3.3.2.4.1.2 "><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p16274202312438">The network connection times out or the drive space is insufficient.</p>
+</td>
+<td class="cellrowborder" valign="top" width="53%" headers="mcps1.3.3.2.4.1.3 "><ul id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_ul178141032122216"><li id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_li11814532142213">Check the network configuration, proxy configuration (see <a href="en-us_topic_0290794907.html">Configuring a Proxy</a>), and the size of the /<strong id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_b526553315499">opt</strong> directory.</li><li id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_li5815173216226">Manually download the JAR files to the <strong id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_b1868771615563">/opt/portadv/<em id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_i1680816205613">xx</em>/data</strong> directory (<em id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_i16936341105718">xx</em> indicates the user name) and perform software package rebuilding again.<div class="note" id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_note1938102545718"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p13821225135710">You can view the names and download paths of the JAR files to be manually downloaded in the software package rebuild report.</p>
+</div></div>
+</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_row4395935184116"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.4.1.1 "><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p1139743518417">Failed to analyze the SO, JAR, static library, or binary files in an RPM or DEB package.</p>
+</td>
+<td class="cellrowborder" valign="top" width="23%" headers="mcps1.3.3.2.4.1.2 "><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p17397235194119">The drive space is insufficient, the RPM/DEB package format is incorrect, or the software package does not need to be ported.</p>
+</td>
+<td class="cellrowborder" valign="top" width="53%" headers="mcps1.3.3.2.4.1.3 "><ul id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_ul19171454917"><li id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_li12488549897">Check whether the size of the <strong id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_b1048914917910">/opt</strong> directory is sufficient.</li><li id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_li381182116102">Check whether the RPM/DEB package is complete and in correct format.</li><li id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_li14917174512914">Use the Kunpeng Porting Advisor to check whether the software package needs to be ported.</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_row1420114211412"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.4.1.1 "><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p9201342174111">Failed to extract and analyze the control file or spec file.</p>
+</td>
+<td class="cellrowborder" valign="top" width="23%" headers="mcps1.3.3.2.4.1.2 "><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p142011420419">The drive space is insufficient or the RPM or DEB package format is incorrect.</p>
+</td>
+<td class="cellrowborder" valign="top" width="53%" headers="mcps1.3.3.2.4.1.3 "><ul id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_ul591123613117"><li id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_li14854164216110">Check whether the size of the <strong id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_b68558421111">/opt</strong> directory is sufficient.</li><li id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_li18911336111115">Check whether the RPM/DEB package is complete and in correct format.</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_row142661556164219"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.4.1.1 "><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p1026615684219">Failed to rebuild the software package.</p>
+</td>
+<td class="cellrowborder" valign="top" width="23%" headers="mcps1.3.3.2.4.1.2 "><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p9266175617422">Files failed to be replaced (the JAR command is missing or the JAR package has embedded JAR packages), the workspace rpmbuilder is not cleared, or an error occurs when the RPM/DEB package is analyzed.</p>
+</td>
+<td class="cellrowborder" valign="top" width="53%" headers="mcps1.3.3.2.4.1.3 "><ul id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_ul97817579286"><li id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_li7816141921216">If the JAR command is missing, install the JDK.<div class="note" id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_note1023371945813"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_p725761911583">The software package rebuilding does not support JAR packages with embedded JAR files.</p>
+</div></div>
+</li><li id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_li778195762816">(For RPM packages) Run the following commands to clear the workspace and then perform software package rebuilding again:<div class="codecoloring" codetype="Bash" id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_screen8842025123411"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">cd</span>  /opt/portadv/
+rm -rf rpmbuilder
+mkdir -pv ./rpmbuilder/<span class="o">{</span>BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS<span class="o">}</span>
+</pre></div>
+</td></tr></table></div>
+</li><li id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0219642917_li1791861418292">(For DEB packages) Run the following command to clear the workspace and then perform software package rebuilding again:<div class="codecoloring" codetype="Bash" id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_screen832313561372"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>rm -rf /opt/portadv/tmp_path
+</pre></div>
+</td></tr></table></div>
+</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_row5736128141520"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.3.2.4.1.1 "><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_p1515431111205">Failed to rebuild the software package due to the lack of rpmrebuild.</p>
+</td>
+<td class="cellrowborder" valign="top" width="23%" headers="mcps1.3.3.2.4.1.2 "><p id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_p87371228151512">rpmrebuild is not installed on the server.</p>
+</td>
+<td class="cellrowborder" valign="top" width="53%" headers="mcps1.3.3.2.4.1.3 "><ul id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_ul189753120282"><li id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_li998431122816">To install rpmrebuild, download and upload the rpmrebuild component to the server, and run the following command to install it:<div class="codecoloring" codetype="Bash" id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0229764399_en-us_topic_0212788399_screen55122221412"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>rpm -ivh xxx.rpm
+</pre></div>
+</td></tr></table></div>
+</li></ul>
+<ul id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_ul10483163418288"><li id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_li1548317344280">To install rpmbuild, run the following commands to check for the rpmbuild package in the Yum source and install rpmbuild:<div class="codecoloring" codetype="Bash" id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0229764399_en-us_topic_0212788399_screen17404204341017"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span>yum list <span class="p">|</span> grep rpm-build
+yum install -y rpm-build
+</pre></div>
+</td></tr></table></div>
+</li></ul>
+<ul id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_ul1885210378287"><li id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_li28529374286">If the Yum source does not contain the rpmbuild RPM package, download the corresponding component, upload it to the server, and run the following command to install it:<div class="codecoloring" codetype="Bash" id="EN-US_TOPIC_0222610840__en-us_topic_0228242418_en-us_topic_0229764399_en-us_topic_0212788399_screen081933451316"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>rpm -ivh xxx.rpm
+</pre></div>
+</td></tr></table></div>
+</li></ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001191872229.html">FAQs</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

@@ -1,0 +1,108 @@
+.table-box {
+    position: relative;
+    display: flex;
+}
+.table-y {
+    width: 8%;
+    height: 100%;
+}
+.table {
+    height: 100%;
+    flex: 1;
+    .ti3-table {
+        .ti3-table-container {
+            td {
+                position: relative;
+
+                .pro-rate {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    background-color: #d6e4ff;
+                }
+            }
+        }
+    }
+}
+::ng-deep #disk-table {
+    .line {
+        width: 150%;
+        height: 1px;
+        background: #484a4e;
+    }
+    .title-box {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding-left: 10%;
+    }
+    .title-num {
+        text-align: right;
+    }
+    .title {
+        font-size: 14px;
+    }
+}
+.memory-detail {
+    position: relative;
+    width: calc(100% - 30px);
+}
+
+.mask-box {
+    cursor: crosshair;
+    position: absolute;
+    top: 0;
+    left: 9.8%;
+    width: 88.8%;
+    display: none;
+    overflow: hidden;
+    z-index: 1001;
+    .brush-box {
+        position: absolute;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        width: 0px;
+        border: solid;
+        border-width: 0px 2px 0px 2px;
+        border-color: #267dff;
+        background-color: rgba($color: #267dff, $alpha: 0.1);
+        box-sizing: border-box;
+    }
+}
+
+
+.table-box.beforeActive {
+    &::before {
+        position: absolute;
+        content: "";
+        width: calc(100% - 20px);
+        left: 0;
+        top: 30px;
+        height: 1px;
+        background-color: #484a4e;
+    }
+}
+.table-box.dataSize {
+    &::before {
+        position: absolute;
+        content: "";
+        width: calc(100% - 20px);
+        left: 0;
+        top: 0px;
+        height: 1px;
+        background-color: #484a4e;
+    }
+}
+.table-box.afterActive {
+    &::after {
+        position: absolute;
+        content: "";
+        width: calc(100% - 20px);
+        left: 0;
+        bottom: 0px;
+        height: 1px;
+        background-color: #484a4e;
+    }
+}

@@ -1,0 +1,194 @@
+.process {
+    padding: 14px 0 20px;
+}
+.info-icon {
+    margin-top: 30px;
+    left: -247px !important;
+    color: #666;
+    position: relative;
+    font-size: 0.9rem;
+    align-items: center;
+
+    img {
+        width: 14px;
+        height: 14px;
+        margin-right: 8px;
+    }
+}
+
+footer {
+    margin-top: 40px;
+    button {
+        height: 28px;
+        line-height: 0px;
+        margin-right: 20px;
+        min-width: 120px;
+        margin-left: 0;
+    }
+
+    button.toRight {
+        margin-left: 0 !important;
+    }
+}
+
+.footer {
+    position: absolute;
+    bottom: 24px;
+    left: calc(50% - 130px);
+}
+
+.show {
+    display: none;
+}
+
+.newSw {
+    position: relative;
+    top: 20px;
+    left: -247px;
+    padding: 15px 0;
+    height: 20px;
+}
+
+.mySw {
+    position: relative;
+    left: -247px;
+    top: 35px;
+    height: 45px;
+}
+
+ti-switch.changswit {
+    position: unset;
+    margin-left: -26px;
+}
+
+ti-switch.changswit.newSw {
+    padding: 0px;
+    position: unset;
+    margin-left: -26px;
+    margin-top: 3px;
+}
+
+div.infoicon {
+    left: -10px !important;
+    margin-top: 0px;
+}
+
+.info-icon.margin-bottom.infoicon {
+    margin-left: -20px;
+}
+
+span.tiItem.infospan {
+    width: 70px;
+    display: unset !important;
+    margin-left: 0px !important;
+    font-size: 12px;
+    height: auto !important;
+    color: #e8e8e8 !important;
+}
+
+.tiItem {
+    font-size: 14px;
+    display: inline-block;
+    color: var(--d-aaaaaa-l-979797);
+    margin-left: 16px;
+    top: 4px;
+    left: 110px;
+    position: absolute;
+}
+
+.iteminfo {
+    display: block;
+    position: unset;
+    margin-left: 0px !important;
+    color: #e8e8e8 !important;
+    font-size: 12px;
+}
+
+.tiType {
+    margin-right: 20px;
+    position: relative;
+    margin-top: 20px;
+    font-size: 14px !important;
+    display: inline-block;
+    min-width: 90px;
+}
+
+span.tiType.ti_type {
+    left: -10px;
+}
+
+:host ::ng-deep input[type="radio"][tiRadio] + .ti3-radio .ti3-radio-label {
+    color: var(--d-aaaaaa-l-222222) !important;
+}
+
+:host ::ng-deep input[type="checkbox"][tiCheckbox] + .ti3-checkbox .ti3-checkbox-label {
+    color: var(--d-aaaaaa-l-222222) !important;
+    font-size: 14px !important;
+}
+
+:host ::ng-deep .tiType.ti_type input[type="checkbox"][tiCheckbox] + .ti3-checkbox .ti3-checkbox-label {
+    font-size: 12px !important;
+}
+
+:host ::ng-deep .myradio.newRaio.new_radio input[type="radio"][tiRadio] + .ti3-radio .ti3-radio-label {
+    font-size: 12px;
+    color: #e8e8e8 !important;
+}
+
+.newRaio {
+    display: inline-block;
+    margin-right: 20px;
+    position: relative;
+    top: 20px;
+    left: -247px;
+    padding: 14px 0;
+    height: 30px;
+}
+
+.myradio.newRaio.new_radio {
+    position: unset;
+    padding: 0px;
+    margin-left: -30px;
+    margin-right: 60px;
+    margin-top: 10px;
+}
+
+.newCheck {
+    width: 520px;
+    height: 50px;
+    position: relative;
+    top: 16px;
+    left: -247px;
+}
+
+.newCheck.labcheck {
+    height: 70px;
+    position: unset;
+    margin-top: -20px;
+    width: 300px;
+    margin-left: -20px;
+}
+
+::ng-deep .process .ti3-form .ti3-form-label {
+    color: #aaaaaa;
+    font-size: 12px;
+}
+::ng-deep .process .ti3-form tbody .ti3-form-list .ti3-form-label {
+    padding-bottom: 20px !important;
+}
+
+:host ::ng-deep .ti3-table > table > tbody > tr > td {
+    color: var(--d-aaaaaa-l-222222) !important;
+}
+
+:host ::ng-deep input:focus {
+    outline: none !important;
+}
+
+:host ::ng-deep .ti3-table > table > tbody > tr > td {
+    border-bottom: 1px solid #797979;
+}
+
+:host ::ng-deep .ti3-table > table > thead > tr > th {
+    border-bottom: 1px solid #797979;
+}

@@ -1,0 +1,52 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "es2020",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": true,
+    "target": "es5",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./declares"
+    ],
+    "paths": {
+      "hyper": [
+        "projects/hyper"
+      ],
+      "jszip": [
+        "node_modules/jszip/dist/jszip.min.js"
+      ],
+      "porting/*": [
+        "projects/porting/*"
+      ],
+      "sys/*": [
+        "projects/sys/*"
+      ],
+      "java/*": [
+        "projects/java/*"
+      ],
+      "user/*": [
+        "projects/sys/*"
+      ]
+    },
+    "lib": [
+      "es2020",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
+}

@@ -1,0 +1,10 @@
+:host .ti3-table > table > tbody > tr > td:first-child {
+  padding-left: 24px;
+}
+:host .ti3-table > table > thead > tr > th:first-child {
+  padding-left: 24px;
+  border-left: 0;
+}
+:host .ti3-table > table > thead > tr > th {
+  border-left: 1px solid var(--common-color-divider);
+}

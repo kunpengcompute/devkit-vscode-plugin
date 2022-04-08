@@ -1,0 +1,92 @@
+<div class="ddr-summury" [appLoading]="isLoading">
+  <div class="sys-info">
+    <p class="info-title">{{ i18n.ddr_summury.sys_info }}</p>
+    <div class="divider"></div>
+    <div class="info-content">
+      <div class="info-left">
+        <div class="info-label">
+          <p>{{ i18n.ddr_summury.linux_os }}</p>
+          <p>{{ i18n.ddr_summury.cpu_type }}</p>
+          <p>NUMA NODE</p>
+        </div>
+        <div class="info-text">
+          <p>{{ sysInfo?.linux_kernel }}</p>
+          <p>{{ sysInfo?.CPU }}</p>
+          <p>{{ sysInfo ? sysInfo["NUMA node"] : "" }}</p>
+        </div>
+      </div>
+      <div class="info-right">
+        <div class="info-label">
+          <p>NUMA NODE0 CPUS</p>
+          <p>NUMA NODE1 CPUS</p>
+          <p>NUMA NODE2 CPUS</p>
+          <p>NUMA NODE3 CPUS</p>
+        </div>
+        <div class="info-text">
+          <p>{{ sysInfo?.NUMA_Detail['NUMA node1 CPUS'] }}</p>
+          <p>{{ sysInfo?.NUMA_Detail['NUMA node2 CPUS'] }}</p>
+          <p>{{ sysInfo?.NUMA_Detail['NUMA node3 CPUS'] }}</p>
+          <p>{{ sysInfo?.NUMA_Detail['NUMA node4 CPUS'] }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="time-line">
+    <app-time-line
+      [timeData]="timeData"
+      [lineData]="lineData"
+      (timeLineData)="timeLineData($event)"
+      #timeLineDetail>
+    </app-time-line>
+  </div>
+  <div class="echart-list">
+    <app-ddr-summury-echart
+      [title]="echartDataCoreCacheMissTitle"
+      [data]="echartDataCoreCacheMiss"
+      [dataZoom]="lineData"
+      (dataZoomOut)="onChartDataZoom($event)">
+    </app-ddr-summury-echart>
+    <app-ddr-summury-echart
+      [title]="echartDataICacheBandwidthTitle"
+      [data]="echartDataICacheBandwidth"
+      [dataZoom]="lineData"
+      (dataZoomOut)="onChartDataZoom($event)">
+    </app-ddr-summury-echart>
+    <app-ddr-summury-echart
+      [title]="echartDataDCacheBandwidthTitle"
+      [data]="echartDataDCacheBandwidth"
+      [dataZoom]="lineData"
+      (dataZoomOut)="onChartDataZoom($event)">
+    </app-ddr-summury-echart>
+    <app-ddr-summury-echart *ngIf="sysInfo?.CPU !== 1616"
+      [title]="echartDataL3cHhaRateTitle"
+      [data]="echartDataL3cHhaRate"
+      [dataZoom]="lineData"
+      (dataZoomOut)="onChartDataZoom($event)">
+    </app-ddr-summury-echart>
+    <app-ddr-summury-echart *ngIf="sysInfo?.CPU !== 1616"
+      [title]="echartDataL3cMissTitle"
+      [data]="echartDataL3cMiss"
+      [dataZoom]="lineData"
+      (dataZoomOut)="onChartDataZoom($event)">
+    </app-ddr-summury-echart>
+    <app-ddr-summury-echart *ngIf="sysInfo?.CPU !== 1616"
+      [title]="echartDataL3cBandwidthTitle"
+      [data]="echartDataL3cBandwidth"
+      [dataZoom]="lineData"
+      (dataZoomOut)="onChartDataZoom($event)">
+    </app-ddr-summury-echart>
+    <app-ddr-summury-echart
+      [title]="echartDataTlbMissTitle"
+      [data]="echartDataTlbMiss"
+      [dataZoom]="lineData"
+      (dataZoomOut)="onChartDataZoom($event)">
+    </app-ddr-summury-echart>
+    <app-ddr-summury-echart *ngIf="sysInfo?.CPU !== 1616"
+      [title]="echartDataDdrBandwidthTitle"
+      [data]="echartDataDdrBandwidth"
+      [dataZoom]="lineData"
+      (dataZoomOut)="onChartDataZoom($event)">
+    </app-ddr-summury-echart>
+  </div>
+</div>

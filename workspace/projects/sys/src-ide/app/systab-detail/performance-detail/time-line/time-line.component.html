@@ -1,0 +1,11 @@
+<div class="box" [id]="timeBox">
+    <div *ngFor="let item of timeLine" class="time">
+        <span></span>
+        <p>{{item | threePoint:2}}</p>
+        <span></span>
+    </div>
+    <div class="select" [id]="timeSelect" (mousedown)="move($event)">
+        <span class="left" [id]="timeLeft" (mousedown)="left($event)"></span>
+        <span class="right" [id]="timeRight" (mousedown)="right($event)"></span>
+    </div>
+</div>

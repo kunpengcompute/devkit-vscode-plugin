@@ -1,0 +1,11 @@
+.hy-backtop-warpper {
+  position: fixed;
+  z-index: 5;
+  .hy-backtop-content-default {
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 1px;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.14);
+  }
+}

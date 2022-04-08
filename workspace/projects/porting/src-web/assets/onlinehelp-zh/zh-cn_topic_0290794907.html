@@ -1,0 +1,65 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="配置代理">
+<meta name="abstract" content="软件包重构和专项软件迁移需要访问外网获取资源文件，隔离网络环境下需要通过代理方式访问外网，代理配置步骤如下。如果当前环境可以联网，则可跳过此章节。">
+<meta name="description" content="软件包重构和专项软件迁移需要访问外网获取资源文件，隔离网络环境下需要通过代理方式访问外网，代理配置步骤如下。如果当前环境可以联网，则可跳过此章节。">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0263147772.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏代码迁移工具">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0290794907">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/pygments.css">
+<title>配置代理</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0290794907"></a><a name="ZH-CN_TOPIC_0290794907"></a>
+
+<h1 class="topictitle1">配置代理</h1>
+<div id="body1604978253802"><p id="shortdesc53421016174815">软件包重构和专项软件迁移需要访问外网获取资源文件，隔离网络环境下需要通过代理方式访问外网，代理配置步骤如下。如果当前环境可以联网，则可跳过此章节。</p>
+<ol id="ZH-CN_TOPIC_0290794907__ol36394220380"><li id="ZH-CN_TOPIC_0290794907__li13639429381"><span>执行如下命令修改“/etc/systemd/system/gunicorn_port.service”文件。</span><p><div class="codecoloring" codetype="Bash" id="ZH-CN_TOPIC_0290794907__screen3307154319567"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>vi /etc/systemd/system/gunicorn_port.service
+</pre></div>
+</td></tr></table></div>
+</p></li><li id="ZH-CN_TOPIC_0290794907__li10652443114615"><span>在“gunicorn_port.service”文件中的“[Service]”字段后面增加如下两个环境变量。</span><p><div class="codecoloring" codetype="Bash" id="ZH-CN_TOPIC_0290794907__screen1093141165710"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nv">Environment</span><span class="o">=</span><span class="s2">&quot;http_proxy=ip:port&quot;</span>
+<span class="nv">Environment</span><span class="o">=</span><span class="s2">&quot;https_proxy=ip:port&quot;</span>
+</pre></div>
+</td></tr></table></div>
+<div class="note" id="ZH-CN_TOPIC_0290794907__note11631837153810"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0290794907__p11685737123810">“<em id="ZH-CN_TOPIC_0290794907__i37456110488">ip:port</em>”是代理服务器的地址和端口号。</p>
+</div></div>
+</p></li><li id="ZH-CN_TOPIC_0290794907__li17656721192819"><span>按“ESC”，输入“:wq”，按“Enter”保存并退出。</span></li><li id="ZH-CN_TOPIC_0290794907__li638343012381"><span>重启Django服务。</span><p><ol type="a" id="ZH-CN_TOPIC_0290794907__ol1759871713338"><li id="ZH-CN_TOPIC_0290794907__li145987176336">执行如下命令重新加载配置文件。<div class="codecoloring" codetype="Bash" id="ZH-CN_TOPIC_0290794907__screen1640455916571"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>systemctl daemon-reload
+</pre></div>
+</td></tr></table></div>
+</li><li id="ZH-CN_TOPIC_0290794907__li4822122316337">执行如下命令重启服务。<div class="codecoloring" codetype="Bash" id="ZH-CN_TOPIC_0290794907__screen13104130588"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>systemctl restart gunicorn_port
+</pre></div>
+</td></tr></table></div>
+</li></ol>
+</p></li><li id="ZH-CN_TOPIC_0290794907__li13573151017237"><span>配置DNS（如果已经配置了DNS，请跳过该步骤）。</span><p><ol type="a" id="ZH-CN_TOPIC_0290794907__ol14114164018335"><li id="ZH-CN_TOPIC_0290794907__li711416408330">执行如下命令修改“resolv.conf”文件。<div class="codecoloring" codetype="Bash" id="ZH-CN_TOPIC_0290794907__screen197103265582"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>vi /etc/resolv.conf
+</pre></div>
+</td></tr></table></div>
+</li><li id="ZH-CN_TOPIC_0290794907__li1293725703316">文件中增加如下内容：<div class="codecoloring" codetype="Bash" id="ZH-CN_TOPIC_0290794907__screen82016488582"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>nameserver ip
+</pre></div>
+</td></tr></table></div>
+<div class="note" id="ZH-CN_TOPIC_0290794907__note536831152715"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0290794907__p436921117279">“<em id="ZH-CN_TOPIC_0290794907__i321015154281">ip</em>”是DNS服务器的IP地址<em id="ZH-CN_TOPIC_0290794907__i7991135442710">。</em></p>
+</div></div>
+</li><li id="ZH-CN_TOPIC_0290794907__li990419502286">按“ESC”，输入“:wq”，按“Enter”保存并退出。</li></ol>
+</p></li></ol>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0263147772.html">使用前配置</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

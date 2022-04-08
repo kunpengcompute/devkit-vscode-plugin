@@ -1,0 +1,108 @@
+<div class="switch flex" *ngIf="!isModifySchedule">
+  <p class="label" [style.width]="labelWidth">
+    {{i18n.preSwitch.switchLabel}}
+  </p>
+  <div [tiTip]="Database ? i18n.mission_create.disableDataTip : i18n.mission_create.disableeTip">
+    <ti-switch *ngIf="switch" id="myswitch" [(ngModel)]="switchState" (ngModelChange)="onSwitchChange($event)"
+      [disabled]="switch || isDisable || isEdit">
+    </ti-switch>
+  </div>
+  <ti-switch *ngIf="!switch" id="myswitch" ngDefaultControl [(ngModel)]="switchState"
+    (ngModelChange)="onSwitchChange($event)"></ti-switch>
+</div>
+<div class="form" *ngIf="switchState">
+  <div class="title">
+    <div>
+      <span>{{ i18n.preSwitch.serverTime }}</span>:
+      <span>{{nowTime.nowYear}}</span>
+      <span>/</span>
+      <span>{{
+        nowTime.nowMonth < 10 ? "0" + nowTime.nowMonth : nowTime.nowMonth
+      }}</span>
+      <span>/</span>
+      <span>{{
+        nowTime.nowDay < 10 ? "0" + nowTime.nowDay : nowTime.nowDay
+      }}</span>
+      <span>&nbsp;</span>
+      <span>{{
+        nowTime.nowHour < 10 ? "0" + nowTime.nowHour : nowTime.nowHour
+      }}</span>
+      <span>:</span>
+      <span>{{
+        nowTime.nowMinutes < 10 ? "0" + nowTime.nowMinutes : nowTime.nowMinutes
+      }}</span>
+      <span>:</span>
+      <span>{{
+        nowTime.nowSecond < 10 ? "0" + nowTime.nowSecond : nowTime.nowSecond
+      }}</span>
+    </div>
+  </div>
+  <!-- // 预约采集 采集方式 1  周期， 2 单次 -->
+  <div class="func">
+    <p class="label" [style.width]="labelWidthAddedStaricon">
+      <ti-icon [name]="'staricon'" id="ti_auto_id_41" style="color:#ff7266;font-size: 16px;"></ti-icon>
+      {{i18n.preSwitch.colectMethods}}
+    </p>
+    <div class="radio">
+      <div class="radio-item">
+        <input type="radio" tiRadio name="group1" [(ngModel)]="selected" (click)="changeColect()" [value]="1"
+          [label]="i18n.preSwitch.duraColect" /><br>
+      </div>
+      <div class="radio-item">
+        <input type="radio" tiRadio name="group1" [(ngModel)]="selected" (click)="changeColect()" [value]="2"
+          [label]="i18n.preSwitch.onceColect" /><br>
+      </div>
+    </div>
+  </div>
+  <div class="time">
+    <!-- 周期 -->
+    <div class="dur" *ngIf="selected === 1">
+      <div class="point-time">
+        <div class="label flex" [style.width]="labelWidthAddedStaricon">
+          <ti-icon [name]="'staricon'" id="ti_auto_id_41" style="color:#ff7266;font-size: 16px;"></ti-icon>
+          <p style="margin-right: 5px;">{{i18n.preSwitch.pointTime}}</p>
+          <div style="max-width: 400px;display: inline;" [tiTip]='i18n.preSwitch.onceTimeWarn'
+            [tiTipPosition]="'right'">
+            <img src="./assets/img/summary/tooltip.png">
+          </div>
+        </div>
+        <div>
+          <ti-time [(ngModel)]="pointTime" [format]="formatD.time" (ngModelChange)="onChangeTime($event)" tiRequired>
+          </ti-time>
+          <p *ngIf="isErrorTime" style="margin-top: 3px;width: 270px;color:red;font-size: 16px;line-height: 20px;">
+            {{errorMsgTime}}</p>
+        </div>
+      </div>
+      <div class="duration-time">
+        <p class="label" [style.width]="labelWidthAddedStaricon">
+          <ti-icon [name]="'staricon'" id="ti_auto_id_41" style="color:#ff7266;font-size: 16px;"></ti-icon>
+          {{i18n.preSwitch.pointDuration}}
+        </p>
+        <div>
+          <ti-date-range [format]="formatD.date" [(ngModel)]="duration" [min]="minDura" [max]="maxDura"
+            [panelAlign]="'left'" (ngModelChange)="onChangeRange($event)" tiRequired>
+          </ti-date-range>
+          <p *ngIf="isError" style="margin-top: 3px;width: 270px;color:red;font-size: 16px;line-height: 20px;">
+            {{errorMsg}}</p>
+        </div>
+      </div>
+    </div>
+    <!-- 坕次 -->
+    <div class="once-time" *ngIf="selected === 2">
+      <div class="label flex" [style.width]="labelWidthAddedStaricon">
+        <ti-icon [name]="'staricon'" id="ti_auto_id_41" style="color:#ff7266;font-size: 16px;"></ti-icon>
+        <p style="margin-right: 5px;">{{i18n.preSwitch.onceTime}}</p>
+        <div style="max-width: 400px;" [tiTip]='i18n.preSwitch.onceTimeWarn' [tiTipPosition]="'right'">
+          <img src="./assets/img/summary/tooltip.png">
+        </div>
+      </div>
+      <div>
+        <ti-datetime [(ngModel)]="onceDate" [format]="format" [min]="minOnce" [max]="maxOnce" tiRequired
+          [panelAlign]="'right'" (ngModelChange)="onChangeOnce($event)">
+        </ti-datetime>
+        <p *ngIf="isErrorDate" style="margin-top: 3px;width: 270px;color:red;font-size: 16px;line-height: 20px;">
+          {{errorMsgDate}}</p>
+      </div>
+    </div>
+  </div>
+</div>

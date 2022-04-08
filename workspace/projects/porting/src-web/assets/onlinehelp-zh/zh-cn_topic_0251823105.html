@@ -1,0 +1,138 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="web服务端证书管理">
+<meta name="product" content="">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏代码迁移工具">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0251823105">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>web服务端证书管理</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0251823105"></a><a name="ZH-CN_TOPIC_0251823105"></a>
+
+<h1 class="topictitle1">web服务端证书管理</h1>
+<div id="body1591183242213"><p id="ZH-CN_TOPIC_0251823105__p8341058155215">Web服务端证书用于客户端浏览器和web服务器之间的通讯，实现数据信息在客户端和web服务器之间的加密传输，可以防止数据信息的泄露。为提高安全性，建议替换成自己的证书，并及时更新证书，保证证书的有效性。</p>
+<div class="section" id="ZH-CN_TOPIC_0251823105__section11470129119"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0251823105__p2444451164517">已成功登录<span id="ZH-CN_TOPIC_0251823105__ph997750104712">鲲鹏代码迁移工具</span>。</p>
+<div class="note" id="ZH-CN_TOPIC_0251823105__note1647916336186"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0251823105__p1647914333188">只有管理员（<strong id="ZH-CN_TOPIC_0251823105__b333483842316">portadmin</strong>）可以执行生成CSR文件、导入web服务器证书、下载根证书，重启和更换工作密钥的操作。</p>
+</div></div>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0251823105__section8939735152415"><h4 class="sectiontitle">查看当前web端服务证书</h4><ol id="ZH-CN_TOPIC_0251823105__ol134453271379"><li id="ZH-CN_TOPIC_0251823105__li681951883619"><a name="ZH-CN_TOPIC_0251823105__li681951883619"></a><a name="li681951883619"></a><span>在页面右上方选择“<span><img id="ZH-CN_TOPIC_0251823105__image6116112912174" src="zh-cn_image_0304782414.png"></span> &gt; web服务端证书”。</span></li><li id="ZH-CN_TOPIC_0251823105__li164261216201113"><span>查看证书信息，如<a href="#ZH-CN_TOPIC_0251823105__fig13817116161310">图1</a>所示，界面参数描述如<a href="#ZH-CN_TOPIC_0251823105__table166535474558">表1</a>所示。</span><p><div class="fignone" id="ZH-CN_TOPIC_0251823105__fig13817116161310"><a name="ZH-CN_TOPIC_0251823105__fig13817116161310"></a><a name="fig13817116161310"></a><span class="figcap"><b>图1 </b>web服务端证书信息</span><br><span><img id="ZH-CN_TOPIC_0251823105__image103351437141615" src="zh-cn_image_0292582436.png" height="99.75" width="523.6875"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0251823105__table166535474558"></a><a name="table166535474558"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0251823105__table166535474558" frame="border" border="1" rules="all"><caption><b>表1 </b>web服务端证书参数说明</caption><colgroup><col style="width:25.979999999999997%"><col style="width:74.02%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0251823105__row19653647105517"><th align="left" class="cellrowborder" valign="top" width="25.979999999999997%" id="mcps1.3.3.2.2.2.2.2.3.1.1"><p id="ZH-CN_TOPIC_0251823105__p16531147175517">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="74.02%" id="mcps1.3.3.2.2.2.2.2.3.1.2"><p id="ZH-CN_TOPIC_0251823105__p565311472558">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0251823105__row1865364735510"><td class="cellrowborder" valign="top" width="25.979999999999997%" headers="mcps1.3.3.2.2.2.2.2.3.1.1 "><p id="ZH-CN_TOPIC_0251823105__p1765304712554">证书名称</p>
+</td>
+<td class="cellrowborder" valign="top" width="74.02%" headers="mcps1.3.3.2.2.2.2.2.3.1.2 "><p id="ZH-CN_TOPIC_0251823105__p16532478555">显示证书名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0251823105__row19653247145514"><td class="cellrowborder" valign="top" width="25.979999999999997%" headers="mcps1.3.3.2.2.2.2.2.3.1.1 "><p id="ZH-CN_TOPIC_0251823105__p9653114725510">证书到期时间</p>
+</td>
+<td class="cellrowborder" valign="top" width="74.02%" headers="mcps1.3.3.2.2.2.2.2.3.1.2 "><p id="ZH-CN_TOPIC_0251823105__p15653184745517">显示证书到期时间。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0251823105__row205792116576"><td class="cellrowborder" valign="top" width="25.979999999999997%" headers="mcps1.3.3.2.2.2.2.2.3.1.1 "><p id="ZH-CN_TOPIC_0251823105__p55796110573">状态</p>
+</td>
+<td class="cellrowborder" valign="top" width="74.02%" headers="mcps1.3.3.2.2.2.2.2.3.1.2 "><p id="ZH-CN_TOPIC_0251823105__p8580101165720">显示证书的当前状态。</p>
+<p id="ZH-CN_TOPIC_0251823105__p43231815412">有效：证书剩余有效时间超过证书过期告警阈值。</p>
+<p id="ZH-CN_TOPIC_0251823105__p17487111918116">即将过期：证书剩余有效时间小于或等于证书过期告警阈值。</p>
+<p id="ZH-CN_TOPIC_0251823105__p10231325413">已过期：已过证书到期时间。</p>
+<div class="note" id="ZH-CN_TOPIC_0251823105__note1974172616215"><span class="notetitle"> 说明： </span><div class="notebody"><ul id="ZH-CN_TOPIC_0251823105__ul11341124911219"><li id="ZH-CN_TOPIC_0251823105__li561320598223">工具每天自动检查并更新证书状态。</li><li id="ZH-CN_TOPIC_0251823105__li131737464019">web服务证书自动告警时间默认为90天。管理员可在<span id="ZH-CN_TOPIC_0251823105__ph4493210133414">鲲鹏代码迁移工具</span>首页中的<span><img id="ZH-CN_TOPIC_0251823105__image2533129203215" src="zh-cn_image_0269825523.png"></span>选项中选择“系统配置”，手动配置“证书过期告警阈值”，可配置范围为7~180天。</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0251823105__row9971511102310"><td class="cellrowborder" valign="top" width="25.979999999999997%" headers="mcps1.3.3.2.2.2.2.2.3.1.1 "><p id="ZH-CN_TOPIC_0251823105__p1698711112314">操作</p>
+</td>
+<td class="cellrowborder" valign="top" width="74.02%" headers="mcps1.3.3.2.2.2.2.2.3.1.2 "><p id="ZH-CN_TOPIC_0251823105__p19141544579">可执行如下操作：</p>
+<ul id="ZH-CN_TOPIC_0251823105__ul63211537185810"><li id="ZH-CN_TOPIC_0251823105__li626212594167">下载根证书<div class="note" id="ZH-CN_TOPIC_0251823105__note4713191180"><span class="notetitle"> 说明： </span><div class="notebody"><p id="ZH-CN_TOPIC_0251823105__zh-cn_topic_0230797645_p134791571746">使用浏览器登录<span id="ZH-CN_TOPIC_0251823105__zh-cn_topic_0230797645_ph14162124773613">鲲鹏代码迁移工具</span>时，若弹出安全告警提示，可以在浏览器中为<span id="ZH-CN_TOPIC_0251823105__zh-cn_topic_0230797645_ph12775501367">鲲鹏代码迁移工具</span><a href="zh-cn_topic_0000001132444575.html">导入根证书</a>来屏蔽此安全告警提示。</p>
+</div></div>
+</li><li id="ZH-CN_TOPIC_0251823105__li83218370587">生成CSR文件<div class="note" id="ZH-CN_TOPIC_0251823105__note4139101571315"><span class="notetitle"> 说明： </span><div class="notebody"><p id="ZH-CN_TOPIC_0251823105__p8707152641913">CSR（Certificate Signing Request）是证书请求文件。证书申请者在申请数字证书时，由CSP（加密服务提供者）在生成私钥的同时也生成证书请求文件。证书申请者把CSR文件提交给证书颁发机构后，证书颁发机构使用其根证书私钥签名就生成了证书公钥文件，即证书。</p>
+</div></div>
+</li><li id="ZH-CN_TOPIC_0251823105__li7321193765816">导入web服务器证书</li><li id="ZH-CN_TOPIC_0251823105__li1932116373581">重启服务</li><li id="ZH-CN_TOPIC_0251823105__li2321237195812">更新工作密钥</li></ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li></ol>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0251823105__section564195416239"><h4 class="sectiontitle">自定义服务器证书信息并导入</h4><ol id="ZH-CN_TOPIC_0251823105__ol1450752662419"><li id="ZH-CN_TOPIC_0251823105__li070016561753"><span>在“web服务端证书”页面中单击“生成CSR文件”。</span><p><p id="ZH-CN_TOPIC_0251823105__p052417579719">打开“生成CSR文件”对话框，如<a href="#ZH-CN_TOPIC_0251823105__fig542418764017">图2</a>所示，界面参数描述如<a href="#ZH-CN_TOPIC_0251823105__table2512136142515">表2</a>所示。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0251823105__fig542418764017"><a name="ZH-CN_TOPIC_0251823105__fig542418764017"></a><a name="fig542418764017"></a><span class="figcap"><b>图2 </b>生成CSR文件</span><br><span><img id="ZH-CN_TOPIC_0251823105__image12649134310259" src="zh-cn_image_0276310315.png" height="492.76500000000004" width="523.6875"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0251823105__table2512136142515"></a><a name="table2512136142515"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0251823105__table2512136142515" frame="border" border="1" rules="all"><caption><b>表2 </b>CSR文件参数说明</caption><colgroup><col style="width:15.32%"><col style="width:84.68%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0251823105__row451213692510"><th align="left" class="cellrowborder" valign="top" width="15.32%" id="mcps1.3.4.2.1.2.3.2.3.1.1"><p id="ZH-CN_TOPIC_0251823105__p185940272125">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="84.68%" id="mcps1.3.4.2.1.2.3.2.3.1.2"><p id="ZH-CN_TOPIC_0251823105__p35947271122">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0251823105__row45121616258"><td class="cellrowborder" valign="top" width="15.32%" headers="mcps1.3.4.2.1.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0251823105__p056103214123">国家</p>
+</td>
+<td class="cellrowborder" valign="top" width="84.68%" headers="mcps1.3.4.2.1.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0251823105__p59651910136">使用者所在的国家。</p>
+<p id="ZH-CN_TOPIC_0251823105__p0962191136">支持字母，长度为2个字符，为必填项。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0251823105__row125121166256"><td class="cellrowborder" valign="top" width="15.32%" headers="mcps1.3.4.2.1.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0251823105__p14551832141213">省份</p>
+</td>
+<td class="cellrowborder" valign="top" width="84.68%" headers="mcps1.3.4.2.1.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0251823105__p14824322131317">使用者所在的省份。</p>
+<p id="ZH-CN_TOPIC_0251823105__p1824422141313">支持字母、数字、“-”、“_”、“.”和空格，最大长度128个字符。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0251823105__row851219612513"><td class="cellrowborder" valign="top" width="15.32%" headers="mcps1.3.4.2.1.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0251823105__p654632191218">城市</p>
+</td>
+<td class="cellrowborder" valign="top" width="84.68%" headers="mcps1.3.4.2.1.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0251823105__p46396262136">使用者所在的城市。</p>
+<p id="ZH-CN_TOPIC_0251823105__p96399266139">支持字母、数字、“-”、“_”、“.”和空格，最大长度128个字符。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0251823105__row145121062253"><td class="cellrowborder" valign="top" width="15.32%" headers="mcps1.3.4.2.1.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0251823105__p850432201217">公司</p>
+</td>
+<td class="cellrowborder" valign="top" width="84.68%" headers="mcps1.3.4.2.1.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0251823105__p1946413304135">使用者所在的公司。</p>
+<p id="ZH-CN_TOPIC_0251823105__p144641730191311">支持字母、数字、“-”、“_”、“.”和空格，最大长度64个字符。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0251823105__row105127642518"><td class="cellrowborder" valign="top" width="15.32%" headers="mcps1.3.4.2.1.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0251823105__p14701832131">部门</p>
+</td>
+<td class="cellrowborder" valign="top" width="84.68%" headers="mcps1.3.4.2.1.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0251823105__p114311834131318">使用者所在部门。</p>
+<p id="ZH-CN_TOPIC_0251823105__p243110341139">支持字母、数字、“-”、“_”、“.”和空格，最大长度64个字符。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0251823105__row17512567250"><td class="cellrowborder" valign="top" width="15.32%" headers="mcps1.3.4.2.1.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0251823105__p423071051312">常用名</p>
+</td>
+<td class="cellrowborder" valign="top" width="84.68%" headers="mcps1.3.4.2.1.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0251823105__p15118193812133">使用者的名称。</p>
+<p id="ZH-CN_TOPIC_0251823105__p911823813133">支持字母、数字、“-”、“_”、“.”和空格，最大长度64个字符，为必填项。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0251823105__li526917501775"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0251823105__uicontrol38821657131314">“确认”</span>生成CSR文件。</span></li><li id="ZH-CN_TOPIC_0251823105__li114791710151414"><span>将导出的CSR文件发往SSL证书颁发机构，并申请SSL证书。</span><p><p id="ZH-CN_TOPIC_0251823105__p2365320201416">获取到正式的证书后，保存到本地。</p>
+<div class="note" id="ZH-CN_TOPIC_0251823105__note115479311008"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0251823105__p14547731606">用户也可以使用其根证书进行自签名获取正式的证书。</p>
+</div></div>
+</p></li><li id="ZH-CN_TOPIC_0251823105__li1222618171391"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0251823105__uicontrol2227117694">“导入web服务端证书”</span>。</span><p><p id="ZH-CN_TOPIC_0251823105__p186566198913">弹出<span class="wintitle" id="ZH-CN_TOPIC_0251823105__wintitle395916313105">“导入web服务端证书”</span>对话框。</p>
+</p></li><li id="ZH-CN_TOPIC_0251823105__li534363861610"><span>单击<span><img id="ZH-CN_TOPIC_0251823105__image1479216545229" src="zh-cn_image_0270874981.png"></span>，选择需要导入证书文件，单击<span class="uicontrol" id="ZH-CN_TOPIC_0251823105__uicontrol18834737389">“导入”</span>。</span><p><div class="note" id="ZH-CN_TOPIC_0251823105__note88651199483"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0251823105__ul11331847171911"><li id="ZH-CN_TOPIC_0251823105__li1113344721912">导入的证书文件不得大于1MB，支持的格式为*.crt、*.cer、*.pem。</li><li id="ZH-CN_TOPIC_0251823105__li101334471193"><a href="#ZH-CN_TOPIC_0251823105__li681951883619">1</a>中生成的CSR文件与向CA机构申请的服务器证书是一一对应的，在导入服务器证书之前请不要再次生成新的CSR文件，否则需要向CA机构重新申请服务器证书。</li><li id="ZH-CN_TOPIC_0251823105__li949815583574">导入的SSL证书如果不是从正式的证书颁发机构获取，而是用户自己使用工具生成，在导入该SSL证书后，还需要确认客户端浏览器中是否已存在对应的根证书。</li></ul>
+</div></div>
+</p></li><li id="ZH-CN_TOPIC_0251823105__li1533213911155"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0251823105__uicontrol3175113417166">“确认”</span>导入web服务端证书。</span></li><li id="ZH-CN_TOPIC_0251823105__li12171215179"><span>单击<span class="menucascade" id="ZH-CN_TOPIC_0251823105__menucascade264201118176">“<span class="uicontrol" id="ZH-CN_TOPIC_0251823105__uicontrol146421115176">更多</span> &gt; <span class="uicontrol" id="ZH-CN_TOPIC_0251823105__uicontrol11662812121714">重启服务</span>”</span>使证书生效。</span><p><div class="note" id="ZH-CN_TOPIC_0251823105__note893610471744"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0251823105__p6936947748">用户手动在服务器上重启Nginx服务，证书不会生效，必须在web上进行重启操作。</p>
+</div></div>
+</p></li></ol>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0251823105__section10476335132611"><h4 class="sectiontitle">更新工作密钥</h4><p id="ZH-CN_TOPIC_0251823105__p15906192135412">工作密钥用于加密启动Nginx服务的口令。为提高系统安全性，建议定期更新。</p>
+<ol id="ZH-CN_TOPIC_0251823105__ol1627484229"><li id="ZH-CN_TOPIC_0251823105__li195313342150"><span>在页面右上方<span><img id="ZH-CN_TOPIC_0251823105__image231163111183" src="zh-cn_image_0304782580.png"></span>选项中选择“web服务端证书”。</span></li><li id="ZH-CN_TOPIC_0251823105__li1566452017185"><span>单击<span class="menucascade" id="ZH-CN_TOPIC_0251823105__menucascade184621524111918">“<span class="uicontrol" id="ZH-CN_TOPIC_0251823105__uicontrol10462152471910">更多</span> &gt; <span class="uicontrol" id="ZH-CN_TOPIC_0251823105__uicontrol7110632121917">更新工作密钥</span>”</span>，如<a href="#ZH-CN_TOPIC_0251823105__fig819916865318">图3</a>所示。</span><p><div class="fignone" id="ZH-CN_TOPIC_0251823105__fig819916865318"><a name="ZH-CN_TOPIC_0251823105__fig819916865318"></a><a name="fig819916865318"></a><span class="figcap"><b>图3 </b>更新工作密钥</span><br><span><img id="ZH-CN_TOPIC_0251823105__image144269378812" src="zh-cn_image_0281111088.png" height="110.72250000000001" width="523.6875"></span></div>
+</p></li><li id="ZH-CN_TOPIC_0251823105__li7515105282013"><span>单击<span class="menucascade" id="ZH-CN_TOPIC_0251823105__menucascade18751145319264">“<span class="uicontrol" id="ZH-CN_TOPIC_0251823105__uicontrol975175362610">更多</span> &gt; <span class="uicontrol" id="ZH-CN_TOPIC_0251823105__uicontrol1775115533261">重启服务</span>”</span>使工作密钥生效。</span></li></ol>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

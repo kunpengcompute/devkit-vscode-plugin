@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="8px" viewBox="0 0 8 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>4.组件/2.通用/icon/*</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="5.5825 7.3396875 6.7075 6.4959375 4.6684375 4.31625 7.4809375 3.8240625 7.129375 2.488125 4.4575 3.5428125 4.73875 0.66 3.3325 0.66 3.61375 3.5428125 0.941875 2.4178125 0.52 3.8240625 3.4028125 4.31625 1.36375 6.425625 2.48875 7.3396875 4.035625 4.738125"></polygon>
+    </defs>
+    <g id="330-TI4需求设计" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="快照-默认-对比-弹窗" transform="translate(-814.000000, -528.000000)">
+            <g id="4.组件/5.反馈/0.弹窗样例/4修改密码" transform="translate(783.000000, 374.000000)">
+                <g id="4.组件/2.通用/icon/10/*" transform="translate(30.000000, 153.000000)">
+                    <g id="3.颜色/3.紧急告警色" transform="translate(1.000000, 1.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="蒙版" fill="#ED4B4B" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g mask="url(#mask-2)" fill="#ED4B4B" id="矩形">
+                            <g transform="translate(-1.000000, -1.000000)">
+                                <rect x="0" y="0" width="10" height="10"></rect>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

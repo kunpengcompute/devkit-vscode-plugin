@@ -1,0 +1,38 @@
+<div class="chart-box" [id]='uuid'>
+    <div class="left" id='chart-left' *ngIf="getDatas.type=='cpu'" style="flex: 0 0 150px">
+        <div class="line" [ngStyle]="{marginTop:baseTop-1+'px'}"></div>
+        <div
+            [ngStyle]="{height: getDatas.spec.length*gridHeight+ (getDatas.spec.length+1)*gridInertvalHeight+'px',marginTop:baseTop+'px'}">
+            <div *ngFor="let item of getDatas.spec;let i = index"
+                [ngStyle]="{top:gridInertvalHeight*(i+1)+'px',height:gridHeight+'px',lineHeight:gridHeight+'px'}"
+                style="position: relative;font-size: 14px;color: #e8e8e8;">{{item}}</div>
+        </div>
+        <div class="line" style="position: relative;top:-1px"></div>
+    </div>
+
+    <div class="left" *ngIf="getDatas.type=='process'" style="flex: 0 0 300px">
+        <ul class="table-title" [ngStyle]="{marginTop: baseTop-20+'px'}">
+            <li *ngFor="let item of getDatas.coloumn" [ngStyle]="{width:item.width+'%'}">{{item.title}}</li>
+        </ul>
+
+        <div class="line" [ngStyle]="{marginTop:baseTop-1+'px'}"></div>
+
+        <div
+            [ngStyle]="{height: getDatas.spec.length*gridHeight+ (getDatas.spec.length+1)*gridInertvalHeight+'px',marginTop:baseTop+'px'}">
+            <div *ngFor="let item of getDatas.spec;let i = index"
+                [ngStyle]="{top:gridInertvalHeight*(i+1)+'px',height:gridHeight+'px',lineHeight:gridHeight+'px'}"
+                style="position:relative; width:100%; font-size:14px; color:#e8e8e8;">
+                <div *ngFor="let key of getDatas.coloumn" tiOverflow [ngStyle]="{width:key.width+'%'}"
+                    class="table-iterm">{{getDatas.values[item][0][key.key] }}</div>
+            </div>
+        </div>
+        <div class="line" style="position: relative;top:-1px"></div>
+    </div>
+    <div class="right">
+        <div class="right-bg"
+            [ngStyle]="{top:baseTop+'px',height:getDatas.spec.length*gridHeight+ (getDatas.spec.length+1)*gridInertvalHeight+'px'}">
+        </div>
+        <div echarts [options]="tableData" *ngIf="tableData" (chartInit)="onChartInit($event)" style="height:100%">
+        </div>
+    </div>
+</div>

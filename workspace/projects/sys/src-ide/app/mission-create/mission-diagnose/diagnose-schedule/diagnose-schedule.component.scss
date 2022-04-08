@@ -1,0 +1,194 @@
+#detail {
+  padding-top: 10px;
+
+  .taskParams {
+    display: flex;
+
+    .taskBox {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+
+      .label {
+        min-width: 225px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        ti-icon {
+          font-size: 16px;
+        }
+        .labelText {
+          font-size: 14px;
+          line-height: 20px;
+          letter-spacing: 0px;
+          color: var(--d-aaaaaa-l-616161);
+          display: inline !important;
+          max-width: 172px;
+        }
+        .tooltip {
+          margin-left: 8px;
+          width: 12px;
+          height: 20px;
+        }
+      }
+      .detail {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        position: relative;
+        width: calc(100% - 225px);
+
+        .inputBox {
+          width: 326px !important;
+          margin-right: 8px;
+        }
+        .importModel {
+          position: absolute;
+          top: 0;
+          left: 336px;
+        }
+        .bottomTip {
+          height: 18px;
+          align-items: center;
+          font-size: 12px;
+          line-height: 18px;
+          letter-spacing: 0px;
+          color: #888888;
+          margin-top: 8px;
+          max-width: 340px;
+          cursor: pointer;
+          .tipImg,
+          .text {
+            vertical-align: middle;
+          }
+          .tipImg {
+            margin-right: 8px;
+          }
+          .oomTip {
+            max-width: 282px;
+          }
+          .tipWidth {
+            display: flex;
+          }
+        }
+        .memoryCheck {
+          .memory-leak,
+          .memory-abnoemal {
+            height: 38px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            padding-left: 16px;
+            box-sizing: border-box;
+            justify-content: space-between;
+            .checkBox {
+              margin-right: 24px;
+              &:nth-child(3) {
+                margin-right: 0;
+              }
+            }
+          }
+          .no-bg-color {
+            padding-left: 0;
+            background-color: transparent;
+          }
+          .memory-abnoemal {
+            margin-top: 10px;
+            overflow: hidden;
+            cursor: pointer;
+          }
+          .allCheck {
+            margin-top: 10px;
+            img {
+              width: 26px;
+              height: 24px;
+              margin-top: 6px;
+              margin-left: 8px;
+            }
+          }
+        }
+        .textarea-params {
+          width: 326px;
+          height: 56px;
+          padding: 4px 10px;
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
+
+  .operateBtn {
+    position: fixed;
+    bottom: 20px;
+    height: 28px !important;
+    width: calc(100% - 110px);
+    justify-content: center;
+    display: flex;
+    .btn {
+      margin-right: 16px;
+    }
+  }
+}
+
+// 修改预约任务页面配置指定节点列表无左margin
+:host ::ng-deep .taskBox {
+  .node-config {
+    margin-left: 0;
+    .table {
+      padding-left: 0;
+    }
+  }
+  .tip{
+    padding-left: 0;
+  }
+}
+
+// 修改预约任务页面预约任务定时启动信息无上margin
+:host ::ng-deep #detail .scheduled .form {
+  margin-top: 0;
+}
+// 修改预约任务页面进程名称无上margin
+:host ::ng-deep #detail .detail .analysis-target-pid-input .warpper {
+  margin-top: 0;
+}
+::ng-deep .ti3-checkbox-label {
+  font-size: 12px !important;
+}
+// 深色主题
+::ng-deep .vscode-dark {
+  .memory-leak,
+  .memory-abnoemal {
+    color: #e8e8e8;
+    background: #161616;
+  }
+  .activeColor {
+    background: rgba($color: #0067ff, $alpha: 0.4);
+  }
+  :host .memoryCheck ::ng-deep .ti3-checkbox-label {
+    color: #e8e8e8 !important;
+  }
+}
+
+// 浅色主题
+::ng-deep .vscode-light {
+  .memory-leak,
+  .memory-abnoemal {
+    color: #161616;
+    background: rgba($color: #b8becc, $alpha: 0.1);
+  }
+  .activeColor {
+    background: #f0f6ff !important;
+  }
+
+  :host .memoryCheck ::ng-deep .ti3-checkbox-label {
+    color: var(--d-aaaaaa-l-222222) !important;
+  }
+  .labelText {
+    color: var(--d-aaaaaa-l-616161) !important;
+  }
+}
+
+:host .scheduled-task ::ng-deep td.ti3-form-label {
+  display: inline-block;
+  width: 210px !important;
+}

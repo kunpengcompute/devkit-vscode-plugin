@@ -1,0 +1,460 @@
+<!-- user guide -->
+<div class="create" id="user-guide-create">
+  <!-- 创建任务 任务名称 -->
+  <div class="mission-name" *ngIf="actionType === 'create'">
+    <div class="mission-label">
+      <ti-icon name="staricon" style="color: red;"></ti-icon>
+      <span>{{ i18n.common_term_task_name }}</span>
+    </div>
+    <div class="mission-input-button">
+      <div class="mission-input">
+        <!-- user guide -->
+        <input id="user-guide-taskname" type="text" #like tiText [placeholder]="missionNameNotice"
+          [(ngModel)]="missionName" [disabled]="misssionNameAble" (blur)="missionName = missionName.trim()"
+          (ngModelChange)="missionNameChange($event)" />
+        <div class="mission-import">
+          <button tiButton (click)="importTemplate()"
+            [disabled]="actionType!=='create'">{{i18n.mission_modal.importTemplates}}</button>
+        </div>
+      </div>
+      <div class="mission-warn" [ngClass]="{warnShow: !missionNameValid}">
+        <span class="imgWarn" *ngIf="missionNameWarnMsg">
+          <span class="ti3-error-icon ti3-icon ti3-icon-alert-warn colonColor"></span>
+        </span>
+        {{missionNameWarnMsg}}
+      </div>
+    </div>
+  </div>
+  <!-- 重启、修改 任务名称 -->
+  <div class="restart-mission-name" *ngIf="actionType !== 'create' && isHaveValue(missionName)">
+    <div class="restart-label">
+      <ti-icon name="staricon" style="opacity: 0;"></ti-icon>
+      <span>{{ i18n.common_term_task_name }}</span>
+    </div>
+    <div class="mission-input-button">{{ missionName }}</div>
+  </div>
+  <div id="select-analysis-target-type">
+    <div class="analysis-target">
+      <!-- 创建任务 分析对象 -->
+      <div class="analysis-target-title" *ngIf="actionType === 'create'">{{i18n.mission_create.analysisTarget }}</div>
+      <!-- 重启任务 分析对象 -->
+      <div class="restart-analysis-target-title"
+        *ngIf="actionType !== 'create' && isHaveValue(restartTaskInfo?.analysisTarget?.value)">
+        <div class="restart-label">
+          <ti-icon name="staricon" style="opacity: 0;"></ti-icon>
+          <span>{{ i18n.mission_create.analysisTarget }}</span>
+        </div>
+        <span>{{ restartTaskInfo.analysisTarget.value }}</span>
+        <ti-icon [tiTip]="restartTaskInfo.analysisTarget.msg" class="margin_left" tiTipMaxWidth='370px'
+          tiTipPosition="bottom">
+          <img src='./assets/img/summary/tooltip.png'>
+        </ti-icon>
+      </div>
+      <!-- 系统、应用 选择图标 -->
+      <div class="analysis-target-lists" *ngIf="actionType === 'create'">
+        <div class="analysis-target-list" *ngFor="let item of analysisTargets; index as i" [ngClass]="{
+            clicked: targetClicked === i,
+            'font-hover': mouseHoverTarget === i,
+            disabled: (actionType === 'edit' || actionType !== 'create'),
+            'user-guide-analysis': i === 0
+          }" (click)="onTargetClick(i)" (mouseenter)="mouseEnterChangeTarget(i)"
+          (mouseleave)="mouseLeaveChangeTarget()">
+          <div class="imgBox">
+            <app-icon-react [name]="item.iconName" [freeze]="calcAnalysisTargetIconStatus(i)"></app-icon-react>
+          </div>
+          <p>{{ item.name }}</p>
+        </div>
+      </div>
+      <div class="analysis-info">
+        <!--  分析对象为系统的描述 -->
+        <div class="analysis-target-notice" *ngIf="actionType === 'create' && targetClicked===0">
+          {{i18n.common_term_task_type_profile}}
+        </div>
+        <!-- 分析对象为应用 -->
+        <div class="analysis-target-app" *ngIf="targetClicked===1">
+          <!--  分析对象为应用的描述 -->
+          <div class="analysis-target-notice" style="margin-bottom:16px;" *ngIf="actionType === 'create'">
+            {{i18n.common_term_task_type_app}}
+          </div>
+          <!-- 选择launch 或 Attach -->
+          <div class="analysis-target-app-choose" *ngIf="actionType === 'create'">
+            <div class="analysis-target-app-label">
+              <ti-icon name="staricon" style="color: red;opacity: 0;"></ti-icon>{{i18n.mission_create.mode}}
+            </div>
+            <ng-container *ngFor="let item of modeList index as i">
+              <div *ngIf="item.display" class="choose-list">
+                <input type="radio" tiRadio [name]="'group1'+missionName" [(ngModel)]="modeClicked"
+                  (ngModelChange)='onModeClick(i)' [value]="item.value" [label]="item.name"
+                  [disabled]="(actionType === 'edit' || actionType !== 'create')" />
+              </div>
+            </ng-container>
+          </div>
+          <!-- 输入应用路径和应用参数 -->
+          <div class="analysis-target-application" *ngIf="modeClicked===0">
+            <!-- launch-application 的描述 -->
+            <div class="analysis-target-app-notice" *ngIf="actionType === 'create'">
+              <ti-icon name="staricon" style="color: red;opacity: 0;"></ti-icon>{{modeAppNotice}}
+            </div>
+            <div class="analysis-target-content">
+              <!-- 应用路径 -->
+              <div class="analysis-target-app">
+                <div class="analysis-target-app-label" [ngClass]="{'analysis-target-app-label-restart': actionType === 'restart' || actionType === 'edit'}">
+                  <ti-icon name="staricon" style="color: red;"></ti-icon>
+                  <!-- 不适用span可能左右会有空格 影响显示 -->
+                  <span>{{i18n.common_term_task_crate_app_path}}</span>
+                  <ti-icon [tiTip]="i18n.mission_create.modeAppNotice" class="margin" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/summary/tooltip.png'>
+                  </ti-icon>
+                </div>
+                <div class="analysis-target-app-value">
+                  <!-- 输入应用路径 -->
+                  <input type="text" #like tiText [placeholder]="modeAppHolder" [(ngModel)]="modeApplication"
+                    [disabled]="applicationPathDisable" (blur)="missionAppChange($event)" />
+                  <div class="mission-app-warn" *ngIf="!modeAppValid">
+                    <span class="imgWarn" *ngIf="modeAppWarnMsg">
+                      <span class="ti3-error-icon ti3-icon ti3-icon-alert-warn colonColor"></span>
+                    </span>{{modeAppWarnMsg}}
+                  </div>
+                  <div class="mission-app-input-tip" *ngIf="isFirstFocusAppPathInput" [innerHTML]="appPathInputTip">
+                  </div>
+                </div>
+              </div>
+              <!-- 应用参数 -->
+              <div class="analysis-target-app">
+                <div class="analysis-target-app-label" [ngClass]="{'analysis-target-app-label-restart': actionType === 'restart' || actionType === 'edit'}">
+                  <ti-icon name="staricon" style="color: red;"
+                    [ngStyle]="{'opacity': analysisTypesDir[typeClicked].type==='java-mixed-mode' ? 1 : 0}">
+                  </ti-icon>
+                  <!-- 不适用span可能左右会有空格 影响显示 -->
+                  <span>{{i18n.common_term_task_crate_parameters}}</span>
+                  <ti-icon [tiTip]="i18n.mission_create.modeAppParamsNotice" class="margin" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/summary/tooltip.png'>
+                  </ti-icon>
+                </div>
+                <div class="analysis-target-app-value">
+                  <!-- 输入应用参数 -->
+                  <textarea tiTextarea type="text" #like class="textarea-params" style="width: 328px;height: 50px;"
+                    resize="'vertical'" [placeholder]="modeAppParamsHolder" [(ngModel)]="modeAppParams"
+                    [disabled]="modeAppParamsDisable" (ngModelChange)="missionAppParamsChange($event)"></textarea>
+                </div>
+              </div>
+              <!-- 应用运行用户 -->
+              <div class="analysis-target-app">
+                <div class="analysis-target-app-label" [ngClass]="{'analysis-target-app-label-restart': actionType === 'restart' || actionType === 'edit'}">
+                  <ti-icon name="staricon" style="color: red; opacity:0"></ti-icon>
+                  <!-- 不适用span可能左右会有空格 影响显示 -->
+                  <span>{{ i18n.common_term_task_crate_app_runUser }}</span>
+                  <ti-icon [tiTip]="i18n.mission_create.modeAppRunUser" class="margin" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/summary/tooltip.png'>
+                  </ti-icon>
+                </div>
+                <div class="analysis-target-app-value">
+                  <ti-switch id="myswitch" ngDefaultControl [(ngModel)]="switchState" (ngModelChange)="checkUserOrPassWord('switch')" [disabled]="modeAppDisable">
+                  </ti-switch>
+                </div>
+              </div>
+              <!-- 禁用原因 -->
+              <div class="analysis-target-app analysis-target-tip" *ngIf="isShowTip">
+                <img class="analysis-target-tip-img" src='./assets/img/mission/tips.svg'>
+                <div class="analysis-target-tip-text">
+                    <div class="analysis-target-tip-tit">{{ i18n.mission_create.disablingReason.tit }}</div>
+                    <div class="analysis-target-tip-item">{{ i18n.mission_create.disablingReason.firstItem }}</div>
+                </div>
+              </div>
+              <!-- 用户名 -->
+              <div class="analysis-target-app" *ngIf="switchState">
+                <div class="analysis-target-app-label" [ngClass]="{'analysis-target-app-label-restart': actionType === 'restart' || actionType === 'edit'}">
+                  <ti-icon name="staricon" style="color: red;"></ti-icon>
+                  <!-- 不适用span可能左右会有空格 影响显示 -->
+                  <span>{{ i18n.common_term_task_crate_app_user }}</span>
+                </div>
+                <div class="analysis-target-app-value">
+                  <input type="text" #like tiText [(ngModel)]="modeApplicationUser" [disabled]="modeAppDisable && !isShowTip"
+                    (blur)="checkUserOrPassWord('user')" oncopy="return false;" oncut="return false;" />
+                  <div class="mission-app-warn" *ngIf="!runUserValid">
+                    <span class="imgWarn">
+                      <span class="ti3-error-icon ti3-icon ti3-icon-alert-warn colonColor"></span>
+                    </span>
+                    {{ runUserMsg }}
+                  </div>
+                </div>
+              </div>
+              <!-- 密码 -->
+              <div class="analysis-target-app" *ngIf="switchState">
+                <div class="analysis-target-app-label" [ngClass]="{'analysis-target-app-label-restart': actionType === 'restart' || actionType === 'edit'}">
+                  <ti-icon name="staricon" style="color: red;"></ti-icon>
+                  <!-- 不适用span可能左右会有空格 影响显示 -->
+                  <span>{{ i18n.common_term_task_crate_app_passWord }}</span>
+                </div>
+                <div class="analysis-target-app-value">
+                  <input type="password" #like tiText [(ngModel)]="modeApplicationPassWord" [disabled]="modeAppDisable && !isShowTip"
+                    (blur)="checkUserOrPassWord('password')" oncopy="return false;"
+                    oncut="return false;">
+                  <div class="mission-app-warn" *ngIf="!runPasswordValid">
+                    <span class="imgWarn">
+                      <span class="ti3-error-icon ti3-icon ti3-icon-alert-warn colonColor"></span>
+                    </span>{{ i18n.tip_msg.system_setting_input_empty_judge }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 输入 Pid 和进程名称 -->
+          <div class="analysis-target-pid " *ngIf="modeClicked===1">
+            <!-- attach to process 的描述 -->
+            <div class="analysis-target-pid-notice" *ngIf="actionType === 'create'">
+              <ti-icon name="staricon" style="color: red;opacity: 0;"></ti-icon>{{modePidNotice}}
+            </div>
+            <div class="analysis-target-pid-input" [ngClass]="{'restart': actionType !== 'create'}"
+              [formGroup]="pidProcessGroup">
+              <app-pid-process-input formControlName="pidProcess">
+              </app-pid-process-input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 分析类型 -->
+    <div class="analysis-type" *ngIf="actionType === 'create'">
+      <div class="analysis-type-title">{{i18n.common_term_task_analysis_type}}</div>
+      <!-- profile system-->
+      <div class="analysis-type-lists" [ngClass]="{ showTypes: targetClicked === 0 }">
+        <div *ngFor="let key of typeSysKey;index as i" class="analysis-type-outer-lists">
+          <span class="typeTitle" (mouseenter)="mouseEnterTypeChange(i)" (mouseleave)="mouseLeaveTypeChange()"
+            [ngClass]="{typeClicked: typeTitleClicked === i,typeTitleHover: typeTitleHover === i}">{{typeTitle[i]}}</span>
+          <div class="analysis-type-inside-lists">
+            <div class="analysis-type-list" *ngFor="let item of analysisTypeSys[key]; index as index" [ngClass]="{
+              clicked: typeClicked === item.id,
+              'font-hover': mouseHover === item.id,
+              disabled: ['edit', 'restart'].includes(actionType),
+              'user-guide-analysis-type': index === 0,
+              'disabled-status': taskDetail.isFromTuningHelper && typeClicked !== item.id
+            }" (click)="onTypeClick(item.id)" (mouseenter)="mouseEnterChange(item.id)"
+              (mouseleave)="mouseLeaveChange()">
+              <div class="imgBox">
+                <app-icon-react [name]="item.iconName" [freeze]="calcAnalysisTypeIconStatus(item.id)"></app-icon-react>
+              </div>
+              <p [ngClass]="{typeNameClicked: typeClicked === item.id, 'typeNameHover': mouseHover === item.id}">{{
+                item.name }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="analysis-type-info">{{ typeMsg }}</div>
+      </div>
+      <!-- launch application -->
+      <div class="analysis-type-lists" [ngClass]="{ showTypes: targetClicked === 1 && modeClicked === 0 }">
+        <div *ngFor="let key of typeSysKey;index as i" class="analysis-type-outer-lists">
+          <span class="typeTitle" (mouseenter)="mouseEnterTypeChange(i)" (mouseleave)="mouseLeaveTypeChange()"
+            [ngClass]="{typeClicked: typeTitleClicked === i,typeTitleHover: typeTitleHover === i}">{{typeTitle[i]}}</span>
+          <div class="analysis-type-inside-lists">
+            <div class="analysis-type-list" *ngFor="let item of analysisTypeLaunch[key]; index as index" [ngClass]="{
+              clicked: typeClicked === item.id,
+              'font-hover': mouseHover === item.id,
+              disabled: ['edit', 'restart'].includes(actionType),
+              'disabled-status': taskDetail.isFromTuningHelper && typeClicked !== item.id
+            }" (click)="onTypeClick(item.id)" (mouseenter)="mouseEnterChange(item.id)"
+              (mouseleave)="mouseLeaveChange()">
+              <div class="imgBox">
+                <app-icon-react [name]="item.iconName" [freeze]="calcAnalysisTypeIconStatus(item.id)"></app-icon-react>
+              </div>
+              <p [ngClass]="{typeNameClicked: typeClicked === item.id, 'typeNameHover': mouseHover === item.id}">{{
+                item.name }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="analysis-type-info">{{ typeMsg }}</div>
+      </div>
+      <!-- attach to process -->
+      <div class="analysis-type-lists" [ngClass]="{showTypes: targetClicked === 1 && modeClicked === 1}">
+        <div *ngFor="let key of typeSysKey;index as i" class="analysis-type-outer-lists">
+          <span class="typeTitle" (mouseenter)="mouseEnterTypeChange(i)" (mouseleave)="mouseLeaveTypeChange()"
+            [ngClass]="{typeClicked: typeTitleClicked === i,typeTitleHover: typeTitleHover === i}">{{typeTitle[i]}}</span>
+          <div class="analysis-type-inside-lists">
+            <div class="analysis-type-list" *ngFor="let item of analysisTypeAttach[key]; index as index" [ngClass]="{
+              clicked: typeClicked === item.id,
+              'font-hover': mouseHover === item.id,
+              disabled: ['edit', 'restart'].includes(actionType),
+              'disabled-status': taskDetail.isFromTuningHelper && typeClicked !== item.id
+            }" (click)="onTypeClick(item.id)" (mouseenter)="mouseEnterChange(item.id)"
+              (mouseleave)="mouseLeaveChange()">
+              <div class="imgBox">
+                <app-icon-react [name]="item.iconName" [freeze]="calcAnalysisTypeIconStatus(item.id)"></app-icon-react>
+              </div>
+              <p [ngClass]="{typeNameClicked: typeClicked === item.id, 'typeNameHover': mouseHover === item.id}">{{
+                item.name }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="analysis-type-info">{{ typeMsg }}</div>
+      </div>
+    </div>
+    <div class="restart-analysis-type"
+      *ngIf="actionType !== 'create' && isHaveValue(restartTaskInfo?.analysisType?.value)">
+      <div class="restart-label">
+        <ti-icon name="staricon" style="opacity: 0;"></ti-icon>
+        <span>{{ i18n.common_term_task_analysis_type }}</span>
+      </div>
+      <span>{{ restartTaskInfo.analysisType.value }}</span>
+      <ti-icon [tiTip]="typeMsg" class="margin_left" tiTipMaxWidth='370px' tiTipPosition="bottom">
+        <img src='./assets/img/summary/tooltip.png'>
+      </ti-icon>
+    </div>
+  </div>
+
+  <!-- user-guide -->
+  <div id="user-guide-analysis-detail" class="analysis-detail">
+    <div class="analysis-detail-bottom" *ngIf="analysisTypesDir[typeClicked].type==='system'  && objectChange">
+      <app-mission-performance #performance [scenes]="scenes" [labelWidth]="labelWidth" [projectName]="projectName"
+        [taskName]="missionName" [projectId]="projectId" [restartAndEditId]="restartAndEditId"
+        [taskNameValid]="missionNameValid" (sendMissionKeep)="saveTemplate($event)" [nodeConfigShow]="nodeConfigShow"
+        [nodeConfigedData]="nodeConfigedData" (handleNodeEmitIndex)="handleNodeEmitIndex($event)"
+        (sendPretable)="handleUpdataPretable()" (closeTab)="closeTab($event)">
+      </app-mission-performance>
+    </div>
+    <div class="analysis-detail-bottom"
+      *ngIf="analysisTypesDir[typeClicked].type==='process-thread-analysis' && objectChange">
+      <app-mission-process #process [labelWidth]="labelWidth" [projectName]="projectName" [taskName]="missionName"
+        [projectId]="projectId" [restartAndEditId]="restartAndEditId" [nodeConfigShow]="nodeConfigShow"
+        [taskNameValid]="missionNameValid" [typeId]="targetClicked+modeClicked" [modeApplication]='modeApplication'
+        [modeAppParams]="modeAppParams" [modeAppValid]="modeAppValid && modeAppRunUserValid" [modePid]="modePid"
+        [modeProcess]="modeProcess" [modePidValid]="modePidValid" [switchState]="switchState"
+        [modeApplicationUser]="modeApplicationUser" [modeApplicationPassWord]="modeApplicationPassWord"
+        (sendAppOrPidDisable)="handleAppAndPidDisable($event)" (sendMissionKeep)="saveTemplate($event)"
+        (sendPretable)="handleUpdataPretable()" (closeTab)="closeTab($event)"
+        (handleNodeEmitIndex)="handleNodeEmitIndex($event)">
+      </app-mission-process>
+    </div>
+    <div class="analysis-detail-bottom"
+      *ngIf="analysisTypesDir[typeClicked].type==='resource_schedule'  && objectChange">
+      <app-mission-schedule #schedule [labelWidth]="labelWidth" [projectName]="projectName" [taskName]="missionName"
+        [projectId]="projectId" [restartAndEditId]="restartAndEditId" [nodeConfigShow]="nodeConfigShow"
+        [nodeConfigedData]="nodeConfigedData" [taskNameValid]="missionNameValid" [typeId]="targetClicked+modeClicked"
+        [modeApplication]='modeApplication' [modeAppParams]="modeAppParams" [modePid]='modePid'
+        [modeProcess]="modeProcess" [modeAppValid]='modeAppValid && modeAppRunUserValid' [modePidValid]='modePidValid'
+        [switchState]="switchState" [modeApplicationUser]="modeApplicationUser" [taskDetail]="taskDetail"
+        [modeApplicationPassWord]="modeApplicationPassWord" (handleNodeEmitIndex)="handleNodeEmitIndex($event)"
+        (sendMissionKeep)="saveTemplate($event)" (sendPretable)="handleUpdataPretable()"
+        (sendAppOrPidDisable)="handleAppAndPidDisable($event)" (closeTab)="closeTab($event)"></app-mission-schedule>
+    </div>
+    <div class="analysis-detail-bottom" *ngIf="analysisTypesDir[typeClicked].type==='system_lock'  && objectChange">
+      <app-mission-lock #lock [actionType]="actionType" [labelWidth]="labelWidth" [projectName]="projectName"
+        [taskName]="missionName" [taskNameValid]="missionNameValid" [projectId]="projectId"
+        [restartAndEditId]="restartAndEditId" [nodeConfigShow]="nodeConfigShow" [nodeConfigedData]="nodeConfigedData"
+        [typeId]="targetClicked+modeClicked" [modeApplication]='modeApplication' [modeAppParams]="modeAppParams"
+        [modePid]='modePid' [modeProcess]="modeProcess" [modeAppValid]='modeAppValid && modeAppRunUserValid'
+        [switchState]="switchState" [modeApplicationUser]="modeApplicationUser" [taskDetail]="taskDetail"
+        [modeApplicationPassWord]="modeApplicationPassWord" [modePidValid]='modePidValid' 
+        (handleNodeEmitIndex)="handleNodeEmitIndex($event)" (sendMissionKeep)="saveTemplate($event)"
+        (sendPretable)="handleUpdataPretable()" (sendAppOrPidDisable)="handleAppAndPidDisable($event)"
+        (closeTab)="closeTab($event)">
+      </app-mission-lock>
+    </div>
+    <div class="analysis-detail-bottom" *ngIf="analysisTypesDir[typeClicked].type==='C/C++ Program'  && objectChange">
+      <app-mission-cplusplus #cplusplus [labelWidth]="labelWidth" [projectName]="projectName" [taskName]="missionName"
+        [taskNameValid]="missionNameValid" [typeId]="targetClicked+modeClicked" [modeApplication]="modeApplication"
+        [projectId]="projectId" [restartAndEditId]="restartAndEditId" [nodeConfigShow]="nodeConfigShow"
+        [nodeConfigedData]="nodeConfigedData" [modeAppParams]="modeAppParams" [modePid]="modePid"
+        [modeProcess]="modeProcess" [modeAppValid]="modeAppValid && modeAppRunUserValid" [modePidValid]="modePidValid"
+        [switchState]="switchState" [modeApplicationUser]="modeApplicationUser"
+        [modeApplicationPassWord]="modeApplicationPassWord" [taskDetail]="taskDetail"
+        (handleNodeEmitIndex)="handleNodeEmitIndex($event)"
+        (sendMissionKeep)="saveTemplate($event)" (sendPretable)="handleUpdataPretable()"
+        (sendAppOrPidDisable)="handleAppAndPidDisable($event)" (closeTab)="closeTab($event)">
+      </app-mission-cplusplus>
+    </div>
+    <div class="analysis-detail-bottom"
+      *ngIf="analysisTypesDir[typeClicked].type==='mem_access_analysis' && objectChange">
+      <app-mission-mem #mem [labelWidth]="labelWidth" [projectName]="projectName" [taskName]="missionName"
+        [taskNameValid]="missionNameValid" [targetClicked]="targetClicked" [modeClicked]="modeClicked"
+        [taskNameValid]="missionNameValid" [modeApplication]='modeApplication' [modeAppParams]="modeAppParams"
+        [modePid]='modePid' [modeProcess]="modeProcess" [modeAppValid]='modeAppValid && modeAppRunUserValid'
+        [modePidValid]='modePidValid' [nodeConfigShow]="nodeConfigShow" [projectId]="projectId"
+        [restartAndEditId]="restartAndEditId" [typeId]="targetClicked+modeClicked" [switchState]="switchState"
+        [modeApplicationUser]="modeApplicationUser" [modeApplicationPassWord]="modeApplicationPassWord" [taskDetail]="taskDetail"
+        (sendMissionKeep)="saveTemplate($event)" (sendPretable)="handleUpdataPretable()" (closeTab)="closeTab($event)"
+        (memAnalysisModeChange)="memAnalysisModeChange($event)" (sendAppOrPidDisable)="handleAppAndPidDisable($event)">
+      </app-mission-mem>
+    </div>
+    <div class="analysis-detail-bottom"
+      *ngIf="analysisTypesDir[typeClicked].type==='microarchitecture'  && objectChange">
+      <app-mission-structure #structure [labelWidth]="labelWidth" [projectName]="projectName" [taskName]="missionName"
+        [projectId]="projectId" [restartAndEditId]="restartAndEditId" [nodeConfigShow]="nodeConfigShow"
+        [nodeConfigedData]="nodeConfigedData" [taskNameValid]="missionNameValid" [typeId]="targetClicked+modeClicked"
+        [modeApplication]='modeApplication' [modeAppParams]="modeAppParams" [modePid]='modePid'
+        [modeProcess]="modeProcess" [switchState]="switchState" [modeApplicationUser]="modeApplicationUser"
+        [modeApplicationPassWord]="modeApplicationPassWord" [modeAppValid]='modeAppValid && modeAppRunUserValid'
+        [modePidValid]='modePidValid' [taskDetail]="taskDetail" (handleNodeEmitIndex)="handleNodeEmitIndex($event)"
+        (sendMissionKeep)="saveTemplate($event)" (sendPretable)="handleUpdataPretable()"
+        (sendAppOrPidDisable)="handleAppAndPidDisable($event)" (closeTab)="closeTab($event)"></app-mission-structure>
+    </div>
+    <div class="analysis-detail-bottom" *ngIf="analysisTypesDir[typeClicked].type==='ioperformance'  && objectChange">
+      <app-mission-io #ioAnalysis [labelWidth]="labelWidth" [actionType]="actionType" [projectName]="projectName"
+        [taskName]="missionName" [taskNameValid]="missionNameValid" [projectId]="projectId"
+        [restartAndEditId]="restartAndEditId" [typeId]="targetClicked + modeClicked" [modeApplication]="modeApplication"
+        [modeAppParams]="modeAppParams" [modeAppValid]="modeAppValid && modeAppRunUserValid" [modePid]="modePid"
+        [modeProcess]="modeProcess" [modePidValid]="modePidValid" [taskDetail]="taskDetail" [switchState]="switchState"
+        [modeApplicationUser]="modeApplicationUser" [modeApplicationPassWord]="modeApplicationPassWord"
+        (sendMissionKeep)="saveTemplate($event)" (sendPretable)="handleUpdataPretable()" (closeTab)="closeTab($event)"
+        (sendAppOrPidDisable)="handleAppAndPidDisable($event)"></app-mission-io>
+    </div>
+    <div class="analysis-detail-bottom" *ngIf="analysisTypesDir[typeClicked].type==='hpc_analysis'  && objectChange">
+      <app-mission-hpc #hpcAnalysis [nodeInfo]="nodeInfo" [actionType]="actionType" [projectName]="projectName" [taskName]="missionName"
+        [taskNameValid]="missionNameValid" [projectId]="projectId" [typeId]="targetClicked + modeClicked"
+        [restartAndEditId]="restartAndEditId" [modeApplication]="modeApplication" [modeAppParams]="modeAppParams"
+        [switchState]="switchState" [modeApplicationUser]="modeApplicationUser" [modePid]="modePid"
+        [modeProcess]="modeProcess" [modeApplicationPassWord]="modeApplicationPassWord" [modePidValid]="modePidValid"
+        [modeAppValid]="modeAppValid && modeAppRunUserValid" (sendMissionKeep)="saveTemplate($event)"
+        (sendPretable)="handleUpdataPretable()" (closeTab)="closeTab($event)" (handleNodeEmitIndex)="handleNodeEmitIndex($event)"
+        [nodeConfigedData]="nodeConfigedData" (sendAppOrPidDisable)="handleAppAndPidDisable($event)" (sendMpiStatus)="onSendMpiStatus($event)"></app-mission-hpc>
+    </div>
+  </div>
+</div>
+<!-- 保存模板 -->
+<app-mission-template-save #keep_modal [data]="keepData"></app-mission-template-save>
+<!-- 导入模板 -->
+<app-mission-templates #template (outer)="getTemplateData($event)" [typeId]="targetClicked+modeClicked"
+  [type]="analysisTypesDir[typeClicked].name"></app-mission-templates>
+
+<!-- c++ attach -->
+<app-mission-c-attach #cAttach (handleConfigData)="handleConfigData($event)">
+</app-mission-c-attach>
+<!-- c++ launch -->
+<app-mission-c-launch #cLaunch (handleConfigData)="handleConfigData($event)">
+</app-mission-c-launch>
+<!-- c++ profile -->
+<app-mission-c-profile #cProfile (handleConfigData)="handleConfigData($event)">
+</app-mission-c-profile>
+<!-- lock attach -->
+<app-mission-l-attach #lAttach (handleConfigData)="handleConfigData($event)">
+</app-mission-l-attach>
+<!-- lock launch -->
+<app-mission-l-launch #lLaunch (handleConfigData)="handleConfigData($event)">
+</app-mission-l-launch>
+<!-- lock profile -->
+<app-mission-l-profile #lProfile (handleConfigData)="handleConfigData($event)">
+</app-mission-l-profile>
+<!-- resource attach -->
+<app-mission-r-attach #rAttach (handleConfigData)="handleConfigData($event)">
+</app-mission-r-attach>
+<!-- resource launch -->
+<app-mission-r-launch #rLaunch (handleConfigData)="handleConfigData($event)">
+</app-mission-r-launch>
+<!-- resource profile -->
+<app-mission-r-profile #rProfile (handleConfigData)="handleConfigData($event)">
+</app-mission-r-profile>
+
+<!-- microarchitecture -->
+<app-mission-s-attach #mAttach (handleConfigData)="handleConfigData($event)">
+</app-mission-s-attach>
+<app-mission-s-launch #mLaunch (handleConfigData)="handleConfigData($event)">
+</app-mission-s-launch>
+<app-mission-s-profile #mProfile (handleConfigData)="handleConfigData($event)">
+</app-mission-s-profile>
+
+<!-- database -->
+<app-mission-d-profile #dProfile (handleConfigData)="handleConfigData($event)">
+</app-mission-d-profile>

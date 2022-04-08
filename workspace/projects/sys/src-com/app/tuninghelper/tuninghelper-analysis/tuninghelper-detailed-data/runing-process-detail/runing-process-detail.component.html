@@ -1,0 +1,86 @@
+<div class="process-detail-container">
+    <div class="metricsList">
+        <div class="metrics" *ngFor="let item of metricsList">
+            <div class="title" (click)="item.open = !item.open" [ngClass]="{borderBottom: item.open}">
+                <span class="expendIcon">
+                    <hy-theme-content>
+                        <img [ngClass]="{'active': item.open}" src="./assets/img/summary/row.svg" light>
+                        <img [ngClass]="{'active': item.open}" src="./assets/img/summary/row_dark.svg" dark>
+                    </hy-theme-content>
+                </span>
+                <span>{{item.title}}</span>
+            </div>
+            <div class="content" *ngIf="item.open">
+                <div class="content-left"></div>
+                <div class="content-right">
+                    <ng-container *ngIf="item.prop === QueryTypeEnum.INDICATOR_INFORMATION">
+                        <app-process-indicator-info [indiacatorInfoData]="indicatorInfo">
+                        </app-process-indicator-info>
+                    </ng-container>
+                    <ng-container *ngIf="item.prop === QueryTypeEnum.MICROARCHITECTURE_METRICS">
+                        <app-process-pid-mic-metrics [sourceData]="micMetricsData"></app-process-pid-mic-metrics>
+                    </ng-container>
+                    <ng-container *ngIf="item.prop === QueryTypeEnum.MEMORY_ACCESS_INDICATOR">
+                        <app-process-pid-memoryaccess-metrics [sourceData]="accessMetricsData">
+                        </app-process-pid-memoryaccess-metrics>
+                    </ng-container>
+                    <ng-container *ngIf="item.prop === QueryTypeEnum.CPU_AFFINITY">
+                        <app-process-pid-cpu-affinity [sourceData]="cpuAffinityData"></app-process-pid-cpu-affinity>
+                    </ng-container>
+                    <ng-container *ngIf="item.prop === QueryTypeEnum.MEMORY_AFFINITY">
+                        <app-process-pid-memory-affinity [sourceData]="memoryAffinityData">
+                        </app-process-pid-memory-affinity>
+                    </ng-container>
+                    <ng-container *ngIf="item.prop === QueryTypeEnum.PROCESS_NUMA_ALLOCATION">
+                        <app-process-pid-numa-allocation [sourceData]="numaAllocationData">
+                        </app-process-pid-numa-allocation>
+                    </ng-container>
+                    <ng-container *ngIf="item.prop === QueryTypeEnum.HOTSPOT_FUNCTION">
+                        <div class="hotFunc-box">
+                            <ti-select class="hotFunc-select" [options]='hotFuncOptions' [(ngModel)]="hotFuncSelected">
+                            </ti-select>
+                            <ng-container *ngIf="hotFuncSelected.label === hotFuncOptions[0].label">
+                                <div hyNodata [nodataShow]="!hotFuncData.length"></div>
+                                <div class="tableData" *ngIf="hotFuncData.length">
+                                    <app-process-pid-hot-func [sourceData]="hotFuncData"></app-process-pid-hot-func>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="hotFuncSelected.label === hotFuncOptions[1].label">
+                                <div hyNodata [nodataShow]="!hotFuncModuleData.length"></div>
+                                <div class="tableData"  *ngIf="hotFuncModuleData.length">
+                                    <app-process-pid-hot-func-module [sourceData]="hotFuncModuleData">
+                                    </app-process-pid-hot-func-module>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="item.prop === QueryTypeEnum.OPERATED_FILEDS">
+                        <app-process-pid-operate-files [sourceData]="operateFilesData"></app-process-pid-operate-files>
+                    </ng-container>
+                    <ng-container *ngIf="item.prop === QueryTypeEnum.OPERATED_NETWORK_PORT">
+                        <app-process-pid-operate-network [sourceData]="operateNetworkData">
+                        </app-process-pid-operate-network>
+                    </ng-container>
+                    <ng-container *ngIf="item.prop === QueryTypeEnum.SYSTEM_CALL">
+                        <app-process-pid-system-call [sourceData]="systemCallData"></app-process-pid-system-call>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 详细调用信息-->
+<ng-template #viewSystemCallInfo let-context='context'>
+    <ti-modal-header>
+        <div tiOverflow class="stackName">{{ context.title }}</div>
+    </ti-modal-header>
+    <ti-modal-body>
+        <div class="system-call-info-content" [innerHtml]="context.content"></div>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <div>
+            <button tiButton (click)="context.dismiss()">{{ 'common_term_operate_close' | i18n}}</button>
+        </div>
+    </ti-modal-footer>
+</ng-template>

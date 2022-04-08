@@ -1,0 +1,464 @@
+<ng-container *ngIf="resultListBak.length > 0">
+    <div class="list-container" [ngStyle]="{'bottom': bottom + 20 + 'px'}">
+        <ng-container *ngFor="let result of resultListBak; let idx = index">
+            <!-- 源码迁移 start -->
+            <div class="result-container" *ngIf="result.type === 'SourceCode'">
+                <div class="content">
+                    <span class="content-message">
+                        <img [src]="imgUrlFormat(result.state)" alt="" style="vertical-align: middle;">
+                        <span class="result" *ngIf="result.state === 'stop_success' || result.state === 'stop_failed'">{{result.msg}}</span>
+                        <span class="result" *ngIf="result.state === 'success' && result.flag">{{result.msg + '(' + formatCreatedId(result.id) + ')'}}</span>
+                        <span class="result" *ngIf="result.state === 'success' && !result.flag">{{result.msg}}</span>
+                        <span class="result"
+                            *ngIf="result.state === 'failed'
+                            && result.status !== portWorkerStatusService.createTaskNoWorkerStatus
+                            && result.status !== status.noPerMission"
+                        >{{i18n.common_term_source_code_failed_tip + result.msg}}
+                        </span>
+                        <span class="result" *ngIf="result.state === 'failed' && result.status === status.noPerMission">
+                          {{ i18n.common_term_source_code_failed_tip + result.msg }}{{ i18n.onlineHelp.tip }}<a (click)="help('scanNoPermission')">{{ i18n.onlineHelp.url }}</a>
+                        </span>
+                        <!-- worker 为0 -->
+                        <span class="result" *ngIf="result.status === portWorkerStatusService.createTaskNoWorkerStatus" style="display: flex;">
+                            <app-user-guide-bar [status]="result.status"></app-user-guide-bar>
+                        </span>
+                    </span>
+                    <span style="padding-right: 10px;font-size: 16px;cursor: pointer;margin-left:10px" (click)="deleteMsg(idx, null, 'SourceCode')">×</span>
+                </div>
+                <div *ngIf="result.state === 'success' && result.flag" class="opt-container">
+                    <button type="button" tiButton color="primary" (click)="createResultOpt(result, true)" class="operation">{{i18n.common_term_view_report_btn}}</button>
+                </div>
+            </div>
+            <!-- 源码迁移 end -->
+
+            <!-- 内存一致性源码文件 -->
+            <div class="result-container" *ngIf="result.type === 'weakCheck'">
+                <div class="content" *ngIf="result.status !== '0x0d0a02' && !bcResultPartial">
+                    <span class="content-message">
+                        <img [src]="imgUrlFormat(result.state)" alt="" style="vertical-align: middle;">
+                        <span class="result" *ngIf="result.state === 'stop_success' || result.state === 'stop_failed'">{{ result.msg }}</span>
+                        <span class="result" *ngIf="result.state === 'failed'">{{ i18n.common_term_weak_check_fail_tip + result.msg }}</span>
+                        <span class="result" *ngIf="result.state === 'success' && result.flag">{{ result.msg + '(' + formatCreatedId(result.id) + ')' }}</span>
+                        <span class="result" *ngIf="result.state === 'success' && !result.flag">{{ result.msg }}</span>
+                    </span>
+                    <span style="padding-right: 10px;font-size: 16px;cursor: pointer;margin-left:10px" (click)="deleteMsg(idx, null, 'weakCheck')">×</span>
+                </div>
+                <div class="content" *ngIf="result.status === '0x0d0a02' && !bcResultPartial">
+                    <span class="content-message">
+                        <img [src]="imgUrlFormat(result.state)" alt="" style="vertical-align: middle;">
+                        <span class="result">{{ result.noDataMsg }}</span>
+                    </span>
+                    <span style="padding-right: 10px;font-size: 16px;cursor: pointer;margin-left:10px" (click)="deleteMsg(idx, null, 'weakCheck')">×</span>
+                </div>
+                <div *ngIf="result.state === 'success' && result.flag && result.status !== '0x0d0a02' && !bcResultPartial" class="opt-container">
+                    <button type="button" tiButton color="primary" (click)="createResultOpt(result)" class="operation">{{ i18n.common_term_view_report_btn }}</button>
+                </div>
+                <div class="content" *ngIf="bcResultPartial">
+                  <div class="progress-modal">
+                    <div class="madal-content">
+                      <p class="result-title">
+                        <img [src]="imgUrlFormat(result.state)" alt="" style="vertical-align: middle;">
+                        <span style="margin-left: 10px;">{{ i18n.check_weak.bc_result.title }}</span>
+                      </p>
+                      <p class="result-icon">
+                        <span (click)="deleteMsg(idx, null, 'weakCheck')">×</span>
+                      </p>
+                    </div>
+                    <div class="drag-box" style="margin-top: 12px">
+                      <ti-table [(displayedData)]="bcFileTableData" [srcData]="bcFileSrcData">
+                        <div class="ti3-table-fixed-head">
+                          <table>
+                            <thead>
+                              <tr>
+                                <th tiOverflow *ngFor="let column of bcFileColumns" width="{{column.width}}">{{column.title}}</th>
+                              </tr>
+                            </thead>
+                          </table>
+                        </div>
+                        <div class="ti3-table-container" style="max-height:266px;">
+                          <table>
+                            <thead>
+                              <tr>
+                                <th tiOverflow *ngFor="let column of bcFileColumns" width="{{column.width}}"></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let row of bcFileTableData;">
+                                <td tiOverflow>{{ row.bc_file_name }}</td>
+                                <td
+                                  *ngIf="currentLang === 'zh-cn'"
+                                  tiOverflow
+                                  class="success-status p-relative"
+                                  [ngClass]="{'fail-status': row.chinese_check_result !== i18n.check_weak.bc_result.success}"
+                                ><span>{{ row.chinese_check_result }}</span>
+                                </td>
+                                <td
+                                  *ngIf="currentLang === 'en-us'"
+                                  tiOverflow
+                                  class="success-status p-relative"
+                                  [ngClass]="{'fail-status': row.check_result !== i18n.check_weak.bc_result.success}"
+                                ><span>{{ row.check_result }}</span>
+                                </td>
+                                <td
+                                  tiOverflow
+                                  [tiTip]='i18n.common_term_view_report_btn'
+                                  class="cursor-link"
+                                  style="border-left:1px solid #E6EBF5;"
+                                  (click)="createResultOpt(result)"
+                                  [attr.rowspan]="row.rowSpan"
+                                  *ngIf="row.showTd && bcFileResult.status === '0x0d0a00'
+                                  && (row.chinese_check_result === i18n.check_weak.bc_result.success || row.check_result === i18n.check_weak.bc_result.success)"
+                                >{{ i18n.common_term_view_report_btn }}
+                                </td>
+                                <td
+                                  [tiTip]='i18n.check_weak.bc_result.no_modify'
+                                  [attr.rowspan]="row.rowSpan"
+                                  style="border-left:1px solid #E6EBF5;"
+                                  *ngIf="row.showTd && result.status === '0x0d0a02'
+                                   && (row.chinese_check_result === i18n.check_weak.bc_result.success || row.check_result === i18n.check_weak.bc_result.success)"
+                                >{{ i18n.check_weak.bc_result.no_modify }}
+                                </td>
+                                <td
+                                  style="border-left:1px solid #E6EBF5;"
+                                  *ngIf="currentLang === 'zh-cn'
+                                  && (row.chinese_check_result != i18n.check_weak.bc_result.success || row.check_result != i18n.check_weak.bc_result.success)"
+                                ></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </ti-table>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <!-- 内存一致性bc文件生成 -->
+            <div class="result-container" *ngIf="result.type === 'weakCompiler'">
+                <div class="content">
+                    <span class="content-message">
+                        <img [src]="imgUrlFormat(result.state)" alt="" style="vertical-align: middle;" *ngIf="result.status !== '0x0d0b20' && result.status !== '0x0b0412'">
+                        <img [src]="imgUrlFormat('success')" alt="" style="vertical-align: middle;" *ngIf="result.status === '0x0d0b20' || result.status === '0x0b0412'">
+                        <span class="result" *ngIf="result.state === 'stop_success' || result.state === 'stop_failed'">{{ result.msg }}</span>
+                        <span class="result" *ngIf="result.state === 'success' && result.flag">{{ result.msg + '(' + formatCreatedId(result.id) + ')' }}</span>
+                        <span class="result" *ngIf="result.state === 'success' && !result.flag">{{ result.msg }}</span>
+                        <span class="result"
+                          *ngIf="result.state === 'failed'
+                           && result.status !== portWorkerStatusService.createTaskNoWorkerStatus
+                           && result.status !== status.noPerMission"
+                        >
+                            <div *ngIf="result.status !== '0x0d0b11' && result.status !== '0x0d0b20'">
+                                {{ i18n.common_term_weak_compiler_fail_tip + result.msg }}
+                            </div>
+                            <div *ngIf="result.status === '0x0d0b20'">
+                                {{ result.msg }}
+                            </div>
+                            <div class="command-tip" *ngIf="result.status === '0x0d0b11'">
+                                <span>{{ i18n.common_term_weak_compiler_fail_tip + result.msg + i18n.commmon_term_bc_tip }}</span>
+                                <span *ngIf="currentLang === 'zh-cn'"><a (click)="help('weak')">{{ i18n.common_term_help_tip }}</a></span>
+                                <span *ngIf="currentLang === 'zh-cn'">{{ i18n.commmon_term_bc_tip1 }}</span>
+                                <span *ngIf="currentLang === 'en-us'">{{ i18n.commmon_term_bc_tip2 }}</span>
+                                <span *ngIf="currentLang === 'en-us'"><a (click)="help('weak')">online help</a>.</span>
+                            </div>
+                        </span>
+                        <span class="result" *ngIf="result.state === 'failed' && result.status === status.noPerMission">
+                          {{i18n.common_term_weak_compiler_fail_tip + result.msg}}{{ i18n.onlineHelp.tip }}<a (click)="help('scanNoPermission')">{{ i18n.onlineHelp.url }}</a>
+                        </span>
+                        <!-- worker 为0 -->
+                        <span class="result" *ngIf="result.status === portWorkerStatusService.createTaskNoWorkerStatus" style="display: flex;">
+                            <app-user-guide-bar [status]="result.status"></app-user-guide-bar>
+                        </span>
+                    </span>
+                    <span style="padding-right: 10px;font-size: 16px;cursor: pointer;margin-left:10px" (click)="deleteMsg(idx, null, 'weakCompiler')">×</span>
+                </div>
+            </div>
+            <!-- 内存一致性bc文件检查 -->
+            <div class="result-container" *ngIf="result.type === 'bcCheck'">
+                <div class="content" *ngIf="result.status !== '0x0d0a02'">
+                    <span class="content-message">
+                        <img [src]="imgUrlFormat(result.state)" alt="" style="vertical-align: middle;">
+                        <span class="result" *ngIf="result.state === 'stop_success' || result.state === 'stop_failed'">{{ result.msg }}</span>
+                        <span class="result" *ngIf="result.state === 'success' && result.flag">{{ result.msg + '(' + formatCreatedId(result.id) + ')' }}</span>
+                        <span class="result" *ngIf="result.state === 'success' && !result.flag">{{ result.msg }}</span>
+                        <span class="result" *ngIf="result.state === 'failed' && result.status !== status.noPerMission">
+                          {{ i18n.common_term_weak_check_fail_tip + result.msg }}
+                        </span>
+                        <span class="result" *ngIf="result.state === 'failed' && result.status === status.noPerMission">
+                          {{ i18n.common_term_weak_check_fail_tip + result.msg }}{{ i18n.onlineHelp.tip }}<a (click)="help('scanNoPermission')">{{ i18n.onlineHelp.url }}</a>
+                        </span>
+                    </span>
+                    <span style="padding-right: 10px;font-size: 16px;cursor: pointer;margin-left:10px" (click)="deleteMsg(idx, null, 'weakCheck')">×</span>
+                </div>
+                <div class="content" *ngIf="result.status === '0x0d0a02'">
+                    <span class="content-message">
+                        <img [src]="imgUrlFormat(result.state)" alt="" style="vertical-align: middle;">
+                        <span class="result">{{ result.noDataMsg }}</span>
+                    </span>
+                    <span style="padding-right: 10px;font-size: 16px;cursor: pointer;margin-left:10px" (click)="deleteMsg(idx, null, 'weakCheck')">×</span>
+                </div>
+                <div *ngIf="result.state === 'success' && result.flag && result.status !== '0x0d0a02'" class="opt-container">
+                    <button type="button" tiButton color="primary" (click)="createResultOpt(result)" class="operation">{{ i18n.common_term_view_report_btn }}</button>
+                </div>
+            </div>
+            <div class="result-container" *ngIf="result.type === 'LogManage'">
+                <div class="content">
+                    <span class="content-message">
+                        <img [src]="imgUrlFormat(result.state)" alt="" style="vertical-align: middle;">
+                        <span class="result" *ngIf="result.state === 'stop_success' || result.state === 'stop_failed'">{{ result.msg }}</span>
+                        <span class="result" *ngIf="result.state === 'success' && !result.flag">{{ result.msg }}</span>
+                        <span class="result" *ngIf="result.state === 'failed'">{{ i18n.common_term_log_manage_fail_tip + result.msg }}</span>
+                    </span>
+                    <span style="padding-right: 10px;font-size: 16px;cursor: pointer;margin-left:10px" (click)="deleteMsg(idx, null, 'LogManage')">×</span>
+                </div>
+            </div>
+            <div class="result-container" *ngIf="result.type === 'PackagePorting'">
+                <div class="content">
+                    <span class="content-message">
+                        <img [src]="imgUrlFormat(result.state)" alt="" style="vertical-align: middle;">
+                        <span class="result" *ngIf="result.state === 'stop_success' || result.state === 'stop_failed'">{{result.msg}}</span>
+                        <span class="result" *ngIf="result.state === 'success' && result.flag">{{result.msg + '(' + formatCreatedId(result.id) + ')'}}</span>
+                        <span class="result" *ngIf="result.state === 'success' && !result.flag">{{result.msg}}</span>
+                        <span class="result" *ngIf="result.state === 'failed' && result.status === status.comNoPerMission">
+                          {{i18n.common_term_workload_failed_tip + result.msg}}{{ i18n.onlineHelp.tip }}<a (click)="help('scanNoPermission')">{{ i18n.onlineHelp.url }}</a>
+                        </span>
+                        <span class="result" *ngIf="result.state === 'failed' && result.status !== status.comNoPerMission">{{i18n.common_term_workload_failed_tip + result.msg}}</span>
+                    </span>
+                    <span style="padding-right: 10px;font-size: 16px;cursor: pointer;margin-left:10px" (click)="deleteMsg(idx, null, 'PackagePorting')">×</span>
+                </div>
+                <div *ngIf="result.state === 'success' && result.flag" class="opt-container">
+                    <button type="button" tiButton color="primary" (click)="createResultOpt(result)" class="operation">{{i18n.common_term_view_report_btn}}</button>
+                </div>
+            </div>
+
+            <!-- 64位迁移预检 start -->
+            <div class="result-container" *ngIf="result.type === 'PortingPreCheck'">
+                <div class="content">
+                    <span class="content-message">
+                        <img [src]="imgUrlFormat(result.state)" alt="" style="vertical-align: middle;">
+                        <span class="result" *ngIf="result.state === 'stop_success' || result.state === 'stop_failed'">{{result.msg}}</span>
+                        <span class="result" *ngIf="result.state === 'success' && result.situation !== 9">{{result.msg + '(' + formatCreatedId(result.id) + ')'}}</span>
+                        <span class="result" *ngIf="result.state === 'success' && result.situation === 9">{{result.msg}}</span>
+                        <span class="result"
+                            *ngIf="result.state === 'failed'
+                            && result.status !== portWorkerStatusService.createTaskNoWorkerStatus
+                            && result.status !== status.noPerMission"
+                        >{{i18n.common_term_portingcheck_fail + result.msg}}</span>
+                        <span class="result" *ngIf="result.state === 'failed' && result.status === status.noPerMission">
+                          {{ i18n.common_term_portingcheck_fail + result.msg }}{{ i18n.onlineHelp.tip }}<a (click)="help('scanNoPermission')">{{ i18n.onlineHelp.url }}</a>
+                        </span>
+                        <!-- worker 为0 -->
+                        <span class="result" *ngIf="result.status === portWorkerStatusService.createTaskNoWorkerStatus" style="display: flex;">
+                            <app-user-guide-bar [status]="result.status"></app-user-guide-bar>
+                        </span>
+                    </span>
+                    <span style="padding-right: 10px;font-size: 16px;cursor: pointer;margin-left:10px"
+                        *ngIf="result.status === portWorkerStatusService.createTaskNoWorkerStatus"
+                        (click)="deleteMsg(idx, null, 'PortingPreCheck')">×</span>
+                    <span style="padding-right: 10px;font-size: 16px;cursor: pointer;margin-left:10px"
+                        *ngIf="result.status !== portWorkerStatusService.createTaskNoWorkerStatus"
+                        (click)="deleteMsg(idx, result)">×</span>
+                </div>
+                <div *ngIf="result.state === 'success' && result.data" class="opt-container">
+                  <button type="button" tiButton color="primary" (click)="createResultOpt(result)" class="operation">{{i18n.common_term_view_report_btn}}</button>
+                </div>
+            </div>
+            <!-- 64位迁移预检 end -->
+
+            <!-- 结构体字节对齐检查 start -->
+            <div class="result-container" *ngIf="result.type === 'ByteAlignment'">
+                <div class="content">
+                    <span class="content-message">
+                        <img [src]="imgUrlFormat(result.state)" alt="" style="vertical-align: middle;">
+                        <span class="result" *ngIf="result.state === 'success' && result.situation !== 9">{{result.msg + '(' + formatCreatedId(result.id) + ')'}}</span>
+                        <span class="result" *ngIf="result.state === 'success' && result.situation === 9">{{result.msg}}</span>
+                        <span class="result"
+                          *ngIf="result.state === 'failed'
+                          && result.status !== portWorkerStatusService.createTaskNoWorkerStatus
+                          && result.status !== status.noPerMission"
+                        >{{ result.msg }}</span>
+                        <span class="result" *ngIf="result.state === 'failed' && result.status === status.noPerMission">
+                          {{ result.msg }}{{ i18n.onlineHelp.tip }}<a (click)="help('scanNoPermission')">{{ i18n.onlineHelp.url }}</a>
+                        </span>
+                        <!-- worker 为0 -->
+                        <span class="result" *ngIf="result.status === portWorkerStatusService.createTaskNoWorkerStatus" style="display: flex;">
+                            <app-user-guide-bar [status]="result.status"></app-user-guide-bar>
+                        </span>
+                    </span>
+                    <span style="padding-right: 10px;font-size: 16px;cursor: pointer;margin-left:10px"
+                        *ngIf="result.status === portWorkerStatusService.createTaskNoWorkerStatus"
+                        (click)="deleteMsg(idx, null, 'ByteAlignment')">×</span>
+                    <span *ngIf="result.status !== portWorkerStatusService.createTaskNoWorkerStatus" style="padding-right: 10px;font-size: 16px;cursor: pointer;margin-left:10px" (click)="deleteMsg(idx, result)">×</span>
+                </div>
+                <div *ngIf="result.state === 'success' && result.data" class="opt-container">
+                <button type="button" tiButton color="primary" (click)="createResultOpt(result)" class="operation">{{i18n.common_term_view_report_btn}}</button>
+                </div>
+            </div>
+            <!-- 结构体字节对齐检查 end -->
+
+          <!-- 缓存行对齐检查 start -->
+          <div class="result-container" *ngIf="result.type === 'CachelineAlignment'">
+            <div class="content">
+                    <span class="content-message">
+                        <img [src]="imgUrlFormat(result.state)" alt="" style="vertical-align: middle;">
+                        <span class="result" *ngIf="result.state === 'stop_success' || result.state === 'stop_failed'">{{result.msg}}</span>
+                        <span class="result" *ngIf="result.state === 'success' && result.situation !== 9">{{result.msg + '(' + formatCreatedId(result.id) + ')'}}</span>
+                        <span class="result" *ngIf="result.state === 'success' && result.situation === 9">{{result.msg}}</span>
+                        <span class="result"
+                              *ngIf="result.state === 'failed'
+                            && result.status !== portWorkerStatusService.createTaskNoWorkerStatus
+                            && result.status !== status.noPerMission"
+                        >{{i18n.common_cacheline_check.fail_tips_common + result.msg}}</span>
+                        <span class="result" *ngIf="result.state === 'failed' && result.status === status.noPerMission">
+                          {{ i18n.common_cacheline_check.fail_tips_common  + result.msg }}{{ i18n.onlineHelp.tip }}<a (click)="help('scanNoPermission')">{{ i18n.onlineHelp.url }}</a>
+                        </span>
+                      <!-- worker 为0 -->
+                        <span class="result" *ngIf="result.status === portWorkerStatusService.createTaskNoWorkerStatus" style="display: flex;">
+                            <app-user-guide-bar [status]="result.status"></app-user-guide-bar>
+                        </span>
+                    </span>
+              <span style="padding-right: 10px;font-size: 16px;cursor: pointer;margin-left:10px"
+                    *ngIf="result.status === portWorkerStatusService.createTaskNoWorkerStatus"
+                    (click)="deleteMsg(idx, null, 'CachelineAlignment')">×</span>
+              <span style="padding-right: 10px;font-size: 16px;cursor: pointer;margin-left:10px"
+                    *ngIf="result.status !== portWorkerStatusService.createTaskNoWorkerStatus"
+                    (click)="deleteMsg(idx, result)">×</span>
+            </div>
+            <div *ngIf="result.state === 'success' && result.data" class="opt-container">
+              <button type="button" tiButton color="primary" (click)="createResultOpt(result)" class="operation">{{i18n.common_term_view_report_btn}}</button>
+            </div>
+          </div>
+          <!-- 64位迁移预检 end -->
+            <!-- 软件包重构 start -->
+            <div class="result-container" *ngIf="result.type === 'SoftwarePackage'">
+                <!-- 软件包构建成功，下载构建软件包 -->
+                <ng-container *ngIf="result.situation === 2">
+                    <div class="content">
+                        <img [src]="imgUrlFormat(result.state)" alt="" style="vertical-align: middle;height: 100%;">
+                        <span class="result" *ngIf="result.state === 'stop_success' || result.state === 'stop_failed'">{{result.msg}}</span>
+                        <span class="result" style="width: 440px" *ngIf="result.state === 'success'">{{i18n.common_term_webpack_success + ': ' + result.msg}}</span>
+                        <span class="close-img" (click)="deleteMsg(idx, result)">×</span>
+                    </div>
+                    <div *ngIf="result.state === 'success'" class="opt-container">
+                        <button *ngIf="result.data && result.data.packResult" type="button" color="primary" tiButton class="operation" (click)="downloadPackage(result.data.packResult, result.id)">
+                            {{i18n.common_term_download_package}}
+                        </button>
+                    </div>
+                </ng-container>
+                <!-- 软件包重构失败 -->
+                <ng-container *ngIf="result.situation !== 2">
+                    <div class="content software-rebuild-content flex">
+                        <div class="img-box">
+                            <img [src]="imgUrlFormat(result.state)" />
+                        </div>
+                        <div class="result-box">
+                            <span class="result" *ngIf="result.state === 'success'">{{result.msg}}</span>
+                            <span class="result" *ngIf="result.state === 'failed'">
+                                <span *ngIf="result.msg === '任务正在运行。' || result.msg === 'The task is running.'">{{i18n.common_term_software_package_failed_tip_1 + result.msg}}</span>
+                                <span *ngIf="result.msg !== '任务正在运行。' && result.msg !== 'The task is running.'">
+                                    {{i18n.common_term_software_package_failed_tip + result.msg}}{{ i18n.onlineHelp.tip }}<a (click)="help('rebuildFaild')">{{ i18n.onlineHelp.url }}</a>
+                                </span>
+                                <span class="tip" *ngIf="result.data && result.data.packResult">{{i18n.common_term_wepack_fail_replacePack}}</span>
+                            </span>
+                        </div>
+                        <p class="close-img" (click)="deleteMsg(idx, result)">×</p>
+                    </div>
+                    <ti-table class="err-table" *ngIf="result.data && result.data.packResult" [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th tiOverflow *ngFor="let column of columns" width="{{column.width}}">{{column.title}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of displayed;">
+                                    <td tiOverflow>{{ row.file }}</td>
+                                    <td tiOverflow class="p-relative">
+                                        <a (click)="downloadPackage(row.file, '', '2', row)" class="tip-instruct" [ngClass]="{'tip-instruct-en': currentLang !== 'zh-cn', 'tip-software-show': row.showTip}">{{ i18n.common_term_operate_download }}</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ti-table>
+                </ng-container>
+            </div>
+            <!-- 软件包重构 end -->
+            <!-- 专项软件迁移 start -->
+            <div class="result-container"  *ngIf="result.type === 'SoftwarePorting'">
+                <div class="content" style="display: block;">
+                    <div style="justify-content: space-between; display: flex; margin-bottom: 10px;">
+                        <span class="content-message">
+                            <img [src]="imgUrlFormat(result.state)" alt="" style="vertical-align: middle;">
+                            <span class="result" *ngIf="result.state === 'stop_success' || result.state === 'stop_failed'">{{result.msg}}</span>
+                            <span class="result" *ngIf="result.state === 'success'">{{result.msg + softwareTypeFormat(result.software)}}</span>
+                            <span class="result" *ngIf="result.state == 'failed' && result.status !== status.yumFailed">
+                                {{i18n.common_term_software_porting_failed_tip + softwareTypeFormat(result.software) + ': ' + result.msg}}
+                            </span>
+                            <span class="result" *ngIf="result.state == 'failed' && result.status === status.yumFailed">
+                              {{i18n.common_term_software_porting_failed_tip + softwareTypeFormat(result.software) + ': ' + result.msg}}{{ i18n.onlineHelp.tip }}<a (click)="help('yumFailed')">{{ i18n.onlineHelp.url }}</a>
+                            </span>
+                        </span>
+                        <span style="padding-right: 10px;font-size: 16px;cursor: pointer;margin-left:10px" (click)="deleteMsg(idx, result)">×</span>
+                    </div>
+                    <div *ngIf="isSelectAll">
+                        <div *ngIf="result.data && result.data.file" style="padding-left: 34px;margin-bottom: 10px">
+                            <span>{{ i18n.common_term_migration_success_file_output }}</span>
+                            <span style="color: #888;padding-left: 20px;">{{result.data.file}}</span>
+                        </div>
+                        <div *ngIf="result.data && result.data.file" class="opt-container">
+                            <button *ngIf="result.data && result.data.file" type="button" color="primary" tiButton class="operation" (click)="downloadFile(result)">
+                                {{i18n.common_term_migration_success_file_download}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 专项软件迁移关闭提示窗 start -->
+            <div class="result-container" *ngIf="result.type === 'confirmInfo'">
+                <div class="content">
+                    <span>
+                        <img [src]="imgUrlFormat(result.state)" alt="" style="vertical-align: middle;">
+                        <span class="result">{{result.msg}}</span>
+                    </span>
+                </div>
+                <div class="opt-container">
+                    <button type="button"  tiButton (click)="cancel(result)" class="operation">{{i18n.common_term_operate_cancel}}</button>
+                    <button type="button" tiButton color="primary" (click)="conform(result)" class="operation">{{i18n.common_term_operate_ok}}</button>
+                </div>
+            </div>
+            <!-- 专项软件迁移 end -->
+        </ng-container>
+        <ng-container *ngIf="stopConfirmList.length > 0">
+            <div class="result-container" *ngFor="let conf of stopConfirmList">
+                <ng-container *ngIf="conf.subType">
+                    <div class="content">
+                        <span>
+                            <img [src]="imgUrlFormat(conf.state)" alt="" style="vertical-align: middle;">
+                            <span class="result">{{stopMsgTip(conf.subType)}}</span>
+                        </span>
+                    </div>
+                    <div class="opt-container">
+                        <button type="button" tiButton (click)="stopConfirmOpt(conf, false)" class="operation">{{i18n.common_term_operate_cancel}}</button>
+                        <button type="button" tiButton color="primary" (click)="stopConfirmOpt(conf, true)" class="operation">{{i18n.common_term_operate_ok}}</button>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="sourceCodeReport">
+            <div class="result-container">
+                <ng-container *ngIf="sourceCodeReport">
+                  <div class="content">
+                        <span>
+                            <img [src]="imgUrlFormat('warn')" alt="" style="vertical-align: middle;">
+                            <span class="result">{{i18n.common_term_leave_tip2}}</span>
+                        </span>
+                  </div>
+                    <div class="opt-container">
+                        <button type="button" tiButton color="primary" (click)="closeGotoReport()" class="operation">{{i18n.common_term_operate_cancel}}</button>
+                        <button type="button" tiButton  (click)="createResultOpt(tempResult)" class="operation">{{i18n.common_term_operate_ok}}</button>
+                    </div>
+                </ng-container>
+            </div>
+        </ng-container>
+    </div>
+</ng-container>
+
+

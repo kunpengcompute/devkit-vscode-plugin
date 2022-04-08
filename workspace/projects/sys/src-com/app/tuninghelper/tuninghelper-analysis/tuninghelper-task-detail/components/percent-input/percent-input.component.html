@@ -1,0 +1,12 @@
+<input
+  #numberInput
+  tiText
+  type="number"
+  [min]="minValue"
+  [max]="maxValue"
+  (keypress)="onKeypress($event)"
+  [(ngModel)]="number"
+  (ngModelChange)="numberChange()"
+  (blur)="inputBlur($event)"
+/>
+<span>%</span>

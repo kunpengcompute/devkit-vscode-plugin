@@ -1,0 +1,157 @@
+<!-- cpu Package -->
+<div class="box">
+    <div class="box-title" (click)='toggle.CPUPackage=!toggle.CPUPackage'>
+        <img *ngIf="currTheme == 1" src="./assets/img/summary/row_dark.svg" class='title-icon'
+            [ngClass]="{active: toggle.CPUPackage}">
+        <img *ngIf="currTheme == 2" src="./assets/img/summary/row.png" class='title-icon'
+            [ngClass]="{active: toggle.CPUPackage}">
+        CPU Package
+        <div class="titleDetail">
+            <div tiOverflow *ngFor="let item of titleDetail">{{item.title}}: <span>{{item.data}}</span></div>
+        </div>
+    </div>
+    <div class="box-content" [ngClass]="{active: toggle.CPUPackage}">
+        <!-- CPU -->
+        <div class="box">
+            <div class="box-title" (click)='toggle.CPU=!toggle.CPU'>
+                <img *ngIf="currTheme == 1" src="./assets/img/summary/row_dark.svg" class='title-icon'
+                    [ngClass]="{active: toggle.CPU}">
+                <img *ngIf="currTheme == 2" src="./assets/img/summary/row.png" class='title-icon'
+                    [ngClass]="{active: toggle.CPU}">
+                CPUs
+            </div>
+            <div class="box-content" [ngClass]="{active: toggle.CPU}">
+                <ti-table [(displayedData)]="cpuDisplayData" [srcData]="cpuContentData" [columns]="cpuTitle">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th tiOverflow *ngFor="let column of cpuTitle;index as i">
+                                    <span [ngClass]="{'tableFirstData': i == 0}">{{column.title}}</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="!ifCpuNoneData">
+                            <tr *ngFor="let row of cpuDisplayData;">
+                                <td tiOverflow><span class="tableFirstData">{{row.cpu}}</span></td>
+                                <td tiOverflow>{{row.cpuTypeLocal}}</td>
+                                <td tiOverflow>{{row.max}}</td>
+                                <td tiOverflow>{{row.current}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <app-default-page *ngIf="ifCpuNoneData" [text]="CpuNoneData"></app-default-page>
+                    <ti-pagination *ngIf="!ifCpuNoneData" autoHide="true" [(currentPage)]="cpuCurrentPage" style="padding-left: 10px;"
+                        [pageSize]="cpuPageSize" [(totalNumber)]="cpuTotalNumber">
+                    </ti-pagination>
+                </ti-table>
+            </div>
+        </div>
+        <!-- NUMA节点 -->
+        <div class="box">
+            <div class="box-title" (click)='toggle.numaNode=!toggle.numaNode'>
+                <img *ngIf="currTheme == 1" src="./assets/img/summary/row_dark.svg" class='title-icon'
+                    [ngClass]="{active: toggle.numaNode}">
+                <img *ngIf="currTheme == 2" src="./assets/img/summary/row.png" class='title-icon'
+                    [ngClass]="{active: toggle.numaNode}">
+                {{i18n.sys_cof.sum.cpu_info.numa_node}}
+            </div>
+            <div class="box-content" [ngClass]="{active: toggle.numaNode}">
+                <ti-table [(displayedData)]="numaNodeDisplayData" [srcData]="numaNodeContentData"
+                    [columns]="numaNodeTitle">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th tiOverflow *ngFor="let column of numaNodeTitle;index as i" width="{{column.width}}">
+                                    <span [ngClass]="{'tableFirstData': i == 0}">{{column.title}}</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="!ifNumaNoneData">
+                            <tr *ngFor="let row of numaNodeDisplayData;">
+                                <td tiOverflow><span class="tableFirstData">{{row.node}}</span></td>
+                                <td tiOverflow>{{row.nodeNuclear}}</td>
+                                <td tiOverflow>{{row.totalRAM}}</td>
+                                <td tiOverflow>{{row.idleRAM}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <app-default-page *ngIf="ifNumaNoneData" [text]="numaNoneData"></app-default-page>
+                    <ti-pagination *ngIf="!ifNumaNoneData" autoHide="true" [(currentPage)]="numaNodeCurrentPage" style="padding-left: 10px;"
+                        [pageSize]="numaNodePageSize" [(totalNumber)]="numaNodeTotalNumber">
+                    </ti-pagination>
+                </ti-table>
+            </div>
+        </div>
+        <!-- NUMA节点距离 -->
+        <div class="box">
+            <div class="box-title" (click)='toggle.numaNodeDistance=!toggle.numaNodeDistance'>
+                <img *ngIf="currTheme == 1" src="./assets/img/summary/row_dark.svg" class='title-icon'
+                    [ngClass]="{active: toggle.numaNodeDistance}">
+                <img *ngIf="currTheme == 2" src="./assets/img/summary/row.png" class='title-icon'
+                    [ngClass]="{active: toggle.numaNodeDistance}">
+                {{i18n.sys_cof.sum.cpu_info.numa_node_dis}}
+            </div>
+            <div class="box-content" [ngClass]="{active: toggle.numaNodeDistance}">
+                <ti-table [(displayedData)]="numaNodeDistanceDisplayData" [srcData]="numaNodeDistanceContentData"
+                    [columns]="numaNodeDistanceTitle">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th tiOverflow *ngFor="let column of numaNodeDistanceTitle;index as i">
+                                    <span [ngClass]="{'tableFirstData': i == 0}">{{column.title}}</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="!ifnumaNodeDistance">
+                            <tr *ngFor="let row of numaNodeDistanceDisplayData;">
+                                <td tiOverflow><span class="tableFirstData">{{row.node}}</span></td>
+                                <td tiOverflow>{{row.zero}}</td>
+                                <td tiOverflow>{{row.one}}</td>
+                                <td tiOverflow>{{row.two}}</td>
+                                <td tiOverflow>{{row.three}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <app-default-page *ngIf="ifnumaNodeDistance" [text]="numaNodeDistance"></app-default-page>
+                    <ti-pagination *ngIf="!ifnumaNodeDistance" autoHide="true" [(currentPage)]="numaNodeDistanceCurrentPage"
+                        style="padding-left: 10px;" [pageSize]="numaNodeDistancePageSize"
+                        [(totalNumber)]="numaNodeDistanceTotalNumber">
+                    </ti-pagination>
+                </ti-table>
+            </div>
+        </div>
+        <!-- NUMA平衡 -->
+        <div class="box">
+            <div class="box-title" (click)='toggle.numaBalance=!toggle.numaBalance'>
+                <img *ngIf="currTheme == ColorTheme.Dark" src="./assets/img/summary/row_dark.svg" class='title-icon'
+                    [ngClass]="{active: toggle.numaBalance}">
+                <img *ngIf="currTheme == ColorTheme.Light" src="./assets/img/summary/row.png" class='title-icon'
+                    [ngClass]="{active: toggle.numaBalance}">
+                {{i18n.sys_summary.cpupackage_tabel.NUMA_name}}
+            </div>
+            <div class="box-content" [ngClass]="{active: toggle.numaBalance}">
+                <ti-table [(displayedData)]="numaBalanceDisplayData" [srcData]="numaBalanceContentData"
+                    [columns]="numaBalanceTitle">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th tiOverflow *ngFor="let column of numaBalanceTitle;index as i">
+                                    <span [ngClass]="{'tableFirstData': i == 0}">{{column.title}}</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="!ifnumaBalance">
+                            <tr *ngFor="let row of numaBalanceDisplayData;">
+                                <td tiOverflow><span class="tableFirstData">{{row.balance}}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <app-default-page *ngIf="ifnumaBalance" [text]="numaBalance"></app-default-page>
+                    <ti-pagination *ngIf="!ifnumaBalance" autoHide="true" [(currentPage)]="numaBalanceCurrentPage" style="padding-left: 10px;"
+                        [pageSize]="numaBalancePageSize" [(totalNumber)]="numaBalanceTotalNumber">
+                    </ti-pagination>
+                </ti-table>
+            </div>
+        </div>
+    </div>
+</div>

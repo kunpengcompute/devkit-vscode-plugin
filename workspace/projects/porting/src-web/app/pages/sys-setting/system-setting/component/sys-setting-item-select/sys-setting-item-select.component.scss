@@ -1,0 +1,83 @@
+$common12: 12px;
+
+.warpper {
+    .label {
+        &::before {
+            display: inline-block;
+            position: relative;
+            top: 4px;
+            left: 3px;
+            content: '*';
+            width: $common12;
+            height: $common12;
+            margin-left: -$common12;
+            color: #ff524e;
+        }
+    }
+    .input-warpper {
+        padding: 0px;
+    }
+
+    .btn-warpper {
+        margin-left: 250px;
+        margin-top: 16px;
+        margin-bottom: 30px;
+    }
+    .btn-warpper-en {
+        margin-left: 378px;
+        margin-bottom: 30px;
+    }
+
+    .btn-fix {
+        button {
+            padding: 0px !important;
+        }
+    }
+}
+
+input {
+    width: 300px;
+}
+
+ti-select {
+    &[disabled] {
+        width: 300px;
+    }
+
+    &:not([disabled]) {
+        box-sizing: border-box;
+        width: 300px;
+        background: #fff !important;
+    }
+}
+
+label {
+    display: inline-block;
+    width: 214px;
+    font-size: 14px;
+    color: #666;
+    position: relative;
+    padding-right: 16px;
+}
+
+button+button {
+    margin-left: 16px;
+}
+
+button {
+    width: 88px;
+}
+
+span {
+    margin-left: 8px;
+    color: #616161;
+}
+
+.log-tip-icon {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    left: 8px;
+}

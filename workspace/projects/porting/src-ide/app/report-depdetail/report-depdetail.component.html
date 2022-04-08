@@ -1,0 +1,374 @@
+<!-- 软件迁移评估历史报告 -->
+<div class="dep-report-container scroll-style" [ngClass]="{'vscode-porting': !intelliJFlagDef}">
+    <div class="report-time">
+        <p>{{i18n.common_term_report_generation_time}} <span>{{ currentReport }}</span></p>
+    </div>
+    <div class="config-list-title">{{i18n.plugins_porting_setting_label}}</div>
+    <div class="project-params">
+        <div class="project-detail">
+            <div class="config-list-table" [ngStyle]="{'min-width': currLang == 'en' ? '400px' : '340px'}">
+                <div class="item-child-container" *ngIf="scanInfo.item1.package.value[0]">
+                    <div class="item-label">{{scanInfo.item1.package.lable}}</div>
+                    <div class="item-content item-contentfirst" tiOverflow>{{packageTipStr}}</div>
+                </div>
+                <div class="item-child-container" *ngIf="scanInfo.item1.software.value[0]">
+                    <div class="item-label">{{i18n.plugins_porting_label_softPackInstallPath}}</div>
+                    <div class="item-content item-contentfirst">
+                        {{scanInfo.item1.software.value}}
+                    </div>
+                </div>
+                <div class="item-child-container">
+                    <div class="item-label">{{depArgs.softwareCode.item2.target_os.label}}</div>
+                    <div class="item-content">{{depArgs.softwareCode.item2.target_os.value}}</div>
+                </div>
+                <div class="item-child-container">
+                    <div class="item-label">{{depArgs.softwareCode.item2.target_system_kernel_version.label}}</div>
+                    <div class="item-content">{{depArgs.softwareCode.item2.target_system_kernel_version.value}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project-result">
+            <div class="preview-list" [ngStyle]="{'min-width': '460px'}">
+                <div class="preview-detail-list">
+                    <div class="preview-detail-list-items">
+                        <div class="preview-list-block">
+                            <div class="block-title">{{i18n.plugins_port_label_cFileSummary}}</div>
+                            <div class="block-data">{{soFilesTotal-soFilesNeed}}</div>
+                        </div>
+                        <div class="preview-list-block">
+                            <div class="block-title">{{i18n.plugins_port_label_linesSummary}}</div>
+                            <div class="block-data">{{soFilesNeed}}</div>
+                        </div>
+                        <div class="preview-list-block">
+                            <div class="block-title">{{i18n.plugins_port_label_soFileSummary}}</div>
+                            <div class="block-data">{{soFilesTotal}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!intelliJFlagDef">
+        <div *ngFor="let item of scanItems">
+            <div class="scan-item-container" *ngIf="item!='lines'">
+                <div class="scan-item-label">
+                    <div class="detail-label">
+                        <div class="detail-title">
+                            {{i18n.common_term_result_soFile}}
+                            <span class="cfile-line-detail" *ngIf="item== 'cFile'">{{scanItemsObj.lines.content}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="scanItemsObj[item].hasTable" class="items-detail-container">
+                    <div *ngIf="item== 'soFile'">
+                        <ti-table
+                            [(displayedData)]="binDetailDisplay"
+                            [srcData]="binDetailSrcData"
+                            [columns]="binDetailColumns"
+                            [searchWords]="searchWords"
+                            [searchKeys]="searchKeys"
+                            tiColsResizable
+                            class="ti3-table">
+                            <div class="ti3-table-fixed-head">
+                                <table [ngClass]="{'scroll-bar-table': binDetailDisplay.length > 14}">
+                                    <thead>
+                                        <tr>
+                                            <ng-container
+                                                *ngFor="let column of binDetailColumns; index as i; trackBy: trackByFn">
+                                                <th *ngIf="column.title !== i18n.common_term_report_result" tiOverflow width="{{column.width}}">
+                                                    {{column.title}}</th>
+                                                <th *ngIf="column.title === i18n.common_term_report_result" width="{{column.width}}">
+                                                    <!--当表头有排序图标或漏斗排序图标，文本title需要显示不下出省略号及tip时需使用ti-cell-text组件；
+                            ti-head-filter为表头过滤漏斗图标-->
+                                                    <ti-cell-text>{{column.title}}</ti-cell-text>
+                                                    <!--ngModel接口可设置和获取headfilter下拉选中值，ti3-head-filtered样式类是
+                                组件提供的设置有过滤时漏斗的高亮样式，可自定义高亮时机-->
+                                                    <ti-head-filter
+                                                        [options]="column.options"
+                                                        [(ngModel)]="column.selected"
+                                                        (select)="onBinDetailSelect($event, column)"
+                                                        [ngClass]="{'ti3-head-filtered': column.selected && column.selected.label !== i18n.plugins_porting_option_cFile_all}">
+                                                    </ti-head-filter>
+                                                </th>
+                                            </ng-container>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="ti3-table-container ti3-resize-wrapper" [hyNodata]="{text: i18n.plugins_porting_message_soFile_noData1 }" [nodataShow]="binDetailDisplay.length === 0">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <ng-container *ngFor="let column of binDetailColumns; index as idx;">
+                                                <th tiOverflow width="{{ column.width }}"></th>
+                                            </ng-container>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="binDetailDisplay.length > 0">
+                                        <ng-container *ngFor="let row of binDetailDisplay; index as i;">
+                                            <tr>
+                                                <td details-icon-column *ngIf="isPathExt" class="dropdown-center">
+                                                    <ti-details-icon *ngIf="row.path_ext.length" [row]="row" [index]="i"
+                                                        (beforeToggle)="beforeToggle($event)">
+                                                    </ti-details-icon>
+                                                    <!--展开详情图标，传入行数据-->
+                                                </td>
+                                                <td>{{row.number}}</td>
+                                                <td tiOverflow>{{row.name}}</td>
+                                                <td>
+                                                    <span tiOverflow class="td-span">{{row.fileType}}</span>
+                                                </td>
+                                                <td class="td-border-right">
+                                                    <span tiOverflow class="td-span">{{row.path}}</span>
+                                                <!--表格合并使用table原生的rowspan、colspan即可-->
+                                                <td [attr.rowspan]="row.rowSpan" class="td-border-right" *ngIf="row.showTd">
+                                                    <span tiOverflow class="td-span">{{row.urlName}}</span>
+                                                <td [attr.rowspan]="row.rowSpan" class="td-border-right" *ngIf="row.showTd">
+                                                    <span tiOverflow class="td-span">{{row.oper}}</span>
+                                                <td [attr.rowspan]="row.rowSpan" *ngIf="row.showTd">
+                                                    <span *ngIf="!row.url" [tiTip]='row.result' tiTipPosition="top"
+                                                        style="line-height: 18px;display: flex;">
+                                                        <span
+                                                            *ngIf="row.level == 0 || row.level == 3 || row.level == 6">--</span>
+                                                        <span *ngIf="row.level != 0 && row.level != 3 && row.level != 6 "
+                                                            style="overflow: hidden;text-overflow: ellipsis;">
+                                                            {{ row.result }}
+                                                        </span>
+                                                    </span>
+                                                    <span *ngIf="row.url && row.url.lastIndexOf('/') > -1"
+                                                        style="line-height: 18px;display: flex;">
+                                                        <a *ngIf="(row.level == 0 || row.level == 3 || row.level == 6) && !row.downloadDesc"
+                                                            (click)="downloadSoFile(row.url)"
+                                                            style="text-transform: capitalize;">{{ row.result }}</a>
+                                                        <a [tiTip]='row.result' tiTipPosition="top"
+                                                            *ngIf="row.level != 0 && row.level != 3 && row.level != 6 && !row.downloadDesc && row.result !==  '下载源码' && row.result !== 'Download Source Code'"
+                                                            style="width: 120px;overflow: hidden;text-overflow: ellipsis;"
+                                                            (click)="downloadSoFile(row.url)">{{
+                                                            row.result }}</a>
+                                                        <a *ngIf="row.level != 0 && row.level != 3 && row.level != 6 && !row.downloadDesc && (row.result ===  '下载源码' || row.result === 'Download Source Code')"
+                                                            [href]="row.url" target="_blank">{{ row.result }}</a>
+                                                        <!-- 复制下载链接 -->
+                                                        <a class="re-copy-link" (click)="onCopy(row.url, copy, row)"
+                                                            [tiTip]='copySuccess' tiTipTrigger='manual'
+                                                            [tiTipHasArrow]="false"
+                                                            #copy='tiTip'>{{ i18n.common_term_report_copy_link }}
+                                                        </a>
+                                                    </span>
+                                                    <span *ngIf="row.url && row.url.lastIndexOf('/') > -1 && row.isAarch64">{{ i18n.common_kunpeng_platform_compatible }}</span>
+                                                    <span *ngIf="row.url && row.url.lastIndexOf('/') === -1"
+                                                        [tiTip]='i18n.common_term_upload_unable'
+                                                        class="cursor-dafult">--</span>
+                                                </td>
+                                            </tr>
+
+                                            <ng-container *ngFor="let son of row.soInfoList; index as idx;">
+                                                <tr *tiDetailsTr="row">
+                                                    <td class="row-left" [ngClass]="{'hide-border-bottom': idx !== row.soInfoList.length -1}"></td>
+                                                    <td></td>
+                                                    <td tiOverflow>{{ row.name }}</td>
+                                                    <td tiOverflow>{{ row.fileType }}</td>
+                                                    <td tiOverflow class="ext_more">{{son.path}}</td>
+                                                    <!-- soFileHasUrl为true：.so文件有下载链接 -->
+                                                    <ng-container *ngIf="row.soFileHasUrl">
+                                                        <!-- son.mergeRowSpan.urlName：需要合并的行数 son.showTd.urlName：是否显示该td-->
+                                                        <td [attr.rowspan]="son.mergeRowSpan.urlName" *ngIf="son.showTd.urlName" class="tb-border-gray">
+                                                            <span tiOverflow class="td-span">{{son.urlName}}</span>
+                                                        </td>
+                                                        <td [attr.rowspan]="son.mergeRowSpan.oper" *ngIf="son.showTd.oper" class="tb-border-gray">
+                                                            <span tiOverflow class="td-span">{{son.oper}}</span>
+                                                        <td [attr.rowspan]="son.mergeRowSpan.result" *ngIf="son.showTd.result">
+                                                            <span class="down-copy" *ngIf="son.url">
+                                                                <a tiOverflow (click)="downloadSoFile(son.url)" style="text-transform: capitalize;">{{ son.result }}</a>
+                                                                <!-- 复制下载链接 -->
+                                                                <a class="re-copy-link" (click)="onCopy(son.url, copy, son)"
+                                                                    [tiTip]='copySuccess' tiTipTrigger='manual'
+                                                                    [tiTipHasArrow]="false"
+                                                                    #copy='tiTip'>{{ i18n.common_term_report_copy_link }}
+                                                                </a>
+                                                            </span>
+                                                            <span *ngIf="son.urlName === '--'" tiOverflow class="td-span">{{ son.result }}</span>
+                                                            <span *ngIf="son.result === '--'" [tiTip]='i18n.common_term_upload_unable' class="cursor-default">{{ son.result }}</span>
+                                                        </td>
+                                                    </ng-container>
+                                                </tr>
+                                            </ng-container>
+                                        </ng-container>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ti-table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="intelliJFlagDef" class="recognize-items detail-border scroll-style" id="intelij">
+        <div *ngFor="let item of scanItems">
+            <div class="scan-item-container" *ngIf="item!='lines'">
+                <div class="scan-item-label">
+                    <div class="detail-label">
+                        <div class="detail-title">
+                            {{i18n.common_term_result_soFile}}
+                            <span class="cfile-line-detail" *ngIf="item== 'cFile'">{{scanItemsObj.lines.content}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="scanItemsObj[item].hasTable" class="items-detail-container">
+                    <div *ngIf="item== 'soFile'">
+                        <ti-table
+                            [(displayedData)]="binDetailDisplay"
+                            [srcData]="binDetailSrcData"
+                            [columns]="binDetailColumns"
+                            [searchWords]="searchWords"
+                            [searchKeys]="searchKeys"
+                            tiColsResizable
+                            class="ti3-table">
+                            <div class="ti3-table-fixed-head">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <ng-container
+                                                *ngFor="let column of binDetailColumns; index as i; trackBy: trackByFn">
+                                                <th *ngIf="column.title !== i18n.common_term_report_result" tiOverflow width="{{column.width}}">
+                                                    {{column.title}}</th>
+                                                <th *ngIf="column.title === i18n.common_term_report_result" width="{{column.width}}">
+                                                    <!--当表头有排序图标或漏斗排序图标，文本title需要显示不下出省略号及tip时需使用ti-cell-text组件；
+                            ti-head-filter为表头过滤漏斗图标-->
+                                                    <ti-cell-text>{{column.title}}</ti-cell-text>
+                                                    <!--ngModel接口可设置和获取headfilter下拉选中值，ti3-head-filtered样式类是
+                                组件提供的设置有过滤时漏斗的高亮样式，可自定义高亮时机-->
+                                                    <ti-head-filter
+                                                        [options]="column.options"
+                                                        [(ngModel)]="column.selected"
+                                                        (select)="onBinDetailSelect($event, column)"
+                                                        [ngClass]="{'ti3-head-filtered': column.selected && column.selected.label !== i18n.plugins_porting_option_cFile_all}">
+                                                    </ti-head-filter>
+                                                </th>
+                                            </ng-container>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="ti3-table-container ti3-resize-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <ng-container *ngFor="let column of binDetailColumns; index as idx;">
+                                                <th tiOverflow width="{{ column.width }}"></th>
+                                            </ng-container>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf="binDetailDisplay.length > 0">
+                                        <ng-container *ngFor="let row of binDetailDisplay; index as i;">
+                                            <tr>
+                                                <td details-icon-column *ngIf="isPathExt" class="dropdown-center">
+                                                    <img *ngIf="!row.showSub && row.path_ext.length!=0"
+                                                    src="./assets/img/home/row.svg"
+                                                    class="path_more row_collapse_icon img-active"
+                                                    (click)="beforeToggle(row)" />
+                                                    <img *ngIf=" row.showSub && row.path_ext.length!=0"
+                                                    src="./assets/img/home/row_dark.svg"
+                                                    class="path_more row_collapse_icon tip-img"
+                                                    (click)="beforeToggle(row)" />
+                                                <td>{{row.number}}</td>
+                                                <td tiOverflow>{{row.name}}</td>
+                                                <td tiOverflow>{{row.fileType}}</td>
+                                                <td tiOverflow class="td-border-right">{{row.path}}</td>
+                                                <!--表格合并使用table原生的rowspan、colspan即可-->
+                                                <td tiOverflow [attr.rowspan]="row.rowSpan" class="td-border-right" *ngIf="row.showTd">
+                                                    <span tiOverflow class="td-span">{{row.urlName}}</span>
+                                                </td>
+                                                <td tiOverflow [attr.rowspan]="row.rowSpan" class="td-border-right" *ngIf="row.showTd">
+                                                    <span tiOverflow class="td-span">{{row.oper}}</span>
+                                                </td>
+                                                <td [attr.rowspan]="row.rowSpan" *ngIf="row.showTd">
+                                                    <span *ngIf="!row.url" [tiTip]='row.result' tiTipPosition="top"
+                                                        style="line-height: 18px;display: flex;">
+                                                        <span
+                                                            *ngIf="row.level == 0 || row.level == 3 || row.level == 6">--</span>
+                                                        <span *ngIf="row.level != 0 && row.level != 3 && row.level != 6 "
+                                                            style="overflow: hidden;text-overflow: ellipsis;">
+                                                            {{ row.result }}
+                                                        </span>
+                                                    </span>
+                                                    <span *ngIf="row.url && row.url.lastIndexOf('/') > -1"
+                                                        style="line-height: 18px;display: flex;">
+                                                        <a *ngIf="(row.level == 0 || row.level == 3 || row.level == 6) && !row.downloadDesc"
+                                                            (click)="downloadSoFile(row.url)"
+                                                            style="text-transform: capitalize;" class="re-down-link">{{ row.result }}</a>
+                                                        <a [tiTip]='row.result' tiTipPosition="top"
+                                                            *ngIf="row.level != 0 && row.level != 3 && row.level != 6 && !row.downloadDesc && row.result !==  '下载源码' && row.result !== 'Download Source Code'"
+                                                            style="width: 120px;overflow: hidden;text-overflow: ellipsis;"
+                                                            (click)="downloadSoFile(row.url)" class="re-down-link">{{
+                                                            row.result }}</a>
+                                                        <a *ngIf="row.level != 0 && row.level != 3 && row.level != 6 && !row.downloadDesc && (row.result ===  '下载源码' || row.result === 'Download Source Code')"
+                                                            [href]="row.url" target="_blank" class="re-down-link">{{ row.result }}</a>
+                                                        <!-- 复制下载链接 -->
+                                                        <a class="re-copy-link" (click)="onCopy(row.url, copy, row)"
+                                                            [tiTip]='copySuccess' tiTipTrigger='manual'
+                                                            [tiTipHasArrow]="false"
+                                                            #copy='tiTip'>{{ i18n.common_term_report_copy_link }}
+                                                        </a>
+                                                    </span>
+                                                    <span *ngIf="row.url && row.url.lastIndexOf('/') > -1 && row.isAarch64">{{ i18n.common_kunpeng_platform_compatible }}</span>
+                                                    <span *ngIf="row.url && row.url.lastIndexOf('/') === -1"
+                                                        [tiTip]='i18n.common_term_upload_unable'
+                                                        class="cursor-dafult">--</span>
+                                                </td>
+                                            </tr>
+                                            <ng-container *ngIf="row.showSub">
+                                                <ng-container *ngFor="let son of row.soInfoList">
+                                                    <tr *tiDetailsTr="row">
+                                                        <td class="row-left"></td>
+                                                        <td></td>
+                                                        <td tiOverflow>{{ row.name }}</td>
+                                                        <td tiOverflow>{{ row.fileType }}</td>
+                                                        <td tiOverflow class="ext_more">{{son.path}}</td>
+                                                        <!-- soFileHasUrl为true：.so文件有下载链接 -->
+                                                        <ng-container *ngIf="row.soFileHasUrl">
+                                                            <!-- son.mergeRowSpan.urlName：需要合并的行数 son.showTd.urlName：是否显示该td-->
+                                                            <td tiOverflow [attr.rowspan]="son.mergeRowSpan.urlName" *ngIf="son.showTd.urlName" class="tb-border-gray">{{son.urlName}}</td>
+                                                            <td tiOverflow [attr.rowspan]="son.mergeRowSpan.oper" *ngIf="son.showTd.oper" class="tb-border-gray">{{son.oper}}</td>
+                                                            <td tiOverflow [attr.rowspan]="son.mergeRowSpan.result" *ngIf="son.showTd.result">
+                                                                <span class="down-copy" *ngIf="son.url">
+                                                                    <a (click)="downloadSoFile(son.url)" style="text-transform: capitalize;">{{ son.result }}</a>
+                                                                    <!-- 复制下载链接 -->
+                                                                    <a class="re-copy-link" (click)="onCopy(son.url, copy, son)"
+                                                                        [tiTip]='copySuccess' tiTipTrigger='manual'
+                                                                        [tiTipHasArrow]="false"
+                                                                        #copy='tiTip'>{{ i18n.common_term_report_copy_link }}
+                                                                    </a>
+                                                                </span>
+                                                                <span *ngIf="son.urlName === '--'">{{ son.result }}</span>
+                                                                <span *ngIf="son.result === '--'" [tiTip]='i18n.common_term_upload_unable' class="cursor-default">{{ son.result }}</span>
+                                                            </td>
+                                                        </ng-container>
+                                                    </tr>
+                                                </ng-container>
+                                            </ng-container>
+                                        </ng-container>
+                                    </tbody>
+                                </table>
+                                <app-default-page *ngIf="binDetailDisplay.length === 0" [height]="'180px'"
+                                    [text]="soFileNoData" [image]="nodataImage"></app-default-page>
+                            </div>
+                        </ti-table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="download-btn" [ngClass]="{'border-top-dashed' : !intelliJFlagDef}">
+        <button type="button" (click)="downloadReport(REPORT_SCV_HTML.CSV)" [ngClass]="{'intelijbtn' : intelliJFlagDef, 'secondary-btn': !intelliJFlagDef}">
+            <p>{{i18n.common_term_history_project_downloadc}}</p>
+        </button>
+        <button type="button" (click)="downloadReport(REPORT_SCV_HTML.HTML)" [ngClass]="{'intelijbtn' : intelliJFlagDef, 'secondary-btn': !intelliJFlagDef}">
+            <p>{{i18n.common_term_history_project_downloadh}}</p>
+        </button>
+    </div>
+</div>

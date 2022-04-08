@@ -1,0 +1,47 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 400px;
+  padding: 18px 32px 32px 32px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.1);
+  .header {
+    display: flex;
+    font-size: 20px;
+    color: #222222;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    .close {
+      cursor: pointer;
+    }
+  }
+  .main {
+    width: 100%;
+    margin: 22px 0 34px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    img {
+      width: 24px;
+      margin-right: 8px;
+    }
+    span {
+      font-size: 14px;
+      color: #616161;
+    }
+  }
+  .foot {
+    width: 100%;
+    text-align: center;
+    button {
+      width: 88px;
+      height: 28px;
+      line-height: 26px;
+    }
+    .confirm {
+      margin-right: 16px;
+    }
+  }
+}

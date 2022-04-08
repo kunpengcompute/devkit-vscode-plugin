@@ -1,0 +1,28 @@
+<app-alert-modal #modal>
+  <div class="content" *ngIf="isOpen">
+    <div class="header">
+      <div class="header-title">
+        <img src="./assets/img/newSvg/hyper_tunner_logo.svg">
+        <span>{{i18n.newHeader.aboutMsg.name}}</span>
+      </div>
+      <img class="close" (click)="close()" 
+      (mouseenter)="onHoverClose('closer')" 
+      (mouseleave)="onHoverClose()" 
+      [src]="hoverClose==='closer'?'./assets/img/newSvg/close_hover.svg':' ./assets/img/header/close_icon.svg'">
+    </div>
+    <div class=" main">
+      <div class="msg">
+        <span class="circle"></span>
+        <span>{{i18n.newHeader.aboutMsg.version}}{{version}}</span>
+      </div>
+      <div class="msg">
+        <span class="circle"></span>
+        <span>{{i18n.newHeader.aboutMsg.time}}{{updateTime}}</span>
+      </div>
+      <div class="msg">
+        <span class="circle"></span>
+        <span>{{i18n.newHeader.aboutMsg.copyRight}}</span>
+      </div>
+    </div>
+  </div>
+</app-alert-modal>

@@ -1,0 +1,65 @@
+.ti3-table {
+  > .ti3-table-container {
+    max-height: 60vh;
+    .operateBox {
+      span.operateIcon {
+        color: #0067ff;
+        cursor: pointer;
+
+        &:not(:first-child) {
+          margin-left: 16px;
+        }
+      }
+    }
+  }
+}
+
+.filter-box {
+  position: relative;
+  display: inline-block;
+  padding-left: 8px;
+  top: 2px;
+
+  img {
+    cursor: pointer;
+  }
+
+  .filter-box-list {
+    min-width: 202px;
+    max-height: 327px;
+    position: absolute;
+    display: none;
+    overflow: scroll;
+    top: 30px;
+    left: 0px;
+    z-index: 9999;
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 2px;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+
+    .searchbox {
+      width: 100%;
+      height: 28px;
+    }
+  }
+}
+
+.filter-box:hover .filter-box-list {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.ti3-table > .ti3-table-fixed-head {
+  overflow: visible;
+}
+
+.ti3-table > .ti3-table-fixed-head > table > thead > tr > th {
+  overflow: visible;
+  .search-icon {
+    width: 12px;
+    height: 12px;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+}

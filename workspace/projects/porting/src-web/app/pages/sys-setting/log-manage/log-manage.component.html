@@ -1,0 +1,81 @@
+
+    <div class="modal-dialog">
+        <div class="content flex-column">
+          <span class="create-title">{{isAdmin ? i18n.common_term_user_info[7] : i18n.common_term_user_info[1]}}</span>
+          <div class="modal-dialog-container">
+            <div class="content_tab" *ngIf="isAdmin">
+              <span class="create-title"  [ngClass]="{'active': isOperate}" (click)="isOperate = true">{{i18n.common_term_user_info[1]}}</span>
+              <span class="create-title" [ngClass]="{'active': !isOperate}" (click)="isOperate = false">{{i18n.common_term_user_info[6]}}</span>
+            </div>
+            <div *ngIf="isOperate">
+              <div class="flex flex-items">
+                <button type="button" tiButton class="downLoadLog" (click)="downloadLog()">{{ i18n.common_term_operate_download }}</button>
+                <span class="operate-log-tip">{{ i18n.common_term_user_sysLog_remark }}</span>
+              </div>
+              <ti-table [(displayedData)]="displayed" class="log-table" [srcData]="logList" [columns]="columsLog">
+                <div class="ti3-table-fixed-head">
+                  <table>
+                    <thead>
+                      <tr>
+                        <!--实际显示的表头。注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+                        <th tiOverflow *ngFor="let colum of columsLog" width="{{colum.width}}">{{colum.title}}</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <div class="ti3-table-container setting-table" [hyNodata]="{text: i18n.common_term_task_nodata }" [nodataShow]="displayed.length === 0">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th tiOverflow *ngFor="let colum of columsLog" width="{{colum.width}}"></th>
+                      </tr>
+                    </thead>
+                   <tbody>
+                      <tr *ngFor="let log of displayed">
+                        <td tiOverflow tiTipPosition="left">{{log.username}}</td>
+                        <td tiOverflow tiTipPosition="left">{{log.event}}</td>
+                        <td tiOverflow tiTipPosition="left">
+                          <span class="status-icon" [ngClass]="statusFormat(log.result)"></span>
+                          <span>{{log.result}}</span>
+                        </td>
+                        <td tiOverflow tiTipPosition="left">{{log.time}}</td>
+                        <td tiOverflow tiTipPosition="left">{{log.detail}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <ti-pagination
+                  *ngIf="totalNumberLog > 10"
+                  [(currentPage)]="currentPageLog"
+                  [pageSize]="pageSizeLog"
+                  [(totalNumber)]="totalNumberLog"
+                  (pageUpdate)="onPageUpdateLog($event)"
+                  [showGotoLink]="showGotoLink"
+                >
+                </ti-pagination>
+              </ti-table>
+            </div>
+            <div *ngIf="!isOperate" style="margin-top: 20px;">
+              <ti-table class="log-table" style="flex: 1">
+                <div class="ti3-table-container" style="height:370px">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th width="50%">{{i18n.common_term_log_filename}}</th>
+                        <th width="50%">{{i18n.common_term_operate}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td tiOverflow>log.zip</td>
+                        <td (click)="downloadRunLog()" class="downloadLog-btn" *ngIf="!isRunLog">{{i18n.common_term_download_runlog}}</td>
+                        <td style="color: #ccc;font-size: 12px;cursor: not-allowed;" *ngIf="isRunLog">{{i18n.common_term_download_runlog}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </ti-table>
+            </div>
+          </div>
+        </div>
+      </div>

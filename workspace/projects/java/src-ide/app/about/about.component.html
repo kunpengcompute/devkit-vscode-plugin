@@ -1,0 +1,15 @@
+<div class="bg" (click)="close()" [ngClass]="{ close: gone }"></div>
+<div class="content" [ngClass]="{ close: gone }">
+  <img
+    class="incorrect"
+    (click)="close()"
+    src="./assets/img/home/closetips.png"
+  />
+  <div class="main">
+    <img [src]="logoSrc" />
+    <div class="first-title">{{ i18n.aboutMsg.name }}</div>
+    <div>{{ i18n.aboutMsg.version }}</div>
+    <div>{{ i18n.aboutMsg.time }}</div>
+    <div class="last-title">{{ i18n.aboutMsg.copyRight }}</div>
+  </div>
+</div>

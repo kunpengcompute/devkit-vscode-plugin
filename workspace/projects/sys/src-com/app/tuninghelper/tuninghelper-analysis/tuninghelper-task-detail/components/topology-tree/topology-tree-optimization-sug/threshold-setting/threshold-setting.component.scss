@@ -1,0 +1,110 @@
+.threshold-setting-container {
+  height: 100%;
+  position: relative;
+
+  .middle {
+    overflow: auto;
+    padding-right: 32px;
+  
+    .right-expand-form {
+      ::ng-deep .ti3-form-label{
+        width: 240px;
+      }
+
+      .lable-desc {
+        max-width: 206px;
+      }
+
+      .lable-no-desc {
+        max-width: 224px;
+      }
+    }
+
+    .right-no-expand-form {
+      ::ng-deep .ti3-form-label{
+        width: 200px;
+      }
+
+      .lable-desc {
+        max-width: 166px;
+      }
+
+      .lable-no-desc {
+        max-width: 184px;
+      }
+    }
+
+    .about-mask {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 4px;
+      height: 14px;
+      line-height: 14px;
+    }
+
+    .curr-value {
+      height: 18px;
+      font-size: 12px;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 18px;
+      letter-spacing: 0px;
+      color: var(--font-d-888888-l-979797);
+      margin-top: 4px;
+    }
+
+    input {
+      background-color: transparent !important;
+      width: 200px;
+    }
+
+    ::ng-deep .ti3-form-label {
+      box-sizing: border-box;
+      padding-right: 16px;
+
+      div {
+        display: flex;
+        align-items: center;
+  
+        span {
+          &:first-of-type {
+            display: inline-block;
+            color: var(--font-d-aaaaaa-l-616161);
+          }
+        }
+      }
+    }
+
+    .form-title {
+      height: 24px;
+      font-size: 16px;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 24px;
+      letter-spacing: 0px;
+      color: var(--font-d-e8e8e8-l-222222);
+      margin-bottom: 20px;
+    }
+
+    .memory-free-form {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--common-color-divider);
+    }
+  }
+
+  .footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    padding: 24px 0 12px 0;
+
+    button {
+      &:first-of-type {
+        margin-right: 16px;
+      }
+      width: 88px;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "noImplicitReturns": false,
+    "noImplicitAny": false,
+    "types": [
+      "jquery","d3","node" 
+    ]
+  },
+  "include": [
+    "**/*.ts",
+    "./declares/*.ts"
+  ],
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ]
+}

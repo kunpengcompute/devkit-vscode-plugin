@@ -1,0 +1,119 @@
+<div class="modal-dialog" id="itemImportAndExportTask">
+    <div class="header">{{ i18n.project.importAndExportTask }}</div>
+
+    <ti-table [(displayedData)]="table.displayed" [srcData]="table.srcData" [columns]="table.columns" tiColsResizable
+        class="custemTable" (stateUpdate)="stateUpdate()">
+        <div class="ti3-table-fixed-head">
+            <table>
+                <thead>
+                    <tr>
+                        <th *ngFor="let column of table.columns" tiOverflow [width]="column.width">{{ column.label }}
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+        <div class="ti3-table-container ti3-resize-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th *ngFor="let column of table.columns" tiOverflow [width]="column.width"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let row of table.displayed; let index = index">
+                        <td tiOverflow>{{ row.taskname || '--' }}</td>
+                        <td tiOverflow>{{ row.projectname || '--' }}</td>
+                        <td tiOverflow>{{ operateTypes[row.operation_type] || '--' }}</td>
+
+                        <!-- 任务状态 -->
+                        <td tiOverflow>
+                            <div class="taskStatusTdContent">
+                                <div class="status">
+                                    <ng-container [ngSwitch]="row.status.status">
+                                        <!-- succeeded -->
+                                        <div *ngSwitchCase="'succeeded'" class="statusIcon succeeded"></div>
+
+                                        <!-- failed -->
+                                        <div *ngSwitchCase="'failed'" class="statusIcon failed"></div>
+
+                                        <!-- running -->
+                                        <div *ngSwitchCase="'running'" class="running"></div>
+
+                                        <!-- uploading -->
+                                        <div *ngSwitchCase="'uploading'" class="running"></div>
+                                    </ng-container>
+                                </div>
+
+                                <span tiOverflow class="info">{{ row.status.text }}</span>
+                            </div>
+                        </td>
+                        <td tiOverflow>{{ row.detail_info || '--' }}</td>
+                        <td tiOverflow>{{ row.size || '--' }}</td>
+                        <td tiOverflow>{{ handleTime(row.start_time) || '--' }}</td>
+                        <td tiOverflow>{{ handleTime(row.end_time) || '--' }}</td>
+
+                        <!-- 操作 -->
+                        <td tiOverflow>
+                            <div class="operateBox">
+                                <ng-container *ngIf="row.operateList?.length; else noOperate">
+                                    <span class="operateIcon" *ngFor="let operate of row.operateList"
+                                        [ngStyle]="{width: operate.width}"
+                                        (click)="!operate.disabled && handleOperate(row, operate)"
+                                        [ngClass]="{disabled: operate.disabled || (userInfo.role !== 'Admin' && userInfo.id !== row.ownerId)}">{{ operate.text }}</span>
+                                </ng-container>
+
+                                <ng-template #noOperate>
+                                    <span>--</span>
+                                </ng-template>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <app-default-page *ngIf="table.displayed.length === 0" [image]="image"></app-default-page>
+        </div>
+        <ti-pagination *ngIf="table.displayed.length !== 0" [(currentPage)]="table.pageNo" [pageSize]="table.pageSize"
+            [(totalNumber)]="table.total" (stateUpdate)="stateUpdate()" [showGotoLink]="true"></ti-pagination>
+    </ti-table>
+</div>
+
+<ng-template #retryImportModalTemp let-context="context">
+    <ti-modal-header>
+        {{ i18n.project.importTask }}
+        <span (click)="context.dismiss()" class="tip-close">
+            <img class="close-img" src="./assets/img/header/close_icon.svg" />
+            <img class="close-img" src="./assets/img/header/close_icon_hover.svg">
+        </span>
+    </ti-modal-header>
+    <ti-modal-body>
+        <ti-formfield labelWidth="80px">
+            <ti-item [label]="i18n.project.projectName">
+                <input type="text" [(ngModel)]="context.projectname" tiText
+                    [placeholder]="i18n.project.createImportTaskProjectPlaceholder"
+                    (blur)="context.projectname = context.projectname.trim()"
+                    (ngModelChange)="priojectNameChange($event)"/>
+                <div *ngIf="isShowProjectError" class="info ti3-unifyvalid-error-container">
+                    <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                    <span>{{ projectNameVerifyMsg }}</span>
+                </div>
+            </ti-item>
+            <ti-item [label]="i18n.project.taskName">
+                <input type="text" [(ngModel)]="context.taskname" tiText
+                    [placeholder]="i18n.project.createImportTaskTaskPlaceholder"
+                    (blur)="context.taskname = context.taskname.trim()"
+                    (ngModelChange)="taskNameChange($event)"/>
+                <div *ngIf="isShowTaskError" class="info ti3-unifyvalid-error-container">
+                    <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                    <span>{{ taskNameVerifyMsg }}</span>
+                </div>
+            </ti-item>
+        </ti-formfield>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <button class="primary-btn" type="button" (click)="retryImportTask(context)">{{ i18n.common_term_operate_ok }}</button>
+        <button class="cancel-btn" type="button" (click)="context.dismiss()">{{ i18n.common_term_operate_cancel }}</button>
+    </ti-modal-footer>
+</ng-template>

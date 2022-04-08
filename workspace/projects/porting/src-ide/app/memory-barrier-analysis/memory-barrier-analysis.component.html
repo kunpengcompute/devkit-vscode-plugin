@@ -1,0 +1,1267 @@
+<app-banner [intellijFlag]="intellijFlag"></app-banner>
+<div class="analysis-container memory-barrier-analysis" [ngClass]="{'intellij-body-height': intellijFlag}">
+    <div class="project-container" [ngClass]="{'dis-flex':selectType.selectedId === 'weak'}">
+        <div class="project-left scroll-style">
+            <div class="left-container" [ngClass]="{'hisBorder': weakTypeChecked === 'remote2' && selectType.selectedId === 'weak'}">
+                <div class="left-content">
+                    <ti-formfield>
+                        <!-- 标题 -->
+                        <ti-item>
+                            <div class="title mb-8">
+                                {{i18n.plugins_porting_message_enhancefun}}
+                                <a *ngIf="currLanguege === LANG_TYPE.ZH"
+                                    (click)="openUrl(pluginUrlCfg.faqFifteenZn)">
+                                    <img *ngIf="currTheme === 1" class="help-icon" src="./assets/img/icon-help-dark.svg">
+                                    <img *ngIf="currTheme === 2" class="help-icon"
+                                        src="./assets/img/icon-help-light.svg">
+                                </a>
+                                <a *ngIf="currLanguege === LANG_TYPE.EN"
+                                    (click)="openUrl(pluginUrlCfg.faqFifteenEn)">
+                                    <img *ngIf="currTheme === 1" class="help-icon" src="./assets/img/icon-help-dark.svg">
+                                    <img *ngIf="currTheme === 2" class="help-icon"
+                                        src="./assets/img/icon-help-light.svg">
+                                </a>
+                            </div>
+                            <div class="subtitle mb-8">{{i18n.plugins_porting_message_enhancefun_desc}}</div>
+                            <div class="arm-tip-container" *ngIf="chkArmEnv.isNotOk && selectType.selectedId === 'weak'">
+                                <div class="arm-tip-container-find">
+                                    <div>
+                                        <img src="./assets/img/system/icon_system_tip_dark.svg" class="tipImg" />
+                                    </div>
+                                    <div>
+                                        <img class="close-arm-tip" *ngIf="currTheme === bgTheme.Dark"
+                                            src="./assets/img/system/icon_close_system_tip_dark.svg"
+                                            (click)="closeArmTip()" />
+                                        <img class="close-arm-tip" *ngIf="currTheme === bgTheme.Light"
+                                            src="./assets/img/system/icon_close_system_tip_light.svg"
+                                            (click)="closeArmTip()" />
+                                    </div>
+                                    <div class="chkArmEnv-tip">
+                                        <span style="vertical-align: middle;">
+                                            {{i18n.plugins_porting_message_weak_evn_check.tip}}
+                                            <a class="viewGuide" (click)="chkArmEnv.showGuide = true"
+                                                *ngIf="!chkArmEnv.showGuide">{{i18n.plugins_porting_message_weak_evn_check.link}}</a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div *ngIf="chkArmEnv.showGuide" class="chkArmEnv-showGuide">
+                                    <p class="gui-title" [ngStyle]="{'margin-left':currLang==='zh-cn'?'-7px':'0px'}">
+                                       {{i18n.plugins_porting_message_weak_evn_check.guide_title}}</p>
+                                    <p>{{chkArmEnv.guide1}}</p>
+                                    <p>{{chkArmEnv.guide2}}</p>
+                                    <p class="linkDownload" *ngIf="chkArmEnv.package_type === 'rpm'">
+                                        <span>
+                                            <a (click)="openUrl(chkArmEnv.link1)"
+                                                class="link">Libstdc++</a>,
+                                            <a (click)="openUrl(chkArmEnv.link2)"
+                                                class="link">Libtinfo</a>
+                                        </span>
+                                    </p>
+                                    <p class="linkDownload" *ngIf="chkArmEnv.package_type === 'deb'">
+                                        <span>
+                                            <a (click)="openUrl(chkArmEnv.link3)"
+                                                class="link">Libstdc++</a>,
+                                            <a (click)="openUrl(chkArmEnv.link4)"
+                                                class="link">Libtinfo</a>
+                                        </span>
+                                    </p>
+                                    <p class="hideGuide"><a
+                                            (click)="chkArmEnv.showGuide=false">{{i18n.plugins_porting_message_weak_evn_check.hide_guide}}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </ti-item>
+                        <ti-item>
+                            <div class="chooseType">{{i18n.plugins_porting_message_enhancefun_label.type}}</div>
+                        </ti-item>
+                        <!-- 增强功能类型 -->
+                        <ti-item>
+                            <div class="sceneBox">
+                                <div *ngFor="let opt of selectType.options; index as index" (mouseenter)="opt.hover = true"
+                                     (mouseleave)="opt.hover = false" [ngClass]="{active:opt.id === selectType.curSelObj.id}" class="sceneItem enhanced-type">
+                                    <label class="ra-label" [for]="opt.key">
+                                        <input type="radio"  name="mygroup" [(ngModel)]="selectType.selectedId"
+                                            [value]="opt.id" [id]="opt.key" class="enhanced-type-input" (ngModelChange)="onRadioModelChange($event)"
+                                            (change)="selectTypeChange(opt)" />
+                                        <img style="margin-top: 8px;margin-left: 25px;" [src]="getOptionsImg(opt)" alt="">
+                                        <div style="text-align: center;">
+                                            <span style="margin-left: 0px;font-size: 12px;" class="ra-label-span"
+                                            [ngClass]="{'ra-label-span-active':selectType.selectedId === opt.id}">{{opt.key}}</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="subtitle">
+                                <span class="mt-10" style="font-size: 12px;"> {{selectType.curSelObj.desc}} </span>
+                            </div>
+                        </ti-item>
+                        <ti-item>
+                            <ul [ngSwitch]="selectType.selectedId">
+                                <!-- 64 位预检 start -->
+                                <li *ngSwitchCase="'precheck'">
+                                    <div *ngIf="localFilePath.length === 0">
+                                    <div *ngFor="let item of radioList" class="bet-radioList" [ngStyle]="{'margin-right': currLanguege === LANG_TYPE.EN ? '16px':'71px'}">
+                                        <label class="ra-label" [for]="item.key">
+                                            <i class="ra-common ra-check"
+                                                *ngIf="sourceTypeChecked === item.key"></i>
+                                            <i class="ra-common ra-uncheck"
+                                                *ngIf="sourceTypeChecked !== item.key"></i>
+                                            <input type="radio" name="softPackUpload" [(ngModel)]="sourceTypeChecked"
+                                                [value]="item.key" [id]="item.key" class="bet-radioList-input"
+                                                (ngModelChange)="onRadioModelChange($event)"
+                                                (change)="sourceTypeChecked == item.key" />
+                                            <span class="bet-radioList-value"
+                                            [ngClass]="{'bet-radioList-value-active':sourceTypeChecked == item.key}">{{item.value}}</span>
+                                        </label>
+                                    </div>
+                                    <!-- 已上传 -->
+                                    <div *ngIf="sourceTypeChecked === 'remote'">
+                                        <div class="uploaded">
+                                            <div class="path_div" [ngClass]="{'intellij-color': intellijFlag}">
+                                                <div class="ti3-icon ti3-icon-staricon"></div>
+                                                <div class="path_div_title">{{inputItems.path.label}}:</div>
+                                                <div class="path_div_path" [tiTip]="workspace">{{ workspace }}</div>
+                                            </div>
+                                            <span>
+                                                <textarea tiText [(ngModel)]="inputValuePrecheck" resize="vertical"
+                                                    [formControl]="filenameLengthPrecheck" [tiValidation]="validation"
+                                                    [placeholder]="selectFileTip" class="areaMatch srcTextArea"
+                                                    (focus)="areaMatchDis('precheck')" (blur)="blurAreaMatch()" (input)="inputAreaMatch('precheck')"
+                                                    (keyup)="keyupAreaMatch('precheck')"></textarea>
+                                            </span>
+                                            <!-- 输入自动匹配 -->
+                                            <div class="areaMatchDiv"
+                                                *ngIf="displayAreaMatch && ((pathlist ||[]).length !== 0)">
+                                                <ul>
+                                                    <li *ngFor="let path of pathlist" (mousedown)="clickAreaMatch(path, 'precheck')"
+                                                        class="areaMatchDivLi">
+                                                        <p (mousedown)="clickAreaMatch(path, 'precheck')">{{path}}</p>
+                                                        <div (mousedown)="isDeleteAreaMatch(path)">
+                                                            <img src="./assets/img/analysis/icon_delete_normal.svg"
+                                                                onmouseover="this.src='./assets/img/analysis/icon_delete_hover.svg'"
+                                                                onmouseout="this.src='./assets/img/analysis/icon_delete_normal.svg'" />
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="sourceTypeChecked === 'local'">
+                                        <div style="margin-bottom: 20px;">
+                                            <div class="chooseTipFile">{{i18n.plugins_porting_title_fileType}}</div>
+                                            <div *ngFor="let item of fileType" class="next-radioList" [ngStyle]="{'margin-right': currLanguege === LANG_TYPE.EN ? '105px':'113px'}">
+                                                <label class="ra-label" [for]="item.key">
+                                                    <i class="ra-common ra-check"
+                                                        *ngIf="isUploadDirectoryBeta === item.key"></i>
+                                                    <i class="ra-common ra-uncheck"
+                                                        *ngIf="isUploadDirectoryBeta !== item.key"></i>
+                                                    <input type="radio" name="softPackUpload" [(ngModel)]="isUploadDirectoryBeta"
+                                                        [value]="item.key" [id]="item.key" class="bet-radioList-input"
+                                                        (change)="changeUploudType64(item)" (ngModelChange)="onRadioModelChange($event)"/>
+                                                    <span class="bet-radioList-value"
+                                                    [ngClass]="{'bet-radioList-value-active':isUploadDirectoryBeta == item.key}">{{item.value}}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="local">
+                                            <div class="path_div" [ngClass]="{'intellij-color': intellijFlag}">
+                                                <div class="ti3-icon ti3-icon-staricon"></div>
+                                                <div class="path_div_title">{{inputItems.path.label}}:</div>
+                                                <div class="path_div_path" [tiTip]="workspace">{{ workspace }}</div>
+                                            </div>
+                                            <textarea tiText [(ngModel)]="inputValuePrecheck" resize="vertical"
+                                                [placeholder]="placeHolder64" [errorMessageWrapper]="wrapper"
+                                                [formControl]="filenameLengthPrecheck" [tiValidation]="validation"
+                                                class="commonTextArea" ></textarea>
+                                            <!-- 输入自动匹配 -->
+                                            <div class="areaMatchDiv"
+                                                *ngIf="displayAreaMatch && ((pathlist ||[]).length !== 0)">
+                                                <ul>
+                                                    <li *ngFor="let path of pathlist" (mousedown)="clickAreaMatch(path, 'precheck')"
+                                                        class="areaMatchDivLi">
+                                                        {{path}}</li>
+                                                </ul>
+                                            </div>
+                                            <!-- 上传压缩包 -->
+                                            <button type="button" [disabled]="isUploading" *ngIf="isUploadDirectoryBeta === 'compressed'" class="little-minor-btn" style="margin-left: 8px;" (click)="zipUpload('2')"
+                                                onkeyup="if(event.keyCode==13 || event.keyCode == 32){ return false;}"
+                                                onkeydown="if(event.keyCode==13 || event.keyCode == 32){ return false;}"
+                                                >{{i18n.common_term_upload_code}}
+                                            </button>
+                                            <input type="file" id="zipload" class="secondary-btn-input"
+                                                [disabled]="isUploading" (change)="uploadFile('normal', '2')"
+                                                accept=".tar,.tar.bz,.tar.bz2,.tar.gz,.tar.xz,.tbz,.tbz2,.tgz,.txz,.zip" />
+                                            <!-- 上传文件夹 -->
+                                            <button type="button" style="margin-left: 8px;"
+                                                class="little-minor-btn" [disabled]="isUploading"
+                                                *ngIf="isUploadDirectoryBeta === 'directory'"
+                                                onkeyup="if(event.keyCode === 13 || event.keyCode === 32){ return false;}"
+                                                onkeydown="if(event.keyCode === 13 || event.keyCode === 32){ return false;}"
+                                                (click)="filesUpload('2')">{{i18n.plugins_common_button_upcode}}
+                                            </button>
+                                            <input type="file" id="files" webkitdirectory
+                                                style="display: none;" (change)="toZip('normal', '2')" />
+                                            <!-- 输入框错误提示 -->
+                                            <div #wrapper></div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <!-- #右键迁移界面 -->
+                                    <div *ngIf="localFilePath.length !== 0">
+                                      <div class="mt-20  path_div_r" [ngClass]="{'intellij-color': intellijFlag}">
+                                        <div class="path_div_r_title">{{inputItems.path.label}}:</div>
+                                        <div class="path_div_r_path" [tiTip]="localFilePath">{{ localFilePath }}</div>
+                                      </div>
+                                    </div>
+                                    <div>
+                                        <span [tiTip]="(cacheBtnDisabled || byteBtnDisabled || createBtnDisabled) ? i18n.common_term_creating_btn_disabled_tip : ''" tiTipPosition='right'>
+                                            <button (click)="portCheck()" type="button" [ngClass]="{'intellij-primary-btn': intellijFlag, 'operation': !intellijFlag}"
+                                                class="ml-0i"
+                                                [disabled]="(!inputValuePrecheck && localFilePath.length === 0) || byteBtnDisabled || createBtnDisabled || cacheBtnDisabled"
+                                                onkeyup="if(event.keyCode==13 || event.keyCode == 32){ return false;}"
+                                                onkeydown="if(event.keyCode==13 || event.keyCode == 32){ return false;}">
+                                                {{ i18n.plugins_porting_64_analysis_btn }}
+                                            </button>
+                                        </span>
+                                    </div>
+                                </li>
+                                <!-- 64 位预检 end -->
+                                <!-- 字节对齐功能 start -->
+                                <li *ngSwitchCase="'byte'">
+                                  <div *ngIf="localFilePath.length === 0">
+                                    <div *ngFor="let item of radioList" class="bet-radioList" [ngStyle]="{'margin-right': currLanguege === LANG_TYPE.EN ? '16px':'71px'}">
+                                        <label class="ra-label" [for]="item.key">
+                                            <i class="ra-common ra-check"
+                                                *ngIf="sourceTypeChecked === item.key"></i>
+                                            <i class="ra-common ra-uncheck"
+                                                *ngIf="sourceTypeChecked !== item.key"></i>
+                                            <input type="radio" name="softPackUpload" [(ngModel)]="sourceTypeChecked"
+                                                [value]="item.key" [id]="item.key" class="bet-radioList-input"
+                                                (ngModelChange)="onRadioModelChange($event)"
+                                                (change)="sourceTypeChecked == item.key" />
+                                            <span class="bet-radioList-value"
+                                            [ngClass]="{'bet-radioList-value-active':sourceTypeChecked == item.key}">{{item.value}}</span>
+                                        </label>
+                                    </div>
+                                    <!-- 已上传 -->
+                                    <div *ngIf="sourceTypeChecked === 'remote'">
+                                        <div class="uploaded">
+                                            <div class="path_div" [ngClass]="{'intellij-color': intellijFlag}">
+                                                <div class="ti3-icon ti3-icon-staricon"></div>
+                                                <div class="path_div_title">{{inputItems.path.label}}:</div>
+                                                <div class="path_div_path" [tiTip]="workspace">{{ workspace }}</div>
+                                            </div>
+                                            <span>
+                                                <textarea tiText [(ngModel)]="inputValueByte" resize="vertical"
+                                                    [formControl]="filenameLengthByte" [tiValidation]="validation"
+                                                    [placeholder]="selectFileTip" class="areaMatch srcTextArea"
+                                                    (focus)="areaMatchDis('byte')" (blur)="blurAreaMatch()" (input)="inputAreaMatch('byte')"
+                                                    (keyup)="keyupAreaMatch('byte')"></textarea>
+                                            </span>
+                                            <!-- 输入自动匹配 -->
+                                            <div class="areaMatchDiv"
+                                                *ngIf="displayAreaMatch && ((pathlist ||[]).length !== 0)">
+                                                <ul>
+                                                    <li *ngFor="let path of pathlist" (mousedown)="clickAreaMatch(path, 'byte')"
+                                                        class="areaMatchDivLi">
+                                                        <p (mousedown)="clickAreaMatch(path, 'byte')">{{path}}</p>
+                                                        <div (mousedown)="isDeleteAreaMatch(path)">
+                                                            <img src="./assets/img/analysis/icon_delete_normal.svg"
+                                                                onmouseover="this.src='./assets/img/analysis/icon_delete_hover.svg'"
+                                                                onmouseout="this.src='./assets/img/analysis/icon_delete_normal.svg'" />
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="sourceTypeChecked === 'local'">
+                                        <div style="margin-bottom: 20px;">
+                                            <div class="chooseTipFile">{{i18n.plugins_porting_title_fileType}}</div>
+                                            <div *ngFor="let item of fileType" class="next-radioList" [ngStyle]="{'margin-right': currLanguege === LANG_TYPE.EN ? '105px':'113px'}">
+                                                <label class="ra-label" [for]="item.key">
+                                                    <i class="ra-common ra-check"
+                                                        *ngIf="isUploadDirectoryBeta === item.key"></i>
+                                                    <i class="ra-common ra-uncheck"
+                                                        *ngIf="isUploadDirectoryBeta !== item.key"></i>
+                                                    <input type="radio" name="softPackUpload" [(ngModel)]="isUploadDirectoryBeta"
+                                                        [value]="item.key" [id]="item.key" class="bet-radioList-input"
+                                                        (change)="changeUploudType64(item)" (ngModelChange)="onRadioModelChange($event)"/>
+                                                    <span class="bet-radioList-value"
+                                                    [ngClass]="{'bet-radioList-value-active':isUploadDirectoryBeta == item.key}">{{item.value}}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="local">
+                                            <div class="path_div" [ngClass]="{'intellij-color': intellijFlag}">
+                                                <div class="ti3-icon ti3-icon-staricon"></div>
+                                                <div class="path_div_title">{{inputItems.path.label}}:</div>
+                                                <div class="path_div_path" [tiTip]="workspace">{{ workspace }}</div>
+                                            </div>
+                                            <textarea tiText [(ngModel)]="inputValueByte" resize="vertical" [errorMessageWrapper]="wrapper"
+                                                [placeholder]="placeHolder64" [formControl]="filenameLengthByte" [tiValidation]="validation"
+                                                class="commonTextArea" ></textarea>
+                                            <!-- 输入自动匹配 -->
+                                            <div class="areaMatchDiv"
+                                                *ngIf="displayAreaMatch && ((pathlist ||[]).length !== 0)">
+                                                <ul>
+                                                    <li *ngFor="let path of pathlist" (mousedown)="clickAreaMatch(path, 'byte')"
+                                                        class="areaMatchDivLi">
+                                                        {{path}}</li>
+                                                </ul>
+                                            </div>
+                                            <!-- 上传压缩包 -->
+                                            <button type="button" [disabled]="isUploading" *ngIf="isUploadDirectoryBeta === 'compressed'" class="little-minor-btn" style="margin-left: 8px;" (click)="zipUpload('1')"
+                                                onkeyup="if(event.keyCode==13 || event.keyCode == 32){ return false;}"
+                                                onkeydown="if(event.keyCode==13 || event.keyCode == 32){ return false;}"
+                                                >{{i18n.common_term_upload_code}}
+                                            </button>
+                                            <input type="file" id="zipload" class="secondary-btn-input"
+                                                [disabled]="isUploading" (change)="uploadFile('normal', '1')"
+                                                accept=".tar,.tar.bz,.tar.bz2,.tar.gz,.tar.xz,.tbz,.tbz2,.tgz,.txz,.zip" />
+                                            <!-- 上传文件夹 -->
+                                            <button type="button" style="margin-left: 8px;"
+                                                class="little-minor-btn" [disabled]="isUploading"
+                                                *ngIf="isUploadDirectoryBeta === 'directory'"
+                                                onkeyup="if(event.keyCode === 13 || event.keyCode === 32){ return false;}"
+                                                onkeydown="if(event.keyCode === 13 || event.keyCode === 32){ return false;}"
+                                                (click)="filesUpload('1')">{{i18n.plugins_common_button_upcode}}
+                                            </button>
+                                            <input type="file" id="files" webkitdirectory
+                                                style="display: none;" (change)="toZip('normal', '1')" />
+                                            <!-- 输入框错误提示 -->
+                                            <div #wrapper></div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <!-- #右键迁移界面 -->
+                                  <div *ngIf="localFilePath.length !== 0">
+                                    <div class="mt-20  path_div_r" [ngClass]="{'intellij-color': intellijFlag}">
+                                      <div class="path_div_r_title">{{inputItems.path.label}}:</div>
+                                      <div class="path_div_r_path" [tiTip]="localFilePath">{{ localFilePath }}</div>
+                                    </div>
+                                  </div>
+                                    <div>
+                                        <div>
+                                            <p class="mt-20" style="font-size: 14px;" [ngStyle]="{'color': intellijFlag ? '#bbbbbb':'unset'}">
+                                                {{inputItems.tool.label}}</p>
+                                            <ti-select [options]="inputItems.tool.options" class="mt-10" style="width: 400px;"
+                                            [(ngModel)]="inputItems.tool.selected" id="toolselect"
+                                            (ngModelChange)="commandChange($event)">
+                                            </ti-select>
+                                        </div>
+                                        <div>
+                                            <p class="mt-20" style="font-size: 14px;" [ngStyle]="{'color': intellijFlag ? '#bbbbbb':'unset'}">
+                                                <span class="ti3-icon ti3-icon-staricon"></span>
+                                                <span>{{inputItems.command.label}}</span>
+                                            </p>
+                                        <span tiTipPosition="top">
+                                                <input class="command-input mt-10" [ngClass]="{'command-input-intellij': intellijFlag}" type="text" tiText
+                                                [(ngModel)]="inputItems.command.value"
+                                                [formControl]="commandControl"
+                                                [tiValidation]="validation" style="width: 400px" maxlength="32" tiMaxLength="32"/>
+                                            </span>
+                                            <div class="command-faq">{{i18n.common_term_ipt_label.compile_command_faq}}
+                                                <a *ngIf="currLanguege === LANG_TYPE.ZH" (click)="openUrl(pluginUrlCfg.faqFiftyZn)">FAQ</a>
+                                                <a *ngIf="currLanguege === LANG_TYPE.EN" (click)="openUrl(pluginUrlCfg.faqFiftyEn)">FAQ</a>
+                                                {{i18n.common_term_ipt_label.compile_command_faq_symbol}}</div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <!-- 对齐检查 -->
+                                        <span [tiTip]="(cacheBtnDisabled || byteBtnDisabled || createBtnDisabled) ? i18n.common_term_creating_btn_disabled_tip : ''" tiTipPosition='right'>
+                                            <button (click)="byteAlignCheck()" type="button" [ngClass]="{'intellij-primary-btn': intellijFlag, 'operation': !intellijFlag}"
+                                                class="ml-0i"
+                                                [disabled]="(!inputValueByte && localFilePath.length === 0 ) || byteBtnDisabled || createBtnDisabled || cacheBtnDisabled"
+                                                onkeyup="if(event.keyCode==13 || event.keyCode == 32){ return false;}"
+                                                onkeydown="if(event.keyCode==13 || event.keyCode == 32){ return false;}">
+                                                {{i18n.plugins_porting_message_enhancefun_label.byteOperation}}
+                                            </button>
+                                        </span>
+                                    </div>
+                                </li>
+                                <!-- 字节对齐功能 end -->
+                                <!-- cacheline start -->
+                                <li *ngSwitchCase="'cache'">
+                                  <div *ngIf="localFilePath.length === 0">
+                                    <div *ngFor="let item of radioList" class="bet-radioList" [ngStyle]="{'margin-right': currLanguege === LANG_TYPE.EN ? '16px':'71px'}">
+                                        <label class="ra-label" [for]="item.key">
+                                            <i class="ra-common ra-check"
+                                                *ngIf="sourceTypeChecked === item.key && !isVersionMismatch"></i>
+                                            <i class="ra-common ra-uncheck"
+                                                *ngIf="sourceTypeChecked !== item.key && !isVersionMismatch"></i>
+                                            <span [tiTip]='isVersionMismatch ? i18n.disable_tip.version_tip : ""' tiTipPosition="top">
+                                                <i class="ra-common ra-check newColor"
+                                                *ngIf="sourceTypeChecked === item.key && isVersionMismatch"></i>
+                                            </span>
+                                            <span [tiTip]='isVersionMismatch ? i18n.disable_tip.version_tip : ""' tiTipPosition="top">
+                                                <i class="ra-common ra-uncheck newColor"
+                                                *ngIf="sourceTypeChecked !== item.key && isVersionMismatch"></i>
+                                            </span>
+                                            <input type="radio" name="softPackUpload" [(ngModel)]="sourceTypeChecked"
+                                                [value]="item.key" [id]="item.key" class="bet-radioList-input"
+                                                (ngModelChange)="onRadioModelChange($event)"
+                                                (change)="sourceTypeChecked == item.key"
+                                                [disabled]="isVersionMismatch"/>
+                                            <span class="bet-radioList-value"
+                                            [ngClass]="{'bet-radioList-value-active':sourceTypeChecked == item.key}">{{item.value}}</span>
+                                        </label>
+                                    </div>
+                                    <!-- 已上传 -->
+                                    <div *ngIf="sourceTypeChecked === 'remote'">
+                                        <div class="uploaded">
+                                            <div class="path_div" [ngClass]="{'intellij-color': intellijFlag}">
+                                                <div class="ti3-icon ti3-icon-staricon"></div>
+                                                <div class="path_div_title">{{inputItems.path.label}}:</div>
+                                                <div class="path_div_path" [tiTip]="workspace">{{ workspace }}</div>
+                                            </div>
+                                            <span *ngIf="!isVersionMismatch">
+                                                <textarea tiText [(ngModel)]="inputValueCache" resize="vertical"
+                                                [placeholder]="selectFileTip" class="areaMatch srcTextArea"
+                                                [formControl]="filenameLengthCache" [tiValidation]="validation"
+                                                (focus)="areaMatchDis('cache')" (blur)="blurAreaMatch()" (input)="inputAreaMatch('cache')"
+                                                (keyup)="keyupAreaMatch('cache')"></textarea>
+                                            </span>
+                                            <span class="dis-value-row"  *ngIf="isVersionMismatch" [tiTip]='isVersionMismatch ? i18n.disable_tip.version_tip : ""' tiTipPosition="top">
+                                                <textarea tiText [(ngModel)]="inputValueCache" resize="vertical"
+                                                [placeholder]="selectFileTip" class="areaMatch srcTextArea dis-border"
+                                                [disabled]="isVersionMismatch"
+                                                ></textarea>
+                                            </span>
+                                            <!-- 输入自动匹配 -->
+                                            <div class="areaMatchDiv"
+                                                *ngIf="displayAreaMatch && ((pathlist ||[]).length !== 0)">
+                                                <ul>
+                                                    <li *ngFor="let path of pathlist" (mousedown)="clickAreaMatch(path, 'cache')"
+                                                        class="areaMatchDivLi">
+                                                        <p (mousedown)="clickAreaMatch(path, 'cache')">{{path}}</p>
+                                                        <div (mousedown)="isDeleteAreaMatch(path)">
+                                                            <img src="./assets/img/analysis/icon_delete_normal.svg"
+                                                                onmouseover="this.src='./assets/img/analysis/icon_delete_hover.svg'"
+                                                                onmouseout="this.src='./assets/img/analysis/icon_delete_normal.svg'" />
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="sourceTypeChecked === 'local'">
+                                        <div style="margin-bottom: 20px;">
+                                            <div class="chooseTipFile">{{i18n.plugins_porting_title_fileType}}</div>
+                                            <div *ngFor="let item of fileType" class="next-radioList" [ngStyle]="{'margin-right': currLanguege === LANG_TYPE.EN ? '105px':'113px'}">
+                                                <label class="ra-label" [for]="item.key">
+                                                    <i class="ra-common ra-check"
+                                                        *ngIf="isUploadDirectoryBeta === item.key"></i>
+                                                    <i class="ra-common ra-uncheck"
+                                                        *ngIf="isUploadDirectoryBeta !== item.key"></i>
+                                                    <span [tiTip]='isVersionMismatch ? i18n.disable_tip.version_tip : ""' tiTipPosition="top">
+                                                        <i class="ra-common ra-check newColor"
+                                                        *ngIf="isUploadDirectoryBeta === item.key && isVersionMismatch"></i>
+                                                    </span>
+                                                    <span [tiTip]='isVersionMismatch ? i18n.disable_tip.version_tip : ""' tiTipPosition="top">
+                                                        <i class="ra-common ra-uncheck newColor"
+                                                        *ngIf="isUploadDirectoryBeta !== item.key && isVersionMismatch"></i>
+                                                    </span>
+                                                    <input type="radio" name="softPackUpload" [(ngModel)]="isUploadDirectoryBeta"
+                                                        [value]="item.key" [id]="item.key" class="bet-radioList-input"
+                                                        (change)="changeUploudType64(item)" (ngModelChange)="onRadioModelChange($event)"/>
+                                                    <span class="bet-radioList-value"
+                                                    [ngClass]="{'bet-radioList-value-active':isUploadDirectoryBeta == item.key}">{{item.value}}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="local">
+                                            <div class="path_div" [ngClass]="{'intellij-color': intellijFlag}">
+                                                <div class="ti3-icon ti3-icon-staricon"></div>
+                                                <div class="path_div_title">{{inputItems.path.label}}:</div>
+                                                <div class="path_div_path" [tiTip]="workspace">{{ workspace }}</div>
+                                            </div>
+                                            <textarea tiText [(ngModel)]="inputValueCache" resize="vertical"
+                                                [placeholder]="placeHolder64" [errorMessageWrapper]="wrapper"
+                                                [formControl]="filenameLengthCache" [tiValidation]="validation"
+                                                class="commonTextArea" ></textarea>
+                                            <!-- 输入自动匹配 -->
+                                            <div class="areaMatchDiv"
+                                                *ngIf="displayAreaMatch && ((pathlist ||[]).length !== 0)">
+                                                <ul>
+                                                    <li *ngFor="let path of pathlist" (mousedown)="clickAreaMatch(path, 'cache')"
+                                                        class="areaMatchDivLi">
+                                                        {{path}}</li>
+                                                </ul>
+                                            </div>
+                                            <!-- 上传压缩包 -->
+                                            <button type="button" [disabled]="isUploading" *ngIf="isUploadDirectoryBeta === 'compressed'" class="little-minor-btn" style="margin-left: 8px;" (click)="zipUpload('12')"
+                                                onkeyup="if(event.keyCode==13 || event.keyCode == 32){ return false;}"
+                                                onkeydown="if(event.keyCode==13 || event.keyCode == 32){ return false;}"
+                                                >{{i18n.common_term_upload_code}}
+                                            </button>
+                                            <input type="file" id="zipload" class="secondary-btn-input"
+                                                [disabled]="isUploading" (change)="uploadFile('normal', '12')"
+                                                accept=".tar,.tar.bz,.tar.bz2,.tar.gz,.tar.xz,.tbz,.tbz2,.tgz,.txz,.zip" />
+                                            <!-- 上传文件夹 -->
+                                            <button type="button" style="margin-left: 8px;"
+                                                class="little-minor-btn" [disabled]="isUploading"
+                                                *ngIf="isUploadDirectoryBeta === 'directory'"
+                                                onkeyup="if(event.keyCode === 13 || event.keyCode === 32){ return false;}"
+                                                onkeydown="if(event.keyCode === 13 || event.keyCode === 32){ return false;}"
+                                                (click)="filesUpload('12')">{{i18n.plugins_common_button_upcode}}
+                                            </button>
+                                            <input type="file" id="files" webkitdirectory
+                                                style="display: none;" (change)="toZip('normal', '12')" />
+                                            <!-- 输入框错误提示 -->
+                                            <div #wrapper></div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <!-- #右键迁移界面 -->
+                                  <div *ngIf="localFilePath.length !== 0">
+                                    <div class="mt-20  path_div_r" [ngClass]="{'intellij-color': intellijFlag}">
+                                      <div class="path_div_r_title">{{inputItems.path.label}}:</div>
+                                      <div class="path_div_r_path" [tiTip]="localFilePath">{{ localFilePath }}</div>
+                                    </div>
+                                  </div>
+                                    <div>
+                                        <span [tiTip]="!isVersionMismatch
+                                            ? ((cacheBtnDisabled || byteBtnDisabled || createBtnDisabled)
+                                            ? i18n.common_term_creating_btn_disabled_tip
+                                            : '' )
+                                            : i18n.disable_tip.version_tip" tiTipPosition="right">
+                                            <!-- 对齐检查 -->
+                                            <button (click)="cacheAlignCheck()" type="button" [ngClass]="{'intellij-primary-btn': intellijFlag, 'operation': !intellijFlag}"
+                                                class="ml-0i"
+                                                [disabled]="(!inputValueCache && localFilePath.length === 0 ) || byteBtnDisabled || createBtnDisabled || cacheBtnDisabled || isVersionMismatch"
+                                                onkeyup="if(event.keyCode==13 || event.keyCode == 32){ return false;}"
+                                                onkeydown="if(event.keyCode==13 || event.keyCode == 32){ return false;}">
+                                                {{i18n.plugins_porting_message_enhancefun_label.byteOperation}}
+                                            </button>
+                                        </span>
+                                    </div>
+                                </li>
+                                <!-- cacheline end -->
+                                <!-- 内存一致性 start -->
+                                <li class="weak" *ngSwitchCase="'weak'">
+                                    <div class="chooseTip">{{i18n.plugins_porting_weakCheck.mode_name}}</div>
+                                    <div *ngFor="let item of weakList" class="next-radioList" [ngStyle]="{'margin-right': currLanguege === LANG_TYPE.EN ? '87px':'98px'}">
+                                        <label class="ra-label" [for]="item.key">
+                                            <i class="ra-common ra-check"
+                                                *ngIf="weakTypeChecked === item.key"></i>
+                                            <i class="ra-common ra-uncheck"
+                                                *ngIf="weakTypeChecked !== item.key"></i>
+                                            <input type="radio" name="softPackUpload" [(ngModel)]="weakTypeChecked"
+                                                [value]="item.key" [id]="item.key" class="bet-radioList-input"
+                                                (change)="weakTypeChecked == item.key" (ngModelChange)="onRadioModelChange($event)"/>
+                                            <span class="bet-radioList-value"
+                                            [ngClass]="{'bet-radioList-value-active':weakTypeChecked == item.key}">{{item.value}}</span>
+                                        </label>
+                                    </div>
+                                    <p class="currTip" *ngIf="!isX86">
+                                        {{ i18n.plugins_porting_weakCheck.mode_tip }} <span [ngStyle]="{'margin-left': currLanguege === LANG_TYPE.EN ? '2px':'0'}">
+                                            {{ weakEnvironment }}
+                                        </span>
+                                    </p>
+                                    <div *ngIf="weakTypeChecked === 'remote2'">
+                                        <div class="scnTip">{{i18n.plugins_porting_weakCheck.bc_tip}}</div>
+                                        <div *ngFor="let item of weakChekList" class="next-radioList" [ngStyle]="{'margin-right': currLanguege === LANG_TYPE.EN ? '54px':'70px'}">
+                                            <label class="ra-label" [for]="item.key">
+                                                <i class="ra-common ra-check"
+                                                    *ngIf="weakCheckTypeChecked === item.key"></i>
+                                                <i class="ra-common ra-uncheck"
+                                                    *ngIf="weakCheckTypeChecked !== item.key"></i>
+                                                <input type="radio" name="softPackUpload" [(ngModel)]="weakCheckTypeChecked"
+                                                    [value]="item.key" [id]="item.key" class="bet-radioList-input"
+                                                    (change)="changeFileModeWeak(item)" (ngModelChange)="onRadioModelChange($event)"/>
+                                                <span class="bet-radioList-value"
+                                                [ngClass]="{'bet-radioList-value-active':weakCheckTypeChecked == item.key}">{{item.value}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- 编译器自动修复 -->
+                                    <div *ngIf="weakTypeChecked === 'local2'">
+                                        <app-auto-fix [intellijFlag]="intellijFlag"></app-auto-fix>
+                                    </div>
+                                    <div *ngIf="weakTypeChecked === 'remote2'">
+                                        <!-- 静态检查 -->
+                                         <!-- 源码文件上传 -->
+                                        <ul style="margin-top:20px;" *ngIf="weakCheckTypeChecked === 'local3'">
+                                        <!-- 上传源码文件 start-->
+                                        <li class="step-item">
+                                            <p class="liltitle">
+                                                {{ i18n.plugins_porting_weakCheck.common_term_check_code_warn }}
+                                            </p>
+                                            <p class="step-label"
+                                                [ngClass]="{'select-step': curStep == weakStepList[0].step}">
+                                                <span class="step-num"
+                                                    [ngClass]="{'circle-icon': curStep === weakStepList[1].step || weakStepList[2].step}">{{
+                                                    weakStepList[0].step }}</span>
+                                                <span>{{ i18n.plugins_porting_weakCheck.step[0].title }}</span>
+                                            </p>
+                                            <div class="step-content" *ngIf="curStep === weakStepList[0].step">
+                                              <div *ngIf="localFilePath.length === 0">
+                                                <div>
+                                                    <span>
+                                                        <div *ngFor="let item of radioListWeak"
+                                                            style="display: inline-block;margin-right: 43px">
+                                                            <label class="ra-label" style="margin-bottom: 20px;"
+                                                                [for]="item.key">
+                                                                <i class="ra-common ra-check"
+                                                                    *ngIf="sourceTypeCheckedWeaK === item.key && !isCheck"></i>
+                                                                <i class="ra-common ra-uncheck"
+                                                                    *ngIf="sourceTypeCheckedWeaK !== item.key && !isCheck"></i>
+                                                                <span [tiTip]='isCheck ? i18n.disable_tip.arm_tip : ""' tiTipPosition="top">
+                                                                    <i class="ra-common ra-uncheck newColor"
+                                                                    *ngIf="sourceTypeCheckedWeaK === item.key && (isCheck || weakScanDisable)"></i>
+                                                                </span>
+                                                                <span [tiTip]='isCheck ? i18n.disable_tip.arm_tip : ""' tiTipPosition="top">
+                                                                    <i class="ra-common ra-uncheck newColor"
+                                                                    *ngIf="sourceTypeCheckedWeaK !== item.key && (isCheck || weakScanDisable)"></i>
+                                                                </span>
+                                                                <input type="radio" name="softPackUpload"
+                                                                    [(ngModel)]="sourceTypeCheckedWeaK" [value]="item.key"
+                                                                    [id]="item.key"
+                                                                    style="width:20px;height:20px;display:none;"
+                                                                    (ngModelChange)="onRadioModelChange($event)"
+                                                                    (change)="sourceTypeCheckedWeaK == item.key"
+                                                                    [disabled]="isCheck || weakScanDisable" />
+                                                                <span class="ra-label-span" [ngClass]="{'ra-label-span-active':sourceTypeCheckedWeaK == item.key}">{{item.value}}</span>
+                                                            </label>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                                <div *ngIf="sourceTypeCheckedWeaK === 'remote'">
+                                                    <div style="position: relative;">
+                                                        <div class="path_div" [ngClass]="{'intellij-color': intellijFlag}">
+                                                            <div class="ti3-icon ti3-icon-staricon"></div>
+                                                            <div class="path_div_title">{{inputItems.path.label}}:</div>
+                                                            <div class="path_div_path" [tiTip]="workspace">{{ workspace }}</div>
+                                                        </div>
+                                                        <span *ngIf="!isCheck"
+                                                            [ngClass]="{'dis-value-row': weakScanDisable}">
+                                                            <textarea tiText [(ngModel)]="weakFileName" resize="vertical"
+                                                                [placeholder]="selectFileTip" style="width: 440px;"
+                                                                class="areaMatch srcTextArea"
+                                                                (focus)="focusWeakTextArea()" (blur)="blurAreaMatch()"
+                                                                (input)="inputWeakAreaMatch()" (keyup)="keyupAreaMatch('weak')"
+                                                                [tiValidation]="validation" [formControl]="filenameLengthWeak"
+                                                                [ngClass]="{'dis-border': weakScanDisable}"
+                                                                ></textarea>
+                                                        </span>
+                                                        <span class="dis-value-row" *ngIf="isCheck">
+                                                            <span  [tiTip]="isCheck ? i18n.disable_tip.arm_tip : ''" tiTipPosition="top">
+                                                                <textarea tiText [(ngModel)]="weakFileName" style="width: 440px;"
+                                                                resize="vertical" [placeholder]="selectFileTip"
+                                                                class="areaMatch srcTextArea dis-border"
+                                                                [disabled]="isCheck || weakScanDisable"></textarea>
+                                                            </span>
+                                                        </span>
+                                                        <!-- 输入自动匹配 -->
+                                                        <div class="areaMatchDiv" style="width: 440px;"
+                                                            *ngIf="displayAreaMatch && ((weakPathList ||[]).length !== 0)">
+                                                            <ul>
+                                                                <li *ngFor="let path of weakPathList"
+                                                                    (mousedown)="clickWeakMatch(path)"
+                                                                    style="cursor: pointer;">
+                                                                    <p (mousedown)="clickWeakMatch(path)" style="width: 390px;">{{path}}
+                                                                    </p>
+                                                                    <div (mousedown)="isDeleteAreaMatch(path)">
+                                                                        <img src="./assets/img/analysis/icon_delete_normal.svg"
+                                                                            onmouseover="this.src='./assets/img/analysis/icon_delete_hover.svg'"
+                                                                            onmouseout="this.src='./assets/img/analysis/icon_delete_normal.svg'" />
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="sourceTypeCheckedWeaK === 'local'">
+                                                    <div style="margin-bottom: 20px;">
+                                                        <div class="chooseTipFile">{{i18n.plugins_porting_title_fileType}}</div>
+                                                        <div *ngFor="let item of fileTypeList" class="next-radioList" [ngStyle]="{'margin-right': currLanguege === LANG_TYPE.EN ? '125px':'82px'}">
+                                                            <label class="ra-label" [for]="item.key">
+                                                                <i class="ra-common ra-check"
+                                                                    *ngIf="isUploadDirectory === item.key && !isCheck"></i>
+                                                                <i class="ra-common ra-uncheck"
+                                                                    *ngIf="isUploadDirectory !== item.key && !isCheck"></i>
+                                                                <span [tiTip]="i18n.disable_tip.x86_tip" tiTipPosition='top'>
+                                                                    <i class="ra-common ra-uncheck newColor"
+                                                                    *ngIf="isUploadDirectory === item.key && isCheck"></i>
+                                                                </span>
+                                                                <span [tiTip]="i18n.disable_tip.x86_tip" tiTipPosition='top'>
+                                                                    <i class="ra-common ra-uncheck newColor"
+                                                                    *ngIf="isUploadDirectory !== item.key && isCheck"></i>
+                                                                </span>
+                                                                <input type="radio" name="softPackUpload" [(ngModel)]="isUploadDirectory"
+                                                                    [value]="item.key" [id]="item.key" class="bet-radioList-input"
+                                                                    (change)="changeUploudType(item)" (ngModelChange)="onRadioModelChange($event)"/>
+                                                                <span class="bet-radioList-value"
+                                                                [ngClass]="{'bet-radioList-value-active':isUploadDirectory == item.key}">{{item.value}}</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div style="position: relative;">
+                                                        <div class="path_div" [ngClass]="{'intellij-color': intellijFlag}">
+                                                            <div class="ti3-icon ti3-icon-staricon"></div>
+                                                            <div class="path_div_title">{{inputItems.path.label}}:</div>
+                                                            <div class="path_div_path" [tiTip]="workspace">{{ workspace }}</div>
+                                                        </div>
+                                                        <span [ngClass]="{'dis-value': weakScanDisable}">
+                                                            <textarea tiText [(ngModel)]="weakFileName" resize="vertical"
+                                                            [tiValidation]="validation" [formControl]="filenameLengthWeak"
+                                                            [placeholder]="placeHolderWeak"
+                                                            [errorMessageWrapper]="wrapper1"
+                                                            style="width: 440px;" class="commonTextArea"
+                                                            [ngClass]="{'dis-border': isCheck || weakScanDisable}"></textarea>
+                                                        </span>
+                                                        <!-- 输入自动匹配 -->
+                                                        <div class="areaMatchDiv"
+                                                            *ngIf="displayAreaMatch && ((pathlist ||[]).length !== 0)">
+                                                            <ul>
+                                                                <li *ngFor="let path of pathlist"
+                                                                    (mousedown)="clickAreaMatch(path, 'weak')"
+                                                                    style="cursor: pointer;">
+                                                                    {{path}}</li>
+                                                            </ul>
+                                                        </div>
+                                                        <!-- 上传压缩包 -->
+                                                        <button type="button" [disabled]="isUploading || weakScanDisable" *ngIf="!isX86 && isUploadDirectory === 'compressed'"
+                                                        class="little-minor-btn" (click)="zipUpload('6')" style="margin-left: 8px;"
+                                                            onkeyup="if(event.keyCode==13 || event.keyCode == 32){ return false;}"
+                                                            onkeydown="if(event.keyCode==13 || event.keyCode == 32){ return false;}"
+                                                            >{{i18n.common_term_upload_code}}
+                                                        </button>
+                                                        <input type="file" id="zipload" class="secondary-btn"
+                                                            [disabled]="isUploading || weakScanDisable"
+                                                            style="display: none;line-height: 28px;"
+                                                            (change)="uploadWeakFile('normal','6')"
+                                                            accept=".tar,.tar.bz,.tar.bz2,.tar.gz,.tar.xz,.tbz,.tbz2,.tgz,.txz,.zip" />
+                                                        <!-- 上传文件夹 -->
+                                                        <button type="button" style="margin-left: 8px;"
+                                                            class="little-minor-btn" [disabled]="isUploading || weakScanDisable"
+                                                            *ngIf="!isX86 && isUploadDirectory === 'directory'"
+                                                            onkeyup="if(event.keyCode === 13 || event.keyCode === 32){ return false;}"
+                                                            onkeydown="if(event.keyCode === 13 || event.keyCode === 32){ return false;}"
+                                                            (click)="uploadFolder()">{{i18n.plugins_common_button_upcode}}
+                                                        </button>
+                                                        <input type="file" id="filesUp" webkitdirectory
+                                                            style="display: none;" (change)="toZipCode('normal','6')" />
+                                                        </div>
+                                                        <!-- 错误提示栏 -->
+                                                        <div #wrapper1></div>
+                                                </div>
+                                                </div>
+                                                <!-- #右键迁移界面 -->
+                                                <div *ngIf="localFilePath.length !== 0">
+                                                    <div class="mt-20  path_div_r" [ngClass]="{'intellij-color': intellijFlag}">
+                                                        <div class="path_div_r_title">{{inputItems.path.label}}:</div>
+                                                        <div class="path_div_r_path" [tiTip]="localFilePath">{{ localFilePath }}</div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: inline-block;">
+                                                    <p style="margin-top: 26px;">
+                                                        <span class="input-label "
+                                                            style="display: inline-block;"><span class="ti3-icon ti3-icon-staricon"></span>{{
+                                                            i18n.plugins_porting_weakCheck.compile_command }}</span>
+                                                    </p>
+                                                    <p [tiTip]='isCheck ? i18n.disable_tip.arm_tip : ""'
+                                                    tiTipPosition="top" [ngClass]="{'dis-value': weakScanDisable}">
+                                                        <textarea
+                                                            *ngIf="!isCheck"
+                                                            type="text" tiText class="cmd-weak"
+                                                            [tiValidation]="validation" [formControl]="weakControl"
+                                                            [(ngModel)]="inputItems.weakTool.value"
+                                                            [placeholder]="cmdHolder"
+                                                            [ngClass]="{'dis-border': weakScanDisable}"
+                                                            (ngModelChange)="updatePage()"
+                                                            >
+                                                        </textarea>
+                                                        <input type="text" class="dis-input" disabled *ngIf="isCheck">
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="curStep !== weakStepList[0].step" class="stepOne"
+                                            [ngStyle]="{'border-left' : curStep === weakStepList[1].step ? (intellijFlag ? '1px solid #5e5e5e':'1px solid #313131') : 'none'}"
+                                            [ngClass]="{'path-content': intellijFlag}">
+                                            <div style="font-size: 14px;">
+                                            {{ i18n.plugins_porting_weakCheck.step[0].path + weakCodeFilePath
+                                            + weakFileName }}
+                                            </div>
+                                            <div style="font-size: 14px;">
+                                                {{ i18n.plugins_porting_weakCheck.compile_command + '：'+ inputItems.weakTool.value }}
+                                            </div>
+                                            </div>
+                                        </li>
+                                        <!-- 上传源码文件 end-->
+                                        <!-- 解析构建命令 start -->
+                                        <li class="step-item">
+                                            <p class="step-label"
+                                                [ngClass]="{'select-step': curStep == weakStepList[1].step}">
+                                                <span class="step-num"
+                                                    [ngClass]="{'circle-icon': curStep === weakStepList[2].step}">{{
+                                                    weakStepList[1].step }}</span>
+                                                <span>{{ i18n.plugins_porting_weakCheck.step[1].title_compileComand
+                                                    }}</span>
+                                            </p>
+                                            <div class="step-content" *ngIf="curStep >= weakStepList[1].step">
+                                                <p>
+                                                    <span class="input-label "
+                                                        style="display: inline-block;"><span class="ti3-icon ti3-icon-staricon"></span>{{
+                                                        i18n.plugins_porting_weakCheck.bc_file }}</span>
+                                                </p>
+                                                <p class="show-bc-modal">{{ i18n.plugins_porting_weakCheck.bc_download_on }}<span
+                                                    (click)="showBcDownloadModal()" style="color: #0067FF; cursor: pointer;">
+                                                    {{ i18n.plugins_porting_weakCheck.bc_modal.download_tip }}
+                                                   </span>{{ i18n.plugins_porting_weakCheck.bc_download_un }}
+                                                 </p>
+                                                <p style="margin-top: 10px;">
+                                                    <ti-select style="width: 400px;"
+                                                        [multiple]="true"
+                                                        [selectAll]="true"
+                                                        [options]='bcOptions'
+                                                        [(ngModel)]="bcSelecteds"
+                                                        [placeholder]='i18n.plugins_porting_weakCheck.step[1].title_compiler'
+                                                        (ngModelChange)="bcFileChange($event)"
+                                                        [noDataText]="i18n.plugins_porting_message_noData"
+                                                        [disabled]="createWeakBtnDisabled"
+                                                        id="myselect"
+                                                        (select)="updatePage()"
+                                                        (click)="updatePage()">
+                                                    </ti-select>
+                                                </p>
+                                                <div style="margin-top: 10px;">
+                                                  <input
+                                                  type="checkbox"
+                                                  tiCheckbox
+                                                  [disabled]=compilerConfigurationFile.disabled
+                                                  [name]=compilerConfigurationFile.title
+                                                  [(ngModel)]=compilerConfigurationFile.checked
+                                                  [label]=compilerConfigurationFile.title
+                                                  />
+                                                </div>
+                                            </div>
+                                            <input type="file" id="compilerfile" style="display: none;"
+                                                (change)="uploadWeakFile('normal','7')" [disabled]="intellijFlag"
+                                                accept=".out" />
+                                        </li>
+                                        <!-- 解析构建命令 end -->
+                                        <div class="cntent-step-desc"
+                                            *ngIf="curStep === weakStepList[0].step"></div>
+                                        <li class="step-item" *ngIf="!isCheck">
+                                            <button type="button" class="little-minor-btn"
+                                                style="width: 150px;height: 32px;cursor: pointer;"
+                                                (click)="stepChangePre()"
+                                                *ngIf="curStep === weakStepList[1].step"
+                                                [disabled]="createWeakCompilerDisabled || createWeakBtnDisabled || weakScanDisable">
+                                                {{ i18n.plugins_porting_weakCheck.prev_btn }}
+                                            </button>
+                                            <button type="button" [ngClass]="{'intellij-primary-btn weak-btn': intellijFlag, 'operation': !intellijFlag}"
+                                                style="width: 150px;" (click)="stepChangeNext()"
+                                                *ngIf="curStep === weakStepList[0].step"
+                                                [ngStyle]="{'margin-left': curStep === weakStepList[0].step ? '0' : '20px'}"
+                                                [disabled]="!weakFileName || createWeakCompilerDisabled || !inputItems.weakTool.value || weakScanDisable || nextDisabled">
+                                                {{ i18n.plugins_porting_weakCheck.next_btn }}
+                                            </button>
+                                            <span [tiTip]="createWeakBtnDisabled?createWeakBtnDisabledTip:''"
+                                                tiTipPosition="right" style="width: 150px;">
+                                                <button type="button" [ngClass]="{'intellij-primary-btn weak-btn': intellijFlag, 'operation': !intellijFlag}"
+                                                    *ngIf="curStep === weakStepList[1].step" (click)="createWeakCheck()"
+                                                    [disabled]="createWeakBtnDisabled || weakScanDisable || isCommit || bcDisabled">
+                                                    {{ i18n.plugins_porting_weakCheck.confirm_title }}
+                                                </button>
+                                            </span>
+                                        </li>
+                                        <li class="step-item" *ngIf="isCheck">
+                                            <span [tiTip]="i18n.disable_tip.arm_tip"
+                                                tiTipPosition="right" style="width: 150px;">
+                                                <button type="button" [ngClass]="{'intellij-primary-btn weak-btn': intellijFlag, 'operation': !intellijFlag}"
+                                                    [disabled]="isCheck || weakScanDisable">
+                                                    {{ i18n.plugins_porting_weakCheck.confirm_title }}
+                                                </button>
+                                            </span>
+                                        </li>
+                                        </ul>
+                                        <!-- BC文件上传 -->
+                                        <ul  *ngIf="weakCheckTypeChecked === 'remote3'">
+                                            <span class="bc-upload">
+                                                <p class="bc-title">{{ i18n.plugins_porting_weakCheck.bc_tip1 }}<a
+                                                    (click)="openUrl(bcUserLink)" class="text-btn" style="font-size: 12px;">
+                                                        FAQ</a>{{i18n.common_term_ipt_label.compile_command_faq_symbol}}</p>
+                                                 <div>
+                                            <span>
+                                                <div *ngFor="let item of BcList" style="display: inline-block;" [ngStyle]="{'margin-right': currLanguege === LANG_TYPE.EN ? '54px':'52px'}">
+                                                    <label class="ra-label" style="margin-bottom: 20px;"
+                                                        [for]="item.key">
+                                                        <i class="ra-common ra-check"
+                                                            *ngIf="TypeChecked === item.key && !isCheck" style="top: 2px;"></i>
+                                                        <i class="ra-common ra-uncheck"
+                                                            *ngIf="TypeChecked !== item.key && !isCheck" style="top: 2px;"></i>
+                                                        <span [tiTip]='isCheck ? i18n.disable_tip.arm_tip : ""' tiTipPosition="top">
+                                                            <i class="ra-common ra-uncheck newColor"
+                                                            *ngIf="TypeChecked === item.key && (isCheck || weakScanDisable)" style="top: 2px;" ></i>
+                                                        </span>
+                                                        <span [tiTip]='isCheck ? i18n.disable_tip.arm_tip : ""' tiTipPosition="top">
+                                                            <i class="ra-common ra-uncheck newColor"
+                                                            *ngIf="TypeChecked !== item.key && (isCheck || weakScanDisable)" style="top: 2px;"></i>
+                                                        </span>
+                                                        <input type="radio" name="softPackUpload"
+                                                            [(ngModel)]="TypeChecked" [value]="item.key"
+                                                            [id]="item.key"
+                                                            style="width:20px;height:20px;display:none;"
+                                                            (ngModelChange)="onRadioModelChange($event)"
+                                                            (change)="TypeChecked == item.key"
+                                                            [disabled]="isCheck || weakScanDisable" />
+                                                        <span class="ra-label-span" [ngClass]="{'ra-label-span-active':TypeChecked == item.key}">{{item.value}}</span>
+                                                    </label>
+                                                </div>
+                                            </span>
+                                                </div>
+                                                <div *ngIf="TypeChecked === 'remote1'">
+                                            <div style="position: relative;">
+                                                <div class="path_div" [ngClass]="{'intellij-color': intellijFlag}">
+                                                    <div class="ti3-icon ti3-icon-staricon"></div>
+                                                    <div class="path_div_title">{{inputItems.path.label}}:</div>
+                                                    <div class="path_div_path" [tiTip]="bcspace">{{ bcspace }}</div>
+                                                </div>
+                                                <span *ngIf="!isCheck"
+                                                    [ngClass]="{'dis-value-row': weakScanDisable}">
+                                                    <textarea tiText [(ngModel)]="bcFileName" resize="vertical"
+                                                        [placeholder]="bcPlaceholder" style="width: 440px;"
+                                                        class="areaMatch bcTextArea"
+                                                        (focus)="focusBcTextArea()" (blur)="blurAreaMatch()"
+                                                        (input)="inputBcAreaMatch()" (keyup)="keyupAreaMatch()"
+                                                        [tiValidation]="validation" [formControl]="filenameLengthBcCheck"
+                                                        [ngClass]="{'dis-border': weakScanDisable}">
+                                                    </textarea>
+                                                </span>
+                                                <span class="dis-value-row" *ngIf="isCheck">
+                                                    <span  [tiTip]='isCheck ? i18n.disable_tip.arm_tip : ""' tiTipPosition="top">
+                                                        <textarea tiText [(ngModel)]="bcFileName" style="width: 440px;"
+                                                        resize="vertical" [placeholder]="bcPlaceholder"
+                                                        class="areaMatch bcTextArea dis-border"
+                                                        [disabled]="isCheck || weakScanDisable"></textarea>
+                                                    </span>
+                                                </span>
+                                                <!-- 输入自动匹配 -->
+                                                <div class="areaMatchDiv" style="width: 440px;"
+                                                    *ngIf="displayAreaMatch && ((BcPathList ||[]).length !== 0)">
+                                                    <ul>
+                                                        <li *ngFor="let path of BcPathList"
+                                                            (mousedown)="clickBcMatch(path)"
+                                                            style="cursor: pointer;">
+                                                            <p (mousedown)="clickBcMatch(path)" style="width: 390px;">{{path}}
+                                                            </p>
+                                                            <div (mousedown)="isDeleteBcMatch(path)">
+                                                                <img src="./assets/img/analysis/icon_delete_normal.svg"
+                                                                    onmouseover="this.src='./assets/img/analysis/icon_delete_hover.svg'"
+                                                                    onmouseout="this.src='./assets/img/analysis/icon_delete_normal.svg'" />
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                                </div>
+                                                <div *ngIf="TypeChecked === 'local1'">
+                                            <div style="position: relative;">
+                                                <div class="path_div" [ngClass]="{'intellij-color': intellijFlag}">
+                                                    <div class="ti3-icon ti3-icon-staricon"></div>
+                                                    <div class="path_div_title">{{inputItems.path.label}}:</div>
+                                                    <div class="path_div_path" [tiTip]="bcspace">{{ bcspace }}</div>
+                                                </div>
+                                                <textarea tiText [(ngModel)]="bcFileName" resize="vertical"
+                                                    [tiValidation]="validation" [formControl]="filenameLengthBcCheck"
+                                                    [errorMessageWrapper]="wrapper1"
+                                                    [placeholder]="i18n.plugins_porting_title_bcTips"
+                                                    style="width: 440px;" class="commonTextArea"
+                                                    [ngClass]="{'txtDisabled': isCheck}"></textarea>
+                                                <button (click)="upload()" type="button" style="margin-left: 10px;vertical-align: middle;" class="little-minor-btn"
+                                                  [disabled]='!weakEnvironment'>{{ i18n.common_term_upload_code }}
+                                                </button>
+                                                <input type="file" id="bcload"
+                                                    style="display: none;" (change)="uploadBcFile('normal', '8')" accept=".bc,.BC" />
+                                                <!-- 错误提示栏 -->
+                                                <div #wrapper1></div>
+                                            </div>
+                                                </div>
+                                                <div style="margin-top: 32px;">
+                                                    <span [tiTip]='isCheck ? i18n.disable_tip.arm_tip : ""' tiTipPosition="top">
+                                                        <button type="button"  (click)="startCheck()" [ngClass]="{'intellij-primary-btn': intellijFlag, 'operation': !intellijFlag}"
+                                                        [disabled]="!bcFileName || bcCreateBtnDisabled || BCCommit" style="margin-left: 0 !important;">{{ i18n.plugins_porting_weakCheck.start_check }}
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </span>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <!-- 内存一致性 end -->
+                           </ul>
+                        </ti-item>
+                    </ti-formfield>
+                </div>
+            </div>
+        </div>
+        <div class="note-area" *ngIf="weakTypeChecked === 'remote2' || selectType.selectedId !== 'weak'">
+          <div *ngIf="selectType.selectedId === 'weak'" style="width: 400px;">
+            <app-history-list [intellijFlag]="intellijFlag" (getReportTotalNum)="getReportTotalNum($event)"
+                              (confirmDelete)="confirmDelete($event)" (confirmAllDelete)="confirmAllDelete($event)"
+                              (changeIsCommit)="changeIsCommit($event)"
+                              (changeBCCommit)="changeBCCommit($event)">
+            </app-history-list>
+          </div>
+        </div>
+    </div>
+</div>
+<!-- 免责声明 -->
+<app-mask-disclaimer *ngIf="localFilePath.length"></app-mask-disclaimer>
+
+<!-- 上传重复文件 modal start -->
+<app-messagebox #exitmask>
+    <div class="content config-modal">
+        <p class="mask-title">
+            <span>{{i18n.plugins_porting_message_analysis_center.exit.title}}</span>
+            <span class="close-btn" (click)="closeMaskExit()">
+                <img class="tip-title-close" alt="" src="./assets/img/install/icon-close.svg" /></span>
+        </p>
+        <div class="mask-container">
+            <div class="des">
+                <img class="des-warn-icon noSpace" alt="" src="./assets/img/home/warn.png" />
+                <p>{{exitFileNameReplace}}</p>
+            </div>
+        </div>
+        <div class="btn-box">
+            <button type="button" color="primary" tiButton class="user-sure-btn user-little-btn primary-btn"
+                (click)="uploadAgain('override')">{{i18n.plugins_porting_message_analysis_center.exit.replace}}</button>
+            <button type="button" tiButton class="user-little-btn little-minor-btn" (click)="uploadAgain('save_as')"
+                *ngIf="noAgain">{{i18n.plugins_porting_message_analysis_center.exit.save_as}}</button>
+            <button type="button" tiButton class="user-little-btn little-minor-btn"
+                (click)="closeMaskExit()">{{i18n.plugins_common_button_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-messagebox>
+<!-- 上传重复文件 modal end -->
+
+<app-messagebox #saveasmask>
+    <div class="content config-modal">
+        <p class="mask-title">
+            <span>{{i18n.plugins_porting_message_analysis_center.exit.save_as}}</span>
+            <span class="close-btn" (click)="closeMaskSaveAs()">
+                <img class="tip-title-close" alt="" src="./assets/img/install/icon-close.svg" /></span>
+        </p>
+        <div class="mask-container">
+            <div class="save_as">
+                <span
+                     style="margin-top: 4px;" [ngClass]="{'changebg': intellijFlag}"><span class="ti3-icon ti3-icon-staricon" [ngClass]="{'save-as-star': intellijFlag}"></span> {{i18n.plugins_porting_message_analysis_center.exit.file_name}}</span>
+                <div class="formArea">
+                    <ti-formfield>
+                        <ti-item>
+                            <input class="command-input saveAs-input" type="text" tiText [(ngModel)]="exitFileName" [ngClass]="{'command-input-intellij': intellijFlag}"
+                                [tiValidation]="validation" [formControl]="confirmUploadZip" [errorMessageWrapper]="saveasmeg"/>
+                           <div #saveasmeg></div>
+                        </ti-item>
+                    </ti-formfield>
+                </div>
+            </div>
+        </div>
+        <div class="btn-box">
+            <button type="button" color="primary" tiButton class="user-sure-btn primary-btn"
+                (click)="saveAs('save_as')">{{i18n.plugins_common_button_term_operate_ok}}</button>
+            <button type="button" tiButton class="user-close-btn little-minor-btn"
+                (click)="closeMaskSaveAs()">{{i18n.plugins_common_button_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-messagebox>
+
+<app-messagebox #exitbc>
+    <div class="content config-modal">
+        <p class="mask-title">
+            <span>{{i18n.plugins_porting_message_analysis_center.exit.title}}</span>
+            <span class="close-btn" (click)="closeBcExit()">
+                <img class="tip-title-close" alt="" src="./assets/img/install/icon-close.svg" /></span>
+        </p>
+        <div class="mask-container">
+            <div class="des">
+                <img class="des-warn-icon noSpace" alt="" src="./assets/img/home/warn.png" />
+                <p>{{exitFileNameReplace}}</p>
+            </div>
+        </div>
+        <div class="btn-box">
+            <button type="button" tiButton color="primary" class="user-sure-btn user-little-btn primary-btn"
+                (click)="uploadAgainbc('override')">{{i18n.plugins_porting_message_analysis_center.exit.replace}}</button>
+            <button type="button" tiButton class="user-little-btn little-minor-btn" (click)="uploadAgainbc('save_as')">
+                {{i18n.plugins_porting_message_analysis_center.exit.save_as}}</button>
+            <button type="button" tiButton class="user-little-btn little-minor-btn"
+                (click)="closeBcExit()">{{i18n.plugins_common_button_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-messagebox>
+
+<app-messagebox #savebc>
+    <div class="content config-modal">
+        <p class="mask-title">
+            <span>{{i18n.plugins_porting_message_analysis_center.exit.save_as}}</span>
+            <span class="close-btn" (click)="closeBcSaveAs()">
+                <img class="tip-title-close" alt="" src="./assets/img/install/icon-close.svg" /></span>
+        </p>
+        <div class="mask-container">
+            <div class="save_as">
+                <span
+                    style="margin-top: 4px;" [ngClass]="{'changebg': intellijFlag}"><span class="ti3-icon ti3-icon-staricon" [ngClass]="{'save-as-star': intellijFlag}"></span>{{i18n.plugins_porting_message_analysis_center.exit.file_name}}</span>
+                <div class="formArea">
+                    <ti-formfield>
+                        <ti-item>
+                            <input class="command-input" [ngClass]="{'command-input-intellij': intellijFlag}" type="text" tiText [(ngModel)]="bcExitFileName"
+                                [tiValidation]="validation" [formControl]="confirmUploadZip" [errorMessageWrapper]="savebcmeg"/>
+                            <span class="suffix" [ngClass]="{'changebg': intellijFlag}">{{bcsuffix}}</span>
+                           <div #savebcmeg></div>
+                        </ti-item>
+                    </ti-formfield>
+                </div>
+            </div>
+        </div>
+        <div class="btn-box">
+            <button type="button" color="primary" tiButton class="user-sure-btn primary-btn"
+                (click)="saveBc('save_as')">{{i18n.plugins_common_button_term_operate_ok}}</button>
+            <button type="button" tiButton class="user-close-btn little-minor-btn"
+                (click)="closeBcSaveAs()">{{i18n.plugins_common_button_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-messagebox>
+
+<app-messagebox #deletereportmask>
+    <div class="content config-modal">
+        <p class="mask-title">
+            <span>{{i18n.plugins_porting_weakCheck.delete_report}}</span>
+            <span class="close-btn" (click)="closeReportDeleteMask()">
+                <img class="tip-title-close" alt="" src="./assets/img/install/icon-close.svg" /></span>
+        </p>
+        <div class="mask-container">
+            <div class="des del" style="display: block;">
+                <p class="tip1"><img src="./assets/img/home/icon_warn.png" style="width: 24px; margin-right: 8px;"
+                        alt="">{{i18n.common_term_history_report_del_tip}}</p>
+                <p class="tip2">{{ i18n.common_term_history_report_del_tip2 }}</p>
+            </div>
+        </div>
+        <div class="btn-box">
+            <button type="button" color="primary" tiButton class="user-close-btn little-minor-btn" style="margin-right: 20px!important;"
+                (click)="deleteReport()">{{i18n.common_term_operate_ok}}</button>
+            <button type="button" tiButton class="user-sure-btn primary-btn"
+                (click)="closeReportDeleteMask()">{{i18n.common_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-messagebox>
+
+<app-messagebox #deleteallreportmask>
+    <div class="content config-modal">
+        <p class="mask-title">
+            <span>{{i18n.plugins_porting_weakCheck.delete_all_report}}</span>
+            <span class="close-btn" (click)="closeAllReportDeleteMask()">
+                <img class="tip-title-close" alt="" src="./assets/img/install/icon-close.svg" /></span>
+        </p>
+        <div class="mask-container">
+            <div class="des del" style="display: block;">
+                <p class="tip1"><img src="./assets/img/home/icon_warn.png" style="width: 24px; margin-right: 8px;" alt="">{{
+                    i18n.common_term_all_history_tip }}</p>
+                <p class="tip2">{{ i18n.common_term_all_history_tip2 }}</p>
+            </div>
+        </div>
+        <div class="btn-box">
+            <button type="button" color="primary" tiButton class="user-close-btn little-minor-btn" style="margin-right: 20px;"
+                (click)="deleteAllReport()">{{i18n.common_term_operate_ok}}</button>
+            <button type="button" tiButton class="user-sure-btn primary-btn" [ngStyle]="{'margin-left': intellijFlag ? '12px':'unset'}"
+                (click)="closeAllReportDeleteMask()">{{i18n.common_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-messagebox>
+
+<!-- BC文件下载 modal start -->
+<app-bc-download
+  #bcDownload
+  [bcOptions]="bcOptions"
+  [workspace]="workspace"
+  [weakFileName]="weakFileName"
+  [bcGenerateTaskId]="bcGenerateTaskId"
+  [intellijFlag]="intellijFlag"
+></app-bc-download>
+<!-- BC文件下载 modal end -->
+
+<ng-template #bcResult let-context="context">
+    <ti-modal-header>{{ i18n.plugins_porting_weakCheck.bc_result.head }}</ti-modal-header>
+    <ti-modal-body class="intellij-bc-result-modal-body">
+      <p class="res-title">
+        <img src="./assets/img/home/icon_success.png" alt="" style="vertical-align: middle;" height="15px" width="15px">
+        <span style="margin-left: 10px;">{{ i18n.plugins_porting_weakCheck.bc_result.title }}</span>
+      </p>
+      <div class="drag-box bc-result-table" style="margin-top: 12px">
+        <ti-table [(displayedData)]="bcFileTableData" [srcData]="bcFileSrcData">
+          <div class="ti3-table-fixed-head">
+            <table>
+              <thead>
+                <tr>
+                  <th tiOverflow *ngFor="let column of bcFileColumns" width="{{column.width}}"
+                  >{{column.title}}</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="ti3-table-container" style="max-height:266px;">
+            <table>
+              <thead>
+                <tr>
+                  <th tiOverflow *ngFor="let column of bcFileColumns" width="{{column.width}}"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of bcFileTableData;" style="border-bottom:1px solid #4b4b4b;">
+                  <td tiOverflow>{{ row.bc_file_name }}</td>
+                  <td *ngIf="currLanguege === LANG_TYPE.ZH" tiOverflow>
+                    <div class="check-status">
+                      <span class="status-icon"
+                          [ngStyle]="{'background-color': row.chinese_check_result === i18n.plugins_porting_weakCheck.bc_result.success ? '#61D274' : '#ED4B4B'}">
+                      </span>
+                      <span>{{ row.chinese_check_result }}</span>
+                    </div>
+                  </td>
+                  <td *ngIf="currLanguege !== LANG_TYPE.ZH" tiOverflow>
+                    <div class="check-status">
+                      <span class="status-icon"
+                          [ngStyle]="{'background-color': row.check_result === i18n.plugins_porting_weakCheck.bc_result.success ? '#61D274' : '#ED4B4B'}">
+                      </span>
+                      <span>{{ row.check_result }}</span>
+                    </div>
+                  </td>
+                  <td
+                    tiOverflow class="final-td"
+                    [tiTip]='i18n.plugins_porting_weakCheck.bc_result.view_report'
+                    [attr.rowspan]="row.rowSpan"
+                    *ngIf="row.showTd && checkResult.realStatus === '0x0d0a00'
+                    && (row.chinese_check_result === i18n.plugins_porting_weakCheck.bc_result.success || row.check_result === i18n.plugins_porting_weakCheck.bc_result.success)"
+                  ><span (click)="goWeakReport(row.taskId)" style="color: #0067FF; cursor: pointer;">
+                    {{ i18n.plugins_porting_weakCheck.bc_result.view_report }}
+                  </span>
+                  </td>
+                  <td
+                    class="final-td"
+                    [tiTip]='i18n.plugins_porting_weakCheck.bc_result.no_modify'
+                    [attr.rowspan]="row.rowSpan"
+                    *ngIf="row.showTd && checkResult.realStatus === '0x0d0a02'
+                     && (row.chinese_check_result === i18n.plugins_porting_weakCheck.bc_result.success || row.check_result === i18n.plugins_porting_weakCheck.bc_result.success)"
+                  >{{ i18n.plugins_porting_weakCheck.bc_result.no_modify }}
+                  </td>
+                  <td
+                    class="final-td"
+                    *ngIf="currLanguege !== LANG_TYPE.ZH
+                     && row.check_result != i18n.plugins_porting_weakCheck.bc_result.success"
+                  ></td>
+                  <td
+                    class="final-td"
+                    *ngIf="currLanguege === LANG_TYPE.ZH
+                     && row.chinese_check_result != i18n.plugins_porting_weakCheck.bc_result.success"
+                  ></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ti-table>
+      </div>
+    </ti-modal-body>
+    <ti-modal-footer>
+    </ti-modal-footer>
+  </ng-template>

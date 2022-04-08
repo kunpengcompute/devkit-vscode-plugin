@@ -1,0 +1,221 @@
+.apis-container{
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+.left_title {
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+    color: #252c3c;
+    display: flex;
+    top: 0px;
+    right: 27px;
+    .selectIcon{
+      display: inline-block;
+      height: 32px;
+      width: 32px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+}
+.function_echarts{
+    height: 59vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+@media only screen and (max-height: 900px) and (min-height: 768px) {
+  .function_echarts{
+    height: 410px;
+  }
+}
+
+@media only screen and (max-height: 768px) {
+  .function_echarts{
+    height: 280px;
+  }
+}
+
+.collapsed{
+    position: relative;
+    border-left: 34px solid #f0f3fa!important;
+    &::before{
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      content: "";
+      width: 2px;
+      background-color: #6c92fa;
+      z-index: 999;   
+    }
+}
+
+
+// 侧滑框
+.thread-screen {
+    padding: 28px 32px;
+    position: relative;
+    height: 100%;
+
+    .header-title {
+        font-size: 20px;
+        color: #222222;
+    }
+
+    .line-between {
+        margin: 18px 0px;
+        width: 100%;
+        border-bottom: dashed 1px #E1E6EE;
+        height: 0px;
+    }
+
+    .table-wrapper {
+        height: min-content;
+        width: 636px;
+        margin-top: 32px;
+    }
+    .table-wrapper.notShow{
+        display: none;
+        overflow: hidden;
+    }
+
+    .opreation-btn {
+        position: absolute;
+        bottom: 80px;
+        width: 90%;
+        text-align: center;
+
+        button+button {
+            margin-left: 16px;
+        }
+    }
+}
+
+.section-title{
+    font-size: 16px;
+    color: #222;
+    padding-bottom: 12px;
+}
+.select-constent{
+    display: flex;
+    flex-flow: wrap;
+}
+.filterConfig_title{
+    height: 20px;
+    width: 168px;
+    margin: 0px 1px 1px 0px;
+    background-color:rgba($color: #b8becc, $alpha: 0.1);
+    border-radius: 2px;
+    padding: 10px 16px 10px 26px;
+    margin: 0px 2px 2px 0px;
+    position: relative;
+    cursor: pointer;
+    span{
+      font-size: 14px;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 20px;
+      letter-spacing: 0px;
+      color: #2b313f;
+    }
+    img{
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+    }
+  }
+  .filterConfig_title.filter_top{
+    padding: 10px 6px 10px 6px;
+    width: 145px;
+   
+  } 
+  .filterConfigClose.filter_top span{
+        color: #0067FF;
+    }
+  .filterConfigClose{
+    background-color:#E0ECFF !important;
+  }
+:host  ::ng-deep .mask{
+    z-index: 1004!important;
+  }
+:host ::ng-deep  .content-box{
+    z-index: 1005!important;
+  } 
+  ti-tip-container.ti3-tooltip{
+    z-index: 1001!important;
+  }
+  .selectTableBox{
+    position: relative;
+    .headerFilter{
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      z-index: 1;
+      img{
+        cursor: pointer;
+        height: 9px;
+        width: 9px;
+      }
+    }
+    .statusFilter {
+      font-size: 14px;
+      display: none;
+      position: relative;
+      position: absolute;
+      top: 25px;
+      right: 5px;
+      min-width: 195px;
+      background-color: #ffffff;
+      box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      padding-top: 15px;
+      max-height: 41vh;
+      overflow-y: auto;
+      span {
+        line-height: 32px;
+        box-sizing: border-box;
+        width: 100%;
+        height: 32px;
+        &:hover {
+          background-color: #f0f3fa;
+        }
+        ::ng-deep .ti3-checkbox{
+          display: flex;
+          padding: 0 15px !important;
+          width: 100% !important;
+        }
+      }
+    }
+    .statusFilter.active {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  ::ng-deep .ti3-checkbox .ti3-checkbox-label {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .nodata{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16%;
+    margin: 0px;
+  }
+
+.title-top{
+  width: calc(100% - 50px);
+}
+
+.devTable{
+  max-height: 400px;
+}
+@media only screen and (max-height: 900px){
+  .devTable{
+    max-height: 132px;
+  }
+}  

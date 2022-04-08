@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="6px" height="10px" viewBox="0 0 6 10" version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>4.组件/2.通用/icon/分页箭头/右</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="8.0012411 10.8061556 12.6912832 5.9987589 13.6625651 6.96935048 9.9142411 10.8115651 13.6625651 14.6912832 12.6912832 15.6625651"></polygon>
+    </defs>
+    <g id="330-TI4需求设计" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="快照-HTTP请求-对比" transform="translate(-671.000000, -158.000000)">
+            <g id="编组-18" transform="translate(663.000000, 152.000000)">
+                <g id="编组-8">
+                    <g id="2.文本/1.字号/20sp/主要文本">
+                        <g id="编组-29">
+                            <g id="4.组件/2.通用/icon/分页箭头/左">
+                                <rect id="frame" x="0" y="0" width="22" height="22"></rect>
+                                <mask id="mask-2" fill="white">
+                                    <use xlink:href="#path-1"></use>
+                                </mask>
+                                <use id="蒙版" fill="#267DFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                                <g id="3.颜色/8.次要文字" mask="url(#mask-2)" fill="#267DFF" fill-rule="evenodd">
+                                    <rect id="矩形" x="0" y="0" width="22" height="22"></rect>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

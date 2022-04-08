@@ -1,0 +1,196 @@
+::ng-deep {
+
+  :root {
+    --linear-gradient-numa-gradation: linear-gradient(180deg,
+      #ef6969 0%,
+      rgba(239, 105, 105, .4) 33%,
+      #69cb71 33%,
+      rgba(195, 234, 198, .4) 67%,
+      #66a4ff 67%,
+      rgba(102, 164, 255, .4) 100%);
+    --color-numa-box-border: #d9dce2;
+  }
+
+  .vscode-dark .system-bubble-gragh {
+    --linear-gradient-numa-gradation: linear-gradient(180deg,
+      #c84242 0%,
+      rgba(98, 44, 44, .4) 33%,
+      #69cb71 33%,
+      rgba(60, 99, 63, .4) 67%,
+      #2072ea 67%,
+      rgba(32, 114, 234, .4) 100%);
+    --color-numa-box-border: #3c3c3c;
+  }
+}
+
+.system-bubble-gragh {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 2px;
+  box-sizing: border-box;
+	border: 1px solid var(--common-color-divider);
+
+  > div {
+    height: 222px;
+    display: none;
+    box-sizing: border-box;
+
+    &.show {
+      display: flex;
+    }
+
+    &.core-view {
+      padding: 8px;
+
+      app-bubble-box + app-bubble-box {
+        margin-left: 2px;
+      }
+
+    }
+
+    &.numa-view {
+      position: relative;
+      box-sizing: border-box;
+      padding: 34px 10px 0 24px;
+
+      .numa-box {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 16px;
+        box-sizing: border-box;
+
+        &::-webkit-scrollbar-track-piece {
+          margin-right: 38px;
+        }
+
+        .numa-item + .numa-item {
+          margin-left: 24px;
+        }
+
+        .numa-item {
+          flex-shrink: 0;
+          width: 227px;
+          height: 156px;
+          border-radius: 2px;
+          border: 1px solid var(--color-numa-box-border);
+          padding: 8px 16px 13px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          box-sizing: border-box;
+
+          title {
+            display: block;
+            height: 20px;
+            font-size: 14px;
+            line-height: 20px;
+            color: var(--common-color-font-primary);
+          }
+
+          .numa-core-box {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 11px;
+
+            app-bubble {
+              margin: 5px 4px;
+            }
+          }
+        }
+
+        .scroll-padding {
+          flex-shrink: 0;
+          width: 38px;
+        }
+      }
+
+      .numa-gradation {
+        position: absolute;
+        width: 10px;
+        height: 100%;
+        right: 0;
+        top: 0;
+        background-image: var(--linear-gradient-numa-gradation);
+
+        .label-box {
+          position: absolute;
+          white-space: nowrap;
+          transform: translateX(-100%);
+          width: 36px;
+          height: 100%;
+          box-sizing: border-box;
+          padding-right: 4px;
+          background-image: linear-gradient(-90deg,
+            var(--common-color-background-primary) 0%,
+            rgba(255, 255, 255, 0) 100%);
+
+          span {
+            position: absolute;
+            height: 18px;
+            font-size: 12px;
+            line-height: 18px;
+            color: var(--color-bubble-box-gradation-label-font);
+            width: 100%;
+            text-align: right;
+            padding-right: 4px;
+            box-sizing: border-box;
+
+            &.start-value {
+              bottom: 0;
+            }
+
+            &.low-value {
+              bottom: calc(33% - 9px);
+            }
+
+            &.high-value {
+              bottom: calc(67% - 9px);
+            }
+
+            &.end-value {
+              top: 0;
+            }
+
+          }
+
+        }
+      }
+    }
+  }
+}
+
+
+.core-info-tip {
+  .info-item {
+    width: 120px;
+    height: 18px;
+    font-size: 12px;
+    line-height: 18px;
+    display: flex;
+
+    .info-item-label {
+      width: 60px;
+      box-sizing: border-box;
+      color: var(--common-color-font-secondary);
+    }
+
+    .info-item-value {
+      margin-left: 10px;
+      width: 50px;
+      color: var(--common-color-font-primary);
+    }
+  }
+
+  .divider {
+    width: 120px;
+    height: 1px;
+    background-color: var(--common-color-divider);
+    margin: 8px 0;
+  }
+}

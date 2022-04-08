@@ -1,0 +1,54 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Run Log Management">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001178881580.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (Java Profiler)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001224122751">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Run Log Management</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001224122751"></a><a name="EN-US_TOPIC_0000001224122751"></a>
+
+<h1 class="topictitle1">Run Log Management</h1>
+<div id="body1587557397114"><div class="section" id="EN-US_TOPIC_0000001224122751__section11470129119"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0000001224122751__p2444451164517">You have logged in to the <span id="EN-US_TOPIC_0000001224122751__ph12594180204619">Java Profiler</span> WebUI.</p>
+<div class="note" id="EN-US_TOPIC_0000001224122751__note43463558452"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001224122751__p15237181353814">Only the administrator <strong id="EN-US_TOPIC_0000001224122751__b131197593101">tunadmin</strong> can change the level of run logs, and view and download run logs.</p>
+</div></div>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001224122751__section724515391286"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0000001224122751__ol179320281599"><li id="EN-US_TOPIC_0000001224122751__li2793182819912"><span>Click <span><img id="EN-US_TOPIC_0000001224122751__image1917092873514" src="en-us_image_0000001224122905.png"></span> in the upper right corner and choose <strong id="EN-US_TOPIC_0000001224122751__b1996608220">Log</strong>.</span><p><p id="EN-US_TOPIC_0000001224122751__p11866185814916">The <strong id="EN-US_TOPIC_0000001224122751__b627891121514">Operation Logs</strong> page is displayed.</p>
+</p></li><li id="EN-US_TOPIC_0000001224122751__li1312775317914"><span>Click the <span class="uicontrol" id="EN-US_TOPIC_0000001224122751__uicontrol24589579117"><b>Run Log</b></span> tab.</span><p><p id="EN-US_TOPIC_0000001224122751__p16164153412106">The <span class="wintitle" id="EN-US_TOPIC_0000001224122751__wintitle4689172281211"><b>Run Log</b></span> tab page is displayed, as shown in <a href="#EN-US_TOPIC_0000001224122751__fig201514591112">Figure 1</a>.</p>
+<div class="note" id="EN-US_TOPIC_0000001224122751__note761031115548"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001224122751__p1995415284133">When <strong id="EN-US_TOPIC_0000001224122751__b5460185013274">hyper-tuner-java-profiler.log</strong> reaches 100 MB, a backup named <span class="filepath" id="EN-US_TOPIC_0000001224122751__filepath1182810239571"><b>hyper-tuner-java-profiler.log.1.zip</b></span> will be automatically created and saved in the <strong id="EN-US_TOPIC_0000001224122751__b18435874">/opt/hyper_tuner/thor-server-<em id="EN-US_TOPIC_0000001224122751__i1834611291977">x.x.x</em>/log/</strong> directory. <span class="filepath" id="EN-US_TOPIC_0000001224122751__filepath5359125614418"><b>/opt/hyper_tuner</b></span> is the tool installation directory, which can be changed during tool installation. <em id="EN-US_TOPIC_0000001224122751__i199471438141411">x.x.x</em> indicates the version. The original <span class="filepath" id="EN-US_TOPIC_0000001224122751__filepath681581578"><b>hyper-tuner-java-profiler.log.1.zip</b></span> will be automatically renamed <span class="filepath" id="EN-US_TOPIC_0000001224122751__filepath1272314135818"><b>hyper-tuner-java-profiler.log.2.zip</b></span>. A maximum of two compressed packages can be saved. When a third package is generated, the earliest package will be deleted by default.</p>
+</div></div>
+<div class="fignone" id="EN-US_TOPIC_0000001224122751__fig201514591112"><a name="EN-US_TOPIC_0000001224122751__fig201514591112"></a><a name="fig201514591112"></a><span class="figcap"><b>Figure 1 </b>Run Log tab page</span><br><span><img id="EN-US_TOPIC_0000001224122751__image8793103241919" src="en-us_image_0000001224201481.png"></span></div>
+</p></li><li id="EN-US_TOPIC_0000001224122751__en-us_topic_0239732282_li1716511371323"><span>Locate the log file to be downloaded, and click <strong id="EN-US_TOPIC_0000001224122751__en-us_topic_0240361568_b5249174317422">Download</strong> in the <strong id="EN-US_TOPIC_0000001224122751__en-us_topic_0240361568_b386419229438">Operation </strong>column.</span><p><p id="EN-US_TOPIC_0000001224122751__p920312992017">In the dialog box displayed, click <strong id="EN-US_TOPIC_0000001224122751__b15524162217592">OK</strong>.</p>
+<p id="EN-US_TOPIC_0000001224122751__p1362613617710">The downloaded run logs are in the following format:</p>
+<p id="EN-US_TOPIC_0000001224122751__p860504981">Time Log level Process ID Thread name Class name Method name (line number) Log details</p>
+<p id="EN-US_TOPIC_0000001224122751__p27924211299">Example:</p>
+<pre class="screen" id="EN-US_TOPIC_0000001224122751__screen20814259637">2020-07-27 09:10:08.782  WARN 20085 --- [           main]  com.zaxxer.hikari.util.DriverDataSource.&lt;init&gt;(70) : Registered driver with driverClassName=org.apache.derby.jdbc.EmbeddedDriver was not found, trying direct instantiation.</pre>
+<p id="EN-US_TOPIC_0000001224122751__p15342111454718">The log level indicates the importance of the log information. User management run logs are classified into five levels: DEBUG, INFO, WARNING, ERROR and CRITICAL. Java profiling run logs are classified into four levels: DEBUG, INFO, WARNING, and ERROR. The default run log level is <strong id="EN-US_TOPIC_0000001224122751__b1197794021613">WARNING</strong>. The tool records only the logs of the specified level and higher levels.</p>
+<ul id="EN-US_TOPIC_0000001224122751__ul61182209319"><li id="EN-US_TOPIC_0000001224122751__en-us_topic_0253410800_li1511818204318"><strong id="EN-US_TOPIC_0000001224122751__en-us_topic_0253410800_b124617215574">DEBUG</strong>: debugging information for fault locating.</li><li id="EN-US_TOPIC_0000001224122751__en-us_topic_0253410800_li31188202310"><strong id="EN-US_TOPIC_0000001224122751__en-us_topic_0253410800_b128771678572">INFO</strong>: key information about the normal running of the service.</li><li id="EN-US_TOPIC_0000001224122751__en-us_topic_0253410800_li1411802016312"><strong id="EN-US_TOPIC_0000001224122751__en-us_topic_0253410800_b6403181375710">WARNING</strong>: events about the system in unexpected status that does not affect the running of the system.</li><li id="EN-US_TOPIC_0000001224122751__en-us_topic_0253410800_li01181120153115"><strong id="EN-US_TOPIC_0000001224122751__en-us_topic_0253410800_b14260152295715">ERROR</strong>: errors that do not affect the application running.</li><li id="EN-US_TOPIC_0000001224122751__en-us_topic_0253410800_li311852017312"><strong id="EN-US_TOPIC_0000001224122751__en-us_topic_0253410800_b3933122413577">CRITICAL</strong>: errors that may cause system breakdown.</li></ul>
+<div class="note" id="EN-US_TOPIC_0000001224122751__note20547115033817"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0000001224122751__ul11737650174420"><li id="EN-US_TOPIC_0000001224122751__li573895084416">The administrator can click <span><img id="EN-US_TOPIC_0000001224122751__image12378163810489" src="en-us_image_0000001224361411.png"></span> in the upper right corner on the home page of the <span id="EN-US_TOPIC_0000001224122751__ph1331116578362">Kunpeng Hyper Tuner</span> or <span id="EN-US_TOPIC_0000001224122751__ph106173175251">Java Profiler</span> and choose <strong id="EN-US_TOPIC_0000001224122751__b185481449173516">System Settings</strong> to change the value of <strong id="EN-US_TOPIC_0000001224122751__b17673194718417">Run Log Level</strong> in the <strong id="EN-US_TOPIC_0000001224122751__b9103182410462">Common Settings</strong> area.</li><li id="EN-US_TOPIC_0000001224122751__li127388508443">The administrator can click <span><img id="EN-US_TOPIC_0000001224122751__image169174784812" src="en-us_image_0000001223882959.png"></span> in the upper right corner on the home page of the <span id="EN-US_TOPIC_0000001224122751__ph197281918172512">Java Profiler</span> and choose <strong id="EN-US_TOPIC_0000001224122751__b76725224364">System Settings</strong> to change the value of <strong id="EN-US_TOPIC_0000001224122751__b45299256429">Run Log Level</strong> in the <strong id="EN-US_TOPIC_0000001224122751__b4913954479">Java Profiler Settings</strong> area.</li></ul>
+</div></div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001178881580.html">Log Management</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

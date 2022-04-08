@@ -1,0 +1,76 @@
+
+
+// 深色主题适配
+::ng-deep .vscode-dark {
+  --leftBox-bg-color: #2a2a2a;
+}
+// 浅色主题适配
+::ng-deep .vscode-light {
+  --leftBox-bg-color: #f5f9ff;
+}
+.oom-information{
+  display: flex;
+  width: 100%;
+  .left-list{
+    flex: 0 0 320px;
+    width: 320px;
+    height: 100%;
+    .item{
+      height: 20px;
+      line-height: 20px;
+      font-family: FZLTHJW--GB1-0;
+      font-size: 14px;
+      font-weight: normal;
+      font-stretch: normal;
+      letter-spacing: 0px;
+      padding: 9px 0;
+      .icon{
+        margin:0 17px 0 23px
+      }
+    }
+    .active-item{
+      background-color: var(--leftBox-bg-color);
+    }
+    .item:hover{
+      cursor: pointer;
+      background-color: var(--leftBox-bg-color);
+    }
+  }
+  .right-content{
+    flex:1;
+    height: 100%;
+    padding: 0 32px 0 40px;
+    border-left:1px dotted #e1e6ee;
+    .stack-content{
+      height: 252px;
+      width: 100%;
+      overflow-y: auto;
+      margin-bottom: 12px;
+      .stack-item{
+        font-family: HuaweiSans;
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 21px;
+        letter-spacing: 0px;
+        .line-number{
+          display:inline-block;
+          width: 20px;
+          margin-right: 16px;
+        }
+      }
+    }
+    .view-details{
+      margin: 30px 0;
+      height: 30px;
+      font-family: FZLTHJW--GB1-0;
+      font-size: 20px;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 30px;
+      letter-spacing: 0px;
+      color: #0067ff;
+      cursor: pointer;
+    }
+  }
+}

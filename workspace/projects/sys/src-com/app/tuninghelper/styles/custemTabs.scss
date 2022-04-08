@@ -1,0 +1,66 @@
+// 自定义 ti3-tabs
+::ng-deep {
+  :root {
+    --level-background-color: #f5f9ff;
+    --level-border-color: #0067ff;
+    --splite-line-color: #e1e6ee;
+    --tabs-a-color: #616161;
+  }
+  .vscode-dark .custemTabs {
+    --level-background-color: #252525;
+    --level-border-color: #2072ea;
+    --splite-line-color: #4b4b4b;
+    --tabs-a-color: #aaaaaa;
+  }
+}
+
+:host ::ng-deep .custemTabs {
+  > .ti3-tabs-container1 {
+    .ti3-tabs-header {
+      > .ti3-tabs {
+        > li {
+          margin: 0 12px;
+          > a {
+            color: var(--tabs-a-color);
+          }
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+        li.ti3-tab-active {
+          border-bottom: 2px solid #0067ff;
+        }
+      }
+    }
+  }
+  // 页签间加分割线
+  &.tabsWithSplitLine {
+    > .ti3-tabs-container1 {
+      .ti3-tabs-header {
+        > .ti3-tabs {
+          > li:not(:first-child) {
+            position: relative;
+
+            &::before {
+              content: "";
+              position: absolute;
+              left: -12px;
+              top: 10px;
+              width: 1px;
+              height: 14px;
+              background: var(--splite-line-color);
+            }
+          }
+        }
+      }
+    }
+  }
+  // 页签底部加下划线
+  &.tabsWithUnderline {
+    > .ti3-tabs-container1 {
+      .ti3-tabs-header {
+        border-bottom: 1px solid var(--tab-header-underline-color);
+      }
+    }
+  }
+}

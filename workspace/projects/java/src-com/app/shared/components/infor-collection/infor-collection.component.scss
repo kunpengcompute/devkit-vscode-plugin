@@ -1,0 +1,35 @@
+.infor {
+  background-color: var(--infor-bg-color);
+  width: 100%;
+  min-height: 24px;
+  font-size: 12px;
+  .item-dom {
+    display: inline-block;
+    margin-right: 24px;
+    padding: 3px 10px;
+    .item-flex {
+      display: flex;
+      align-items: center;
+    }
+    .item-key {
+      color: var(--infor-key-font-color);
+      margin-right: 8px;
+    }
+    .item-value {
+      color: var(--infor-value-font-color);
+      display: inline-block;
+    }
+    .item-value-long-infor{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .item-url {
+      color: var(--infor-url-font-color);
+      margin-left: 4px;
+    }
+    .item-url:hover{
+      cursor:pointer
+      }
+  }
+}

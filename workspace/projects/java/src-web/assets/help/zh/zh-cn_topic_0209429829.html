@@ -1,0 +1,149 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="查看内存转储信息">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0209429826.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="鲲鹏性能分析工具">
+<meta name="DC.Publisher" content="20210406">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0209429829">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>查看内存转储信息</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0209429829"></a><a name="ZH-CN_TOPIC_0209429829"></a>
+
+<h1 class="topictitle1">查看内存转储信息</h1>
+<div id="body1575365888696"><div class="section" id="ZH-CN_TOPIC_0209429829__section3882164703911"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0209429829__zh-cn_topic_0209429827_p20936551103910">已创建在线分析任务，且分析任务正在进行中。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0209429829__section417152614011"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0209429829__ol311685715619"><li id="ZH-CN_TOPIC_0209429829__li4346104015416"><span>登录<span id="ZH-CN_TOPIC_0209429829__zh-cn_topic_0209429828_ph12594180204619">Java性能分析</span>Web界面，单击首页界面“在线分析记录”列表中指定分析任务的名称。</span><p><p id="ZH-CN_TOPIC_0209429829__zh-cn_topic_0209429828_p5815113211443">打开“概览”页面。</p>
+</p></li><li id="ZH-CN_TOPIC_0209429829__li844313511370"><span>依次单击<span class="menucascade" id="ZH-CN_TOPIC_0209429829__menucascade0444851103718">“<span class="uicontrol" id="ZH-CN_TOPIC_0209429829__uicontrol74447512373">内存</span> &gt; <span class="uicontrol" id="ZH-CN_TOPIC_0209429829__uicontrol844415112375">执行内存转储</span>”</span>。</span><p><div class="p" id="ZH-CN_TOPIC_0209429829__p1814414527378">生成内存转储直方图，如<a href="#ZH-CN_TOPIC_0209429829__fig182691697194">图1</a>所示，参数说明如<a href="#ZH-CN_TOPIC_0209429829__table52694981919">表1</a>所示。<div class="note" id="ZH-CN_TOPIC_0209429829__note82691897192"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0209429829__ul1590716571477"><li id="ZH-CN_TOPIC_0209429829__li16907357876">可单击页面右上角的<span><img id="ZH-CN_TOPIC_0209429829__image1136828162910" src="zh-cn_image_0271467834.png"></span>按钮保存当前页面的快照，已保存的快照可以在<span class="wintitle" id="ZH-CN_TOPIC_0209429829__wintitle18934318143">“快照”</span>页签中查看。</li><li id="ZH-CN_TOPIC_0209429829__li11123110385">一次内存转储仅需保存一份快照，多次内存转储可保存多份快照用于快照对比。</li><li id="ZH-CN_TOPIC_0209429829__li75511553482">在页面右上方的搜索框输入类名可快速筛选数据。</li><li id="ZH-CN_TOPIC_0209429829__li4446164181911">可单击页面右上角<span><img id="ZH-CN_TOPIC_0209429829__image116243422014" src="zh-cn_image_0000001110970150.png"></span>按钮保存当前内存分析报告，所保存报告中包含<span class="wintitle" id="ZH-CN_TOPIC_0209429829__wintitle2847753152713">“内存转储”</span>和<span class="wintitle" id="ZH-CN_TOPIC_0209429829__wintitle14165165972710">“报告信息”</span>页签，并可到主页的<span class="uicontrol" id="ZH-CN_TOPIC_0209429829__uicontrol113025185279">“数据列表”</span>中下载。</li></ul>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0209429829__fig182691697194"><a name="ZH-CN_TOPIC_0209429829__fig182691697194"></a><a name="fig182691697194"></a><span class="figcap"><b>图1 </b>内存转储-直方图</span><br><span><img id="ZH-CN_TOPIC_0209429829__image1787013191644" src="zh-cn_image_0316511396.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0209429829__table52694981919"></a><a name="table52694981919"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0209429829__table52694981919" frame="border" border="1" rules="all"><caption><b>表1 </b>内存转储-直方图参数说明</caption><colgroup><col style="width:18.360000000000003%"><col style="width:81.64%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0209429829__row4269195190"><th align="left" class="cellrowborder" valign="top" width="18.360000000000003%" id="mcps1.3.2.2.2.2.1.5.2.3.1.1"><p id="ZH-CN_TOPIC_0209429829__p18269798196">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="81.64%" id="mcps1.3.2.2.2.2.1.5.2.3.1.2"><p id="ZH-CN_TOPIC_0209429829__p172696917190">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0209429829__row10269794191"><td class="cellrowborder" valign="top" width="18.360000000000003%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0209429829__p326969121915">类名</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.64%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0209429829__p128582521407">类名有以下三种类型：</p>
+<ul id="ZH-CN_TOPIC_0209429829__ul165221935917"><li id="ZH-CN_TOPIC_0209429829__li25221031691">类名称（当为类实例时显示）</li><li id="ZH-CN_TOPIC_0209429829__li45221636915">实例ID</li><li id="ZH-CN_TOPIC_0209429829__li16522532096">gcRoot信息（当实例为gcRoot时显示）</li></ul>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0209429829__row7269179121918"><td class="cellrowborder" valign="top" width="18.360000000000003%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0209429829__p102694914191">实例数</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.64%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0209429829__p162694911915">显示垃圾收集之后实例数量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0209429829__row132691893195"><td class="cellrowborder" valign="top" width="18.360000000000003%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0209429829__p12916165395314">浅堆大小</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.64%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0209429829__p18269129181920">显示垃圾收集之后该类实例的浅堆大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0209429829__row129715855313"><td class="cellrowborder" valign="top" width="18.360000000000003%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0209429829__p329795815531">保留堆大小</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.64%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0209429829__p72971584532">显示垃圾收集之后该类实例的保留堆大小。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p id="ZH-CN_TOPIC_0209429829__p31361116122815">点击<a href="#ZH-CN_TOPIC_0209429829__fig182691697194">图1</a>中<span class="wintitle" id="ZH-CN_TOPIC_0209429829__wintitle1689216334356">“类名”</span>前的<span><img id="ZH-CN_TOPIC_0209429829__image6892133317356" src="zh-cn_image_0285676188.png"></span>按钮。</p>
+<div class="p" id="ZH-CN_TOPIC_0209429829__p166322376357">选择<span class="wintitle" id="ZH-CN_TOPIC_0209429829__wintitle6632123733517">“从GC Roots到对象的最短共同路径”</span>，生成最短共同路径如<a href="#ZH-CN_TOPIC_0209429829__fig168552545312">图2</a>所示，参数说明如<a href="#ZH-CN_TOPIC_0209429829__table73502346375">表2</a>。<div class="note" id="ZH-CN_TOPIC_0209429829__note4527141495010"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0209429829__p2011230195013">页面右上方可以选择扩展内容：</p>
+<ul id="ZH-CN_TOPIC_0209429829__ul611143011506"><li id="ZH-CN_TOPIC_0209429829__li11113016506">soft Ref：软引用，引用路径计算包含软引用对象。</li><li id="ZH-CN_TOPIC_0209429829__li3111330165014">weak Ref：弱引用，引用路径计算包含弱引用对象。</li><li id="ZH-CN_TOPIC_0209429829__li91120307509">phantom Ref：虚引用，引用路径计算包含虚引用对象。</li></ul>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0209429829__fig168552545312"><a name="ZH-CN_TOPIC_0209429829__fig168552545312"></a><a name="fig168552545312"></a><span class="figcap"><b>图2 </b>从GC Roots到对象的最短共同路径</span><br><span><img id="ZH-CN_TOPIC_0209429829__image9457170185015" src="zh-cn_image_0293880571.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0209429829__table73502346375"></a><a name="table73502346375"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0209429829__table73502346375" frame="border" border="1" rules="all"><caption><b>表2 </b>从GC Roots到对象的最短共同路径参数说明</caption><colgroup><col style="width:26.040000000000003%"><col style="width:73.96000000000001%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0209429829__row335023412377"><th align="left" class="cellrowborder" valign="top" width="26.040000000000003%" id="mcps1.3.2.2.2.2.3.6.2.3.1.1"><p id="ZH-CN_TOPIC_0209429829__p23501334153718">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="73.96000000000001%" id="mcps1.3.2.2.2.2.3.6.2.3.1.2"><p id="ZH-CN_TOPIC_0209429829__p123501834103713">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0209429829__row123501634123718"><td class="cellrowborder" valign="top" width="26.040000000000003%" headers="mcps1.3.2.2.2.2.3.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0209429829__p19350163413717">类名</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.96000000000001%" headers="mcps1.3.2.2.2.2.3.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0209429829__p03144112028">类名有以下三种类型：</p>
+<ul id="ZH-CN_TOPIC_0209429829__ul762514453820"><li id="ZH-CN_TOPIC_0209429829__zh-cn_topic_0209429829_li25221031691">类名称（当为类实例时显示）</li><li id="ZH-CN_TOPIC_0209429829__zh-cn_topic_0209429829_li45221636915">实例ID</li><li id="ZH-CN_TOPIC_0209429829__zh-cn_topic_0209429829_li16522532096">gcRoot信息（当实例为gcRoot时显示）</li></ul>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0209429829__row103502346375"><td class="cellrowborder" valign="top" width="26.040000000000003%" headers="mcps1.3.2.2.2.2.3.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0209429829__p1335023413376">引用实例数统计</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.96000000000001%" headers="mcps1.3.2.2.2.2.3.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0209429829__p1735063418378">显示垃圾收集之后的引用实例数量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0209429829__row133502344373"><td class="cellrowborder" valign="top" width="26.040000000000003%" headers="mcps1.3.2.2.2.2.3.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0209429829__p113501234113715">当前对象浅堆大小</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.96000000000001%" headers="mcps1.3.2.2.2.2.3.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0209429829__p83501341373">显示垃圾收集之后当前对象的浅堆大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0209429829__row83507347378"><td class="cellrowborder" valign="top" width="26.040000000000003%" headers="mcps1.3.2.2.2.2.3.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0209429829__p335033453719">引用实例浅堆大小统计</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.96000000000001%" headers="mcps1.3.2.2.2.2.3.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0209429829__p1935033410372">显示垃圾收集之后引用实例的浅堆大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0209429829__row65463216398"><td class="cellrowborder" valign="top" width="26.040000000000003%" headers="mcps1.3.2.2.2.2.3.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0209429829__p3547329395">当前对象保留堆大小</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.96000000000001%" headers="mcps1.3.2.2.2.2.3.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0209429829__p772511208549">显示垃圾收集之后当前对象的保留堆大小。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="p" id="ZH-CN_TOPIC_0209429829__p129965217268">选择<span class="wintitle" id="ZH-CN_TOPIC_0209429829__wintitle57015328565">“列出当前类的所有对象”</span>，生成所有对象如<a href="#ZH-CN_TOPIC_0209429829__fig1393810375585">图3</a>所示，参数说明如<a href="#ZH-CN_TOPIC_0209429829__table1625450175915">表3</a>。<div class="fignone" id="ZH-CN_TOPIC_0209429829__fig1393810375585"><a name="ZH-CN_TOPIC_0209429829__fig1393810375585"></a><a name="fig1393810375585"></a><span class="figcap"><b>图3 </b>列出所有对象</span><br><span><img id="ZH-CN_TOPIC_0209429829__image425145716534" src="zh-cn_image_0293882010.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0209429829__table1625450175915"></a><a name="table1625450175915"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0209429829__table1625450175915" frame="border" border="1" rules="all"><caption><b>表3 </b>列出所有对象参数说明</caption><colgroup><col style="width:26.32%"><col style="width:73.68%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0209429829__row1625419013598"><th align="left" class="cellrowborder" valign="top" width="26.32%" id="mcps1.3.2.2.2.2.4.5.2.3.1.1"><p id="ZH-CN_TOPIC_0209429829__p1225412013598">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="73.68%" id="mcps1.3.2.2.2.2.4.5.2.3.1.2"><p id="ZH-CN_TOPIC_0209429829__p17254160205911">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0209429829__row172543065914"><td class="cellrowborder" valign="top" width="26.32%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0209429829__p181391134145919">类名</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.68%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0209429829__p1117015211718">类名有以下三种类型：</p>
+<ul id="ZH-CN_TOPIC_0209429829__ul3832941883"><li id="ZH-CN_TOPIC_0209429829__zh-cn_topic_0209429829_li25221031691_1">类名称（当为类实例时显示）</li><li id="ZH-CN_TOPIC_0209429829__zh-cn_topic_0209429829_li45221636915_1">实例ID</li><li id="ZH-CN_TOPIC_0209429829__zh-cn_topic_0209429829_li16522532096_1">gcRoot信息（当实例为gcRoot时显示）</li></ul>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0209429829__row182541901595"><td class="cellrowborder" valign="top" width="26.32%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0209429829__p14139334125920">浅堆大小</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.68%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0209429829__p81395343595">显示垃圾收集之后该类实例的浅堆大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0209429829__row12548015917"><td class="cellrowborder" valign="top" width="26.32%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0209429829__p51391234155918">保留堆大小</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.68%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0209429829__p41391434175910">显示垃圾收集之后该类实例的保留堆大小。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0209429829__li1257434195817"><span>在<span class="uicontrol" id="ZH-CN_TOPIC_0209429829__uicontrol1258183465812">“显示类型”</span>下拉菜单中选择<span class="uicontrol" id="ZH-CN_TOPIC_0209429829__uicontrol458934125811">“支配树”</span>。</span><p><div class="p" id="ZH-CN_TOPIC_0209429829__p14416143418586">以树形结构显示内存转储信息，如<a href="#ZH-CN_TOPIC_0209429829__fig49861598515">图4</a>所示。<div class="fignone" id="ZH-CN_TOPIC_0209429829__fig49861598515"><a name="ZH-CN_TOPIC_0209429829__fig49861598515"></a><a name="fig49861598515"></a><span class="figcap"><b>图4 </b>内存转储-支配树</span><br><span><img id="ZH-CN_TOPIC_0209429829__image342465205412" src="zh-cn_image_0294232616.png"></span></div>
+</div>
+<p id="ZH-CN_TOPIC_0209429829__p9795113423016">点击<a href="#ZH-CN_TOPIC_0209429829__fig49861598515">图4</a>中<span class="wintitle" id="ZH-CN_TOPIC_0209429829__wintitle13461319133810">“类名”</span>前的<span><img id="ZH-CN_TOPIC_0209429829__image646919153814" src="zh-cn_image_0294232617.png"></span>按钮。</p>
+<div class="p" id="ZH-CN_TOPIC_0209429829__p4372112143819">选择<span class="wintitle" id="ZH-CN_TOPIC_0209429829__wintitle524815224592">“从对象到GC Roots的路径”</span>，生成路径图如<a href="#ZH-CN_TOPIC_0209429829__fig1058912541904">图5</a>所示。<div class="fignone" id="ZH-CN_TOPIC_0209429829__fig1058912541904"><a name="ZH-CN_TOPIC_0209429829__fig1058912541904"></a><a name="fig1058912541904"></a><span class="figcap"><b>图5 </b>从对象到GC Roots的路径</span><br><span><img id="ZH-CN_TOPIC_0209429829__image575362811565" src="zh-cn_image_0294232618.png"></span></div>
+</div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0209429826.html">查看分析结果</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

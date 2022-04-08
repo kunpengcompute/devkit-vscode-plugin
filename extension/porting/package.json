@@ -1,0 +1,737 @@
+{
+    "name": "kunpeng-porting-advisor-plugin",
+    "displayName": "Kunpeng Porting Advisor Plugin",
+    "description": "自动扫描并分析用户待迁移软件，提供专业迁移指导。",
+    "version": "2.3.3",
+    "publisher": "kunpengfamily",
+    "license": "SEE LICENSE IN LICENSE.md",
+    "engines": {
+        "vscode": "^1.38.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "icon": "resources/images/dep_port.png",
+    "activationEvents": [
+        "onView:portingTools",
+        "onCommand:extension.checkFile",
+        "onCommand:extension.checkProject",
+        "onCommand:extension.checkSource",
+        "onCommand:extension.checkSourceAffinity",
+        "onCommand:extension.checkAffinity",
+        "onCommand:extension.kunpeng.undo"
+    ],
+    "main": "./out/extension/src/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.checkProject",
+                "title": "%plugins_port_check_project%"
+            },
+            {
+                "command": "extension.checkFile",
+                "title": "%plugins_port_check_file%"
+            },
+            {
+                "command": "extension.checkAffinity",
+                "title": "%plugins_port_check_affinity_project%"
+            },
+            {
+                "command": "extension.checkSource",
+                "title": "%plugins_port_check_source%"
+            },
+            {
+                "command": "extension.checkSourceAffinity",
+                "title": "%plugins_port_check_affinity%"
+            },
+            {
+                "command": "extension.view.portlogin",
+                "title": "%plugins_port_title_login%"
+            },
+            {
+                "command": "extension.view.migratAppraise",
+                "title": "%plugins_common_menu_newtask%",
+                "icon": {
+                    "light": "src/extension/assets/dark/addtask.svg",
+                    "dark": "src/extension/assets/light/addtask.svg"
+                }
+            },
+            {
+                "command": "extension.view.depclearreports",
+                "title": "%clear.history.reports%",
+                "icon": {
+                    "light": "src/extension/assets/dark/delete.svg",
+                    "dark": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "extension.view.depdownloadcsvreport",
+                "title": "%download.csv.report%",
+                "icon": {
+                    "light": "src/extension/assets/dark/downloadcsv.svg",
+                    "dark": "src/extension/assets/light/downloadcsv.svg"
+                }
+            },
+            {
+                "command": "extension.view.depdownloadhtmlreport",
+                "title": "%download.html.report%",
+                "icon": {
+                    "light": "src/extension/assets/dark/downloadhtml.svg",
+                    "dark": "src/extension/assets/light/downloadhtml.svg"
+                }
+            },
+            {
+                "command": "extension.view.depdeletereport",
+                "title": "%delete.history.report%",
+                "icon": {
+                    "light": "src/extension/assets/dark/delete.svg",
+                    "dark": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "extension.view.portwhitelistmanage",
+                "title": "%plugins_porting_menu_whitelist%"
+            },
+            {
+                "command": "extension.view.portwebservercertificate",
+                "title": "%plugins_porting_menu_certificate_settings%"
+            },
+            {
+                "command": "extension.view.portcertificaterevocationlist",
+                "title": "%plugins_porting_menu_crl_settings%"
+            },
+            {
+                "command": "extension.view.portSysSetting",
+                "title": "%plugins_porting_menu_sys_setting%"
+            },
+            {
+                "command": "extension.view.portweakpassworddictionary",
+                "title": "%plugins_porting_menu_weak_password_dic%"
+            },
+            {
+                "command": "extension.view.portscanparaconfig",
+                "title": "%plugins_porting_menu_scan_params_settings%"
+            },
+            {
+                "command": "extension.view.portthresholdconfig",
+                "title": "%plugins_porting_menu_threshold_settings%"
+            },
+            {
+                "command": "extension.view.portloginconfig",
+                "title": "%plugins_porting_menu_login_configure%"
+            },
+            {
+                "command": "extension.view.portmodifypwd",
+                "title": "%plugins_porting_menu_modify_password%"
+            },
+            {
+                "command": "extension.view.portoperatlog",
+                "title": "%plugins_porting_menu_operation_log%"
+            },
+            {
+                "command": "extension.view.portrunlog",
+                "title": "%plugins_porting_menu_run_log%"
+            },
+            {
+                "command": "extension.view.portusermanage",
+                "title": "%plugins_porting_menu_user_management%"
+            },
+            {
+                "command": "extension.view.portingtemplateman",
+                "title": "%plugins_porting_menu_software_migrate_temp%"
+            },
+            {
+                "command": "extension.view.portfeedback",
+                "title": "%link.feedback%"
+            },
+            {
+                "command": "extension.view.portdisclaimer",
+                "title": "%view.disclaimer%"
+            },
+            {
+                "command": "extension.view.portserverconfig",
+                "title": "%configure.remote.server%"
+            },
+            {
+                "command": "extension.view.portfreetrialremoteenvironment",
+                "title": "%free.trial.remote.environment%"
+            },
+            {
+                "command": "extension.view.portuninstall",
+                "title": "%portuninstall%"
+            },
+            {
+                "command": "extension.view.portupgrade",
+                "title": "%portupgrade%"
+            },
+            {
+                "command": "extension.view.portlogout",
+                "title": "%plugins_common_menu_logout%"
+            },
+            {
+                "command": "extension.view.portShowUser",
+                "title": "%plugins_common_menu_show_user%"
+            },
+            {
+                "command": "extension.view.portcreatetask",
+                "title": "%plugins_common_menu_newtask%",
+                "icon": {
+                    "light": "src/extension/assets/dark/addtask.svg",
+                    "dark": "src/extension/assets/light/addtask.svg"
+                }
+            },
+            {
+                "command": "extension.view.portcreateprechecktask",
+                "title": "%plugins_common_menu_newtask%",
+                "icon": {
+                    "light": "src/extension/assets/dark/addtask.svg",
+                    "dark": "src/extension/assets/light/addtask.svg"
+                }
+            },
+            {
+                "command": "extension.view.portclearreports",
+                "title": "%clear.history.reports%",
+                "icon": {
+                    "light": "src/extension/assets/dark/delete.svg",
+                    "dark": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "extension.view.portdownloadcsvreport",
+                "title": "%download.csv.report%",
+                "icon": {
+                    "light": "src/extension/assets/dark/downloadcsv.svg",
+                    "dark": "src/extension/assets/light/downloadcsv.svg"
+                }
+            },
+            {
+                "command": "extension.view.portdownloadhtmlreport",
+                "title": "%download.html.report%",
+                "icon": {
+                    "light": "src/extension/assets/dark/downloadhtml.svg",
+                    "dark": "src/extension/assets/light/downloadhtml.svg"
+                }
+            },
+            {
+                "command": "extension.view.portdeletereport",
+                "title": "%delete.history.report%",
+                "icon": {
+                    "light": "src/extension/assets/dark/delete.svg",
+                    "dark": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "extension.view.portCreateSoftWareBuildTask",
+                "title": "%plugins_common_menu_newtask%",
+                "icon": {
+                    "light": "src/extension/assets/dark/addtask.svg",
+                    "dark": "src/extension/assets/light/addtask.svg"
+                }
+            },
+            {
+                "command": "extension.view.softwarepkgclearreports",
+                "title": "%clear.history.reports%",
+                "icon": {
+                    "light": "src/extension/assets/dark/delete.svg",
+                    "dark": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "extension.view.portDownloadSoftBuildHis",
+                "title": "%plugins_port_downloadSoftBuildHis%",
+                "icon": {
+                    "light": "src/extension/assets/dark/icon_download_soft_pakage.svg",
+                    "dark": "src/extension/assets/light/icon_download_soft_pakage.svg"
+                }
+            },
+            {
+                "command": "extension.view.portDownloadSoftBuildHTML",
+                "title": "%download.html.report%",
+                "icon": {
+                    "light": "src/extension/assets/dark/downloadhtml.svg",
+                    "dark": "src/extension/assets/light/downloadhtml.svg"
+                }
+            },
+            {
+                "command": "extension.view.portDelSoftBuildHis",
+                "title": "%delete.history.report%",
+                "icon": {
+                    "light": "src/extension/assets/dark/delete.svg",
+                    "dark": "src/extension/assets/light/delete.svg"
+                }
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "extension.quickFix",
+                "key": "ctrl+f10",
+                "mac": "cmd+f10",
+                "when": "editorTextFocus"
+            }
+        ],
+        "colors": [
+            {
+                "id": "errorLens.infoBackground",
+                "defaults": {
+                    "dark": "#D66B5120",
+                    "light": "#D66B5120",
+                    "highContrast": "#D66B5120"
+                },
+                "description": "Background color used to highlight lines containing info."
+            },
+            {
+                "id": "errorLens.infoMessageBackground",
+                "defaults": {
+                    "dark": "#fff0",
+                    "light": "#fff0",
+                    "highContrast": "#fff0"
+                },
+                "description": "Background color of the info message."
+            },
+            {
+                "id": "errorLens.infoBackgroundLight",
+                "defaults": {
+                    "dark": "#D66B5120",
+                    "light": "#D66B5120",
+                    "highContrast": "#D66B5120"
+                },
+                "description": "Background color used to highlight lines containing info (Only in light themes)."
+            },
+            {
+                "id": "errorLens.infoForeground",
+                "defaults": {
+                    "dark": "#D66B51",
+                    "light": "#D66B51",
+                    "highContrast": "#D66B51"
+                },
+                "description": "Text color used to highlight lines containing info."
+            },
+            {
+                "id": "errorLens.infoForegroundLight",
+                "defaults": {
+                    "dark": "#D66B51",
+                    "light": "#D66B51",
+                    "highContrast": "#D66B51"
+                },
+                "description": "Text color used to highlight lines containing info (Only in light themes)."
+            },
+            {
+                "id": "errorLens.autoRepairBackground",
+                "defaults": {
+                    "dark": "#51B6D620",
+                    "light": "#51B6D620",
+                    "highContrast": "#51B6D620"
+                },
+                "description": "Automatic repair background color."
+            }
+        ],
+        "viewsWelcome": [
+            {
+                "view": "portingTools",
+                "contents": "%port.configer.server%",
+                "when": "!isportconfigured && portipconfig"
+            },
+            {
+                "view": "portingTools",
+                "contents": "%port.no.login%",
+                "when": "!isportlogined && isportconfigured"
+            },
+            {
+                "view": "portingTools",
+                "contents": "%port.free.use%",
+                "when": "!isportconfigured && portipconfig || !isportlogined"
+            }
+        ],
+        "menus": {
+            "view/title": [
+                {
+                    "command": "extension.checkSource",
+                    "when": "view == workbench.explorer.fileView",
+                    "group": "inline1@1"
+                },
+                {
+                    "command": "extension.checkSourceAffinity",
+                    "when": "view == workbench.explorer.fileView",
+                    "group": "inline1@2"
+                },
+                {
+                    "command": "extension.view.portShowUser",
+                    "when": "view == portingTools && isportconfigured && isportlogined",
+                    "group": "inline1@1"
+                },
+                {
+                    "command": "extension.view.portmodifypwd",
+                    "when": "view == portingTools && isportconfigured && isportlogined && !isPortAdmin",
+                    "group": "inline1@2"
+                },
+                {
+                    "command": "extension.view.portusermanage",
+                    "when": "view == portingTools && isportconfigured && isportlogined && isPortAdmin",
+                    "group": "inline1@2"
+                },
+                {
+                    "command": "extension.view.portweakpassworddictionary",
+                    "when": "view == portingTools && isportconfigured && isportlogined",
+                    "group": "inline1@3"
+                },
+                {
+                    "command": "extension.view.portSysSetting",
+                    "when": "view == portingTools && isportconfigured && isportlogined && isPortAdmin",
+                    "group": "inline1@4"
+                },
+                {
+                    "command": "extension.view.portloginconfig",
+                    "when": "view == portingTools && isportconfigured && isportlogined && isAutoSystem && !isPortAdmin",
+                    "group": "inline1@5"
+                },
+                {
+                    "command": "extension.view.portoperatlog",
+                    "when": "view == portingTools && isportconfigured && isportlogined",
+                    "group": "inline1@6"
+                },
+                {
+                    "command": "extension.view.portrunlog",
+                    "when": "view == portingTools && isportconfigured && isportlogined && isPortAdmin",
+                    "group": "inline1@7"
+                },
+                {
+                    "command": "extension.view.portwhitelistmanage",
+                    "when": "view == portingTools && isportconfigured && isportlogined && isPortAdmin",
+                    "group": "inline2@1"
+                },
+                {
+                    "command": "extension.view.portingtemplateman",
+                    "when": "view == portingTools && isportconfigured && isportlogined && isPortAdmin",
+                    "group": "inline2@2"
+                },
+                {
+                    "command": "extension.view.portscanparaconfig",
+                    "when": "view == portingTools && isportconfigured && isportlogined",
+                    "group": "inline2@3"
+                },
+                {
+                    "command": "extension.view.portthresholdconfig",
+                    "when": "view == portingTools && isportconfigured && isportlogined && isPortAdmin",
+                    "group": "inline2@4"
+                },
+                {
+                    "command": "extension.view.portwebservercertificate",
+                    "when": "view == portingTools && isportconfigured && isportlogined",
+                    "group": "inline3@1"
+                },
+                {
+                    "command": "extension.view.portcertificaterevocationlist",
+                    "when": "view == portingTools && isportconfigured && isportlogined",
+                    "group": "inline3@2"
+                },
+                {
+                    "command": "extension.view.portserverconfig",
+                    "when": "view == portingTools",
+                    "group": "inline4@1"
+                },
+                {
+                    "command": "extension.view.portfreetrialremoteenvironment",
+                    "when": "view == portingTools",
+                    "group": "inline4@2"
+                },
+                {
+                    "command": "extension.view.portupgrade",
+                    "when": "view == portingTools && !isCloudIDE",
+                    "group": "inline5@1"
+                },
+                {
+                    "command": "extension.view.portuninstall",
+                    "when": "view == portingTools && !isCloudIDE",
+                    "group": "inline5@2"
+                },
+                {
+                    "command": "extension.view.portfeedback",
+                    "when": "view == portingTools && isZhCn",
+                    "group": "inline6@1"
+                },
+                {
+                    "command": "extension.view.portdisclaimer",
+                    "when": "view == portingTools && isportconfigured && isportlogined",
+                    "group": "inline6@2"
+                },
+                {
+                    "command": "extension.view.portlogout",
+                    "when": "view == portingTools && isportconfigured && isportlogined",
+                    "group": "inline7@1"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "extension.view.depdownloadcsvreport",
+                    "when": "view == portingTools && viewItem == depreport",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.depdownloadhtmlreport",
+                    "when": "view == portingTools && viewItem == depreport && !isCloudIDE",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "extension.view.depdeletereport",
+                    "when": "view == portingTools && viewItem == depreport",
+                    "group": "inline@3"
+                },
+                {
+                    "command": "extension.view.portcreatetask",
+                    "when": "view == portingTools && viewItem == portsource",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.migratAppraise",
+                    "when": "view == portingTools && viewItem == portingAppraise",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.depclearreports",
+                    "when": "view == portingTools && viewItem == portingAppraise && hasdepreports",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "extension.view.portcreateprechecktask",
+                    "when": "view == portingTools && viewItem == portingPrecheck",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.portdownloadcsvreport",
+                    "when": "view == portingTools && viewItem == portreport",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.portdownloadhtmlreport",
+                    "when": "view == portingTools && viewItem == portreport",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "extension.view.portdeletereport",
+                    "when": "view == portingTools && viewItem == portreport",
+                    "group": "inline@3"
+                },
+                {
+                    "command": "extension.view.portclearreports",
+                    "when": "view == portingTools && viewItem == portsource && hasportreports",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "extension.view.portCreateSoftWareBuildTask",
+                    "when": "view == portingTools && viewItem == softBuild",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.softwarepkgclearreports",
+                    "when": "view == portingTools && viewItem == softBuild && hassoftwarepkgreports",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "extension.view.portDownloadSoftBuildHis",
+                    "when": "view == portingTools && viewItem == pkgRebuildS",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.portDownloadSoftBuildHTML",
+                    "when": "view == portingTools && viewItem == pkgRebuildF || viewItem == pkgRebuildS && !isCloudIDE",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "extension.view.portDelSoftBuildHis",
+                    "when": "view == portingTools && viewItem == pkgRebuildF || viewItem == pkgRebuildS",
+                    "group": "inline@3"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "extension.view.portlogin",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.depclearreports",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.depdownloadcsvreport",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.depdownloadhtmlreport",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.depdeletereport",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portwhitelistmanage",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portscanparaconfig",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portthresholdconfig",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portloginconfig",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portoperatlog",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portrunlog",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portwebservercertificate",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portcertificaterevocationlist",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portweakpassworddictionary",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portSysSetting",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portusermanage",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portingtemplateman",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portserverconfig",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portlogout",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portcreatetask",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.migratAppraise",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portcreateprechecktask",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portclearreports",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portdownloadcsvreport",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portdownloadhtmlreport",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portdeletereport",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portmodifypwd",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portCreateSoftWareBuildTask",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.softwarepkgclearreports",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portDownloadSoftBuildHis",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portDownloadSoftBuildHTML",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.portDelSoftBuildHis",
+                    "when": "false"
+                }
+            ],
+            "explorer/context": [
+                {
+                    "command": "extension.checkFile",
+                    "group": "navigation@1"
+                },
+                {
+                    "command": "extension.checkProject",
+                    "group": "navigation@2"
+                },
+                {
+                    "command": "extension.checkAffinity",
+                    "group": "navigation@3"
+                }
+            ]
+        },
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "kunpengDepPort",
+                    "title": "%kunpeng.dep.port.suite%",
+                    "icon": "resources/images/dep_port.svg"
+                }
+            ]
+        },
+        "views": {
+            "kunpengDepPort": [
+                {
+                    "id": "portingTools",
+                    "name": ""
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "lint": "tslint -p ./",
+        "watch": "tsc -w -p ./",
+        "package": "sh ./build/package.sh",
+        "compile:all": "npm install && tsc -p ./ && cd ../../workspace/ && npm install && npm run build:porting:ide"
+    },
+    "dependencies": {
+        "axios": "0.21.1",
+        "form-data": "3.0.0",
+        "log4js": "6.3.0",
+        "ssh2": "1.4.0",
+        "tslib": "2.0.0",
+        "jszip": "3.7.0"
+    },
+    "devDependencies": {
+        "@angular/compiler": "~8.0.0",
+        "@angular/core": "~8.0.0",
+        "@types/node": "^12.12.0",
+        "@types/jszip": "^3.2.2",
+        "@types/ssh2": "^0.5.43",
+        "@types/vscode": "^1.38.0",
+        "codelyzer": "^5.0.0",
+        "rxjs": "~6.4.0",
+        "tslint": "^5.19.0",
+        "typescript": "^3.8.3",
+        "vsce": "^1.87.1"
+    }
+}

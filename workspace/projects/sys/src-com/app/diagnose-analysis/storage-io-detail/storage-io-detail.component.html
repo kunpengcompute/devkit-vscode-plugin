@@ -1,0 +1,30 @@
+<div class="storage_io_detail">
+  <ti-tabs class="storage_io_tabs">
+    <ng-container *ngFor="let tab of storageIoTabList">
+      <ti-tab *ngIf="tab.show" [header]="tab.title" [(active)]="tab.active">
+        <ng-template #tiTabContent>
+  
+          <!-- 压测结果详情 -->
+          <ng-container *ngIf="tab.name === storageIoTabObj.pressure_test_result">
+            <app-pressure-test-result-detail [taskId]="taskId" [nodeId]="nodeId" [hasDiagram]="hasDiagram">
+            </app-pressure-test-result-detail>
+          </ng-container>
+  
+          <!-- 负载监控详情 -->
+          <ng-container *ngIf="tab.name === storageIoTabObj.system_load">
+          </ng-container>
+
+          <!-- 任务信息详情 -->
+          <ng-container *ngIf="tab.name === storageIoTabObj.task_info">
+            <app-task-information [taskId]="taskId" [nodeId]="nodeId"></app-task-information>
+          </ng-container>
+  
+          <!-- 任务日志详情 -->
+          <ng-container *ngIf="tab.name === storageIoTabObj.task_log">
+            <app-task-log [taskId]="taskId" [nodeId]="nodeId"></app-task-log>
+          </ng-container>
+        </ng-template>
+      </ti-tab>
+    </ng-container>
+  </ti-tabs>
+</div>

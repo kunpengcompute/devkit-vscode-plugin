@@ -1,0 +1,34 @@
+<app-common-table [commonTableData]="tableData" [isDetails]="true" [isFilters]="true">
+    <ng-template let-displayed let-tabcolumns="columns">
+        <tbody>
+            <ng-container *ngFor="let row of displayed;index as i">
+                <tr>
+                    <td details-icon-column class="details-icon-column">
+                        <ti-icon name="right-1" [ngClass]="{'active': row.expanded}" 
+                            (click)="row.expanded = !row.expanded"></ti-icon>
+                    </td>
+                    <ng-container *ngFor="let column of tabcolumns;">
+                        <ng-container *ngIf="column.key === 'pid' && isLookPidDetail else other">
+                            <td *ngIf="column.show || column.show === undefined" class="can-click" tiOverflow (click)="clickPidLookDetail(row)">
+                                {{ row[column.key] || '--' }}</td>
+                        </ng-container>
+                        <ng-template #other>
+                            <td *ngIf="column.show || column.show === undefined" tiOverflow>{{ row[column.key] || '--' }}</td>
+                        </ng-template>
+                        
+                    </ng-container>
+                </tr>
+                <ng-container *ngFor="let childrenItem of row.children">
+                    <tr [hidden]="!row.expanded">
+                        <td class="details-hd">
+                        </td>
+                        <ng-container *ngFor="let column of tabcolumns;">
+                            <td *ngIf="column.show || column.show === undefined" [tiColumnFixed]="column.fixed"
+                                tiOverflow>{{ childrenItem[column.key] }}</td>
+                        </ng-container>
+                    </tr>
+                </ng-container>
+            </ng-container>
+        </tbody>
+    </ng-template>
+</app-common-table>

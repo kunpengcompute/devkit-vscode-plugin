@@ -1,0 +1,34 @@
+<div [ngSwitch]="actionType">
+    <ng-container *ngSwitchCase="actTypeEnum.RESERVATION">
+        <app-mission-hpc-schedule
+            [modePidValid]="modePidValid"
+            [scheduleTaskId]="scheduleTaskId"
+            [taskInfo]="taskInfo"
+            (cancelModify)="onCancelModify($event)"
+            (confirmModify)="onConfirmModify($event)">
+        </app-mission-hpc-schedule>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+        <app-mission-hpc-create
+            [modePidValid]="modePidValid"
+            [analysisMode]="analysisMode"
+            [actionType]="taskActionType"
+            [appAndParams]="appAndParams"
+            [pidProcess]="pidProcess"
+            [projectInfo]="projectInfo"
+            [taskName]="taskName"
+            [nodeInfo]="nodeInfo"
+            [nodeConfigedData]="nodeConfigedData"
+            [restartAndEditId]="restartAndEditId"
+            [switchState]="switchState"
+            [modeApplicationUser]="modeApplicationUser"
+            [modeApplicationPassWord]="modeApplicationPassWord"
+            (sendMissionKeep)="onSendMissionKeep($event)"
+            (sendPretable)="onSendPretable($event)"
+            (closeTab)="onCloseTab($event)"
+            (handleNodeEmitIndex)="handleNodeEmit($event)"
+            (sendAppOrPidDisable)="onSendAppOrPidDisable($event)"
+            (sendMpiStatus)="onSendMpiStatus($event)">
+        </app-mission-hpc-create>
+    </ng-container>
+</div>

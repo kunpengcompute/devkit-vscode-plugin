@@ -1,0 +1,100 @@
+.histogram {
+    margin-top: 20px;
+
+    .ti3-table-container {
+        margin-bottom: 10px;
+        min-height: 590px;
+        max-height: 680px;
+        overflow-y: auto;
+    }
+}
+
+.noDate {
+    width: 100%;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        color: #979797;
+        font-size: 14px;
+        margin-top: 51px;
+    }
+}
+
+.sortIcon {
+    margin-left: 5px;
+}
+
+.noHover:hover {
+    background-color: transparent !important;
+}
+
+.tip-close {
+    display: inline-block;
+
+    img:hover {
+        cursor: pointer;
+    }
+
+    &>img {
+        display: none;
+    }
+
+    &>img:nth-of-type(1) {
+        display: block;
+    }
+
+    &:hover {
+        &>img:nth-of-type(1) {
+            display: none;
+        }
+
+        &>img:nth-of-type(2) {
+            display: block;
+        }
+    }
+
+    &:active {
+        &>img:nth-of-type(1) {
+            display: none;
+        }
+
+        &>img:nth-of-type(2) {
+            display: block;
+        }
+    }
+}
+:host ::ng-deep .ti3-table > .ti3-table-fixed-head > table,
+:host ::ng-deep .ti3-table > .ti3-resize-wrapper > table,
+:host ::ng-deep .ti3-table-container > table {
+    border: none !important;
+
+    & > thead > tr > th {
+        font-size: 16px !important;
+    }
+}
+.cellText{
+    font-size: 14px !important;
+}
+.sortIcon{
+  .tableIcon{
+    display: inline-block;
+    ti-icon{
+        vertical-align: middle;
+        height: 16px;
+        width: 16px;
+    }
+  }
+  .colorIcon{
+    color: #267dff;
+  }
+  .tableIcon:hover{
+    color: #267dff;
+  }
+}
+::ng-deep .ti3-icon-sort-ascent:before{
+  font-size: 16px!important;
+}

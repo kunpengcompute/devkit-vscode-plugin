@@ -1,0 +1,44 @@
+<ng-template #profileExportModal let-context="context">
+    <ti-modal-header>
+        {{ i18n.plugins_perf_java_profiling_export.title }}
+        <span (click)="context.dismiss()" class="tip-close">
+            <img class="ti3-close" src="./assets/img/newSvg/close_icon.svg" />
+            <img class="ti3-close" src="./assets/img/newSvg/close_hover.svg">
+        </span>
+    </ti-modal-header>
+    <ti-modal-body>
+        <header>
+            <div class="tipTop">
+                <img class="required-icon" src="./assets/img/input-required.png" />
+                <span>{{i18n.plugins_perf_java_profiling_export.tip}}</span>
+            </div>
+            <div class="tip-box" *ngIf="tipActive">
+                <img class="tip-icon" src="./assets/img/guardian/icon-information.png">
+                <div class="tip-text">{{i18n.protalserver_profiling_tab.exportDisabledTip}}</div>
+                <span class="tip-close" (click)="tipActive = false">
+                    <img class="close-icon" src="./assets/img/newSvg/close_icon.svg" />
+                    <img class="close-icon" src="./assets/img/newSvg/close_hover.svg">
+                </span>
+            </div>
+        </header>
+        <main>
+            <ti-tree [data]="treeData" [multiple]="true" (select)="selectFn()">
+                <ng-template let-item>
+                    <div class="tree-item" [ngStyle]="{'opacity':item.disabled?'0.5':'1.0'}">
+                        <img *ngIf="item.children" src="./assets/img/profiling/tree-folder.png">
+                        <img *ngIf="!item.children" src="./assets/img/profiling/tree-file.png">
+                        <span class="tiptext">{{item.label}}</span>
+                    </div>
+                </ng-template>
+            </ti-tree>
+        </main>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <button class="primary" type="button" [disabled]="selectedData.length === 0" (click)="handleClickOk()" tiButton>
+            {{ i18n.common_term_operate_ok }}
+        </button>
+        <button class="secondary" type="button" (click)="context.dismiss()" tiButton>
+            {{ i18n.common_term_operate_cancel}}
+        </button>
+    </ti-modal-footer>
+</ng-template>

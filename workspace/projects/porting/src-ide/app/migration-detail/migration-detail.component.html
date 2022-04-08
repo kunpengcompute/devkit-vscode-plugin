@@ -1,0 +1,307 @@
+<div class="migration-detail">
+  <div class="migration-content">
+    <!-- 基本信息 -->
+    <div class="sub-info">
+      <p [ngClass]="{'p-intellij': intelliJFlag === true}">{{ i18n.plugins_porting_migration_info_label }}</p>
+      <div class="info-detail" *ngIf="detailData.sw_info">
+        <li>
+          <div [ngClass]="{'desc-intellij': intelliJFlag === true}">
+            {{ i18n.plugins_porting_migration_info_name }}</div>
+          <div [ngClass]="{'value-intellij': intelliJFlag === true}">{{ detailData.sw_info.name }}</div>
+        </li>
+        <li>
+          <div [ngClass]="{'desc-intellij': intelliJFlag === true}">
+            {{ i18n.plugins_porting_migration_info_ver }}</div>
+          <div [ngClass]="{'value-intellij': intelliJFlag === true}">{{ detailData.sw_info.ver }}</div>
+        </li>
+        <li>
+          <div [ngClass]="{'desc-intellij': intelliJFlag === true}">
+            {{ i18n.plugins_porting_migration_info_env }}</div>
+          <div [ngClass]="{'value-intellij': intelliJFlag === true}">{{ detailData.sw_info.target }}</div>
+        </li>
+        <li *ngIf="showMaven">
+          <div>{{ i18n.plugins_porting_migration_info_mvn }}</div>
+          <div class="mvn-url">
+            <a *ngFor="let item of mavenUrl" [href]="item.url" target="_blank"
+               [ngClass]="{'mvnUrl-intellij': intelliJFlag === true, 'visited': item.visited}"
+               (click)="item.visited = true">{{item.url}}</a>
+          </div>
+        </li>
+        <li>
+          <div [ngClass]="{'desc-intellij': intelliJFlag === true}">
+            {{ i18n.plugins_porting_migration_info_des }}</div>
+          <div class="guide-url" [ngClass]="{'value-intellij': intelliJFlag === true}">{{ migrationDes }}
+            <a [href]="guideUrl" target="_blank"
+               [ngClass]="{'guideUrl-intellij': intelliJFlag === true, 'visited': guideUrlVisited}"
+               (click)="guideUrlVisited = true">{{guideUrl}}</a><br>
+            {{ downloadUrlDes }}
+            <a [href]="downloadUrl" target="_blank"
+               [ngClass]="{'guideUrl-intellij': intelliJFlag === true, 'visited': downloadUrlVisited}"
+               (click)="downloadUrlVisited = true">{{downloadUrl}}</a>
+          </div>
+        </li>
+        <!--UCD未涉及，暂时保留tinyUI-->
+      </div>
+    </div>
+    <div class="steps-content" *ngIf="!isDisplay">
+      <!-- 环境检查 -->
+      <div class="precond" *ngIf="precheckData.length != 0">
+        <p class="title" [ngClass]="{'title-intellij': intelliJFlag === true}">
+          {{ i18n.plugins_porting_migration_precond_label }}</p>
+        <div *ngFor="let precheck of precheckData">
+          <div class="pre-cond-item" *ngIf="!precheck.desc">
+            <div class="lable">{{ i18n.plugins_porting_migration_check_label }}
+              {{ precheckData.length > 1 ? precheck.step : '' }}</div>
+            <div class="before">{{ precheck.cmd  }}</div>
+          </div>
+          <div class="pre-cond-item" *ngIf="precheck.desc">
+            <div class="lable">{{ i18n.plugins_porting_migration_check_label }}
+              {{ precheckData.length > 1 ? precheck.step : '' }}</div>
+            <div class="before">{{ precheck.desc }}</div>
+          </div>
+        </div>
+      </div>
+      <!-- 执行脚本 -->
+      <div class="batch-precond" *ngIf="batchData.length != 0">
+        <p class="title">{{ i18n.plugins_porting_migration_batch_label }}</p>
+        <p class="select-all"
+           [ngClass]="{'checkbox-disabled': isRunning, 'select-all-intellij': intelliJFlag === true}">
+          <input type="checkbox" tiCheckgroup [items]="batchData" [(checkeds)]="checkBatch"
+                 [disabled]="isRunning" (checkedsChange)="batchChange($event)"/>
+          <span>{{ i18n.plugins_porting_migration_select_all }}</span>
+        </p>
+        <div *ngFor="let batch of batchData">
+          <div class="steps-title"
+               [ngClass]="{'checkbox-disabled': isRunning, 'steps-title-intellij': intelliJFlag === true}">
+            <input type="checkbox" tiCheckitem [item]="batch" [beCheckeds]="checkBatch"
+                   [disabled]="isRunning"/>
+            <span><span
+              class="txt">{{ i18n.plugins_porting_migration_steps_label }}</span>{{ batch.step }}</span>
+          </div>
+          <p class="opt-des">
+            <span>{{ i18n.plugins_porting_migration_execute_label }}</span>{{ batch.script }}
+          </p>
+        </div>
+      </div>
+      <!-- 执行步骤 -->
+      <div class="step" [ngClass]="{'disableView-intellij': enableIntelliJView === false }">
+        <p class="title" [ngClass]="{ mt24: batchData.length === 0, 'title-intellij': intelliJFlag === true }">
+          {{ i18n.plugins_porting_migration_steps }}
+        </p>
+        <p class="select-all"
+           [ngClass]="{'checkbox-disabled': migrationTip || isOSDisabled || isRunning, 'select-all-intellij': intelliJFlag === true}">
+          <input type="checkbox" id="allCheck2" tiCheckgroup [items]="stepsData" [(checkeds)]="checkSteps"
+                 [disabled]="migrationTip || isOSDisabled || isRunning"/>
+          <span class="txt">{{i18n.plugins_porting_migration_select_all}}</span>
+        </p>
+        <!-- change -->
+        <div *ngFor="let step of stepsData">
+          <!-- group -->
+          <p class="steps-title" [hidden]="step.step"
+             [ngClass]="{'checkbox-disabled': migrationTip || isOSDisabled || isRunning, 'steps-title-intellij': intelliJFlag === true}">
+            <input type="checkbox" tiCheckitem [item]="step" [beCheckeds]="checkSteps"
+                   [disabled]="migrationTip || isOSDisabled || isRunning || step.disabled"/>
+            <span class="txt" *ngIf="!step.stepid && currLang === 'zh-cn'">{{step.groupdes_cn}}</span>
+            <span class="txt" *ngIf="!step.stepid && currLang !== 'zh-cn'">{{step.groupdes_en}}</span>
+          </p>
+          <p class='step-comps'
+             *ngIf="step.file_name">
+                        <span *ngIf="step.status !== undefined" style="margin-right: 9px; min-width: 16px;">
+                            <img src="./assets/img/migration-center/icon-fail16.svg" alt=""
+                                 *ngIf="step.status === taskStatus.FAILED">
+                            <img src="./assets/img/migration-center/icon-ok16.svg" alt=""
+                                 *ngIf="step.status === taskStatus.SUCCESS">
+                            <img src="./assets/img/migration-center/loading-dark.gif" alt=""
+                                 *ngIf="step.status === taskStatus.RUNNING && currTheme === ColorTheme.Dark && intelliJFlag != true">
+                            <img src="./assets/img/migration-center/loading.gif" alt=""
+                                 *ngIf="step.status === taskStatus.RUNNING && currTheme === ColorTheme.Dark && intelliJFlag === true">
+                            <img src="./assets/img/migration-center/loading-light.gif" alt=""
+                                 *ngIf="step.status === taskStatus.RUNNING && currTheme === ColorTheme.Light">
+                        </span>
+            <span class="step-label"
+                  [ngClass]="{'step-label-intellij': intelliJFlag === true}">{{i18n.plugins_porting_migration_steps_label}}{{step.step}}</span>
+            <span class="step-des"
+                  [ngClass]="{'step-des-intellij': intelliJFlag === true}">{{ step.file_name2 }}</span>
+          </p>
+          <div class='step-comps'
+               *ngIf="!step.file_name && currLang === 'zh-cn' && step.step ">
+            <div *ngIf="step.status !== undefined" style="margin-right: 9px; min-width: 16px;">
+              <img src="./assets/img/migration-center/icon-fail16.svg" alt=""
+                   *ngIf="step.status === taskStatus.FAILED">
+              <img src="./assets/img/migration-center/icon-ok16.svg" alt=""
+                   *ngIf="step.status === taskStatus.SUCCESS">
+              <img src="./assets/img/migration-center/loading-dark.gif" alt=""
+                   *ngIf="step.status === taskStatus.RUNNING && currTheme === ColorTheme.Dark && intelliJFlag != true">
+              <img src="./assets/img/migration-center/loading.gif" alt=""
+                   *ngIf="step.status === taskStatus.RUNNING && currTheme === ColorTheme.Dark && intelliJFlag === true">
+              <img src="./assets/img/migration-center/loading-light.gif" alt=""
+                   *ngIf="step.status === taskStatus.RUNNING && currTheme === ColorTheme.Light">
+            </div>
+            <div class="step-label" [ngClass]="{'step-label-intellij': intelliJFlag === true}">
+              <span>{{ i18n.plugins_porting_migration_steps_label }}{{ step.step }}</span>
+            </div>
+            <div class="step-des" [ngClass]="{'step-des-intellij': intelliJFlag === true}">
+              <span>{{ step.des_cn }}</span>
+            </div>
+          </div>
+          <div class='step-comps'
+               *ngIf="!step.file_name && currLang !== 'zh-cn' && step.step">
+            <div *ngIf="step.status !== undefined" style="margin-right: 9px; min-width: 16px;">
+              <img src="./assets/img/migration-center/icon-fail16.svg" alt=""
+                   *ngIf="step.status === taskStatus.FAILED">
+              <img src="./assets/img/migration-center/icon-ok16.svg" alt=""
+                   *ngIf="step.status === taskStatus.SUCCESS">
+              <img src="./assets/img/migration-center/loading-dark.gif" alt=""
+                   *ngIf="step.status === taskStatus.RUNNING && currTheme === ColorTheme.Dark && intelliJFlag != true">
+              <img src="./assets/img/migration-center/loading.gif" alt=""
+                   *ngIf="step.status === taskStatus.RUNNING && currTheme === ColorTheme.Dark && intelliJFlag === true">
+              <img src="./assets/img/migration-center/loading-light.gif" alt=""
+                   *ngIf="step.status === taskStatus.RUNNING && currTheme === ColorTheme.Light">
+            </div>
+            <div class="step-label" [ngClass]="{'step-label-intellij': intelliJFlag === true}">
+              <span>{{ i18n.plugins_porting_migration_steps_label }}{{ step.step }}</span></div>
+            <div class="step-des" [ngClass]="{'step-des-intellij': intelliJFlag === true}">
+              <span>{{ step.des_en }}</span></div>
+          </div>
+          <div *ngFor="let file of step.file_list">
+            <p class="file-des" *ngIf="currLang === 'zh-cn'"
+               [ngClass]="{'file-des-intellij': intelliJFlag === true}">{{ file.check_des_cn }}</p>
+            <p class="file-des" *ngIf="currLang !== 'zh-cn'"
+               [ngClass]="{'file-des-intellij': intelliJFlag === true}">{{ file.check_des_en }}</p>
+          </div>
+          <p class="step-cmd" *ngIf="!step.file_name && step.step && step.cmd"
+             [ngClass]="{'step-cmd-intellij': intelliJFlag === true}">{{ step.cmd }}</p>
+          <div *ngIf="step.file_name">
+            <div *ngFor="let list of step.op_list; let index = index">
+              <div>
+                <div *ngIf="list.opname == 'replace_once'">
+                  <p class="opt-des" *ngIf="currLang === 'zh-cn'">
+                    {{ list.optname }}，{{ list.des_cn }}
+                  </p>
+                  <p class="opt-des" *ngIf="currLang !== 'zh-cn'">
+                    {{ list.optname }} {{ list.des_en }}
+                  </p>
+                  <p class="step-cmd" *ngIf="currLang === 'zh-cn'"
+                     [ngClass]="{'step-cmd-intellij': intelliJFlag === true}">
+                    {{ list.orig}}<span>（{{ i18n.plugins_porting_migration_orig_code }}）</span>
+                    <img *ngIf="currTheme === 1" class="arrow"
+                         src="./assets/img/migration-center/icon-arrow-dark.svg" alt=""/>
+                    <img *ngIf="currTheme === 2" class="arrow"
+                         src="./assets/img/migration-center/icon-arrow-light.svg" alt=""/>
+                    {{ list.new }}
+                    <span>（{{ i18n.plugins_porting_migration_new_code }}）</span>
+                  </p>
+                  <p class="step-cmd" *ngIf="currLang !== 'zh-cn'"
+                     [ngClass]="{'step-cmd-intellij': intelliJFlag === true}">
+                    {{ list.orig }}&nbsp;<span>({{ i18n.plugins_porting_migration_orig_code }})</span>
+                    <img *ngIf="currTheme === 1" class="arrow"
+                         src="./assets/img/migration-center/icon-arrow-dark.svg" alt=""/>
+                    <img *ngIf="currTheme === 2" class="arrow"
+                         src="./assets/img/migration-center/icon-arrow-light.svg" alt=""/>
+                    {{ list.new }}&nbsp;<span>({{ i18n.plugins_porting_migration_new_code }})</span>
+                  </p>
+                </div>
+                <div *ngIf="list.opname == 'replace_all'">
+                  <p class="opt-des" *ngIf="currLang === 'zh-cn'">
+                    <span>{{ i18n.plugins_porting_migration_edit_all_line }}，{{list.des_cn}}</span>
+                  </p>
+                  <p class="opt-des" *ngIf="currLang !== 'zh-cn'">
+                                        <span>{{ i18n.plugins_porting_migration_edit_all_line }},
+                                          {{ list.des_en }}</span>
+                  </p>
+                  <p class="step-cmd" *ngIf="currLang !== 'zh-cn'"
+                     [ngClass]="{'step-cmd-intellij': intelliJFlag === true}">
+                    {{ list.orig }}&nbsp;<span>({{ i18n.plugins_porting_migration_orig_code }})</span>
+                    <img *ngIf="currTheme === 1" class="arrow"
+                         src="./assets/img/migration-center/icon-arrow-dark.svg" alt=""/>
+                    <img *ngIf="currTheme === 2" class="arrow"
+                         src="./assets/img/migration-center/icon-arrow-light.svg" alt=""/>
+                    {{ list.new }}&nbsp;<span>({{ i18n.plugins_porting_migration_new_code }})</span>
+                  </p>
+                  <p class="step-cmd" *ngIf="currLang === 'zh-cn'"
+                     [ngClass]="{'step-cmd-intellij': intelliJFlag === true}">
+                    {{ list.orig}}<span>（{{ i18n.plugins_porting_migration_orig_code }}）</span>
+                    <img *ngIf="currTheme === 1" class="arrow"
+                         src="./assets/img/migration-center/icon-arrow-dark.svg" alt=""/>
+                    <img *ngIf="currTheme === 2" class="arrow"
+                         src="./assets/img/migration-center/icon-arrow-light.svg" alt=""/>
+                    {{ list.new }}
+                    <span>（{{ i18n.plugins_porting_migration_new_code }}）</span>
+                  </p>
+                </div>
+                <div *ngIf="list.opname == 'add_new_line'">
+                  <p class="opt-des" *ngIf="currLang === 'zh-cn'">
+                    {{ list.optname }}，{{ list.des_cn }}
+                  </p>
+                  <p class="opt-des" *ngIf="currLang !== 'zh-cn'">
+                    {{ list.optname }} {{ list.des_en }}
+                  </p>
+                  <p class="step-cmd" [ngClass]="{'step-cmd-intellij': intelliJFlag === true}">
+                    {{ list.new }}
+                  </p>
+                </div>
+                <div *ngIf="list.opname == 'delete_one_line'">
+                  <p class="opt-des" *ngIf="currLang === 'zh-cn'">
+                    {{ list.optname }}，{{ list.des_cn }}
+                  </p>
+                  <p class="opt-des" *ngIf="currLang !== 'zh-cn'">
+                    {{ list.optname }} {{ list.des_en }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="migration-main-content" *ngIf="isDisplay">
+      <p class="title" [ngClass]="{ mt24: batchData.length == 0, 'title-intellij': intelliJFlag === true}">
+        {{ i18n.plugins_porting_migration_mainContent }}
+      </p>
+      <div *ngFor="let step of stepsData">
+        <!-- group -->
+        <p class="steps-title" *ngIf="!step.step" [ngClass]="{'steps-title-intellij': intelliJFlag === true}">
+          <span class="txt" *ngIf="!step.stepid && currLang === 'zh-cn'">{{step.groupdes_cn}}</span>
+          <span class="txt" *ngIf="!step.stepid && currLang !== 'zh-cn'">{{step.groupdes_en}}</span>
+        </p>
+        <div class='step-comps' *ngIf="currLang === 'zh-cn' && step.des_cn"
+             [ngClass]="{'step-comps-intellij': intelliJFlag === true}">
+          <div class='step-des'> {{ step.des_cn }}</div>
+        </div>
+        <div class='step-comps' *ngIf="currLang !== 'zh-cn' && step.des_en"
+             [ngClass]="{'step-comps-intellij': intelliJFlag === true}">
+          <div class='step-des'>{{ step.des_en }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="option" [ngClass]="{'option-intellij': intelliJFlag === true}">
+    <div class="option-border">
+      <div class="pri-btn" [tiTip]="migrationTip || RunningTip" tiTipPosition='top'>
+        <button *ngIf="!isDisplay" type="button" [disabled]="migrationTip || isOSDisabled || isRunning || isDisabled"
+                (click)="submit()"
+                [ngClass]="{'pri-btn-intellij': intelliJFlag === true, 'pri-btn-intellij-disable': intelliJFlag === true && (isRunning === true || isOSDisabled)}">
+          {{ i18n.plugins_porting_migration_execute }}
+        </button>
+      </div>
+      <div class="sec-btn">
+        <button [ngStyle]="{'margin-left':isDisplay? '0px':'20px'}" type="button" (click)="goBack()"
+                [ngClass]="{'sec-btn-intellij': intelliJFlag === true}">
+          {{ i18n.plugins_porting_migration_back }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--check group-->
+<div style="display: none;">
+  <input type="checkbox" tiCheckgroup [items]="precheckData" [(checkeds)]="checkPrecheck" [disabled]="isRunning"
+         (checkedsChange)="precheckChange($event)"/>
+  <input type="checkbox" tiCheckgroup [items]="batchData" [(checkeds)]="checkBatch" [disabled]="isRunning"
+         (checkedsChange)="batchChange($event)"/>
+  <input type="checkbox" tiCheckgroup [items]="stepsData" [(checkeds)]="checkSteps" [disabled]="isRunning"
+         (checkedsChange)="stepsChange($event)"/>
+</div>
+<app-messagebox #migrationDetailModal>
+</app-messagebox>

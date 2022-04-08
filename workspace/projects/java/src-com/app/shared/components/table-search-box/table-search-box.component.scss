@@ -1,0 +1,94 @@
+:host ::ng-deep .table-search-box {
+  width: 400px;
+  display: flex;
+  position: relative;
+  .clearImg {
+      position: absolute;
+      top: 9px;
+      right: 45px;
+  }
+
+  &:hover {
+      ti-select,
+      ti-searchbox {
+          border-color: #0067ff !important;
+      }
+
+      ti-select {
+          border-right: none !important;
+      }
+  }
+
+  &:not(:hover) {
+      ti-searchbox-notsearch.ti3-searchbox-container:not([disabled])[tiFocused] + .focus,
+      ti-searchbox.ti3-searchbox-container:not([disabled])[tiFocused] + .focus {
+          z-index: 1;
+      }
+  }
+
+  ti-select {
+      width: 30%;
+      border-radius: 2px 0 0 2px !important;
+      border-right: none !important;
+      border-color: #888888 !important;
+  }
+
+  ti-select + ti-searchbox {
+      border-radius: 0 2px 2px 0 !important;
+      width: 70%;
+      border-left: none !important;
+      position: relative;
+
+      &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 6px;
+          height: 14px;
+          width: 1px;
+          background: #888888;
+      }
+  }
+
+  ti-searchbox {
+      width: 400px !important;
+      border-color: #888888;
+
+      input {
+          height: 26px !important;
+          outline: none;
+          border: none;
+
+          &::placeholder {
+              color: #616161;
+          }
+
+          &:hover,
+          &:focus {
+              border: none !important;
+          }
+      }
+  }
+
+  ti-searchbox-notsearch.ti3-searchbox-container:not([disabled])[tiFocused],
+  ti-searchbox.ti3-searchbox-container:not([disabled])[tiFocused] {
+      --ti-input-border-color-focus: #0067ff;
+  }
+
+  ti-searchbox-notsearch.ti3-searchbox-container .ti3-searchbox-divider,
+  ti-searchbox.ti3-searchbox-container .ti3-searchbox-divider {
+      background-color: #888 !important;
+  }
+
+  .focus {
+      width: 120px;
+      height: 28px;
+      border-radius: 2px 0 0 2px !important;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      border: 1px solid #0067ff;
+      border-right: none;
+  }
+}

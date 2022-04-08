@@ -1,0 +1,33 @@
+<div *ngIf="this.currLang === 0" class="banner-container">
+    <div class="welcome">
+        <ng-container *ngFor="let list of bannerList;let index = index">
+            <p>
+                <a (click)="openUrl(list.link)" class="url" (mouseenter)="changeBannerImgSrcZh(index, true)"
+                    (mouseleave)="changeBannerImgSrcZh(index, false)">
+                    {{list.title}} <img [src]="sanitizer.bypassSecurityTrustResourceUrl(list.img)" class="arrow" />
+                </a>
+            </p>
+        </ng-container>
+    </div>
+    <div class="bg">
+        <div class="fit-bg"></div>
+        <img src="./assets/img/banner/banner.png" class="bg-img" />
+    </div>
+</div>
+
+<div *ngIf="this.currLang === 1" class="banner-container">
+    <div class="welcome" style="margin-top: 90px;">
+        <ng-container *ngFor="let list of bannerListEn;let index = index">
+            <p>
+                <a (click)="openUrl(list.link)" class="url" (mouseenter)="changeBannerImgSrcZh(index, true)"
+                    (mouseleave)="changeBannerImgSrcZh(index, false)">
+                    {{list.title}} <img [src]="sanitizer.bypassSecurityTrustResourceUrl(list.img)" class="arrow" />
+                </a>
+            </p>
+        </ng-container>
+    </div>
+    <div class="bg">
+        <div class="fit-bg"></div>
+        <img src="./assets/img/banner/banner.png" class="bg-img" />
+    </div>
+</div>

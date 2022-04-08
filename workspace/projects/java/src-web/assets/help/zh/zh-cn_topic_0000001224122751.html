@@ -1,0 +1,54 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="运行日志管理">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001178881580.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具 (Java性能分析)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001224122751">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>运行日志管理</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001224122751"></a><a name="ZH-CN_TOPIC_0000001224122751"></a>
+
+<h1 class="topictitle1">运行日志管理</h1>
+<div id="body1587557397114"><div class="section" id="ZH-CN_TOPIC_0000001224122751__section11470129119"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0000001224122751__p2444451164517">已成功登录<span id="ZH-CN_TOPIC_0000001224122751__ph12594180204619">Java性能分析</span>。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001224122751__note43463558452"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001224122751__p15237181353814">只有管理员用户（<strong id="ZH-CN_TOPIC_0000001224122751__b101961578173">tunadmin</strong>）可以修改运行日志级别、查看和下载运行日志。</p>
+</div></div>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001224122751__section724515391286"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0000001224122751__ol179320281599"><li id="ZH-CN_TOPIC_0000001224122751__li2793182819912"><span>在页面右上角<span><img id="ZH-CN_TOPIC_0000001224122751__image1917092873514" src="zh-cn_image_0000001224122905.png"></span>菜单选项中单击“日志”。</span><p><p id="ZH-CN_TOPIC_0000001224122751__p11866185814916">打开“操作日志”界面。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001224122751__li1312775317914"><span>单击“运行日志”页签。</span><p><p id="ZH-CN_TOPIC_0000001224122751__p16164153412106">打开<span class="wintitle" id="ZH-CN_TOPIC_0000001224122751__wintitle13579134514917">“运行日志”</span>界面，如<a href="#ZH-CN_TOPIC_0000001224122751__fig201514591112">图1</a>所示。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001224122751__note761031115548"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001224122751__p1995415284133"><span id="ZH-CN_TOPIC_0000001224122751__ph919271672515">Java性能分析</span>运行日志<span class="filepath" id="ZH-CN_TOPIC_0000001224122751__filepath1268692165514">“hyper-tuner-java-profiler.log”</span>达到100MB时，会自动保存备份为压缩包，压缩文件名为<span class="filepath" id="ZH-CN_TOPIC_0000001224122751__filepath133951232267">“hyper-tuner-java-profiler.log.1.zip”</span>，保存在<span class="filepath" id="ZH-CN_TOPIC_0000001224122751__filepath78928555714">“/opt/hyper_tuner/thor-server-x.x.x/log/”</span>目录下（<span class="filepath" id="ZH-CN_TOPIC_0000001224122751__filepath3173183712279">“/opt/hyper_tuner”</span>为工具安装目录，用户安装工具时可自定义，“x.x.x”表示版本号），之前已保存的<span class="filepath" id="ZH-CN_TOPIC_0000001224122751__filepath5897132319815">“hyper-tuner-java-profiler.log.1.zip”</span>压缩包自动更名为<span class="filepath" id="ZH-CN_TOPIC_0000001224122751__filepath1135819291981">“hyper-tuner-java-profiler.log.2.zip”</span>。后台最多保存两个压缩包，当第三个压缩包生成时，默认删除最早的压缩包文件。</p>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001224122751__fig201514591112"><a name="ZH-CN_TOPIC_0000001224122751__fig201514591112"></a><a name="fig201514591112"></a><span class="figcap"><b>图1 </b>运行日志</span><br><span><img id="ZH-CN_TOPIC_0000001224122751__image8793103241919" src="zh-cn_image_0000001224201481.png"></span></div>
+</p></li><li id="ZH-CN_TOPIC_0000001224122751__zh-cn_topic_0239732282_li1716511371323"><span>单击指定运行日志“操作”列的“下载”。</span><p><p id="ZH-CN_TOPIC_0000001224122751__p920312992017">在弹出的对话框中单击“确认”下载运行日志。</p>
+<p id="ZH-CN_TOPIC_0000001224122751__p1362613617710">下载的运行日志的格式如下：</p>
+<p id="ZH-CN_TOPIC_0000001224122751__p860504981">时间 日志级别 进程ID 线程名称 类名称 方法名称(行数) 日志详情</p>
+<p id="ZH-CN_TOPIC_0000001224122751__p27924211299">例如：</p>
+<pre class="screen" id="ZH-CN_TOPIC_0000001224122751__screen20814259637">2020-07-27 09:10:08.782  WARN 20085 --- [           main]  com.zaxxer.hikari.util.DriverDataSource.&lt;init&gt;(70) : Registered driver with driverClassName=org.apache.derby.jdbc.EmbeddedDriver was not found, trying direct instantiation.</pre>
+<p id="ZH-CN_TOPIC_0000001224122751__p15342111454718">日志级别用来表示日志信息的重要程度，工具用户管理运行日志级别分为DEBUG、INFO、WARNING、ERROR和CRITICAL，Java性能分析运行日志级别分为DEBUG、INFO、WARNING和ERROR。运行日志级别默认为WARNING，工具只会记录配置的级别及以上级别的日志。</p>
+<ul id="ZH-CN_TOPIC_0000001224122751__ul61182209319"><li id="ZH-CN_TOPIC_0000001224122751__zh-cn_topic_0253410800_li1511818204318">DEBUG：调试级别，记录调试信息，便于开发人员或维护人员定位问题。</li><li id="ZH-CN_TOPIC_0000001224122751__zh-cn_topic_0253410800_li31188202310">INFO：信息级别，记录服务正常运行的关键信息。</li><li id="ZH-CN_TOPIC_0000001224122751__zh-cn_topic_0253410800_li1411802016312">WARNING：警告级别，记录系统和预期的状态不一致的事件，但这些事件不影响整个系统的运行。</li><li id="ZH-CN_TOPIC_0000001224122751__zh-cn_topic_0253410800_li01181120153115">ERROR：一般错误级别，记录错误事件，但应用可能还能继续运行。</li><li id="ZH-CN_TOPIC_0000001224122751__zh-cn_topic_0253410800_li311852017312">CRITICAL：严重错误级别，记录可能会导致系统崩溃的信息。</li></ul>
+<div class="note" id="ZH-CN_TOPIC_0000001224122751__note20547115033817"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001224122751__ul11737650174420"><li id="ZH-CN_TOPIC_0000001224122751__li573895084416">管理员用户可在<span id="ZH-CN_TOPIC_0000001224122751__ph1331116578362">鲲鹏性能分析工具</span>或<span id="ZH-CN_TOPIC_0000001224122751__ph106173175251">Java性能分析</span>首页中的<span><img id="ZH-CN_TOPIC_0000001224122751__image445815576393" src="zh-cn_image_0000001224361411.png"></span>菜单选项中选择“系统设置”，手动配置“用户管理运行日志级别”。</li><li id="ZH-CN_TOPIC_0000001224122751__li127388508443">管理员用户可在<span id="ZH-CN_TOPIC_0000001224122751__ph197281918172512">Java性能分析</span>首页中的<span><img id="ZH-CN_TOPIC_0000001224122751__image19988131919409" src="zh-cn_image_0000001223882959.png"></span>菜单选项中选择“系统设置”，手动配置“运行日志级别”。</li></ul>
+</div></div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001178881580.html">日志管理</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

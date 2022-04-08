@@ -1,0 +1,22 @@
+<app-time-line *ngIf="timeData.length" [timeData]='timeData' [lineData]='timeLine' (timeLineData)='timeLineData($event)'
+    #timeLineDetail></app-time-line>
+<app-consum-charts #sys [datas]='sysData' *ngIf="sysData" (dataZoom)='dataZoom($event)' [timeLine]='timeLine'>
+</app-consum-charts>
+<app-consum-charts #app [datas]='appData' *ngIf="appData" (dataZoom)='dataZoom($event)' [timeLine]='timeLine'>
+</app-consum-charts>
+<app-consum-charts #dist [datas]='distData' *ngIf="distData" (dataZoom)='dataZoom($event)' [timeLine]='timeLine'>
+</app-consum-charts>
+
+<div class="select-map">
+    <span class="select-mapTitle">{{i18n.diagnostic.consumption.process_map}}</span>
+    <ti-select class="hidden-select" *ngIf="mapData" [options]='processOption' [searchable]="true" [(ngModel)]="selectedProcess"
+      (ngModelChange)="selectProcess()">
+    </ti-select>
+</div>
+<app-consum-charts #map [datas]='mapData' *ngIf="mapData" (dataZoom)='dataZoom($event)' [timeLine]='timeLine'>
+</app-consum-charts>
+
+  <div class="nodata" *ngIf="!mapData && !initializing" >
+      <img src='./assets/img/projects/nodata.png' />
+      <div>{{nodataTips}}</div>
+  </div>

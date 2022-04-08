@@ -1,0 +1,32 @@
+.warpper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    .block {
+        display: flex;
+        align-items: center;
+        width: fit-content;
+        cursor: pointer;
+
+        & + .block {
+            margin-left: 16px;
+        }
+
+        .color {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            &.checkout {
+                background-color: #ccc !important;
+            }
+        }
+        .name {
+            margin-left: 8px;
+            font-size: 12px;
+            display: inline-block;
+            &.checkout {
+                color: #ccc;
+            }
+        }
+    }
+}

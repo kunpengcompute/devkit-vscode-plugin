@@ -1,0 +1,418 @@
+<div class="home-container">
+    <app-banner></app-banner>
+    <div class="project-container">
+        <div class="project-left scroll-style">
+            <div class="left-container">
+                <div class="left-content">
+                    <div class="left-form">
+                        <ti-formfield>
+                            <!-- radio -->
+                            <ti-item>
+                                <div class="title ">{{i18n.common_term_analysis_softwareCode_label}}
+                                    <a *ngIf="currLang === 'zh-cn'" class=" help-tips-icon" (click)="openHyperlinks(pluginUrlCfg.faqTwelveZn)">
+                                        <img *ngIf="currentTheme === 1" src="./assets/img/icon-help-dark.svg" alt="">
+                                        <img *ngIf="currentTheme === 2" src="./assets/img/icon-help-light.svg" alt="">
+                                    </a>
+                                    <a *ngIf="currLang === 'en' || currLang === 'en-us'" class=" help-tips-icon" (click)="openHyperlinks(pluginUrlCfg.faqTwelveEn)">
+                                        <img *ngIf="currentTheme === 1" src="./assets/img/icon-help-dark.svg" alt="">
+                                        <img *ngIf="currentTheme === 2" src="./assets/img/icon-help-light.svg" alt="">
+                                    </a>
+                                </div>
+                                <!-- #正常页面 -->
+                                <div *ngIf="filePath.length === 0">
+                                    <span class="tipinfo">{{i18n.plugins_porting_tip_info}}</span>
+                                    <div class="arm-tip-container" [ngClass]="{'intellij-gcc-color': intelliJFlagDef}" *ngIf="chkArmEnv.isNotOk">
+                                        <div class="arm-tip-container-find">
+                                            <div>
+                                                <img src="./assets/img/system/icon_system_tip_dark.svg"
+                                                    style="width:16px;height:16px;vertical-align: bottom;" />
+                                            </div>
+                                            <div>
+                                                <img class="close-arm-tip" *ngIf="currentTheme === 1"
+                                                    src="./assets/img/system/icon_close_system_tip_dark.svg"
+                                                    (click)="closeArmTip()" />
+                                                <img class="close-arm-tip" *ngIf="currentTheme === 2"
+                                                    src="./assets/img/system/icon_close_system_tip_light.svg"
+                                                    (click)="closeArmTip()" />
+                                            </div>
+                                            <div class="chkArmEnv-tip">
+                                                <span *ngIf="chkArmEnv.tip">{{chkArmEnv.tip}}</span>
+                                                <span *ngIf="!chkArmEnv.tip" style="vertical-align: middle;">
+                                                    {{i18n.plugins_porting_message_automake_evn_check.tip}}
+                                                    <a class="viewGuide" (click)="chkArmEnv.showGuide = true"
+                                                        *ngIf="!chkArmEnv.showGuide">{{i18n.plugins_porting_message_automake_evn_check.link}}</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="chkArmEnv.showGuide" class="chkArmEnv-showGuide">
+                                            <p style="margin: 4px 0;font-size: 14px;"
+                                                [ngStyle]="{'margin-left':currLang==='zh-cn'?'-7px':'0px'}">
+                                                {{i18n.plugins_porting_message_automake_evn_check.guide_title}}</p>
+                                            <p>{{chkArmEnv.guide1}}</p>
+                                            <p>{{chkArmEnv.guide2}}</p>
+                                            <p style="margin-top: 4px; font-size: 12px;">
+                                                <span>
+                                                    <a [href]="chkArmEnv.link2" class="link guide-link"
+                                                        target="_blank">Glibc</a></span>
+                                            </p>
+                                            <p style="margin-top:4px;font-size: 12px;"><a
+                                                    (click)="chkArmEnv.showGuide=false">{{i18n.plugins_porting_message_automake_evn_check.hide_guide}}</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="mt-20">
+                                        <div *ngFor="let item of radioList" class="tiradio">
+                                            <label class="ra-label" [for]="item.key">
+                                                <i class="ra-common ra-check" *ngIf="sourceTypeChecked === item.key"></i>
+                                                <i class="ra-common ra-uncheck"
+                                                    *ngIf="sourceTypeChecked !== item.key"></i>
+                                                <input type="radio" name="softPackUpload"
+                                                    [(ngModel)]="sourceTypeChecked" [id]="item.key" [value]="item.key"
+                                                    (change)="sourceTypeChecked === item.key" (click)="tabSourceType()"/>
+                                                <span
+                                                    [ngClass]="{'intellij-color': intelliJFlagDef}">{{item.value}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- #远端有已上传的文件 -->
+                                    <div *ngIf="sourceTypeChecked === 'remote'">
+                                        <div style="position: relative;">
+                                            <div class="mt-20  path_div">
+                                                <p [ngClass]="{'intellij-color':
+                                                    intelliJFlagDef}"><span class="ti3-icon  ti3-icon-staricon"></span>{{inputItems.path.label}}:
+                                                    {{ userPath }}</p>
+                                            </div>
+                                            <textarea tiText
+                                                [(ngModel)]="inputItems.path.value" resize="vertical"
+                                                [placeholder]="i18n.plugins_porting_title_remoteSourceCodeTips"
+                                                class="areaMatch" (focus)="areaMatchDis()" (blur)="blurAreaMatch()"
+                                                [formControl]="filenameLength" (input)="inputAreaMatch()"
+                                                [tiValidation]="validation" (keyup)="keyupAreaMatch()"></textarea>
+                                            <!-- 输入自动匹配 -->
+                                            <div class="areaMatchDiv" [ngStyle]="{top:areaMatchHeight+30+'px'}"
+                                                *ngIf="displayAreaMatch && ((pathlist || []).length !== 0)">
+                                                <ul>
+                                                    <li *ngFor="let path of pathlist" style="cursor: pointer;">
+                                                        <p (mousedown)="clickAreaMatch(path)">{{path}}</p>
+                                                        <div (mousedown)="isDeleteAreaMatch(path)">
+                                                            <img src="./assets/img/analysis/icon_delete_normal.svg"
+                                                                onmouseover="this.src='./assets/img/analysis/icon_delete_hover.svg'"
+                                                                onmouseout="this.src='./assets/img/analysis/icon_delete_normal.svg'" />
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- #上传源码包或文件夹 -->
+                                    <div *ngIf="sourceTypeChecked === 'local'" class="div_code mt-20">
+                                        <div>
+                                            <span class="filetype"
+                                                [ngClass]="{'intellij-color': intelliJFlagDef}">{{i18n.plugins_porting_title_fileType}}</span>
+                                            <form>
+                                                <div *ngFor="let typeItem of fileTypeList" class="fileTypeArea mt-10">
+                                                    <label class="ra-label" [for]="typeItem.key">
+                                                        <i class="ra-common ra-check"
+                                                            *ngIf="isUploadDirectory === typeItem.key"></i>
+                                                        <i class="ra-common ra-uncheck"
+                                                            *ngIf="isUploadDirectory !== typeItem.key"></i>
+                                                        <input type="radio" name="fileType" [value]="typeItem.key"
+                                                            [id]="typeItem.key " class="radioType"
+                                                            [(ngModel)]="isUploadDirectory"
+                                                            [checked]="isUploadDirectory === typeItem.key"
+                                                            (change)="isUploadDirectory = typeItem.key"
+                                                            (click)="tabSourceType()"/>
+                                                        <span
+                                                            [ngClass]="{'intellij-color': intelliJFlagDef}">{{typeItem.value}}</span>
+                                                    </label>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div style="position: relative;">
+                                            <div class="inpath mt-20 " [ngClass]="{'intellij-color':
+                                                intelliJFlagDef}"><span class="ti3-icon  ti3-icon-staricon "></span>{{inputItems.path.label}}:
+                                                {{ userPath }}
+                                            </div>
+                                            <div style="display: inline-block;position: relative;" class="mt-10">
+                                                <textarea tiText
+                                                    [(ngModel)]="inputItems.path.value" resize="vertical"
+                                                    [placeholder]="isUploadDirectory === 'directory' ? i18n.plugins_porting_title_folder : i18n.plugins_porting_title_file"
+                                                    class="texare" (focus)="areaMatchDis()" (blur)="blurAreaMatch()"
+                                                    [formControl]="filenameLength" [tiValidation]="validation"
+                                                    (input)="inputAreaMatch()" (keyup)="keyupAreaMatch()"></textarea>
+                                                <div class="uploadButton enSelectUpload" (mouseenter)="showUploadCode()"
+                                                    (mouseleave)="hideUploadCode()">
+                                                    <!-- 上传压缩包 -->
+                                                    <button type=" button" style="margin-left: 8px;"
+                                                        class="little-minor-btn" [disabled]="isUploading"
+                                                        *ngIf="isUploadDirectory === 'compressed'"
+                                                        [ngClass]="{enSelectUpload: currLang === 'en'}"
+                                                        onkeyup="if(event.keyCode === 13 || event.keyCode === 32){ return false;}"
+                                                        onkeydown="if(event.keyCode === 13 || event.keyCode === 32){ return false;}"
+                                                        (click)="zipUploadCode()">{{i18n.plugins_common_button_upcode}}
+                                                    </button>
+                                                    <input type="file" id="ziploadCode" style="display: none;"
+                                                        (change)="uploadFileCode('normal')"
+                                                        accept=".zip,.tar,.tar.gz,.tar.bz,.tar.bz2,.tar.xz,.tgz,.tbz,.tbz2,.txz" />
+                                                    <!-- 上传文件夹 -->
+                                                    <button type="button" style="margin-left: 8px;"
+                                                        class="little-minor-btn" [disabled]="isUploading"
+                                                        *ngIf="isUploadDirectory === 'directory'"
+                                                        [ngClass]="{enSelectUpload: currLang === 'en'}"
+                                                        onkeyup="if(event.keyCode === 13 || event.keyCode === 32){ return false;}"
+                                                        onkeydown="if(event.keyCode === 13 || event.keyCode === 32){ return false;}"
+                                                        (click)="uploadFolder()">{{i18n.plugins_common_button_upcode}}
+                                                        <input type="file" id="filesUp" webkitdirectory
+                                                            style="display: none;" (change)="toZipCode('normal')" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- #右键迁移界面 -->
+                                <div *ngIf="filePath.length !== 0">
+                                    <span class="tipinfo">{{i18n.plugins_porting_tip_info}}</span>
+                                    <div class="mt-20  path_div_r" [ngClass]="{'intellij-color': intelliJFlagDef}">
+                                        <div class="path_div_r_title">{{inputItems.path.label}}:</div>
+                                        <div class="path_div_r_path" [tiTip]="filePath">{{ filePath }}</div>
+                                    </div>
+                                </div>
+                            </ti-item>
+
+                            <!-- 源码类型 -->
+                            <ti-item>
+                                <p class=" mt-10 "
+                                    [ngClass]="{'intellij-color': intelliJFlagDef}"><span class="ti3-icon  ti3-icon-staricon"></span>{{inputItems.fortran.label}}</p>
+                                <span *ngFor="let item of dataArray1; index as i" class="source-span mt-10 home_checkbox_item"
+                                    [tiTip]="i === 3 ? i18n.common_term_interpreted_language_tip : i18n.source_code_type_tip"
+                                    [ngClass]="{'intellij-color': intelliJFlagDef}">
+                                    <input type="checkbox" tiCheckitem [item]="item" [beCheckeds]="checkedArray1"
+                                        [label]="item.text" (click)="onEditChange()" />
+                                    <span *ngIf="i !== 3" style="padding-left: 40px;"></span>
+                                </span>
+                                <p class="port-tip" [ngStyle]="{'margin-bottom': currLang === 'zh-cn' ? '0' : '20px'}" *ngIf="showInfo">
+                                    <span>
+                                        {{i18n.common_term_porting_tip}}
+                                    </span>
+                                </p>
+                            </ti-item>
+                            <!-- 目标环境配置 -->
+                            <ti-item [required]="inputItems.linuxOS.required">
+                                <p class="mt-10 " [ngClass]="{'intellij-color': intelliJFlagDef}">
+                                    {{inputItems.linuxOS.label}}</p>
+                                <ti-select class=" toolti  mt-10" [searchable]="true" labelKey="label" id="linuxOSselect"
+                                    [options]="inputItems.linuxOS.options"
+                                    [(ngModel)]="inputItems.linuxOS.selected"
+                                    (ngModelChange)="osSelectChange($event)"
+                                    (beforeOpen)="onBeforeOpen($event)">
+                                    <ng-template #footer let-item>
+                                        <div class="btn-about-more">
+                                          <span (mousedown)="openAboutMask()">{{i18n.about_more.about_more_btn}}</span>
+                                        </div>
+                                      </ng-template>
+                                </ti-select>
+                            </ti-item>
+                            <ti-item>
+                                <p class="mt-10 " [ngClass]="{'intellij-color': intelliJFlagDef}">
+                                    {{ inputItems.kernelVersion.label }}</p>
+                                <input type="text" tiText [(ngModel)]="inputItems.kernelVersion.selected.label"
+                                    class="toolti  mt-10" disabled />
+                            </ti-item>
+                            <!-- 编译器版本 -->
+                            <ti-item [show]="interpretedShow">
+                                <p class=" mt-10" [ngClass]="{'intellij-color': intelliJFlagDef}">
+                                    {{inputItems.version.label}}
+                                </p>
+                                    <div *ngIf="editorSelect === 'two'"class="mt-10 versiondiv" [ngClass]="{ 'ti-item-en-right-content': currLang === 'en-us' }">
+                                        <ti-select [searchable]="true" labelKey="label" class="version-select common-size"
+                                          [options]="inputItems.version.options" id="verselect1" [(ngModel)]="inputItems.version.selected">
+                                        </ti-select>
+                                        <ti-select [searchable]="true" labelKey="label" class="version-select common-size"
+                                          [options]="inputItems.fortran.options" [(ngModel)]="inputItems.fortran.selected" id="verselect2">
+                                        </ti-select>
+                                      </div>
+                                      <div *ngIf="editorSelect === 'one'" class="mt-10">
+                                        <ti-select [options]="singleSys.options" [searchable]="true" labelKey="label" [(ngModel)]="singleSys.selected" class="common-size"
+                                          id="toolselect" [placeholder]="needCodeType" [disabled]="checkedArray1.length === 0">
+                                        </ti-select>
+                                      </div>
+                            </ti-item>
+
+                            <!-- 构建工具 -->
+                            <ti-item [show]="interpretedShow">
+                                <p class="mt-10 " [ngClass]="{'intellij-color': intelliJFlagDef}">
+                                    {{inputItems.tool.label}}</p>
+                                <ti-select class="mt-10 toolti " [options]="inputItems.tool.options"
+                                    [(ngModel)]="inputItems.tool.selected" id="toolselect"
+                                    (ngModelChange)="commandChange($event)">
+                                </ti-select>
+                            </ti-item>
+
+                            <!-- 编译命令 -->
+                            <ti-item [show]="interpretedShow">
+                                <p class="mt-10 "
+                                    [ngClass]="{'intellij-color': intelliJFlagDef}"><span class="ti3-icon  ti3-icon-staricon"></span>{{inputItems.command.label}}</p>
+                                <input class="command-input mt-10  toolti  " type=" text" tiText
+                                    [(ngModel)]="inputItems.command.value" [tiValidation]="validation"
+                                    [formControl]="commandControl" />
+                                <div class="command-faq">{{i18n.common_term_ipt_label.compile_command_faq}}
+                                    <a *ngIf="currLang === 'zh-cn'" (click)="openUrl(pluginUrlCfg.faqFiftyZn)">FAQ</a>
+                                    <a *ngIf="currLang === 'en' || currLang === 'en-us'" (click)="openUrl(pluginUrlCfg.faqFiftyEn)">FAQ</a>
+                                    {{i18n.common_term_ipt_label.compile_command_faq_symbol}}</div>
+                            </ti-item>
+                        </ti-formfield>
+                    </div>
+                    <div class="clear-float"></div>
+                    <div class="generate-btn">
+                        <button type="button"
+                            [ngClass]="{'intellij-primary-btn btn-move': intelliJFlagDef, 'operation': !intelliJFlagDef}"
+                            [disabled]="isCommit || dangerFlag || !inputItems.linuxOS.options.length"
+                            onkeyup="if(event.keyCode === 13 || event.keyCode === 32){ return false;}"
+                            onkeydown="if(event.keyCode === 13 || event.keyCode === 32){ return false;}"
+                            (click)="analyze()">{{ i18n.common_term_analysis_btn }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="showLoading" class="loading">
+        <app-loading [height]="'100%'" [size]="'max'"></app-loading>
+    </div>
+</div>
+
+
+<ng-template #myModal let-context="context">
+    <ti-modal-header> </ti-modal-header>
+    <ti-modal-body>
+        <div class="del-content">
+            <div class="title">
+                <img src="./assets/img/home/icon_warn.png" alt="" />
+                <p class="tip1">{{ i18n.common_term_history_report_del_tip }}</p>
+            </div>
+            <p class="tip2">{{ i18n.common_term_history_report_del_tip2 }}</p>
+        </div>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <div class="btn-box">
+            <button type="button" autofocus class="user-sure-btn" (click)="context.close()" tiButton>
+                {{ i18n.common_term_operate_ok }}
+            </button>
+            <button type="button" class="user-close-btn" (click)="context.dismiss()" tiButton>
+                {{ i18n.common_term_operate_cancel }}
+            </button>
+        </div>
+    </ti-modal-footer>
+</ng-template>
+
+
+<ng-template #allModal let-context="context">
+    <ti-modal-header> </ti-modal-header>
+    <ti-modal-body>
+        <div class="del-content">
+            <div class="title">
+                <img src="./assets/img/home/icon_warn.png" alt="" />
+                <p class="tip1">{{ i18n.common_term_all_history_tip }}</p>
+            </div>
+            <p class="tip2">{{ i18n.common_term_all_history_tip2 }}</p>
+        </div>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <div class="btn-box">
+            <button type="button" autofocus class="user-sure-btn" (click)="context.close()" tiButton>
+                {{ i18n.common_term_operate_ok }}
+            </button>
+            <button type="button" class="user-close-btn" (click)="context.dismiss()" tiButton>
+                {{ i18n.common_term_operate_cancel }}
+            </button>
+        </div>
+    </ti-modal-footer>
+</ng-template>
+
+<!-- 免责声明 -->
+<app-mask-disclaimer *ngIf="filePath.length"></app-mask-disclaimer>
+
+<!-- 上传重复文件 modal start -->
+<app-messagebox #exitmask>
+    <div class="content config-modal">
+        <p class="mask-title">
+            <span>{{i18n.plugins_porting_message_analysis_center.exit.title}}</span>
+            <span class="close-btn" (click)="closeMaskExit()">
+                <img class="tip-title-close" alt="" src="./assets/img/install/icon-close.svg" /></span>
+        </p>
+        <div class="mask-container">
+            <div class="des">
+                <img class="des-warn-icon noSpace" alt="" src="./assets/img/home/warn.png" />
+                <p>{{exitFileNameReplace}}</p>
+            </div>
+        </div>
+        <div class="btn-box">
+            <button type="button" tiButton color="primary" class="user-sure-btns primary-btn"
+                [ngClass]="{'user-little-btns ': !intelliJFlagDef, 'user-little-btn user-intellij-primary-btn': intelliJFlagDef}"
+                (click)="uploadAgain('override')">{{i18n.plugins_porting_message_analysis_center.exit.replace}}</button>
+            <button type="button" tiButton class="little-minor-btn"
+                [ngClass]="{'user-little-btns ': !intelliJFlagDef, 'user-little-btn user-intellij-little-btn': intelliJFlagDef}"
+                (click)="uploadAgain('save_as')">{{i18n.plugins_porting_message_analysis_center.exit.save_as}}</button>
+            <button type="button" tiButton class="little-minor-btn"
+                [ngClass]="{'user-little-btns ': !intelliJFlagDef, 'user-little-btn user-intellij-little-btn': intelliJFlagDef}"
+                (click)="closeMaskExit()">{{i18n.plugins_common_button_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-messagebox>
+<!-- 上传重复文件 modal end -->
+
+<!-- 另存为 modal start -->
+<app-messagebox #saveasmask>
+    <div class="content config-modal">
+        <p class="mask-title">
+            <span>{{i18n.plugins_porting_message_analysis_center.exit.save_as}}</span>
+            <span class="close-btn" (click)="closeMaskSaveAs()">
+                <img class="tip-title-close" alt="" src="./assets/img/install/icon-close.svg" /></span>
+        </p>
+        <div class="mask-container">
+            <div class="saveAs">
+                <span class="save-label"
+                    ><span class="ti3-icon ti3-icon-staricon" [ngClass]="{'save-as-star': intelliJFlagDef}"></span>{{i18n.plugins_porting_message_analysis_center.exit.file_name}}</span>
+                <div class="formArea">
+                    <ti-formfield>
+                        <ti-item [label]="confirmName.zip.label">
+                            <input class="command-input saveAs-input" type="text" tiText [(ngModel)]="exitFileName"
+                                [tiValidation]="validation" [formControl]="confirmUploadZip" [ngStyle]="{'width':intelliJFlagDef ? '380px':'400px'}"
+                                [errorMessageWrapper]="saveasErrorMsg"/>
+                            <div #saveasErrorMsg></div>
+                        </ti-item>
+                    </ti-formfield>
+                </div>
+            </div>
+        </div>
+        <div class="btn-box">
+            <button type="button" tiButton color="primary" class="user-sure-btns primary-btn"
+                (click)="saveAs('save_as')">{{i18n.plugins_common_button_term_operate_ok}}</button>
+            <button type="button" tiButton class="user-close-btns little-minor-btn"
+                (click)="closeMaskSaveAs()">{{i18n.plugins_common_button_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-messagebox>
+<!-- 另存为 modal end -->
+
+<!-- 了解更多 -->
+<app-messagebox #aboutmore class="modal-about-more">
+    <div class="content modal-box">
+        <p class="modal-title">
+            <span>{{i18n.about_more.title}}</span>
+            <span (click)="closeAboutMoreMask()" class="modal-close-icon">
+                <img src="./assets/img/install/icon-close.svg">
+                <img src="./assets/img/install/icon-close-hover.svg">
+            </span>
+        </p>
+        <div class="modal-container">
+            <app-about-more-system [intelliJFlagDef]='intelliJFlagDef'></app-about-more-system>
+        </div>
+        <div class="modal-footer">
+            <button type="button" tiButton class="little-minor-btn" [ngStyle]="{'float':intelliJFlagDef ? 'right':'none'}"
+             (click)="closeAboutMoreMask()">
+                {{i18n.common_term_operate_close}}
+            </button>
+        </div>
+    </div>
+</app-messagebox>

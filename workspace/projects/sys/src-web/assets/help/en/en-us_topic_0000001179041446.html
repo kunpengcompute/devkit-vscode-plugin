@@ -1,0 +1,48 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Upgrade Failure in Ubuntu">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001224201323.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (System Profiler)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001179041446">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Upgrade Failure in Ubuntu</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001179041446"></a><a name="EN-US_TOPIC_0000001179041446"></a>
+
+<h1 class="topictitle1">Upgrade Failure in Ubuntu</h1>
+<div id="body8662426"><div class="section" id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_en-us_topic_0220116450_section13779133512387"><h4 class="sectiontitle">Symptom</h4><p id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_en-us_topic_0220116450_p08780389510">Versions later than V2.2.T3 fail to be upgraded in the Ubuntu OS.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_en-us_topic_0220116450_section1439194518389"><h4 class="sectiontitle">Possible Causes</h4><p id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_p15774649163718">The upgrade script <strong id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_b1948584016194">Upgrade</strong> does not contain the <strong id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_b335094619194">HOME=/root</strong> environment variable.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_section692115811487"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_ol165771632165513"><li id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_li121545016368"><span>Run the following command to go to the directory where the new <span id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_ph1012135220203">Kunpeng Hyper Tuner</span> installation package is stored. (Replace <em id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_i13697182713213">/home</em> with the actual directory.)</span><p><p id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_en-us_topic_0228009037_en-us_topic_0190602890_p0522932153718"><strong id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_en-us_topic_0228009037_en-us_topic_0190602890_b882431173715">cd </strong><em id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_en-us_topic_0228009037_i72121243319">/home</em></p>
+</p></li><li id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_li4154160113613"><span>Decompress the installation package. In the command, <em id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_i19190637192219">x.x.x</em> indicates the version.</span><p><p id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_en-us_topic_0228009037_en-us_topic_0190815659_p2343155512147"><strong id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_en-us_topic_0228009037_b20808103919196">tar -zxvf Hyper-Tuner-</strong><em id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_en-us_topic_0228009037_i93621541191919">x.x.x</em><strong id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_en-us_topic_0228009037_b28081039181914">.tar.gz</strong></p>
+</p></li><li id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_li161546011362"><span>Go to the directory where the decompressed installation package is saved.</span><p><p id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_en-us_topic_0228009037_en-us_topic_0190815659_p13859816408"><strong id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_en-us_topic_0228009037_b124351311716">cd </strong><strong id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_en-us_topic_0228009037_b083833104819">Hyper_tuner</strong></p>
+</p></li><li id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_li11916152215215"><span>Decompress the software package again. In the command, <em id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_i156621550102211">x.x.x</em> indicates the version.</span><p><p id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_p9878121117534"><strong id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_b1787812113535">tar -zxvf Hyper-Tuner-</strong><em id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_i7878111110539">x.x.x</em><strong id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_b11878911165314">.tar.gz</strong></p>
+</p></li><li id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_li1330692505219"><span>Go to the directory where the decompressed installation package is stored.</span><p><p id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_p4961155165619"><strong id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_b696117519562">cd </strong><strong id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_b1664234516542">Hyper_tuner</strong></p>
+</p></li><li id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_li4219127105218"><span>Obtain the upgrade entry function in the new software package:</span><p><p id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_p1311116582"><strong id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_b1710551715588">cp –rf ./Upgrade /opt/hyper_tuner</strong></p>
+</p></li><li id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_li987742914526"><span>Go to the installation directory of the <span id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_ph6704121414234">Kunpeng Hyper Tuner</span> of the old version. (<span class="filepath" id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_filepath197611539105919"><b>/opt/hyper_tuner</b></span> is the installation directory of the old version. Replace it with the actual directory.)</span><p><p id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_p876133913591"><strong id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_b107611739175914">cd </strong><em id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_i1020491715522">/opt/hyper_tuner</em></p>
+</p></li><li id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_li1851615321529"><span>Run the following command to upgrade the tool. (Replace <strong id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_b1071717289234">/home</strong> with the actual directory.)</span><p><p id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_p36661535589"><strong id="EN-US_TOPIC_0000001179041446__en-us_topic_0000001116222486_en-us_topic_0314268483_b173014516014">./Upgrade upgrade /home/Hyper_tuner/Hyper-Tuner-x.x.x.tar.gz</strong></p>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001224201323.html">FAQ</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

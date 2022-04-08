@@ -1,0 +1,9 @@
+<div class="warpper">
+    <div class="crumb-item" *ngFor="let item of crumbList; index as i">
+        <span class="title" (click)="onBreadClick(i)">        
+            {{item.title}}
+        </span>
+        <span class="arrow">{{'>'}}</span>
+    </div>
+</div>
+

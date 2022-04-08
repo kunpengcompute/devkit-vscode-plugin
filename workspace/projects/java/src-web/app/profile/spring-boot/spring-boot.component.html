@@ -1,0 +1,384 @@
+<div class="overview-container" [appLoading]="isLoading">
+    <div class="container" *ngIf="isSpringBoot === 'true' && !contentTip">
+        <div class="springBoot-login" *ngIf="showLogin ==='true'">
+            <div class="login-form">
+                <p class="login-title1">
+                    {{i18n.protalserver_profiling_springBoot_login.login}}</p>
+                <span class="login-title2">{{i18n.protalserver_profiling_tab.springBoot}}</span>
+                <form [formGroup]='form' style=" margin-top: 2.18vw;">
+                    <div class='login-form-item'>
+                        <div class='login-form-item-label'>{{i18n.common_term_login_name}}</div>
+                        <input [placeholder]='i18n.protalserver_profiling_springBoot_login.springBootName' tiValidation
+                            formControlName='name' [errorMessageWrapper]='name' clearable
+                            [tiValidation]='nameValidation' name='loginname' tiText oncopy="return false"
+                            oncut="return false" />
+                        <span #name></span>
+                    </div>
+                    <div class='login-form-item'>
+                        <div class='login-form-item-label'>
+                            {{i18n.common_term_login_password}}{{i18n.protalserver_profiling_springBoot_login.savePpassword}}
+                        </div>
+                        <input [placeholder]='i18n.protalserver_profiling_springBoot_login.password' tiValidation
+                            formControlName='pwd' id='password' type="password" [tiValidation]='pwdValidation'
+                            [errorMessageWrapper]='pwd' autocomplete="new-password" name='loginpwd' id='loginpwd'
+                            (keyup.enter)="login()" tiText oncopy="return false" oncut="return false"
+                            (keydown)="disableCtrlZ($event)" />
+                        <span #pwd></span>
+                    </div>
+                    <span (click)='login()' class="login-btn">{{i18n.common_term_login_btn}}</span>
+                </form>
+            </div>
+        </div>
+        <div class="dataDteail" *ngIf="showLogin === 'false'">
+            <div class="button-container">
+                <div class="start-button">
+                    <button type="button" tiButton class="springBoot-btn" color="primary" (click)="startSpringBoot()"
+                        [disabled]="startBtnDisabled" *ngIf="!isStart">
+                        {{ i18n.protalserver_profiling_springBoot.start_analysis }}
+                    </button>
+                    <button type="button" tiButton color="primary" class="springBoot-btn" (click)="stopSpringBoot()"
+                        *ngIf="isStart">
+                        {{ i18n.protalserver_profiling_springBoot.stop_analysis }}
+                    </button>
+                    <img [tiTip]="springBootBtnTip" tiTipPosition="right" class="help-img"
+                        src="./assets/img/newSvg/hollowTip.svg" />
+                </div>
+                <div class="http-threshold">
+                    <span>{{ threshold.label }}</span>
+
+                    <ti-formfield class="formList" [formGroup]="springbootGroup">
+                        <ti-item>
+                            <ti-spinner class="http-spinner" name="spinner" [format]="threshold.format" tiValidation
+                                tiRequired [disabled]="isStart || isDownload || startBtnDisabled"
+                                [tiRangeValue]="threshold.rangeValue" (blur)="verifySpinnerValue(springbootBlur)"
+                                formControlName="springboot_threshold">
+                            </ti-spinner>
+                        </ti-item>
+                    </ti-formfield>
+                    <img [tiTip]="i18n.protalserver_profiling_springBoot.thresholdTip" class="help-img"
+                        tiTipPosition="right" src="./assets/img/newSvg/hollowTip.svg" />
+                </div>
+            </div>
+            <div class="springBoot-tab" *ngIf="health.eventName_ || tabsShow">
+                <span class="data-tabs" *ngFor="let tab of springBootTabs; let idx = index" (click)="activeChange(tab)">
+                    <span class="item-tab" *ngIf="tab.checked || !isDownload">
+                        <span class="tab-title" [ngClass]="{ 'tab-active': tabActive === tab.link }">
+                            {{ tab.tabName }}
+                        </span>
+                    </span>
+                </span>
+            </div>
+            <div class="health" *ngIf="tabActive === 'health'">
+                <div class="loadData" *ngIf="!health.eventName_">
+                    <div *ngIf="!isStart">
+                        <img class='newNoData' src="./assets/img/projects/noData.svg" />
+                    </div>
+                    <div class="analyz-svg" *ngIf="isStart">
+                        <img class="browser-img" src="./assets/img/profiling/browserPreview.gif">
+                    </div>
+                    <p>
+                        {{ isStart ? i18n.profileNoData.springBoot2 : i18n.profileNoData.springBoot }}
+                    </p>
+                </div>
+                <div class="healthList" *ngIf="health.eventName_">
+                    <div class="instance">
+                        <div class="title">{{i18n.protalserver_profiling_springBoot.instance}}</div>
+                        <div class="status">
+                            <span [ngStyle]="{'background': health.status_ === 'UP'?'#7adfa0':'#d4d9e6'}"></span>
+                            {{health.status_}}
+                        </div>
+                    </div>
+                    <ul>
+                        <li class="list-item" *ngIf="health.diskSpace_.length > 0">
+                            <div class="itemDate">
+                                <div class="title">{{i18n.protalserver_profiling_springBoot.disk}}</div>
+                                <div class="status">
+                                    <span
+                                        [ngStyle]="{'background': health.diskSpace_[0].status_ === 'UP'?'#7adfa0':'#d4d9e6'}"></span>
+                                    {{health.diskSpace_[0].status_}}
+                                </div>
+                            </div>
+                            <ul class="item-details">
+                                <li class="database">
+                                    <span class="key">{{i18n.protalserver_profiling_springBoot.diskTotal}}</span>
+                                    <span class="value">{{bytesToSize(health.diskSpace_[0].total_)}}</span>
+                                </li>
+                                <li class="database">
+                                    <span class="key">{{i18n.protalserver_profiling_springBoot.diskFree}}</span>
+                                    <span class="value">{{bytesToSize(health.diskSpace_[0].free_)}}</span>
+                                </li>
+                                <li class="database">
+                                    <span class="key">{{i18n.protalserver_profiling_springBoot.diskThreshold}}</span>
+                                    <span class="value">{{bytesToSize(health.diskSpace_[0].threshold_)}}</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="list-item" *ngFor="let item of health.dataBase_">
+                            <div class="itemDate">
+                                <div class="title" style="margin-right:40px">{{item.name_}}</div>
+                                <div class="status">
+                                    <span [ngStyle]="{'background': item.status_ === 'UP'?'#7adfa0':'#d4d9e6'}"></span>
+                                    {{item.status_}}
+                                </div>
+                            </div>
+                            <ul class="item-details">
+                                <li class="database" *ngIf="item.version_ !== ''">
+                                    <span class="key">{{i18n.protalserver_profiling_springBoot.version}}</span>
+                                    <span *ngIf="item.version_ !== ''" class="value">{{item.version_}}</span>
+                                    <img style="width: 16px;height: 16px;margin-bottom: 10px;"
+                                        *ngIf="item.version_ === ''"
+                                        [tiTip]="i18n.protalserver_profiling_springBoot.versionTip"
+                                        tiTipPosition="right" src="./assets/img/newSvg/hollowTip.svg" alt="">
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="beans" *ngIf="tabActive === 'beans'" [appLoading]="isBeansLoading">
+                <div class="loadData" *ngIf="beans.length === 0">
+                    <div *ngIf="!isStart">
+                        <img class='newNoData' src="./assets/img/projects/noData.svg" />
+                    </div>
+                    <div class="analyz-svg" *ngIf="isStart">
+                        <div [id]="analyzID"></div>
+                    </div>
+                    <p>
+                        {{ isStart ? i18n.profileNoData.springBoot2 : i18n.profileNoData.springBoot }}
+                    </p>
+                </div>
+                <div class="beansList" *ngIf="beans.length > 0">
+                    <ul>
+                        <li class="beans-item" *ngFor="let item of beans;let idx = index">
+                            <div class="beansData" (click)="selectBeans(item,idx)">
+                                <img [ngStyle]="{'opacity':item.dependencies[0] !== '' || item.resource !== '' && item.resource !== 'null'?'1':'0' }"
+                                    class="expend" [ngClass]="{'active':item.select}"
+                                    src="./assets/img/projects/expand-down.png" alt="">
+                                <span class="beanName" [tiTip]='item.nameTip' tiOverflow>{{item.beanName}}</span>
+                                <span class="type" [tiTip]='item.typeTip' tiOverflow>{{item.type}}</span>
+                                <span class="scope">{{item.scope}}</span>
+                            </div>
+                            <div class="beansContent" *ngIf="item.select">
+                                <div class="resource" *ngIf="item.resource !== '' && item.resource !== 'null'">
+                                    <span>{{i18n.protalserver_profiling_springBoot.resource}}</span>
+                                    <p>{{item.resource}}</p>
+                                </div>
+                                <div class="dependencies" *ngIf="item.dependencies[0] !== ''">
+                                    <span>{{i18n.protalserver_profiling_springBoot.dependence}}</span>
+                                    <ul>
+                                        <li *ngFor="let depItem of item.dependencies" style='margin-bottom:20px'>
+                                            {{depItem}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="metrics" *ngIf="tabActive === 'metrics'">
+                <div class="loadData" *ngIf="metrics.length === 0">
+                    <div *ngIf="!isStart">
+                        <img class='newNoData' src="./assets/img/projects/noData.svg" />
+                    </div>
+                    <div class="analyz-svg" *ngIf="isStart">
+                        <div [id]="analyzID"></div>
+                    </div>
+                    <p>
+                        {{ isStart ? i18n.profileNoData.springBoot2 : i18n.profileNoData.springBoot }}
+                    </p>
+                </div>
+                <div class="echartsList" *ngIf="metrics.length > 0">
+                    <div class="myecharts" id="myChart1" echarts [options]="metricsOpt1"
+                        [merge]="allMetricsOpt.echarts1" style="height: 214px;" *ngIf="echarts1.show"></div>
+                    <div class="myecharts" id="myChart2" echarts [options]="metricsOpt2"
+                        [merge]="allMetricsOpt.echarts2" style="height: 214px;" *ngIf="echarts2.show"></div>
+                    <div class="myecharts" id="myChart3" echarts [options]="metricsOpt3"
+                        [merge]="allMetricsOpt.echarts3" style="height: 214px;" *ngIf="echarts3.show"></div>
+                    <div class="myecharts" id="myChart4" echarts [options]="metricsOpt4"
+                        [merge]="allMetricsOpt.echarts4" style="height: 214px;" *ngIf="echarts4.show"></div>
+                    <div class="myecharts" id="myChart5" echarts [options]="metricsOpt5"
+                        [merge]="allMetricsOpt.echarts5" style="height: 214px;" *ngIf="echarts5.show"></div>
+                </div>
+            </div>
+            <div class="http-traces" *ngIf="tabActive === 'http_traces'">
+                <div *ngIf="traceFailReason === ''" style="height: 100%;">
+                    <div class="loadData" *ngIf="allHttpTraces.length === 0">
+                        <div *ngIf="!isStart">
+                            <img class='newNoData' src="./assets/img/projects/noData.svg" />
+                        </div>
+                        <div class="analyz-svg" *ngIf="isStart">
+                            <div [id]="analyzID"></div>
+                        </div>
+                        <p>
+                            {{ isStart ? i18n.profileNoData.springBoot2 : i18n.profileNoData.springBoot }}
+                        </p>
+                    </div>
+                    <div *ngIf="allHttpTraces.length > 0">
+                        <div class="filterInput">
+                            <input type="text" [(ngModel)]="pathValueModel"
+                                [placeholder]="i18n.protalserver_profiling_springBoot.pathFilte">
+                            <span class="count">{{ httpTracesLength | separator }}/{{ pathFilterLength | separator
+                                }}</span>
+                            <button type="button" style="margin-left: 16px;" tiButton
+                                (click)="filterPath(pathValueModel)">{{i18n.protalserver_profiling_springBoot.filter}}</button>
+                        </div>
+                        <div style="width: 100%;margin-top: 20px;">
+                            <app-time-line [timeData]='timeData' (timeLineData)='timeLineData($event)' #TimeLine>
+                            </app-time-line>
+                        </div>
+                        <div class="echarts">
+                            <div id='httpEcharts' echarts [options]='httpOption' [merge]='httpUpdateOption'
+                                (chartInit)="onChartInit($event)" (chartDataZoom)="handleDatazoom($event)"
+                                style="height: 200px;width: 100%;"></div>
+                        </div>
+                        <div class="tracesTable">
+                            <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="column"
+                                [searchWords]="searchWords" [searchKeys]="searchKeys">
+                                <div class="ti3-table-fixed-head">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th style="padding-left: 12px;" tiOverflow
+                                                    width="{{ column[0].width }}">
+                                                    <ti-cell-text>{{ column[0].title}}</ti-cell-text>
+                                                    <ti-head-filter [ngClass]="{'ti3-head-filtered': sureFilter}">
+                                                    </ti-head-filter>
+                                                    <div class="timeFilter" (click)="timestampFilter()"
+                                                        style="position: absolute;top:0;left: 16%;">
+                                                    </div>
+                                                </th>
+                                                <th style="padding-left: 12px;" tiOverflow
+                                                    width="{{ column[1].width }}">
+                                                    <ti-cell-text>{{ column[1].title}}</ti-cell-text>
+                                                </th>
+                                                <th style="padding-left: 12px;" tiOverflow
+                                                    width="{{ column[2].width }}">
+                                                    <ti-cell-text>{{ column[2].title}}</ti-cell-text>
+                                                    <ti-head-filter [options]="column[2].options"
+                                                        [(ngModel)]="column[2].selected"
+                                                        (select)="onSelect($event, column[2])"
+                                                        [ngClass]="{'ti3-head-filtered': column[2].selected && column[2].selected.label !== 'ALL'}">
+                                                    </ti-head-filter>
+                                                </th>
+                                                <th style="padding-left: 12px;" tiOverflow
+                                                    width="{{ column[3].width }}">
+                                                    <ti-cell-text>{{ column[3].title}}</ti-cell-text>
+                                                </th>
+                                                <th style="padding-left: 12px;" tiOverflow
+                                                    width="{{ column[4].width }}">
+                                                    <ti-cell-text>{{ column[4].title}}</ti-cell-text>
+                                                    <ti-head-filter [ngClass]="{'ti3-head-filtered': haveFilter}">
+                                                    </ti-head-filter>
+                                                    <div class="timeFilter" (click)="statusFilter()"
+                                                        style="position: absolute;top:0;left: 30%;">
+                                                    </div>
+                                                </th>
+                                                <th style="padding-left: 12px;" tiOverflow
+                                                    width="{{ column[5].width }}">
+                                                    <ti-cell-text>{{ column[5].title}}</ti-cell-text>
+                                                    <ti-head-filter [options]="column[5].options"
+                                                        [(ngModel)]="column[5].selected"
+                                                        (select)="onSelect($event, column[5])"
+                                                        [ngClass]="{'ti3-head-filtered': column[5].selected && column[5].selected.label !== 'ALL'}">
+                                                    </ti-head-filter>
+                                                </th>
+                                                <th style="padding-left: 12px;" tiOverflow
+                                                    width="{{ column[6].width }}">
+                                                    <ti-cell-text>{{ column[6].title}}</ti-cell-text>
+                                                    <ti-head-sort [sortKey]="column[6].sortKey"></ti-head-sort>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="ti3-table-container">
+                                    <table>
+                                        <thead>
+                                            <tr [ngStyle]="{'opacity': 0}">
+                                                <th [ngStyle]="{ 'padding-left': idx === 0 ? '12px' : 0 }" tiOverflow
+                                                    *ngFor="let columnitem of column; let idx = index"
+                                                    width="{{ columnitem.width }}">
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let row of displayed">
+                                                <td tiOverflow style="padding-left: 12px;">{{row.newTime || '--'}}</td>
+                                                <td tiOverflow style="padding-left: 12px;">{{row.session_ || '--'}}</td>
+                                                <td tiOverflow style="padding-left: 12px;">{{row.method_ || '--'}}</td>
+                                                <td tiOverflow style="padding-left: 12px;">{{row.uri_ || '--'}}</td>
+                                                <td tiOverflow style="padding-left: 12px;">{{row.status_ || '--'}}</td>
+                                                <td tiOverflow style="padding-left: 12px;">{{row.contentType_ || '--'}}
+                                                </td>
+                                                <td tiOverflow style="padding-left: 12px;">
+                                                    {{row.timeTaken_ | separator}}</td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngIf="displayed.length === 0">
+                                            <tr class="ti3-table-nodata">
+                                                <td tiColspan>{{ noDadaInfo }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <ti-pagination style="margin-left: 10px;position: absolute;bottom: 0;left: 0;"
+                                    [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber">
+                                </ti-pagination>
+                            </ti-table>
+                            <div class="selectTime" [ngClass]="{'active': filterShow}">
+                                <div class="title">
+                                    {{i18n.protalserver_profiling_springBoot.filterTime}}
+                                    <img [tiTip]="i18n.protalserver_profiling_springBoot.filterTip" tiTipPosition="top"
+                                        style="margin-left: 8px;" src="./assets/img/newSvg/hollowTip.svg" alt="">
+                                </div>
+                                <div>
+                                    <p>{{i18n.protalserver_profiling_springBoot.from}}</p>
+                                    <div style="margin-top: 5px;">
+                                        <input disabled class="dataInput" type="text" [(ngModel)]="todayTime">
+                                        <ti-time [(ngModel)]="stimeValue" [format]="format">
+                                        </ti-time>
+                                    </div>
+                                    <p>{{i18n.protalserver_profiling_springBoot.to}}</p>
+                                    <div style="margin-top: 5px;">
+                                        <input disabled class="dataInput" type="text" [(ngModel)]="todayTime">
+                                        <ti-time [(ngModel)]="etimeValue" [min]="min" [format]="format">
+                                        </ti-time>
+                                    </div>
+                                </div>
+                                <div class="time-btn">
+                                    <button type="button" color="primary" style="margin-top: 15px;" tiButton
+                                        (click)="fliterTime()">{{ i18n.common_term_operate_ok }}</button>
+                                    <button type="button" style="margin-top: 15px;" tiButton
+                                        (click)="cancleFliterTime()">{{ i18n.common_term_operate_cancel }}</button>
+                                </div>
+                            </div>
+                            <div class="statusFilter" [ngClass]="{'active': statusShow}">
+                                <span><input type="checkbox" id="allCheck1" tiCheckgroup [items]='dataArray1'
+                                        [(checkeds)]="checkedArray1" [label]="i18n.common_term_user_all"></span>
+                                <span *ngFor="let item of dataArray1">
+                                    <input type="checkbox" tiCheckitem [item]="item" [label]="item.text">
+                                    <span style="padding-left: 10px;"></span>
+                                </span>
+                                <button type="button" color="primary" style="margin: 15px 40px;" tiButton
+                                    (click)="fliterStatus()">{{ i18n.common_term_operate_ok }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="traceFailReason !== ''" style="height: 100%;">
+                    <div class="loadData">
+                        <img class='newNoData' src="./assets/img/projects/noData.svg" />
+                        <p> {{traceFailReason}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" *ngIf="isSpringBoot === 'false' || contentTip">
+        <div class="loadData" *ngIf="!isLoading">
+            <img class='newNoData' src="./assets/img/projects/noData.svg" />
+            <p> {{ contentTip === ''? i18n.profileNoData.springBoot : contentTip}}</p>
+        </div>
+    </div>
+</div>

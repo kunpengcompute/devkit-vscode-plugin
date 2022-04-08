@@ -1,0 +1,143 @@
+::ng-deep .vscode-dark{
+    --flag-tooltip-bg:#313131;
+}
+::ng-deep .vscode-light{
+    --flag-tooltip-bg:#ffffff;
+}
+.timing-container {
+    .color {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .timing {
+        height: 100%;
+        width: 100%;
+
+        .timing_timeaxis {
+            background-color: #fff;
+            height: 41px;
+            display: flex;
+
+            .timing_timeaxis_col_1 {
+                width: 90px;
+                flex-shrink: 0;
+                display: flex;
+                align-items: center;
+            }
+
+            .timing_timeaxis_col_2 {
+                width: 100%;
+            }
+        }
+
+        .timing_table {
+            max-height: 474px;
+            overflow: auto;
+            .timing_table_item {
+                height: 56px;
+                display: flex;
+                .item-name {
+                    width: 90px;
+                    flex-shrink: 0;
+                    display: flex;
+                    align-items: center;
+                }
+
+                .item-chart {
+                    height: fit-content;
+                    width: fit-content;
+                    flex: 1;
+                }
+
+                & + .timing_table_item {
+                    margin-top: 6px;
+                }
+            }
+        }
+        .separator {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .timing-single,
+        .timing-axis {
+            display: flex;
+            .black {
+                width: 90px;
+                flex-shrink: 0;
+            }
+            .single-chart {
+                height: fit-content;
+                width: fit-content;
+                flex: 1;
+                .opreation {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        .timing-single {
+            margin-top: 15px;
+        }
+        .timing-axis {
+            position: relative;
+            top: 6px;
+        }
+    }
+}
+
+.flagpole {
+    position: absolute;
+    top: 26px;
+    opacity: 0;
+    border-left: 1px solid #6c7280;
+    height: calc(100% - 56px);
+    display: inline-block;
+    pointer-events: none;
+}
+
+.flag-tooltip {
+    margin: 0px !important;
+    opacity: 0;
+    position: absolute;
+    display: inline-block;
+    padding: 13px;
+    height: auto;
+    font-family: FZLTHJW--GB1-0;
+    font-size: 14px;
+    background-color: var(--flag-tooltip-bg);
+    line-height: 20px;
+    border-radius: 2px;
+    margin-left: 12px;
+    pointer-events: none;
+    cursor: default;
+    box-shadow: 0px 3px 6px -4px rgba(65, 44, 44, 0.48), 0px 6px 16px 0 rgba(0, 0, 0, 0.32),
+        0px 9px 28px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+
+    @for $i from 0 through 100 {
+        $offset: '[offset="#{$i}"]';
+
+        &[placement="left"]#{$offset} {
+            transform: translate(calc(-100% - 20px), $i * -1%);
+        }
+
+        &[placement="right"]#{$offset} {
+            transform: translate(20px, $i * -1%);
+        }
+    }
+}
+.aaa {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: 3px 8px 0 0;
+}
+.tip-items-color {
+    position: relative;
+    top: 6px;
+    left: -2px;
+}

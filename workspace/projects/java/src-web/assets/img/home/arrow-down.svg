@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="6px" viewBox="0 0 10 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-Pagination-right</title>
+    <defs>
+        <path d="M10.1819805,8 L6.46966991,4.2876894 C6.1767767,3.99479618 6.1767767,3.51992245 6.46966991,3.22702923 C6.76256313,2.93413601 7.23743687,2.93413601 7.53033009,3.22702923 L11.7729708,7.46966991 C12.065864,7.76256313 12.065864,8.23743687 11.7729708,8.53033009 L7.53033009,12.7729708 C7.23743687,13.065864 6.76256313,13.065864 6.46966991,12.7729708 C6.1767767,12.4800776 6.1767767,12.0052038 6.46966991,11.7123106 L10.1819805,8 Z" id="path-1"></path>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="-修改任务" transform="translate(-955.000000, -75.000000)">
+            <g id="icon-Pagination-right" transform="translate(960.000000, 77.000000) scale(1, -1) rotate(-90.000000) translate(-960.000000, -77.000000) translate(952.000000, 69.000000)">
+                <g>
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="路径" fill="#6C7280" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <rect id="换色" fill="#6C7280" mask="url(#mask-2)" x="0" y="0" width="16" height="16"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

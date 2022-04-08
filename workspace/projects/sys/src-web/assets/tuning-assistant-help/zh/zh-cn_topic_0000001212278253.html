@@ -1,0 +1,340 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="查看日志">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001129346244.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="鲲鹏性能分析工具 (调优助手) 联机帮助">
+<meta name="DC.Publisher" content="20211029">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001212278253">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>查看日志</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001212278253"></a><a name="ZH-CN_TOPIC_0000001212278253"></a>
+
+<h1 class="topictitle1">查看日志</h1>
+<div id="body8662426"><ol id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_ol1644316557418"><li id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_li12443155544119"><span>使用SSH远程登录工具，进入Linux操作系统命令行界面。</span></li><li id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_li156192834813"><span>执行如下命令进入日志文件所在目录，日志名及日志存放路径如<a href="#ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_table05014012171">表1</a>所示。</span><p><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p12111531154818"><strong id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_b10306183819265">cd </strong><em id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_i27115266448">日志存放路径</em></p>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_table05014012171"></a><a name="zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_table05014012171"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_table05014012171" frame="border" border="1" rules="all"><caption><b>表1 </b>日志文件说明</caption><colgroup><col style="width:15%"><col style="width:25%"><col style="width:25%"><col style="width:35%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row951601178"><th align="left" class="cellrowborder" valign="top" width="15%" id="mcps1.3.1.2.2.2.2.5.1.1"><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p851200174">日志类型</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="25%" id="mcps1.3.1.2.2.2.2.5.1.2"><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p351200111714">日志名称</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="25%" id="mcps1.3.1.2.2.2.2.5.1.3"><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p35170191716">存储路径</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="35%" id="mcps1.3.1.2.2.2.2.5.1.4"><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p55120141718">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row987714231916"><td class="cellrowborder" valign="top" width="15%" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p15878172141914">安装日志</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p5878122101910">install.log</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="mcps1.3.1.2.2.2.2.5.1.3 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p11988135014249">执行安装命令的目录（即解压工具安装包得到的目录），例如：/home/Hyper_tuner</p>
+</td>
+<td class="cellrowborder" valign="top" width="35%" headers="mcps1.3.1.2.2.2.2.5.1.4 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p2879722191">记录各个组件在安装过程中的安装情况。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row1824735583712"><td class="cellrowborder" rowspan="54" valign="top" width="15%" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p1826415272414">运行日志</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p824815555379">collection.log</p>
+</td>
+<td class="cellrowborder" valign="top" width="25%" headers="mcps1.3.1.2.2.2.2.5.1.3 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p202481655123720">/工具安装目录/hyper_tuner/sys-perf/logs/</p>
+</td>
+<td class="cellrowborder" valign="top" width="35%" headers="mcps1.3.1.2.2.2.2.5.1.4 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p6248255123715">记录分析任务运行日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row195118013175"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p147771315194615">gunicorn_access.log</p>
+</td>
+<td class="cellrowborder" rowspan="3" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><ul id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_ul17295185523212"><li id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_li1829510557324">/工具安装目录/hyper_tuner/sys-perf/logs</li><li id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_li192954557329">/工具安装目录/hyper_tuner/user_management/logs</li></ul>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.3 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p285842714467">记录访问gunicorn的IP与端口的信息。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row1051404172"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p3777415154612">gunicorn_error.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p985920277466">记录gunicorn的进程号以及运行出错的信息。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row2511602177"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p11777131513462">gunicorn.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p1085952774618">记录gunicorn的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row25240111717"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p1025334413461">c_analysis.log</p>
+</td>
+<td class="cellrowborder" rowspan="41" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p211955610434">/工具安装目录/hyper_tuner/sys-perf/logs/backend</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.3 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p97162553468">记录热点函数任务分析API的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row122191710102719"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p19220141012273">certificate_manager.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p52202104273">记录读取机机接口证书的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row078935134015"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p478235184012">certificate_manager_update_certificate.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p87873534011">记录替换证书的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row627215971314"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p1273189141313">check_mem_access_task_param.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p1127310971315">记录校验访存分析入参是否正确的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row133581366132"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p33582036111311">check_system_lock_task_param.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p1535813367138">记录校验锁与等待入参是否正确的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row3725201417295"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p82531744104616">check_task_param.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p1772175584619">记录检查任务参数的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row1152603179"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p11253104417462">common_analysis.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p19722145514464">记录公共分析的日志，包括获取热点函数、函数调用栈等。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row10698155616137"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p156981856111314">config.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p7698185619139">记录系统配置的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row6764152211509"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p32541944184610">data_sampling_control.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p1872575518465">记录检查磁盘空间、检查日志、任务启动停止等日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row7131518184120"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p15254124414618">data_sampling.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p167251559462">记录采集过程中的信息。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row86687248436"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p46691724194314">falsesharing_query.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p106699247433">记录伪共享分析查询和分析入参是否正确的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row1366962444311"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p36691924134313">falsesharing_task.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p1825371011318">记录校验伪共享分析入参是否正确的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row46691024154313"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p13669424194316">install_agent.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p1966942404316">记录安装节点的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row04471944164513"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p72541644194613">java_analysis.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p1272515513468">记录Java任务分析API的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row69814149450"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p16981114144519">mem_access_analysis_control.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p20981314124513">记录Miss事件分析任务执行过程中的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row556314285140"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p10387135111413">memaccessanalysis.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p188801757161414">记录访存分析django日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row17382124112454"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p18382104114455">microarchitecture.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p153821841194520">记录微架构分析采集日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row193820412458"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p5382194118452">microarchitecture_query.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p18382114194513">记录微架构分析查询日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row10382241114516"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p5382124112456">models.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p11382164115455">记录创建任务相关的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row0382154134517"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p11382104118454">node_manager.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p16382104154518">记录节点管理模块的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row47415216463"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p102545444469">operationlog_manager.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p1172555554618">记录用户的操作日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row1857061211107"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p82541544164611">permission.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p772665564615">记录用户管理权限的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row394142164715"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p39462184718">polling_task.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p109412214710">记录预约任务执行过程中的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row6114172294819"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p16255244144618">process_thread_check_task_param.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p0726115515464">记录进程/线程级分析任务创建参数检查的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row6167181917458"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p16255744134612">process_thread.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p5726115510461">记录查询进程/线程级采集结果的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row146141448145115"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p32551344184615">project_manager.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p107261255174618">记录工程管理的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row1685446163"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p966713499163">recover_system.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p217711461716">记录系统配置与修复的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row1881644141615"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p766744941614">requests.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p817714461718">记录URL请求日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row950177125217"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p12255134444613">resource_analysis.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p7726145574611">记录资源调度模块分析模块的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row16237192781714"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p19237122731713">restart.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p7238427171711">重启日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row714814910470"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p19148154912470">runlog_manager.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p1148349104715">记录运行日志级别的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row10148449184716"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p17148949114714">running_task.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p11148849154719">记录任务执行相关的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row85544158489"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p11554201514481">schedule_task.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p1255521534817">记录预约任务管理模块的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row7170161934914"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p51710193496">system_config_control.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p1217121944920">记录全景分析任务执行过程中的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row118407845319"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p5255104412466">systemconfigmessage.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p772755574617">记录全景分析django层调度的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row03243596174"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p1546446171819">systemlock_query.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p15513101651816">记录锁与等待查询日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row9839162435314"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p42551244124618">systemperformance.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p13727105517460">记录系统性能全景分析django层调度的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row1576195323611"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p02551447469">task_manager.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p572710552468">记录任务管理日志，包括任务删除、任务编辑等日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row18490115443616"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p125513445469">taskqueue.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p672716556467">记录任务队列运行日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row78051355183614"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p17255174418467">user_manager.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p19727145519468">记录用户登录管理的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row1256362013506"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p0563112010508">work_key_manager.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p2563112065011">记录机机工作密钥更新过程的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row2053193995318"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p945602174819">certificate_manager.log</p>
+</td>
+<td class="cellrowborder" rowspan="9" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p677132642818">/工具安装目录/hyper_tuner/user_management/logs/backend</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.3 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p15456152111487">记录读取人机接口证书的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row257914045013"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p2057954095013">config.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p1579240205015">记录<span class="wintitle" id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_wintitle1929754510396">“系统配置”</span>的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row53195581917"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p19128191207">operationlog_manager.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p64115510196">记录用户的操作日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row9412557191"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p61284912016">permission.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p15417554195">记录用户管理权限的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row7485518197"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p4128293207">requests.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p1040555196">记录URL请求日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row154669556506"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p7466165585019">runlog_manager.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p15466555195017">记录用户管理运行日志级别的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_row14475516191"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p11289922010">user_manager.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p1651455161915">记录用户登录管理的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row17823416512"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p147821344514">weakpassword_manager.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p16782184185111">记录弱口令字典管理的日志。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_row57827411513"><td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p17782134145111">work_key_manager.log</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.1.2.2.2.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_p197821441513">记录人机工作密钥更新过程的日志。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_li166103271487"><span>执行如下命令查看日志记录。</span><p><p id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_p48741523184213"><strong id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_b7574330174210">vi</strong><strong id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_b13236183654220"> </strong><em id="ZH-CN_TOPIC_0000001212278253__zh-cn_topic_0000001163428915_zh-cn_topic_0228009071_zh-cn_topic_0213059761_i52891241101619">日志名称</em></p>
+</p></li></ol>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001129346244.html">常用操作</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

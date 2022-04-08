@@ -1,0 +1,47 @@
+.process-perf-data-detail-container {
+    width: 100%;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+
+    .basic-info-box {
+        margin-top: 24px;
+        padding: 0 24px;
+        background-color: var(--ti-table-th-bg-color);
+        height: 24px;
+        line-height: 24px;
+        font-size: 12px;
+
+        .info-key {
+            color: var(--common-color-font-secondary);
+            &:not(:first-child) {
+                margin-left: 32px;
+            }
+        }
+
+        .info-value {
+            color: var(--common-color-font-primary);
+            margin-left: 8px;
+        }
+
+    }
+
+    .table-box {
+        margin-top: 20px;   
+        .app-process-box + .all-process-box {
+            margin-top: 32px;
+        }
+        .table-title {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: var(--common-color-font-primary);
+        }
+        .app-table {
+            width: 100%;
+        }
+
+        .all-table {
+            width: 100%;
+        }   
+    }
+    
+}

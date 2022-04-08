@@ -1,0 +1,48 @@
+<div id="detail-container" class="custemDetailContainer">
+  <ti-tabs class="custemTabs tabsWithSplitLine tabsWithUnderline">
+    <ti-tab [(active)]="item.active" *ngFor="let item of detailList; let index = index" [disabled]="item.disable" (activeChange)='change()'>
+      <ti-tab-header>
+        <span>{{item.title}}</span>
+      </ti-tab-header>
+  
+      <!--懒加载的内容区必须使用ng-template标签包裹，并且加上#tiTabContent的标识-->
+      <ng-template #tiTabContent>
+        <!-- 配置信息【为了不重复获取配置信息，子组件会返回配置信息上来，改成懒加载请注意！！！】 -->
+        <div class="content-container" *ngIf="item.prop === 'configuration' && item.disable==false">
+          <app-configuration
+            [status]='status'
+            [nodeid]='nodeid'
+            [projectName]='projectName'
+            [taskName]='taskName'
+            [analysisType]='analysisType'
+            [taskid]='taskid'
+          ></app-configuration>
+        </div>
+  
+        <!-- 采集日志 -->
+        <div class="content-container" *ngIf="item.prop === 'log' && item.disable==false">
+          <app-configuration-log
+            [status]='status'
+            [nodeid]='nodeid'
+            [projectName]='projectName'
+            [taskName]='taskName'
+            [analysisType]='analysisType'
+            [taskid]='taskid'
+          ></app-configuration-log>
+        </div>
+  
+        <!-- 总览 -->
+        <div class="content-container" *ngIf="item.prop === 'summary' && item.disable==false">
+          <app-f-s-summary
+            [nodeid]='nodeid'
+            [isActive]="item.active"
+            [projectName]='projectName'
+            [taskName]='taskName'
+            [analysisType]='analysisType'
+            [taskid]='taskid'
+          ></app-f-s-summary>
+        </div>
+      </ng-template>
+    </ti-tab>
+  </ti-tabs>
+</div>

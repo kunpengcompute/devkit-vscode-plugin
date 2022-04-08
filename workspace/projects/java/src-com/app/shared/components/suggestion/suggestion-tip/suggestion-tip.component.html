@@ -1,0 +1,33 @@
+<!-- 当前页面内的优化建议提示 -->
+<ng-container *ngIf="type === 'tip'">
+  <div class="report-tips" *ngIf="showSuggest && suggetNum > 0">
+      <div tiOverflow>
+          <img *ngIf="ideType === 'other'" src="./assets/img/newSvg/tip.svg" class="report-icon">
+          <img *ngIf="ideType === 'intellij'" src="./assets/img/newSvg/newTip.svg" class="report-icon">
+          <span class="span">{{getSuggestTip('tip')}} </span>
+          <img *ngIf="ideType === 'other'" src="./assets/img/newSvg/suggestion.svg" (click)="onImgClick()" class="report-icon1">
+          <img *ngIf="ideType === 'intellij'" src="./assets/img/newSvg/newSuggestion.svg" (click)="onImgClick()" class="report-icon1">
+          <span>{{i18n.protalserver_sampling_leak.look}}</span>
+      </div>
+      <img *ngIf="ideType === 'other'" src="./assets/img/newSvg/close_hover.svg" class="report-close" (click)="closeReport()">
+      <img *ngIf="ideType === 'intellij'" src="./assets/img/newSvg/close_icon.svg" class="report-close" (click)="closeReport()">
+  </div>
+</ng-container>
+
+<!-- 当前页面内的优化建议图标 -->
+<ng-container *ngIf="type === 'icon'">
+  <div class="suggest-tip" *ngIf="suggetNum > 0">
+      <ng-template #suggestTip>
+        <div>
+          <p class="suggestSate" [innerHtml]="getSuggestTip('icon')"></p>
+        </div>
+      </ng-template>
+      <span>
+        <img [src]="hoverSuggest==='suggest'?'./assets/img/newSvg/up_optimization.svg':'./assets/img/newSvg/optimization.svg'"
+          (click)="onImgClick()" [tiTip]="suggestTip" tiTipPosition='top' (mouseenter)="onHoverSuggest('suggest')"
+          (mouseleave)="onHoverSuggest('')">
+        <span [ngClass]="suggetNum > 9? 'span-nums' :'span-num'">{{ suggetNum }}</span>
+      </span>
+  </div>
+</ng-container>
+

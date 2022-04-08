@@ -1,0 +1,175 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Creating a Hotspot Function Analysis Task">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0250262370.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="user guide">
+<meta name="DC.Publisher" content="20210630">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0250422243">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Creating a Hotspot Function Analysis Task</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0250422243"></a><a name="EN-US_TOPIC_0250422243"></a>
+
+<h1 class="topictitle1">Creating a Hotspot Function Analysis Task</h1>
+<div id="body1590719496407"><div class="section" id="EN-US_TOPIC_0250422243__section71672165013"><h4 class="sectiontitle">Function Description</h4><p id="EN-US_TOPIC_0250422243__p11631183145512">The tool analyzes C/C++ program code, identifies performance bottlenecks, and displays the association between hotspot functions, source code, and assembly instructions. It also displays the function calling relationship in cold/hot flame graphs and discovers the tuning path.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0250422243__section11470129119"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0250422243__en-us_topic_0250279620_p99642151324">A project has been created, and the project does not contain a node in <span class="parmvalue" id="EN-US_TOPIC_0250422243__en-us_topic_0250279620_en-us_topic_0206925255_parmvalue11239184764819"><b>Offline</b></span> state.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0250422243__section3384633721"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0250422243__ol15971352649"><li id="EN-US_TOPIC_0250422243__li19218535102519"><span>Click <span><img id="EN-US_TOPIC_0250422243__en-us_topic_0250422235_en-us_topic_0250279620_image21541215171214" src="en-us_image_0252395926.png"></span> next to the target project in the project list.</span><p><p id="EN-US_TOPIC_0250422243__en-us_topic_0250422235_en-us_topic_0250279620_p166122471044">The <strong id="EN-US_TOPIC_0250422243__en-us_topic_0250422235_en-us_topic_0250279620_b121531549164219">New Analysis Task</strong> page is displayed.</p>
+</p></li><li id="EN-US_TOPIC_0250422243__li105176585336"><span>Set task parameters by referring to <strong id="EN-US_TOPIC_0250422243__b19585183718537">Task Management</strong> and <a href="#EN-US_TOPIC_0250422243__table2694161815565">Table 1</a>.</span><p><div class="p" id="EN-US_TOPIC_0250422243__p33775913333"><a href="#EN-US_TOPIC_0250422243__fig33033717210">Figure 1</a> shows the page for creating a hotspot function analysis task, using a project of the general scenario as an example.<div class="fignone" id="EN-US_TOPIC_0250422243__fig33033717210"><a name="EN-US_TOPIC_0250422243__fig33033717210"></a><a name="fig33033717210"></a><span class="figcap"><b>Figure 1 </b>Creating a hotspot function analysis task (general scenario)</span><br><span><img id="EN-US_TOPIC_0250422243__image161669576503" src="en-us_image_0319460072.png"></span></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0250422243__table2694161815565"></a><a name="table2694161815565"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0250422243__table2694161815565" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Parameters for creating a hotspot function analysis task</caption><colgroup><col style="width:24.04%"><col style="width:75.96000000000001%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0250422243__row169421865610"><th align="left" class="cellrowborder" valign="top" width="24.04%" id="mcps1.3.3.2.2.2.1.3.2.3.1.1"><p id="EN-US_TOPIC_0250422243__p156941818115610">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.96000000000001%" id="mcps1.3.3.2.2.2.1.3.2.3.1.2"><p id="EN-US_TOPIC_0250422243__p66945188562">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0250422243__row969431885617"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p169441875619">Task Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p11695118145619">Name of the task. The task name must meet the following requirements:</p>
+<ul id="EN-US_TOPIC_0250422243__ul669531815617"><li id="EN-US_TOPIC_0250422243__en-us_topic_0250471713_li9539192134211">Contain only letters, digits, and special characters (including @#$ %^&amp;*()[]&lt;&gt;._-!-+ and spaces).</li><li id="EN-US_TOPIC_0250422243__en-us_topic_0250471713_li1253911219425">Contain 1 to 32 characters.</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row116954184565"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p1369510185561">Analysis Object</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p145711729132511">Select <strong id="EN-US_TOPIC_0250422243__b1076812152013">Systems</strong> or <strong id="EN-US_TOPIC_0250422243__b157681715703">Application</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row273724151014"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p18738841141010">Mode</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p05419106413">Select <strong id="EN-US_TOPIC_0250422243__b45021518164313">Launch Application</strong> or <strong id="EN-US_TOPIC_0250422243__b10503161854310">Attach to Process</strong>.</p>
+<p id="EN-US_TOPIC_0250422243__p736721413479">This parameter is displayed when <strong id="EN-US_TOPIC_0250422243__b58761167432">Analysis Object</strong> is set to <strong id="EN-US_TOPIC_0250422243__b17876161634313">Application</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row117413157115"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p151743152118">Application Path</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p1772542511310">Enter the absolute path of the application to be analyzed. For example, to analyze the <strong id="EN-US_TOPIC_0250422243__b4393425164415">loop_test</strong> application stored in the <strong id="EN-US_TOPIC_0250422243__b123991325134420">/home/test</strong> directory, enter <strong id="EN-US_TOPIC_0250422243__b3403152013450">/home/test/loop_test</strong>.</p>
+<p id="EN-US_TOPIC_0250422243__p6516192610510">This parameter is displayed when <strong id="EN-US_TOPIC_0250422243__b990674415549">Analysis Object</strong> is set to <strong id="EN-US_TOPIC_0250422243__b1591184411545">Application</strong> and <strong id="EN-US_TOPIC_0250422243__b15911174425416">Mode</strong> is set to <strong id="EN-US_TOPIC_0250422243__b7912124410543">Launch Application</strong>.</p>
+<div class="note" id="EN-US_TOPIC_0250422243__note9725162513132"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0250422243__ul167258259137"><li id="EN-US_TOPIC_0250422243__li772513252139">By default, applications in the <strong id="EN-US_TOPIC_0250422243__b1613514351456">/opt/</strong> or <strong id="EN-US_TOPIC_0250422243__b78061738114513">/home/</strong> directory are analyzed. The administrator can click <span><img id="EN-US_TOPIC_0250422243__image2032351371812" src="en-us_image_0293557353.png"></span> in the upper right corner on the home page of the <span id="EN-US_TOPIC_0250422243__ph37251225181319">System Profiler</span> and choose <strong id="EN-US_TOPIC_0250422243__b113251113141818">System Settings</strong>, and enter application paths (separated by semicolons) in the <strong id="EN-US_TOPIC_0250422243__b21181414468">Application Path</strong> test box. Only administrators can modify this parameter. Common users can only view this parameter. <p id="EN-US_TOPIC_0250422243__p1274014165718">You are advised to set the application path to a path such as <strong id="EN-US_TOPIC_0250422243__b18863171519207">/home</strong> or <strong id="EN-US_TOPIC_0250422243__b2881519162020">/opt</strong>. Do not set the application path to a system directory such as <strong id="EN-US_TOPIC_0250422243__b2052510252207">/</strong>, <strong id="EN-US_TOPIC_0250422243__b184016301203">/dev</strong>, <strong id="EN-US_TOPIC_0250422243__b103341433162016">/sys</strong>, or <strong id="EN-US_TOPIC_0250422243__b56231836102012">/boot</strong>. Otherwise, system exceptions may occur.</p>
+</li><li id="EN-US_TOPIC_0250422243__li10725142551320">The OS running user (<strong id="EN-US_TOPIC_0250422243__b6290143125311">launcher</strong>) of the <span id="EN-US_TOPIC_0250422243__ph19726725151312">Kunpeng Hyper Tuner</span> must have the read and execute permissions on the applications to be analyzed.</li><li id="EN-US_TOPIC_0250422243__li16726425181310">In the multi-node scenario, you can enable <span class="uicontrol" id="EN-US_TOPIC_0250422243__uicontrol344015231253"><b>Configure Node Parameters</b></span> to configure this parameter separately for each node.</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row0188191720112"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p11275657101116">(Optional) Application Parameters</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p109821355135">Used for executing the application. Set this parameter based on the actual application scenario.</p>
+<p id="EN-US_TOPIC_0250422243__p1797173445110">This parameter is displayed when <strong id="EN-US_TOPIC_0250422243__b889655145413">Analysis Object</strong> is set to <strong id="EN-US_TOPIC_0250422243__b1189785113542">Application</strong> and <strong id="EN-US_TOPIC_0250422243__b9897145114548">Mode</strong> is set to <strong id="EN-US_TOPIC_0250422243__b6897451145417">Launch Application</strong>.</p>
+<div class="note" id="EN-US_TOPIC_0250422243__note0982143510137"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0250422243__p198273513138">In the multi-node scenario, you can enable <span class="uicontrol" id="EN-US_TOPIC_0250422243__uicontrol20731853175516"><b>Configure Node Parameters</b></span> to configure this parameter separately for each node.</p>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row885080154313"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p84605375395">Process</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p6460193718395">Enter a process name. The process name can be a regular expression.</p>
+<p id="EN-US_TOPIC_0250422243__p292515407516">This parameter is displayed when <strong id="EN-US_TOPIC_0250422243__b12817125710553">Analysis Object</strong> is set to <strong id="EN-US_TOPIC_0250422243__b1882212573555">Application</strong> and <strong id="EN-US_TOPIC_0250422243__b188231157135519">Mode</strong> is set to <strong id="EN-US_TOPIC_0250422243__b382345717550">Attach to Process</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row15141519191118"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p21419198119">PID</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p1090011944310">Enter a maximum of 10 PIDs of the processes to be analyzed. Use commas (,) to separate the PIDs. <strong id="EN-US_TOPIC_0250422243__en-us_topic_0251208341_b698175616416">PID</strong> and <strong id="EN-US_TOPIC_0250422243__en-us_topic_0251208341_b750537513">Process</strong> can be configured at the same time.</p>
+<p id="EN-US_TOPIC_0250422243__p173258502515">This parameter is displayed when <strong id="EN-US_TOPIC_0250422243__b591420010568">Analysis Object</strong> is set to <strong id="EN-US_TOPIC_0250422243__b1491430165612">Application</strong> and <strong id="EN-US_TOPIC_0250422243__b791410015617">Mode</strong> is set to <strong id="EN-US_TOPIC_0250422243__b179146012568">Attach to Process</strong>.</p>
+<div class="note" id="EN-US_TOPIC_0250422243__note1351413456132"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0250422243__ul11514745101316"><li id="EN-US_TOPIC_0250422243__li85141245121316">If <strong id="EN-US_TOPIC_0250422243__b10338182195613">Attach to Process</strong> is selected, the tool associates the ID of the process that runs an application to trace and collect the performance data of the application in real time. The OS running user <strong id="EN-US_TOPIC_0250422243__b18892174953213">launcher</strong> of the <span id="EN-US_TOPIC_0250422243__ph12514184521311">Kunpeng Hyper Tuner</span> must have the read permission on the application.</li><li id="EN-US_TOPIC_0250422243__li15514194511312">To query the PID, run the <strong id="EN-US_TOPIC_0250422243__b1924255913479">ps -ef | grep</strong> <em id="EN-US_TOPIC_0250422243__i67631142488">Program name</em> command.</li><li id="EN-US_TOPIC_0250422243__li1951417459130">You can enable <span class="uicontrol" id="EN-US_TOPIC_0250422243__uicontrol64213378015"><b>Configure Node Parameters</b></span> to configure this parameter separately for each node.</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row469571855618"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p15695101805615">Analysis Type</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p16695318115613">Select <strong id="EN-US_TOPIC_0250422243__b1147913103277">Hotspot Function Analysis</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row369512186562"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p0695141885618">Sampling Time (s)</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p269785110216">Sampling duration, in seconds. The default value is <strong id="EN-US_TOPIC_0250422243__b9410456122912">30</strong>. The value range is 1 to 300.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row868614054118"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p19858142352313">Sampling Interval (ms)</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p48581623172315">Sampling interval, in milliseconds. The default value is <strong id="EN-US_TOPIC_0250422243__en-us_topic_0250422243_en-us_topic_0189354041_b11353733142311">Customize</strong>. The values are as follows:</p>
+<ul id="EN-US_TOPIC_0250422243__en-us_topic_0189354041_ul1068618711406"><li id="EN-US_TOPIC_0250422243__en-us_topic_0189354041_li15176112011194"><strong id="EN-US_TOPIC_0250422243__en-us_topic_0250422243_en-us_topic_0189354041_b6354933122311">Customize</strong>: The default value is <strong id="EN-US_TOPIC_0250422243__en-us_topic_0250422243_en-us_topic_0189354041_b1354163316235">1</strong>. The value range is 1 to 1000.</li><li id="EN-US_TOPIC_0250422243__en-us_topic_0189354041_li191765207197"><strong id="EN-US_TOPIC_0250422243__en-us_topic_0250422243_en-us_topic_0189354041_b10354633172318">High Precision</strong>: The default value is <strong id="EN-US_TOPIC_0250422243__en-us_topic_0250422243_en-us_topic_0189354041_b163541433102320">710</strong> (in us).<div class="note" id="EN-US_TOPIC_0250422243__note1785910237233"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0250422243__en-us_topic_0189354041_p161761320151915">If the performance data collected at an interval of 1 ms is not accurate enough, you can select <strong id="EN-US_TOPIC_0250422243__en-us_topic_0250422243_en-us_topic_0189354041_b1035583352312">High Precision</strong>. It can accurately trace the CPU running time of all micro-instructions occupied by an application running on a high-frequency CPU.</p>
+</div></div>
+</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row15581857133610"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p15468487143">(Optional) Sampling Range</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p54687817144">Sampling range. The default value is <strong id="EN-US_TOPIC_0250422243__b055723510119">All</strong>. The values are as follows:</p>
+<ul id="EN-US_TOPIC_0250422243__ul17468148161417"><li id="EN-US_TOPIC_0250422243__en-us_topic_0250422237_li17288192319117"><strong id="EN-US_TOPIC_0250422243__en-us_topic_0250422237_b648920893912">All</strong>: collects performance data of the application layer and OS kernel.</li><li id="EN-US_TOPIC_0250422243__en-us_topic_0250422237_li2028882391117"><strong id="EN-US_TOPIC_0250422243__en-us_topic_0250422237_b6446193114395">User mode</strong>: collects performance data of the application layer.</li><li id="EN-US_TOPIC_0250422243__en-us_topic_0250422237_li3288152319111"><strong id="EN-US_TOPIC_0250422243__en-us_topic_0250422237_b163732043193912">Kernel mode</strong>: collects performance data of the OS kernel.</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row22513448417"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p4859142332316">(Optional) CPU Cores to Be Sampled</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p19859142318234">IDs of the CPU cores to be sampled.</p>
+<div class="note" id="EN-US_TOPIC_0250422243__note1885992317231"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0250422243__ul4830233205812"><li id="EN-US_TOPIC_0250422243__li153338105812">Set this parameter if you want to collect the performance data of an application on a CPU core. Enter one or more CPU core IDs here. The value range is <strong id="EN-US_TOPIC_0250422243__b1674158171218">0</strong> to the total number of CPU cores of the server minus 1. For example, if you enter <strong id="EN-US_TOPIC_0250422243__en-us_topic_0250422243_b8899123615238">0,1,2,10</strong> for a 16-core CPU, performance data of CPU cores 0, 1, 2, and 10 will be collected and analyzed.</li><li id="EN-US_TOPIC_0250422243__li5830173385816">You can enable <span class="uicontrol" id="EN-US_TOPIC_0250422243__en-us_topic_0250422243_uicontrol12185163251819"><b>Configure Node Parameters</b></span> to configure this parameter separately for each node.</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row13267182614319"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p1429732421018">(Optional) Binary/Symbol File Path</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p102972024191017">Absolute path of the binary or symbol file on the server.</p>
+<div class="note" id="EN-US_TOPIC_0250422243__note9297162471015"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0250422243__ul194014204118"><li id="EN-US_TOPIC_0250422243__li16391920151120">You can use this parameter to import the symbol table of an application when you need to view the performance data after source code and assembly instructions are mapped but the corresponding application has no symbol table information.</li><li id="EN-US_TOPIC_0250422243__li6391520171114">If the binary file of the application contains debug information, you only need to save the binary file in the directory.</li><li id="EN-US_TOPIC_0250422243__li83962017112">If the binary file of the application does not contain debug information, save the binary file and the corresponding debug information file in the directory.</li><li id="EN-US_TOPIC_0250422243__li9401520191110">You can enable <span class="uicontrol" id="EN-US_TOPIC_0250422243__en-us_topic_0250422243_en-us_topic_0189354041_uicontrol1386142754312"><b>Configure Node Parameters</b></span> to configure this parameter separately for each node.</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row12268626434"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p1929812249103">(Optional) C/C++ Source File Path</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p102981624141011">Absolute path of the C/C++ source file on the server.</p>
+<div class="notice" id="EN-US_TOPIC_0250422243__note1829822441010"><span class="noticetitle"> NOTICE: </span><div class="noticebody"><p id="EN-US_TOPIC_0250422243__p239263414111">The source code of the application must comply with the general programming specifications. Otherwise, the source code of hot functions in the analysis result may not be displayed properly.</p>
+</div></div>
+<div class="note" id="EN-US_TOPIC_0250422243__note1529822412105"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0250422243__ul10609542181115"><li id="EN-US_TOPIC_0250422243__li660911429115">You can use this parameter to import the source code of an application to view the performance data after the source code and assembly instructions are mapped.</li><li id="EN-US_TOPIC_0250422243__li66094422115">You can enable <span class="uicontrol" id="EN-US_TOPIC_0250422243__en-us_topic_0250422243_en-us_topic_0189354041_uicontrol48913952612"><b>Configure Node Parameters</b></span> to configure this parameter separately for each node.</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row86467121618"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p1564761214612">(Optional) Associate Kernel Function with Assembly Code</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p16477125610">Whether to associate kernel functions with assembly instructions. This parameter is disabled by default.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row910815281374"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p93785468383">(Optional) Size of the Collected File (MiB)</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p113782464382">Size of the file to be collected, in MB. The default value is <strong id="EN-US_TOPIC_0250422243__b637361454616">100</strong>. The value range is 1 to 100.</p>
+<div class="note" id="EN-US_TOPIC_0250422243__note332718566912"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0250422243__en-us_topic_0269716242_p13111129123319">You can set the size of the file to be collected to prevent long analysis time caused by large file size.</p>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row96951418115614"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p1469531811564">Scheduled Startup</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p86951018145611">Whether to create a scheduled analysis task. For details, see <a href="en-us_topic_0250471713.html">Task Management</a>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250422243__row126951218175619"><td class="cellrowborder" valign="top" width="24.04%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250422243__p9317758124419">Start Now</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.96000000000001%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250422243__p13695818205616">Whether to automatically execute a task after it is created. This parameter is selected by default.</p>
+<div class="note" id="EN-US_TOPIC_0250422243__note19695141885611"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0250422243__en-us_topic_0250471713_p15450171572414">This parameter is not displayed if <span class="uicontrol" id="EN-US_TOPIC_0250422243__en-us_topic_0250471713_uicontrol35519368586"><b>Scheduled Startup</b></span> is enabled.</p>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note" id="EN-US_TOPIC_0250422243__note18386446560"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0250422243__p8386146060">If there are a large number of program processes or a large amount of data to be analyzed, task timeout may occur. To prevent this problem, you can reduce the value of <strong id="EN-US_TOPIC_0250422243__b319413201204">Collection Duration (s)</strong> or increase the value of <strong id="EN-US_TOPIC_0250422243__b620072042017">Sampling Interval (ms)</strong>.</p>
+</div></div>
+</div>
+</p></li><li id="EN-US_TOPIC_0250422243__li1078349172116"><span>Click <strong id="EN-US_TOPIC_0250422243__b184832915212">OK</strong>.</span><p><p id="EN-US_TOPIC_0250422243__p891613712436">You can click the icon next to the task name to perform the following operations:</p>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0250262370.html">Hotspot Function Analysis</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

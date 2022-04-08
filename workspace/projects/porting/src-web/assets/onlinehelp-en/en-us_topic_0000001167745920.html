@@ -1,0 +1,72 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Cache Line Alignment Check">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0249523736.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.T21">
+<meta name="brand" content="Huawei Kunpeng Porting Advisor">
+<meta name="DC.Publisher" content="20201230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001167745920">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Cache Line Alignment Check</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001167745920"></a><a name="EN-US_TOPIC_0000001167745920"></a>
+
+<h1 class="topictitle1">Cache Line Alignment Check</h1>
+<div id="body8662426"><p id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_p8060118">Cache line alignment check: This function checks the 128-byte alignment of structure variables in the C/C++ source code to improve memory access performance.</p>
+<div class="section" id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_section168581536335"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_p51944520335">You have logged in to the Kunpeng Porting Advisor.</p>
+<div class="notice" id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_note2019283518329"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-en-us.png"> </span><div class="noticebody"><p id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_p514913555530"><strong id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_b79783318339">/opt/portadv</strong> is the default installation directory of the tool. The following uses this directory as an example. Replace it with the actual directory.</p>
+</div></div>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_section3447205124211"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_ol19389724194216"><li id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_li138962484211"><span>Choose <strong id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_b39323871955135">Enhanced Functions</strong> from the navigation pane on the left.</span><p><p id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_p236193614431">Select <strong id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_b37105909655135">Cacheline Alignment</strong> as the check type, as shown in <a href="#EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_fig20973203110440">Figure 1</a>.</p>
+<div class="fignone" id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_fig20973203110440"><a name="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_fig20973203110440"></a><a name="en-us_topic_0000001168061968_fig20973203110440"></a><span class="figcap"><b>Figure 1 </b>Cache line alignment check</span><br><span><img id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_image19973231174410" src="en-us_image_0000001167765014.png" height="308.2275" width="523.6875"></span></div>
+</p></li><li id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_li10914142205212"><span>Set <span class="parmname" id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_parmname512111823415"><b>Source Code File Path</b></span>. You can use either of the following methods to upload the file:</span><p><ul id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_ul14639651202212"><li id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_li12639145122217">Click <strong id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_b174506641455135">Upload</strong> to upload the package or folder. The package will be automatically decompressed during the upload process.<div class="note" id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_note06621371915"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_ul83501941185112"><li id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_li95517327205">Only one compressed package in the following formats can be uploaded at a time: tar, tar.bz, tar.bz2, tar.gz, tar.xz, tbz, tbz2, tgz, txz, and zip The size of the source code package should be less than or equal to 1 GB. The decompressed file size should be less than or equal to half of the remaining drive space.</li><li id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_li7242101791010">Only one folder can be uploaded at a time. The size of the folder must be less than or equal to half of the remaining drive space.</li><li id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_li993192614101">Internet Explorer does not support upload of folders. Use other browsers, such as Google Chrome and Microsoft Edge.</li></ul>
+</div></div>
+</li><li id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_li16391151112215">Manually upload the source code file to the specified path (for example, <strong id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_b71519604055135">/opt/portadv/portadmin/cachecheck/</strong>) on the server. Grant the read, write, and execute permissions to the <strong id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_b72822864055135">porting</strong> user. Then, click the text box to select the source code file path from the drop-down list. You can also manually enter the source code file path.</li></ul>
+</p></li><li id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_li3412112212331"><span>Click <strong id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_b55135753855135">Check</strong>. After the check is complete, click <span class="parmname" id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_parmname86472508255135"><b>View Report</b></span>. The page shown in <a href="#EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_fig117508276498">Figure 2</a> is displayed.</span><p><div class="notice" id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_note424363519494"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-en-us.png"> </span><div class="noticebody"><p id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_en-us_topic_0189800508_p461752353216">When editing the original code, save the modification in time. Otherwise, the modification may be lost due to session timeout.</p>
+</div></div>
+<div class="p" id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_p199451329154912"><div class="fignone" id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_fig117508276498"><a name="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_fig117508276498"></a><a name="en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_fig117508276498"></a><span class="figcap"><b>Figure 2 </b>Cache line check report</span><br><span><img id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_image37504272491" src="en-us_image_0000001167765388.png" height="246.38250000000002" width="523.6875"></span></div>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_table775122713490" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Parameters in the cache line check report</caption><colgroup><col style="width:24.01%"><col style="width:75.99000000000001%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_row9751192734910"><th align="left" class="cellrowborder" valign="top" width="24.01%" id="mcps1.3.3.2.3.2.2.2.2.3.1.1"><p id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_p15750112704918">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.99000000000001%" id="mcps1.3.3.2.3.2.2.2.2.3.1.2"><p id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_p13751132764910">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_row2751427124914"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.2.3.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_p1775182714496">File List</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.2.3.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_p575116273498">Lists the source code files analyzed.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_row19751122718492"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.3.2.3.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_p197511727114914">Original Source Code</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.3.2.3.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_p1875162754911">Displays the original source code. You can also move the cursor to the code with a red wavy line and click <strong id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_b100809931355135">Peek Problem</strong> in the floating message box to view the source code suggestions. You can modify the source code. After the modification, click <strong id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_b163052289955135">Save</strong>, <strong id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_b144587180155135">Undo</strong>, or <strong id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_b86370844955135">Cancel</strong> in the upper right corner as required.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note" id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_note67515277493"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_ul77516277497"><li id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_li1775110270497">The tool supports concurrent running of multiple cache line alignment check tasks.</li><li id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_li2751172716497">To cancel a task, click <strong id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_b45407658855135">Close</strong> during the analysis process.</li><li id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_li3751327164911">If the source code does not need to be modified, a dialog box is displayed indicating that the operation is successful. The check report page is not displayed.</li><li id="EN-US_TOPIC_0000001167745920__en-us_topic_0000001168061968_en-us_topic_0266691931_en-us_topic_0264880573_li157516276495">To download a source code file, select the file on the left and click the download icon.</li></ul>
+</div></div>
+</div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0249523736.html">Enhanced Functions</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

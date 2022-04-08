@@ -1,0 +1,90 @@
+::ng-deep html {
+    min-width: 1062px !important;
+    overflow-x: auto !important;
+}
+::ng-deep .vscode-dark {
+    --list-info-color: #888888;
+}
+::ng-deep .vscode-light {
+    --list-info-color: #aaaaaa;
+}
+.main-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    background-color: var(--ti-default-body-bg);
+    overflow: auto;
+    padding: 0 80px;
+    box-sizing: border-box;
+    
+    .header-title {
+        margin-top: 40px;
+        font-size: 20px;
+        font-weight: normal;
+        color: var(--btn-font-d-e8e8e8-l-222222);
+    }
+
+    .content-box {
+        display: flex;
+        width: 100%;
+        margin-top: 100px;
+        justify-content: space-between;
+
+        .list-item {
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding-bottom: 36px;
+            box-sizing: border-box;
+
+            .icon-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                height: 60px;
+                box-sizing: border-box;
+                padding-right: 10px;
+
+                .icon {
+                    height: 60px;
+                }
+            }
+
+            .title {
+                margin-top: 32px;
+                font-size: 20px;
+                color: var(--btn-font-d-e8e8e8-l-222222);
+            }
+
+            .info {
+                margin-top: 16px;
+                font-size: 14px;
+                color: var(--list-info-color);
+                line-height: 32px;
+                text-align: left;
+            }
+
+            .extension-info {
+                margin-top: 16px;
+                font-size: 14px;
+                color: var(--btn-font-d-e8e8e8-l-222222);
+            }
+            
+            .link_btn {
+                margin-top: 16px;
+                font-size: 14px;
+                color: #0067ff;
+                position: absolute;
+                bottom: 0;
+                cursor: pointer;
+            }
+
+            a.link_btn {
+                text-decoration: underline;
+            }
+        }
+    }
+}

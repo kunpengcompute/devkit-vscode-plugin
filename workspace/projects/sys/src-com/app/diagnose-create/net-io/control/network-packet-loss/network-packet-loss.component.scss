@@ -1,0 +1,22 @@
+.warpper {
+  --sys-tail-annotation-text-color: #979797;
+  .tail-annotation {
+    display: inline-block;
+    margin-left: 8px;
+    color: var(--sys-tail-annotation-text-color);
+  }
+  .prefix-miss {
+    margin-left: 16px;
+  }
+  .fix-area {
+    margin-top: 20px;
+  }
+  .fix-area:first-child {
+    margin-top: 0;
+  }
+  .flex{
+    display: flex;
+    align-items: center;
+    height: 28px;
+  }
+}

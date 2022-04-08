@@ -1,0 +1,68 @@
+<div class="oom-information" *ngIf="leftTimeList">
+    <div class="left-list">
+        <div class="item" [ngClass]="{'active-item':index===active}" *ngFor="let item of leftTimeList let index=index">
+            <div (click)="chooseItem(index)" class="item-list">
+                <img src="./assets/img/oom/normal.svg" *ngIf="index!==active" class="icon" alt="normal" />
+                <img src="./assets/img/oom/chosed.svg" *ngIf="index===active" class="icon" alt="active" />
+                <span class="time">{{item}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="right-content">
+        <div class="base-information">
+            <app-information-description [title]="i18n.oomDetail.basicTitle" [data]="baseInfo" [column]=1>
+            </app-information-description>
+        </div>
+        <div class="stack-information">
+            <app-information-title [title]="i18n.oomDetail.callStackTitle"></app-information-title>
+            <div class="stack-content">
+                <div class="stack-item" *ngFor="let item of stackInformationList; let index=index">
+                    <span class="line-number">{{index+1}}</span>
+                    <span class="line-content">{{item}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="system-memory-information">
+            <app-information-description [title]="i18n.oomDetail.systemMemoryTitle" [data]="systemMemoryInformationList"
+                [column]=2></app-information-description>
+        </div>
+        <div class="process-memory-information">
+            <app-information-title [title]="i18n.oomDetail.processMemoryTitle" [hasBorder]="hasBorder">
+            </app-information-title>
+            <ti-searchbox *ngIf="searchInfo.isShowSearch" [(ngModel)]="searchInfo.searchInput"
+                (ngModelChange)="setOneWordSearch($event)" (blur)="hideSearchBox()"></ti-searchbox>
+            <!--tiTable实现对表格的整体配置-->
+            <ti-table [(displayedData)]="displayed" [srcData]="srcData" [searchWords]="searchWords"
+                [searchKeys]="searchKeys" [columns]="columns">
+                <table>
+                    <thead>
+                        <tr>
+                            <th *ngFor="let column of columns" width="{{column.width}}">
+                                <ti-cell-text *ngIf="column.title==='pid'">{{column.title}} <ti-icon name="search"
+                                        (click)="searchPid()"></ti-icon>
+                                </ti-cell-text>
+                                <ti-cell-text *ngIf="column.title!=='pid'">{{column.title}}</ti-cell-text>
+                                <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                                <ti-head-sort *ngIf="column.title!=='pid'" [sortKey]="column.sortKey"></ti-head-sort>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                        <tr *ngFor="let row of displayed">
+                            <td tiOverflow *ngFor="let item of headerList let index=index">{{row[item]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <app-default-page *ngIf="!displayed.length" [scene]="'noData'"></app-default-page>
+                <!--tiPagination实现分页功能-->
+                <!-- 在表格中使用分页组件时必须保证其父元素是ti-table -->
+                <ti-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber">
+                </ti-pagination>
+            </ti-table>
+        </div>
+        <div class="view-details" (click)='showMsg()'>{{i18n.oomDetail.viewDetails}}</div>
+    </div>
+</div>
+<app-default-page *ngIf="!leftTimeList" [scene]="'noData'"></app-default-page>
+<app-details-pop-up #oomDetailsModal [detailLists]="detailedInformationList"></app-details-pop-up>

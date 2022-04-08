@@ -1,0 +1,12 @@
+<div class="io_timehis_chart" [id]='uuid'>
+  <p class="title">{{chartTitle}}</p>
+  <div class="echarts_box" *ngIf="chartData.write.length || chartData.read.length">
+    <div echarts [options]="optionData" (chartInit)="onChartInit($event)" [theme]="currTheme"
+      class="echarts">
+    </div>
+    <app-time-line [timeData]="chartData.time" [lineData]="timeLine" (timeLineData)="timeLineData($event)">
+    </app-time-line>
+  </div>
+  <div *ngIf="!chartData.write.length && !chartData.read.length" hyNodata
+    [nodataShow]="!chartData.write.length && !chartData.read.length"></div>
+</div>

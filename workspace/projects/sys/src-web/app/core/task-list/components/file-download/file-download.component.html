@@ -1,0 +1,42 @@
+<ul class="steps">
+  <li *ngFor="let step of steps">
+    <div class="step">
+      <div class="status" [ngClass]="[step.status]">
+        <ng-container [ngSwitch]="step.status">
+          <!-- succeeded -->
+          <ti-icon *ngSwitchCase="'succeeded'" name="checkmark" class="checkmark"></ti-icon>
+  
+          <!-- failed -->
+          <ti-icon *ngSwitchCase="'failed'" name="close" class="close"></ti-icon>
+  
+          <!-- running -->
+          <app-step-loading *ngSwitchCase="'running'" class="svg"></app-step-loading>
+  
+          <!-- waiting -->
+          <svg *ngSwitchCase="'waiting'" viewBox="25 25 50 50">
+            <circle cx="50" cy="50" r="20" fill="transparent" stroke="#d7d7d7" stroke-width="10" />
+          </svg>
+        </ng-container>
+      </div>
+  
+      <p class="info">{{ step.text }}</p>
+    </div>
+
+    <!-- 失败原因 -->
+    <div class="operateBox" *ngIf="step.status === 'failed'">
+      <p class="info">{{ taskInfo?.detail_info || '--' }}</p>
+
+      <span class="operate" (click)="handleOperate('retry')">{{ i18n.project.retry }}</span>
+    </div>
+  </li>
+
+  <li>
+    <!-- 下载任务 -->
+    <div class="operateBox" *ngIf="exportSucceeded">
+      <span class="operate" (click)="handleOperate('download')">{{ i18n.project.downloadTask }}</span>
+    </div>
+  </li>
+</ul>
+
+<!-- 下载任务 -->
+<app-download-task-modal #downloadTaskModal></app-download-task-modal>

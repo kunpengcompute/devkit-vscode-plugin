@@ -1,0 +1,17 @@
+.advice-tip {
+  height: 32px;
+  width: 32px;
+  position: fixed;
+  z-index: 999;
+  bottom: 80px;
+  right: 0px;
+  cursor: pointer;
+  .img-icon {
+    img {
+      vertical-align: middle;
+      width: 32px;
+      height: 32px;
+      box-shadow:-5px 5px 15px 5px rgb(0 0 0 / 10%);
+    }
+  }
+}

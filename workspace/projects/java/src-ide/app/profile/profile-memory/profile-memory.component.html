@@ -1,0 +1,71 @@
+<div class="overview-container">
+  <div class="item-table">
+    <div class="title">{{ i18n.protalserver_profiling_memory.histogram }}</div>
+    <div style="margin-top: 30px; margin-bottom: 20px;">
+      <button
+        type="button"
+        class="graph-btn"
+        (click)="refreshData()"
+        [ngClass]="{ 'disable-btn': startBtnDisabled }"
+      >
+        {{ i18n.protalserver_profiling_memory.btn }}
+      </button>
+    </div>
+    <div>
+      <ti-table
+        [(displayedData)]="displayed"
+        [srcData]="srcData"
+        [columns]="columns"
+      >
+        <div class="ti3-table-fixed-head">
+          <table>
+            <thead>
+              <tr>
+                <th
+                  tiOverflow
+                  *ngFor="let column of columns"
+                  width="{{ column.width }}"
+                >
+                  <ti-cell-text>{{
+                    i18n.protalserver_profiling_memory[column.title]
+                  }}</ti-cell-text>
+                  <ti-head-sort
+                    *ngIf="column.sortKey !== ''"
+                    [sortKey]="column.sortKey"
+                  ></ti-head-sort>
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="ti3-table-container" style="max-height: 600px;">
+          <table>
+            <thead>
+              <tr>
+                <th
+                  tiOverflow
+                  *ngFor="let column of columns"
+                  width="{{ column.width }}"
+                ></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of displayed; trackBy: trackByFn">
+                <td tiOverflow>{{ row.className }}</td>
+                <td tiOverflow class="insCount">
+                  {{ row.instances }}
+                </td>
+                <td tiOverflow>{{ (row.bytes / 1000).toFixed(2) }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="displayed.length === 0">
+              <tr class="ti3-table-nodata">
+                <td tiColspan>{{ noDadaInfo }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ti-table>
+    </div>
+  </div>
+</div>

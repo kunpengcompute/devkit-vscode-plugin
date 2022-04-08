@@ -1,0 +1,150 @@
+<div class="key-metric-select">
+    <ti-formfield labelWidth="210px">
+        <ti-item [label]="'storageIo.keyMetric.keyMetric' | i18n" [required]="true">
+            <div class="checkbox-group">
+                <div *ngFor="let item of checkboxList" class="checkbox-item">
+                    <input type="checkbox" tiCheckbox [(ngModel)]="item.checked" (ngModelChange)="metricValChange()" [name]='item.value'
+                    [label]='item.label'>
+                </div>
+            </div>
+            <p class="error-tip" *ngIf="!validateMetricVal">
+                <ti-icon name="exclamation-circle" class="error-icon"></ti-icon>
+                {{'storageIo.keyMetric.required' | i18n}}
+            </p>
+        </ti-item>
+    </ti-formfield>
+    <button type="button" [disabled]="isAddingRow" (click)="changeNewrowFlag(true)" tiButton>{{'storageIo.keyMetric.addModel' | i18n}}</button>
+
+    <ti-table #mytable [(displayedData)]="tableData" [srcData]="tableData.srcData" [columns]="tableData.columnsTree">
+        <div class="ti3-table-fixed-head" [ngStyle]="{'overflow-y': showScrollX ? 'scroll' : 'hidden'}">
+            <table>   
+                <thead>
+                    <tr>
+                        <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                        <th class="hidden-input" style="width: 42px;" [tiColumnFixed]='showScrollX ? "left" : ""' checkbox-column>
+                            <input type="hidden"
+                                    tiCheckgroup
+                                    [disabled]="selectAllDisabled"
+                                    [items]="tableData.srcData"
+                                    [(checkeds)]="checkedList"
+                                    (checkedsChange)="onCheckedChange()"/>
+                        </th>
+                        <th tiOverflow *ngFor="let column of tableData.columnsTree" width="{{column.width}}">{{column.label}}</th>
+                        <th style="width: 150px;" [tiColumnFixed]='showScrollX ? "right" : ""'>
+                            {{'storageIo.keyMetric.operation' | i18n}}
+                            <img class="tool-tip" src="./assets/img/summary/tooltip.png" [tiTip]="'storageIo.keyMetric.operationTip' | i18n" />
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="ti3-table-container" style="max-height:320px;">
+            <table>
+                <thead>
+                    <th style="width: 42px;" [tiColumnFixed]='showScrollX ? "left" : ""'></th>
+                    <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                    <th *ngFor="let column of tableData.columnsTree" width="{{column.width}}"></th>
+                    <th style="width: 150px;" [tiColumnFixed]='showScrollX ? "right" : ""'></th>
+                </thead>
+                <tbody>
+                    <!-- 新增一行 -->
+                    <tr *ngIf="isAddingRow">
+                        <td [tiColumnFixed]='showScrollX ? "left" : ""'></td>
+                        <td *ngFor="let column of tableData.columnsTree">
+                            <ti-formfield [formGroup]="formArray.controls[0]" class="form-item">
+                                <ti-item>
+                                    <input tiOverflow class="input-width" [formControlName]="column.key" tiValidation *ngIf="column.type === 'input'" type="text" tiText tiNumber [(ngModel)]="newRow[column.key]">
+                                    <ti-select tiOverflow class="input-width" [formControlName]="column.key" tiValidation *ngIf="column.type === 'select'" [options]='column.option' [(ngModel)]="newRow[column.key]"
+                                        [valueKey]="'value'">
+                                    </ti-select>
+                                    <span tiOverflow class="rate-input" *ngIf="column.type === 'rateInput'">
+                                        <ng-container *ngIf="showRateKeys.includes(newRow.rw_type);else elseBlock">
+                                            <input maxlength="2" type="text" [formControlName]="column.key" tiValidation tiText tiNumber [(ngModel)]="newRow[column.key]">
+                                            <!-- 补全tip提示语 -->
+                                            <span hidden>{{newRow[column.key]}}</span>
+                                            <span class="link">:</span>
+                                            <span>{{100 - (newRow[column.key] > 0 ? newRow[column.key] : 0)}}</span>
+                                        </ng-container>
+                                        <ng-template #elseBlock>--</ng-template>
+                                    </span>
+                                    <ti-select class="input-width" [multiple]="true" [formControlName]="column.key" tiValidation *ngIf="column.type === 'selectMultiple'" [options]='column.option' [(ngModel)]="newRow[column.key]">
+                                        <ng-template #selected let-i=index>
+                                            <span style="width: 100%" tiOverflow>
+                                                {{getMultipleText(newRow[column.key])}}
+                                            </span>
+                                        </ng-template>
+                                    </ti-select>
+                                </ti-item>
+                                <span tiOverflow *ngIf="!column.type">{{newRow[column.key]}}</span>
+                            </ti-formfield>
+                        </td>
+                        <td [tiColumnFixed]='showScrollX ? "right" : ""'>
+                            <ti-actionmenu [items]="addItems" (select)='onSelectAdd($event)'>
+                            </ti-actionmenu>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let row of tableData.srcData;">
+                        <ng-container *ngIf="!(isEditingRow && editingRow.id === row.id); else editRowTemplate">
+                            <td [tiColumnFixed]='showScrollX ? "left" : ""' checkbox-column [ngClass]="{
+                                'ti3-disabled-cell': row.disabled}">
+                                <input type="checkbox"
+                                        tiCheckitem
+                                        [disabled]="row.disabled"
+                                        [item]="row"/>
+                            </td>
+                            <td *ngFor="let column of tableData.columnsTree" tiOverflow>
+                                {{format(row[column.key], column)}}
+                            </td>
+                            <td [tiColumnFixed]='showScrollX ? "right" : ""'>
+                                <ti-actionmenu (select)='onSelect($event,row)' [items]="items">
+                                </ti-actionmenu>
+                            </td>
+                        </ng-container>
+                        <ng-template #editRowTemplate>
+                            <td [tiColumnFixed]='showScrollX ? "left" : ""' checkbox-column [ngClass]="{
+                                'ti3-disabled-cell': row.disabled}">
+                                <input type="checkbox"
+                                        tiCheckitem
+                                        [disabled]="row.disabled"
+                                        [item]="row"/>
+                            </td>
+                            <td *ngFor="let column of tableData.columnsTree">
+                                <ti-formfield [formGroup]="formArray.controls[1]" class="form-item">
+                                    <ti-item>
+                                        <input tiOverflow class="input-width" [formControlName]="column.key" tiValidation *ngIf="column.type === 'input'" type="text " tiText tiNumber [(ngModel)]="editingRow[column.key]">
+                                        <ti-select tiOverflow class="input-width" [formControlName]="column.key" tiValidation *ngIf="column.type === 'select'" [options]='column.option' [(ngModel)]="editingRow[column.key]"
+                                            [valueKey]="'value'">
+                                        </ti-select>
+                                        <span tiOverflow class="rate-input" *ngIf="column.type === 'rateInput'">
+                                            <ng-container *ngIf="showRateKeys.includes(editingRow.rw_type);else elseBlock">
+                                                <input maxlength="2" type="text" [formControlName]="column.key" tiValidation tiText tiNumber [(ngModel)]="editingRow[column.key]">
+                                                <!-- 补全tip提示语 -->
+                                                <span hidden>{{editingRow[column.key]}}</span>
+                                                <span class="link">:</span>
+                                                <span>{{100 - (editingRow[column.key] > 0 ? editingRow[column.key] : 0)}}</span>
+                                            </ng-container>
+                                            <ng-template #elseBlock>--</ng-template>
+                                        </span>
+                                        <ti-select class="input-width" [multiple]="true" [formControlName]="column.key" tiValidation *ngIf="column.type === 'selectMultiple'" [options]='column.option' [(ngModel)]="editingRow[column.key]">
+                                            <ng-template #selected let-i=index>
+                                                <span style="width: 100%" tiOverflow>
+                                                    {{getMultipleText(editingRow[column.key])}}
+                                                </span>
+                                            </ng-template>
+                                        </ti-select>
+                                    </ti-item>
+                                    <span tiOverflow *ngIf="!column.type">{{editingRow[column.key]}}</span>
+                                </ti-formfield>
+                            </td>
+                            <td [tiColumnFixed]='showScrollX ? "right" : ""'>
+                                <ti-actionmenu [items]="editingItems" (select)='onSelectEditing($event,row)'>
+                                </ti-actionmenu>
+                            </td>
+                        </ng-template>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ti3-table-container ti3-resize-wrapper" hyNodata [nodataShow]="tableData?.srcData?.length === 0 && !isAddingRow"></div>
+    </ti-table>
+</div>

@@ -1,0 +1,31 @@
+.io_timehis_chart {
+  padding: 20px;
+
+  .title {
+    height: 20px;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--common-color-font-primary);
+    margin-bottom: 10px;
+  }
+
+  .echarts_box .echarts {
+    margin-bottom: 16px;
+    height: 215px;
+  }
+}
+
+:host ::ng-deep .io_timehis_chart {
+  .box {
+    height: 24px;
+    box-sizing: border-box;
+    margin-bottom: 0;
+    .time span {
+      height: 2px !important;
+    }
+  }
+
+  .hy-nodata-container {
+    padding-bottom: 0;
+  }
+}

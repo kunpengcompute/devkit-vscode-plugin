@@ -1,0 +1,142 @@
+// 全局通用样式
+$width64: 64px;
+
+$color97: #979797;
+$col0067ff: #0067ff;
+
+// display 相关
+.dis-block {
+  display: block;
+}
+.dis-none {
+  display: none;
+}
+.dis-inline-block {
+  display: inline-block;
+}
+
+// position 相关
+.p-relative {
+  position: relative;
+}
+
+// flex 相关
+.flex {
+  display: flex;
+}
+.flex-items {
+  align-items: center;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-row-reverse {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// float 相关
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.clearfix::after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+// 文本超出显示省略号
+.ellispis {
+  overflow: hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+// a 链接相关
+.ti-tip a {
+  text-decoration: none !important;
+  cursor: pointer !important;
+  color: $themeColor !important;
+  &:hover {
+    color: $themeHover !important;
+  }
+  &:active {
+    color: $themeActive !important;
+  }
+}
+.cursor-link {
+  color: $col0067ff !important;
+  cursor: pointer;
+  &:hover {
+    color: $themeHover !important;
+    opacity: 0.8;
+  }
+  &:active {
+    color: $themeActive !important;
+  }
+}
+
+
+// button相关
+:root .btn64 {
+  min-width: 64px !important;
+  width: 64px !important;
+}
+
+// 了解更多按钮
+.btn-about-more {
+  border-top: 1px solid #e1e6ee;
+  height: 18px;
+  font-family: FZLTHJW--GB1-0;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 18px;
+  letter-spacing: 0px;
+  padding: 6px 0 6px 10px;
+  
+  span {
+    color: var(--ti-button-primary-normal-bg-color);
+    cursor: pointer;
+    &:hover {
+      color: var(--ti-button-primary-bg-color-hover);
+    }
+
+  }
+}
+
+// 了解更多弹框
+.mask-about-more {
+  .config-modal {
+    width: 700px;
+    max-height: 600px;
+    box-sizing: border-box;
+    overflow: auto;
+    margin: 0;
+    padding: 18px 32px 32px;
+
+    .mask-title {
+      .close-btn {
+        cursor: pointer;
+      }
+    }
+    .mask-container {
+      margin-top: 15px;
+    }
+
+    .mask-footer {
+      margin-top: 32px;
+      text-align: center;
+    }
+  }
+}

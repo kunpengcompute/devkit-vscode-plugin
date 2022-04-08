@@ -1,0 +1,55 @@
+<div class="sys-config-mem-compare">
+  <div class="mem-info">
+    <div class="mem-info-left">
+      <p>
+        <span class="label">{{ 'tuninghelper.sysConfigDetail.totalSize' | i18n }}</span>
+        <img class="diff-img" *ngIf="totalSizeDiff" src="./assets/img/linkage/abnormal.svg">
+        <span class="text">{{ summary.totalSize }}</span>
+      </p>
+      <p>
+        <span class="label">{{ 'tuninghelper.sysConfigDetail.totalBandwidth' | i18n }}</span>
+        <img class="diff-img" *ngIf="totalBandwidthDiff" src="./assets/img/linkage/abnormal.svg">
+        <span class="text">{{ summary.totalBandwidth }}</span>
+      </p>
+    </div>
+    <app-compare-params-select (selectedChange)="onSelectedChange($event)"></app-compare-params-select>
+  </div>
+  <app-common-table
+    [commonTableData]="tableData"
+    [isFilters]="true"
+    [isPagination]="false"
+    (filterColumn)="onFilterColumn($event)">
+    <ng-template let-displayed let-tabcolumns="columns">
+      <tbody>
+        <ng-container *ngFor="let row of displayed;index as i">
+          <tr>
+            <td tiOverflow [attr.rowspan]="row.cpuRowSpan" *ngIf="!diff && row.cpuRowSpan"
+              style="border-right: 1px solid var(--ti-table-border-bottom-color); padding-left: 24px;">{{ row.cpu }}</td>
+            <td tiOverflow [attr.rowspan]="row.cpuRowSpanDiff" *ngIf="diff && row.cpuRowSpanDiff"
+              style="border-right: 1px solid var(--ti-table-border-bottom-color); padding-left: 24px;">{{ row.cpu }}</td>
+            <td tiOverflow [attr.rowspan]="2" *ngIf="i % 2 === 0"
+              style="border-right: 1px solid var(--ti-table-border-bottom-color);">{{ row.channel }}</td>
+            <td tiOverflow [attr.rowspan]="2" *ngIf="i % 2 === 0"
+              style="border-right: 1px solid var(--ti-table-border-bottom-color);">{{ row.dimm }}</td>
+            <td tiOverflow>{{ row.compareObject }}</td>
+            <td *ngIf="tabcolumns[4].show || tabcolumns[4].show === undefined">
+              <app-diff-td [hasEmptyPlace]="tabcolumns[4].hasEmptyPlace" [diff]="i % 2 === 0 && !row.maxSpeedDiff" [value]="row.maxSpeed"></app-diff-td>
+            </td>
+            <td *ngIf="tabcolumns[5].show || tabcolumns[5].show === undefined">
+              <app-diff-td [hasEmptyPlace]="tabcolumns[5].hasEmptyPlace" [diff]="i % 2 === 0 && !row.dataWidthDiff" [value]="row.dataWidth"></app-diff-td>
+            </td>
+            <td *ngIf="tabcolumns[6].show || tabcolumns[6].show === undefined">
+              <app-diff-td [hasEmptyPlace]="tabcolumns[6].hasEmptyPlace" [diff]="i % 2 === 0 && !row.bandWidthDiff" [value]="row.bandWidth"></app-diff-td>
+            </td>
+            <td *ngIf="tabcolumns[7].show || tabcolumns[7].show === undefined">
+              <app-diff-td [hasEmptyPlace]="tabcolumns[7].hasEmptyPlace" [diff]="i % 2 === 0 && !row.sizeDiff" [value]="row.size"></app-diff-td>
+            </td>
+            <td *ngIf="tabcolumns[8].show || tabcolumns[8].show === undefined">
+              <app-diff-td [hasEmptyPlace]="tabcolumns[8].hasEmptyPlace" [diff]="i % 2 === 0 && !row.numaNodeDiff" [value]="row.numaNode"></app-diff-td>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </ng-template>
+  </app-common-table>
+</div>

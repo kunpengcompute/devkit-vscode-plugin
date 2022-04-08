@@ -1,0 +1,51 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="查看热点函数">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001129506030.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="鲲鹏性能分析工具 (调优助手) 联机帮助">
+<meta name="DC.Publisher" content="20211029">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001130639108">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>查看热点函数</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001130639108"></a><a name="ZH-CN_TOPIC_0000001130639108"></a>
+
+<h1 class="topictitle1">查看热点函数</h1>
+<div id="body0000001130639108"><div class="section" id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0189293077_section11470129119"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0189293077_zh-cn_topic_0189293076_p5336201013112">已创建分析任务，并且成功完成分析。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001130639108__section19332161475"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0000001130639108__ol92117562556"><li id="ZH-CN_TOPIC_0000001130639108__li85521472718"><span>在“工程管理”区域，依次单击指定工程和分析任务名称前的<span><img id="ZH-CN_TOPIC_0000001130639108__image4105155811375" src="zh-cn_image_0000001130798950.png"></span>。</span><p><p id="ZH-CN_TOPIC_0000001130639108__p198319584430">展开节点列表。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001130639108__li779815445566"><span>单击节点名称查看分析结果。</span><p><p id="ZH-CN_TOPIC_0000001130639108__p19449114955616">打开分析结果页面。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0000001130639108__fig1545112710122"><span class="figcap"><b>图1 </b>分析结果页面</span><br><span><img id="ZH-CN_TOPIC_0000001130639108__image34512761210" src="zh-cn_image_0000001148586052.png" height="291.27000000000004" width="523.6875"></span></div>
+</p></li><li id="ZH-CN_TOPIC_0000001130639108__li447864414719"><span>（可选）选择业务类型。</span><p><ul id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_ul141542911385"><li id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_li11572914385">根据实际情况选择业务类型。可选类型包括：CPU密集型、网络IO密集型和存储IO密集型。可以选择1~3个业务类型。选中后，选项的文字颜色变为蓝色。默认三个选项均被选中。</li><li id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_li499817326383">根据实际情况选择建议范围。可以调节优化建议拓扑树显示<span class="uicontrol" id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_uicontrol78009395409">“全部建议”</span>或<span class="uicontrol" id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_uicontrol1995184416408">“经过阈值过滤的建议”</span>。<div class="fignone" id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_fig10998732123818"><span class="figcap"><b>图2 </b>选择业务类型</span><br><span><img id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_image4998132183813" src="zh-cn_image_0000001130639270.png" height="61.845000000000006" width="523.6875"></span></div>
+</li></ul>
+</p></li><li id="ZH-CN_TOPIC_0000001130639108__li4707155917224"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0000001130639108__uicontrol12560113018522">“热点函数”</span>查看热点函数分析结果,进行调优设置。</span><p><div class="fignone" id="ZH-CN_TOPIC_0000001130639108__fig3422165016277"><span class="figcap"><b>图3 </b>查看热点函数分析结果</span><br><span><img id="ZH-CN_TOPIC_0000001130639108__image1942275052712" src="zh-cn_image_0000001130799054.png" height="291.27000000000004" width="523.6875"></span></div>
+<ol type="a" id="ZH-CN_TOPIC_0000001130639108__ol187712642713"><li id="ZH-CN_TOPIC_0000001130639108__li16877136132715">查看分析结果页面的优化建议拓扑树图，单击根据配置条件<span><img id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_image102291941366" src="zh-cn_image_0000001145866444.png" width="26.080502000000003" height="26.068000000000005"></span>，单击<span><img id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_image1545302274519" src="zh-cn_image_0000001145861258.png" width="24.550337000000003" height="25.748002000000003"></span>选择对应的调优建议。<div class="fignone" id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_fig460235795011"><span class="figcap"><b>图4 </b>优化建议拓扑树图</span><br><span><img id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_image96027575507" src="zh-cn_image_0000001191942091.png" height="316.20750000000004" width="523.6875"></span></div>
+</li><li id="ZH-CN_TOPIC_0000001130639108__li1449261273">查看右侧调优建议中的相关配置、指标说明、优化建议及优化指导。单击<span><img id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_image893910417140" src="zh-cn_image_0000001145868788.png" width="65.83500000000001" height="23.753002000000002"></span>确定采纳该调优建议，再次单击取消采纳该调优建议。<div class="fignone" id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_fig1791211517228"><span class="figcap"><b>图5 </b>调优建议页面</span><br><span><img id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_image179120518229" src="zh-cn_image_0000001145899404.png"></span></div>
+</li><li id="ZH-CN_TOPIC_0000001130639108__li109455172717">已采纳的调优建议将会保留在关联报告中，单击页面右下角<span class="uicontrol" id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_uicontrol7421959152812">“关联报告”</span>进入关联报告页面。<p id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_p296043062912">关联报告页面会显示已经采纳的所有调优建议，单击任务名称可进行查看。根据采纳的调优建议是否达到预期目标，单击左下角<span class="uicontrol" id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_uicontrol2038142201311">“有效”</span>和<span class="uicontrol" id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_uicontrol109373681317">“无效”</span>进行确定。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_fig14809483120"><span class="figcap"><b>图6 </b>关联报告页面</span><br><span><img id="ZH-CN_TOPIC_0000001130639108__zh-cn_topic_0000001130798882_image158034123112" src="zh-cn_image_0000001145901236.png" height="286.2825" width="523.6875"></span></div>
+</li></ol>
+</p></li><li id="ZH-CN_TOPIC_0000001130639108__li81651215165919"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0000001130639108__uicontrol16128112716525">“热点函数”</span>右侧的<span><img id="ZH-CN_TOPIC_0000001130639108__image0414425536" src="zh-cn_image_0000001143823922.png"></span>查看热点函数详细数据。</span><p><div class="p" id="ZH-CN_TOPIC_0000001130639108__p1128558153517">热点函数详细数据中包含<span class="uicontrol" id="ZH-CN_TOPIC_0000001130639108__uicontrol6891202810434">“函数”</span>和<span class="uicontrol" id="ZH-CN_TOPIC_0000001130639108__uicontrol1637113215437">“模块”</span>两个部分，可通过单击函数名称来查看函数详细信息。<div class="fignone" id="ZH-CN_TOPIC_0000001130639108__fig23875564354"><span class="figcap"><b>图7 </b>查看热点函数详细数据</span><br><span><img id="ZH-CN_TOPIC_0000001130639108__image173871256123517" src="zh-cn_image_0000001143663610.png" height="304.2375" width="523.6875"></span></div>
+</div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001129506030.html">查看分析结果</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

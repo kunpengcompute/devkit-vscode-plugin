@@ -1,0 +1,17 @@
+<div class="memory-usage">
+  <div class="cpu-header title-top">
+    <p class="title">{{i18n.sys_summary.cpupackage_tabel.network_port}}</p>
+    <ti-select class="select" [options]='devOptions' [searchable]="false" [(ngModel)]="selecteDev"
+      (ngModelChange)="selectDev($event)"></ti-select>
+  </div>
+  <div class="time-line">
+    <app-time-line [timeData]="timeData" [lineData]="lineData" (timeLineData)="timeLineData($event)" #timeLineDetail>
+    </app-time-line>
+  </div>
+  <div class="echart-title">{{i18n.disgnose.netIO.networkPPS}}</div>
+  <app-load-network-chart #PPSEchart [datas]="PPSEchartData" [lineColorListPps]="lineColorListPps" (echartsInstOut)='echartsInstOut($event)' *ngIf="PPSEchartData" [timeLine]="lineData" (dataZoomOut)="onChartDataZoom($event)">
+  </app-load-network-chart >
+  <div class="echart-title" style="padding-top: 32px;">{{i18n.disgnose.netIO.networkThroughput}}</div>
+  <app-load-network-chart #throughputEchart [datas]="throughputEchartData" [lineColorListPps]="lineColorListNum" (echartsInstOut)='echartsInstOut($event)' *ngIf="throughputEchartData" [timeLine]="lineData" (dataZoomOut)="onChartDataZoom($event)">
+  </app-load-network-chart >
+</div>

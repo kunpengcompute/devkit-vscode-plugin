@@ -1,0 +1,101 @@
+<div class="sys-config-disk-compare">
+  <section>
+    <div class="section-header">
+      <h1>{{ diskInfo.title }}</h1>
+      <app-compare-params-select (selectedChange)="onDiskInfoChange($event)"></app-compare-params-select>
+    </div>
+    <app-common-table [commonTableData]="diskInfo.tableData" [isFilters]="true" (filterColumn)="onFilterDiskInfoColumn($event)">
+      <ng-template let-displayed let-tabcolumns="columns">
+        <tbody>
+          <ng-container *ngFor="let row of displayed;index as i">
+            <tr>
+              <td tiOverflow [attr.rowspan]="2" *ngIf="i % 2 === 0"
+                style="border-right: 1px solid var(--ti-table-border-bottom-color);">{{ row.deviceName }}</td>
+              <td tiOverflow>{{ row.compareObject }}</td>
+              <ng-container *ngFor="let column of tabcolumns;index as columnIndex">
+                <td *ngIf="columnIndex > 1 && (tabcolumns[columnIndex].show || tabcolumns[columnIndex].show === undefined)">
+                  <app-diff-td
+                    [hasEmptyPlace]="column.hasEmptyPlace"
+                    [diff]="i % 2 === 0 && !row[tabcolumns[columnIndex].key + 'Diff']"
+                    [value]="row[tabcolumns[columnIndex].key]"
+                  ></app-diff-td>
+                </td>
+              </ng-container>
+            </tr>
+          </ng-container>
+        </tbody>
+      </ng-template>
+    </app-common-table>
+  </section>
+  <section>
+    <div class="section-header">
+      <h1>{{ raidInfo.title }}</h1>
+      <app-compare-params-select (selectedChange)="onRaidInfoChange($event)"></app-compare-params-select>
+    </div>
+    <app-common-table [commonTableData]="raidInfo.tableData" [isFilters]="true" (filterColumn)="onFilterRaidInfoColumn($event)">
+      <ng-template let-displayed let-tabcolumns="columns">
+        <tbody>
+          <ng-container *ngFor="let row of displayed;index as i">
+            <tr>
+              <td tiOverflow [attr.rowspan]="2" *ngIf="i % 2 === 0"
+                style="border-right: 1px solid var(--ti-table-border-bottom-color);">{{ row.deviceName }}</td>
+              <td tiOverflow>{{ row.compareObject }}</td>
+              <ng-container *ngFor="let column of tabcolumns;index as columnIndex">
+                <td *ngIf="columnIndex > 1 && (tabcolumns[columnIndex].show || tabcolumns[columnIndex].show === undefined)">
+                  <app-diff-td
+                    [hasEmptyPlace]="column.hasEmptyPlace"
+                    [diff]="i % 2 === 0 && !row[tabcolumns[columnIndex].key + 'Diff']"
+                    [value]="row[tabcolumns[columnIndex].key]"
+                  ></app-diff-td>
+                </td>
+              </ng-container>
+            </tr>
+          </ng-container>
+        </tbody>
+      </ng-template>
+    </app-common-table>
+  </section>
+  <section>
+    <div class="section-header">
+      <h1>{{ fileSystemInfo.title }}</h1>
+      <app-compare-params-select (selectedChange)="onFileSystemInfoChange($event)"></app-compare-params-select>
+    </div>
+    <app-common-table [commonTableData]="fileSystemInfo.tableData" [isPagination]="false">
+      <ng-template let-displayed let-tabcolumns="columns">
+        <tbody>
+          <ng-container *ngFor="let row of displayed;index as i">
+            <tr>
+              <td tiOverflow *ngIf="row.fileSystemRowSpan" [attr.rowspan]="row.fileSystemRowSpan"
+                style="border-right: 1px solid var(--ti-table-border-bottom-color);">{{ row.fileSystem }}</td>
+              <td tiOverflow *ngIf="row.rowSpan" [attr.rowspan]="row.rowSpan"
+                style="border-right: 1px solid var(--ti-table-border-bottom-color);">{{ row.compareObject }}</td>
+              <td *ngIf="row.rowSpan" [attr.rowspan]="row.rowSpan"
+                style="border-right: 1px solid var(--ti-table-border-bottom-color);">
+                <app-diff-td [hasEmptyPlace]="tabcolumns[2].hasEmptyPlace" [diff]="i % (row.rowSpan * 2) === 0 && !row.mountedOnDiff" [value]="row.mountedOn"></app-diff-td>
+              </td>
+              <td *ngIf="row.rowSpan" [attr.rowspan]="row.rowSpan"
+                style="border-right: 1px solid var(--ti-table-border-bottom-color);">
+                <app-diff-td [hasEmptyPlace]="tabcolumns[3].hasEmptyPlace" [diff]="i % (row.rowSpan * 2) === 0 && !row.mountParameterDiff" [value]="row.mountParameter"></app-diff-td>
+              </td>
+              <td *ngIf="row.rowSpan" [attr.rowspan]="row.rowSpan"
+                style="border-right: 1px solid var(--ti-table-border-bottom-color);">
+                <app-diff-td [hasEmptyPlace]="tabcolumns[4].hasEmptyPlace" [diff]="i % (row.rowSpan * 2) === 0 && !row.typeDiff" [value]="row.type"></app-diff-td>
+              </td>
+              <td
+                style="border-right: 1px solid var(--ti-table-border-bottom-color);">
+                <app-diff-td [hasEmptyPlace]="tabcolumns[5].hasEmptyPlace" [diff]="i % (row.rowSpan * 2) === 0 && !row.deviceNameDiff" [value]="row.deviceName"></app-diff-td>
+              </td>
+              <td
+                style="border-right: 1px solid var(--ti-table-border-bottom-color);">
+                <app-diff-td [hasEmptyPlace]="tabcolumns[6].hasEmptyPlace" [diff]="i % (row.rowSpan * 2) === 0 && !row.partitionDiff" [value]="row.partition"></app-diff-td>
+              </td>
+              <td *ngIf="row.rowSpan" [attr.rowspan]="row.rowSpan">
+                <app-diff-td [hasEmptyPlace]="tabcolumns[7].hasEmptyPlace" [diff]="i % (row.rowSpan * 2) === 0 && !row.lvmDiff" [value]="row.lvm"></app-diff-td>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </ng-template>
+    </app-common-table>
+  </section>
+</div>

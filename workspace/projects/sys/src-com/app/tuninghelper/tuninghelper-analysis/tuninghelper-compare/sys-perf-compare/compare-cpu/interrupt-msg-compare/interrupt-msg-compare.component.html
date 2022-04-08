@@ -1,0 +1,16 @@
+<div class="interrupt-msg-compare">
+    <div class="inter-header">
+        <span class="title">{{ 'net_io.xps_rps.hard_info.info' | i18n }}</span>
+        <ti-select class="inter-selected" [options]='interOption' [(ngModel)]="interSelected"></ti-select>
+    </div>
+    <div class="inter-container">
+        <!-- 硬中断编号视图 -->
+        <div class="hart-number-table-container" *ngIf="!interSelected.index">
+            <app-common-table [commonTableData]="hardIrqTableData" [isFilters]="true"></app-common-table>
+        </div>
+        <!-- CPU核视图 -->
+        <div class="hart-cpu-table-container" *ngIf="interSelected.index">
+            <app-common-table [commonTableData]="coreTableData" [isFilters]="true"></app-common-table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+.sys-config-cpu {
+
+  section {
+    h1 {
+      font-weight: normal;
+      height: 24px;
+      font-size: 16px;
+      line-height: 24px;
+      color: var(--common-color-font-primary);
+    }
+
+    .other-info {
+      display: flex;
+      margin-top: 10px;
+
+      p {
+        font-size: 12px;
+        line-height: 18px;
+  
+        .label {
+          color: var(--common-color-font-secondary);
+        }
+  
+        .text {
+          margin-left: 8px;
+          color: var(--common-color-font-primary);
+        }
+      }
+  
+      p + p {
+        margin-left: 32px;
+      }
+    }
+
+    ti-table {
+      margin-top: 10px;
+      font-size: 12px;
+
+      .ti3-table-fixed-head {
+        ti-head-sort {
+          ::ng-deep {
+            .ti3-sort {
+              margin-top: -3px;
+            }
+          }
+        }
+
+        .about-mask {
+          position: relative;
+          app-icon-static {
+            position: absolute;
+            top: 1px;
+            width: 14px;
+            height: 14px;
+            line-height: 18px;
+            margin-left: 8px;
+          }
+        }
+      }
+    }
+
+    &.cache-info-section {
+
+      hr {
+        margin: 10px 0;
+      }
+
+      .cache-info-data {
+        .cache-info-item {
+          font-size: 12px;
+          line-height: 18px;
+          display: flex;
+    
+          .label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--common-color-font-secondary);
+            span:nth-of-type(1) {
+              margin-right: 10px;
+            }
+            hy-theme-content {
+              width: 14px;
+              height: 14px;
+            }
+          }
+    
+          .text {
+            margin-left: 17px;
+            color: var(--common-color-font-primary);
+          }
+        }
+  
+        .cache-info-item + .cache-info-item {
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+
+  section + section {
+    margin-top: 32px;
+  }
+}

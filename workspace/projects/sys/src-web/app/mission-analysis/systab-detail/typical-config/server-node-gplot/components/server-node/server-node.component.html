@@ -1,0 +1,96 @@
+<div class="node-warpper" [tiTip]='tipTemplate'>
+    <!-- node 图标 -->
+    <svg width="80px" height="85px" viewBox="0 0 80 85" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+            <path
+                d="M11,5.37209302 C14.0375661,5.37209302 16.5,7.777261 16.5,10.744186 C16.5,13.7111111 14.0375661,16.1162791 11,16.1162791 C7.96243388,16.1162791 5.5,13.7111111 5.5,10.744186 C5.5,7.777261 7.96243388,5.37209302 11,5.37209302 Z"
+                id="path-1"></path>
+        </defs>
+        <g id="各类分析" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="3-1节点样式示例" transform="translate(-1529.000000, -95.000000)">
+                <g id="icon/节点topo/正常节点备份-9" transform="translate(1529.000000, 95.000000)">
+                    <!-- 较窄圆 -->
+                    <rect [ngStyle]="{display: isFocusNode ? 'none' : 'unset', stroke: nodeColor}" id="矩形-1"
+                        stroke-width="2" x="1" y="1" width="78" height="76.1395349" rx="38.0697674"></rect>
+                    <!-- 较宽圆 -->
+                    <rect [ngStyle]="{display: isFocusNode ? 'unset' : 'none', stroke: nodeColor}" id="矩形-2"
+                        stroke-width="4" x="2" y="2" width="76" height="74.1395349" rx="37.0697674"></rect>
+                    <g id="编组" transform="translate(26.000000, 17.581395)">
+                        <rect id="矩形" [ngStyle]="{stroke: nodeColor}" stroke-width="2.4" x="0" y="0" width="28"
+                            height="42.9767442" rx="2">
+                        </rect>
+                        <rect id="矩形备份-2" [ngStyle]="{stroke: nodeColor}" stroke-width="1.4" x="5" y="4.88372093"
+                            width="18" height="5.86046512" rx="2"></rect>
+                        <rect id="矩形备份-3" [ngStyle]="{stroke: nodeColor}" stroke-width="1.4" x="5" y="14.6511628"
+                            width="18" height="5.86046512" rx="2"></rect>
+                        <ellipse id="椭圆形" [ngStyle]="{stroke: nodeColor}" cx="20" cy="27.3488372" rx="2"
+                            ry="1.95348837">
+                        </ellipse>
+                        <ellipse id="椭圆形备份" [ngStyle]="{stroke: nodeColor}" cx="13" cy="27.3488372" rx="1" ry="1">
+                        </ellipse>
+                    </g>
+                    <!-- 小火箭 -->
+                    <g [ngStyle]="{display: nodeData.nodeSolution ? 'unset' : 'none'}" style="top:996px;" id="编组-2"
+                        transform="translate(33.000000, 68.372093)">
+                        <ellipse id="椭圆形" fill="#ED4B4B" cx="8" cy="7.81395349" rx="8" ry="7.81395349"></ellipse>
+                        <g id="icon/14/小火箭" transform="translate(3.000000, 3.906977)" fill="#FFFFFF">
+                            <path
+                                d="M4.29842933,1.50195507 C5.75346316,0.33949644 7.59302786,-0.174927574 9.47220504,0.052722507 C9.7925752,0.0888117139 10.0252898,0.363579388 9.99779495,0.673290134 C9.86446515,2.50752601 8.98767683,4.16020045 7.53215991,5.32265907 C7.37467616,5.44835544 7.21670934,5.57405181 7.05536098,5.69974818 L6.7722767,7.41154647 C6.75198738,7.55307126 6.6756609,7.67876762 6.56213736,7.76908279 L5.09454345,8.93945563 C4.93298482,9.07143923 4.70881279,9.10621982 4.5124333,9.0297708 C4.31289523,8.96208221 4.16536174,8.79777224 4.1245209,8.59774773 L3.85786131,7.32542118 C2.91199269,7.41154647 2.31345786,6.96416052 1.96998872,6.55960443 L1.88496682,6.45346084 C1.47676509,5.91156984 1.36372461,5.29891644 1.55357463,4.64343314 L0.369548089,4.16392478 C0.175413793,4.08415811 0.0378400727,3.91337179 0.00578964017,3.71234895 C-0.0231951052,3.51216585 0.0579621688,3.30825841 0.219793611,3.17883771 L1.68352289,2.00474054 C1.79608029,1.91442537 1.94197014,1.86694008 2.08737691,1.87112996 L3.7684917,1.92978826 C3.94240013,1.78453912 4.12065627,1.64347988 4.29842933,1.50148952 L4.29842933,1.50195507 Z M6.05347246,2.09318682 C5.46282158,2.10372725 4.98920237,2.5796687 5.00018729,3.15696055 C5.00694724,3.73425239 5.49450885,4.19641019 6.0889622,4.18586974 C6.68003559,4.1757347 7.15365479,3.69938785 7.14266985,3.12209602 C7.13210743,2.54520957 6.64412332,2.08305179 6.05347246,2.09318682 Z M1.9942231,7.948777 C2.06042359,7.93237623 2.11335791,7.8842666 2.13450698,7.82127927 C2.1545853,7.75727846 2.13786855,7.68775483 2.09066827,7.6389575 L0.85266298,6.33805559 C0.806389133,6.29028935 0.737700325,6.26949003 0.671609094,6.28323155 C0.605408597,6.29963233 0.552474277,6.34774197 0.531325205,6.41072931 L0.00745257707,8.12047395 C0.00314768153,8.13847238 0.000651827566,8.15683284 0,8.17529797 L0,8.17869793 C0.00350709278,8.29174592 0.0850471081,8.3720695 0.192013556,8.37206948 C0.224630705,8.37261296 0.256677213,8.36373658 0.28407485,8.34656994 L1.9942231,7.949202 L1.9942231,7.948777 Z"
+                                id="形状备份"></path>
+                        </g>
+                    </g>
+                    <!-- 红点 -->
+                    <g [ngStyle]="{display: nodeData.nodeSolution ? 'none' : 'unset'}" id="icon/16/状态"
+                        transform="translate(29.000000, 66.418605)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="蒙版" fill="#3AD53E" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g id="编组" mask="url(#mask-2)" fill="#61D274">
+                            <g id="3.颜色/2.成功-安全">
+                                <rect id="矩形" x="0" y="0" width="22" height="21.4883721"></rect>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </svg>
+    <!-- IP 地址 -->
+    <p class="ip-addr">{{nodeData.IP || ''}}</p>
+</div>
+
+<!-- tip内容模板，其中let-定义的是模板中用到的上下文 -->
+<ng-template #tipTemplate>
+    <div class="tip-warpper">
+        <div class="node-info">
+            <div class="info-title">
+                <div class="info-item info-item-title">{{ i18n.sys_summary.distributed.ip_addr }}</div>
+                <ng-container *ngIf="nodeData.NODE_TYPE != null">
+                    <div class="info-item info-item-title">{{ i18n.sys_summary.distributed.node_character }}</div>
+                </ng-container>
+                <div class="info-item info-item-title">{{ i18n.sys_summary.distributed.cpu_core_num }}</div>
+                <div class="info-item info-item-title">{{ i18n.sys_summary.distributed.mem_size_total }}</div>
+                <div class="info-item info-item-title">{{ i18n.sys_summary.distributed.per_mem_size }}</div>
+                <div class="info-item info-item-title">{{ i18n.sys_summary.distributed.mem_speed }}</div>
+            </div>
+            <div class="info-value">
+                <div class="info-item info-item-value">{{ nodeData.IP }}</div>
+                <ng-container *ngIf="nodeData.NODE_TYPE != null">
+                    <div class="info-item info-item-value">{{ nodeData.NODE_TYPE == '' ? '--' : nodeData.NODE_TYPE}}</div>
+                </ng-container>
+                <div class="info-item info-item-value">{{ nodeData.CPU_CORE }}</div>
+                <div class="info-item info-item-value">{{ nodeData.MEM }}</div>
+                <div class="info-item info-item-value">{{ nodeData.MEM_PER }}</div>
+                <div class="info-item info-item-value">{{ nodeData.MEM_SPEED }}</div>
+            </div>
+        </div>
+        <div *ngIf="!nodeData.IS_VM && !isBigData" class="run-process">
+            <div class="process-title">{{ i18n.sys_summary.distributed.running_process }}</div>
+            <div class="process-item">ceph-mgr * {{ nodeData['CEPH-MGR'] }}</div>
+            <div class="process-item">ceph-osd * {{ nodeData['CEPH-OSD'] }}</div>
+            <div class="process-item">ceph-mon * {{ nodeData['CEPH-MON'] }}</div>
+        </div>
+    </div>
+</ng-template>

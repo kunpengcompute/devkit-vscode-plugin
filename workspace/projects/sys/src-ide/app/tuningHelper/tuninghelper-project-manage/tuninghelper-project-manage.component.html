@@ -1,0 +1,9 @@
+<app-banner></app-banner>
+<div class="div-p-title">
+    <p class="p-title">{{ i18n.plugins_perf_label_newProject }}</p>
+</div>
+<div class="createProBox">
+    <app-tuninghelper-create-project [currentTool]="showTipType" (createdProject)="createdProject($event)"
+        (jumpToNodeManage)="jumpToNodeManage($event)">
+    </app-tuninghelper-create-project>
+</div>

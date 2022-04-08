@@ -1,0 +1,33 @@
+<div class="warpper">
+    <ti-formfield [formGroup]="ppFormGroup" [labelWidth]="labelWidth">
+        <ti-item [hidden]="!ctl.processCheck.value" [required]="ctl.processCheck.value" class="content">
+            <ti-item-label class="label">
+                <input type="checkbox" tiCheckbox tiValidation formControlName="processCheck"
+                    [label]="i18n.mission_create.process_alias" (ngModelChange)="onNgModelChange($event, 'processCheck')">
+            </ti-item-label>
+            <div class="inputValue">
+                <!-- 进程名输入框 -->
+                <input type="text" tiText tiValidation formControlName="processInput" [ngStyle]="{'width': inputWidth}"
+                    [placeholder]="i18n.mission_create.process_input_placeholder" [tiValidation]='validation'
+                    [errorMessageWrapper]='processErrorMsgWrapper'>
+                <div #processErrorMsgWrapper></div>
+            </div>
+        </ti-item>
+        <ti-item [hidden]="!ctl.pidCheck.value" [required]="ctl.pidCheck.value" class="content">
+            <ti-item-label class="label">
+                <!-- Pid checkbox -->
+                <input type="checkbox" tiCheckbox tiValidation formControlName="pidCheck" [label]="'PID'" (ngModelChange)="onNgModelChange($event, 'pidCheck')">
+            </ti-item-label>
+            <div class="inputValue">
+                <!-- Pid 输入框 -->
+                <textarea *ngIf="atMostPid === attachProcessPidNumMax" tiTextarea tiValidation formControlName="pidInput" [ngStyle]="{'width': inputWidth, 'box-sizing': 'border-box'}"
+                    [placeholder]="i18n.mission_create.pid_input_placeholder" [tiValidation]='validation'
+                    [errorMessageWrapper]='pidErrorMsgWrapper'></textarea>
+                <input *ngIf="atMostPid !== attachProcessPidNumMax" type="text" tiText tiValidation formControlName="pidInput" [ngStyle]="{'width': inputWidth, 'box-sizing': 'border-box'}"
+                    [placeholder]="i18n.mission_create.pid_input_placeholder_java" [tiValidation]='validation'
+                    [errorMessageWrapper]='pidErrorMsgWrapper'>
+                <div #pidErrorMsgWrapper></div>
+            </div>
+        </ti-item>
+    </ti-formfield>
+</div>

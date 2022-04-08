@@ -1,0 +1,104 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Structure Byte Alignment Check">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0249523736.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.T21">
+<meta name="brand" content="Huawei Kunpeng Porting Advisor">
+<meta name="DC.Publisher" content="20201230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0264880574">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Structure Byte Alignment Check</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0264880574"></a><a name="EN-US_TOPIC_0264880574"></a>
+
+<h1 class="topictitle1">Structure Byte Alignment Check</h1>
+<div id="body1595831235458"><p id="EN-US_TOPIC_0264880574__p11711162915413">The tool checks the byte alignment of the structure variables in the source code.</p>
+<div class="section" id="EN-US_TOPIC_0264880574__section641662874317"><h4 class="sectiontitle">Prerequisites</h4><div class="p" id="EN-US_TOPIC_0264880574__p12373143711718">You have logged in to the <span id="EN-US_TOPIC_0264880574__ph997750104712">Kunpeng Porting Advisor</span> WebUI.<div class="notice" id="EN-US_TOPIC_0264880574__note8799192914203"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-en-us.png"> </span><div class="noticebody"><ul id="EN-US_TOPIC_0264880574__en-us_topic_0189775177_ul15320134212322"><li id="EN-US_TOPIC_0264880574__en-us_topic_0189775177_li173203424323">The build command to upload the build file in the source package is executed during the task running. Make sure that the content uploaded is the content that needs to be analyzed and checked and that there are no security issues to avoid affecting the normal operation of the server.</li><li id="EN-US_TOPIC_0264880574__en-us_topic_0189775177_li18103195014339"><strong id="EN-US_TOPIC_0264880574__en-us_topic_0189775177_b12711751153914">/opt/portadv</strong> is the default installation directory of the tool. The following uses this directory as an example. Replace it with the actual directory.</li></ul>
+</div></div>
+</div>
+</div>
+<div class="section" id="EN-US_TOPIC_0264880574__section8124135420196"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0264880574__ol166651423121620"><li id="EN-US_TOPIC_0264880574__li10102950192018"><span>In the navigation pane on the left, select <strong id="EN-US_TOPIC_0264880574__b151987287280">Enhanced Functions</strong>.</span><p><p id="EN-US_TOPIC_0264880574__p152451647202216">Select <strong id="EN-US_TOPIC_0264880574__b1546143512287">Structure Byte Alignment</strong> as the check type, as shown in <a href="#EN-US_TOPIC_0264880574__fig145674894612">Figure 1</a>.</p>
+<div class="fignone" id="EN-US_TOPIC_0264880574__fig145674894612"><a name="EN-US_TOPIC_0264880574__fig145674894612"></a><a name="fig145674894612"></a><span class="figcap"><b>Figure 1 </b>Structure byte alignment check</span><br><span><img id="EN-US_TOPIC_0264880574__image58823121217" src="en-us_image_0000001164936407.png" height="409.9725" width="523.6875"></span></div>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0264880574__table28711415124712" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Parameter description</caption><colgroup><col style="width:24.22%"><col style="width:75.78%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0264880574__row0871151554715"><th align="left" class="cellrowborder" valign="top" width="24.22%" id="mcps1.3.3.2.1.2.3.2.3.1.1"><p id="EN-US_TOPIC_0264880574__p5871111564711">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.78%" id="mcps1.3.3.2.1.2.3.2.3.1.2"><p id="EN-US_TOPIC_0264880574__p1787171554712">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0264880574__row98712015104719"><td class="cellrowborder" valign="top" width="24.22%" headers="mcps1.3.3.2.1.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0264880574__p68710156478">Source Code File Path</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.78%" headers="mcps1.3.3.2.1.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0264880574__p08711151478">Enter a relative path by using either of the following methods:</p>
+<ul id="EN-US_TOPIC_0264880574__ul19401982235"><li id="EN-US_TOPIC_0264880574__li1740158112318">Click <strong id="EN-US_TOPIC_0264880574__b146901015161">Upload</strong> to upload the package or folder. The package will be automatically decompressed during the upload process.</li><li id="EN-US_TOPIC_0264880574__li134020818235">Manually upload the source code file to the specified path (for example, <strong id="EN-US_TOPIC_0264880574__b69655301071">/opt/portadv/portadmin/bytecheck/</strong>) on the server. Grant the read, write, and execute permissions to the <strong id="EN-US_TOPIC_0264880574__b119716307719">porting</strong> user. Then, click the text box to select the source code file path from the drop-down list. You can also manually enter the source code file path.</li></ul>
+<div class="note" id="EN-US_TOPIC_0264880574__note71591932201218"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0264880574__ul83501941185112"><li id="EN-US_TOPIC_0264880574__li95517327205">Only <strong id="EN-US_TOPIC_0264880574__b161911264176">tar</strong>, <strong id="EN-US_TOPIC_0264880574__b1462015266171">tar.bz</strong>, <strong id="EN-US_TOPIC_0264880574__b1762019267177">tar.bz2</strong>, <strong id="EN-US_TOPIC_0264880574__b126201526161717">tar.gz</strong>, <strong id="EN-US_TOPIC_0264880574__b6621122614176">tar.xz</strong>, <strong id="EN-US_TOPIC_0264880574__b2621326181715">tbz</strong>, <strong id="EN-US_TOPIC_0264880574__b20621152671719">tbz2</strong>, <strong id="EN-US_TOPIC_0264880574__b96211426111717">tgz</strong>, <strong id="EN-US_TOPIC_0264880574__b56221826171715">txz</strong>, and <strong id="EN-US_TOPIC_0264880574__b17622192681712">zip</strong> packages can be uploaded. Only one package can be uploaded at a time. The size of the source code package should be less than or equal to 1 GB. The decompressed file size should be less than or equal to half of the remaining drive space.</li><li id="EN-US_TOPIC_0264880574__li7242101791010">Only one folder can be uploaded at a time. The size of the folder must be less than or equal to half of the remaining drive space.</li><li id="EN-US_TOPIC_0264880574__li993192614101">Internet Explorer is incompatible with the folder upload function. You need to use other browsers, such as Google Chrome and Microsoft Edge, to upload folders.</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0264880574__row188711515124720"><td class="cellrowborder" valign="top" width="24.22%" headers="mcps1.3.3.2.1.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0264880574__p15871171510477">Build Tool</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.78%" headers="mcps1.3.3.2.1.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0264880574__p1987118151478">Select the build tool to be used.</p>
+<p id="EN-US_TOPIC_0264880574__p1125915383547">Value:</p>
+<ul id="EN-US_TOPIC_0264880574__ul799594405010"><li id="EN-US_TOPIC_0264880574__li4995114495017">make</li><li id="EN-US_TOPIC_0264880574__li39951446503">cmake</li><li id="EN-US_TOPIC_0264880574__li299584445016">automake</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0264880574__row3519181185119"><td class="cellrowborder" valign="top" width="24.22%" headers="mcps1.3.3.2.1.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0264880574__p65196115512">Compile Command</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.78%" headers="mcps1.3.3.2.1.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0264880574__p65641018175116">Specify the command used to compile the source code.</p>
+<p id="EN-US_TOPIC_0264880574__p477810216411">The compile command is determined based on the configuration file of the build tool. For details, see <a href="en-us_topic_0320090988.html">Identifying Compile Commands Using the Build Tool Configuration File</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="EN-US_TOPIC_0264880574__li3412112212331"><span>Click <strong id="EN-US_TOPIC_0264880574__b335173132412">Check</strong> to start the byte alignment check. After the check is complete, click <strong id="EN-US_TOPIC_0264880574__b14401630182411">View Report</strong>. The page shown in <a href="#EN-US_TOPIC_0264880574__fig19340174216515">Figure 2</a> is displayed.</span><p><div class="notice" id="EN-US_TOPIC_0264880574__note338144885110"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-en-us.png"> </span><div class="noticebody"><p id="EN-US_TOPIC_0264880574__en-us_topic_0189800508_p461752353216">When editing the original code, save the modification in time. Otherwise, the modification may be lost due to session timeout.</p>
+</div></div>
+<div class="fignone" id="EN-US_TOPIC_0264880574__fig19340174216515"><a name="EN-US_TOPIC_0264880574__fig19340174216515"></a><a name="fig19340174216515"></a><span class="figcap"><b>Figure 2 </b>Alignment check</span><br><span><img id="EN-US_TOPIC_0264880574__image8340174275116" src="en-us_image_0319641728.png" height="256.3575" width="523.6875"></span></div>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0264880574__table4340174210515" frame="border" border="1" rules="all"><caption><b>Table 2 </b>Parameter description</caption><colgroup><col style="width:25.629999999999995%"><col style="width:74.37%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0264880574__row1934084214517"><th align="left" class="cellrowborder" valign="top" width="25.629999999999995%" id="mcps1.3.3.2.2.2.3.2.3.1.1"><p id="EN-US_TOPIC_0264880574__p15340642115119">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="74.37%" id="mcps1.3.3.2.2.2.3.2.3.1.2"><p id="EN-US_TOPIC_0264880574__p1434014217515">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0264880574__row834004215118"><td class="cellrowborder" valign="top" width="25.629999999999995%" headers="mcps1.3.3.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0264880574__p12340942205111">File list</p>
+</td>
+<td class="cellrowborder" valign="top" width="74.37%" headers="mcps1.3.3.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0264880574__p153409421512">Lists the source code files analyzed.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0264880574__row11340184285113"><td class="cellrowborder" valign="top" width="25.629999999999995%" headers="mcps1.3.3.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0264880574__p1340184212519">Original Source Code</p>
+</td>
+<td class="cellrowborder" valign="top" width="74.37%" headers="mcps1.3.3.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0264880574__p4340194217511">Displays the original source code.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0264880574__row634044214514"><td class="cellrowborder" valign="top" width="25.629999999999995%" headers="mcps1.3.3.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0264880574__p13340144215111">Structure Variable Memory Allocation</p>
+</td>
+<td class="cellrowborder" valign="top" width="74.37%" headers="mcps1.3.3.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0264880574__p9340542155120">Displays the memory space to be aligned in the code.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note" id="EN-US_TOPIC_0264880574__note7340114285119"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0264880574__ul203401442125117"><li id="EN-US_TOPIC_0264880574__li9340124285112">The tool supports concurrent running of multiple alignment checks.</li><li id="EN-US_TOPIC_0264880574__li1340104214515">To cancel a task, click <strong id="EN-US_TOPIC_0264880574__b186231940182020">Close</strong> during the task running process.</li><li id="EN-US_TOPIC_0264880574__li1340154205118">Only one of the 64-bit mode check and structure type definition alignment check can be performed by a user at a time.</li><li id="EN-US_TOPIC_0264880574__li3340542105112">You can click the arrow keys in the upper right corner of <strong id="EN-US_TOPIC_0264880574__b17886171999">Original Source Code</strong> to view the code.</li><li id="EN-US_TOPIC_0264880574__li199342603515">When the environment changes, the analysis result may be different, which is normal.</li></ul>
+</div></div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0249523736.html">Enhanced Functions</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

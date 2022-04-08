@@ -1,0 +1,71 @@
+<div class="runing-process-thread">
+  <div class="cpu-header">
+    <p class="title">{{ 'tuninghelper.detailedData.runing_process_thread' | i18n }}</p>
+  </div>
+  <div class="cpu-table">
+    <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns" [searchWords]="searchWords"
+      [searchKeys]="searchKeys" tiColsResizable>
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr>
+              <th tiOverflow *ngFor="let column of columns;index as index" width="{{column.width}}">
+                <ti-cell-text>{{column.title}}</ti-cell-text>
+                <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+                <div *ngIf="column.searchKey" class="icon searchIcon">
+                  <ng-container *ngTemplateOutlet="searchTipContent; context: {$implicit: column}"></ng-container>
+                </div>
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="ti3-table-container ti3-resize-wrapper" hyNodata [nodataShow]="displayed.length === 0">
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of columns" width="{{column.width}}"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let row of displayed;index as i">
+              <tr>
+                <td details-icon-column>
+                  <ti-details-icon [row]="row" [index]="i">
+                  </ti-details-icon>
+                </td>
+                <td tiOverflow>{{row['CPU core']}}</td>
+                <td tiOverflow>{{row.pid_tid_count}}</td>
+              </tr>
+              <tr *tiDetailsTr="row">
+                <td tiColspan>
+                  <div class="ti3-table-detail-container">
+                    <div class="detailTdStyle"></div>
+                    <div class="detailTextStyle">
+                      <span *ngFor="let item of row['PID/TID'].split(','); let idx = index"
+                        [ngClass]="{'clickStyle': item.includes('PID')}" (click)="viewThreadsData(item)"><i
+                          class="commaStyle" *ngIf="idx > 0">{{'common_term_sign_comma'| i18n}}</i>{{item}}</span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+      <ti-pagination class="pagination" [(currentPage)]="currentPage" [pageSize]="pageSize"
+        [(totalNumber)]="totalNumber" [showGotoLink]="true"></ti-pagination>
+    </ti-table>
+  </div>
+</div>
+<ng-template #searchTipContent let-column>
+  <ti-icon name="search" class="search-icon"
+    [ngClass]="{'active': processSearchPop.isShow || searchWordsSave[column.searchKey]}" [pop]="searchTip"
+    #processSearchPop="pop" [popOffset]="{x: -40, y: 24 }" popClass="common-table-search-pop" [popContext]="column">
+  </ti-icon>
+  <ng-template #searchTip let-context="context">
+    <ti-searchbox [ngModel]="searchWordsSave[column.searchKey]" (clear)="onTableHeaderSearch('', context)"
+      (search)="onTableHeaderSearch($event, context)">
+    </ti-searchbox>
+  </ng-template>
+</ng-template>

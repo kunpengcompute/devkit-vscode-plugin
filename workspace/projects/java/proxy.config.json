@@ -1,0 +1,26 @@
+{
+  "/user-management/api/": {
+    "target": "http://*.*.*.*:8000/",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/user-management/api/": "http://*.*.*.*:8000/"
+    }
+  },
+  "/api/v2.2/users/": {
+    "target": "http://*.*.*.*:8000/",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  },
+  "/api": {
+    "target": "http://*.*.*.*:8080/api/",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

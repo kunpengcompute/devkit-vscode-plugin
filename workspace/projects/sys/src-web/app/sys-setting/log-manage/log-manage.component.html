@@ -1,0 +1,43 @@
+<div class="logManageBox configItemBox">
+  <div class="boxHeader">
+    <span class="create-title">{{ role === 'Admin' ? i18n.log : i18n.common_term_admin_log }}</span>
+  </div>
+
+  <div class="boxMain">
+    <ti-tabs *ngIf="role === 'Admin'; else commonUser" dark class="logTab custemDarkTabs">
+      <!-- 操作日志 -->
+      <ti-tab [header]="i18n.common_term_admin_log" [active]="true" class="operateLogTab">
+        <ti-tabs class="operateLogTabs custemTabs tabsWithSplitLine">
+          <!-- 公共日志 -->
+          <ti-tab [header]="i18n.operationLog.commonLog" [active]="true">
+            <app-common-operate-log></app-common-operate-log>
+          </ti-tab>
+
+          <!-- 系统性能分析工具日志 -->
+          <ti-tab [header]="isDiagnose?i18n.diagnostic.analysis_log:i18n.operationLog.sysLog">
+            <app-sys-operate-log></app-sys-operate-log>
+          </ti-tab>
+        </ti-tabs>
+      </ti-tab>
+
+      <!-- 运行日志 -->
+      <ti-tab [header]="i18n.operationLog.workingLog">
+        <app-header-download-log></app-header-download-log>
+      </ti-tab>
+    </ti-tabs>
+
+    <ng-template #commonUser>
+      <ti-tabs dark class="operateLogTabs custemDarkTabs">
+        <!-- 公共日志 -->
+        <ti-tab [header]="i18n.operationLog.commonLog" [active]="true">
+          <app-common-operate-log></app-common-operate-log>
+        </ti-tab>
+
+        <!-- 系统性能分析工具日志 -->
+        <ti-tab [header]="isDiagnose?i18n.diagnostic.analysis_log:i18n.operationLog.sysLog">
+          <app-sys-operate-log></app-sys-operate-log>
+        </ti-tab>
+      </ti-tabs>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+.box {
+    display: flex;
+    justify-content: space-around;
+    height: 40px;
+    position: relative;
+    margin-bottom: 24px;
+    border: var(--time-line-border);
+
+    .time {
+        flex: 1;
+        height: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--d-161616-l-ffffff);
+
+        span {
+            width: 2px;
+            height: 6px;
+            background-color: #6c7280;
+            display: block;
+        }
+
+        p {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            height: 12px;
+            font-size: 12px;
+            line-height: 12px;
+            color: var(--d-aaaaaa-l-222222);
+        }
+    }
+
+    .select {
+        position: absolute;
+        display: flex;
+        justify-content: space-between;
+        background-color: rgba($color: #0067FF, $alpha: 0.16);
+        width: 100%;
+        left: 0px;
+        height: 100%;
+        align-items: center;
+        border-left: 1px solid #0067FF;
+        border-right: 1px solid #0067FF;
+        margin-right: 1px;
+        margin-left: 1px;
+
+        span {
+            width: 4px;
+            height: 20px;
+            display: block;
+            background-color: #0067FF;
+            cursor: move;
+        }
+
+        .left {
+            margin-left: -2px;
+            cursor: w-resize;
+        }
+
+        .right {
+            margin-right: -2px;
+            cursor: e-resize;
+
+        }
+    }
+}
+::ng-deep .vscode-light {
+    --time-line-border: 1px solid #d4d9e6;
+    .box .time {
+        background: none !important;
+    }
+}
+::ng-deep .vscode-dark {
+    --time-line-border: none;
+}

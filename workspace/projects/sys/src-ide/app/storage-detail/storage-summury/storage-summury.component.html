@@ -1,0 +1,248 @@
+<div class="scroll-content" id="io-summury">
+    <app-msg-suggestion *ngIf="suggestMsg.length" [suggestMsg]="suggestMsg"></app-msg-suggestion>
+    <!-- 磁盘I/O -->
+    <div class="section-content" style="margin-bottom: 32px;">
+        <app-block-io-trace [blockData]="blockIOData" *ngIf="blockIOData" [platform]="'vscode'"></app-block-io-trace>
+        <div class="section-title">{{i18n.storageIO.disk_title}}</div>
+        <div class="selectTableBox">
+
+            <!-- 磁盘io表头筛选器 -->
+            <div class="headerFilter">
+                <img src="./assets/img/micarch/tableHeader.svg" (click)="disksHeadShow = !disksHeadShow">
+                <div class="statusFilter" [ngClass]="{'active': disksHeadShow}" appClickOutside (clickOutside)="disksHeadShow = false">
+                    <span *ngFor="let item of diskColumns">
+                        <input type="checkbox" tiCheckitem [item]="item" [disabled]="item.disabled"
+                            [beCheckeds]="diskCheckedData" [label]="item.title" (change)="diskHeaderChange()">
+                        <span style="padding-left: 10px;"></span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- 磁盘io表单 -->
+            <ti-table [(displayedData)]="diskDisplayedData" [srcData]="diskSrcData" [columns]="diskTitle"
+                [searchWords]="diskSearchWords" [searchKeys]="diskSearchKeys">
+                <div class="ti3-table-fixed-head">
+                    <table>
+                        <thead>
+                            <tr>
+                                <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                                <th details-icon-column></th>
+                                <ng-container *ngFor="let column of diskTitle;index as i;">
+                                    <th *ngIf="i === 0">
+                                        <ti-cell-text>{{column.title}}</ti-cell-text>
+                                        <ti-head-filter [options]="column.options" [(ngModel)]="column.selected"
+                                            (select)="onDiskSelect($event)" [selectAll]="true"
+                                            [ngClass]="{'ti3-head-filtered': column.selected && column.selected.length}"
+                                            [multiple]="column.multiple">
+                                        </ti-head-filter>
+                                    </th>
+                                    <th *ngIf="i !== 0">
+                                        <ti-cell-text>{{column.title}}</ti-cell-text>
+                                        <ti-head-sort [sortKey]="column.sortKey"></ti-head-sort>
+                                    </th>
+                                </ng-container>
+                                <th tiOverflow>
+                                    <ti-cell-text>{{i18n.common_term_operate}}</ti-cell-text>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+                <!--.ti3-table-container是表体的容器，它的子元素中的table的thead是用来控制各列宽度，实际不显示；tbody是实际显示的表体-->
+                <!--注意1:此处一定要使用.ti3-table-container样式类-->
+                <!--注意2:用户在有.ti3-table-container样式类的容器上来设置表体的高度或最大高度-->
+                <div class="ti3-table-container" style="height: 470px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th details-icon-column></th>
+                                <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                                <th *ngFor="let column of diskTitle"></th>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                            <ng-container *ngFor="let obj of diskDisplayedData;index as i;trackBy: trackByFn">
+                                <tr>
+                                    <td details-icon-column>
+                                        <!--详情图标设置，传入行数据-->
+                                        <img class="expand-icon" [ngClass]="{hasNodata: obj.is_empty, active: obj.showDetails}" 
+                                            (click)="obj.showDetails = !obj.showDetails" src="./assets/img/summary/row.svg">
+                                    </td>
+                                    <ng-container *ngFor="let item of diskTitle; index as i">
+                                        <td tiOverflow> {{obj[item.key] }} </td>
+                                    </ng-container>
+                                    <td class="hover-line" tiOverflow>
+                                        <span *ngIf="obj.is_empty" class="no-data-line">--</span>
+                                        <span *ngIf="!obj.is_empty" style="color:#6c92fa;cursor: pointer;"
+                                            (click)="viewDiskDetails(obj, 'disk')">{{i18n.storageIO.summury.viewDetails}}</span>
+                                    </td>
+
+                                </tr>
+                                <tr *tiDetailsTr="obj" class="tiDetailsTr template"
+                                    [ngClass]="{'active': obj.showDetails}">
+                                    <!--详情内容行tiDetailsTr，传入行数据-->
+                                    <!-- tiColspan是为了使得该td（详情内容）占据表格整个宽度(列合并)，tiColspan列合并的值为columns接口传入的对象数组中
+                      中show属性值不为false的对象的个数。本例中，作用相当于colspan='6' -->
+                                    <td class="collapsed" [attr.colspan]="diskColspan">
+                                        <app-data-size-chart
+                                            [data]="obj.size_distributions"
+                                            [dev]="obj.dev"
+                                            [name]="'size'">
+                                        </app-data-size-chart>
+                                        <app-data-size-chart
+                                            [data]="obj.i2d_delay_distributions"
+                                            [dev]="obj.dev"
+                                            *ngIf="hasAddI2D"
+                                            [name]="'i2d_delay'">
+                                        </app-data-size-chart>
+                                        <app-data-size-chart
+                                            [data]="hasAddI2D ? obj.d2c_delay_distributions : obj.delay_distributions"
+                                            [dev]="obj.dev"
+                                            [name]="hasAddI2D ? 'd2c_delay' : 'delay'">
+                                        </app-data-size-chart>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                    <app-default-page *ngIf="diskSrcData.data.length === 0" [text]="nodataTips"></app-default-page>
+                </div>
+                <!-- 磁盘I/O控件 -->
+                <ti-pagination *ngIf="diskSrcData.data.length !== 0" [(currentPage)]="diskCurrentPage" [pageSize]="diskPageSize"
+                    [(totalNumber)]="diskTotalNumber">
+                </ti-pagination>
+            </ti-table>
+
+        </div>
+    </div>
+
+    <!-- APIs -->
+    <div class="section-content" *ngIf="ifSys">
+        <div class="section-title">I/O APIs</div>
+
+        <ti-table [(displayedData)]="threadDisplayedData" [srcData]="threadSrcData" [columns]="pidColumns">
+            <div class="ti3-table-fixed-head">
+                <table>
+                    <thead>
+                        <tr>
+                            <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                            <th details-icon-column></th>
+                            <ng-container *ngFor="let column of pidColumns;index as i;">
+                                <th>
+                                    <ti-cell-text>{{column.title}}</ti-cell-text>
+                                    <ti-head-filter [options]="column.options" [(ngModel)]="column.selected"
+                                        (select)="onProcessSelect($event)" [selectAll]="true"
+                                        [ngClass]="{'ti3-head-filtered': column.selected && column.selected.length}"
+                                        [multiple]="true">
+                                    </ti-head-filter>
+                                </th>
+                            </ng-container>
+                            <th tiOverflow>
+                                <ti-cell-text>{{i18n.common_term_operate}}</ti-cell-text>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <!--.ti3-table-container是表体的容器，它的子元素中的table的thead是用来控制各列宽度，实际不显示；tbody是实际显示的表体-->
+            <!--注意1:此处一定要使用.ti3-table-container样式类-->
+            <!--注意2:用户在有.ti3-table-container样式类的容器上来设置表体的高度或最大高度-->
+            <div class="ti3-table-container" style="height: 470px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th details-icon-column></th>
+                            <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                            <th *ngFor="let column of pidColumns"></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <ng-container *ngFor="let obj of threadDisplayedData;index as i;trackBy: trackByFn">
+                            <tr>
+                                <td details-icon-column style="width: 45px !important;">
+                                    <!--详情图标设置，传入行数据-->
+                                    <img class="expand-icon" [ngClass]="{active: obj.showDetails}" 
+                                    (click)="beforeToggleFun(obj, i)" src="./assets/img/summary/row.svg">
+                                </td>
+                                <td tiOverflow>{{ obj.pid }}</td>
+                                <td tiOverflow>{{ obj.cmd_name || '--' }}</td>
+                                <td class="hover-line"> <span style="color:#6c92fa;cursor: pointer;"
+                                        (click)="viewDiskDetails(obj, 'pid')">{{i18n.storageIO.summury.viewDetails}}</span>
+                                </td>
+                            </tr>
+
+                            <tr *tiDetailsTr="obj" class="tiDetailsTr template">
+                                <!--详情内容行tiDetailsTr，传入行数据-->
+                                <!-- tiColspan是为了使得该td（详情内容）占据表格整个宽度(列合并)，tiColspan列合并的值为columns接口传入的对象数组中
+                      中show属性值不为false的对象的个数。本例中，作用相当于colspan='6' -->
+                                <td colspan="4" class="collapsed">
+                                    <!-- 进程函数表单 -->
+                                    <ti-table [(displayedData)]="obj.displayedData" [srcData]="obj.srcData" [columns]="threadColumns" class="ti3-table-small table-func">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <ti-cell-text>{{threadColumns[0].title}}</ti-cell-text>
+                                                        <ti-head-filter [options]="obj.options"
+                                                            [(ngModel)]="obj.selected"
+                                                            (select)="functionSelect($event, obj)" [selectAll]="true"
+                                                            [ngClass]="{'ti3-head-filtered': obj.selected && obj.selected.length}"
+                                                            [multiple]="true">
+                                                        </ti-head-filter>
+                                                    </th>
+                                                    <ng-container *ngFor="let item of [1,2, 3, 4]">
+                                                        <th>
+                                                            <ti-cell-text>{{threadColumns[item].title}}
+                                                            </ti-cell-text>
+                                                            <ti-head-sort [sortKey]="threadColumns[item].sortKey">
+                                                            </ti-head-sort>
+                                                        </th>
+                                                    </ng-container>
+                                                    <th tiOverflow>
+                                                        <ti-cell-text>{{i18n.common_term_operate}}</ti-cell-text>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <tr *ngFor="let row of obj.displayedData; index as i;"
+                                                    [ngClass]="{'ti3-selected-tr': obj.threadCheckedList.indexOf(row) !== -1}">
+                                                    <ng-container *ngFor="let item of threadColumns; index as i">
+                                                        <ng-container>
+                                                            <td tiOverflow> {{row[item.key] | thousandSeparator}} </td>
+                                                        </ng-container>
+                                                    </ng-container>
+                                                    <td class="hover-line"> <span style="color:#6c92fa;cursor: pointer;"
+                                                            (click)="viewDiskDetails(obj,'function', row)">{{i18n.storageIO.summury.viewDetails}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                        <!-- 函数分页控件 -->
+                                        <ti-pagination class="ti-page-func" [(currentPage)]="obj.currentPage" [pageSize]="obj.pageSize"
+                                            [(totalNumber)]="obj.totalNumber">
+                                        </ti-pagination>
+                                    </ti-table>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <app-loading *ngIf="showLoading" [height]="'100%'"></app-loading>
+                <app-default-page *ngIf="threadSrcData.data.length === 0 && !showLoading" [height]="'100%'" [text]="nodataTips"></app-default-page>
+            </div>
+            <!-- 进程分页控件 -->
+            <ti-pagination  *ngIf="threadSrcData.data.length !== 0" [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber">
+            </ti-pagination>
+        </ti-table>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+.warpper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    .axis-box {
+        width: calc(100% - 12px);
+        height: 100%;
+        display: inline-block;
+        position: relative;
+        border: 1px solid #d4d9e6;
+        .virtual-hotspot {
+            position: absolute;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba($color: #6c92fa, $alpha: 0.15);
+            width: 100%;
+            height: 100%;
+            left: -1px;
+            border-left: 1px solid #6c92fa;
+            border-right: 1px solid #6c92fa;
+
+            .essential-hotspot{
+                width: 100%;
+                height: 100%;
+            }
+
+            .vernier-being {
+                width: 4px;
+                height: 20px;
+                background-color: #0067ff;
+            }
+
+            .vernier-left {
+                position: relative;
+                left: -3px;
+                cursor: ew-resize;
+            }
+
+            .vernier-right {
+                position: relative;
+                right: -2px;
+                cursor: ew-resize;
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+.table-box{
+    position: relative;
+   display: flex
+}
+.table-y{
+   width: 10%;
+   height: 100%;
+   .line{
+      height: 1px !important;
+      background: var(--echarts-line-bg-color);
+   }
+}
+.over-table{
+   height: 100%;
+   margin-left: -4px;
+   flex: 1;
+   & > div {
+      width: 99%;
+      height: 550px;
+      border-top: 1px solid var(--echarts-line-bg-color);
+   }
+}
+.title-box{
+   width: 100%;
+    display: flex;
+   flex-direction: column;
+   padding-left: 10%;
+}

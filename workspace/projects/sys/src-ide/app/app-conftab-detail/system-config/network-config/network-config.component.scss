@@ -1,0 +1,121 @@
+.system-item {
+  margin-top: 2.7vh;
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.system-content-title {
+  font-size: 20px;
+  color: #282b33;
+  float: left;
+  margin-bottom: 34px;
+}
+
+.system-tip {
+  float: left;
+  margin-left: 8px;
+  margin-top: 8px;
+}
+
+.system-content-table {
+  width: 100%;
+  color: #282b33;
+  border-collapse: collapse;
+}
+
+.system-titlebar {
+  height: 32px;
+  background-color: #f0f3fa;
+  box-shadow: inset 0px -1px 0px 0px #e6ebf5;
+  font-size: 12px;
+  line-height: 32px;
+}
+
+.system-tiTip {
+  margin-left: 3px;
+  margin-top: 1px;
+  vertical-align: -3%;
+}
+
+.system-line {
+  position: relative;
+}
+
+.system-line::before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 11px;
+  top: 11px;
+  left: -9px;
+  background: #d4d9e6;
+}
+
+.system-word {
+  height: 3vh;
+  font-size: 14px;
+  box-shadow: inset 0px -1px 0px 0px #e6ebf5;
+  line-height: 3vh;
+}
+
+.system-info {
+  margin-top: 30px;
+}
+
+.system-info-title {
+  font-size: 14px;
+  color: #6c7280;
+}
+
+.system-info-text {
+  font-size: 20px;
+  margin-left: 16px;
+  margin-right: 32px;
+}
+tr th,
+tr td {
+  overflow: hidden; //超出的文本隐藏
+  text-overflow: ellipsis; //溢出用省略号显示
+  white-space: nowrap; //溢出不换行
+  padding-left: 1vw;
+}
+
+// offload表格
+.offload.system-content-table {
+  tr th,
+  tr td {
+    max-width: 7vw;
+  }
+}
+
+table tr th {
+  position: relative;
+  &::after {
+    position: absolute;
+    width: 2px;
+    height: 11px;
+    background-color: #d4d9e6;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    content: "";
+  }
+  &:first-child {
+    &::after {
+      width: 0;
+    }
+  }
+}
+
+.system-item.queue {
+  table {
+    th,
+    td {
+      width: 100%;
+      &:first-child {
+        width: 20%;
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<ng-template #oomDetailsModal let-context='context'>
+    <!-- 弹框头部定义 -->
+    <ti-modal-header>
+        <div class="title">{{diagnoseType=== 'exception'?
+            i18n.diagnostic.exception.more_detail_title:i18n.oomDetail.oomDetailsTitle}}</div>
+    </ti-modal-header>
+    <ti-searchbox id="search-box" [maxlength]="'100'" [placeholder]="i18n.common_term_operate_search"
+        [(ngModel)]="searchValue" autofocus (ngModelChange)="onModelChange($event)" (keydown)="jumpNext($event)">
+    </ti-searchbox>
+    <!-- 弹框内容定义 -->
+    <ti-modal-body id="oomDetailsContent">
+        <div class="details-list">
+            <div class="detail-item" *ngFor="let item of detailLists">
+                <span *ngIf="!searchValue">{{item}}</span>
+                <span *ngIf="searchValue" [innerHTML]="item | searchKeyWord: searchValue"></span>
+            </div>
+        </div>
+    </ti-modal-body>
+    <!-- 弹框底部定义 -->
+    <ti-modal-footer id="closeModalButton">
+        <button tiButton type="button" (click)="context.dismiss()">{{i18n.oomDetail.shutdown}}</button>
+    </ti-modal-footer>
+</ng-template>

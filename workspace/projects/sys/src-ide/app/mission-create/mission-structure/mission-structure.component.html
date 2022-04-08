@@ -1,0 +1,406 @@
+<div class="structure" [ngClass]="{strulab: isModifySchedule}">
+    <ti-formfield
+        vertical
+        [labelWidth]="labelWidth"
+        [formGroup]="micarchCurrntForm"
+        class="taskForm"
+    >
+        <!-- 选择节点 -->
+        <ti-item *ngIf="analysisScene.TYPE_HPC === scenes" [required]="true">
+        <ti-item-label>
+            {{ i18n.node.selectNode }}
+            <span class="tint">{{ 'project.HPCSelectNodeTxt' | i18n : ('mission_create.structure' | i18n) }}</span>
+        </ti-item-label>
+        <app-not-hpc-select-nodes
+            [width]="isModifySchedule ? '600px' : '952px'"
+            [nodeList]="nodeList"
+            [isSelectNodeDisabled]="isSelectNodeDisabled"
+            formControlName="nodeList"
+            ></app-not-hpc-select-nodes>
+        </ti-item>
+    </ti-formfield>
+    <!-- 系统 -->
+    <ti-formfield vertical [labelWidth]="labelWidth" [formGroup]="profileItemsMicarchForm" *ngIf="isProfile">
+        <!-- 采样模式 -->
+        <ti-item [label]="micarchItems.samplingSwitch.label" [required]="micarchItems.samplingSwitch.required"
+            class='switch'>
+            <div *ngFor="let item of micarchItems.samplingSwitch.options"
+                style="display: inline-block;margin-right: 20px" class="myradio"
+                [ngClass]="{radiomarg: isModifySchedule}">
+                <input type="radio" tiRadio [disabled]="item.disable" (ngModelChange)='simplingSwitchChange($event)'
+                    [value]="item.id" [label]="item.key" formControlName='mode_ctrl' />
+            </div>
+            <p class="desc-content1" [ngClass]="{changcontent: isModifySchedule}">{{micarchItems.samplingSwitch.tip}}
+            </p>
+        </ti-item>
+        <!-- 采样时长 -->
+        <ti-item [label]="i18n.sys.duration" [required]="true">
+            <div class='info-icon margin-bottom' [ngClass]="{infoicon: isModifySchedule}" style="align-items: center;">
+                <ti-spinner name='spinner' [step]='micarchItems.res_d.step' [format]="micarchItems.res_d.format"
+                    [placeholder]='micarchItems.res_d.placeholder' [appSpinnerBlur]="samplingDurationBlur" tiValidation
+                    formControlName='sampling_ctrl'>
+                </ti-spinner>
+                <span class="margin-left">{{ micarchItems.res_d.tailPrompt }}</span>
+            </div>
+        </ti-item>
+        <!-- 采样间隔 -->
+        <ti-item [label]="micarchItems.cpu.label+ ' (' + LaunchItemsLock.cpu.unit + ')'"
+            [required]="micarchItems.cpu.required">
+            <div class='info-icon margin-bottom' [ngClass]="{infoicon: isModifySchedule}" style="align-items: center;">
+                <ti-spinner name='spinner' [step]='micarchItems.cpu.spinner.step' [appSpinnerBlur]="intervalBlur"
+                    [format]="micarchItems.cpu.spinner.format" [placeholder]='micarchItems.cpu.spinner.placeholder'
+                    tiValidation formControlName='cpu_spinner_ctrl'></ti-spinner>
+                <span class="margin-left">{{ micarchItems.cpu.spinner.tailPrompt }}</span>
+            </div>
+        </ti-item>
+        <!-- 分析指标 -->
+        <ti-item [label]="micarchItems.analysis.label" [required]="true">
+            <div [ngClass]="{anasytip: isModifySchedule}"
+                style="width: 72%;position: relative;top: 10px;display: flex;flex-wrap:wrap;" class="sys-type-label">
+                <span *ngFor="let item of micarchItems.analysis.options" [ngClass]="{fontsize: isModifySchedule}">
+                    <input type="radio" tiRadio formControlName='analysisTypes' [value]="item.id" [label]="item.text"
+                        [disabled]="micarchItems.analysis.disabled">
+                    <ti-icon [tiTip]="item.tip" style="margin-left:10px;" tiTipMaxWidth='370px' tiTipPosition="bottom">
+                        <img src='./assets/img/template/icon_question.svg' class="imgQuestion">
+                    </ti-icon>
+                </span>
+            </div>
+        </ti-item>
+
+        <!-- 待采样CPU核 -->
+        <ti-item [required]="false">
+            <ti-item-label>
+                <span>{{i18n.micarch.cpu_kernel}}</span>
+                <ti-icon [tiTip]="i18n.tip_msg.common_term_task_crate_mask_tip" style="margin-left:10px;"
+                    tiTipMaxWidth='370px' tiTipPosition="bottom">
+                    <img src='./assets/img/template/icon_question.svg' class="imgQuestion">
+                </ti-icon>
+            </ti-item-label>
+            <input [ngClass]="{spinnerstep: isModifySchedule}" type="text" tiText [tiValidation]='validation'
+                formControlName='cpu_kernel_ctrl' [placeholder]="i18n.cpu_kernel_All" style="width: 300px">
+        </ti-item>
+        <!-- 采样范围 -->
+        <ti-item [required]="false">
+            <ti-item-label>
+                <span>{{i18n.micarch.label.typeItem}}</span>
+            </ti-item-label>
+            <ti-select style="width: 300px;" [options]="micarchItems.typeItem.options" [tiValidation]='validation'
+                [ngClass]="{spinnerstep: isModifySchedule}" formControlName='typeItem_ctrl'></ti-select>
+        </ti-item>
+        <!-- 延时采样时长 -->
+        <ti-item [required]="false">
+            <div class='info-icon margin-bottom' [ngClass]="{infoicon: isModifySchedule}" style="align-items: center;">
+                <ti-item-label>
+                    <span>{{i18n.micarch.simpling_delay}}</span>
+                    <ti-icon [tiTip]="micarchItems.cpu.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                        tiTipPosition="bottom">
+                        <img src='./assets/img/template/icon_question.svg' class="imgQuestion">
+                    </ti-icon>
+                </ti-item-label>
+                <ti-spinner name='spinner' [step]='micarchItems.cpu.spinner_delay.step'
+                    [format]="micarchItems.cpu.spinner_delay.format" [appSpinnerBlur]="delaySamplingDurationBlur"
+                    [placeholder]='micarchItems.cpu.spinner_delay.placeholder' tiValidation
+                    formControlName='timing_spinner_ctrl' style='width: 116px;'>
+                </ti-spinner>
+                <span class="margin-left">{{ micarchItems.cpu.spinner_delay.tailPrompt }}</span>
+            </div>
+        </ti-item>
+        <!-- c/c++源文件 -->
+        <ti-item [required]="micarchItems.c_source.required">
+            <ti-item-label>
+                <span>{{micarchItems.c_source.label}}</span>
+                <ti-icon [tiTip]="micarchItems.c_source.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/template/icon_question.svg' class="imgQuestion">
+                </ti-icon>
+            </ti-item-label>
+            <input [ngClass]="{spinnerstep: isModifySchedule}" type="text" tiText [tiValidation]='validation'
+                formControlName='source_ctrl' style="width: 300px">
+        </ti-item>
+        <!-- 采集文件大小 -->
+        <ti-item [label]="i18n.common_term_task_crate_collectFiles" [required]="false" class="filrFize">
+            <ti-spinner name='spinner' [step]='micarchItems.fileSize.step' [format]="micarchItems.fileSize.format"
+                [placeholder]='micarchItems.fileSize.placeholder' formControlName='fileSize' style='width: 116px;'
+                [appSpinnerBlur]="collectFileBlur" tiValidation>
+            </ti-spinner>
+            <span class="margin-left">{{micarchItems.fileSize.tailPrompt}}</span>
+        </ti-item>
+        <!-- 内核函数关联汇编指令 -->
+        <ti-item [required]="micarchItems.kcore.required">
+            <ti-item-label [ngClass]="{'wrap':isModifySchedule && micarchItems.kcore.label === strObj.kcore}">
+                <span tiOverflow>{{ micarchItems.kcore.label }}</span></ti-item-label>
+            <div class="formContent">
+                <ti-switch formControlName="kcore"></ti-switch>
+            </div>
+        </ti-item>
+    </ti-formfield>
+
+    <!-- 应用 Launch -->
+    <ti-formfield vertical [labelWidth]="labelWidth" [formGroup]='launchItemsMicarchForm' *ngIf="isLaunch">
+        <!-- 采样模式 -->
+        <ti-item [label]="micarchItems.samplingSwitch.label" [required]="micarchItems.samplingSwitch.required"
+            [colspan]="micarchItems.samplingSwitch.colspan" class='switch'>
+            <div *ngFor="let item of micarchItems.samplingSwitch.options"
+                style="display: inline-block;margin-right: 20px" class="myradio"
+                [ngClass]="{radiomarg: isModifySchedule}">
+                <input type="radio" tiRadio [disabled]="item.disable" (ngModelChange)='simplingSwitchChange($event)'
+                    [value]="item.id" [label]="item.key" formControlName='mode_ctrl' />
+            </div>
+            <p class="desc-content1" [ngClass]="{changcontent: isModifySchedule}">{{micarchItems.samplingSwitch.tip}}
+            </p>
+        </ti-item>
+        <!-- 采样时长 -->
+        <ti-item [label]="i18n.sys.duration" [required]="true">
+            <div class='info-icon margin-bottom' [ngClass]="{infoicon: isModifySchedule}" style="align-items: center;">
+                <ti-spinner name='spinner' [step]='micarchItems.res_d.step' [format]="micarchItems.res_d.format"
+                    [placeholder]='micarchItems.res_d.placeholder' tiValidation formControlName='sampling_ctrl'
+                    style='width: 116px;' [appSpinnerBlur]="samplingDurationBlur"></ti-spinner>
+                <span class="margin-left">{{ micarchItems.res_d.tailPrompt }}</span>
+            </div>
+        </ti-item>
+        <!-- 采样间隔 -->
+        <ti-item [label]="micarchItems.cpu.label+ ' (' + LaunchItemsLock.cpu.unit + ')'"
+            [required]="micarchItems.cpu.required">
+            <div class='info-icon margin-bottom' [ngClass]="{infoicon: isModifySchedule}" style="align-items: center;">
+                <ti-spinner name='spinner' [step]='micarchItems.cpu.spinner.step' [appSpinnerBlur]="intervalBlur"
+                    [format]="micarchItems.cpu.spinner.format" [placeholder]='micarchItems.cpu.spinner.placeholder'
+                    tiValidation formControlName='cpu_spinner_ctrl' style='width: 116px;'></ti-spinner>
+                <span class="margin-left">{{ micarchItems.cpu.spinner.tailPrompt }}</span>
+            </div>
+        </ti-item>
+        <!-- 分析指标 -->
+        <ti-item [label]="micarchItems.analysis.label" [required]="true">
+            <div [ngClass]="{anasytip: isModifySchedule}"
+                style="width: 72%;position: relative;top: 10px;display: flex;flex-wrap:wrap;" class="sys-type-label">
+                <span *ngFor="let item of micarchItems.analysis.options" [ngClass]="{fontsize: isModifySchedule}">
+                    <input type="radio" tiRadio formControlName='analysisTypes' [value]="item.id" [label]="item.text"
+                        [disabled]="micarchItems.analysis.disabled">
+                    <ti-icon [tiTip]="item.tip" style="margin-left:10px;" tiTipMaxWidth='370px' tiTipPosition="bottom">
+                        <img src='./assets/img/template/icon_question.svg' class="imgQuestion">
+                    </ti-icon>
+                </span>
+            </div>
+        </ti-item>
+
+        <!-- 采样范围 -->
+        <ti-item [required]="false">
+            <ti-item-label>
+                <span>{{i18n.micarch.label.typeItem}}</span>
+            </ti-item-label>
+            <ti-select [ngClass]="{spinnerstep: isModifySchedule}" style="width: 300px;"
+                [options]="micarchItems.typeItem.options" [tiValidation]='validation' formControlName='typeItem_ctrl'>
+            </ti-select>
+        </ti-item>
+        <!-- 延时采样时长 -->
+        <ti-item [required]="false">
+            <div class='info-icon margin-bottom' [ngClass]="{infoicon: isModifySchedule}" style="align-items: center;">
+                <ti-item-label>
+                    <span>{{i18n.micarch.simpling_delay}}</span>
+                    <ti-icon [tiTip]="micarchItems.cpu.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                        tiTipPosition="bottom">
+                        <img src='./assets/img/template/icon_question.svg' class="imgQuestion">
+                    </ti-icon>
+                </ti-item-label>
+                <ti-spinner name='spinner' [step]='micarchItems.cpu.spinner_delay.step'
+                    [format]="micarchItems.cpu.spinner_delay.format" [appSpinnerBlur]="delaySamplingDurationBlur"
+                    [placeholder]='micarchItems.cpu.spinner_delay.placeholder' tiValidation
+                    formControlName='timing_spinner_ctrl' style='width: 116px;'>
+                </ti-spinner>
+                <span class="margin-left">{{ micarchItems.cpu.spinner_delay.tailPrompt }}</span>
+            </div>
+        </ti-item>
+        <!-- c/c++源文件 -->
+        <ti-item [required]="micarchItems.c_source.required">
+            <ti-item-label>
+                <span>{{micarchItems.c_source.label}}</span>
+                <ti-icon [tiTip]="micarchItems.c_source.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/template/icon_question.svg' class="imgQuestion">
+                </ti-icon>
+            </ti-item-label>
+            <input [ngClass]="{spinnerstep: isModifySchedule}" type="text" tiText [tiValidation]='validation'
+                formControlName='source_ctrl' style="width: 300px">
+        </ti-item>
+        <!-- 采集文件大小 -->
+        <ti-item [label]="i18n.common_term_task_crate_collectFiles" [required]="false">
+            <ti-spinner name='spinner' [step]='micarchItems.fileSize.step' [format]="micarchItems.fileSize.format"
+                [placeholder]='micarchItems.fileSize.placeholder' [appSpinnerBlur]="collectFileBlur"
+                formControlName='fileSize' style='width: 116px;' tiValidation>
+            </ti-spinner>
+            <span class="margin-left">{{micarchItems.fileSize.tailPrompt}}</span>
+        </ti-item>
+        <!-- 内核函数关联汇编指令 -->
+        <ti-item [required]="micarchItems.kcore.required">
+            <ti-item-label [ngClass]="{'wrap':isModifySchedule && micarchItems.kcore.label === strObj.kcore}">
+                <span tiOverflow>{{ micarchItems.kcore.label }}</span></ti-item-label>
+            <div class="formContent">
+                <ti-switch formControlName="kcore"></ti-switch>
+            </div>
+        </ti-item>
+    </ti-formfield>
+
+    <!-- 应用 attarch -->
+    <ti-formfield vertical [labelWidth]="labelWidth" [formGroup]='attachItemsMicarchForm' *ngIf="isAttach">
+        <!-- 采样模式 -->
+        <ti-item [label]="micarchItems.samplingSwitch.label" [required]="micarchItems.samplingSwitch.required"
+            class='switch'>
+            <div *ngFor="let item of micarchItems.samplingSwitch.options"
+                style="display: inline-block;margin-right: 20px" class="myradio"
+                [ngClass]="{radiomarg: isModifySchedule}">
+                <input type="radio" tiRadio [disabled]="item.disable" (ngModelChange)='simplingSwitchChange($event)'
+                    [value]="item.id" [label]="item.key" formControlName='mode_ctrl' />
+            </div>
+            <p class="desc-content1" [ngClass]="{changcontent: isModifySchedule}">{{micarchItems.samplingSwitch.tip}}
+            </p>
+        </ti-item>
+        <!-- 采样时长 -->
+        <ti-item [label]="i18n.sys.duration" [required]="true">
+            <div class='info-icon margin-bottom' [ngClass]="{infoicon: isModifySchedule}" style="align-items: center;">
+                <ti-spinner name='spinner' [step]='micarchItems.res_d.step' [format]="micarchItems.res_d.format"
+                    [placeholder]='micarchItems.res_d.placeholder' [appSpinnerBlur]="samplingDurationBlur" tiValidation
+                    formControlName='sampling_ctrl' style='width: 116px;'></ti-spinner>
+                <span class="margin-left">{{micarchItems.res_d.tailPrompt}}</span>
+            </div>
+        </ti-item>
+        <!-- 采样间隔 -->
+        <ti-item [label]="micarchItems.cpu.label+ ' (' + LaunchItemsLock.cpu.unit + ')'"
+            [required]="micarchItems.cpu.required">
+            <div class='info-icon margin-bottom' [ngClass]="{infoicon: isModifySchedule}" style="align-items: center;">
+                <ti-spinner name='spinner' [step]='micarchItems.cpu.spinner.step' [appSpinnerBlur]="intervalBlur"
+                    [format]="micarchItems.cpu.spinner.format" [placeholder]='micarchItems.cpu.spinner.placeholder'
+                    tiValidation formControlName='cpu_spinner_ctrl' style='width: 116px;'></ti-spinner>
+                <span class="margin-left">{{ micarchItems.cpu.spinner.tailPrompt }}</span>
+            </div>
+        </ti-item>
+        <!-- 分析指标 -->
+        <ti-item [label]="micarchItems.analysis.label" [required]="true">
+            <div [ngClass]="{anasytip: isModifySchedule}"
+                style="width: 72%;position: relative;top: 10px;display: flex;flex-wrap:wrap;" class="sys-type-label">
+                <span *ngFor="let item of micarchItems.analysis.options" [ngClass]="{fontsize: isModifySchedule}">
+                    <input type="radio" tiRadio formControlName='analysisTypes' [value]="item.id" [label]="item.text"
+                        [disabled]="micarchItems.analysis.disabled">
+                    <ti-icon [tiTip]="item.tip" style="margin-left:10px;" tiTipMaxWidth='370px' tiTipPosition="bottom">
+                        <img src='./assets/img/template/icon_question.svg' class="imgQuestion">
+                    </ti-icon>
+                </span>
+            </div>
+        </ti-item>
+
+        <!-- 采样范围 -->
+        <ti-item [required]="false">
+            <ti-item-label>
+                <span>{{i18n.micarch.label.typeItem}}</span>
+            </ti-item-label>
+            <ti-select [ngClass]="{spinnerstep: isModifySchedule}" style="width: 300px;"
+                [options]="micarchItems.typeItem.options" [tiValidation]='validation' formControlName='typeItem_ctrl'>
+            </ti-select>
+        </ti-item>
+        <!-- 延时采样时长 -->
+        <ti-item [required]="false">
+            <div class='info-icon margin-bottom' [ngClass]="{infoicon: isModifySchedule}" style="align-items: center;">
+                <ti-item-label>
+                    <span>{{i18n.micarch.simpling_delay}}</span>
+                    <ti-icon [tiTip]="micarchItems.cpu.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                        tiTipPosition="bottom">
+                        <img src='./assets/img/template/icon_question.svg' class="imgQuestion">
+                    </ti-icon>
+                </ti-item-label>
+                <ti-spinner name='spinner' [step]='micarchItems.cpu.spinner_delay.step'
+                    [format]="micarchItems.cpu.spinner_delay.format" [appSpinnerBlur]="delaySamplingDurationBlur"
+                    [placeholder]='micarchItems.cpu.spinner_delay.placeholder' tiValidation
+                    formControlName='timing_spinner_ctrl' style='width: 116px;'>
+                </ti-spinner>
+                <span class="margin-left">{{ micarchItems.cpu.spinner_delay.tailPrompt }}</span>
+            </div>
+        </ti-item>
+        <!-- c/c++源文件 -->
+        <ti-item [required]="micarchItems.c_source.required">
+            <ti-item-label>
+                <span>{{micarchItems.c_source.label}}</span>
+                <ti-icon [tiTip]="micarchItems.c_source.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/template/icon_question.svg' class="imgQuestion">
+                </ti-icon>
+            </ti-item-label>
+            <input [ngClass]="{spinnerstep: isModifySchedule}" type="text" tiText [tiValidation]='validation'
+                formControlName='source_ctrl' style="width: 300px">
+        </ti-item>
+        <!-- 采集文件大小 -->
+        <ti-item [label]="i18n.common_term_task_crate_collectFiles" [required]="false">
+            <ti-spinner name='spinner' [step]='micarchItems.fileSize.step' [format]="micarchItems.fileSize.format"
+                [placeholder]='micarchItems.fileSize.placeholder' [appSpinnerBlur]="collectFileBlur" tiValidation
+                formControlName='fileSize' style='width: 116px;' [correctable]="false"></ti-spinner>
+            <span class="margin-left">{{micarchItems.fileSize.tailPrompt}}</span>
+        </ti-item>
+        <!-- 内核函数关联汇编指令 -->
+        <ti-item [required]="micarchItems.kcore.required">
+            <ti-item-label [ngClass]="{'wrap':isModifySchedule && micarchItems.kcore.label === strObj.kcore}">
+                <span tiOverflow>{{ micarchItems.kcore.label }}</span></ti-item-label>
+            <div class="formContent">
+                <ti-switch formControlName="kcore"></ti-switch>
+            </div>
+        </ti-item>
+    </ti-formfield>
+
+
+    <!-- 配置节点参数 -->
+    <div class="node-config-modal">
+        <app-mission-node-config #nodeConfigM [labelWidth]="labelWidth" [taskType]="'microarchitecture'"
+            [formData]="formDatas" [projectId]="projectId" [nodeConfigShow]="nodeConfigShow" [nodeList]="micarchCurrntForm.get('nodeList').value"
+            [nodeConfigedData]="nodeConfigedData" [runUserData]="runUserData" (onsControlNode)="onControlNode($event)"
+            (onsOpentNode)="handleNodeEmit($event)"
+            [isAbled]="!(micarchCurrntForm.valid  && taskNameValid && appAndPidValid && modeAppRunUserValid)"
+            [modeAppPathAllow]="modeAppPathAllow" [isModifySchedule]="isModifySchedule" (selectNodeDisable)="selectNodeDisable($event)">
+        </app-mission-node-config>
+    </div>
+    <!-- 预约 -->
+    <div style="flex:1">
+        <app-mission-reservation [hidden]="taskDetail.isFromTuningHelper" #preSwitchMicarch [labelWidth]="labelWidth"
+            [isModifySchedule]="isModifySchedule || isRestart || isEdit" [switch]="switchState">
+        </app-mission-reservation>
+        <!-- 立即 -->
+        <div class="immediately" *ngIf='!preSwitchMicarch.switchState && !isRestart'>
+            <div *ngIf="switchState" [tiTip]="i18n.mission_create.disableeTip">
+                <input type="checkbox" tiCheckbox [name]='startCheckMicarch.title'
+                    [(ngModel)]="startCheckMicarch.checked" [disabled]="switchState">
+            </div>
+            <input *ngIf="!switchState" type="checkbox" tiCheckbox [name]='startCheckMicarch.title'
+                [(ngModel)]="startCheckMicarch.checked" [disabled]="taskDetail.isFromTuningHelper">
+            <span class="start-now">{{startCheckMicarch.title}}</span>
+        </div>
+    </div>
+    <footer [ngClass]="{ footer: isModifySchedule }">
+        <button class="little-primary-btn" tiButton type="button" color="primary" style="margin-right: 20px"
+            (click)="createMicarchkAnalysis(isEdit)" [ngClass]="{toRight: isModifySchedule}"
+            [disabled]='!(micarchCurrntForm.valid  && taskNameValid  && appAndPidValid && (preSwitchMicarch.previewState || !preSwitchMicarch.switchState))'>
+            {{i18n.common_term_operate_ok}}</button>
+        <button class="little-minor-btn" tiButton type="button" (click)="close()">
+            {{i18n.common_term_operate_cancel}}</button>
+        <button class="little-minor-btn" tiButton type="button" (click)="saveTemplates()"
+            *ngIf="!isModifySchedule && !taskDetail.isFromTuningHelper"
+            [disabled]='!(micarchCurrntForm.valid  && taskNameValid && appAndPidValid && (preSwitchMicarch.previewState || !preSwitchMicarch.switchState))'>
+            {{i18n.mission_modal.saveTemplates}}
+        </button>
+    </footer>
+</div>
+<ng-template #createMicarchConfirmModal let-context='context'>
+    <ti-modal-header>{{i18n.secret_title}}</ti-modal-header>
+
+    <ti-modal-body>
+        <div style="display:flex;font-size: 12px;color: #888888;line-height: 18px;">
+            <img src="./assets/img/common/icon_warning.png" style="width:20px;height:20px;">
+            <span style="margin-left:12px;font-size: 14px;">{{i18n.secret_count}}</span>
+        </div>
+    </ti-modal-body>
+
+    <ti-modal-footer>
+        <button class="little-primary-btn" type="button" color="primary" style="margin-right: 16px;"
+            (click)="context.close()">
+            {{ i18n.common_term_operate_ok }}
+        </button>
+
+        <button class="little-minor-btn" type="button" (click)="context.dismiss()">
+            {{ i18n.common_term_operate_cancel }}
+        </button>
+    </ti-modal-footer>
+</ng-template>

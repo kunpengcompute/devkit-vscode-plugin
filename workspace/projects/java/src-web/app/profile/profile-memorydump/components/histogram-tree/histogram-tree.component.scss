@@ -1,0 +1,201 @@
+
+.dominantTree {
+  margin-top: 20px;
+  .sortIcon {
+    margin-left: 5px;
+  }
+  .ti3-table-container {
+    margin-bottom: 10px;
+    max-height: 630px;
+    overflow-y: auto;
+    .text_tr{
+      height: 40px;
+      line-height: 40px;
+    }
+    .tree_td{
+      z-index: 11;
+      border-bottom:1px solid #e1e6ee;
+    }
+    .toggleIcon {
+      display: inline-block;
+      width: 36px;
+      position: relative;
+      min-width: 36px;
+      img {
+        transform: rotate(-90deg);
+        &.open {
+          transform: rotate(0deg);
+        }
+      }
+    }
+    .bottomBorder {
+      width: 100%;
+      display: inline-block;
+      left: 0;
+      border-bottom: 1px solid #e1e6ee;
+      position: absolute;
+      bottom: 0;
+    }
+    .loadMore {
+      color: #0067ff;
+      cursor: pointer;
+      &:hover {
+        color: #267dff;
+      }
+    }
+    .headbg {
+      display: inline-block;
+      position: absolute;
+      width: 35px;
+      height: 43px;
+      top: 0;
+      background-color: #f5f9ff;
+      border-right: 2px solid #0067ff;
+    }
+  }
+}
+.sortIcon{
+  .sortList{
+    cursor:pointer;
+  } 
+}
+.btn-header {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
+  .input_space{
+    padding-left: 20px;
+  }
+  .pro-title {
+    max-width: 500px;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+.loading {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 150px;
+  p {
+    margin-bottom: 32px;
+    font-size: 14px;
+  }
+  img {
+    width: 400px;
+    height: 117px;
+  }
+}
+.noDate {
+  width: 100%;
+  height: 580px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  p {
+    color: #616161;
+    font-size: 14px;
+    line-height: 21px;
+    margin-top: 5px;
+    text-align: center;
+  }
+}
+.noHover:hover{
+  background-color:transparent!important;
+}
+
+.snap_title {
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
+  font-weight: bold;
+}
+.snap_content {
+  font-size: 12px;
+  line-height: 18px;
+  color: #616161;
+}
+.red_count {
+  width: 14px;
+  height: 14px;
+  font-size: 10px;
+  background-color: #ed4b4b;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -7px;
+  right: -6px;
+}
+.histogram_tr {
+  position: relative;
+  .histogram_more {
+    position: absolute;
+    left: 10px;
+    z-index: 1;
+    width: auto;
+    min-width: 225px;
+    background-color: #fff;
+    margin-top: 13px;
+    padding: 9px;
+    border: 1px solid #267dff;
+    box-shadow: 1px 1px 1px 0px rgba(136, 136, 136, 0.5);
+    .histogram_more_li {
+      width: 214;
+      height: 18px;
+      padding: 4px 0px;
+      .histogram_more_li_text {
+        padding-left: 8px;
+      }
+    }
+  }
+}
+.showAllSum{
+  font-size: 12px;
+  color: #222222;
+  font-weight: 600;
+}
+
+:host ::ng-deep .ti3-table > .ti3-table-fixed-head > table,
+:host ::ng-deep .ti3-table > .ti3-resize-wrapper > table,
+:host ::ng-deep .ti3-table-container > table {
+    border: none !important;
+
+    & > thead > tr > th {
+        font-size: 16px !important;
+    }
+}
+.cellText{
+    font-size: 12px !important;
+}
+::ng-deep .dominantTree, ::ng-deep .histogram .ti3-table {
+  .ti3-table-fixed-head .ti3-cell-text {
+      max-width: calc(100% - 30px) !important;
+  }
+}
+.sortIcon{
+  .tableIcon{
+    display: inline-block;
+    ti-icon{
+        vertical-align: middle;
+        height: 16px;
+        width: 16px;
+    }
+  }
+  .colorIcon{
+    color: #267dff;
+  }
+  .tableIcon:hover{
+    color: #267dff;
+  }
+}

@@ -1,0 +1,217 @@
+#detail-container {
+  margin-top: 20px;
+  width: 100%;
+  transform: translateZ(0);
+  .content-container {
+    margin-top: 20px;
+    margin-left: 10px;
+
+    .group-list {
+      margin-right: 30px;
+      font-size: 12px;
+
+      .function-label {
+        color: #9ea4b3;
+        padding-right: 10px;
+      }
+    }
+
+    .func-main {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: row;
+
+      .source-left,
+      .assembly-right {
+        flex: 1;
+        border: 1px solid #d4d9e6;
+        border-radius: 5px;
+      }
+      .source-left {
+        margin-right: 10px;
+
+        .table-container {
+          margin: 15px;
+
+          h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+          }
+        }
+      }
+
+      .assembly-right {
+        .table-container {
+          margin: 15px;
+
+          h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+
+    .source-img {
+      border: 1px solid #d4d9e6;
+      border-radius: 5px;
+      margin-top: 10px;
+      padding: 10px;
+      box-sizing: border-box;
+      overflow: hidden;
+      height: 312px;
+    }
+  }
+}
+.source-table {
+  text-align: left;
+  border-width: 0;
+  width: 100%;
+}
+.source-table thead tr {
+  width: 100%;
+}
+.source-table thead th {
+  box-sizing: border-box;
+  position: relative;
+  cursor: default;
+  background-color: #e1e4e5;
+  outline: 0;
+  line-height: 32px;
+  color: #333;
+  font-weight: 400;
+  border-left: none;
+  padding: 0 10px;
+  text-align: left;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.table-container {
+  transform: translateZ(0);
+}
+.source-table tbody {
+  margin-top: 34px;
+}
+.table-box {
+  max-height: 19vw;
+  min-height: 19vw;
+  overflow-y: scroll;
+  transform: translateZ(0);
+}
+.table-header div,
+.table-header2 div {
+  display: inline-block;
+  box-sizing: border-box;
+  position: relative;
+  cursor: default;
+  background-color: #f0f3fa;
+  outline: 0;
+  line-height: 32px;
+  color: #333;
+  font-weight: 400;
+  border-left: none;
+  padding: 0 10px;
+  text-align: left;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.table-header div:nth-child(1) {
+  width: 20%;
+}
+.table-header div:nth-child(2) {
+  width: 60%;
+}
+.table-header div:nth-child(3) {
+  width: 20%;
+}
+.source-table tr:nth-child(even) {
+  background: #e1e4e5;
+}
+.table-header2 div:nth-child(1) {
+  width: 20%;
+}
+.table-header2 div:nth-child(2) {
+  width: 20%;
+}
+.table-header2 div:nth-child(3) {
+  width: 40%;
+}
+.table-header2 div:nth-child(4) {
+  width: 20%;
+}
+:host .source-table ::ng-deep .ti3-table-tree.active {
+  transform: rotate(90deg);
+}
+.ti3-table-tree {
+  display: inline-block;
+}
+.source-img {
+  position: relative;
+}
+#insvg {
+  position: relative;
+  transform-origin: center center;
+  text-align: center;
+  height: 100%;
+  margin-top: 30px;
+}
+.svg-title {
+  margin-bottom: 10px;
+  position: absolute;
+  z-index: 111;
+  width: 100%;
+}
+.svg-title h2 {
+  display: inline-block;
+}
+.svg-title span {
+  float: right;
+  margin-right: 10px;
+}
+.svg-title span img {
+  margin-right: 20px;
+}
+.sort-title {
+  vertical-align: top;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inline-block;
+  max-width: calc(100% - 23px);
+}
+:host ::ng-deep .func-main .sort-box {
+  position: static;
+}
+.operate-box {
+  float: right;
+}
+.operate-box img {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.chen-nodata-td {
+  img {
+    width: 9.5%;
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  > span {
+    display: inline-block;
+  }
+}
+
+.no-data {
+  text-align: center;
+  height: 38px;
+
+  .chen-nodata-td > img {
+    width: 20%;
+    display: block;
+  }
+}

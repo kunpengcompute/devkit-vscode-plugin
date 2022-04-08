@@ -1,0 +1,39 @@
+<div class="warpper">
+    <div class="input-warpper" [lang]="language">
+        <div class="input-form">
+            <ti-formfield [formGroup]='sysConfForm'>
+                <ti-item [label]="config.label" [required]='isAdmin'>
+                    <textarea class="input-item" tiTextarea [tiValidation]='validation' formControlName='inputValue' maxlength="1000"
+                        resize="vertical"></textarea>
+                </ti-item>
+            </ti-formfield>
+        </div>
+    </div>
+    <div *ngIf="isAdmin" class="btn-warpper" [lang]="language">
+        <div *ngIf="mode === 'read'">
+            <button type="button" tiButton (click)="onFixConfig($event)">{{i18n.system_config.change_config}}</button>
+        </div>
+        <div *ngIf="mode === 'write'">
+            <button type="button" tiButton color="primary" (click)="onSubmit($event)"
+                [disabled]="!sysConfForm.valid">{{i18n.common_term_operate_ok}}</button>
+            <button type="button" tiButton (click)="onCancel($event)">{{i18n.common_term_operate_cancel}}</button>
+        </div>
+    </div>
+</div>
+
+<!-- 修改应用程序路径配置 确认弹框 -->
+<ng-template #setAppPathModalComponent let-context="context">
+    <ti-modal-header>{{ i18n.tip_msg.warn }}</ti-modal-header>
+  
+    <ti-modal-body>
+        <div class="content">
+            <img src="./assets/img/weakPassword/warn.svg" alt="" />
+            <p>{{ i18n.tip_msg.system_setting_input_app_path_input_warn }}</p>
+        </div>
+    </ti-modal-body>
+  
+    <ti-modal-footer>
+        <button type="button" tiButton color="primary" (click)="context.confirm(context)">{{ i18n.common_term_operate_ok }}</button>
+        <button type="button" tiButton (click)="context.dismiss()" style="margin-left: 16px;">{{ i18n.common_term_operate_cancel }}</button>
+    </ti-modal-footer>
+</ng-template>

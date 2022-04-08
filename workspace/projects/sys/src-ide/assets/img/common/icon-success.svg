@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>4.组件/2.通用/icon/20/加载完成</title>
+    <defs>
+        <path d="M10,2 C14.418278,2 18,5.581722 18,10 C18,14.418278 14.418278,18 10,18 C5.581722,18 2,14.418278 2,10 C2,5.581722 5.581722,2 10,2 Z" id="path-1"></path>
+    </defs>
+    <g id="4.组件/2.通用/icon/20/加载完成" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="蒙版" fill="#3AD53E" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="编组" mask="url(#mask-2)" fill="#61D274">
+            <g id="矩形">
+                <rect x="0" y="0" width="20" height="20"></rect>
+            </g>
+        </g>
+        <path d="M5.99979518,5.5 C6.24525505,5.49989949 6.44947597,5.67669101 6.49190747,5.90992286 L6.5,5.99979518 L6.50175757,10.2905592 L14.087544,10.2905592 C14.3636864,10.2905592 14.587544,10.5144168 14.587544,10.7905592 C14.587544,11.036019 14.4106688,11.2401675 14.1774196,11.2825035 L14.087544,11.2905592 L6.50175757,11.2905592 C5.98892173,11.2905592 5.56625041,10.904519 5.50848533,10.4073443 L5.50175761,10.290764 L5.5,6.00020482 C5.49988692,5.72406247 5.72365283,5.50011316 5.99979518,5.5 Z" id="路径" fill="#FFFFFF" fill-rule="nonzero" transform="translate(10.043772, 8.395280) rotate(-45.000000) translate(-10.043772, -8.395280) "></path>
+    </g>
+</svg>

@@ -1,0 +1,24 @@
+<div
+  class="hy-backtop-warpper"
+  (click)="onClick($event)"
+  [ngStyle]="{ 'right.px': right, 'bottom.px': bottom }"
+  [ngClass]="theme$ | async"
+>
+  <ng-container *ngIf="showBacktop">
+    <div #contentRef class="hy-backtop-content">
+      <ng-content select="[content]"></ng-content>
+    </div>
+    <div
+      *ngIf="!contentRef?.children?.length"
+      class="hy-backtop-content-default"
+      [tiTip]="'hyBacktop.tip' | hyTranslate"
+      tiTipPosition="left"
+    >
+      <hy-theme-content>
+        <hy-icon-react name="toTopReactLight" light></hy-icon-react>
+        <hy-icon-react name="toTopReactDark" dark></hy-icon-react>
+        <hy-icon-react name="toTopReactDark" grey></hy-icon-react>
+      </hy-theme-content>
+    </div>
+  </ng-container>
+</div>

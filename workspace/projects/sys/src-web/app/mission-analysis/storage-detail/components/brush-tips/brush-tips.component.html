@@ -1,0 +1,17 @@
+<div class="tips" >
+    <div class="left-tips" >
+        <div class="title1">
+            <img src="./assets/img/mission/iconTanhao.svg" style="padding-right:8px;"> 
+            {{i18n.storageIO.tips}}
+        </div>
+       <div class='brushTips'></div>
+    </div>
+    <div class="content1">
+      <div class="tip-title">{{tips}}</div>
+      <div class="checkBox" >
+        <input type="checkbox" tiCheckbox [name]='i18n.storageIO.notdisplay' [(ngModel)]="readChecked"
+        (ngModelChange)="changeBrushTip($event)"[label]='i18n.storageIO.notdisplay'>
+    </div>
+    </div>
+  </div>
+

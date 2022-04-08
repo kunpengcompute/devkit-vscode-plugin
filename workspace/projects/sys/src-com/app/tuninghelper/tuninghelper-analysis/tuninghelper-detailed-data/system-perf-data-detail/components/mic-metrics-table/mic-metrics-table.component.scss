@@ -1,0 +1,44 @@
+::ng-deep {
+  :root {
+    --metrics-background-color: #f5f9ff;
+    --container-text-color: #616161;
+    --text-color: #222222;
+  }
+  .vscode-dark .mic-container {
+    --metrics-background-color: #12223b;
+    --container-text-color: #aaaaaa;
+    --text-color: #dcdcdc;
+  }
+}
+.mic-content {
+  display: inline-block;
+  width: 250px;
+  height: 24px;
+  font-size: 16px;
+  color: var(--text-color);
+}
+.mic-introduction {
+  margin: 10px 0px;
+  display: flex;
+  height: 24px;
+  line-height: 24px;
+  padding-left: 10px;
+  background: var(--metrics-background-color);
+  .metrics {
+    font-size: 12px;
+    color: var(--container-text-color);
+    display: inline-block;
+    margin-right: 8px;
+  }
+  .mic-intro-spanColor {
+    font-size: 12px;
+    color: var(--text-color);
+  }
+}
+.mic-introduction li {
+  height: 18px;
+  margin-right: 24px;
+}
+.containerStyle {
+  margin-top: 5px;
+}

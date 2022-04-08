@@ -1,0 +1,52 @@
+.analysis-target-content {
+    margin-top: 8px;
+
+    .analysis-target-item{
+        display: flex;
+        padding-bottom: 20px;
+
+        .analysis-target-item-label{
+            display: flex;
+            margin-right: 20px;
+            flex-shrink: 0;
+            width: 250px;
+            color: #aaa;
+            font-size: 12px;
+            box-sizing: border-box;
+
+            .red {
+                color: #ff4c4c;
+            }
+            .margin_left {
+                margin-left: 10px;
+            }
+            .opacity {
+                opacity: 0;
+            }
+        }
+        .analysis-target-item-value{
+            display: flex;
+            flex-direction: column;
+            
+            input {
+                width: 400px;
+            }
+            textarea {
+                width: 400px;
+                height: 50px;
+                padding: 6px 10px 8px;
+                box-sizing: border-box;
+            }
+            .mission-app-warn{
+                line-height: 24px;
+                color: #ff4c4c;
+            }
+            .mission-app-input-tip {
+                line-height: 24px;
+                font-size: 12px;
+                color: #AAA;
+            }
+        }
+    }
+}
+

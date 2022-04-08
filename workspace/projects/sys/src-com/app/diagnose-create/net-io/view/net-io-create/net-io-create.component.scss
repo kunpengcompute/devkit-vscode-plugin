@@ -1,0 +1,90 @@
+.dark {
+  --ti-common-color-text-secondary: #aaaaaa;
+  --ti-title-color: #e8e8e8;
+}
+.light {
+  --ti-title-color: #222;
+}
+
+:host .warpper {
+  .control {
+    margin-top: 20px;
+
+    .immediately {
+      margin-top: 0px !important;
+
+      .start-now {
+        color: var(--ti-title-color);
+      }
+    }
+  }
+  .up-top{
+    margin-top: 32px;
+  }
+  .opreation {
+    margin: 40px 0px 104px 0px;
+
+    button {
+      min-width: 108px;
+      height: 32px !important;
+    }
+
+    button + button {
+      margin-left: 16px;
+    }
+  }
+  .prefix-miss {
+    margin-left: 16px;
+  }
+
+  .switch-align {
+    display: flex;
+    height: 28px;
+    align-items: center;
+  }
+  .paramsValue{
+    position: relative;
+    height: 53px;
+
+    .illustrate {
+      width: max-content;
+      position: absolute;
+      top: 32px;
+      left: 0;
+      color: #979797;
+    }
+
+    .location{
+      position: absolute;
+      top: 55px;
+      left: 0;
+
+      ::ng-deep .ti3-unifyvalid-error-container{
+        margin: 0;
+        padding-top: 0;
+
+        .ti3-error-icon-bg{
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+  }
+}
+
+:host ::ng-deep .ti3-form .ti3-form-list .ti3-form-label {
+  padding-bottom: 0 !important;
+}
+
+:host
+  ::ng-deep
+  .right_align
+  > ti-formfield
+  > .ti3-form
+  > tbody
+  > .ti3-form-list {
+  > .ti3-form-require > .ti3-icon,
+  > .ti3-form-label  {
+    line-height: 60px !important;
+  }
+}

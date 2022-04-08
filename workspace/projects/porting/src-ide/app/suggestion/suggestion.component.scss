@@ -1,0 +1,21 @@
+.suggestion-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .suggestion-check {
+        position: absolute;
+        top: 300px;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        text-align: center;
+        line-height: 28px;
+        font-size: 0.875rem;
+        width: 29%;
+        margin: 0 auto;
+
+        .checkbox-item {
+            margin: 20px 0;
+        }
+    }
+}

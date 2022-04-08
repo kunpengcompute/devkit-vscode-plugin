@@ -1,0 +1,38 @@
+<div class="cpu-detailed-container">
+  <!-- cpu利用率 -->
+  <div class="table-container">
+    <app-cpu-usage-table [cpuCoreData]="cpuCoreData" [numaCoreData]="numaCoreData" [taskId]="taskId" [nodeid]="nodeid">
+    </app-cpu-usage-table>
+  </div>
+  <!-- cpu负载 -->
+  <div class="table-container">
+    <app-cpu-load-table [loadData]="loadData"></app-cpu-load-table>
+  </div>
+  <!--运行的进程线程 -->
+  <div class="table-container">
+    <app-runing-process-thread [allProcessThreads]="allProcessThreads" [taskId]="taskId" [nodeid]="nodeid">
+    </app-runing-process-thread>
+  </div>
+  <!--硬中断信息 -->
+  <div class="table-container">
+    <app-interrupt-msg [ethCpuData]="ethCpuData" [cpuCoreView]="cpuCoreView" [hardNoView]="hardNoView" [taskId]="taskId" [nodeid]="nodeid"
+      [numaNum]="numaNum">
+    </app-interrupt-msg>
+  </div>
+  <!--软中断信息 -->
+  <div class="table-container">
+    <app-soft-irq [softIrq]="softIrq" [ksoftirqdList]="ksoftirqdList" [numaNum]="numaNum"></app-soft-irq>
+  </div>
+  <!--中断分布统计 -->
+  <div class="table-container">
+    <app-interruption-distribution [interruptData]="interruptDistribution"></app-interruption-distribution>
+  </div>
+  <!-- 任务创建和上下文切换统计 -->
+  <div class="table-container">
+    <app-create-and-context-switch [cpuContextSwitch]="cpuContextSwitch"></app-create-and-context-switch>
+  </div>
+  <!-- 微架构表格 -->
+  <div class="table-container">
+    <app-mic-metrics-table [taskId]="taskId" [nodeid]="nodeid"></app-mic-metrics-table>
+  </div>
+</div>

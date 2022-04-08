@@ -1,0 +1,51 @@
+<div class="javaPerfSet">
+    <!-- 左侧菜单区 -->
+    <div id="menu" class="left">
+        <!-- Guardian管理 -->
+        <div class='clickindex' title='{{i18n.plugins_perf_javaperfsetting.guardianManage}}'>
+            <span (click)="jumpScroll('itemguardianManage')" id="menuGuardianManage">{{i18n.plugins_perf_javaperfsetting.guardianManage}}</span>
+        </div>
+        <!-- 工作密钥 -->
+        <div *ngIf="userRoleFlag" class='clickindex' title='{{i18n.common_term_work_key}}'>
+            <span (click)="jumpScroll('itemWorkingkey')" id="menuWorkingkey">{{i18n.common_term_work_key}}</span>
+        </div>
+        <!-- Java性能分析配置 -->
+        <div class='clickindex' title='{{i18n.newHeader.setting.javaSetting}}'>
+            <span (click)="jumpScroll('itemConfiguration')" id="menuConfiguration">{{i18n.newHeader.setting.javaSetting}}</span>
+        </div>
+        <!-- 采样报告阈值 -->
+        <div class='clickindex' title='{{i18n.plugins_perf_javaperfsetting.samplingReportManage}}'>
+            <span (click)="jumpScroll('itemReportManage')" id="menuReportManage">
+                {{i18n.plugins_perf_javaperfsetting.samplingReportManage}}</span>
+        </div>
+        <!-- 操作日志 -->
+        <div *ngIf="!userRoleFlag" class='clickindex' title='{{i18n.plugins_perf_javaperfsetting.operaLog}}'>
+            <span (click)="jumpScroll('itemOperaLog')" id="menuOperaLog">{{i18n.plugins_perf_javaperfsetting.operaLog}}</span>
+        </div>
+        <!-- 日志 -->
+        <div *ngIf="userRoleFlag" class='clickindex' title='{{i18n.common_term_log}}'>
+            <span (click)="jumpScroll('itemRunLog')" id="menuRunLog">{{i18n.common_term_log}}</span>
+        </div>
+        <!-- 内部通信证书 -->
+        <div *ngIf="userRoleFlag" class='clickindex' title='{{i18n.plugins_perf_javaperfsetting.secretKey}}'>
+            <span (click)="jumpScroll('itemSecretKey')" id="menuSecretkey">{{i18n.plugins_perf_javaperfsetting.secretKey}}</span>
+        </div>
+    </div>
+    <!-- 右侧菜单区 -->
+    <div id="content" class="right">
+        <!-- Guardian管理 -->
+        <app-javaguardian-manage></app-javaguardian-manage>
+        <!-- 工作密钥 -->
+        <app-javaperf-work-key></app-javaperf-work-key>
+        <!-- Java性能分析配置 -->
+        <app-java-profiling-configuration></app-java-profiling-configuration>
+        <!-- 采样报告阈值 -->
+        <app-threshold></app-threshold>
+        <!-- 运行日志 -->
+        <app-javarunlog-manage></app-javarunlog-manage>
+        <!-- 操作日志 -->
+        <app-javaoperalog-manage></app-javaoperalog-manage>
+        <!-- 内部通信证书 -->
+        <app-javaperf-secret-key></app-javaperf-secret-key>
+    </div>
+</div>

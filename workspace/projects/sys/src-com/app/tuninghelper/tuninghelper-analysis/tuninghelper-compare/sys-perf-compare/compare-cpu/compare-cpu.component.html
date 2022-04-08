@@ -1,0 +1,37 @@
+<div class="sys-perf-compare">
+    <!-- cpu利用率 -->
+    <div class="table-container">
+        <app-cpu-usage-compare [cpuData]="cpuCoreData" [numaData]="numaCoreData"></app-cpu-usage-compare>
+    </div>
+    <!-- cpu负载 -->
+    <div class="table-container">
+        <div class="cpu-title">{{ 'net_io.cpu_load' | i18n}}</div>
+        <app-common-table [commonTableData]="loadTableData" [isFilters]="true"></app-common-table>
+    </div>
+    <!--中断信息 -->
+    <div class="table-container">
+        <app-interrupt-msg-compare [hardIrqData]="hardNoView" [cpuCoreData]="cpuCoreView"></app-interrupt-msg-compare>
+    </div>
+    <!--中断分布统计 -->
+    <div class="table-container">
+        <app-irq-distribution-echart [interruptDistribution]="interruptDistribution"></app-irq-distribution-echart>
+    </div>
+    <!-- 任务创建和上下文切换统计 -->
+    <div class="table-container">
+        <div class="cpu-title">{{ 'tuninghelper.detailedData.cpuContextSwitch' | i18n}}</div>
+        <app-common-table [commonTableData]="cTextSwitchTableData"></app-common-table>
+    </div>
+    <!-- 微架构表格 -->
+    <div class="table-container">
+        <div class="cpu-title">{{ 'tuninghelper.taskDetail.micIndicator' | i18n}}</div>
+        <div>
+            <ul class="mic-introduction">
+                <li *ngFor="let item of mrcioInfo" class="infoValue">
+                    <span class="metrics">{{item.key}}</span>
+                    <span class="mic-intro-spanColor">{{item.value1}} | {{item.value2}}</span>
+                </li>
+            </ul>
+        </div>
+        <app-common-table [commonTableData]="mrcioTableData"></app-common-table>
+    </div>
+</div>

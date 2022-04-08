@@ -1,0 +1,76 @@
+<div [ngClass]="theme$ | async">
+  <div class="check-box">
+    <div
+      class="box-item"
+      [ngClass]="{
+        'click-item':
+          functions.includes(DiagnoseFuncEnum.DialingTest) ||
+          functions.includes(DiagnoseFuncEnum.PacketLoss),
+          'wrap': currLang === 'en' || currLang === 'en-us'
+      }"
+    >
+      <div class="select-item" style="margin-right: 24px">
+        <input
+          type="checkbox"
+          tiCheckbox
+          [name]="optionLabel.dialingTest"
+          [(ngModel)]="optionObj.dialingTest.checked"
+          [label]="optionLabel.dialingTest"
+          (ngModelChange)="onSelect(DiagnoseFuncEnum.DialingTest)"
+          [disabled]="optionObj.dialingTest.disabled"
+        />
+      </div>
+      <div class="select-item">
+        <input
+          type="checkbox"
+          tiCheckbox
+          [name]="optionLabel.packetLoss"
+          [(ngModel)]="optionObj.packetLoss.checked"
+          [label]="optionLabel.packetLoss"
+          (ngModelChange)="onSelect(DiagnoseFuncEnum.PacketLoss)"
+          [disabled]="optionObj.packetLoss.disabled"
+        />
+      </div>
+      <img
+        [src]="
+          functions.includes(DiagnoseFuncEnum.DialingTest) ||
+          functions.includes(DiagnoseFuncEnum.PacketLoss)
+            ? './assets/img/summary/Selected.png'
+            : './assets/img/summary/Unselected.png'
+        "
+      />
+    </div>
+    <div style="display: flex">
+      <div
+        class="box-item"
+        (click)="onSelect(DiagnoseFuncEnum.NetCaught)"
+        [ngClass]="{ 'click-item': functions.includes(DiagnoseFuncEnum.NetCaught) }"
+        [tiTip]="'network_diagnositic.netCaughtTip' | i18n"
+        tiTipPosition="top"
+      >
+        <div>{{ optionLabel.netCaught }}</div>
+        <img
+          [src]="
+            functions.includes(DiagnoseFuncEnum.NetCaught)
+              ? './assets/img/summary/Selected.png'
+              : './assets/img/summary/Unselected.png'
+          "
+        />
+      </div>
+      <div
+        class="box-item"
+        (click)="onSelect(DiagnoseFuncEnum.Load)"
+        [ngClass]="{ 'click-item': functions.includes(DiagnoseFuncEnum.Load) }"
+      >
+        <div>{{ optionLabel.load }}</div>
+        <img
+          [src]="
+            functions.includes(DiagnoseFuncEnum.Load)
+              ? './assets/img/summary/Selected.png'
+              : './assets/img/summary/Unselected.png'
+          "
+        />
+      </div>
+    </div>
+  </div>
+</div>

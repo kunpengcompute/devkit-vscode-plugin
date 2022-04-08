@@ -1,0 +1,29 @@
+.distribution_table {
+  .percent_td {
+    position: relative;
+    padding: 0;
+
+    span {
+      position: relative;
+      display: inline-block;
+      box-sizing: border-box;
+      height: 31px;
+    }
+
+    .td_bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+      background-color: #0067ff;
+      opacity: 0.2;
+    }
+
+    .td_value {
+      width: 100%;
+      line-height: 31px;
+      padding: 0 10px;
+    }
+  }
+}

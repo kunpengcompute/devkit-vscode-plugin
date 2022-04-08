@@ -1,0 +1,45 @@
+<ti-table class="custemTable" id="custemTable" [(displayedData)]="displayed" [srcData]="dataList" [columns]="columns" tiColsResizable>
+    <div class="ti3-table-fixed-head">
+        <table>
+            <thead>
+                <tr>
+                    <th *ngFor="let column of columns; let index = index" width="{{column.width}}"  [tiColumnFixed]="column.fixed">
+                        <div class="thContent">
+                            <ti-cell-text tiOverflow>{{ column.label || column.title }}</ti-cell-text>
+
+                            <app-sub-module-table-sort *ngIf="column.sortKey" [sortStatus]="column.sortStatus"
+                                (sortTable)="tableService.sortTable(dataList['data'], columns, column.sortKey, $event)">
+                            </app-sub-module-table-sort>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div class="ti3-table-container ti3-resize-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th *ngFor="let column of columns" width="{{column.width}}"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <ng-container *ngIf="displayed.length > 0">
+                    <tr *ngFor="let item of displayed; index as i ">
+                        <ng-container *ngFor="let row of columns; index as i">
+                            <td [tiColumnFixed]="row.fixed" tiOverflow tiTipPosition='left' *ngIf="item[row.key] === 0 || item[row.key]; else others">{{item[row.key]}}</td>
+                            <ng-template #others><td [tiColumnFixed]="row.fixed" tiOverflow tiTipPosition='left'>--</td></ng-template>
+                        </ng-container>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <app-default-page *ngIf="displayed.length === 0" [height]="'300px'"></app-default-page>
+    </div>
+
+    <ti-pagination [(currentPage)]="tlbData.pageNo" [pageSize]="tlbData.pageSize" [(totalNumber)]="totalPage"
+        *ngIf="hasPage && totalPage > 10" [showGotoLink]="true">
+    </ti-pagination>
+</ti-table>

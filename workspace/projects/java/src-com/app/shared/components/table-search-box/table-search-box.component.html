@@ -1,0 +1,12 @@
+<div class="table-search-box">
+  <ti-select class="select" [options]="searchOptions" [(ngModel)]="option" id="myselect"
+      *ngIf="searchOptions && searchOptions.length > 1"></ti-select>
+  <ti-searchbox class="search" [placeholder]="placeholder" (clear)="propClear()" (search)="propSearch()"
+      [(ngModel)]="value" (ngModelChange)="onMoreThanOneWordSearch($event, searchIndex)"></ti-searchbox>
+  <span class="clearImg svg-toggle" *ngIf="value && !web" (click)="propClear()">
+      <img tiTipPosition='top' src="./assets/img/profiling/clear-default.svg">
+      <img tiTipPosition='top' src="./assets/img/profiling/clear-hover.svg">
+      <img tiTipPosition='top' src="./assets/img/profiling/clear-clicked.svg">
+  </span>
+  <div class="focus" *ngIf="searchOptions && searchOptions.length > 0"></div>
+</div>

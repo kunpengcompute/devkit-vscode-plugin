@@ -1,0 +1,43 @@
+<!-- lock attach -->
+<app-mission-public
+  #missionPublic
+  [labelWidth]="labelWidth"
+  [drawerLevel]="drawerLevel"
+  [nodeName]="nodeParams.nodeName"
+  [nodaIP]="nodeParams.nodeIP"
+>
+  <div class="model-body">
+    <div [formGroup]="formGroup" style="margin: 0px 0px 20px 0px;" >
+      <app-pid-process-input formControlName="p_t_ctrl" [labelWidth]="labelWidth"></app-pid-process-input>
+    </div>
+    <ti-formfield [labelWidth]="labelWidth" [formGroup]='formGroup'>
+      <ti-item [required]="form.b_s.required">
+        <ti-item-label>
+          <span>{{i18n.mission_modal.lockSummary.filname}}</span>
+          <ti-icon [tiTip]="i18n.mission_modal.lockSummary.common_term_task_crate_c_bs_tip"
+            style="margin-left:10px;" tiTipMaxWidth='370px' tiTipPosition="bottom">
+            <img src='./assets/img/summary/tooltip.png' alt="">
+          </ti-icon>
+        </ti-item-label>
+        <input type="text" tiText [tiValidation]='validation' formControlName='b_s_ctrl' style="width: 300px">
+      </ti-item>
+
+      <ti-item [required]="form.c_source.required">
+        <ti-item-label>
+          <span>{{i18n.mission_modal.lockSummary.source_path}}</span>
+          <ti-icon [tiTip]="i18n.mission_modal.lockSummary.common_term_task_crate_c_source_tip"
+            style="margin-left:10px;" tiTipMaxWidth='370px' tiTipPosition="bottom">
+            <img src='./assets/img/summary/tooltip.png' alt="">
+          </ti-icon>
+        </ti-item-label>
+        <input type="text" tiText [tiValidation]='validation' formControlName='source_ctrl' style="width: 300px">
+      </ti-item>
+    </ti-formfield>
+  </div>
+
+  <footer>
+    <button tiButton type="button" color="primary" style="margin-right: 20px" [disabled]='!formGroup.valid'
+      (click)="confirm()"> {{i18n.common_term_operate_ok}}</button>
+    <button tiButton type="button" (click)="close()"> {{i18n.common_term_operate_cancel}} </button>
+  </footer>
+</app-mission-public>

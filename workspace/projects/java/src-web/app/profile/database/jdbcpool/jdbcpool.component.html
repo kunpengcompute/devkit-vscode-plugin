@@ -1,0 +1,313 @@
+<div class="jdbcpool">
+  <div class="head">
+    <div class="control">
+      <div class="btntip">
+        <button class="control-button" type="button" (click)="onControlAnalysis()" tiButton color="primary"
+          class="left-btn" [disabled]="startBtnDisabled || snapShot">{{!beginFileIo ? i18n.jdbcpool.begin :
+          i18n.jdbcpool.end }}</button>
+        <img [tiTip]="jdbcPoolBtnTip" tiTipPosition="right" style="width: 12px; height: 12px;margin: 0 24px 0 10px;"
+          src="./assets/img/newSvg/hollowTip.svg" alt="">
+      </div>
+      <div class="visible-type">
+        <div class="visible-type-label">{{ i18n.jdbcpool.visibleType }}</div>
+        <ti-select style="width: 200px; margin-left: 16px;height: 32px;" [options]="typeOptions"
+          [(ngModel)]="typeSelected" id="myselect">
+        </ti-select>
+      </div>
+      <div class="control-value" style="margin-left: 30px;" *ngIf="typeSelected.value === 'view'">
+        <div class="control-value-title">{{i18n.jdbcpool.alertThreshold}}</div>
+        <input tiNumber class="control-value-input" [placeholder]="i18n.jdbcpool.inputThreshold"
+          [(ngModel)]="alertThreshold" [disabled]="startBtnDisabled || snapShot" [format]="threshold.format">
+        <div class="tip"><img [tiTip]='tipStr2' tiTipPosition="right" style="width: 12px;"
+            src="./assets/img/newSvg/hollowTip.svg"></div>
+      </div>
+      <app-suggestion-tip [suggetNum]="suggestArr.length" (openSuggest)="openSuggest()"></app-suggestion-tip>
+    </div>
+    <div class="config">
+      <app-suggestion-tip [suggetNum]="suggestArr.length" (openSuggest)="openSuggest()" [type]="'icon'">
+      </app-suggestion-tip>
+      <div *ngIf="!snapShot" class="snapphote">
+        <div [ngClass]="isDownload?'notSnapshot':'snapshotBg'" (click)="doSnap('jdbcpool')"
+          [tiTip]='i18n.snapshot_analysis_content1' tiTipMaxWidth="221px" [tiTipContext]='tip1Context'
+          tiTipPosition='top-right'></div>
+        <span [ngClass]="isDownload?'count_disabled':'red_count'" *ngIf="snapCount > 0">{{snapCount}}</span>
+      </div>
+      <div class="configBg" tiTipMaxWidth="''" (mousedown)="openJDBC()"></div>
+    </div>
+  </div>
+  <div class="jdbcpool-table" [ngClass]="{ show: typeSelected.value === 'form' }"
+    *ngIf="srcDataTable.data.length !== 0">
+    <ti-table [(displayedData)]="displayedTable" [srcData]="srcDataTable" [columns]="columnsTable" tiColsResizable
+      style="border-left: none !important;">
+      <div class="ti3-table-fixed-head" style="overflow-y:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th details-icon-column class="setfirsttd">
+              </th>
+              <ng-container *ngFor="let column of columnsTable; let idx = index">
+                <th width="{{ column.width }}" *ngIf="idx != 0" tiOverflow>
+                  <ti-cell-text>{{ column.title }}
+                    <span *ngIf="idx == 1"><span style="margin-right: 5px;">{{i18n.common_term_java_parentheses_left}}{{
+                        spinnerValue }}{{i18n.common_term_java_parentheses_right}}</span><img
+                        src="./assets/img/home/tableFilter.svg" alt="" [tiTip]="configTwo"
+                        [tiTipContext]="tipContext" /></span>
+                  </ti-cell-text>
+                  <ti-head-sort *ngIf="column.isSort" [sortKey]="column.sortKey"></ti-head-sort>
+                </th>
+              </ng-container>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="ti3-table-container ti3-resize-wrapper" style="height: 300px;">
+        <table>
+          <thead>
+            <tr [ngStyle]="{ opacity: 0 }">
+              <th details-icon-column class="setfirsttd">
+              </th>
+              <ng-container *ngFor="let column of columnsTable; let idx = index">
+                <th *ngIf="idx != 0" style="height: 0px;" tiOverflow width="{{ column.width }}"></th>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let row of displayedTable; index as i">
+              <!-- 第一行 -->
+              <tr [ngStyle]="{
+                'background-color':
+                row.showDetails || row.isSelect ?
+                '#F7FAFF' : ''
+                }">
+                <td details-icon-column class="setfirsttd">
+                  <ti-details-icon [row]="row" [index]="i" (beforeToggle)="beforeToggle($event)">
+                  </ti-details-icon>
+                </td>
+                <td tiOverflow width="{{ columnsTable[1].width }}">
+                  {{ row.linkId || "--" }}
+                </td>
+                <td tiOverflow width="{{ columnsTable[2].width }}">
+                  {{ row.url || "--" }}
+                </td>
+                <td tiOverflow width="{{ columnsTable[3].width }}">
+                  {{ row.startTime || "--" }}
+                </td>
+                <td tiOverflow width="{{ columnsTable[4].width }}">
+                  {{ row.endTime || "--" }}
+                </td>
+                <td tiOverflow width="{{ columnsTable[5].width }}">
+                  {{ row.count }}
+                </td>
+                <td tiOverflow width="{{ columnsTable[6].width }}">
+                  {{ row.duration + " ms" }}
+                </td>
+              </tr>
+              <ng-container *ngIf="row.showDetails">
+                <tr *ngFor="let subRow of currentFdTableListTop ; let idx=index" (click)="onClickTableRow(subRow)"
+                  [ngStyle]="{
+                  'background-color': subRow['isSelect']
+                    ? '#F7FAFF'
+                    : ''
+                }">
+                  <td style="border-right: solid 2px #0067ff;border-bottom:hidden!important;background: #f5f9ff;"></td>
+                  <td tiOverflow>
+                    {{ subRow["sessId"] }}
+                  </td>
+                  <td tiOverflow>
+                    {{ subRow["url"] }}
+                  </td>
+                  <td tiOverflow>
+                    {{ handleTimeFormat(subRow["startTime"]) }}
+                  </td>
+                  <td tiOverflow>
+                    {{ handleTimeFormat(subRow["endTime"]) }}
+                  </td>
+                  <td tiOverflow>
+                    {{ subRow["count"] }}
+                  </td>
+                  <td tiOverflow>
+                    {{ subRow["duration"] + "ms" }}
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </ti-table>
+  </div>
+  <div class="jdbcpool-echarts" [ngClass]="{ show: typeSelected.value === 'view' }"
+    *ngIf="srcDataTable.data.length !== 0">
+    <div style="width: 100%;">
+      <app-time-line [timeData]='timeData' (timeLineData)='timeLineData($event)' #jdbcPoolTimeLine>
+      </app-time-line>
+    </div>
+    <div class="profile-echarts">
+      <div class="right-legend">
+        <div class="green-legend">
+          <span class="write circle"></span><span>{{ i18n.jdbcpool.idleWaiting }}</span>
+        </div>
+        <div class="green-legend">
+          <span class="green circle"></span><span>{{ i18n.jdbcpool.normalRun }}</span>
+        </div>
+        <div>
+          <span class="red circle"></span><span>{{ i18n.jdbcpool.thresholdAlert }}</span>
+        </div>
+      </div>
+      <div class="box-echarts">
+        <div class="echart" id="echartId">
+          <div class="link-position">{{ i18n.jdbcpool.linkId }}</div>
+          <div class="mychart" id="main" echarts [options]="echartsOption" [merge]="updateOptions"
+            (chartInit)="onChartInit($event)" (chartDataZoom)="handleDatazoom($event)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="stack" *ngIf="srcDataTable.data.length !== 0">
+    <div class="jdbcpool-tack" style="margin-right: 16px;">
+      <div class="config-title">
+        {{ i18n.protalserver_sampling_lock_stack
+        }}<span>{{i18n.common_term_java_parentheses_left}}{{ i18n.jdbcpool.beginTime
+          }}{{i18n.common_term_java_parentheses_right}}</span>
+        <app-stack-tip [depth]="downloadService.downloadItems.jdbcpool.stackDepth"></app-stack-tip>
+      </div>
+      <div class="config-border"></div>
+      <div class="config-tree" id="stackData">
+        <ti-tree class="begin-tree" [data]="stackTranceData" (select)="onSelect($event)">
+          <ng-template let-item let-i="index">
+            <span tiOverflow tiTipPosition="right" style="vertical-align: middle;">
+              <span class="expandAll" *ngIf="!item.expanded  && item.children && item.children.length"
+                (click)="expandAllNode(item,0)"><img src="./assets/img/profiling/expand.svg"></span>
+              <span class="expandAll" *ngIf="item.expanded  && item.children && item.children.length"
+                (click)="expandAllNode(item,0)"><img src="./assets/img/profiling/noExpand.svg"></span>
+              <span [ngStyle]="{ width: item.count + 'px' }" style="
+                  display: inline-block;
+                  min-width: 1px;
+                  max-width: 5px;
+                  height: 10px;
+                  background: #6c92fa;
+                  margin-right: 5px;
+                "></span>
+              <span style="cursor: pointer; padding-right: 10px;">{{
+                item.label
+                }}</span>
+            </span>
+          </ng-template>
+        </ti-tree>
+        <div *ngIf="stackTranceData.length === 0 ">
+          <div class="noData">
+            <img class='newNoData' src="./assets/img/projects/noData.svg" />
+            <p>{{i18n.common_term_task_nodata}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="config-border"></div>
+    </div>
+    <div class="jdbcpool-tack">
+      <div class="config-title">
+        {{ i18n.protalserver_sampling_lock_stack
+        }}<span>{{i18n.common_term_java_parentheses_left}}{{ i18n.jdbcpool.endTime
+          }}{{i18n.common_term_java_parentheses_right}}</span>
+        <app-stack-tip [depth]="downloadService.downloadItems.jdbcpool.stackDepth"></app-stack-tip>
+      </div>
+      <div class="config-border"></div>
+      <div class="config-tree" id="stackDataRight">
+        <ti-tree class="end-tree" [data]="stackTranceDataEnd" (select)="onSelect($event)">
+          <ng-template let-item let-i="index">
+            <span tiOverflow tiTipPosition="right" style="vertical-align: middle;">
+              <span class="expandAll" *ngIf="!item.expanded && item.children && item.children.length"
+                (click)="expandAllNode(item,1)"><img src="./assets/img/profiling/expand.svg"></span>
+              <span class="expandAll" *ngIf="item.expanded && item.children && item.children.length"
+                (click)="expandAllNode(item,1)"><img src="./assets/img/profiling/noExpand.svg"></span>
+              <span [ngStyle]="{ width: item.count + 'px' }" style="
+                  display: inline-block;
+                  min-width: 1px;
+                  max-width: 5px;
+                  height: 10px;
+                  background: #6c92fa;
+                  margin-right: 5px;
+                "></span>
+              <span style="cursor: pointer; padding-right: 10px;">{{
+                item.label
+                }}</span>
+            </span>
+          </ng-template>
+        </ti-tree>
+        <div *ngIf="stackTranceDataEnd.length === 0 ">
+          <div class="noData">
+            <img class='newNoData' src="./assets/img/projects/noData.svg" />
+            <p>{{i18n.common_term_task_nodata}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="config-border"></div>
+    </div>
+  </div>
+  <div *ngIf="srcDataTable.data.length === 0" class="databaseNodata">
+    <div *ngIf="!beginFileIo">
+      <img class='newNoData' src="./assets/img/projects/noData.svg" />
+    </div>
+    <div class="analyz-svg" *ngIf="beginFileIo">
+      <img class="browser-img" src="./assets/img/profiling/browserPreview.gif">
+    </div>
+    <div class="no-text">
+      {{ beginFileIo ? i18n.profileNoData.jdbcPoolNoDataMsg2 : noDataMsg }}</div>
+  </div>
+  <!-- tip内容模板，其中let-定义的是模板中用到的上下文 -->
+  <div [hidden]="!jdbcSug" class="poolSug" (mousedown)="dragJDBC()">
+    <div class="jdbcSug" #draggable tiDraggable>
+      <div class="tip-config">
+        <div class="config-title" style="font-size: 16px;display: flex;justify-content: space-between;">
+          {{ configTitle }}{{ i18n.jdbcpool.jdbcpoolConfig }}
+          <img (mouseenter)="onHoverJDBC('closer')" (mouseleave)="onHoverJDBC('')" (click)="closeJDBC()"
+            [src]="hoverClose==='closer'?'./assets/img/newSvg/close_hover.svg':' ./assets/img/header/close_icon.svg'"
+            alt="" />
+        </div>
+        <div class="config-content" *ngIf="jdbcpoolConfig.length > 0">
+          <div class="label">
+            <ng-container *ngFor="let item of jdbcpoolConfig">
+              <div class="label-box">
+                <div class="content-label">{{ item.label }}</div>
+                <div class="content-value">
+                  {{ item.value }}
+                  <span *ngIf="item.expected" style="padding-left: 5px;"><img [tiTip]="optimization"
+                      (mouseenter)="configMouse(item)" [tiTipContext]="configContext" src="./assets/img/home/rocket.svg"
+                      alt="" /></span>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="no-data-content" *ngIf="jdbcpoolConfig.length == 0">
+          <div class="label">
+            <img class='newNoData' src="./assets/img/projects/noData.svg" />
+            <p>{{i18n.protalserver_profiling_tab.jdbcPoolNoData}}</p>
+          </div>
+        </div>
+        <div class="jdbc-btn">
+          <button tiButton (click)="closeJDBC()">{{i18n.common_term_operate_close}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #configTwo let-context="context">
+    <div class="config_title">{{ i18n.jdbcpool_config_title }}</div>
+    <div class="spinner_content">
+      <div style="margin-right: 7px;">{{ i18n.jdbcpool_config_top }}</div>
+      <ti-spinner class="spinner2" style="width: 150px;" name="spinner2" [min]="spinner.min" [max]="spinner.max"
+        [format]="spinner.format" [(ngModel)]="spinnerValue" [tiRangeValue]="spinner.rangeValue"
+        (ngModelChange)="onModelChange($event)" tiValidation tiRequired [disabled]="startBtnDisabled || snapShot">
+      </ti-spinner>
+    </div>
+  </ng-template>
+  <ng-template #optimization let-context="context">
+    <div>
+      <p>{{i18n.jdbcpool.suggestions}}<a style="color: #0067FF;"
+          (click)="closeSug()">{{i18n.jdbcpool.look}}</a>{{i18n.jdbcpool.info}}</p>
+    </div>
+  </ng-template>
+</div>
+<app-analysis #analysis [isSuggest]="isSuggest" [type]="sugtype" (closeHandle)="closeHandle($event)"
+  [suggestArr]="suggestArr" class="analysis" (mousedown)="dragAnalysis()">
+</app-analysis>

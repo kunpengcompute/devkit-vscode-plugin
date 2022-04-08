@@ -1,0 +1,55 @@
+.detail-item {
+    padding-left: 15px;
+    color: #ddd;
+}
+
+#detail-container {
+    .content-container {
+        opacity: 0;
+    }
+}
+
+.showDetail {
+    opacity: 1 !important;
+}
+
+:host ::ng-deep .ti3-tabs > li {
+    margin: 0;
+}
+
+:host ::ng-deep ti-tabs {
+    .ti3-tabs-container1 {
+        overflow: hidden;
+        position: fixed;
+        z-index: 1000;
+        box-sizing: border-box;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: var(--vscode-editor-background);
+        padding: 32px 32px 0;
+
+        .ti3-tabs {
+            width: 93.5%;
+            height: 44px !important;
+            background: var(--vscode-editor-background) !important;
+            z-index: 999;
+        }
+    }
+    .ti3-tab-content {
+        padding-top: 44px;
+    }
+}
+
+::ng-deep #detail-container .ti3-tabs-container .ti3-tabs > li {
+    margin-right: 30px;
+
+    a {
+        padding: 10px 0 !important;
+
+        ti-tab-header {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+    }
+}

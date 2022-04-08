@@ -1,0 +1,133 @@
+<div class="body-title">
+  <div style="margin-right: 68px;">
+    <p>
+      <span>{{ 'net_io.xps_rps.hard_info.network_name' | i18n }}</span>
+      <span>{{ bodyTitle?.ethName || '--' }}</span>
+    </p>
+    <p>
+      <span>{{ 'net_io.xps_rps.hard_info.inter_time' | i18n }}</span>
+      <span>{{ bodyTitle?.irqCount === 0 ? 0 : (format(bodyTitle?.irqCount) || '--') }}</span>
+    </p>
+  </div>
+  <div>
+    <p>
+      <span>{{ 'net_io.xps_rps.hard_info.network_numa' | i18n }}</span>
+      <span>{{ bodyTitle?.numaNode || '--' }}</span>
+    </p>  
+  </div>
+</div>
+
+<div class="warpper">
+  <div class="warpper-header">
+    <ti-select
+      style="width: 240px"
+      [clearable]="true"
+      [options]="irqOptionList"
+      [(ngModel)]="currIrqOption"
+      [placeholder]="'net_io.xps_rps.hard_info.inter_select_placeholder' | i18n"
+      (ngModelChange)="onIrqSelectChange($event)"
+    >
+    </ti-select>
+    <div class="legend">
+      <p *ngFor="let item of legend"
+        [ngClass]="{'active': item.active}"
+        (click)="item.active = !item.active">
+        <span class="legend-icon">{{ item.icon }}</span>
+        <span class="legend-label">{{ item.label }}</span>
+      </p>
+    </div>
+  </div>
+  <div class="box-warpper">
+    <div class="box" *ngFor="let subList of netportIrqListArr; index as idxOne">
+      <div class="box-title">
+        <span>CPU{{ floor(idxOne / 2) + 1 }}</span>
+        <span>NUMA{{ idxOne }}</span>
+      </div>
+      <div class="color-block">
+        <ng-container *ngFor="let item of subList; index as idxTwo">
+          <div
+            class="core"
+            [hyTiTip]="tipContent"
+            [hyTipStyle]="{ 'pointer-events': 'none' }"
+            [hyTipClass]="['netport-irq-tooltip']"
+            [tiTipContext]="{meragedIrq: item, selectedIrq: currIrqCountList[idxOne*numaCoreNum + idxTwo]}"
+            tiTipPosition="right"
+            tiTipMaxWidth="500px"
+            [ngStyle]="{ 'background-color': item.color }"
+          >
+            <div class="hard-block inner-block"
+              [ngClass]="{'highlight-border': currIrqCountList[idxOne*numaCoreNum + idxTwo] > 0}">
+              <span *ngIf="item.hardIrq.affinity > 0 && legendH.active" [ngClass]="{'highlight-text': currIrqAffinityList[idxOne*numaCoreNum + idxTwo] > 0}">H</span>
+              <div *ngIf="item.hardIrq.irqCount > 0"
+                class="highlight-bg"
+                [ngStyle]="{'opacity': item.hardIrq.irqCount / allHardIrqCount}"
+              ></div>
+            </div>
+            <div class="sub-block">
+              <div class="rps-block inner-block">
+                <span *ngIf="item.rps.affinity > 0 && legendR.active" [ngClass]="{'highlight-text': currRpsList[idxOne*numaCoreNum + idxTwo] > 0}">R</span>
+              </div>
+              <div class="xps-block inner-block">
+                <span *ngIf="item.xps.affinity > 0 && legendX.active" [ngClass]="{'highlight-text': currXpsList[idxOne*numaCoreNum + idxTwo] > 0}">X</span>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #tipContent let-context="context">
+  <ti-formfield [type]="'text'" [textLineHeight]="'30px'">
+    <ti-item>
+      <ti-item-label>
+        <span class="label-icon"></span>
+        <span class="label-text">Core ID</span>
+      </ti-item-label>
+      <span class="value">{{ context.meragedIrq.coreId }}</span>
+    </ti-item>
+    <ti-item [show]="context.selectedIrq !== undefined">
+      <ti-item-label>
+        <span class="label-icon irq-count-item"></span>
+        <span class="label-text">{{ currIrqOption ? currIrqOption.label : 'ALL' + ('net_io.xps_rps.hard_info.inter_time' | i18n) }}</span>
+      </ti-item-label>
+      <span class="value">{{ context.selectedIrq }}（{{ computePercent(context.selectedIrq, context.meragedIrq.hardIrq.irqCount) }}）</span>
+    </ti-item>
+    <ti-item>
+      <ti-item-label>
+        <span class="label-icon irq-count"></span>
+        <span class="label-text">{{ 'net_io.xps_rps.hard_info.inter_time' | i18n }}</span>
+      </ti-item-label>
+      <span class="value">{{ format(context.meragedIrq.hardIrq.irqCount) }}</span>
+    </ti-item>
+    <ti-item [show]="ipiData?.length">
+      <ti-item-label>
+        <span class="label-icon ipi-num"></span>
+        <span class="label-text">{{ 'net_io.xps_rps.hard_info.ipi_name' | i18n }}</span>
+      </ti-item-label>
+      <span class="value" *ngIf="ipiData?.length">{{ ipiData[context.meragedIrq.coreId] }}</span>
+    </ti-item>
+    <ti-item>
+      <ti-item-label>
+        <span class="label-icon">H</span>
+        <span class="label-text">{{ 'tuninghelper.sysConfigDetail.irqHardBondNumber' | i18n }}</span>
+      </ti-item-label>
+      <span class="value">{{ context.meragedIrq.hardIrq.affinity }}</span>
+    </ti-item>
+    <ti-item>
+      <ti-item-label>
+        <span class="label-icon">R</span>
+        <span class="label-text">{{ 'tuninghelper.sysConfigDetail.rpsBondNumber' | i18n }}</span>
+      </ti-item-label>
+      <span class="value">{{ context.meragedIrq.rps.affinity }}</span>
+    </ti-item>
+    <ti-item>
+      <ti-item-label>
+        <span class="label-icon">X</span>
+        <span class="label-text">{{ 'tuninghelper.sysConfigDetail.xpsBondNumber' | i18n }}</span>
+      </ti-item-label>
+      <span class="value">{{ context.meragedIrq.xps.affinity }}</span>
+    </ti-item>
+  </ti-formfield>
+</ng-template>

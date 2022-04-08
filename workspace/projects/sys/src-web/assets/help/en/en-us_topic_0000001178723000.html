@@ -1,0 +1,102 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Project Management">
+<meta name="product" content="">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (System Profiler)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001178723000">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Project Management</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001178723000"></a><a name="EN-US_TOPIC_0000001178723000"></a>
+
+<h1 class="topictitle1">Project Management</h1>
+<div id="body1591609102841"><div class="section" id="EN-US_TOPIC_0000001178723000__section11470129119"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0000001178723000__p5336201013112">You have logged in to the <span id="EN-US_TOPIC_0000001178723000__ph1359340104618">System Profiler</span> WebUI.</p>
+<div class="note" id="EN-US_TOPIC_0000001178723000__note7604161917585"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0000001178723000__ul761114538214"><li id="EN-US_TOPIC_0000001178723000__li361118531921">In general, big data, distributed storage, and database, a maximum of 10 nodes can be sampled and analyzed concurrently.</li><li id="EN-US_TOPIC_0000001178723000__li1417017554218">When you create an HPC task in an HPC project, all nodes (101 nodes at maximum) are selected by default. For other non-HPC tasks in an HPC project, 10 nodes are selected by default.</li></ul>
+</div></div>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001178723000__section1715015352384"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0000001178723000__ol1052162113269"><li id="EN-US_TOPIC_0000001178723000__li14522182152620"><span>On the home page, click <span><img id="EN-US_TOPIC_0000001178723000__image14352155534017" src="en-us_image_0000001179041664.png"></span> next to <strong id="EN-US_TOPIC_0000001178723000__b4936654133320">Project Management</strong>.</span><p><p id="EN-US_TOPIC_0000001178723000__p332993204211">The <strong id="EN-US_TOPIC_0000001178723000__b59754812510">Create Project</strong> page is displayed.</p>
+</p></li><li id="EN-US_TOPIC_0000001178723000__li02691120184211"><span>Set project parameters, as shown in <a href="#EN-US_TOPIC_0000001178723000__fig82199388588">Figure 1</a>. For details about the parameters, see <a href="#EN-US_TOPIC_0000001178723000__table953882104213">Table 1</a>.</span><p><div class="fignone" id="EN-US_TOPIC_0000001178723000__fig82199388588"><a name="EN-US_TOPIC_0000001178723000__fig82199388588"></a><a name="fig82199388588"></a><span class="figcap"><b>Figure 1 </b>Creating a project</span><br><span><img id="EN-US_TOPIC_0000001178723000__image1160521814488" src="en-us_image_0000001224361397.png"></span></div>
+<div class="note" id="EN-US_TOPIC_0000001178723000__note8471410143019"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001178723000__p647410153012">In the HPC scenario, sampling analysis can be performed on 101 nodes concurrently. You can click <span><img id="EN-US_TOPIC_0000001178723000__image0269194813111" src="en-us_image_0000001223882943.png"></span> to search for node names and node IP addresses.</p>
+</div></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0000001178723000__table953882104213"></a><a name="table953882104213"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0000001178723000__table953882104213" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Parameter description</caption><colgroup><col style="width:22.29%"><col style="width:77.71000000000001%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0000001178723000__row1253872110428"><th align="left" class="cellrowborder" valign="top" width="22.29%" id="mcps1.3.2.2.2.2.3.2.3.1.1"><p id="EN-US_TOPIC_0000001178723000__p253911211429">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="77.71000000000001%" id="mcps1.3.2.2.2.2.3.2.3.1.2"><p id="EN-US_TOPIC_0000001178723000__p55391321164215">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0000001178723000__row15539182114427"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723000__p115392212423">Project Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723000__p115391321114214">Name of the project to be added. The name must meet the following requirements:</p>
+<ul id="EN-US_TOPIC_0000001178723000__ul15539142144215"><li id="EN-US_TOPIC_0000001178723000__li9539192134211">Contains only letters, digits, and special characters (including @#$ %^&amp;*()[]&lt;&gt;._-!-+ and spaces).</li><li id="EN-US_TOPIC_0000001178723000__li1253911219425">Contain 1 to 32 characters.</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723000__row1242195513496"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723000__p92431455164918">Scenario</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723000__p72431551498">Select <strong id="EN-US_TOPIC_0000001178723000__b894010392223">General Scenario</strong>, <strong id="EN-US_TOPIC_0000001178723000__b3321124218228">Big Data</strong>, <strong id="EN-US_TOPIC_0000001178723000__b0759044102215">Distributed Storage</strong>, <strong id="EN-US_TOPIC_0000001178723000__b4342134682211">HPC</strong>, or <strong id="EN-US_TOPIC_0000001178723000__b14568168589">Database</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723000__row11560114817102"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723000__p1864181021411">Component</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><ul id="EN-US_TOPIC_0000001178723000__ul786441081410"><li id="EN-US_TOPIC_0000001178723000__li4864910141416"><strong id="EN-US_TOPIC_0000001178723000__b14155950162815">Spark2x</strong>: WordCount, TeraSort, and k-means</li><li id="EN-US_TOPIC_0000001178723000__li10864510181417"><strong id="EN-US_TOPIC_0000001178723000__b7503736163116">HBase</strong>: random read/write and BulkLoad</li><li id="EN-US_TOPIC_0000001178723000__li1386418100140"><strong id="EN-US_TOPIC_0000001178723000__b11826184173315">Hive</strong>: SQL1, SQL2, SQL3, SQL4, and SQL5</li><li id="EN-US_TOPIC_0000001178723000__li11864210141415"><strong id="EN-US_TOPIC_0000001178723000__b571316165336">Elastic search</strong>: Elasticsearch cases</li><li id="EN-US_TOPIC_0000001178723000__li10864610201417"><strong id="EN-US_TOPIC_0000001178723000__b3280381403">Flink</strong>: throughput</li><li id="EN-US_TOPIC_0000001178723000__li1864810151413"><strong id="EN-US_TOPIC_0000001178723000__b9515311194012">Kafka</strong>: producer throughput and consumer throughput</li><li id="EN-US_TOPIC_0000001178723000__li19864141011145"><strong id="EN-US_TOPIC_0000001178723000__b104920374401">Redis</strong>: basic data type</li><li id="EN-US_TOPIC_0000001178723000__li186411101149"><strong id="EN-US_TOPIC_0000001178723000__b10874135313221">Storm</strong>: storm case<div class="note" id="EN-US_TOPIC_0000001178723000__note8640659265"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0000001178723000__p26408591566">This parameter is displayed when the <strong id="EN-US_TOPIC_0000001178723000__b1532311516234">Big Data</strong> scenario is selected.</p>
+</div></div>
+</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723000__row1186065017104"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723000__p989991915149">Storage Type</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><ul id="EN-US_TOPIC_0000001178723000__ul108991919161414"><li id="EN-US_TOPIC_0000001178723000__li12899519111419"><strong id="EN-US_TOPIC_0000001178723000__b4412019204414">Ceph object storage</strong>: cold storage, balanced storage, and high-performance storage</li><li id="EN-US_TOPIC_0000001178723000__li58991819131414"><strong id="EN-US_TOPIC_0000001178723000__b372102411440">Ceph block storage</strong>: balanced storage and high-performance storage</li><li id="EN-US_TOPIC_0000001178723000__li689918193149"><strong id="EN-US_TOPIC_0000001178723000__b16990191911236">Ceph file storage</strong>: balanced storage<div class="note" id="EN-US_TOPIC_0000001178723000__note18583163477"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0000001178723000__p1583431178">This parameter is displayed when the <strong id="EN-US_TOPIC_0000001178723000__b195272732314">Distributed Storage</strong> scenario is selected.</p>
+</div></div>
+</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723000__row0485153411487"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723000__p12486173419486">Database Type</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><ul id="EN-US_TOPIC_0000001178723000__ul12397194594815"><li id="EN-US_TOPIC_0000001178723000__li1639744514482">MySQL 8</li><li id="EN-US_TOPIC_0000001178723000__li1614311044917">openGauss 2<div class="note" id="EN-US_TOPIC_0000001178723000__note8201152924915"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0000001178723000__p1420142913490">This parameter is displayed when the <strong id="EN-US_TOPIC_0000001178723000__b11798546203315">Database</strong> scenario is selected.</p>
+</div></div>
+</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723000__row7814622153517"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.3.2.3.1.1 mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723000__p253932119421">Select Nodes</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723000__row10539192112425"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723000__p1453922154214">Node Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723000__p25391217427">Name of a node.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723000__row1853982116425"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723000__p11539321164216">Node Status</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723000__p13539202113425">Status of the node.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723000__row35391421124212"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723000__p7539102118423">Node IP Address</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723000__p14539142194216">IP address of the server where the node is installed.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="EN-US_TOPIC_0000001178723000__li193357593218"><span>Click <strong id="EN-US_TOPIC_0000001178723000__b134491615131115">OK</strong>.</span><p><p id="EN-US_TOPIC_0000001178723000__p1116135110352">You can click the icons next to the project name to perform the following operations:</p>
+<ul id="EN-US_TOPIC_0000001178723000__ul433519593218"><li id="EN-US_TOPIC_0000001178723000__li1533595902111"><span><img id="EN-US_TOPIC_0000001178723000__image5335125915218" src="en-us_image_0000001223882939.png"></span>: creates an analysis task in the current project.</li><li id="EN-US_TOPIC_0000001178723000__li16335195917218"><span><img id="EN-US_TOPIC_0000001178723000__image5335185932117" src="en-us_image_0000001178723178.png"></span>: modifies the project name and adds or deletes nodes for the project.</li><li id="EN-US_TOPIC_0000001178723000__li1733510595216"><span><img id="EN-US_TOPIC_0000001178723000__image13335165952112" src="en-us_image_0000001179041666.png"></span>: deletes a project. After a project is deleted, all data related to the project will be deleted. Exercise caution when performing this operation.</li></ul>
+<div class="note" id="EN-US_TOPIC_0000001178723000__note12335859122117"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0000001178723000__ul18335115972119"><li id="EN-US_TOPIC_0000001178723000__li153354592211">The administrator (<strong id="EN-US_TOPIC_0000001178723000__b29535316127">tunadmin</strong>) can view, modify, and delete projects created by all users.</li><li id="EN-US_TOPIC_0000001178723000__li1336185922119">Common users can view, modify, and delete their own projects and only view the projects created by other users.</li><li id="EN-US_TOPIC_0000001178723000__li5336205915211">After a project is created, you can click the project name to view details about the project.</li></ul>
+</div></div>
+</p></li></ol>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

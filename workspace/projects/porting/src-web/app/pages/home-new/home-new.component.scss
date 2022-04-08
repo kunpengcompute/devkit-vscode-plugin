@@ -1,0 +1,469 @@
+$common80: 4.166%;
+
+$width360: 18.75%;
+
+$col222: #222;
+$col0067ff: #0067ff;
+
+.box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 1366px;
+    width: 100%;
+    height: 100%;
+    background-color: #EEF0F5;
+    .icon-banner1{
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      top: -30px;
+      z-index: 3;
+      transition: all 3s;
+      cursor: pointer;
+    }
+    .toTop{
+      transform: rotateZ(180deg);
+    }
+    .router-content1{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 99;
+      background-color: #fff;
+    }
+    box-sizing: border-box;
+    background-color: #fff;
+    .main {
+      position: relative;
+      display: flex;
+      flex: 1 auto;
+      flex-direction: column;
+      overflow-y: auto;
+      .banner-container {
+        position: relative;
+        overflow: hidden;
+        height: 16.5vw;
+        background: url('../../../assets/img/home/webbanner.png') no-repeat;
+        background-position: 0px -3.333vw;
+        background-size: cover;
+        transition: all 0.1s;
+        .icon-banner {
+          position: absolute;
+          bottom: 8px;
+          left: 0;
+          right: 0;
+          z-index: 1;
+          width: 16px;
+          height: 16px;
+          margin: 0 auto;
+          cursor: pointer;
+        }
+        img{
+          width: 100%;
+          height: 316px;
+        }
+        .msg {
+          position: absolute;
+          display: flex;
+          flex-direction: column;
+          top: 50%;
+          left: 4.166%;
+          transform: translateY(-50%);
+          span,
+          a {
+            margin-bottom: 24px;
+            color: #fff;
+            font-size: 16px;
+          }
+          a{
+            display: inline-block;
+            &:hover {
+              color: #267DFF;
+            }
+            img {
+              width: 8px;
+              height: 8px;
+              margin-left: 8px;
+              vertical-align: middle;
+              transform: rotate(-90deg);
+            }
+          }
+          span:first-child {
+            font-size: 28px;
+          }
+        }
+      }
+      .banner-collapse{
+        min-height: 0 !important;
+        height: 0 !important;
+        overflow: hidden;
+      }
+
+      .container{
+        .img-close{
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          right: -4px;
+          cursor: pointer;
+        }
+        .img-open{
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          left: 0;
+          z-index: 1;
+          cursor: pointer;
+        }
+        .router-content{
+          flex: 1;
+          overflow-x: hidden;
+          overflow-y: auto !important;
+          background-color: #fff;
+        }
+      }
+    }
+}
+
+/* 左侧菜单栏 start */
+.container {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  overflow-y: hidden;
+  .nav {
+    box-sizing: border-box;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: $width360;
+    padding: 30px 0 0 $common80;
+    border-right: 1px solid #e1e6ee !important;
+    background-color: #fff;
+    > ul {
+      display: flex;
+      flex-direction: column;
+      li {
+        margin-bottom: 44px;
+        font-size: 16px;
+        color: $col222;
+        cursor: pointer;
+        &.active {
+          color: $col0067ff;
+        }
+        &.isCollapse {
+          margin-bottom: 0;
+        }
+        > span{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          img{
+            height: 10px;
+            margin-right: 22px;
+          }
+        }
+        .port{
+          img{
+            transform: rotateZ(90deg);
+          }
+        }
+        ul {
+          margin-top: 10px;
+          &.collapse{
+            height: 0;
+            overflow: hidden;
+          }
+          li{
+            font-size: 14px;
+            color: #666;
+            padding: 14px 0 12px 20px;
+            margin: 0;
+            border-left: 2px solid transparent;
+            &.active1{
+              color: $col0067ff ;
+              background-color: #F5F9FF;
+              border-left: 2px solid $col0067ff;
+            }
+          }
+          li:hover {
+            color: #5E9EFF;
+          }
+        }
+      }
+      li:hover {
+        color: #5E9EFF;
+      }
+    }
+  }
+  .navToggle {
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+}
+/* 左侧菜单栏 end */
+
+footer{
+    text-align: center;
+    padding: 8px 0 8px;
+    background: #2e3243;
+    color: white;
+
+    line-height: 26px;
+    font-size: 12px;
+    color: #ffffff;
+}
+.bg{
+   width: 56px;
+   height: 56px;
+    background-color: red;
+    -webkit-mask-image: url('../../../assets/logo-5.6mm.svg');
+
+mask-image: url('../../../assets/logo-5.6mm.svg');
+}
+.loading-box{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: none;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+}
+.loading{
+    z-index: 9999;
+    text-align: center;
+}
+.loading h2 {
+    color: #ccc;
+    margin: 0;
+    font: .8em verdana;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+  }
+
+  /*
+   * Loading Dots
+   * Can we use pseudo elements here instead :after?
+   */
+  .loading span {
+    display: inline-block;
+    vertical-align: middle;
+    width: .6em;
+    height: .6em;
+    margin: .19em;
+    background: #007DB6;
+    border-radius: .6em;
+    animation: loading 1s infinite alternate;
+  }
+
+  /*
+   * Dots Colors
+   * Smarter targeting vs nth-of-type?
+   */
+  .loading span:nth-of-type(2) {
+    background: #008FB2;
+    animation-delay: 0.2s;
+  }
+  .loading span:nth-of-type(3) {
+    background: #009B9E;
+    animation-delay: 0.4s;
+  }
+  .loading span:nth-of-type(4) {
+    background: #00A77D;
+    animation-delay: 0.6s;
+  }
+  .loading span:nth-of-type(5) {
+    background: #00B247;
+    animation-delay: 0.8s;
+  }
+  .loading span:nth-of-type(6) {
+    background: #5AB027;
+    animation-delay: 1.0s;
+  }
+  .loading span:nth-of-type(7) {
+    background: #A0B61E;
+    animation-delay: 1.2s;
+  }
+
+  .changeWeb-btn-box {
+    text-align: center;
+    width: 100%;
+
+    .user-sure-btn {
+      margin-right: 6px;
+      width: 100px;
+      min-width: 100px;
+    }
+
+    .user-close-btn {
+      width: 100px;
+      min-width: 100px;
+    }
+  }
+
+  .do-title{
+    margin-bottom: 10px;
+    position: relative;
+    .title{
+      width: 327px;
+      font-family: "huawei sans";
+      font-size: 18px;
+      font-weight: bold;
+      font-stretch: normal;
+      line-height: 18px;
+      letter-spacing: 0px;
+      color: #282b33;
+    }
+    img{
+      padding-bottom: 6px;
+    }
+  }
+
+.show-box{
+  width: 540px;
+  margin: 0 auto;
+  position: relative;
+  .do-title{
+    margin-bottom: 20px;
+  }
+}
+  .show-box1{
+    width: 390px;
+  }
+  .ps{
+    margin-bottom: 24px;
+    width: 540px;
+    p{
+      width: 540px;
+      font-family: "huawei sans";
+      font-size: 14px;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 24px;
+      letter-spacing: 0px;
+      color: #6c7280;
+    }
+  }
+  .select{
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 14px;
+    letter-spacing: 0px;
+    color: #888;
+    vertical-align: middle;
+    span{
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-right: 16px;
+      vertical-align: middle;
+    }
+    span.default{
+      background: url("../../../assets/img/migration-center/unselected.png") no-repeat;
+    }
+    span.active{
+      background: url("../../../assets/img/migration-center/selected.png") no-repeat;
+    }
+  }
+  .btn-box{
+    text-align: center;
+    button.disabled-btn {
+        cursor:not-allowed;
+    }
+
+  }
+
+  /*
+   * Animation keyframes
+   * Use transition opacity instead of keyframes?
+   */
+  @keyframes loading {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .alerm-container {
+    z-index: 1;
+    position: absolute;
+    right: 80px;
+    top: 0;
+
+    .alerm-circle {
+      width: 80px;
+      display: inline-block;
+      height: 80px;
+    }
+
+    .alerm-tip {
+      background-color: #282b33;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.1);
+      width: max-content;
+      position: absolute;
+      top: 80px;
+      left: calc(-100% - 60px);
+      display: none;
+      padding: 10px;
+      color: #fff;
+      line-height: 20px;
+      font-size: 14px;
+      .suggestion {
+        color: #9ea4b3;
+      }
+    }
+  }
+
+  .alerm-container:hover .alerm-tip {
+    display: block;
+    z-index: 200;
+  }
+
+.init-pwd{
+  width: 100%;
+  &::ng-deep .ti3-unifyvalid-error-container{
+    display: flex;
+    align-items: flex-start;
+    .ti3-validate-text{
+      text-indent: 0!important;
+    }
+  }
+}
+
+/* 初始密码弹框 */
+.modal560 {
+  .ti3-close {
+    top: 20px;
+    right: 32px;
+  }
+  .ti3-modal-body {
+    overflow-y: visible;
+    .edit-box {
+      margin-left: -16px;
+      .ti3-form .ti3-form-content {
+        width: 300px;
+      }
+      .ti3-form {
+        .ti3-form-label {
+          width: 94px;
+          padding-right: 16px;
+        }
+      }
+    }
+  }
+}

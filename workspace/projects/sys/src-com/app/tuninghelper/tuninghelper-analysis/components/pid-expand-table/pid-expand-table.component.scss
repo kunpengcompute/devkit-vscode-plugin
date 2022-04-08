@@ -1,0 +1,30 @@
+.ti3-table-container {
+    tbody {
+        tr {
+            td[details-icon-column] {
+                ti-icon {
+                    color: #979797;
+                    cursor: pointer;
+        
+                    &.active {
+                      display: inline-block;
+                      transform: rotate(90deg);
+                    }
+                }
+
+                &.details-td {
+                    background: var(--ti-table-expand-children-margin-background-color);
+                    border-right: 2px solid #0067ff;
+                }
+            }
+        }
+    }
+}
+.ti3-table.custemTable > .ti3-table-fixed-head > table > thead > tr > th .thContent {
+    display: flex;
+    align-items: center;
+    overflow: hidden
+}
+.ti3-table.custemTable > .ti3-table-fixed-head > table > thead > tr > th .thContent .ti3-cell-text-container {
+  height: var(--ti-table-th-height);
+}

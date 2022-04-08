@@ -1,0 +1,29 @@
+<div class="download" style="position: absolute; right:5vw;top:20px;z-index: 99;">
+  <a style="display: block;margin-bottom:5px;" (click)="downloadCsv()"
+    [title]="i18n.sys_cof.sum.download_csv">
+    <img src="./assets/img/download.svg" alt="" />
+  </a>
+</div>
+
+
+<div class="system-content">
+  <div class="system-item">
+    <h1 class="system-content-title">{{i18n.sys_cof.sum.disk}}</h1>
+    <table class="system-content-table">
+      <thead>
+        <tr class="system-titlebar">
+          <th tiOverflow tiTipPosition='left' *ngFor="let column of columns ;index as i"
+            [ngClass]="{'system-line': i!=0}"> {{column.title}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of list" class="system-word">
+          <td tiOverflow tiTipPosition='left'>{{item.deviceName}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.model}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.size}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.type}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

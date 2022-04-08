@@ -1,0 +1,45 @@
+<app-mission-modal-header #modal (ongModalClose)="closePopDetail($event)">
+  <div class="content show-box modify-schedule" style="max-height: 600px">
+    <div class="header">
+      <span class="title"> {{ i18n.modifySchedule }}</span>
+      <span (mousedown)="close()" class="tip-close">
+        <img class="close-img" src="./assets/img/header/close_icon.svg" />
+        <img class="close-img" src="./assets/img/header/close_icon_hover.svg" />
+      </span>
+    </div>
+    <div class="list-info" tiScroll>
+      <div class="missMobal">
+        <!-- 网络IO诊断预约任务 -->
+        <div
+          *ngIf="analysisType === 'netio_diagnostic'"
+          style="margin: 20px 0"
+        >
+          <app-net-io-schedule
+            [taskData]="taskData"
+            [scheduleTaskId]="scheduleTaskId"
+            [projectId]="projectId"
+            (cancelModify)="handleUpdataPretable($event)"
+            (confirmModify)="handleUpdataPretable($event)"
+            *ngIf="showDiagnose"
+          >
+          </app-net-io-schedule>
+        </div>
+        <!-- 存储io诊断预约任务 -->
+        <div
+          *ngIf="analysisType === 'storageio_diagnostic'"
+          style="margin-top: 20px"
+        >
+          <app-storage-io-schedule
+            [taskData]="taskData"
+            [scheduleTaskId]="scheduleTaskId"
+            [projectId]="projectId"
+            (cancelModify)="handleUpdataPretable($event)"
+            (confirmModify)="handleUpdataPretable($event)"
+            *ngIf="showDiagnose"
+          >
+          </app-storage-io-schedule>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-mission-modal-header>

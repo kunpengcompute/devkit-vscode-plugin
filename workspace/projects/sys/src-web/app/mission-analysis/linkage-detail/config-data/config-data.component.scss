@@ -1,0 +1,317 @@
+.ti-icon{
+    font-size: 14px;
+    &.blue{
+        color:  #0067ff; 
+    }
+    &.green{
+        color: #3ad53e;
+    }
+    &.red{
+      margin-bottom: -2px;
+    }
+  } 
+  .img-span{
+    padding-left: 35px;
+  }
+ .msg-main {
+    border: 1px solid #D7DBE7;
+}
+.msg-title {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    line-height: 24px;
+    background: #edf4ff;
+    cursor: pointer;
+}
+.msg-title ti-icon{
+    margin: 0 13px 0 20px;
+}
+.msg-title .des {
+    flex: auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 12px;
+}
+.legends{
+    float: right;
+    padding: 10px 0;
+}
+.same{
+    display: inline-block;
+    padding-left: 25px;
+    span{
+        padding-left: 8px;
+    }
+}
+.section{
+    padding-bottom: 32px;   
+}
+.first-section{
+    padding-top: 40px;
+}
+
+.section-title{
+    color: #222;
+    font-size: 16px;
+    line-height: 24px;
+    padding-bottom: 10px;
+    width: 100%;
+    border-bottom: dashed 1px #e1e6ee;
+}
+.section-box{
+    display: flex;
+}
+.section-config{
+    padding-right: 50px;
+}
+.config-item{
+    display: flex;
+    line-height: 20px;
+    font-size: 14px;
+    padding-top: 8px; 
+}
+.config-title{
+    padding-right: 16px;
+    color: #616161;
+    display: flex;
+    align-items: center;
+    span{
+        padding-left: 10px;
+        width: 150px      ;
+    }
+}
+.config-data{
+    span{
+        width: 250px;
+        color: #222;
+    }
+    .viewDetails{
+      color: #2072ea;
+      cursor: pointer;
+    }
+    .clicked{
+      color: #004ec1;
+    }
+}
+
+
+.thread-screen {
+    padding: 18px 32px;
+    position: relative;
+    height: 100%;
+    .header-title {
+        font-size: 20px;
+        line-height: 30px;
+        padding-bottom: 17px;
+        margin-bottom: 20px;
+        color: #222222;
+        border-bottom: dashed 1px #e1e6ee;
+    }
+    .table-wrapper {
+        max-height: 720px;
+        overflow-y: auto;
+        width: 636px;
+    }
+    &.selectContent{
+      width: 596px;
+      box-shadow: -6px 0px 18px 0px 
+		rgba(0, 0, 0, 0.1);
+    .table-wrapper {
+      max-width: 596px;
+  }
+    }
+    .opreation-btn {
+        position: absolute;
+        bottom: 80px;
+        width: 90%;
+        text-align: center;
+
+        button+button {
+            margin-left: 16px;
+        }
+    }
+}
+
+.expand-icon {
+    transition: 0.3s linear;
+    position: relative;
+    left: 22px;
+    top: 3px;
+  }
+  .expand-icon.active {
+    transform: rotate(90deg);
+  }
+
+ .devSelectBox {
+    position: relative;
+    .box-title {
+      height: 32px;
+      line-height: 32px;
+      font-size: 12px;
+      color: #282b33;
+      border-top: solid 1px #e1e6ee;
+      box-shadow: inset 0px -1px 0px 0px #e6ebf5;
+      span{
+        padding-left: 33px;
+      }
+      .diff-span {
+        padding-left: 10px;
+      }
+    }
+  
+    .summury-table {
+      position: relative;
+      max-height: 0;
+      border-left: 40px solid #f0f3fa;
+      transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+      overflow: hidden;
+      &::before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        content: "";
+        width: 2px;
+        background-color: #6c92fa;
+        z-index: 999;
+      }
+      tr th,
+      tr td {
+        height: 32px;
+        font-size: 14px;
+        color: #282b33;
+        line-height: 32px;
+      }
+      tr.tidTr td {
+        &:nth-child(2) {
+          padding-left: 24px;
+        }
+      }
+      thead tr,
+      tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        box-shadow: inset 0px -1px 0px 0px #e6ebf5;
+      }
+      thead {
+        tr {
+          background-color: #f0f3fa;
+        }
+        th {
+          font-size: 12px;
+          position: relative;
+  
+          &::before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 0;
+            padding-left: 2px;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #d4d9e6;
+          }
+  
+          .content {
+            display: flex;
+            align-items: center;
+  
+            .sort-title {
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              max-width: calc(100% - 23px);
+            }
+  
+            &.center {
+              justify-content: center;
+            }
+          }
+        }
+      }
+  
+      tbody tr:hover {
+        background: #f7faff;
+      }
+    }
+  
+    .summury-table.active,
+    tbody.active {
+      max-height: 50000px;
+      overflow: auto;
+      transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
+    }
+  }
+:host ::ng-deep .icons-warpper{
+  width: 32px;
+  padding-bottom: 18px;
+}
+.selectIcon{
+  cursor: pointer;
+}
+
+.nodata {
+  width: 636px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(100%);
+  .nodata-tips{
+    margin-top: 15px;
+  }
+}
+
+.ti3-table>.ti3-table-container>table>tbody>tr>td{
+  padding: 0 var(--ti-table-td-padding);
+}
+.devSelectBox .summury-table thead th:first-child, .devSelectBox .ti3-table>.ti3-table-container>table>tbody>tr>td:first-child{
+  padding-left: var(--ti-table-column-icon-left-space);
+  width: 60px;
+}
+.thread-screen:not(.selectContent) .devSelectBox {
+  .summury-table thead th:first-child, .ti3-table>.ti3-table-container>table>tbody>tr>td:first-child{
+  width: 120px;
+}
+}
+:host ::ng-deep .ti3-table > .ti3-table-fixed-head + div.ti3-table-container{
+  max-height: 600px;
+}
+  @media only screen and (max-width: 1440px) and (min-width: 1367px) {
+    .section-config{
+      padding-right: 16px;
+    }
+    .config-data span{
+      width: 160px;
+    }
+}
+
+  @media only screen and (max-width: 1366px) {
+    .section-config{
+      padding-right: 16px;
+    }
+    .config-data span{
+      width: 138px;
+    }
+  }
+
+@media only screen and (max-height: 900px) and (min-height: 768px) {
+    .thread-screen .table-wrapper{
+        max-height: 550px;
+    }
+    :host ::ng-deep .ti3-table > .ti3-table-fixed-head + div.ti3-table-container{
+      max-height: 430px;
+    }
+}
+
+  @media only screen and (max-height: 768px) {
+    .thread-screen .table-wrapper{
+        max-height: 430px;
+    }
+    :host ::ng-deep .ti3-table > .ti3-table-fixed-head + div.ti3-table-container{
+      max-height: 311px;
+    }
+  }

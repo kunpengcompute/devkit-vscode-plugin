@@ -1,0 +1,66 @@
+<div class="ddr-cache-echarts">
+  <app-time-line *ngIf="timeData.length" [timeData]="timeData" [lineData]="timeLine" (timeLineData)="timeLineData($event)" #timeLineDetail></app-time-line>
+  <div class="cpu-usage" [appLoading]="obtainingL1cL2cTlbData">
+    <span class="box-title">{{ i18n.ddr.catchPageTitle1 }}</span>
+
+    <div class="select-box" *ngIf="tlbData">
+      <div class="selectItem">
+        <span class="select-title">CPU</span>
+        <ti-select *ngIf="tlbCPUOption.length>0" [multiple]="true" [options]="tlbCPUOption"
+          [searchable]="true" [(ngModel)]="tlbCPUSelected" (ngModelChange)="tlbCPUChange()" id="myselect2">
+        </ti-select>
+        <app-icon-react name="filter" [freeze]="currSelectedCpuList?.length > 0 ? 'active' : 'normal'" (click)="tlbFilterSlider.open()"></app-icon-react>
+      </div>
+
+      <div class="selectItem">
+        <span class="select-title">{{i18n.ddr.catchTypeSelectTitle}}</span>
+        <ti-select [multiple]="true" *ngIf="tlbTypeOption.length>0" [options]="tlbTypeOption"
+          [searchable]="true" [(ngModel)]="tlbTypeSelected" (ngModelChange)="tlbTypeChange()" id="myselect3" tipPosition="top">
+          <ng-template #item let-item let-i=index>
+            <span [tiTip]="item.tips" tiTipPosition="right">
+              {{item.label}}
+            </span>
+          </ng-template>
+        </ti-select>
+      </div>
+    </div>
+
+    <div class="table-box" hyNodata [nodataShow]="!obtainingL1cL2cTlbData && !tlbData">
+      <app-table-catch *ngIf="tlbData" #tlbEcharts [datas]="tlbData" [timeLine]="timeLine" (dataZoom)="dataZoom($event)"></app-table-catch>
+    </div>
+  </div>
+
+  <div class="cpu-usage" [appLoading]="obtainingL3cData" *ngIf="cpu !== 1616">
+    <span class="box-title">{{ i18n.ddr.catchPageTitle2 }}</span>
+    <div class="select-box" *ngIf="l3cData">
+      <div class="selectItem">
+        <span class="select-title">NUMA NODE</span>
+        <ti-select [multiple]="true" *ngIf="l3cNodeOption.length>0" [options]="l3cNodeOption"
+          [searchable]="true" [(ngModel)]="l3cNodeSelected" (ngModelChange)="l3cNodeChange()" id="myselect5">
+        </ti-select>
+      </div>
+
+      <div class="selectItem">
+        <span class="select-title">{{i18n.ddr.catchTypeSelectTitle}}</span>
+        <ti-select [multiple]="true" *ngIf="l3cTypeOption.length>0"
+          [searchable]="true" [options]="l3cTypeOption" [(ngModel)]="l3cTypeSelected" (ngModelChange)="l3cTypeChange()"
+          id="myselect4" tipPosition="top" [searchKeys]="['label', 'englishname', 'code']">
+          <ng-template #item let-item let-i=index>
+            <!-- 去掉tips 将tips当成label -->
+            <span>
+              {{item.tips}}
+            </span>
+          </ng-template>
+        </ti-select>
+      </div>
+    </div>
+    <div class="table-box" hyNodata [nodataShow]="!obtainingL3cData && !l3cData">
+      <app-table-catch *ngIf="l3cData" #l3cEcharts [datas]="l3cData" [timeLine]="timeLine" (dataZoom)="dataZoom($event)" ></app-table-catch>
+    </div>
+  </div>
+</div>
+
+<app-tlb-filter-slider #tlbFilterSlider
+  [data]="tlbFilterTableData"
+  (updataChart)="onFilterCpu($event)">
+</app-tlb-filter-slider>

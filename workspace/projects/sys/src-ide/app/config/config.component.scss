@@ -1,0 +1,412 @@
+.config-form {
+    min-width: 300px;
+    box-sizing: border-box;
+    padding: 40px;
+    position: absolute;
+
+    .config-title-gen {
+        margin-bottom: 4px;
+        margin-left: 40px;
+        height: 26px;
+    }
+
+    input {
+        width: 400px;
+    }
+
+    .config-form-item {
+        margin-top: 20px;
+        margin-left: 40px;
+
+        .config-form-item-label {
+            color: var(--config-form-item-label-color);
+            height: 14px;
+            line-height: 14px;
+            font-size: 14px;
+            padding-bottom: 10px;
+    
+            .config-form-item-label-req {
+                color: #e02020;
+                margin-left: 4px;
+            }
+        }
+
+        .codeInput {
+            width: 67%;
+        }
+
+        .codeImg {
+            width: 5.416vw;
+            height: 2.3vw;
+            vertical-align: bottom;
+            margin-left: 0.6vw;
+        }
+
+        .check {
+            display: inline-block;
+        }
+    }
+
+    .config-form-certificate {
+        margin-left: 40px;
+        margin-top: 20px;
+
+        .config-form-certificate-label {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #aaaaaa;
+
+            .help-icon {
+                height: 14px;
+            }
+        }
+
+        .config-form-certificate-file {
+            margin-top: 10px;
+
+            .config-form-certificate-textarea {
+                resize: none;
+                width: 400px;
+                height: 28px;
+                line-height: 26px;
+            }
+
+            .config-form-certificate-bt {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+:host ::ng-deep .vscode-dark .little-minor-btn {
+    border: 1px solid #616161 !important;
+}
+
+.help-icon {
+    position: relative;
+    top: 2px;
+}
+
+.primary-btn {
+    margin-top: 50px;
+    width: 160px;
+    height: 32px;
+    line-height: 32px;
+    margin-left: 40px;
+    margin-right: 0;
+    border: none;
+}
+
+.can-btn {
+    width: 160px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-left: 20px;
+    top: 1px;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+::ng-deep .vscode-light {
+    --install-color-title-content: #222222;
+    --install-color-content: #616161;
+
+    --install-color-separator: #e1e6ee;
+    --install-color-msgbox-bg: #ffffff;
+    --install-color-msgbox-close: #aaaaaa;
+    --install-color-msgbox-dsc-icon-bg: #ffffff;
+    --install-color-msgbox-content: #616161;
+    --install-color-msgbox-dsc-icon: #0067ff;
+
+    --install-color-btn-p: #ffffff;
+    --install-color-btn-p-bg-dft: #0067ff;
+    --install-color-btn-p-bg-hover: #267dff;
+    --install-color-btn-p-bg-active: #0057d9;
+    --install-color-btn-p-bg-disabled: #f5f5f5;
+    --install-color-btn-m-bg: #ffffff;
+    --install-color-btn-m-dft: #979797;
+    --install-color-btn-m-hover: #267dff;
+    --install-color-btn-m-active: #0057d9;
+    --install-color-btn-m-disabled: #cccccc;
+    --install-color-btn-m-bg-disabled: #f5f5f5;
+    --install-color-btn-text-disabled: #cccccc;
+
+    --ti3-tip-small-left: #fff;
+
+    --config-form-item-label-color: #616161;
+    .config-title-det {
+        font-size: 14px;
+        color: #979797;
+        margin-left: 40px;
+        height: 20px;
+        width:900px;
+        &:last-child {
+            margin-bottom: 40px;
+        }
+
+        .config-title-det-btn {
+            color: #0067ff;
+            margin-left: 6px;
+            cursor: pointer;
+        }
+    }
+
+    [tiText][disabled]:not(.ti3-spinner-input):disabled {
+        background: #fff !important;
+    }
+
+    .primary-btn[disabled] {
+        background-color: var(--vscode-editor-background) !important;
+        color: #222 !important;
+        cursor: not-allowed;
+        border: 1px solid #979797 !important;
+    }
+}
+
+::ng-deep .vscode-dark {
+    --dark-tooltip-background-color: #252526;
+    --install-color-title-content: #e8e8e8;
+    --install-color-content: #aaaaaa;
+
+    --install-color-separator: #4b4b4b;
+    --install-color-msgbox-bg: #252526;
+    --install-color-msgbox-close: #aaaaaa;
+    --install-color-msgbox-dsc-icon-bg: #ffffff;
+    --install-color-msgbox-content: #888888;
+    --install-color-msgbox-dsc-icon: #0067ff;
+
+    --install-color-btn-p: #e8e8e8;
+    --install-color-btn-p-bg-dft: #0067ff;
+    --install-color-btn-p-bg-hover: #267dff;
+    --install-color-btn-p-bg-active: #0057d9;
+    --install-color-btn-p-bg-disabled: #313131;
+    --install-color-btn-m-bg: #313131;
+    --install-color-btn-m-dft: #dddddd;
+    --install-color-btn-m-hover: #267dff;
+    --install-color-btn-m-active: #0057d9;
+    --install-color-btn-m-disabled: #616161;
+    --install-color-btn-m-bg-disabled: #313131;
+    --install-color-btn-text-disabled: #666666;
+
+    --config-form-item-label-color: #aaaaaa;
+    --ti3-tip-small-left: #424242;
+
+    .config-title-det {
+        font-size: 14px;
+        color: #888888;
+        margin-left: 40px;
+        height: 20px;
+        width: 900px;
+        &:last-child {
+            margin-bottom: 40px;
+        }
+
+        .config-title-det-btn {
+            color: #0067ff;
+            margin-left: 6px;
+            cursor: pointer;
+        }
+    }
+
+    [tiText][disabled]:not(.ti3-spinner-input):disabled {
+        background: #313131 !important;
+    }
+
+    .primary-btn[disabled] {
+        background: #313131 !important;
+        color: #616161 !important;
+        cursor: not-allowed;
+    }
+}
+
+::ng-deep .content-box {
+    background-color: var(--install-color-msgbox-bg) !important;
+    width: 660px !important;
+    padding: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+
+.tip-box {
+    padding: 0px 40px;
+    padding-bottom: 40px;
+    width: 660px;
+
+    .tip-title {
+        color: var(--install-color-title-content);
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        line-height: 20px;
+
+        font-size: 20px;
+
+        .tip-close {
+            color: var(--install-color-msgbox-close);
+            font-weight: 100;
+            border: solid 1px var(--install-color-msgbox-bg);
+
+            &:hover {
+                border-color: var(--install-color-msgbox-close);
+            }
+        }
+    }
+
+    .tip-title-border {
+        width: 100%;
+        margin-top: 19px;
+        border-top: 1px dashed var(--install-color-separator);
+    }
+
+    .tip-dsc {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        .tip-icon {
+            color: var(--install-color-msgbox-dsc-icon);
+            background-color: var(--install-color-msgbox-dsc-icon-bg);
+            margin-right: 10px;
+            font-size: 16px;
+            border-radius: 30px;
+            top: 2px;
+            width: 16px;
+            height: 16px;
+        }
+
+        p {
+            font-size: 14px;
+            color: var(--install-color-msgbox-content);
+        }
+    }
+
+    .tip-select {
+        color: var(--install-color-msgbox-content);
+        padding-top: 30px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        font-size: 14px;
+        vertical-align: middle;
+
+        span {
+            width: 16px;
+            line-height: 16px;
+            margin-right: 16px;
+            vertical-align: middle;
+        }
+    }
+}
+.config-form-certificate .icontext{
+    margin-top: -16px;
+}
+
+.tip-confirm {
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        width: 160px;
+        line-height: 32px;
+        font-size: 14px;
+        text-align: center;
+        margin: 0px 10px;
+        border-width: 1px;
+        border-style: solid;
+        cursor: pointer;
+        border-radius: 2px;
+
+        &:first-child {
+            color: var(--install-color-btn-p);
+            background-color: var(--install-color-btn-p-bg-dft);
+            border-color: var(--install-color-btn-p-bg-dft);
+
+            &:hover {
+                background-color: var(--install-color-btn-p-bg-hover);
+                border-color: var(--install-color-btn-p-bg-hover);
+            }
+
+            &:active {
+                background-color: var(--install-color-btn-p-bg-active);
+                border-color: var(--install-color-btn-p-bg-active);
+            }
+
+            &:disabled {
+                background-color: var(--install-color-btn-p-bg-disabled);
+                border-color: var(--install-color-btn-p-bg-disabled);
+                color: var(--install-color-btn-text-disabled);
+                cursor: not-allowed;
+            }
+        }
+
+        &:last-child {
+            background-color: var(--install-color-btn-m-bg);
+            border-color: var(--install-color-btn-m-dft);
+            color: var(--install-color-content);
+
+            &:hover {
+                border-color: var(--install-color-btn-m-hover);
+                color: var(--install-color-btn-m-hover);
+            }
+
+            &:active {
+                border-color: var(--install-color-btn-m-active);
+                color: var(--install-color-btn-m-active);
+            }
+
+            &:disabled {
+                background-color: var(--install-color-btn-m-bg-disabled);
+                border-color: var(--install-color-btn-m-disabled);
+                color: var(--install-color-btn-text-disabled);
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+.img_box {
+    margin-right: 6px;
+    width: 20px;
+    height: 20px;
+}
+
+.loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.certificateSettingsTip {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+:host ::ng-deep .ti3-radio-label {
+    margin-right: 20px !important;
+    font-size: 14px;
+}
+:host ::ng-deep input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-label {
+    color: #616161 !important;
+}
+:host ::ng-deep .ti3-tooltip {
+    color: #aaaaaa !important;
+}
+:host ::ng-deep input[type=radio][tiRadio]:not(:disabled):not(:checked)+.ti3-radio .ti3-radio-label{
+    color: #aaaaaa !important;
+}
+:host ::ng-deep input[type='radio'][tiRadio]:disabled + .ti3-radio .ti3-radio-skin{
+    border-color: #616161 !important;
+}
+:host ::ng-deep input[type='radio'][tiRadio]:disabled:checked + .ti3-radio .ti3-radio-skin::after{
+    background-color: #616161 !important;
+}

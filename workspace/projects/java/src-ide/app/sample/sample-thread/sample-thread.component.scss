@@ -1,0 +1,518 @@
+.method-box {
+    padding: 20px 0 0px 0!important;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: calc(87vh);
+    overflow: hidden;
+    .toggle-btn {
+        position: absolute;
+        top: calc(50% - 45px);
+        left: 244px;
+        cursor: pointer;
+        img {
+            width: 20px;
+            height: 90px;
+        }
+    }
+    .activeToggle {
+        left: -2px;
+        transform: rotateY(180deg);
+        z-index: 10;
+    }
+}
+
+.select-box {
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+}
+.file-list {
+    overflow: hidden;
+    vertical-align: top;
+    border-radius: 5px;
+    border: solid 1px #d4d9e6;
+    height: calc(100% - 40px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    .split-line-toggle {
+        height: 100%;
+        padding: 0;
+        position: relative;
+        .toggle-btn {
+            position: absolute;
+            top: calc(50% - 45px);
+            left: calc(20% - 17px);
+            cursor: pointer;
+            width: 20px;
+            height: 90px;
+            img {
+                width: 20px;
+                height: 90px;
+            }
+        }
+        .activeToggle {
+            left: -2px;
+            transform: rotateY(180deg);
+            z-index: 10;
+        }
+    }
+
+    .list-content {
+        width: 260px;
+        min-width: 20px;
+        overflow-y: auto;
+        position: relative;
+        margin-top: 40px;
+        border-top: 1px dashed #313131;
+        padding-top: 14px;
+
+        /*定义了滚动条滑块的样式*/
+        ::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+
+        img {
+            vertical-align: text-bottom;
+            margin-right: 8px;
+        }
+        .list-tree {
+            margin-top: 48px;
+        }
+        .list-item {
+            line-height: 32px;
+            padding-left: 16px;
+            font-size: 14px;
+            cursor: pointer;
+            .item-child span{
+                display: inline-block;
+                width: 145px;
+                height: 14px;
+                font-size: 14px;
+                text-align: center;
+                line-height: 14px;
+            }
+        }
+
+        .item-child {
+            height: var(--ti-tree-item-height);
+            white-space: nowrap;
+        }
+    }
+
+    .split-line {
+        height: 100%;
+        border-left: 1px solid #545454;
+        padding: 0;
+        display: inline-block!important;
+    }
+
+    /*定义了滚动条滑块的样式*/
+    ::-webkit-scrollbar {
+        height: 6px;
+        width: 6px;
+    }
+
+    .file-diff {
+        flex: 1;
+        padding-left: 8px;
+        .echarts-btns {
+            float: right;
+
+            .btn-box {
+                border: 1px solid #ccc;
+                padding: 3px;
+            }
+        }
+
+        .echarts-desc {
+            position: relative;
+
+            &:after {
+                content: "";
+                clear: both;
+                display: block;
+            }
+
+            .desc-number {
+                float: left;
+            }
+
+            .line-desc {
+                position: fixed;
+                right: 130px;
+                color: #6c7280;
+            }
+        }
+    }
+}
+
+.file-diff {
+    box-sizing: border-box;
+    float: left;
+    vertical-align: top;
+    min-width: 55vw;
+    overflow: auto;
+
+    .source-area {
+        flex: 1;
+    }
+
+    .advised-area {
+        flex: 1;
+    }
+
+    &::ng-deep .d2h-file-diff {
+        overflow-y: visible;
+    }
+}
+.file-diff-max {
+    width: 100% !important;
+    max-width: 100vw !important;
+}
+.split-line {
+    height: 100%;
+    border-left: 1px solid #ccc;
+    padding: 0;
+}
+
+.file-diff {
+    flex: 1;
+
+    .echarts-btns {
+        float: right;
+
+        .btn-box {
+            border: 1px solid #ccc;
+            padding: 3px;
+        }
+    }
+
+    &::ng-deep .d2h-code-linenumber {
+        position: static;
+        border-width: 3px 0px;
+    }
+
+    &::ng-deep .code tbody tr td .d2h-code-line {
+        padding: 0 !important;
+    }
+}
+
+.overflow-class {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
+}
+
+.circel-running,
+.circel-deadlock {
+    display: inline-block;
+    margin-bottom: 24px;
+
+    span {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background: #67c78b;
+        border-radius: 50%;
+        margin-right: 8px;
+    }
+}
+
+.circel-deadlock {
+    span {
+        background: #f45c5e;
+        margin-left: 20px;
+    }
+}
+
+.lock-graph {
+    background-size: 100%;
+    background-repeat: repeat;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 700px;
+    overflow: auto;
+}
+
+.graph-header {
+    height: 70px;
+    padding: 10px 32px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    font-size: 12px;
+
+    .graph-control {
+        display: flex;
+        justify-content: flex-start;
+
+        .obersver {
+            margin-right: 32px;
+        }
+
+        .obersver,
+        .compare {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            word-wrap: normal !important;
+            word-break: unset !important;
+            white-space: nowrap;
+
+            .control-label {
+                margin-right: 16px;
+            }
+
+            .control-switch {
+                margin-right: 16px;
+            }
+        }
+    }
+
+    .graph-status {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        .status {
+            display: flex;
+            justify-content: flex-end;
+
+            div {
+                height: 32px;
+                line-height: 32px;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin-left: 16px;
+
+                white-space: nowrap;
+                word-wrap: normal !important;
+                word-break: normal !important;
+
+                .circle {
+                    display: inline-block;
+                    width: 10px;
+                    height: 10px;
+                    margin-right: 8px;
+                    border-radius: 0px !important;
+                }
+
+                .green {
+                    background-color: rgba(122, 223, 160, 0.75);
+                }
+
+                .red {
+                    background-color: rgba(244, 92, 94, 0.75);
+                }
+
+                .yellow {
+                    background-color: rgba(236, 232, 95, 1);
+                }
+
+                .orange {
+                    background-color: rgba(232, 153, 84, 1);
+                }
+            }
+        }
+
+        .lines {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            div {
+                display: flex;
+                align-items: center;
+
+                img {
+                    margin-right: 8px;
+                }
+            }
+
+            .dashLine {
+                margin-right: 24px;
+            }
+        }
+    }
+}
+
+.graph-content {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 0px 32px;
+    overflow: auto;
+
+    .graph-svg {
+        display: flex;
+        .left {
+            min-width: 600px;
+            height: 100%;
+        }
+        .right {
+            min-width: 600px;
+            height: 100%;
+        }
+    }
+}
+
+::ng-deep ti-list {
+    background: var(--vscode-editor-background) !important;
+}
+
+// 深色主题
+::ng-deep .vscode-dark {
+    .lock-graph .graph1 .lock-left .attr .deadlock-tip{
+        position: unset!important;
+    }
+    .file-list .split-line-toggle {
+        border-left: 1px solid #545454;
+    }
+    .ti3-switch.ti3-switch-off .ti3-switch-track {
+        border-color: #313131 !important;
+        background: #313131 !important;
+    }
+    .method-box .select-box {
+        color: #ddd;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--vscode-scrollbarSlider-background) !important;
+        border: 0 !important;
+        border-radius: 5px !important;
+    }
+
+    ::-webkit-scrollbar-track {
+        box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.2) inset;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        min-height: 20px;
+        background-clip: content-box;
+        box-shadow: 0 0 0 12px rgba(0, 0, 0, 0.2) inset;
+    }
+
+    .active {
+        background-color: #313131;
+    }
+
+    .file-list {
+        .list-content {
+            .item-child:hover {
+                background-color: #313131;
+            }
+            .file-item .active:hover {
+                background-color: #313131;
+            }
+        }
+    }
+}
+
+// 浅色主题
+::ng-deep .vscode-light {
+  .lock-graph .graph1 .lock-left .attr .deadlock-tip{
+    position: unset!important;
+  }
+    .file-list .split-line-toggle {
+        border-left: 1px solid #d4d9e6;
+    }
+    .active {
+        background-color: #ddd;
+    }
+
+    .method-box .select-box {
+        color: #222222;
+    }
+
+    .file-list {
+        .list-content {
+            .item-child:hover {
+                background-color: #ddd;
+            }
+
+            .file-item .active:hover {
+                background-color: #ddd;
+            }
+        }
+    }
+}
+
+:host .lock-graph ::ng-deep .graph1 .attr {
+    font-size: 12px !important;
+}
+
+:host .lock-graph ::ng-deep .graph1 .attr > p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+::ng-deep .ti3-dropdown-option.ti3-dropdown-option-disabled {
+    display: none;
+}
+::ng-deep #threadTree .ti3-tree-container .ti3-icon-minus-square,
+::ng-deep #threadTree .ti3-tree-container .ti3-icon-plus-square {
+    font-size: 16px !important;
+}
+::ng-deep #threadTree .ti3-tree-container span > span{
+    display: inline-block;
+    width: 145px;
+    height: 14px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 14px;
+}
+::ng-deep .vscode-dark #threadTree {
+    .ti3-tree-container {
+        overflow: visible !important;
+        background-color: transparent;
+        font-size: 14px;
+    }
+    .ti3-tree-container .ti3-icon-minus-square {
+        color: #0067ff;
+    }
+    .ti3-tree-item-leaf {
+        margin-left: 0 !important;
+    }
+    .ti3-tree-leaf-node > .ti3-tree-content-box > .ti3-tree-item-guide-line {
+        width: 14px !important;
+    }
+
+    .ti3-tree-container .ti3-icon-plus-square {
+        font-size: 16px !important;
+        color: var(--ti-tree-plus-square-color) !important;
+        &:hover {
+            color: #0067ff;
+        }
+    }
+    input[type="checkbox"][tiCheckbox] + .ti3-checkbox {
+        margin-bottom: 25px !important;
+    }
+    input[type="checkbox"][tiCheckbox]:not([disabled]):indeterminate + .ti3-checkbox .ti3-checkbox-skin {
+        background-color: #0067ff !important;
+    }
+}
+.zoom-screen {
+    position: absolute;
+    right: 40px;
+    bottom: 30px;
+}

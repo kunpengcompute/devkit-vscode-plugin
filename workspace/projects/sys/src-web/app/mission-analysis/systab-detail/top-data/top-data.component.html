@@ -1,0 +1,23 @@
+<div class="diff-box" [appLoading]="initializing">
+  <div class="left">
+    <div *ngFor="let file of fileList.list; index as index"
+      [ngClass]="['fileItem', index === fileList.currentIndex ? 'active' : '']" (click)="switchFile(index)">
+      <div class="fileIcon"></div>
+      <span class="info">{{ file }}</span>
+    </div>
+  </div>
+
+  <div class="right" [appLoading]="obtainingTableData">
+    <div class="title">
+      <pre class="index">{{ fileData.title.index }}</pre>
+      <pre class="text">{{ fileData.title.text }}</pre>
+    </div>
+
+    <div class="content" #content [appDemandLoading]="{visibleArea: fileDataWarpperEl}" (demandData)="onDemandData($event)">
+      <div class="content-warpper" #fileDataWarpper>
+        <pre class="index">{{ fileData.content.indexes }}</pre>
+        <pre class="text">{{ fileData.content.text }}</pre>
+      </div>
+    </div>
+  </div>
+</div>

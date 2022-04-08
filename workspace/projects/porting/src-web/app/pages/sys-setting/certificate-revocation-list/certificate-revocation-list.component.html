@@ -1,0 +1,133 @@
+<div class="content certificate-revocation-list">
+  <p class="create-title">{{ i18n.certificate_revocation_list.title }}</p>
+  <div class="crl-content modal-dialog-container">
+    <div class="msg">
+      <p>{{ i18n.certificate_revocation_list.webNotice }}</p>
+    </div>
+    <div class="flex">
+      <button *ngIf="isAdmin" type="button" tiButton id="mybutton2" (click)='importCRL()' class="create-btn">{{
+        i18n.certificate_revocation_list.import_btn }}
+        <input type="file" id="zipload" (change)="uploadCRL('normal')" [accept]="acceptType" style="display: none;" />
+      </button>
+    </div>
+    <ti-table class="crl-table-all" [(displayedData)]="CRLDisplayed" [srcData]="CRLSrcData" [hyNodata]="{text: i18n.certificate_revocation_list.certificateEmpty}" [nodataShow]="CRLDisplayed.length === 0">
+      <table >
+        <thead>
+        <tr>
+          <th tiOverflow width="5%"></th>
+          <th tiOverflow width="15%">{{i18n.certificate_revocation_list.name}}</th>
+          <th tiOverflow width="20%">{{i18n.certificate_revocation_list.issuedBy}}</th>
+          <th tiOverflow width="15%">{{i18n.certificate_revocation_list.validTime}}</th>
+          <th tiOverflow width="15%">{{i18n.certificate_revocation_list.updateTime}}</th>
+          <th tiOverflow width="20%">{{i18n.certificate_revocation_list.certStatus}}</th>
+          <th tiOverflow width="10%" *ngIf="isAdmin">{{i18n.certificate_revocation_list.options}}</th>
+        </tr>
+        </thead>
+        <tbody class="crl-table-all">
+        <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+        <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+        <ng-container *ngFor="let row of CRLDisplayed;">
+          <tr>
+            <td details-icon-column>
+              <ti-details-icon
+                [row]="row"
+                (beforeToggle)="beforeToggle($event)"
+                *ngIf="row.crlDetail.length"
+              >
+              </ti-details-icon> <!--详情图标设置，传入行数据-->
+            </td>
+            <td tiOverflow>{{ row.name }}</td>
+            <td tiOverflow>{{ row.issuedBy }}</td>
+            <td tiOverflow>{{ row.validTime }}</td>
+            <td tiOverflow>{{ row.updateTime }}</td>
+            <td *ngIf="row.certStatus === 'normal'" tiOverflow><i class="status-icon analyzing-icon"></i>{{i18n.certificate_revocation_list.certIsValidate}}
+            </td>
+            <td *ngIf="row.certStatus === 'expire'" tiOverflow><i class="status-icon failed-icon"></i>{{i18n.certificate_revocation_list.certIsNotValidate}}
+            </td>
+            <td tiOverflow *ngIf="isAdmin">
+              <a class="del-text"
+                 (click)="deleteCRL(row)">{{i18n.certificate_revocation_list.delete}}</a>
+            </td>
+          </tr>
+          <tr *tiDetailsTr="row"> <!--详情内容行tiDetailsTr，传入行数据-->
+            <!-- tiColspan是为了使得该td（详情内容）占据表格整个宽度(列合并)，tiColspan列合并的值为columns接口传入的对象数组中中show属性值不为false的对象的个数 -->
+            <td tiColspan class="nested-table-container">
+              <div class="ti3-table-detail-container">
+                <app-crl-info [data]="row.crlDetail">
+                </app-crl-info>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+    </ti-table>
+  </div>
+  <app-crl-upload-progress
+    [isShow]="isShow"
+    [isSlow]="isSlow"
+    [info]="info"
+    [uploadProgress]="uploadProgress"
+    (closeRequest)="closeRequest()"
+  >
+
+  </app-crl-upload-progress>
+</div>
+
+<!-- check_upload情况已存在 -->
+<app-pop-mask #exitmask>
+  <div class="content-mask content config-modal exit-modal-560">
+    <p class="mask-title mask-title-cert">
+      <span>{{i18n.certificate_revocation_list.importDuplicateTitle}}</span>
+      <span class="close-btn" (click)="closeMaskExit()"><img src="./assets/img/header/icon_header_pop_close.svg"  alt=""/></span>
+    </p>
+    <div class="mask-container">
+      <div class="img-box">
+        <img src="./assets/img/tip/warn.svg"  alt=""/>
+      </div>
+      <p>{{exitFileNameReplace}}</p>
+    </div>
+    <div class="btn-box-crl">
+      <button type="button" class="crl-btn" tiButton color="primary" (click)="uploadAgain('override')">{{i18n.certificate_revocation_list.replace}}</button>
+      <button type="button" class="crl-btn" tiButton (click)="closeMaskExit()">{{i18n.certificate_revocation_list.cancel}}</button>
+    </div>
+  </div>
+</app-pop-mask>
+<!-- 删除框-->
+<app-pop-mask #deleteMask>
+  <div class="content-mask content config-modal exit-modal-560">
+    <p class="mask-title mask-title-cert">
+      <span>{{i18n.certificate_revocation_list.deletCRL}}</span>
+      <span class="close-btn" (click)="closeDeleteMask()"><img src="./assets/img/header/icon_header_pop_close.svg"  alt=""/></span>
+    </p>
+    <div class="mask-container">
+      <div class="img-box">
+        <img src="./assets/img/tip/warn.svg"  alt=""/>
+      </div>
+      <p>{{i18n.certificate_revocation_list.deleteCRLTips}}</p>
+    </div>
+    <div class="btn-box-crl">
+      <button type="button" class="crl-btn" tiButton color="primary" (click)="deleteCRLAction()">{{i18n.certificate_revocation_list.confirm}}</button>
+      <button type="button" class="crl-btn" tiButton (click)="closeDeleteMask()">{{i18n.certificate_revocation_list.cancel}}</button>
+    </div>
+  </div>
+</app-pop-mask>
+
+<!--超过3份-->
+<app-pop-mask #crlLimitMask>
+  <div class="content-mask content config-modal exit-modal-560">
+    <p class="mask-title mask-title-cert">
+      <span>{{i18n.certificate_revocation_list.maxLimitTitle}}</span>
+      <span class="close-btn" (click)="closeCrlLimitMask()"><img src="./assets/img/header/icon_header_pop_close.svg" /></span>
+    </p>
+    <div class="mask-container">
+      <div class="img-box">
+        <img src="./assets/img/tip/tip.svg" />
+      </div>
+      <p>{{i18n.certificate_revocation_list.maxLimitTips}}</p>
+    </div>
+    <div class="btn-box-crl">
+      <button type="button" class="crl-btn" tiButton (click)="closeCrlLimitMask()">{{i18n.certificate_revocation_list.close}}</button>
+    </div>
+  </div>
+</app-pop-mask>

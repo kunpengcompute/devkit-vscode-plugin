@@ -1,0 +1,86 @@
+<app-common-table [commonTableData]="tableData" [isPagination]="isPagination">
+    <ng-template let-displayed let-tabcolumns="columns">
+        <tbody>
+            <ng-container *ngFor="let row of displayed;index as i">
+                <tr>
+                    <ng-container *ngFor="let column of tabcolumns;">
+                        <ng-container *ngIf="column.key === 'function' else other">
+                            <td *ngIf="column.show || column.show === undefined">
+                                <div class="symbol-box">
+                                    <div class="func-name" [ngClass]="{'view-stacks': row.showStack}"
+                                        [tiTip]='hotFuncNameTip' [tiTipContext]='row' tiTipPosition="right" tiTipMaxWidth='400px'
+                                        (click)="viewStacks(viewStack, row)">{{row.function}}</div>
+                                    <img *ngIf="row.is_sug" [tiTip]='funcSugTipContent' [tiTipContext]='row' tiTipMaxWidth='400px'
+                                        src="./assets/img/rocket.svg" class="rocket">
+                                </div>
+                            </td>
+                        </ng-container>
+                        <ng-template #other>
+                            <ng-container *ngIf="column.key === 'command'">
+                                <td *ngIf="column.show || column.show === undefined"
+                                    [tiTip]='commandTip' [tiTipContext]='row' tiTipPosition="left" tiTipMaxWidth='400px'>
+                                    {{ row[column.key] || '--' }}
+                                </td>
+                            </ng-container>
+                            <ng-container *ngIf="column.key !== 'command'">
+                                <td *ngIf="column.show || column.show === undefined" tiOverflow>{{ row[column.key] || '--' }}</td>
+                            </ng-container>
+                        </ng-template>
+                    </ng-container>
+                </tr>
+            </ng-container>
+        </tbody>
+    </ng-template>
+</app-common-table>
+<!-- 热点函数调用栈 -->
+<ng-template #viewStack let-context='context'>
+    <ti-modal-header>
+        <div tiOverflow class="stackName">
+            <span>{{ context.title }}</span>
+            <span [ngClass]="{'ml12': !islanguageZH}">{{'common_term_task_tab_summary_callstack' | i18n }}</span>
+        </div>
+    </ti-modal-header>
+    <ti-modal-body>
+        <div class="subModuleFunctionTable">
+            <app-expand-tree id="tree" [data]="context.stackTree">
+                <ng-template let-item let-i="index">
+                    <span tiOverflow tiTipPosition='right' class='ti3-tree-node-text'>{{item.function}}</span>
+                </ng-template>
+            </app-expand-tree>
+        </div>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <div>
+            <button tiButton (click)="context.dismiss()">{{ 'common_term_operate_close' | i18n}}</button>
+        </div>
+    </ti-modal-footer>
+</ng-template>
+<!-- 函数名称tip -->
+<ng-template #hotFuncNameTip let-context='context'>
+    <div class="tip-hot-func-content">
+        <div class="tip-func-name">{{ context.function }}</div>
+        <ng-container *ngIf="!context.showStack">
+            <div class="tip-middle-line"></div>
+            <div class="tip-no-tracks">{{ 'tuninghelper.taskDetail.noCallStack' | i18n }}</div>
+        </ng-container>
+    </div>
+</ng-template>
+<!-- 函数建议tip -->
+<ng-template #funcSugTipContent let-context='context'>
+    <div class="suggest_content">
+        <div class="suggest_tip">{{ 'sys.sug' | i18n}}:</div>
+        <div class="sug_content">{{ islanguageZH ? context.sug_cn : context.sug_en}}</div>
+    </div>
+</ng-template>
+<!-- command指令tip -->
+<ng-template #commandTip let-context='context'>
+    <div class="tip-hot-func-content">
+        <div class="tip-func-name">{{ context.command }}</div>
+        <div class="tip-middle-line"></div>
+        <ng-container *ngIf="context.cmdline">
+            <div class="tip-cmd-title" >cmdline</div>
+            <div class="tip-cmd-name">{{ context.cmdline }}</div>
+        </ng-container>
+        <div class="tip-no-tracks" *ngIf="!context.cmdline">{{ 'tuninghelper.taskDetail.noCommandLine' | i18n }}</div>
+    </div>
+</ng-template>

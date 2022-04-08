@@ -1,0 +1,49 @@
+<div class="tuninghelper-compare">
+  <header>
+    <p tiOverflow>
+      {{ 'tuninghelper.compare.object1' | i18n }}
+      （{{ object1Text }}）｜
+      {{ 'tuninghelper.compare.object2' | i18n }}
+      （{{ object2Text }}）
+    </p>
+    <p tiOverflow>
+      {{ 'tuninghelper.taskDetail.compareValueNoPercent' | i18n }} =
+      {{ 'tuninghelper.compare.object1' | i18n }} - {{ 'tuninghelper.compare.object2' | i18n }}
+    </p>
+    <p tiOverflow>
+      %{{ 'tuninghelper.taskDetail.compareValueNoPercent' | i18n }} =
+      （{{ 'tuninghelper.compare.object1' | i18n }} - {{ 'tuninghelper.compare.object2' | i18n }}）/
+      {{ 'tuninghelper.compare.object1' | i18n }}
+    </p>
+  </header>
+  <main>
+    <ti-tabs class="custom-ti-tabs" [class]="isSysConfig || isSysPerf ? 'is-sys-config' : ''">
+      <ti-tab (activeChange)="activeChange($event)" [header]="'tuninghelper.taskDetail.systemConfig' | i18n"
+        [active]="true">
+        <ng-template #tiTabContent>
+          <app-sys-config-compare></app-sys-config-compare>
+        </ng-template>
+      </ti-tab>
+      <ti-tab [header]="'tuninghelper.taskDetail.hotFunction' | i18n">
+        <ng-template #tiTabContent>
+          <app-hot-function-compare></app-hot-function-compare>
+        </ng-template>
+      </ti-tab>
+      <ti-tab (activeChange)="sysPerfActiveChange($event)" [header]="'tuninghelper.taskDetail.systemPerf' | i18n">
+        <ng-template #tiTabContent>
+          <app-sys-perf-compare></app-sys-perf-compare>
+        </ng-template>
+      </ti-tab>
+      <ti-tab [header]="'tuninghelper.taskDetail.processPerf' | i18n">
+        <ng-template #tiTabContent>
+          <app-process-perf-compare></app-process-perf-compare>
+        </ng-template>
+      </ti-tab>
+      <ti-tab [header]="'tuninghelper.compare.compareInfo' | i18n">
+        <ng-template #tiTabContent>
+          <app-compare-info></app-compare-info>
+        </ng-template>
+      </ti-tab>
+    </ti-tabs>
+  </main>
+</div>

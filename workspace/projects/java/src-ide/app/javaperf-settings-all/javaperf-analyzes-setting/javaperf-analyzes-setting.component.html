@@ -1,0 +1,13 @@
+<div class="java-setting">
+    <div class="setting-title">
+        <img class="required-icon" src="./assets/img/input-required.png" />
+        {{
+        i18n.newHeader.setting.stackDepth}}({{commonConfig.stackDepth.range[0]}}~{{commonConfig.stackDepth.range[1]}})
+    </div>
+    <div class="setting-list">
+        <app-setting-item [config]="commonConfig.stackDepth" [value]="formItems.stackDepth.value"
+            (confirm)="handleStack($event)">
+        </app-setting-item>
+    </div>
+
+</div>

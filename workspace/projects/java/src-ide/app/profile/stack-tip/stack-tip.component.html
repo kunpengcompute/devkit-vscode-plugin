@@ -1,0 +1,8 @@
+<img src="./assets/img/projects/help.svg" [tiTip]='tipContent' tiTipPosition="right" tiTipMaxWidth="248px" />
+<ng-template #tipContent let-context='context'>
+    <div *ngIf="role">
+        {{stackBtnTip.split(i18n.newHeader.setting.javaSetting)[0]}}<span class="clickActive"
+            (click)="toSetting()">{{i18n.newHeader.setting.javaSetting}}</span>{{stackBtnTip.split(i18n.newHeader.setting.javaSetting)[1]}}
+    </div>
+    <div *ngIf="!role">{{stackBtnTip}}</div>
+</ng-template>

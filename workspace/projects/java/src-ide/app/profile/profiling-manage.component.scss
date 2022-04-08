@@ -1,0 +1,117 @@
+::ng-deep .vscode-dark app-profiling-manage {
+    // 主要按钮字体颜色
+    --primary-button-font-color: #e8e8e8;
+    // 主要按钮禁用状态字体颜色
+    --primary-button-disabled-font-color: #616161;
+    // 主要按钮禁用状态背景颜色
+    --primary-button-disabled-background-color: #313131;
+    // 主要按钮禁用状态边框颜色
+    --primary-button-disabled-border-color: transparent;
+    // 次级按钮字体颜色
+    --secondary-button-font-color: #e8e8e8;
+    // 次级按钮背景颜色
+    --secondary-button-background-color: #313131;
+    // 次级按钮边框颜色
+    --secondary-button-border-color: #dddddd;
+    // 表格tr背景颜色
+    --ti-table-tr-bg-color: #161616;
+    // 表格tr背景hover颜色
+    --ti-table-tr-bg-color-hover: #383838;
+    // 表格th分割线颜色
+    --ti-table-th-spacing-line-color: #4b4b4b;
+}
+
+::ng-deep .vscode-light app-profiling-manage {
+    --primary-button-font-color: #ffffff;
+    --primary-button-disabled-font-color: #cccccc;
+    --primary-button-disabled-background-color: #f5f5f5;
+    --primary-button-disabled-border-color: #cccccc;
+    --secondary-button-font-color: #222222;
+    --secondary-button-background-color: #ffffff;
+    --secondary-button-border-color: #979797;
+    --ti-table-tr-bg-color: #ffffff;
+    --ti-table-tr-bg-color-hover: #383838;
+    --ti-table-th-spacing-line-color: #ffffff;
+}
+
+section {
+    padding-bottom: 30px;
+
+    .title {
+        font-size: 20px;
+        line-height: 26px;
+        color: #e8e8e8;
+    }
+
+    .import-btn-box {
+        margin-top: 20px;
+
+        .import-btn {
+            cursor: pointer;
+            padding: 0 24px;
+            height: 28px;
+            line-height: 26px;
+            border-radius: 2px;
+            background: #0067ff;
+            color: var(--primary-button-font-color);
+            font-size: 12px;
+            border: none;
+
+            &:hover {
+                background: #267dff;
+            }
+
+            &:active {
+                background: #0057d9;
+            }
+
+            &:disabled {
+                cursor: not-allowed;
+                color: var(--primary-button-disabled-font-color);
+                background: var(--primary-button-disabled-background-color);
+                border: 1px solid var(--primary-button-disabled-border-color);
+            }
+        }
+    }
+
+    .record-table {
+        font-size: 14px;
+        margin-top: 10px;
+
+        .td-state {
+            img {
+                width: 16px;
+                height: 16px;
+                margin-right: 8px;
+                vertical-align: middle;
+            }
+        }
+
+        .td-operate {
+            button {
+                cursor: pointer;
+                border: none;
+                background: none;
+                margin-right: 10px;
+                color: #0067ff;
+            }
+        }
+
+        tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr) {
+            background-color: var(--ti-table-tr-bg-color) !important;
+        }
+
+        tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover {
+            background-color: var(--ti-table-tr-bg-color-hover) !important;
+        }
+    }
+}
+
+.icon-finished {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #61D274;
+    border-radius: 5px;
+    margin-right: 10px;
+}

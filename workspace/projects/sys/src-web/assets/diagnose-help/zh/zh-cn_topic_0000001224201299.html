@@ -1,0 +1,41 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="内存越界诊断">
+<meta name="product" content="">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具（系统诊断）">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001224201299">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>内存越界诊断</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001224201299"></a><a name="ZH-CN_TOPIC_0000001224201299"></a>
+
+<h1 class="topictitle1">内存越界诊断</h1>
+<div id="body0000001149712521"><div class="section" id="ZH-CN_TOPIC_0000001224201299__zh-cn_topic_0311508298_zh-cn_topic_0189293077_section11470129119"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0000001224201299__zh-cn_topic_0311508298_zh-cn_topic_0189293077_zh-cn_topic_0189293076_p5336201013112">已创建内存越界诊断任务，并且成功完成分析。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001224201299__zh-cn_topic_0311508298_section984925391620"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0000001224201299__zh-cn_topic_0311508298_ol145591432714"><li id="ZH-CN_TOPIC_0000001224201299__zh-cn_topic_0311508298_li85521472718"><span>在“工程管理”区域，依次单击指定工程和分析任务名称前的<span><img id="ZH-CN_TOPIC_0000001224201299__zh-cn_topic_0311508298_image4105155811375" src="zh-cn_image_0000001223882929.png"></span>。</span><p><p id="ZH-CN_TOPIC_0000001224201299__zh-cn_topic_0311508298_p198319584430">展开节点列表。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001224201299__zh-cn_topic_0311508298_li257535304314"><span>单击节点名称查看分析结果。</span><p><div class="p" id="ZH-CN_TOPIC_0000001224201299__p1248793419337">单击节点名称默认打开<span class="uicontrol" id="ZH-CN_TOPIC_0000001224201299__uicontrol7105121152714">“内存越界诊断”</span>页签，如<a href="#ZH-CN_TOPIC_0000001224201299__zh-cn_topic_0311508298_fig139501915934">图1</a>所示。<div class="fignone" id="ZH-CN_TOPIC_0000001224201299__zh-cn_topic_0311508298_fig139501915934"><a name="ZH-CN_TOPIC_0000001224201299__zh-cn_topic_0311508298_fig139501915934"></a><a name="zh-cn_topic_0311508298_fig139501915934"></a><span class="figcap"><b>图1 </b>内存越界诊断</span><br><span><img id="ZH-CN_TOPIC_0000001224201299__image5161141310265" src="zh-cn_image_0000001179041654.png"></span></div>
+<div class="note" id="ZH-CN_TOPIC_0000001224201299__note18577111117105"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001224201299__ul314371019279"><li id="ZH-CN_TOPIC_0000001224201299__li81325023217">源码框中，会标记存在内存异常访问的代码所在行数。</li><li id="ZH-CN_TOPIC_0000001224201299__li142758400311">可通过<span><img id="ZH-CN_TOPIC_0000001224201299__image6602155012818" src="zh-cn_image_0000001178881722.png"></span>切换存在内存异常访问的代码行。</li></ul>
+</div></div>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0000001224201299__li103755302477"><span>单击<span><img id="ZH-CN_TOPIC_0000001224201299__image1062077102" src="zh-cn_image_0000001178723162.png"></span>按钮可进行视图切换，如<a href="#ZH-CN_TOPIC_0000001224201299__fig12597219134817">图2</a>所示。</span><p><div class="fignone" id="ZH-CN_TOPIC_0000001224201299__fig12597219134817"><a name="ZH-CN_TOPIC_0000001224201299__fig12597219134817"></a><a name="fig12597219134817"></a><span class="figcap"><b>图2 </b>列表视图</span><br><span><img id="ZH-CN_TOPIC_0000001224201299__image2199032122817" src="zh-cn_image_0000001224201457.png"></span></div>
+<p id="ZH-CN_TOPIC_0000001224201299__p811112318149">以异常类型为模块分成heap buffer overflow、global buffer overflow等，每个模块下分别显示访问类型、异常访问点、辅助信息。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001224201299__li179201346121614"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0000001224201299__uicontrol57677531514">“查看详细信息”</span>可查看异常的具体信息。</span></li><li id="ZH-CN_TOPIC_0000001224201299__li160613622918"><span>单击“任务信息”页签查看当前节点任务的详细配置信息和采集信息。</span><p><div class="note" id="ZH-CN_TOPIC_0000001224201299__note12740201411296"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001224201299__p177406141298">如果任务执行失败，“任务信息”界面上会显示任务失败的原因。</p>
+</div></div>
+</p></li><li id="ZH-CN_TOPIC_0000001224201299__li199182427283"><span>单击“任务日志”页签查看详细的日志信息。</span></li></ol>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

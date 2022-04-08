@@ -1,0 +1,998 @@
+<div class="structure">
+  <ti-formfield
+    vertical
+    [labelWidth]="labelWidth"
+    [formGroup]="micarchCurrntForm"
+    class="taskForm"
+  >
+    <!-- 选择节点 -->
+    <ti-item *ngIf="sceneName === 'HPC'" [required]="true">
+      <ti-item-label>
+        {{ i18n.node.selectNode }}
+        <span class="tint">{{
+          "project.HPCSelectNodeTxt" | i18n: ("mission_create.structure" | i18n)
+        }}</span>
+      </ti-item-label>
+      <app-not-hpc-select-nodes
+        [width]="isModifySchedule ? '670px' : '952px'"
+        [nodeList]="nodeList"
+        [isSelectNodeDisabled]="isSelectNodeDisabled"
+        formControlName="nodeList"
+      ></app-not-hpc-select-nodes>
+    </ti-item>
+  </ti-formfield>
+  <!-- launch application -->
+  <ti-formfield
+    [labelWidth]="labelWidth"
+    [formGroup]="launchItemsMicarchForm"
+    *ngIf="isLaunch"
+    class="taskForm"
+  >
+    <!-- 采样模式 -->
+    <ti-item
+      [label]="micarchItems.samplingSwitch.label"
+      [required]="micarchItems.samplingSwitch.required"
+      class="switch"
+    >
+      <div
+        *ngFor="let item of micarchItems.samplingSwitch.options"
+        style="display: inline-block; margin-right: 20px"
+        class="myradio"
+      >
+        <input
+          type="radio"
+          tiRadio
+          [disabled]="item.disable"
+          (ngModelChange)="simplingSwitchChange($event)"
+          [value]="item.id"
+          [label]="item.key"
+          formControlName="mode_ctrl"
+        />
+      </div>
+      <p class="desc-content">{{ micarchItems.samplingSwitch.tip }}</p>
+    </ti-item>
+    <!-- 采样时长 -->
+    <ti-item [label]="i18n.sys.duration" [required]="true">
+      <div class="formContent">
+        <ti-spinner
+          name="spinner"
+          [step]="micarchItems.res_d.step"
+          [format]="micarchItems.res_d.format"
+          [correctable]="false"
+          [placeholder]="micarchItems.res_d.placeholder"
+          [appSpinnerBlur]="samplingDurationBlur"
+          tiValidation
+          formControlName="sampling_ctrl"
+          style="width: 165px"
+          [errorMessageWrapper]="appDurationErrorMsgWrapper"
+        ></ti-spinner>
+
+        <!-- 尾后提示 -->
+        <span class="tailPrompt">
+          {{ micarchItems.res_d.tailPrompt }}
+        </span>
+      </div>
+
+      <!-- 自定义错误提示位置 -->
+      <div #appDurationErrorMsgWrapper></div>
+    </ti-item>
+
+    <!-- CPU采集周期 -->
+    <ti-item
+      [label]="
+        micarchItems.cpu.label +
+        i18n.common_term_sign_left +
+        LaunchItemsLock.cpu.unit +
+        i18n.common_term_sign_right
+      "
+      [required]="micarchItems.cpu.required"
+    >
+      <div class="formContent">
+        <ti-select
+          style="width: 165px; margin-right: 5px"
+          [options]="micarchItems.cpu.options"
+          [tiValidation]="validation"
+          formControlName="cpu_ctrl"
+          (ngModelChange)="
+            cpu_interval_change($event, LaunchItemsLock.cpu, 'micarch')
+          "
+          id="direselect-lock"
+          *ngIf="false"
+        >
+        </ti-select>
+        <ti-spinner
+          name="spinner"
+          [step]="micarchItems.cpu.spinner.step"
+          [format]="micarchItems.cpu.spinner.format"
+          [placeholder]="micarchItems.cpu.spinner.placeholder"
+          [correctable]="false"
+          tiValidation
+          formControlName="cpu_spinner_ctrl"
+          [appSpinnerBlur]="intervalBlur"
+          style="width: 165px"
+          [errorMessageWrapper]="appIntervalErrorMsgWrapper"
+        ></ti-spinner>
+
+        <!-- 尾后提示 -->
+        <span class="tailPrompt">
+          {{ micarchItems.cpu.tailPrompt }}
+        </span>
+      </div>
+
+      <!-- 自定义错误提示位置 -->
+      <div #appIntervalErrorMsgWrapper></div>
+    </ti-item>
+
+    <!-- 分析指标 -->
+    <ti-item [label]="micarchItems.analysis.label" [required]="true">
+      <div style="position: relative; top: -10px" class="sys-type-label">
+        <span
+          *ngFor="let item of micarchItems.analysis.options"
+          style="
+            color: #666 !important;
+            margin-right: 20px;
+            position: relative;
+            margin-top: 20px;
+            font-size: 0.78rem;
+            display: block;
+            min-width: 260px;
+          "
+        >
+          <input
+            type="radio"
+            tiRadio
+            formControlName="analysisTypes"
+            [value]="item.id"
+            [label]="item.text"
+            (ngModelChange)="analysisTypesChange($event)"
+            [disabled]="micarchItems.analysis.disabled"
+          />
+          <ti-icon
+            [tiTip]="item.tip"
+            style="margin-left: 10px"
+            tiTipMaxWidth="370px"
+            tiTipPosition="bottom"
+          >
+            <img src="./assets/img/summary/tooltip.png" />
+          </ti-icon>
+        </span>
+      </div>
+    </ti-item>
+
+    <!-- 采样范围 -->
+    <ti-item [required]="false">
+      <ti-item-label>
+        <span>{{ i18n.micarch.label.typeItem }}</span>
+      </ti-item-label>
+      <ti-select
+        style="width: 300px"
+        [options]="micarchItems.typeItem.options"
+        [tiValidation]="validation"
+        formControlName="typeItem_ctrl"
+      ></ti-select>
+    </ti-item>
+
+    <!-- 延时采集时长 -->
+    <ti-item [required]="false">
+      <ti-item-label>
+        <span>{{ i18n.micarch.simpling_delay }}</span>
+        <ti-icon
+          [tiTip]="micarchItems.cpu.tip"
+          style="margin-left: 10px"
+          tiTipMaxWidth="370px"
+          tiTipPosition="bottom"
+        >
+          <img src="./assets/img/summary/tooltip.png" />
+        </ti-icon>
+      </ti-item-label>
+
+      <div class="formContent">
+        <ti-spinner
+          name="spinner"
+          [step]="micarchItems.cpu.spinner_delay.step"
+          [correctable]="false"
+          tiValidation
+          [format]="micarchItems.cpu.spinner_delay.format"
+          [placeholder]="micarchItems.cpu.spinner_delay.placeholder"
+          tiValidation
+          formControlName="timing_spinner_ctrl"
+          style="width: 165px"
+          [appSpinnerBlur]="delaySamplingDurationBlur"
+          [errorMessageWrapper]="appDelayErrorMsgWrapper"
+        ></ti-spinner>
+
+        <!-- 尾后提示 -->
+        <span class="tailPrompt">
+          {{ micarchItems.cpu.spinner_delay.tailPrompt }}
+        </span>
+      </div>
+
+      <!-- 自定义错误提示位置 -->
+      <div #appDelayErrorMsgWrapper></div>
+    </ti-item>
+
+    <!-- 二进制/符号文件路径 -->
+    <ti-item [required]="micarchItems.b_s.required" [show]="false">
+      <ti-item-label>
+        <span>{{ micarchItems.b_s.label }}</span>
+        <ti-icon
+          [tiTip]="micarchItems.b_s.tip"
+          style="margin-left: 10px"
+          tiTipMaxWidth="370px"
+          tiTipPosition="bottom"
+        >
+          <img src="./assets/img/summary/tooltip.png" />
+        </ti-icon>
+      </ti-item-label>
+      <input
+        type="text"
+        tiText
+        [tiValidation]="validation"
+        formControlName="b_s_ctrl"
+        style="width: 300px"
+      />
+    </ti-item>
+
+    <!-- c/c++源文件 -->
+    <ti-item [required]="micarchItems.c_source.required">
+      <ti-item-label>
+        <span>{{ micarchItems.c_source.label }}</span>
+        <ti-icon
+          [tiTip]="micarchItems.c_source.tip"
+          style="margin-left: 10px"
+          tiTipMaxWidth="370px"
+          tiTipPosition="bottom"
+        >
+          <img src="./assets/img/summary/tooltip.png" />
+        </ti-icon>
+      </ti-item-label>
+      <input
+        type="text"
+        tiText
+        [tiValidation]="validation"
+        formControlName="source_ctrl"
+        style="width: 300px"
+      />
+    </ti-item>
+
+    <!-- 内核函数关联汇编指令 -->
+    <ti-item [required]="micarchItems.kcore.required">
+      <ti-item-label>
+        <span tiOverflow>
+          {{ micarchItems.kcore.label }}
+        </span>
+      </ti-item-label>
+
+      <div class="formContent">
+        <ti-switch formControlName="kcore"></ti-switch>
+      </div>
+    </ti-item>
+
+    <!-- 采集文件大小 -->
+    <ti-item [required]="false">
+      <ti-item-label>
+        <span>{{ micarchItems.filesize.label }}</span>
+        <ti-icon
+          [tiTip]="micarchItems.filesize.iconTip"
+          style="margin-left: 10px"
+          tiTipMaxWidth="370px"
+          tiTipPosition="bottom"
+        >
+          <img src="./assets/img/summary/tooltip.png" />
+        </ti-icon>
+      </ti-item-label>
+
+      <div class="formContent">
+        <ti-spinner
+          name="spinner"
+          [step]="micarchItems.filesize.step"
+          [correctable]="false"
+          [format]="micarchItems.filesize.format"
+          [placeholder]="micarchItems.filesize.placeholder"
+          tiValidation
+          formControlName="fileSize"
+          style="width: 165px"
+          [appSpinnerBlur]="collectFileBlur"
+          [errorMessageWrapper]="appDelayErrorMsgWrapper1"
+        ></ti-spinner>
+
+        <!-- 尾后提示 -->
+        <span class="tailPrompt">
+          {{ micarchItems.filesize.tailPrompt }}
+        </span>
+      </div>
+
+      <!-- 自定义错误提示位置 -->
+      <div #appDelayErrorMsgWrapper1></div>
+    </ti-item>
+  </ti-formfield>
+
+  <!-- profile system -->
+  <ti-formfield
+    [labelWidth]="labelWidth"
+    [formGroup]="profileItemsMicarchForm"
+    *ngIf="isProfile"
+    class="taskForm"
+  >
+    <!-- 采样模式 -->
+    <ti-item
+      [label]="micarchItems.samplingSwitch.label"
+      [required]="micarchItems.samplingSwitch.required"
+      class="switch"
+    >
+      <div
+        *ngFor="let item of micarchItems.samplingSwitch.options"
+        style="display: inline-block; margin-right: 20px"
+        class="myradio"
+      >
+        <input
+          type="radio"
+          tiRadio
+          [disabled]="item.disable"
+          (ngModelChange)="simplingSwitchChange($event)"
+          [value]="item.id"
+          [label]="item.key"
+          formControlName="mode_ctrl"
+        />
+      </div>
+      <p class="desc-content">{{ micarchItems.samplingSwitch.tip }}</p>
+    </ti-item>
+    <!-- 采样时长 -->
+    <ti-item [label]="i18n.sys.duration" [required]="true">
+      <div class="formContent">
+        <ti-spinner
+          name="spinner"
+          [step]="micarchItems.res_d.step"
+          [format]="micarchItems.res_d.format"
+          [correctable]="false"
+          [placeholder]="micarchItems.res_d.placeholder"
+          tiValidation
+          formControlName="sampling_ctrl"
+          [appSpinnerBlur]="samplingDurationBlur"
+          style="width: 165px"
+          [errorMessageWrapper]="sysDurationErrorMsgWrapper"
+        ></ti-spinner>
+
+        <!-- 尾后提示 -->
+        <span class="tailPrompt">
+          {{ micarchItems.res_d.tailPrompt }}
+        </span>
+      </div>
+
+      <!-- 自定义错误提示位置 -->
+      <div #sysDurationErrorMsgWrapper></div>
+    </ti-item>
+    <!-- CPU采集周期 -->
+    <ti-item
+      [label]="
+        micarchItems.cpu.label +
+        i18n.common_term_sign_left +
+        LaunchItemsLock.cpu.unit +
+        i18n.common_term_sign_right
+      "
+      [required]="micarchItems.cpu.required"
+    >
+      <div class="formContent">
+        <ti-select
+          style="width: 165px; margin-right: 5px"
+          [options]="micarchItems.cpu.options"
+          [tiValidation]="validation"
+          formControlName="cpu_ctrl"
+          (ngModelChange)="
+            cpu_interval_change($event, LaunchItemsLock.cpu, 'micarch')
+          "
+          *ngIf="false"
+        >
+        </ti-select>
+        <ti-spinner
+          name="spinner"
+          [step]="micarchItems.cpu.spinner.step"
+          [format]="micarchItems.cpu.spinner.format"
+          [placeholder]="micarchItems.cpu.spinner.placeholder"
+          [correctable]="false"
+          tiValidation
+          formControlName="cpu_spinner_ctrl"
+          style="width: 165px"
+          [errorMessageWrapper]="sysCpuErrorMsgWrapper"
+          [appSpinnerBlur]="intervalBlur"
+        ></ti-spinner>
+
+        <!-- 尾后提示 -->
+        <span class="tailPrompt">
+          {{ micarchItems.cpu.tailPrompt }}
+        </span>
+      </div>
+
+      <!-- 自定义错误提示位置 -->
+      <div #sysCpuErrorMsgWrapper></div>
+    </ti-item>
+
+    <!-- 分析指标 -->
+    <ti-item [label]="micarchItems.analysis.label" [required]="true">
+      <div style="position: relative; top: -10px" class="sys-type-label">
+        <span
+          *ngFor="let item of micarchItems.analysis.options"
+          style="
+            color: #666 !important;
+            margin-right: 20px;
+            position: relative;
+            margin-top: 20px;
+            font-size: 0.78rem;
+            display: block;
+            min-width: 260px;
+          "
+        >
+          <input
+            type="radio"
+            tiRadio
+            formControlName="analysisTypes"
+            [value]="item.id"
+            [label]="item.text"
+            (ngModelChange)="analysisTypesChange($event)"
+            [disabled]="micarchItems.analysis.disabled"
+          />
+          <ti-icon
+            [tiTip]="item.tip"
+            style="margin-left: 10px"
+            tiTipMaxWidth="370px"
+            tiTipPosition="bottom"
+          >
+            <img src="./assets/img/summary/tooltip.png" />
+          </ti-icon>
+        </span>
+      </div>
+    </ti-item>
+
+    <!-- 待采样CPU核 -->
+    <ti-item [required]="false">
+      <ti-item-label>
+        <span>{{ i18n.ddr.cpuToBeSamples }}</span>
+        <ti-icon
+          [tiTip]="i18n.tip_msg.common_term_task_crate_mask_tip"
+          style="margin-left: 10px"
+          tiTipMaxWidth="370px"
+          tiTipPosition="bottom"
+        >
+          <img src="./assets/img/summary/tooltip.png" />
+        </ti-icon>
+      </ti-item-label>
+      <input
+        type="text"
+        tiText
+        [tiValidation]="validation"
+        formControlName="cpu_kernel_ctrl"
+        style="width: 300px"
+      />
+    </ti-item>
+
+    <!-- 采样范围 -->
+    <ti-item [required]="false">
+      <ti-item-label>
+        <span>{{ i18n.micarch.label.typeItem }}</span>
+      </ti-item-label>
+      <ti-select
+        style="width: 300px"
+        [options]="micarchItems.typeItem.options"
+        [tiValidation]="validation"
+        formControlName="typeItem_ctrl"
+      ></ti-select>
+    </ti-item>
+
+    <!-- 延时采集时长 -->
+    <ti-item [required]="false">
+      <ti-item-label>
+        <span>{{ i18n.micarch.simpling_delay }}</span>
+        <ti-icon
+          [tiTip]="micarchItems.cpu.tip"
+          style="margin-left: 10px"
+          tiTipMaxWidth="370px"
+          tiTipPosition="bottom"
+        >
+          <img src="./assets/img/summary/tooltip.png" />
+        </ti-icon>
+      </ti-item-label>
+
+      <div class="formContent">
+        <ti-spinner
+          name="spinner"
+          [step]="micarchItems.cpu.spinner_delay.step"
+          [format]="micarchItems.cpu.spinner_delay.format"
+          [placeholder]="micarchItems.cpu.spinner_delay.placeholder"
+          [correctable]="false"
+          tiValidation
+          formControlName="timing_spinner_ctrl"
+          [appSpinnerBlur]="delaySamplingDurationBlur"
+          style="width: 165px"
+          [errorMessageWrapper]="sysDelayErrorMsgWrapper"
+        ></ti-spinner>
+
+        <!-- 尾后提示 -->
+        <span class="tailPrompt">
+          {{ micarchItems.cpu.spinner_delay.tailPrompt }}
+        </span>
+      </div>
+
+      <!-- 自定义错误提示位置 -->
+      <div #sysDelayErrorMsgWrapper></div>
+    </ti-item>
+
+    <!-- 二进制/符号文件路径 -->
+    <ti-item [required]="micarchItems.b_s.required" [show]="false">
+      <ti-item-label>
+        <span>{{ micarchItems.b_s.label }}</span>
+        <ti-icon
+          [tiTip]="micarchItems.b_s.tip"
+          style="margin-left: 10px"
+          tiTipMaxWidth="370px"
+          tiTipPosition="bottom"
+        >
+          <img src="./assets/img/summary/tooltip.png" />
+        </ti-icon>
+      </ti-item-label>
+      <input
+        type="text"
+        tiText
+        [tiValidation]="validation"
+        formControlName="b_s_ctrl"
+        style="width: 300px"
+      />
+    </ti-item>
+
+    <!-- c/c++源文件 -->
+    <ti-item [required]="micarchItems.c_source.required">
+      <ti-item-label>
+        <span>{{ micarchItems.c_source.label }}</span>
+        <ti-icon
+          [tiTip]="micarchItems.c_source.tip"
+          style="margin-left: 10px"
+          tiTipMaxWidth="370px"
+          tiTipPosition="bottom"
+        >
+          <img src="./assets/img/summary/tooltip.png" />
+        </ti-icon>
+      </ti-item-label>
+      <input
+        type="text"
+        tiText
+        [tiValidation]="validation"
+        formControlName="source_ctrl"
+        style="width: 300px"
+      />
+    </ti-item>
+
+    <!-- 内核函数关联汇编指令 -->
+    <ti-item [required]="micarchItems.kcore.required">
+      <ti-item-label>
+        <span tiOverflow>
+          {{ micarchItems.kcore.label }}
+        </span>
+      </ti-item-label>
+
+      <div class="formContent">
+        <ti-switch formControlName="kcore"></ti-switch>
+      </div>
+    </ti-item>
+
+    <!-- 采集文件大小 -->
+    <ti-item [required]="false">
+      <ti-item-label>
+        <span>{{ micarchItems.filesize.label }}</span>
+        <ti-icon
+          [tiTip]="micarchItems.filesize.iconTip"
+          style="margin-left: 10px"
+          tiTipMaxWidth="370px"
+          tiTipPosition="bottom"
+        >
+          <img src="./assets/img/summary/tooltip.png" />
+        </ti-icon>
+      </ti-item-label>
+
+      <div class="formContent">
+        <ti-spinner
+          name="spinner"
+          [step]="micarchItems.filesize.step"
+          [correctable]="false"
+          [format]="micarchItems.filesize.format"
+          [placeholder]="micarchItems.filesize.placeholder"
+          tiValidation
+          formControlName="fileSize"
+          style="width: 165px"
+          [appSpinnerBlur]="collectFileBlur"
+          [errorMessageWrapper]="appDelayErrorMsgWrapper"
+        ></ti-spinner>
+
+        <!-- 尾后提示 -->
+        <span class="tailPrompt">
+          {{ micarchItems.filesize.tailPrompt }}
+        </span>
+      </div>
+
+      <!-- 自定义错误提示位置 -->
+      <div #appDelayErrorMsgWrapper></div>
+    </ti-item>
+  </ti-formfield>
+
+  <!-- attarch to process -->
+  <ti-formfield
+    [labelWidth]="labelWidth"
+    [formGroup]="attachItemsMicarchForm"
+    *ngIf="isAttach"
+    class="taskForm"
+  >
+    <!-- 采样模式 -->
+    <ti-item
+      [label]="micarchItems.samplingSwitch.label"
+      [required]="micarchItems.samplingSwitch.required"
+      class="switch"
+    >
+      <div
+        *ngFor="let item of micarchItems.samplingSwitch.options"
+        style="display: inline-block; margin-right: 20px"
+        class="myradio"
+      >
+        <input
+          type="radio"
+          tiRadio
+          [disabled]="item.disable"
+          (ngModelChange)="simplingSwitchChange($event)"
+          [value]="item.id"
+          [label]="item.key"
+          formControlName="mode_ctrl"
+        />
+      </div>
+      <p class="desc-content">{{ micarchItems.samplingSwitch.tip }}</p>
+    </ti-item>
+
+    <!-- 采样时长 -->
+    <ti-item [label]="i18n.sys.duration" [required]="true">
+      <div class="formContent">
+        <ti-spinner
+          name="spinner"
+          [step]="micarchItems.res_d.step"
+          [format]="micarchItems.res_d.format"
+          [correctable]="false"
+          [placeholder]="micarchItems.res_d.placeholder"
+          tiValidation
+          formControlName="sampling_ctrl"
+          [appSpinnerBlur]="samplingDurationBlur"
+          style="width: 165px"
+          [errorMessageWrapper]="pidDurationErrorMsgWrapper"
+        ></ti-spinner>
+
+        <!-- 尾后提示 -->
+        <span class="tailPrompt">
+          {{ micarchItems.res_d.tailPrompt }}
+        </span>
+      </div>
+
+      <!-- 自定义错误提示位置 -->
+      <div #pidDurationErrorMsgWrapper></div>
+    </ti-item>
+
+    <!-- CPU采集周期 -->
+    <ti-item
+      [label]="
+        micarchItems.cpu.label +
+        i18n.common_term_sign_left +
+        LaunchItemsLock.cpu.unit +
+        i18n.common_term_sign_right
+      "
+      [required]="micarchItems.cpu.required"
+    >
+      <div class="formContent">
+        <ti-select
+          style="width: 165px; margin-right: 5px"
+          [options]="micarchItems.cpu.options"
+          [tiValidation]="validation"
+          formControlName="cpu_ctrl"
+          (ngModelChange)="
+            cpu_interval_change($event, LaunchItemsLock.cpu, 'micarch')
+          "
+          id="direselect-lock"
+          *ngIf="false"
+        >
+        </ti-select>
+        <ti-spinner
+          name="spinner"
+          [step]="micarchItems.cpu.spinner.step"
+          [format]="micarchItems.cpu.spinner.format"
+          [placeholder]="micarchItems.cpu.spinner.placeholder"
+          [correctable]="false"
+          tiValidation
+          formControlName="cpu_spinner_ctrl"
+          style="width: 165px"
+          [errorMessageWrapper]="pidIntervalErrorMsgWrapper"
+          [appSpinnerBlur]="intervalBlur"
+        ></ti-spinner>
+
+        <!-- 尾后提示 -->
+        <span class="tailPrompt">
+          {{ micarchItems.cpu.tailPrompt }}
+        </span>
+      </div>
+
+      <!-- 自定义错误提示位置 -->
+      <div #pidIntervalErrorMsgWrapper></div>
+    </ti-item>
+
+    <!-- 分析指标 -->
+    <ti-item [label]="micarchItems.analysis.label" [required]="true">
+      <div style="position: relative; top: -10px" class="sys-type-label">
+        <span
+          *ngFor="let item of micarchItems.analysis.options"
+          style="
+            color: #666 !important;
+            margin-right: 20px;
+            position: relative;
+            margin-top: 20px;
+            font-size: 0.78rem;
+            display: block;
+            min-width: 260px;
+          "
+        >
+          <input
+            type="radio"
+            tiRadio
+            formControlName="analysisTypes"
+            [value]="item.id"
+            [label]="item.text"
+            (ngModelChange)="analysisTypesChange($event)"
+            [disabled]="micarchItems.analysis.disabled"
+          />
+          <ti-icon
+            [tiTip]="item.tip"
+            style="margin-left: 10px"
+            tiTipMaxWidth="370px"
+            tiTipPosition="bottom"
+          >
+            <img src="./assets/img/summary/tooltip.png" />
+          </ti-icon>
+        </span>
+      </div>
+    </ti-item>
+
+    <!-- 采样范围 -->
+    <ti-item [required]="false">
+      <ti-item-label>
+        <span>{{ i18n.micarch.label.typeItem }}</span>
+      </ti-item-label>
+      <ti-select
+        style="width: 300px"
+        [options]="micarchItems.typeItem.options"
+        [tiValidation]="validation"
+        formControlName="typeItem_ctrl"
+      ></ti-select>
+    </ti-item>
+
+    <!-- 延时采集时长 -->
+    <ti-item [required]="false">
+      <ti-item-label>
+        <span>{{ i18n.micarch.simpling_delay }}</span>
+        <ti-icon
+          [tiTip]="micarchItems.cpu.tip"
+          style="margin-left: 10px"
+          tiTipMaxWidth="370px"
+          tiTipPosition="bottom"
+        >
+          <img src="./assets/img/summary/tooltip.png" />
+        </ti-icon>
+      </ti-item-label>
+
+      <div class="formContent">
+        <ti-spinner
+          name="spinner"
+          [step]="micarchItems.cpu.spinner_delay.step"
+          [format]="micarchItems.cpu.spinner_delay.format"
+          [placeholder]="micarchItems.cpu.spinner_delay.placeholder"
+          [correctable]="false"
+          tiValidation
+          formControlName="timing_spinner_ctrl"
+          [appSpinnerBlur]="delaySamplingDurationBlur"
+          style="width: 165px"
+          [errorMessageWrapper]="pidDelayErrorMsgWrapper"
+        ></ti-spinner>
+
+        <!-- 尾后提示 -->
+        <span class="tailPrompt">
+          {{ micarchItems.cpu.spinner_delay.tailPrompt }}
+        </span>
+      </div>
+
+      <!-- 自定义错误提示位置 -->
+      <div #pidDelayErrorMsgWrapper></div>
+    </ti-item>
+
+    <!-- 二进制/符号文件路径 -->
+    <ti-item [required]="micarchItems.b_s.required" [show]="false">
+      <ti-item-label>
+        <span>{{ micarchItems.b_s.label }}</span>
+        <ti-icon
+          [tiTip]="micarchItems.b_s.tip"
+          style="margin-left: 10px"
+          tiTipMaxWidth="370px"
+          tiTipPosition="bottom"
+        >
+          <img src="./assets/img/summary/tooltip.png" />
+        </ti-icon>
+      </ti-item-label>
+      <input
+        type="text"
+        tiText
+        [tiValidation]="validation"
+        formControlName="b_s_ctrl"
+        style="width: 300px"
+      />
+    </ti-item>
+
+    <!-- c/c++源文件 -->
+    <ti-item [required]="micarchItems.c_source.required">
+      <ti-item-label>
+        <span>{{ micarchItems.c_source.label }}</span>
+        <ti-icon
+          [tiTip]="micarchItems.c_source.tip"
+          style="margin-left: 10px"
+          tiTipMaxWidth="370px"
+          tiTipPosition="bottom"
+        >
+          <img src="./assets/img/summary/tooltip.png" />
+        </ti-icon>
+      </ti-item-label>
+      <input
+        type="text"
+        tiText
+        [tiValidation]="validation"
+        formControlName="source_ctrl"
+        style="width: 300px"
+      />
+    </ti-item>
+
+    <!-- 内核函数关联汇编指令 -->
+    <ti-item [required]="micarchItems.kcore.required">
+      <ti-item-label>
+        <span tiOverflow>
+          {{ micarchItems.kcore.label }}
+        </span>
+      </ti-item-label>
+
+      <div class="formContent">
+        <ti-switch formControlName="kcore"></ti-switch>
+      </div>
+    </ti-item>
+
+    <!-- 采集文件大小 -->
+    <ti-item [required]="false">
+      <ti-item-label>
+        <span>{{ micarchItems.filesize.label }}</span>
+        <ti-icon
+          [tiTip]="micarchItems.filesize.iconTip"
+          style="margin-left: 10px"
+          tiTipMaxWidth="370px"
+          tiTipPosition="bottom"
+        >
+          <img src="./assets/img/summary/tooltip.png" />
+        </ti-icon>
+      </ti-item-label>
+
+      <div class="formContent">
+        <ti-spinner
+          name="spinner"
+          [step]="micarchItems.filesize.step"
+          [correctable]="false"
+          [format]="micarchItems.filesize.format"
+          [placeholder]="micarchItems.filesize.placeholder"
+          tiValidation
+          formControlName="fileSize"
+          [appSpinnerBlur]="collectFileBlur"
+          style="width: 165px"
+          [errorMessageWrapper]="appDelayErrorMsgWrapper"
+        ></ti-spinner>
+
+        <!-- 尾后提示 -->
+        <span class="tailPrompt">
+          {{ micarchItems.filesize.tailPrompt }}
+        </span>
+      </div>
+
+      <!-- 自定义错误提示位置 -->
+      <div #appDelayErrorMsgWrapper></div>
+    </ti-item>
+  </ti-formfield>
+
+  <!-- 配置节点参数 -->
+  <div class="node-config-modal import-btn">
+    <app-mission-node-config
+      #nodeConfigM
+      [labelWidth]="labelWidth"
+      [isAbled]="!(micarchCurrntForm.valid && taskNameValid && appAndPidValid)"
+      [taskType]="'microarchitecture'"
+      [formData]="formDatas"
+      [runUserData]="runUserData"
+      [runUserDataObj]="runUserDataObj"
+      [projectId]="projectId"
+      [nodeConfigShow]="nodeConfigShow"
+      [nodeConfigedData]="nodeConfigedData"
+      [isModifySchedule]="isModifySchedule"
+      [nodeList]="micarchCurrntForm.get('nodeList').value"
+      (controlNode)="onControlNode($event)"
+      (opentNode)="handleNodeEmit($event)"
+      (selectNodeDisable)="selectNodeDisable($event)"
+    ></app-mission-node-config>
+  </div>
+  <!-- 预约 -->
+  <div style="margin-top: 20px; flex: 1">
+    <app-mission-reservation
+      [hidden]="taskDetail.isFromTuningHelper"
+      #preSwitchMicarch
+      [labelWidth]="labelWidth"
+      [isModifySchedule]="isModifySchedule || isRestart || isEdit"
+      [switch]="isShowReserveAndImmedia"
+    >
+    </app-mission-reservation>
+    <!-- 立即 -->
+    <div
+      class="immediately"
+      *ngIf="!preSwitchMicarch.switchState && !isRestart"
+    >
+      <div
+        *ngIf="isShowReserveAndImmedia"
+        [tiTip]="i18n.mission_create.disableeTip"
+      >
+        <input
+          type="checkbox"
+          tiCheckbox
+          [name]="startCheckMicarch.title"
+          [(ngModel)]="startCheckMicarch.checked"
+          [disabled]="isShowReserveAndImmedia || taskDetail.isFromTuningHelper"
+        />
+      </div>
+      <input
+        *ngIf="!isShowReserveAndImmedia"
+        type="checkbox"
+        tiCheckbox
+        [name]="startCheckMicarch.title"
+        [(ngModel)]="startCheckMicarch.checked"
+        [disabled]="taskDetail.isFromTuningHelper"
+      />
+      <span class="start-now">{{ startCheckMicarch.title }}</span>
+    </div>
+  </div>
+  <footer>
+    <button
+      tiButton
+      type="button"
+      color="primary"
+      style="margin-right: 20px"
+      (click)="createMicarchkAnalysis(isEdit)"
+      [ngClass]="{ toRight: isModifySchedule }"
+      [disabled]="
+        !(
+          micarchCurrntForm.valid &&
+          taskNameValid &&
+          appAndPidValid &&
+          (preSwitchMicarch.previewState || !preSwitchMicarch.switchState)
+        )
+      "
+    >
+      {{ i18n.common_term_operate_ok }}
+    </button>
+    <button tiButton type="button" (click)="close()">
+      {{ i18n.common_term_operate_cancel }}
+    </button>
+    <button
+      tiButton
+      type="button"
+      (click)="saveTemplates()"
+      *ngIf="!isModifySchedule && !taskDetail.isFromTuningHelper"
+      [disabled]="
+        !(
+          micarchCurrntForm.valid &&
+          taskNameValid &&
+          appAndPidValid &&
+          (preSwitchMicarch.previewState || !preSwitchMicarch.switchState)
+        )
+      "
+    >
+      {{ i18n.mission_modal.saveTemplates }}
+    </button>
+  </footer>
+</div>

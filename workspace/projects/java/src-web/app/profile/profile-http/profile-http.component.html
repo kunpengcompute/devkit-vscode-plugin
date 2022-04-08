@@ -1,0 +1,73 @@
+<div class="overview-container" style="min-height: calc(100vh - 200px);">
+  <div class="thread-content">
+    <div style="display: flex;justify-content: space-between;">
+      <div>
+        <div style="display: inline-block;">
+          <button type="button" tiButton color="primary" [disabled]="startBtnDisabled || snapShot" (click)="startHttp()"
+            *ngIf="!isStart">
+            {{ i18n.protalserver_profiling_http.start }}
+          </button>
+          <button type="button" tiButton color="primary" (click)="stopHttp()" *ngIf="isStart">
+            {{ i18n.protalserver_profiling_http.stop }}
+          </button>
+          <img [tiTip]="httpBtnTip" tiTipPosition="right"
+            style="position: relative;top: 4px; width: 12px; height: 12px;margin-left: 10px;"
+            src="./assets/img/newSvg/hollowTip.svg" alt="">
+        </div>
+        <div style="display: inline-block; margin-left: 24px;">
+          <span style="margin-right: 10px; font-size: 14px; color: #6c7280;">{{
+            threshold.label
+            }}</span>
+          <ti-formfield class="httpForm" [formGroup]="httpGroup">
+            <ti-item>
+              <ti-spinner class="http-threshold" style="width: 170px;" name="spinner" [format]="threshold.format"
+                [tiRangeValue]="threshold.rangeValue" tiValidation tiRequired
+                [disabled]="startBtnDisabled || snapShot || isStart" (blur)="verifySpinnerValue(httpBlur)"
+                formControlName="http_threshold">
+              </ti-spinner>
+            </ti-item>
+          </ti-formfield>
+          <img [tiTip]="jdbcThresholdTip" tiTipPosition="right"
+            style="position: relative;top: 4px; width: 12px; height: 12px;margin-left: 10px;"
+            src="./assets/img/newSvg/hollowTip.svg" alt="">
+        </div>
+      </div>
+      <div style="position: relative;cursor: pointer;" *ngIf="!snapShot">
+        <div [ngClass]="isDownload?'notSnapshot':'snapshotBg'" (click)="doSnap('http')"
+          [tiTip]='i18n.snapshot_analysis_content1' tiTipMaxWidth="221px" [tiTipContext]='tip1Context'
+          tiTipPosition='top-right'></div>
+        <span [ngClass]="isDownload?'count_disabled':'red_count'" *ngIf="snapCount > 0">{{snapCount}}</span>
+      </div>
+    </div>
+    <div *ngIf="httpTreeData[0].children.length || echartDatas.time1.length ">
+      <div class="thread-tabs hot-spot">
+        {{ i18n.protalserver_profiling_jdbc.label }}
+      </div>
+      <div class="hot-tree">
+        <ti-tree [data]="httpTreeData" *ngIf="httpTreeData[0].children.length"></ti-tree>
+      </div>
+      <div class="thread-tabs real-graph">
+        {{ i18n.protalserver_profiling_http.real_time }}
+      </div>
+      <div style="min-height: 100px; width: 100%;" class="real-content">
+        <div *ngIf="echartDatas.request.length">
+          <app-echarts-common #echartsCommon [startDate]="startDate" [datas]="echartDatas"
+            [updateOptions]="updateOptions" [timeData]='timeData'>
+          </app-echarts-common>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="loadData" *ngIf="!httpTreeData[0].children.length">
+    <div *ngIf="!isStart">
+      <img class='newNoData' src="./assets/img/projects/noData.svg" />
+    </div>
+    <div class="analyz-svg" *ngIf="isStart">
+      <img class="browser-img" src="./assets/img/profiling/browserPreview.gif">
+    </div>
+    <div class="noDataText">
+      {{ isStart ? i18n.profileNoData.http2 : i18n.profileNoData.http }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+.hot-function-compare{
+  height: 100%;
+
+  app-common-table {
+    font-size: 12px;
+  }
+
+  .no-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+  }
+}
+:host ::ng-deep .hot-function-compare {
+  .ti3-table-fixed-head {
+    table {
+        thead {
+          tr {
+            .th-box {
+              cursor: default;
+            } 
+          }
+        }
+    }
+  }
+}
+
+.tip-hot-func-content {
+  font-size: 12px;
+  .tip-func-name, .tip-cmd-title {
+    color: var(--common-color-font-primary);
+  }
+  .tip-middle-line {
+    background-color: var(--common-color-divider);
+    width: 100%;
+    height: 1px;
+    margin: 8px 0;
+  }
+  .tip-no-tracks {
+    color: var(--button-color-border-secondary);
+  }
+  .tip-cmd-name {
+    color: var(--common-color-font-secondary);
+  }
+}

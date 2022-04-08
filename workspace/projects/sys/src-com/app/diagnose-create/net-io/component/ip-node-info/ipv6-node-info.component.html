@@ -1,0 +1,83 @@
+<div class="node-info-form" [ngClass]="theme$ | async">
+  <div class="node-boxs">
+    <div *ngFor="let form of formArray.controls; index as i" class="node-box">
+      <!-- IPv4表单 -->
+      <ti-formfield [formGroup]="form" [labelWidth]="labelWidth">
+        <!-- 任务节点 -->
+        <ti-item
+          [label]="'network_diagnositic.taskParams.task_node' | i18n"
+          [required]="true"
+        >
+          <div style="position: relative">
+            <ti-select
+              class="form-value"
+              [options]="allTaskNodeOption"
+              formControlName="serverIp"
+              [tiValidation]="{ type: 'blur' }"
+              [errorMessageWrapper]="errorServerIpMsg"
+              valueKey="value"
+            ></ti-select>
+            <span class="location" #errorServerIpMsg></span>
+          </div>
+        </ti-item>
+        <!-- 源端网口 -->
+        <ti-item [required]="true">
+          <ti-item-label>
+            <div tiOverflow>
+              {{ "network_diagnositic.taskParams.source_network_port" | i18n }}
+            </div>
+          </ti-item-label>
+          <div style="position: relative">
+            <input
+              class="form-value"
+              type="text"
+              tiText
+              formControlName="sourceEth"
+              [tiValidation]="{ type: 'blur' }"
+              [errorMessageWrapper]="errorNetportMsg"
+            />
+            <span class="location" #errorNetportMsg></span>
+          </div>
+        </ti-item>
+        <!-- 目标服务器IP -->
+        <ti-item [required]="true">
+          <ti-item-label>
+            <div tiOverflow>
+              {{ "network_diagnositic.taskParams.target_server_ip" | i18n }}
+            </div>
+          </ti-item-label>
+          <div style="position: relative">
+            <ti-ip
+              #ipv6
+              [version]="6"
+              formControlName="destinationIp"
+              class="form-value"
+              [tiValidation]="{ type: 'blur' }"
+              [errorMessageWrapper]="errorDestinationIpMsg"
+              style="width: 325px"
+            ></ti-ip>
+            <span class="location" #errorDestinationIpMsg></span>
+          </div>
+        </ti-item>
+      </ti-formfield>
+      <!-- 删除按钮 -->
+      <div
+        *ngIf="i > 0"
+        (click)="onFormArrayRemoveFG(i)"
+        class="delete-node-btn"
+      >
+        <app-icon-react name="deleteProject"></app-icon-react>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="allTaskNodeOption.length > formArray.controls.length"
+    (click)="onFormArrayAddFG()"
+    class="add-node-btn"
+  >
+    <div class="add-img">
+      <app-icon-react name="addProject" [freeze]="'hover'"></app-icon-react>
+    </div>
+    <span>{{ "network_diagnositic.taskParams.add" | i18n }}</span>
+  </div>
+</div>

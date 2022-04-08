@@ -1,0 +1,44 @@
+<div class="analysis-target-content">
+    <div class="analysis-target-item">
+        <div class="analysis-target-item-label" [ngStyle]="{width: labelWidth}">
+            <ti-icon name="staricon" class="opacity"></ti-icon>
+            <!-- 不适用span可能左右会有空格 影响显示 -->
+            <span>{{ i18n.common_term_task_crate_app_runUser }}</span>
+            <ti-icon [tiTip]="i18n.mission_create.modeAppRunUser" class="margin_left" tiTipMaxWidth='370px'
+                tiTipPosition="bottom">
+                <img src='./assets/img/summary/tooltip.png'>
+            </ti-icon>
+        </div>
+        <div class="analysis-target-item-value">
+            <ti-switch id="myswitch" [(ngModel)]="switchState" (ngModelChange)="checkUserOrPassWord('switch')">
+            </ti-switch>
+        </div>
+    </div>
+    <div class="analysis-target-item" *ngIf="switchState">
+        <div class="analysis-target-item-label" [ngStyle]="{width: labelWidth}">
+            <ti-icon name="staricon" class="red"></ti-icon>
+            <!-- 不适用span可能左右会有空格 影响显示 -->
+            <span>{{ i18n.common_term_task_crate_app_user }}</span>
+        </div>
+        <div class="analysis-target-item-value">
+            <input type="text" #like tiText [(ngModel)]="modeApplicationUser"
+                (blur)="checkUserOrPassWord('user')" />
+            <div class="mission-app-warn" *ngIf="!runUserValid">{{ runUserMsg }}
+            </div>
+        </div>
+    </div>
+    <div class="analysis-target-item" *ngIf="switchState">
+        <div class="analysis-target-item-label" [ngStyle]="{width: labelWidth}">
+            <ti-icon name="staricon" class="red"></ti-icon>
+            <!-- 不适用span可能左右会有空格 影响显示 -->
+            <span>{{ i18n.common_term_task_crate_app_passWord }}</span>
+        </div>
+        <div class="analysis-target-item-value">
+            <input type="password" #like tiText [(ngModel)]="modeApplicationPassWord"
+                (blur)="checkUserOrPassWord('password')">
+            <div class="mission-app-warn" *ngIf="!runPasswordValid">{{ i18n.tip_msg.system_setting_input_empty_judge
+                }}
+            </div>
+        </div>
+    </div>
+</div>

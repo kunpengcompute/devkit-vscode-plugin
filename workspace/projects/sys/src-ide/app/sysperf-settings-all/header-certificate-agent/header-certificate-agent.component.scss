@@ -1,0 +1,260 @@
+.modal-dialog {
+    width: 100%;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+
+    .content {
+        flex-grow: 1;
+
+        .content-title {
+            font-size: 20px;
+            font-weight: normal;
+            padding-bottom: 20px;
+        }
+        .content-table{
+            .buts{
+                display: flex;
+                margin-bottom: 10px;
+
+                button{
+                    margin-top: 20px;
+                }
+            }
+        }
+
+        .content-notice {
+            font-size: 14px;
+            line-height: 32px;
+        }
+
+        .operation-text {
+            float: left;
+            font-size: 12px;
+            color: #0067ff;
+            cursor: pointer;
+        }
+
+        .agent-warn {
+            .middle-font {
+                font-size: 14px;
+                line-height: 20px;
+                margin-bottom: 10px;
+                color: var(--color-middle-font) !important;
+                display: flex;
+                align-items: center;
+
+                .required-icon {
+                    width: 8px;
+                    height: 8px;
+                    margin-left: -8px;
+                }
+            }
+
+            .setting-list {
+                display: flex;
+                flex-direction: column;
+                ::ng-deep .ti3-form .ti3-form-top-label {
+                    padding-bottom: 0;
+                }
+            }
+        }
+    }
+
+    .footer {
+        height: 96px;
+        line-height: 96px;
+        text-align: center;
+
+        button {
+            width: 96px;
+        }
+    }
+}
+
+.certInfo {
+    height: 48px;
+    line-height: 48px;
+}
+
+.status-icon {
+    border-radius: 50%;
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 2px;
+}
+
+.analyzing-icon {
+    border: 5px solid #7adfa0;
+}
+
+.stopping-icon {
+    border: 5px solid #ffb146;
+}
+
+.failed-icon {
+    border: 5px solid #f45c5e;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+    border-bottom: 1px dashed var(--d-4b4b4b-l-e2e2e2);
+    padding-bottom: 23px;
+    align-items: center;
+
+    p {
+        font-family: "huawei sans";
+        color: var(--d-e8e8e8-l-222222);
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    div {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+}
+
+::ng-deep #certHead {
+    padding: 23px 0px 0px 0px !important;
+}
+
+::ng-deep #certBody:after {
+    height: 0px !important;
+}
+
+::ng-deep #certBody {
+    padding: 0px 40px 0px 35px;
+    margin: 0;
+
+    .certContent {
+        margin: 32px 0px;
+    }
+
+    input {
+        width: 300px;
+        height: 28px;
+    }
+}
+
+::ng-deep #certFooter,
+#fingerPrint {
+    border: none;
+
+    button {
+        width: 88px !important;
+        height: 28px !important;
+        line-height: 26px !important;
+    }
+}
+
+::ng-deep .cert {
+    width: 660px !important;
+    margin: 0px !important;
+
+    .ti3-modal-content {
+        width: 660px;
+    }
+
+    .ti3-form {
+        width: 100% !important;
+
+        .ti3-form-content {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 130px;
+
+            ti-item {
+                width: 300px;
+            }
+        }
+    }
+}
+
+::ng-deep .ti3-table > table > tbody > tr > td {
+    border-top: 1px solid var(--d-4b4b4b-l-e2e2e2);
+}
+
+::ng-deep #agent {
+    max-height: 645px;
+    overflow: auto;
+}
+
+::ng-deep .ti3-table > table > thead > tr > th:not(:last-child)::after,
+.ti3-table > .ti3-resize-wrapper > table > thead > tr > th:not(:last-child)::after,
+.ti3-table > .ti3-table-fixed-head > table > thead > tr > th:not(:last-child)::after,
+.ti3-table > .ti3-table-container > table > thead > tr > th:not(:last-child)::after {
+    width: 1px;
+    background: var(--d-4b4b4b-l-e2e2e2);
+    color: var(--d-4b4b4b-l-e2e2e2);
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    content: "";
+}
+
+.little-minor-btn:hover {
+    cursor: pointer;
+}
+
+.eyes {
+    position: absolute;
+    right: 5px;
+    top: 6px;
+    width: 20px;
+    height: 20px;
+}
+
+.dashed-line {
+    width: 100%;
+    height: 2px;
+    background-image: linear-gradient(to right, var(--d-4b4b4b-l-e2e2e2) 0%, var(--d-4b4b4b-l-e2e2e2) 50%, transparent 50%);
+    background-size: 4px 1px;
+    background-repeat: repeat-x;
+}
+
+::ng-deep .tip-th.ti3-modal-header {
+    border-bottom: 0;
+}
+
+// 更换证书/工作秘钥时需要节点认证
+::ng-deep #certBody {
+    .rootPwdTip {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: left;
+        margin: 20px 0;
+        width: 429px;
+        color: var(--d-d4d4d4-l-222222);
+        font-size: 12px;
+        border: 1px solid var(--d-15395b-l-0067ff);
+    }
+
+    .tip-content {
+        max-width: 100%;
+        background-color: var(--d-111d2c-l-f0f6ff);
+        padding-right: 0;
+    }
+}
+
+.agent-table {
+    position: relative;
+
+    .loading {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+    }
+}
+
+.success-loading {
+    z-index: 9999;
+}

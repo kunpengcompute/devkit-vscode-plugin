@@ -1,0 +1,38 @@
+<div class="source-code-viewer">
+  <header>
+    <div class="header-left">
+        <span *ngIf="data?.currActiveFunc?.moduleName" tiOverflow>{{ data?.currActiveFunc?.moduleName }}</span>
+        <span tiOverflow>{{ data?.currActiveFunc?.funcName }}</span>
+    </div>
+    <div class="header-right" [ngClass]="{'moveLeft': memLeakType === 3}">
+      <div class="legend" *ngIf="memLeakType !== 2 && memLeakType !== 3">
+        <div>
+          <div class="self-rect"></div>
+          <span>{{ i18n.diagnostic.sourceCode.legend.selfMemLeak }}</span>
+        </div>
+        <div>
+          <div class="child-rect"></div>
+          <span>{{ i18n.diagnostic.sourceCode.legend.childMemLeak }}</span>
+        </div>
+      </div>
+      <div class="legend" *ngIf="memLeakType === 2 && !isModal">
+        <div>
+          <div class="self-rect"></div>
+          <span>{{ i18n.diagnostic.sourceCode.legend.selfAbnormalRelease }}</span>
+        </div>
+        <div>
+          <div class="child-rect"></div>
+          <span>{{ i18n.diagnostic.sourceCode.legend.childAbnormalRelease }}</span>
+        </div>
+      </div>
+      <div class="jump-btns" *ngIf="!isModal">
+        <img class="jump-up" src="./assets/img/memDiagnose/jump-up.svg" (click)="jumpUpLine()">
+        <img class="jump-down" src="./assets/img/memDiagnose/jump-down.svg" (click)="jumpDownLine()">
+      </div>
+      <div class="shortLine" *ngIf="memLeakType === 3">|</div>
+    </div>
+  </header>
+  <div class="code-viwer-box">
+    <div id="code-viwer" [ngClass]="{'leak': memLeakType !== 3}" contenteditable="true"></div>
+  </div>
+</div>

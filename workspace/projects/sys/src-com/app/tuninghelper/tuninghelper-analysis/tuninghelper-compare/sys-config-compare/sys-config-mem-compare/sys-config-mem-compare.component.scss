@@ -1,0 +1,55 @@
+.sys-config-mem-compare {
+  display: flex;
+  flex-direction: column;
+
+  .mem-info {
+    display: flex;
+    height: 28px;
+    justify-content: space-between;
+
+    .mem-info-left {
+      display: flex;
+      align-items: center;
+
+      p {
+        font-size: 12px;
+        line-height: 18px;
+        display: flex;
+
+        .label {
+          color: var(--common-color-font-secondary);
+          margin-right: 16px;
+        }
+        
+        .diff-img {
+          margin: 0 8px 0 0;
+        }
+
+        .text {
+          color: var(--common-color-font-primary);
+        }
+      }
+
+      p + p {
+        margin-left: 32px;
+      }
+    }
+  }
+
+  app-common-table {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+
+  ::ng-deep .ti3-table table tbody {
+    tr:nth-of-type(odd) td:first-child {
+      border-right: 1px solid var(--ti-table-border-bottom-color);
+    }
+    tr td:first-child {
+      padding: var(--ti-table-td-padding);
+    }
+    tr:nth-of-type(4n + 3), tr:nth-of-type(4n + 4) {
+      background-color: var(--ti-table-odd-tr-background-color) !important;
+    }
+  }
+}

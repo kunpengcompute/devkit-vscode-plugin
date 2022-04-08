@@ -1,0 +1,173 @@
+::ng-deep .vscode-dark {
+    --ti-brush-main-bg-color: #313131;
+    --ti-func-title-color: #e8e8e8;
+    --ti-time-title-color: #aaaaaa;
+    --ti-header-filter-bg-color: #2a2a2a;
+    --ti-td-echart-bg-color: #252525;
+
+    .brush-main {
+        box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.2),
+            0px 6px 16px 0px rgba(0, 0, 0, 0.32),
+            0px 3px 6px -4px rgba(0, 0, 0, 0.48);
+    }
+}
+
+::ng-deep .vscode-light {
+    --ti-brush-main-bg-color: #fff;
+    --ti-func-title-color: #222222;
+    --ti-time-title-color: #616161;
+    --ti-header-filter-bg-color: var(--ti-table-th-bg-color);
+    --ti-td-echart-bg-color: var(--ti-table-details-bg-color);
+
+    .brush-main {
+        box-shadow: 0px 9px 28px 8px rgba(255, 255, 255, 0.2),
+            0px 6px 16px 0px rgba(255, 255, 255, 0.32),
+            0px 3px 6px -4px rgba(255, 255, 255, 0.48);
+    }
+}
+
+.brush-main {
+    position: fixed;
+    bottom: 0px;
+    overflow: hidden;
+    height: 78px;
+    left: 0;
+    width: 100%;
+    padding: 0px 80px;
+    box-sizing: border-box;
+    background-color: var(--ti-brush-main-bg-color);
+    transition: height 0.2s;
+    z-index: 1003;
+
+    &.active {
+        height: 482px;
+        transition: height 0.2s;
+    }
+    &.active.tips {
+        height: 240px;
+        transition: height 0.2s;
+    }
+    .content1 {
+        margin-top: 16px;
+    }
+}
+
+.toggle-btn-top {
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    z-index: 99;
+    user-select: none;
+
+    img {
+        transition: all 100ms linear;
+        &.active {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.page-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    .function-title {
+        font-size: 20px;
+        color: var(--ti-func-title-color);
+        display: flex;
+        margin-right: 16px;
+    }
+    .time_title {
+        color: var(--ti-time-title-color);
+        font-size: 14px;
+    }
+}
+
+.expand-icon {
+    transition: 0.2s linear;
+    position: relative;
+    left: 13px;
+    top: 1px;
+}
+
+.expand-icon.active {
+    transform: rotate(90deg);
+}
+
+:host ::ng-deep .brush-main {
+    .ti3-table-fixed-head thead tr th,
+    .ti3-table-container tbody tr,
+    .ti3-table.table-func thead tr th {
+        box-shadow: inset 0px -1px 0px 0px #545454;
+        background-color: var(--ti-td-echart-bg-color);
+    }
+    .ti3-table-container tbody tr:last-child {
+        box-shadow: none;
+    }
+
+    .collapsed {
+        background-color: var(--ti-td-echart-bg-color) !important;
+        tbody tr {
+            background-color: var(--ti-td-echart-bg-color) !important;
+            &:hover {
+                background-color: #313131 !important;
+            }
+        }
+    }
+    .ti3-table
+        > .ti3-table-fixed-head
+        + .ti3-table-container::-webkit-scrollbar {
+        width: 6px !important;
+    }
+    .ti3-table > .ti3-table-fixed-head .ti3-table-fixed-head-filler {
+        background-color: var(--ti-header-filter-bg-color);
+    }
+
+    .ti3-table > .ti3-table-fixed-head + .ti3-table-container {
+        border-bottom: 1px solid #6e6e6e;
+    }
+
+    .ti3-table-container {
+        .tiDetailsTr > td {
+            padding: 0 0 0 40px;
+            box-shadow: inset 0px -1px 0px 0px #545454;
+            border-bottom: none;
+        }
+    }
+
+    .data_size {
+        height: 400px;
+        overflow-y: auto;
+        .ti3-table > .ti3-table-fixed-head + .ti3-table-container {
+            max-height: 300px;
+        }
+    }
+}
+
+::ng-deep .table_box {
+    position: relative;
+    top: 20px;
+    margin-bottom: 40px;
+    .close-detail-box {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        .ti3-icon-close {
+            font-size: 10px;
+            color: #aaaaaa;
+            &:hover {
+                color: #0067ff;
+            }
+        }
+        .info-text {
+            font-size: 14px;
+            color: #e8e8e8;
+            display: inline-block;
+            margin-left: 12px;
+        }
+    }
+}
+
+::ng-deep .collapsed app-disk-table .ti3-table {
+    border-left: 2px solid #0067ff;
+}

@@ -1,0 +1,28 @@
+<ng-template #inforDetail let-context='context'>
+  <ti-modal-header id="weakHeader">
+    <div class="header">
+      <span class="infor-title">
+        {{inforDetailKey}}
+      </span>
+      <span class="tip-close" (click)="context.dismiss()">
+        <img class="ti3-close" src="./assets/img/newSvg/close_icon.svg" />
+        <img class="ti3-close" src="./assets/img/newSvg/close_hover.svg">
+      </span>
+    </div>
+  </ti-modal-header>
+  <ti-modal-body id="addWeakBody">
+    <div class="set-body">
+      <form>
+        <textarea  class="set-textarea" [name]='4'  tiTextarea readonly="readonly"
+        [(ngModel)]="inforDetailValue">
+          </textarea>
+      </form>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer id="weakFooter">
+    <div class="infor-btn">
+      <button type="button" class="infor-button" tiButton
+        (click)="context.close()">{{i18n.common_term_operate_close}}</button>
+    </div>
+  </ti-modal-footer>
+</ng-template>

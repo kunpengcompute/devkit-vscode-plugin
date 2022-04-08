@@ -1,0 +1,291 @@
+<div *ngIf="chartType =='contrastSnapshot'" [appLoading]="isLoading">
+    <div class="btn-header">
+        <img (mouseenter)="onContrastHoverList('hover')"
+            (mouseleave)="onContrastHoverList()"
+            [src]="ContrastHover==='hover' ?
+            './assets/img/newSvg/back_hover.svg':
+            './assets/img/projects/back.svg'"
+            alt="" style="cursor: pointer;margin-right: 10px;"
+            (click)="goHistogram()"
+            [tiTip]="i18n.profileMemorydump.histogram.common_term_back" />
+        <span class="pro-title" >
+            <span class="pro_text">
+                <span class="pro_text_img"><img src="./assets/img/newSvg/Bsnap.svg" alt=""></span>
+                <span>{{i18n.squareBracketL}}{{snapshotB}}{{i18n.squareBracketR}}</span>
+            </span>
+            <span class="toggleSnapshot" (click)="toggleSnapshot()">
+                <img src="./assets/img/newSvg/toggle_clicked.svg" alt="">
+            </span>
+            <span class="pro_text">
+                <span class="pro_text_img"><img src="./assets/img/newSvg/Asnap.svg" alt=""></span>
+                <span>{{i18n.squareBracketL}}{{snapshotA}}{{i18n.squareBracketR}}{{i18n.profileMemorydump.snapShot.snapshotContrast}}</span>
+            </span>
+        </span>
+        <span class="formula_text">
+            <span>{{i18n.profileMemorydump.snapShot.formulaSnapshot}}</span>
+            <span class="formula_text_img">
+                <img src="./assets/img/newSvg/Bsnap.svg" alt="">
+            </span>
+            <span>{{i18n.profileMemorydump.snapShot.subtracted}}</span>
+            <span class="formula_text_img">
+                <img src="./assets/img/newSvg/Asnap.svg" alt="">
+            </span>
+        </span>
+    </div>
+    
+    <ti-table [(displayedData)]="displayed" [srcData]="srcData"
+        [columns]="columns" (stateUpdate)="stateUpdate($event)"
+        tiColsResizable>
+        <div class="ti3-table-fixed-head ">
+            <table class="table_header">
+                <thead>
+                    <tr >
+                        <th tiOverflow width="{{ columns[0].width }}"><ti-cell-text>{{ columns[0].title}}</ti-cell-text></th>
+                        <th tiOverflow width="{{ columns[1].width }}"  *ngIf="columns[1].show">
+                            <ti-cell-text>{{ columns[1].title}}</ti-cell-text>
+                            <span class="sortIcon" style="margin-left: 5px;">
+                                <span class="sortList" *ngFor="let item of
+                                currentNumOfInstanceSort;let idx= index"
+                                    (click)="getContrastSort(idx,'currentNumOfInstance')">
+                                    <span class="tableIcon" [ngClass]="{colorIcon: item.imgType !== 'sort'}"
+                                        *ngIf="item.show">
+                                        <ti-icon [name]="item.imgType"></ti-icon>
+                                    </span>
+                                </span>
+                            </span>
+                        </th>
+                        <th tiOverflow width="{{ columns[2].width }}"  *ngIf="columns[2].show">
+                            <ti-cell-text>{{ columns[2].title}}</ti-cell-text>
+                            <span class="sortIcon" style="margin-left: 5px;">
+                                <span class="sortList" *ngFor="let item of
+                                    instanceNumSort;let idx= index"
+                                    (click)="getContrastSort(idx,'instanceNum')">
+                                    <span class="tableIcon" [ngClass]="{colorIcon: item.imgType !== 'sort'}"
+                                        *ngIf="item.show">
+                                        <ti-icon [name]="item.imgType"></ti-icon>
+                                    </span>
+                                </span>
+                            </span>
+                        </th>
+                        <th tiOverflow width="{{ columns[3].width }}"  *ngIf="columns[3].show">
+                            <ti-cell-text>{{ columns[3].title}}</ti-cell-text>
+                            <span class="sortIcon" style="margin-left: 5px;">
+                                <span class="sortList" *ngFor="let item of
+                                currentRetainedHeapSort;let idx= index"
+                                    (click)="getContrastSort(idx,'currentRetainedHeap')">
+                                    <span class="tableIcon" [ngClass]="{colorIcon: item.imgType !== 'sort'}"
+                                        *ngIf="item.show">
+                                        <ti-icon [name]="item.imgType"></ti-icon>
+                                    </span>
+                                </span>
+                            </span>
+                        </th>
+                        <th tiOverflow width="{{ columns[4].width }}"  *ngIf="columns[4].show">
+                            <ti-cell-text>{{ columns[4].title}}</ti-cell-text>
+                            <span class="sortIcon" style="margin-left: 5px;">
+                                <span class="sortList" *ngFor="let item of
+                                    retainedHeapSort;let idx= index"
+                                    (click)="getContrastSort(idx,'retainedHeap')">
+                                    <span class="tableIcon" [ngClass]="{colorIcon: item.imgType !== 'sort'}"
+                                        *ngIf="item.show">
+                                        <ti-icon [name]="item.imgType"></ti-icon>
+                                    </span>
+                                </span>
+                            </span>
+                        </th>
+                        <th [tiColumnFixed]="columns[5].fixed"  width="{{ columns[5].width }}" not-resizable >
+                            <span>
+                                <ti-cols-toggle style="float:right;"
+                                [searchable]="searchable"
+                                [panelWidth]="panelWidth"
+                                [selectAll]="selectAll"
+                                [tipPosition]='tipPosition'
+                                [disabled]="disabled"
+                                (select)="onSelect($event)">
+                                </ti-cols-toggle>
+                            </span>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="ti3-table-container ti3-resize-wrapper">
+            <table>
+                <thead>
+                    <tr [ngStyle]="{'opacity': 0}">
+                        <ng-container *ngFor="let column of columns">
+                            <th  width="{{ column.width }}" *ngIf="column.show || column.show === undefined"></th>
+                        </ng-container>
+                    </tr>
+                </thead>
+                <tbody *ngIf="displayed.length> 0">
+                    <tr class="contrast_tr" *ngFor="let row of displayed;let idx=index">
+                        <td tiOverflow 
+                            tiTipPosition="right" 
+                            style="position:relative;overflow:visible;">
+                            <span class="first_td_text">
+                                <span (click)="snapshotMore(row,idx,$event)"
+                                class="blockCls">
+                                    <img [src]="showSnapshotMore === idx
+                                        ? './assets/img/newSvg/more_hover.svg':
+                                        './assets/img/newSvg/more_default.svg'" />
+                                </span>
+                                <div class="classNameDiv">
+                                    <p class='classNameSpan'>{{row.className}}</p>
+                                </div>
+                                <div *ngIf="showSnapshotMore === idx"
+                                    [ngClass]="hisSpans?'snapshot_div':'snapshot_divtop'">
+                                    <ul class="snapshot_more">
+                                        <li
+                                            (mouseenter)="OnHoverMore('shortCommonRoute')"
+                                            (mouseleave)="OnHoverMore('shortCommonRoute')"
+                                            class="snapshot_more_li"
+                                            [tiTip]='tipContent'
+                                            tiTipPosition='right-top'>
+                                            <span>
+                                                <img
+                                                src="./assets/img/newSvg/short_common_route.svg"
+                                                alt="" srcset="">
+                                            <span
+                                                class="snapshot_more_li_text">{{i18n.profileMemorydump.histogram.shortCommonRoute}}</span>
+                                            </span>
+                                            <span class="ti3-table-tree toggleIcon
+                                                expand-down">
+                                                <img
+                                                    src="./assets/img/projects/expand-down.png">
+                                            </span>
+                                        </li>
+                                        <li
+                                            (mouseenter)="OnHoverMore('histogramAllObject')"
+                                            (mouseleave)="OnHoverMore('histogramAllObject')"
+                                            class="snapshot_more_li"
+                                            [tiTip]='tipContent'
+                                            tiTipPosition='right-top'>
+                                            <span>
+                                                <img
+                                                src="./assets/img/newSvg/all_object.svg"
+                                                alt="" srcset="">
+                                            <span
+                                                class="snapshot_more_li_text">{{i18n.profileMemorydump.histogram.allObject}}</span>
+                                            </span>
+                                            <span class="ti3-table-tree toggleIcon
+                                                expand-down">
+                                                <img
+                                                    src="./assets/img/projects/expand-down.png">
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </span>
+                        </td>
+                        <td tiOverflow *ngIf="columns[1].show">{{row.currentNumOfInstance | separator}}</td>
+                        <td tiOverflow  style="min-width: 120px;" *ngIf="columns[2].show">
+                            <div style="width: 110px;display: inline-block;">
+                                <span *ngIf="row.changeInstanceNum>=0"
+                                    [ngStyle]="{
+                                    width: row.changeInstanceNum /
+                                    maxNumOfInstance
+                                    * 100 + 'px' }" style="
+                                    display: inline-block;
+                                    min-width: 1px;
+                                    max-width: 100px;
+                                    height: 10px;
+                                    background: #E85D54;
+                                    margin-right: 5px;">
+                                </span>
+                                <span *ngIf="row.changeInstanceNum<0"
+                                    [ngStyle]="{
+                                    width: -row.changeInstanceNum /
+                                    maxNumOfInstance
+                                    * 100 + 'px' }" style="display:
+                                    inline-block;
+                                    min-width: 1px;
+                                    max-width: 100px;
+                                    height: 10px;
+                                    background: #45CC90;
+                                    margin-right: 5px;">
+                                </span>
+                            </div>
+                            {{row.changeInstanceNum |
+                            separator}}({{row.changeInstancePercentage}}%)
+                        </td>
+                        <td tiOverflow *ngIf="columns[3].show">{{row.currentRetainedHeap | separator}}</td>
+                        <td tiOverflow *ngIf="columns[4].show">{{row.changeRetainedHeap | separator}}</td>
+                        <td  tiColumnFixed='right'  ></td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="displayed.length === 0">
+                    <tr class="noHover">
+                        <td tiColspan>
+                            <div class="noDate">
+                                <img class='newNoData' src="./assets/img/projects/noData.svg" />
+                                <p>{{i18n.common_term_task_nodata}}</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ti-pagination [(currentPage)]="currentPage" [pageSize]="pageSize"
+            [(totalNumber)]="totalNumber">
+        </ti-pagination>
+    </ti-table>
+</div>
+
+<!-- GC Roots -->
+<div class="short-common-route" *ngIf="chartType =='shortCommonRoute'">
+    <div class="table-content">
+        <app-histogram-tree [appType]="'snapshot'" [recordId]="moreSnapshotId"
+            [moreSnapshotNum]="moreSnapshotNum"
+            [snapShot]="false" [treeType]="'shortCommonRoute'"
+            [startBtnDisabled]="false"
+            [isDownload]="false" 
+            [rowData]="snapshotRowData"
+            [goBack]="'contrastSnapshot'"
+            (childOuter)="goContrastSnapshot($event)"
+            >
+        </app-histogram-tree>
+    </div>
+</div>
+
+<!-- app-histogram-allobject -->
+<div class="short-common-route" *ngIf="chartType =='histogramAllObject'">
+    <div class="btn-header">
+        <img (mouseenter)="onHoverAllobject('allobjectConSnapshotHover')"
+            (mouseleave)="onHoverAllobject()"
+            [src]="allobjectBackHover==='allobjectConSnapshotHover' ?
+            './assets/img/newSvg/back_hover.svg':'./assets/img/projects/back.svg'"
+            alt="" style="cursor: pointer;margin-right: 10px;"
+            (click)="goContrastSnapshot('contrastSnapshot')"
+            [tiTip]="i18n.profileMemorydump.histogram.common_term_back" />
+        <span class="pro-title" tiOverflow>
+            {{i18n.squareBracketL}}{{moreSnapshotDate}}{{i18n.squareBracketR}}{{i18n.profileMemorydump.histogram.allObjectLeft}}{{snapshotRowData.className}}{{i18n.profileMemorydump.histogram.allObjectRight}}</span>
+    </div>
+    <div class="table-content">
+        <app-histogram-allobject [appType]="'snapshot'"
+            [recordId]="moreSnapshotId" [snapShot]="false"
+            [startBtnDisabled]="false" [isDownload]="false"
+            [rowData]="snapshotRowData">
+        </app-histogram-allobject>
+    </div>
+</div>
+
+
+<ng-template #tipContent let-context='context'>
+    <div class="date_div">
+        <ul class="date_more">
+            <li
+                (click)="choiceSnapshot(currentHeapId,snapshotRowData.currentNumOfInstance,currentHeapLabel)"
+                class="date_more_li">
+                <img src="./assets/img/projects/fileIcon.svg" alt="" srcset="">
+                <span class="date_more_li_text">{{currentHeapLabel}}</span>
+            </li>
+            <li
+                (click)="choiceSnapshot(prevHeapId,snapshotRowData.prevNumOfInstance,prevHeapLabel)"
+                class="date_more_li">
+                <img src="./assets/img/projects/fileIcon.svg" alt="" srcset="">
+                <span class="date_more_li_text">{{prevHeapLabel}}</span>
+            </li>
+        </ul>
+    </div>
+</ng-template>

@@ -1,0 +1,134 @@
+.bubble-item {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: solid 1px transparent;
+  box-sizing: border-box;
+  overflow: hidden;
+  cursor: pointer;
+
+  &.circle-bubble {
+    border-radius: 8px;
+  }
+
+  &.idle-bubble-item {
+    box-shadow: 0px 0px 10px 0px var(--color-bubble-idle-box-shadow);
+    border-color: var(--color-bubble-idle-border);
+
+    .bubble-item-background {
+      background-color: var(--color-bubble-idle-background);
+    }
+  }
+
+  &.normal-bubble-item {
+    box-shadow: 0px 0px 10px 0px var(--color-bubble-normal-box-shadow);
+    border-color: var(--color-bubble-normal-border);
+
+    .bubble-item-background {
+      background-color: var(--color-bubble-normal-background);
+    }
+  }
+
+  &.busy-bubble-item {
+    box-shadow: 0px 0px 10px 0px var(--color-bubble-busy-box-shadow);
+    border-color: var(--color-bubble-busy-border);
+
+    .bubble-item-background {
+      background-color: var(--color-bubble-busy-background);
+    }
+  }
+
+  &.active,
+  &:hover {
+    border: 2px solid #0067ff;
+  }
+
+  .bubble-item-background {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+.triangle-border {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 8px 16px;
+  border-color: transparent;
+  position: relative;
+  cursor: pointer;
+
+  &.active,
+  &:hover {
+    border-bottom-color: #0067ff;
+  }
+
+  &.idle-bubble-item {
+    &:not(:hover) {
+      border-bottom-color: var(--color-bubble-idle-border);
+    }
+
+    .triangle-box-shadow {
+      box-shadow: 0px 0px 16px 6px var(--color-bubble-idle-box-shadow);
+    }
+
+    .triangle-background-opacity {
+      border-bottom-color: var(--color-bubble-idle-background);
+    }
+  }
+
+  &.normal-bubble-item {
+    &:not(:hover) {
+      border-bottom-color: var(--color-bubble-normal-border);
+    }
+
+    .triangle-box-shadow {
+      box-shadow: 0px 0px 16px 6px var(--color-bubble-normal-box-shadow);
+    }
+
+    .triangle-background-opacity {
+      border-bottom-color: var(--color-bubble-normal-background);
+    }
+  }
+
+  &.busy-bubble-item {
+    &:not(:hover) {
+      border-bottom-color: var(--color-bubble-busy-border);
+    }
+
+    .triangle-box-shadow {
+      box-shadow: 0px 0px 16px 6px var(--color-bubble-busy-box-shadow);
+    }
+
+    .triangle-background-opacity {
+      border-bottom-color: var(--color-bubble-busy-background);
+    }
+  }
+
+  .triangle-box-shadow {
+    position: absolute;
+    top: 10px;
+    left: 0;
+  }
+
+  .triangle-background {
+    border-style: solid;
+    border-width: 0 6px 12px;
+    border-color: transparent transparent var(--common-color-background-base);
+    position: absolute;
+    top: 3px;
+    left: -6px;
+  }
+  
+  .triangle-background-opacity {
+    border-style: solid;
+    border-width: 0 6px 12px;
+    border-color: transparent;
+    position: absolute;
+    top: 3px;
+    left: -6px;
+  }
+
+}
+

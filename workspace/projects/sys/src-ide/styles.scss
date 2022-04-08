@@ -1,0 +1,3063 @@
+/* You can add global styles to this file, and also import other style files */
+$themeColor: #0067ff;
+$switchOffColor: #9ea4b3;
+// table tr hover 颜色
+$tableTrHover: #313131;
+::ng-deep html,
+body {
+    min-width: 1062px !important;
+    overflow-x: auto !important;
+}
+html {
+    font-size: 100%;
+}
+
+body {
+    padding: 0 !important;
+    margin: 0;
+    font-size: 14px;
+    overflow: auto;
+    font-family: "huawei sans";
+}
+.preventScroll {
+    height: 100%;
+    overflow: hidden;
+}
+
+body * {
+    padding: 0px;
+}
+
+@media only screen and (max-width: 1580px) and (min-width: 1366px) {
+    html {
+        font-size: 75.7% !important;
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+        font-size: 13px;
+        font-family: "huawei sans";
+    }
+}
+
+@media only screen and (max-width: 1367px) {
+    html {
+        font-size: 75.7% !important;
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+        font-size: 12px;
+        font-size: 1rem;
+    }
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word;
+    word-break: break-word;
+    outline: none;
+}
+
+dl,
+ul,
+ol {
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    list-style: none;
+}
+
+table {
+    border: none;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+table > tr {
+    vertical-align: baseline;
+}
+
+.clear {
+    clear: both;
+    overflow: hidden;
+    height: 0px;
+    width: 0px;
+}
+
+.loading-box {
+    .spinner {
+        margin: 100px auto;
+        width: 50px;
+        height: 60px;
+        text-align: center;
+        font-size: 10px;
+    }
+
+    .spinner > div {
+        background-color: #0067ff;
+        height: 100%;
+        width: 6px;
+        display: inline-block;
+
+        -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+        animation: stretchdelay 1.2s infinite ease-in-out;
+    }
+
+    .spinner .rect2 {
+        -webkit-animation-delay: -1.1s;
+        animation-delay: -1.1s;
+    }
+
+    .spinner .rect3 {
+        -webkit-animation-delay: -1s;
+        animation-delay: -1s;
+    }
+
+    .spinner .rect4 {
+        -webkit-animation-delay: -0.9s;
+        animation-delay: -0.9s;
+    }
+
+    .spinner .rect5 {
+        -webkit-animation-delay: -0.8s;
+        animation-delay: -0.8s;
+    }
+
+    @-webkit-keyframes stretchdelay {
+        0%,
+        40%,
+        100% {
+            -webkit-transform: scaleY(0.4);
+        }
+
+        20% {
+            -webkit-transform: scaleY(1);
+        }
+    }
+
+    @keyframes stretchdelay {
+        0%,
+        40%,
+        100% {
+            transform: scaleY(0.4);
+            -webkit-transform: scaleY(0.4);
+        }
+
+        20% {
+            transform: scaleY(1);
+            -webkit-transform: scaleY(1);
+        }
+    }
+}
+
+.cl {
+    clear: both;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    zoom: 1;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+* html .clearfix {
+    height: 1%;
+}
+
+.clearfix:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    zoom: 1;
+}
+
+.mg-top20 {
+    margin-top: 20px;
+}
+
+.mg-left10 {
+    margin-left: 10px;
+}
+
+.main-container {
+    width: 100%;
+    height: 100%;
+}
+
+.main-title {
+    line-height: 58px;
+    height: 58px;
+    margin-left: 28px;
+
+    img {
+        vertical-align: middle;
+    }
+
+    span {
+        display: inline-block;
+        margin-left: 15px;
+    }
+
+    span:nth-of-type(1) {
+        font-size: 14px;
+        color: #9ea4b3;
+    }
+
+    span:nth-of-type(2) {
+        font-size: 20px;
+        color: #333333;
+    }
+}
+
+.main-content {
+    margin-right: 30px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+    background-color: #fff;
+    height: 100%;
+}
+
+.error-msg-tip {
+    color: #ff4c4c;
+}
+
+// 树形表格的icon样式
+.expand_icon {
+    display: inline-block;
+    border: 5px solid transparent;
+    border-top-color: #6c7280;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.not_expand_icon {
+    display: inline-block;
+    border: 5px solid transparent;
+    border-left-color: #6c7280;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+//提示框
+.ti3-tooltip {
+    max-height: 60%;
+    display: flex !important;
+    flex-direction: column;
+    border-radius: 2px !important;
+    background: var(--d-424242-l-ffffff) !important;
+    border: 0 !important;
+
+    .ti3-tooltip-content {
+        max-height: 80%;
+        overflow-y: auto;
+        border-top: rgba(255, 255, 255, 0.12);
+        color: var(--d-aaaaaa-l-616161) !important;
+    }
+}
+
+.ti3-tooltip-bottom::before,
+.ti3-tooltip-bottom::after {
+    background: var(--d-424242-l-ffffff) !important;
+    border: 0 !important;
+}
+
+.ti3-tooltip-top {
+    background: var(--d-424242-l-ffffff) !important;
+}
+
+.ti3-tooltip-top::before {
+    border-right: var(--tooltip-border) !important;
+    border-bottom: var(--tooltip-border) !important;
+    border-left: var(--tooltip-border) !important;
+    border-top: var(--tooltip-border) !important;
+    background: var(--d-424242-l-ffffff) !important;
+}
+
+.ti3-tooltip-top::after {
+    background: var(--d-424242-l-ffffff) !important;
+}
+
+.ti3-tooltip-bottom-right::before,
+.ti3-tooltip-top-left::before,
+.ti3-tooltip-top-right::before,
+.ti3-tooltip-right::before,
+.ti3-tooltip-left::before,
+.ti3-tooltip-right-top::before {
+    border-right: 1px solid #424242 !important;
+    border-bottom: 1px solid #424242 !important;
+    background: var(--ti3-tip-small-left) !important;
+    border-left: unset !important;
+    border-top: unset !important;
+}
+
+.ti3-tooltip-bottom-right::after,
+.ti3-tooltip-top-left::after,
+.ti3-tooltip-top-right::after,
+.ti3-tooltip-right::after,
+.ti3-tooltip-left::after,
+.ti3-tooltip-right-top::after {
+    background: var(--ti3-tip-small-left) !important;
+}
+
+// 重写tiny无数据时的样式
+
+.modal-dialog ti-formfield#select-modal table.ti3-form {
+    margin-bottom: 20px !important;
+}
+
+.modal-dialog ti-formfield#select-modal-java table.ti3-form {
+    margin-bottom: 20px !important;
+}
+
+.project-table .ti3-table > table > tbody > tr.ti3-table-nodata > td {
+    height: 100%;
+    height: 481px;
+    padding: 320px 0 0;
+}
+
+#detail-container.custemDetailContainer {
+    padding-top: 0;
+}
+#detail-container,
+.project-tabs ti-tabs .ti3-tab-content {
+    border-top: none !important;
+}
+
+#detail-container .project-tabs ti-tabs .ti3-tabs + .ti3-tab-slider {
+    border-bottom: none;
+}
+
+#detail-container ti-tabs li.ti3-tab-li ti-tab-header span {
+    color: var(--d-aaaaaa-l-616161);
+    border-bottom: none;
+
+    &:hover {
+        color: #0067ff !important;
+    }
+}
+
+#detail-container ti-tabs li.ti3-tab-active ti-tab-header span {
+    color: #0067ff;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #0067ff;
+
+    &:hover {
+        color: #267dff !important;
+        border-bottom: 2px solid #267dff;
+    }
+}
+
+#detail-container .ti3-tabs > li > a ti-tab-header {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+// 解决 tabs 第一个和最后一个页签不居中问题
+#detail-container .ti3-tabs > li:first-child > a ti-tab-header span:first-child::before {
+    content: "";
+}
+
+#detail-container .ti3-tabs > li:last-child > a ti-tab-header span::after {
+    content: "";
+}
+
+.project-tabs > ti-tabs > ul > li.ti3-tab-li {
+    padding-right: 20px;
+}
+
+.project-tabs > ti-tabs > ul {
+    padding-top: 10px;
+    height: 48px;
+}
+
+.project-tabs ti-tabs .ti3-tab-content {
+    border-top: none !important;
+}
+
+.project-tabs ti-tabs .ti3-tabs + .ti3-tab-slider {
+    border-bottom: none;
+}
+
+.project-tabs > ti-tabs > ul > li.ti3-tab-li ti-tab-header > span.tab-title {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 40px;
+    font-size: 16px;
+}
+
+.project-tabs > ti-tabs > ul > li.ti3-tab-li ti-tab-header > span.tab-close {
+    position: absolute;
+    right: -20px !important;
+    cursor: pointer;
+}
+
+.project-tabs ti-tabs li.ti3-tab-active {
+    background: #fff;
+    height: 48px;
+}
+
+.ti3-validate-icon {
+    margin-right: 5px !important;
+}
+
+.desc-content {
+    font-size: 12px;
+    color: #888888;
+}
+
+.mytip {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    text-align: center;
+    z-index: 112;
+}
+
+.tip-content {
+    display: inline-block;
+    pointer-events: all;
+    padding: 8px 20px;
+    max-width: 20vw;
+    text-align: center;
+    min-width: 8vw;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+    font-size: 0.9rem;
+    color: #222;
+}
+
+.tip-toggle {
+    vertical-align: bottom;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.tip-toggle.active {
+    transform: rotate(90deg);
+}
+
+.tip-detail {
+    display: none;
+    margin-top: 5px;
+}
+
+.tip-detail.active {
+    display: block;
+}
+
+.tip-icon {
+    width: 15px;
+    height: 15px;
+    vertical-align: bottom;
+    margin-right: 5px;
+    position: relative;
+    top: -1px;
+}
+
+::-webkit-scrollbar-track {
+    background: 0 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--vscode-scrollbarSlider-background) !important;
+    border: 0 !important;
+    border-radius: 5px !important;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: 0 0;
+}
+
+#test tr:nth-child(even) {
+    background: #fff;
+}
+
+#assembly tr:nth-child(even) {
+    background: #fff;
+}
+
+#assembly tr.active {
+    background: #ecec77;
+}
+
+#test tr.active {
+    background: #ecec77;
+}
+
+#assembly tr:hover {
+    background: $tableTrHover;
+}
+
+#test tr:hover {
+    background: $tableTrHover;
+}
+
+// 解决无数据时 hover 有背景色
+#assembly tr td:only-of-type {
+    background: #fff;
+}
+
+#test tr td:only-of-type {
+    background: #fff;
+}
+
+.ti3-table-tree {
+    display: inline-block;
+    transition: 0.5 ease-in-out;
+}
+
+.ti3-table-tree.active {
+    transform: rotate(90deg);
+}
+
+.ti3-table-tree img {
+    width: 12px;
+}
+
+#assembly .level1 {
+    padding-left: 20px;
+}
+
+.chen-nodata-td {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.chen-nodata-td div {
+    margin-top: 15px;
+}
+
+.line {
+    width: 150%;
+    height: 2px;
+    background: #ddd;
+}
+
+.title-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10%;
+    color: #ddd;
+    font-size: 0.8rem;
+}
+
+.table-y .title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.title-num {
+    text-align: right;
+}
+
+// loading
+.loading-box {
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    position: absolute;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 111111;
+}
+
+.loading {
+    z-index: 111111;
+    text-align: center;
+}
+
+.loading h2 {
+    color: #ccc;
+    margin: 0;
+    font: 0.8em verdana;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.loading span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0.6em;
+    height: 0.6em;
+    margin: 0.19em;
+    background: #007db6;
+    border-radius: 0.6em;
+    animation: loading 1s infinite alternate;
+}
+
+.loading span:nth-of-type(2) {
+    background: #008fb2;
+    animation-delay: 0.2s;
+}
+
+.loading span:nth-of-type(3) {
+    background: #009b9e;
+    animation-delay: 0.4s;
+}
+
+.loading span:nth-of-type(4) {
+    background: #00a77d;
+    animation-delay: 0.6s;
+}
+
+.loading span:nth-of-type(5) {
+    background: #00b247;
+    animation-delay: 0.8s;
+}
+
+.loading span:nth-of-type(6) {
+    background: #5ab027;
+    animation-delay: 1s;
+}
+
+.loading span:nth-of-type(7) {
+    background: #a0b61e;
+    animation-delay: 1.2s;
+}
+
+@keyframes loading {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+:host ::ng-deep #detail-container .content-container {
+    transform: translateX(0px);
+}
+
+.ti3-dropdown-option {
+    cursor: pointer !important;
+}
+
+.ti3-dropdown-option:hover {
+    background-color: #f5f6f7 !important;
+}
+
+:host ::ng-deep body .ti3-tooltip {
+    z-index: 1111111;
+}
+
+.d3-flame-graph g:hover {
+    stroke-width: 1 !important;
+    cursor: pointer !important;
+}
+
+.d3-flame-graph react:hover {
+    stroke-width: 1 !important;
+    cursor: pointer !important;
+}
+
+.d3-flame-graph foreignObject:hover {
+    stroke-width: 1 !important;
+    cursor: pointer !important;
+}
+
+.d3-flame-graph foreignObject > div:hover {
+    stroke-width: 1 !important;
+    cursor: pointer !important;
+}
+
+.d3-flame-graph-tip {
+    background-color: #fff;
+    border: 1px solid #333;
+
+    padding: 3px 7px 3px 7px;
+    min-width: 250px;
+    text-align: left;
+    color: #333;
+    z-index: 10;
+}
+
+.d3-flame-graph-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    line-height: 1;
+    color: white;
+    position: absolute;
+    pointer-events: none;
+}
+
+:host ::ng-deep .d3-container .d3-flame-graph-label {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.vscode-dark {
+    .d3-flame-graph-tip {
+        background-color: #424242 !important;
+        color: #aaaaaa !important;
+    }
+
+    .d3-flame-graph g:hover rect {
+        opacity: 1;
+    }
+
+    .d3-flame-graph g:hover text {
+        fill: black;
+    }
+
+    .d3-flame-graph g rect {
+        opacity: 0.6;
+    }
+
+    .d3-flame-graph g text {
+        fill: rgba(255, 255, 255, 0.6);
+    }
+
+    .d3-flame-graph rect {
+        stroke: none;
+    }
+}
+
+body .tree-box .ti3-icon-plus-square {
+    font-size: 16px !important;
+    vertical-align: middle;
+}
+
+body .tree-box .ti3-icon-minus-square {
+    font-size: 16px !important;
+    vertical-align: middle;
+}
+
+body .ti3-tab-slider {
+    display: none;
+}
+
+.ti3-tree-content-box i {
+    color: #6c7280;
+}
+
+.ti3-tree-content-box i:hover {
+    color: $themeColor;
+}
+
+.ti3-tab-content {
+    border-top: none !important;
+}
+
+:host ::ng-deep body .missStatisticsTabs .ti3-tab-slider {
+    margin-left: 0px !important;
+}
+
+body .tab-content .ti3-tabs-container {
+    overflow: hidden;
+}
+
+// 按钮全局样式
+// 常态
+.ng-valid{
+    .ti3-switch.ti3-switch-on .ti3-switch-track {
+      border: 1px solid var(--ti-switch-rectangle-on-bg) !important;
+      background: var(--ti-switch-rectangle-on-bg) !important;
+    }
+    .ti3-switch.ti3-switch-on .ti3-switch-pointer {
+        border: 1px solid var(--ti-switch-round-on-bg) !important;
+        background: var(--ti-switch-round-on-bg) !important;
+    }
+    .ti3-switch.ti3-switch-off .ti3-switch-track {
+      height: 20px !important;
+      border-radius: 20px !important;
+      border-color: var(--ti-switch-rectangle-off-bg) !important;
+      background: var(--ti-switch-rectangle-off-bg) !important;
+    }
+    .ti3-switch.ti3-switch-off .ti3-switch-pointer {
+        border: 1px solid var(--ti-switch-round-off-bg) !important;
+        background: var(--ti-switch-round-off-bg) !important;
+    }
+}
+  // 禁用态
+.ti3-switch.ti3-switch-on .ti3-switch-track,
+.ti3-switch.ti3-switch-off .ti3-switch-track {
+    top: 0 !important;
+    border: 1px solid var(--ti-switch-disable-rectangle-bg) !important;
+    background: var(--ti-switch-disable-rectangle-bg) !important;
+}
+.ti3-switch.ti3-switch-on .ti3-switch-pointer,
+.ti3-switch.ti3-switch-off .ti3-switch-pointer {
+    border: 1px solid var(--ti-switch-disable-round-bg) !important;
+    background: var(--ti-switch-disable-round-bg) !important;
+}
+
+body input[type="checkbox"][tiCheckbox]:not([disabled]):checked + .ti3-checkbox .ti3-checkbox-skin,
+input[type="checkbox"][tiCheckbox]:not([disabled]):checked + .ti3-checkbox .ti3-checkbox-skin:focus {
+    border-color: $themeColor !important;
+    background-color: $themeColor !important;
+    color: #fff;
+}
+
+// ******错误提示******
+body .ti3-unifyvalid-error-container {
+    min-height: 24px;
+    line-height: 16px;
+    padding-top: 5px;
+    font-size: 12px;
+    margin: 4px 0;
+    color: var(--ti-valid-error-color);
+    display: flex;
+    // 错误提示图标
+    .ti3-error-icon-bg {
+        background-color: var(--ti-valid-error-color);
+        border-radius: 50%;
+        flex-shrink: 0;
+        height: 16px;
+        margin-right: var(--ti-common-space-2x);
+        text-align: center;
+        width: 16px;
+        .ti3-error-icon {
+            color: var(--ti-common-color-text-white);
+            font-size: var(--ti-common-font-size-base);
+        }
+    }
+}
+
+.ti3-validate-icon {
+    color: #ff4c4c;
+    margin-right: 10px;
+    font-size: 16px;
+}
+.ti3-icon {
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+//单行输入框disable
+[tiText][disabled]:not(.ti3-spinner-input):disabled {
+    color: var(--d-616161-l-cccccc);
+    border: 1px solid var(--d-616161-l-cccccc);
+    background: var(--d-313131-l-f5f5f5);
+}
+
+.ti_input_ip_container_ipv6[disabled]{
+    border-color: var(--ti-input-border-color) !important;
+}
+.textarea-params:disabled {
+    color: #616161 !important;
+    border: 1px solid #616161 !important;
+    background: #313131 !important;
+}
+
+.ti3-compnent-container-border:disabled {
+    color: #b8becc !important;
+    border: 1px solid #e6ebf5 !important;
+    background: #e6ebf5 !important;
+}
+
+[tiText].ti3-text-input-noborder {
+    border: 0 !important;
+}
+
+ti-spinner {
+    .ti3-icon {
+        height: 26px;
+    }
+    .ti3-spinner-input {
+        height: 26px !important;
+    }
+}
+
+// 按钮样式 start
+.ti3-btn-default[disabled],
+[tiButton][disabled] {
+    color: #616161 !important;
+    border: 1px solid #616161 !important;
+    background: #313131 !important;
+    color: var(--button-disable-color) !important;
+    border: var(--button-disable-border) !important;
+    background: var(--button-disable-bg) !important;
+}
+
+.ti3-btn-default:not([disabled]):focus,
+[tiButton]:not([disabled]):focus {
+    color: unset !important;
+    border-color: unset !important;
+}
+
+.ti3-btn-default:not([disabled]):active,
+[tiButton]:not([disabled]):active {
+    color: #0057d9 !important;
+    border-color: #0057d9 !important;
+}
+
+.ti3-btn-default:not([disabled]):hover,
+[tiButton]:not([disabled]):hover {
+    border-color: #267dff !important;
+}
+
+.ti3-btn-primary:hover {
+    background: #267dff !important;
+    border-color: #267dff !important;
+}
+
+.ti3-btn-primary:not([disabled]):focus,
+.ti3-btn-primary:not([disabled]):active {
+    color: #e8e8e8 !important;
+    border: 1px solid #0057d9 !important;
+    background: #0057d9 !important;
+}
+
+.ti3-btn-primary[disabled] {
+    color: var(--g-color-input-disabled) !important;
+    border: 1px solid var(--g-color-input-disabled) !important;
+    background: var(--g-color-input-bg-disabled) !important;
+}
+
+.ti3-btn-danger {
+    color: #fff !important;
+    background: #6c92fa !important;
+    border-color: #6c92fa !important;
+}
+
+.ti3-btn-danger:not([disabled]):hover {
+    color: #fff !important;
+    background: #6c92fa !important;
+    border-color: #6c92fa !important;
+}
+
+.ti3-btn-danger:not([disabled]):focus,
+.ti3-btn-danger:not([disabled]):active {
+    box-shadow: none;
+    color: #fff !important;
+    background: #6c92fa !important;
+    border-color: #6c92fa !important;
+}
+
+// 按钮样式 end
+
+// 日期时间组件 当前天和近几天 背景颜色修改 start
+.ti3-date-current-day,
+.ti3-date-default-day:hover {
+    background-color: $themeColor !important;
+}
+
+.ti3-dateRange-select-day {
+    background: rgba(108, 146, 250, 0.1) !important;
+}
+
+.ti3-date-today {
+    background: rgba(108, 146, 250, 0.2) !important;
+    border: 1px dashed $themeColor !important;
+}
+
+.ti3-date-current-month,
+.ti3-date-current-year {
+    background-color: $themeColor !important;
+}
+
+.ti3-date-default-month:hover,
+.ti3-date-default-year:hover {
+    background-color: rgba(108, 146, 250, 0.2) !important;
+}
+
+.ti3-date-picker-year-month:hover {
+    color: $themeColor !important;
+}
+
+.dataTab .ti3-date-range-input-container {
+    border-radius: 2px !important;
+
+    .ti3-date-dominator-container {
+        border-radius: 2px !important;
+    }
+}
+
+.oncetimeTab .ti3-datetime-input-container {
+    border: 1px solid #888888 !important;
+}
+
+.oncetimeTab .ti3-datetime-input-container:hover {
+    border: 1px solid $themeColor !important;
+}
+
+.ti3-date-dominator-container .ti3-date-show {
+    font-size: 12px !important;
+}
+
+.oncetimeTab .ti3-datetime-input-container .ti3-date-dominator-container {
+    margin-top: 0px !important;
+}
+
+.oncetimeTab .ti3-date-dominator-container .ti3-date-show {
+    line-height: 28px !important;
+}
+
+.duration-time[_ngcontent-lyt-c31]
+    > .dataTab[_ngcontent-lyt-c31]
+    .ti3-date-range-input-container:hover
+    .ti3-date-dominator-container {
+    border: 1px solid #888888 !important;
+}
+
+// 日期时间组件 end
+
+// radio
+input[type="radio"][tiRadio]:not(:disabled):checked + .ti3-radio .ti3-radio-skin {
+    border-color: $themeColor !important;
+    background-color: var(--vscode-editor-background) !important;
+}
+
+input[type="radio"][tiRadio]:not(:disabled):not(:checked) + .ti3-radio .ti3-radio-skin:hover {
+    border-color: $themeColor !important;
+}
+
+input[type="radio"][tiRadio]:not(:disabled):checked + .ti3-radio .ti3-radio-skin::after {
+    background-color: $themeColor !important;
+    opacity: 1;
+}
+
+input[type="radio"][tiRadio] + .ti3-radio .ti3-radio-skin {
+    background-color: var(--vscode-editor-background) !important;
+}
+
+input[type="radio"][tiRadio] + .ti3-radio .ti3-radio-label {
+    color: var(--d-e8e8e8-l-222222) !important;
+}
+
+.ti3-dropdown-option-hover {
+    color: $themeColor !important;
+}
+
+.ti3-dropdown-option-selected {
+    color: $themeColor !important;
+}
+
+.ti3-page-container .ti3-pag-page.active {
+    color: #ffffff !important;
+    background-color: #0067ff !important;
+    font-weight: unset !important;
+}
+
+.ti3-page-container .ti3-pag-page:not(.ellipse):hover,
+.ti3-page-container .ti3-pag-page.simple:hover {
+    background-color: #0067ff !important;
+    color: #ffffff !important;
+}
+
+.ti3-dropdown-container-border {
+    border: 1px solid $themeColor !important;
+}
+
+.ti3-compnent-container-border:not([disabled])[tiFocused],
+ti-pagination.ti3-page-container .ti3-pag-prev:not(.disabled):active,
+ti-pagination.ti3-page-container .ti3-pag-next:not(.disabled):active {
+    color: $themeColor !important;
+}
+
+ti-searchbox-notsearch.ti3-searchbox-container:not([disabled])[tiFocused],
+ti-searchbox.ti3-searchbox-container:not([disabled])[tiFocused] {
+    border-color: $themeColor !important;
+}
+
+ti-tag.ti3-multiselect-box-cell {
+    background-color: var(--ti-tag-select) !important;
+    color: #aaaaaa !important;
+    height: 22px !important;
+    line-height: 22px !important;
+    margin-top: 3px !important;
+}
+
+ti-tag.ti3-multiselect-box-cell:hover {
+    border: 1px solid $themeColor;
+}
+
+// 表格样式修改
+.ti3-table > .ti3-resize-wrapper > table > thead > tr > th,
+.ti3-table > .ti3-table-container > table > thead > tr > th,
+.ti3-table > .ti3-table-fixed-head > table > thead > tr > th,
+.ti3-table > table > thead > tr > th {
+    background-color: var(--d-2a2a2a-l-f5f9ff) !important;
+    border-bottom: none !important;
+    color: var(--ti-table-th-text-color) !important;
+    font-size: 12px;
+}
+
+.ti3-table,
+.ti3-table > .ti3-resize-wrapper,
+.ti3-table > .ti3-table-container {
+    & > table > tbody > .ti3-details-tr > td > .ti3-table-detail-container {
+        padding: 0px !important;
+    }
+}
+
+.ti3-table > .ti3-resize-wrapper > table > tbody > tr.ti3-odd-tr:not(.ti3-selected-tr),
+.ti3-table
+    > .ti3-resize-wrapper
+    > table
+    > tbody
+    > tr:nth-child(odd):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr),
+.ti3-table > .ti3-table-container > table > tbody > tr.ti3-odd-tr:not(.ti3-selected-tr),
+.ti3-table
+    > .ti3-table-container
+    > table
+    > tbody
+    > tr:nth-child(odd):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr),
+.ti3-table > .ti3-table-fixed-head > table > tbody > tr.ti3-odd-tr:not(.ti3-selected-tr),
+.ti3-table
+    > .ti3-table-fixed-head
+    > table
+    > tbody
+    > tr:nth-child(odd):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr),
+.ti3-table > table > tbody > tr.ti3-odd-tr:not(.ti3-selected-tr),
+.ti3-table
+    > table
+    > tbody
+    > tr:nth-child(odd):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr) {
+    background: var(--d-161616-l-ffffff);
+}
+
+.ti3-table > .ti3-resize-wrapper > table > tbody > tr.ti3-even-tr:not(.ti3-selected-tr),
+.ti3-table
+    > .ti3-resize-wrapper
+    > table
+    > tbody
+    > tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr),
+.ti3-table > .ti3-table-container > table > tbody > tr.ti3-even-tr:not(.ti3-selected-tr),
+.ti3-table
+    > .ti3-table-container
+    > table
+    > tbody
+    > tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr),
+.ti3-table > .ti3-table-fixed-head > table > tbody > tr.ti3-even-tr:not(.ti3-selected-tr),
+.ti3-table
+    > .ti3-table-fixed-head
+    > table
+    > tbody
+    > tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr),
+.ti3-table > table > tbody > tr.ti3-even-tr:not(.ti3-selected-tr),
+.ti3-table
+    > table
+    > tbody
+    > tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr) {
+    background: var(--d-161616-l-ffffff);
+}
+
+// 偶数行
+.ti3-table > .ti3-resize-wrapper > table > tbody > tr.ti3-even-tr:not(.ti3-selected-tr):hover,
+.ti3-table
+    > .ti3-resize-wrapper
+    > table
+    > tbody
+    > tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover,
+.ti3-table > .ti3-table-container > table > tbody > tr.ti3-even-tr:not(.ti3-selected-tr):hover,
+.ti3-table
+    > .ti3-table-container
+    > table
+    > tbody
+    > tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover,
+.ti3-table > .ti3-table-fixed-head > table > tbody > tr.ti3-even-tr:not(.ti3-selected-tr):hover,
+.ti3-table
+    > .ti3-table-fixed-head
+    > table
+    > tbody
+    > tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover,
+.ti3-table > table > tbody > tr.ti3-even-tr:not(.ti3-selected-tr):hover,
+.ti3-table
+    > table
+    > tbody
+    > tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover {
+    background: var(--d-2d2d2d-l-f5f9ff) !important;
+}
+
+// 奇数行
+.ti3-table > .ti3-resize-wrapper > table > tbody > tr.ti3-odd-tr:not(.ti3-selected-tr):hover,
+.ti3-table
+    > .ti3-resize-wrapper
+    > table
+    > tbody
+    > tr:nth-child(odd):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover,
+.ti3-table > .ti3-table-container > table > tbody > tr.ti3-odd-tr:not(.ti3-selected-tr):hover,
+.ti3-table
+    > .ti3-table-container
+    > table
+    > tbody
+    > tr:nth-child(odd):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover,
+.ti3-table > .ti3-table-fixed-head > table > tbody > tr.ti3-odd-tr:not(.ti3-selected-tr):hover,
+.ti3-table
+    > .ti3-table-fixed-head
+    > table
+    > tbody
+    > tr:nth-child(odd):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover,
+.ti3-table > table > tbody > tr.ti3-odd-tr:not(.ti3-selected-tr):hover,
+.ti3-table
+    > table
+    > tbody
+    > tr:nth-child(odd):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover {
+    background: var(--d-313131-l-f5f9ff) !important;
+}
+
+// 全局的表格样式，与别的地方有冲突，所以加个类名防止影响别的地方
+.ti3-table.custemTable {
+    @mixin _thead {
+        > thead {
+            > tr {
+                > th {
+                    border-bottom: 1px solid var(--d-545454-l-e1e6ee);
+
+                    &:not(:last-child)::after {
+                        background: var(--d-4b4b4b-l-e2e2e2);
+                    }
+                }
+            }
+        }
+    }
+
+    @mixin _tbody {
+        > tbody {
+            > tr {
+                &:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover,
+                &:nth-child(odd):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover {
+                    background: var(--td-hover-bg) !important;
+
+                    td {
+                        background-color: var(--d-2a2a2a-l-f5f9ff) !important;
+                    }
+                }
+
+                > td {
+                    border-bottom: 1px solid var(--d-545454-l-e1e6ee);
+                    color: var(--d-4b4b4b-e2e2e2);
+                    font-size: 12px;
+
+                    > .tdContent {
+                        display: flex;
+
+                        > .angleBtn {
+                            flex-shrink: 0;
+                        }
+
+                        > .overflowEllipsis {
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+                    }
+
+                    // 展开图标
+                    .angleBtn {
+                        padding: 0;
+                        background: transparent;
+                        border: 0;
+                        outline: none;
+                        cursor: pointer;
+                        margin-right: 6px;
+
+                        // 树表展开图标
+                        .expandIcon {
+                            transition: 0.5 linear;
+
+                            &.active {
+                                transform: rotate(90deg);
+                            }
+                        }
+
+                        // 详情展开图标
+                        .ti3-toggle-details {
+                            & > .ti3-icon-angle-right {
+                                transform: rotate(180deg);
+
+                                &::before {
+                                    content: "" !important;
+                                }
+
+                                &.ti3-icon-angle-transform-up-thin {
+                                    transform: rotate(270deg);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // 树表、表格嵌套、展开详情缩进【统一使用indentLine缩进，因为可能存在多层缩进】
+                &.childTr {
+                    > td {
+                        background: var(--d-222-l-fff);
+
+                        &:first-child {
+                            position: relative;
+                            border-bottom: 0;
+                            padding: 0;
+
+                            & > .ti3-table-detail-container {
+                                margin: 0;
+                                padding: 0;
+                                border-left: 0;
+                                background-color: var(--d-161616-l-ffffff);
+                            }
+
+                            > .indentLine,
+                            & > .ti3-table-detail-container > .indentLine {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 38px;
+                                height: 100%;
+                                background: var(--d-252525-l-f5f9ff);
+                                border-right: 2px solid #0067ff;
+                            }
+
+                            > .tdContent {
+                                padding: 10px 10px;
+                                border-bottom: 1px solid var(--d-545454-l-e1e6ee);
+                            }
+                        }
+                    }
+                }
+
+                &:last-child {
+                    &.childTr {
+                        > td {
+                            &:first-child {
+                                > .tdContent {
+                                    border-bottom: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    > table {
+        @include _thead;
+
+        @include _tbody;
+    }
+
+    // 固定表头
+    > .ti3-table-fixed-head {
+        > table {
+            @include _thead;
+        }
+
+        // tbody的滚动条在thead的占位
+        > .ti3-table-fixed-head-filler {
+            background: var(--d-2a2a2a-l-f5f9ff) !important;
+        }
+    }
+
+    > .ti3-table-container {
+        border-bottom: 1px solid var(--d-545454-l-e1e6ee) !important;
+
+        > table {
+            > thead {
+                > tr {
+                    > th {
+                        border-bottom: 0;
+                    }
+                }
+            }
+
+            @include _tbody;
+        }
+    }
+}
+// 外层有task-content-box，padding样式覆盖下面的padding
+.task-content-box #detail-container.customContainer{
+    padding: 0;
+}
+// 外层没有task-content-box，微架构、miss事件、伪共享使用padding30px
+#detail-container.customContainer {
+    padding: 32px 0 0 32px;
+}
+
+// detail-container的全局样式，加个类名防止影响别的地方
+#detail-container.customContainer {
+    margin: 0 !important;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    > .ti3-tabs-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        > .ti3-tab-content {
+            flex: 1;
+            overflow: hidden;
+
+            > .ti3-tab-pane {
+                height: 100%;
+                padding-top: 20px;
+                box-sizing: border-box;
+
+                > .content-container {
+                    height: 100%;
+                    opacity: 0;
+                    overflow: hidden;
+
+                    &.showDetail {
+                        opacity: 1 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// tab的全局样式，加个类名防止影响别的地方
+#detail-container {
+    // 层级盖不过，加个父类名
+    .customTabsContainer {
+        .ti3-tabs {
+            > li {
+                margin: 0;
+
+                &:not(:first-child) {
+                    margin-left: 15px;
+                }
+
+                &:not(:last-child) {
+                    margin-right: 15px;
+                }
+
+                a {
+                    padding: 10px 0 !important;
+
+                    ti-tab-header {
+                        margin-left: 0 !important;
+                        margin-right: 0 !important;
+                    }
+                }
+            }
+        }
+
+        &.withSplitLine {
+            .ti3-tabs {
+                > li:not(:first-child) a ti-tab-header span {
+                    position: relative;
+
+                    &::before {
+                        content: "";
+                        width: 1px;
+                        height: 10px;
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        left: -15px;
+                        background-color: #888;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 选中对勾为蓝色
+.ti3-dropdown-option .ti3-multi-select-checkbox-selected {
+    background-color: #0067ff !important;
+    color: #ffffff !important;
+    border: 0 !important;
+}
+
+.ti3-icon-plus-square,
+.ti3-tree-container .ti3-icon-minus-square {
+    font-size: 14px !important;
+}
+
+.ti3-table > table > tbody > tr > td .ti3-table-tree .ti3-icon-minus-square:hover,
+.ti3-table > table > tbody > tr > td .ti3-table-tree .ti3-icon-plus-square:hover {
+    color: $themeColor !important;
+}
+
+.hover-line span:hover {
+    border-bottom: 1px solid;
+}
+
+.system-content table tbody tr:hover {
+    background: $tableTrHover;
+}
+
+.nodata img {
+    width: 97px !important;
+}
+
+.ti3-date-default-day {
+    font-size: 12px !important;
+    background: var(--d-252526-l-ffffff) !important;
+    color: var(--d-e8e8e8-l-222222);
+    border: 0 !important;
+
+    &:hover {
+        font-size: 12px !important;
+        background: var(--ti-datetime-beside-day-bg-color-hover) !important;
+        border: 0 !important;
+        color: #e8e8e8;
+    }
+}
+
+.ti3-date-today {
+    font-size: 12px !important;
+    background: var(--d-252526-l-ffffff) !important;
+    color: #0067ff;
+    border: 0 !important;
+
+    &:hover {
+        color: #e8e8e8 !important;
+        background: #0067ff !important;
+    }
+
+    &::after {
+        display: none;
+    }
+}
+
+.ti3-date-current-day {
+    font-size: 12px !important;
+    color: #e8e8e8 !important;
+    background: #0067ff !important;
+    border: 0 !important;
+}
+
+.ti3-date-disable-day {
+    font-size: 12px !important;
+    background-color: var(--d-252526-l-ffffff) !important;
+    color: var(--d-616161-l-cccccc) !important;
+
+    &:hover {
+        font-size: 12px !important;
+        background-color: var(--d-313131-l-ffffff) !important;
+        color: var(--d-616161-l-cccccc) !important;
+    }
+}
+
+.ti3-dateRange-select-day {
+    font-size: 12px !important;
+    background-color: var(--d-313131ff-l-6c92fa33) !important;
+    color: var(--d-e8e8e8-l-222222) !important;
+
+    &:hover {
+        background-color: #0067ff !important;
+    }
+}
+
+.ti3-date-picker-container {
+    th {
+        background-color: var(--d-252526-l-ffffff) !important;
+        color: #616161 !important;
+        font-size: 12px !important;
+    }
+}
+
+ti-time.ti3-time-container {
+    border: 1px solid #888888 !important;
+    box-shadow: none !important;
+    background: none !important;
+
+    &:hover {
+        border-color: #0067ff !important;
+    }
+
+    .ti3-time-input {
+        border: none !important;
+        height: 100% !important;
+        background-color: var(--d-252526-l-ffffff) !important;
+    }
+
+    .ti3-time-colon {
+        color: var(--g-color-input) !important;
+    }
+}
+
+.ti3-date-picker-header {
+    font-size: 12px;
+}
+
+.ti3-datetime-btn-picker-footer,
+.ti3-date-range-picker-footer {
+    border-top: 1px solid var(--d-4b4b4b-l-e2e2e2) !important;
+}
+
+//周期  时间表
+.ti3-date-range-picker {
+    --ti-datetime-disable-day-bg-color: #252526;
+    --ti-common-color-line-normal: #616161;
+    --ti-datetime-default-day-color: #e8e8e8;
+    border: 1px solid #0067ff !important;
+    background-color: #252526 !important;
+    .ti3-date-edit-container {
+        .ti3-date-range-splitline {
+            padding: 0 4px;
+        }
+        .ti3-date-range-edit {
+            --ti-input-border-color-focus: #0057d9;
+        }
+    }
+    //时间表
+    .ti3-date-range-begin-container,
+    .ti3-date-range-end-container {
+        .ti3-date-range-begin-end-text {
+            //开始时间
+            color: var(--d-e8e8e8-l-222222) !important;
+            font-size: 12px !important;
+            margin-top: 10px !important;
+            padding-left: 0 !important;
+        }
+
+        ti-date-panel {
+            .ti3-date-picker-header {
+                //显示年月
+                .ti3-icon-angle-left:before,
+                .ti3-icon-angle-right:before {
+                    color: #aaaaaa !important;
+                }
+
+                .ti3-icon-angle-left:hover:before,
+                .ti3-icon-angle-right:hover:before {
+                    color: #0067ff !important;
+                }
+
+                .ti3-header-year-month-picker {
+                    .ti3-date-picker-year-month {
+                        color: var(--d-e8e8e8-l-222222) !important;
+                        background-color: var(--d-252526-l-ffffff) !important;
+                        border: 0 !important;
+                    }
+                }
+            }
+
+            section {
+                //日历日盘
+                table {
+                    background-color: #252526 !important;
+
+                    thead {
+                        tr {
+                            th {
+                                background-color: #252526 !important;
+                                color: #616161 !important;
+                                font-size: 12px !important;
+                            }
+                        }
+                    }
+
+                    tbody {
+                        tr {
+                            td {
+                                // 天
+                                .ti3-date-disable-day,
+                                .ti3-date-beside-day,
+                                .ti3-date-disable-month,
+                                .ti3-date-disable-year {
+                                    font-size: 12px !important;
+                                    background-color: #252526 !important;
+                                    color: #616161 !important;
+                                }
+
+                                .ti3-dateRange-select-day {
+                                    font-size: 12px !important;
+                                    background-color: #313131 !important;
+                                    color: #e8e8e8 !important;
+                                }
+
+                                .ti3-dateRange-select-day:hover {
+                                    background-color: #0067ff !important;
+                                }
+                            }
+                        }
+                    }
+
+                    tr {
+                        td {
+                            // 年月
+                            .ti3-date-current-year,
+                            .ti3-date-current-month {
+                                font-size: 12px !important;
+                                background-color: #0067ff !important;
+                                color: #e8e8e8 !important;
+                            }
+
+                            .ti3-date-disable-year,
+                            .ti3-date-disable-month,
+                            .ti3-date-preNext-year {
+                                font-size: 12px !important;
+                                background-color: #252526 !important;
+                                color: #616161 !important;
+                            }
+
+                            .ti3-date-default-year,
+                            .ti3-date-default-month {
+                                font-size: 12px !important;
+                                background: #252526 !important;
+                                color: #e8e8e8;
+                            }
+
+                            .ti3-date-default-year:hover,
+                            .ti3-date-default-month:hover {
+                                font-size: 12px !important;
+                                background: #313131 !important;
+                                color: #e8e8e8;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .ti3-date-edit-container {
+            .ng-pristine {
+                input {
+                    box-shadow: 0 0 0 0 !important;
+                    border: 1px solid #888888 !important;
+                    width: 115px !important;
+                    height: 28px !important;
+                    line-height: 28px !important;
+                    color: var(--d-cccccc-l-222222) !important;
+                    background-color: var(--d-252526-l-ffffff) !important;
+                }
+
+                input:hover {
+                    border: 1px solid #0067ff !important;
+                }
+            }
+        }
+    }
+
+    .ti3-date-picker-footer-right {
+        --ti-common-color-line-dividing: #4b4b4b;
+        --ti-button-default-bg-color-active: var(--d-313131-l-ffffff);
+        button {
+            width: 56px !important;
+            height: 28px !important;
+            background-color: var(--d-313131-l-ffffff);
+            font-size: 12px !important;
+            color: var(--d-e8e8e8-l-222222);
+            padding: 0 !important;
+            line-height: 24px !important;
+            border: 1px solid var(--d-dddddd-l-979797);
+        }
+
+        button:nth-child(1) {
+            margin-right: 8px !important;
+        }
+
+        button:hover {
+            border: 1px solid #267dff;
+            color: #267dff;
+            animation: none;
+        }
+
+        button:focus {
+            border: 1px solid #0057d9;
+            color: #0057d9;
+        }
+    }
+}
+
+//单次 时间表
+.ti3-datetime-picker {
+    border: 1px solid #0067ff !important;
+    background-color: #252526 !important;
+    ti-date-edit {
+        --ti-input-border-color-focus: #0057d9;
+    }
+    ti-date-panel {
+        .ti3-date-picker-header {
+            .ti3-header-year-month-picker {
+                .ti3-date-picker-year-month {
+                    color: var(--d-e8e8e8-l-222222) !important;
+                    background-color: var(--d-252526-l-ffffff) !important;
+                    border: 0 !important;
+                }
+            }
+        }
+
+        section {
+            //日历盘
+            .ti3-date-picker-container,
+            .ti3-date-picker-table {
+                background-color: #252526 !important;
+
+                thead {
+                    tr {
+                        th {
+                            background-color: #252526 !important;
+                            color: #616161 !important;
+                            font-size: 12px !important;
+                        }
+                    }
+                }
+
+                tr {
+                    td {
+                        .ti3-date-disable-month,
+                        .ti3-date-disable-year,
+                        .ti3-date-preNext-year {
+                            font-size: 12px !important;
+                            background-color: #252526 !important;
+                            color: #616161 !important;
+                        }
+
+                        .ti3-date-current-year,
+                        .ti3-date-current-month {
+                            //选中的年月
+                            background-color: #0067ff;
+                            color: #e8e8e8;
+                            font-size: 12px;
+                        }
+
+                        .ti3-date-default-year,
+                        .ti3-date-default-month {
+                            background-color: #252526;
+                            color: #e8e8e8;
+                            font-size: 12px;
+                        }
+
+                        .ti3-date-default-year:hover,
+                        .ti3-date-default-month:hover,
+                        .ti3-date-preNext-year:hover {
+                            background-color: #313131 !important;
+                            color: #e8e8e8;
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+
+        section {
+            //日历年月盘
+            table {
+                tr {
+                    td {
+                        .ti3-date-current-year,
+                        .ti3-date-current-month {
+                            //选中的年月
+                            background-color: #0067ff;
+                            color: #e8e8e8;
+                            font-size: 12px;
+                        }
+
+                        .ti3-date-default-year,
+                        .ti3-date-default-month,
+                        .ti3-date-preNext-year {
+                            background-color: #252526;
+                            color: #e8e8e8;
+                            font-size: 12px;
+                        }
+
+                        .ti3-date-default-year:hover,
+                        .ti3-date-default-month:hover,
+                        .ti3-date-preNext-year:hover {
+                            background-color: #313131 !important;
+                            color: #e8e8e8;
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .ti3-datetime-picker-footer {
+        display: flex;
+        justify-items: center;
+        --ti-common-color-text-highlight: #0067ff;
+        .ti3-datetime-picker-footer-btn {
+            height: 28px;
+            background-color: #252526;
+            border: 1px solid #8e8e8e;
+            box-sizing: content-box;
+            line-height: 27px;
+            box-shadow: 0 0 0 0 !important;
+
+            input {
+                height: 26px !important;
+                box-shadow: 0 0 0 0 !important;
+                color: #cccccc;
+                background-color: #252526 !important;
+                font-size: 12px;
+                border: 0px solid #888888 !important;
+                padding: 0 20px;
+            }
+
+            span {
+                color: #cccccc !important;
+            }
+
+            input:hover {
+                border: 0px solid #888888 !important;
+            }
+        }
+
+        .ti3-datetime-picker-footer-btn:hover {
+            border: 1px solid #0067ff !important;
+        }
+    }
+
+    .ti3-datetime-btn-picker-footer {
+        button {
+            width: 56px !important;
+            height: 28px !important;
+            background-color: var(--d-313131-l-ffffff);
+            font-size: 12px !important;
+            color: var(--d-e8e8e8-l-222222);
+            padding: 0 !important;
+            line-height: 24px !important;
+            border: 1px solid var(--d-dddddd-l-979797);
+        }
+
+        button:nth-child(1) {
+            margin-right: 8px !important;
+        }
+
+        button:hover {
+            border: 1px solid #267dff;
+            color: #267dff;
+            animation: none !important;
+            background-color: var(--d-313131-l-ffffff);
+        }
+
+        button:focus {
+            border: 1px solid #0057d9;
+            color: #0057d9;
+            background-color: var(--d-313131-l-ffffff);
+        }
+    }
+}
+
+.ti3-dropdown-searchbox-wrapper-outer {
+    background: var(--vscode-editor-background) !important;
+    padding: 0 !important;
+}
+
+.ti3-dropdown-container {
+    background-color: var(--d-252526-l-ffffff) !important;
+}
+
+/*滚动条里面小方块*/
+.ti3-dropdown-container ti-list::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.ti3-dropdown-container ti-list::-webkit-scrollbar-corner {
+    background-color: var(--vscode-editor-background) !important;
+}
+
+.ti3-dropdown-container ti-list::-webkit-scrollbar-thumb {
+    background-color: var(--vscode-scrollbarSlider-background) !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+
+.operation-anal {
+    margin-left: 26px;
+    background-color: #0067ff;
+    border: none;
+    color: #e0e0e0;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    font-size: 12px;
+}
+
+.operation-anal:hover {
+    background-color: #267dff;
+    color: #fff;
+}
+
+.operation-anal:active {
+    background-color: #0057d9;
+    color: #fff;
+}
+
+.operation[disabled],
+.operation-anal[disabled] {
+    background: #313131;
+    color: #575757;
+    border: none;
+}
+
+input {
+
+    &:focus {
+        border: 1px solid var(--g-color-input-border-focus) !important;
+        outline: 1px solid var(--g-color-input-border-focus);
+    }
+
+    &:hover {
+        border: 1px solid var(--g-color-input-border-hover) !important;
+    }
+
+    &:disabled {
+        border-color: var(--g-color-input-border-disabled) !important;
+        background: var(--g-color-input-bg-disabled) !important;
+        color: var(--g-color-input-disabled) !important;
+    }
+}
+
+//黑色主题
+.vscode-dark {
+    --button-disable-bg: #313131;
+    --button-disable-color: #616161;
+    --button-disable-border: 1px solid #616161;
+    --ti-input-bg-color-error: var(--ti-input-bg-color);
+    --ti-table-td-text-color: #aaaaaa;
+    --g-color-input: #e8e8e8;
+    --g-color-input-border-hover: #0067ff;
+    --g-color-input-border-focus: #0067ff;
+    --g-color-input-disabled: #616161;
+    --g-color-input-border-disabled: #616161;
+    --g-color-input-bg-disabled: #313131;
+    --d-222-l-fff: #222;
+    --g-color-page-bg: #222;
+    --ti-tag-select: #313131;
+    --th-border-right-color: #4b4b4b;
+    --td-hover-bg: #161616;
+    --thead-th-bg: #2a2a2a;
+    --tbody-td-tab-bg: #252525;
+    --tr-childTr-bg: #222222;
+    --ti3-tip-small-left: #424242;
+    --ti-select-bg: #313131;
+    --ti-select-font-color-disabled: #222;
+    --ti-th-border-color: #4b4b4b;
+    --ti-switch-rectangle-on-bg: #0067ff;
+    --ti-switch-round-on-bg: #fff;
+    --ti-switch-rectangle-off-bg: #313131;
+    --ti-switch-round-off-bg: #b7b7b7;
+    --ti-switch-disable-rectangle-bg: #313131;
+    --ti-switch-disable-round-bg: #616161;
+    --ti-input-disable-border-color: #313131;
+    --ti-input-disable-color: #aaa;
+    .secondary-btn {
+        background-color: #313131;
+        color: #e8e8e8;
+        border: 1px solid #dddddd;
+        border-radius: 2px;
+    }
+
+    .secondary-btn:hover {
+        background-color: rgb(83, 83, 92);
+        color: #ffff;
+    }
+
+    .secondary-btn:active {
+        background-color: rgb(13, 14, 15);
+        color: #ffff;
+    }
+
+    // ******下拉框控件样式******
+    .ti3-overflow-padding {
+        font-size: 12px;
+    }
+
+    .ti3-dropdown-option {
+        margin-top: 0 !important;
+        background-color: var(--vscode-editor-background) !important;
+        font-size: 12px;
+        border: none !important;
+
+        .ti3-icon-checkmark {
+            background-color: #1e1e1e;
+            color: #1e1e1e;
+
+            &:hover {
+                border-color: #0067ff;
+            }
+        }
+    }
+
+    .ti3-dropdown-option-disabled {
+        > .ti3-overflow-padding {
+            color: #616161 !important;
+            cursor: not-allowed !important;
+        }
+
+        .ti3-multi-select-checkbox {
+            background-color: #313131 !important;
+            border-color: #616161 !important;
+            color: #313131;
+        }
+    }
+
+    .operation[disabled],
+    .operation-anal[disabled] {
+        background: #313131;
+        color: #575757;
+        border: none;
+    }
+
+    .ti3-dropdown-option-hover {
+        background-color: #313131 !important;
+        font-weight: normal !important;
+    }
+
+    .ti3-dropdown-option-selected {
+        background-color: #0067ff !important;
+        font-weight: normal !important;
+    }
+
+    ti-select {
+        width: 65%;
+
+        > ti-dominator.ti3-multiselect-container {
+            height: 100%;
+        }
+    }
+
+    ti-select:focus {
+        border: 1px solid #0067ff !important;
+    }
+
+    ti-select:hover {
+        border: 1px solid #0067ff !important;
+    }
+    .ti3-compnent-container-border[disabled], [disabled]:hover{
+        border-color: var(--ti-input-border-color-disabled) !important;
+    }
+
+    .select_operation[disabled] {
+        border-color: #616161 !important;
+        background: #313131 !important;
+        color: #616161 !important;
+
+        .ti3-placeholder[_ngcontent-iqj-c12] {
+            color: #616161 !important;
+        }
+
+        .ti3-placeholder {
+            color: #616161 !important;
+        }
+    }
+
+    // ******下拉框控件样式******
+
+    // ******按钮控件样式******
+    .primary-btn {
+        display: inline-block;
+        min-width: 160px;
+        height: 32px;
+        line-height: 32px;
+        font-size: 14px;
+        text-align: center;
+        background: #0067ff;
+        color: #e8e8e8;
+        margin-right: 20px;
+        cursor: pointer;
+        border-radius: 2px;
+    }
+
+    .primary-btn:hover {
+        background: #267dff !important;
+        color: #ffff !important;
+    }
+
+    .primary-btn:active {
+        background: #0057d9 !important;
+        color: #ffff !important;
+    }
+
+    .cancel-btn {
+        display: inline-block;
+        min-width: 96px;
+        height: 28px;
+        line-height: 28px;
+        font-size: 14px;
+        text-align: center;
+        background: #313131;
+        color: #dddddd;
+        margin-top: 6px;
+        cursor: pointer;
+        border: 1px solid #dddddd !important;
+    }
+
+    .cancel-btn:hover {
+        color: #ffffff !important;
+        border-color: #0067ff !important;
+    }
+
+    .cancel-btn:active {
+        background: #1c314f !important;
+        color: #0067ff !important;
+    }
+
+    // ******小按钮控件样式******//
+    // 小主要按钮控件样式
+    .little-primary-btn {
+        display: inline-block;
+        text-align: center;
+        min-width: 100px;
+        background: #0067ff;
+        color: #e8e8e8;
+        width: 100px;
+        height: 28px;
+        line-height: 28px;
+        font-size: 12px;
+        border-radius: 2px;
+        border: none;
+    }
+
+    .little-primary-btn:hover {
+        background: #267dff !important;
+        color: #e8e8e8 !important;
+        cursor: pointer;
+    }
+
+    .little-primary-btn:active {
+        background: #0057d9 !important;
+        color: #e8e8e8 !important;
+    }
+
+    .little-primary-btn[disabled] {
+        background: #313131 !important;
+        color: #616161 !important;
+        cursor: not-allowed;
+    }
+
+    // 小次要按钮控件样式
+    .little-minor-btn {
+        display: inline-block;
+        text-align: center;
+        background: #313131 !important;
+        color: #e8e8e8;
+        min-width: 100px;
+        height: 28px;
+        line-height: 26px;
+        font-size: 12px;
+        border-radius: 2px;
+        border: 1px solid #dddddd !important;
+    }
+
+    .little-minor-btn:hover {
+        background: #313131 !important;
+        color: #267dff !important;
+        border-color: #267dff !important;
+    }
+
+    .little-minor-btn:active {
+        background: #313131 !important;
+        color: #0057d9 !important;
+        border-color: #0057d9 !important;
+    }
+
+    .little-minor-btn[disabled] {
+        background: #313131 !important;
+        color: #666666 !important;
+        border: 1px solid #616161 !important;
+    }
+
+    // ******小按钮控件样式******//
+
+    // ******按钮控件样式******
+
+    .mask2 {
+        .ng-invalid.ng-touched:not([tiFocused]) {
+            border: 1px solid #ff4c4c !important;
+        }
+    }
+
+    .ti3-dropdown-searchbox-wrapper-outer {
+        background: #3c3c3c !important;
+    }
+
+    .title {
+        height: 26px;
+        line-height: 26px;
+        font-size: 20px;
+        color: #e8e8e8;
+    }
+
+    input[type="checkbox"][tiCheckbox] + .ti3-checkbox .ti3-checkbox-skin {
+        border: 1px solid #b7b7b7;
+    }
+
+    input[type="checkbox"][tiCheckbox] + .ti3-checkbox .ti3-checkbox-skin:hover {
+        background-color: unset;
+        border: 1px solid #0067ff;
+    }
+
+    input[type="checkbox"][tiCheckbox]:not([disabled]):checked + .ti3-checkbox .ti3-checkbox-skin,
+    input[type="checkbox"][tiCheckbox]:not([disabled]):checked + .ti3-checkbox .ti3-checkbox-skin:focus {
+        background-color: #0067ff !important;
+    }
+    // 树 按住展开的icon的反馈的背景颜色
+    .ti3-table>.ti3-resize-wrapper>table>tbody>tr>td .ti3-table-tree .ti3-icon-minus-square:active,
+    .ti3-table>.ti3-resize-wrapper>table>tbody>tr>td .ti3-table-tree .ti3-icon-plus-square:active{
+        background: unset;
+    }
+    input[type=checkbox][tiCheckbox]:not([disabled]):indeterminate + .ti3-checkbox .ti3-checkbox-skin:before {
+        --ti-checkbox-label-color-checked: #0067ff;
+    }
+
+    input[type="checkbox"][tiCheckbox]:not([disabled]):indeterminate + .ti3-checkbox .ti3-checkbox-skin {
+        background-color: #0067ff !important;
+        border-color: #0067ff !important;
+        border-width: 5px;
+
+        &:before {
+            width: 0px;
+            background-color: #fff !important;
+        }
+    }
+
+    [tiText] {
+        box-shadow: unset !important;
+    }
+
+    .ti3-switch.ti3-switch-off .ti3-switch-track {
+        border-color: #313131 !important;
+        background: #313131 !important;
+    }
+
+    .ti3-date-dominator-container .ti3-date-show {
+        color: #e8e8e8 !important;
+    }
+}
+
+//浅色主题
+.vscode-light {
+    --button-disable-bg: #f5f5f5;
+    --button-disable-border: 1px solid #ccc;
+    --button-disable-color: #ccc;
+    --ti-input-bg-color-error: var(--ti-input-bg-color);
+    --g-color-input: #222222;
+    --g-color-input-border-hover: #0067ff;
+    --g-color-input-border-focus: #0067ff;
+    --g-color-input-disabled: #cccccc;
+    --g-color-input-border-disabled: #cccccc;
+    --g-color-input-bg-disabled: #f5f5f5;
+    --d-222-l-fff: #fff;
+    --g-color-page-bg: #fff;
+    --ti-tag-select: #e6ebf5;
+    --th-border-right-color: #ffffff;
+    --td-hover-bg: #f5f9ff;
+    --thead-th-bg: #f5f9ff;
+    --tbody-td-tab-bg: #f0f3fa;
+    --tr-childTr-bg: #ffffff;
+    --ti3-tip-small-left: #ffffff;
+    --ti-select-bg: #ffffff;
+    --ti-select-font-color-disabled: #222;
+    --ti-th-border-color: #e2e2e2;
+    --ti-switch-rectangle-on-bg: #0067ff;
+    --ti-switch-round-on-bg: #fff;
+    --ti-switch-rectangle-off-bg: #979797;
+    --ti-switch-round-off-bg: #fff;
+    --ti-switch-disable-rectangle-bg: #ccc;
+    --ti-switch-disable-round-bg: #fff;
+    --ti-input-disable-border-color: #ccc;
+    --ti-input-disable-color: #ccc;
+    .secondary-btn {
+        background-color: #ffffff;
+        color: #222222;
+        border: 1px solid #979797;
+    }
+
+    .secondary-btn:hover {
+        border: 1px solid #267dff;
+        color: #267dff;
+    }
+
+    .secondary-btn:active {
+        border: 1px solid #0057d9;
+        color: #0057d9;
+    }
+
+    .operation[disabled],
+    .operation-anal[disabled] {
+        background: #f5f5f5;
+        color: #575757;
+        border: 1px solid #ccc;
+    }
+
+    .ra-label {
+        i.ra-uncheck {
+            border: 1px solid #a4a4a4;
+        }
+    }
+
+    // ******下拉框控件样式******
+    .ti3-overflow-padding {
+        font-size: 12px;
+    }
+
+    .ti3-dropdown-option {
+        margin-top: 0 !important;
+        background-color: #ffffff !important;
+        font-size: 14px !important;
+        border: none !important;
+    }
+
+    .ti3-dropdown-option-hover {
+        background-color: #f5f9ff !important;
+        font-weight: normal !important;
+
+        .ti3-overflow-padding {
+            color: #0067ff !important;
+        }
+    }
+
+    .ti3-dropdown-option-selected {
+        font-weight: normal !important;
+        background-color: #0067FF !important;
+
+        .ti3-overflow-padding > span {
+            color: #fff !important;
+            
+        }
+    }
+
+    ti-select {
+        width: 65%;
+        border: 1px solid #0062f0;
+        border-radius: 2px !important;
+        box-shadow: none !important;
+        background: var(--vscode-editor-background) !important;
+        height: 28px !important;
+        font-size: 14px !important;
+
+        > ti-dominator.ti3-multiselect-container {
+            height: 100%;
+        }
+    }
+
+    ti-select:focus {
+        border: 1px solid #0067ff !important;
+    }
+
+    ti-select:hover {
+        border: 1px solid #0067ff !important;
+    }
+
+    ti-select:disabled {
+        border: none !important;
+        background: #e6ebf5 !important;
+        color: #b8becc !important;
+    }
+
+    // ******下拉框控件样式******
+
+    // ******按钮控件样式******
+    .primary-btn {
+        display: inline-block;
+        min-width: 160px;
+        height: 32px;
+        line-height: 32px;
+        font-size: 14px;
+        text-align: center;
+        background: #0067ff;
+        color: #e8e8e8;
+        margin-right: 20px;
+        cursor: pointer;
+    }
+
+    .primary-btn:hover {
+        background: #267dff !important;
+        color: #ffff !important;
+    }
+
+    .primary-btn:active {
+        background: #0057d9 !important;
+        color: #ffff !important;
+    }
+
+    .cancel-btn {
+        display: inline-block;
+        min-width: 96px;
+        height: 30px;
+        line-height: 28px;
+        font-size: 14px;
+        text-align: center;
+        background: #ffffff;
+        color: #333333;
+        margin-top: 6px;
+        cursor: pointer;
+        border: 1px solid #b8becc !important;
+    }
+
+    .cancel-btn:hover {
+        border-color: #0067ff !important;
+        border: 1px solid #0067ff !important;
+    }
+
+    .cancel-btn:active {
+        color: #0067ff !important;
+        border: 1px solid #0067ff !important;
+    }
+
+    // ******小按钮控件样式******//
+    // 小主要按钮控件样式
+    .little-primary-btn {
+        display: inline-block;
+        text-align: center;
+        background: #0067ff;
+        color: #ffffff;
+        min-width: 100px;
+        height: 28px;
+        line-height: 28px;
+        font-size: 12px;
+        border-radius: 2px;
+        border: none;
+    }
+
+    .little-primary-btn:hover {
+        background: #267dff !important;
+    }
+
+    .little-primary-btn:active {
+        background: #0057d9 !important;
+    }
+
+    .little-primary-btn[disabled] {
+        background: #f5f5f5 !important;
+        color: #cccccc !important;
+        border: 1px solid #cccccc !important;
+    }
+
+    // 小次要按钮控件样式
+    .little-minor-btn {
+        display: inline-block;
+        text-align: center;
+        background: #ffffff;
+        color: #222222;
+        min-width: 100px;
+        height: 28px;
+        line-height: 26px;
+        font-size: 12px;
+        border-radius: 2px;
+        border: 1px solid #979797 !important;
+    }
+
+    .little-minor-btn:hover {
+        color: #267dff !important;
+        border-color: #267dff !important;
+    }
+
+    .little-minor-btn:active {
+        color: #0057d9 !important;
+        border-color: #0057d9 !important;
+    }
+
+    .little-minor-btn[disabled] {
+        background: #f5f5f5 !important;
+        color: #cccccc !important;
+        border: 1px solid #cccccc !important;
+    }
+
+    // ******小按钮控件样式******//
+
+    // ******按钮控件样式******
+
+    .mask2 {
+        .ng-invalid.ng-touched:not([tiFocused]) {
+            border: 1px solid #ff4c4c !important;
+        }
+    }
+
+    .ti3-dropdown-searchbox-wrapper-outer {
+        background: #ffffff !important;
+    }
+
+    .ti3-checkbox-label {
+        line-height: 17px;
+        font-size: 14px;
+        color: unset;
+    }
+
+    .title {
+        height: 26px;
+        line-height: 26px;
+        font-size: 20px;
+        color: #222222;
+    }
+
+    input[type="checkbox"][tiCheckbox] + .ti3-checkbox .ti3-checkbox-skin {
+        border: 1px solid #b7b7b7;
+    }
+
+    input[type="checkbox"][tiCheckbox] + .ti3-checkbox .ti3-checkbox-skin:hover {
+        background-color: unset;
+        border: 1px solid #0067ff;
+    }
+
+    input[type="checkbox"][tiCheckbox]:not([disabled]):checked + .ti3-checkbox .ti3-checkbox-skin,
+    input[type="checkbox"][tiCheckbox]:not([disabled]):checked + .ti3-checkbox .ti3-checkbox-skin:focus {
+        background-color: #0067ff !important;
+    }
+
+    input[type="checkbox"][tiCheckbox]:not([disabled]):indeterminate + .ti3-checkbox .ti3-checkbox-skin,
+    input[type="checkbox"][tiCheckbox]:not([disabled]):indeterminate + .ti3-checkbox .ti3-checkbox-skin:hover {
+        background-color: #0067ff !important;
+        border-color: #0067ff !important;
+    }
+
+    .ra-label {
+        i.ra-uncheck {
+            border: 1px solid #a4a4a4;
+        }
+    }
+
+    // ******路径级联列表样式******
+    .areaMatchDiv {
+        border: 1px solid #0067ff;
+        background-color: #ffffff !important;
+
+        li {
+            color: #222222 !important;
+        }
+
+        li:hover {
+            background-color: #f5f5f5 !important;
+            color: #0067ff !important;
+        }
+
+        li:active {
+            background-color: #0067ff !important;
+            color: #ffffff !important;
+        }
+    }
+}
+
+.ti3-icon-staricon::before {
+    color: #f45c5e !important;
+    margin-left: -16px !important;
+}
+
+a {
+    &:focus {
+        outline-style: none;
+    }
+}
+
+.ti3-table > .ti3-resize-wrapper > table > tbody > tr > td,
+.ti3-table > .ti3-table-container > table > tbody > tr > td,
+.ti3-table > .ti3-table-fixed-head > table > tbody > tr > td,
+.ti3-table > table > tbody > tr > td {
+    color: var(--d-aaaaaa-l-222222) !important;
+}
+.ti3-table > .ti3-table-fixed-head > table > thead > tr > th,
+.ti3-table > table > thead > tr > th {
+    border-bottom: 1px solid var(--ti-th-border-color) !important;
+}
+.ti3-table > .ti3-table-fixed-head + .ti3-table-container > table > thead > tr > th {
+    border-bottom: none !important;
+}
+
+:host ::ng-deep ti-pagination.ti3-page-container a.ti3-pag-next {
+    background-color: var(--vscode-editor-background) !important;
+}
+
+:host ::ng-deep ti-pagination.ti3-page-container a.ti3-pag-next.disabled {
+    background-color: var(--vscode-editor-background) !important;
+}
+
+////创建任务确任弹框
+.ti3-modal-dialog {
+    width: 660px !important;
+}
+
+// tiny3模态弹窗样式
+.ti3-modal-content {
+    --ti-modal-header-padding: 20px 0;
+    --ti-modal-footer-padding: 24px 0;
+    --ti-modal-content-margin: 0;
+
+    width: 660px;
+    max-height: 600px;
+    background-color: var(--common-color-background-primary) !important;
+    box-shadow: 0 3px 6px 0 var(--ti3-modal-content-shadow-color) !important;
+    padding: 0 32px;
+
+    .ti3-icon-close {
+        position: absolute;
+        right: 32px;
+        top: 20px;
+        height: 26px;
+        padding: 6px 0;
+        width: 14px;
+        font: normal normal normal var(--ti-common-font-size-base) ti3Font;
+    }
+
+    .ti3-modal-header {
+        border-bottom: 1px dashed var(--common-color-divider);
+
+        span {
+            height: 26px;
+            font-size: 20px;
+            line-height: 26px;
+            font-size: 20px;
+            color: var(--common-color-font-primary);
+        }
+    }
+
+    .ti3-modal-body {
+        max-height: 454px !important;
+        overflow-y: overlay;
+        padding-top: 21px;
+        // start 下面两个样式设置body区域左侧x轴超出内容显示并且不出现滚动条（因为overflow-x对于tiny3表单组件的星号无效）
+        margin-left: -32px;
+        padding-left: 32px;
+        // end
+        // start 下面是为了把body的滚动条移到整个模态弹窗的最右边
+        margin-right: -32px;
+        padding-right: 32px;
+        // end
+    }
+
+    .ti3-modal-footer {
+        .ti3-btn-middle {
+            max-width: 200px;
+            height: 32px;
+            background-color: var(--button-color-background-secondary);
+            border-radius: 2px;
+            border: solid 1px var(--button-color-border-secondary);
+            color: var(--common-color-font-primary);
+            font-size: 14px;
+
+            &:active {
+                --ti-button-default-bg-color-active: var(--button-color-background-secondary);
+            }
+        }
+
+        .ti3-btn-primary {
+            background-color: #0067ff;
+            border: 1px solid #0067ff;
+            color: #ffffff !important;
+        }
+    }
+}
+
+.modal832 {
+    width: 832px !important;
+    .ti3-modal-content {
+      width: 832px;
+      .ti3-close {
+        margin-top: 8px;
+      }
+  
+      .ti3-modal-header {
+        margin: 0;
+        padding: 23px 0 22px;
+        border-bottom: 1px solid var(--common-color-divider);
+      }
+  
+      .ti3-modal-body {
+        overflow-y: scroll;
+        height: 400px;
+        color: #aaa;
+      }
+    }
+  }
+
+.ti3-icon-warn:before {
+    font-size: 20px;
+    content: none;
+}
+
+.ti3-btn-danger:not(:focus):not([disabled]):hover {
+    animation: null !important;
+}
+
+ti-dominator.ti3-multiselect-container > .ti3-select-dominator-text::-webkit-scrollbar {
+    width: 6px !important;
+}
+
+// 下拉选择项关闭按钮样式
+.ti3-icon-clear:before {
+    content: "\e905" !important;
+    font-size: 12px;
+}
+
+// tab分割竖线不展示
+.ti3-tabs .ti3-tab-li:not(:last-child):after {
+    display: none;
+}
+
+// 表格拖动 去掉白色指示虚线
+.ti3-table > table > thead > tr > th.col-resize-active:after,
+.ti3-table > .ti3-resize-wrapper > table > thead > tr > th.col-resize-active:after,
+.ti3-table > .ti3-table-fixed-head > table > thead > tr > th.col-resize-active:after,
+.ti3-table > .ti3-table-container > table > thead > tr > th.col-resize-active:after {
+    width: 1px;
+    border-right: none;
+}
+
+.ti3-table > table > tbody > tr:not(.ti3-table-nodata) > td.col-resize-active:after,
+.ti3-table > table > tbody > tr:not(.ti3-table-nodata) > td.col-resize-active:after,
+.ti3-table > .ti3-table-fixed-head > table > tbody > tr:not(.ti3-table-nodata) > td.col-resize-active:after,
+.ti3-table > .ti3-table-container > table > tbody > tr:not(.ti3-table-nodata) > td.col-resize-active:after {
+    width: 1px;
+    border-right: none;
+}
+
+// tiny3无数据去掉自带图片
+.ti3-table>.ti3-resize-wrapper>table>tbody>tr.ti3-table-nodata>td,
+.ti3-table>.ti3-table-container>table>tbody>tr.ti3-table-nodata>td,
+.ti3-table>.ti3-table-fixed-head>table>tbody>tr.ti3-table-nodata>td,
+.ti3-table>table>tbody>tr.ti3-table-nodata>td {
+    padding: 0 !important;
+    background: none !important;
+}
+
+.ti3-close:hover {
+    color: #267dff !important;
+}
+// 页码样式
+.main ti-pagination {
+    --mc-color-page-bg-hover: #267dff;
+    --mc-color-page-bg-active: #0067ff;
+    --mc-color-page-hover: #ffffff;
+    --mc-color-page-bg-disabled: #666666;
+    ti-select {
+        background-color: var(--d-313131-l-ffffff) !important;
+    }
+    // 总条数
+    .ti3-pag-total-items {
+        --ti-pagination-text-color: var(--d-aaaaaa-l-222222);
+        font-family: FZLTHJW--GB1-0 !important;
+        font-size: 12px !important;
+    }
+
+    // 翻页
+    .ti3-pag-next,
+    .ti3-pag-prev {
+        color: #aaaaaa !important;
+        background-color: inherit !important;
+        width: 22px !important;
+        height: 22px !important;
+        --ti-pagination-icon-color-disabled: #666666;
+        &:hover {
+            color: #ffffff !important;
+            background-color: var(--mc-color-page-bg-hover) !important;
+        }
+        &:active {
+            color: #ffffff !important;
+            background-color: #0057d9 !important;
+        }
+
+        &.disabled {
+            color: var(--mc-color-page-bg-disabled) !important;
+            background-color: inherit !important;
+        }
+    }
+
+    // 页数
+    .ti3-pag-page {
+        color: var(--d-aaaaaa-l-222222) !important;
+        display: inline-block;
+        cursor: pointer;
+        text-decoration: none;
+        vertical-align: middle;
+        text-align: center;
+        font-family: FZLTHJW--GB1-0 !important;
+        font-size: 12px !important;
+        border-radius: 2px !important;
+
+        &:not(.ellipse):hover {
+            background-color: var(--mc-color-page-bg-hover) !important;
+            color: var(--mc-color-page-hover) !important;
+        }
+        &:not(.ellipse):active {
+            background-color: #0057d9 !important;
+            color: var(--mc-color-page-hover) !important;
+        }
+        // 当前选中
+        &.active {
+            background-color: var(--mc-color-page-bg-active) !important;
+            color: var(--mc-color-page-hover) !important;
+        }
+
+        &:disabled {
+            background-color: var(--mc-color-page-bg-disabled) !important;
+            color: var(--mc-color-page-bg-disabled);
+        }
+    }
+
+    // 跳转
+    .ti3-pag-goto {
+        margin-left: 82px;
+        .ti3-pag-goto-input {
+            text-align: center;
+        }
+    }
+}
+.ti3-drop-list-ul .ti3-dropdown-option .ti3-overflow-padding {
+    color: var(--ti-input-text-color) !important;
+    .ti3-icon-checkmark {
+        background-color: rgba(0, 0, 0, 0);
+        border: 1px solid #aaaaaa;
+    }
+}
+.ti3-head-filter-drop-button-container {
+    display: flex;
+    justify-content: space-around;
+
+    .ti3-btn-small {
+        background: var(--d-313131-l-ffffff);
+        color: var(--d-e8e8e8-l-222222);
+        border: var(--filter-button-border);
+    }
+    .ti3-btn-small:hover,
+    .ti3-btn-small:focus {
+        background: #0067ff;
+        color: #ffffff;
+        border: 1px solid #0067ff;
+    }
+}
+
+.global-loading {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.immediately {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+// 创建任务各个任务的间隔管理与字体颜色
+ti-formfield .ti3-form tbody tr td {
+    .ti3-form-top-label {
+        .ti3-form-top-text {
+            color: var(--common-color-font-secondary);
+            margin: 0;
+        }
+    }
+    .ti3-form-content {
+        padding-bottom: 20px;
+    }
+}
+
+/************* 按钮样式 *****************/
+.ti3-btn-middle {
+    min-width: var(--ti-button-middle-width);
+    font-size: var(--ti-button-font-size-base);
+}
+
+// 时间组件
+.ti3-time-select-container {
+    --ti-common-color-line-dividing: transparent; 
+    .ti3-time-select-title {
+        color: var(--d-aaaaaa-l-222222);
+    }
+    .ti3-time-select-item-container .ti3-time-select-list {
+        height: 231px;
+        --ti-common-space-base: 0;
+    }
+}
+// 表头填充
+.ti3-table .ti3-table-fixed-head .ti3-table-fixed-head-filler {
+    --ti-table-th-bg-color: var(--d-2a2a2a-l-f5f9ff);
+}
+
+// 当同时有垂直滚动条和水平滚动条时交汇的部分
+::-webkit-scrollbar-corner {
+    background: none;
+}
+
+// 下拉搜索框样式
+.vscode-dark {
+  ti-searchbox-notsearch.ti3-searchbox-container:not([disabled])[noBorder]{
+    background-color: var(--ti-input-bg-color);
+    &:hover {
+      background-color: var(--ti-input-bg-color);
+    }
+  }
+}
+
+// 表格搜索框
+.ti3-searchbox-container .ti3-searchbox-input {
+  height: 100% !important;
+}
+
+/**********************表格全局样式修改（主题无法解决的样式问题）************************/
+.ti3-table>.ti3-resize-wrapper>table>tbody>.ti3-details-tr>td>.ti3-table-detail-container, .ti3-table>.ti3-table-container>table>tbody>.ti3-details-tr>td>.ti3-table-detail-container, .ti3-table>table>tbody>.ti3-details-tr>td>.ti3-table-detail-container {
+    margin-left: 32px;
+    border-left: #2072ea 2px solid;
+}
+
+// 深色主题
+.dark {
+    ti-switch{
+        .ti3-switch-off{
+            --ti-common-color-bg-white-normal: #b7b7b7;
+        }
+        .ti3-switch-on{
+            --ti-common-color-bg-white-normal: #e8e8e8;
+        }
+    }
+}
+
+// 多行输入框
+textarea {
+  --ti-input-placeholder-color: var(--color-input-placeholder);
+  min-height: 28px;
+  background-color: var(--vscode-editor-background) !important;
+  font-size: 12px !important;
+  color: var(--common-color-font-primary) !important;
+  box-shadow: unset !important;
+  resize: vertical;
+  border: 1px solid var(--color-input-border);
+  border-radius: 2px !important;
+
+  &:focus {
+      outline: 1px solid #0067ff;
+  }
+}
+
+textarea:focus,
+textarea:hover {
+  border: 1px solid #0067ff !important;
+}
+
+.ti3-head-filter-drop{
+    .ti3-dropdown-no-data {
+      display: none;
+      padding: var(--ti-common-space-6) var(--ti-input-padding-horizontal);
+      line-height: var(--ti-common-line-height-number);
+    }
+    .ti3-btn-small{
+      height: 28px;
+    }
+    .ti3-dropdown-option .ti3-icon-checkmark {
+        color: transparent;
+    }
+  }

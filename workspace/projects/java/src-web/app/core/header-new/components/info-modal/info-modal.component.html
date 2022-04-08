@@ -1,0 +1,36 @@
+<div class='content-box' [ngClass]="{'active':myMask}">
+  <div class="content">
+    <div class="setting-left">
+      <div class="setting-left-header" (click)="close()">
+        <img class="back-img" (mouseenter)="onHoverList('hover')" (mouseleave)="onHoverList()"
+          [src]="currentHover==='hover' ? './assets/img/newSvg/back_hover.svg': './assets/img/newSvg/back_default.svg'">
+        <span>{{i18n.common_term_backSetting}}</span>
+      </div>
+      <div class="setting-left-list">
+        <ng-container *ngFor="let item of settingList">
+          <div (click)="onSettingChange(item)" class="list-style" [ngClass]="{'list-selected': item.isSelected}"
+            *ngIf="item.role !== 'Admin' || role === 'Admin'" tiOverflow>{{item.title}}</div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="header-line"></div>
+    <div class="setting-right">
+      <div class="setting-right-header">
+        <span>{{currentTitle}}</span>
+        <img class="tipicon" *ngIf="hasImgTip.indexOf(currentType) > -1" [tiTip]='currentTip' tiTipPosition="right"
+          src="./assets/img/header/icon-navgationbar-help.svg">
+      </div>
+      <div #container class="setting-right-main">
+        <app-user-manage *ngIf="currentType === 'userManage'"></app-user-manage>
+        <app-log #appLog *ngIf="currentType === 'log'"></app-log>
+        <app-setting *ngIf="currentType === 'sysConfig'"></app-setting>
+        <app-threshold *ngIf="currentType === 'threshold' "></app-threshold>
+        <app-dictionary *ngIf="currentType === 'dictionary'"></app-dictionary>
+        <app-work-key *ngIf="currentType === 'certificate_work'"></app-work-key>
+        <app-header-cert *ngIf="currentType === 'certificate_java'"></app-header-cert>
+        <app-web-cert *ngIf="currentType === 'certificate_web'"></app-web-cert>
+        <app-data-limit *ngIf="currentType === 'dataLimit'"></app-data-limit>
+      </div>
+    </div>
+  </div>
+</div>

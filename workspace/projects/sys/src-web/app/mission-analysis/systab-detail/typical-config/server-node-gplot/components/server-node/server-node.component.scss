@@ -1,0 +1,58 @@
+.node-warpper {
+    display: inline-block;
+    cursor: pointer;
+    .ip-addr {
+        text-align: center;
+        font-size: 14px;
+        color: #616161;
+        margin: 0;
+    }
+    &:hover {
+        .ip-addr {
+            color: #222222;
+        }
+    }
+}
+
+.tip-warpper {
+    width: max-content;
+    .node-info {
+        font-size: 12px;
+        display: flex;
+        .info-title {
+            .info-item-title {
+                color: #616161;
+                text-align: left;
+            }
+            .info-item + .info-item {
+                margin-top: 8px;
+            }
+        }
+        .info-value {
+            .info-item-value {
+                color: #222222;
+                margin-left: 16px;
+                text-align: left;
+            }
+            .info-item + .info-item {
+                margin-top: 8px;
+            }
+        }
+    }
+    .run-process {
+        .process-title {
+            margin: 10px 0;
+            color: #000;
+            font-size: 14px;
+            text-align: left;
+        }
+        .process-item {
+            color: #222222;
+            font-size: 12px;
+            text-align: left;
+            & + .process-item {
+                margin-top: 8px;
+            }
+        }
+    }
+}

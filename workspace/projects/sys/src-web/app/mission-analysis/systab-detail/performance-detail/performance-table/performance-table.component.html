@@ -1,0 +1,766 @@
+<div class="summury-box svgPage" [ngClass]="{ifShow: isActive}">
+  <div class="box">
+    <div class="box-title" (click)='toggle.cpu=!toggle.cpu'><img src="./assets/img/summary/row.png" class='title-icon'
+        [ngClass]="{active: toggle.cpu}">CPU
+
+    </div>
+    <div class="box-content" [ngClass]="{active: toggle.cpu}">
+      <div class="box">
+        <div class="box-title" (click)='toggle.cpuUsage=!toggle.cpuUsage'><img src="./assets/img/summary/row.png"
+            class='title-icon' [ngClass]="{active: toggle.cpuUsage}">{{i18n.sys.titles.cpuUsage}}</div>
+        <div class="box-content" [ngClass]="{active: toggle.cpuUsage}">
+          <ti-table  tiColsResizable [(displayedData)]="cpuUsageDisplayData" [srcData]="cpuUsageSrcData" [columns]="cpuUsageTitle">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th *ngFor="let column of cpuUsageTitle;index as i">
+                      <ti-cell-text [ngClass]="{'tableFirstData': i == 0}">
+                        {{column.title}}{{column.danwei}}
+                      </ti-cell-text>
+                      <img src="./assets/img/summary/tooltip.png" [tiTip]='danwei' [tiTipContext]='column.key'
+                        tiTipMaxWidth='400px' tiTipPosition="right" class="th-tip-icon">
+                      <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                      <ti-head-sort [sortKey]="column.sortKey" [compareFn]="mycompareFn"
+                        *ngIf='column.sortKey && column.mycompareFn'></ti-head-sort>
+                      <ti-head-sort [sortKey]="column.sortKey" [compareFn]="column.compareFn"
+                        *ngIf='column.sortKey && (!column.mycompareFn)'>
+                      </ti-head-sort>
+                      <div *ngIf="i !==0&&rawIndex!==column.title" [tiTip]='tabSearch' tiTipMaxWidth='400px'
+                        tiTipPosition="top" class="tabSearch" (click)="searchShow(searchTips,column.title)">
+                        <div [tiTip]='tipContent2' tiTipTrigger='manual' tiTipPosition='bottom' #searchTips='tiTip'>
+                        </div>
+                      </div>
+                      <div *ngIf="i !==0&&rawIndex==column.title" [tiTip]='tabSearch' tiTipMaxWidth='400px'
+                        tiTipPosition="top" class="tabSearchClick" (click)="searchShow(searchTips,column.title)">
+                        <div [tiTip]='tipContent2' tiTipTrigger='manual' tiTipPosition='bottom' #searchTips='tiTip'>
+                        </div>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container ti3-resize-wrapper" style="overflow-y: auto;max-height: 400px;">
+              <table>
+                <thead>
+                  <tr>
+                      <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                      <th *ngFor="let column of cpuUsageTitle" ></th>
+                  </tr>
+              </thead>
+                <tbody>
+                  <tr *ngFor="let row of cpuUsageDisplayData; ">
+
+                    <td tiOverflow *ngFor="let column of cpuUsageTitle;let index = index">
+                      <!-- 第一列CPU标识 -->
+                      <span [ngClass]="{'tableFirstData': index == 0}">
+                        <ng-container *ngIf="index==0">
+                          <span
+                            *ngIf="!row[column.key]['value'] && index!=0 && row[column.key]['value']!=0">{{row[column.key] }}</span>
+                          <span *ngIf="!row[column.key]['value'] && index==0 ">{{row[column.key] }}</span>
+                          <span *ngIf="row[column.key]['value'] ||  row[column.key]['value']==0"
+                            [ngClass]="{above: row[column.key]['above']}">
+                            <span [tiTip]='tipContentMem' [tiTipContext]='row[column.key]' tiTipMaxWidth='400px'
+                              *ngIf="row[column.key]['above']" tiTipPosition="right" class="blockCls">
+                              {{row[column.key]['value'] }}
+                              <img src="./assets/img/rocket.svg" *ngIf="row[column.key]['above']">
+                            </span>
+                            <span *ngIf="!row[column.key]['above']">{{row[column.key]['value'] }}</span>
+                          </span>
+                        </ng-container>
+                        <ng-container *ngIf="index!=0">
+                          <!-- 无建议数据 -->
+                          <span
+                            *ngIf="!row[column.key]['value'] && index!=0 && row[column.key]['value']!=0">{{row[column.key] | threePoint:2}}</span>
+                          <span *ngIf="!row[column.key]['value'] && index==0 ">{{row[column.key] | threePoint:2}}</span>
+                          <!-- 有建议数据 -->
+                          <span *ngIf="row[column.key]['value'] ||  row[column.key]['value']==0"
+                            [ngClass]="{above: row[column.key]['above']}">
+                            <span [tiTip]='tipContentMem' [tiTipContext]='row[column.key]' tiTipMaxWidth='400px'
+                              *ngIf="row[column.key]['above']" tiTipPosition="right" class="blockCls">
+                              {{row[column.key]['value'] | threePoint:2}}
+                              <img src="./assets/img/rocket.svg" *ngIf="row[column.key]['above']">
+                            </span>
+                            <!-- 有建议未超标数据 -->
+                            <span *ngIf="!row[column.key]['above']">{{row[column.key]['value'] | threePoint:2}}</span>
+                          </span>
+                        </ng-container>
+                      </span>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ti-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" style="padding-left: 10px;"
+              [(totalNumber)]="totalNumber" *ngIf="totalNumber > 10">
+            </ti-pagination>
+          </ti-table>
+        </div>
+      </div>
+      <div class="box">
+        <div class="box-title" (click)='toggle.averageLoad=!toggle.averageLoad'><img src="./assets/img/summary/row.png"
+            class='title-icon' [ngClass]="{active: toggle.averageLoad}">{{i18n.sys.titles.avgLoad}}</div>
+        <div class="box-content" [ngClass]="{active: toggle.averageLoad}">
+          <ti-table  tiColsResizable [(displayedData)]="cpuAvgDisplayData" [srcData]="cpuAvgSrcData" [columns]="cpuAvgTitle">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th *ngFor="let column of cpuAvgTitle;index as i">
+                      <ti-cell-text [ngClass]="{'tableFirstData': i == 0}">
+                        {{column.title}}{{column.danwei}}
+                      </ti-cell-text>
+                      <img src="./assets/img/summary/tooltip.png" [tiTip]='danwei' [tiTipContext]='column.key'
+                        tiTipMaxWidth='400px' tiTipPosition="right" class="th-tip-icon">
+                      <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                      <ti-head-sort [sortKey]="column.key" *ngIf='column.key'></ti-head-sort>
+
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container ti3-resize-wrapper" style="overflow-y: auto;max-height: 470px;">
+              <table>
+                <thead>
+                  <tr>
+                      <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                      <th *ngFor="let column of cpuAvgTitle" ></th>
+                  </tr>
+              </thead>
+                <tbody>
+                  <tr *ngFor="let row of cpuAvgDisplayData;">
+
+                    <td tiOverflow *ngFor="let column of cpuAvgTitle;index as i">
+                      <span [ngClass]="{'tableFirstData': i == 0}">
+                        <span
+                          *ngIf="!row[column.key]['value'] && row[column.key]['value']!=0">{{row[column.key] | threePoint:2}}</span>
+                        <span *ngIf="row[column.key]['value'] ||  row[column.key]['value']==0"
+                          [ngClass]="{above: row[column.key]['above']}">
+                          <span [tiTip]='tipContentMem' [tiTipContext]='row[column.key]' tiTipMaxWidth='400px'
+                            *ngIf="row[column.key]['above']" tiTipPosition="right" class="blockCls">
+                            {{row[column.key]['value'] | threePoint:2}}
+                            <img src="./assets/img/rocket.svg" *ngIf="row[column.key]['above']">
+                          </span>
+                          <span *ngIf="!row[column.key]['above']">{{row[column.key]['value'] | threePoint:2}}</span>
+                        </span>
+                      </span>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ti-table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box" *ngIf="memUsageDisplayData.length>0">
+    <div class="box-title" (click)='toggle.memory=!toggle.memory'><img src="./assets/img/summary/row.png"
+        class='title-icon' [ngClass]="{active: toggle.memory}">{{i18n.sys.titles.mem}}
+  
+    </div>
+    <div class="box-content" [ngClass]="{active: toggle.memory}">
+      <div class="box">
+        <div class="box-title" (click)='toggle.memoryUsage=!toggle.memoryUsage'><img src="./assets/img/summary/row.png"
+            class='title-icon' [ngClass]="{active: toggle.memoryUsage}">{{i18n.sys.titles.memUsage}}</div>
+        <div class="box-content" [ngClass]="{active: toggle.memoryUsage}">
+          <ti-table  tiColsResizable [(displayedData)]="memUsageDisplayData" [srcData]="memUsageSrcData" [columns]="memUsageTitle">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th *ngFor="let column of memUsageTitle;index as i">
+                      <ti-cell-text [ngClass]="{'tableFirstData': i == 0}">
+                        {{column.title}}{{column.danwei}}
+
+                      </ti-cell-text>
+                      <img src="./assets/img/summary/tooltip.png" [tiTip]='danwei' [tiTipContext]='column.key'
+                        tiTipMaxWidth='400px' tiTipPosition="right" class="th-tip-icon">
+                      <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                      <ti-head-sort [sortKey]="column.key" *ngIf='column.key'></ti-head-sort>
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container ti3-resize-wrapper" style="overflow-y: auto;max-height: 470px;">
+              <table>
+                <thead>
+                  <tr>
+                      <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                      <th *ngFor="let column of memUsageTitle" ></th>
+                  </tr>
+              </thead>
+                <tbody>
+                  <tr *ngFor="let row of memUsageDisplayData;">
+
+                    <td tiOverflow *ngFor="let column of memUsageTitle;index as i">
+                      <span [ngClass]="{'tableFirstData': i == 0}">
+                        <span
+                          *ngIf="!row[column.key]['value'] && row[column.key]['value']!=0">{{row[column.key] | threePoint:2}}</span>
+                        <span *ngIf="row[column.key]['value'] ||  row[column.key]['value']==0"
+                          [ngClass]="{above: row[column.key]['above']}">
+                          <span [tiTip]='tipContentMem' [tiTipContext]='row[column.key]' tiTipMaxWidth='400px'
+                            *ngIf="row[column.key]['above']" tiTipPosition="right" class="blockCls">
+                            {{row[column.key]['value'] | threePoint:2}}
+                            <img src="./assets/img/rocket.svg" *ngIf="row[column.key]['above']">
+                          </span>
+                          <span *ngIf="!row[column.key]['above']">{{row[column.key]['value'] | threePoint:2}}</span>
+                        </span>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ti-table>
+        </div>
+      </div>
+      <!-- 分页统计 -->
+      <div class="box">
+        <div class="box-title" (click)='toggle.memoryPag=!toggle.memoryPag'><img src="./assets/img/summary/row.png"
+            class='title-icon' [ngClass]="{active: toggle.memoryPag}">{{i18n.sys.titles.memPag}}</div>
+        <div class="box-content" [ngClass]="{active: toggle.memoryPag}">
+          <ti-table  tiColsResizable [(displayedData)]="memPagDisplayData" [srcData]="memPagSrcData" [columns]="memPagTitle">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th *ngFor="let column of memPagTitle;index as i">
+                      <ti-cell-text [ngClass]="{'tableFirstData': i == 0}">
+                        {{column.title}}{{column.danwei}}
+                      </ti-cell-text>
+                      <img src="./assets/img/summary/tooltip.png" [tiTip]='danwei' [tiTipContext]='column.key'
+                        tiTipMaxWidth='400px' tiTipPosition="right" class="th-tip-icon">
+                      <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                      <ti-head-sort [sortKey]="column.key" *ngIf='column.key'></ti-head-sort>
+
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container ti3-resize-wrapper" style="overflow-y: auto;max-height: 470px;">
+              <table>
+                <thead>
+                  <tr>
+                      <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                      <th *ngFor="let column of memPagTitle" ></th>
+                  </tr>
+              </thead>
+                <tbody>
+                  <tr *ngFor="let row of memPagDisplayData;">
+
+                    <td tiOverflow *ngFor="let column of memPagTitle;index as i">
+                      <span [ngClass]="{'tableFirstData': i == 0}">
+                        <span
+                          *ngIf="!row[column.key]['value'] && row[column.key]['value']!=0">{{row[column.key] | threePoint:2}}</span>
+                        <span *ngIf="row[column.key]['value'] ||  row[column.key]['value']==0"
+                          [ngClass]="{above: row[column.key]['above']}">
+                          <span [tiTip]='tipContentMem' [tiTipContext]='row[column.key]' tiTipMaxWidth='400px'
+                            *ngIf="row[column.key]['above']" tiTipPosition="right" class="blockCls">
+                            {{row[column.key]['value'] | threePoint:2}}
+                            <img src="./assets/img/rocket.svg" *ngIf="row[column.key]['above']">
+                          </span>
+                          <span *ngIf="!row[column.key]['above']">{{row[column.key]['value'] | threePoint:2}}</span>
+                        </span>
+                      </span>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ti-table>
+        </div>
+      </div>
+      <div class="box">
+        <div class="box-title" (click)='toggle.memorySwap=!toggle.memorySwap'><img src="./assets/img/summary/row.png"
+            class='title-icon' [ngClass]="{active: toggle.memorySwap}">{{i18n.sys.titles.memSwap}}</div>
+        <div class="box-content" [ngClass]="{active: toggle.memorySwap}">
+          <ti-table  tiColsResizable [(displayedData)]="memSwapDisplayData" [srcData]="memSwapSrcData" [columns]="memSwapTitle">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th *ngFor="let column of memSwapTitle;index as i">
+                      <ti-cell-text [ngClass]="{'tableFirstData': i == 0}">
+                        {{column.title}}{{column.danwei}}
+
+                      </ti-cell-text>
+                      <img src="./assets/img/summary/tooltip.png" [tiTip]='danwei' [tiTipContext]='column.key'
+                        tiTipMaxWidth='400px' tiTipPosition="right" class="th-tip-icon">
+                      <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                      <ti-head-sort [sortKey]="column.key" *ngIf='column.key'></ti-head-sort>
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container ti3-resize-wrapper" style="overflow-y: auto;max-height: 470px;">
+              <table>
+                <thead>
+                  <tr>
+                      <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                      <th *ngFor="let column of memSwapTitle" ></th>
+                  </tr>
+              </thead>
+                <tbody>
+                  <tr *ngFor="let row of memSwapDisplayData; ">
+
+                    <td tiOverflow *ngFor="let column of memSwapTitle;index as i">
+                      <span [ngClass]="{'tableFirstData': i == 0}">
+                        <span
+                          *ngIf="!row[column.key]['value'] && row[column.key]['value']!=0">{{row[column.key] | threePoint:2}}</span>
+                        <span *ngIf="row[column.key]['value'] ||  row[column.key]['value']==0"
+                          [ngClass]="{above: row[column.key]['suggest_chs']}">
+                          <span [tiTip]='tipContentMemSwap' [tiTipContext]='row[column.key]' tiTipMaxWidth='400px'
+                            *ngIf="row[column.key]['suggest_chs']; else noSuggestSwap" tiTipPosition="right"
+                            class="blockCls">
+                            {{row[column.key]['value'] | threePoint:2}}
+                            <img src="./assets/img/rocket.svg" alt="">
+                          </span>
+                          <ng-template #noSuggestSwap>
+                            <span>{{row[column.key]['value'] | threePoint:2}}</span>
+                          </ng-template>
+                        </span>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ti-table>
+        </div>
+      </div>
+      <!-- NUMA内存统计 -->
+      <div class="box">
+        <div class="box-title" (click)='toggle.numaStatistics=!toggle.numaStatistics'><img
+            src="./assets/img/summary/row.png" class='title-icon'
+            [ngClass]="{active: toggle.numaStatistics}">{{i18n.sys_summary.cpupackage_tabel.statistics}}</div>
+        <div class="box-content" [ngClass]="{active: toggle.numaStatistics}">
+          <ti-table  tiColsResizable [(displayedData)]="numaStatisticsDisplayData" [srcData]="numaStatisticsData"
+            [columns]="numaStatisticsTitle">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th *ngFor="let column of numaStatisticsTitle;index as i">
+                      <ti-cell-text [ngClass]="{'tableFirstData': i == 0}">
+                        {{column.title}}
+                      </ti-cell-text>
+                      <img src="./assets/img/summary/tooltip.png" *ngIf="column.key&&i!==0" [tiTip]='danwei'
+                        [tiTipContext]='column.key' tiTipMaxWidth='400px' tiTipPosition="right" class="th-tip-icon">
+                      <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                      <ti-head-sort [sortKey]="column.key" *ngIf='column.key'></ti-head-sort>
+
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container ti3-resize-wrapper" style="overflow-y: auto;max-height: 470px;">
+              <table>
+                <thead>
+                  <tr>
+                      <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                      <th *ngFor="let column of numaStatisticsTitle" ></th>
+                  </tr>
+              </thead>
+                <tbody>
+                  <tr *ngFor="let row of numaStatisticsDisplayData; ">
+                    <td tiOverflow *ngFor="let column of numaStatisticsTitle;index as i">
+                      <span [ngClass]="{'tableFirstData': i == 0}">
+                        <span
+                          *ngIf="!row[column.key]['value'] && row[column.key]['value']!=0">{{row[column.key] | threePoint:2}}</span>
+                        <span *ngIf="row[column.key]['value'] ||  row[column.key]['value']==0"
+                          [ngClass]="{above: row[column.key]['suggest_chs']}">
+                          <span [tiTip]='tipContentMemSwap' [tiTipContext]='row[column.key]' tiTipMaxWidth='400px'
+                            *ngIf="row[column.key]['suggest_chs']; else noSuggestSwap" tiTipPosition="right"
+                            class="blockCls">
+                            {{row[column.key]['value'] | threePoint:2}}
+                            <img src="./assets/img/rocket.svg" alt="">
+                          </span>
+                          <ng-template #noSuggestSwap>
+                            <span>{{row[column.key]['value'] | threePoint:2}}</span>
+                          </ng-template>
+                        </span>
+                      </span>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ti-table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box" *ngIf="diskDisplayData.length>0">
+    <div class="box-title" (click)='toggle.disk=!toggle.disk'><img src="./assets/img/summary/row.png" class='title-icon'
+        [ngClass]="{active: toggle.disk}">{{i18n.sys.disk}}
+
+    </div>
+    <div class="box-content" [ngClass]="{active: toggle.disk}">
+      <div class="box">
+        <div class="box-title" (click)='toggle.diskBlock=!toggle.diskBlock'><img src="./assets/img/summary/row.png"
+            class='title-icon' [ngClass]="{active: toggle.diskBlock}">{{i18n.sys.titles.diskBlock}}</div>
+        <div class="box-content" [ngClass]="{active: toggle.diskBlock}">
+          <ti-table  tiColsResizable [(displayedData)]="diskDisplayData" [srcData]="diskSrcData" [columns]="diskTitle">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th *ngFor="let column of diskTitle;index as i">
+                      <ti-cell-text [ngClass]="{'tableFirstData': i == 0}">
+                        {{column.title}}{{column.danwei}}
+                      </ti-cell-text>
+                      <img src="./assets/img/summary/tooltip.png" [tiTip]='danwei' [tiTipContext]='column.key'
+                        tiTipMaxWidth='400px' tiTipPosition="right" class="th-tip-icon">
+                      <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                      <ti-head-sort [sortKey]="column.key" *ngIf='column.mycompareFn' [compareFn]='mycompareFn'>
+                      </ti-head-sort>
+                      <ti-head-sort [sortKey]="column.key" *ngIf='!column.mycompareFn'></ti-head-sort>
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container ti3-resize-wrapper" style="overflow-y: auto;max-height: 470px;">
+              <table>
+                <thead>
+                  <tr>
+                      <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                      <th *ngFor="let column of diskTitle" ></th>
+                  </tr>
+              </thead>
+                <tbody>
+                  <tr *ngFor="let row of diskDisplayData;">
+
+                    <td tiOverflow *ngFor="let column of diskTitle;let index = index">
+                      <span [ngClass]="{'tableFirstData': index == 0}">
+                        <span
+                          *ngIf="!row[column.key]['value'] && index!=0 && row[column.key]['value']!=0">{{row[column.key] | threePoint:2}}</span>
+                        <span *ngIf="!row[column.key]['value'] && index==0">{{row[column.key] | threePoint:2}}</span>
+                        <span *ngIf="row[column.key]['value'] ||  row[column.key]['value']==0"
+                          [ngClass]="{above: row[column.key]['above']}">
+                          <span [tiTip]='tipContentMem' [tiTipContext]='row[column.key]' tiTipMaxWidth='400px'
+                            *ngIf="row[column.key]['above']" tiTipPosition="right" class="blockCls">
+                            {{row[column.key]['value'] | threePoint:2}}
+                            <img src="./assets/img/rocket.svg" *ngIf="row[column.key]['above']">
+                          </span>
+                          <span *ngIf="!row[column.key]['above']">{{row[column.key]['value'] | threePoint:2}}</span>
+                        </span>
+                      </span>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ti-table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- 网络IO -->
+  <div class="box" *ngIf="netOkDisplayData.length>0">
+    <div class="box-title" (click)='toggle.net=!toggle.net'><img src="./assets/img/summary/row.png" class='title-icon'
+        [ngClass]="{active: toggle.net}">{{i18n.sys.titles.net}}
+
+    </div>
+    <div class="box-content" [ngClass]="{active: toggle.net}">
+      <!-- 网络设备统计 -->
+      <div class="box">
+        <div class="box-title" (click)='toggle.netOk=!toggle.netOk'><img src="./assets/img/summary/row.png"
+            class='title-icon' [ngClass]="{active: toggle.netOk}">{{i18n.sys.titles.netOk}}</div>
+        <div class="box-content" [ngClass]="{active: toggle.netOk}">
+          <ti-table  tiColsResizable [(displayedData)]="netOkDisplayData" [srcData]="netOkSrcData" [columns]="netOkTitle">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th *ngFor="let column of netOkTitle;index as i">
+                      <!-- 给th加flex会换行 -->
+                      <ti-cell-text [ngClass]="{'tableFirstData': i == 0}">
+                        {{column.title}}{{column.danwei}}
+                      </ti-cell-text>
+                      <img src="./assets/img/summary/tooltip.png" [tiTip]='danwei' [tiTipContext]='column.key'
+                        tiTipMaxWidth='400px' tiTipPosition="right" class="th-tip-icon">
+                      <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                      <ti-head-sort [sortKey]="column.key" *ngIf='column.key'></ti-head-sort>
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container ti3-resize-wrapper" style="overflow-y: auto;max-height: 470px;">
+              <table>
+                <thead>
+                  <tr>
+                      <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                      <th *ngFor="let column of netOkTitle" ></th>
+                  </tr>
+              </thead>
+                <tbody>
+                  <tr *ngFor="let row of netOkDisplayData; ">
+
+                    <td tiOverflow *ngFor="let column of netOkTitle;let index = index">
+                      <span [ngClass]="{'tableFirstData': index == 0}">
+                        <ng-container *ngIf="index == 0">
+                          <span *ngIf="!row[column.key]['value']">{{row[column.key] | threePoint:2}}</span>
+                          <img [tiTip]='tipContent1' [tiTipContext]="row['suggest']" tiTipPosition="right"
+                            tiTipMaxWidth='400px' src="./assets/img/rocket.svg" alt=""
+                            style="padding-left:8px;vertical-align: middle;"
+                            *ngIf="row['suggest'] && row['suggest']['suggest_chs']">
+                        </ng-container>
+                        <ng-container *ngIf="index != 0">
+                          <span
+                            *ngIf="!row[column.key]['value'] && row[column.key]['value']!=0">{{row[column.key] | threePoint:2}}</span>
+                          <span *ngIf="row[column.key]['value'] ||  row[column.key]['value']==0"
+                            [ngClass]="{above: row[column.key]['above']}">
+                            <span [tiTip]='tipContentMem' [tiTipContext]='row[column.key]' tiTipMaxWidth='400px'
+                              *ngIf="row[column.key]['above']" tiTipPosition="right" class="blockCls">
+                              {{row[column.key]['value'] | threePoint:2}}
+                            </span>
+                            <span *ngIf="!row[column.key]['above']"
+                              [ngStyle]="row[column.key]['suggest_chs']?{color:'#f45c5e'}:{color:'#333'}">{{row[column.key]['value'] | threePoint:2}}</span>
+                          </span>
+                          <img [tiTip]='tipContent1' [tiTipContext]='row[column.key]' tiTipPosition="right"
+                            tiTipMaxWidth='400px' src="./assets/img/rocket.svg" alt=""
+                            style="padding-left:8px;vertical-align: middle;" *ngIf="row[column.key]['suggest_chs']">
+                        </ng-container>
+                      </span>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ti-table>
+        </div>
+      </div>
+      <!-- 网络设备故障统计 -->
+      <div class="box">
+        <div class="box-title" (click)='toggle.netError=!toggle.netError'><img src="./assets/img/summary/row.png"
+            class='title-icon' [ngClass]="{active: toggle.netError}">{{i18n.sys.titles.netError}}</div>
+        <div class="box-content" [ngClass]="{active: toggle.netError}">
+          <ti-table  tiColsResizable [(displayedData)]="netErrorDisplayData" [srcData]="netErrorSrcData" [columns]="netErrorTitle">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th *ngFor="let column of netErrorTitle;index as i">
+                      <ti-cell-text [ngClass]="{'tableFirstData': i == 0}">
+                        {{column.title}}{{column.danwei}}
+                      </ti-cell-text>
+                      <img src="./assets/img/summary/tooltip.png" [tiTip]='danwei' [tiTipContext]='column.key'
+                        tiTipMaxWidth='400px' tiTipPosition="right" class="th-tip-icon">
+                      <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                      <ti-head-sort [sortKey]="column.key" *ngIf='column.key'></ti-head-sort>
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container ti3-resize-wrapper" style="overflow-y: auto;max-height: 470px;">
+              <table>
+                <thead>
+                  <tr>
+                      <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                      <th *ngFor="let column of netErrorTitle" ></th>
+                  </tr>
+              </thead>
+                <tbody>
+                  <tr *ngFor="let row of netErrorDisplayData; ">
+
+                    <td tiOverflow *ngFor="let column of netErrorTitle;let index = index">
+                      <span
+                        *ngIf="!row[column.key]['value'] && index!=0 && row[column.key]['value']!=0">{{row[column.key] | threePoint:2}}</span>
+                      <span *ngIf="!row[column.key]['value'] && index==0">{{row[column.key] | threePoint:2}}</span>
+                      <span [ngClass]="{above: row[column.key]['above']}">
+                        <span [tiTip]='tipContentMem' [tiTipContext]='row[column.key]' tiTipMaxWidth='400px'
+                          *ngIf="row[column.key]['above']" tiTipPosition="right" class="blockCls">
+                          {{row[column.key]['value'] | threePoint:2}}
+                        </span>
+                        <span *ngIf="!row[column.key]['above']">{{row[column.key]['value'] | threePoint:2}}</span>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ti-table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 能耗 -->
+  <div class="box">
+    <div class="box-title" (click)='toggle.consumption=!toggle.consumption'><img src="./assets/img/summary/row.png"
+        class='title-icon' [ngClass]="{active: toggle.consumption}">{{i18n.sys_summary.cpupackage_tabel.consumption}}
+
+    </div>
+    <div class="box-content" [ngClass]="{active: toggle.consumption}">
+      <ti-table  tiColsResizable [(displayedData)]="consumptionDisplayData" [srcData]="consumptionContentData"
+        [columns]="consumptionTitle">
+        <div class="ti3-table-fixed-head">
+          <table>
+            <thead>
+              <tr>
+                <th tiOverflow *ngFor="let column of consumptionTitle;index as i" width="{{column.width}}">
+                  <span [ngClass]="{'tableFirstData': i == 0}">
+                    {{column.title}} </span>
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="ti3-table-container ti3-resize-wrapper" style="overflow-y: auto;max-height: 470px;">
+          <table>
+            <thead>
+              <tr>
+                  <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                  <th *ngFor="let column of consumptionTitle" ></th>
+              </tr>
+          </thead>
+            <tbody *ngIf="consumptionDisplayData.length>0">
+              <tr *ngFor="let item of consumptionDisplayData;">
+                <td tiOverflow tiTipPosition='left'><span class="tableFirstData">{{item.average}}</span></td>
+                <td tiOverflow tiTipPosition='left'>{{item.max}}</td>
+                <td tiOverflow tiTipPosition='left'>{{item.min}}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="consumptionDisplayData.length==0">
+              <tr class="ti3-table-nodata-simple">
+                <td tiColspan>
+                  <img style='width:198px;' src='./assets/img/projects/nodata.png' />
+                  <div style="font-size: 1rem">{{i18n.common_term_task_nodata}}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ti-pagination *ngIf="consumptionDisplayData.length > 10" [(currentPage)]="consumptionCurrentPage"
+          style="padding-left: 10px;" [pageSize]="consumptionPageSize" [(totalNumber)]="consumptionDisplayData">
+        </ti-pagination>
+      </ti-table>
+    </div>
+  </div>
+
+
+
+  <div class="nodata" *ngIf="resData.length==0">
+    <img style='width:198px;display:block' src='./assets/img/projects/nodata.png' />
+    <div style="font-size: 1rem" *ngIf="axiosStatus < 2">{{i18n.loading}}</div>
+    <div style="font-size: 1rem" *ngIf="axiosStatus >= 2">{{i18n.common_term_task_nodata2}}</div>
+  </div>
+  <ng-template #tipContent let-context='context'>
+    <span>{{i18n.sys.baseValue}}:</span><span style="color:#f45c5e;margin-left: 4px">{{context.ref}}</span>
+    <div>{{i18n.sys.sug}}:
+      <span style="color:#f45c5e;margin-left: 4px" *ngIf="language=='zh'">{{context['suggest_chs']}}</span>
+      <span style="color:#f45c5e;margin-left: 4px" *ngIf="language=='en'">{{context['suggest_chs']}}</span>
+    </div>
+  </ng-template>
+
+  <ng-template #tipContentMem let-context='context'>
+    <span>{{i18n.sys.baseValue}}:</span><span style="color:#f45c5e;margin-left: 4px">{{context.ref}}</span>
+    <div>{{i18n.sys.sug}}:
+      <span style="color:#f45c5e;margin-left: 4px" *ngIf="language=='zh'">{{context.suggestion_ch}}</span>
+      <span style="color:#f45c5e;margin-left: 4px" *ngIf="language=='en'">{{context.suggestion_en}}</span>
+    </div>
+  </ng-template>
+  <ng-template #tipContentMemSwap let-context='context'>
+    <span>{{i18n.sys.baseValue}}:</span><span>{{ context.base_value }}</span>
+    <div>
+      <span *ngIf="language=='zh'" [innerHTML]="context.suggest_chs"></span>
+      <span *ngIf="language=='en'" [innerHTML]="context.suggest_en"></span>
+    </div>
+  </ng-template>
+  <ng-template #danwei let-context='context'>
+    <span>{{i18n.sys.tip[context]}}</span>
+  </ng-template>
+</div>
+
+<ng-template #tipContent1 let-context='context'>
+  <!-- 注意这里不会显示*ngIf="false" -->
+  <div class="suggest_content" *ngIf="false">
+    <div>{{i18n.sys.baseValue}}:{{context['base_value']}}</div>
+    <div>{{i18n.sys.sug}}:
+      <div>
+        <span style="margin-left: 4px"
+          *ngIf="language=='zh' && context['suggest_chs'].length==1">{{context['suggest_chs']}}</span>
+        <span style="margin-left: 4px"
+          *ngIf="language=='en' && context['suggest_en'].length==1">{{context['suggest_en']}}</span>
+      </div>
+      <div *ngIf="language=='zh' && context['suggest_chs'].length>1">
+        <p style="margin-left: 4px" *ngFor="let item of context['suggest_chs'];let index = index">({{index+1}}){{item}}
+        </p>
+      </div>
+      <div *ngIf="language=='en' && context['suggest_en'].length>1">
+        <p style="margin-left: 4px" *ngFor="let item of context['suggest_en'];let index = index">({{index+1}}){{item}}
+        </p>
+      </div>
+    </div>
+
+  </div>
+  <div class="suggest_content">
+    <div>{{i18n.sys.baseValue}}:{{context['base_value']}}</div>
+    <div>
+      <div>
+        <span *ngIf="language=='zh' && context['suggest_chs'].length==1" [innerHTML]="context['suggest_chs']"></span>
+        <span *ngIf="language=='en' && context['suggest_en'].length==1" [innerHTML]="context['suggest_en']"></span>
+      </div>
+      <div *ngIf="language=='zh' && context['suggest_chs'].length>1">
+        <p *ngFor="let item of context['suggest_chs'];let index = index" [innerHTML]="getMultipleSug(index, item)">
+        </p>
+      </div>
+      <div *ngIf="language=='en' && context['suggest_en'].length>1">
+        <p *ngFor="let item of context['suggest_en'];let index = index" [innerHTML]="getMultipleSug(index, item)">
+        </p>
+      </div>
+    </div>
+
+  </div>
+</ng-template>
+
+<ng-template #tipContent2 let-context='context'>
+  <div class="tabSearchBox" id="tabSearchBox">
+    <p>{{tabSearch}}</p>
+    <div class="slide" id="slide">
+      <div class="range" id="range">
+        <span class="left" (mousedown)="left($event)" id="searchLeft"></span>
+        <span class="right" (mousedown)="right($event)" id="searchRight"></span>
+      </div>
+
+    </div>
+    <div class="slideNumber">
+      <input #min type="text" [(ngModel)]="minValue" tiText tiNumber [ngClass]="{'minNum': !minShow}" maxlength="3"
+        min="0" max="99" [format]="format" (blur)="minOnBlur()" name="myinputnumber" autofocus
+        (keydown)="minChange($event)" />
+
+      <input type="text" [(ngModel)]="minValue2" *ngIf="!minShow" tiText min="0" maxlength="4" (focus)="onFocus(min)" />
+
+
+      <span></span>
+      <input #max type="text" [(ngModel)]="maxValue" tiText [ngClass]="{'maxNum': !maxShow}" maxlength="3" min="1"
+        max="100" [format]="format" tiNumber name="myinputnumber1" autofocus (blur)="maxOnBlur()"
+        (keydown)="maxChange($event)" />
+
+      <input type="text" [(ngModel)]="maxValue2" tiText *ngIf="!maxShow" maxlength="3" (focus)="maxFocus(max)" />
+    </div>
+    <div class="btn">
+      <button type="button" tiButton (click)="searchConfirm()">{{i18n.common_term_operate_ok}}</button>
+      <button type="button" tiButton (click)="searchCancel()">{{i18n.common_term_operate_cancel}}</button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,64 @@
+<div class="control">
+  <div class="item-table">
+    <div style="margin-bottom: 20px; display: flex; justify-content: space-between;align-items: center;">
+      <div style="display: flex;align-items: center;">
+        <div style="display: flex;align-items: center;">
+          <button type="button" tiButton color="primary" [disabled]="startBtnDisabled || snapShot"
+            (click)="startMongodb()" *ngIf="!isStart" class="left-btn">
+            {{ i18n.protalserver_profiling_mongodb.start_analysis }}
+          </button>
+          <button type="button" tiButton color="primary" (click)="stopMongodb()" *ngIf="isStart" class="left-btn">
+            {{ i18n.protalserver_profiling_mongodb.stop_analysis }}
+          </button>
+          <img [tiTip]="mdbBtnTip" tiTipPosition="right" style="width: 12px; height: 12px;margin-left: 10px;"
+            src="./assets/img/newSvg/hollowTip.svg" alt="">
+        </div>
+        <div style="display: flex; margin-left: 24px;align-items: center;">
+          <span style="margin-right: 10px; font-size: 14px; color: #6c7280;">{{
+            threshold.label
+            }}</span>
+          <ti-formfield [formGroup]="mongodbGroup">
+            <ti-item>
+              <ti-spinner class="mongodb-threshold" style="width: 170px;" name="spinner" [format]="threshold.format"
+                [tiRangeValue]="threshold.rangeValue" tiValidation tiRequired
+                [disabled]="startBtnDisabled || snapShot || isStart" (blur)="verifySpinnerValue(mongodbBlur)"
+                formControlName="mongodb_threshold">
+              </ti-spinner>
+            </ti-item>
+          </ti-formfield>
+          <img [tiTip]="mdbThresholdTip" tiTipPosition="right" style="width: 12px; height: 12px;margin-left: 10px;"
+            src="./assets/img/newSvg/hollowTip.svg" alt="">
+        </div>
+      </div>
+      <div style="position: relative;cursor: pointer;" *ngIf="!snapShot">
+        <div [ngClass]="isDownload?'notSnapshot':'snapshotBg'" (click)="doSnap('mongodb')"
+          [tiTip]='i18n.snapshot_analysis_content1' tiTipMaxWidth="221px" [tiTipContext]='tip1Context'
+          tiTipPosition='top-right'></div>
+        <span [ngClass]="isDownload?'count_disabled':'red_count'" *ngIf="snapCount > 0">{{snapCount}}</span>
+      </div>
+    </div>
+    <div id="mongodb-sql-table" *ngIf="srcData.data.length !== 0">
+      <app-hotword-table #hotWordTable [srcData]="srcData" [columns]="columns"
+        (sendExpandData)="send_ExpandData($event)" (sendTableSort)="onTableSort($event)">
+      </app-hotword-table>
+    </div>
+    <div *ngIf="srcData.data.length === 0" class="databaseNodata">
+      <div *ngIf="!isStart">
+        <img class='newNoData' src="./assets/img/projects/noData.svg" />
+      </div>
+      <div class="analyz-svg" *ngIf="isStart">
+        <img class="browser-img" src="./assets/img/profiling/browserPreview.gif">
+      </div>
+      <div class="no-text">
+        {{ isStart ? i18n.profileNoData.mongoDBNoDataMsg2 : noDataMsg }}</div>
+    </div>
+  </div>
+  <div class="item-echart" style="height: 310px;" *ngIf="echartDatas.executed && echartDatas.executed.length">
+    <div class="title">{{ i18n.protalserver_profiling_jdbc.monitor }}</div>
+    <ng-container>
+      <app-echarts-common #mongodbEcharts [startDate]="startDate" [datas]="echartDatas" [updateOptions]="updateOptions"
+        [timeData]='timeData'>
+      </app-echarts-common>
+    </ng-container>
+  </div>
+</div>

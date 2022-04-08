@@ -1,0 +1,368 @@
+<div class="cplusplus structure" [ngClass]="{ strulab: isModifySchedule, create: !isModifySchedule}">
+    <ti-formfield
+        vertical
+        [labelWidth]="labelWidth"
+        [formGroup]="cCurrntFormC"
+        class="taskForm"
+    >
+        <!-- 选择节点 -->
+        <ti-item *ngIf="analysisScene.TYPE_HPC === scenes" [required]="true">
+        <ti-item-label>
+            {{ i18n.node.selectNode }}
+            <span class="tint">{{ 'project.HPCSelectNodeTxt' | i18n : ('mission_create.cPlusPlus' | i18n) }}</span>
+        </ti-item-label>
+        <app-not-hpc-select-nodes
+            [width]="isModifySchedule ? '600px' : '952px'"
+            [nodeList]="nodeList"
+            [isSelectNodeDisabled]="isSelectNodeDisabled"
+            formControlName="nodeList"
+            ></app-not-hpc-select-nodes>
+        </ti-item>
+    </ti-formfield>
+
+    <ti-formfield vertical [labelWidth]="labelWidth" [formGroup]='launchItemsCForm' class="taskForm" *ngIf="isLaunch">
+        <!-- 采样范围 -->
+        <ti-item [required]="false">
+            <ti-item-label>
+                <span>{{i18n.micarch.label.typeItem}}</span>
+            </ti-item-label>
+            <ti-select style="width: 335px;" [options]="commentItems.typeItem.options" [tiValidation]='validation'
+                formControlName='typeItem_ctrl'></ti-select>
+        </ti-item>
+        <ti-item [label]="commentItems.cpu.label+ ' (' + LaunchItemsC.cpu.unit + ')'"
+            [required]="commentItems.cpu.required">
+            <div class="formContent">
+                <ti-select class="cpu-ctrl" [options]="commentItems.cpu.options" [tiValidation]='validation'
+                    formControlName='cpu_ctrl' (ngModelChange)="cpu_interval_change($event, LaunchItemsC.cpu, 'C')">
+                </ti-select>
+                <ti-spinner name='spinner' [step]='commentItems.cpu.spinner.step'
+                    [format]="commentItems.cpu.spinner.format" [placeholder]='commentItems.cpu.spinner.placeholder'
+                    [appSpinnerBlur]="intervalBlur" tiValidation [correctable]="false"
+                    formControlName='cpu_spinner_ctrl' style='width: 165px;'
+                    [errorMessageWrapper]='appIntervalErrorMsgWrapper'></ti-spinner>
+
+                <!-- 尾后提示 -->
+                <span class="tailPrompt">
+                    {{ commentItems.cpu.tailPrompt }}
+                </span>
+            </div>
+
+            <!-- 自定义错误提示位置 -->
+            <div #appIntervalErrorMsgWrapper></div>
+        </ti-item>
+
+        <ti-item [required]="commentItems.b_s.required">
+            <ti-item-label>
+                <span>{{commentItems.b_s.label}}</span>
+                <ti-icon [tiTip]="commentItems.b_s.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/template/icon_question.svg' *ngIf="currTheme === ColorTheme.Dark">
+                    <img src='./assets/img/template/icon_question_light.svg' *ngIf="currTheme === ColorTheme.Light">
+                </ti-icon>
+            </ti-item-label>
+            <input type="text" tiText [tiValidation]='validation' formControlName='b_s_ctrl' style="width: 335px"
+                [disabled]="nodeConfigC.switchStatus">
+        </ti-item>
+        <ti-item [required]="commentItems.c_source.required">
+            <ti-item-label>
+                <span>{{commentItems.c_source.label}}</span>
+                <ti-icon [tiTip]="commentItems.c_source.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/template/icon_question.svg' *ngIf="currTheme === ColorTheme.Dark">
+                    <img src='./assets/img/template/icon_question_light.svg' *ngIf="currTheme === ColorTheme.Light">
+                </ti-icon>
+            </ti-item-label>
+            <input type="text" tiText [tiValidation]='validation' formControlName='source_ctrl' style="width: 335px"
+                [disabled]="nodeConfigC.switchStatus">
+        </ti-item>
+
+        <!-- 采集文件大小 -->
+        <ti-item [required]="commentItems.c_r.required">
+            <div class="formContent">
+                <ti-item-label>
+                    <span>{{commentItems.c_r.label}}</span>
+                    <ti-icon [tiTip]="commentItems.c_r.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                        tiTipPosition="bottom">
+                        <img src='./assets/img/template/icon_question.svg' *ngIf="currTheme === ColorTheme.Dark">
+                        <img src='./assets/img/template/icon_question_light.svg' *ngIf="currTheme === ColorTheme.Light">
+                    </ti-icon>
+                </ti-item-label>
+                <ti-spinner name='spinner' [step]='commentItems.c_r.step' [format]="commentItems.c_r.format"
+                    [correctable]="false" [placeholder]='commentItems.c_r.placeholder' tiValidation
+                    formControlName='c_r_ctrl' [appSpinnerBlur]="collectFileBlur" style='width: 165px;'
+                    [errorMessageWrapper]='sysDurationRangeErrorMsgWrapper1'></ti-spinner>
+
+                <!-- 尾后提示 -->
+                <span class="tailPrompt">
+                    {{ commentItems.c_r.tailPrompt }}
+                </span>
+            </div>
+
+            <!-- 自定义错误提示位置 -->
+            <div #sysDurationRangeErrorMsgWrapper1></div>
+        </ti-item>
+
+        <!-- 内核函数关联汇编指令 -->
+        <ti-item [required]="commentItems.kcore.required">
+            <ti-item-label [ngClass]="{'wrap':isModifySchedule && commentItems.kcore.label === strObj.kcore}">
+                {{ commentItems.kcore.label }}</ti-item-label>
+            <div class="formContent">
+                <ti-switch formControlName="kcore"></ti-switch>
+            </div>
+        </ti-item>
+    </ti-formfield>
+
+    <!-- profile system -->
+    <ti-formfield vertical [labelWidth]="labelWidth" [formGroup]="profileItemsCForm" class="taskForm" *ngIf="isProfile">
+        <!-- 采样时长 -->
+        <ti-item [label]="commentItems.c_d.label" [required]="commentItems.c_d.required">
+            <div class="formContent">
+                <ti-spinner name='spinner' [step]='commentItems.c_d.step' [format]="commentItems.c_d.format"
+                    [correctable]="false" [placeholder]='commentItems.c_d.placeholder' tiValidation
+                    formControlName='c_d_ctrl' [appSpinnerBlur]="samplingDurationBlur" style='width: 165px;'
+                    [errorMessageWrapper]='sysDurationErrorMsgWrapper'></ti-spinner>
+
+                <!-- 尾后提示 -->
+                <span class="tailPrompt">
+                    {{ commentItems.c_d.tailPrompt }}
+                </span>
+            </div>
+
+            <!-- 自定义错误提示位置 -->
+            <div #sysDurationErrorMsgWrapper></div>
+        </ti-item>
+        <!-- 采样间隔 -->
+        <ti-item [label]="commentItems.cpu.label + ' (' + profileItemC.cpu.unit + ')'"
+            [required]="commentItems.cpu.required">
+            <div class="formContent">
+                <ti-select [ngStyle]="{width: selectWidth ? selectWidth : '165px'}" class="cpu-ctrl-select"
+                    [options]="commentItems.cpu.options" [tiValidation]='validation' formControlName='cpu_ctrl'
+                    (ngModelChange)="cpu_interval_change($event, profileItemC.cpu, 'C')">
+                </ti-select>
+                <ti-spinner name='spinner' [step]='commentItems.cpu.spinner.step'
+                    [format]="commentItems.cpu.spinner.format" [placeholder]='commentItems.cpu.spinner.placeholder'
+                    [correctable]="false" [appSpinnerBlur]="intervalBlur" tiValidation
+                    formControlName='cpu_spinner_ctrl' style='width: 165px;'
+                    [errorMessageWrapper]='sysIntervalErrorMsgWrapper'></ti-spinner>
+
+                <!-- 尾后提示 -->
+                <span class="tailPrompt">
+                    {{ commentItems.cpu.tailPrompt }}
+                </span>
+            </div>
+
+            <!-- 自定义错误提示位置 -->
+            <div #sysIntervalErrorMsgWrapper></div>
+        </ti-item>
+        <!-- 采样范围 -->
+        <ti-item [required]="false">
+            <ti-item-label>
+                <span>{{i18n.micarch.label.typeItem}}</span>
+            </ti-item-label>
+            <ti-select style="width: 335px;" [options]="commentItems.typeItem.options" [tiValidation]='validation'
+                formControlName='typeItem_ctrl'></ti-select>
+        </ti-item>
+        <!-- 待采样CPU核 -->
+        <ti-item [required]="commentItems.mask.required">
+            <ti-item-label>
+                <span>{{commentItems.mask.label}}</span>
+                <ti-icon [tiTip]="commentItems.mask.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/template/icon_question.svg' *ngIf="currTheme === ColorTheme.Dark">
+                    <img src='./assets/img/template/icon_question_light.svg' *ngIf="currTheme === ColorTheme.Light">
+                </ti-icon>
+            </ti-item-label>
+            <input type="text" tiText [tiValidation]='validation' formControlName='mask_ctrl' style="width: 335px">
+        </ti-item>
+        <ti-item [required]="commentItems.b_s.required">
+            <ti-item-label>
+                <span>{{commentItems.b_s.label}}</span>
+                <ti-icon [tiTip]="commentItems.b_s.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/template/icon_question.svg' *ngIf="currTheme === ColorTheme.Dark">
+                    <img src='./assets/img/template/icon_question_light.svg' *ngIf="currTheme === ColorTheme.Light">
+                </ti-icon>
+            </ti-item-label>
+            <input type="text" tiText [tiValidation]='validation' formControlName='b_s_ctrl' style="width: 335px">
+        </ti-item>
+        <ti-item [required]="commentItems.c_source.required">
+            <ti-item-label>
+                <span>{{commentItems.c_source.label}}</span>
+                <ti-icon [tiTip]="commentItems.c_source.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/template/icon_question.svg' *ngIf="currTheme === ColorTheme.Dark">
+                    <img src='./assets/img/template/icon_question_light.svg' *ngIf="currTheme === ColorTheme.Light">
+                </ti-icon>
+            </ti-item-label>
+            <input type="text" tiText [tiValidation]='validation' formControlName='source_ctrl' style="width: 335px">
+        </ti-item>
+        <!-- 采集文件大小 -->
+        <ti-item [required]="commentItems.c_r.required">
+            <div class="formContent">
+                <ti-item-label>
+                    <span>{{commentItems.c_r.label}}</span>
+                    <ti-icon [tiTip]="commentItems.c_r.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                        tiTipPosition="bottom">
+                        <img src='./assets/img/template/icon_question.svg' *ngIf="currTheme === ColorTheme.Dark">
+                        <img src='./assets/img/template/icon_question_light.svg' *ngIf="currTheme === ColorTheme.Light">
+                    </ti-icon>
+                </ti-item-label>
+                <ti-spinner name='spinner' [step]='commentItems.c_r.step' [format]="commentItems.c_r.format"
+                    [correctable]="false" [placeholder]='commentItems.c_r.placeholder' tiValidation
+                    formControlName='c_r_ctrl' [appSpinnerBlur]="collectFileBlur" style='width: 165px;'
+                    [errorMessageWrapper]='sysDurationRangeErrorMsgWrapper2'></ti-spinner>
+
+
+                <span class="tailPrompt">
+                    {{ commentItems.c_r.tailPrompt }}
+                </span>
+            </div>
+
+            <div #sysDurationRangeErrorMsgWrapper2></div>
+        </ti-item>
+        <!-- 内核函数关联汇编指令 -->
+        <ti-item [required]="commentItems.kcore.required">
+            <ti-item-label [ngClass]="{'wrap':isModifySchedule && commentItems.kcore.label === strObj.kcore}">
+                {{ commentItems.kcore.label }}</ti-item-label>
+            <div class="formContent">
+                <ti-switch formControlName="kcore"></ti-switch>
+            </div>
+        </ti-item>
+    </ti-formfield>
+
+    <!-- attach to process -->
+    <ti-formfield vertical [labelWidth]="labelWidth" [formGroup]="attachItemsCForm" class="taskForm" *ngIf="isAttach">
+        <!-- 采样时长 -->
+        <ti-item [label]="commentItems.c_d.label" [required]="commentItems.c_d.required">
+            <div class="formContent">
+                <ti-spinner name='spinner' [step]='commentItems.c_d.step' [format]="commentItems.c_d.format"
+                    [correctable]="false" [placeholder]='commentItems.c_d.placeholder' tiValidation
+                    formControlName='c_d_ctrl' [appSpinnerBlur]="samplingDurationBlur" style='width: 165px;'
+                    [errorMessageWrapper]='pidDurationErrorMsgWrapper'></ti-spinner>
+                <!-- 尾后提示 -->
+                <span class="tailPrompt">
+                    {{ commentItems.c_d.tailPrompt }}
+                </span>
+            </div>
+
+            <!-- 自定义错误提示位置 -->
+            <div #pidDurationErrorMsgWrapper></div>
+        </ti-item>
+
+        <!-- 采样范围 -->
+        <ti-item [required]="false">
+            <ti-item-label>
+                <span>{{i18n.micarch.label.typeItem}}</span>
+            </ti-item-label>
+            <ti-select style="width: 335px;" [options]="commentItems.typeItem.options" [tiValidation]='validation'
+                formControlName='typeItem_ctrl'></ti-select>
+        </ti-item>
+        <ti-item [label]="commentItems.cpu.label + ' (' + attachItemsC.cpu.unit + ')'"
+            [required]="commentItems.cpu.required">
+            <div class="formContent">
+                <ti-select class="cpu-ctrl" [options]="commentItems.cpu.options" [tiValidation]='validation'
+                    formControlName='cpu_ctrl' (ngModelChange)="cpu_interval_change($event, attachItemsC.cpu, 'C')">
+                </ti-select>
+                <ti-spinner name='spinner' [step]='commentItems.cpu.spinner.step'
+                    [format]="commentItems.cpu.spinner.format" [placeholder]='commentItems.cpu.spinner.placeholder'
+                    [correctable]="false" [appSpinnerBlur]="intervalBlur" tiValidation
+                    formControlName='cpu_spinner_ctrl' style='width: 165px;'
+                    [errorMessageWrapper]='pidIntervalErrorMsgWrapper'></ti-spinner>
+
+                <!-- 尾后提示 -->
+                <span class="tailPrompt">
+                    {{ commentItems.cpu.tailPrompt }}
+                </span>
+            </div>
+
+            <!-- 自定义错误提示位置 -->
+            <div #pidIntervalErrorMsgWrapper></div>
+        </ti-item>
+        <ti-item [required]="commentItems.b_s.required">
+            <ti-item-label>
+                <span>{{commentItems.b_s.label}}</span>
+                <ti-icon [tiTip]="commentItems.b_s.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/template/icon_question.svg' *ngIf="currTheme === ColorTheme.Dark">
+                    <img src='./assets/img/template/icon_question_light.svg' *ngIf="currTheme === ColorTheme.Light">
+                </ti-icon>
+            </ti-item-label>
+            <input type="text" tiText [tiValidation]='validation' formControlName='b_s_ctrl' style="width: 335px">
+        </ti-item>
+        <ti-item [required]="commentItems.c_source.required">
+            <ti-item-label>
+                <span>{{commentItems.c_source.label}}</span>
+                <ti-icon [tiTip]="commentItems.c_source.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/template/icon_question.svg' *ngIf="currTheme === ColorTheme.Dark">
+                    <img src='./assets/img/template/icon_question_light.svg' *ngIf="currTheme === ColorTheme.Light">
+                </ti-icon>
+            </ti-item-label>
+            <input type="text" tiText [tiValidation]='validation' formControlName='source_ctrl' style="width: 335px">
+        </ti-item>
+
+        <!-- 采集文件大小 -->
+        <ti-item [required]="commentItems.c_r.required">
+            <div class="formContent">
+                <ti-item-label>
+                    <span>{{commentItems.c_r.label}}</span>
+                    <ti-icon [tiTip]="commentItems.c_r.tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+                        tiTipPosition="bottom">
+                        <img src='./assets/img/template/icon_question.svg' *ngIf="currTheme === ColorTheme.Dark">
+                        <img src='./assets/img/template/icon_question_light.svg' *ngIf="currTheme === ColorTheme.Light">
+                    </ti-icon>
+                </ti-item-label>
+                <ti-spinner name='spinner' [step]='commentItems.c_r.step' [format]="commentItems.c_r.format"
+                    [correctable]="false" [placeholder]='commentItems.c_r.placeholder' tiValidation
+                    formControlName='c_r_ctrl' [appSpinnerBlur]="collectFileBlur" style='width: 165px;'></ti-spinner>
+
+                <span class="tailPrompt">
+                    {{ commentItems.c_r.tailPrompt }}
+                </span>
+            </div>
+        </ti-item>
+
+        <!-- 内核函数关联汇编指令 -->
+        <ti-item [required]="commentItems.kcore.required">
+            <ti-item-label [ngClass]="{'wrap':isModifySchedule && commentItems.kcore.label === strObj.kcore}">
+                {{ commentItems.kcore.label }}</ti-item-label>
+            <div class="formContent">
+                <ti-switch formControlName="kcore"></ti-switch>
+            </div>
+        </ti-item>
+    </ti-formfield>
+    <!-- 配置节点参数 -->
+    <div class="node-config-modal import-btn">
+        <app-mission-node-config #nodeConfigC [labelWidth]="labelWidth"
+            [isAbled]="!(cCurrntFormC.valid  && taskNameValid && appAndPidValid && modeAppRunUserValid)"
+            [taskType]="'C/C++ Program'" [formData]="formDatas" [projectId]="projectId" [nodeList]="cCurrntFormC.get('nodeList').value"
+            [nodeConfigShow]="nodeConfigShow" [nodeConfigedData]="nodeConfigedData" [runUserData]="runUserData"
+            (onsControlNode)="onControlNode($event)" (onsOpentNode)="handleNodeEmit($event)" (selectNodeDisable)="selectNodeDisable($event)"
+            [modeAppPathAllow]="modeAppPathAllow" [isModifySchedule]="isModifySchedule"></app-mission-node-config>
+    </div>
+    <!-- 预约 -->
+    <div style="flex:1">
+        <app-mission-reservation [hidden]="taskDetail.isFromTuningHelper" #preSwitchC [labelWidth]="labelWidth"
+            [isModifySchedule]="isModifySchedule || isRestart || isEdit" [switch]="switchState">
+        </app-mission-reservation>
+        <!-- 立即 -->
+        <div class="immediately" *ngIf='!preSwitchC.switchState && !isRestart'>
+            <div *ngIf="switchState" [tiTip]="i18n.mission_create.disableeTip">
+                <input type="checkbox" tiCheckbox [name]='startCheckC.title' [(ngModel)]="startCheckC.checked"
+                    [disabled]="switchState">
+            </div>
+            <input *ngIf="!switchState" type="checkbox" tiCheckbox [name]='startCheckC.title'
+                [(ngModel)]="startCheckC.checked" [disabled]="taskDetail.isFromTuningHelper">
+            <span class="start-now">{{startCheckC.title}}</span>
+        </div>
+    </div>
+    <footer [ngClass]="{ footer: isModifySchedule }">
+        <button class="little-primary-btn" type="button" (click)="createAnalysis(isEdit)"
+            [ngClass]="{toRight: isModifySchedule}"
+            [disabled]='getButState()'>
+            {{i18n.common_term_operate_ok}}</button>
+        <button class="little-minor-btn" type="button" (click)="close()"> {{i18n.common_term_operate_cancel}} </button>
+        <button class="little-minor-btn" type="button" (click)="saveTemplates()" *ngIf="!isModifySchedule && !taskDetail.isFromTuningHelper"
+            [disabled]='getButState()'>{{i18n.mission_modal.saveTemplates}}</button>
+    </footer>
+</div>

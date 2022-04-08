@@ -1,0 +1,17 @@
+<div class="report-container" id="savedHeapdump">
+    <ti-tabs>
+        <ti-tab *ngFor="let item of tabList; let index = index" [(active)]="item.active">
+            <ti-tab-header>
+                <span>{{item.title}}</span>
+            </ti-tab-header>
+            <ng-template #tiTabContent>
+                <div class="tab-content" *ngIf="item.title === i18n.plugins_common_report.memory_dump">
+                    <app-profile-memorydump offlineHeapdump="true" [offlineHeapdumpId]="heapdumpId"></app-profile-memorydump>
+                </div>
+                <div class="tab-content" *ngIf="item.title === i18n.plugins_common_report.report_info">
+                    <app-report-config-info [reportType]="'heapdump'" [reportId]="heapdumpId"></app-report-config-info>
+                </div>
+            </ng-template>
+        </ti-tab>
+    </ti-tabs>
+</div>

@@ -1,0 +1,44 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Identifying Compile Commands Using the Build Tool Configuration File">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0222610839.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.T21">
+<meta name="brand" content="Huawei Kunpeng Porting Advisor">
+<meta name="DC.Publisher" content="20201230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0320090988">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Identifying Compile Commands Using the Build Tool Configuration File</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0320090988"></a><a name="EN-US_TOPIC_0320090988"></a>
+
+<h1 class="topictitle1">Identifying Compile Commands Using the Build Tool Configuration File</h1>
+<div id="body1614928072293"><div class="section" id="EN-US_TOPIC_0320090988__section16999175618597"><h4 class="sectiontitle">Symptom</h4><p id="EN-US_TOPIC_0320090988__p9413651603">If analysis of build file configuration is involved, the <strong id="EN-US_TOPIC_0320090988__b6180151519449">Compile Command</strong> may not be the default <strong id="EN-US_TOPIC_0320090988__b17840142619449">make</strong> or <strong id="EN-US_TOPIC_0320090988__b930733211446">cmake</strong> command. You need to identify the compile command in the build configuration file and then input the command.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0320090988__section177591042102416"><h4 class="sectiontitle">Reference</h4><ul id="EN-US_TOPIC_0320090988__ul17608194223"><li id="EN-US_TOPIC_0320090988__li17306103918407">If <strong id="EN-US_TOPIC_0320090988__b1723614063716">Build Tool</strong> is <strong id="EN-US_TOPIC_0320090988__b12242194023717">make</strong>, the default value is <strong id="EN-US_TOPIC_0320090988__b19242194017375">make</strong>. You can also customize a compile command starting with "make". <strong id="EN-US_TOPIC_0320090988__b92134550224">make</strong> supports <strong id="EN-US_TOPIC_0320090988__b0218655152210">-C</strong> and <strong id="EN-US_TOPIC_0320090988__b1821845511222">-f</strong> parameters. <strong id="EN-US_TOPIC_0320090988__b7218155552212">-C</strong> specifies the working directory. <strong id="EN-US_TOPIC_0320090988__b162191955182212">-f</strong> specifies the makefile. If labels are used in your makefile, you need to identify the compile command based on the used labels.<ul id="EN-US_TOPIC_0320090988__ul7561728105011"><li id="EN-US_TOPIC_0320090988__li19813393502">Usually the <strong id="EN-US_TOPIC_0320090988__b1130117242489">clean</strong> and <strong id="EN-US_TOPIC_0320090988__b13892202911484">all</strong> labels are used in the makefile, as shown in <a href="#EN-US_TOPIC_0320090988__fig182938396541">Figure 1</a>.<div class="fignone" id="EN-US_TOPIC_0320090988__fig182938396541"><a name="EN-US_TOPIC_0320090988__fig182938396541"></a><a name="fig182938396541"></a><span class="figcap"><b>Figure 1 </b>Scenario 1</span><br><span><img id="EN-US_TOPIC_0320090988__image20293103965410" src="en-us_image_0000001134268831.png" height="136.977631" width="470.022"></span></div>
+<p id="EN-US_TOPIC_0320090988__p1526119409501"><strong id="EN-US_TOPIC_0320090988__b0456238194917">make clean</strong> means to run the compile commands labeled with <strong id="EN-US_TOPIC_0320090988__b1415415725020">clean</strong>, and <strong id="EN-US_TOPIC_0320090988__b97251165506">make</strong> means to run the compile command labeled with <strong id="EN-US_TOPIC_0320090988__b9238123155118">all</strong> or other associated labels. In this case, you only need to enter <strong id="EN-US_TOPIC_0320090988__b08771012105411">make</strong> in the <strong id="EN-US_TOPIC_0320090988__b16197143025414">Compile Command</strong> text box.</p>
+</li><li id="EN-US_TOPIC_0320090988__li73949525614">If you add the <strong id="EN-US_TOPIC_0320090988__b1715892510558">mpp</strong> label, see <a href="#EN-US_TOPIC_0320090988__fig1788482054311">Figure 2</a>.<div class="fignone" id="EN-US_TOPIC_0320090988__fig1788482054311"><a name="EN-US_TOPIC_0320090988__fig1788482054311"></a><a name="fig1788482054311"></a><span class="figcap"><b>Figure 2 </b>Scenario 2</span><br><span><img id="EN-US_TOPIC_0320090988__image28841420174317" src="en-us_image_0000001134529137.png" height="273.06043800000003" width="470.022"></span></div>
+<p id="EN-US_TOPIC_0320090988__p94479612563"><strong id="EN-US_TOPIC_0320090988__b49351520112012">make mpp</strong> means to run the compile commands labeled with <strong id="EN-US_TOPIC_0320090988__b12935520102011">mpp</strong>. In this case, you need to enter <strong id="EN-US_TOPIC_0320090988__b1493519205203">make mpp</strong> in the <strong id="EN-US_TOPIC_0320090988__b79353205206">Compile Command</strong> text box. For details, see <a href="#EN-US_TOPIC_0320090988__fig14243919266">Figure 3</a>.</p>
+<div class="fignone" id="EN-US_TOPIC_0320090988__fig14243919266"><a name="EN-US_TOPIC_0320090988__fig14243919266"></a><a name="fig14243919266"></a><span class="figcap"><b>Figure 3 </b>make mpp</span><br><span><img id="EN-US_TOPIC_0320090988__image124414152614" src="en-us_image_0000001193733971.png" height="252.3675" width="523.6875"></span></div>
+</li></ul>
+</li><li id="EN-US_TOPIC_0320090988__en-us_topic_0189700310_li57404423337">If <strong id="EN-US_TOPIC_0320090988__b7750144793718">Build Tool</strong> is <strong id="EN-US_TOPIC_0320090988__b19755647103710">cmake</strong>, the default value is <strong id="EN-US_TOPIC_0320090988__b47561947193714">cmake</strong>. You can also customize a compile command starting with "cmake". For details about the parameters supported by CMake, see the CMake 3.13.4 user guide on the official website.</li><li id="EN-US_TOPIC_0320090988__en-us_topic_0189700310_li37402424333">If <strong id="EN-US_TOPIC_0320090988__b19225526373">Build Tool</strong> is <strong id="EN-US_TOPIC_0320090988__b16281852143719">automake</strong>, the default value is <strong id="EN-US_TOPIC_0320090988__b202915223714">make</strong> and cannot be changed. The automake tool does not support any parameter. When using the automake tool, ensure that the makefile exists in the project source code. Upload the makefile together with the source code file. Alternatively, you can run the automake commands after uploading the software to be analyzed, and change the owner of the generated makefile to <strong id="EN-US_TOPIC_0320090988__b16910115534">porting</strong>, in this way, the tool can read makefile normally.</li><li id="EN-US_TOPIC_0320090988__li1693919347362">If <strong id="EN-US_TOPIC_0320090988__b370912198385">Build Tool</strong> is <strong id="EN-US_TOPIC_0320090988__b142421225123812">go</strong> (only <strong id="EN-US_TOPIC_0320090988__b81073116384">Go</strong> is selected for <strong id="EN-US_TOPIC_0320090988__b3133193715389">Source Code Type</strong>), the default value is <strong id="EN-US_TOPIC_0320090988__b782964923817">go build</strong>. You can customize a compile command starting with "go".</li></ul>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0222610839.html">Common Operations</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

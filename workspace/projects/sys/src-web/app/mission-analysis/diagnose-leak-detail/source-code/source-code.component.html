@@ -1,0 +1,29 @@
+<div id="source-code">
+    <div class="source-code-left">
+      <app-mem-leak-func-list
+        [updateTree]="updateTree"
+        [isUpdateService]="false"
+        [taskId]="taskId"
+        [nodeId]="nodeId"
+        (listInited)="funcMap = $event"
+        (functionClick)="handleFuncClick($event)"
+        (pidChange)="pid = $event"
+        (memLeakTypeChange)="memLeakType = $event"
+      >
+      </app-mem-leak-func-list>
+    </div>
+    <div class="source-code-right">
+      <div class="right-top">
+        <app-source-code-viewer
+          [memLeakType]="memLeakType"
+          [data]="sourceCodeData"
+          [notJump]='true'
+        >
+        </app-source-code-viewer>
+      </div>
+      <div class="right-bottom" *ngIf="memLeakType === 2">
+        <app-mem-release-table [funcInfo]="memReleaseData"></app-mem-release-table>
+      </div>
+    </div>
+  </div>
+  <app-source-code-viewer-slider #sourceCodeSlider></app-source-code-viewer-slider>

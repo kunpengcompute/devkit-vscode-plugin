@@ -1,0 +1,227 @@
+:host ::ng-deep .content-container {
+    height: 100%;
+    padding: 20px 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    > .header {
+        .group-list {
+            font-size: 12px;
+
+            &:not(:first-child) {
+                margin-left: 30px;
+            }
+
+            .function-label {
+                color: #9ea4b3;
+                padding-right: 10px;
+            }
+        }
+    }
+
+    > .body {
+        margin-top: 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        > .func-main {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+
+            .table-container {
+                flex: 1;
+                padding: 15px;
+                box-sizing: border-box;
+                border: 1px solid #d4d9e6;
+                border-radius: 5px;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+
+                > .title {
+                    h2 {
+                        font-size: 20px;
+                    }
+                }
+
+                .ti3-table {
+                    margin-top: 20px;
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    overflow: hidden;
+
+                    th {
+                        .content {
+                            display: flex;
+                            align-items: center;
+                            overflow: hidden;
+
+                            .ti3-cell-text-container {
+                                overflow: hidden;
+                                height: 32px;
+
+                                .ti3-cell-text {
+                                    max-width: 100% !important;
+                                }
+                            }
+
+                            &.center {
+                                justify-content: center;
+                            }
+                        }
+                    }
+
+                    .ti3-table-container {
+                        flex: 1;
+                        position: relative;
+
+                        td.codeLine {
+                            white-space: pre-wrap !important;
+                        }
+
+                        tbody {
+                            .ti3-table-tree img {
+                                margin-right: 10px;
+
+                                &.active {
+                                    transform: rotate(90deg);
+                                }
+                            }
+
+                            tr {
+                                &.active {
+                                    background: #ecec77 !important;
+
+                                    td:first-child > div {
+                                        background: #ecec77;
+                                    }
+                                }
+
+                                &:hover {
+                                    background: #f5f9ff !important;
+
+                                    td:first-child > div {
+                                        background: #f5f9ff;
+                                    }
+                                }
+                            }
+
+                            .childTr td {
+                                padding: 0 10px;
+
+                                &:first-child {
+                                    background: #f0f2f5;
+                                    border-bottom: 0;
+                                    padding: 0;
+
+                                    > div {
+                                        margin-left: 30px;
+                                        height: 100%;
+                                        padding: 10px;
+                                        background: #fff;
+                                        transition: background-color 150ms linear;
+                                        position: relative;
+                                        border-bottom: 1px solid #e1e6ee;
+
+                                        &::before {
+                                            content: "";
+                                            position: absolute;
+                                            left: 0;
+                                            top: 0;
+                                            width: 2px;
+                                            height: calc(100% + 1px);
+                                            background: #6c92fa;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .assembly-right {
+                margin-left: 10px;
+
+                .operate-box {
+                    float: right;
+
+                    img {
+                        margin-right: 8px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        > .source-img {
+            border: 1px solid #d4d9e6;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow: hidden;
+            height: 312px;
+            position: relative;
+
+            .svg-title {
+                margin-bottom: 10px;
+                position: absolute;
+                z-index: 111;
+                width: 100%;
+
+                h2 {
+                    display: inline-block;
+                }
+
+                span {
+                    float: right;
+                    margin-right: 10px;
+
+                    img {
+                        margin-right: 20px;
+                    }
+                }
+            }
+
+            #insvg {
+                position: relative;
+                transform-origin: center center;
+                text-align: center;
+                margin-top: 30px;
+                height: calc(100% - 30px);
+            }
+        }
+    }
+}
+.ti3-table-tree {
+    display: inline-block;
+}
+
+.no-data {
+    text-align: center;
+    height: 38px;
+
+    img {
+        width: 20%;
+        display: block;
+    }
+}
+
+.chen-nodata-td {
+    width: 9.5%;
+    display: block;
+    margin-bottom: 15px;
+
+    > span {
+        display: inline-block;
+    }
+}

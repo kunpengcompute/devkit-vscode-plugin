@@ -1,0 +1,122 @@
+.list-container {
+    position: fixed;
+    bottom: 10px;
+    right: 0px;
+    z-index: 666; 
+
+    .result-container{
+        width: 480px;
+        margin-right: 45px;
+        margin-bottom: 16px;
+        background-color: #fff;
+        text-align: left;
+        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.15);
+        border-radius: 1px;
+        .content {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+
+            .content-message {
+                display: flex;
+                width: 95%;
+                align-items: center;
+                font-size: 12px;
+            }
+        }
+        .opt-container {
+            height: 32px;
+            padding-bottom: 10px;
+        }
+        .result {
+            margin-left: 8px;
+            word-break: break-word;
+        }
+    }
+}
+
+
+.close-img {
+    margin-left:16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.software-rebuild-content {
+    .img-box {
+        img {
+            width: 20px;
+            height: 20px;
+        }
+    }
+    .result-box {
+        flex: 1;
+        margin-left: 8px;
+    }
+}
+.err-table {
+    overflow-y: auto;
+    max-height: 200px;
+    margin-top: 7px;
+    padding: 0 16px 16px;
+    td {
+        border-bottom: 1px solid #e1e6ee;
+    }
+}
+.tip-software-show {
+    &::before {
+        display: block;
+        top: -12px;
+        left: 42px;
+    }
+}
+
+.operation {
+    float: right;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+
+.success-status {
+    &::before {
+      position: absolute;
+      display: block;
+      content: '';
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      margin-top: -4px;
+      background-color: #61D274;
+      border-radius: 50%;
+    }
+    span {
+      margin-left: 18px;
+    }
+  }
+  .fail-status {
+    &::before {
+      background-color: #ED4B4B;
+    }
+  }
+
+.madal-content {
+  position: relative;
+  .result-title {
+    width: 90%;
+    display: inline-block;
+  }
+  .result-icon {
+    width: 10%;
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+
+    span {
+      margin-top: -5px;
+      font-size: 16px;
+      cursor: pointer;
+      display: inline;
+      float:right
+    }
+  }
+}

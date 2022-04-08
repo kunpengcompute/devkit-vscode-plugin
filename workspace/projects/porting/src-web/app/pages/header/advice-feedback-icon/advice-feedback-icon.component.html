@@ -1,0 +1,19 @@
+<!-- 建议反馈图标 -->
+<ng-container>
+    <div class="advice-tip">
+        <ng-template #suggestTip>
+            <div>
+                <p class="suggestSate" [innerHtml]="getSuggestTip()"></p>
+            </div>
+        </ng-template>
+        <span #draggable id="advice-feedback">
+            <img
+              src="./assets/img/home/advice-feedback.svg"
+              (click)="onImgClick()" [tiTip]="suggestTip" tiTipPosition='left' (mouseenter)="onHoverSuggest('advice')"
+              (mouseleave)="onHoverSuggest('')" class="iconImg"
+            >
+        </span>
+    </div>
+    <img src="./assets/img/home/icon_error.png" style="display: none;">
+    <img src="./assets/img/home/qr-code.png" style="display: none;">
+</ng-container>

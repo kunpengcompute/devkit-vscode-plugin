@@ -1,0 +1,665 @@
+<div class="gclog" [appLoading]="isLoading">
+    <!-- GC日志头部 -->
+    <div class="gc-log-header" *ngIf="!detailInfo">
+        <div class="header-left">
+            <button *ngIf="!isDownload" type="button" class="operation-anal" (click)="refreshData()"
+                [disabled]="startBtnDisabled || showLoading " color="primary" tiButton>
+                {{ i18n.protalserver_profiling_gc_log.start_collect }}
+            </button>
+            <img *ngIf="!isDownload" [tiTip]="i18n.protalserver_profiling_gc_log.gcLogTip" tiTipPosition="right"
+                class="helpTop" src="./assets/img/newSvg/hollowTip.svg">
+            <!-- 显示类型 -->
+            <ng-container *ngIf="isFinished">
+                <div [ngClass]="{'importClass':isDownload}" style="margin: 0 16px 0 24px;">{{
+                    i18n.protalserver_profiling_memoryDump.dumpType.type }}</div>
+                <ti-select style="width: 200px;" [options]='selectOptions' [(ngModel)]="selectValue"
+                    [placeholder]='i18n.protalserver_profiling_thread.show_placehold' (select)="onSelect(selectValue)"
+                    id="myselect">
+                </ti-select>
+            </ng-container>
+            <!-- 优化建议提示 -->
+            <app-suggestion-tip [suggetNum]="suggestArr.length" (openSuggest)="openSuggest()"></app-suggestion-tip>
+        </div>
+        <div class="save-box" *ngIf="!showNodate && !showLoading && !isDownload">
+            <div *ngIf="gcLogList < maxGCLogsCount && !isAlermDisk && !startBtnDisabled" (click)="openSaveReport()">
+                <span class="svg-toggle" [tiTip]='i18n.profileMemorydump.saveHeapDump.saveReport' tiTipPosition='top'>
+                    <img tiTipPosition='top' src="./assets/img/newSvg/save_default.svg">
+                    <img tiTipPosition='top' src="./assets/img/newSvg/save_hover.svg">
+                    <img tiTipPosition='top' src="./assets/img/newSvg/save_clicked.svg">
+                </span>
+            </div>
+            <div *ngIf="(gcLogList >= maxGCLogsCount && !isAlermDisk) || startBtnDisabled"
+                [tiTip]="!startBtnDisabled ? i18n.profileMemorydump.saveHeapDump.saveGCLogReportSizeTip : ''">
+                <span>
+                    <img tiTipPosition='top' src="./assets/img/newSvg/save_disabled.svg">
+                </span>
+            </div>
+            <div *ngIf="isAlermDisk" [tiTip]='i18n.common_term_upload_disk'>
+                <span>
+                    <img tiTipPosition='top' src="./assets/img/newSvg/save_disabled.svg">
+                </span>
+            </div>
+        </div>
+        <!-- 优化建议数量 -->
+        <app-suggestion-tip [suggetNum]="suggestArr.length" (openSuggest)="openSuggest()" [type]="'icon'">
+        </app-suggestion-tip>
+    </div>
+    <!-- 采集GC日志中 -->
+    <ng-container *ngIf="showLoading">
+        <div class="loading">
+            <div class="progress-svg">
+                <img class="browser-img" src="./assets/img/profiling/browserPreview.gif">
+            </div>
+            <p>{{collectState}}</p>
+            <div class="progress">
+                <div *ngIf="showProgress">
+                    <div class="line">
+                        <span class="bar"></span>
+                    </div>
+                </div>
+                <div *ngIf="!showProgress" class="barBox">
+                    <div class="line">
+                        <span class="progressBar" [ngStyle]="{'width': barLength}"></span>
+                    </div>
+                    <div class="value">{{progress}}%</div>
+                </div>
+                <button *ngIf="showCancalBtn" tiButton
+                    (click)="openCancal()">{{i18n.protalserver_profiling_gc_log.cancel}}</button>
+                <div class="statusBox" [ngStyle]="{'padding-left': language?'140px':'115px'}">
+                    <p>
+                        <span class="status"
+                            [ngClass]="{'status1': currentCollectState === 'TRANSFERRING',
+                            'status2': currentCollectState === 'PARSING' || currentCollectState === 'PARSE_COMPLETED'}"></span>
+                        {{i18n.protalserver_profiling_gc_log.translate}}
+                    </p>
+                    <p>
+                        <span class="status"
+                            [ngClass]="{'status1': currentCollectState === 'PARSING','status2': currentCollectState === 'PARSE_COMPLETED' }"></span>
+                        {{i18n.protalserver_profiling_gc_log.analysis}}
+                    </p>
+                    <p>
+                        <span class="status" [ngClass]="{'status2': currentCollectState === 'PARSE_COMPLETED'}"></span>
+                        {{i18n.protalserver_profiling_gc_log.finish}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="!showLoading && !showNodate && isFinished">
+        <!-- G1 GC关键指标分析 -->
+        <ng-container *ngIf="selectValue.type === 'key'">
+            <div style="display: flex;justify-content: space-between;">
+                <!-- 关键性指标 -->
+                <div class="key-point">
+                    <p class="sub-title">{{ i18n.protalserver_profiling_gc_log.key_point }}</p>
+                    <div>
+                        <div>
+                            <p>{{ (metricsData.throughput * 100).toFixed(2) }}%</p>
+                            <div>{{ i18n.protalserver_profiling_gc_log.throughput }}</div>
+                        </div>
+                        <div>
+                            <p>{{ (metricsData.gcOverhead * 100).toFixed(2) }}%</p>
+                            <div>{{ i18n.protalserver_profiling_gc_log.cost }}</div>
+                        </div>
+                        <div>
+                            <p>{{ metricsData.avgLinearity > 0 ? (metricsData.avgLinearity * 100).toFixed(2) + '%' :
+                                '--' }}</p>
+                            <div>
+                                {{ i18n.protalserver_profiling_gc_log.average }}
+                                <img [tiTip]="i18n.protalserver_profiling_gc_log.linearyTip" tiTipPosition="right"
+                                    class="helpTop" src="./assets/img/newSvg/hollowTip.svg">
+                            </div>
+                        </div>
+                        <div class="distance">
+                            <p>{{ metricsData.avgPauseTime }} ms</p>
+                            <div>{{ i18n.protalserver_profiling_gc_log.aver_pause_time }}</div>
+                        </div>
+                        <div class="distance">
+                            <p>{{ metricsData.maxPauseTime }} ms</p>
+                            <div>{{ i18n.protalserver_profiling_gc_log.highest_pause_time }}</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- GC暂停统计 -->
+                <div style="flex: 1">
+                    <p class="sub-title">{{i18n.protalserver_profiling_gc_log.pauseCount}}</p>
+                    <ti-table [(displayedData)]="pauseDisplayed" [srcData]="pauseSrcData" [columns]="pauseColumns"
+                        tiColsResizable>
+                        <div class="ti3-table-fixed-head">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let column of pauseColumns" width="{{ column.width }}">
+                                            <ti-cell-text>{{
+                                                i18n.protalserver_profiling_gc_log.pause_table[column.title] }}
+                                            </ti-cell-text>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="ti3-table-container ti3-resize-wrapper" style="height: 150px;">
+                            <table>
+                                <thead style="height: 1px;">
+                                    <tr>
+                                        <th *ngFor="let column of pauseColumns" width="{{ column.width }}"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of pauseDisplayed">
+                                        <td tiOverflow>{{ row.interval }}</td>
+                                        <td tiOverflow>{{ row.pauseTimes }}</td>
+                                        <td tiOverflow>{{ (row.pauseTimePercent * 100).toFixed(2) }}%</td>
+                                    </tr>
+                                </tbody>
+                                <tbody *ngIf="pauseDisplayed.length === 0">
+                                    <tr class="ti3-table-nodata">
+                                        <div class="no-data">
+                                            <img class='noDataImg ' src="./assets/img/projects/noData.svg" />
+                                            <div class="nodataText">
+                                                <span>{{ i18n.common_term_task_nodata }}</span>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </ti-table>
+                </div>
+            </div>
+            <!-- 线性度分类采集 -->
+            <div class="chartDiv">
+                <p class="sub-title">{{i18n.protalserver_profiling_gc_log.collectType}}</p>
+                <div class="time-box" *ngIf="keyIndicatorArray.length">
+                    <app-time-line [timeData]="timeData" (timeLineData)="collectTimeLineData($event)" #collectTimeLine>
+                    </app-time-line>
+                </div>
+                <div class="over-table">
+                    <div id="gcLogEchart" class="gclog-echart-box" *ngIf="keyIndicatorArray.length">
+                        <div echarts (chartInit)="onCollectChartInit($event)"
+                            (chartDataZoom)="collectHandleDatazoom($event)" [options]="keyOption"></div>
+                    </div>
+                    <div class="loadData" *ngIf="keyIndicatorArray.length === 0">
+                        <img class='newNoData ' src="./assets/img/projects/noData.svg" />
+                        <div class="nodata-text">
+                            <span>{{ i18n.protalserver_profiling_gc_log.nodataTip }}</span>
+                            <a target="_blank" class="helpTip" href="{{gcloghelpUrl}}">
+                                {{ i18n.protalserver_profiling_gc_log.forHelp }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <!-- G1 GC成因分析 -->
+        <ng-container *ngIf="selectValue.type === 'cause'">
+            <div class="allTitle">
+                <div class="causeTitle">
+                    {{i18n.protalserver_profiling_gc_log.showType.cause}}</div>
+            </div>
+            <div class="cause-detail">
+                <div id="causeEchart" *ngIf="pieData.length"></div>
+                <div class="legends" *ngIf="pieData.length">
+                    <div *ngFor="let item of pieData" class="legend">
+                        <div>
+                            <span [ngStyle]="{'background': item.itemStyle.color}"></span>
+                            <span>{{(item.value * 100).toFixed(2)}}%</span>
+                        </div>
+                        <div>{{item.name}}</div>
+                    </div>
+                </div>
+                <div class="noData" *ngIf="!pieData.length">
+                    <img class='newNoData ' src="./assets/img/projects/noData.svg" />
+                    <div class="nodata-text">
+                        <span>{{ i18n.common_term_task_nodata }}</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <ti-table [(displayedData)]="causeDisplayed" [srcData]="causeSrcData" [columns]="causeColumns"
+                    tiColsResizable>
+                    <div class="ti3-table-fixed-head">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let column of causeColumns" width="{{ column.width }}">
+                                        <ti-cell-text>{{ i18n.protalserver_profiling_gc_log.cause_table[column.title] }}
+                                        </ti-cell-text>
+                                        <ti-head-sort *ngIf="column.isSort" [sortKey]="column.sortKey"></ti-head-sort>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="ti3-table-container ti3-resize-wrapper" style="max-height: 420px;">
+                        <table>
+                            <thead style="height: 1px;">
+                                <tr>
+                                    <th *ngFor="let column of causeColumns" width="{{ column.width }}"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of causeDisplayed">
+                                    <ng-container *ngIf="row.cause !== 'total'">
+                                        <td tiOverflow>{{ row.cause }}</td>
+                                        <td tiOverflow>{{ row.count }}</td>
+                                        <td tiOverflow>{{ row.avgTime }}</td>
+                                        <td tiOverflow>{{ row.maxTime }}</td>
+                                        <td tiOverflow>{{ row.totalTime }}</td>
+                                        <td tiOverflow>{{ (row.timePercent * 100).toFixed(2) }}%</td>
+                                    </ng-container>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr *ngFor="let row of causeDisplayed">
+                                    <ng-container *ngIf="row.cause === 'total'">
+                                        <td tiOverflow width="{{causeColumns[0].width}}">{{
+                                            i18n.protalserver_profiling_gc_log.cause_table.totalCount }}</td>
+                                        <td tiOverflow width="{{causeColumns[1].width}}">{{ row.count }}</td>
+                                        <td tiOverflow width="{{causeColumns[2].width}}">{{ row.avgTime }}</td>
+                                        <td tiOverflow width="{{causeColumns[3].width}}">{{ row.maxTime }}</td>
+                                        <td tiOverflow width="{{causeColumns[4].width}}">{{ row.totalTime }}</td>
+                                        <td tiOverflow width="{{causeColumns[5].width}}">{{ (row.timePercent *
+                                            100).toFixed(2) }}%</td>
+                                    </ng-container>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="causeDisplayed.length === 0">
+                                <tr class="ti3-table-nodata">
+                                    <div class="noData">
+                                        <img class='newNoData ' src="./assets/img/projects/noData.svg" />
+                                        <div class="nodata-text">
+                                            <span>{{ i18n.common_term_task_nodata }}</span>
+                                        </div>
+                                    </div>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ti-table>
+            </div>
+        </ng-container>
+        <!-- GC活动细化分析 -->
+        <ng-container *ngIf="selectValue.type === 'detail' && !detailInfo">
+            <div>
+                <p class="sub-title">{{i18n.protalserver_profiling_gc_log.collectStage}}</p>
+                <ti-table [(displayedData)]="collectDisplayed" [srcData]="collectSrcData" [columns]="colTableColumns"
+                    tiColsResizable>
+                    <div class="ti3-table-container ti3-resize-wrapper" style="max-height: 420px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <ng-container *ngFor="let item of collectColumns[0]">
+                                        <th width="{{ item.width }}" [attr.rowspan]="item.rowspan"
+                                            [attr.colspan]="item.colspan" [ngClass]="{'colspan-center': item.colspan}">
+                                            <span *ngIf="!item.tip" class="lightText" tiOverflow>
+                                                {{ i18n.protalserver_profiling_gc_log.collect_table[item.title] }}
+                                            </span>
+                                            <span *ngIf="item.tip" class="lightText highlight"
+                                                (click)="toDetailInfo(item)" tiOverflow>
+                                                {{ i18n.protalserver_profiling_gc_log.collect_table[item.title] }}
+                                            </span>
+                                        </th>
+                                    </ng-container>
+                                </tr>
+                                <tr>
+                                    <ng-container *ngFor="let item of collectColumns[1]">
+                                        <th width="{{ item.width }}" not-resizable>
+                                            <span *ngIf="!item.tip" class="lightText" tiOverflow>
+                                                {{ i18n.protalserver_profiling_gc_log.collect_table[item.title] }}
+                                            </span>
+                                            <span *ngIf="item.tip" class="lightText highlight"
+                                                (click)="toDetailInfo(item)" tiOverflow>
+                                                {{ i18n.protalserver_profiling_gc_log.collect_table[item.title] }}
+                                            </span>
+                                        </th>
+                                    </ng-container>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of collectDisplayed;let idx = index">
+                                    <ng-container *ngIf="row.type !== 'phase'">
+                                        <td tiOverflow>{{ pointeTypes[idx] }}</td>
+                                        <td tiOverflow>{{ (row.young || row.young === 0) ? row.young : '--' }}</td>
+                                        <td tiOverflow>{{ (row['initial-mark'] || row['initial-mark'] === 0) ?
+                                            row['initial-mark'] : '--' }}</td>
+                                        <td tiOverflow>{{ (row['concurrent-root-region-scan'] ||
+                                            row['concurrent-root-region-scan'] === 0) ?
+                                            row['concurrent-root-region-scan'] : '--'}}
+                                        </td>
+                                        <td tiOverflow>
+                                            {{ (row['concurrent-mark'] || row['concurrent-mark'] === 0) ?
+                                            row['concurrent-mark'] : '--' }}
+                                        </td>
+                                        <td tiOverflow>{{ (row.remark || row.remark === 0) ? row.remark : '--' }}</td>
+                                        <td tiOverflow>
+                                            {{ (row.cleanup || row.cleanup === 0) ? row.cleanup : '--' }}
+                                        </td>
+                                        <td tiOverflow>
+                                            {{ (row['concurrent-cleanup'] || row['concurrent-cleanup'] === 0 ) ?
+                                            row['concurrent-cleanup'] : '--' }}
+                                        </td>
+                                        <td tiOverflow>
+                                            {{ (row.mixed || row.mixed === 0) ? row.mixed : '--' }}
+                                        </td>
+                                        <td tiOverflow>
+                                            {{ (row.FullGC || row.FullGC === 0) ? row.FullGC : '--'}}
+                                        </td>
+                                    </ng-container>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="collectDisplayed.length === 0">
+                                <tr class="ti3-table-nodata">
+                                    <div class="noData">
+                                        <img class='newNoData ' src="./assets/img/projects/noData.svg" />
+                                        <div class="nodata-text">
+                                            <span>{{ i18n.protalserver_profiling_gc_log.nodataTip }}</span>
+                                            <a style="cursor: pointer;" target="_blank" class="helpTip"
+                                                href="{{gcloghelpUrl}}">
+                                                {{ i18n.protalserver_profiling_gc_log.forHelp }}</a>
+                                        </div>
+                                    </div>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ti-table>
+            </div>
+            <div class="pauseChart">
+                <p class="top-title">{{i18n.protalserver_profiling_gc_log.pauseAndMemoryUsed}}</p>
+                <div class="leftTable">
+                    <ul class="listData">
+                        <li class="rowData" *ngFor="let row of pauseAndMemoryData;let idx = index" tiOverflow
+                            style="cursor: pointer;" [ngClass]="{ 'tab-active': row.active }"
+                            (click)="memoryUsedChange(row,idx)">{{ row.title }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="rightTable">
+                    <p class="right-title">{{rightTitle}}</p>
+                    <div class="time-box" *ngIf="showData">
+                        <app-time-line [timeData]="timeData" (timeLineData)="timeLineOption($event)" #gcLogTimeLine>
+                        </app-time-line>
+                    </div>
+                    <div class="over-table">
+                        <div id="gcLogEchart" class="gclog-echart-box" *ngIf="showData">
+                            <div style="height: 400px;" echarts (chartInit)="onChartInit($event)"
+                                (chartDataZoom)="handleDatazoom($event)" [options]="memoryOption"></div>
+                        </div>
+                        <div class="loadData" *ngIf="!showData">
+                            <img class='newNoData ' src="./assets/img/projects/noData.svg" />
+                            <div class="nodata-text">
+                                <span>{{ i18n.protalserver_profiling_gc_log.nodataTip }}</span>
+                                <a target="_blank" class="helpTip" href="{{gcloghelpUrl}}">
+                                    {{ i18n.protalserver_profiling_gc_log.forHelp }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <!-- 活动细化分析详情 -->
+        <ng-container *ngIf="selectValue.type === 'detail' && detailInfo">
+            <div class="detailTitle">
+                <img class="backImg" style="cursor: pointer;" src="./assets/img/projects/back.svg"
+                    (click)="comeToBack()">
+                <span class="causeTitle" *ngIf="detailInfo === 'young_recycle'">
+                    {{i18n.protalserver_profiling_gc_log.detailInfo.youngRecycle}}</span>
+                <span class="causeTitle" *ngIf="detailInfo === 'hybrid'">
+                    {{i18n.protalserver_profiling_gc_log.detailInfo.mixedPhase}}</span>
+                <span class="causeTitle" *ngIf="detailInfo === 'origin'">
+                    {{i18n.protalserver_profiling_gc_log.detailInfo.initialMark}}</span>
+            </div>
+            <div *ngIf="detailData">
+                <div class="detail">
+                    <div class="topDetail">
+                        <div *ngFor="let item of detailInfoData" class="detailItem">
+                            <div class="itemTitle">{{item.title}}</div>
+                            <div class="itemValue">{{item.value }}</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 串行阶段 -->
+                <div class="serial">
+                    <p class="sub-title1">{{i18n.protalserver_profiling_gc_log.detailInfo.serialPhase}}</p>
+                    <div *ngIf="javaEnvironment === 'java11'">
+                        <ti-table [(displayedData)]="serialDisplayed" [srcData]="serialPhaseData"
+                            [columns]="colTableColumns" tiColsResizable>
+                            <div class="ti3-resize-wrapper" style="max-height: 420px;">
+                                <table>
+                                    <thead>
+                                        <ng-container *ngIf="serialDisplayed.length > 0">
+                                            <tr *ngFor="let column of serialYoungColumns">
+                                                <ng-container *ngFor="let item of column">
+                                                    <th width="{{ item.width }}" [attr.rowspan]="item.rowspan"
+                                                        [ngClass]="{'colspan-center': item.colspan}"
+                                                        [attr.colspan]="item.colspan" style="text-align: center;">
+                                                        <ti-cell-text>
+                                                            {{i18n.protalserver_profiling_gc_log.young_table[item.title]
+                                                            }}
+                                                        </ti-cell-text>
+                                                    </th>
+                                                </ng-container>
+                                            </tr>
+                                        </ng-container>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let row of serialDisplayed;let idx = index">
+                                            <td tiOverflow>{{ serialTypes[idx] }}</td>
+                                            <td tiOverflow>{{row.chooseCSet }}</td>
+                                            <td tiOverflow>{{ row.humongousRegister }}</td>
+                                            <td tiOverflow>{{ row.evacuateCSet }}</td>
+                                            <td tiOverflow>{{ row.evacuationFailure }}</td>
+                                            <td tiOverflow>{{ row.codeRootFixup }}</td>
+                                            <td tiOverflow>{{ row.clearCT }}</td>
+                                            <td tiOverflow>{{ row.referenceProc }}</td>
+                                            <td tiOverflow>{{ row.weakProc }}</td>
+                                            <td tiOverflow>{{ row.codeRootPurge }}</td>
+                                            <td tiOverflow>{{ row.redirtyCards }}</td>
+                                            <td tiOverflow>{{ row.freeCSet }}</td>
+                                            <td tiOverflow>{{ row.humongousReclaim }}</td>
+                                            <td tiOverflow>{{ row.other }}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody *ngIf=" serialDisplayed.length===0">
+                                        <tr class="ti3-table-nodata">
+                                            <div class="noData">
+                                                <img class='newNoData ' src="./assets/img/projects/noData.svg" />
+                                                <div class="nodata-text">
+                                                    <span>{{ i18n.protalserver_profiling_gc_log.nodataTip }}</span>
+                                                    <a style="cursor: pointer;" target="_blank" class="helpTip"
+                                                        href="{{gcloghelpUrl}}">
+                                                        {{ i18n.protalserver_profiling_gc_log.forHelp }}</a>
+                                                </div>
+                                            </div>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ti-table>
+                    </div>
+                    <div *ngIf="javaEnvironment === 'java8'">
+                        <ti-table [(displayedData)]="serialDisplayed" [srcData]="serialPhaseData"
+                            [columns]="colTableColumns" tiColsResizable>
+                            <div class="ti3-resize-wrapper" style="max-height: 420px;">
+                                <table>
+                                    <thead>
+                                        <ng-container *ngIf="serialDisplayed.length > 0">
+                                            <tr *ngFor="let column of serialInitColumns">
+                                                <ng-container *ngFor="let item of column">
+                                                    <th width="{{ item.width }}" [attr.rowspan]="item.rowspan"
+                                                        [ngClass]="{'colspan-center': item.colspan}"
+                                                        [attr.colspan]="item.colspan" style="text-align: center;">
+                                                        <ti-cell-text>
+                                                            {{i18n.protalserver_profiling_gc_log.init_table[item.title]
+                                                            }}
+                                                        </ti-cell-text>
+                                                    </th>
+                                                </ng-container>
+                                            </tr>
+                                        </ng-container>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let row of serialDisplayed;let idx = index">
+                                            <td tiOverflow>{{ serialTypes[idx] }}</td>
+                                            <td tiOverflow>{{row.parallelInfo }}</td>
+                                            <td tiOverflow>{{ row.codeRootFixup }}</td>
+                                            <td tiOverflow>{{ row.codeRootPurge }}</td>
+                                            <td tiOverflow>{{ row.clearCT }}</td>
+                                            <td tiOverflow>{{ row.evacuationFailure }}</td>
+                                            <td tiOverflow>{{ row.chooseCSet }}</td>
+                                            <td tiOverflow>{{ row.refProc }}</td>
+                                            <td tiOverflow>{{ row.refEnq }}</td>
+                                            <td tiOverflow>{{ row.redirtyCards }}</td>
+                                            <td tiOverflow>{{ row.humongousRegister }}</td>
+                                            <td tiOverflow>{{ row.humongousReclaim }}</td>
+                                            <td tiOverflow>{{ row.freeCSet }}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody *ngIf="serialDisplayed.length === 0">
+                                        <tr class="ti3-table-nodata">
+                                            <div class="noData">
+                                                <img class='newNoData ' src="./assets/img/projects/noData.svg" />
+                                                <div class="nodata-text">
+                                                    <span>{{ i18n.protalserver_profiling_gc_log.nodataTip }}</span>
+                                                    <a style="cursor: pointer;" target="_blank" class="helpTip"
+                                                        href="{{gcloghelpUrl}}">
+                                                        {{ i18n.protalserver_profiling_gc_log.forHelp }}</a>
+                                                </div>
+                                            </div>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ti-table>
+                    </div>
+                </div>
+                <!-- 并行阶段 -->
+                <div class="comitans">
+                    <p class="sub-title1">{{i18n.protalserver_profiling_gc_log.detailInfo.comitansPhase}}</p>
+                    <ti-table [(displayedData)]="parallelDisplayed" [srcData]="parallelPhaseData" tiColsResizable>
+                        <div class="ti3-table-container ti3-resize-wrapper" style="max-height: 420px;">
+                            <table>
+                                <thead>
+                                    <ng-container *ngIf="parallelPhaseData.data.length > 0">
+                                        <tr>
+                                            <ng-container *ngFor="let column of comitansColumns">
+                                                <th width="{{column.width}}">
+                                                    <ti-cell-text>
+                                                        {{i18n.protalserver_profiling_gc_log.comitans_table[column.title]}}
+                                                    </ti-cell-text>
+                                                </th>
+                                            </ng-container>
+                                        </tr>
+                                    </ng-container>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of parallelDisplayed;let idx = index">
+                                        <td tiOverflow>{{ parallelTypes[idx] }}</td>
+                                        <td tiOverflow>{{ row.extRootScanning }}</td>
+                                        <td tiOverflow>{{ row.updateRS }}</td>
+                                        <td tiOverflow>{{ row.scanRS }}</td>
+                                        <td tiOverflow>{{ row.codeRootScanning }}</td>
+                                        <td tiOverflow>{{ row.objectCopy }}</td>
+                                        <td tiOverflow>{{ row.termination }}</td>
+                                        <td tiOverflow>{{ row.gcWorkerOther }}</td>
+                                    </tr>
+                                </tbody>
+                                <tbody *ngIf="parallelPhaseData.data.length === 0">
+                                    <tr class="ti3-table-nodata">
+                                        <div class="noData">
+                                            <img class='newNoData ' src="./assets/img/projects/noData.svg" />
+                                            <div class="nodata-text">
+                                                <span>{{ i18n.protalserver_profiling_gc_log.nodataTip }}</span>
+                                                <a style="cursor: pointer;" target="_blank" class="helpTip"
+                                                    href="{{gcloghelpUrl}}">
+                                                    {{ i18n.protalserver_profiling_gc_log.forHelp }}</a>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </ti-table>
+                </div>
+            </div>
+            <div *ngIf="!detailData">
+                <div class="noDate">
+                    <img class='newNoData ' src="./assets/img/projects/noData.svg" />
+                    <p>{{i18n.common_term_task_nodata}}</p>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+    <!-- 无数据 -->
+    <ng-container *ngIf="showNodate">
+        <div class="noDate">
+            <img class='newNoData' src="./assets/img/projects/noData.svg" />
+            <p>{{noDadaInfo || i18n.protalserver_profiling_gc_log.no_data}}</p>
+        </div>
+    </ng-container>
+    <app-alert-message #cancalGCLog (confirmHandle)="confirmHandleStop($event)"></app-alert-message>
+</div>
+<app-analysis #analysis [isSuggest]="isSuggest" [type]="sugtype" (closeHandle)="closeHandle($event)"
+    [suggestArr]="suggestArr" class="analysis">
+</app-analysis>
+<!-- 保存GC-->
+<app-alert-modal #saveGCLogs>
+    <div class="content">
+        <div class="header">
+            <span>{{i18n.profileMemorydump.saveHeapDump.saveReport}}</span>
+            <img class="close" (click)="onCloseGCLogsReport()" (mouseenter)="onHoverClose('closerDelete')"
+                (mouseleave)="onHoverClose('')"
+                [src]="hoverClose==='closerDelete'?'./assets/img/newSvg/close_hover.svg':' ./assets/img/header/close_icon.svg'">
+        </div>
+        <div class="main-body">
+            <div class="tip">
+                <div class="save-report-tips" *ngIf="GCLogsReport">
+                    <div tiOverflow>
+                        <img src="./assets/img/newSvg/tip.svg" alt="" class="report-icon">
+                        <span>
+                            {{saveReportTip}}
+                        </span>
+                    </div>
+                    <img src="./assets/img/newSvg/close_hover.svg" alt="" class="report-close"
+                        (click)="closeGCLogsReport()">
+                </div>
+            </div>
+            <div class="inputDiv">
+                <span class="leftText">{{i18n.profileMemorydump.saveHeapDump.reportType}}</span>
+                <span class="right">{{i18n.profileGC.GCLogs.GCLogs}}</span>
+            </div>
+            <form [formGroup]='saveReportForm'>
+                <div class="inputDiv">
+                    <span class="leftText">{{i18n.profileMemorydump.saveHeapDump.reportName}}</span>
+                    <div class="right">
+                        <input type="text" [placeholder]="reportNameHolder" [(ngModel)]="reportName" tiText tiValidation
+                            [tiValidation]="reportNameValidation" formControlName='reportName'
+                            [errorMessageWrapper]="reportNameError" />
+                        <div #reportNameError class="error-tip"></div>
+                    </div>
+                </div>
+                <div class="inputDiv">
+                    <span class="leftText">{{i18n.profileMemorydump.saveHeapDump.reportRemarks}}</span>
+                    <div class="right">
+                        <input type="text" [(ngModel)]="reportRemarks" tiText tiValidation
+                            [placeholder]="i18n.profileMemorydump.saveHeapDump.input_remark_placehloder"
+                            [tiValidation]="reportRemarkValidation" formControlName='reporRemark' />
+                        <div class="error-tip" *ngIf="errorTip">
+                            <img class="tipimg" src="./assets/img/tip/error.svg">
+                            <span class="error-text">{{errorTip}}</span>
+                        </div>
+                    </div>
+                </div>
+            </form>   
+        </div>
+        <div class="foot">
+            <button class="confirm" type="button" tiButton color="primary" (click)="onSaveGCLogsReport()"
+                [disabled]="!saveReportForm.valid">{{i18n.common_term_ok}}</button>
+            <button type="button" tiButton (click)="onCloseGCLogsReport()">{{i18n.common_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-alert-modal>
+<div *ngIf="saveReport" class="alertLink">
+    <ti-alert>{{successSaveReportTip}}<span class="see" (click)="goHomeGCLogs()">{{i18n.jdbcpool.look}}</span>
+    </ti-alert>
+</div>

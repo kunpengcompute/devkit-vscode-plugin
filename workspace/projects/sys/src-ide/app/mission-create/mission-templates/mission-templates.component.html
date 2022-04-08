@@ -1,0 +1,1403 @@
+<!-- 点击导入模板按钮后弹出模板弹框 -->
+<app-pop-mask #missionModal>
+    <div class="modal-dialog content">
+        <main class='mainstyle'>
+            <div class="wrapper">
+                <div class="header">
+                    <div class="mask-title">
+                        <span class="create-title">{{ i18n.mission_modal.importTemplates }}</span>
+                        <span (click)="cancle()" class="tip-close">
+                            <img class="incorrect" src="./assets/img/header/close_icon.svg" />
+                            <img class="incorrect" src="./assets/img/header/close_icon_hover.svg">
+                        </span>
+                    </div>
+                    <div class='fckLine'></div>
+                </div>
+                <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="colums">
+                    <div class="ti3-table-container ti3-resize-wrapper" name="template" style="height: 300px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <!-- 展开图标 -->
+                                    <th resizable details-icon-column></th>
+                                    <!-- 单选框 -->
+                                    <th resizable radio-column width="{{colums[1].width}}"></th>
+                                    <th resizable tiOverflow width="{{colums[2].width}}">{{colums[2].title}}</th>
+                                    <th resizable tiOverflow width="{{colums[3].width}}">{{colums[3].title}}</th>
+                                    <th resizable tiOverflow width="{{colums[4].width}}">{{colums[4].title}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let obj of data.templateList; let i = index;">
+                                    <tr [ngClass]="{expanded: !obj['showDetails']}">
+                                        <td details-icon-column>
+                                            <ti-details-icon [row]="obj" [index]="i" (beforeToggle)="beforeToggle(i)">
+                                            </ti-details-icon>
+                                            <!--详情图标设置，传入行数据-->
+                                        </td>
+                                        <td radio-column>
+                                            <input type="radio" tiRadio name="group" [(ngModel)]="selectedValue" 
+                                                [value]="i" />
+                                        </td>
+                                        <td tiOverflow>{{ obj['template-name'] || obj["templateName"] || '--' }}</td>
+                                        <td tiOverflow>
+                                            {{typeId === 0 ? i18n.common_term_projiect_task_system :
+                                            i18n.common_term_task_crate_path}}
+                                        </td>
+                                        <td tiOverflow>{{type}}</td>
+                                    </tr>
+                                    <tr *tiDetailsTr="obj">
+                                        <td class="leftBox"></td>
+                                        <td colspan="4" class="collapsed">
+                                            <!-- 函数分析任务模板 c/c++-->
+                                            <div class="table" *ngIf="missName === missArr[0]">
+                                                <ul style="width: 100%;">
+                                                    <li *ngFor="let obje of obj.configList" style="display: flex;">
+                                                        <p [ngClass]="{'wrap': obje.title === strObj.kcore}"
+                                                            class="label-left">{{ obje.title }}</p>
+                                                        <p>{{ obje.text || '--' }}</p>
+                                                    </li>
+                                                    <!-- 预约任务 -->
+                                                    <li *ngIf="obj.hasOwnProperty('cycle')" style="display: flex;">
+                                                        <p class="label-left">{{i18n.preSwitch.colectMethods}}</p>
+                                                        <p>
+                                                            {{obj.cycle? i18n.preSwitch.duraColect:
+                                                            i18n.preSwitch.onceColect}}
+                                                        </p>
+                                                    </li>
+                                                    <li *ngIf="obj.hasOwnProperty('cycle')" style="display: flex;">
+                                                        <p class="label-left">{{i18n.preSwitch.pointTime}}</p>
+                                                        <p>{{obj.targetTime}}</p>
+                                                    </li>
+                                                    <li *ngIf="obj.hasOwnProperty('cycle')" style="display: flex;">
+                                                        <p class="label-left">{{i18n.preSwitch.pointDuration}}</p>
+                                                        <p>{{ handleColectDate(obj) }}</p>
+                                                    </li>
+                                                </ul>
+                                                <!-- mission-panel -->
+                                                <div *ngIf="obj.switch">
+                                                    <div *ngFor="let item of obj.nodeConfig">
+                                                        <app-mission-panel
+                                                            [title]="item.nodeName + '(' + item.nodeIp + ')'"
+                                                            [active]="false">
+                                                            <div class="content-box">
+                                                                <div class="content-list"
+                                                                    *ngIf=" item.task_param['analysis-target'].indexOf('Profile') !== -1">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[0][0][3].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param['cpu-mask'] || '--' }}</p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[0][0][5].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.sourceLocation || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[0][0][6].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.assemblyLocation || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="content-list"
+                                                                    *ngIf="item.task_param['analysis-target'].indexOf( 'Launch') !== -1">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.cProcess.app_path }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param["app-dir"] || '--' }}</p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.cProcess.app_params }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param["app-parameters"] || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[0][0][5].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.assemblyLocation || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[0][0][6].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.sourceLocation || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="content-list"
+                                                                    *ngIf="item.task_param['analysis-target'].indexOf('Attach') !== -1 ">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.cProcess.processName }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param['process_name'] || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.cProcess.pid }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param['target-pid'] || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[0][2][5].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.sourceLocation || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[0][2][6].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.assemblyLocation || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </app-mission-panel>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 函数分析任务模板  java-mixed-mode 3-->
+                                            <div class="table" *ngIf="missName === missArr[1]">
+                                                <div class="table-left">
+                                                    <ul *ngIf="obj['analysis-target'] === cAtp">
+                                                        <li *ngFor="let obje of missionDetail[1][0]">
+                                                            <p>{{ obje.calcTitle ? obje.calcTitle(obj) : obje.title }}
+                                                            </p>
+                                                        </li>
+
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.colectMethods }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.pointTime }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.pointDuration }}</p>
+                                                        </li>
+                                                    </ul>
+                                                    <ul *ngIf="obj['analysis-target'] === cLa">
+                                                        <li *ngFor="let obje of missionDetail[1][1]">
+                                                            <p>{{ obje.calcTitle ? obje.calcTitle(obj) : obje.title }}
+                                                            </p>
+                                                        </li>
+
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.colectMethods }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.pointTime }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.pointDuration }}</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="table-right">
+                                                    <ul>
+                                                        <li>
+                                                            <p>{{ obj["taskname"] }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj['analysis-target'] !== 'Profile System'">
+                                                            <p>{{ obj["analysis-target"] }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p *ngIf="obj['analysis-target'] === cAtp">
+                                                                {{ decoding(obj.process_name) || '--' }}
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p *ngIf="obj['analysis-target'] === cAtp">
+                                                                {{ obj["target-pid"] || '--' }}
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p *ngIf="obj['analysis-target'] === cAtp">
+                                                                {{ obj["duration"] || '--' }}
+                                                            </p>
+                                                        </li>
+
+                                                        <li>
+                                                            <p *ngIf="obj['analysis-target'] === cLa">
+                                                                {{ obj["app-dir"] || '--' }}
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p *ngIf="obj['analysis-target'] === cLa">
+                                                                {{ obj["app-parameters"] || '--' }}
+                                                            </p>
+                                                        </li>
+
+                                                        <li>
+                                                            <p
+                                                                [innerHTML]=" obj['interval'] === '0.71' ? 710 : obj['interval']">
+                                                                {{ obj["interval"] }}
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>{{ obj["javaSoucreLocation"] || '--' }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>
+                                                                {{
+                                                                obj["cycle"]
+                                                                ? i18n.preSwitch.duraColect
+                                                                : i18n.preSwitch.onceColect
+                                                                }}
+                                                            </p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ obj["targetTime"] }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ handleColectDate(obj) }}</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- mission-panel -->
+                                                <div *ngIf="obj.switch">
+                                                    <div *ngFor="let item of obj.nodeConfig">
+                                                        <app-mission-panel
+                                                            [title]="item.nodeName + '(' + item.nodeIp + ')'"
+                                                            [active]="false">
+                                                            <div class="content-box">
+                                                                <div class="content-list"
+                                                                    *ngIf="item.task_param['analysis-target'].indexOf('Launch') !== -1">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[1][1][2].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param["app-dir"] || '--' }}</p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[1][1][3].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param["app-parameters"] || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[1][1][5].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.assemblyLocation || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="content-list"
+                                                                    *ngIf="item.task_param['analysis-target'].indexOf('Attach') !== -1">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[1][0][2].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param["target-pid"] || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[1][0][5].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.assemblyLocation || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </app-mission-panel>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 函数分析任务模板 锁与等待 system_lock -->
+                                            <div class="table" *ngIf="missName === missArr[6]">
+                                                <ul class="box_content">
+                                                    <li *ngFor="let item of obj.configList" class="box">
+                                                        <div class="box_left">{{item.title}}</div>
+                                                        <div class="box_right"
+                                                            *ngIf="!(item.title === i18n.mission_modal.syslock.function)">
+                                                            {{item.text}}</div>
+                                                        <div class="box_right"
+                                                            *ngIf="item.title === i18n.mission_modal.syslock.function"
+                                                            [tiTip]="item.text">{{item.text}}</div>
+                                                    </li>
+                                                    <li *ngIf="obj.hasOwnProperty('cycle')" class="box">
+                                                        <div class="box_left">{{ i18n.preSwitch.colectMethods }}</div>
+                                                        <div class="box_right">
+                                                            {{
+                                                            obj["cycle"]
+                                                            ? i18n.preSwitch.duraColect
+                                                            : i18n.preSwitch.onceColect
+                                                            }}
+                                                        </div>
+                                                    </li>
+                                                    <li *ngIf="obj.hasOwnProperty('cycle')" class="box">
+                                                        <div class="box_left">{{ i18n.preSwitch.pointTime }}</div>
+                                                        <div class="box_right">{{ obj["targetTime"] }}</div>
+                                                    </li>
+                                                    <li *ngIf="obj.hasOwnProperty('cycle')" class="box">
+                                                        <div class="box_left">{{ i18n.preSwitch.pointDuration }}</div>
+                                                        <div class="box_right">{{ handleColectDate(obj) }}</div>
+                                                    </li>
+                                                </ul>
+                                                <!-- mission-panel -->
+                                                <div *ngIf="obj.switch">
+                                                    <div *ngFor="let item of obj.nodeConfig">
+                                                        <app-mission-panel
+                                                            [title]="item.nodeName + '(' + item.nodeIp + ')'"
+                                                            [active]="false">
+                                                            <div class="content-box">
+                                                                <div class="content-list"
+                                                                    *ngIf="item.task_param['analysis-target'].indexOf('Profile') !== -1">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[6][0][4].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.assemblyLocation || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[6][0][5].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.sourceLocation || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="content-list"
+                                                                    *ngIf="item.task_param['analysis-target'].indexOf( 'Launch' ) !== -1">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[6][2][2].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param["app-dir"] || '--' }}</p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[6][2][3].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param["app-parameters"] || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[6][2][6].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.assemblyLocation || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[6][2][7].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.sourceLocation || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="content-list"
+                                                                    *ngIf=" item.task_param['analysis-target'].indexOf( 'Attach' ) !== -1">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.sysSource.pid }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param["target-pid"] || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">{{
+                                                                            i18n.mission_create.process_alias }}</p>
+                                                                        <p>{{ decoding(item.task_param["process_name"])
+                                                                            || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.lockSummary.filname }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.assemblyLocation || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.sysSource.source_path
+                                                                            }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.sourceLocation || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </app-mission-panel>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 全景分析任务模板 system 1NO-->
+                                            <div class="table" *ngIf="missName === missArr[3]">
+                                                <div class="table-left">
+                                                    <ul>
+                                                        <ng-container *ngFor="let obje of missionDetail[3]">
+                                                            <li
+                                                                *ngIf="obj.hasOwnProperty('sceneSolution') || !obje.hasOwnProperty('dssTitle')">
+                                                                <p *ngIf="!obje.hasOwnProperty('dssTitle')" tiOverflow>
+                                                                    {{ obje.calcTitle ? obje.calcTitle(obj) : obje.title
+                                                                    }}
+                                                                </p>
+                                                                <p *ngIf="obje.hasOwnProperty('dssTitle') && obj.sceneSolution < 2"
+                                                                    tiOverflow>
+                                                                    {{ obj.sceneSolution === 0 ? obje.dssTitle :
+                                                                    obje.bigDataTitle }}
+                                                                </p>
+                                                            </li>
+                                                            <ng-container
+                                                                *ngIf="obje.hasOwnProperty('dssTitle') && obj.sceneSolution === 2">
+                                                                <li>
+                                                                    <p tiOverflow>{{ i18n.databaseConfig.ip }}</p>
+                                                                </li>
+                                                                <li>
+                                                                    <p tiOverflow>{{ i18n.databaseConfig.port }}</p>
+                                                                </li>
+                                                                <li><p tiOverflow>{{ i18n.sys.scenes_tracing }}</p></li>
+                                                                <li><p tiOverflow>{{ i18n.sys.tracing_event }}</p></li>
+                                                            </ng-container>
+                                                        </ng-container>
+                                                        <!-- 采集方式 -->
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.colectMethods }}</p>
+                                                        </li>
+                                                        <!-- 采集时间 -->
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.pointTime }}</p>
+                                                        </li>
+                                                        <!-- 采集日期 -->
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.pointDuration }}</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="table-right">
+                                                    <ul>
+                                                        <li>
+                                                            <p>{{ obj["taskname"] }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>{{ obj["interval"] | thousandSeparator}}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>{{ (obj["duration"] || '--') | thousandSeparator}}</p>
+                                                        </li>
+                                                        <li
+                                                            *ngIf="obj.hasOwnProperty('configDir') && obj.sceneSolution < 2">
+                                                            <p>
+                                                                {{ obj["configDir"] || '--' }}
+                                                            </p>
+                                                        </li>
+                                                        <ng-container *ngIf="obj.sceneSolution === 2">
+                                                            <li>
+                                                                <p>{{ obj.sqlIp }}</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>{{ obj.sqlPort || '--' }}</p>
+                                                            </li>
+                                                            <li><p>{{ obj.traceSwitch === true ? this.i18n.status_Yes : this.i18n.status_No }}</p></li>
+                                                            <li><p>{{ obj.events || '--' }}</p></li>
+                                                        </ng-container>
+                                                        <li>
+                                                            <p>
+                                                                {{ obj["topCheck"] === true ? this.i18n.status_Yes :
+                                                                this.i18n.status_No }}
+                                                            </p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>
+                                                                {{
+                                                                obj["cycle"]
+                                                                ? i18n.preSwitch.duraColect
+                                                                : i18n.preSwitch.onceColect
+                                                                }}
+                                                            </p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ obj["targetTime"] }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ handleColectDate(obj) }}</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- mission-panel -->
+                                                <div *ngIf="obj.switch && obj.sceneSolution === 2">
+                                                    <div *ngFor="let item of obj.nodeConfig">
+                                                        <app-mission-panel
+                                                            [title]="item.nodeName + '(' + item.nodeIp + ')'"
+                                                            [active]="false">
+
+                                                            <div class="content-box">
+                                                                <div class="content-list">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">{{ i18n.databaseConfig.ip }}</p>
+                                                                        <p>{{ item.task_param['sqlIp'] || '--' }}</p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">{{ i18n.databaseConfig.port }}</p>
+                                                                        <p>{{ item.task_param['sqlPort'] || '--' }}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </app-mission-panel>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 系统分析任务模板 system 1-->
+                                            <div class="table" *ngIf="missName === missArr[4]">
+                                                <div class="table-left">
+                                                    <ul>
+                                                        <li *ngFor="let obje of missionDetail[4]">
+                                                            <p>{{ obje.calcTitle ? obje.calcTitle(obj) : obje.title }}
+                                                            </p>
+                                                        </li>
+
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.colectMethods }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.pointTime }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.pointDuration }}</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="table-right">
+                                                    <ul>
+                                                        <li>
+                                                            <p>{{ obj["taskname"] }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>{{ obj["interval"] }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>{{ obj["duration"] || '--' }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>
+                                                                {{
+                                                                obj["cycle"]
+                                                                ? i18n.preSwitch.duraColect
+                                                                : i18n.preSwitch.onceColect
+                                                                }}
+                                                            </p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ obj["targetTime"] }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ handleColectDate(obj) }}</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!-- 系统分析任务模板 system_config 1-->
+                                            <div class="table" *ngIf="missName === missArr[4]">
+                                                <div class="table-left">
+                                                    <ul>
+                                                        <li *ngFor="let obje of missionDetail[4]">
+                                                            <p>{{ obje.calcTitle ? obje.calcTitle(obj) : obje.title }}
+                                                            </p>
+                                                        </li>
+
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.colectMethods }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.pointTime }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.pointDuration }}</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="table-right">
+                                                    <ul>
+                                                        <li>
+                                                            <p>{{ obj["taskname"] }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                <span style="margin-right: 5px;">{{
+                                                                    handleObj(obj['task_param']) }}</span>
+                                                            </p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>
+                                                                {{
+                                                                obj["cycle"]
+                                                                ? i18n.preSwitch.duraColect
+                                                                : i18n.preSwitch.onceColect
+                                                                }}
+                                                            </p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ obj["targetTime"] }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ handleColectDate(obj) }}</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!-- 系统分析任务模板 资源调度 resource_schedule ok -->
+                                            <div class="table" *ngIf="missName === missArr[5]">
+                                                <ul style="width: 100%;">
+                                                    <li *ngFor="let obje of obj.configList" style="display: flex;">
+                                                        <p class="label-left">{{ obje.key }}</p>
+                                                        <p>{{ obje.text || '--' }}</p>
+                                                    </li>
+                                                    <!-- 预约任务 -->
+                                                    <li *ngIf="obj.hasOwnProperty('cycle')" style="display: flex;">
+                                                        <p class="label-left">{{i18n.preSwitch.colectMethods}}</p>
+                                                        <p>
+                                                            {{obj.cycle? i18n.preSwitch.duraColect:
+                                                            i18n.preSwitch.onceColect}}
+                                                        </p>
+                                                    </li>
+                                                    <li *ngIf="obj.hasOwnProperty('cycle')" style="display: flex;">
+                                                        <p class="label-left">{{i18n.preSwitch.pointTime}}</p>
+                                                        <p>{{obj.targetTime}}</p>
+                                                    </li>
+                                                    <li *ngIf="obj.hasOwnProperty('cycle')" style="display: flex;">
+                                                        <p class="label-left">{{i18n.preSwitch.pointDuration}}</p>
+                                                        <p>{{ handleColectDate(obj) }}</p>
+                                                    </li>
+                                                </ul>
+                                                <!-- mission-panel -->
+                                                <div *ngIf="obj.switch">
+                                                    <div *ngFor="let item of obj.nodeConfig">
+                                                        <app-mission-panel
+                                                            [title]="item.nodeName + '(' + item.nodeIp + ')'"
+                                                            [active]="false">
+                                                            <div class="content-box">
+                                                                <div class="content-list"
+                                                                    *ngIf=" item.task_param['analysis-target'].indexOf('Profile' ) !== -1 ">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[5][0][3].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.assemblyLocation || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="content-list"
+                                                                    *ngIf="item.task_param['analysis-target'].indexOf('Launch' ) !== -1 ">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[5][2][2].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param["app-dir"] || '--' }}</p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[5][2][3].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param["app-parameters"] || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[5][2][4].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.assemblyLocation || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="content-list"
+                                                                    *ngIf=" item.task_param['analysis-target'].indexOf( 'Attach' ) !== -1 ">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.sysSource.pid }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param["target-pid"] || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.sysSource.processName
+                                                                            }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param['process-name'] || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[5][1][5].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.assemblyLocation || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </app-mission-panel>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 系统分析任务模板 访存分析、访存统计分析、Miss事件统计、进程/线程分析-->
+                                            <div class="table"
+                                                *ngIf="['mem_access', 'miss_event', 'falsesharing', 'process-thread-analysis'].includes(obj['analysis-type'])">
+                                                <ul style="width: 100%;">
+                                                    <li *ngFor="let obje of obj.configList" style="display: flex;">
+                                                        <p [ngClass]="{'wrap': obje.key === strObj.kcore}"
+                                                            class="label-left">{{ obje.key }}</p>
+                                                        <p [ngClass]="{'wrap': obje.key === strObj.samplingType}"
+                                                            class="label-right">{{ obje.text || '--' }}</p>
+                                                    </li>
+                                                    <!-- 预约任务 -->
+                                                    <li *ngIf="obj.hasOwnProperty('cycle')" style="display: flex;">
+                                                        <p class="label-left">{{i18n.preSwitch.colectMethods}}</p>
+                                                        <p class="label-right">
+                                                            {{obj.cycle? i18n.preSwitch.duraColect:
+                                                            i18n.preSwitch.onceColect}}
+                                                        </p>
+                                                    </li>
+                                                    <li *ngIf="obj.hasOwnProperty('cycle')" style="display: flex;">
+                                                        <p class="label-left">{{i18n.preSwitch.pointTime}}</p>
+                                                        <p class="label-right">{{obj.targetTime}}</p>
+                                                    </li>
+                                                    <li *ngIf="obj.hasOwnProperty('cycle')" style="display: flex;">
+                                                        <p class="label-left">{{i18n.preSwitch.pointDuration}}</p>
+                                                        <p class="label-right">{{ handleColectDate(obj) }}</p>
+                                                    </li>
+                                                </ul>
+                                                <!-- mission-panel -->
+                                                <div *ngIf="obj.switch && obj['analysis-type']">
+                                                    <div *ngFor="let item of obj.nodeConfig">
+                                                        <app-mission-panel
+                                                            [title]="item.nodeName + '(' + item.nodeIp + ')'"
+                                                            [active]="false">
+                                                            <div class="content-box"
+                                                                *ngIf="['mem_access', 'miss_event'].includes(obj['analysis-type'])">
+                                                                <div class="content-list"
+                                                                    *ngIf="item.task_param.task_param">
+                                                                    <div class="lable-right"
+                                                                        *ngIf="item.task_param.task_param.target === 'app'">
+                                                                        <p class="label">
+                                                                            {{ i18n.common_term_task_crate_app_path}}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.task_param.app || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right"
+                                                                        *ngIf="item.task_param.task_param.target === 'app'">
+                                                                        <p class="label">
+                                                                            {{ i18n.common_term_task_crate_parameters }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.task_param.appArgs || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right"
+                                                                        *ngIf="item.task_param.task_param.pid">
+                                                                        <p class="label">
+                                                                            {{ i18n.common_term_task_crate_pid }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.task_param.pid || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right"
+                                                                        *ngIf="item.task_param.task_param.process_name">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.sysSource.processName
+                                                                            }}
+                                                                        </p>
+                                                                        <p>{{
+                                                                            decoding(item.task_param.task_param.process_name)
+                                                                            ||
+                                                                            '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right"
+                                                                        *ngIf="item.task_param.task_param.target === 'sys'">
+                                                                        <p class="label">
+                                                                            {{ i18n.micarch.cpu_kernel }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.task_param.cpu || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.common_term_task_crate_c_path }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.task_param.srcDir || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="content-box"
+                                                                *ngIf="obj['analysis-type'] === 'falsesharing'">
+                                                                <div class="content-list"
+                                                                    *ngIf="item.task_param['analysis-target'].indexOf('Profile') > -1 ">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.micarch.cpu_kernel }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.cpuMask || '--' }}</p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[5][0][3].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.assemblyLocation || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[0][0][6].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.sourceLocation || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{
+                                                                            i18n.storageIO.mission_create.collection_size
+                                                                            }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.filesize || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="content-list"
+                                                                    *ngIf="item.task_param['analysis-target'].indexOf( 'Launch' ) !== -1">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.common_term_task_crate_app_path}}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.appDir || '--' }}</p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.sysSource.app_params
+                                                                            }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.appParameters || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.micarch.cpu_kernel }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.cpuMask || '--' }}</p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[5][0][3].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.assemblyLocation || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[0][0][6].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.sourceLocation || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{
+                                                                            i18n.storageIO.mission_create.collection_size
+                                                                            }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.filesize || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="content-list"
+                                                                    *ngIf="item.task_param['analysis-target'].indexOf('Attach') !== -1 ">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.sysSource.pid }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.pid || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.sysSource.processName
+                                                                            }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param['process_name'] || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.micarch.cpu_kernel }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.cpuMask || '--' }}</p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[5][0][3].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.assemblyLocation || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ missionDetail[0][0][6].title }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.sourceLocation || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{
+                                                                            i18n.storageIO.mission_create.collection_size
+                                                                            }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.filesize || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="content-box"
+                                                                *ngIf="obj['analysis-type'] === 'process-thread-analysis'">
+                                                                <div class="content-list"
+                                                                    *ngIf="item.task_param['analysis-target'].indexOf( 'Launch' ) !== -1">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.common_term_task_crate_app_path}}
+                                                                        </p>
+                                                                        <p>{{ item.task_param["app-dir"] || '--' }}</p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.sysSource.app_params
+                                                                            }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param["app-parameters"] || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="content-list"
+                                                                    *ngIf="item.task_param['analysis-target'].indexOf('Attach') !== -1 ">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.sysSource.pid }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.targetPid ||
+                                                                            item.task_param.pid || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.sysSource.processName
+                                                                            }}
+                                                                        </p>
+                                                                        <p>{{ decoding(item.task_param['process_name'])
+                                                                            || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </app-mission-panel>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 微架构分析任务模板 微架构 microarchitecture  ok-->
+                                            <div class="table" *ngIf="missName === 'microarchitecture'">
+                                                <div class="table-left">
+                                                    <ul>
+                                                        <li>
+                                                            <p class="label-left">{{ i18n.task_name }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="label-left">{{ i18n.ddr.analysisMode}}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.analysisTarget === 'Attach to Process'">
+                                                            <p>{{ i18n.common_term_task_crate_processName}}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.analysisTarget === 'Attach to Process'">
+                                                            <p>{{ i18n.common_term_task_crate_pid}}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.analysisTarget === 'Launch Application'">
+                                                            <p>{{ i18n.common_term_task_crate_app_path}}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.analysisTarget === 'Launch Application'">
+                                                            <p>{{i18n.common_term_task_crate_parameters}}</p>
+                                                        </li>
+                                                        <!-- 采样模式 -->
+                                                        <li>
+                                                            <p>{{i18n.micarch.label.simpling}}</p>
+                                                        </li>
+                                                        <!-- 采样时长(秒) -->
+                                                        <li>
+                                                            <p>{{i18n.sys.duration}}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>{{i18n.mission_modal.syslock.cpu_interval}}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>{{i18n.micarch.label.analysis}}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.analysisTarget === 'Profile System'">
+                                                            <p>{{i18n.micarch.cpu_kernel}}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>{{i18n.micarch.label.typeItem}}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>{{i18n.micarch.simpling_delay}}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>{{i18n.common_term_task_crate_c_path}}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p
+                                                                [ngClass]="{'wrap': i18n.mission_create.kcore === strObj.kcore}">
+                                                                {{ i18n.mission_create.kcore }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.colectMethods }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.pointTime }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ i18n.preSwitch.pointDuration }}</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="table-right">
+                                                    <ul>
+                                                        <!-- "wei_launch_01" -->
+                                                        <li>
+                                                            <p>{{ obj.taskName }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>{{ obj.analysisTarget }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p *ngIf="obj.analysisTarget === 'Attach to Process'">
+                                                                {{ decoding(obj.process_name) || '--' }}
+                                                            </p>
+                                                        </li>
+                                                        <li *ngIf="obj.analysisTarget === 'Attach to Process'">
+                                                            <p>
+                                                                {{ obj.targetPid || '--' }}
+                                                            </p>
+                                                        </li>
+                                                        <li *ngIf="obj.analysisTarget === 'Launch Application'">
+                                                            <p>{{ obj.appDir || '--' }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.analysisTarget === 'Launch Application'">
+                                                            <p>{{obj.appParameters || '--'}}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                {{ obj.samplingMode || '--' }}
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                {{ obj.duration || '--' }}
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                {{ obj.interval || '--' }}
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p [tiTip]='obj.analysisIndex'>
+                                                                {{ obj.analysisIndex || '--' }}
+                                                            </p>
+                                                        </li>
+                                                        <li *ngIf="obj.analysisTarget === 'Profile System'">
+                                                            <p>
+                                                                {{ obj.cpuMask || '--' }}
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                {{ getMicarchType(obj.samplingSpace ) }}
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                {{ obj.samplingDelay }}
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p>{{ obj.sourceLocation || '--' }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>{{ obj.kcore ? i18n.process.enable : i18n.process.disable
+                                                                }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>
+                                                                {{
+                                                                obj.cycle
+                                                                ? i18n.preSwitch.duraColect
+                                                                : i18n.preSwitch.onceColect
+                                                                }}
+                                                            </p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ obj.targetTime }}</p>
+                                                        </li>
+                                                        <li *ngIf="obj.hasOwnProperty('cycle')">
+                                                            <p>{{ handleColectDate(obj) }}</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- panel -->
+                                                <div *ngIf="obj.switch">
+                                                    <div *ngFor="let item of obj.nodeConfig">
+                                                        <app-mission-panel
+                                                            [title]="item.nodeName + '(' + item.nodeIp + ')'"
+                                                            [active]="false">
+                                                            <div class="content-box">
+                                                                <div class="content-list"
+                                                                    *ngIf=" item.taskParam['analysisTarget'].indexOf( 'Profile' ) !== -1 ">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.micarch.cpu_kernel }}
+                                                                        </p>
+                                                                        <p>{{ item.taskParam.cpuMask || '--' }}</p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.common_term_task_crate_c_path }}
+                                                                        </p>
+                                                                        <p>{{ item.taskParam.sourceLocation || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="content-list"
+                                                                    *ngIf="item.taskParam['analysisTarget'].indexOf('Launch') !== -1">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.common_term_task_crate_app_path}}
+                                                                        </p>
+                                                                        <p>{{ item.taskParam["appDir"] || '--' }}</p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.common_term_task_crate_parameters }}
+                                                                        </p>
+                                                                        <p>{{ item.taskParam["appParameters"] || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.common_term_task_crate_c_path }}
+                                                                        </p>
+                                                                        <p>{{ item.taskParam.sourceLocation || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="content-list"
+                                                                    *ngIf="item.taskParam['analysisTarget'].indexOf('Attach') !== -1">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.common_term_task_crate_pid }}
+                                                                        </p>
+                                                                        <p>{{ item.taskParam["targetPid"] || '--' }}</p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.sysSource.processName
+                                                                            }}
+                                                                        </p>
+                                                                        <p>{{ decoding(item.taskParam['process_name'])
+                                                                            || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.common_term_task_crate_c_path}}
+                                                                        </p>
+                                                                        <p>{{ item.taskParam.sourceLocation || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </app-mission-panel>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- IO分析 -->
+                                            <div class="table" *ngIf="missName === missArr[10]">
+                                                <app-mession-io-detail [taskInfo]="obj"></app-mession-io-detail>
+                                            </div>
+                                             <!-- memory_diagnostic -->
+                                             <div class="table" *ngIf="missName === 'memory_diagnostic'">
+                                                <app-diagnose-template  [taskInfo]="obj" [detailTarget]="obj.detailTarget"></app-diagnose-template>
+                                            </div>
+                                            <!-- hpc -->
+                                            <div class="table" *ngIf="missName === missArr[11]">
+                                                <ul style="width: 100%;margin-bottom: 5px;">
+                                                    <li *ngFor="let obje of obj.configList" style="display: flex;">
+                                                        <p style="width: 33%;" tiOverflow>{{ obje.key }}</p>
+                                                        <p style="width: 67%;" tiOverflow>{{ obje.text || '--' }}</p>
+                                                    </li>
+                                                    <!-- 预约任务 -->
+                                                    <li *ngIf="obj.hasOwnProperty('cycle')" style="display: flex;">
+                                                        <p style="width: 33%;">{{i18n.preSwitch.colectMethods}}</p>
+                                                        <p style="width: 67%;">
+                                                            {{obj.cycle? i18n.preSwitch.duraColect:
+                                                            i18n.preSwitch.onceColect}}
+                                                        </p>
+                                                    </li>
+                                                    <li *ngIf="obj.hasOwnProperty('cycle')" style="display: flex;">
+                                                        <p style="width: 33%;">{{i18n.preSwitch.pointTime}}</p>
+                                                        <p style="width: 67%;">{{obj.targetTime}}</p>
+                                                    </li>
+                                                    <li *ngIf="obj.hasOwnProperty('cycle')" style="display: flex;">
+                                                        <p style="width: 33%;">{{i18n.preSwitch.pointDuration}}</p>
+                                                        <p style="width: 67%;">{{ handleColectDate(obj) }}</p>
+                                                    </li>
+                                                </ul>
+                                                <!-- mission-panel -->
+                                                <div *ngIf="obj?.hpc_mlt_rank_info?.length > 0">
+                                                    <div *ngFor="let item of obj.hpc_mlt_rank_info">
+                                                        <app-mission-panel
+                                                            [title]="item.IP"
+                                                            [active]="false">
+                                                            <div class="content-box">
+                                                                <div class="content-list">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            RANK
+                                                                        </p>
+                                                                        <p>{{ item.rank || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </app-mission-panel>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="obj.nodeConfig && obj.switch">
+                                                    <div *ngFor="let item of obj.nodeConfig">
+                                                        <app-mission-panel
+                                                            [title]="item.nodeName + '(' + item.nodeIp + ')'" [active]="false">
+                                                            <div class="content-box">
+                                                                <div class="content-list"  
+                                                                *ngIf="item.task_param['analysis-target'].indexOf( 'Launch' ) !== -1">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.common_term_task_crate_app_path}}
+                                                                        </p>
+                                                                        <p>{{ item.task_param["app-dir"] || '--' }}</p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.sysSource.app_params
+                                                                            }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param["app-parameters"] || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.hpc.mission_create.openMpParams
+                                                                            }}
+                                                                        </p>
+                                                                        <p tiOverflow>{{ item.task_param.open_mp_param || '--'
+                                                                            }}
+                                                                        </p>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                                <div class="content-list"
+                                                                    *ngIf="item.task_param['analysis-target'].indexOf('Attach') !== -1 ">
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.sysSource.processName
+                                                                            }}
+                                                                        </p>
+                                                                        <p>{{ decoding(item.task_param['process_name'])
+                                                                            || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="lable-right">
+                                                                        <p class="label">
+                                                                            {{ i18n.mission_modal.sysSource.pid }}
+                                                                        </p>
+                                                                        <p>{{ item.task_param.targetPid ||
+                                                                            item.task_param.pid || '--' }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </app-mission-panel>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 网络IO监控 -->
+                                            <div class="table" *ngIf="missName === 'network_diagnostic'">
+                                                <app-net-io-temp-detail [taskInfo]="obj"></app-net-io-temp-detail>
+                                            </div>
+                                            <!-- 存储IO -->
+                                            <div class="table" *ngIf="missName === 'storageio_diagnostic'">
+                                                <app-storage-io-temp-detail [taskInfo]="obj"></app-storage-io-temp-detail>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </ti-table>
+                <div class="footer">
+                    <button class="primary-btn" type="button" (click)="confirm()" [disabled]="selectedValue === undefined">
+                        {{ i18n.mission_modal.confirm }}
+                    </button>
+                    <button class="cancel-btn" type="button" (click)="cancle()">
+                        {{ i18n.mission_modal.cancle }}
+                    </button>
+                </div>
+                <div class="nodata-temp" *ngIf="data.templateList.length===0">
+                  <img class=nodataSrc *ngIf="currTheme == ColorTheme.Dark"
+                       src='./assets/img/projects/nodata-dark.png' />
+                  <img class=nodataSrc *ngIf="currTheme == ColorTheme.Light"
+                       src='./assets/img/projects/nodata-light.png' />
+                  <div class="no-data">{{i18n.mission_create.templateNoData}}</div>
+                </div>
+            </div>
+        </main>
+    </div>
+</app-pop-mask>

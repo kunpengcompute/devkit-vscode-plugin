@@ -1,0 +1,191 @@
+:host ::ng-deep .taskForm {
+  margin-bottom: 0px;
+  margin-top: -10px;
+  .ti3-form {
+    // 解决没有required参数的表单会和带有required参数的表单不对齐的问题
+    & > tbody > tr > td:first-child {
+      width: 16px !important;
+    }
+  }
+
+  .ti_form_radio {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    & > div {
+      margin-right: 20px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+
+      &:last-child {
+        margin-right: unset;
+      }
+    }
+  }
+
+  .ti_form_switch {
+    height: 32px;
+    display: flex;
+    align-items: center;
+  }
+
+  // 通栏显示
+  .showThrough {
+    position: relative;
+    margin-top: 21px;
+    left: -220px;
+    width: calc(100% - 16px + 200px);
+  }
+
+  .info-icon {
+    display: flex;
+    align-items: center;
+    margin-top: 21px;
+    color: var(--d-aaaaaa-l-222222);
+    font-size: 12px;
+
+    img {
+      margin-right: 8px;
+    }
+
+    span {
+      font-size: 12px;
+      min-width: 450px;
+    }
+  }
+
+  // 修改 tiny TiValidationDirective 的错误提示信息
+  .ti3-unifyvalid-error-container {
+    > .ti3-error-icon {
+      margin-right: 8px;
+      font-size: unset;
+      width: 16px;
+      background: url("../../../../assets/img/tip/error.svg") 1px center no-repeat;
+      background-size: 14px 14px;
+      float: left;
+    }
+  }
+
+  .expandBtn {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    button {
+      margin: 0;
+      margin-left: 6px;
+      padding: 0;
+      border: none;
+      outline: none;
+      background: unset;
+      cursor: pointer;
+      position: relative;
+      padding-left: 15px;
+      color: #6c92fa;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 0;
+        height: 0;
+        border: 6px solid transparent;
+        border-left-color: #6c92fa;
+        transform: translateY(-50%);
+        transform-origin: 25% 50%;
+      }
+    }
+  }
+  .expandBtn.active button::before {
+    transform: translateY(-50%) rotate(90deg);
+  }
+
+  // 设置输入框 placehold 字体大小
+  input::-webkit-input-placeholder {
+    font-size: 12px;
+  }
+
+  &.textForm {
+    td {
+      padding: unset;
+    }
+
+    .ti3-text-form-label {
+      color: #9ea4b3;
+    }
+
+    .ti3-text-form-content {
+      padding-left: 2vw;
+    }
+  }
+
+  &.template {
+    .ti3-form {
+      width: 100%;
+      margin-bottom: 0px !important;
+
+      .ti3-form-content {
+        padding-left: 5px;
+      }
+    }
+  }
+
+  .ti3-form-content {
+    .formContent {
+      display: flex;
+
+      .tailPrompt {
+        color: var(--d-aaaaaa-l-979797);
+        font-size: 14px;
+        margin-left: 10px;
+        line-height: 28px;
+        white-space: nowrap;
+      }
+
+      .info-icon {
+        margin-top: 0;
+        margin-left: 10px;
+      }
+
+      .ti3-unifyvalid-error-container {
+        display: flex;
+
+        // 宽度取决于HTML设定的input框的宽度为400px，再减去图标的宽度【IE11不设置宽度会撑开td的宽度，导致变形】
+        .ti3-validate-text {
+          width: 400px - 20px;
+        }
+      }
+      textarea {
+        height: 70px;
+        margin-bottom: 20px;
+        background-color: transparent !important;
+        padding: 0 10px;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
+
+::ng-deep .vscode-light{
+  #select-modal .ti3-form tbody tr td .ti3-form-content{
+    margin-bottom: 0;
+  }
+}
+
+
+
+::ng-deep .taskForm input[type="radio"][tiRadio] + .ti3-radio .ti3-radio-skin {
+  background-color: transparent !important;
+}
+::ng-deep .taskForm .ti3-icon.ti3-spinner-upicon.ti3-icon-add#ti_auto_id_16_add {
+  background-color: transparent;
+}
+::ng-deep .taskForm .ti3-icon.ti3-spinner-upicon.ti3-icon-add#ti_auto_id_31_add {
+  background-color: transparent;
+}
+::ng-deep .nodeConfigModal .ti3-icon-staricon::before {
+  margin-left: 0px !important;
+}

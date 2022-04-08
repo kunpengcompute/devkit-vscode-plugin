@@ -1,0 +1,81 @@
+<div id="itemOperaLog">
+    <div class='titleset'>{{i18n.common_term_admin_log}}</div>
+    <div style="margin-bottom: 10px;">
+        <div *ngIf="notShowTimeFlag" class="middle-font">{{this.i18n.plugins_perf_title_operaLog}}
+            <a href="" title='{{i18n.plugins_perf_tip_operaLogFaq}}'>
+                <img *ngIf="currTheme == themeDark" style="margin-bottom: -2.45px;"
+                    src="./assets/img/summary/tooltip_dark.svg">
+                <img *ngIf="currTheme == themeLight" style="margin-bottom: -2.45px;"
+                    src="./assets/img/summary/tooltip.png">
+            </a>
+            <div *ngIf="!isOperate">
+                <input class='input' [(ngModel)]="operationLogAgeValue" disabled />
+            </div>
+            <div *ngIf="isOperate">
+                <div *ngIf="!isModifyOperaLogFlag">
+                    <input tiText class='input' [(ngModel)]="operationLogAgeValue" disabled />
+                    <span class="little-primary-btn"
+                        (click)="changeLogTime()">{{i18n.common_term_admin_user_edit}}</span>
+                </div>
+                <div *ngIf="isModifyOperaLogFlag">
+                    <input tiText class="input" [(ngModel)]="operationLogAgeValue" [required]="errorFlag" oncopy="return false"
+                        [ngClass]="{inputError: errorFlag}"
+                        onkeyup="if(event.ctrlKey&&event.keyCode==200){ return false;}"
+                        onkeydown="if(event.ctrlKey&&event.keyCode==200){return false;}" onpaste="return false"
+                        oncut="return false" (ngModelChange)="operaLogCheck()">
+                    <button type="button" class="little-primary-btn" (click)="onOperationLogAgeConfirm()"
+                        [disabled]="errorFlag">{{i18n.common_term_operate_ok}}</button>
+                    <span type="button" class="little-minor-btn"
+                        (click)="onCancel()">{{i18n.common_term_operate_cancel}}</span>
+                    <div *ngIf="errorFlag" class="ti3-unifyvalid-error-container">
+                        <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                        <span class="ti3-validate-text">{{errorLogMessage}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class="little-primary-btn" type="button" style="margin-bottom: 10px"
+                (click)="downloadOperaLog('sys')">{{i18n.operationLog.downLoadLog}}</button>
+            <ti-table [(displayedData)]="displayedLog" [srcData]="logList" [columns]="columsLog"
+                (stateUpdate)="logUpdate($event)">
+                <div class="ti3-table-fixed-head">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th tiOverflow *ngFor="let columslogItem of columsLog" width="{{columslogItem.width}}">
+                                    {{columslogItem.title}}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="ti3-table-container ti3-resize-wrapper" style="max-height:300px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th tiOverflow *ngFor="let columslogItem of columsLog" width="{{columslogItem.width}}">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let log of displayedLog">
+                                <td tiOverflow tiTipPosition="right">{{log.username}}</td>
+                                <td tiOverflow tiTipPosition="right">{{log.module_type}}</td>
+                                <td tiOverflow tiTipPosition="right">
+                                    <span class="status-icon" [ngClass]="statusFormat(log.result)"></span>
+                                    <span>{{log.result}}</span>
+                                </td>
+                                <td tiOverflow tiTipPosition="right">{{log.ipaddr}}</td>
+                                <td tiOverflow tiTipPosition="right">{{log.Time}}</td>
+                                <td tiOverflow tiTipPosition="right">{{log.information}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <app-default-page *ngIf="displayedLog.length === 0"></app-default-page>
+                </div>
+                <ti-pagination *ngIf="displayedLog.length !== 0" [(currentPage)]="currentPageLog" [pageSize]="pageSizeLog" style="width:100%"
+                    [(totalNumber)]="totalNumberLog" (pageUpdate)="onPageUpdateLog($event)" [showGotoLink]="true">
+                </ti-pagination>
+            </ti-table>
+        </div>
+    </div>

@@ -1,0 +1,6 @@
+::ng-deep .ti3-tabs > li.ti3-tab-active:not(.disabled) > a {
+    color: #0067ff !important;
+}
+::ng-deep .ti3-tabs + .ti3-tab-slider {
+    border-bottom: 2px solid #0067ff !important;
+}

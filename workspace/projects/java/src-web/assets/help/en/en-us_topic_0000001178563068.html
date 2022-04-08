@@ -1,0 +1,47 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Configuring JDK">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001179041524.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (Java Profiler)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001178563068">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Configuring JDK</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001178563068"></a><a name="EN-US_TOPIC_0000001178563068"></a>
+
+<h1 class="topictitle1">Configuring JDK</h1>
+<div id="body0000001110124492"><p id="EN-US_TOPIC_0000001178563068__p7282717111915">The <span id="EN-US_TOPIC_0000001178563068__ph1828211781914">Java Profiler</span> Guardian is deployed using the non-interactive shell and depends on JDK 8 or later. You need to install the JDK of a supported version in the Guardians and configure <strong id="EN-US_TOPIC_0000001178563068__b1184534915310">JAVA_HOME</strong>.</p>
+<p id="EN-US_TOPIC_0000001178563068__p72827173198">You can configure the <strong id="EN-US_TOPIC_0000001178563068__b8536164523119">JAVA_HOME</strong> environment variable as follows:</p>
+<ul id="EN-US_TOPIC_0000001178563068__ul11282817161915"><li id="EN-US_TOPIC_0000001178563068__li142821917131918">On Debian, Ubuntu, UOS 20, or Linx, upload the JDK file to the server and add the following content to the <strong id="EN-US_TOPIC_0000001178563068__b02704113620">/etc/environment</strong> file:<p id="EN-US_TOPIC_0000001178563068__p142828179193"><strong id="EN-US_TOPIC_0000001178563068__b728219172192">export JAVA_HOME=</strong>/usr/jdk/jdk1.8.0</p>
+<p id="EN-US_TOPIC_0000001178563068__p7281301184">In the preceding command, replace <strong id="EN-US_TOPIC_0000001178563068__b1566921420365">/usr/jdk/jdk1.8.0</strong> with the actual absolute path of the JDK file.</p>
+<p id="EN-US_TOPIC_0000001178563068__p628211174196">Run the following command to apply the <strong id="EN-US_TOPIC_0000001178563068__b16188113733612">JAVA_HOME</strong> configuration: </p>
+<p id="EN-US_TOPIC_0000001178563068__p928281781918"><strong id="EN-US_TOPIC_0000001178563068__b1428216174197">source </strong><strong id="EN-US_TOPIC_0000001178563068__b1328271701911">/etc/environment</strong></p>
+</li><li id="EN-US_TOPIC_0000001178563068__li112821217131914">On CentOS, EulerOS, openEuler, NeoKylin, Kylin V10, or SUSE, upload the JDK file to the server. Configure <strong id="EN-US_TOPIC_0000001178563068__b9404194963716">JAVA_HOME</strong> in the <strong id="EN-US_TOPIC_0000001178563068__b132915818370">~/.bashrc</strong> file. If the <strong id="EN-US_TOPIC_0000001178563068__b18708610143814">~/.bashrc</strong> file does not exist, you can run the <strong id="EN-US_TOPIC_0000001178563068__b42821179194">touch ~/.bashrc</strong> command to create the file and add the following content to the file:<p id="EN-US_TOPIC_0000001178563068__p192822176196"><strong id="EN-US_TOPIC_0000001178563068__b128211710194">export JAVA_HOME=</strong>/usr/jdk/jdk1.8.0</p>
+<p id="EN-US_TOPIC_0000001178563068__p12306132192010">In the preceding command, replace <strong id="EN-US_TOPIC_0000001178563068__b09772012397">/usr/jdk/jdk1.8.0</strong> with the actual absolute path of the JDK file.</p>
+<p id="EN-US_TOPIC_0000001178563068__p182828172195">Run the following command to apply the <strong id="EN-US_TOPIC_0000001178563068__b102001522173919">JAVA_HOME</strong> configuration: </p>
+<p id="EN-US_TOPIC_0000001178563068__p8282117141920"><strong id="EN-US_TOPIC_0000001178563068__b128251711918">source</strong><strong id="EN-US_TOPIC_0000001178563068__b5282217121917"> ~/.bashrc</strong></p>
+</li></ul>
+<div class="note" id="EN-US_TOPIC_0000001178563068__note16361439173216"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001178563068__p4371339123210">After the <strong id="EN-US_TOPIC_0000001178563068__b891712358391">JAVA_HOME</strong> is configured, if the JDK version is JDK 8, configure the correct <strong id="EN-US_TOPIC_0000001178563068__b7282717101915">tools.jar</strong> path in the <strong id="EN-US_TOPIC_0000001178563068__b37729115408">CLASSPATH</strong> environment variable.</p>
+</div></div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001179041524.html">Common Operations</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

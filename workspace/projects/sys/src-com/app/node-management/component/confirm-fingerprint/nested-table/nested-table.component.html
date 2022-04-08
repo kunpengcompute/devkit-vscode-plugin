@@ -1,0 +1,17 @@
+<!-- 嵌套表格需要加ti-table-nest这个样式类 -->
+<ti-table [(displayedData)]="table.displayed" [srcData]="table.srcData" [columns]="table.columns" class="ti3-table-nest">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let column of table.columns" width="{{column.width}}">{{column.label}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of table.displayed">
+          <td>{{ row.hash_type }}</td>
+          <td>{{ row.key_type }}</td>
+          <td>{{ row.finger_print }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ti-table>

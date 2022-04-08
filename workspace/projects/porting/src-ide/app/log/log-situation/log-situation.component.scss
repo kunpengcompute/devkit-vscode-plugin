@@ -1,0 +1,293 @@
+.webpack-situation-modal,
+.webpack-success-modal,
+.webpack-fail-modal {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    top: 64px;
+    left: 0;
+    overflow: hidden;
+    z-index: 100;
+}
+.webpack-situation-wrap,
+.webpack-success-wrap,
+.webpack-fail-wrap {
+    position: fixed;
+    z-index: 101;
+    left: 80%;
+    top: 90%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 101;
+    width: 450px;
+    padding: 24px 20px 16px 20px;
+}
+.situation {
+    font-size: 14px;
+}
+
+.endTask{
+    margin-top: 10px;
+    float: right;
+}
+
+.result {
+    word-break: break-all;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.modal-footer{
+    float: right;
+}
+
+.little-primary-btn{
+    cursor: pointer;
+}
+
+.little-minor-btn{
+    cursor: pointer;
+}
+
+.tip,
+.analyzing {
+    font-size: 14px;
+}
+.close {
+    margin-top: 32px;
+    button {
+        display: inline-block;
+        min-width: 160px;
+        height: 32px;
+        line-height: 32px;
+        background: #6c92fa;
+        border-color: #6c92fa;
+        border-radius: 1px;
+        color: #fff;
+        font-size: 0.875rem;
+    }
+    .disabled-btn {
+        background: #e6ebf5;
+        border-color: #e6ebf5;
+        color: #b8becc;
+    }
+}
+.webpack-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+.webpack-situation-wrap {
+    .img {
+        height: 154px;
+        margin: 0 auto;
+    }
+    .analyzing img {
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+}
+@keyframes loading {
+    0% {
+        transform: rotateZ(0);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+img.loading {
+    animation: loading 2s linear infinite;
+}
+::ng-deep .vscode-dark {
+    .progress-modal,
+    .success-modal {
+        background-color: #252526;
+    }
+    .progress-bar-bg {
+        background-color: #3c3c3c;
+        .progress-bar {
+            background-color: #0067ff;
+        }
+    }
+    .analyzing {
+        color: #b7b7b7;
+    }
+}
+::ng-deep .vscode-light {
+    .progress-modal,
+    .success-modal {
+        box-shadow: 0px 4px 8px 0px rgba(40, 43, 51, 0.2);
+        background-color: #ffffff;
+    }
+    .progress-bar-bg {
+        background-color: #ebebeb;
+        .progress-bar {
+            background-color: #0067ff;
+        }
+    }
+    .analyzing {
+        color: #888888;
+    }
+}
+.progress-modal,
+.success-modal {
+    position: fixed;
+    z-index: 101;
+    left: 80%;
+    top: 90%;
+    transform: translate(-45%, -10%);
+    z-index: 101;
+    width: 450px;
+    padding: 24px 20px 16px 20px;
+
+    .analyzing img {
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+    .madal-content {
+        p {
+            margin-top: 10px;
+        }
+
+        .progress-bar-bg {
+            height: 10px;
+            position: relative;
+            border-radius: 5px;
+            .progress-bar {
+                width: 85px;
+                height: 10px;
+                border-radius: 5px;
+                position: absolute;
+                left: 0;
+            }
+        }
+    }
+    .webpack-close {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+}
+
+.del-content {
+    box-sizing: border-box;
+    .title {
+        margin-bottom: 15px;
+        img {
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        p {
+            display: inline;
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+    }
+}
+.btn-box {
+    text-align: center;
+    width: 100%;
+    .user-sure-btn {
+        background: #6c92fa;
+        margin-right: 1.5vw;
+        width: 100px;
+        border-color: #6c92fa;
+        color: white;
+        min-width: 100px;
+    }
+
+    .user-close-btn {
+        width: 100px;
+        min-width: 100px;
+    }
+}
+
+@keyframes fadeInLeft {
+    0% {
+        transform: translateX(0px);
+    }
+    100% {
+        transform: translateX(365px);
+    }
+}
+
+.progress-bar {
+    -webkit-animation: "fadeInLeft" 2s infinite alternate;
+}
+.port-check-font {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+.ti3-table > .ti3-resize-wrapper > table > thead > tr > th,
+.ti3-table > .ti3-table-container > table > thead > tr > th,
+.ti3-table > .ti3-table-fixed-head > table > thead > tr > th,
+.ti3-table > table > thead > tr > th {
+    color: #282b33;
+    font-size: 0.6rem;
+    background-color: #f0f3fa;
+}
+.ti3-table > .ti3-resize-wrapper > table,
+.ti3-table > .ti3-table-container > table,
+.ti3-table > .ti3-table-fixed-head > table,
+.ti3-table > table {
+    color: #282b33;
+}
+.ti3-table > .ti3-resize-wrapper > table,
+.ti3-table > .ti3-table-container > table,
+.ti3-table > .ti3-table-fixed-head > table,
+.ti3-table > table a {
+    color: #5b7ede;
+}
+.ti3-table > .ti3-resize-wrapper > table > tbody > tr.ti3-even-tr:not(.ti3-selected-tr),
+.ti3-table
+    > .ti3-resize-wrapper
+    > table
+    > tbody
+    > tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr),
+.ti3-table > .ti3-table-container > table > tbody > tr.ti3-even-tr:not(.ti3-selected-tr),
+.ti3-table
+    > .ti3-table-container
+    > table
+    > tbody
+    > tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr),
+.ti3-table > .ti3-table-fixed-head > table > tbody > tr.ti3-even-tr:not(.ti3-selected-tr),
+.ti3-table
+    > .ti3-table-fixed-head
+    > table
+    > tbody
+    > tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr),
+.ti3-table > table > tbody > tr.ti3-even-tr:not(.ti3-selected-tr),
+.ti3-table
+    > table
+    > tbody
+    > tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr) {
+    background-color: transparent;
+}
+.ti3-table > .ti3-resize-wrapper > table > tbody > tr.ti3-odd-tr:not(.ti3-selected-tr):hover,
+.ti3-table
+    > .ti3-resize-wrapper
+    > table
+    > tbody
+    > tr:nth-child(odd):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover,
+.ti3-table > .ti3-table-container > table > tbody > tr.ti3-odd-tr:not(.ti3-selected-tr):hover,
+.ti3-table
+    > .ti3-table-container
+    > table
+    > tbody
+    > tr:nth-child(odd):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover,
+.ti3-table > .ti3-table-fixed-head > table > tbody > tr.ti3-odd-tr:not(.ti3-selected-tr):hover,
+.ti3-table
+    > .ti3-table-fixed-head
+    > table
+    > tbody
+    > tr:nth-child(odd):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover,
+.ti3-table > table > tbody > tr.ti3-odd-tr:not(.ti3-selected-tr):hover,
+.ti3-table
+    > table
+    > tbody
+    > tr:nth-child(odd):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover {
+    background-color: transparent;
+}

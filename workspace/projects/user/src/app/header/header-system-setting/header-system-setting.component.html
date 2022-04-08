@@ -1,0 +1,34 @@
+<div class="warpper configItemBox">
+    <div class="boxHeader">
+        <div class="title">{{i18n.sysSetting}}</div>
+        <div class="diliver"></div>
+    </div>
+    <div class="common-warpper boxMain" [appLoading]="isLoading">
+        <div class="sub-title">{{i18n.system_config.common_config}}</div>
+        <div class="common-item">
+            <app-sys-setting-item [config]="commonConfig.userCount" [value]="userCountValue"
+                (confirm)="onUserCountConfirm($event)">
+            </app-sys-setting-item>
+        </div>
+        <div class="common-item">
+            <app-sys-setting-item [config]="commonConfig.timeout" [value]="timeoutValue"
+                (confirm)="onTimeoutConfirm($event)">
+            </app-sys-setting-item>
+        </div>
+        <div class="common-item">
+            <app-sys-setting-item [config]="commonConfig.webWarnDeadline" [value]="webWarnDeadlineValue"
+                (confirm)="onWebWarnDeadlineConfirm($event)">
+            </app-sys-setting-item>
+        </div>
+        <div class="common-item">
+            <app-sys-setting-item-select [config]="commonConfig.userManRunLogLevel" [value]="userManRunLogLevelValue"
+                (confirm)="onUserManRunLogLevelConfirm($event)">
+            </app-sys-setting-item-select>
+        </div>
+        <div class="common-item">
+            <app-sys-setting-item [config]="commonConfig.passwordOutDate" [value]="passwordOutDateValue"
+                (confirm)="onPasswordOutDateConfirm($event)">
+            </app-sys-setting-item>
+        </div>
+    </div>
+</div>

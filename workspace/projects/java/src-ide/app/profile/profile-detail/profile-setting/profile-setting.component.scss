@@ -1,0 +1,196 @@
+.vscode-dark #profileSettingModal {
+    // 弹窗背景颜色
+    --modal-background-color: #252526;
+    // 弹窗上下虚线颜色
+    --modal-dashed-border-color: #4b4b4b;
+    // 弹窗头部标题颜色
+    --modal-header-title-color: #e8e8e8;
+    // 弹窗底部次级按钮字体颜色
+    --modal-footer-secondary-button-font-color: #e8e8e8;
+    // 弹窗底部次级按钮背景颜色
+    --modal-footer-secondary-button-background-color: #313131;
+    // 弹窗底部次级按钮边框颜色
+    --modal-footer-secondary-button-border-color: #dddddd;
+    // 折叠面板上下边框颜色
+    --details-border-color: #484a4e;
+    // 折叠面板概览字体颜色
+    --details-summary-font-color: #e8e8e8;
+    // 滚动条滑块颜色
+    --scrollbar-thumb-background-color: rgba(121, 121, 121, 0.4);
+    // 滚动条外层轨道和内层滚动条颜色
+    --scrollbar-thumb-track-background-color: #252526;
+}
+
+.vscode-light #profileSettingModal {
+    --modal-background-color: #ffffff;
+    --modal-dashed-border-color: #e1e6ee;
+    --modal-header-title-color: #222222;
+    --modal-footer-secondary-button-font-color: #222222;
+    --modal-footer-secondary-button-background-color: #ffffff;
+    --modal-footer-secondary-button-border-color: #979797;
+    --details-border-color: #e1e6ee;
+    --details-summary-font-color: #222222;
+    --scrollbar-thumb-background-color: #979797;
+    --scrollbar-thumb-track-background-color: #ffffff;
+}
+
+#profileSettingModal {
+    .ti3-modal {
+        z-index: 9999999 !important;
+    }
+
+    .ti3-modal-content {
+        background-color: var(--modal-background-color) !important;
+
+        .ti3-modal-header {
+            color: var(--modal-header-title-color) !important;
+            border-color: var(--modal-dashed-border-color);
+            margin-bottom: -1px;
+            padding: 20px 0;
+            span {
+                display: flex;
+                font-size: 20px;
+                line-height: 26px;
+                justify-content: space-between;
+
+                .ti3-close {
+                    position: relative;
+                    top: 0;
+                    right: 0;
+                }
+            }
+        }
+
+        .ti3-modal-body {
+            height: 438px;
+            padding: 0px 0 10px 0;
+            margin-top: 0px !important;
+            details {
+                &[open] {
+                    & > summary > img {
+                        transform: rotateZ(0deg);
+                    }
+                }
+
+                &:not([open]):last-of-type summary {
+                    border-bottom: 1px solid var(--details-border-color);
+                }
+
+                summary {
+                    height: 36px;
+                    line-height: 36px;
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    border-top: 1px solid var(--details-border-color);
+
+                    img {
+                        transform: rotateZ(-90deg);
+                        padding: 8px;
+                    }
+
+                    title {
+                        display: inline-block;
+                        font-size: 16px;
+                        color: var(--details-summary-font-color);
+                    }
+
+                    // 去掉summary的箭头
+                    &::-webkit-details-marker {
+                        display: none;
+                    }
+                }
+                &:first-child summary {
+                    border-top: none;
+                }
+
+                main {
+                    .input-group-box {
+                        padding-left: 32px;
+                        margin: 20px 0;
+
+                        .input-group-name {
+                            font-size: 14px;
+                            margin-bottom: 8px;
+                        }
+                    }
+                }
+            }
+
+            &::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: var(--scrollbar-thumb-background-color) !important;
+            }
+
+            &::-webkit-scrollbar-track,
+            &::-webkit-scrollbar-track-piece {
+                background: var(--scrollbar-thumb-track-background-color);
+            }
+        }
+
+        .ti3-modal-footer {
+            border-top: 1px dashed var(--modal-dashed-border-color) !important;
+            margin-top: -1px;
+            padding: 32px 0 !important;
+            background: var(--modal-background-color) !important;
+
+            button {
+                width: 160px;
+                height: 32px;
+                cursor: pointer;
+                background: var(--modal-footer-secondary-button-background-color);
+                border: 1px solid var(--modal-footer-secondary-button-border-color);
+                border-radius: 2px;
+                font-size: 14px;
+                line-height: 32px;
+                color: var(--modal-footer-secondary-button-font-color);
+
+                &:hover {
+                    color: #267dff;
+                    border-color: #267dff;
+                }
+
+                &:active {
+                    color: #0057d9;
+                    border-color: #0057d9;
+                }
+            }
+        }
+    }
+
+    #body-wrapper {
+        height: 100%;
+        overflow-y: auto;
+    }
+}
+.tip-close{
+    display: inline-block;
+    img:hover {
+        cursor: pointer;
+    }
+    & > img {
+        display: none;
+    }
+    & > img:nth-of-type(1) {
+        display: block;
+    }
+    &:hover {
+        & > img:nth-of-type(1) {
+            display: none;
+        }
+        & > img:nth-of-type(2) {
+            display: block;
+        }
+    }
+    &:active {
+        & > img:nth-of-type(1) {
+            display: none;
+        }
+        & > img:nth-of-type(2) {
+            display: block;
+        }
+    }
+}

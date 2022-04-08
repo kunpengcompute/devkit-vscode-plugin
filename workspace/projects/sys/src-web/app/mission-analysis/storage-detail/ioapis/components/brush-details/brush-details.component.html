@@ -1,0 +1,68 @@
+<div class="brush-main" [ngClass]="{'active': topState=='active','tips': timeTitle === '--'}">
+  <div class="toggle-btn-top" (click)='toggleTop()' (mouseenter)="onHoverClose('arrowDown')" 
+    (mouseleave)="onHoverClose('')">
+    <img id="user-guide-toggle" 
+      [src]="hoverArrow==='arrowDown'?'./assets/img/home/arrow-down_hover.svg':'./assets/img/home/arrow-down.svg'" 
+      [ngClass]="{'active': topState=='notActive'}" />
+  </div>
+
+  <app-brush-tips *ngIf="timeTitle === '--'" [type]="'iops'" (firstTip) = "topState= 'active'" #brushTips></app-brush-tips>
+  <div class="content1" *ngIf="timeTitle !== '--'">
+  <div class="page-title">
+      <div class="function-title">{{pidFunction}}</div>
+      <div class="time_title">{{i18n.storageIO.ioapis.time_title}}: {{timeTitle}}</div>
+  </div>
+  <ti-table class="custemTable" [(displayedData)]="tlbData.displayed"
+  [srcData]="tlbData.srcData" [columns]="tlbData.columns" tiColsResizable>
+  <div class="ti3-table-fixed-head">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let column of tlbData.columns; let index = index">
+            <div class="thContent">
+              <ti-cell-text tiOverflow>{{ column.label }}</ti-cell-text>
+
+              <app-sub-module-table-sort *ngIf="column.sortKey" [sortStatus]="column.sortStatus"
+                (sortTable)="tableService.sortTable(tlbData.srcData.data, tlbData.columns, column.sortKey, $event)">
+              </app-sub-module-table-sort>
+            </div>
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+  <div class="ti3-table-container ti3-resize-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let column of tlbData.columns" [width]="column.width"></th>
+        </tr>
+      </thead>
+
+      <tbody style="height: 400px;">
+        <ng-container  *ngIf="tlbData.displayed.length > 0; else tlbNoData">
+        <tr *ngFor="let item of tlbData.displayed; index as i ">
+          <ng-container *ngFor="let row of tlbData.columns; index as i">
+              <td tiOverflow tiTipPosition='left'> {{item[row.sortKey] }} </td>
+      </ng-container>
+        </tr>
+    </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <ti-pagination [(currentPage)]="tlbData.pageNo" [pageSize]="tlbData.pageSize" [(totalNumber)]="tlbData.total">
+  </ti-pagination>
+</ti-table>
+
+<!-- 无数据 -->
+<ng-template #tlbNoData>
+  <div class="nodata">
+    <img style='width:198px;display:block' src='./assets/img/projects/nodata.png' />
+    <div style="font-size: 1rem">{{i18n.common_term_task_nodata}}</div>
+  </div>
+</ng-template>
+</div>
+    
+</div>

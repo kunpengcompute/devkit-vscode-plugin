@@ -1,0 +1,48 @@
+<!-- export task modal -->
+<ng-template #exportTaskModalComponent let-context='context'>
+  <ti-modal-header>{{ i18n.project.exportTask }}</ti-modal-header>
+
+  <!-- 弹框内容定义 -->
+  <ti-modal-body>
+    <p class="tips" *ngIf="userInfo.role !== 'Admin'" style="color: #616161; font-size: 14px; margin-bottom: 20px; display: flex; align-items: center;">
+      <img src='./assets/img/tip/tip.svg' style="width: 18px; height: 18px; margin-right: 8px;" />
+      {{ i18n.project.createExportTaskTip }}
+    </p>
+
+    <ti-formfield [formGroup]="context.formGroup">
+      <!--选择工程 -->
+      <ti-item [label]="exportTaskForm.projectName.label" [required]="exportTaskForm.projectName.required">
+        <ti-select 
+          formControlName="projectName"
+          [options]="exportTaskForm.projectName.list"
+          [placeholder]="exportTaskForm.projectName.placeholder"
+          [noDataText]="exportTaskForm.projectName.noDataText"
+          style="width: 424px;"
+          (ngModelChange)="context.projectNameChange($event)"
+        ></ti-select>
+      </ti-item>
+
+      <!--选择任务 -->
+      <ti-item [label]="exportTaskForm.taskName.label" [required]="exportTaskForm.taskName.required">
+        <ti-select 
+          formControlName="taskName"
+          [options]="exportTaskForm.taskName.list"
+          [placeholder]="exportTaskForm.taskName.placeholder"
+          [noDataText]="exportTaskForm.taskName.noDataText"
+          style="width: 424px;"
+        ></ti-select>
+      </ti-item>
+    </ti-formfield>
+  </ti-modal-body>
+
+  <ti-modal-footer>
+    <button
+      tiButton type="button" color="primary" style="margin-right: 16px"
+      (click)="context.confirm(context)" [disabled]="!context.formGroup.valid || context.interfacing"
+    >{{ i18n.common_term_operate_ok }}</button>
+    
+    <button type="button" (mousedown)="context.dismiss()" tiButton>
+      {{ i18n.common_term_operate_cancel }}
+    </button>
+  </ti-modal-footer>
+</ng-template>

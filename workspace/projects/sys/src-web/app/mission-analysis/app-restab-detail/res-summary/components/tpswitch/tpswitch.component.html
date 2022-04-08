@@ -1,0 +1,84 @@
+<ti-table
+  #tableComponent
+  [(displayedData)]="displayed"
+  [srcData]="srcData"
+  [columns]="columns"
+  tiColsResizable
+  class="custemTable"
+  (stateUpdate)="onStateUpdate($event)"
+  [appLoading]="isLoading"
+>
+  <div class="ti3-table-fixed-head">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns; let index = index" [width]="column.width">
+            <ti-cell-text>
+              <span>{{column.label}}</span>
+              <ti-icon *ngIf="column.searchKey"
+                class="search-icon"
+                [ngClass]="{'active': processSearchPop.isShow || searchWordsSave[column.searchKey]}" 
+                name="search"
+                [pop]="processSearchTipContent"
+                [popContext]="{ key: column.searchKey, index: index }"
+                #processSearchPop="pop"
+                [popOffset]="{ x: -40, y: 24 }"
+                popClass="process-search-pop">
+              </ti-icon>
+            </ti-cell-text>
+            <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey" [asc]="publicMethodService.calcSortStatus(column.sortStatus)"></ti-head-sort>
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+  <div class="ti3-table-container ti3-resize-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns; let index = index" tiOverflow [width]="column.width"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let row of displayed; let index = index">
+          <td tiOverflow>{{ row.task }}</td>
+          <td tiOverflow>{{ row.tid }}</td>
+          <td tiOverflow>{{ row.pid }}</td>
+          <td tiOverflow>{{ row.runtime | threePoint:3 }}</td>
+          <td tiOverflow>{{ row.switches | thousandSeparator }}</td>
+          <td tiOverflow>{{ row.avg_delay | threePoint:3 }}</td>
+          <td tiOverflow>{{ row.max_delay | threePoint:3 }}</td>
+          <td tiOverflow>{{ row.max_delay_at | threePoint:6 }}</td>
+          <td class="operateBox">
+            <span class="operateIcon" *ngIf="row.switches; else noOperate" (click)="viewSwitchDetails(row)">{{ i18n.sys_res.viewSwtichDetail }}</span>
+
+            <ng-template #noOperate>
+              <span class="disabledClick">{{ i18n.sys_res.viewSwtichDetail }}</span>
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 无数据 -->
+    <div *ngIf="!isLoading && !displayed.length" class='chen-nodata-td unsetPosition'>
+      <img src='./assets/img/projects/nodata.png' />
+      <div>{{ i18n.common_term_task_nodata2 }}</div>
+    </div>
+  </div>
+
+  <ti-pagination
+    [(currentPage)]="pageNo"
+    [pageSize]="pageSize"
+    [(totalNumber)]="total"
+    [showGotoLink]="true"
+  ></ti-pagination>
+</ti-table>
+<ng-template #processSearchTipContent let-context="context">
+  <ti-searchbox
+    [ngModel]="searchWordsSave[context.key]"
+    (clear)="onTableHeaderSearch('', context)"
+    (search)="onTableHeaderSearch($event, context)"></ti-searchbox>
+</ng-template>

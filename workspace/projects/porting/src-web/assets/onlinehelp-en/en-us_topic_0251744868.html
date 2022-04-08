@@ -1,0 +1,46 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Configuring Alarm Thresholds for Historical Reports">
+<meta name="abstract" content="Set the alarm thresholds for historical reports.">
+<meta name="description" content="Set the alarm thresholds for historical reports.">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0263147772.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.T21">
+<meta name="brand" content="Huawei Kunpeng Porting Advisor">
+<meta name="DC.Publisher" content="20201230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0251744868">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Configuring Alarm Thresholds for Historical Reports</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0251744868"></a><a name="EN-US_TOPIC_0251744868"></a>
+
+<h1 class="topictitle1">Configuring Alarm Thresholds for Historical Reports</h1>
+<div id="body1591174541941"><p id="shortdesc14230141315551">Set the alarm thresholds for historical reports.</p>
+<div class="section" id="EN-US_TOPIC_0251744868__section11470129119"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0251744868__p2444451164517">You have logged in to the <span id="EN-US_TOPIC_0251744868__ph997750104712">Kunpeng Porting Advisor</span> WebUI.</p>
+<div class="note" id="EN-US_TOPIC_0251744868__note33289411010"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0251744868__p1328124113014">Only the administrator <strong id="EN-US_TOPIC_0251744868__b598021781412">portadmin</strong> can configure thresholds.</p>
+</div></div>
+</div>
+<div class="section" id="EN-US_TOPIC_0251744868__section920691725615"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0251744868__ol1095132424619"><li id="EN-US_TOPIC_0251744868__li1423863018444"><span>Click <span><img id="EN-US_TOPIC_0251744868__image6467113413556" src="en-us_image_0304780557.png"></span> in the upper right corner and choose <span class="wintitle" id="EN-US_TOPIC_0251744868__wintitle55951783276"><b>Threshold Settings</b></span>.</span></li><li id="EN-US_TOPIC_0251744868__li19131241171114"><span>Click <span class="wintitle" id="EN-US_TOPIC_0251744868__wintitle8274138101716"><b>Modify</b></span>, set <span class="wintitle" id="EN-US_TOPIC_0251744868__wintitle10296171714269"><b>Report Warning Threshold</b></span> and <span class="wintitle" id="EN-US_TOPIC_0251744868__wintitle43818228264"><b>Maximum Report Threshold</b></span>, and click <strong id="EN-US_TOPIC_0251744868__b7631515141818">OK</strong>, as shown in <a href="#EN-US_TOPIC_0251744868__fig191174916127">Figure 1</a>.</span><p><div class="fignone" id="EN-US_TOPIC_0251744868__fig191174916127"><a name="EN-US_TOPIC_0251744868__fig191174916127"></a><a name="fig191174916127"></a><span class="figcap"><b>Figure 1 </b>Threshold Settings</span><br><span><img id="EN-US_TOPIC_0251744868__image87881549142" src="en-us_image_0000001118061888.png" height="167.58" width="523.6875"></span></div>
+<div class="note" id="EN-US_TOPIC_0251744868__note155274249151"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0251744868__ul73714672512"><li id="EN-US_TOPIC_0251744868__li63715619254">The value of <span class="wintitle" id="EN-US_TOPIC_0251744868__wintitle1142816519420"><b>Report Warning Threshold</b></span> ranges from 1 to 49, and the default value is <strong id="EN-US_TOPIC_0251744868__b128128501649">40</strong>. The value of <span class="wintitle" id="EN-US_TOPIC_0251744868__wintitle136749106514"><b>Maximum Report Threshold</b></span> ranges from 2 to 50, and the default value is <strong id="EN-US_TOPIC_0251744868__b209512528510">50</strong>. The value of <span class="wintitle" id="EN-US_TOPIC_0251744868__wintitle1986651317114"><b>Maximum Report Threshold</b></span> must be greater than that of <span class="wintitle" id="EN-US_TOPIC_0251744868__wintitle17904123819112"><b>Report Warning Threshold</b></span>.</li><li id="EN-US_TOPIC_0251744868__li1537117610257">When the number of reports reaches <strong id="EN-US_TOPIC_0251744868__b795292184512">Report Warning Threshold</strong>, "Too many reports. Please delete some reports to release the storage space." will be displayed. However, the use of the tool is not affected.</li><li id="EN-US_TOPIC_0251744868__li9261113151718">When the number of historical reports reaches the <strong id="EN-US_TOPIC_0251744868__b8252436182614">Maximum Report Threshold</strong>, the task creating function is disabled, and the system displays a message indicating that the number of current reports has reached the maximum threshold and the task creating function has been disabled. In this case, you need to delete unnecessary historical reports.</li></ul>
+</div></div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0263147772.html">Configuration Before Using the Tool</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

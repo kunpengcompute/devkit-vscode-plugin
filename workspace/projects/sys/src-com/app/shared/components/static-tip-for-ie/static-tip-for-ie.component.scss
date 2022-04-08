@@ -1,0 +1,19 @@
+.warpper {
+  width: 100%;
+  position: relative;
+  background-color: #edf4ff;
+  height: 44px;
+  .ie-tip {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    height: 44px;
+    border-radius: 2px;
+    img {
+      margin: 0 13px 0 20px;
+    }
+    .ie-tip-des {
+      margin-right: 20px;
+    }
+  }
+}

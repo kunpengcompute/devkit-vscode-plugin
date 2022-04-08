@@ -1,0 +1,32 @@
+<div>
+    <div class="itemParam">
+      <div class="label">{{"storage_io_detail.result_tab.test_model_obj"|i18n}}</div> 
+    </div>
+    <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns" tiColsResizable>
+        <div class="ti3-table-fixed-head">
+          <table>
+            <thead>
+              <tr>
+                <th tiOverflow *ngFor="let column of columns;index as index" width="{{column.width}}">{{column.title}}</th>
+              </tr>  
+            </thead>
+          </table>
+        </div>
+        <div class="ti3-table-container ti3-resize-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let column of columns" width="{{column.width}}"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of displayed;index as i">
+                <td tiOverflow>{{ row.nodeIp }}</td>
+                <td tiOverflow>{{ row.nodeName }}</td>
+                <td tiOverflow>{{ row.file_name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ti-table>
+</div>

@@ -1,0 +1,109 @@
+<div class="mem">
+  <p class="paramsConfigSuggestions" *ngIf="formEl.paramsConfigSuggestions">
+    {{ formEl.paramsConfigSuggestions }}
+  </p>
+
+  <div class="form">
+    <app-task-form [labelWidth]="labelWidth" [displayedElementList]="formEl.displayedElementList"
+      [allFormElements]="formEl.form" [formGroup]="formEl.formGroup" [widthIsLimited]="widthIsLimited" type="form"
+      [isModifySchedule]="isModifySchedule" [ngClass]="{strulab: isModifySchedule}"></app-task-form>
+  </div>
+
+  <!-- 配置节点参数 -->
+  <div class="node-config-box import-btn" *ngIf="formEl.hasNodeConfig && nodeConfigShow">
+    <div class="switch">
+      <div class="flex" [style.width]="labelWidth">
+        <span class="label">{{ i18n.mission_create.nodeParamsConfig }}</span>
+      </div>
+
+      <div class="content">
+        <ti-switch [(ngModel)]="nodeConfig.status" [disabled]="!(formValid && modeAppRunUserValid)"
+          [tiTip]="!formValid ? i18n.mission_create.paramsConfigNotice : ''" tiTipPosition="right"
+          (ngModelChange)="switchNodeConfig($event)"></ti-switch>
+
+        <div class="tip" *ngIf="!nodeConfig.status">
+          <span>{{ i18n.nodeConfig.nodeTip }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="node-config" *ngIf="nodeConfig.status">
+      <div class="table">
+        <ti-table [(displayedData)]="nodeConfig.displayed" [srcData]="nodeConfig.srcData"
+          [columns]="nodeConfig.columns">
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let column of nodeConfig.columns" tiOverflow>
+                  {{ column.title}}
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let node of nodeConfig.displayed; index as i;">
+                <td tiOverflow>{{node.nickName}}</td>
+                <td tiOverflow>{{node.nodeIp}}</td>
+                <td tiOverflow>
+                  <span class="status-icon" [ngClass]="node.hasConfig ? 'success-icon' : 'reserve-icon'"></span>
+                  <span>{{ node.hasConfig ? i18n.nodeConfig.configed : i18n.nodeConfig.noConfig }}</span>
+                </td>
+                <td tiOverflow>
+                  <span (click)="openConfigNodeModal(node)" class="config-btn">
+                    {{ i18n.nodeConfig.configParams }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ti-table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 配置节点参数弹框 -->
+<ng-template #nodeConfigModal let-context='context'>
+  <ti-modal-header class="modal-title">
+    {{ i18n.nodeConfig.modifyNodeParameter }}
+  </ti-modal-header>
+
+  <ti-modal-body>
+    <div class="nodeInfo">
+      <ti-formfield [labelWidth]="'160px'">
+        <!-- 节点别名 -->
+        <ti-item [label]="i18n.common_term_another_nodename">
+          <span class="nodeInfoItem">{{ nodeConfig.configNode.nickName }}</span>
+        </ti-item>
+
+        <!-- 节点IP -->
+        <ti-item [label]="i18n.common_term_node_ip">
+          <span class="nodeInfoItem">{{ nodeConfig.configNode.nodeIp }}</span>
+        </ti-item>
+      </ti-formfield>
+    </div>
+    <div *ngIf="analysisMode === 'pid'" class="model-body" [formGroup]="nodeConfig.formEl.formGroup">
+      <app-pid-process-input formControlName="p_t_ctrl" [labelWidth]="'160px'">
+      </app-pid-process-input>
+    </div>
+    <div *ngIf="analysisMode === 'app'" class="model-body" [formGroup]="nodeConfig.formEl.formGroup">
+      <app-app-params-input [labelWidth]="'180px'" formControlName="app_params_ctrl">
+      </app-app-params-input>
+      <app-run-user-input *ngIf="!isModifySchedule" [labelWidth]="'180px'" formControlName="run_user_password_ctrl">
+      </app-run-user-input>
+    </div>
+    <app-path-parameter [labelWidth]="isIntellij?'166px':'180px'" [analysisMode]="analysisMode"
+        [analysisType]="analysisType" [displayedElementList]="nodeConfig.formEl.displayedElementList"
+        [allFormElements]="nodeConfig.formEl.form" [formGroup]="nodeConfig.formEl.formGroup"
+        [widthIsLimited]="widthIsLimited"></app-path-parameter>
+  </ti-modal-body>
+
+  <ti-modal-footer>
+    <button tiButton type="button" color="primary" style="margin-right: 20px" (click)='setNodeParams(context)'
+      [disabled]='!nodeConfig.formEl.formGroup.valid'>{{ i18n.common_term_operate_ok }}</button>
+
+    <button tiButton type="button" (click)="context.dismiss()">
+      {{ i18n.common_term_operate_cancel }}
+    </button>
+  </ti-modal-footer>
+</ng-template>

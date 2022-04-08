@@ -1,0 +1,104 @@
+::ng-deep {
+
+  :root {
+    --color-btn-disabled-font: #CCCCCC;
+    --color-btn-disabled-bg: #F5F5F5;
+    --color-btn-primary-disabled-border: #CCCCCC;
+    --color-btn-secondary-font: #222222;
+    --color-btn-secondary-bg: #FFFFFF;
+    --color-btn-secondary-border: #979797;
+    --color-btn-secondary-disabled-border: #CCCCCC;
+  }
+  .vscode-dark {
+    --color-btn-disabled-font: #AAAAAA;
+    --color-btn-disabled-bg: #313131;
+    --color-btn-primary-disabled-border: #313131;
+    --color-btn-secondary-font: #E8E8E8;
+    --color-btn-secondary-bg: #313131;
+    --color-btn-secondary-border: #DDDDDD;
+    --color-btn-secondary-disabled-border: #616161;
+  }
+}
+
+::ng-deep {
+  /** 主要、次要按钮 start **/
+  // 大按钮
+  .primary-button,
+  .secondary-button {
+    font-size: 12px;
+    padding: 0 24px;
+    height: 32px;
+    display: inline-block;
+    line-height: 18px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+  }
+  // 小按钮
+  .small-primary-button,
+  .small-secondary-button {
+    font-size: 12px;
+    padding: 0 20px;
+    height: 28px;
+    display: inline-block;
+    line-height: 18px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+  }
+  
+  .primary-button,
+  .small-primary-button {
+    background-color: #0067ff;
+    border-color: #0067ff;
+    color: #ffffff;
+  
+    &:hover {
+      background-color: #267DFF;
+      border-color: #267DFF;
+    }
+
+    &:active {
+      background-color: #0057d9;
+      border-color: #0057d9;
+    }
+    
+    &:disabled {
+      color: var(--color-btn-disabled-font);
+      background-color: var(--color-btn-disabled-bg);
+      border-color: var(--color-btn-primary-disabled-border);
+      cursor: not-allowed;
+    }
+  }
+  
+  .secondary-button,
+  .small-secondary-button {
+    color: var(--color-btn-secondary-font);
+    background-color: var(--color-btn-secondary-bg);
+    border-color: var(--color-btn-secondary-border);
+  
+    &:hover {
+      border-color: #267DFF;
+      color: #267DFF;
+    }
+  
+    &:active {
+      border-color: #0057D9;
+      color: #0057D9;
+    }
+  
+    &:disabled {
+      color: var(--color-btn-disabled-font) !important;
+      background-color: var(--color-btn-disabled-bg) !important;
+      border-color: var(--color-btn-secondary-disabled-border) !important;
+      cursor: not-allowed;
+    }
+  }
+  /** 主要、次要按钮 end **/
+}

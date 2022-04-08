@@ -1,0 +1,27 @@
+<div class="warpper" id="warpperColor">
+  <ti-formfield [formGroup]="ppFormGroup" [labelWidth]="labelWidth">
+    <ti-item [hidden]="!ctl.processCheck.value" [required]="ctl.processCheck.value" class="content">
+      <ti-item-label class="label">
+        <input type="checkbox" tiCheckbox tiValidation formControlName="processCheck"
+          [label]="i18n.mission_create.process_alias" (ngModelChange)="onNgModelChange($event,'processCheck')">
+      </ti-item-label>
+      <div class="inputValue">
+        <input [ngStyle]="{'width': inputWidth}" type="text" tiText tiValidation formControlName="processInput"
+          [placeholder]="i18n.mission_create.process_input_placeholder" [tiValidation]='validation'>
+      </div>
+    </ti-item>
+    <ti-item [hidden]="!ctl.pidCheck.value" [required]="ctl.pidCheck.value" class="content">
+      <ti-item-label class="label">
+        <input type="checkbox" tiCheckbox tiValidation formControlName="pidCheck" [label]="'PID'"
+          (ngModelChange)="onNgModelChange($event, 'pidCheck')">
+      </ti-item-label>
+      <div class="inputValue">
+        <textarea *ngIf="atMostPid === attachProcessPidNumMax"  [ngStyle]="{'width': inputWidth}" tiTextarea tiValidation formControlName="pidInput"
+          [placeholder]="i18n.mission_create.pid_input_placeholder" [tiValidation]='validation' [errorMessageWrapper]='errorPidWrapper'></textarea>
+        <input *ngIf="atMostPid !== attachProcessPidNumMax" [ngStyle]="{'width': inputWidth}" type="text" tiText tiValidation formControlName="pidInput"
+          [placeholder]="i18n.mission_create.pid_input_placeholder_java" [tiValidation]='validation' [errorMessageWrapper]='errorPidWrapper'>
+        <div #errorPidWrapper></div>
+      </div>
+    </ti-item>
+  </ti-formfield>
+</div>

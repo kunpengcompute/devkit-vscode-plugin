@@ -1,0 +1,137 @@
+$col222: #222;
+
+.modal-dialog .content .content_tab{
+    display:flex;
+    background-color: #f5f9ff;
+    height: 40px;
+    align-items: flex-end;
+    margin-bottom: 16px;
+    .create-title{
+      display: inline-block;
+      height: 36px;
+      color: #666;
+      background-color: #f5f9ff;
+      cursor: pointer;
+      margin-bottom: 0;
+      line-height: 36px;
+      margin-left: 4px;
+      padding-left: 24px;
+      padding-right: 24px;
+      box-sizing: border-box;
+      font-size: 14px;
+      min-width: 108px;
+      border-bottom: none;
+    }
+    .create-title.active{
+        background-color: #fff;
+        color: #0067ff;
+        border: 1px solid #e1e6ee;
+        border-bottom: none;
+    }
+}
+
+.downLoadLog{
+  min-width: 64px !important;
+}
+.log-table {
+  margin-top: 16px;
+}
+.operate-log-tip {
+  margin-left: 16px;
+  color: $col222;
+  font-size: 14px;
+}
+
+.downloadLog-btn {
+  color: #0067FF !important;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.modal-dialog {
+    display: flex;
+    flex-direction: column;
+    .content {
+      flex-grow: 1;
+      .create-title {
+        .title {
+          color: #222;
+        }
+        .download-logs {
+          width: 96px;
+          height: 32px;
+          line-height: 32px;
+          font-size: 14px;
+          position: relative;
+          img {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+          }
+          button {
+            width: 96px;
+          }
+        }
+      }
+    }
+    .footer {
+      height: 96px;
+      line-height: 96px;
+      text-align: center;
+    }
+
+    .create-btn {
+      width: 130px;
+      margin-top: 1vw;
+      background: #6c92fa;
+      border-color: #6c92fa;
+      font-size: 14px;
+    }
+    .user-table {
+      width: 35vw;
+      margin-top: 1vw;
+      flex: 1;
+    }
+    .user-close-btn {
+      width: 15%;
+      margin: 1vw auto;
+      font-size: 14px;
+    }
+    .user-opt {
+      text-decoration: underline;
+      margin-left: 1vw;
+      color: #6c92fa;
+      cursor: pointer;
+    }
+  }
+  .status-icon {
+    border-radius: 50%;
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 5px;
+    border: 3px solid #7adfa0;
+  }
+
+  .success-icon {
+    border: 3px solid #7adfa0;
+  }
+  .failed-icon {
+    border: 3px solid #f45c5e;
+  }
+
+  .timeout-icon {
+    border: 3px solid #CCCCCC;
+  }
+
+  .setting-table {
+    max-height: calc(100vh - 330px);
+  }
+
+  // ti-table错位问题
+  :host ::ng-deep .ti3-table>.ti3-table-fixed-head>table{
+    table-layout: fixed;
+  }
+  :host ::ng-deep .ti3-table>.ti3-table-container>table{
+    table-layout: fixed;
+  }

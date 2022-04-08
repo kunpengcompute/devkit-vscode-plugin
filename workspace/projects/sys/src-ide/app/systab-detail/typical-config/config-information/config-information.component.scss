@@ -1,0 +1,469 @@
+.distributedBox {
+    .titleBox {
+        display: flex;
+        align-items: center;
+        padding: 6px 0 6px 16px;
+        background: var(--titlebox-bg);
+
+        .formContent {
+            display: flex;
+            color: var(--font-color);
+            line-height: 20px;
+            margin-right: 24px;
+
+            .formTitle {
+                color: var(--formtitle-color);
+                margin-right: 8px;
+            }
+        }
+
+    }
+
+    .distributedConfigBox {
+        margin-top: 20px;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        background: var(--configtitle-bg);
+        border-bottom: 1px solid var(--border-bottom-color);
+
+        .istributedConfigIcon {
+            height: 15px;
+            width: 15px;
+            margin-right: 17px;
+        }
+
+        .istributedConfigContent {
+            font-size: 14px;
+            color: var(--font-color);
+            line-height: 20px;
+
+            span {
+                color: #0067FF;
+                margin-right: 4px;
+                cursor: pointer;
+            }
+
+            span:hover {
+                color: #267dff;
+            }
+        }
+    }
+
+    .distributedConfig-content {
+        margin-top: 20px;
+        background-color: var(--node-warpper-bg);
+
+        .distributedConfig {
+            height: 30px;
+            display: flex;
+            p {
+                margin-right: 16px;
+                font-size: 20px;
+                color: var(--font-color);
+                line-height: 30px;
+            }
+
+            div {
+                cursor: pointer;
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        .line {
+            height: 1px;
+            background: var(--line-bg);
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .congfigContent {
+            padding-top: 20px;
+            display: flex;
+
+            .distributedHard,
+            .distributedSystem,
+            .distributedComponent {
+                min-width: calc((100% - 80px) / 3);
+                margin-right: 40px;
+
+                .distributedTitle {
+                    font-size: 14px;
+                    color: var(--font-color);
+                    height: 20px;
+                }
+
+                ti-searchbox {
+                    ::ng-deep input {
+                        height: 100% !important;
+                        background: none !important;
+                    }
+                }
+
+                .distributedContentBox {
+                    overflow-y: auto;
+                    padding-right: 10px;
+                    max-height: 184px;
+                    div {
+                        height: 18px;
+                        display: flex;
+                        align-items: center;
+                        margin-top: 12px;
+                        font-size: 12px;
+                        line-height: 18px;
+
+                        .left-title{
+                            color: var(formtitle-color);
+                            margin-right: 16px;
+                            min-width: 200px;
+                            max-width: 200px;
+                            display: flex;
+                        }
+
+                        span {
+                            color: var(--font-color);
+                        }
+
+                        img {
+                            min-height: 16px;
+                            min-width: 16px;
+                            margin-left: 8px;
+                            margin-top: 2px;
+                        }
+                    }
+                }
+                .componentBox{
+                    max-height: 145px;
+                }
+
+                .noData {
+                    height: 173px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 14px;
+                    line-height: 20px;
+
+                    img {
+                        margin-bottom: 8px;
+                    }
+                }
+            }
+
+            .distributedSystem {
+                .distributedContentBox {
+                    div {
+                        .left-title{
+                            min-width: 200px;
+                            max-width: 200px;
+                        }
+                    }
+                }
+            }
+
+            .distributedComponent {
+                margin-right: 0px;
+
+                .distributedContentBox {
+                    div {
+                        .left-title{
+                            min-width: 220px;
+                            max-width: 220px;
+                        }
+                    }
+                }
+            }
+        }
+        .noNodeData {
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            line-height: 20px;
+
+            img {
+                margin-bottom: 8px;
+            }
+        }
+    }
+}
+
+.distributedBox .distributedConfig-content.preStyle 
+    .congfigContent .distributedSection{
+        height: 204px;
+        .distributedContentBox{
+             max-height: 173px;
+    }}
+.viewDetail-mask {
+    max-height: 72vh;
+    padding: 24px 30px;
+    position: relative;
+    background-color: var(--titlebox-bg);
+    border: 1px solid var(--viewDetail-border);
+
+    .viewDetail-title {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: dashed 1px #E1E6EE;
+        padding-bottom: 24px;
+        height: 30px;
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .box {
+        background: #f0f3fa;
+
+        .raidConfig {
+            height: 80px;
+
+            .raidConfigContent {
+                height: 20px;
+                margin-top: 20px;
+                display: flex;
+                margin-left: 24px;
+
+                span {
+                    width: 100px;
+                    font-family: "huawei sans";
+                    font-size: 12px;
+                    color: var(formtitle-color);
+                    margin-right: 24px;
+                    line-height: 20px;
+                }
+
+                div {
+                    font-size: 14px;
+                    font-family: "huawei sans";
+                    color: var(--font-color);
+                    line-height: 20px;
+                }
+            }
+        }
+    }
+
+    .box:first-child {
+        .box-title {
+            border-top: 1px solid var(--box-first-child-border-top);
+        }
+    }
+
+    .margin-box {
+        margin-top: 20px;
+    }
+
+    .box-title {
+        position: relative;
+        padding-left: 24px;
+        height: 48px;
+        line-height: 48px;
+
+        &:hover {
+            background-color: var(--box-title-bg) !important;
+        }
+
+        .titleDetail {
+            display: flex;
+            align-items: center;
+            height: 18px;
+            top: 15px;
+            position: absolute;
+            right: 0px;
+            z-index: 99;
+
+            div {
+                width: 130px;
+                border-left: 2px solid #0067FF;
+                padding: 0px 15px;
+                font-size: 12px;
+                line-height: 18px;
+            }
+        }
+
+        .left-box {
+            width: 72%;
+            margin-right: 7%;
+        }
+
+        .right-box {
+            width: 24px;
+        }
+    }
+
+    .box-content {
+        background: white;
+        margin-left: 41px;
+        border-left: solid 2px #0067FF;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0, 1, 0, 1)
+    }
+
+    .box-content.active {
+        max-height: 6000px;
+        transition: max-height 0.1s cubic-bezier(1, 0, 1, 0);
+        background-color: var(--node-warpper-bg) !important;
+
+        .ti3-table>table>tbody>tr {
+            background: var(--ti-table-tr-bg-color) !important;
+        }
+    }
+
+    .title-icon {
+        margin-right: 24px;
+        transition: 0.5s linear;
+        position: relative;
+        width: 12px;
+        cursor: pointer;
+    }
+
+    .title-icon.active {
+        transform: rotate(-90deg)
+    }
+
+    .box-config-content {
+        margin-left: 24px;
+        min-height: 18px;
+        color: var(--font-color);
+        font-size: 12px;
+        margin-top: 20px;
+        line-height: 18px;
+        display: flex;
+
+        p {
+            min-width: 240px;
+            margin-right: 16px;
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            max-width: 270px;
+
+            span {
+                margin-top: 10px;
+                width: 270px;
+                line-height: 17.5px;
+            }
+
+            span:first-child {
+                margin-top: 0px;
+            }
+        }
+    }
+
+    .box-distributed-content {
+        border-bottom: dashed 1px #4B4B4B;
+        max-height: 58vh;
+        margin-bottom: 72px;
+        .box-content-all {
+            overflow-y: auto;
+            height: 58vh;
+        }
+    }
+
+    .closeBtn {
+        width: 160px;
+        height: 32px;
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        margin-left: -80px;
+    }
+}
+
+.suggestAll {
+    width: 850px;
+    margin-left: -125px;
+}
+
+.configNodata {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    line-height: 20px;
+
+    img {
+        margin-bottom: 8px;
+    }
+}
+
+.tableFirstData {
+    margin-left: 14px;
+}
+
+:host ::ng-deep .ti3-table>table>thead>tr>th {
+    background-color: #fff !important
+}
+
+//表头分割线颜色
+:host ::ng-deep .box-content .ti3-table>.ti3-resize-wrapper>table>thead>tr>th:not(:last-child)::after,
+.ti3-table>.ti3-table-container>table>thead>tr>th:not(:last-child)::after,
+.ti3-table>.ti3-table-fixed-head>table>thead>tr>th:not(:last-child)::after,
+.ti3-table>table>thead>tr>th:not(:last-child)::after {
+    background: #e6ebf5
+}
+
+//tr上边线
+:host ::ng-deep .box-content .ti3-table>.ti3-resize-wrapper>table>tbody>tr>td,
+.ti3-table>.ti3-table-container>table>tbody>tr>td,
+.ti3-table>.ti3-table-fixed-head>table>tbody>tr>td,
+.ti3-table>table>tbody>tr>td {
+    border-bottom: 1px solid #e6ebf5
+}
+
+:host ::ng-deep .ti3-table>table>thead>tr>th {
+    border-bottom: 1px solid #e6ebf5
+}
+
+::ng-deep .vscode-dark .distributedConfig-content {
+    padding: 24px;
+}
+
+::ng-deep .vscode-light .distributedConfig-content {
+    padding: 0px 24px;
+}
+
+:host ::ng-deep .ti3-table-nodata-simple .nodata {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+        margin-bottom: 8px;
+    }
+}
+
+.search.ti3-searchbox-container{
+    width: 100%;
+    margin: 10px 0 -2px 0;
+}
+.viewDetail-mask .box-content {
+    .splitsClass {
+      position: relative;
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px dashed #e1e6ee;
+      &:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+    }
+  }
+.distributedBox  .distributedConfig-content .congfigContent .distributedSection{
+    .distributedContentBox {
+        max-height: 595px;
+    }
+    .componentBox {
+        height: 559px;
+    }
+}
+  

@@ -1,0 +1,14 @@
+<ng-template #miniModal let-context='context'>
+  <ti-modal-header>{{ config.content.title }}</ti-modal-header>
+  <ti-modal-body>
+    <div class="hy-nodata-icon">
+      <hy-icon-static [name]="config.type + 'IconLight'"></hy-icon-static>
+    </div>
+    <p class="hy-nodata-msg">{{ config.content.body }}</p>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button tiButton type="button" (click)="onConfirm()" tiButton>{{ 'hyCommon.okBtn' | hyTranslate }}</button>
+    <button tiButton type="button" color="primary" (click)="onCancel()" tiButton>{{ 'hyCommon.cancelBtn' | hyTranslate }}</button>
+  </ti-modal-footer>
+</ng-template>
+

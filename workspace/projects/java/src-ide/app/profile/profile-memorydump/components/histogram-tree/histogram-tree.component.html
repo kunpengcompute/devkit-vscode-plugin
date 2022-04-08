@@ -1,0 +1,211 @@
+<ti-table *ngIf="treeType=='shortCommonRoute'" class="dominantTree" [(displayedData)]="displayedTree"
+    [srcData]="srcDataTree" [columns]="columnsTree" tiColsResizable>
+    <div class="ti3-table-fixed-head">
+        <!-- 管道 separator -->
+        <table>
+            <thead>
+                <tr>
+                    <th tiOverflow width="{{ columnsTree[0].width }}">
+                        <ti-cell-text class="cellText">{{ columnsTree[0].title}}</ti-cell-text>
+                    </th>
+                    <th tiOverflow width="{{ columnsTree[1].width }}">
+                        <ti-cell-text class="cellText">{{ columnsTree[1].title}}</ti-cell-text>
+                        <span class="sortIcon" *ngIf="!isDownload && !startBtnDisabled">
+                            <span class="sortList" *ngFor="let item of refObjectsTSort;let idx= index"
+                                (click)="getDominantTreeSort(idx,'refObjects')">
+                                <span class="tableIcon" [ngClass]="{colorIcon: item.imgType !== 'sort'}"
+                                    *ngIf="item.show">
+                                    <ti-icon [name]="item.imgType"></ti-icon>
+                                </span>
+                            </span>
+                        </span>
+                    </th>
+                    <th tiOverflow width="{{ columnsTree[2].width }}">
+                        <ti-cell-text class="cellText">{{ columnsTree[2].title}}</ti-cell-text>
+                        <span class="sortIcon" *ngIf="!isDownload && !startBtnDisabled">
+                            <span class="sortList" *ngFor="let item of shallowHeapTSort;let idx= index"
+                                (click)="getDominantTreeSort(idx,'shallowHeap')">
+                                <span class="tableIcon" [ngClass]="{colorIcon: item.imgType !== 'sort'}"
+                                    *ngIf="item.show">
+                                    <ti-icon [name]="item.imgType"></ti-icon>
+                                </span>
+                            </span>
+                        </span>
+                    </th>
+                    <th tiOverflow width="{{ columnsTree[3].width }}">
+                        <ti-cell-text class="cellText">{{ columnsTree[3].title}}</ti-cell-text>
+                        <span class="sortIcon">
+                            <span *ngIf="!isDownload && !startBtnDisabled">
+                                <span class="sortList" *ngFor="let item of refShallowHeapTSort;let idx= index"
+                                    (click)="getDominantTreeSort(idx,'refShallowHeap')">
+                                    <span class="tableIcon" [ngClass]="{colorIcon: item.imgType !== 'sort'}"
+                                        *ngIf="item.show">
+                                        <ti-icon [name]="item.imgType"></ti-icon>
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </th>
+                    <th tiOverflow width="{{ columnsTree[4].width }}">
+                        <ti-cell-text class="cellText">{{ columnsTree[4].title}}</ti-cell-text>
+                        <span class="sortIcon" style="margin-left: 5px;">
+                            <span *ngIf="!isDownload && !startBtnDisabled">
+                                <span class="sortList" *ngFor="let item of retainedHeapTSort;let idx= index"
+                                    (click)="getDominantTreeSort(idx,'retainedHeap')">
+                                    <span class="tableIcon" [ngClass]="{colorIcon: item.imgType !== 'sort'}"
+                                        *ngIf="item.show">
+                                        <ti-icon [name]="item.imgType"></ti-icon>
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="ti3-table-container ti3-resize-wrapper">
+        <table>
+            <thead>
+                <tr [ngStyle]="{'opacity': 0}">
+                    <th tiOverflow *ngFor="let column of columnsTree" width="{{ column.width }}"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="displayedTree.length > 0 " id="tbodyDom" style="position: relative;">
+                <tr *ngFor="let node of displayedTree" [hidden]="!node.isShow" [class]="node.id">
+                    <td [ngStyle]="getLevelStyle(node)" style="position:relative;">
+                        <span style="display: flex; align-items: center;">
+                            <span class="headbg" *ngFor="let i of counter(node.level);"
+                                [ngStyle]="getbgLevelStyle(node,i)"></span>
+                            <span *ngIf="node.expand" class="ti3-table-tree toggleIcon" (click)="toggle(node)">
+                                <img src="./assets/img/projects/expand-down.svg" [ngClass]="{'open': node.isOpen}">
+                            </span>
+                            <span tiOverflow
+                                [ngClass]="{'ti3-table-tree-no-leaf': !node.expand}">{{node.className}}</span>
+                        </span>
+                        <span [ngStyle]="getBorder(node)" class="bottomBorder"></span>
+                    </td>
+                    <td tiOverflow>
+                        {{node.refObjects}}
+                    </td>
+                    <td tiOverflow>
+                        {{node.shallowHeap}}
+                    </td>
+                    <td tiOverflow>
+                        {{node.refShallowHeap}}
+                    </td>
+                    <td tiOverflow>
+                        {{node.retainedHeap}}
+                    </td>
+                </tr>
+                <tr *ngIf="totalNumberT > currentTotal && !startBtnDisabled ">
+                    <td tiOverflow>
+                        <span class='loadMore' (click)="loadMore(currentTotal)">
+                            {{i18n.protalserver_profiling_memoryDump.loadMore}}</span>
+                        <span
+                            style="margin-left: 10px;">{{i18n.protalserver_profiling_memoryDump.currentShow}}&nbsp;{{currentTotal}}</span>
+                        <span
+                            style="margin-left: 10px;">{{i18n.protalserver_profiling_memoryDump.totalNum}}&nbsp;{{totalNumberT}}</span>
+                        <span
+                            style="margin-left: 10px;">{{i18n.protalserver_profiling_memoryDump.Remain}}&nbsp;{{totalNumberT
+                            - currentTotal }}</span>
+                    </td>
+                    <td class="showAllSum">{{totalRefObjectsT}}</td>
+                    <td class="showAllSum">{{totalSHallowHeapT}}</td>
+                    <td class="showAllSum">{{totalRefShallowHeapT}}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <app-default-page *ngIf="displayedTree.length === 0" [height]="'700px'"></app-default-page>
+    </div>
+</ti-table>
+<ti-table *ngIf="treeType=='objectWithGcRootsRoute'" class="dominantTree" [(displayedData)]="OGCRTree"
+    [srcData]="OGCRDataTree" [columns]="OGCRColumnsTree" tiColsResizable>
+    <div class="ti3-table-fixed-head">
+        <table>
+            <thead>
+                <tr>
+                    <th tiOverflow width="{{ OGCRColumnsTree[0].width }}">
+                        <ti-cell-text class="cellText">{{ OGCRColumnsTree[0].title}}</ti-cell-text>
+                    </th>
+                    <th tiOverflow width="{{ OGCRColumnsTree[1].width }}">
+                        <ti-cell-text class="cellText">{{ OGCRColumnsTree[1].title}}</ti-cell-text>
+                        <span class="sortIcon" *ngIf="!isDownload &&
+                            !startBtnDisabled">
+                            <span class="sortList" *ngFor="let item of OGCRshallowHeapTSort;let idx= index"
+                                (click)="getOGCRDominantTreeSort(idx,'shallowHeap')">
+                                <span class="tableIcon" [ngClass]="{colorIcon: item.imgType !== 'sort'}"
+                                    *ngIf="item.show">
+                                    <ti-icon [name]="item.imgType"></ti-icon>
+                                </span>
+                            </span>
+                        </span>
+                    </th>
+                    <th tiOverflow width="{{ OGCRColumnsTree[2].width }}">
+                        <ti-cell-text class="cellText">{{ OGCRColumnsTree[2].title}}</ti-cell-text>
+                        <span class="sortIcon" *ngIf="!isDownload && !startBtnDisabled">
+                            <span class="sortList" *ngFor="let item of OGCRretainedHeapTSort;let idx= index"
+                                (click)="getOGCRDominantTreeSort(idx,'retainedHeap')">
+                                <span class="tableIcon" [ngClass]="{colorIcon: item.imgType !== 'sort'}"
+                                    *ngIf="item.show">
+                                    <ti-icon [name]="item.imgType"></ti-icon>
+                                </span>
+                            </span>
+                        </span>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="ti3-table-container ti3-resize-wrapper">
+        <table>
+            <thead>
+                <tr [ngStyle]="{'opacity': 0}">
+                    <th tiOverflow *ngFor="let column of OGCRColumnsTree" width="{{ column.width }}"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="OGCRTree.length > 0 " id="tbodyDom">
+                <tr *ngFor="let node of OGCRTree,let idx= index" [hidden]="!node.isShow" [class]="node.id">
+                    <td [ngStyle]="getOGCRLevelStyle(node)" style="position:relative;z-index: 1;border-bottom:none">
+                        <span style="display: flex; align-items: center;">
+                            <span class="headbg" *ngFor="let i of OGCRCounter(node.level);"
+                                [ngStyle]="getOGCRbgLevelStyle(node,i)"></span>
+                            <span class="ti3-table-tree toggleIcon" (click)="OGCRtoggle(node)">
+                                <img *ngIf="node.expand" src="./assets/img/projects/expand-down.svg"
+                                    [ngClass]="{'open': node.needOpen}">
+                            </span>
+                            <span tiOverflow
+                                [ngClass]="{'ti3-table-tree-no-leaf': !node.expand}">{{node.className}}</span>
+                        </span>
+                        <span *ngIf="OGCRDataTree.data.length!==idx+1" [ngStyle]="getOGCRBorder(node)"
+                            class="bottomBorder"></span>
+                    </td>
+                    <td tiOverflow style="z-index: 11;border-bottom:1px solid #e1e6ee">
+                        {{node.shallowHeap}}
+                    </td>
+                    <td tiOverflow style="z-index: 11;border-bottom:1px solid #e1e6ee">
+                        {{node.retainedHeap}}
+                    </td>
+                </tr>
+                <tr *ngIf="totalNumberT> currentTotal && !startBtnDisabled " style="height: 40px;line-height: 40px;">
+                    <td tiOverflow>
+                        <span class='loadMore' (click)="loadMore(currentTotal)">
+                            {{i18n.protalserver_profiling_memoryDump.loadMore}}</span>
+                        <span
+                            style="margin-left: 10px;">{{i18n.protalserver_profiling_memoryDump.currentShow}}&nbsp;{{currentTotal}}</span>
+                        <span
+                            style="margin-left: 10px;">{{i18n.protalserver_profiling_memoryDump.totalNum}}&nbsp;{{totalNumberT}}</span>
+                        <span
+                            style="margin-left: 10px;">{{i18n.protalserver_profiling_memoryDump.Remain}}&nbsp;{{(totalNumberT
+                            - currentTotal) }}</span>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <app-default-page *ngIf="OGCRTree.length === 0" [height]="'700px'"></app-default-page>
+    </div>
+</ti-table>

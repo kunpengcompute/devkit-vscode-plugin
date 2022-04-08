@@ -1,0 +1,131 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="采集MySQL trace数据">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001178881562.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具 (调优助手)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001223882721">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>采集MySQL trace数据</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001223882721"></a><a name="ZH-CN_TOPIC_0000001223882721"></a>
+
+<h1 class="topictitle1">采集MySQL trace数据</h1>
+<div id="body8662426"><p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p537371412176">本节以为MySQL源码为例，描述为 /home/mysql-8.0.17/sql/sql_parse.cc文件中dispatch_command函数添加trace的操作步骤。</p>
+<div class="notice" id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_note181471612580"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-zh-cn.png"> </span><div class="noticebody"><p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p198141516205813">下文中描述的mysql源代码根目录为/home/mysql-8.0.17，相关操作请根据实际场景调整。</p>
+</div></div>
+<ol id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_ol11716172651715"><li id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_li167171326131712"><span>创建function-tp.h文件。</span><p><p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p85371529101811">执行命令<strong id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_b15557192715189">mkdir /home/mysql-8.0.17/trace</strong>, 在/home/mysql-8.0.17下面创建一个trace目录，在/home/mysql-8.0.17/trace下面创建文件function-tp.h。</p>
+<pre class="screen" id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_screen15999423197">#undef TRACEPOINT_PROVIDER
+#define TRACEPOINT_PROVIDER function_trace
+#undef TRACEPOINT_INCLUDE
+#define TRACEPOINT_INCLUDE "trace/function-tp.h"
+#if !defined(_FUNCTION_TP_H) || defined(TRACEPOINT_HEADER_MULTI_READ)
+#define _FUNCTION_TP_H
+#include &lt;lttng/tracepoint.h&gt;
+TRACEPOINT_EVENT(
+    function_trace,
+    function_enter,
+    TP_ARGS(
+        char *, function_name
+    ),
+    TP_FIELDS(
+        ctf_string(funcname, function_name)
+    )
+)
+TRACEPOINT_EVENT(
+    function_trace,
+    function_exit,
+    TP_ARGS(
+        char *, function_name
+    ),
+    TP_FIELDS(
+        ctf_string(funcname, function_name)
+    )
+)
+#endif
+#include &lt;lttng/tracepoint-event.h&gt;</pre>
+</p></li><li id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_li9201515181820"><span>创建function-tp.c文件。</span><p><p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p1480019426204">在相同目录 /home/mysql-8.0.17/trace 下创建源文件function-tp.c。</p>
+<pre class="screen" id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_screen6678115912204">#define TRACEPOINT_CREATE_PROBES
+#define TRACEPOINT_DEFINE
+#include "function-tp.h"</pre>
+</p></li><li id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_li330917273201"><span>编译动态库。</span><p><p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p3471914112111">执行以下命令进行编译。</p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p13493182511219"><strong id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_b1751714462111"></strong><strong id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_b18518134452110">gcc -I/home/mysql-8.0.17 -fpic -c -o function-tp.o function-tp.c</strong></p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p17818133842112"><strong id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_b1585753121310">gcc -Wl,--no-as-needed -o lttng-ust-function.so -shared -fpic function-tp.o -ldl -llttng-ust</strong></p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p15506172562210"><span><img id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_image450620257228" src="zh-cn_image_0000001178881600.png"></span></p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p57651011236">执行完以上步骤就编译成功了一个提供tracepoint函数的动态链接库。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_li1321392616476"><span>封装tracepoint函数，对外暴露更友好接口。</span><p><p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p3521050193312">在/home/mysql-8.0.17/trace下创建function_trace.h</p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p170807115319">代码如下：</p>
+<pre class="screen" id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_screen16771512575">#ifndef _FUNCTIONTRACE_h_
+#define _FUNCTIONTRACE_h_
+#define FUNC_TRACE(funcname) \
+  FunctionTrace lttng_func_trace(funcname, funcname)
+class FunctionTrace {
+
+public:
+
+  FunctionTrace(const char *category, const char *name);
+  <font style="font-size:8pt" Face="Courier New" >~</font>FunctionTrace();
+private:
+  const char *category_;
+  const char *name_;
+};
+#endif</pre>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p3783855185613">同时，在/home/mysql-8.0.17/trace下创建function_trace.cc的文件。</p>
+<pre class="screen" id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_screen1842312417514">#include &lt;sys/time.h&gt;
+#define TRACEPOINT_DEFINE
+#define TRACEPOINT_PROBE_DYNAMIC_LINKAGE
+#include "trace/function-tp.h"
+#include "trace/function_trace.h"
+
+FunctionTrace::FunctionTrace(const char *category, const char *name)
+        : category_(category), name_(name) {
+    tracepoint(function_trace, function_enter, const_cast&lt;char *&gt;(name_));
+}
+
+FunctionTrace::<font style="font-size:8pt" Face="Courier New" >~</font>FunctionTrace() {
+    tracepoint(function_trace, function_exit, const_cast&lt;char *&gt;(name_));
+}</pre>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p1256414261256"></p>
+</p></li><li id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_li71613257206"><span>业务代码中加入需要打点信息，跟踪业务逻辑。</span><p><p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p164181275243">打开MySQL源码的sql目录下的sql_parse.cc，在代码最后一个#include后添加如下代码。</p>
+<pre class="screen" id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_screen1675203412418">#include "trace/function_trace.h"</pre>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p2924121219256"><span><img id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_image26451538154319" src="zh-cn_image_0000001223882809.png"></span></p>
+</p></li><li id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_li192855111810"><span>在sql_parse.cc中添加参数。</span><p><p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p2015091716262">在sql_parse.cc中找到调用dispatch_command的地方，在函数开头添加FUNC_TRACE("dispatch_command")。</p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p1855752182617"><span><img id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_image9716195511451" src="zh-cn_image_0000001223882803.png"></span></p>
+</p></li><li id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_li171162064187"><span>修改CMakeLists.txt文件。</span><p><p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p1696454352715">在/home/mysql-8.0.17/sql中打开CMakeLists.txt, 添加function_trace.cc到如下图所示的位置，让该源文件参与mysql编译。</p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p1524341545414"><span><img id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_image1995154435410" src="zh-cn_image_0000001224122767.png"></span></p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p133113982813">在如下图所示的位置，添加dl动态库到sql_main中。</p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p9112184755616"><span><img id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_image1820461013572" src="zh-cn_image_0000001179041542.png"></span></p>
+</p></li><li id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_li42301328202720"><span>初始化MySQL。</span><p><p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p8922171516291">重新编译MySQL，安装部署后，执行必要的初始化命令后，使用如下命令启动<strong id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_b15411111302919">LD_PRELOAD=”/home/mysql-8.0.17/trace/lttng-ust-function.so” mysqld --defaults-file=/etc/my.cnf</strong> 。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_li10158529192712"><span>检测trace事件是否生效。</span><p><p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p126476168302"><strong id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_b14635122683014">lttng create hellotest1</strong></p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p658773415309"><strong id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_b1033345613301">lttng enable-event -u function_trace:*</strong></p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p441044273017"><strong id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_b833411568306">lttng add-context --userspace --type vtid --type vpid</strong></p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p5494114903015"><strong id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_b154241450103010">lttng start</strong></p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p26512812315">用mysql –h 127.0.0.1 –uroot –pxxx进入mysql client，执行一些sql语句。</p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p1266512513113"><strong id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_b19802162533114">lttng stop</strong></p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p97969273319"><strong id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_b14169537183112">lttng destroy</strong></p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p1323744903114">执行<strong id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_b568813157414">babeltrace /root/lttng-traces/hellotest1-20210505-104018</strong>,如果出现如下的回显就表示已经OK。</p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p157732028193217"><span><img id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_image777311281327" src="zh-cn_image_0000001178881604.png"></span></p>
+</p></li><li id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_li16966112718514"><span>在/etc/sudoers.d/malluma_sudoers文件的末尾增加lttng和babeltrace的免密执行权限。</span><p><p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p10951202574817"><strong id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_b1195713695117">echo 'malluma    ALL=(root)      NOPASSWD:/usr/local/bin/lttng' &gt;&gt; /etc/sudoers.d/malluma_sudoers</strong></p>
+<p id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_p1242212231506"><strong id="ZH-CN_TOPIC_0000001223882721__zh-cn_topic_0000001163428919_zh-cn_topic_0000001156762203_b1080791445211">echo 'malluma    ALL=(root)      NOPASSWD:/usr/bin/babeltrace' &gt;&gt; /etc/sudoers.d/malluma_sudoers</strong></p>
+</p></li></ol>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001178881562.html">常用操作</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

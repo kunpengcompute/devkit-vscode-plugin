@@ -1,0 +1,256 @@
+.node-config {
+    width: calc(100% - 16px);
+    margin-bottom: 20px;
+    font-size: 14px;
+    .config-button {
+        width: 96px;
+        height: 32px;
+        margin: 20px 0px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #6c92fa;
+        color: #ffffff;
+    }
+
+    .table {
+        width: 670.3px;
+        .config-btn {
+            color: #0067ff;
+            cursor: pointer;
+        }
+    }
+}
+:host ::ng-deep .table ti-table table tbody tr td:nth-child(4n) {
+    color: #0067ff !important;
+}
+:host ::ng-deep .ti3-table > .ti3-resize-wrapper > table,
+.ti3-table > .ti3-table-container > table,
+.ti3-table > .ti3-table-fixed-head > table,
+.ti3-table > table {
+    color: #aaaaaa !important;
+}
+:host ::ng-deep .ti3-table > table > tbody > tr {
+    width: 100% !important;
+    height: 32px !important;
+    background: var(--ti-table-tr-bg-color);
+}
+:host .node-config > .table > ::ng-deep .ti3-table > table > tbody > tr:hover {
+    background: var(--ti-table-tr-bg-color-hover) !important;
+}
+:host ::ng-deep .ti3-table > table > tbody > tr:last-child {
+    border-bottom: 0 !important;
+}
+:host ::ng-deep .ti3-table > table > tbody > tr > td {
+    height: 32px;
+    box-sizing: border-box;
+}
+
+:host ::ng-deep .ti3-table > table > thead > tr > th:not(:last-child)::after {
+    background: var(--ti-table-th-spacing-line-color);
+}
+.status-icon {
+    border-radius: 50%;
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 5px;
+    border: 4px solid #63b6f7;
+}
+.success-icon {
+    border: 4px solid #61d274;
+}
+.reserve-icon {
+    border: 4px solid #0067ff;
+}
+.flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+    .label {
+        color: var(--d-aaaaaa-l-616161);
+    }
+}
+.buts {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 20px;
+    span {
+        margin-left: 16px;
+        color: #888888;
+    }
+}
+
+.config-title {
+    width: 220px;
+    padding-left: 16px;
+    margin: 20px 0px;
+    padding-right: 20px;
+    color: #6c7280;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+::ng-deep .vscode-dark {
+    .modal-modifyNode {
+        .modal-content {
+            .modal-item {
+                input:focus,
+                textarea:focus {
+                    color: #e8e8e8;
+                }
+                input:hover,
+                textarea:hover {
+                    color: #e8e8e8;
+                }
+            }
+        }
+    }
+}
+
+//修改节点模板
+::ng-deep .modal-modifyNode {
+    .ti3-modal-body {
+        margin-bottom: 24px !important;
+    }
+    .ti3-modal-footer {
+        padding-bottom: 24px !important;
+    }
+    .modal-title {
+        height: 26px;
+        font-size: 20px;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 20px;
+        color: var(--d-e8e8e8-l-222222);
+        display: flex;
+        justify-content: space-between;
+        justify-items: center;
+    }
+    .modal-content {
+        color: var(--d-ffffff-l-222222);
+        font-size: 12px;
+        .modal-item {
+            display: flex;
+            justify-content: flex-start;
+            >span {
+                text-align: left;
+                img,
+                div {
+                    display: inline-block;
+                    width: 8px;
+                    height: 8px;
+                    margin-right: 2px;
+                }
+                div {
+                    margin-right: 4px;
+                }
+                .imgQuestion {
+                    width: 12px;
+                    height: 12px;
+                }
+            }
+            >span:first-child {
+                display: inline-block;
+                width: 170px;
+                line-height: 28px;
+                color: var(--d-aaaaaa-l-616161);
+            }
+            >span:nth-child(2) {
+                display: inline-block;
+                width: 400px;
+                line-height: 28px;
+            }
+            .modal-item-value{
+                position: relative;
+                .eye {
+                    position: absolute;
+                    left: 375px;
+                    top: 6px;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+            .ti3-unifyvalid-error-container {
+              width: 400px;
+            }
+            input {
+                width: 400px;
+                height: 28px;
+                border: 1px solid var(--color-input-border);
+                border-radius: 2px;
+                background: var(--d-252526-l-ffffff) !important;
+                padding: 6px 10px;
+                color: var(--common-color-font-primary);
+                box-sizing: border-box;
+                outline: 0 !important;
+            }
+            textarea {
+                width: 400px;
+                height: 70px;
+                border-radius: 2px;
+                padding: 5px 10px 5px !important;
+                box-sizing: border-box;
+                outline: 0 !important;
+            }
+            input:focus,
+            textarea:focus {
+                border: 1px solid #0067ff;
+            }
+            input:hover,
+            textarea:hover {
+                border: 1px solid #0067ff;
+            }
+            ti-switch {
+                margin-top: 4px;
+            }
+        }
+    }
+    .footerButs {
+        display: flex;
+        justify-self: flex-start;
+        button {
+            width: 160px;
+            height: 32px;
+            text-align: center;
+            line-height: 32px;
+            border-radius: 2px;
+        }
+    }
+    .footerButs > button:nth-child(1) {
+        background: #0067ff;
+        color: #e8e8e8;
+        border: 0;
+        margin: 0 14px 0 120px;
+    }
+    .footerButs > button:nth-child(2) {
+        background: var(--d-313131-l-ffffff);
+        color: var(--d-e8e8e8-l-222222);
+        border: 1px solid #dddddd;
+    }
+    .ti3-close {
+        top: 15px;
+        right: 40px;
+    }
+}
+.modal_item > span:nth-child(1) {
+    color: #aaaaaa;
+}
+.incorrect:hover {
+    cursor: pointer;
+}
+
+.little-minor-btn {
+    cursor: pointer;
+}
+.mission-app-warn{
+    max-width: 400px;
+    margin-top: 2px;
+}
+.pl12 {
+    padding-left: 12px;
+}

@@ -1,0 +1,133 @@
+.create-linkage{
+    width: 100%;
+    font-size: 14px;
+    color: var(--d-aaaaaa-l-616161);
+    margin: 0;
+    padding: 0;
+
+    .linkage-task{
+        .linkage-tree{
+          border: 1px solid var(--tab-border-color);
+          border-top: 1px solid var(--linkage-tab-header-border-color);
+          width: 100%;
+          .tab-header{
+            display: flex;
+            align-items:center ;
+            justify-content: center;
+            width: 100%;
+          }
+          .normal-tab{
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            background-color: var(--common-color-background-f5f9ff-2a2a2a);
+            .img-tip{
+              margin-left:10px;
+              width: 15px;
+              height: 15px;
+              position: relative;
+              top: 3px;
+            }
+          }
+          .normal-tab:hover{
+            cursor: pointer;
+          }
+          .active-tab{
+            background-color: var(--table-color-background-nodata);
+            color: #2072ea;
+            border-bottom:2px solid #2072ea;
+          }
+          .tab-content{
+            height: 500px;
+            overflow: auto;
+            background-color: var(--table-color-background-nodata);
+          }
+        }
+    }
+    .button-bottom{
+      margin-top: 40px;
+      .ti3-btn-primary{
+        margin-right: 16px;
+      }
+    }
+  }
+  
+  
+  // 调优助手对比分析
+  .hidden{
+    display: none !important;
+  }
+  .tuningHelper{
+    margin-top: 24px;
+    .linkage-task {
+      width: 636px;
+     .linkage-tree{
+      border: 1px solid var(--tab-border-color);
+    } 
+    }
+    
+  }
+  .compare-title{
+    color: var(--common-color-font-primary);
+    padding-bottom: 10px
+  }
+  .compare-tip{
+    color: var(--common-color-font-tip);
+    font-size: 12px;
+    padding-bottom: 10px;
+    width: 636px;
+  }
+  
+  .object-exchange{
+    padding-top: 32px;
+  }
+  .title-span{
+    color: var(--common-color-font-primary);
+    width: 296px;
+    padding-bottom: 10px;
+    display: inline-block;
+    &:first-child{
+      padding-right: 44px;
+    }
+  }
+  .object-msg{
+    display: flex;
+    .object-left{
+      font-size: 14px;
+      height: 28px;
+      line-height: 28px;
+      width: 280px;
+      padding: 0 8px;
+      color: var(--common-color-font-primary);
+      background-color: var(--tab-bgc-exchange-color);
+    }
+    hy-theme-content{
+      padding: 0 8px;
+      height: 28px;
+      width: 28px;
+      cursor: pointer;
+    }
+  }
+  ::ng-deep   .ti3-tree-item-leaf {
+    margin-left: 0 !important;
+  }
+  ::ng-deep .compare-create-repeats-modal {
+    .ti3-btn-primary{
+      display: none;
+    }
+    .ti3-modal-content app-message-modal .ti3-modal-body .content > i {
+      margin-top: 2px;
+      font-size: 16px !important;
+      position: relative;
+      span{
+        position: absolute;
+        color: white;
+        left: 6px;
+        font-size: 12px;
+      }
+    }
+    &.message-modal div.ti3-modal-content {
+      width: 400px !important;
+    }
+  }

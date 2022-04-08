@@ -1,0 +1,42 @@
+.light {
+  --dial-test-item-divider: #e1e6ee;
+}
+.dark {
+  --dial-test-item-divider: #6e6e6e;
+}
+
+
+.warpper {
+  .svg-warpper {
+    margin-bottom: 41px;
+  }
+  .failed-warpper {
+    .failed-title {
+      height: 30px;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .collapse {
+      & + .collapse {
+        margin-top: 20px;
+      }
+      .fail-title {
+        display: flex;
+        img {
+          width: 16px;
+          height: 16px;
+          margin-right: 16px;
+        }
+      }
+      .fail-content {
+        .item-divider {
+          margin: 16px 0px;
+          border-top: dashed 1px var(--dial-test-item-divider);
+          &:last-child {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

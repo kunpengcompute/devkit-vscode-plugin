@@ -1,0 +1,123 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Creating an Analysis Task">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0212788391.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.T21">
+<meta name="brand" content="Huawei Kunpeng Porting Advisor">
+<meta name="DC.Publisher" content="20201230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0189775177">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Creating an Analysis Task</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0189775177"></a><a name="EN-US_TOPIC_0189775177"></a>
+
+<h1 class="topictitle1">Creating an Analysis Task</h1>
+<div id="body1567562641461"><div class="section" id="EN-US_TOPIC_0189775177__section11470129119"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0189775177__p9917148805">You have logged in to the <span id="EN-US_TOPIC_0189775177__ph997750104712">Kunpeng Porting Advisor</span> WebUI.</p>
+<div class="notice" id="EN-US_TOPIC_0189775177__note2019283518329"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-en-us.png"> </span><div class="noticebody"><ul id="EN-US_TOPIC_0189775177__ul15320134212322"><li id="EN-US_TOPIC_0189775177__li173203424323">The build command to upload the build file in the source package is executed during the task running. Make sure that the content uploaded is the content that needs to be analyzed and checked and that there are no security issues to avoid affecting the normal operation of the server.</li><li id="EN-US_TOPIC_0189775177__li18103195014339"><strong id="EN-US_TOPIC_0189775177__b12711751153914">/opt/portadv</strong> is the default installation directory of the tool. The following uses this directory as an example. Replace it with the actual directory.</li></ul>
+</div></div>
+</div>
+<div class="section" id="EN-US_TOPIC_0189775177__section570312135117"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0189775177__ol166651423121620"><li id="EN-US_TOPIC_0189775177__li766592361616"><span>Choose <strong id="EN-US_TOPIC_0189775177__b2018041593113">Source Code Porting</strong> from the navigation pane on the left.</span></li><li id="EN-US_TOPIC_0189775177__li1344272820248"><span>In the analysis task creation area, set task parameters.</span><p><div class="fignone" id="EN-US_TOPIC_0189775177__fig18659185274220"><span class="figcap"><b>Figure 1 </b>Source code porting</span><br><span><img id="EN-US_TOPIC_0189775177__image565925274213" src="en-us_image_0000001213344739.png" height="447.8775" width="523.6875"></span></div>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0189775177__table101671324172818" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Source code porting parameters</caption><colgroup><col style="width:24.09%"><col style="width:75.91%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0189775177__row171675241281"><th align="left" class="cellrowborder" valign="top" width="24.09%" id="mcps1.3.2.2.2.2.2.2.3.1.1"><p id="EN-US_TOPIC_0189775177__p1316713247285">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.91%" id="mcps1.3.2.2.2.2.2.2.3.1.2"><p id="EN-US_TOPIC_0189775177__p10167132422819">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0189775177__row131671248283"><td class="cellrowborder" valign="top" width="24.09%" headers="mcps1.3.2.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0189775177__p1230912478920">Source Code File Path</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.91%" headers="mcps1.3.2.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0189775177__p139051594311">Enter a relative path by using either of the following methods:</p>
+<ul id="EN-US_TOPIC_0189775177__ul67531648142019"><li id="EN-US_TOPIC_0189775177__li975374852019">Click <strong id="EN-US_TOPIC_0189775177__b5668161316304">Upload</strong> to upload the package. The package will be automatically decompressed during the upload process.</li><li id="EN-US_TOPIC_0189775177__li127537484205">Manually upload the source code file to the specified path (for example, <strong id="EN-US_TOPIC_0189775177__b48161629105818">/opt/portadv/portadmin/sourcecode/</strong>) on the server. Grant the read, write, and execute permissions to the <strong id="EN-US_TOPIC_0189775177__b12992163795819">porting</strong> user. Then, click the text box to select the source code file path from the drop-down list. You can also manually enter the source code file path.<div class="note" id="EN-US_TOPIC_0189775177__note4613123483111"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0189775177__p1061383483116">If the source code to be scanned contains assembly code only, you need to compile and generate the <strong id="EN-US_TOPIC_0189775177__b191136051614">make.log</strong> file in the root directory of the source code file, and then compress and upload the package. For example, to scan the source code <strong id="EN-US_TOPIC_0189775177__b985304222918">example</strong> that contains pure assembly code, create <strong id="EN-US_TOPIC_0189775177__b1885414210292">make.log</strong> in the <strong id="EN-US_TOPIC_0189775177__b88547423290">/opt/portadv/<em id="EN-US_TOPIC_0189775177__i1085418428293">User name</em>/sourcecode/example/</strong> directory and then enter the relative path <strong id="EN-US_TOPIC_0189775177__b485454252917">example</strong>.</p>
+</div></div>
+</li></ul>
+<div class="p" id="EN-US_TOPIC_0189775177__p163111535184810">In the <strong id="EN-US_TOPIC_0189775177__b14888957155213">Upload</strong> drop-down menu, you can choose:<ul id="EN-US_TOPIC_0189775177__ul14530153619494"><li id="EN-US_TOPIC_0189775177__li753063614492"><strong id="EN-US_TOPIC_0189775177__b6282089586">Compressed package</strong>: Select the source code package. The tool automatically decompresses the package.<div class="note" id="EN-US_TOPIC_0189775177__note11634821791"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0189775177__ul83501941185112"><li id="EN-US_TOPIC_0189775177__li95517327205">Only <strong id="EN-US_TOPIC_0189775177__b63015417819">tar</strong>, <strong id="EN-US_TOPIC_0189775177__b153710549818">tar.bz</strong>, <strong id="EN-US_TOPIC_0189775177__b173710546819">tar.bz2</strong>, <strong id="EN-US_TOPIC_0189775177__b173725417810">tar.gz</strong>, <strong id="EN-US_TOPIC_0189775177__b438654788">tar.xz</strong>, <strong id="EN-US_TOPIC_0189775177__b6389543818">tbz</strong>, <strong id="EN-US_TOPIC_0189775177__b12382541487">tbz2</strong>, <strong id="EN-US_TOPIC_0189775177__b1539155414816">tgz</strong>, <strong id="EN-US_TOPIC_0189775177__b539954789">txz</strong>, and <strong id="EN-US_TOPIC_0189775177__b53911541385">zip</strong> packages can be uploaded. Only one package can be uploaded at a time. The size of the source code package should be less than or equal to 1 GB. The decompressed file size should be less than or equal to half of the remaining drive space.</li><li id="EN-US_TOPIC_0189775177__li0350841185116">The tool automatically decompresses the package to a directory in the same name as the compressed package. For example, if the uploaded package is <strong id="EN-US_TOPIC_0189775177__b24910454354">test.zip</strong>, the tool automatically decompresses the package to the <strong id="EN-US_TOPIC_0189775177__b687102873515">test </strong>folder.</li></ul>
+</div></div>
+</li><li id="EN-US_TOPIC_0189775177__li29044481493"><strong id="EN-US_TOPIC_0189775177__b19213240131320">Folder</strong>: Select the source code folder to be uploaded.<div class="note" id="EN-US_TOPIC_0189775177__note20614104351210"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0189775177__ul11431963189"><li id="EN-US_TOPIC_0189775177__li84313631812">Only one folder can be uploaded at a time. The size of the folder must be less than or equal to half of the remaining drive space.</li><li id="EN-US_TOPIC_0189775177__li7439671810">Internet Explorer does not support folder upload. You can use other browsers such as Google Chrome and Microsoft Edge to upload folders.</li></ul>
+</div></div>
+</li></ul>
+</div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0189775177__row98722111567"><td class="cellrowborder" valign="top" width="24.09%" headers="mcps1.3.2.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0189775177__p1087317145615">Source Code Type</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.91%" headers="mcps1.3.2.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0189775177__p14977632131817">Select the type of the source code.</p>
+<p id="EN-US_TOPIC_0189775177__p56421512132">Value:</p>
+<ul id="EN-US_TOPIC_0189775177__ul114111441415"><li id="EN-US_TOPIC_0189775177__li15737201119194">C/C++/ASM</li><li id="EN-US_TOPIC_0189775177__li13151214171415">Fortran</li><li id="EN-US_TOPIC_0189775177__li93941299259">Go</li><li id="EN-US_TOPIC_0189775177__li112185125253">Interpreted languages<p id="EN-US_TOPIC_0189775177__p69339159219"><a name="EN-US_TOPIC_0189775177__li112185125253"></a><a name="li112185125253"></a>Python, Java, and Scala are supported.</p>
+</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0189775177__row1660095413593"><td class="cellrowborder" valign="top" width="24.09%" headers="mcps1.3.2.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0189775177__p41127316014">Compiler Version</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.91%" headers="mcps1.3.2.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0189775177__p18113143405">Select the version of the compiler.</p>
+<p id="EN-US_TOPIC_0189775177__p1011303202">The default compiler versions supported by the OSs are as follows:</p>
+<ul id="EN-US_TOPIC_0189775177__ul14113103409"><li id="EN-US_TOPIC_0189775177__li942217411138">BC-Linux 7.6: GCC 4.8.5</li><li id="EN-US_TOPIC_0189775177__li12946171818131">BC-Linux 7.7: GCC 4.8.5</li><li id="EN-US_TOPIC_0189775177__li4113183602">CentOS 7.4: GCC 4.8.5</li><li id="EN-US_TOPIC_0189775177__li10113193701">CentOS 7.5: GCC 4.8.5</li></ul>
+<ul id="EN-US_TOPIC_0189775177__ul161131531009"><li id="EN-US_TOPIC_0189775177__li6113931012">CentOS 7.6: GCC 4.8.5</li><li id="EN-US_TOPIC_0189775177__li15113039014">CentOS 7.7: GCC 4.8.5</li><li id="EN-US_TOPIC_0189775177__li131131631508">CentOS 8.0: GCC 8.2</li><li id="EN-US_TOPIC_0189775177__li13113238020">CentOS 8.1: GCC 8.3</li><li id="EN-US_TOPIC_0189775177__li574183914192">CentOS 8.2: GCC 8.3</li><li id="EN-US_TOPIC_0189775177__li13113113805">Deepin 15.2: GCC 6.3</li><li id="EN-US_TOPIC_0189775177__li31131533013">Debian 10: GCC 8.3</li><li id="EN-US_TOPIC_0189775177__li91131032010">EulerOS 2.8: GCC 7.3</li><li id="EN-US_TOPIC_0189775177__li368713811411">iSoft 5.1: GCC 7.3</li><li id="EN-US_TOPIC_0189775177__li21132031307">Kylin V10 SP1: GCC 7.3</li><li id="EN-US_TOPIC_0189775177__li71139315019">LinxOS 6.0.90: GCC 6.3</li><li id="EN-US_TOPIC_0189775177__li01131133014">NeoKylin V7U5: GCC 4.8.5</li><li id="EN-US_TOPIC_0189775177__li19113123203">NeoKylin V7U6: GCC 4.8.5</li><li id="EN-US_TOPIC_0189775177__li12286323162018">openEuler 20.03: GCC 7.3</li><li id="EN-US_TOPIC_0189775177__li1593254218541">openEuler 20.03 SP1: GCC 7.3 (default)</li><li id="EN-US_TOPIC_0189775177__li363273025515">openEuler 20.03 SP2: GCC 7.3 (default)</li><li id="EN-US_TOPIC_0189775177__li71131139013">SLES 15.1: GCC 7.4</li><li id="EN-US_TOPIC_0189775177__li111316313019">Ubuntu 18.04.x: GCC 7.3</li><li id="EN-US_TOPIC_0189775177__li1858112710200">Ubuntu 20.04.x: GCC 9.3</li><li id="EN-US_TOPIC_0189775177__li121138320020">UOS 20 SP1: GCC 8.3</li><li id="EN-US_TOPIC_0189775177__li9552145451412">uosEuler 20: GCC 7.3</li></ul>
+<p id="EN-US_TOPIC_0189775177__p3113231703">For C/C++, ASM, and Go source code, you can select from:</p>
+<ul id="EN-US_TOPIC_0189775177__ul41131137016"><li id="EN-US_TOPIC_0189775177__li16113931602">GCC 4.8.5/4.9.3/5.1/5.2/5.3/5.4/5.5/6.1/6.2/6.3/6.4/6.5/7.1/7.2/7.3/7.4/8.1/8.2/8.3/9.1/9.2/9.3<div class="note" id="EN-US_TOPIC_0189775177__note3892144610311"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0189775177__p889214653112">The C, C++, and ASM languages share the same compiler version with the Go language.</p>
+</div></div>
+</li></ul>
+<p id="EN-US_TOPIC_0189775177__p01131831308">For Fortran source code, you can select from:</p>
+<ul id="EN-US_TOPIC_0189775177__ul21139317016"><li id="EN-US_TOPIC_0189775177__li81131939015">GFORTRAN 7</li><li id="EN-US_TOPIC_0189775177__li191131831504">GFORTRAN 8</li><li id="EN-US_TOPIC_0189775177__li151131331405">GFORTRAN 9</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0189775177__row467741111295"><td class="cellrowborder" valign="top" width="24.09%" headers="mcps1.3.2.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0189775177__p728619922915">Build Tool</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.91%" headers="mcps1.3.2.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0189775177__p4395020152012">Select the build tool to be used.</p>
+<p id="EN-US_TOPIC_0189775177__p116775112292">Value:</p>
+<ul id="EN-US_TOPIC_0189775177__ul780623613180"><li id="EN-US_TOPIC_0189775177__en-us_topic_0189700310_li208061736191819">make</li><li id="EN-US_TOPIC_0189775177__en-us_topic_0189700310_li19806173617180">cmake</li><li id="EN-US_TOPIC_0189775177__en-us_topic_0189700310_li10806193615188">automake</li><li id="EN-US_TOPIC_0189775177__li1198245573211">go<div class="note" id="EN-US_TOPIC_0189775177__note557911917332"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0189775177__p557917943319">The <strong id="EN-US_TOPIC_0189775177__b56491938165916">go</strong> option is available only when only <strong id="EN-US_TOPIC_0189775177__b10790124110593">Go</strong> or both <strong id="EN-US_TOPIC_0189775177__b7289154416598">Go</strong> and <strong id="EN-US_TOPIC_0189775177__b10415537201">Interpreted</strong> are selected for <strong id="EN-US_TOPIC_0189775177__b201832598019">Source Code Type</strong>.</p>
+</div></div>
+</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0189775177__row67137126298"><td class="cellrowborder" valign="top" width="24.09%" headers="mcps1.3.2.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0189775177__p11350171602913">Compile Command</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.91%" headers="mcps1.3.2.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0189775177__p1271341212918">Select the command to be used to compile the source code.</p>
+<p id="EN-US_TOPIC_0189775177__p477810216411">The compile command is determined based on the configuration file of the build tool. For details, see <a href="en-us_topic_0320090988.html">Identifying Compile Commands Using the Build Tool Configuration File</a>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0189775177__row116485319301"><td class="cellrowborder" valign="top" width="24.09%" headers="mcps1.3.2.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0189775177__p2083013305018">Target OS</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.91%" headers="mcps1.3.2.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0189775177__p1683073019018">Select the version of the target OS. Value: </p>
+<ul id="EN-US_TOPIC_0189775177__ul1783010301019"><li id="EN-US_TOPIC_0189775177__li1117503411517">BC-Linux 7.6/7.7</li><li id="EN-US_TOPIC_0189775177__li208305301707">CentOS 7.4/7.5/7.6/7.7/8.0/8.1/8.2</li><li id="EN-US_TOPIC_0189775177__li4830330609">Deepin V15.2</li><li id="EN-US_TOPIC_0189775177__li28301530208">Debian 10</li><li id="EN-US_TOPIC_0189775177__li983183015019">EulerOS 2.8</li><li id="EN-US_TOPIC_0189775177__li868615021512">iSoft 5.1</li><li id="EN-US_TOPIC_0189775177__li20831193020014">Kylin V10 SP1</li><li id="EN-US_TOPIC_0189775177__li15831173014019">LinxOS 6.0.90</li><li id="EN-US_TOPIC_0189775177__li88311430208">NeoKylin V7U5</li><li id="EN-US_TOPIC_0189775177__li198314301107">NeoKylin V7U6</li><li id="EN-US_TOPIC_0189775177__li4331310162419">openEuler 20.03</li><li id="EN-US_TOPIC_0189775177__li41851110135518">openEuler 20.03 SP1</li><li id="EN-US_TOPIC_0189775177__li74142875512">openEuler 20.03 SP2</li><li id="EN-US_TOPIC_0189775177__li12831430909">SLES 15.1</li><li id="EN-US_TOPIC_0189775177__li208310301103">Ubuntu 18.04.x</li><li id="EN-US_TOPIC_0189775177__li577171402416">Ubuntu 20.04.x</li><li id="EN-US_TOPIC_0189775177__li10831173010016">UOS 20 SP1</li><li id="EN-US_TOPIC_0189775177__li271821220164">uosEuler 20</li><li id="EN-US_TOPIC_0189775177__li44675019477">More</li></ul>
+<div class="note" id="EN-US_TOPIC_0189775177__note16396193494120"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0189775177__p1839615342413">Click <strong id="EN-US_TOPIC_0189775177__b1416392453316">More</strong>, upgrade the dependency dictionary according to the steps on the page, and view the updated OS list.</p>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0189775177__row1859510612119"><td class="cellrowborder" valign="top" width="24.09%" headers="mcps1.3.2.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0189775177__p9595146916">Target OS Kernel Version</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.91%" headers="mcps1.3.2.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0189775177__p957713213325">Kernel version of the target operating system.</p>
+<ul id="EN-US_TOPIC_0189775177__ul6648171674219"><li id="EN-US_TOPIC_0189775177__li45472961620">BC-Linux 7.6: 4.19.25</li><li id="EN-US_TOPIC_0189775177__li6606256191619">BC-Linux 7.7: 4.19.25</li><li id="EN-US_TOPIC_0189775177__li1435815344119">CentOS 7.4: 4.11.0</li><li id="EN-US_TOPIC_0189775177__li1176532041320">CentOS 7.5: 4.14.0</li><li id="EN-US_TOPIC_0189775177__li5298192824319">CentOS 7.6: 4.14.0</li><li id="EN-US_TOPIC_0189775177__li73262711130">CentOS 7.7: 4.18.0</li><li id="EN-US_TOPIC_0189775177__li1680414975816">CentOS 8.0: 4.18.0</li><li id="EN-US_TOPIC_0189775177__li58931035155718">CentOS 8.1: 4.18.0</li><li id="EN-US_TOPIC_0189775177__li1335542742414">CentOS 8.2: 4.18.0</li><li id="EN-US_TOPIC_0189775177__li13601848171312">Deepin V15.2: 4.19.34</li><li id="EN-US_TOPIC_0189775177__li3958559132">Debian 10: 4.14.0</li><li id="EN-US_TOPIC_0189775177__li3177515958">EulerOS 2.8: 4.19.36</li><li id="EN-US_TOPIC_0189775177__li661317101718">iSoft 5.1: 4.19.90</li><li id="EN-US_TOPIC_0189775177__li2635325144315">Kylin V10 SP1: 4.19.90</li><li id="EN-US_TOPIC_0189775177__li1039728104311">LinxOS 6.0.90: 4.19.0</li><li id="EN-US_TOPIC_0189775177__li14300114164313">NeoKylin V7U5: 4.14.0</li><li id="EN-US_TOPIC_0189775177__li464841614429">NeoKylin V7U6: 4.14.0</li><li id="EN-US_TOPIC_0189775177__li5592155132515">openEuler 20.03: 4.19.90</li><li id="EN-US_TOPIC_0189775177__li222393516560">openEuler 20.03 SP1: 4.19.90</li><li id="EN-US_TOPIC_0189775177__li5443134855617">openEuler 20.03 SP2: 4.19.90</li><li id="EN-US_TOPIC_0189775177__li166410247449">SLES 15.1: 4.12.14</li><li id="EN-US_TOPIC_0189775177__li1394795112422">Ubuntu 18.04.x: 4.15.0</li><li id="EN-US_TOPIC_0189775177__li252421052517">Ubuntu 20.04.x: 5.4.0</li><li id="EN-US_TOPIC_0189775177__li166431854714">UOS 20 SP1: 4.19.0</li><li id="EN-US_TOPIC_0189775177__li4629543101711">uosEuler 20: 4.19.90</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0189775177__row199771229193019"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.2.2.3.1.1 mcps1.3.2.2.2.2.2.2.3.1.2 "><div class="note" id="EN-US_TOPIC_0189775177__note3985104133016"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0189775177__p169852041193010">If the Glibc version is earlier than 2.28, the automatic translation of assembly files cannot be used. If you want to use this function, click <span class="uicontrol" id="EN-US_TOPIC_0189775177__uicontrol14571200193312"><b>View Installation Guide</b></span> on the page and perform operations as prompted.</p>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="EN-US_TOPIC_0189775177__li240693381816"><span>Click <span class="parmname" id="EN-US_TOPIC_0189775177__parmname4152123816395"><b>Analyze</b></span>.</span><p><p id="EN-US_TOPIC_0189775177__p87218527385">The task progress is displayed. After the analysis is complete, click <span class="parmname" id="EN-US_TOPIC_0189775177__parmname25552487476"><b>View Report</b></span> to open the Porting Report page.</p>
+<div class="note" id="EN-US_TOPIC_0189775177__note17373252125816"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0189775177__ul154981251646"><li id="EN-US_TOPIC_0189775177__li20498145119416">To cancel a task, click <strong id="EN-US_TOPIC_0189775177__b1930175912331">Close</strong> during the analysis process.</li><li id="EN-US_TOPIC_0189775177__li7498951745">The tool supports concurrent running of multiple analysis tasks.</li><li id="EN-US_TOPIC_0189775177__li20518122916422">If the task analysis fails or the evaluation result indicates that porting is not required, an empty report is generated.</li><li id="EN-US_TOPIC_0189775177__li13147134363418">When the environment changes, the analysis result may be different, which is normal.</li></ul>
+</div></div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0212788391.html">Source Code Porting</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

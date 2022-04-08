@@ -1,0 +1,117 @@
+<div class="system-bubble-gragh">
+  <div class="core-view" [ngClass]="{'show': !isNumaView}">
+    <app-bubble-box
+      [ngClass]="{'active': currShowCoreView === 'idle'}"
+      [active]="currShowCoreView === 'idle'"
+      [threshold]="{
+        start: 0,
+        end: cpuTarget.currThreshold?.lowValue
+      }"
+      [currShowBubble]="currShowCoreDetailsId"
+      [bubbleInfoTipContent]="coreInfoTipContent"
+      [data]="coreViewDataSet[cpuTarget.currTarget]?.idle.core"
+      (click)="switchCoreView('idle')"
+      (bubbleClick)="onCoreBubbleClick($event)"
+      [numaStatistic]="coreViewDataSet[cpuTarget.currTarget]?.idle.numa"
+      shape="circle"
+      [bubbleInfoMap]="coreInfoMap"
+      type="core"
+      status="idle">
+    </app-bubble-box>
+    <app-bubble-box
+      [ngClass]="{'active': currShowCoreView === 'normal'}"
+      [active]="currShowCoreView === 'normal'"
+      [threshold]="{
+        start: cpuTarget.currThreshold?.lowValue,
+        end: cpuTarget.currThreshold?.highValue
+      }"
+      [currShowBubble]="currShowCoreDetailsId"
+      [bubbleInfoTipContent]="coreInfoTipContent"
+      [data]="coreViewDataSet[cpuTarget.currTarget]?.normal.core"
+      (click)="switchCoreView('normal')"
+      (bubbleClick)="onCoreBubbleClick($event)"
+      [numaStatistic]="coreViewDataSet[cpuTarget.currTarget]?.normal.numa"
+      shape="circle"
+      [bubbleInfoMap]="coreInfoMap"
+      type="core"
+      status="normal">
+    </app-bubble-box>
+    <app-bubble-box
+      [ngClass]="{'active': currShowCoreView === 'busy'}"
+      [active]="currShowCoreView === 'busy'"
+      [threshold]="{
+        start: cpuTarget.currThreshold?.highValue,
+        end: 1
+      }"
+      [currShowBubble]="currShowCoreDetailsId"
+      [bubbleInfoTipContent]="coreInfoTipContent"
+      [data]="coreViewDataSet[cpuTarget.currTarget]?.busy.core"
+      (click)="switchCoreView('busy')"
+      (bubbleClick)="onCoreBubbleClick($event)"
+      [numaStatistic]="coreViewDataSet[cpuTarget.currTarget]?.busy.numa"
+      shape="circle"
+      [bubbleInfoMap]="coreInfoMap"
+      type="core"
+      status="busy">
+    </app-bubble-box>
+  </div>
+  <div class="numa-view" [ngClass]="{'show': isNumaView}">
+    <div class="numa-box">
+      <div class="numa-item" *ngFor="let numa of numaViewDataSet[cpuTarget.currTarget] | keyvalue">
+        <title>NUMA {{ numa.key }}&nbsp;&nbsp;&nbsp;&nbsp;{{
+          numaPercentSet[numa.key][cpuTarget.currTarget] | percent
+        }}</title>
+        <div class="numa-core-box">
+          <app-bubble
+            *ngFor="let bubble of numa.value"
+            [active]="bubble.id === currShowCoreDetailsId"
+            [status]="bubble.status"
+            (click)="onCoreBubbleClick(bubble.id)"
+            [opacity]="bubble.opacity"
+            shape="circle"
+            [info]="coreInfoMap[bubble.id]"
+            [infoTipContent]="coreInfoTipContent">
+          </app-bubble>
+        </div>
+      </div>
+      <!-- 右侧padding不会占滚动条空间，这里加一个div让他占用空间 -->
+      <div class="scroll-padding"></div>
+    </div>
+    <div class="numa-gradation">
+      <div class="label-box">
+        <span class="start-value">0%</span>
+        <span class="low-value">{{ cpuTarget.currThreshold?.lowValue | percent }}</span>
+        <span class="high-value">{{ cpuTarget.currThreshold?.highValue | percent }}</span>
+        <span class="end-value">100%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #coreInfoTipContent let-context="context">
+  <div class="core-info-tip">
+    <div class="info-item">
+      <span class="info-item-label">NUMA</span>
+      <span class="info-item-value">{{ context?.numa_id }}</span>
+    </div>
+    <div class="info-item">
+      <span class="info-item-label">Core ID</span>
+      <span class="info-item-value">{{ context?.core_id }}</span>
+    </div>
+    <div class="info-item">
+      <span class="info-item-label">%{{ cpuTarget.currTarget === 'usr' ? 'user' : cpuTarget.currTarget }}</span>
+      <span class="info-item-value">{{ context[cpuTarget.currTarget] | number:'1.0-2' }}%</span>
+    </div>
+    <div class="divider"></div>
+    <ng-container *ngFor="let target of context | keyvalue">
+      <div class="info-item" *ngIf="
+        target.key !== 'core_id'
+        && target.key !==  'numa_id'
+        && target.key !== cpuTarget.currTarget
+      ">
+        <span class="info-item-label">%{{ target.key === 'usr' ? 'user' : target.key }}</span>
+        <span class="info-item-value">{{ target.value | number:'1.0-2' }}%</span>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>

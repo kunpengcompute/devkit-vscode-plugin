@@ -1,0 +1,111 @@
+<div class="main-container" #container>
+  <div class="main-title">
+    <div class="sample-title">
+      <img (mouseenter)="onHoverList('hover')" (mouseleave)="onHoverList()"
+        [src]="currentHover==='hover' ? './assets/img/newSvg/back_hover.svg': './assets/img/projects/back.svg'"
+        (click)="goHome()" [tiTip]="i18n.common_term_back" />
+      <span class="sam-title" tiOverflow>{{ simplingName }}</span>
+    </div>
+    <div *ngIf="suggestNum>0">
+      <img
+        [src]="hoverSuggest==='suggest'?'./assets/img/newSvg/hover_suggests.svg':'./assets/img/newSvg/all_suggests.svg'"
+        alt="" (mouseenter)="onHoverSuggest('suggest')" (mouseleave)="onHoverSuggest('')" class="sample-icon"
+        [tiTip]="i18n.protalserver_sampling_tab.suggestions" tiTipPosition='left' (click)="openModal()" />
+      <span [ngClass]="suggestNum>9? 'allNums' :'allNum'">{{suggestNum}}</span>
+    </div>
+  </div>
+  <div class="main-content scroll-style">
+    <div class="profile-tabs">
+      <ng-container *ngFor="let tab of simplimgTabs; let idx = index">
+        <span class="item-tab" [ngClass]="{ 'tab-active': tab.active }" *ngIf="tab.show" [routerLink]="[tab.link]"
+          (click)="tabsToggle(idx)">{{ i18n.protalserver_sampling_tab[tab.tabName] }}</span>
+      </ng-container>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<app-mask #suggestion>
+  <div class="content modal-container" style="width: 600px;">
+    <div class="data-title">
+      {{ i18n.protalserver_sampling_tab.suggestions }}&nbsp;({{suggestNum}})
+    </div>
+    <div class="data-content">
+      <div *ngFor="let sug of suggestItem;let i =index">
+        <div class="suggest-tit" *ngIf="sug.suggest.length>0">
+          <img src="./assets/img/newSvg/icon_triangle_down.svg" alt="" class="suggests_icon"
+            [ngClass]="{'suggest-rotate': !sug.expend}" (click)="unfold(sug)">
+          <div>{{i18n.protalserver_sampling_tab[sug.tabName]}}</div>
+        </div>
+        <div *ngIf="sug.expend" class="allSug">
+          <div class="left-sug">
+          </div>
+          <div class="right-sug" *ngIf="sug.subLabel">
+            <div class="sublable-sug ">
+              <img src="./assets/img/newSvg/icon_triangle_down.svg" alt="" class="suggests_icon"
+                [ngClass]="{'suggest-rotate': !sug.show}" (click)="unfoldTitle(sug)" style="margin-top: 10px;">
+              <div>
+                {{i18n.protalserver_sampling_tab[sug.object]}}
+              </div>
+            </div>
+            <ng-container *ngFor="let item of sug.suggest;let idx=index">
+              <div *ngIf="sug.show" class="sug-content">
+                <div class="left-sug">
+                </div>
+                <div [ngClass]="{'sug-border': !item.state}">
+                  <div class="sug-header" [ngClass]="{'sug-border': item.state}">
+                    <span class="arow">
+                      <img src="./assets/img/newSvg/down_arrow.svg" [ngClass]="{'suggest-rotate':!item.state}"
+                        (click)="unfoldContent(item)" alt="">
+                    </span>
+                    <div class="sug-div" tiOverflow>
+                      <img src="./assets/img/newSvg/suggestions.svg" alt="">
+                      <span>{{item.title}}</span>
+                    </div>
+                  </div>
+                  <div *ngIf="item.state">
+                    <div class="sug-ctx" style="width: 464px;">
+                      <div class="left-color">
+                      </div>
+                      <span [innerHtml]="item.content" class="right-content">
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div *ngIf="!sug.subLabel" style="width: 100%;">
+            <ng-container *ngFor="let item of sug.suggest;let idx=index">
+              <div class="sug-content">
+                <div [ngClass]="{'sug-border': !item.state}">
+                  <div class="sug-header" [ngClass]="{'sug-border': item.state}">
+                    <span class="arow">
+                      <img src="./assets/img/newSvg/down_arrow.svg" [ngClass]="{'suggest-rotate':!item.state}"
+                        (click)="unfoldContent(item)" alt="">
+                    </span>
+                    <div class="sug-div">
+                      <img src="./assets/img/newSvg/suggestions.svg" alt="">
+                      <span>{{item.title}}</span>
+                    </div>
+                  </div>
+                  <div *ngIf="item.state">
+                    <div class="sug-ctx" style="width: 500px;">
+                      <div class="left-color">
+                      </div>
+                      <span [innerHtml]="item.content" class="right-content">
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sug-btn">
+      <button type="button" class="sug-button" tiButton
+        (click)="closeSuggest()">{{i18n.common_term_operate_close}}</button>
+    </div>
+  </div>
+</app-mask>

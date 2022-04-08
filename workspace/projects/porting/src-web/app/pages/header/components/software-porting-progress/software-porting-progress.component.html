@@ -1,0 +1,21 @@
+<div class="webpack-situation-modal" *ngIf="situation == 1">
+    <div class="progress-modal">
+      <div class="madal-content">
+        <p class="situation analyzing">
+            <span>
+                <img class="loading" src="./assets/img/analysis/loading.png" alt="" />
+                <span>[{{softWareText}}]{{i18n.common_term_migration_info + msgInfo}}</span>
+            </span>
+            <span style="display: inline-block; min-width: 70px;">
+                <span style="padding-left: 5px;padding-right: 10px;">{{ progessValue }}</span>
+                <img (click)="closeTask()" style="cursor: pointer;" src="./assets/img/common/icon_close.svg" />
+            </span>
+        </p>
+        <div class="progress-bar-bg">
+          <div class="progress-bar" [ngStyle]="{ width: barWidth + 'px' }"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  

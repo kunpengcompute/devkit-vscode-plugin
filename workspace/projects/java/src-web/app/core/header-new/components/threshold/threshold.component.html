@@ -1,0 +1,63 @@
+<div class="threshold" [appLoading]="isLoading">
+    <div class="sampling-setting bottom-size">
+        <div class="setting-header">{{ i18n.common_term_sampling }}</div>
+        <div class="common-item">
+            <app-setting-item [butType] = "'config'" [config]="config.tips" [value]="formItems.tips.value" (confirm)="handleTipsConfirm($event)">
+            </app-setting-item>
+        </div>
+        <div class="common-item">
+            <app-setting-item [butType] = "'config'" [config]="config.warn" [value]="formItems.warn.value" (confirm)="handleWarnConfirm($event)">
+            </app-setting-item>
+        </div>
+    </div>
+    <div class="thread-dump bottom-size">
+        <div class="setting-header">{{ i18n.newHeader.offlineReport.threadDumpThreshold }}</div>
+        <div class="thread-dump-contents">
+            <div class="thread-dump-item">
+                <app-setting-item [butType] = "'config'" [config]="config.threadDumpHintsLimit" [value]="formItems.threadDumpHistReportHints.value"
+                    (confirm)="handleTDHistReportHints($event)">
+                </app-setting-item>
+            </div>
+            <div class="thread-dump-item">
+                <app-setting-item [butType] = "'config'" [config]="config.threadDumpMaxLimit" [value]="formItems.threadDumpHistReportMax.value"
+                    (confirm)="handleTDHistReportMax($event)">
+                </app-setting-item>
+            </div>
+        </div>
+    </div>
+    <div class="heap-dump bottom-size">
+        <div class="setting-header">{{ i18n.newHeader.offlineReport.heapDumpThreshold }}</div>
+        <div class="heap-dump-contents">
+            <div class="heap-dump-item">
+                <app-setting-item [butType] = "'config'" [config]="config.hintsLimit" [value]="formItems.histReportHints.value"
+                    (confirm)="handleHistReportHints($event)">
+                </app-setting-item>
+            </div>
+            <div class="heap-dump-item">
+                <app-setting-item [butType] = "'config'" [config]="config.maxLimit" [value]="formItems.histReportMax.value"
+                    (confirm)="handlehistReportMax($event)">
+                </app-setting-item>
+            </div>
+            <div class="heap-dump-item">
+                <app-setting-item [butType] = "'config'" [config]="config.sizeLimit" [value]="formItems.histReportSize.value"
+                    (confirm)="handlehistReportSize($event)">
+                </app-setting-item>
+            </div>
+        </div>
+    </div>
+    <div class="GC-logs bottom-size">
+        <div class="setting-header">{{ i18n.newHeader.offlineReport.GCLogsThreshold }}</div>
+        <div class="GC-logs-contents">
+            <div class="GC-logs-item">
+                <app-setting-item [butType] = "'config'" [config]="config.GCLogsHintsLimit" [value]="formItems.GCLogsHistReportHints.value"
+                    (confirm)="handleGCLogsHistReportHints($event)">
+                </app-setting-item>
+            </div>
+            <div class="GC-logs-item list-item">
+                <app-setting-item [butType] = "'config'" [config]="config.GCLogsMaxLimit" [value]="formItems.GCLogsHistReportMax.value"
+                    (confirm)="handleGCLogsHistReportMax($event)">
+                </app-setting-item>
+            </div>
+        </div>
+    </div>
+</div>

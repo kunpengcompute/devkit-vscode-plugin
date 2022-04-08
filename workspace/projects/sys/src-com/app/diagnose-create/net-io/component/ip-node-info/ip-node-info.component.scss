@@ -1,0 +1,92 @@
+.light {
+  --netio-node-box-bg: #f8fafd;
+}
+.dark {
+  --netio-node-box-bg: #252525;
+}
+.node-boxs {
+  display: flex;
+  flex-wrap: wrap;
+
+  .node-box {
+    width: 510px;
+    height: 160px;
+    background: var(--netio-node-box-bg);
+    margin-right: 80px;
+    margin-top: 20px;
+    padding: 16px 24px 16px 11px;
+    box-sizing: border-box;
+    position: relative;
+
+    .delete-node-btn {
+      width: 16px;
+      height: 16px;
+      margin-left: 8px;
+      position: absolute;
+      top: 16px;
+      right: -24px;
+      cursor: pointer;
+    }
+  }
+}
+.node-boxs .node-box:nth-child(2n) {
+  margin-right: 0;
+}
+.node-boxs .node-box:first-child,
+.node-boxs .node-box:nth-child(2) {
+  margin-top: 0;
+}
+.add-node-btn {
+  width: fit-content;
+  display: flex;
+  color: #2072ea;
+  margin-top: 10px;
+  max-width: 80px;
+  cursor: pointer;
+  align-items: center;
+
+  .add-img {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+}
+.form-value {
+  width: 325px;
+}
+.location {
+  position: absolute;
+  left: 0;
+  top: 20px;
+}
+
+:host ::ng-deep .ti3-unifyvalid-tip-error-container {
+  align-items: center;
+  .ti3-error-icon-bg {
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+  }
+  .ti3-error-icon {
+    font-size: 12px;
+  }
+}
+
+:host ::ng-deep .node-info-form .node-boxs .node-box .ti3-form .ti3-form-label {
+  padding: 0px var(--ti-formfield-item-label-padding-right)
+    var(--ti-formfield-item-padding-bottom) 0 !important;
+  min-width: unset;
+  max-width: unset;
+  display: inline-block;
+}
+:host
+  ::ng-deep
+  .node-info-form
+  .node-boxs
+  .node-box
+  .ti3-form
+  tbody
+  .ti3-form-list:last-child
+  .ti3-form-label {
+  padding-bottom: 16px !important;
+}

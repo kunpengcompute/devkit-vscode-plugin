@@ -1,0 +1,16 @@
+<div class="res-summury-container" *ngIf="isActive">
+  <app-msg-suggestion [suggestMsg]="suggestMsg"></app-msg-suggestion>
+  <!-- 进程/线程切换-表格 -->
+  <div class="tableContainer">
+    <div class="title">{{ i18n.sys_res.sum.process }}</div>
+
+    <app-tpswitch [taskId]="taskid" [nodeId]="nodeid"></app-tpswitch>
+  </div>
+
+  <!-- NUMA节点切换-表格 -->
+  <div class="tableContainer">
+    <div class="title">{{ i18n.sys_res.numaSwitch }}</div>
+
+    <app-numa-node-switch [taskId]="taskid" [nodeId]="nodeid" (suggListArr)="suggListArr($event)"></app-numa-node-switch>
+  </div>
+</div>

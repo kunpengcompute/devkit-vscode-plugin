@@ -1,0 +1,22 @@
+<div class="warpper">
+    <div *ngIf="hasTopologyType else noTopologyType" #gplotContainer class="gplot-warpper">
+        <div #nameNodeEl class="namenode-area">
+            <ng-container #nameNodeContainer></ng-container>
+        </div>
+        <div [hidden]="!(gplotType && gplotType.hasTopolopy)" class="middle-area">
+            <div class="link-line"></div>
+        </div>
+        <div #dataNodeEl [hidden]="!(gplotType && gplotType.hasTopolopy)" class="datanode-area">
+            <ng-container #dataNodeContainer></ng-container>
+        </div>
+        <div #svgContainer class="svg-area">
+        </div>
+    </div>
+    <ng-template #noTopologyType>
+        <div class="noNodeData">
+            <img *ngIf="currTheme === ColorTheme.Dark" src='./assets/img/projects/nodata-dark.png' />
+            <img *ngIf="currTheme === ColorTheme.Light" src='./assets/img/projects/nodata-light.png' />
+            <div>{{i18n.sys_summary.cpupackage_tabel.node_type_not_supported}}</div>
+        </div>
+    </ng-template>
+</div>

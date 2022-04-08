@@ -1,0 +1,84 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="联动分析">
+<meta name="product" content="">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具 (系统性能分析)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001178881594">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>联动分析</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001178881594"></a><a name="ZH-CN_TOPIC_0000001178881594"></a>
+
+<h1 class="topictitle1">联动分析</h1>
+<div id="body0000001111265114"><div class="section" id="ZH-CN_TOPIC_0000001178881594__section71672165013"><h4 class="sectiontitle">功能描述</h4><p id="ZH-CN_TOPIC_0000001178881594__p1024811383219">支持对同一种类型分析任务的结果，选择同一节点或者不同节点间进行比较，从而快速获得不同分析结构之间的差别，定位性能指标的变化，快速识别优化手段的效果。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001178881594__section11470129119"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0000001178881594__p5336201013112">已成功登录<span id="ZH-CN_TOPIC_0000001178881594__ph1359340104618">系统性能分析</span>。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001178881594__section1148964931011"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0000001178881594__ol164579301111"><li id="ZH-CN_TOPIC_0000001178881594__li4457130101116"><span>单击首页界面<span><img id="ZH-CN_TOPIC_0000001178881594__image10823194541311" src="zh-cn_image_0000001224361443.png"></span>图标。</span><p><p id="ZH-CN_TOPIC_0000001178881594__p753192215126">进入分析报告管理界面。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0000001178881594__fig92918151226"><span class="figcap"><b>图1 </b>联动分析界面</span><br><span><img id="ZH-CN_TOPIC_0000001178881594__image630131518226" src="zh-cn_image_0000001178723222.png"></span></div>
+</p></li><li id="ZH-CN_TOPIC_0000001178881594__li1252083125"><span>单击“分析报告管理”后面的<span><img id="ZH-CN_TOPIC_0000001178881594__image14352155534017" src="zh-cn_image_0000001224361437.png"></span>。</span><p><p id="ZH-CN_TOPIC_0000001178881594__p337460201414">进入“新建联动分析任务”页面。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001178881594__li188084581213"><span>设置分析报告参数，如<a href="#ZH-CN_TOPIC_0000001178881594__fig12107035121911">图 新建分析任务</a>所示，需要配置的选项如<a href="#ZH-CN_TOPIC_0000001178881594__table1810723551910">表 新建分析任务的参数说明</a>所示。</span><p><div class="p" id="ZH-CN_TOPIC_0000001178881594__p15666936151918">选择分析场景，单击“横向分析”或“纵向分析”，勾选需要分析的对象。<div class="note" id="ZH-CN_TOPIC_0000001178881594__note14331310135712"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001178881594__ul20355649195717"><li id="ZH-CN_TOPIC_0000001178881594__li163551249135715">不在一种场景下的任务不会被显示出来。</li><li id="ZH-CN_TOPIC_0000001178881594__li1664551105818">不符合当前对比方式的任务不会被选中。</li><li id="ZH-CN_TOPIC_0000001178881594__li5883191214582">若出现了任务的组件不同（比如在数据库场景下，openGauss与MySQL相比），则会弹窗提示。</li></ul>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001178881594__fig12107035121911"><a name="ZH-CN_TOPIC_0000001178881594__fig12107035121911"></a><a name="fig12107035121911"></a><span class="figcap"><b>图2 </b>新建分析任务</span><br><span><img id="ZH-CN_TOPIC_0000001178881594__image16107173515195" src="zh-cn_image_0000001178563258.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001178881594__table1810723551910"></a><a name="table1810723551910"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001178881594__table1810723551910" frame="border" border="1" rules="all"><caption><b>表1 </b>新建联动分析任务的参数说明</caption><colgroup><col style="width:33.43%"><col style="width:66.57%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001178881594__row41071235171916"><th align="left" class="cellrowborder" valign="top" width="33.43%" id="mcps1.3.3.2.3.2.1.3.2.3.1.1"><p id="ZH-CN_TOPIC_0000001178881594__p2107143514198">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="66.57%" id="mcps1.3.3.2.3.2.1.3.2.3.1.2"><p id="ZH-CN_TOPIC_0000001178881594__p8107203518192">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001178881594__row36561647195312"><td class="cellrowborder" valign="top" width="33.43%" headers="mcps1.3.3.2.3.2.1.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881594__p1865713472533">选择场景</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.57%" headers="mcps1.3.3.2.3.2.1.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881594__p26571447105313">选择需要分析的场景。</p>
+<p id="ZH-CN_TOPIC_0000001178881594__p1187146547">可选“通用”、“大数据”、“数据库”和“分布式存储”四个场景。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881594__row1010763511915"><td class="cellrowborder" valign="top" width="33.43%" headers="mcps1.3.3.2.3.2.1.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881594__p7107835151913">任务名称</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.57%" headers="mcps1.3.3.2.3.2.1.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881594__p310783514194">输入任务名称。名称需要满足如下要求：</p>
+<ul id="ZH-CN_TOPIC_0000001178881594__ul191071356193"><li id="ZH-CN_TOPIC_0000001178881594__li51077351190">只能由字母、数字、特殊字符（@#$%^&amp;*()[]&lt;&gt;._-!~+空格）组成</li><li id="ZH-CN_TOPIC_0000001178881594__li1210743517191">长度为1~32个字符</li></ul>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178881594__row310710354195"><td class="cellrowborder" valign="top" width="33.43%" headers="mcps1.3.3.2.3.2.1.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178881594__p12107143571917">选择对比对象</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.57%" headers="mcps1.3.3.2.3.2.1.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178881594__p8107183591913">选择“全景分析”和“热点函数分析”。</p>
+<p id="ZH-CN_TOPIC_0000001178881594__p1739711406168">选择“热点函数分析”可查看差分火焰图页签。</p>
+<p id="ZH-CN_TOPIC_0000001178881594__p151077355193">横向分析是同一工程同一任务下的多个节点间分析结果对比，纵向分析是不同任务两个节点间分析结果对比。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0000001178881594__li2351101791213"><span>单击“确认”，完成任务的创建。</span><p><p id="ZH-CN_TOPIC_0000001178881594__p113045673617">单击任务名称后面的<span><img id="ZH-CN_TOPIC_0000001178881594__image181145133616" src="zh-cn_image_0000001178881784.png"></span>图标，将该任务相关的所有数据都删除，请谨慎操作。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001178881594__li1858971018124"><span>等待分析完成，单击任务名。</span><p><p id="ZH-CN_TOPIC_0000001178881594__p131516191136">进入“配置数据”页签（默认），查看配置数据详细信息，如<a href="#ZH-CN_TOPIC_0000001178881594__fig4797115281418">图 配置数据详情</a>所示。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001178881594__note103631247122413"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001178881594__ul103644214212"><li id="ZH-CN_TOPIC_0000001178881594__li103642214215">配置信息的差异项前有<span><img id="ZH-CN_TOPIC_0000001178881594__image1617704982619" src="zh-cn_image_0000001224122939.png"></span>标识，可点击“查看详情”进行详细信息查看；可正常按照纵向对比，也可横向对比展示。</li><li id="ZH-CN_TOPIC_0000001178881594__li17203153115216">配置不同的选项单击“查看详情”可以看到弹窗罗列不同的详情。</li></ul>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001178881594__fig4797115281418"><a name="ZH-CN_TOPIC_0000001178881594__fig4797115281418"></a><a name="fig4797115281418"></a><span class="figcap"><b>图3 </b>配置数据详情</span><br><span><img id="ZH-CN_TOPIC_0000001178881594__image179717524148" src="zh-cn_image_0000001224122937.png"></span></div>
+</p></li><li id="ZH-CN_TOPIC_0000001178881594__li208461413141311"><span>单击“性能数据”页签。</span><p><p id="ZH-CN_TOPIC_0000001178881594__p63421916131510">进入“性能数据”页签，查看性能数据的详细信息，如<a href="#ZH-CN_TOPIC_0000001178881594__fig322871671614">图 性能数据详情</a>所示。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001178881594__note8893164617192"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001178881594__ul15588171417386"><li id="ZH-CN_TOPIC_0000001178881594__li12589181417386">存储IO、网络IO默认无数据，需用户自行点击<span><img id="ZH-CN_TOPIC_0000001178881594__image6553618372" src="zh-cn_image_0000001178881782.png"></span>按钮筛选对象查看，最多可选中10个对象。</li><li id="ZH-CN_TOPIC_0000001178881594__li191318178381">可以通过下拉框选择进行切换数据展示。</li></ul>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001178881594__fig322871671614"><a name="ZH-CN_TOPIC_0000001178881594__fig322871671614"></a><a name="fig322871671614"></a><span class="figcap"><b>图4 </b>性能数据详情</span><br><span><img id="ZH-CN_TOPIC_0000001178881594__image4229516161616" src="zh-cn_image_0000001178723224.png"></span></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001178881594__fig1270115127245"><span class="figcap"><b>图5 </b>性能数据-IO区域</span><br><span><img id="ZH-CN_TOPIC_0000001178881594__image3701111262410" src="zh-cn_image_0000001179041710.png"></span></div>
+</p></li><li id="ZH-CN_TOPIC_0000001178881594__li86871615118"><span>点击“热差分火焰图”或“冷差分火焰图”页签。</span><p><p id="ZH-CN_TOPIC_0000001178881594__p8304042740">进入“热差分火焰图”页签，查看应用运行的详细信息，如<a href="#ZH-CN_TOPIC_0000001178881594__fig1956505918718">图6</a>所示。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001178881594__note1069274411516"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001178881594__ul10829776618"><li id="ZH-CN_TOPIC_0000001178881594__li17829771265">上半部分聚合当前火焰图应用程序的宏观指标，包括时钟周期，执行指令值，IPC，操作系统，主机名等；下半部分主要罗列用户选择的差分火焰图；火焰图顶端有搜索模块，搜索到的函数会变成紫色。</li><li id="ZH-CN_TOPIC_0000001178881594__li1782957261">差分火焰图只能表示两张火焰图的差异，因此当对比任务数大于2的时候用户要自己选择base节点和比较节点。同一时刻只能显示用户选择的两个节点对比出来的一张火焰图。</li><li id="ZH-CN_TOPIC_0000001178881594__li186352558238">在火焰图的最顶端函数可通过鼠标悬浮，然后点击查看函数详情，跳转至对应函数；仅支持最后一个函数跳转。</li><li id="ZH-CN_TOPIC_0000001178881594__li166356550232">支持搜索框搜索需要查询的函数，搜索时可通过“大小写敏感”单选框支持大小写敏感查询，默认不支持；查询后，火焰图自动为查询结果添加底色，并为第一个函数添加边框；搜索框支持正则匹配和模糊查询。</li><li id="ZH-CN_TOPIC_0000001178881594__li10149155144719">搜索时点击<span><img id="ZH-CN_TOPIC_0000001178881594__zh-cn_topic_0250422244_image1655116174316" src="zh-cn_image_0000001178881700.png"></span>或<span><img id="ZH-CN_TOPIC_0000001178881594__zh-cn_topic_0250422244_image1992718343436" src="zh-cn_image_0000001224361349.png"></span>按钮进行结果切换，点击回车键可展开当前选中函数块；点击<span><img id="ZH-CN_TOPIC_0000001178881594__zh-cn_topic_0250422244_image9738635152120" src="zh-cn_image_0000001224122849.png"></span>或<span><img id="ZH-CN_TOPIC_0000001178881594__zh-cn_topic_0250422244_image1796934515212" src="zh-cn_image_0000001224201423.png"></span>按钮可放大缩小，也可通过鼠标滑轮控制；点击<span><img id="ZH-CN_TOPIC_0000001178881594__zh-cn_topic_0250422244_image1837893111423" src="zh-cn_image_0000001178881692.png"></span>按钮可查看火焰图使用方法。</li></ul>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001178881594__fig1956505918718"><a name="ZH-CN_TOPIC_0000001178881594__fig1956505918718"></a><a name="fig1956505918718"></a><span class="figcap"><b>图6 </b>热差分火焰图</span><br><span><img id="ZH-CN_TOPIC_0000001178881594__image25657591712" src="zh-cn_image_0000001178563256.png"></span></div>
+</p></li></ol>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

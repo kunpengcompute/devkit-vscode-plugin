@@ -1,0 +1,36 @@
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    min-height: 600px;
+    height: calc(100vh - 5px);
+    padding-left: 32px;
+}
+.container>div{
+    width: 49%;
+    display: inline-block;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+#root {
+    overflow-y: none !important;
+    overflow-x: none !important;
+}
+:host ::ng-deep .vscode-light{
+    .title-color{
+        color: #cccccc;
+    }
+}
+
+:host ::ng-deep .vscode-dark{
+    .title-color{
+        color: #e8e8e8;
+    }
+}
+
+h3 {
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: 0;
+}

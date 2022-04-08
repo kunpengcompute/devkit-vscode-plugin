@@ -1,0 +1,65 @@
+::ng-deep {
+  :root {
+    --pop-background-color: #ffffff;
+    --poptitle-border-bottom: #e1e6ee;
+  }
+  .vscode-dark .tuninghelperNodeConfig {
+    --pop-background-color: #252526;
+    --poptitle-border-bottom: #4b4b4b;
+  }
+
+  .vscode-dark,
+  .vscode-light {
+    .tuninghelperNodeConfig {
+      .ti3-modal-content .ti3-close {
+        line-height: 27px;
+      }
+      .ti3-modal-header {
+        margin: 0px;
+      }
+      .nodeNameStyle,
+      .pathConfig {
+        padding-left: 0px !important;
+      }
+      .nodeNameStyle {
+        margin-top: 0px;
+        margin-left: 0px;
+      }
+    }
+  }
+}
+
+::ng-deep .tuninghelperNodeConfig {
+  .ti3-modal-content {
+    width: 660px;
+    max-height: 600px;
+    .ti3-close {
+      line-height: 52px;
+    }
+  }
+  .ti3-modal-header {
+    text-align: left;
+    border-bottom: dashed 1px var(--poptitle-border-bottom);
+    margin: 0px 32px;
+    padding: 24px 0px;
+  }
+  .ti3-modal-body {
+    background: var(--pop-background-color);
+  }
+  .nodeNameStyle {
+    margin: 24px 0px 24px 16px;
+  }
+  .bigInput {
+    width: 480px;
+    height: 28px;
+  }
+  .pathConfig {
+    margin-top: 20px;
+    padding-left: 16px;
+  }
+  .imgQuestion {
+    width: 14px;
+    height: 14px;
+    margin-left: 10px;
+  }
+}

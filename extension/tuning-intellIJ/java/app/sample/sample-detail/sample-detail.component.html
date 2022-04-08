@@ -1,0 +1,53 @@
+<div class="main-container-sample">
+    <div class="main-content scroll-style">
+        <div class="profile-tabs" *ngIf="!recordTime && !showTime">
+            <div>
+                <ng-container *ngFor="let tab of simplimgTabs; let idx = index">
+                    <span class="item-tab" [ngClass]="{ 'tab-active': tab.active }" *ngIf="tab.show"
+                        [routerLink]="[tab.link]" [queryParams]="{enableOldObjectSample: enableOldObjectSample}"
+                        (click)=" tabsToggle(idx)">{{ i18n.protalserver_sampling_tab[tab.tabName] }}</span>
+                </ng-container>
+            </div>
+            <div class="suggestion" tiTipPosition='bottom-right' *ngIf="!recordTime&&!showTime"
+            [tiTip]="i18n.protalserver_sampling_tab.suggestions" (click)="openModal()">
+                <img *ngIf="currTheme === colorTheme.Dark" src="./assets/img/profiling/suggestion-normal.svg">
+                <img *ngIf="currTheme === colorTheme.Dark" src="./assets/img/profiling/suggestion-hover.svg" class="hover">
+                <img *ngIf="currTheme === colorTheme.Light" src="./assets/img/profiling/suggest_lightNormal.svg">
+                <img *ngIf="currTheme === colorTheme.Light" src="./assets/img/profiling/suggest_lightHover.svg" class="hover">
+                <span class="suggestNum" *ngIf="suggestNum > 0" [ngClass]="suggestNum > 9? 'allNums' :'allNum'">{{suggestNum}}</span>
+            </div>
+        </div>
+        <router-outlet *ngIf="!recordTime&&!showTime&&startConnect"></router-outlet>
+        <div class="timeProgress" *ngIf="recordTime||showTime">
+            <div class="title">{{simplingName}} {{ i18n.common_term_sampling_forms.recording }}</div>
+            <div *ngIf="currTheme === colorTheme.Dark" class="darkkAnalyze" dark> 
+                <img src="./assets/img/profiling/analyzeBg.png" class="analyzing-gif">
+                <img src="./assets/img/profiling/analyzeAnimation.gif" class="analyzing-gif1">
+            </div>
+            <div *ngIf="currTheme === colorTheme.Light" class="lightAnalyze" light> 
+                <img src="./assets/img/img_0.gif" class="analyzing-gif">
+            </div>
+            <div class="time" *ngIf="!showTime">{{ i18n.common_term_sampling_forms.recordNeedTime }} <span>{{ timeShow }}</span></div>
+            <div class="time" *ngIf="showTime">{{ i18n.common_term_sampling_forms.recordNeedTime }}<span>{{ timeShowLeft }}</span> -
+                <span>{{ timeShowRight }}</span>
+            </div>
+            <div class="progressLine" *ngIf="!showTime">
+                <div class="left">
+                    <div class="up" [ngStyle]="{'width':percentage}"></div>
+                </div>
+                <div class="right">{{ percentage }}</div>
+            </div>
+            <div class="progressAnmi" *ngIf="showTime">
+                <div class="wrap">
+                    <div class="move"></div>
+                </div>
+            </div>
+            <div class="btns">
+                <div (click)="stopAnalysis()">{{ i18n.common_term_sampling_forms.stop_analysis }}</div>
+                <div (click)="cancelAnalysis()">{{ i18n.common_term_sampling_forms.cancel_analysis }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-sample-suggest #suggest></app-sample-suggest>
+<app-cadownload #caFileModal></app-cadownload>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="9px" height="16px" viewBox="0 0 9 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>4.组件/2.通用/icon/主页面向下箭头</title>
+    <defs>
+        <path d="M13.8979708,12.488961 L8.32950487,6.92049513 C7.89016504,6.4811553 7.89016504,5.7688447 8.32950487,5.32950487 C8.7688447,4.89016504 9.4811553,4.89016504 9.92049513,5.32950487 L16.2844562,11.6934659 C16.723796,12.1328057 16.723796,12.8451163 16.2844562,13.2844562 L9.92049513,19.6484172 C9.4811553,20.087757 8.7688447,20.087757 8.32950487,19.6484172 C7.89016504,19.2090774 7.89016504,18.4967668 8.32950487,18.0574269 L13.8979708,12.488961 Z" id="path-1"></path>
+    </defs>
+    <g id="顶部导航" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="0.导航交互1-无banner" transform="translate(-21.000000, -87.000000)">
+            <g id="4.组件/1.导航/手风琴/240/1.默认" transform="translate(0.000000, 60.000000)">
+                <g id="4.组件/2.通用/icon/主页面箭头/向下" transform="translate(26.000000, 35.000000) rotate(90.000000) translate(-26.000000, -35.000000) translate(14.000000, 23.000000)">
+                    <rect id="frame" x="0" y="0" width="24" height="24"></rect>
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="路径" fill="#6C7280" fill-rule="nonzero" transform="translate(12.306981, 12.488961) scale(1, -1) rotate(-90.000000) translate(-12.306981, -12.488961) " xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

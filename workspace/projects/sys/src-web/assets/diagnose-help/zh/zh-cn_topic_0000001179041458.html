@@ -1,0 +1,984 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="网络IO诊断">
+<meta name="product" content="">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具（系统诊断）">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001179041458">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>网络IO诊断</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001179041458"></a><a name="ZH-CN_TOPIC_0000001179041458"></a>
+
+<h1 class="topictitle1">网络IO诊断</h1>
+<div id="body0000001180218011"><div class="section" id="ZH-CN_TOPIC_0000001179041458__section3446157173513"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0000001179041458__p459816144352">已创建网络IO诊断任务，并且成功完成分析。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001179041458__section1664619718356"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0000001179041458__ol11751729163618"><li id="ZH-CN_TOPIC_0000001179041458__zh-cn_topic_0311508298_li85521472718"><span>在“工程管理”区域，依次单击指定工程和分析任务名称前的<span><img id="ZH-CN_TOPIC_0000001179041458__zh-cn_topic_0311508298_image4105155811375" src="zh-cn_image_0000001224201427.png"></span>。</span><p><p id="ZH-CN_TOPIC_0000001179041458__zh-cn_topic_0311508298_p198319584430">展开节点列表。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001179041458__zh-cn_topic_0311508298_li257535304314"><span>单击节点名称查看分析结果。</span><p><p id="ZH-CN_TOPIC_0000001179041458__p1248793419337">单击节点名称默认打开“连通性拨测”页签，如<a href="#ZH-CN_TOPIC_0000001179041458__fig15547205011383">图1</a>所示，参数说明如<a href="#ZH-CN_TOPIC_0000001179041458__table870017225419">表1</a>所示。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001179041458__note58811931134817"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001179041458__ul918523554814"><li id="ZH-CN_TOPIC_0000001179041458__li9185735164820">若分析连通性拨测成功，拨测KPI图连通，点击服务器，弹窗显示配置信息；若分析连通性拨测失败，拨测KPI断开，显示拨测失败原因及建议。</li><li id="ZH-CN_TOPIC_0000001179041458__li206631190497">拨测成功后，可点击服务器图标下的“配置信息”，弹框展示服务器配置信息。</li></ul>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001179041458__fig15547205011383"><a name="ZH-CN_TOPIC_0000001179041458__fig15547205011383"></a><a name="fig15547205011383"></a><span class="figcap"><b>图1 </b>连通性拨测</span><br><span><img id="ZH-CN_TOPIC_0000001179041458__image17548135073815" src="zh-cn_image_0000001223882911.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001179041458__table870017225419"></a><a name="table870017225419"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001179041458__table870017225419" frame="border" border="1" rules="all"><caption><b>表1 </b>连通性拨测页签-参数说明</caption><colgroup><col style="width:32.67%"><col style="width:67.33%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001179041458__row07011222154113"><th align="left" class="cellrowborder" valign="top" width="32.67%" id="mcps1.3.2.2.2.2.4.2.3.1.1"><p id="ZH-CN_TOPIC_0000001179041458__p17701622164110">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="67.33%" id="mcps1.3.2.2.2.2.4.2.3.1.2"><p id="ZH-CN_TOPIC_0000001179041458__p6701222164116">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001179041458__row11701152204115"><td class="cellrowborder" valign="top" width="32.67%" headers="mcps1.3.2.2.2.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p77011522164117">发包</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.33%" headers="mcps1.3.2.2.2.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p14701112210416">显示发送数据包数量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row6701122294115"><td class="cellrowborder" valign="top" width="32.67%" headers="mcps1.3.2.2.2.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p16701132215411">收包</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.33%" headers="mcps1.3.2.2.2.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p8701422104115">显示接受数据包数量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row15701142254116"><td class="cellrowborder" valign="top" width="32.67%" headers="mcps1.3.2.2.2.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p9701162264112">丢包率（%）</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.33%" headers="mcps1.3.2.2.2.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p67011522194118">显示数据包丢包比例。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row197011122104110"><td class="cellrowborder" valign="top" width="32.67%" headers="mcps1.3.2.2.2.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1470192234114">最大值</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.33%" headers="mcps1.3.2.2.2.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p17701142215418">显示时延最大值。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row57014227412"><td class="cellrowborder" valign="top" width="32.67%" headers="mcps1.3.2.2.2.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p14701192284111">最小值</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.33%" headers="mcps1.3.2.2.2.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p127015222414">显示时延最小值。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row570172214112"><td class="cellrowborder" valign="top" width="32.67%" headers="mcps1.3.2.2.2.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p27011922124119">平均值</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.33%" headers="mcps1.3.2.2.2.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p2701122194117">显示平均时延。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row770117222418"><td class="cellrowborder" valign="top" width="32.67%" headers="mcps1.3.2.2.2.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1701422164117">标准偏差</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.33%" headers="mcps1.3.2.2.2.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p187012221418">显示平均偏差时延。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row3566144010331"><td class="cellrowborder" valign="top" width="32.67%" headers="mcps1.3.2.2.2.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p656724017331">路由序号</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.33%" headers="mcps1.3.2.2.2.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p0567104063317">显示路由序号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row137052445337"><td class="cellrowborder" valign="top" width="32.67%" headers="mcps1.3.2.2.2.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1370514413317">路由设备IP</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.33%" headers="mcps1.3.2.2.2.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1270514441332">显示路由设备IP。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row06211150163315"><td class="cellrowborder" valign="top" width="32.67%" headers="mcps1.3.2.2.2.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p3621750203319">响应时间1（ms）</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.33%" headers="mcps1.3.2.2.2.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p162105013319">显示路由响应时间。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row4568135211332"><td class="cellrowborder" valign="top" width="32.67%" headers="mcps1.3.2.2.2.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p145683523331">响应时间2（ms）</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.33%" headers="mcps1.3.2.2.2.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p512158163910">显示路由响应时间。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1271534823318"><td class="cellrowborder" valign="top" width="32.67%" headers="mcps1.3.2.2.2.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p167157480331">响应时间3（ms）</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.33%" headers="mcps1.3.2.2.2.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p14451383393">显示路由响应时间。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p id="ZH-CN_TOPIC_0000001179041458__p0497753192814">点击“配置信息”可查看服务器详细配置，如<a href="#ZH-CN_TOPIC_0000001179041458__fig617514282715">图2</a>所示。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0000001179041458__fig617514282715"><a name="ZH-CN_TOPIC_0000001179041458__fig617514282715"></a><a name="fig617514282715"></a><span class="figcap"><b>图2 </b>配置信息</span><br><span><img id="ZH-CN_TOPIC_0000001179041458__image417719281377" src="zh-cn_image_0000001178563184.png"></span></div>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001179041458__table11708145532212" frame="border" border="1" rules="all"><caption><b>表2 </b>配置信息-参数说明</caption><colgroup><col style="width:32.769999999999996%"><col style="width:67.23%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001179041458__row10710175532214"><th align="left" class="cellrowborder" valign="top" width="32.769999999999996%" id="mcps1.3.2.2.2.2.7.2.3.1.1"><p id="ZH-CN_TOPIC_0000001179041458__p207102055152211">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="67.23%" id="mcps1.3.2.2.2.2.7.2.3.1.2"><p id="ZH-CN_TOPIC_0000001179041458__p671005518220">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001179041458__row1871035512223"><td class="cellrowborder" valign="top" width="32.769999999999996%" headers="mcps1.3.2.2.2.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p12710135520228">Destination</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.23%" headers="mcps1.3.2.2.2.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p10201827122512">显示本地地址。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row11710055162217"><td class="cellrowborder" valign="top" width="32.769999999999996%" headers="mcps1.3.2.2.2.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p17710125572217">Gateway</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.23%" headers="mcps1.3.2.2.2.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1620327142515">显示网关信息。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row127101555132216"><td class="cellrowborder" valign="top" width="32.769999999999996%" headers="mcps1.3.2.2.2.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p27101355152213">Genmask</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.23%" headers="mcps1.3.2.2.2.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p3201127182520">显示掩码信息。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row571005520226"><td class="cellrowborder" valign="top" width="32.769999999999996%" headers="mcps1.3.2.2.2.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p77101955172211">Flags</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.23%" headers="mcps1.3.2.2.2.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p7205275251">显示网络接口状态。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row20710155202213"><td class="cellrowborder" valign="top" width="32.769999999999996%" headers="mcps1.3.2.2.2.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p167102550229">Network Interface</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.23%" headers="mcps1.3.2.2.2.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p020172722512">显示网口信息。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row971085519220"><td class="cellrowborder" valign="top" width="32.769999999999996%" headers="mcps1.3.2.2.2.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p2071055512224">Address</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.23%" headers="mcps1.3.2.2.2.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p089823813259">显示网络地址。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row113173142415"><td class="cellrowborder" valign="top" width="32.769999999999996%" headers="mcps1.3.2.2.2.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p14416312419">HWtype</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.23%" headers="mcps1.3.2.2.2.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1620162772519">显示网卡类型。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row3980144102412"><td class="cellrowborder" valign="top" width="32.769999999999996%" headers="mcps1.3.2.2.2.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p139811472411">HWaddress</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.23%" headers="mcps1.3.2.2.2.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p620152792517">显示mac地址。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p id="ZH-CN_TOPIC_0000001179041458__p255532274310">拨测类型选择“TCP拨测”时，TCP拨测如<a href="#ZH-CN_TOPIC_0000001179041458__fig822811517441">图3</a>所示，参数说明如<a href="#ZH-CN_TOPIC_0000001179041458__table182661817134420">表3</a>所示。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0000001179041458__fig822811517441"><a name="ZH-CN_TOPIC_0000001179041458__fig822811517441"></a><a name="fig822811517441"></a><span class="figcap"><b>图3 </b>TCP拨测</span><br><span><img id="ZH-CN_TOPIC_0000001179041458__image3228135154411" src="zh-cn_image_0000001178723152.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001179041458__table182661817134420"></a><a name="table182661817134420"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001179041458__table182661817134420" frame="border" border="1" rules="all"><caption><b>表3 </b>TCP拨测-参数说明</caption><colgroup><col style="width:31.19%"><col style="width:68.81%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001179041458__row826741712447"><th align="left" class="cellrowborder" valign="top" width="31.19%" id="mcps1.3.2.2.2.2.10.2.3.1.1"><p id="ZH-CN_TOPIC_0000001179041458__p112671178442">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="68.81%" id="mcps1.3.2.2.2.2.10.2.3.1.2"><p id="ZH-CN_TOPIC_0000001179041458__p1026710171445">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001179041458__row136786514546"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.10.2.3.1.1 mcps1.3.2.2.2.2.10.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1037715557544">连接信息</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1026718175441"><td class="cellrowborder" valign="top" width="31.19%" headers="mcps1.3.2.2.2.2.10.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p243914745317">连接ID</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.81%" headers="mcps1.3.2.2.2.2.10.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1226731774416">显示拨测时连接的ID。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1526711714418"><td class="cellrowborder" valign="top" width="31.19%" headers="mcps1.3.2.2.2.2.10.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p3267017144413">客户端IP</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.81%" headers="mcps1.3.2.2.2.2.10.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p126781714442">显示拨测时客户端IP地址。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1826711794416"><td class="cellrowborder" valign="top" width="31.19%" headers="mcps1.3.2.2.2.2.10.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p72671717104419">客户端端口</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.81%" headers="mcps1.3.2.2.2.2.10.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p102671017124411">显示拨测时客户端端口。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1726721744418"><td class="cellrowborder" valign="top" width="31.19%" headers="mcps1.3.2.2.2.2.10.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p10267817164410">服务端IP</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.81%" headers="mcps1.3.2.2.2.2.10.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p7267121774415">显示拨测时服务端IP地址。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row11267161724416"><td class="cellrowborder" valign="top" width="31.19%" headers="mcps1.3.2.2.2.2.10.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p526713173442">服务端端口</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.81%" headers="mcps1.3.2.2.2.2.10.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p14267161754413">显示拨测时服务端端口。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row6267131712448"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.10.2.3.1.1 mcps1.3.2.2.2.2.10.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p65418717553">拨测统计信息</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row192701124105416"><td class="cellrowborder" valign="top" width="31.19%" headers="mcps1.3.2.2.2.2.10.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p227092465419">连接ID</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.81%" headers="mcps1.3.2.2.2.2.10.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p17270152410540">显示拨测时连接的ID。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row2516113745417"><td class="cellrowborder" valign="top" width="31.19%" headers="mcps1.3.2.2.2.2.10.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1151643735416">时间间隔（s）</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.81%" headers="mcps1.3.2.2.2.2.10.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1851613710544">显示拨测时采集数据的时间间隔。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row4407114085411"><td class="cellrowborder" valign="top" width="31.19%" headers="mcps1.3.2.2.2.2.10.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p740817407544">传输数据量（MB）</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.81%" headers="mcps1.3.2.2.2.2.10.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p940814085416">显示某一时间间隔内传输的数据量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row701736145414"><td class="cellrowborder" valign="top" width="31.19%" headers="mcps1.3.2.2.2.2.10.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p5063611549">带宽（Mbits/sec）</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.81%" headers="mcps1.3.2.2.2.2.10.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p50103675413">显示某一时间间隔内的带宽。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row11956103814541"><td class="cellrowborder" valign="top" width="31.19%" headers="mcps1.3.2.2.2.2.10.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p99561838115414">重传</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.81%" headers="mcps1.3.2.2.2.2.10.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p10956738185414">显示是否存在数据失败重传的情况。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row419135413593"><td class="cellrowborder" valign="top" width="31.19%" headers="mcps1.3.2.2.2.2.10.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1919185495915">窗口大小（MB）</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.81%" headers="mcps1.3.2.2.2.2.10.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p12191155445920">显示拨测时TCP数据窗口大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row25787349542"><td class="cellrowborder" valign="top" width="31.19%" headers="mcps1.3.2.2.2.2.10.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p5579133465416">操作</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.81%" headers="mcps1.3.2.2.2.2.10.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p195793346548">显示详细信息，点击可查看。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p id="ZH-CN_TOPIC_0000001179041458__p6239112284511">拨测类型选择“UDP拨测”时，如<a href="#ZH-CN_TOPIC_0000001179041458__fig257214824616">图4</a>所示，参数说明如<a href="#ZH-CN_TOPIC_0000001179041458__table156014589467">表4</a>所示。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0000001179041458__fig257214824616"><a name="ZH-CN_TOPIC_0000001179041458__fig257214824616"></a><a name="fig257214824616"></a><span class="figcap"><b>图4 </b>UDP拨测</span><br><span><img id="ZH-CN_TOPIC_0000001179041458__image145731848134619" src="zh-cn_image_0000001223882899.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001179041458__table156014589467"></a><a name="table156014589467"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001179041458__table156014589467" frame="border" border="1" rules="all"><caption><b>表4 </b>UDP拨测-参数说明</caption><colgroup><col style="width:29.439999999999998%"><col style="width:70.56%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001179041458__row9618581464"><th align="left" class="cellrowborder" valign="top" width="29.439999999999998%" id="mcps1.3.2.2.2.2.13.2.3.1.1"><p id="ZH-CN_TOPIC_0000001179041458__p96113581465">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="70.56%" id="mcps1.3.2.2.2.2.13.2.3.1.2"><p id="ZH-CN_TOPIC_0000001179041458__p126175813462">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001179041458__row937616511512"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.13.2.3.1.1 mcps1.3.2.2.2.2.13.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p16694169558">连接信息</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row761185894618"><td class="cellrowborder" valign="top" width="29.439999999999998%" headers="mcps1.3.2.2.2.2.13.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p16946919515">连接ID</p>
+</td>
+<td class="cellrowborder" valign="top" width="70.56%" headers="mcps1.3.2.2.2.2.13.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1369439455">显示拨测时连接的ID。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row561658104614"><td class="cellrowborder" valign="top" width="29.439999999999998%" headers="mcps1.3.2.2.2.2.13.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1069469556">客户端IP</p>
+</td>
+<td class="cellrowborder" valign="top" width="70.56%" headers="mcps1.3.2.2.2.2.13.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p5694159258">显示拨测时客户端IP地址。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row107366531418"><td class="cellrowborder" valign="top" width="29.439999999999998%" headers="mcps1.3.2.2.2.2.13.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p16694894515">客户端端口</p>
+</td>
+<td class="cellrowborder" valign="top" width="70.56%" headers="mcps1.3.2.2.2.2.13.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p11694791157">显示拨测时客户端端口。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1422771858"><td class="cellrowborder" valign="top" width="29.439999999999998%" headers="mcps1.3.2.2.2.2.13.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p3695891953">服务端IP</p>
+</td>
+<td class="cellrowborder" valign="top" width="70.56%" headers="mcps1.3.2.2.2.2.13.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p8695096513">显示拨测时服务端IP地址。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row125818819510"><td class="cellrowborder" valign="top" width="29.439999999999998%" headers="mcps1.3.2.2.2.2.13.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p4695797514">服务端端口</p>
+</td>
+<td class="cellrowborder" valign="top" width="70.56%" headers="mcps1.3.2.2.2.2.13.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1695391150">显示拨测时服务端端口。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row0625956845"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.13.2.3.1.1 mcps1.3.2.2.2.2.13.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p116955911518">拨测统计信息</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row77159590413"><td class="cellrowborder" valign="top" width="29.439999999999998%" headers="mcps1.3.2.2.2.2.13.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p15695991659">连接ID</p>
+</td>
+<td class="cellrowborder" valign="top" width="70.56%" headers="mcps1.3.2.2.2.2.13.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p26956918519">显示拨测时连接的ID。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1511115819418"><td class="cellrowborder" valign="top" width="29.439999999999998%" headers="mcps1.3.2.2.2.2.13.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p469517918514">时间间隔（s）</p>
+</td>
+<td class="cellrowborder" valign="top" width="70.56%" headers="mcps1.3.2.2.2.2.13.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p12695594516">显示拨测时采集数据的时间间隔。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row3611758154620"><td class="cellrowborder" valign="top" width="29.439999999999998%" headers="mcps1.3.2.2.2.2.13.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p56951191351">传输数据量（MB）</p>
+</td>
+<td class="cellrowborder" valign="top" width="70.56%" headers="mcps1.3.2.2.2.2.13.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p14695791956">显示某一时间间隔内传输的数据量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row328915512413"><td class="cellrowborder" valign="top" width="29.439999999999998%" headers="mcps1.3.2.2.2.2.13.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p19695179759">带宽（Mbits/sec）</p>
+</td>
+<td class="cellrowborder" valign="top" width="70.56%" headers="mcps1.3.2.2.2.2.13.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p10695693512">显示某一时间间隔内的带宽。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row186195815467"><td class="cellrowborder" valign="top" width="29.439999999999998%" headers="mcps1.3.2.2.2.2.13.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p469512915520">延时抖动（ms）</p>
+</td>
+<td class="cellrowborder" valign="top" width="70.56%" headers="mcps1.3.2.2.2.2.13.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p20695192053">显示延时抖动时间。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1161155815467"><td class="cellrowborder" valign="top" width="29.439999999999998%" headers="mcps1.3.2.2.2.2.13.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p8695119251">丢失数据包/总数据包</p>
+</td>
+<td class="cellrowborder" valign="top" width="70.56%" headers="mcps1.3.2.2.2.2.13.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p12695159853">显示数据传输时丢失数据包和总数据包数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row147842037192912"><td class="cellrowborder" valign="top" width="29.439999999999998%" headers="mcps1.3.2.2.2.2.13.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p187841137182914">丢包率（%）</p>
+</td>
+<td class="cellrowborder" valign="top" width="70.56%" headers="mcps1.3.2.2.2.2.13.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1678416378299">显示丢包率。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row912512391139"><td class="cellrowborder" valign="top" width="29.439999999999998%" headers="mcps1.3.2.2.2.2.13.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1569614911510">操作</p>
+</td>
+<td class="cellrowborder" valign="top" width="70.56%" headers="mcps1.3.2.2.2.2.13.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p96961192514">显示详细信息，点击可查看。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0000001179041458__li3298931143618"><span>单击“网络负载监控”页签。</span><p><p id="ZH-CN_TOPIC_0000001179041458__p849717715485">查看“网络负载监控”分析内容，如<a href="#ZH-CN_TOPIC_0000001179041458__fig47911915013">图5</a>所示，参数如<a href="#ZH-CN_TOPIC_0000001179041458__table281412196508">表5</a>所示。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001179041458__note167631517501"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001179041458__ul1968272115513"><li id="ZH-CN_TOPIC_0000001179041458__li13509121983416">CPU利用率区域可通过下拉列表切换CPU core和NUMA NODE查看详情。</li><li id="ZH-CN_TOPIC_0000001179041458__li106421323135117">网卡可通过下拉列表进行切换查看网络吞吐量图。</li></ul>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001179041458__fig47911915013"><a name="ZH-CN_TOPIC_0000001179041458__fig47911915013"></a><a name="fig47911915013"></a><span class="figcap"><b>图5 </b>网络负载监控</span><br><span><img id="ZH-CN_TOPIC_0000001179041458__image197915915012" src="zh-cn_image_0000001223882917.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001179041458__table281412196508"></a><a name="table281412196508"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001179041458__table281412196508" frame="border" border="1" rules="all"><caption><b>表5 </b>网络负载监控-参数说明</caption><colgroup><col style="width:32.22%"><col style="width:67.78%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001179041458__row10814119165016"><th align="left" class="cellrowborder" valign="top" width="32.22%" id="mcps1.3.2.2.3.2.4.2.3.1.1"><p id="ZH-CN_TOPIC_0000001179041458__p118141019175016">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="67.78%" id="mcps1.3.2.2.3.2.4.2.3.1.2"><p id="ZH-CN_TOPIC_0000001179041458__p15814719135018">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001179041458__row124503481158"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.3.2.4.2.3.1.1 mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p193039581856">CPU利用率</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row296216541054"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1963115416516">CPU core</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p149631154852">显示CPU核编号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1820983117332"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p112101131133315">MUMA NODE</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p52101331163312">显示MUMA编号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row125811453459"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p558165313516">%user</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1758114531519">显示在用户态运行时所占用CPU总时间的百分比。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1625817527514"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1525875211520">%nice</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p11258145213513">显示在用户态改变过优先级的进程运行时所占用CPU总时间的百分比。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row78751050953"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1887513501657">%system</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1487510501058">显示在内核态运行时所占用CPU总时间的百分比（不包括硬件中断和软件中断的时间）。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row86928491454"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p669294916514">%iowait</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1869234917514">显示CPU等待磁盘I/O操作导致空闲状态的时间占CPU总时间的百分比。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1981415196504"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1581416193503">%irq</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p881551911503">显示CPU服务硬件中断所花费时间占CPU总时间的百分比。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row18815419125013"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p16815519175014">%soft</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1181518191505">显示<span style="color:#3F4549;">CPU</span><span style="color:#3F4549;">服务软件中断所花费时间占</span><span style="color:#3F4549;">CPU</span><span style="color:#3F4549;">总时间的百分比</span>。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row147544462058"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1275417461751">%idle</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1675464617512">显示<span style="color:#3F4549;">CPU</span><span style="color:#3F4549;">空闲且系统没有未完成的磁盘</span><span style="color:#3F4549;">I/O</span><span style="color:#3F4549;">请求的时间占总时间的百分比</span>。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row16815319155018"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.3.2.4.2.3.1.1 mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p5420321278">CPU负载</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row138151519125020"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p78159191502">runq-sz</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p4815719185019">显示<span style="color:#3F4549;">运行队列的长度，即等待运行任务的数量</span>。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row105291427273"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p195307271770">plist-sz</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p853012271773">显示<span style="color:#3F4549;">在任务列表中的任务的数量。</span></p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row9143929771"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1914415291374">ldavg-1</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p16144229872">显示<span style="color:#3F4549;">最后</span><span style="color:#3F4549;">1</span><span style="color:#3F4549;">分钟的系统平均负载</span>。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row15289103416718"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p182893344718">ldavg-5</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1128920341878">显示<span style="color:#3F4549;">最后5</span><span style="color:#3F4549;">分钟的系统平均负载</span>。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row19691133520711"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1269111359710">idavg-15</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p8691935972">显示<span style="color:#3F4549;">最后</span><span style="color:#3F4549;">1</span><span style="color:#3F4549;">5分钟的系统平均负载</span>。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row63815401874"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p53811240075">blocked</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p113811040670">显示<span style="color:#3F4549;">当前阻塞的任务数，正在等待</span><span style="color:#3F4549;">I/O</span><span style="color:#3F4549;">完成</span>。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row63114371175"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.3.2.4.2.3.1.1 mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p13992202915813">内存利用率</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row373343817717"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p177336381178">total（KB）</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p147339386717">显示系统总的可用内存大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row19866321774"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p39866321720">free（KB）</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p098623212710">显示剩余可用内存大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1749311311719"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p149317311476">used（KB）</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p124939316711">显示已被使用的内存大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1815111918507"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1081519194503">%used</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p68151519175016">显示已被使用的内存占总内存的百分比。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row128151819155015"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p18815119115018">avail（KB）</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p12815161920501">显示可被应用程序使用的内存大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row12815181955017"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p0815519105010">buffers（KB）</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p18815201905018">显示显示被buffer的内存大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row151441928992"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1914422814913">cached（KB）</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1214418285911">显示显示cache中的内存大小。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row18954172610910"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.3.2.4.2.3.1.1 mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1463810587913">网络IO统计</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row127675251596"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p476713251192">IFACE</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1276714251398">显示<span style="color:#3F4549;">网络接口名称</span>。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1462125513917"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p66211551898">rx（pck/s）</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p962114551496">显示<span style="color:#3F4549;">每秒接收的数据包总数</span>。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row890419539914"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1490416539912">tx（pck/s）</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p199041253492">显示<span style="color:#3F4549;">每秒</span><span style="color:#3F4549;">发送</span><span style="color:#3F4549;">的数据包总数</span>。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row81846424108"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p181843423100">rx（KB/s）</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p101843425109">显示<span style="color:#3F4549;">每秒接收的字节总数</span>。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row192131723894"><td class="cellrowborder" valign="top" width="32.22%" headers="mcps1.3.2.2.3.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p8213122310919">tx（KB/s）</p>
+</td>
+<td class="cellrowborder" valign="top" width="67.78%" headers="mcps1.3.2.2.3.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p13213182312911">显示<span style="color:#3F4549;">每秒</span><span style="color:#3F4549;">发送</span><span style="color:#3F4549;">的字节总数</span>。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p id="ZH-CN_TOPIC_0000001179041458__p111841547171714">在“网络负载监控”页签下的网络IO统计区域，点击网卡会弹出详细信息页面。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0000001179041458__fig13843144915185"><span class="figcap"><b>图6 </b>网卡信息</span><br><span><img id="ZH-CN_TOPIC_0000001179041458__image3844164981813" src="zh-cn_image_0000001224361361.png"></span></div>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001179041458__table220717161195" frame="border" border="1" rules="all"><caption><b>表6 </b>网卡信息页面参数说明</caption><colgroup><col style="width:27.68%"><col style="width:72.32%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001179041458__row16208111611199"><th align="left" class="cellrowborder" valign="top" width="27.68%" id="mcps1.3.2.2.3.2.7.2.3.1.1"><p id="ZH-CN_TOPIC_0000001179041458__p2208171681917">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="72.32%" id="mcps1.3.2.2.3.2.7.2.3.1.2"><p id="ZH-CN_TOPIC_0000001179041458__p3208181601914">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001179041458__row19208161615193"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.3.2.7.2.3.1.1 mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p166084371914">网络配置信息</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row182092167193"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p102091516171912">Network Interface</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p16209111611912">显示网卡名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row820921614192"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p15209191671912">Status</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p17209016191914">显示网卡状态。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row14209161610199"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p18209121612199">IPv4</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p6209016161910">显示是否支持IPv4协议类型。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row520916162193"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1320911618193">IPv6</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1520911671914">显示是否支持IPv6协议类型。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1420901651912"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p42095165191">Supported Port</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p520981616191">显示支持的端口。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row32098162194"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1209101615195">Speed（Mb/s）</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p13209121619198">显示网络速率。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row10209181651916"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1920951618199">Duplex</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1320914169191">显示网卡工作类型。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row4209416181918"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p82091165194">NUMA NODE</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p720981651912">显示绑定的NUMA NODE。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row6209121671912"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1620981641913">driver</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p102099162199">显示驱动名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row16350850102215"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p203500505222">version</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p0350050132213">显示驱动版本。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1026117802316"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1926119862317">firmware version</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p326112852313">显示软件的版本号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row137081096236"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p187081892236">adaptive-rx</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__zh-cn_topic_0250422234_p96029433617">显示接收队列的动态聚合执行功能开关状态。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1257818615239"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p142448515241">adaptive-tx</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__zh-cn_topic_0250422234_p1260210431169">显示发送队列的动态聚合执行功能开关状态。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row11122165616220"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p312355618226">rx-usecs</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__zh-cn_topic_0250422234_p66028435618">显示产生一个中断之前至少有一个数据包被接收之后的微秒数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1393659233"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p188017308240">tx-usecs</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__zh-cn_topic_0250422234_p2602134310614">显示产生一个中断之前至少有一个数据包被发送之后的微秒数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row237516312315"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p23759317235">rx-framcs</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__zh-cn_topic_0250422234_p1760210431061">显示产生中断之前发送的数据包数量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row14802112318"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p20482292320">rx-checksumming</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p280646152515">显示接收包校验和开关状态。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row7693185762216"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p74081714192510">tx-checksumming</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p208094612252">显示发送包校验和开关状态。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row56230032317"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p362300102313">scatter-gatter</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p880184692511">显示分散/聚集功能开关状态。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row821445918224"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p5214195952219">TSO</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p9804469252">显示TCP-segmentation-offload开关状态。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row4839104862218"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1840448152212">UFO</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p0801446132519">显示UDP-fragmentation-offload开关状态。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row19209141615197"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p52091016191916">LRO</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p181104662512">显示large-receive-offload开关状态。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row18733185392218"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1673325372212">GSO</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p145151259102610">显示generic-segmentation-offload开关状态。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row14915185117224"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p15915751142214">GRO</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p148118467251">显示generic-receive-offload开关状态。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1236844710221"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p63681474226">Tx</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p195163065915">发送的环形缓冲区大小，单位为字节。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1120913169190"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p10209191614191">Rx</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p9951143015594">接收的环形缓冲区大小，单位为字节。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row7209116111920"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p112099168197">绑定名称</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p8209121651911">显示绑定网卡名。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row136974437227"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p66971743162212">模式</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p069744311225">显示模式信息。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row162092167191"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p17209316121915">Destination</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p92091716131914">显示本地地址。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row11101154215223"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p5102164210228">Gateway</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1910213423223">显示网关信息。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row10209171641919"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p16209151601918">Genmask</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p92094162199">显示掩码信息。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1344514174273"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1044571711279">Flags</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p544561714275">显示网络接口状态。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row163791923132717"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p637992314271">Address</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p3379323132714">显示网络地址。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row161451119112713"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p4145121910276">HWtype</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p71451419132710">显示网卡类型。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1574382962716"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1474372992717">HWaddress</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p137431029182718">显示mac地址。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row13271838112717"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1332793811277">Flags</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p33271338122712">显示网络接口状态。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row13896139162712"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.3.2.7.2.3.1.1 mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1617032716282">中断及XPS/RPS信息</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1993593610275"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p11935173642719">硬中断编号</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p16935136182711">显示硬中断编号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row18593732102719"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p159363211278">设备信息</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p2059323213275">显示设备信息。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1963217356272"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p363213358274">PCIE设备BDF号</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p3632143512271">显示PCIE设备BDF号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row153085340271"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p2308113413273">中断事件名称</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p17308143418276">显示中断事件名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row816253172719"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p216273122710">中断绑核信息</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p121634310274">显示中断绑核信息。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row4737122614274"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p4737126142714">中断频率（次/s）</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p15737122620279">显示中断频率。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row923842802716"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p8238122882717">网络设备名称</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1423852814273">显示网络设备名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row3556257279"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1956152514274">xps_cpus</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1269154783316">显示xps绑核的CPU。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row168921421162717"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p989219217275">rps_cpus</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p97248543337">显示rps绑核的CPU。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row320961610196"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p220941610190">rps_flow_cnt</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1920941620194">显示每个队列负责flow的最大数量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row19209616101910"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p102091016121911">软中断信息</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p202091716181916">显示软中断信息。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1865633383020"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p12656433153017">CPU核</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p465710337304">显示CPU核编号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row195323763019"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p115373723011">硬中断绑核数量</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p38007506333">显示硬中断绑核数量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row8952162819305"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p14952628203019">XPS绑核数量</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1953610416351">显示XPS的绑核数量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row543953510302"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p54401935123010">RPS绑核数量</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p137314121354">显示RPS的绑核数量</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row144673243019"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p2048133216306">软硬中断频率（次/s）</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1649183283012">显示软硬中断的频率。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row13543113063012"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.3.2.7.2.3.1.1 mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p31471577329">占用网络IO的进程</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row18952172073017"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1595214204302">Local Interface</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p10952142023018">显示本端网口。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row9205427163018"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p12206127113019">Protocol</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p820652710307">显示支持的网络协议类型。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row952923616324"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1452911360325">Local IP</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p195291436103210">显示本端IP。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row382453412325"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1782403416324">Local Port</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p582414341324">显示本端端口。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row295919235302"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p199591323123015">Remote IP</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p9959623113013">显示对端IP</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row799153210323"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p29911332193214">Remote Port</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p159911932103212">显示对端端口。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row3154171017331"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p51541710203320">PID</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1315441033310">显示进程的进程号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1381178153320"><td class="cellrowborder" valign="top" width="27.68%" headers="mcps1.3.2.2.3.2.7.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p2812083331">Command</p>
+</td>
+<td class="cellrowborder" valign="top" width="72.32%" headers="mcps1.3.2.2.3.2.7.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p38115833310">显示具体操作信息。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0000001179041458__li912334932814"><span>单击“丢包诊断”页签。</span><p><p id="ZH-CN_TOPIC_0000001179041458__p1877871283013">查看“丢包诊断”分析内容，如<a href="#ZH-CN_TOPIC_0000001179041458__fig16328185943519">图7</a>所示，参数说明如<a href="#ZH-CN_TOPIC_0000001179041458__table7606912153617">表7</a>所示。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001179041458__note1334196211"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001179041458__p035186415">单击“查看排查建议”可以查看系统给出的排查建议。</p>
+<p id="ZH-CN_TOPIC_0000001179041458__p16596355610">如参数后有<span><img id="ZH-CN_TOPIC_0000001179041458__image53010818214" src="zh-cn_image_0000001224201433.png"></span>图标，可以点击进行搜索需要参数。</p>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001179041458__fig16328185943519"><a name="ZH-CN_TOPIC_0000001179041458__fig16328185943519"></a><a name="fig16328185943519"></a><span class="figcap"><b>图7 </b>丢包诊断</span><br><span><img id="ZH-CN_TOPIC_0000001179041458__image17328859153511" src="zh-cn_image_0000001179041628.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001179041458__table7606912153617"></a><a name="table7606912153617"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001179041458__table7606912153617" frame="border" border="1" rules="all"><caption><b>表7 </b>丢包诊断参数说明</caption><colgroup><col style="width:33.08%"><col style="width:66.92%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001179041458__row17606161218364"><th align="left" class="cellrowborder" valign="top" width="33.08%" id="mcps1.3.2.2.4.2.4.2.3.1.1"><p id="ZH-CN_TOPIC_0000001179041458__p260691293611">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="66.92%" id="mcps1.3.2.2.4.2.4.2.3.1.2"><p id="ZH-CN_TOPIC_0000001179041458__p14606201283610">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001179041458__row16591451124913"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.4.2.4.2.3.1.1 mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p123251555184917">网卡硬件和驱动丢包</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row860671243612"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p146078121365">IFACE</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p4607171233611">显示网络接口名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row2607131218367"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p060701233616">rxerr/s</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p560710122363">显示每秒接收到的损坏的数据包数量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row96071812123610"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p17607612193610">txerr/s</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p66071124360">显示发送数据包时，每秒发生错误的总数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row5607121293620"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p19607181217367">coll/s</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p2607712173620">显示每秒发生冲突的数据包数量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row46079126365"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1160761283613">rxdrop/s</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p11607161219361">显示发送数据包进入Ring Buffer后，每秒钟丢弃的数据包的数量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row86071012143615"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p360741217368">txdrop/s</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1660751233617">显示接收数据包进入Ring Buffer后，每秒钟丢弃的数据包的数量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row186071712133615"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p156071812183619">txcarr/s</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p166071012113612">显示每秒发送的载波错误数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row113405291493"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1234022994915">rxfram/s</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p534072920490">显示接收数据包时，每秒发生的帧对齐错误数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row162830458499"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1628318453493">rxfifo/s</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p928384514914">显示接收数据包时，每秒发生FIFO溢出错误的次数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1298373874916"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p198393812493">txfifo/s</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1998320382495">显示发送数据包时，每秒发生FIFO溢出错误的次数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row2080834620496"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.4.2.4.2.3.1.1 mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p15481183685017">协议栈缓存队列丢包</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row14442042104915"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p844144214918">Queue（CPU core）</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1644142114914">显示CPU核队列。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row9932743184917"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p149331043104911">received/s</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1693354312490">显示每秒接收的协议栈缓存。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row8575144014911"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p8576104012498">drop/s</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p75761640134919">显示每秒丢弃的协议栈缓存。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row14325163754914"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p2326193710498">drop rate（%）</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p13268373497">显示丢包率。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1990683524920"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.4.2.4.2.3.1.1 mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p15749101527">内核调用栈丢包</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1269732174911"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1470173212496">函数名称</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p4701632174915">显示调用函数的名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row472553125215"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1273453165213">模块名称</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1173195385216">显示调用模块的名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row11422554185217"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p84231548527">协议类型</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p342317549527">显示数据包的协议类型。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row793157175215"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p199313575529">SKB丢弃次数</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p593857185211">显示SKB丢包次数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row11517358165216"><td class="cellrowborder" valign="top" width="33.08%" headers="mcps1.3.2.2.4.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p1551775811523">调用栈信息</p>
+</td>
+<td class="cellrowborder" valign="top" width="66.92%" headers="mcps1.3.2.2.4.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p145173582524">显示调用栈信息。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0000001179041458__li118418914308"><span>单击“网络抓包”页签。</span><p><p id="ZH-CN_TOPIC_0000001179041458__p10344193823110">查看“网络抓包”分析内容，如<a href="#ZH-CN_TOPIC_0000001179041458__fig148274120366">图8</a>所示，参数说明如<a href="#ZH-CN_TOPIC_0000001179041458__table2028019535365">表8</a>所示。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0000001179041458__fig148274120366"><a name="ZH-CN_TOPIC_0000001179041458__fig148274120366"></a><a name="fig148274120366"></a><span class="figcap"><b>图8 </b>网络抓包</span><br><span><img id="ZH-CN_TOPIC_0000001179041458__image20831841113610" src="zh-cn_image_0000001178563174.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001179041458__table2028019535365"></a><a name="table2028019535365"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001179041458__table2028019535365" frame="border" border="1" rules="all"><caption><b>表8 </b>网络抓包参数说明</caption><colgroup><col style="width:32%"><col style="width:68%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001179041458__row132811253113610"><th align="left" class="cellrowborder" valign="top" width="32%" id="mcps1.3.2.2.5.2.3.2.3.1.1"><p id="ZH-CN_TOPIC_0000001179041458__p19281165313614">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="68%" id="mcps1.3.2.2.5.2.3.2.3.1.2"><p id="ZH-CN_TOPIC_0000001179041458__p1328135333615">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001179041458__row528114537366"><td class="cellrowborder" valign="top" width="32%" headers="mcps1.3.2.2.5.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p16281253143618">时间戳</p>
+</td>
+<td class="cellrowborder" valign="top" width="68%" headers="mcps1.3.2.2.5.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p172811537365">显示抓包的时间点。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row228105320366"><td class="cellrowborder" valign="top" width="32%" headers="mcps1.3.2.2.5.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p19281165312363">源MAC地址</p>
+</td>
+<td class="cellrowborder" valign="top" width="68%" headers="mcps1.3.2.2.5.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p162814539360">显示源MAC地址。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1128125373620"><td class="cellrowborder" valign="top" width="32%" headers="mcps1.3.2.2.5.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p6281165343612">目标MAC地址</p>
+</td>
+<td class="cellrowborder" valign="top" width="68%" headers="mcps1.3.2.2.5.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1281135353619">显示目的MAC地址。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row828185393613"><td class="cellrowborder" valign="top" width="32%" headers="mcps1.3.2.2.5.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p172811053173619">协议类型</p>
+</td>
+<td class="cellrowborder" valign="top" width="68%" headers="mcps1.3.2.2.5.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p1028113537365">显示协议类型。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1228116538364"><td class="cellrowborder" valign="top" width="32%" headers="mcps1.3.2.2.5.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p828119534364">长度</p>
+</td>
+<td class="cellrowborder" valign="top" width="68%" headers="mcps1.3.2.2.5.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p16281155315365">显示抓包的长度。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1928185383611"><td class="cellrowborder" valign="top" width="32%" headers="mcps1.3.2.2.5.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p15281195313617">源IP地址</p>
+</td>
+<td class="cellrowborder" valign="top" width="68%" headers="mcps1.3.2.2.5.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p142819536361">显示源IP地址。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row4281125373620"><td class="cellrowborder" valign="top" width="32%" headers="mcps1.3.2.2.5.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p2281165353612">源端口</p>
+</td>
+<td class="cellrowborder" valign="top" width="68%" headers="mcps1.3.2.2.5.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p112811053133618">显示源端口号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1063185611449"><td class="cellrowborder" valign="top" width="32%" headers="mcps1.3.2.2.5.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p364115674411">目标IP地址</p>
+</td>
+<td class="cellrowborder" valign="top" width="68%" headers="mcps1.3.2.2.5.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p36425644418">显示目的IP地址。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row9922115904418"><td class="cellrowborder" valign="top" width="32%" headers="mcps1.3.2.2.5.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p139225594441">目标端口</p>
+</td>
+<td class="cellrowborder" valign="top" width="68%" headers="mcps1.3.2.2.5.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p169223593448">显示目的端口号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001179041458__row1467586445"><td class="cellrowborder" valign="top" width="32%" headers="mcps1.3.2.2.5.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001179041458__p247125834414">包头信息</p>
+</td>
+<td class="cellrowborder" valign="top" width="68%" headers="mcps1.3.2.2.5.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001179041458__p4471758124418">显示抓包得到的包头信息。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li></ol>
+</div>
+</div>
+<div></div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

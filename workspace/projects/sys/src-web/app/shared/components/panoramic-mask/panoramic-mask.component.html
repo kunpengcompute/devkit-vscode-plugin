@@ -1,0 +1,5 @@
+<div class="mask" [ngClass]="{'active':myMask}" (click)='Close()'></div>
+<div class='content-box' [ngClass]="{'active':myMask}" >
+    <ng-content select='.content'></ng-content>
+
+</div>

@@ -1,0 +1,19 @@
+<div class="infor-tip" *ngIf="showTip">
+  <div class="infor-dom" [ngStyle]="{'min-height': tipMinHeight ? tipMinHeight + 'px' : '28px'}" 
+  [ngClass]="{'infor-dom-alarm': tipType === 'alarm' , 'infor-dom-error': tipType === 'error'}">
+    <span class="infor-img">
+      <img *ngIf="tipType === 'normal'" src="./assets/img/newSvg/normal_tip.svg">
+      <img *ngIf="tipType === 'alarm'" src="./assets/img/newSvg/alarm_tip.svg">
+      <img *ngIf="tipType === 'error'" src="./assets/img/newSvg/error_tip.svg">
+    </span>
+    <p class="infor-text">
+      {{inforText}}
+    </p>
+    <span class="infor-close" *ngIf="tipType !== 'error'">
+      <span (click)="close()">
+        <img *ngIf="tipType === 'normal'" src="./assets/img/newSvg/normal_tip_close.svg">
+        <img *ngIf="tipType === 'alarm'" src="./assets/img/newSvg/alarm_tip_close.svg">
+      </span>
+    </span>
+  </div>
+</div>

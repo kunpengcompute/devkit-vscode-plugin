@@ -1,0 +1,448 @@
+$color222: #222;
+$fontSize12: 12px;
+$fontSize14: 14px;
+$fontSize16: 16px;
+$fontWeight600: 600;
+
+/* 公用样式 start */
+.des-title {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: $fontSize16;
+}
+.st-title {
+    box-sizing: border-box;
+    width: 100%;
+    height: 48px;
+    padding: 0 20px;
+    border: 1px solid #E1E6EE;
+    border-left: none;
+    border-right: none; 
+    line-height: 48px;
+    .step-title-left {
+        display: inline-block;
+        cursor: pointer;
+    }
+    img {
+        margin-right: 16px;
+        transform: rotateZ(-90deg);
+    }
+    .img-active {
+        transform: rotateZ(0);
+    }
+}
+
+
+
+
+
+
+
+.fix-container {
+    width: 100%;
+    color: $color222;
+    font-size: $fontSize14;
+    .title {
+        font-size: 14px;
+    }
+    .description {
+        box-sizing: border-box;
+        min-width: 960px;
+        height: 160px;
+        margin: 16px 0 40px 0;
+        padding: 10px;
+        background-color: #fafafa;
+        .tip {
+            span {
+                vertical-align: middle;
+                font-size: 16px;
+            }
+        }
+        .description-list {
+            padding-left: 22px;
+            margin-top: 10px;
+            line-height: 22px;
+            li {
+                margin: 2px 0;
+            }
+        }
+    }
+    .operating {
+        .title {
+            margin-bottom: 10px;
+        }
+        .step {
+            width: 100%;
+            .step-title {
+                box-sizing: border-box;
+                width: 100%;
+                height: 48px;
+                padding: 0 20px;
+                border: 1px solid #e1e6ee;
+                border-left: none;
+                border-right: none;
+                line-height: 48px;
+                img {
+                    margin-right: 16px;
+                    cursor: pointer;
+                }
+            }
+            .help {
+                color: #0067ff;
+                cursor: pointer;
+            }
+            &:last-child {
+                margin: 20px 0 22px 0;
+            }
+        }
+        .step-content {
+            display: flex;
+            width: 100%;
+            &::before {
+                display: block;
+                content: "";
+                width: 40px;
+                border-right: 2px solid var(--executed-num-border);
+                background-color: #f5f9ff;
+            }
+            .content {
+                box-sizing: border-box;
+                width: 918px;
+                padding: 16px 20px;
+                li {
+                    color: #616161;
+                    .title {
+                        margin-bottom: 0;
+                        font-size: $fontSize14;
+                    }
+                    p {
+                        line-height: 24px;
+                    }
+                    a {
+                        color: #0067ff;
+                        cursor: pointer;
+                    }
+                    .tip {
+                        span {
+                            font-weight: $fontWeight600;
+                        }
+                    }
+                }
+                li + li {
+                    margin-top: 16px;
+                }
+            }
+        }
+    }
+    .use {
+        margin-bottom: 16px;
+        .title {
+            height: 22px;
+            margin-bottom: 16px;
+        }
+        .step {
+            font-weight: normal;
+        }
+        .step-container {
+            box-sizing: border-box;
+            margin: 10px 0 20px 0;
+            padding: 16px 30px;
+            width: 958px;
+            background-color: #fafafa;
+            color: #616161;
+            li {
+                line-height: 24px;
+                &:first-child,
+                &:nth-child(2) {
+                    color: $color222;
+                }
+            }
+        }
+    }
+}
+
+.tip-img {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.tit-img {
+    width: 16px;
+    height: 16px;
+    margin-right: 22px;
+    vertical-align: middle;
+}
+
+.fr {
+    float: right;
+}
+.step-table-title {
+    .tip-img {
+        transform: rotate(-90deg);
+        transition: all 0.5s;
+    }
+    .tit-img {
+        transform: rotate(-90deg);
+        transition: all 0.5s;
+    }
+    .img-active {
+        transform: rotate(0);
+    }
+}
+::ng-deep .vscode-dark {
+/* 工具使用 start */
+.use {
+    margin-bottom: 60px;
+    .step {
+        font-weight: $fontWeight600;
+    }
+    .step-container {
+        box-sizing: border-box;
+        margin: 10px 0 20px 0;
+        padding: 16px 30px;
+        background-color: #FAFAFA;
+        color: #AAAAAA;
+        .click-link {
+            margin-left: 8px;
+            text-decoration: underline;
+        }
+        li {
+            line-height: 24px;
+            &:first-child,
+            &:nth-child(2){
+                color: $color222;
+            }
+        }
+        .use-active {
+            .active-title {
+                color: #e8e8e8;
+            }
+            .detail-title {
+                color: #AAAAAA;
+            }
+            .text-indent {
+                text-indent: 10px;
+                &:nth-of-type(1) {
+                    text-indent: 0;
+                }
+            }
+        }
+    }
+}
+/* 工具使用 end */
+
+/* 支持的操作系统和版本 start */
+.version {
+    .step {
+        margin-bottom: 22px;
+    }
+    .tip {
+        span {
+            vertical-align: middle;
+        }
+    }
+    .table-content {
+        margin-top: 15px;
+        table tr th {
+            border-bottom: 1px solid #4b4b4b !important;
+            background-color: #2a2a2a;
+            color: #e8e8e8;
+        }
+        table tr td {
+            color: #aaaaaa;
+            background-color: var(--td-bg-d-161616-l-ffffff);
+            border-bottom: 1px solid #4b4b4b !important;
+        }
+    }
+    .ti3-table > table > thead > tr > th:not(:last-child)::after {
+        background-color: #4b4b4b !important;
+    }
+}
+/* 支持的操作系统和版本 end */
+    .st-content {
+        position: relative;
+        display: flex;
+        width: 100%;
+        &::before {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            content: '';
+            width: 36px;
+            border-right: 2px solid var(--executed-num-border);
+            background-color: #252525;
+        }
+        .content {
+            box-sizing: border-box;
+            padding: 16px 20px 16px 56px;
+            width: 980px;
+        }
+    }
+    .font-14 {
+        font-size: 14px;
+        height: 18px;
+        line-height: 20px;
+        color: #aaaaaa;
+    }
+    .font-16 {
+        font-size: 16px;
+        height: 18px;
+        line-height: 20px;
+        color: #aaaaaa;
+    }
+    .fix-container {
+        .description {
+            background-color: #161616 !important;
+            color: #aaa !important;
+        }
+    }
+    .step-table-title {
+        line-height: 48px;
+        background: var(--td-bg-d-161616-l-ffffff);
+        padding: 0 24px;
+        color: #e8e8e8;
+        border-bottom: 1px solid #4b4b4b;
+        border-top: 1px solid #4b4b4b;
+        width: 913px;
+    }
+    .step-container {
+        background-color: var(--td-bg-d-161616-l-ffffff) !important;
+        color: #aaa !important;
+        font-weight: 400 !important;
+        li {
+            &:first-child,
+            &:nth-child(2) {
+                color: #aaa !important;
+            }
+        }
+    }
+    .step-content {
+        &::before {
+            background-color: #252525 !important;
+        }
+        .content {
+            background-color: var(--td-bg-d-161616-l-ffffff) !important;
+            li {
+                color: #aaa !important;
+            }
+        }
+    }
+    .tip {
+        span {
+            color: #e8e8e8;
+        }
+    }
+    .desc {
+        span {
+            color: #e8e8e8;
+        }
+    }
+}
+::ng-deep .vscode-light {
+
+    .use {
+        margin-bottom: 60px;
+        .step {
+            font-weight: $fontWeight600;
+        }
+        .step-container {
+            box-sizing: border-box;
+            margin: 10px 0 20px 0;
+            padding: 16px 30px;
+            background-color: #FAFAFA;
+            color: #616161;
+            .click-link {
+                color: #0067ff;
+                margin-left: 8px;
+                text-decoration: underline;
+            }
+            li {
+                line-height: 24px;
+                &:first-child,
+                &:nth-child(2){
+                    color: $color222;
+                }
+            }
+            .use-active {
+                .active-title {
+                    color: $color222;
+                }
+                .detail-title {
+                    color: #616161;
+                    opacity: .7;
+                }
+                .text-indent {
+                    text-indent: 10px;
+                    &:nth-of-type(1) {
+                        text-indent: 0;
+                    }
+                }
+            }
+        }
+    }
+    .ti3-table > table > tbody > tr > td {
+    --ti-table-td-text-color: #616161 !important;
+    }
+/* 支持的操作系统和版本 start */
+.version {
+    .step {
+        margin-bottom: 22px;
+    }
+    .tip {
+        span {
+            vertical-align: middle;
+        }
+    }
+    .table-content {
+        margin-top: 15px;
+        table tr th {
+            border-bottom: 1px solid #e1e6ee !important;
+            background: var(--td-bg-d-161616-l-ffffff);
+        }
+    }
+}
+/* 支持的操作系统和版本 end */
+    .st-content {
+        position: relative;
+        display: flex;
+        width: 100%;
+        &::before {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            content: '';
+            width: 36px;
+            border-right: 2px solid var(--executed-num-border);
+            background-color: #F5F9FF;
+        }
+        .content {
+            box-sizing: border-box;
+            padding: 16px 20px 16px 56px;
+            width: 980px;
+        }
+    }
+    .step-table-title {
+        line-height: 48px;
+        background: var(--td-bg-d-161616-l-ffffff);
+        padding: 0 24px;
+        border-bottom: 1px solid #e1e6ee;
+        border-top: 1px solid #e1e6ee;
+        width: 913px;
+    }
+    .fix-container {
+        .title {
+            font-weight: $fontWeight600;
+            color: #222;
+        }
+    }
+    .desc-content {
+        color: #616161;
+        .spec {
+            color: #222;
+        }
+    }
+}

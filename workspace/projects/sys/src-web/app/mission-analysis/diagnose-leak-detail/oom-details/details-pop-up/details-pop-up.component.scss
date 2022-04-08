@@ -1,0 +1,28 @@
+::ng-deep .oomDetailsModal {
+    text-align: center;
+    .ti3-modal-header{
+      text-align: left;
+      border-bottom: dashed 1px #e1e6ee;
+      margin: 0px 32px;
+      padding: 24px 0px;
+    }
+    .ti3-modal-content{
+        width:72.3vh !important;
+    }
+    #search-box{
+      width: 91%;
+      margin: 12px 0px;
+    }
+    #oomDetailsContent{
+      text-align: left;
+      border-bottom: dashed 1px #d4d9e6;
+      margin: 0px 32px;
+      padding: 0px;
+      .detail-item{
+        white-space: nowrap;
+      }
+    }
+    #oomDetailsModal_close{
+      line-height: 52px;
+    }
+}

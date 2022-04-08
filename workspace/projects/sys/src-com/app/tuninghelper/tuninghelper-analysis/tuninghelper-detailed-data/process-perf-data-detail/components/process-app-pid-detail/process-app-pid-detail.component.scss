@@ -1,0 +1,122 @@
+:host ::ng-deep #process-app-pid-detail-container {
+    padding: 20px 0;
+    .custom-expand-tree {
+        .ti3-tree-node-text-wrapper {
+            width: 100%;
+        }
+        .ti3-tree-content-box {
+            height: auto;
+            &.ti3-tree-item-leaf {
+                padding: 0;
+                .expand-icon {
+                    display: none;
+                }
+            }
+        }
+        .nav-title-box {
+            width: 100%;
+            height: 100%;
+            padding-right: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .mark-text {
+                color: #0067ff;
+                cursor: pointer;
+            }
+        }
+
+        .hot-func-box {
+            padding: 16px 24px;
+            background-color: var(--common-color-background-base);
+            width: 100%;
+
+            .hot-func-select {
+                width: 145px;
+                line-height: initial;
+            }
+
+            .ti3-select-dominator-container {
+                vertical-align: unset;
+            }
+        }
+    }
+
+    .noPagination .ti3-table>.ti3-table-fixed-head+.ti3-table-container {
+        border-bottom: none;
+        max-height: unset;
+    }
+    .ti3-table>.ti3-resize-wrapper>table>thead>tr>th,
+    .ti3-table>.ti3-table-container>table>thead>tr>th,
+    .ti3-table>.ti3-table-fixed-head>table>thead>tr>th,
+    .ti3-table>table>thead>tr>th {
+        background-color: var(--ti-table-tr-bg-color);
+        &:first-child {
+            padding-left: 24px;
+        }
+    }
+
+    .ti3-table>.ti3-resize-wrapper>table>tbody>tr>td,
+    .ti3-table>.ti3-table-container>table>tbody>tr>td,
+    .ti3-table>.ti3-table-fixed-head>table>tbody>tr>td,
+    .ti3-table>table>tbody>tr>td {
+        &:first-child {
+            padding-left: 24px;
+        }
+    }
+
+    ti-pagination {
+        line-height: initial;
+    }
+    
+}
+::ng-deep .process-pid-common-timodal-box {
+    .ti3-modal-content {
+      width: 900px;
+      max-height: 600px;
+      overflow: hidden;
+      .ti3-close {
+        top: 16px;
+      }
+  
+      ti-modal-header {
+        height: 90px;
+        padding-top: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+        .stackName {
+          width: 100%;
+          height: 66px;
+          line-height: 66px;
+          box-sizing: border-box;
+          padding-right: 50px;
+          border-bottom: var(--divider-style);
+        }
+      }
+  
+      ti-modal-body {
+        max-height: 424px !important;
+        padding-top: 0;
+        
+        .system-call-info-content {
+            white-space: pre-wrap;
+            font-size: 12px;
+            line-height: 18px;
+        }
+      }
+  
+      ti-modal-footer {
+        height: 86px;
+        padding: 32px 20px 0 !important;
+        box-sizing: border-box;
+      }
+    }
+  
+  
+    .subModuleFunctionTable {
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
+    }  
+}

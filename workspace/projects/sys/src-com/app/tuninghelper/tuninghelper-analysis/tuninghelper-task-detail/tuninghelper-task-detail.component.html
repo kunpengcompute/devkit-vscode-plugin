@@ -1,0 +1,144 @@
+<div class="tuninghelper-task-detail" *ngIf="!showFailed">
+  <div class="left">
+    <header>
+      <div class="service-type">
+        <span>{{ i18n.tuninghelper.taskDetail.serviceType }}</span>
+        <div class="service-type-item" *ngFor="let item of statusService.serviceType">
+          <input
+            [ngClass]="{
+              'checked': item.checked,
+              'disabled': item.disabled
+            }"
+            type="checkbox"
+            tiCheckbox
+            [disabled]="item.disabled || item.notAllowed"
+            [(ngModel)]="item.checked"
+            (ngModelChange)="serviceTypeChange()"
+            [label]="item.label"/>
+        </div>
+        <span tiOverflow class="suggestion-select-lable">{{ i18n.tuninghelper.taskDetail.suggestionScope }}</span>
+        <ti-select
+          valueKey="value"
+          [options]="suggestionSelectList"
+          [(ngModel)]="statusService.suggestionSelect"
+          (ngModelChange)="suggestionSelectedChange($event)">
+        </ti-select>
+      </div>
+      <div class="optimization-tab">
+        <div class="optimization-tab-box" (click)="switchModuleTab(OptimizationTypeEnum.systemConfig)"
+          [ngClass]="{
+            active: currActiveTab === OptimizationTypeEnum.systemConfig,
+            'tab-icon-dot': moduleTab?.systemConfig.hasIdea
+          }">
+          <p tiOverflow>{{ i18n.tuninghelper.taskDetail.systemConfig }}</p>
+          <hy-theme-content class="tab-icon" (click)="viewDetails('systemConfigData');$event.stopPropagation();">
+            <app-icon-react name="viewDetailsDark" dark></app-icon-react>
+            <app-icon-react name="viewDetails" light></app-icon-react>
+          </hy-theme-content>
+        </div>
+        <div class="optimization-tab-box" (click)="switchModuleTab(OptimizationTypeEnum.hotFunction)"
+          [ngClass]="{
+            active: currActiveTab === OptimizationTypeEnum.hotFunction,
+            'tab-icon-dot': moduleTab?.hotFunction.hasIdea
+          }">
+          <p tiOverflow>{{ i18n.tuninghelper.taskDetail.hotFunction }}</p>
+          <hy-theme-content class="tab-icon" (click)="viewDetails('hotFunctionData');$event.stopPropagation();">
+            <app-icon-react name="viewDetailsDark" dark></app-icon-react>
+            <app-icon-react name="viewDetails" light></app-icon-react>
+          </hy-theme-content>
+        </div>
+        <div class="optimization-tab-box" (click)="switchModuleTab(OptimizationTypeEnum.systemPerf)"
+          [ngClass]="{
+            active: currActiveTab === OptimizationTypeEnum.systemPerf,
+            'tab-icon-dot': moduleTab?.systemPerf.hasIdea
+          }">
+          <p tiOverflow>{{ i18n.tuninghelper.taskDetail.systemPerf }}</p>
+          <hy-theme-content class="tab-icon" (click)="viewDetails('systemPerfData');$event.stopPropagation();">
+            <app-icon-react name="viewDetailsDark" dark></app-icon-react>
+            <app-icon-react name="viewDetails" light></app-icon-react>
+          </hy-theme-content>
+        </div>
+        <div class="optimization-tab-box" (click)="switchModuleTab(OptimizationTypeEnum.processPerf)"
+          [ngClass]="{
+            active: currActiveTab === OptimizationTypeEnum.processPerf,
+            'tab-icon-dot': moduleTab?.processPerf.hasIdea
+          }">
+          <p tiOverflow>{{ i18n.tuninghelper.taskDetail.processPerf }}</p>
+          <hy-theme-content class="tab-icon" (click)="viewDetails('processPerfData');$event.stopPropagation();">
+            <app-icon-react name="viewDetailsDark" dark></app-icon-react>
+            <app-icon-react name="viewDetails" light></app-icon-react>
+          </hy-theme-content>
+        </div>
+      </div>
+    </header>
+    <main>
+      <app-system-config
+        *ngIf="pageLoaded.systemConfig"
+        [hidden]="currActiveTab !== OptimizationTypeEnum.systemConfig"
+        [optimizationType]="OptimizationTypeEnum.systemConfig">
+      </app-system-config>
+      <app-hot-function
+        *ngIf="pageLoaded.hotFunction"
+        [hidden]="currActiveTab !== OptimizationTypeEnum.hotFunction"
+        [optimizationType]="OptimizationTypeEnum.hotFunction">
+      </app-hot-function>
+      <app-system-perf
+        *ngIf="pageLoaded.systemPerf"
+        (cpuTargetChange)="initExistSuggestion()"
+        [hidden]="currActiveTab !== OptimizationTypeEnum.systemPerf"
+        [optimizationType]="OptimizationTypeEnum.systemPerf">
+      </app-system-perf>
+      <app-process-perf 
+        *ngIf="pageLoaded.processPerf"
+        [hidden]="currActiveTab !== OptimizationTypeEnum.processPerf"
+        [optimizationType]="OptimizationTypeEnum.processPerf"
+        [viewCpuTarget]="viewCpuTarget">
+      </app-process-perf>
+    </main>
+  </div>
+  <div class="right" [ngClass]="{'active': statusService.rightExpand}">
+    <hy-theme-content class="toggle-btn" (click)="onRightExpandChange()">
+      <app-icon-react name="toggle" [freeze]="!statusService.rightExpand ? 'active' : ''" light></app-icon-react>
+      <app-icon-react name="toggleDark" [freeze]="!statusService.rightExpand ? 'active' : ''" dark></app-icon-react>
+    </hy-theme-content>
+    <div class="sug-box">
+      <!-- 系统配置优化建议详情 -->
+      <app-topology-tree-optimization-sug
+        *ngIf="pageLoaded.systemConfig"
+        [hidden]="currActiveTab !== OptimizationTypeEnum.systemConfig"
+        [optimizationType]="OptimizationTypeEnum.systemConfig">
+      </app-topology-tree-optimization-sug>
+
+      <!-- 热点函数优化建议详情 -->
+      <app-topology-tree-optimization-sug
+        *ngIf="pageLoaded.hotFunction"
+        [hidden]="currActiveTab !== OptimizationTypeEnum.hotFunction"
+        [optimizationType]="OptimizationTypeEnum.hotFunction">
+      </app-topology-tree-optimization-sug>
+
+      <!-- 系统性能优化建议详情 -->
+      <app-system-perf-sug-detail
+        *ngIf="pageLoaded.systemPerf"
+        [hidden]="currActiveTab !== OptimizationTypeEnum.systemPerf"
+        [optimizationType]="OptimizationTypeEnum.systemPerf">
+      </app-system-perf-sug-detail>
+
+      <!-- 进程线程优化建议详情 -->
+      <app-process-perf-sug-detail
+        *ngIf="pageLoaded.processPerf"
+        [hidden]="currActiveTab !== OptimizationTypeEnum.processPerf"
+        [optimizationType]="OptimizationTypeEnum.processPerf">
+      </app-process-perf-sug-detail>
+    </div>
+  </div>
+</div>
+<div *ngIf="showFailed" class="task-failed">
+  <div class="icon">
+    <hy-theme-content>
+      <app-icon-react light name="taskFailed"></app-icon-react>
+      <app-icon-react dark name="taskFailedDark"></app-icon-react>
+    </hy-theme-content>
+  </div>
+  <div class="text" *ngIf="status === TaskStatus.Cancelled">{{ i18n.common_term_task_analysis_canceled }}</div>
+  <div class="text" *ngIf="status === TaskStatus.Failed">{{ i18n.common_term_task_analysis_failed }}</div>
+</div>

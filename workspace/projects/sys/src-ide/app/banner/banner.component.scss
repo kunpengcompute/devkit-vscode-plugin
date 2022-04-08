@@ -1,0 +1,78 @@
+.banner-container {
+    height: 260px;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    .bg {
+        height: 260px;
+        display: flex;
+        flex-direction: row;
+        z-index: 79;
+        .fit-bg {
+            z-index: 80;
+            height: 260px;
+            flex-grow: 1;
+            background-color: #040a15;
+        }
+        .bg-img {
+            height: 260px;
+            width: 1160px;
+            z-index: 80;
+        }
+    }
+    .arrow {
+        margin-left: 8px;
+    }
+    .welcome {
+        position: absolute;
+        z-index: 100;
+        p {
+            font-size: 16px;
+            position: relative;
+            margin-left: 80px;
+            line-height: 24px;
+            margin-bottom: 16px;
+            
+            > a {
+                position: relative;
+            }
+        }
+        p :hover {
+            color: #0067ff;
+        }
+        p :active {
+            color: #135fcf;
+        }
+    }
+    .welcome p:nth-child(2) {
+        margin-top: 16px;
+    }
+    .welcome p:nth-child(3) {
+        margin-top: 16px;
+    }
+    .url {
+        text-decoration: none;
+        cursor: pointer;
+        outline: none;
+    }
+}
+::ng-deep .vscode-light {
+    .url {
+        color: #ffffff;
+    }
+}
+::ng-deep .vscode-dark {
+    .url {
+        color: #cccccc;
+    }
+}
+
+#animation-case {
+    display: block;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: -28px;
+}

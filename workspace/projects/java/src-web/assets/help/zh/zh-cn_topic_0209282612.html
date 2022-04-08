@@ -1,0 +1,86 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="添加目标环境">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0209277843.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="鲲鹏性能分析工具">
+<meta name="DC.Publisher" content="20210406">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0209282612">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>添加目标环境</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0209282612"></a><a name="ZH-CN_TOPIC_0209282612"></a>
+
+<h1 class="topictitle1">添加目标环境</h1>
+<div id="body1575344776801"><div class="section" id="ZH-CN_TOPIC_0209282612__section11470129119"><h4 class="sectiontitle">前提条件</h4><ul id="ZH-CN_TOPIC_0209282612__ul058113713819"><li id="ZH-CN_TOPIC_0209282612__li9591437153818">已成功登录<span id="ZH-CN_TOPIC_0209282612__ph12594180204619">Java性能分析</span>。</li><li id="ZH-CN_TOPIC_0209282612__li15973743816">待安装分析辅助软件的服务器已开启sshd。</li><li id="ZH-CN_TOPIC_0209282612__li92821817121914">已安装JDK并配置环境变量。</li></ul>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0209282612__section114981936144812"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0209282612__ol1052162113269"><li id="ZH-CN_TOPIC_0209282612__li14522182152620"><span>登录<span id="ZH-CN_TOPIC_0209282612__ph6370131915247">Java性能分析</span>Web界面，单击首页界面“目标环境列表”区域中的<span><img id="ZH-CN_TOPIC_0209282612__image1677672410537" src="zh-cn_image_0297079447.png"></span>。</span><p><div class="p" id="ZH-CN_TOPIC_0209282612__p1235014325613">打开“添加目标环境”窗口，如<a href="#ZH-CN_TOPIC_0209282612__fig2050420586316">图1</a>所示，参数说明如<a href="#ZH-CN_TOPIC_0209282612__zh-cn_topic_0189424700_table423624975820">表1</a>所示。<div class="fignone" id="ZH-CN_TOPIC_0209282612__fig2050420586316"><a name="ZH-CN_TOPIC_0209282612__fig2050420586316"></a><a name="fig2050420586316"></a><span class="figcap"><b>图1 </b>添加目标环境</span><br><span><img id="ZH-CN_TOPIC_0209282612__image12436811131118" src="zh-cn_image_0319443024.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0209282612__zh-cn_topic_0189424700_table423624975820"></a><a name="zh-cn_topic_0189424700_table423624975820"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0209282612__zh-cn_topic_0189424700_table423624975820" frame="border" border="1" rules="all"><caption><b>表1 </b>添加目标环境参数说明</caption><colgroup><col style="width:18.39%"><col style="width:81.61%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0209282612__zh-cn_topic_0189424700_row323612494584"><th align="left" class="cellrowborder" valign="top" width="18.39%" id="mcps1.3.2.2.1.2.1.4.2.3.1.1"><p id="ZH-CN_TOPIC_0209282612__zh-cn_topic_0189424700_p52362498581">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="81.61%" id="mcps1.3.2.2.1.2.1.4.2.3.1.2"><p id="ZH-CN_TOPIC_0209282612__zh-cn_topic_0189424700_p6236124911583">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0209282612__row62451255193110"><td class="cellrowborder" valign="top" width="18.39%" headers="mcps1.3.2.2.1.2.1.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0209282612__p14246155512318">目标环境类型</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.61%" headers="mcps1.3.2.2.1.2.1.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0209282612__p8488104112302">选择需要添加的目标环境类型，可选“远程服务器”和“本地服务器”。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0209282612__row12255614123413"><td class="cellrowborder" valign="top" width="18.39%" headers="mcps1.3.2.2.1.2.1.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0209282612__p182561514133415">服务器IP地址</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.61%" headers="mcps1.3.2.2.1.2.1.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0209282612__p72561114193413">输入待安装分析辅助软件的远程服务器的IP地址，详情请参考“常用操作 &gt; 查询服务器物理IP地址“。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0209282612__row1673035762913"><td class="cellrowborder" valign="top" width="18.39%" headers="mcps1.3.2.2.1.2.1.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0209282612__zh-cn_topic_0189424700_p696712242353">端口</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.61%" headers="mcps1.3.2.2.1.2.1.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0209282612__zh-cn_topic_0189424700_p2967182410356">输入远程服务器的SSH服务端口号。默认为22。</p>
+<div class="note" id="ZH-CN_TOPIC_0209282612__note1632511011465"><span class="notetitle"> 说明： </span><div class="notebody"><p id="ZH-CN_TOPIC_0209282612__p632561011469">如果在Docker容器中部署分析辅助软件，需要在启动Docker容器时设置“<strong id="ZH-CN_TOPIC_0209282612__b35723118535">-p</strong> <em id="ZH-CN_TOPIC_0209282612__i2055512412549">映射端口号</em><strong id="ZH-CN_TOPIC_0209282612__b184813685319">:22</strong>”参数，然后在此处输入Docker的SSH服务所映射的<em id="ZH-CN_TOPIC_0209282612__i09951855411">宿主机端口号</em>。</p>
+<p id="ZH-CN_TOPIC_0209282612__p582113545315">例如：</p>
+<p id="ZH-CN_TOPIC_0209282612__p2568213240">执行如下命令启动Docker：</p>
+<p id="ZH-CN_TOPIC_0209282612__p11939175618541"><strong id="ZH-CN_TOPIC_0209282612__b20259145711533">docker run -di --name</strong> <em id="ZH-CN_TOPIC_0209282612__i104531119548">dockername</em> <strong id="ZH-CN_TOPIC_0209282612__b5444115185420">-p</strong> <em id="ZH-CN_TOPIC_0209282612__i4525139145410">20086</em><strong id="ZH-CN_TOPIC_0209282612__b134051375511">:22</strong> <strong id="ZH-CN_TOPIC_0209282612__b759151814546">--privileged=true</strong> <em id="ZH-CN_TOPIC_0209282612__i1685219215541">imageid</em> <strong id="ZH-CN_TOPIC_0209282612__b2116825165417">/usr/sbin/init</strong></p>
+<p id="ZH-CN_TOPIC_0209282612__p64934251576">则在“端口”文本框中输入：20086</p>
+</div></div>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0209282612__row649083419347"><td class="cellrowborder" valign="top" width="18.39%" headers="mcps1.3.2.2.1.2.1.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0209282612__p1849011344342">用户名</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.61%" headers="mcps1.3.2.2.1.2.1.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0209282612__p17835241164519">输入登录远程服务器的用户名。</p>
+<div class="note" id="ZH-CN_TOPIC_0209282612__note15017471021"><span class="notetitle"> 说明： </span><div class="notebody"><ul id="ZH-CN_TOPIC_0209282612__ul1090908194919"><li id="ZH-CN_TOPIC_0209282612__li890911834915">操作系统管理员用户部署的分析辅助软件可以获取服务器上所有已运行的Java进程。</li><li id="ZH-CN_TOPIC_0209282612__li2909138104914">非操作系统管理员用户部署的分析辅助软件只能获取服务器上该用户权限下的已运行的Java进程。</li><li id="ZH-CN_TOPIC_0209282612__li19353153093518">为保证SSH通道安全，建议您使用非root用户部署分析辅助软件。</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0209282612__zh-cn_topic_0189424700_row156132793516"><td class="cellrowborder" valign="top" width="18.39%" headers="mcps1.3.2.2.1.2.1.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0209282612__zh-cn_topic_0189424700_p4611127133515">密码</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.61%" headers="mcps1.3.2.2.1.2.1.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0209282612__p08532566347">输入登录远程服务器的用户密码。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0209282612__li1990633715547"><span>参考<a href="#ZH-CN_TOPIC_0209282612__zh-cn_topic_0189424700_table423624975820">表1</a>配置参数后，单击“确认”。</span><p><p id="ZH-CN_TOPIC_0209282612__p25216172396">弹出操作确认对话框，单击“确认”完成目标环境的添加。</p>
+<div class="note" id="ZH-CN_TOPIC_0209282612__note1486155018301"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0209282612__p1948695013308">指纹为要部署分析辅助软件的服务器的SSH公钥指纹。</p>
+</div></div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0209277843.html">目标环境</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

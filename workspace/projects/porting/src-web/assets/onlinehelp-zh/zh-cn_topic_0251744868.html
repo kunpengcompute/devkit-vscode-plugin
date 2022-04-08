@@ -1,0 +1,46 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="配置历史报告阈值">
+<meta name="abstract" content="如果需要自定义历史报告阈值，执行本章节的操作。">
+<meta name="description" content="如果需要自定义历史报告阈值，执行本章节的操作。">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0263147772.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏代码迁移工具">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0251744868">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>配置历史报告阈值</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0251744868"></a><a name="ZH-CN_TOPIC_0251744868"></a>
+
+<h1 class="topictitle1">配置历史报告阈值</h1>
+<div id="body1591174541941"><p id="shortdesc14230141315551">如果需要自定义历史报告阈值，执行本章节的操作。</p>
+<div class="section" id="ZH-CN_TOPIC_0251744868__section11470129119"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0251744868__p2444451164517">已成功登录<span id="ZH-CN_TOPIC_0251744868__ph997750104712">鲲鹏代码迁移工具</span>。</p>
+<div class="note" id="ZH-CN_TOPIC_0251744868__note33289411010"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0251744868__p1328124113014">只有管理员（<strong id="ZH-CN_TOPIC_0251744868__b542813560014">portadmin</strong>）才能配置门限阈值。</p>
+</div></div>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0251744868__section920691725615"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0251744868__ol1095132424619"><li id="ZH-CN_TOPIC_0251744868__li1423863018444"><span>在页面右上角<span><img id="ZH-CN_TOPIC_0251744868__image6467113413556" src="zh-cn_image_0304780557.png"></span>下拉菜单中，选择<span class="wintitle" id="ZH-CN_TOPIC_0251744868__wintitle191134484514">“阈值设置”</span>。</span></li><li id="ZH-CN_TOPIC_0251744868__li19131241171114"><span>单击<span class="wintitle" id="ZH-CN_TOPIC_0251744868__wintitle102726613181">“修改配置”</span>，填写<span class="parmname" id="ZH-CN_TOPIC_0251744868__parmname3572111991210">“历史报告提示阈值”</span>和<span class="parmname" id="ZH-CN_TOPIC_0251744868__parmname16870112231213">“历史报告最大阈值”</span>，如<a href="#ZH-CN_TOPIC_0251744868__fig191174916127">图1</a>所示。</span><p><div class="fignone" id="ZH-CN_TOPIC_0251744868__fig191174916127"><a name="ZH-CN_TOPIC_0251744868__fig191174916127"></a><a name="fig191174916127"></a><span class="figcap"><b>图1 </b>阈值设置界面</span><br><span><img id="ZH-CN_TOPIC_0251744868__image71803359231" src="zh-cn_image_0000001118061888.png" height="234.41250000000002" width="523.6875"></span></div>
+<div class="note" id="ZH-CN_TOPIC_0251744868__note155274249151"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0251744868__ul73714672512"><li id="ZH-CN_TOPIC_0251744868__li63715619254"><span class="wintitle" id="ZH-CN_TOPIC_0251744868__wintitle1896148122415">“历史报告提示阈值”</span>和<span class="wintitle" id="ZH-CN_TOPIC_0251744868__wintitle18886187245">“历史报告最大阈值”</span>默认分别为40和50，其中<span class="wintitle" id="ZH-CN_TOPIC_0251744868__wintitle124831028145912">“历史报告提示阈值”</span>取值范围为1~49，<span class="wintitle" id="ZH-CN_TOPIC_0251744868__wintitle99731046408">“历史报告最大阈值”</span>取值范围为2~50，<span class="wintitle" id="ZH-CN_TOPIC_0251744868__wintitle12795529175711">“历史报告最大阈值”</span>需要大于<span class="wintitle" id="ZH-CN_TOPIC_0251744868__wintitle1225624185715">“历史报告提示阈值”</span>。</li><li id="ZH-CN_TOPIC_0251744868__li1537117610257">当历史报告数量达到<span class="wintitle" id="ZH-CN_TOPIC_0251744868__wintitle10217173572120">“历史报告提示阈值”</span>后，可以继续操作，但会提示<span class="keyword" id="ZH-CN_TOPIC_0251744868__keyword14929175562110">当前报告数量过多，请适量删除</span>。</li><li id="ZH-CN_TOPIC_0251744868__li9261113151718">当历史报告数量达到<span class="wintitle" id="ZH-CN_TOPIC_0251744868__wintitle62611320178">“历史报告最大阈值”</span>后，新建任务功能禁用，会提示<span class="keyword" id="ZH-CN_TOPIC_0251744868__keyword3803221161718">当前报告数量已达到最大限制，新建任务功能已被禁用，请删除无用的历史报告</span>。</li></ul>
+</div></div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0263147772.html">使用前配置</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

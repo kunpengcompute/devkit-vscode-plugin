@@ -1,0 +1,19 @@
+<div class="cpu-detail">
+    <div class="cpu-usage" *ngIf="consumptionShow">
+        <span class="box-title-set"
+            style="position: relative;display: block">{{i18n.plugins_sysperf_title_consumption.consumption}}
+        </span>
+        <div class="table-box">
+            <div *ngIf="consumptionEchartData.length>0">
+                <div *ngFor="let item of consumptionEchartData">
+                    <app-tables #consumption [timeLine]='timeLine' [datas]='item' [isHave]="'consumption'"
+                        (dataZoom)='dataZoom($event)' (echartsInstOut)='echartsInstOut($event)'></app-tables>
+                </div>
+            </div>
+            <app-loading *ngIf="showLoading" [size]="'min'"></app-loading>
+            <app-default-page *ngIf="consumptionEchartData.length==0&&!showLoading" [scene]="'noData'"
+                [text]="i18n.common_term_task_nodata" [bgColor]="'#1e1e1e'">
+            </app-default-page>
+        </div>
+    </div>
+</div>

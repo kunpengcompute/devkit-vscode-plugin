@@ -1,0 +1,25 @@
+// input textarea 相关样式
+
+$wd440: 440px;
+$wd300: 300px;
+
+// input disable 样式
+.inp-disabled {
+  width: $wd440 !important;
+}
+
+.inp-width300 {
+  width: $wd300;
+}
+
+// textarea 样式
+.area-textarea {
+  box-sizing: border-box;
+  width: $wd440;
+  height: 140px;
+  margin-left: 10px;
+  padding: 7px;
+  font-size: 14px;
+  word-wrap: break-word;
+  white-space: normal;
+}

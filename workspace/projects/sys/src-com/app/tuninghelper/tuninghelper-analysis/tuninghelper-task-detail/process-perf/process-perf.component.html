@@ -1,0 +1,22 @@
+<div class="process-container">
+  <header>
+    <app-process-cpu-target
+      [viewCpuTarget]="viewCpuTarget"
+      (cpuTargetInit)="onCpuTargetInit($event)"
+      (cpuTargetChange)="onCpuTargetChange($event)">
+    </app-process-cpu-target>
+  </header>
+  <app-process-bubble-gragh
+    (currViewChange)="onCurrCoreViewChange($event)"
+    [allTargetThreshold]="allTargetThreshold"
+    [cpuTarget]="cpuTarget"
+    [optimizationType]="optimizationType">
+  </app-process-bubble-gragh>
+  <div class="topology-tree">
+    <app-topology-tree-detail
+      [optimizationType]="optimizationType"
+      [currCoreView]="currCoreView"
+      [cpuTarget]="cpuTarget">
+    </app-topology-tree-detail>
+  </div>
+</div>

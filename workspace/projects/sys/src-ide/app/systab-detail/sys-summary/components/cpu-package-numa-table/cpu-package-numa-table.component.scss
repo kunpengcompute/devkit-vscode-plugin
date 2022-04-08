@@ -1,0 +1,67 @@
+.tableBox {
+    .tableTitle {
+        height: 20px;
+        line-height: 20px;
+        font-size: 20px;
+        margin: 48px 0px 16px 0px;
+    }
+}
+
+.ti3-table table thead tr th:not(:last-child)::after {
+    height: 100% !important;
+    top: 0px !important;
+}
+
+.ti3-table table tbody tr td {
+    border-bottom-width: 1px !important;
+    border-bottom-style: solid !important;
+}
+
+:host ::ng-deep .ti3-table > table > thead > tr > th {
+    background-color: #f0f3fa !important;
+}
+.tableFirstData {
+    margin-left: 14px;
+}
+
+::ng-deep .vscode-dark {
+    .ti3-table table thead tr th {
+        background-color: #2a2a2a !important;
+        color: #e8e8e8 !important;
+    }
+
+    .ti3-table table thead tr th:not(:last-child)::after {
+        background: #4b4b4b !important;
+    }
+
+    .ti3-table table tbody tr td {
+        background: #161616 !important;
+        color: #aaaaaa !important;
+        border-bottom-color: #4b4b4b !important;
+    }
+
+    .tableTitle {
+        color: #e8e8e8 !important;
+    }
+
+    ::ng-deep .ti3-page-container .ti3-pag-pages > .ti3-pag-next {
+        font-size: 12px !important;
+        background-color: unset !important;
+        color:#666666 !important;
+    }
+    ::ng-deep .ti3-page-container .ti3-pag-pages > .ti3-pag-prev {
+        font-size: 12px !important;
+        background-color: unset !important;
+        color:#666666 !important;
+    }
+    ::ng-deep .ti3-page-container .ti3-pag-page {
+        font-size: 12px !important;    
+        .active{
+            font-weight: normal;
+        }
+    }
+    ::ng-deep .ti3-page-container .ti3-page-mini-option, .ti3-page-container .ti3-page-size-option {
+        height: 24px !important;
+        border-color: #888888 !important;
+    }
+}

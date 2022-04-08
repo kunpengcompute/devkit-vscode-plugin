@@ -1,0 +1,90 @@
+<div class="mem">
+  <p class="paramsConfigSuggestions" *ngIf="formEl.paramsConfigSuggestions">
+    {{ formEl.paramsConfigSuggestions }}
+  </p>
+
+  <div class="form">
+    <app-task-form [labelWidth]="labelWidth" [displayedElementList]="formEl.displayedElementList"
+      [allFormElements]="formEl.form" [formGroup]="formEl.formGroup" [widthIsLimited]="widthIsLimited" type="form">
+    </app-task-form>
+  </div>
+
+  <!-- 配置节点参数 -->
+  <div class="node-config-modal import-btn" *ngIf="formEl.hasNodeConfig && nodeConfigShow">
+    <div class="switch">
+      <div class="config-title" [style.width]="labelWidth">
+        <span>{{ i18n.mission_create.nodeParamsConfig }}</span>
+      </div>
+
+      <ti-switch [(ngModel)]="nodeConfig.status" [disabled]="!formValid"
+        [tiTip]="!formValid ? i18n.mission_create.paramsConfigNotice : ''" tiTipPosition="right"
+        (ngModelChange)="switchNodeConfig($event)"></ti-switch>
+    </div>
+
+    <div class="node-config" *ngIf="nodeConfig.status">
+      <div class="table">
+        <ti-table [(displayedData)]="nodeConfig.displayed" [srcData]="nodeConfig.srcData"
+          [columns]="nodeConfig.columns">
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let column of nodeConfig.columns" tiOverflow>
+                  {{ column.title}}
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let node of nodeConfig.displayed; index as i;">
+                <td tiOverflow>{{node.nickName}}</td>
+                <td tiOverflow>{{node.nodeIp}}</td>
+                <td tiOverflow>
+                  <span class="status-icon" [ngClass]="node.hasConfig ? 'success-icon' : 'reserve-icon'"></span>
+                  <span>{{ node.hasConfig ? i18n.nodeConfig.configed : i18n.nodeConfig.noConfig }}</span>
+                </td>
+                <td tiOverflow>
+                  <span (click)="openConfigNodeModal(node)" class="config-btn">
+                    {{ i18n.nodeConfig.configParams }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ti-table>
+      </div>
+    </div>
+
+    <div class="tip" *ngIf="!nodeConfig.status">
+      <img src="./assets/img/tip/tip.svg" />
+      <span>{{ i18n.nodeConfig.nodeTip }}</span>
+    </div>
+  </div>
+</div>
+
+<!-- 配置节点参数弹框 -->
+<app-mission-public #missionPublic *ngIf="nodeConfig.status && nodeConfig.formEl"
+  [labelWidth]="calcLabelWidth(drawerLevel)" [drawerLevel]="drawerLevel" [nodeName]="nodeConfig.configNode.nickName"
+  [nodaIP]="nodeConfig.configNode.nodeIp">
+  <div  class="model-body" [formGroup]="nodeConfig.formEl.formGroup"
+    style="margin: 0px 0px 20px 0px;">
+    <app-pid-process-input *ngIf="analysisMode === 'pid'" formControlName="p_t_ctrl" [labelWidth]="calcLabelWidth(drawerLevel)">
+    </app-pid-process-input>
+    <app-app-params-input *ngIf="analysisMode === 'app'"  [labelWidth]="'264px'" formControlName="app_params_ctrl">
+    </app-app-params-input>
+    <app-run-user-input *ngIf="!isModifySchedule && analysisMode === 'app'" [labelWidth]="'264px'"
+      formControlName="run_user_password_ctrl">
+    </app-run-user-input>
+    <app-path-parameter [labelWidth]="calcLabelWidth(drawerLevel)" [analysisMode]="analysisMode"
+        [analysisType]="analysisType" [displayedElementList]="nodeConfig.formEl.displayedElementList"
+        [allFormElements]="nodeConfig.formEl.form" [formGroup]="nodeConfig.formEl.formGroup"
+        [widthIsLimited]="widthIsLimited"></app-path-parameter>
+  </div>
+
+  <footer>
+    <button tiButton type="button" color="primary" style="margin-right: 20px" (click)='setNodeParams()'
+      [disabled]='!nodeConfig.formEl.formGroup.valid'>{{ i18n.common_term_operate_ok }}</button>
+    <button tiButton type="button" (click)="closeConfigNodeModal()">
+      {{ i18n.common_term_operate_cancel }}
+    </button>
+  </footer>
+</app-mission-public>

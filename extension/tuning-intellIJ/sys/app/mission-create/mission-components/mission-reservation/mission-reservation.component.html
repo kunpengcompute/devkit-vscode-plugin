@@ -1,0 +1,110 @@
+<div class="switch " *ngIf="!isModifySchedule">
+    <p class="label" [style.width]="labelWidthAddedStaricon">
+        {{i18n.preSwitch.switchLabel}}
+    </p>
+    <ti-switch *ngIf="switch" id="myswitch" ngDefaultControl [(ngModel)]="switchState"
+               (click)="onSwitchChange($event)" [disabled]="switch || isDisable || isEdit"
+               [tiTip]="i18n.mission_create.disableeTip"></ti-switch>
+    <ti-switch *ngIf="!switch" id="myswitch" ngDefaultControl [(ngModel)]="switchState"
+               (click)="onSwitchChange($event)" [disabled]="switch || isDisable || isEdit"></ti-switch>
+</div>
+<div class="form" *ngIf="switchState">
+    <div class="title">
+        <div [ngClass]="{fontsize: isModifySchedule}">
+            <span>{{i18n.preSwitch.serverTime}}</span>:
+            <span>{{nowTime.nowYear}}</span>
+            <span>/</span>
+            <span>{{nowTime.nowMonth < 10 ? "0" + nowTime.nowMonth : nowTime.nowMonth}}</span>
+                    <span>/</span>
+                    <span>{{nowTime.nowDay < 10 ? "0" + nowTime.nowDay : nowTime.nowDay}}</span>
+                            <span>&nbsp;</span>
+                            <span>{{nowTime.nowHour < 10 ? "0" + nowTime.nowHour : nowTime.nowHour}}</span>
+                                    <span>:</span>
+                                    <span>{{nowTime.nowMinutes < 10 ? "0" + nowTime.nowMinutes :
+                                            nowTime.nowMinutes}}</span>
+                                            <span>:</span>
+                                            <span>{{nowTime.nowSecond < 10 ? "0" + nowTime.nowSecond :
+                                                    nowTime.nowSecond}}</span>
+        </div>
+    </div>
+    <div class="func" [ngClass]="{isfunc: isModifySchedule}">
+        <p class="label" [ngClass]="{islable: isModifySchedule}" [style.width]="labelWidthAddedStaricon">
+            <ti-icon [name]="'staricon'" id="ti_auto_id_41" style="color:#ff7266;font-size: 16px;"
+                [ngClass]="{fontsize: isModifySchedule}">
+            </ti-icon>{{i18n.preSwitch.colectMethods}}
+        </p>
+        <div class="radio flex" [ngClass]="{radioflex: isModifySchedule}">
+            <div class="duration flex" (click)="changeColect(1)" style="margin-right: 32px">
+                <div class="selectDx" [ngClass]="{selectedDx:selected === 1 }" [ngStyle]="{'border-color': selected === 1?'#0067FF':'#888888'}">
+                    <span class="selectDx_ed" *ngIf="selected === 1"></span>
+                </div>
+                <p>{{i18n.preSwitch.duraColect}}</p>
+            </div>
+            <div class="once flex" (click)="changeColect(2)">
+                <div class="selectDx" [ngClass]="{selectedDx:selected === 2 }" [ngStyle]="{'border-color': selected === 2?'#0067FF':'#888888'}">
+                    <span class="selectDx_ed" *ngIf="selected === 2"></span>
+                </div>
+                <p>{{i18n.preSwitch.onceColect}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="time">
+        <!-- 周期采集 -->
+        <div class="dur" *ngIf="selected === 1">
+            <div class="point-time" [ngClass]="{isfunc: isModifySchedule}">
+                <div class="label flex" [ngClass]="{islable: isModifySchedule}" [style.width]="labelWidthAddedStaricon">
+                    <ti-icon [name]="'staricon'" id="ti_auto_id_41" style="color:#FF4C4C;font-size: 16px;"
+                        [ngClass]="{fontsize: isModifySchedule}"></ti-icon>
+                    <p style="margin-right: 5px;">{{i18n.preSwitch.pointTime}}</p>
+                </div>
+                <div class="timeTab">
+                    <ti-time [(ngModel)]="pointTime" [min]="minPoint" [max]="maxPoint"
+                        (ngModelChange)="onChangeTime($event)" tiRequired [ngClass]="{timeRed : isErrorTime}">
+                    </ti-time>
+                    <p *ngIf="isErrorTime" [ngStyle]="{'width': isModifySchedule ? 'auto' : '500px' }"
+                        style="margin-top: 3px;color:#FF4C4C;font-size: 14px;line-height: 16px;"
+                        [ngClass]="{fontsize: isModifySchedule}">
+                        <span class="caveat">!</span>{{errorMsgTime}}
+                    </p>
+                </div>
+            </div>
+            <div class="duration-time" [ngClass]="{isfunc: isModifySchedule}">
+                <div class="label flex" [ngClass]="{islable: isModifySchedule}" [style.width]="labelWidthAddedStaricon">
+                    <ti-icon [name]="'staricon'" id="ti_auto_id_41" style="color:#FF4C4C;font-size: 16px;"
+                        [ngClass]="{fontsize: isModifySchedule}"></ti-icon>
+                    <p style="margin-right: 5px;">{{i18n.preSwitch.pointDuration}}</p>
+                </div>
+                <div class="dataTab">
+                    <ti-date-range [ngClass]="{isdatarang: isModifySchedule, durationRed: isError}"
+                        [format]="formatD.date" [(ngModel)]="duration" [min]="minDura" [max]="maxDura"
+                        (ngModelChange)="onChangeRange($event)" tiRequired>
+                    </ti-date-range>
+                    <p *ngIf="isError" [ngStyle]="{'width': isModifySchedule ? 'auto' : '500px' }"
+                        style="margin-top: 8px;color:#FF4C4C;font-size: 14px;line-height: 16px;"
+                        [ngClass]="{fontsize: isModifySchedule}">
+                        <span class="caveat">!</span> {{errorMsg}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- 单次采集 -->
+        <div class="once-time" *ngIf="selected === 2" [ngClass]="{isfunc: isModifySchedule}">
+            <div class="label flex" [ngClass]="{islable: isModifySchedule}" [style.width]="labelWidthAddedStaricon">
+                <ti-icon [name]="'staricon'" id="ti_auto_id_41" style="color:#FF4C4C;font-size: 16px;"
+                    [ngClass]="{fontsize: isModifySchedule}"></ti-icon>
+                <p style="margin-right: 5px;">{{i18n.preSwitch.onceTime}}</p>
+            </div>
+            <div class="oncetimeTab">
+                <ti-datetime [(ngModel)]="onceDate"
+                    [ngClass]="{isdatarang: isModifySchedule,oncetimeTabRed:isErrorDate}" [format]="format"
+                    [min]="minOnce" [max]="maxOnce" tiRequired [panelAlign]="'right'"
+                    (ngModelChange)="onChangeOnce($event)">
+                </ti-datetime>
+                <p *ngIf="isErrorDate"
+                    style="margin-top: 3px;width: 400px;color:#FF4C4C;font-size: 14px;line-height: 16px;"
+                    [ngClass]="{fontsize: isModifySchedule}"><span class="caveat">!</span>{{errorMsgDate}}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

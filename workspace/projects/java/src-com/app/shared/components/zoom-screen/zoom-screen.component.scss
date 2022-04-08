@@ -1,0 +1,18 @@
+.zoom-screen {
+    width: 32px;
+    .bigger-zoom {
+        height: 65px;
+        width: 32px;
+        .size-seat {
+            display: flex;
+            height: 32px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #979797;
+            border-bottom: none;
+        }
+        .size-seat:nth-child(2) {
+            border-top: none;
+        }
+    }
+}

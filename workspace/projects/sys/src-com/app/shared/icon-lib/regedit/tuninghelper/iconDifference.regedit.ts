@@ -1,0 +1,20 @@
+import { IStaticIcon } from '../../domain';
+import * as hardUrl from 'sys/src-com/assets/hard-coding/url.json';
+
+export const iconDifferenceNormal: IStaticIcon = {
+  name: 'iconDifferenceNormal',
+  data: `
+  <?xml version="1.0" encoding="UTF-8"?>
+  <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="${hardUrl.w3cUrl}" xmlns:xlink="${hardUrl.xlinkUrl}">
+      <title>Web_SFW/icon/16/联动分析_异常</title>
+      <g id="Web_SFW/icon/16/联动分析_异常" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <path d="M8,1 C11.8659932,1 15,4.13400675 15,8 C15,11.8659932 11.8659932,15 8,15 C4.13400675,15 1,11.8659932 1,
+          8 C1,4.13400675 4.13400675,1 8,1 Z M8,2 C4.6862915,2 2,4.6862915 2,8 C2,11.3137085 4.6862915,14 8,14 C11.3137085,
+          14 14,11.3137085 14,8 C14,4.6862915 11.3137085,2 8,2 Z" id="形状结合" fill="#E2253B"></path>
+          <path d="M8.5,6.5 L9,12.5 L7,12.5 L7.5,6.5 L8.5,6.5 Z M8.5,4 L8.5,5.5 L7.5,5.5 L7.5,4 L8.5,4 Z" id="形状结合" fill="#E2253B"
+          transform="translate(8.000000, 8.250000) rotate(-180.000000) translate(-8.000000, -8.250000) "></path>
+      </g>
+  </svg>
+  `,
+};
+

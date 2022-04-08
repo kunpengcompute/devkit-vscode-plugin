@@ -1,0 +1,50 @@
+.warpper {
+    padding-bottom: 20px;
+    --ti-checkbox-label-color-disabled: #222222;
+    input::-webkit-input-placeholder {
+        font-size: 12px !important;
+      }
+      input::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color:red !important;
+        font-size: 12px !important;
+      }
+      
+      input:-ms-input-placeholder { /* Internet Explorer 10+ */
+        font-size: 12px !important;
+      }
+      textarea::-webkit-input-placeholder {
+        font-size: 12px !important;
+      }
+      textarea::-moz-placeholder { /* Mozilla Firefox 19+ */
+        font-size: 12px !important;
+      }
+      
+      textarea:-ms-input-placeholder { /* Internet Explorer 10+ */
+        font-size: 12px !important;
+      }
+    .content{
+        display: flex;
+        .label{
+            height: 21px;
+            line-height: 21px;
+        }
+        .inputValue{
+            input{
+                width: 430px;
+                height: 29px;
+                padding: 5px 10px;
+            }
+            textarea {
+              height: 60px;
+              padding: 5px 10px;
+              box-sizing: border-box;
+              border-radius: 2px;
+            }
+        }
+    }
+}
+
+:host .warpper ::ng-deep td.ti3-form-label {
+  display: inline-block;
+}
+

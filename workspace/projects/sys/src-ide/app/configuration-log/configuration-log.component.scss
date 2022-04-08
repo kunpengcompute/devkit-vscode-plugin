@@ -1,0 +1,52 @@
+.config-log {
+    .log-title-div {
+        padding-bottom: 10px;
+    }
+
+    .log-title {
+        font-size: 20px;
+        line-height: 26px;
+        color: var(--d-e8e8e8-l-222222);
+    }
+
+    .log-box {
+        color: #E8E8E8;
+        margin-top: 10px;
+        padding: 10px 0 0 30px;
+        height: 315px;
+        overflow-y: auto;
+        box-sizing: border-box;
+        font-size: 14px;
+        background-color: var(--common-color-background-secondary);
+
+        .log-item {
+            display: flex;
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: var(--d-e8e8e8-l-222222);
+            line-height: 21px;
+            white-space: pre-wrap;
+
+            .log-label {
+                flex: 0 0 192px
+            }
+
+            .log-info {
+                margin-left: 1.04vw;
+                color: #6C7280;
+            }
+        }
+
+        &.all {
+            max-height: 630px;
+        }
+    }
+
+    .log-box.system {
+        height: 31.5vw;
+    }
+
+    .Data {
+        margin-top: 1vw
+    }
+}

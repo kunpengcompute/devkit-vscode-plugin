@@ -1,0 +1,48 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Failed to Log In to the Java Profiler After the Tool Is Installed">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001224201273.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (Java Profiler)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001179041476">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Failed to Log In to the Java Profiler After the Tool Is Installed</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001179041476"></a><a name="EN-US_TOPIC_0000001179041476"></a>
+
+<h1 class="topictitle1">Failed to Log In to the Java Profiler After the Tool Is Installed</h1>
+<div id="body8662426"><div class="section" id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_en-us_topic_0220116450_section13779133512387"><h4 class="sectiontitle">Symptom</h4><p id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_en-us_topic_0220116450_p08780389510">After the tool is installed, users can successfully log in to <span id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_ph1331116578362">Kunpeng Hyper Tuner</span>, but fail to log in to <span id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_ph129951742153214">Java Profiler</span>. The output of the <strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b18952241173811">netstat -anp | grep</strong> <em id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_i0353181123918">9090</em> command shows that port 9090 is not occupied.</p>
+<div class="note" id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_note1429473524110"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_p10458154084915">If no information is displayed, the port is not occupied. In the preceding command, 9090 indicates the internal module communication port number of <span id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_ph112611446321">Java Profiler</span>, which is set during the installation. Change it as required.</p>
+</div></div>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_en-us_topic_0220116450_section1439194518389"><h4 class="sectiontitle">Possible Cause</h4><p id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_p2023860164312">In the Linux operating system, <strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b1162163010501">securerandom.source=file:/dev/random</strong> is configured in the <strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b6407193819502">$JAVA_HOME/conf/security/java.security</strong> file by default. The random pool of <strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b12279183175210">file:/dev/random</strong> depends on the number of system interrupts. Therefore, when the number of system interrupts is less than the threshold, the <strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b1930273755712">/dev/random</strong> device is locked always, and the process that attempts to read data enters the waiting state. As a result, the startup of the <span id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_ph42841838133513">Java Profiler</span> service is delayed.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_section11797114084510"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_ol883195314537"><li id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_li69061484418"><span>Run the following command to modify the <strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b352922185912">java.security</strong> file:</span><p><p id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_p5431104610441"><strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b792313553441">vi $JAVA_HOME/conf/security/java.security</strong></p>
+</p></li><li id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_li36711364470"><span>Locate the following code:</span><p><pre class="screen" id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_screen4784645174711">securerandom.source=file:/dev/random</pre>
+<p id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_p14695135814476">Press <strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b1885152410020">i</strong> to enter the editing mode and change the code after the equal sign to <strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b11892112318113">file:/dev/urandom</strong>.</p>
+<pre class="screen" id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_screen29251221175010">securerandom.source=<strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b121994189017">file:/dev/urandom</strong></pre>
+<p id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_p2313237155918">Press <strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b951792913120">Esc</strong>, enter <strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b1651719292012">:wq</strong>, and press <strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b25176299119">Enter</strong> to save the change and exit.</p>
+</p></li><li id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_li1583125316539"><span>Run the following command to restart the tool:</span><p><p id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_p126582431511"><strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b260712313199">systemctl </strong><strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b162192021916">restart</strong><strong id="EN-US_TOPIC_0000001179041476__en-us_topic_0000001163022251_en-us_topic_0266692624_b36071023111913"> thor</strong></p>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001224201273.html">FAQ</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

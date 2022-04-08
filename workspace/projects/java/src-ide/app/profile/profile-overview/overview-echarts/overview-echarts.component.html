@@ -1,0 +1,54 @@
+<div class="memory-detail" [id]="uuid">
+    <app-time-line [timeData]='timeData' (timeLineData)='timeLineData($event)' #timeLineDetail>
+    </app-time-line>
+    <div class="table-box">
+        <div class="table-y">
+            <div class="line" style="margin-top: 0px;"></div>
+            <div class="title-box" style="height: 72px;color: #aaaaaa;">
+                <span class='title-num'>{{ maxDate[0] }}</span>
+                <span class='title' style='color:#aaaaaa;font-size:14px'>{{nameList[0]}}</span>
+                <span class='title-num'>0</span>
+            </div>
+            <div class="line"></div>
+            <div class="title-box" style="height: 71px;color: #aaaaaa;">
+                <span class='title-num'>{{maxDate[1]}}</span>
+                <span class='title' style='color:#aaaaaa;font-size:14px'>{{nameList[1]}}</span>
+                <span class='title-num'>0</span>
+            </div>
+            <div class="line"></div>
+            <div class="title-box" style="height: 71px;color: #aaaaaa;">
+                <span class='title-num'>{{maxDate[2]}}</span>
+                <span class='title' style='color:#aaaaaa;font-size:14px'>{{nameList[2]}}</span>
+                <span class='title-num'>0</span>
+            </div>
+            <div class="line"></div>
+            <div class="title-box" style="height: 71px;color: #aaaaaa;">
+                <span class='title-num'>{{maxDate[3]}}</span>
+                <span class='title' style='color:#aaaaaa;font-size:14px'>{{nameList[3]}}</span>
+                <span class='title-num'>0</span>
+            </div>
+            <div class="line"></div>
+            <div class="title-box" style="height: 71px;color: #aaaaaa;">
+                <span class='title-num'>{{maxDate[4]}}</span>
+                <span class='title' style='color:#aaaaaa;font-size:14px'>{{nameList[4]}}</span>
+                <span class='title-num'>0</span>
+            </div>
+            <div class="line"></div>
+            <div class="title-box" style="height: 71px;color: #aaaaaa;">
+                <span class='title-num'>{{maxDate[5]}}</span>
+                <span class='title' style='color:#aaaaaa;font-size:14px'>{{nameList[5]}}</span>
+                <span class='title-num'>0</span>
+            </div>
+            <div class="line"></div>
+            <div class="title-box" style="height: 71px;color: #aaaaaa;">
+                <span class='title-num'>{{maxDate[6]}}</span>
+                <span class='title' style='color:#aaaaaa;font-size:14px'>{{nameList[6]}}</span>
+                <span class='title-num'>0</span>
+            </div>
+            <div class="line"   ></div>
+        </div>
+        <div class="over-table">
+            <div id="overviewEchart"></div>
+        </div>
+    </div>
+</div>

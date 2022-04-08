@@ -1,0 +1,82 @@
+<app-switch-button *ngIf="selectMode === 'checkbox'" [selectedNum]="selectedNodeIds.length" [originTotal]="originTotal"
+  (selectClick)="onNodeStatusSelect($event)">
+</app-switch-button>
+<ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns" tiColsResizable 
+(stateUpdate)="stateUpdate($event)" [appLoading]="obtainingTableData" id="nodeInfoTable">
+  <div class="ti3-table-fixed-head" [ngStyle]="{'width': tableWidth}">
+    <table>
+      <thead>
+        <tr>
+          <th *ngIf="selectMode === 'checkbox'" class="notShow" checkbox-column>
+            <input type="checkbox" tiCheckgroup [items]="allNodeIds" [checkeds]="selectedNodeIds"
+              (checkedsChange)="selectedNodeIdsChange.emit($event)" [disabled]="'true'"/>
+          </th>
+          <ng-container *ngFor="let column of columns;index as i">
+            <th width="{{ column.width }}">
+              <div class="thContent">
+                <ti-cell-text tiOverflow>{{ column.label || column.title}}</ti-cell-text>
+                <ng-container *ngIf="selectMode === 'checkbox'">
+                  <span class="ti3-searchbox-search ti3-icon ti3-icon-search" tiTipTrigger='manual'
+                    [tiTipHasArrow]='false' [tiTip]='search' #t='tiTip' tiTipPosition='bottom-right'
+                    [ngClass]="{active: searchWords[i]}" *ngIf='column.search'
+                    (click)="searchClick(t, i)"></span>
+                  <div *ngIf="column.options" class="filter-icon">
+                    <ti-head-filter [options]="column.options" [(ngModel)]="column.selected"
+                      (select)="onNodeStatusSelect(isSelected)"
+                      [ngClass]="{'ti3-head-filtered': column.selected && column.selected.length}"
+                      [multiple]="column.multiple">
+                    </ti-head-filter>
+                  </div>
+                </ng-container>
+              </div>
+            </th>
+          </ng-container>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="ti3-table-container ti3-resize-wrapper" [ngStyle]="{'width': tableWidth}"  hyNodata
+  [nodataShow]="displayed.length === 0">
+    <table>
+      <thead>
+        <tr>
+          <th *ngIf="selectMode === 'checkbox'" checkbox-column></th>
+          <th *ngFor="let column of columns" tiOverflow width="{{column.width}}"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let node of displayed;trackBy: trackByFn">
+          <td *ngIf="selectMode === 'checkbox'" checkbox-column>
+            <input type="checkbox" tiCheckitem [item]="node.id"
+              [disabled]="!selectedNodeIds.includes(node.id) && (node.nodeStatus !== 'on' || selectedNodeIds.length >= nodeNumLimit)" />
+          </td>
+          <td *ngFor="let column of columns">
+            <ng-container [ngSwitch]="column.prop">
+              <!-- 节点状态 -->
+              <div *ngSwitchCase="'nodeStatus'" class="nodeStatus">
+                <div *ngIf="['init', 'lock', 'update'].includes(node[column.prop]); else icon_nodeStatus"
+                  class="running"><img *ngIf="alertTipBox" class="loadingImg" src="./assets/img/loding.svg"></div>
+                <ng-template #icon_nodeStatus>
+                  <div class="icon_nodeStatus" [style.background]="nodeStatusList[node[column.prop]].color"></div>
+                </ng-template>
+                <span tiOverflow>{{ nodeStatusList[node[column.prop]].text }}</span>
+              </div>
+              <!-- 其他只显示文本 -->
+              <span *ngSwitchDefault tiOverflow style="width: 100%;">{{ node[column.prop] || '--'
+                }}</span>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ti-pagination *ngIf="totalNumber > 10" [autoHide]="true" [(currentPage)]="currentPage" [pageSize]="pageSize"
+    [(totalNumber)]="totalNumber">
+  </ti-pagination>
+</ti-table>
+<ng-template #search let-context="context">
+  <ti-searchbox class="search-box node-table-search" 
+  (ngModelChange)="onNodeStatusSelect(isSelected, searchIdx, $event)" (clear)="clearOut(searchIdx)"
+  [(ngModel)]="searchWords[searchIdx]" (blur)="searchHide()">
+  </ti-searchbox>
+</ng-template>

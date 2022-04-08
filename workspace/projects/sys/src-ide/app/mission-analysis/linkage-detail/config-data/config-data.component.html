@@ -1,0 +1,146 @@
+<div class="config-content">
+    <div class="msg-main">
+        <div class="msg-title">
+            <ti-icon name='info-circle' class="ti-icon blue"></ti-icon>
+            <div class="des">
+                <span>{{i18n.linkage.tips}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="legends">
+        <div class="same">
+            <ti-icon name='check-circle' class="ti-icon green"></ti-icon>
+            <span>{{i18n.linkage.paramsSame}}</span>
+        </div>
+        <div class="same">
+            <img src="./assets/img/linkage-analysis/abnormal.svg" class="ti-icon red">
+            <span>{{i18n.linkage.paramsNotSame}}</span>
+        </div>
+    </div>
+
+    <div class="section" [ngClass]="{'first-section': i === 0}" *ngFor="let section of tableData; index as i">
+        <div class="section-title">{{section.title}}</div>
+        <div class="section-box">
+            <div class="section-config" *ngFor="let item of section.table; index as j">
+                <div class="config-item" *ngFor="let el of item">
+                    <div class="config-title">
+                        <ti-icon name='check-circle' class="ti-icon green" *ngIf="el.data !== 'view_details'"></ti-icon>
+                            <img src="./assets/img/linkage-analysis/abnormal.svg" class="ti-icon red" *ngIf="el.data === 'view_details'">
+                       
+                        <span tiOverflow>{{el.title}}</span>
+                    </div>
+                    <div class="config-data">
+                        <span tiOverflow *ngIf="el.data !== 'view_details'">{{el.data}}</span>
+                        <span tiOverflow class="viewDetails" [ngClass]="{'clicked': el.clicked}" *ngIf="el.data === 'view_details'"
+                            (click)="viewDetails(el)">{{i18n.sys.viewDetails}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isLoading" class="loading">
+        <app-loading [height]="'100%'" [size]="'max'"></app-loading>
+    </div>
+</div>
+
+<!-- 对比侧滑框 -->
+<app-panoramic-mask  #constastMask>
+    <ng-container class="content">
+        <div class="thread-screen">
+            <div class="header-title">{{tableTitle}}
+                <span  class="ti3-close ti3-icon ti3-icon-close" (click)="constastMask.Close()"></span>
+            </div>
+            <div class="table-wrapper" *ngIf="(srcData.data.length > 0 || tableType === 'multipleRows'); else noData" id="detail-container ">
+                <div *ngIf="tableType === 'multipleObjects'">
+                    <div class="icon" (click)="onThreadScreenClick()" (mouseenter)="mouseenter()"
+                    (mouseleave)="mouseleave()">
+                    <img [src]="sanitizer.bypassSecurityTrustResourceUrl(filterSrc)">
+                </div>
+                    <app-disk-table [dataList]="srcData" [totalPage]="srcData.data.length" [columns]="columns" [hasPage]="true"></app-disk-table>
+                </div>
+                <app-disk-table [dataList]="srcData" [totalPage]="srcData.data.length" [columns]="columns" [hasPage]="true"
+                    *ngIf="tableType === 'multipleValues' || this.tableType === 'singleData'"></app-disk-table>
+                <ti-tabs class="custemTabs tabsWithSplitLine" *ngIf="tableType === 'multipleRows'" >
+                    <ti-tab [header]="item.title" [(active)]="item.active"
+                        *ngFor="let item of tabList; let index = index" (activeChange)="onActiveChange($event)">
+                        <div>
+                            <app-multiple-rows-table [dataList]="srcData.data"
+                                *ngIf="item.title === i18n.linkage.typicalConfig && srcData.data.length > 0" [columns]="longColumns">
+                            </app-multiple-rows-table>
+                            <app-multiple-rows-table [dataList]="horSrcData.data"
+                                *ngIf="item.title === i18n.linkage.allConfig" [columns]="horColumns">
+                            </app-multiple-rows-table>
+                        </div>
+                    </ti-tab>
+                </ti-tabs>
+            </div>
+            <div class="opreation-btn">
+                <button (click)="constastMask.Close()"  type="button" class="cancel-btn btn">
+                    {{i18n.common_term_operate_close}}
+                </button>
+            </div>
+        </div>
+    </ng-container>
+</app-panoramic-mask>
+<!-- 筛选侧滑框 / DIMM列表(differentNodes)-->
+<app-panoramic-mask  #selectMask>
+    <ng-container class="content">
+        <div class="thread-screen" [ngClass]="{selectContent: tableType === 'multipleObjects'}">
+            <div class="header-title">{{selectTableTitle}}
+                <span  class="ti3-close ti3-icon ti3-icon-close" (click)="onSelectCancel()"></span>
+            </div>
+            <div class="table-wrapper" *ngIf="differentNodesData.length > 0;else noData">
+                <div class="devSelectBox " *ngFor="let item of differentNodesData; index as i">
+                    <div class="box-title" (click)='item.expand = !item.expand'>
+                           <img class='expand-icon' src="./assets/img/summary/row.svg" alt=""
+                            [ngClass]="{active: item.expand}">
+                            <img src="./assets/img/linkage-analysis/abnormal.svg" class="ti-icon red" *ngIf="tableType === 'differentNodes' && item.different">
+                        <span>{{item.projectName}}</span>
+                    </div>
+                    <div class="summury-table" [ngClass]="{active: item.expand}">
+                        <ti-table [(displayedData)]="item.displayed" [srcData]="item.srcData" [columns]="multipleObjectsColumns">
+                            <div class="ti3-table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th *ngIf="tableType === 'multipleObjects'">
+                                                <input type="checkbox" tiCheckgroup [items]="item.displayed"
+                                                    [(checkeds)]="item.checkedList" />
+                                            </th>
+                                            <ng-container *ngFor="let column of multipleObjectsColumns;index as i;">
+                                                <th tiOverflow>{{column.title}}</th>
+                                            </ng-container>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let obj of item.displayed; index as j">
+                                            <td checkbox-column *ngIf="tableType === 'multipleObjects'">
+                                                <input type="checkbox" tiCheckitem [item]="obj" />
+                                            </td>
+                                            <ng-container *ngFor="let row of multipleObjectsColumns; index as k">
+                                                <td tiOverflow tiTipPosition='left'>
+                                                    {{obj[row.key] }}
+                                                </td>
+                                            </ng-container>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ti-table>
+                    </div>
+                </div>
+            </div>
+            <div class="opreation-btn">
+                <button (click)="onSelectConfirm()" class="primary-btn btn" type="button" *ngIf="tableType !== 'differentNodes'">
+                    {{i18n.common_term_operate_ok}}
+                </button>
+                <button (click)="onSelectCancel()" type="button" class="cancel-btn btn">
+                    {{tableType !== 'differentNodes' ? i18n.plugins_perf_button_cancel : i18n.common_term_operate_close}}
+                </button>
+            </div>
+        </div>
+    </ng-container>
+</app-panoramic-mask>
+<ng-template #noData>
+    <app-default-page [scene]="'noData'" ></app-default-page>
+</ng-template>

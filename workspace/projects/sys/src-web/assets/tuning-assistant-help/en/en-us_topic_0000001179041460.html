@@ -1,0 +1,55 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="High Memory Usage">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001223882739.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (Tuning Assistant)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001179041460">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>High Memory Usage</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001179041460"></a><a name="EN-US_TOPIC_0000001179041460"></a>
+
+<h1 class="topictitle1">High Memory Usage</h1>
+<div id="body0000001199514221"><div class="section" id="EN-US_TOPIC_0000001179041460__section63871328422"><h4 class="sectiontitle">Adjusting the Thread Stack Size When There Are Many Threads</h4><ol id="EN-US_TOPIC_0000001179041460__ol1727192762711"><li id="EN-US_TOPIC_0000001179041460__li1278272270"><span>Run the following command to check the resource limit:</span><p><p id="EN-US_TOPIC_0000001179041460__p1389145272717"><strong id="EN-US_TOPIC_0000001179041460__b1965310811287">ulimit -a</strong></p>
+<p id="EN-US_TOPIC_0000001179041460__p9139144220312">By default, the thread stack size is 8192 (8 MB). You can run the <strong id="EN-US_TOPIC_0000001179041460__b540343871513">ulimit -s</strong><em id="EN-US_TOPIC_0000001179041460__i9148154201512"> xxx</em> command to change the default thread stack size.</p>
+<p id="EN-US_TOPIC_0000001179041460__p1687816213288"><span><img id="EN-US_TOPIC_0000001179041460__image14953163282918" src="en-us_image_0000001179041590.png"></span></p>
+</p></li><li id="EN-US_TOPIC_0000001179041460__li66655943420"><span>Modify the default thread stack.</span><p><ol type="a" id="EN-US_TOPIC_0000001179041460__ol882873114347"><li id="EN-US_TOPIC_0000001179041460__li14828173117345">The default thread stack size is 8 MB.<p id="EN-US_TOPIC_0000001179041460__p19906125163513"><a name="EN-US_TOPIC_0000001179041460__li14828173117345"></a><a name="li14828173117345"></a><span><img id="EN-US_TOPIC_0000001179041460__image1296817914355" src="en-us_image_0000001224122813.png"></span></p>
+</li><li id="EN-US_TOPIC_0000001179041460__li2050511593518">Use <strong id="EN-US_TOPIC_0000001179041460__b4195177191618">pthread_attr_setstack()</strong> to change the stack size. As shown in the following figure, change the stack size to 16 MB. The thread stack space is allocated from the heap.<pre class="screen" id="EN-US_TOPIC_0000001179041460__screen1083015579321">pthread_attr_t attr;    //Create a thread attribute variable.
+struct sched_param param;
+
+pthread_attr_init(&amp;attr);    //Initialize the thread attribute variable.
+ 
+pthread_attr_setstacksize (&amp;attr, 16*1024*1024);    //Change the stack size to 16 MB.
+ 
+pthread_attr_getschedparam(&amp;attr, &amp;param);    //Thread priority
+param.sched_priority += 5;
+pthread_attr_setschedparam(&amp;attr, &amp;param)</pre>
+</li><li id="EN-US_TOPIC_0000001179041460__li52980402362">Create two threads and use the default stack size for execution.<p id="EN-US_TOPIC_0000001179041460__p1381813113714"><a name="EN-US_TOPIC_0000001179041460__li52980402362"></a><a name="li52980402362"></a><span><img id="EN-US_TOPIC_0000001179041460__image2652332153713" src="en-us_image_0000001178563132.png"></span></p>
+</li><li id="EN-US_TOPIC_0000001179041460__li683138193710">Do not use any thread.<p id="EN-US_TOPIC_0000001179041460__p105792085389"><a name="EN-US_TOPIC_0000001179041460__li683138193710"></a><a name="li683138193710"></a><span><img id="EN-US_TOPIC_0000001179041460__image478615126385" src="en-us_image_0000001224361311.png"></span></p>
+</li><li id="EN-US_TOPIC_0000001179041460__li17842017123818">The thread stack is allocated from the process stack.<p id="EN-US_TOPIC_0000001179041460__p1018615073810"><a name="EN-US_TOPIC_0000001179041460__li17842017123818"></a><a name="li17842017123818"></a><span><img id="EN-US_TOPIC_0000001179041460__image85105193813" src="en-us_image_0000001178723102.png"></span></p>
+</li><li id="EN-US_TOPIC_0000001179041460__li5891634194019">Summary of the process stack and thread stack:<ul id="EN-US_TOPIC_0000001179041460__ul65516313419"><li id="EN-US_TOPIC_0000001179041460__li20558311417">The size of the process stack is determined when the process stack is executed, which is irrelevant to the compilation link.</li><li id="EN-US_TOPIC_0000001179041460__li19829121611415">The size of the process stack is determined randomly. It is at least greater than the size of the thread stack, but is not more than twice the size of the thread stack.</li><li id="EN-US_TOPIC_0000001179041460__li78041630114111">The thread stack size is fixed. You can run the <strong id="EN-US_TOPIC_0000001179041460__b17594105061910">ulimit -a</strong> command to view the thread stack size and run the <strong id="EN-US_TOPIC_0000001179041460__b19643155861917">ulimit -s</strong> command to change the thread stack size.</li></ul>
+</li></ol>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001223882739.html">%SYSTEM</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

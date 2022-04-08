@@ -1,0 +1,45 @@
+// table 相关样式
+
+$col97: #979797;
+$cole1e6ee: #e1e6ee;
+
+.tb-border-gray {
+  border-right: 1px solid #E6EBF5;
+}
+
+table > tr {
+  vertical-align: baseline;
+}
+
+.ti3-table-container table tr td {
+  border-bottom: 1px solid $cole1e6ee !important;
+}
+
+// 表格无数据时
+.ti3-table-nodata > td {
+  height: 160px !important;
+  background: url("./../assets/img/home/no-data.png") 50%  no-repeat !important;
+}
+.td-no-data {
+  height: 380px;
+}
+.ti3-table > .ti3-table-container > table > tbody > tr.td-no-data > td {
+  padding-top: 250px !important;
+}
+
+// 分页跳转链接
+ti-pagination.ti3-page-container .ti3-pag-goto .ti3-pag-goto-input { 
+  border-color: $col97 !important;
+}
+// 分页跳转链接
+ti-pagination.ti3-page-container .ti3-pag-goto .ti3-pag-goto-input:hover,
+ti-pagination.ti3-page-container .ti3-pag-goto .ti3-pag-goto-input:focus { 
+  border-color: var(--ti-input-border-color-focus) !important;
+}
+
+.ti3-table > .ti3-resize-wrapper > table > tbody > tr > td,
+.ti3-table > .ti3-table-container > table > tbody > tr > td,
+.ti3-table > .ti3-table-fixed-head > table > tbody > tr > td,
+.ti3-table > table > tbody > tr > td {
+  padding: 5px 10px !important;
+}

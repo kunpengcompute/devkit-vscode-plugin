@@ -1,0 +1,250 @@
+$labelWidth: 250px;
+
+#createTaskInfo {
+  .taskParams {
+    .taskBox {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .margin_top {
+      margin-top: 32px;
+    }
+    .label {
+      min-width: 250px;
+      display: flex;
+      ti-icon {
+        font-size: 16px;
+        line-height: 28px;
+      }
+      .labelText {
+        font-size: 14px;
+        line-height: 28px;
+        letter-spacing: 0px;
+        color: #616161;
+        max-width: 200px;
+      }
+      .tooltip {
+        margin-left: 8px;
+        margin-top: 7px;
+        width: 14px;
+        height: 14px;
+      }
+    }
+    .detail {
+      position: relative;
+      width: calc(100% - 250px);
+      
+      .location{
+        position: absolute;
+        top: 28px;
+        left: 0;
+      }
+
+      /* 模式 */
+      .mode-detail {
+        display: flex;
+        .choose-list + .choose-list {
+          margin-left: 32px;
+        }
+      }
+      /* Attach to Process */
+      .analysis-target-pid-notice {
+        width: 100%;
+        margin-left: $labelWidth;
+        margin-top: -12px;
+        margin-bottom: 20px;
+      }
+
+      .diagnoseType {
+        font-size: 14px;
+        color: #222222;
+      }
+      .inputBox {
+        width: 326px !important;
+        margin-right: 8px;
+      }
+      .importModel {
+        position: absolute;
+        top: 0;
+        left: 336px;
+        button {
+          min-width: 88px;
+          height: 28px;
+          line-height: 28px;
+        }
+      }
+      .rangeTip {
+        color: #979797;
+        margin-left: 8px;
+      }
+      .bottomTipT {
+        margin-top: 4px;
+      }
+      .bottomTip {
+        align-items: center;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0px;
+        color: #616161;
+        margin-top: 8px;
+        .tipImg,
+        .text {
+          vertical-align: middle;
+        }
+        .tipImg {
+          width: 16px;
+          height: 16px;
+          margin-right: 8px;
+        }
+        .tipWidth {
+          display: flex;
+          align-items: center;
+          .exceptTip {
+            cursor: pointer;
+          }
+        }
+      }
+      .bottomTipT {
+        margin-top: 4px;
+      }
+      .memoryCheck {
+        display: flex;
+        height: 28px;
+        .memory-leak,
+        .memory-abnoemal {
+          font-size: 14px;
+          background: #f0f6ff;
+          display: flex;
+          align-items: center;
+          margin-right: 24px;
+          padding-left: 16px;
+          box-sizing: border-box;
+          .checkBox {
+            margin-right: 24px;
+            &:nth-child(3) {
+              margin-right: 0;
+            }
+          }
+        }
+        .noActiveColor {
+          background: rgba($color: #b8becc, $alpha: 0.1);
+        }
+        .no-bg-color {
+          padding-left: 0;
+          background-color: transparent;
+        }
+        .memory-abnoemal {
+          cursor: pointer;
+        }
+        .allCheck {
+          img {
+            width: 26px;
+            height: 24px;
+            margin-top: 6px;
+            margin-left: 8px;
+          }
+        }
+      }
+    }
+  }
+  .diagnoseTarget {
+    padding-left: 16px;
+    .editOrResetDiagnose {
+      display: flex;
+      align-items: center;
+      margin: 20px 0px;
+      .diagnoseLabel{
+        color: #616161;
+        min-width: 234px;
+      }
+    }
+
+    .title {
+      font-size: 16px;
+      margin: 32px 0 16px;
+    }
+    .select-box {
+      display: flex;
+
+      .select-item {
+        width: 88px;
+        height: 88px;
+        background-color: #ffffff;
+        box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.09);
+        border-radius: 2px;
+        margin-right: 8px;
+        cursor: pointer;
+
+        img {
+          width: 34px;
+          height: 34px;
+          margin: 11px 27px 0;
+        }
+        p {
+          text-align: center;
+          margin-top: 11px;
+          color: #222;
+        }
+      }
+      .select-item:last-child {
+        margin-right: 0;
+      }
+      .select-item:hover,
+      .select {
+        box-shadow: 0px 2px 10px 0px rgba(0, 103, 255, 0.17);
+      }
+
+      // 禁用状态
+      .disabled-status {
+        cursor: not-allowed;
+        background-color: #e6ebf5 !important;
+        color: #cccccc !important;
+      }
+    }
+    .description {
+      margin-top: 4px;
+      color: #616161;
+      font-size: 12px;
+    }
+  }
+
+  .immediately {
+    margin-top: 4px;
+    margin-left: 4px;
+  }
+  .scheduled {
+    margin-top: 20px;
+  }
+  .operateBtn {
+    margin: 40px 0px 40px 16px;
+    .btn {
+      margin-right: 16px;
+    }
+  }
+  .run-user {
+    margin-bottom: 24px;
+  }
+  .runUserForm {
+    position: relative;
+    left: -250px;
+    top: 24px;
+    margin-bottom: 32px;
+  }
+}
+:host .run-user ::ng-deep .ti3-form .ti3-form-label {
+  min-width: 212px !important;
+}
+:host .memoryCheck ::ng-deep .ti3-checkbox {
+  line-height: 18px !important;
+}
+:host #createTaskInfo ::ng-deep td.ti3-form-label {
+  display: inline-block;
+}
+:host ::ng-deep .memoryCheck {
+  input[type="checkbox"][tiCheckbox][disabled]
+    + .ti3-checkbox
+    .ti3-checkbox-label {
+    color: #cccccc !important;
+  }
+}

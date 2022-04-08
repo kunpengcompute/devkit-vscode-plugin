@@ -1,0 +1,44 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Updating the Dependency Dictionary">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0220268915.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.T21">
+<meta name="brand" content="Huawei Kunpeng Porting Advisor">
+<meta name="DC.Publisher" content="20201230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0220268918">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Updating the Dependency Dictionary</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0220268918"></a><a name="EN-US_TOPIC_0220268918"></a>
+
+<h1 class="topictitle1">Updating the Dependency Dictionary</h1>
+<div id="body1579155147711"><div class="section" id="EN-US_TOPIC_0220268918__section11470129119"><h4 class="sectiontitle">Prerequisites</h4><ul id="EN-US_TOPIC_0220268918__ul115751954115418"><li id="EN-US_TOPIC_0220268918__li15576165475415">You have logged in to the <span id="EN-US_TOPIC_0220268918__ph997750104712">Kunpeng Porting Advisor</span> WebUI.</li><li id="EN-US_TOPIC_0220268918__li14576105455413">You have obtained the latest dependency dictionary package from the Kunpeng community.<div class="note" id="EN-US_TOPIC_0220268918__note587033111184"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0220268918__p17196150112013">The dependency dictionary in versions earlier than 2.3.T10 cannot be upgraded to the dependency dictionary of version 2.3.T10.</p>
+</div></div>
+</li></ul>
+</div>
+<div class="section" id="EN-US_TOPIC_0220268918__section8939735152415"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0220268918__ol1095132424619"><li id="EN-US_TOPIC_0220268918__li1423863018444"><span>In the upper right corner of the page, choose <span><img id="EN-US_TOPIC_0220268918__image62641614201615" src="en-us_image_0304782336.png"></span> &gt; <strong id="EN-US_TOPIC_0220268918__b17788134213231">Dependency Dictionary</strong>.</span></li><li id="EN-US_TOPIC_0220268918__li73145613463"><span>Click <span class="wintitle" id="EN-US_TOPIC_0220268918__wintitle581813445499"><b>Upgrade</b></span>. The page shown in <a href="#EN-US_TOPIC_0220268918__fig10279034123419">Figure 1</a> is displayed.</span><p><div class="fignone" id="EN-US_TOPIC_0220268918__fig10279034123419"><a name="EN-US_TOPIC_0220268918__fig10279034123419"></a><a name="fig10279034123419"></a><span class="figcap"><b>Figure 1 </b>Upgrading the dependency dictionary</span><br><span><img id="EN-US_TOPIC_0220268918__image2800193743010" src="en-us_image_0000001161689375.png" height="139.65" width="523.6875"></span></div>
+</p></li><li id="EN-US_TOPIC_0220268918__li11600326182820"><span>Click <strong id="EN-US_TOPIC_0220268918__b97497511776">Select File</strong> and select the dependency dictionary to upload. After the file is verified, click <strong id="EN-US_TOPIC_0220268918__b20755195114713">Upload</strong>, enter the administrator password, and click <strong id="EN-US_TOPIC_0220268918__b47561851573">OK</strong>.</span><p><p id="EN-US_TOPIC_0220268918__p169341429104714">The upgrade progress is displayed. After the upgrade is complete, check the dependency dictionary in the <strong id="EN-US_TOPIC_0220268918__b11622135492419">/opt/portadv/config/dependency_dictionary</strong> directory.</p>
+<div class="note" id="EN-US_TOPIC_0220268918__note41231724123213"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0220268918__ul2562986457"><li id="EN-US_TOPIC_0220268918__li1489044515454">Do not close the current page during the upgrade process.</li><li id="EN-US_TOPIC_0220268918__li1055813433313">When you are selecting the dependency dictionary to upload, the tool checks whether the selected package exists on the server. If it already exists on the server, delete it and then proceed subsequent operations. When the package is being uploaded, the tool checks whether the current whitelist is of the latest version. If yes, the file cannot be uploaded and no update is required.</li><li id="EN-US_TOPIC_0220268918__li117783174400">If the upgrade fails, rectify the fault based on the error message displayed or by referring to the FAQs in the user guide. For details about the failure information, see <strong id="EN-US_TOPIC_0220268918__b15638125516015">/opt/portadv/logs/porting.log</strong>.</li><li id="EN-US_TOPIC_0220268918__li4597192322110"><strong id="EN-US_TOPIC_0220268918__b2572101374617">/opt/portadv</strong> is the tool installation directory. Replace it with the actual directory.</li></ul>
+</div></div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0220268915.html">Dependency Dictionary Management</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

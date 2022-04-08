@@ -1,0 +1,160 @@
+.mem-leak-table {
+  .table-head-top {
+    background: #f5f9ff;
+    padding: 0 10px;
+    box-sizing: border-box;
+
+    .is-self-filter {
+      line-height: 18px;
+      font-size: 12px;
+      text-align: center;
+      padding: 6px 0;
+      color: #222222;
+    }
+
+    .head-second-row {
+      display: flex;
+      justify-content: space-between;
+
+      .stack-searcher {
+        font-size: 12px;
+        line-height: 18px;
+        color: #222222;
+      }
+
+      .cols-toggle {
+        position: relative;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+
+        ::ng-deep ti-cols-toggle {
+          position: relative;
+          width: 16px;
+          height: 16px;
+          opacity: 0;
+          z-index: 1;
+
+          .ti3-cols-toggle-menu-container {
+            width: 10px;
+            height: 10px;
+            background: none;
+            border: none;
+
+            .ti3-cols-toggle-menu {
+              display: none;
+            }
+          }
+        }
+
+        app-icon-react {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 16px;
+          height: 16px;
+          z-index: 0;
+        }
+      }
+    }
+
+    ti-icon {
+      margin-left: 8px;
+    }
+  }
+
+}
+
+.table-dropdown {
+  width: fit-content;
+
+  p {
+    height: 28px;
+    font-size: 12px;
+    line-height: 28px;
+    color: #222222;
+    cursor: pointer;
+
+    &:hover {
+      background: #f5f6f7;
+    }
+
+    &.active {
+      color: #ffffff;
+      background: #0067ff;
+    }
+  }
+}
+
+.ti3-table-container {
+  height: 225px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.ti3-table > .ti3-table-fixed-head > table > thead > tr > th,
+.ti3-table > table > tbody > tr > td,
+.ti3-table > table > thead > tr > th {
+  border-bottom: 1px solid var(--ti-table-border-bottom-color);
+}
+
+.ti3-table-fixed-head {
+  flex: 0 0 auto;
+
+  thead {
+    .center {
+      text-align: center;
+    }
+
+    th {
+      border-bottom: 1px solid #fff;
+
+      .content {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+
+        .ti3-cell-text-container {
+          overflow: hidden;
+          height: 32px;
+
+          .ti3-cell-text {
+            max-width: 100% !important;
+          }
+        }
+
+        &.center {
+          justify-content: center;
+        }
+
+        .tableSort {
+          display: flex;
+          align-items: center;
+        }
+
+        img {
+          transform: rotate(90deg);
+          margin-left: 6px;
+          vertical-align: middle;
+          cursor: pointer;
+
+          &.expand {
+            transform: rotate(-90deg);
+          }
+        }
+      }
+
+      // 解决表格最后一列没有border的显示问题
+      &::after {
+        width: 1px !important;
+        background: #fff;
+        color: transparent;
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        content: "";
+      }
+    }
+  }
+}

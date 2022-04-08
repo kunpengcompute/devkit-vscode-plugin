@@ -1,0 +1,25 @@
+<div class="trouble-suggestion">
+  <ul class="detail-list-container">
+    <li *ngFor="let detail of suggestionList;index as index" class="detail-list">
+      <div class="detail-title" (click)="showDetail(detail)">
+        <div class="left-title" tiOverflow>
+          <hy-theme-content>
+            <img src="./assets/img/diagnose/suggestion.svg" light />
+            <img src="./assets/img/diagnose/suggestion_dark.svg" dark />
+          </hy-theme-content>
+          <span>{{ detail.title }}</span>
+        </div>
+        <ti-icon name="accordion-unfold" [ngClass]="{'active-icon': detail.isActive}"></ti-icon>
+      </div>
+
+      <div class="detail-container" *ngIf="detail.isActive">
+        <div class="reason-suggestion" *ngFor="let child of detail.children">
+          <p>{{ child.reason }}</p>
+          <ng-container *ngFor="let sugg of child.suggList">
+            <p>{{ sugg }}</p>
+          </ng-container>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

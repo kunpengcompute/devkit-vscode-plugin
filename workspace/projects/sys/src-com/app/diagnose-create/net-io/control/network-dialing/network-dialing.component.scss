@@ -1,0 +1,94 @@
+.light {
+  --title-color: #222222;
+  --dial-scenes-color: #979797;
+}
+.dark {
+  --title-color: #e8e8e8;
+  --dial-scenes-color: #888;
+}
+
+.form-warpper {
+  .form-area,
+  .advanced-parame {
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--title-color);
+      margin: 32px 0 16px;
+    }
+    .control {
+      margin-top: 20px;
+
+      .taskValue {
+        display: flex;
+        justify-items: center;
+      }
+      input {
+        width: 326px;
+        height: 28px;
+        padding: 5px 10px;
+        box-sizing: border-box;
+      }
+
+      .importTemplate {
+        display: inline-block;
+        width: 88px;
+        height: 26px;
+        text-align: center;
+        line-height: 26px;
+        border: 1px solid #979797;
+        margin-left: 8px;
+        font-size: 12px;
+      }
+    }
+    .padding {
+      padding-left: 16px;
+    }
+  }
+  .form-hight {
+    .hight-title {
+      margin-top: 32px;
+      display: flex;
+      justify-items: center;
+
+      .txt {
+        font-size: 16px;
+        color: var(--title-color);
+        font-weight: bold;
+        margin-right: 8px;
+      }
+    }
+  }
+  .opreation {
+    margin: 40px 0px 114px 0px;
+    padding-bottom: 114px;
+    button + button {
+      margin-left: 16px;
+    }
+  }
+}
+.form-warpper .form-area > .control:first-child{
+  margin-top: 0;
+}
+.paramValue {
+  display: flex;
+
+  span {
+    color: #979797;
+    font-size: 12px;
+    margin-left: 8px;
+    line-height: 28px;
+  }
+}
+
+.radios ::ng-deep .ti3-radio {
+  margin-right: 50px;
+}
+.margin_left{
+  margin-left: 8px;
+}
+.illustrate{
+  color: #888;
+  font-size: 12px;
+  margin-top: 4px;
+}

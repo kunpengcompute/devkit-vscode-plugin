@@ -1,0 +1,13 @@
+<div class="overview-container">
+  <div class="database-tab">
+    <span class="item-tab" *ngFor="let tab of cpuTabs; let idx = index" [routerLink]="[tab.link]"
+      (click)="activeChange(idx)">
+      <ng-container *ngIf="tab.show">
+        <span class="tab-title" [ngClass]="{ 'tab-active': tab.active }">
+          {{ tab.title }}
+        </span>
+      </ng-container>
+    </span>
+  </div>
+  <router-outlet></router-outlet>
+</div>

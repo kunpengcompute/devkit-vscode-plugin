@@ -1,0 +1,32 @@
+.modal-dialog{
+  width:660px;
+  height: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+.main{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.modal-title{
+  height: 20px;
+  margin: 0px 32px;
+  padding-bottom: 32px;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 20px;
+    color: #222222;
+  border-bottom: 1px lightgrey dashed;
+}
+.modal-content{
+  flex: 1;
+  padding: 32px;
+}
+footer {
+  height: 50px;
+  clear: both;
+  text-align: center;
+}

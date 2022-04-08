@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>失败16*16</title>
+    <defs>
+        <path d="M8,1 C11.8659932,1 15,4.13400675 15,8 C15,11.8659932 11.8659932,15 8,15 C4.13400675,15 1,11.8659932 1,8 C1,4.13400675 4.13400675,1 8,1 Z" id="path-1"></path>
+    </defs>
+    <g id="失败16*16" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="蒙版" fill="#ED4B4B" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <path d="M8.203125,6.625 L8.4765625,12.5 L7,12.5 L7.21875,6.625 L8.203125,6.625 Z M8.421875,4 L8.421875,5.4765625 L7.0546875,5.4765625 L7.0546875,4 L8.421875,4 Z" id="形状结合" fill="#FFFFFF" fill-rule="nonzero" transform="translate(7.738281, 8.250000) scale(1, -1) translate(-7.738281, -8.250000) "></path>
+    </g>
+</svg>

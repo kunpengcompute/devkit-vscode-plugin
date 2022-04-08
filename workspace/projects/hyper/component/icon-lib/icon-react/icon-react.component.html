@@ -1,0 +1,14 @@
+<div class="icons-warpper">
+    <div class="icon" [hidden]="!(currIconStatus === IconStatusEnum.Normal)">
+        <hy-icon-static *ngIf="reactIconData != null" [name]="reactIconData.normal"></hy-icon-static>
+    </div>
+    <div class="icon" [hidden]="!(currIconStatus === IconStatusEnum.Active)">
+        <hy-icon-static *ngIf="reactIconData != null" [name]="reactIconData.active"></hy-icon-static>
+    </div>
+    <div class="icon" [hidden]="!(currIconStatus === IconStatusEnum.Hover)">
+        <hy-icon-static *ngIf="reactIconData != null" [name]="reactIconData.hover"></hy-icon-static>
+    </div>
+    <div class="icon" [hidden]="!(currIconStatus === IconStatusEnum.Disabled)">
+        <hy-icon-static *ngIf="reactIconData != null" [name]="reactIconData.disabled"></hy-icon-static>
+    </div>
+</div>

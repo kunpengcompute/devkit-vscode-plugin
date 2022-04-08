@@ -1,0 +1,14 @@
+.interrupt-msg-compare {
+    .inter-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        .title {
+            font-size: 16px;
+        }
+        ti-select {
+            margin-left: 20px;
+            width: 141px;
+        }
+    }
+}

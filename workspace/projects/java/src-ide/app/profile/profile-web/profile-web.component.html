@@ -1,0 +1,13 @@
+<div>
+    <div class="profile-detail-tabs">
+        <div class="item-tab" *ngFor="let tab of webTabs; let idx = index" (click)="toggleTab(idx)" [routerLink]="[tab.link]">
+            <div>
+                <span class="tab-label" [ngClass]="{'tab-label-first': idx == 0 }">
+                    <span [ngClass]="{ 'tab-active': tab.selected }">{{i18n.protalserver_profiling_tab[tab.label]}}</span>
+                </span>
+            </div>
+            <div class="item-tab-line"></div>
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,115 @@
+.nodeStatus {
+  display: flex;
+  align-items: center;
+
+  .icon_nodeStatus {
+    min-width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+
+    &.online {
+      background: #7adfa0;
+    }
+
+    &.offline {
+      background: #b8becc;
+    }
+  }
+
+  .running {
+    width: 10px;
+    height: 10px;
+    margin-right: 8px;
+    background-color: transparent;
+    background-image: url("../../../../assets/img/home/running.gif");
+    background-size: 105%;
+  }
+}
+
+.alarmInfo {
+  > div {
+    display: flex;
+    align-items: center;
+
+    > span {
+      margin-left: 8px;
+    }
+  }
+}
+
+.alarmTip {
+  font-size: 12px;
+  line-height: 18px;
+
+  > .tipLine {
+    display: flex;
+    color: #222;
+  }
+
+  > .suggestion {
+    color: #979797;
+  }
+
+  > *:not(:first-child) {
+    margin-top: 6px;
+  }
+}
+
+.operateBox {
+  .operate-item {
+    display: inline-block;
+    .operate-btn {
+      color: #0067ff;
+      cursor: pointer;
+    }
+    .operate-divider {
+      margin-left: 8px;
+      margin-right: 8px;
+      border-right: solid 1px #e1e6ee;
+    }
+    &:last-child {
+      .operate-divider {
+        display: none;
+      }
+    }
+  }
+}
+
+:host ::ng-deep .ti3-table {
+  height: unset;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .ti3-table-fixed-head {
+    height: 32px;
+    flex: 0 0 auto;
+    .thContent {
+      height: 32px;
+      display: flex;
+      .imgIcon {
+        height: 32px;
+        display: flex;
+        align-items: center;
+        .tipImg {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+  }
+  .ti3-table-fixed-head > table > thead > tr > th.notShow[checkbox-column] {
+    cursor: auto;
+    input[type="checkbox"][tiCheckbox] + label.ti3-checkbox {
+      cursor: auto;
+      display: none;
+    }
+  }
+  .ti3-page-container {
+    flex: 0 0 auto;
+  }
+  .ti3-table-container {
+    max-height: 55vh;
+  }
+}

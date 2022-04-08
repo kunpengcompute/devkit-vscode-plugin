@@ -1,0 +1,198 @@
+<div class="box">
+  <div class="box-title" (click)='toggle.storageResource=!toggle.storageResource'>
+    <img src="./assets/img/summary/row.png" class='title-icon' [ngClass]="{active: toggle.storageResource}">
+    {{i18n.sys.storageConfig}}
+    <div class="titleDetail">
+      <div tiOverflow>{{Raid.title}}<span>{{Raid.data}}</span></div>
+      <div tiOverflow>{{storage.title}}<span>{{storage.data}}</span></div>
+      <div tiOverflow>{{fill.title}}<span>{{fill.data}}</span></div>
+    </div>
+  </div>
+  <div class="box-content" [ngClass]="{active: toggle.storageResource}">
+    <!-- RAID控制卡 -->
+    <div class="box">
+      <div class="box-title" (click)='toggle.raidControlCard=!toggle.raidControlCard'>
+        <img src="./assets/img/summary/row.png" class='title-icon' [ngClass]="{active: toggle.raidControlCard}">
+        {{i18n.sys_cof.sum.raid_level}}
+        <img src="./assets/img/summary/tooltip.png" [tiTip]='raidTipStr' tiTipMaxWidth='550px'
+          *ngIf="raidTipStr !='NULL'" tiTipPosition="top-left" />
+      </div>
+      <div class="box-content" [ngClass]="{active: toggle.raidControlCard}">
+        <ti-table [(displayedData)]="raidControlCardDisplayData" [srcData]="raidControlCardContentData"
+          [columns]="raidControlCardTitle">
+          <table>
+            <thead>
+              <tr>
+                <th tiOverflow *ngFor="let column of raidControlCardTitle;index as i" width="{{column.width}}">
+                  <span [ngClass]="{'tableFirstData': i == 0}">{{column.title}}</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngIf="!ifraid">
+              <tr *ngFor="let item of raidControlCardDisplayData;">
+                <td tiOverflow tiTipPosition='left'><span
+                    class="tableFirstData">{{item.data1 | thousandSeparator}}</span></td>
+                <td tiOverflow tiTipPosition='left'>{{item.data2 | thousandSeparator}}</td>
+                <td tiOverflow tiTipPosition='left'>{{item.data3 | thousandSeparator}}</td>
+                <td tiOverflow tiTipPosition='left'>{{item.data4 | thousandSeparator}}</td>
+                <td tiOverflow tiTipPosition='left'>{{item.data5 | thousandSeparator}}</td>
+                <td tiOverflow tiTipPosition='left'>{{item.data6 | thousandSeparator}}</td>
+                <td tiOverflow tiTipPosition='left'>{{item.data7 | thousandSeparator}}</td>
+                <td tiOverflow tiTipPosition='left'>{{item.data8 | thousandSeparator}}</td>
+                <td tiOverflow tiTipPosition='left'>{{item.data9 | thousandSeparator}}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="ifraid">
+              <tr class="ti3-table-nodata-simple">
+                <td tiColspan>
+                  <img style='width:198px;' src='./assets/img/projects/nodata.png' />
+                  <div style="font-size: 1rem">{{raid}}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <ti-pagination *ngIf="raidControlCardTotalNumber > 10" [(currentPage)]="raidControlCardCurrentPage"
+            style="padding-left: 10px;" [pageSize]="raidControlCardPageSize"
+            [(totalNumber)]="raidControlCardTotalNumber">
+          </ti-pagination>
+        </ti-table>
+      </div>
+    </div>
+    <!-- RAID配置 -->
+    <div class="box">
+      <div class="box-title" (click)='toggle.raidConfig=!toggle.raidConfig'>
+        <img src="./assets/img/summary/row.png" class='title-icon' [ngClass]="{active: toggle.raidConfig}">
+        {{i18n.sys_summary.cpupackage_tabel.raid_config}}
+      </div>
+      <div class="box-content" [ngClass]="{active: toggle.raidConfig}">
+        <div class="raidConfig">
+          <div *ngFor="let item of raidConfigData" class="raidConfigContent">
+            <span>{{item.title}}</span>
+            <div>{{item.data}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 存储信息 -->
+    <div class="box">
+      <div class="box-title" (click)='toggle.storageInformation=!toggle.storageInformation'>
+        <img src="./assets/img/summary/row.png" class='title-icon' [ngClass]="{active: toggle.storageInformation}">
+        {{i18n.sys_cof.sum.storage_msg}}
+      </div>
+      <div class="box-content" [ngClass]="{active: toggle.storageInformation}">
+        <ti-table [(displayedData)]="storageInformationDisplayData" [srcData]="storageInformationContentData"
+          [columns]="storageInformationTitle">
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let column of storageInformationTitle;index as i" width="{{column.width}}">
+                  <div class="questionMark">
+                    <span tiOverflow [ngClass]="{'tableFirstData': i == 0}">
+                      {{column.title}}
+                    </span>
+                    <img src="./assets/img/summary/compass.svg" [tiTip]='column.tipStr' tiTipMaxWidth='550px'
+                      *ngIf="column.tipStr && column.tipStr !='NULL'" tiTipPosition="top-left" />
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngIf="!ifstorage">
+              <tr *ngFor="let item of storageInformationDisplayData;">
+                <td tiOverflow tiTipPosition='left'><span class="tableFirstData">{{item.name}}</span></td>
+                <td tiOverflow tiTipPosition='left'>{{item.parameter | thousandSeparator}}</td>
+                <td tiOverflow tiTipPosition='left'>
+                  <span [ngClass]="{'redColor': item.tipStr && item.tipStr !='NULL'}">{{item.mechanism}}</span>
+                  <img src="./assets/img/rocket.svg" class='rocket' [tiTip]='tipContent' [tiTipContext]='item.tipStr'
+                    tiTipMaxWidth='550px' *ngIf="item.tipStr && item.tipStr !='NULL'" tiTipPosition="top-left" />
+                </td>
+                <td tiOverflow tiTipPosition='left'>{{item.affinity | thousandSeparator}}</td>
+                <td tiOverflow tiTipPosition='left'>{{item.config | thousandSeparator}}</td>
+                <td tiOverflow tiTipPosition='left'>{{item.depth | thousandSeparator}}</td>
+                <td tiOverflow tiTipPosition='left'>{{item.IO | thousandSeparator}}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="ifstorage">
+              <tr class="ti3-table-nodata-simple">
+                <td tiColspan>
+                  <img style='width:198px;' src='./assets/img/projects/nodata.png' />
+                  <div style="font-size: 1rem">{{storageInformation}}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <ti-pagination *ngIf="storageInformationTotalNumber > 10" [(currentPage)]="storageInformationCurrentPage"
+            style="padding-left: 10px;" [pageSize]="storageInformationPageSize"
+            [(totalNumber)]="storageInformationTotalNumber">
+          </ti-pagination>
+        </ti-table>
+      </div>
+    </div>
+    <!-- 文件信息 -->
+    <div class="box">
+      <div class="box-title" (click)='toggle.fileInformation=!toggle.fileInformation'>
+        <img src="./assets/img/summary/row.png" class='title-icon' [ngClass]="{active: toggle.fileInformation}">
+        {{i18n.sys_cof.sum.file_system_msg}}
+      </div>
+      <div class="box-content" [ngClass]="{active: toggle.fileInformation}">
+        <ti-table [(displayedData)]="filleInformationDisplayData" [srcData]="filleInformationContentData"
+          [columns]="filleInformationTitle">
+          <div class="ti3-table-fixed-head">
+            <table>
+              <thead>
+                <tr>
+                  <th *ngFor="let column of filleInformationTitle;index as i" width="{{column.width}}">
+                    <span [ngClass]="{'tableFirstData': i == 0}">
+                      {{column.title}}
+                      <img src="./assets/img/summary/compass.svg" [tiTip]='column.tipStr' tiTipMaxWidth='550px'
+                        *ngIf="column.tipStr && column.tipStr !='NULL'" tiTipPosition="top-left" />
+                    </span>
+
+                  </th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="ti3-table-container" style="max-height:440px;overflow-y:auto">
+            <table>
+              <thead>
+                <tr>
+                    <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                    <th *ngFor="let column of filleInformationTitle" width="{{column.width}}"></th>
+                </tr>
+            </thead>
+              <tbody *ngIf="!iffille">
+                <tr *ngFor="let item of filleInformationDisplayData;">
+                  <td tiOverflow tiTipPosition='left'><span class="tableFirstData">{{item.name}}</span></td>
+                  <td tiOverflow tiTipPosition='left'> <span
+                      [ngClass]="{'redColor': item.tipStr && item.tipStr !='NULL'}">{{item.type}}</span>
+                    <img src="./assets/img/rocket.svg" class='rocket' [tiTip]='tipContent' [tiTipContext]='item.tipStr'
+                      tiTipMaxWidth='550px' *ngIf="item.tipStr && item.tipStr !='NULL'" tiTipPosition="top-left" />
+                  </td>
+                  <td tiOverflow tiTipPosition='left'>{{item.mountDot}}</td>
+                  <td tiOverflow tiTipPosition='left'>{{item.mountInfo}}</td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="iffille">
+                <tr class="ti3-table-nodata-simple">
+                  <td tiColspan>
+                    <img style='width:198px;' src='./assets/img/projects/nodata.png' />
+                    <div style="font-size: 1rem">{{fille}}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ti-pagination *ngIf="filleInformationTotalNumber > 10" [(currentPage)]="filleInformationCurrentPage"
+            style="padding-left: 10px;" [pageSize]="filleInformationPageSize"
+            [(totalNumber)]="filleInformationTotalNumber">
+          </ti-pagination>
+        </ti-table>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #tipContent let-context='context'>
+  <span [innerHtml]="context"></span>
+</ng-template>

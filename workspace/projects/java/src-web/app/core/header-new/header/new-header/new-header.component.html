@@ -1,0 +1,56 @@
+<div class="header">
+  <div class="header-left">
+    <img src="./assets/img/header/logo.svg" class="logo" (click)="onJumpHome()" style="cursor: pointer;" />
+    <span class="title">{{ i18n.common_term_pro_name }}</span>
+  </div>
+  <div class="header-right">
+    <ng-container *ngFor="let item of headerInforList;let i = index">
+      <!-- user-guide -->
+      <div [ngClass]="{'user-guide-list-menu': item.type == 'menu'}" class="list-style" (click)="menuClick(item)"
+        (mouseenter)="onHeaderChange(i)" (mouseleave)="onHeaderChange(i)">
+        <span *ngIf="item.title" [ngClass]="{'hover-span': item.isHover}">{{item.title}}</span>
+        <img [src]="!item.isHover ? item.src : item.hoverSrc"
+          [ngClass]="{'hover-img-rotate': item.type == 'user'&&item.isHover}" />
+        <div class="tiplist" [ngClass]="{'user-guide-tiplist': item.type == 'menu'}">
+          <div *ngTemplateOutlet='tipUserInfo'></div>
+        </div>
+        <span class="right-border" *ngIf="i == 0"></span>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<!-- 用户下拉 -->
+<ng-template #tipUserInfo>
+  <div class="tipContent" *ngIf="tipType === 'user'">
+    <ng-container *ngFor="let item of userTipList">
+      <div class="content-list" (click)="onLogInfoChange(item.type)">{{item.title}}</div>
+    </ng-container>
+  </div>
+  <div class="tipContent" *ngIf="tipType === 'home'">
+    <ng-container *ngFor="let item of backHomeTipList">
+      <div class="content-list" (click)="onJumpHome()">{{item.title}}</div>
+    </ng-container>
+  </div>
+  <div class="tipContent" (click)="movekeybordFun()" *ngIf="tipType === 'setting'">
+    <ng-container *ngFor="let item of settingTipList">
+      <div class="content-list" (click)="onSettingChange(item.type)" *ngIf="item.role !== 'Admin' || role === 'Admin'">
+        {{item.title}}</div>
+    </ng-container>
+  </div>
+  <div class="tipContent" *ngIf="tipType === 'menu'">
+    <ng-container *ngFor="let item of menuTipList">
+      <!-- user-guide -->
+      <div class="content-list" (click)="onOtherChange(item.type)"
+        [ngClass]="{'user-guide-done': item.type === 'guide'}">{{item.title}}</div>
+    </ng-container>
+  </div>
+</ng-template>
+
+<app-advice-error-alert #errorAlert></app-advice-error-alert>
+
+<app-info-modal #infomodal></app-info-modal>
+<app-logout #logout></app-logout>
+<app-modifypwd #modifyPwd></app-modifypwd>
+<app-header-about #about></app-header-about>
+<app-statement #statement></app-statement>

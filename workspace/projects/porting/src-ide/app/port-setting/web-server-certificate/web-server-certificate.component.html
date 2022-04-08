@@ -1,0 +1,178 @@
+<div class="weidheight" id="itemWebServerCertificate">
+    <div id="webServerCertificate" class="titleset">
+        <div style="display: flex;">
+            <div class='title_20'>{{i18n.plugins_porting_menu_certificate_settings}}</div>
+            <div>
+                <a  *ngIf="i18nService.currLang === i18nService.langType.zh_cn"
+                    [href]="pluginUrlCfg.faqTwentyFourZn">
+                    <img *ngIf="currTheme == 1" src="./assets/img/icon-help-dark.svg" alt="" class="help-tips">
+                    <img *ngIf="currTheme == 2" src="./assets/img/icon-help-light.svg" alt="" class="help-tips">
+                </a>
+                <a  *ngIf="i18nService.currLang === i18nService.langType.en"
+                    [href]="pluginUrlCfg.faqTwentyFourEn">
+                    <img *ngIf="currTheme == 1" src="./assets/img/icon-help-dark.svg" alt="" class="help-tips">
+                    <img *ngIf="currTheme == 2" src="./assets/img/icon-help-light.svg" alt="" class="help-tips">
+                </a>
+            </div>
+        </div>
+        <p class="title_14">{{i18n.plugins_porting_webServerCertificate.webNotice}}</p>
+        <div class="webserver-table">
+            <ti-table [(displayedData)]="displayed"
+                [ngClass]="{'mw700': i18nService.currLang === i18nService.langType.zh_cn , 'mw900': i18nService.currLang === i18nService.langType.en}"
+                [srcData]="webCertData"
+                [columns]="columns"
+                tiColsResizable>
+                <div class="ti3-table-fixed-head">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th tiOverflow *ngFor="let column of columns" width="{{column.width}}">
+                                    {{column.title}}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="ti3-table-container ti3-resize-wrapper" style="max-height:38vh;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th *ngFor="let column of columns" width="{{column.width}}"></th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="displayed.length !== 0">
+                            <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                            <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+                            <tr *ngFor="let row of displayed;">
+                                <!-- tiOverflow指令的作用是使文本溢出时出'...'，且hover时出tip-->
+                                <td tiOverflow>{{row.name}}</td>
+                                <td tiOverflow>{{row.validTime}}</td>
+                                <td tiOverflow><span class="status-icon" [ngClass]="iconColor"></span>{{row.certStatus}}
+                                </td>
+                                <td tiOverflow *ngIf="role">
+                                    <ti-actionmenu class="sertificate-action-menu"
+                                        [data]="row"
+                                        [dataToItemsFn]='dataToItemsFn'
+                                        [maxShowNum]="3"
+                                        [panelMaxWidth]="'200px'"
+                                        [maxWidth]="'500px'"
+                                        (select)='onSelect($event)'>
+                                    </ti-actionmenu>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <app-loading *ngIf="displayed.length === 0 && showLoading"></app-loading>
+                    <app-default-page *ngIf="displayed.length === 0 && !showLoading"></app-default-page>
+                </div>
+            </ti-table>
+        </div>
+    </div>
+</div>
+<!-- 生成csr文件模态框  -->
+<ng-template let-context="context" #csrModal>
+    <!-- 弹框头部自定义：此处自定义了弹框头部关闭按钮和头部对齐方式 -->
+    <ti-modal-header id="csrHeader">
+        <div class="header">
+            <p>{{i18n.plugins_porting_webServerCertificate.createCsr}} </p>
+        </div>
+    </ti-modal-header>
+    <!-- 弹框内容定义 -->
+    <ti-modal-body id="csrBody">
+        <div class="tip-dsc">
+            <img src="./assets/img/tip/icon_information.svg">
+            <span class="top-tips">{{i18n.plugins_porting_webServerCertificate.import_pre_tip}}</span>
+        </div>
+        <ti-formfield [formGroup]='csrFrom'>
+            <ti-item [label]="label.country" [required]='true'>
+                <input tiText [tiValidation]='validation' formControlName='country' class="input" />
+            </ti-item>
+            <ti-item [label]="label.province">
+                <input tiText [tiValidation]='validation' formControlName='province' class="input" />
+            </ti-item>
+            <ti-item [label]="label.city">
+                <input tiText [tiValidation]='validation' formControlName='city' class="input" />
+            </ti-item>
+            <ti-item [label]="label.organization">
+                <input tiText [tiValidation]='validation' formControlName='organization' class="input" />
+            </ti-item>
+            <ti-item [label]="label.department">
+                <input tiText [tiValidation]='validation' formControlName='department' class="input" />
+            </ti-item>
+            <ti-item [label]="label.commonName" [required]='true'>
+                <input tiText [tiValidation]='validation' formControlName='commonName' class="input" />
+            </ti-item>
+        </ti-formfield>
+    </ti-modal-body>
+    <ti-modal-footer id="csrFooter">
+        <button type="button" tiButton class="little-primary-btn" style="margin-right:20px;width:160px" color="primary"
+            (click)='confirm(context)'
+            [disabled]='!csrFrom.valid || csrSubmitBtn'>{{i18n.common_term_operate_ok}}</button>
+        <button type="button" class="little-minor-btn" style="width:160px"
+            (click)="context.dismiss()">{{i18n.common_term_operate_cancel}}</button>
+    </ti-modal-footer>
+</ng-template>
+<!-- 生成导入证书模态框 -->
+<app-messagebox #csrLeadModal>
+    <div class="content modal-box">
+        <div class="modal-title">
+            <span class="title">{{this.i18n.plugins_porting_webServerCertificate.leadCsr}}</span>
+            <span class="modal-close-icon" (click)="cancel('lead')">
+                <img src="./assets/img/close_icon.svg" />
+                <img src="./assets/img/close_hover.svg">
+            </span>
+        </div>
+        <div class="modal-title-border"></div>
+        <div class="edit-box">
+            <ti-formfield class="csr-lead-from" [formGroup]='csrLeadFrom'>
+                <ti-item [label]="label.csrFile" [required]='true'>
+                    <input tiText formControlName='csrFile' [(ngModel)]='csrLeadList.csrFile'
+                        [placeholder]="i18n.plugins_porting_webServerCertificate.import_placeholder" readonly>
+                    <div style="display: inline-block;">
+                        <button type="button" class="small-secondary-btn" (click)="fileUpload()"
+                            style="display: inline-block; width: 100px; height: 28px; vertical-align: middle; margin-left: 10px;">{{i18n.plugins_porting_webServerCertificate.upload}}
+                            <input type="file" id="uploadCert" style="display: none;" (change)="uploadFile()"
+                                accept=".crt,.cer,.pem" />
+                        </button>
+                    </div>
+                    <div style="color: #979797; font-size: 12px;padding-top:4px;">
+                        {{i18n.plugins_porting_webServerCertificate.import_tip}}</div>
+                </ti-item>
+            </ti-formfield>
+            <div class="btn-box">
+                <button type="button" class="little-primary-btn" style="margin-right:20px; width:160px"
+                    (click)="uploadWebCert()"
+                    [disabled]='!csrLeadList.csrFile'>{{i18n.plugins_porting_webServerCertificate.lead}}</button>
+                <button type="button" class="little-minor-btn" style="width:160px"
+                    (click)="cancel('lead')">{{i18n.common_term_operate_cancel}}</button>
+            </div>
+        </div>
+    </div>
+</app-messagebox>
+
+<!-- 确认更换工作密钥弹窗 start-->
+<app-messagebox #updateKey>
+    <div class="content modal-box">
+        <div class="modal-title" style="margin-left: 16px;">
+            <span class="title">{{i18n.plugins_porting_webServerCertificate.changeCipher}}</span>
+            <span class="modal-close-icon" (click)="cancel('updateKey')">
+                <img src="./assets/img/close_icon.svg">
+                <img src="./assets/img/close_hover.svg">
+            </span>
+        </div>
+        <div class="modal-title-border"></div>
+        <div class="text-box">
+            <p>
+                <img src="./assets/img/home/warn.png" alt="">
+                <span>{{i18n.plugins_porting_webServerCertificate.confirmChangeCipher}}</span>
+            </p>
+            <div class="btn-box">
+                <button type="button" class="little-minor-btn" style="margin-right:20px; width:160px"
+                    (click)="changeSecret()">{{i18n.common_term_operate_ok}}</button>
+                <button type="button" class="little-primary-btn" style="width:160px"
+                    (click)="cancel('updateKey')">{{i18n.common_term_operate_cancel}}</button>
+            </div>
+        </div>
+    </div>
+</app-messagebox>
+<!-- 确认更换工作密钥弹窗 end-->

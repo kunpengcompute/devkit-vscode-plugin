@@ -1,0 +1,31 @@
+<div class="progress-bg" *ngIf="showAlert">
+  <div class="progress-modal" [ngStyle]="{ width: width }">
+    <div class="modal-header">
+      <img [src]="srcType" class="icon" />
+      <span class="title">{{ title }}</span>
+      <span class="close-icon" (click)="alert_close()">
+        <img src="./assets/img/home/close.svg" />
+      </span>
+    </div>
+
+    <div class="madal-content">
+      <span class="content">{{ content }}</span>
+      <ng-content select=".alert-body"></ng-content>
+    </div>
+
+    <div style="text-align: center">
+      <button type="button" color="primary" *ngIf="showOkBtn" tiButton (click)="alert_ok()">
+        {{ i18n.common_term_operate_ok }}
+      </button>
+      <button
+        *ngIf="showCancelBtn"
+        type="button"
+        tiButton
+        style="margin-left: 20px"
+        (click)="alert_close()"
+      >
+        {{ i18n.common_term_operate_cancel }}
+      </button>
+    </div>
+  </div>
+</div>

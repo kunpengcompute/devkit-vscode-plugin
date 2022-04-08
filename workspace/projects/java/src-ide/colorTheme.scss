@@ -1,0 +1,66 @@
+:root {
+    --ti-default-font-color: var(--vscode-editor-foreground);
+    --ti-common-color-line-dividing: #0067ff;
+    --ti-select-small-dominator-text-left-padding: 10px;
+    --ti-input-height: 28px;
+    --ti-input-border-color: #888888;
+    --ti-input-bg-color: transparent;
+    --ti-table-sort-icon-color-active: #0067ff;
+    --ti-table-sort-color-hover: #0067ff;
+    --ti-tree-item-guide-line-color: #545454;
+    .vscode-dark {
+        --ti-default-body-bg: #1e1e1e;
+        --ti-table-td-text-color: #aaaaaa;
+        --mc-color-msgbox-bg: #252526;
+        --ti3-btn-primary-color: #aaaaaa;
+        --ti3-btn-primary-background-color: #313131;
+        --ti3-btn-primary-border-color: #313131;
+        --ti-select-no-allow-color: #616161;
+        --ti-table-border-bottom-color: #545454;
+        --tree-tip-content-background-color: #252526;
+        --table-td-left-color: #252525;
+        --snapshot-compare-threshold-background-color: #12223b;
+        --table-select-background-color: #313131;
+        --modal-body-tip-box-background-color: #111d2c;
+        --modal-body-tip-box-border-color: #15395b;
+
+        --d-e8e8e8-l-222222: #e8e8e8;
+        --d-161616-l-ffffff: #161616;
+        --d-252525-l-f5f9ff: #252525;
+        --d-aaaaaa-l-616161: #aaaaaa;
+        --d-dddddd-l-979797: #dddddd;
+        --d-313131-l-ffffff: #313131;
+        --d-2a2a2a-l-f5f9ff: #2a2a2a;
+        --ti-pagination-text-color: #aaaaaa;
+        --mc-color-faFileInstall-bg: #1e1e1e;
+        --mc-color-msgbox-content: #888888;
+    }
+
+    .vscode-light {
+        --ti-default-body-bg: #ffffff;
+        --ti-table-td-text-color: #222222;
+        --ti3-btn-primary-color: #ccc;
+        --ti3-btn-primary-background-color: #f5f5f5;
+        --ti3-btn-primary-border-color: #ccc;
+        --ti-select-no-allow-color: #999;
+        --ti-table-border-bottom-color: #e1e6ee;
+        --tree-tip-content-background-color: #fff;
+        --table-td-left-color: #f5f9ff;
+        --snapshot-compare-threshold-background-color: #f5f9ff;
+        --table-select-background-color: #f7faff;
+        --modal-body-tip-box-background-color: #f0f6ff;
+        --modal-body-tip-box-border-color: #0067ff;
+        --mc-color-msgbox-bg: #ffffff;
+
+        --d-e8e8e8-l-222222: #222222;
+        --d-161616-l-ffffff: #ffffff;
+        --d-252525-l-f5f9ff: #f5f9ff;
+        --d-aaaaaa-l-616161: #616161;
+        --d-dddddd-l-979797: #979797;
+        --d-313131-l-ffffff: #ffffff;
+        --d-2a2a2a-l-f5f9ff: #f5f9ff;
+        --ti-pagination-text-color: #222222;
+        --mc-color-faFileInstall-bg: #f3f3f3;
+        --mc-color-msgbox-content: #616161;
+    }
+}

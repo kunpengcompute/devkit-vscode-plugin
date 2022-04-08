@@ -1,0 +1,61 @@
+.warpper {
+    display: flex;
+    background-color: #fff;
+    .nothing {
+        background-color: #f0f3fa;
+        border-right: 2px solid #6c92fa;
+        &.templateDetail {
+            width: 0px;
+        }
+        &.reservation {
+            width: 33px;
+        }
+        &.templateImport {
+            display: none;
+        }
+    }
+    .list-warpper {
+        margin: 10px 0px 10px 57px;
+        width: 100%;
+        &.templateImport {
+            margin: 10px 0px 10px 0px;
+        }
+        .lable-right{
+            margin: 20px 0px;
+            p {
+                font-size: 14px;
+            }
+            p:first-child {
+                width:25%;
+                display: inline-block;
+                color: #9EA4B3;
+            }
+            p:last-child {
+                width:70%;
+                display: inline-block;
+                padding-left: 5px;
+                box-sizing: border-box;
+            }
+        }
+    }
+}
+
+:host ::ng-deep .ti3-form {
+    width: 100%;
+    font-size: 14px;
+    .ti3-form-label,
+    .ti3-text-form-label {
+        width: 25%;
+        color: #9ea4b3 !important;
+    }
+    .ti3-text-form-content {
+        ti-item {
+            line-height: 27px;
+        }
+    }
+    tbody:not(.ti3-text-form) .ti3-form-label {
+        padding: 0 16px 16px 0 !important;
+    }
+}
+
+

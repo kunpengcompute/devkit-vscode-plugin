@@ -1,0 +1,47 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Values of Parameters Being None in the Flink, Kafka, and Storm Components">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001224201323.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (System Profiler)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001178722980">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Values of Parameters Being None in the Flink, Kafka, and Storm Components</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001178722980"></a><a name="EN-US_TOPIC_0000001178722980"></a>
+
+<h1 class="topictitle1">Values of Parameters Being None in the Flink, Kafka, and Storm Components</h1>
+<div id="body8662426"><div class="section" id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_section16642114110209"><h4 class="sectiontitle">Symptom</h4><p id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_p348115422011">In the Flink, Kafka, and Storm components of a big data project, some parameters cannot be collected and are displayed as <strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b485894410">None</strong>, as shown in <a href="#EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_fig143361749112112">Figure 1</a>.</p>
+<div class="fignone" id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_fig143361749112112"><a name="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_fig143361749112112"></a><a name="en-us_topic_0000001135274990_fig143361749112112"></a><span class="figcap"><b>Figure 1 </b>Big data collection</span><br><span><img id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_image0336144922110" src="en-us_image_0000001179041598.png"></span></div>
+<p id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_p1964341216225">The parameters are:</p>
+<ul id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_ul558017280224"><li id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_li13580112819221">log.dir</li><li id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_li75801728192219">num.network.threads</li><li id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_li13580028142211">num.io.threads</li><li id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_li45801628152215">compression.type</li><li id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_li95801628162218">num.partitions</li></ul>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_section7360173611223"><h4 class="sectiontitle">Possible Causes</h4><p id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_p09457413214">The <strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b2031511275426">malluma</strong> user does not have the permission to read the <strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b1261154164215">kafka/conf/server.properties</strong> file and cannot collect related parameters.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_section2060875316228"><h4 class="sectiontitle">Procedure</h4><ul id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_ul132881130215"><li id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_li1128811133218">Solution 1: As the <strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b1370619237569">root</strong> user, grant the read permission on the <strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b5423162134513">kafka/conf/server.properties</strong> file to the <strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b44061111144511">malluma</strong> user.</li></ul>
+<ol id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_ol591514422217"><li id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_li1791512443226"><span>Go to the directory where the Kafka configuration file is stored, for example, <strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b108857136467">/etc/kafka/conf</strong>. <strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b1777442314463">/etc</strong> indicates the Kafka installation directory.</span><p><p id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_p202346142318"><strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b152344118236">cd </strong><strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b342210652315"><em id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_i62341512235">/etc/kafka/conf</em></strong></p>
+</p></li><li id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_li242291617233"><span>Modify the permission on the <strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b1715173164719">server.properties</strong> file.</span><p><p id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_p3349182814231"><strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b17349828112317">chmod 644 </strong><strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b19891132172319"><em id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_i17349112815234">server.properties</em></strong></p>
+</p></li></ol>
+<ul id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_ul117351054122513"><li id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_li20735654132514">Solution 2: Install Kafka in the <strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b14509161594716">/etc</strong> or <strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b9133112118472">/usr/local</strong> directory. The tool can read <strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b63331034174713">/etc/kafka/conf/server.properties</strong> or <strong id="EN-US_TOPIC_0000001178722980__en-us_topic_0000001135274990_b78952388476">/usr/local/conf/server.properties</strong> and collect parameters through sudo privilege escalation.</li></ul>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001224201323.html">FAQ</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

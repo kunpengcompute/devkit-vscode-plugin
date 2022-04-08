@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="6px" height="10px" viewBox="0 0 6 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>4组件_2_通用_icon_下拉箭头备份</title>
+    <defs>
+        <path d="M8.9750423,0.5 L1.02468497,0.5 C0.55928566,0.5 0.32401474,1.06187132 0.65442254,1.39042319 L4.62960121,5.3473305 C4.83401693,5.5508898 5.16571037,5.5508898 5.37012609,5.3473305 L9.3453048,1.39042319 C9.6757126,1.06187132 9.4417273,0.5 8.9750423,0.5" id="path-1"></path>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="4组件_2_通用_icon_下拉箭头备份" transform="translate(3.000000, 5.000000) rotate(-90.000000) translate(-3.000000, -5.000000) translate(-2.000000, 2.000000)">
+            <g id="Mask" fill="#888888" fill-rule="nonzero">
+                <path d="M8.9750423,0.5 L1.02468497,0.5 C0.55928566,0.5 0.32401474,1.06187132 0.65442254,1.39042319 L4.62960121,5.3473305 C4.83401693,5.5508898 5.16571037,5.5508898 5.37012609,5.3473305 L9.3453048,1.39042319 C9.6757126,1.06187132 9.4417273,0.5 8.9750423,0.5" id="path-1"></path>
+            </g>
+            <g id="3.颜色/9.辅助文字-Clipped">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="path-1"></g>
+                <g id="3.颜色/9.辅助文字" mask="url(#mask-2)" fill="#888888" fill-rule="nonzero">
+                    <g transform="translate(-3.000000, -5.000000)" id="矩形">
+                        <rect x="0" y="0" width="16" height="16"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

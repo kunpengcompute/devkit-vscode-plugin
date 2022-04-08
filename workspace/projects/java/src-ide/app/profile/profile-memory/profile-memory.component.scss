@@ -1,0 +1,41 @@
+.overview-container {
+    padding-bottom: 50px;
+    height: calc(100vh - 197px);
+    overflow: hidden;
+
+    .title {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .count-proportion {
+        display: inline-block;
+        height: 10px;
+        vertical-align: middle;
+        background: #6C92FA !important;
+    }
+
+    .item-echarts {
+        margin-top: 40px;
+
+    }
+
+    .graph-btn {
+        background: #6C92FA;
+        padding: 8px 25px;
+        border: none;
+        border-radius: 2px;
+        color: #fff;
+        cursor: pointer;
+        &:hover{
+            background: #5b7ede;
+          }
+    }
+
+    .disable-btn {
+        background: #e6ebf5 !important;
+        border: 1px solid #e6ebf5 !important;
+        color: #b8becc !important;
+        cursor: not-allowed;
+    }
+}

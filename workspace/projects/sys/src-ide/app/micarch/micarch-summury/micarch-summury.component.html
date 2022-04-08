@@ -1,0 +1,126 @@
+<div style="height: 100%;">
+    <div class="summury-container" *ngIf="!showLoading">
+        <div class="bar">
+            <div class="title_bar">
+                <div class="left_title">
+                    <span *ngIf="app">{{i18n.common_term_task_crate_path}}<span class="font">{{app}}</span></span>
+                    <span>{{i18n.micarch.cycles}}<span class="font">{{cycles || '--'}}</span></span>
+                    <span>{{i18n.micarch.instructions}}<span class="font">{{instructions|| '--'}}</span></span>
+                    <span>IPC<span class="font">{{ipc || '--'}}</span></span>
+                </div>
+            </div>
+            <div class="right_switch">
+                   <hy-theme-content class="view-switch">
+                    <app-icon-react light name="chartView" *ngIf="isTable" (click)="isTable = false"></app-icon-react>
+                    <app-icon-react light name="chartViewSelected" *ngIf="!isTable" (click)="isTable = false">
+                    </app-icon-react>
+                    <app-icon-react light name="tableView" *ngIf="!isTable" (click)="isTable = true"></app-icon-react>
+                    <app-icon-react light name="tableViewSelected" *ngIf="isTable" (click)="isTable = true">
+                    </app-icon-react>
+
+                    <app-icon-react dark name="chartViewDark" *ngIf="isTable" (click)="isTable = false">
+                    </app-icon-react>
+                    <app-icon-react dark name="chartViewSelectedDark" *ngIf="!isTable" (click)="isTable = false">
+                    </app-icon-react>
+                    <app-icon-react dark name="tableViewDark" *ngIf="!isTable" (click)="isTable = true">
+                    </app-icon-react>
+                    <app-icon-react dark name="tableViewSelectedDark" *ngIf="isTable" (click)="isTable = true">
+                    </app-icon-react>
+                </hy-theme-content>
+            </div>
+        </div>
+        <!-- echarts -->
+        <div class="micarch_echarts" [hidden]="isTable || chartNotShow">
+            <app-icicle-summary [data]="icicleData"></app-icicle-summary>
+        </div>
+        <div *ngIf="chartNotShow" style="height: calc(100% - 37px);">
+            <app-default-page [scene]="'noData'" [height]="'80vh'" [bgColor]="'#1e1e1e'"></app-default-page>
+        </div>
+        <!-- 表格 -->
+        <div class="micarch_table" [hidden]="!isTable || chartNotShow">
+            <ti-table [(displayedData)]="displayed" style="margin-top: 22px;" [srcData]="srcData" [columns]="columns"
+                [closeOtherDetails]="true">
+                <div class="ti3-table-fixed-head">
+                    <table>
+                        <thead>
+                            <tr>
+                                <!--注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+                                <th *ngFor="let column of columns" tiOverflow width="{{column.width}}">
+                                    <div class="content">
+                                        <ti-cell-text>{{ column.title }}</ti-cell-text>
+
+                                        <app-sub-module-table-sort *ngIf="column.sortKey"
+                                            [sortStatus]="column.sortStatus"
+                                            (sortTable)="doSort(column.sortKey, $event)"></app-sub-module-table-sort>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+                <div>
+                    <table class="subModuleFunctionTable">
+                        <thead>
+                            <tr *ngFor="let column of columns">
+                                <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                                <th tiOverflow width="{{column.width}}"></th>
+                            </tr>
+                        </thead>
+
+                        <tbody *ngFor="let node of displayed">
+                            <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                            <!-- 不知道怎么去除子组件的app-标签，暂时先全部列出来 -->
+                            <tr>
+                                <td *ngFor="let n of countArr[node.levelIndex]" width="40px" class="front"
+                                    style="min-width: 0px;">
+                                </td>
+                                <td [ngStyle]=" {'padding-left': 24 + (node.children ? 0 : 20)
+                                + 'px' }" tiOverflow>
+                                    <button *ngIf="node.children" class="angleBtn" (click)="toggle(node)">
+                                        <ti-icon [name]="'angle-right'" [ngClass]="{active: node.expand}"></ti-icon>
+                                    </button>
+                                    <span style="margin-left:24px">{{ node.name }}</span>
+                                </td>
+
+                                <td width="50%" style="padding-left: 10px;">
+                                    <span [ngClass]="{red: node.max}" [tiTip]='node.suggestions && tipContent'
+                                        tiTipMaxWidth='500px' [tiTipContext]='node' tiTipHasArrow='false'
+                                        tiTipPosition="right">
+                                        {{ node.proportion }}
+                                        {{ !node.proportion && node.proportion !== 0 ? '' : '%' }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <tbody *ngIf="displayed.length === 0">
+                            <tr class="ti3-table-nodata-simple">
+                                <td class='chen-nodata-td'><img style='width:13%;display:block'
+                                        src='./assets/img/projects/nodata-dark.png' />
+                                    <div style="font-size: 1.3rem">{{noDataInfo}}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </ti-table>
+        </div>
+    </div>
+    <app-loading *ngIf="showLoading" [size]="'max'" [height]="'80vh'" [bgColor]="'#1e1e1e'"></app-loading>
+
+    <!-- 优化建议显示 -->
+    <ng-template #tipContent let-context='context'>
+        <ti-formfield [type]="'text'" [title]="context.suggestions.title" class="suggestionsForm">
+            <ti-item [label]="i18n.micarch.suggestions.des" [show]="context.suggestions.desc !== undefined">
+                <span>{{ context.suggestions.desc }}</span>
+            </ti-item>
+            <ti-item [label]="i18n.micarch.suggestions.possibleCause" [show]="context.suggestions.cause !== undefined">
+                <span>{{ context.suggestions.cause }}</span>
+            </ti-item>
+            <ti-item [label]="i18n.micarch.suggestions.solution" [show]="context.suggestions.tips !== undefined">
+                <span>{{ context.suggestions.tips }}</span>
+            </ti-item>
+        </ti-formfield>
+    </ng-template>
+</div>

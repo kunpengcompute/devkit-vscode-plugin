@@ -1,0 +1,30 @@
+<div class="table-title">{{i18n.sysPerfDetailed.equipCon}}</div>
+<app-general-table [dataList]="diskData" [columns]="usageTitle" (trigger)="triggerPop($event, viewStack)"></app-general-table>
+<ng-template #viewStack let-context='context'>
+    <ti-modal-header>{{ 'net_io.details' | i18n:selectedDev }}</ti-modal-header>
+    <ti-modal-body class="dev-modal">
+        <div class="table-title first">{{i18n.sysPerfDetailed.diskInfo}}</div>
+        <app-common-table [isDetails]="false" [isFilters]="true" [commonTableData]="diskInfoData"></app-common-table>
+        <div class="table-title">{{i18n.sysPerfDetailed.raidInfo}}</div>
+        <app-common-table [isDetails]="false" [isFilters]="true" [commonTableData]="raidData"></app-common-table>
+        <div class="table-title">{{i18n.sysPerfDetailed.openFile}}</div>
+        <app-general-table [dataList]="fileData" [columns]="fileTitle" (trigger)="filePop($event, fileDetails, context)"></app-general-table>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <div>
+            <button tiButton (click)="context.dismiss()">{{i18n.common_term_operate_close}}</button>
+        </div>
+    </ti-modal-footer>
+</ng-template>
+<ng-template #fileDetails let-context='context'>
+    <ti-modal-header>{{ fileName }}</ti-modal-header>
+    <ti-modal-body>
+        <div class="table-title">{{i18n.sysPerfDetailed.file_info_title}}</div>
+        <app-general-table [dataList]="filesysData" [columns]="filesysTitle"></app-general-table>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <div>
+            <button tiButton (click)="context.dismiss()">{{i18n.common_term_operate_close}}</button>
+        </div>
+    </ti-modal-footer>
+</ng-template>

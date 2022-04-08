@@ -1,0 +1,16 @@
+$col0067ff: #0067ff;
+
+.BCFile {
+  box-sizing: border-box;
+  height: 32px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  padding: 0 10px;
+  border: 1px solid $col0067ff;
+  background-color: #f0f6ff;
+  color: $col0067ff;
+  line-height: 32px;
+  .suggestion {
+    margin-left: 24px;
+  }
+}

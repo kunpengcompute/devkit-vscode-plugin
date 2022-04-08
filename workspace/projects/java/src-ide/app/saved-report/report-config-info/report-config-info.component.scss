@@ -1,0 +1,23 @@
+.info-box {
+    .tab-cell {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        padding-bottom: 20px;
+        .cell-title {
+            flex-shrink: 0;
+            width: 200px;
+            padding-right: 20px;
+            box-sizing: border-box;
+            color: var(--d-aaaaaa-l-616161);
+            
+        }
+        .detail-text {
+            color: var(--d-e8e8e8-l-222222);
+        }
+    }
+    .split {
+        border-bottom: 1px dashed #4b4b4b;
+        margin-bottom: 20px;
+    }
+}

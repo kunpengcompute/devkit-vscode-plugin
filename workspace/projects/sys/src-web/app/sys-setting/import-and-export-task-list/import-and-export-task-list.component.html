@@ -1,0 +1,117 @@
+<div class="modal-dialog configItemBox">
+  <div class="header boxHeader">{{ i18n.project.importAndExportTask }}</div>
+
+  <div class="boxMain" [appLoading]="isLoading">
+    <ti-table
+      [(displayedData)]="table.displayed"
+      [srcData]="table.srcData"
+      [columns]="table.columns"
+      tiColsResizable
+      class="custemTable"
+      (stateUpdate)="stateUpdate($event)"
+    >
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr>
+              <ng-container *ngFor="let column of table.columns">
+                <th tiOverflow width="{{column.width}}">{{ column.label }}</th>
+              </ng-container>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <div class="ti3-table-container ti3-resize-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <ng-container *ngFor="let column of table.columns">
+                <th width="{{column.width}}"></th>
+              </ng-container>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let row of table.displayed; let index = index">
+              <td tiOverflow>{{ row.taskname || '--' }}</td>
+              <td tiOverflow>{{ row.projectname || '--' }}</td>
+              <td tiOverflow>{{ operateTypes[row.operation_type] || '--' }}</td>
+
+              <!-- 任务状态 -->
+              <td tiOverflow>
+                <div class="taskStatusTdContent">
+                  <div class="status">
+                    <ng-container [ngSwitch]="row.status.status">
+                      <!-- succeeded -->
+                      <div *ngSwitchCase="'succeeded'" class="statusIcon succeeded"></div>
+              
+                      <!-- failed -->
+                      <div *ngSwitchCase="'failed'" class="statusIcon failed"></div>
+              
+                      <!-- running -->
+                      <div *ngSwitchCase="'running'" class="running"></div>
+
+                      <!-- uploading -->
+                      <div *ngSwitchCase="'uploading'" class="running"></div>
+                    </ng-container>
+                  </div>
+    
+                  <span tiOverflow class="info">{{ row.status.text }}</span>
+                </div>
+              </td>
+              <td tiOverflow>{{ row.detail_info || '--' }}</td>
+              <td tiOverflow>{{ row.size || '--' }}</td>
+              <td tiOverflow>{{ row.start_time? ( row.start_time| timeProcess ): '--' }}</td>
+              <td tiOverflow>{{ row.end_time? (row.end_time | timeProcess) : '--' }}</td>
+
+              <!-- 操作 -->
+              <td tiOverflow>
+                <div class="operateBox">
+                  <ng-container *ngIf="row.operateList?.length; else noOperate">
+                    <span
+                      class="operateIcon"
+                      *ngFor="let operate of row.operateList"
+                      [ngStyle]="{width: operate.width}"
+                      (click)="!operate.disabled && handleOperate(row, operate)"
+                      [ngClass]="{disabled: (userInfo.role !== 'Admin' && userInfo.id !== row.ownerId)}"
+                    >{{ operate.text }}</span>
+                  </ng-container>
+
+                  <ng-template #noOperate>
+                    <span>--</span>
+                  </ng-template>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 无数据 -->
+        <div *ngIf="!table.displayed.length && !isLoading" class='chen-nodata-td unsetPosition'>
+          <img src='./assets/img/projects/nodata.png' />
+          <div>{{ i18n.common_term_task_nodata }}</div>
+        </div>
+      </div>
+
+      <ti-pagination
+        [(currentPage)]="table.pageNo"
+        [pageSize]="table.pageSize"
+        [(totalNumber)]="table.total"
+        [showGotoLink]="true"
+      ></ti-pagination>
+    </ti-table>
+  </div>
+</div>
+
+<!-- 下载任务 -->
+<app-download-task-modal #downloadTaskModal></app-download-task-modal>
+
+<!-- 查看任务 -->
+<app-view-task-modal #viewTaskModal></app-view-task-modal>
+
+<!-- 导入任务 -->
+<app-import-task-modal #importTaskModel></app-import-task-modal>
+
+<!-- 导出任务 -->
+<app-export-task-modal #exportTaskModel></app-export-task-modal>

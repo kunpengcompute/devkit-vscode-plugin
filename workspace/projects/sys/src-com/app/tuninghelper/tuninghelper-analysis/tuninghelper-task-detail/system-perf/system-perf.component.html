@@ -1,0 +1,30 @@
+<div class="system-container">
+  <header>
+    <app-system-cpu-target
+      (cpuTargetInit)="onCpuTargetInit($event)"
+      (cpuTargetChange)="onCpuTargetChange($event)">
+    </app-system-cpu-target>
+    <hy-theme-content
+      (click)="switchView()"
+      [tiTip]="i18n.tuninghelper.taskDetail.switchCoreViewTip"
+      tiTipPosition="top">
+      <app-icon-react name="viewSwitch" [freeze]="isNumaView ? 'active' : ''" light></app-icon-react>
+      <app-icon-react name="viewSwitchDark" [freeze]="isNumaView ? 'active' : ''" dark></app-icon-react>
+    </hy-theme-content>
+  </header>
+  <app-system-bubble-gragh
+    (currCoreViewChange)="onCurrCoreViewChange($event)"
+    [allTargetThreshold]="allTargetThreshold"
+    [cpuTarget]="cpuTarget"
+    [isNumaView]="isNumaView"
+    [optimizationType]="optimizationType">
+  </app-system-bubble-gragh>
+  <div class="topology-tree">
+    <app-topology-tree-detail
+      [optimizationType]="optimizationType"
+      [currCoreView]="currCoreView"
+      [cpuTarget]="cpuTarget"
+      [isNumaView]="isNumaView">
+    </app-topology-tree-detail>
+  </div>
+</div>

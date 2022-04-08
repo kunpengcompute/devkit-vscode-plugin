@@ -1,0 +1,479 @@
+<div class="pcie-details-warpper" [ngClass]="theme$ | async">
+  <div class="topology-diagram">
+    <app-cpu-topology [cpuData]="cpuData" (sendData)="getNodeData($event)"></app-cpu-topology>
+  </div>
+  <div class="status-information">
+    <div class="main-table" *ngIf="!nodeDetails || nodeDetails.type === 1">
+      <div class="process-unbinding">
+        <div class="tible-title">
+          <span class="title-left">{{i18n.pcieDetailsinfo.processBindingTitle}}</span>
+          <ti-select style="width: 120px;" [options]='processOptions' [(ngModel)]="processSelected" id="processselect"
+            (ngModelChange)="processSelectedChange($event)">
+          </ti-select>
+        </div>
+        <div class="table-content">
+          <ti-searchbox *ngIf="isShowPrecessSearchBox" [(ngModel)]="searchProcessInput"
+            (ngModelChange)="setProcessSearch($event)" (blur)="hidePrcoessSearchBox()"
+            [placeholder]="i18n.common_search_input_tip">
+          </ti-searchbox>
+          <ti-table *ngIf="processSelected.value==='processview'" [(displayedData)]="pidBindTopTen.displayed"
+            [srcData]="pidBindTopTen.srcData" [searchWords]="searchProcessWords" [searchKeys]="searchProcessKeys"
+            [columns]="pidBindTopTen.columns">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th tiOverflow width="{{pidBindTopTen.columns[0].width}}">
+                      <ti-cell-text>{{pidBindTopTen.columns[0].title}}
+                        <ti-icon class="pcie-table-search" name="search" (click)="searchProcess('pid')"></ti-icon>
+                      </ti-cell-text>
+                    </th>
+                    <th tiOverflow width="{{pidBindTopTen.columns[1].width}}">
+                      <ti-cell-text>{{pidBindTopTen.columns[1].title}}
+                        <ti-icon class="pcie-table-search" name="search" (click)="searchProcess('name')"></ti-icon>
+                      </ti-cell-text>
+                    </th>
+                    <th tiOverflow width="{{pidBindTopTen.columns[2].width}}">{{pidBindTopTen.columns[2].title}}</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container" style="height:330px;">
+              <table>
+                <thead>
+                  <tr>
+                    <th *ngFor="let column of pidBindTopTen.columns" width="{{column.width}}"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of pidBindTopTen.displayed" class="ti3-table-color">
+                    <td tiOverflow>{{row.key}}</td>
+                    <td tiOverflow>{{row.cmdline}}</td>
+                    <td tiOverflow><span
+                        (click)="viewMoreDetail(row,'TOP10_process')"><a>{{row.affinity_mask}}</a></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ti-pagination [(currentPage)]="pidBindTopTen.currentPage" [pageSize]="pidBindTopTen.pageSize"
+              [(totalNumber)]="pidBindTopTen.totalNumber" [showGotoLink]="true">
+            </ti-pagination>
+          </ti-table>
+          <ti-table *ngIf="processSelected.value==='cpuView'" [(displayedData)]="displayedCpu" [srcData]="srcDataCpu"
+            [columns]="columnsCpu" class="ti3-table-small">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th tiOverflow *ngFor="let column of columnsCpu" width="{{column.width}}">{{column.title}}</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container" style="height:330px;">
+              <table>
+                <thead>
+                  <tr>
+                    <th *ngFor="let column of columnsCpu" width="{{column.width}}"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of displayedCpu" class="ti3-table-color">
+                    <td tiOverflow>{{row.key}}</td>
+                    <td tiOverflow (click)="viewMoreDetail(row,'TOP10_cpu')"><a>{{row.str_value}}</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ti-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber"
+              [showGotoLink]="true">
+            </ti-pagination>
+          </ti-table>
+        </div>
+      </div>
+      <div class="other-binding">
+        <!-- 硬中断绑核状态 -->
+        <div class="left-hard-interrupt other-table" *ngIf="showOld">
+          <div class="tible-title">
+            <span class="title-left">{{i18n.pcieDetailsinfo.hardInterruptTitle}}</span>
+            <ti-select style="width: 120px;" [options]='hardInterruptOptions' [(ngModel)]="hardInterruptSelected"
+              id="hardInterruptSelect" (ngModelChange)="hardInterruptSelectedChange($event)">
+            </ti-select>
+          </div>
+          <div>
+            <ti-searchbox *ngIf="isShowIrqSearchBox" [(ngModel)]="searchIrqInput" (ngModelChange)="setIrqSearch($event)"
+              (blur)="hideIrqSearchBox()" [placeholder]="i18n.common_search_input_tip">
+            </ti-searchbox>
+          </div>
+          <ti-table *ngIf="hardInterruptSelected.value==='interruptsView'" [(displayedData)]="displayedIrq"
+            [srcData]="srcDataIrq" [columns]="columnsIrq" [searchWords]="searchIrqWords" [searchKeys]="searchIrqKeys"
+            class="ti3-table-small">
+            <!--.ti3-table-fixed-head是表头的容器，它的子元素中的table(thead)是实际显示的表头-->
+            <!--注意:此处一定要使用.ti3-table-fixed-head样式类-->
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th width="{{columnsIrq[0].width}}">
+                      <ti-cell-text>{{columnsIrq[0].title}}</ti-cell-text>
+                      <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                      <ti-head-sort [sortKey]="columnsIrq[0].sortKey"></ti-head-sort>
+                    </th>
+                    <th width="{{columnsIrq[1].width}}">
+                      <ti-cell-text>{{columnsIrq[1].title}}</ti-cell-text>
+                      <ti-icon class="pcie-table-search" name="search" (click)="searchIrq('device')"></ti-icon>
+                    </th>
+                    <th width="{{columnsIrq[2].width}}">
+                      <ti-cell-text>{{columnsIrq[2].title}}</ti-cell-text>
+                      <ti-icon class="pcie-table-search" name="search" (click)="searchIrq('event')"></ti-icon>
+                    </th>
+                    <th width="{{columnsIrq[3].width}}">
+                      <ti-cell-text>{{columnsIrq[3].title}}</ti-cell-text>
+                      <!-- asc接口指定初始排序是升序(true)还是降序(false)-->
+                      <ti-head-sort [sortKey]="columnsIrq[3].sortKey"></ti-head-sort>
+                    </th>
+                    <th width="{{columnsIrq[4].width}}">
+                      <ti-cell-text>{{columnsIrq[4].title}}</ti-cell-text>
+                    </th>
+                    <th width="{{columnsIrq[5].width}}">
+                      <ti-cell-text>{{columnsIrq[5].title}}</ti-cell-text>
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container" style="height:330px;">
+              <table>
+                <thead>
+                  <tr>
+                    <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                    <th *ngFor="let column of columnsIrq" width="{{column.width}}"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of displayedIrq" class="ti3-table-color">
+                    <td tiOverflow>{{row.key}}</td>
+                    <td tiOverflow>{{row.irq_device_name}}</td>
+                    <td tiOverflow>{{row.irq_event_name}}</td>
+                    <td tiOverflow>{{row.irq_count}}</td>
+                    <td tiOverflow>{{row.affinity_mask}}</td>
+                    <td tiOverflow><span
+                        (click)="viewMoreDetail(row, 'Irq')"><a>{{i18n.pcieDetailsinfo.viewMore}}</a></span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ti-pagination [(currentPage)]="currentPageIrq" [pageSize]="pageSizeIrq" [(totalNumber)]="totalNumberIrq">
+            </ti-pagination>
+          </ti-table>
+          <ti-table *ngIf="hardInterruptSelected.value==='cpuView'" [(displayedData)]="displayedIrqCpu"
+            [srcData]="srcDataIrqCpu" [columns]="columnsIrqCpu" class="ti3-table-small">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th tiOverflow *ngFor="let column of columnsIrqCpu" width="{{column.width}}">{{column.title}}</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container" style="height:330px;">
+              <table>
+                <thead>
+                  <tr>
+                    <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                    <th *ngFor="let column of columnsIrqCpu" width="{{column.width}}"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of displayedIrqCpu" class="ti3-table-color">
+                    <td tiOverflow>{{row.key}}</td>
+                    <td tiOverflow (click)="viewMoreDetail(row, 'Irq_cpu')"><a>{{row.str_value}}</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ti-pagination [(currentPage)]="currentPageIrqCpu" [pageSize]="pageSizeIrqCpu"
+              [(totalNumber)]="totalNumberIrqCpu">
+            </ti-pagination>
+          </ti-table>
+        </div>
+        <!-- XPS/RPS绑核状态信息 -->
+        <div class="right-xps other-table" *ngIf="showOld">
+          <div class="tible-title">
+            <span class="title-left">{{i18n.pcieDetailsinfo.xrsBindingTitle}}</span>
+            <ti-select style="width: 120px;" [options]='xpsOptions' [(ngModel)]="xpsSelected"
+              (ngModelChange)="xpsSelectedChange($event)" id="xpsSelect">
+            </ti-select>
+          </div>
+          <div>
+            <ti-searchbox *ngIf="isShowXpsSearchBox" [(ngModel)]="searchXpsInput" (ngModelChange)="setXpsSearch($event)"
+              (blur)="hideXpsSearchBox()" [placeholder]="i18n.common_search_input_tip">
+            </ti-searchbox>
+          </div>
+          <ti-table *ngIf="xpsSelected.value==='xpsView'" [(displayedData)]="displayedXps" [srcData]="srcDataXps"
+            [columns]="columnsXps" [searchWords]="searchXpsWords" [searchKeys]="searchXpsKeys" class="ti3-table-small">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th width="{{columnsXps[0].width}}">
+                      <ti-cell-text>{{columnsXps[0].title}}</ti-cell-text>
+                      <ti-icon class="pcie-table-search" name="search" (click)="searchXps()"></ti-icon>
+                    </th>
+                    <th width="{{columnsXps[1].width}}">{{columnsXps[1].title}}</th>
+                    <th width="{{columnsXps[2].width}}">{{columnsXps[2].title}}</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container" style="height:330px;">
+              <table>
+                <thead>
+                  <tr>
+                    <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                    <th *ngFor="let column of columnsXps" width="{{column.width}}"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of displayedXps" class="ti3-table-color">
+                    <td tiOverflow>{{row.key}}</td>
+                    <td tiOverflow>{{row.affinity_mask}}</td>
+                    <td tiOverflow><span
+                        (click)="viewMoreDetail(row,'Xps')"><a>{{i18n.pcieDetailsinfo.viewMore}}</a></span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ti-pagination [(currentPage)]="currentPageXps" [pageSize]="pageSizeXps" [(totalNumber)]="totalNumberXps">
+            </ti-pagination>
+          </ti-table>
+          <ti-table *ngIf="xpsSelected.value==='cpuView'" [(displayedData)]="displayedXpsCpu" [srcData]="srcDataXpsCpu"
+            [columns]="columnsXpsCpu" class="ti3-table-small">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th tiOverflow *ngFor="let column of columnsXpsCpu" width="{{column.width}}">{{column.title}}</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container" style="height:330px;">
+              <table>
+                <thead>
+                  <tr>
+                    <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                    <th *ngFor="let column of columnsXpsCpu" width="{{column.width}}"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of displayedXpsCpu" class="ti3-table-color">
+                    <td tiOverflow>{{row.key}}</td>
+                    <td tiOverflow (click)="viewMoreDetail(row,'Xps_cpu')"><a>{{row.str_value}}</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <ti-pagination [(currentPage)]="currentPageXpsCpu" [pageSize]="pageSizeXpsCpu"
+              [(totalNumber)]="totalNumberXpsCpu">
+            </ti-pagination>
+          </ti-table>
+        </div>
+        <div *ngIf="!showOld">
+          <app-port-hard-inter [allIrqData]="allIrqData" [allIrqCPUData]="allIrqCPUData"
+            [singleIrqCPUData]="singleIrqCPUData" [ipiInfo]="ipiInfo" [numaNum]="numaNum"></app-port-hard-inter>
+        </div>
+      </div>
+      <!-- 中断分布统计 -->
+      <app-inter-dis-static [softwareData]="softwareInterData" [hardwareData]="allIrqCPUData" [cpuData]="cpuUsageInfo"
+        [irqData]="allIrqData" *ngIf="cpuUsageInfo">
+      </app-inter-dis-static>
+    </div>
+    <div class="node-details" *ngIf="nodeDetails && nodeDetails.type !== 1">
+      <div class="info-box" *ngFor="let key of nodeConfigInfoKeys">
+        <title class="info-title">{{ nodeDetails.nodeData.node_config_info[key].name[language] }}</title>
+        <div class="info-divider"></div>
+        <div class="info-content">
+          <app-node-info-panel [nodeInfo]="nodeDetails.nodeData.node_config_info[key]"
+            *ngIf=" nodeDetails.nodeData.node_config_info[key].name.en !== 'IO stat information'"></app-node-info-panel>
+          <app-pcie-io-detail [nodeInfo]="nodeDetails.nodeData.node_config_info[key]"
+            *ngIf=" nodeDetails.nodeData.node_config_info[key].name.en === 'IO stat information'"></app-pcie-io-detail>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #viewDetailMaskCpu let-context='context'>
+    <ti-modal-header>{{ popTitle }}</ti-modal-header>
+    <ti-modal-body>
+      <div class="viewDetail-content">
+        <div class="content-title">
+          <div class="content-title-left">
+            <span>CPU core</span>
+            <span>{{top10CpuCoreNum}}</span>
+          </div>
+        </div>
+        <div class="content-boxs content-boxs-cpu">
+          <ti-table *ngIf="isPopTableTtpe === 'TOP10_cpu'" [(displayedData)]="displayedPop" [srcData]="srcDataPop"
+            [columns]="columnsProcessCPUPop">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <!--实际显示的表头。注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+                    <th tiOverflow *ngFor="let column of columnsProcessCPUPop" width="{{column.width}}">{{column.title}}
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container" style="height:320px;">
+              <table>
+                <thead>
+                  <tr>
+                    <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                    <th *ngFor="let column of columnsProcessCPUPop" width="{{column.width}}"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of srcDataPop">
+                    <td tiOverflow>{{row.key}}</td>
+                    <td tiOverflow>{{row.cmdline}}</td>
+                    <td tiOverflow (click)="viewMoreDetail(row,'TOP10_process')"><a>{{row.affinity_mask}}</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ti-table>
+          <ti-table *ngIf="isPopTableTtpe === 'Irq_cpu'" [(displayedData)]="displayedPop" [srcData]="srcDataPop"
+            [columns]="columnsIrqCPUPop">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <!--实际显示的表头。注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+                    <th tiOverflow *ngFor="let column of columnsIrqCPUPop" width="{{column.width}}">{{column.title}}
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container" style="height:320px;">
+              <table>
+                <thead>
+                  <tr>
+                    <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                    <th *ngFor="let column of columnsIrqCPUPop" width="{{column.width}}"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of srcDataPop">
+                    <td tiOverflow>{{row.key}}</td>
+                    <td tiOverflow>{{row.key}}</td>
+                    <td tiOverflow>{{row.irq_device_name}}</td>
+                    <td tiOverflow>{{row.irq_event_name}}</td>
+                    <td tiOverflow>{{row.irq_count}}</td>
+                    <td tiOverflow (click)="viewMoreDetail(row, 'Irq')"><a>{{row.affinity_mask}}</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ti-table>
+          <ti-table *ngIf="isPopTableTtpe === 'Xps_cpu'" [(displayedData)]="displayedPop" [srcData]="srcDataPop"
+            [columns]="columnsXpscessCPUPop">
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <!--实际显示的表头。注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+                    <th tiOverflow *ngFor="let column of columnsXpscessCPUPop" width="{{column.width}}">{{column.title}}
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="ti3-table-container" style="height:320px;">
+              <table>
+                <thead>
+                  <tr>
+                    <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                    <th *ngFor="let column of columnsXpscessCPUPop" width="{{column.width}}"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of srcDataPop">
+                    <td tiOverflow>{{row.key}}</td>
+                    <td tiOverflow (click)="viewMoreDetail(row,'Xps')"><a>{{row.affinity_mask}}</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ti-table>
+        </div>
+      </div>
+    </ti-modal-body>
+    <ti-modal-footer>
+      <button type="button" (click)="context.close()" tiButton>{{ i18n.common_term_operate_close }}</button>
+    </ti-modal-footer>
+  </ng-template>
+
+  <ng-template #viewDetailMask let-context='context'>
+    <ti-modal-header>{{ popTitle }}</ti-modal-header>
+    <ti-modal-body>
+      <div class="viewDetail-content">
+        <div class="content-title">
+          <div class="content-title-left">
+            <span>{{ popProcessTitleLeft }}</span>
+            <span>{{ popProcessTitleRight }}</span>
+          </div>
+          <div>
+            <div>
+              <span style="margin-right: 16px;">{{popProcessRight}}</span>
+              <span>{{popProcess}}</span>
+            </div>
+            <div class="pcie-detail-legend">
+              <p>
+                <span class="legend-icon">P</span>
+                <span class="legend-label">Process</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="content-boxs">
+          <div class="box" *ngFor="let item of irqToCoreData;index as i">
+            <div class="box-title">
+              <span>CPU{{ getCpuNumber(i) }}</span>
+              <span>NUMA{{ i }}</span>
+            </div>
+            <div class="cpu-box">
+              <ng-container *ngFor="let itemCpu of item">
+                <div class="core" [tiTip]="tipContent" [tiTipContext]="itemCpu" tiTipPosition="right">
+                  <span class="is-bind-cpu-process-pcie" *ngIf="itemCpu.isBind">P</span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ti-modal-body>
+    <ti-modal-footer>
+      <button type="button" (click)="context.close()" tiButton>{{ i18n.common_term_operate_close }}</button>
+    </ti-modal-footer>
+  </ng-template>
+
+  <ng-template #tipContent let-context='context'>
+    <ti-formfield [type]="'text'" [labelWidth]="'50px'" [textLineHeight]="'30px'">
+      <ti-item [label]="'Core'">
+        <span>{{context.core}}</span>
+      </ti-item>
+      <ti-item *ngIf="context.irqNum != null" [label]="i18n.pcieDetailsinfo.interrupt_number">
+        <span>{{context.irqNum}}</span>
+      </ti-item>
+      <ti-item [label]="i18n.pcieDetailsinfo.bindingState">
+        <span>{{context.isBind ? i18n.popInfo.nuclear_tied : i18n.popInfo.untied_nuclear}}</span>
+      </ti-item>
+    </ti-formfield>
+  </ng-template>
+</div>

@@ -1,0 +1,28 @@
+<div>
+    <app-banner></app-banner>
+    <div class="new-task-container">
+        <div class="top-title">
+            <div class="top-tip">
+                <img src="./assets/img/common/icon-success.svg" alt="">
+                <div>{{i18n.plugins_perf_title_projectSuccess}}</div>
+            </div>
+            <div class="bottom-tip">{{i18n.plugins_perf_title_viewTip}}</div>
+        </div>
+        <div class="analysis-target">
+            <div class="analysis-target-title">{{i18n.plugins_perf_title_sysAnalysisProcess}}</div>
+            <div class="analysis-target-lists">
+                <div class="analysis-target-list">
+                    <img src="./assets/img/home1/new_target.svg" />
+                    <p class="active" (click)="openNewTask()">
+                        {{i18n.plugins_perf_label_newTarget}}
+                    </p>
+                </div>
+                <div class="arrow"><img src="./assets/img/home1/arrow.svg" alt=""></div>
+                <div class="analysis-target-list">
+                    <img src="./assets/img/home1/new_report.svg" />
+                    <p class="no-active">{{i18n.plugins_perf_label_checkReport}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

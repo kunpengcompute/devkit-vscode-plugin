@@ -1,0 +1,59 @@
+.light {
+  --box-item-txt-color: #222;
+  --box-item-bg: rgba(184, 190, 204, 0.1);
+  --box-item-click-bg: #f0f6ff;
+  --check-disable-border-color: #ccc;
+}
+.dark {
+  --box-item-txt-color: #e8e8e8;
+  --box-item-bg: #161616;
+  --box-item-click-bg: rgba(0, 103, 255, 0.3);
+  --vscode-editor-background: #e8e8e8;
+  --ti-input-text-color: #e8e8e8;
+  --check-disable-border-color: #616161;
+}
+
+.check-box {
+  display: flex;
+  flex-wrap: wrap;
+
+  .box-item {
+    box-sizing: border-box;
+    position: relative;
+    height: 28px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 0 34px 0 24px;
+    margin-right: 24px;
+    color: var(--box-item-txt-color);
+    background: var(--box-item-bg);
+    cursor: pointer;
+
+    .ti3-checkbox {
+      margin-right: 24px;
+    }
+    .ti3-checkbox:last-child {
+      margin-right: 0;
+    }
+
+    img {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  }
+  .click-item {
+    background: var(--box-item-click-bg);
+  }
+  .wrap{
+    margin-bottom: 20px;
+  }
+}
+.check-box .box-item:last-child {
+  margin-right: 0;
+}
+
+:host ::ng-deep .box-item .select-item input[type='checkbox'][tiCheckbox][disabled]:checked + .ti3-checkbox .ti3-checkbox-skin{
+  border-color: var(--check-disable-border-color);
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-fail16</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon-fail16">
+            <g id="icon-错误">
+                <path d="M8,0 C3.6,0 0,3.6 0,8 C0,12.4 3.6,16 8,16 C12.4,16 16,12.4 16,8 C16,3.6 12.4,0 8,0 Z" id="XMLID_298_" fill="#F45C5E"></path>
+                <path d="M10.9565217,4 L12,5.04347826 L8.93377225,7.9053565 L8.819,8.014 L8.93115511,8.12173357 L12,10.9565217 L10.9565217,12 L8.14580774,8.94197614 L7.999,8.801 L7.85419226,8.94197614 L5.04347826,12 L4,10.9565217 L7.06884489,8.12173357 L7.18,8.014 L7.06622775,7.9053565 L4,5.04347826 L5.04347826,4 L7.85613412,7.09853685 L8,7.235 L8.14386588,7.09853685 L10.9565217,4 Z" id="形状结合" fill="#FFFFFF" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

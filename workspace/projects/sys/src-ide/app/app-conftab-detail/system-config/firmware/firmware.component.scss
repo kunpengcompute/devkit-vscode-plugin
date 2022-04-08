@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+}
+.base_info {
+  width: calc(100% - 2vw);
+}
+
+.base_info td {
+  vertical-align: top;
+  font-size: 14px;
+  color: #282b33;
+}
+
+.tiTip {
+  margin-left: 7px;
+  margin-top: 1px;
+  vertical-align: -3%;
+}
+
+.tit {
+  color: #6c7280;
+  padding-right: 10vw;
+  padding-bottom: 20px;
+  width: 5vw;
+}
+
+.base_line {
+  height: 45px;
+}
+.base_line .line_td {
+  margin-top: 12.5px;
+  width: 100%;
+  height: 0;
+  border-bottom: 2px dotted #d4d9e6;
+}

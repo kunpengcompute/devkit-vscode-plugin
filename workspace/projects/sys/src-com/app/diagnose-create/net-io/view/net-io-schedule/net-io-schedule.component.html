@@ -1,0 +1,146 @@
+<div class="warpper" [ngClass]="theme$ | async">
+  <!-- 文本展示 -->
+  <div class="prefix-miss">
+    <ti-formfield [labelWidth]="outsideLabelWidth">
+      <ti-item [label]="'common_term_task_name' | i18n">
+        <span>{{ taskData.taskName }}</span>
+      </ti-item>
+      <ti-item [label]="'diagnostic.taskParams.diagnosticTarget' | i18n">
+        <span>{{ "diagnostic.taskParams.networkIO" | i18n }}</span>
+      </ti-item>
+    </ti-formfield>
+  </div>
+
+  <!-- 表单 -->
+  <div class="form" [formGroup]="formGroup">
+    <!-- 诊断功能选项 -->
+    <div class="control">
+      <ti-formfield [labelWidth]="outsideLabelWidth">
+        <ti-item
+          [label]="'network_diagnositic.taskParams.diagnositic_scen' | i18n"
+          [required]="true"
+        >
+          <app-check-box-control formControlName="functions">
+          </app-check-box-control>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <!-- 网络拨测参数  -->
+    <div class="control prefix-miss" [hidden]="!formOption.dialing.display">
+      <app-netio-collapse [title]="'network_diagnositic.net_dial_test' | i18n">
+        <app-network-dialing
+          formControlName="dialing"
+          [nodeOptions]="nodeOptions"
+          [labelWidth]="insideLabelWidth"
+          content
+        ></app-network-dialing>
+      </app-netio-collapse>
+    </div>
+
+    <!-- 任务节点 -->
+    <div class="control" [hidden]="!formOption.taskNodeIp.display">
+      <ti-formfield [labelWidth]="outsideLabelWidth || '109px'">
+        <ti-item
+          [label]="'network_diagnositic.taskParams.task_node' | i18n"
+          [required]="true"
+        >
+          <ti-select
+            [multiple]="true"
+            formControlName="taskNodeIp"
+            [options]="nodeOptions"
+            labelKey="label"
+            valueKey="value"
+            style="width: 326px"
+          >
+          </ti-select>
+          <div style="margin-top: 8px; color: #979797">
+            {{ "network_diagnositic.taskParams.task_node_txt" | i18n }}
+          </div>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <!-- 丢包诊断参数 -->
+    <div class="control prefix-miss">
+      <app-netio-collapse
+        [title]="'network_diagnositic.packetLoss' | i18n"
+        [hidden]="!formOption.packetLoss.display"
+      >
+        <app-network-packet-loss
+          formControlName="packetLoss"
+          [labelWidth]="insideLabelWidth"
+          content
+        ></app-network-packet-loss>
+      </app-netio-collapse>
+    </div>
+
+    <!-- 网络抓包参数 -->
+    <div class="control prefix-miss">
+      <app-netio-collapse
+        [title]="'network_diagnositic.netCaught' | i18n"
+        [hidden]="!formOption.netCaught.display"
+      >
+        <app-network-caught
+          formControlName="netCaught"
+          [labelWidth]="insideLabelWidth"
+          content
+        ></app-network-caught>
+      </app-netio-collapse>
+    </div>
+
+    <!-- 网路负载监控  -->
+    <div class="control prefix-miss">
+      <app-netio-collapse
+        [title]="'network_diagnositic.load' | i18n"
+        [hidden]="!formOption.load.display"
+      >
+        <app-network-load
+          formControlName="load"
+          content
+          [labelWidth]="insideLabelWidth"
+        ></app-network-load>
+      </app-netio-collapse>
+    </div>
+
+    <!-- 预约定时启动 -->
+    <div class="control prefix-miss" *ngIf="formOption.doOrder.display">
+      <ti-formfield [labelWidth]="outsideLabelWidth">
+        <ti-item [label]="'network_diagnositic.taskParams.reservation' | i18n">
+          <ti-switch formControlName="doOrder"></ti-switch>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <!-- 预约定时编辑控件 -->
+    <div class="control" *ngIf="formOption.orderConfig.display">
+      <div>
+        <app-mission-reservation-plus
+          formControlName="orderConfig"
+          [labelWidth]="outsideLabelWidth"
+        >
+        </app-mission-reservation-plus>
+      </div>
+    </div>
+
+    <!-- 立即启动 -->
+    <div class="control" *ngIf="formOption.taskStartNow.display">
+      <div class="immediately">
+        <input tiCheckbox type="checkbox" formControlName="taskStartNow" />
+        <span class="start-now">{{
+          "network_diagnositic.taskParams.immediate" | i18n
+        }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 操作 -->
+  <div class="opreation">
+    <button tiButton type="button" color="primary" (click)="onConfirm()">
+      {{ "network_diagnositic.taskParams.confirm" | i18n }}
+    </button>
+    <button tiButton type="button" (click)="onCancel()">
+      {{ "network_diagnositic.taskParams.cancel" | i18n }}
+    </button>
+  </div>
+</div>

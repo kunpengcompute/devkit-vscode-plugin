@@ -1,0 +1,8 @@
+<div class="divider" #divider>
+  <div *ngIf="!showDivider" class="toggle-btn" (click)='toggleLeft()' [ngClass]="{'activeToggle': expendState}">
+    <hy-theme-content>
+      <img dark src="./assets/img/newSvg/toggle_dark.svg" />
+      <img light src="./assets/img/newSvg/toggle_light.svg" />
+    </hy-theme-content>
+  </div>
+</div>

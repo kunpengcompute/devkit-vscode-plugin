@@ -1,0 +1,77 @@
+:host ::ng-deep .storage_io_detail {
+  --ti-tab-header-text-color-active: #0067ff;
+
+  height: 100%;
+  box-sizing: border-box;
+
+  .ti3-tabs-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .ti3-tabs-container1 {
+      flex-shrink: 0;
+      padding: 0 32px;
+
+      .ti3-tabs > li.ti3-tab-active:not(.disabled) {
+        border-bottom: 2px solid #0067ff;
+
+        & > a {
+          color: #0067ff !important;
+        }
+      }
+
+      .ti3-tabs > li {
+        height: 34px;
+        font-size: 16px;
+        color: var(--ti-tab-header-text-color);
+        line-height: 24px;
+
+        & > a {
+          padding-top: 0 !important;
+          height: 34px !important;
+        }
+      }
+
+      .ti3-tabs > li:not(.disabled) > a:focus {
+        color: #0067ff;
+      }
+
+      .ti3-tabs > li:not(.disabled) > a:hover {
+        color: var(--common-color-font-primary);
+      }
+    }
+
+    .ti3-tab-content {
+      flex: 1;
+      overflow: auto;
+      box-sizing: border-box;
+    }
+  }
+}
+
+::ng-deep {
+  // web适配
+  body.light {
+    .storage_io_detail {
+      width: 104%;
+      margin-left: -2%;
+      padding-top: 24px;
+    }
+    .ti3-tab-content {
+      padding: 0 32px 24px;
+    }
+  }
+
+  // vscode适配
+  body.vscode-light,
+  body.vscode-dark {
+    .storage_io_detail {
+      width: calc(100% + 32px * 2);
+      margin-left: -32px;
+    }
+    .ti3-tab-content {
+      padding: 0 32px;
+    }
+  }
+}

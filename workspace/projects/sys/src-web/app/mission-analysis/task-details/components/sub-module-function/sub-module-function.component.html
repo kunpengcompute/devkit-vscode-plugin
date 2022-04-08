@@ -1,0 +1,165 @@
+<!-- 任务详情-子模块-函数 -->
+<div class="function">
+  <ti-select id="myselect" [options]='optionList' labelKey='label' [(ngModel)]="selectOption" placeholder=''
+    (ngModelChange)="doSelectOption($event)"></ti-select>
+
+  <ti-table [(displayedData)]="displayed" class="subModuleFunction" [srcData]="srcData" [columns]="columns"
+    [closeOtherDetails]="closeOtherDetails">
+    <div class="ti3-table-fixed-head">
+      <table>
+        <thead>
+          <tr *ngFor="let thead of theads">
+            <ng-container *ngFor="let column of thead; let index = columnIndex">
+              <!--注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+              <th width="{{column.width}}" [attr.rowspan]="column.rowspan" [attr.colspan]="column.colspan">
+                <div class="content" [ngClass]="{center: column.align}">
+                  <ti-cell-text>{{ column.title }}</ti-cell-text>
+
+                  <app-sub-module-table-sort *ngIf="column.sortKey" [sortStatus]="column.sortStatus"
+                    (sortTable)="sortTable(column.sortKey, $event)"></app-sub-module-table-sort>
+
+                  <img *ngIf="column.children && column.children.length" src="./assets/img/summary/row.png" alt=""
+                    [ngClass]="{expand: column.expand}" (click)="expandColumn.emit(column)">
+                </div>
+              </th>
+            </ng-container>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <div class="ti3-table-container ti3-resize-wrapper">
+      <table class="subModuleFunctionTable">
+        <thead>
+          <tr>
+            <ng-container *ngFor="let column of columns; let index = columnIndex">
+              <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+              <th tiOverflow *ngIf="column.show || column.show === undefined" width="{{column.width}}"></th>
+            </ng-container>
+          </tr>
+        </thead>
+
+        <tbody>
+          <ng-container *ngFor="let node of displayed">
+            <tr>
+              <ng-container *ngFor="let column of columns; let index = index">
+                <ng-container *ngIf="!index; else TidTd">
+                  <td details-icon-column [ngStyle]="{'padding-left': 18 * node.levelIndex + 'px'}">
+                    <ng-container *ngFor="let item of [].constructor(node.levelIndex); index as index">
+                      <div [style.width.px]="18 * (node.levelIndex - index)" class="indentLine"></div>
+                    </ng-container>
+                    <div class="tdContent" [ngStyle]="{'padding-left': 10 + (node.children ? 0 : 20) + 'px'}">
+                      <button *ngIf="node.children" class="angleBtn" [disabled]="node.disabled" (click)="toggle(node)"
+                        details-icon-column>
+                        <!--详情图标设置，传入行数据-->
+                        <ti-details-icon *ngIf="node.hasDetails; else expandIcon" [row]="node"></ti-details-icon>
+
+                        <ng-template #expandIcon>
+                          <ti-icon [tiTip]='node.tip' tiTipPosition='bottom' [name]="'angle-right'"
+                            [ngClass]="{active: node.expand}"></ti-icon>
+                        </ng-template>
+                      </button>
+
+                      <span *ngIf="node.level !== 'Function'; else functionName" tiOverflow>{{ node[column.prop] |
+                        thousandSeparator }}</span>
+
+                      <ng-template #functionName>
+                        <span (click)="addFunctionTab.emit(node)" class="canClick" [ngClass]="{'readed': node.isReaded}" tiOverflow>{{ node[column.prop] }}</span>
+                      </ng-template>
+                    </div>
+                  </td>
+                </ng-container>
+
+                <!-- tid要hover显示cmdline -->
+                <ng-template #TidTd>
+                  <td tiOverflow *ngIf="column.prop === 'tid'; else otherTd">
+                    <span [ngClass]="{tipField: node.cmdline}" [tiTip]='node.cmdline && cmdlineField'
+                      [tiTipContext]='node.cmdline' tiTipPosition="top">
+                      {{ node[column.prop] | thousandSeparator }}
+                    </span>
+                  </td>
+                </ng-template>
+
+                <ng-template #otherTd>
+                  <td tiOverflow [ngClass]="{red: node.maximumField === column.prop}">
+                    {{ node[column.prop] | thousandSeparator}}
+                    {{ addPercentSignFields.includes(column.prop) && node[column.prop] && node[column.prop] !== 'NaN' ?
+                    '%' : '' }}
+                  </td>
+                </ng-template>
+              </ng-container>
+            </tr>
+
+            <!--详情内容行tiDetailsTr，传入行数据-->
+            <ng-container *ngIf="node.details">
+              <tr *tiDetailsTr="node">
+                <div class="ti3-details-td">
+                  <div class="ti3-table-detail-container"
+                    [ngStyle]="{'padding-left': 18 * node.levelIndex + 'px', width: detailColspan * 100 + 10 + '%'}" >
+                    <ng-container *ngFor="let item of [].constructor(node.levelIndex); index as index">
+                      <div [style.width.px]="18 * (node.levelIndex - index)" class="indentLine"></div>
+                    </ng-container>
+                    <ti-table [(displayedData)]="node.details.displayed" [srcData]="node.details.srcData"
+                      [columns]="node.details.columns" class="ti3-table-nest">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th *ngFor="let column of node.details.columns" tiOverflow width="{{column.width}}">
+                              {{column.title}}</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr *ngFor="let row of node.details.displayed">
+                            <ng-container *ngFor="let column of node.details.columns">
+                              <ng-container *ngIf="column.prop === 'callstack'; else otherDetailsTd">
+                                <td [tiTip]='tipCallStackContent' [tiTipContext]='row[column.prop]'
+                                  tiTipPosition='right' tiTipMaxWidth='unset'>{{ row[column.prop] | thousandSeparator }}
+                                </td>
+                              </ng-container>
+
+                              <ng-template #otherDetailsTd>
+                                <td tiOverflow>{{ row[column.prop] | thousandSeparator}}</td>
+                              </ng-template>
+                            </ng-container>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <ti-pagination [(currentPage)]="node.details.currentPage" [pageSize]="node.details.pageSize"
+                        [(totalNumber)]="node.details.totalNumber" style="margin-left: 10px;"></ti-pagination>
+                    </ti-table>
+                  </div>
+                </div>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+
+      <!-- 无数据 -->
+      <div *ngIf="!isLoading && !displayed.length" class='chen-nodata-td'>
+        <img style='width:13%;display:block;margin-bottom: 10px;' src='./assets/img/projects/nodata.png' />
+        <div style="font-size: 14px">{{ i18n.common_term_task_nodata }}</div>
+      </div>
+    </div>
+    <ti-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber">
+    </ti-pagination>
+  </ti-table>
+
+  <ng-template #tipContent let-context='context'>
+    <div class="stack-tip" [innerHTML]="context">
+    </div>
+  </ng-template>
+
+  <!-- cmdline -->
+  <ng-template #cmdlineField let-context='context'>
+    <div>{{ context }}</div>
+  </ng-template>
+
+  <!-- callStack内容模板 -->
+  <ng-template #tipCallStackContent let-context='context'>
+    <div style="white-space: pre-line;" [innerHTML]="context">
+    </div>
+  </ng-template>
+</div>

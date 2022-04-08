@@ -1,0 +1,62 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Failed to Collect HPC Task Data on Ubuntu">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001178881562.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (Tuning Assistant)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001178723020">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Failed to Collect HPC Task Data on Ubuntu</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001178723020"></a><a name="EN-US_TOPIC_0000001178723020"></a>
+
+<h1 class="topictitle1">Failed to Collect HPC Task Data on Ubuntu</h1>
+<div id="body8662426"><p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p537371412176">The python scripting function in the perf script is disabled on Ubuntu 13.04 and later. As a result, data fails to be collected in an HPC analysis task. To support this function on Ubuntu, recompile and replace the perf in the OS.</p>
+<ol id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_ol98621954308"><li id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_li7370185105317"><span>Use an SSH tool to remotely log in to the Linux CLI as the root user.</span></li><li id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_li15104173713364"><span>Run the <strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b12449215373">uname -r</strong> command to view the current kernel version.</span><p><p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p0546143116373"><span><img id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_image13217187103812" src="en-us_image_0000001224361407.png"></span></p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p865121183718">In this example, the kernel version is 4.15.0.</p>
+</p></li><li id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_li167171326131712"><span>Run the following command to download the perf version matching the kernel.</span><p><p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p2598115902513"><strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b106713151263">mkdir /home/linux_kernel</strong></p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p14869612201118"><strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b14633163110114">cd /home/linux_kernel</strong></p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p13493182511219"><strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b197159312353">apt-get update</strong></p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p1777544810352">In <strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b175023891719">apt-get source linux-source-&lt;</strong><em id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_i17796159161717">kernel-version</em><strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b55031789178">&gt;</strong>, <em id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_i1444012042510">kernel-version</em> is the result obtained in <strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b71561617112013">step 2</strong>.</p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p1044114617416">Download the source code, as shown in the following figure:</p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p13126455164312"><span><img id="EN-US_TOPIC_0000001178723020__image528465629" src="en-us_image_0000001223882957.png"></span></p>
+</p></li><li id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_li9201515181820"><span>Compile the perf.</span><p><p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p1991132414472">Run the following command to check what packages are missing in the current version.</p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p187051369445"><strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b17869145414450">cd /home/linux_kernel/linux_4.15.0/tools/perf</strong></p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p2642174574611"><strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b19696154944611">make</strong></p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p863921710273"><span><img id="EN-US_TOPIC_0000001178723020__image1663709339" src="en-us_image_0000001179041678.png"></span></p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p68620388264">If the console displays a message indicating that some packages are missing, install those as prompted.</p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p163141950192617">The python scripting function requires <strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_b1266714416232">python-dev libelf-dev libunwind-dev libaudit-dev libslang2-dev</strong>.</p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p144186304444">Run the following commands to install the packages:</p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p139837507"><strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b262581218502">apt-get install python-dev libelf-dev libunwind-dev libaudit-dev libslang2-dev</strong></p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p088811110515"><strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b43151221205111">make</strong></p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p1790751319514"><strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b633032110514">make install</strong></p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p976793732716"><span><img id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_image8767937142715" src="en-us_image_0000001224201475.png"></span></p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p1917411661512">The command output shows that the libaudit, libelf, libpython, libslang, libunwind, lzma, and bpf are enabled.</p>
+</p></li><li id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_li15828133715530"><span>Run the following commands to check whether the compilation is successful:</span><p><p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p14596143713516"><strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b1449091124111">cd /home/linux_kernel</strong></p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p1318472613414"><strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b10503311415">/home/linux_kernel/linux-4.15.0/tools/perf/perf record</strong></p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p15181334173410"><strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b16517131164114">/home/linux_kernel/linux-4.15.0/tools/perf/perf script -g python</strong></p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p386011597184">If a <strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_b8603840243">perf-script.py</strong> file is generated in the directory, the compilation is successful.</p>
+<p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p113298442214"><span><img id="EN-US_TOPIC_0000001178723020__image84606028" src="en-us_image_0000001223882949.png"></span></p>
+</p></li><li id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_li101251442016"><span>Run the following command to replace the existing perf. Then the python scripting function is available on Ubuntu.</span><p><p id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_p127303204404"><strong id="EN-US_TOPIC_0000001178723020__en-us_topic_0000001118002414_en-us_topic_0000001117602894_b1078111710418">cp /home/linux_kernel/linux-4.15.0/tools/perf/perf /usr/bin</strong></p>
+</p></li></ol>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001178881562.html">Common Operations</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="12px" viewBox="0 0 80 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>分组 34</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M0,0 L9.11107923,10.6295924 C10.9752941,12.8045097 12,15.5745537 12,18.4390889 L12,61.5609111 C12,64.4254463 10.9752941,67.1954903 9.11107923,69.3704076 L0,80 L0,80 L0,0 Z" id="path-1"></path>
+        <filter x="-4.2%" y="-0.6%" width="108.3%" height="101.2%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="-1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.901960784   0 0 0 0 0.921568627   0 0 0 0 0.960784314  0 0 0 1 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <polygon id="path-3" points="0 0 8 0 4 5"></polygon>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="HTTP-Request-Hot-Spots（Start-To-Instrument）备份-2" transform="translate(-920.000000, -584.000000)">
+            <g id="分组-34" transform="translate(960.000000, 590.000000) rotate(-270.000000) translate(-960.000000, -590.000000) translate(954.000000, 550.000000)">
+                <g id="矩形">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <path stroke="#267DFF" stroke-width="1" d="M0.5,1.3516287 L0.5,78.6483713 L8.73145093,69.0450119 C10.5179901,66.9607161 11.5,64.3060907 11.5,61.5609111 L11.5,18.4390889 C11.5,15.6939093 10.5179901,13.0392839 8.73145093,10.9549881 L0.5,1.3516287 Z" stroke-linejoin="square"></path>
+                </g>
+                <g id="icon-下展" transform="translate(6.000000, 40.500000) scale(-1, 1) rotate(90.000000) translate(-6.000000, -40.500000) translate(2.000000, 38.000000)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <g id="蒙版"></g>
+                    <g id="颜色/9EA4B3" mask="url(#mask-4)" fill="#267DFF" fill-rule="evenodd" stroke-width="1">
+                        <g id="颜色/888888">
+                            <rect id="矩形备份" x="0" y="0" width="8" height="5"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

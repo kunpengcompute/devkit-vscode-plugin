@@ -1,0 +1,238 @@
+<div class="content user-manage">
+    <p class="create-title">{{ i18n.common_term_user_info[0] }}</p>
+    <div class="user-content modal-dialog-container">
+        <div class="flex">
+            <button type="button" tiButton id="mybutton2" (click)='createUser()' class="create-btn btn64">{{
+                i18n.common_term_create_user_title }}</button>
+        </div>
+        <ti-table [(displayedData)]="displayed" class="user-table" [srcData]="userList" [columns]="columns"
+            tiColsResizable>
+            <div class="ti3-table-fixed-head">
+                <table>
+                    <thead>
+                        <tr>
+                            <th *ngFor="let column of columns" width="{{column.width}}">{{ column.title }}</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="ti3-table-container ti3-resize-wrapper" [hyNodata]="{text: i18n.common_term_task_nodata }" [nodataShow]="displayed.length === 0">
+                <table>
+                    <thead>
+                        <tr>
+                            <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                            <th tiOverflow *ngFor="let column of columns" width="{{column.width}}"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of displayed">
+                            <td tiOverflow>{{row.username}}</td>
+                            <td tiOverflow>{{row.role1}}</td>
+                            <td tiOverflow>{{row.workspace}}</td>
+                            <td tiOverflow>
+                                <a *ngIf="row.role === 'Admin'"
+                                    (click)="updatePassword(row)">{{i18n.common_term_user_info[2]}}</a>
+                                <a *ngIf="row.role === 'User'" class="reset-pwd"
+                                    (click)="resetPwd(row)">{{i18n.common_term_operate_reset}}</a>
+                                <a *ngIf="row.role === 'User'" class="del-text"
+                                    (click)="showDelUser($event, true, row)">{{i18n.common_term_operate_del}}</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ti-pagination *ngIf="totalNumber>10" [(currentPage)]="currentPage" [pageSize]="pageSize"
+                [(totalNumber)]="totalNumber" [showGotoLink]="showGotoLink">
+            </ti-pagination>
+        </ti-table>
+    </div>
+</div>
+
+<!-- creater-user modal start -->
+<app-pop-mask #mask2>
+    <div class="content mask2" style="height: 100%;" [ngStyle]="{
+    width: currLang == 'en-us' ? '650px' : '560px'
+  }" *ngIf="pwdShow">
+        <span class="modal-title">{{i18n.common_term_create_user}}</span>
+        <div class="img-box">
+            <img src="./assets/img/common/modal_close.svg" (mousedown)="closeUserOpt($event)" />
+        </div>
+        <div class="edit-box">
+            <ti-formfield [formGroup]="createRoleForm">
+                <ti-item [label]="label.Name" [required]="true">
+                    <input type="text" tiText [tiValidation]="validation" (keyup)="stopBack($event)"
+                        (keydown)="stopBack($event)" formControlName="name"
+                        oncopy="return false"
+                        oncontextmenu="return false"
+                        oncut="return false"
+                        (blur)="getUsrName()"
+                        maxlength="32">
+                    <p class="name-tip">{{i18n.common_term_create_tip}}</p>
+                </ti-item>
+                <ti-item [label]="label.Workspace">
+                    <input type="text" tiText formControlName="workspace" [(ngModel)]="workspace" disabled>
+                </ti-item>
+            </ti-formfield>
+            <div style="margin-top:20px;">
+                <ti-formfield [formGroup]="createRoleForm">
+                    <ti-item [label]="label.AdminPwd" [required]="true">
+                        <input type="password" tiText [tiValidation]="validation" formControlName="cadminPwd"
+                            oncopy="return false" oncontextmenu="return false" (keyup)="stopBack($event)"
+                            (keydown)="stopBack($event)" oncut="return false" maxlength="32">
+                    </ti-item>
+                </ti-formfield>
+            </div>
+            <div style="margin-top: 20px">
+                <ti-formfield [formGroup]="editPwd">
+                    <ti-item [label]="label.Pwd" [required]="true">
+                        <input tiText [tiValidation]="validation" formControlName="pwd" type="password"
+                            autocomplete="new-password" oncopy="return false" oncontextmenu="return false"
+                            (keyup)="stopBack($event)" (keydown)="stopBack($event)" oncut="return false" maxlength="32">
+                    </ti-item>
+                    <ti-item [label]="label.Cpwd" [required]="true">
+                        <input tiText [tiValidation]="validation" formControlName="cpwd" type="password"
+                            oncopy="return false" oncontextmenu="return false" (keyup)="stopBack($event)"
+                            (keydown)="stopBack($event)" oncut="return false" maxlength="32"
+                            (keyup.enter)="userOpt()"
+                        >
+                    </ti-item>
+                </ti-formfield>
+            </div>
+        </div>
+        <div class="btn-box">
+            <button type="button" color="primary" tiButton
+                class="user-sure-btn" (click)="userOpt()">{{ i18n.common_term_operate_ok }}</button>
+            <button type="button" tiButton class="user-close-btn" (mousedown)="closeUserOpt($event)">{{
+                i18n.common_term_operate_cancel }}</button>
+        </div>
+    </div>
+</app-pop-mask>
+<!-- creater-user modal end -->
+
+<!-- update-pwd modal start -->
+<app-pop-mask #updatePwdModal>
+    <div class="content mask2 update-modal" *ngIf="pwdShow">
+        <span class="modal-title">{{i18n.common_term_operate_change}}</span>
+        <div class="img-box">
+            <img src="./assets/img/common/modal_close.svg" (mousedown)="closeUserPwd($event)" />
+        </div>
+        <div class="edit-box">
+            <ti-formfield [formGroup]="changePwdForm" [labelWidth]="'110px'">
+                <ti-item [label]="label.Name">
+                    <input 
+                        tiText class="inp-width300" disabled
+                        [tiValidation]="validation" formControlName="userName">
+                </ti-item>
+                <ti-item [label]="label.oldPwd" [required]="true">
+                    <input tiText [tiValidation]="validation" formControlName="oldPwd" autocomplete="new-password"
+                        type="password" style="width: 300px;" oncopy="return false" oncontextmenu="return false"
+                        (keyup)="stopBack($event)" (keydown)="stopBack($event)" oncut="return false" maxlength="32">
+                </ti-item>
+                <ti-item [label]="label.newPwd" [required]="true">
+                    <input tiText [tiValidation]="validation" formControlName="pwd" type="password"
+                        style="width: 300px;" oncopy="return false" oncontextmenu="return false"
+                        (keyup)="stopBack($event)" (keydown)="stopBack($event)" oncut="return false" maxlength="32">
+                </ti-item>
+                <ti-item [label]="label.Cpwd" [required]="true">
+                    <input tiText [tiValidation]="validation" formControlName="cpwd" type="password"
+                        style="width: 300px;" oncopy="return false" oncontextmenu="return false"
+                        (keyup)="stopBack($event)" (keydown)="stopBack($event)" oncut="return false"
+                        (keyup.enter)="setUserPwd()" maxlength="32">
+                </ti-item>
+            </ti-formfield>
+        </div>
+        <div class="btn-box">
+            <button type="button" color="primary" tiButton class="user-sure-btn"
+                (click)="setUserPwd()">{{i18n.common_term_operate_ok}}</button>
+            <button type="button" tiButton
+                (mousedown)="closeUserPwd($event)">{{i18n.common_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-pop-mask>
+<!-- update-pwd modal end -->
+
+<!-- rest-pwd modal start -->
+<app-pop-mask #mask5>
+    <div class="content mask2" [ngStyle]="{ width: currLang == 'en-us' ? '650px' : '560px' }" *ngIf="pwdShow">
+        <span class="modal-title">{{ i18n.common_term_operate_reset }}</span>
+        <div class="img-box">
+            <img src="./assets/img/common/modal_close.svg" (mousedown)="closeResetPwdOpt($event)" />
+        </div>
+        <div class="edit-box">
+            <div style="margin-left: 16px;">
+                <ti-formfield [formGroup]="createRoleForm">
+                    <ti-item [label]="label.Name">
+                        <input 
+                            tiText class="inp-width300" disabled
+                            [tiValidation]="validation" formControlName="name">
+                    </ti-item>
+                    <ti-item [label]="label.Workspace">
+                        <input type="text" tiText [tiValidation]="validation" formControlName="workspace" disabled
+                            value="workspace">
+                    </ti-item>
+                </ti-formfield>
+            </div>
+            <div style="margin-top:20px;">
+                <ti-formfield [formGroup]="resetPwdForm">
+                    <ti-item [label]="label.AdminPwd" [required]="true">
+                        <input type="password" tiText [tiValidation]="validation" formControlName="radminPwd"
+                            oncopy="return false" oncontextmenu="return false" (keyup)="stopBack($event)"
+                            (keydown)="stopBack($event)" oncut="return false" maxlength="32">
+                    </ti-item>
+                </ti-formfield>
+            </div>
+            <div style="margin-top: 20px">
+                <ti-formfield [formGroup]="editPwd">
+                    <ti-item [label]="label.newPwd" [required]="true">
+                        <input tiText [tiValidation]="validation" formControlName="pwd" type="password"
+                            autocomplete="new-password" oncopy="return false" oncontextmenu="return false"
+                            (keyup)="stopBack($event)" (keydown)="stopBack($event)" oncut="return false" maxlength="32">
+                    </ti-item>
+                    <ti-item [label]="label.Cpwd" [required]="true">
+                        <input tiText [tiValidation]="validation" formControlName="cpwd" type="password"
+                            oncopy="return false" oncontextmenu="return false" (keyup)="stopBack($event)"
+                            (keydown)="stopBack($event)" oncut="return false" (keyup.enter)="resetPwdOpt()"
+                            maxlength="32">
+                    </ti-item>
+                </ti-formfield>
+            </div>
+        </div>
+        <div class="btn-box">
+            <button type="button" color="primary" tiButton class="user-sure-btn"
+                (click)="resetPwdOpt()">{{i18n.common_term_operate_ok}}</button>
+            <button type="button" tiButton class="user-close-btn"
+                (mousedown)="closeResetPwdOpt($event)">{{i18n.common_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-pop-mask>
+<!-- rest-pwd modal end -->
+
+<!-- del-user modal start -->
+<app-pop-mask #delUserMask>
+    <div class="content delUserMask" *ngIf="pwdShow">
+        <div class="del-header">
+            <p class="title">{{ i18n.common_term_operate_delete_title }}</p>
+            <img src="./assets/img/header/icon_header_pop_close.svg" alt="" (mousedown)="showDelUser($event, false)" />
+        </div>
+        <div class="tip">
+            <img src="./assets/img/system/icon_system_warn_1.svg" />
+            <span>{{i18n.common_term_operate_delete_tip1}}</span>
+        </div>
+        <div class="form">
+            <ti-formfield [formGroup]="delRoleForm">
+                <ti-item [required]="true" [label]="label.AdminPwd">
+                    <input class="admin-ipt" id="abdc" type="password" tiText [tiValidation]="validation" formControlName="dadminPwd" oncopy="return false"
+                        oncontextmenu="return false" (keyup)="stopBack($event)" (keydown)="stopBack($event)"
+                        oncut="return false" maxlength="32">
+                </ti-item>
+            </ti-formfield>
+        </div>
+        <div class="btn-box" style="position: relative;margin: 32px 0;">
+            <button type="button" tiButton class="user-sure-btn" style="margin-right: 16px;"
+                (click)="deleteUser()">{{i18n.common_term_operate_ok}}</button>
+            <button type="button" color="primary" tiButton class="user-close-btn"
+                (mousedown)="showDelUser($event, false)">{{i18n.common_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-pop-mask>
+<!-- del-user modal end -->

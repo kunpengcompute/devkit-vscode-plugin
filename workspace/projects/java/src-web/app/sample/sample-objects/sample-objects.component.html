@@ -1,0 +1,127 @@
+<div class="method-box-objects">
+  <div class="top-box" style="display: flex;">
+    <div class="table-left" style="flex: 1; width: 45%;">
+      <span class="box-title">{{
+        i18n.protalserver_sampling_object_class.label
+      }}</span>
+      <div class="search-box">
+        <ti-searchbox
+           class="search"
+          [placeholder]="searchValue.placeholder"
+          (clear)="searchClear($event)"
+          (search)="keySearch($event)"
+          [(ngModel)]="searchValue.value"
+        ></ti-searchbox>
+      </div>
+      <ti-table
+       [(displayedData)]="displayed"
+       [srcData]="srcData" 
+       [columns]="columns"
+       [searchWords]="searchWords"
+       [searchKeys]="searchKeys"
+       tiColsResizable>
+        <div class="ti3-table-fixed-head">
+          <table>
+            <thead>
+              <tr>
+                <th style="padding-left: 12px;" width="{{ columns[0].width }}">
+                  <ti-cell-text>{{
+                    i18n.protalserver_sampling_object_class.name
+                  }}</ti-cell-text>
+                  <ti-head-sort [sortKey]="columns[0].sortKey"></ti-head-sort>
+                </th>
+                <th width="{{ columns[1].width }}">
+                  <ti-cell-text>{{
+                    i18n.protalserver_sampling_object_class.max_count
+                  }}</ti-cell-text>
+                  <ti-head-sort [sortKey]="columns[1].sortKey"></ti-head-sort>
+                </th>
+                <th width="{{ columns[2].width }}">
+                  <ti-cell-text>{{
+                    i18n.protalserver_sampling_object_class.max_size
+                  }}</ti-cell-text>
+                  <ti-head-sort [sortKey]="columns[2].sortKey"></ti-head-sort>
+                </th>
+                <th width="{{ columns[3].width }}">
+                  <ti-cell-text>{{
+                    i18n.protalserver_sampling_object_class.total_allocation +
+                    i18n.common_term_java_parentheses_left + 'MiB' + i18n.common_term_java_parentheses_right
+                  }}</ti-cell-text>
+                  <ti-head-sort [sortKey]="columns[3].sortKey"></ti-head-sort>
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="ti3-table-container ti3-resize-wrapper" style="max-height: 370px; min-height: 370px;">
+          <table>
+            <thead>
+              <tr [ngStyle]="{'opacity': 0}">
+                <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                <th [ngStyle]="{ 'padding-left': idx == 0 ? '12px' : 0 }" tiOverflow
+                  *ngFor="let column of columns; let idx = index" width="{{ column.width }}"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of displayed; let idx = index" (click)="showClassMemory(row, idx)"  
+                [ngStyle]="{'background-color': row.isSelect ? '#F7FAFF' : ''}">
+                <td style="padding-left: 12px; cursor: pointer;" tiOverflow>
+                  {{ row.name }}
+                </td>
+                <td style="padding-left: 12px;" tiOverflow>
+                  <span *ngIf="row.maxRealCount">{{row.maxRealCount | separator}}</span>
+                  <span *ngIf="!row.maxRealCount">--</span>
+                </td>
+                <td style="padding-left: 12px;" tiOverflow>
+                  <span *ngIf="row.maxRealSize">{{row.maxRealSize | separator}}</span>
+                  <span *ngIf="!row.maxRealSize">--</span>
+                </td>
+                <td style="padding-left: 12px;" tiOverflow>
+                  <span *ngIf="row.tlabSize">{{row.tlabSize | separator}}</span>
+                  <span *ngIf="!row.tlabSize">--</span>
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="displayed.length === 0">
+              <tr class="noHover">
+                <td tiColspan>
+                    <div class="noData noDataRight">
+                        <div >
+                            <img class='newNoData' src="./assets/img/projects/noData.svg" />
+                            <p>{{i18n.common_term_task_nodata}}</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <ti-pagination [(currentPage)]="currentPage"
+          [pageSize]="pageSize"
+          [(totalNumber)]="totalNumber">
+          </ti-pagination>
+      </ti-table>
+    </div>
+    <div class="table-right" style="flex: 1; margin-left: 20px;padding-bottom: 0;">
+      <span class="box-title box-echars">{{
+        i18n.protalserver_sampling_object_memory
+      }}</span>
+      <div echarts [options]="memChart" (chartInit)="onChartInit($event)" (chartClick)="chartClick($event)"
+        *ngIf="seriesData.length"></div>
+      <div class="loadData" *ngIf="!seriesData.length">
+        <img class='newNoData' src="./assets/img/projects/noData.svg" />
+        <div style="font-size: 1.1rem; position: relative; color: #333;">
+          {{ i18n.common_term_task_nodata }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tree-container" style="margin-top: 20px;">
+    <div class="box-title">{{ i18n.protalserver_sampling_object_stackTrance }}</div>
+    <div class="config-border"></div>
+    <div class="config-tree">
+      <app-stack-tree #stackTrace [recordId]="recordId" [eventType]="eventType"></app-stack-tree>
+    </div>
+    <div class="config-border"></div>
+  </div>
+</div>

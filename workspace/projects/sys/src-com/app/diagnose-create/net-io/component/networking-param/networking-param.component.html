@@ -1,0 +1,164 @@
+<div class="targetAndClient" [ngClass]="theme$ | async">
+  <div class="target">
+    <!-- 服务端任务节点 -->
+    <div class="control">
+      <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+        <ti-item
+          [label]="'network_diagnositic.taskParams.server_task_node' | i18n"
+          [required]="true"
+        >
+          <div style="position: relative">
+            <ti-select
+              formControlName="serverIp"
+              [options]="serverNodeOptions"
+              [tiValidation]="{ type: 'blur' }"
+              [clearable]="true"
+              [errorMessageWrapper]="errorServerIPMsg"
+              style="width: 325px"
+              valueKey="value"
+            ></ti-select>
+            <span class="location" #errorServerIPMsg></span>
+          </div>
+        </ti-item>
+      </ti-formfield>
+    </div>
+    <!-- 服务端IP -->
+    <div class="control">
+      <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+        <ti-item
+          [label]="'network_diagnositic.taskParams.server_ip' | i18n"
+          [required]="true"
+        >
+          <div style="position: relative">
+            <ti-ip
+              #ipv4
+              [version]="4"
+              formControlName="serverBindIp"
+              [tiValidation]="{ type: 'blur' }"
+              [errorMessageWrapper]="errorServerBindIpMsg"
+              style="width: 325px"
+              *ngIf="protocolType === protocolTypeMenu.IPv4; else serverIPv6"
+            ></ti-ip>
+            <ng-template #serverIPv6>
+              <ti-ip
+                #ipv6
+                [version]="6"
+                formControlName="serverBindIp"
+                [tiValidation]="{ type: 'blur' }"
+                [errorMessageWrapper]="errorServerBindIpMsg"
+                style="width: 325px"
+              ></ti-ip>
+            </ng-template>
+            <span class="location" #errorServerBindIpMsg></span>
+          </div>
+        </ti-item>
+      </ti-formfield>
+    </div>
+    <!-- 服务端端口  -->
+    <div class="control prefix">
+      <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+        <ti-item
+          [label]="'network_diagnositic.taskParams.server_port' | i18n"
+          [required]="false"
+        >
+          <input
+            tiText
+            tiNumber
+            type="text"
+            class="form-value"
+            formControlName="listenPort"
+          />
+        </ti-item>
+      </ti-formfield>
+    </div>
+  </div>
+  <div class="client">
+    <!-- 客户端任务节点 -->
+    <div class="control">
+      <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+        <ti-item
+          [label]="'network_diagnositic.taskParams.client_task_node' | i18n"
+          [required]="true"
+        >
+          <div style="position: relative">
+            <ti-select
+              formControlName="clientIp"
+              [options]="clientNodeOptions"
+              [tiValidation]="{ type: 'blur' }"
+              [clearable]="true"
+              [errorMessageWrapper]="errorClientIpMsg"
+              style="width: 325px"
+              valueKey="value"
+            ></ti-select>
+            <span class="location" #errorClientIpMsg></span>
+          </div>
+        </ti-item>
+      </ti-formfield>
+    </div>
+    <div class="control" [ngClass]="{prefix: protocolType === protocolTypeMenu.IPv4}">
+      <!-- 客户端IP -->
+      <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+        <ti-item
+          *ngIf="protocolType === protocolTypeMenu.IPv4; else clientIPv6"
+          [label]="'network_diagnositic.taskParams.client_ip' | i18n"
+          [required]="false"
+        >
+          <ti-ip
+            #ipv4
+            [version]="4"
+            formControlName="clientBindIp"
+            style="width: 325px"
+          ></ti-ip>
+        </ti-item>
+        <ng-template #clientIPv6>
+          <!-- 客户端网口 -->
+          <ti-item
+            [label]="
+              'network_diagnositic.taskParams.client_network_port' | i18n
+            "
+            [required]="true"
+          >
+            <div style="position: relative">
+              <input
+                tiText
+                type="text"
+                formControlName="sourceEth"
+                [tiValidation]="{ type: 'blur' }"
+                [errorMessageWrapper]="errorSourceEthMsg"
+                style="width: 325px"
+              />
+              <span class="location" #errorSourceEthMsg></span>
+            </div>
+          </ti-item>
+        </ng-template>
+      </ti-formfield>
+    </div>
+    <!-- 客户端端口 -->
+    <div class="control prefix">
+      <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+        <ti-item [required]="false">
+          <ti-item-label>
+            <div class="flex">
+              <span>{{
+                "network_diagnositic.taskParams.client_port" | i18n
+              }}</span>
+              <img
+                [tiTip]="'network_diagnositic.tips.clientProtTip' | i18n"
+                tiTipMaxWidth="370px"
+                tiTipPosition="bottom"
+                src="./assets/img/summary/tooltip.png"
+              />
+            </div>
+          </ti-item-label>
+          <input
+            tiText
+            tiNumber
+            type="text"
+            class="form-value"
+            formControlName="connectPort"
+          />
+        </ti-item>
+      </ti-formfield>
+    </div>
+  </div>
+</div>

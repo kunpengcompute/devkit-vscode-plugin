@@ -1,0 +1,284 @@
+.login-box {
+  width: 100%;
+  height: 100%;
+  background: url("../../assets/img/login/login.png") center/100%;
+  position: relative;
+
+  .tip-for-ie {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+  }
+}
+.login {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 46px;
+}
+
+.header-left {
+  margin-left: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.right-tabs {
+  display: flex;
+  margin-right: 56px;
+}
+.header-right {
+  position: relative;
+}
+.user-container {
+  color: #9ea4b3;
+  font-size: 14px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  color: #9ea4b3;
+}
+
+.header-lang {
+  height: 16px;
+  width: 16px;
+  margin-left: 24px;
+  background: url("../../assets/img/header/menu-7.svg") no-repeat;
+}
+.header-up {
+  height: 7px;
+  width: 7px;
+  margin-left: 8px;
+  background: url("../../assets/img/header/svg/down.svg") no-repeat;
+}
+.user-container:hover {
+  color: #6c92fa;
+
+  .header-lang {
+    background: url("../../assets/img/header/menu-7-copy.svg") no-repeat;
+  }
+  .header-up {
+    background: url("../../assets/img/header/svg/up-hover.svg") no-repeat;
+  }
+}
+.user-container img:nth-child(1) {
+  margin-right: 5px;
+  position: relative;
+  top: 1px;
+}
+.user-container img {
+  margin-left: 5px;
+  vertical-align: middle;
+}
+.user-container:hover + .user-list-box,
+.user-container:hover .user-list-box {
+  display: block;
+  opacity: 1;
+}
+
+.user-list-box {
+  width: max-content;
+  height: auto;
+  background-color: #202228;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2), 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  right: 0%;
+  top: 64px;
+  color: #6c7280;
+  z-index: 100;
+  display: none;
+  opacity: 0;
+  transition: 0.5s linear;
+  text-align: center;
+  padding: 7px 0;
+}
+.user-list-box.lang {
+  right: 56px;
+}
+.user-list-box > li {
+  font-size: 14px;
+  cursor: pointer;
+  padding: 8px 16px;
+  white-space: nowrap;
+}
+
+.user-list-box:hover {
+  display: block;
+  opacity: 1;
+}
+.user-list-box li:hover {
+  color: #fff;
+  background-color: #022547;
+}
+
+li.notShow {
+  display: none;
+}
+
+.title {
+  font-size: 20px;
+  color: #ffffff;
+  margin-left: 20px;
+  vertical-align: super;
+}
+.login-form {
+  width: 21.14vw;
+  height: auto;
+  background: transparent;
+  position: absolute;
+  box-sizing: border-box;
+  right: 9%;
+  top: 20vh;
+  .login-title1 {
+    font-size: 1.25rem;
+    color: white;
+    top: 55px;
+    margin-bottom: 13px;
+    font-weight: 500;
+  }
+  .login-title2 {
+    font-size: 1.7rem;
+    color: white;
+    font-weight: bold;
+  }
+  .login-form-item {
+    margin-top: 1vw;
+    .login-form-item-label {
+      font-size: 1rem;
+      color: white;
+    }
+    input {
+      width: 100%;
+      border: none;
+      margin-top: 0.5vw;
+      border-bottom: 1px solid #999;
+      box-shadow: none;
+      border-radius: 0px;
+      background-color: transparent;
+      color: white;
+    }
+    input:focus {
+      border: none !important;
+      border-bottom: 1px solid #6c92fa !important;
+    }
+    input:hover {
+      border: none;
+      border-bottom: 1px solid #6c92fa;
+    }
+    .codeInput {
+      width: 67%;
+    }
+    .codeImg {
+      width: 5.416vw;
+      height: 2.3vw;
+      vertical-align: bottom;
+      margin-left: 0.6vw;
+    }
+    .check {
+      display: inline-block;
+    }
+  }
+}
+:host .check ::ng-deep :host input[type="checkbox"][tiCheckbox] + .ti3-checkbox .ti3-checkbox-label {
+  color: #222 !important;
+  font-size: 1rem;
+}
+:host .check ::ng-deep input[type="checkbox"][tiCheckbox]:not([disabled]):checked + .ti3-checkbox .ti3-checkbox-skin,
+input[type="checkbox"][tiCheckbox]:not([disabled]):checked + .ti3-checkbox .ti3-checkbox-skin:focus {
+  border-color: #6c92fa;
+  background-color: #6c92fa;
+}
+.login-btn {
+  display: inline-block;
+  width: 100%;
+  height: 2.5vw;
+  line-height: 2.5vw;
+  font-size: 1.428rem;
+  text-align: center;
+  border: 1px solid #0067ff;
+  color: #0067ff;
+  margin-top: 2vw;
+  cursor: pointer;
+}
+.last-info {
+  text-align: center;
+  margin-top: 0.83vw;
+  font-size: 1rem;
+}
+.footer {
+  font-size: 1rem;
+  color: #888;
+  position: absolute;
+  bottom: 1vw;
+  text-align: center;
+  width: 100%;
+}
+
+.tool-version {
+  font-size: 1.25rem;
+  color: white;
+  margin-top: 8px;
+  margin-bottom: 2.18vw;
+  font-family: "huawei sans";
+}
+
+#user {
+  width: 100%;
+  height: 34px;
+  background-color: #e6ebf5;
+  border-radius: 1px;
+  border-bottom: none;
+  font-family: "huawei sans";
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 18px;
+  letter-spacing: 0px;
+  color: #b8becc;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+
+.fisrstTit {
+  background-color: #d1ebff;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  border: solid 1px #6cbfff;
+  box-sizing: border-box;
+  padding: 11px 16px;
+}
+
+.fisrstTit p {
+  font-family: "huawei sans";
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 14px;
+  letter-spacing: 0px;
+  color: #282b33;
+  img {
+    padding-right: 8px;
+    vertical-align: bottom;
+  }
+}
+.info {
+  width: calc(100%-20px);
+  background-color: rgba(255, 209, 210, 0.75);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  border: solid 1px #f45c5e;
+  font-family: "huawei sans";
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 20px;
+  letter-spacing: 0px;
+  color: #282b33;
+  text-align: center;
+  padding: 10px;
+}
+
+#loginpwd[type="password"],
+#Cpwd[type="password"] {
+  background-image: url(data:image/svg+xml,%3Csvg%20version=%221.1%22%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2232%22%20height=%2232%22%3E%3Cpath%20fill%3D%22%23777777%22%20d=%22M1.6%202.925c0.6-0.6%201.4-0.6%201.8%200v0l25.6%2024.2c0.2%200.2%200.4%200.6%200.4%201s-0.2%200.6-0.4%201c-0.2%200.2-0.6%200.4-1%200.4s-0.8-0.2-1-0.4v0l-5-5.2c-2%200.6-4%201-6%201-9.2%200-16-6.6-16-9.8%200-1.8%202-4.6%205.4-6.6v0l-3.6-3.8c-0.6-0.4-0.6-1.2-0.2-1.8zM9%2011.725c-0.4%201-0.6%202.2-0.6%203.4%200%204.4%203.4%208%207.8%208%201.4%200%202.8-0.4%203.8-1v0l-2.4-2.4c-0.4%200.2-1%200.4-1.6%200.4-2.8%200-5-2.2-5-5%200-0.4%200-0.8%200.2-1.2v0l-2.2-2.2zM16%205.325c9.4%200%2016%206.6%2016%209.8%200%201.8-2%204.6-5.6%206.8v0l-3.4-3.2c0.6-1%200.8-2.2%200.8-3.4%200-4.4-3.4-8-7.8-8-1.4%200-2.8%200.4-4%201.2v0%200l-2-2c2-1%204-1.2%206-1.2zM16%209.925c2.8%200%205%202.2%205%205%200%200.4%200%201-0.2%201.4v0l-6.6-6c0.6-0.2%201.2-0.4%201.8-0.4z%22%3E%3C/path%3E%3C/svg%3E) !important;
+}

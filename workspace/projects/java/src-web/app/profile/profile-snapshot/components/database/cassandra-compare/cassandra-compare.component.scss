@@ -1,0 +1,133 @@
+.btn-header {
+  display: flex;
+  margin: 20px 0 20px 0;
+  align-items: center;
+  min-width: 536px;
+  max-width: 100%;
+  .pro-title {
+    font-size: 16px;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    .pro_text {
+      height: 20px;
+      display: flex;
+      line-height: 20px;
+      justify-content: center;
+      .pro_text_img {
+        display: flex;
+        margin-left: 5px;
+        height: 20px;
+        width: 20px;
+      }
+    }
+    .toggleSnapshot:hover {
+      cursor: pointer;
+    }
+  }
+  .formula_text {
+    margin-left: 20px;
+    height: 20px;
+    display: flex;
+    line-height: 20px;
+    justify-content: center;
+    .formula_text_img {
+      display: flex;
+      margin-left: 5px;
+      height: 20px;
+      width: 20px;
+    }
+  }
+}
+.threshold {
+  height: 24px;
+  line-height: 24px;
+  background: #f5f9ff;
+  .thresholdBlock {
+    margin-left: 26px;
+    .thresholdText {
+      margin-right: 10px;
+    }
+  }
+}
+.count-fill-red {
+  color: #e85d54;
+}
+.count-fill-greed {
+  color: #45cc90;
+}
+.control {
+  height: auto;
+  padding: 20px 0px 0px;
+  .item-table {
+    .title {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .count-proportion {
+      display: inline-block;
+      height: 10px;
+      vertical-align: middle;
+      background: var(--table-count-bg-color) !important;
+    }
+
+    .totalDurtion {
+      display: inline-block;
+    }
+
+    #cass-sql-table {
+      position: relative;
+
+      .expand-btn {
+        position: absolute;
+        left: 50%;
+        bottom: -14px;
+        height: 12px;
+      }
+    }
+  }
+}
+
+.item-echart,
+.item-tree {
+  margin-top: 40px;
+}
+.item-echart .title {
+  font-size: 20px;
+  line-height: 30px;
+  margin-bottom: 16px;
+  color: #222222;
+}
+.disable-btn {
+  background: #e6ebf5 !important;
+  border: 1px solid #e6ebf5 !important;
+  color: #b8becc !important;
+  cursor: not-allowed !important;
+}
+
+.snap_title {
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
+  font-weight: bold;
+}
+.snap_content {
+  font-size: 12px;
+  line-height: 18px;
+  color: #616161;
+}
+.red_count {
+  width: 14px;
+  height: 14px;
+  font-size: 10px;
+  background-color: #ed4b4b;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -7px;
+  right: -6px;
+}

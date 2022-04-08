@@ -1,0 +1,251 @@
+<div class="snapshot-container">
+    <div class="snapshot-main" *ngIf="profileSnapshotNodataState">
+        <div class="leftList" [ngClass]="{'active': leftState}">
+            <div class="leftListHeader" *ngIf="!leftState">
+                <span class="file-list-icon" (click)="onDeleteSnapshot()">
+                    <span *ngIf="multiple">
+                        <img [tiTip]="i18n.common_term_delete_tips" tiTipPosition='top'
+                            src="./assets/img/newSvg/delete_click.svg">
+                    </span>
+                    <span *ngIf="!multiple" class="tip-close">
+                        <img [tiTip]="i18n.common_term_delete_tips" src="./assets/img/newSvg/delete_default.svg">
+                        <img [tiTip]="i18n.common_term_delete_tips" src="./assets/img/newSvg/delete_hover.svg">
+                    </span>
+                </span>
+                <span class="file-list-icon" (click)="showContrastSnapshot()">
+                    <span *ngIf="showSnapShot || showContrastData">
+                        <img [tiTip]="i18n.profileMemorydump.snapShot.compare" tiTipPosition='top'
+                            src="./assets/img/newSvg/contrast_clicked.svg">
+                    </span>
+                    <span *ngIf="!showSnapShot && !showContrastData" class="tip-close">
+                        <img [tiTip]="i18n.profileMemorydump.snapShot.compare" tiTipPosition='top'
+                            src="./assets/img/newSvg/contrast_default.svg">
+                        <img [tiTip]="i18n.profileMemorydump.snapShot.compare" tiTipPosition='top'
+                            src="./assets/img/newSvg/contrast_hover.svg">
+                    </span>
+                </span>
+            </div>
+            <ti-tree *ngIf="!leftState" [data]="innerData" [multiple]="multiple" [changedByCheckbox]="true"
+                (change)="changeFn($event)">
+                <ng-template let-item let-i="index">
+                    <div class="file-name" (click)="onClickTreeState();onClickTree(item, i)"
+                        (mouseenter)="onHoverList(item.label)" (mouseleave)="onHoverList('')">
+                        <span class="file-list" [title]='item.label'>
+                            <span *ngIf="snapshotA === item.label">
+                                <img src="./assets/img/newSvg/Asnap.svg">
+                            </span>
+                            <span *ngIf="snapshotB === item.label">
+                                <img src="./assets/img/newSvg/Bsnap.svg">
+                            </span>
+                            <img *ngIf="item.children" src="./assets/img/projects/folder.svg">
+                            <img *ngIf="!item.children" src="./assets/img/projects/file_icon.svg">
+                            <span>{{item.label}}</span>
+                        </span>
+                    </div>
+                </ng-template>
+            </ti-tree>
+            <div *ngIf="multiple&&!leftState" class="leftListBt">
+                <button class="confirm" type="button" color="primary" tiButton [disabled]="onConfirmDeleteDisabled"
+                    (click)="onConfirmPopDeleteSnapshot()">{{i18n.common_term_ok}}</button>
+                <button class="cancel" tiButton type="button"
+                    (click)="onCancelSnapshot()">{{i18n.common_term_operate_cancel}}</button>
+            </div>
+            <div class="toggle-btn" (click)='toggleLeft()' [ngClass]="{'active': leftState}">
+                <img *ngIf="currTheme === ColorTheme.Dark" src="./assets/img/projects/toggle.svg" />
+                <img *ngIf="currTheme === ColorTheme.Light" src="./assets/img/profiling/pull_left_light.svg" />
+            </div>
+        </div>
+        <!-- 查看快照 -->
+        <div class="snapshot-content">
+            <!-- jdbc快照 -->
+            <div class="jdbc" *ngIf="currentType==='jdbc' && !showContrastData">
+                <div class="jdbc1">
+                    <app-jdbc #jdbc1 [snapShot]="true" [snapShotData]="currentSnapShotData"></app-jdbc>
+                </div>
+            </div>
+            <!-- mongodb快照 -->
+            <div class="mongodb" *ngIf="currentType==='mongodb' && !showContrastData">
+                <div class="mongodb1">
+                    <app-mongodb #mongodb1 [snapShot]="true" [snapShotData]="currentSnapShotData"></app-mongodb>
+                </div>
+            </div>
+            <!-- cassandra快照 -->
+            <div class="cassandra" *ngIf="currentType==='cassandra' && !showContrastData">
+                <div class="cassandra1">
+                    <app-cassandra #cassandra1 [snapShot]="true" [snapShotData]="currentSnapShotData"></app-cassandra>
+                </div>
+            </div>
+            <!-- hbase快照 -->
+            <div class="hbase" *ngIf="currentType==='hbase' && !showContrastData">
+                <div class="hbase1">
+                    <app-hbase #hbase1 [snapShot]="true" [snapShotData]="currentSnapShotData"></app-hbase>
+                </div>
+            </div>
+            <!-- 数据库连接池快照 -->
+            <div class="jdbcpool" *ngIf="currentType==='jdbcpool' && !showContrastData">
+                <div class="jdbcpool1">
+                    <app-jdbcpool #jdbcpool1 [snapShot]="true" [snapShotData]="currentSnapShotData"></app-jdbcpool>
+                </div>
+            </div>
+            <!-- io快照 -->
+            <div class="fileio" *ngIf="currentType==='pFileIO' && !showContrastData">
+                <div class="fileio1">
+                    <app-file-io #fileIo1 [snapShot]="true" [snapShotData]="currentSnapShotData"></app-file-io>
+                </div>
+            </div>
+            <div class="socketIo" *ngIf="currentType==='pSocketIO' && !showContrastData">
+                <div class="socketIo1">
+                    <app-socket-io #socketIo1 [snapShot]="true" [snapShotData]="currentSnapShotData"></app-socket-io>
+                </div>
+            </div>
+            <!-- 内存转储快照 -->
+            <div class="memorydump" *ngIf="currentType==='heapDump'&&!showContrastData && profileSnapshotNodataState">
+                <div class="memorydump1" *ngIf="showSnapShotData">
+                    <app-profile-memorydump #memorydump1 [snapShot]="true" [snapShotTag]="true"
+                        [snapShotData]="currentSnapShotData"></app-profile-memorydump>
+                </div>
+            </div>
+            <!-- http快照 -->
+            <div class="http" *ngIf="currentType==='http' && !showContrastData">
+                <div class="http1">
+                    <app-profile-http #http1 [snapShot]="true" [snapShotData]="currentSnapShotData"></app-profile-http>
+                </div>
+            </div>
+            <div *ngIf="!showSnapShotData && !showContrastData" class="no-data">
+                <app-default-page [text]="i18n.profileMemorydump.snapShot.noData"></app-default-page>
+            </div>
+            <!-- 快照对比 -->
+            <div *ngIf="showContrastData">
+                <!-- 文件io快照对比 -->
+                <div class="table-content" *ngIf="snapshotType === 'pFileIO'">
+                    <app-fileio-compare #snapshotFileio [snapshotType]="snapshotType"
+                        [currentHeapLabel]="currentHeapLabel" (childOuter)="goBack($event)"
+                        [prevHeapLabel]="prevHeapLabel" (childTGSnapshotIN)="toggleSnapshotIN($event)"
+                        [leftState]=leftState>
+                    </app-fileio-compare>
+                </div>
+                <!-- socketio快照对比 -->
+                <div class="table-content" *ngIf="snapshotType === 'pSocketIO' ">
+                    <app-socketio-compare #snapshotSocketIO [snapshotType]="snapshotType"
+                        [currentHeapLabel]="currentHeapLabel" (childOuter)="goBack($event)"
+                        [prevHeapLabel]="prevHeapLabel" (childTGSnapshotIN)="toggleSnapshotIN($event)"
+                        [leftState]=leftState>
+                    </app-socketio-compare>
+                </div>
+                <!-- 数据库连接池快照对比 -->
+                <div class="table-content" *ngIf="snapshotType === 'jdbcpool'">
+                    <app-jdbcpool-compare #snapshotJdbcpool [snapshotType]="snapshotType"
+                        [currentHeapLabel]="currentHeapLabel" (childOuter)="goBack($event)"
+                        [prevHeapLabel]="prevHeapLabel" (childTGSnapshotIN)="toggleSnapshotIN($event)">
+                    </app-jdbcpool-compare>
+                </div>
+                <!-- 数据库快照对比 -->
+                <div class="table-content"
+                    *ngIf="snapshotType === 'cassandra' || snapshotType === 'jdbc'  || snapshotType === 'mongodb' || snapshotType === 'hbase'">
+                    <app-cassandra-compare #snapshotCassandra [snapshotType]="snapshotType"
+                        [currentHeapLabel]="currentHeapLabel" (childOuter)="goBack($event)"
+                        [prevHeapLabel]="prevHeapLabel" (childTGSnapshotIN)="toggleSnapshotIN($event)">
+                    </app-cassandra-compare>
+                </div>
+                <!-- 内存转储 -->
+                <div class="table-content" *ngIf="snapshotType === 'heapDump'">
+                    <app-contrast-snapshot #appConSnapshot [currentHeapId]="currentHeapId" [prevHeapId]="prevHeapId"
+                        [currentHeapLabel]="currentHeapLabel" [prevHeapLabel]="prevHeapLabel"
+                        (childOuter)="goHistogramChild($event)" (childTGSnapshotIN)="toggleSnapshotIN($event)">
+                    </app-contrast-snapshot>
+                </div>
+                <div class="table-content" *ngIf="snapshotType === 'http'">
+                    <app-http-compare #snapshotHttp [snapshotType]="snapshotType" [currentHeapLabel]="currentHeapLabel"
+                        (childOuter)="goBack($event)" [prevHeapLabel]="prevHeapLabel"
+                        (childTGSnapshotIN)="toggleSnapshotIN($event)">
+                    </app-http-compare>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!profileSnapshotNodataState" class="no-data">
+        <app-default-page [text]="isDownload ? i18n.common_term_task_nodata : i18n.plugins_perf_java_profileNoData.profileSnapshotNodata"></app-default-page>
+    </div>
+</div>
+<!-- 快照删除 -->
+<app-alert-modal #popDeleteSnapshot>
+    <div class="content" *ngIf="popDeleteSnapshotState">
+        <div class="header">
+            <span>{{i18n.profileMemorydump.snapShot.deleteSnapshot}}</span>
+            <div class="close" (click)="closeConfirmDeleteSnapshot()" (mouseenter)="onHoverClose('closerDelete')"
+                (mouseleave)="onHoverClose('')">
+                <img *ngIf="hoverClose === 'closerDelete'" src="./assets/img/newSvg/close_hover.svg">
+                <img *ngIf="hoverClose !== 'closerDelete'" src="./assets/img/newSvg/close_icon.svg">
+            </div>
+        </div>
+        <div class="delete-snap-main">
+            <img src="./assets/img/newSvg/warn.svg" srcset="">
+            <span class="delete-tip">{{i18n.profileMemorydump.snapShot.confirmSnapshot}}</span>
+        </div>
+        <div class="foot">
+            <button class="confirm" type="button" color="primary" tiButton
+                (click)="onConfirmDeleteSnapshot()">{{i18n.common_term_ok}}</button>
+            <button type="button" tiButton
+                (click)="closeConfirmDeleteSnapshot()">{{i18n.common_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-alert-modal>
+
+<!-- 快照对比 -->
+<app-alert-modal #contrastSnapshot>
+    <div class="content" *ngIf="showSnapShot">
+        <div class="header">
+            <span>{{i18n.profileMemorydump.snapShot.popChoiceTwoSnapshot}}</span>
+            <div class="close" (click)="closeContrastSnapshot()" (mouseenter)="onHoverClose('closer')"
+                (mouseleave)="onHoverClose('')" (mouseleave)="onHoverClose('')">
+                <img *ngIf="hoverClose === 'closer'" src="./assets/img/newSvg/close_hover.svg">
+                <img *ngIf="hoverClose !== 'closer'" src="./assets/img/newSvg/close_icon.svg">
+            </div>
+        </div>
+        <div class="contrast-main">
+            <div class="selectDiv">
+                <span class="select-required">
+                    <img src="./assets/img/newSvg/icon_required.svg">
+                </span>
+                <span class="selectDivText">{{i18n.profileMemorydump.snapShot.snapshotType}}</span>
+                <ti-select class="alertSelect" [options]='myOptionsSnapshotType' [(ngModel)]="mySelectedsSnapshotType"
+                    (ngModelChange)="onNgModelSnapshotType($event)"
+                    placeholder='{{i18n.profileMemorydump.snapShot.popChoiceTwoSnapshot}}' id="myselect1">
+                </ti-select>
+            </div>
+            <div class="selectDiv">
+                <span class="select-required">
+                    <img src="./assets/img/newSvg/icon_required.svg">
+                </span>
+                <span class="selectDivText">{{i18n.profileMemorydump.snapShot.firstSnapshot}}</span>
+                <ti-select class="alertSelect" [options]='myOptionsFirstSnapshot' [(ngModel)]="mySelectedsFirstSnapshot"
+                    (ngModelChange)="onNgModelFirstChange($event)"
+                    placeholder='{{i18n.profileMemorydump.snapShot.popPleaseChoiceSnapshot}}' id="myselect2">
+                </ti-select>
+            </div>
+            <div class="selectDiv">
+                <span class="select-required">
+                    <img src="./assets/img/newSvg/icon_required.svg">
+                </span>
+                <span class="selectDivText">{{i18n.profileMemorydump.snapShot.secondSnapshot}}</span>
+                <ti-select class="alertSelect" [options]='myOptionsSecondSnapshot'
+                    [(ngModel)]="mySelectedsSecondSnapshot" (click)="onSecondClick($event)"
+                    (ngModelChange)="onNgModelSecondChange($event)"
+                    placeholder='{{i18n.profileMemorydump.snapShot.popPleaseChoiceSnapshot}}' id="myselect3">
+                </ti-select>
+            </div>
+            <div *ngIf="showSnapshotError" class="snapshotError">
+                <span class="snapshotErrorText">
+                    <img src="./assets/img/newSvg/error.svg">
+                </span>
+                <span class="snapshotErrorText">{{i18n.profileMemorydump.snapShot.snapshotError}}</span>
+            </div>
+        </div>
+        <div class="foot">
+            <button class="confirm" type="button" color="primary" tiButton [disabled]="!mySelectedsSecondSnapshot || !mySelectedsFirstSnapshot"
+                (click)="onContrastSnapshot()">{{i18n.common_term_ok}}</button>
+            <button type="button" tiButton
+                (click)="closeContrastSnapshot()">{{i18n.common_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-alert-modal>

@@ -1,0 +1,185 @@
+<div class="warpper" [ngClass]="theme$ | async">
+  <!-- IP协议类型 -->
+  <div class="control fix-area">
+    <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+      <ti-item
+        [label]="i18n.network_diagnositic.taskParams.ip_type"
+        [required]="true"
+      >
+        <div class="radios">
+          <div>
+            <input
+              type="radio"
+              tiRadio
+              formControlName="protocolType"
+              [label]="'IPv4'"
+              [value]="protocolTypeEnum.IPv4"
+            />
+          </div>
+          <div style="margin-left: 32px">
+            <input
+              type="radio"
+              tiRadio
+              formControlName="protocolType"
+              [label]="'IPv6'"
+              [value]="protocolTypeEnum.IPv6"
+            />
+          </div>
+        </div>
+      </ti-item>
+    </ti-formfield>
+  </div>
+  <!-- ping 节点信息 -->
+  <div class="control change-area right_align">
+    <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+      <ti-item
+        [label]="i18n.network_diagnositic.taskParams.node_info"
+        [required]="true"
+      >
+        <div [hidden]="!this.formOption.v4Servers.dispaly">
+          <app-ipv4-node-info
+            [taskNodeList]="nodeList"
+            formControlName="v4Servers"
+          >
+          </app-ipv4-node-info>
+        </div>
+        <div [hidden]="!this.formOption.v6Servers.dispaly">
+          <app-ipv6-node-info
+            [taskNodeList]="nodeList"
+            formControlName="v6Servers"
+          >
+          </app-ipv6-node-info>
+        </div>
+      </ti-item>
+    </ti-formfield>
+
+    <span class="title" (click)="showHightParam = !showHightParam">
+      <span>{{ i18n.network_diagnositic.advanced_param.advanced_param }}</span>
+      <img
+        src="./assets/img/template/arrowRight.png"
+        [ngStyle]="{
+          transform: showHightParam ? 'rotateZ(270deg)' : 'rotateZ(90deg)'
+        }"
+      />
+    </span>
+    <div class="control change-area label_margin" [hidden]="!showHightParam">
+      <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+        <!-- 拨测报文长度（byte） -->
+        <ti-item [required]="false">
+          <ti-item-label>
+            <div [ngStyle]="{ width: labelWidth }" tiOverflow>
+              {{ "network_diagnositic.advanced_param.connect_msg_len" | i18n }}
+            </div>
+          </ti-item-label>
+          <div class="paramValue">
+            <input
+              type="text"
+              tiText
+              tiNumber
+              formControlName="msgLen"
+              [hySpinnerBlur]="{
+                control: formGroup.get('msgLen'),
+                min: 16,
+                max: 65507
+              }"
+              [format]="'N0'"
+              tiValidation
+            />
+            <span>{{ "common_scope_replace_teml" | i18n: "16~65507" }}</span>
+          </div>
+        </ti-item>
+        <!-- 拨测间隔 -->
+        <ti-item [required]="false">
+          <ti-item-label>
+            <div tiOverflow>
+              {{ i18n.network_diagnositic.advanced_param.interval }}
+            </div>
+          </ti-item-label>
+          <div class="paramValue">
+            <input
+              type="text"
+              tiText
+              tiNumber
+              formControlName="interval"
+              [hySpinnerBlur]="{
+                control: formGroup.get('interval'),
+                min: 10,
+                max: 10000
+              }"
+              [format]="'N0'"
+              tiValidation
+            />
+            <span>{{ "common_scope_replace_teml" | i18n: "10~10000" }}</span>
+          </div>
+        </ti-item>
+        <!-- 拨测时长（s） -->
+        <ti-item [required]="false">
+          <ti-item-label>
+            <div tiOverflow>
+              {{ "network_diagnositic.advanced_param.duration" | i18n }}
+            </div>
+          </ti-item-label>
+          <div class="paramValue">
+            <ti-spinner
+              formControlName="duration"
+              [hySpinnerBlur]="{
+                control: formGroup.get('duration'),
+                min: 1,
+                max: 60
+              }"
+              [format]="'N0'"
+              tiValidation
+            ></ti-spinner>
+            <span>{{ "common_scope_replace_teml" | i18n: "1~60" }}</span>
+          </div>
+        </ti-item>
+        <!-- 分片策略 -->
+        <ti-item [required]="false">
+          <ti-item-label>
+            <div class="flex">
+              <span tiOverflow>
+                {{
+                  "network_diagnositic.advanced_param.sharding_strategy" | i18n
+                }}
+              </span>
+              <img
+                [tiTip]="i18n.network_diagnositic.tips.sharding_strategyTip"
+                tiTipMaxWidth="370px"
+                tiTipPosition="top"
+                src="./assets/img/summary/tooltip.png"
+              />
+            </div>
+          </ti-item-label>
+          <div class="paramValue">
+            <ti-select
+              [options]="partList"
+              valueKey="value"
+              formControlName="pathmtudis"
+              style="width: 326px"
+            >
+            </ti-select>
+          </div>
+        </ti-item>
+        <!-- TTL -->
+        <ti-item
+          [label]="i18n.network_diagnositic.advanced_param.ttl"
+          [required]="false"
+        >
+          <div class="paramValue">
+            <ti-spinner
+              formControlName="ttl"
+              [hySpinnerBlur]="{
+                control: formGroup.get('ttl'),
+                min: 1,
+                max: 255
+              }"
+              [format]="'N0'"
+              tiValidation
+            ></ti-spinner>
+            <span>{{ "common_scope_replace_teml" | i18n: "1~255" }}</span>
+          </div>
+        </ti-item>
+      </ti-formfield>
+    </div>
+  </div>
+</div>

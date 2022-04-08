@@ -1,0 +1,46 @@
+::ng-deep .pmu {
+    margin-bottom: 40px;
+    p {
+        font-size: 20px;
+        color: var(--d-e8e8e8-l-222222);
+    }
+    .pmu-box {
+        margin-top: 20px;
+        display: flex;
+        .core-title {
+            font-size: 16px;
+            color: var(--d-e8e8e8-l-222222);
+            margin-bottom: 10px;
+        }
+    }
+    .core {
+        width: 48%;
+    }
+    .uncore {
+        width: 50%;
+        margin-left: 32px;
+    }
+    .core-box {
+        max-height: 329px;
+    }
+    .ti3-table > .ti3-table-fixed-head > .ti3-table-fixed-head-filler {
+        background-color: var(--d-2a2a2a-l-f5f9ff);
+    }
+    .ti3-table > .ti3-table-fixed-head + .ti3-table-container {
+        border: none;
+    }
+    .ti3-resize-wrapper {
+        &::-webkit-scrollbar {
+            width: 8px !important;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 4px !important;
+            background: rgba(232, 232, 232, 0.2) !important;
+        }
+
+        &::-webkit-scrollbar-track {
+            border: none !important;
+        }
+    }
+}

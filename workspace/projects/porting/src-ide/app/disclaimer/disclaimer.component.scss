@@ -1,0 +1,57 @@
+
+::ng-deep .vscode-light{
+    --disclaimer-background-clr: #F3F3F3;
+    --disclaimer-font-clr: #616161;
+    --disclaimer-title-clr: #222222;
+    --disclaimer-notice-clr: #222222;
+  }
+  
+  ::ng-deep .vscode-dark{
+    --disclaimer-background-clr: #161616;
+    --disclaimer-font-clr: #AAAAAA;
+    --disclaimer-title-clr: #DDDDDD;
+    --disclaimer-notice-clr: #DDDDDD;
+  }
+
+.disclaimer-box {
+    padding-top: 60px;
+    margin-left: 80px;
+    .disclaimer-title {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        line-height: 26px;
+        padding-left: 24px;
+        .title-content {
+            font-weight: 500;
+            font-size: 20px;
+            color: var(--disclaimer-title-clr);
+        }
+        padding-bottom: 20px;
+    }
+    .disclaimer-dsc{ 
+        overflow: auto;
+        justify-content: center;
+        align-items: center;
+        padding-top: 20px;
+        padding-left: 24px;
+        padding-bottom: 14px;
+        padding-right: 14px;
+        width: 90%;
+        background-color: var(--disclaimer-background-clr);
+        .disclaimer-notice{
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 20px;
+            margin-bottom: 8px;
+            color: var(--disclaimer-notice-clr);
+        }
+        p{
+            font-size: 14px;
+            color: var(--disclaimer-font-clr);
+            margin-bottom: 8px;
+            line-height: 20px;
+        }
+    } 
+}
+  

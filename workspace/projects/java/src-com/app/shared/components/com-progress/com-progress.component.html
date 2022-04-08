@@ -1,0 +1,71 @@
+<div class="progress-bg" *ngIf="isCreatingModal">
+  <div class="sample-hot-modal">
+    <div class="progress-svg" [id]="generateID"></div>
+    <div class="madal-content">
+      <!-- ???? -->
+      <div *ngIf="recordAutoTime !== -1">
+        <div class="creating">
+          <div *ngIf="!startCreating">
+            <div *ngIf="barWidth1 !== '100.00%'">
+              {{ i18n.common_term_recording }}&nbsp;<span class="setColor">{{ timeRequired }}</span>
+            </div>
+            <div *ngIf="barWidth1 === '100.00%'" class="creating">{{i18n.common_term_creating}}
+            </div>
+          </div>
+          <div *ngIf="startCreating">
+            {{i18n.common_term_start_creating}}
+          </div>
+        </div>
+        <div class="noAll" *ngIf="barWidth1 !== '100.00%' && !startCreating">
+          <div class="progress-bar-bg">
+            <div class="progress-bar" [ngStyle]="{ width: barWidth1 }"></div>
+          </div>
+          <span class="barWidthInf">{{ barWidth1
+            }}</span>
+        </div>
+        <div class="over-status" *ngIf="barWidth1 === '100.00%' || startCreating">
+          <div class="progress-bar-bg-over">
+            <div class="progress-bar-over"></div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="recordAutoTime === -1">
+        <div class="Irregular">
+          <div *ngIf="!startCreating">
+            <div *ngIf="barWidth1 !== '100.00%'">
+              <span class="text">{{ i18n.common_term_recording }}</span>
+              <span class="setColor">{{ startTime }}</span>
+              <span class="setColor"> - </span>
+              <span class="setColor">{{ timeRequired }}</span>
+            </div>
+            <div *ngIf="barWidth1 === '100.00%'" class="creating">{{i18n.common_term_creating}}
+            </div>
+          </div>
+          <div *ngIf="startCreating">
+            {{i18n.common_term_start_creating}}
+          </div>
+        </div>
+        <div class="progress-bar-bg">
+          <div *ngIf="!startCreating">
+            <div class="progress-bar" [ngStyle]="{ width: barWidth60 + 'px' }"></div>
+          <div class="progress-bar progress-cover" [ngStyle]="{ width: barWidth60 - 60 + 'px' }"></div>
+          </div>
+          <div class="over-status" *ngIf="startCreating">
+            <div class="progress-bar-bg-over">
+              <div class="progress-bar-over"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="buttonDom">
+        <button type="button" tiButton color="primary" (click)="stop_analysis()" [disabled]="stopAnalysisDisable">
+          {{ i18n.stop_analysis }}
+        </button>
+        <button type="button" tiButton style="margin-left: 16px;" (click)="cancel_analysis()">
+          {{ i18n.cancel_analysis }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-com-alert-message #cancalDump (confirmHandle)="confirmHandle_stop($event)"></app-com-alert-message>

@@ -1,0 +1,89 @@
+#call-tree {
+  width: 100%;
+  height: calc(100vh - 217px);
+  overflow-y: auto;
+  display: flex;
+
+  .call-tree-left {
+    width: 326px;
+    height: 920px;
+    margin-right: 32px;
+
+    .pid-select {
+      width: 100%;
+      height: 28px;
+      margin-bottom: 10px;
+    }
+
+    .memory-exception {
+      display: flex;
+      margin-bottom: 10px;
+
+      .memory-exception-select {
+        width: 239px;
+        margin-right: 2px;
+        height: 28px;
+      }
+
+      .icon {
+        width: 28px;
+        height: 28px;
+
+        &:last-of-type {
+          margin-left: 2px;
+        }
+      }
+    }
+
+    .func-input {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .func-list {
+      height: 500px;
+      overflow-y: auto;
+      li {
+        box-sizing: border-box;
+        width: 100%;
+        height: 36px;
+        padding: 8px;
+        display: flex;
+        align-content: flex-start;
+        cursor: pointer;
+
+        .icon {
+          width: 8px;
+          height: 8px;
+          border-radius: 4px;
+          margin: 6px 8px 6px 0;
+
+          &.self {
+            background-color: #ed4b4b;
+          }
+        }
+
+        .left-text {
+          width: 60px;
+          height: 100%;
+        }
+
+        .func-name {
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  .call-tree-right {
+    width: calc(100% - 360px);
+
+    .call-stack {
+      width: 100%;
+      height: 562px;
+      margin-bottom: 20px;
+    }
+
+  }
+
+}

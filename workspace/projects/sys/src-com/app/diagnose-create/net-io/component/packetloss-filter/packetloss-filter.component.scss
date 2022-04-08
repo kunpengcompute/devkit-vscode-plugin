@@ -1,0 +1,26 @@
+.light {
+  --netio-filter-mask-bg: #f8fafd;
+}
+.dark {
+  --netio-filter-mask-bg: #252525;
+}
+
+.warpper {
+  padding: 16px 24px 0;
+  background-color: var(--netio-filter-mask-bg);
+
+  .lastInput{
+    width: 326px;
+  }
+}
+
+:host ::ng-deep .warpper .ti3-form .ti3-form-label .label {
+  padding: 0 var(--ti-formfield-item-label-padding-right)
+    var(--ti-formfield-item-padding-bottom) 0 !important; 
+  min-width: 109px !important;
+  max-width: unset;
+  display: inline-block;
+}
+:host ::ng-deep .warpper .ti3-form tbody .ti3-form-list:last-child .ti3-form-label .label {
+  padding-bottom: 16px !important; 
+}

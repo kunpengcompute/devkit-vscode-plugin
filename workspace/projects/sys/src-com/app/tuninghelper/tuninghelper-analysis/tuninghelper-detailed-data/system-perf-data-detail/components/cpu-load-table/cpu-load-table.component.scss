@@ -1,0 +1,18 @@
+.cpu-header {
+  .title {
+    font-size: 16px;
+  }
+}
+.cpu-table {
+  margin-top: 10px;
+  .cell-icon {
+    img {
+      position: relative;
+      top: 2px;
+      left: 8px;
+      cursor: pointer;
+      width: 14px;
+      height: 14px;
+    }
+  }
+}

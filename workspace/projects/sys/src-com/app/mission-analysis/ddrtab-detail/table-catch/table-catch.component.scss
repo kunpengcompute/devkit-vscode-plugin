@@ -1,0 +1,48 @@
+::ng-deep {
+
+  .table-box {
+    --color-pro-rate: #d6e4ff;
+  }
+
+  .vscode-dark {
+    .table-box {
+      --color-pro-rate: rgba(24, 64, 135, 0.8);
+    }
+  }
+}
+
+.table-box {
+  position: relative;
+  display: flex;
+
+  .table-y {
+    width: 8%;
+    height: 100%;
+
+    .line {
+      width: 115%;
+      height: 2px;
+    }
+
+    ::ng-deep .title-box {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding-left: 10%;
+
+      .title {
+        height: 26px;
+        line-height: 26px;
+        font-size: 14px;
+        color: var(--common-color-font-primary);
+      }
+      .title-num {
+        text-align: right;
+      }
+    }
+  }
+  .table {
+    height: 100%;
+    flex: 1;
+  }
+}

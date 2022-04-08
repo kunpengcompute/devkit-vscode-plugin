@@ -1,0 +1,52 @@
+.container {
+    height: 100%;
+    width: 100%;
+    .follow-tooltip {
+        margin: 0px !important;
+        opacity: 0;
+        position: absolute;
+        display: inline-block;
+        padding: 8px 20px;
+        font-size: 14px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 4px;
+        margin-left: 12px;
+        pointer-events: none;
+        cursor: default;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 3px;
+
+        @for $i from 0 through 100 {
+            $offset: '[offset="#{$i}"]';
+
+            &[placement="left"]#{$offset} {
+                transform: translate(-100%, $i * -1%);
+            }
+
+            &[placement="right"]#{$offset} {
+                transform: translate(0, $i * -1%);
+            }
+        }
+    }
+}
+
+.tip-warpper {
+    font-size: 12px;
+    .time {
+        color: #616161;
+    }
+    .row {
+        display: flex;
+        justify-content: space-between;
+        .label {
+            margin-right: 24px;
+        }
+        & + .row {
+            margin-top: 8px;
+        }
+    }
+}
+.line {
+    width: 100%;
+    height: 0.5px;
+    border-bottom: 0.5px solid #e1e6ee;
+}

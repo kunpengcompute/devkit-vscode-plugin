@@ -1,0 +1,112 @@
+.mem-abnormal-release-table {
+  .table-head-top {
+    background: var(--d-2a2a2a-l-f5f9ff);
+    padding: 0 10px;
+    box-sizing: border-box;
+  
+    .is-self-filter {
+      line-height: 18px;
+      font-size: 12px;
+      text-align: center;
+      padding: 6px 0;
+      color: var(--common-color-font-primary);
+    }
+  
+    .head-second-row {
+      display: flex;
+      justify-content: space-between;
+  
+      .stack-searcher {
+        font-size: 12px;
+        line-height: 18px;
+        color: var(--common-color-font-primary);
+      }
+  
+      .cols-toggle {
+        position: relative;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+  
+        ::ng-deep ti-cols-toggle {
+          position: relative;
+          width: 16px;
+          height: 16px;
+          opacity: 0;
+          z-index: 1;
+  
+          .ti3-cols-toggle-menu-container {
+            width: 10px;
+            height: 10px;
+            background: none;
+            border: none;
+  
+            .ti3-cols-toggle-menu {
+              display: none;
+            }
+          }
+        }
+  
+        app-icon-react {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 16px;
+          height: 16px;
+          z-index: 0;
+        }
+      }
+    }
+  
+    ti-icon {
+      margin-left: 8px;
+    }
+  }
+  
+  .ti3-details-tr {
+    > td {
+      background: var(--d-2a2a2a-l-f5f9ff);
+      padding: 0 0 0 20px;
+
+      .ti3-table-detail-container {
+        padding: 0;
+        border-left: 2px solid #0067ff;
+      }
+    }
+  }
+}
+
+.table-dropdown {
+  width: fit-content;
+
+  p {
+    height: 28px;
+    font-size: 12px;
+    line-height: 28px;
+    color: var(--common-color-font-primary);
+    cursor: pointer;
+
+    &:hover {
+      background: var(--d-2a2a2a-l-f5f9ff);
+    }
+
+    &.active {
+      color: #ffffff;
+      background: #0067ff;
+    }
+  }
+}
+
+.ti3-table-container {
+  height: 224px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.table-search {
+
+  ::ng-deep input {
+    height: 100% !important;
+    background: none !important;
+  }
+}

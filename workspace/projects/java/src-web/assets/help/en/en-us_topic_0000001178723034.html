@@ -1,0 +1,84 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Operation Log Management">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001178881580.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (Java Profiler)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001178723034">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Operation Log Management</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001178723034"></a><a name="EN-US_TOPIC_0000001178723034"></a>
+
+<h1 class="topictitle1">Operation Log Management</h1>
+<div id="body1587557759853"><div class="section" id="EN-US_TOPIC_0000001178723034__section11470129119"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0000001178723034__p2444451164517">You have logged in to the <span id="EN-US_TOPIC_0000001178723034__ph12594180204619">Java Profiler</span> WebUI.</p>
+<div class="note" id="EN-US_TOPIC_0000001178723034__note115738433256"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_p1421914270145">Only the administrator <strong id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_b15001328144618">tunadmin</strong> can view and download the operation logs of all users. Common users can view and download only the operation logs of the current login user.</p>
+</div></div>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001178723034__section13522162242718"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0000001178723034__ol94441751076"><li id="EN-US_TOPIC_0000001178723034__li1293891492916"><span>Click <span><img id="EN-US_TOPIC_0000001178723034__image136917479386" src="en-us_image_0000001223883017.png"></span> in the upper right corner and choose <strong id="EN-US_TOPIC_0000001178723034__b1395092611117">Logs</strong>.</span><p><div class="p" id="EN-US_TOPIC_0000001178723034__p1460113212107">The <strong id="EN-US_TOPIC_0000001178723034__b2526105420434">Operation Log</strong> page is displayed, as shown in <a href="#EN-US_TOPIC_0000001178723034__fig21484261717">Figure 1</a>. For details about the parameters, see <a href="#EN-US_TOPIC_0000001178723034__table71491526176">Table 1</a>.<div class="note" id="EN-US_TOPIC_0000001178723034__note174781552102011"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0000001178723034__ul15163125882013"><li id="EN-US_TOPIC_0000001178723034__li368705511261">When you log in to the system as a common user, you can click <strong id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_b19766135318490">Operation Logs</strong> in the upper right corner of the page to open the operation log page.</li><li id="EN-US_TOPIC_0000001178723034__li868616413117">When the number of common operation log entries reaches 2000, the tool exports the entries to the <span class="filepath" id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_filepath29589517412"><b>operation_logs.csv</b></span> file in the <span class="filepath" id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_filepath189587511241"><b>/opt/hyper_tuner/user_management/logs</b></span> directory (<span class="filepath" id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_filepath1595812511043"><b>/opt/hyper_tuner</b></span> is the tool installation directory, which can be customized), and clears data on the <span class="wintitle" id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_wintitle795819511249"><b>Common Log</b></span> tab page. When a new <span class="filepath" id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_filepath1511118571747"><b>operation_logs.csv</b></span> is generated, the old one will be overwritten automatically.</li><li id="EN-US_TOPIC_0000001178723034__li916310581207">The operation logs of the <span id="EN-US_TOPIC_0000001178723034__ph9352161302518">Java Profiler</span> are stored for 30 days by default. The tool automatically checks operation logs at 01:00 every day and deletes expired log entries.</li></ul>
+</div></div>
+<div class="fignone" id="EN-US_TOPIC_0000001178723034__fig21484261717"><a name="EN-US_TOPIC_0000001178723034__fig21484261717"></a><a name="fig21484261717"></a><span class="figcap"><b>Figure 1 </b>Operation Log tab page</span><br><span><img id="EN-US_TOPIC_0000001178723034__image1416411263359" src="en-us_image_0000001178881812.png"></span></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0000001178723034__table71491526176"></a><a name="table71491526176"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0000001178723034__table71491526176" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Parameters on the Operation Log tab page</caption><colgroup><col style="width:24.01%"><col style="width:75.99000000000001%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_row94164276501"><th align="left" class="cellrowborder" valign="top" width="24.01%" id="mcps1.3.2.2.1.2.1.6.2.3.1.1"><p id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_p10416182720502">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.99000000000001%" id="mcps1.3.2.2.1.2.1.6.2.3.1.2"><p id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_p134163278503">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_row20416327155016"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.1.2.1.6.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_p46186226397">User Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.1.2.1.6.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_p64172027185016">User who performed the operation.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_row11417202755011"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.1.2.1.6.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_p176171229398">Event</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.1.2.1.6.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_p11417827145020">Type of the operation performed.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_row134171127145012"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.1.2.1.6.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_p46161922193918">Result</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.1.2.1.6.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_p104171527115013">Operation result.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_row3903267398"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.1.2.1.6.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_p691162673916">IP</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.1.2.1.6.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_p99213269393">IP address of the host on which the operation was performed.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_row189214268399"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.1.2.1.6.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_p199212264392">Time</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.1.2.1.6.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_p8926268396">Time when the operation was performed.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_row1992122612398"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.1.2.1.6.2.3.1.1 "><p id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_p892152633920">Detail</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.1.2.1.6.2.3.1.2 "><p id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_p15921626193910">Details about the operation.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</p></li><li id="EN-US_TOPIC_0000001178723034__en-us_topic_0239731436_li56018381198"><span>Click <strong id="EN-US_TOPIC_0000001178723034__en-us_topic_0253410799_b45090386612">Download Log</strong> to download the log file in .csv format.</span></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001178881580.html">Log Management</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

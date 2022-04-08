@@ -1,0 +1,297 @@
+:host ::ng-deep .overview-container {
+    font-size: 14px;
+    margin-top: 20px;
+
+    .io-detail-tab {
+        margin-bottom: 20px;
+
+        .tab-content {
+            position: relative;
+
+            .item-tab {
+                padding: 0 16px;
+
+                .tab-title {
+                    display: inline-block;
+                    cursor: pointer;
+                    box-sizing: border-box;
+                    font-size: 14px;
+                    line-height: 20px;
+                    position: relative;
+
+                    .tab-active {
+                        display: inline-block;
+                        padding-bottom: 6px;
+                        color: #267dff;
+                        border-bottom: 2px solid #267dff;
+                    }
+                }
+            }
+
+            .item-tab:hover {
+                color: #0067ff;
+            }
+        }
+
+        .tab-content:nth-of-type(1) {
+            .item-tab {
+                padding-left: 0;
+            }
+        }
+
+        .tab-content:not(:last-child) {
+            .item-tab:after {
+                content: "";
+                position: absolute;
+                height: 10px;
+                width: 1px;
+                right: 0;
+                top: calc(50% - 5px);
+                background-color: #888;
+            }
+        }
+    }
+
+    .file-io {
+        display: flex;
+        flex-direction: column;
+
+        .control {
+            display: flex;
+            justify-content: flex-start;
+            height: 32px;
+            line-height: 32px;
+            margin-bottom: 24px;
+
+            .control-button {
+                margin-right: 8px;
+            }
+
+            .tip {
+                margin-right: 24px;
+            }
+
+            .control-value {
+                display: flex;
+                justify-content: flex-start;
+
+                .control-value-title,
+                .control-value-input {
+                    margin-right: 8px;
+                }
+            }
+        }
+
+        .table {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 60px;
+            height: 100%;
+            .pagination-bottom {
+                position: absolute;
+            }
+
+            .table-content {
+                display: flex;
+                flex-direction: column;
+                .tiTableDmo{
+                  margin-top: 20px;
+                }
+            }
+
+            .table-time {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .tr-hover:hover {
+                background-color: #f7faff;
+            }
+        }
+
+        .table-expand {
+            cursor: pointer;
+        }
+
+        .echarts {
+            position: relative;
+            margin-bottom: 20px;
+
+            .echarts-content {
+                width: calc(100% + 25px);
+                height: 100%;
+                display: flex;
+                justify-content: flex-start;
+                position: relative;
+
+                .myecharts {
+                    flex: 1;
+                }
+            }
+        }
+
+        .stack {
+            padding: 20px 0 0px 0;
+            margin-bottom: 24px;
+
+            .config-content {
+                height: 350px;
+                overflow: auto;
+                min-width: 300px;
+            }
+        }
+    }
+
+    .count-fill {
+        display: inline-block;
+        background: var(--ti-table-tr-count-fill-bg-color);
+        height: 38px;
+        position: absolute;
+        top: -19px;
+        left: -10px;
+    }
+
+    .count-right {
+        position: absolute;
+        left: 0;
+        top: -10px;
+    }
+
+    .file-io-nooperate {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 240px;
+    }
+
+    .config-title,
+    .echarts-title {
+        color: #e8e8e8;
+        font-size: 20px;
+        margin-bottom: 20px;
+
+        .subtitle {
+            margin-left: 16px;
+            color: var(--echart-subtitle-color);
+            font-size: 12px;
+        }
+    }
+
+    .ti3-table > table > thead > tr > th,
+    .ti3-table > .ti3-resize-wrapper > table > thead > tr > th,
+    .ti3-table > .ti3-table-fixed-head > table > thead > tr > th,
+    .ti3-table > .ti3-table-container > table > thead > tr > th {
+        border-bottom: none;
+    }
+
+    .ti3-toggle-details .ti3-icon-angle-right:before {
+        content: "\e919" !important;
+    }
+
+    .ti3-icon-angle-transform-up-thin {
+        display: inline-block;
+        transform: rotate(270deg) !important;
+    }
+
+    .ti3-icon-angle-transform-down-thin {
+        display: inline-block;
+        transform: rotate(180deg) !important;
+    }
+
+    .ti3-table-container {
+        background: var(--ti-table-tr-bg-color) !important;
+    }
+
+    .ti3-table > table > tbody > tr {
+        background: var(--ti-table-tr-bg-color) !important;
+    }
+
+    .ti3-table > .ti3-table-container > table > tbody > .ti3-details-tr {
+        background: #252525 !important;
+    }
+
+    .ti3-table-nest {
+        border-left: 2px solid #0067ff;
+    }
+
+    .ti3-tree-content-box {
+        --ti-tree-content-box-color-hover: #313131;
+    }
+}
+
+.show {
+    display: none;
+}
+
+::ng-deep .vscode-dark .overview-container {
+    --ti-table-border-bottom-color: var(--vscode-editor-background);
+    --ti-table-td-text-color: #aaaaaa;
+    --ti-table-th-text-color: #e8e8e8;
+    --ti-table-tr-bg-color: #161616;
+    --ti-table-nest-td-border-bottom-color: var(--vscode-editor-background);
+    --ti-table-tr-count-fill-bg-color: #1d55b6;
+    .ti3-table > table > tbody .tr-active,
+    .ti3-table > .ti3-table-container > table > tbody > .tr-active {
+        background-color: #313131 !important;
+    }
+    .ti3-table > table > tbody > tr {
+        &:hover {
+            background: #313131 !important;
+        }
+    }
+    .ti3-tree-content-box {
+        --ti-tree-content-box-color-hover: #313131;
+    }
+}
+
+::ng-deep .vscode-light .overview-container {
+    --ti-table-border-bottom-color: #e1e6ee;
+    --ti-table-td-text-color: #222;
+    --ti-table-th-text-color: #e8e8e8;
+    --ti-table-tr-bg-color: #fff;
+    --ti-table-nest-td-border-bottom-color: #e1e6ee;
+    --ti-table-tr-count-fill-bg-color: #5d89d8;
+    .ti3-table > table > tbody .tr-active,
+    .ti3-table > .ti3-table-container > table > tbody > .tr-active {
+        background-color: #f5f9ff !important;
+    }
+    .ti3-table > table > tbody > tr {
+        &:hover {
+            background: #f5f9ff !important;
+        }
+    }
+    .ti3-tree-content-box {
+        --ti-tree-content-box-color-hover: #f5f9ff;
+    }
+}
+
+::ng-deep .vscode-dark #Thor-Container .ti3-table > .ti3-table-container > table > tbody > .ti3-details-tr > td {
+    background: #252525;
+}
+
+::ng-deep .vscode-light #Thor-Container .ti3-table > .ti3-table-container > table > tbody > .ti3-details-tr > td {
+    background: #f5f9ff;
+}
+::ng-deep .vscode-dark {
+    --echart-subtitle-color: #aaaaaa;
+    .config-title {
+        color: #e8e8e8 !important;
+    }
+    .borderLeft {
+        border-left: 38px solid #252525;
+    }
+}
+::ng-deep .vscode-light {
+    --echart-subtitle-color: #979797;
+    .config-title {
+        color: #222222 !important;
+    }
+    .borderLeft {
+        border-left: 38px solid #f5f9ff;
+    }
+}
+:host ::ng-deep .ti3-table > .ti3-page-container {
+    margin-top: 16px;
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-提示图标</title>
+    <desc>Created with Sketch.</desc>
+    <g id="组件规范" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="消息提示类弹窗" transform="translate(-718.000000, -1578.000000)">
+            <g id="icon-提示图标" transform="translate(718.000000, 1578.000000)">
+                <path d="M12,0 C5.4,0 0,5.4 0,12 C0,18.6 5.4,24 12,24 C18.6,24 24,18.6 24,12 C24,5.4 18.6,0 12,0 Z" id="XMLID_298_" fill="#6CBFFF"></path>
+                <path d="M13.4566603,16.2296512 L13.4566603,19.2383721 L10.4566603,19.2383721 L10.4566603,16.2296512 L13.4566603,16.2296512 Z M13.245979,5.45454545 L13.8210244,13.3335095 L10.1058607,13.3335095 L10.6986233,5.45454545 L13.245979,5.45454545 Z" id="形状结合" fill="#FFFFFF" transform="translate(11.963443, 12.346459) rotate(-180.000000) translate(-11.963443, -12.346459) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

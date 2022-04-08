@@ -1,0 +1,53 @@
+.dark {
+  --netio-form-block-bg-color: #252525;
+  --ti-input-border-color-disabled: #616161;
+}
+.light {
+  --netio-form-block-bg-color: #f8fafd;
+}
+
+
+.warpper {
+  min-width: 536px;
+  background: var(--netio-form-block-bg-color);
+  padding: 16px 24px 0;
+
+  .radioItem {
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  .paramValue {
+    display: flex;
+    align-items: center;
+
+    input{
+      width: 236px;
+    }
+    span {
+      font-size: 12px;
+      color: #979797;
+      margin-left: 8px;
+    }
+  }
+}
+.limit > .radioItem:last-child{
+  margin-bottom: 0;
+}
+
+:host ::ng-deep .warpper .ti3-form .ti3-form-label {
+  padding: 0px var(--ti-formfield-item-label-padding-right)
+    var(--ti-formfield-item-padding-bottom) 0 !important;
+  min-width: unset;
+  max-width: unset;
+  display: inline-block;
+}
+:host
+  ::ng-deep
+  .warpper
+  .ti3-form
+  tbody
+  .ti3-form-list:last-child
+  .ti3-form-label {
+  padding-bottom: 16px !important;
+}

@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "noImplicitReturns": true,
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "es2019",
+        "lib": [
+            "ES2019"
+        ],
+        "outDir": "out",
+        "sourceMap": true,
+        "strict": true,
+        "rootDir": "src",
+        "suppressImplicitAnyIndexErrors": true
+    },
+    "exclude": [
+        "node_modules",
+        ".vscode",
+        "out"
+    ]
+}

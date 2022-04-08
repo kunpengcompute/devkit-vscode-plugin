@@ -1,0 +1,21 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--default-page-background-c);
+
+    .item {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        .text {
+            font-size: 14px;
+            color: var(--d-aaaaaa-l-616161);
+            margin-top: 8px;
+            line-height: 20px;
+            text-align: center;
+        }
+    }
+}

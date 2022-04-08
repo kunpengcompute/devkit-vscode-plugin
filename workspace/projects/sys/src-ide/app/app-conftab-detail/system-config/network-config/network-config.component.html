@@ -1,0 +1,102 @@
+<div class="download" style="position: absolute; right:5vw;top:20px;z-index: 99;">
+  <a style="display: block;margin-bottom:5px;" (click)="downloadCsv()"
+    [title]="i18n.sys_cof.sum.download_csv">
+    <img src="./assets/img/download.svg" alt="" />
+  </a>
+</div>
+
+<div class="system-content">
+  <div class="system-item">
+    <h1 class="system-content-title">{{i18n.sys_cof.sum.network_info.irq_aggre_title}}</h1>
+    <img src="./assets/img/summary/tooltip.png" class="system-tip blockCls" [tiTip]='susppendTipStr'
+      tiTipMaxWidth='550px' *ngIf="susppendTipStr !='NULL'" tiTipPosition="top-left" />
+    <table class="system-content-table" style="margin-top: 2.9vh;">
+      <thead>
+        <tr class="system-titlebar">
+          <th tiOverflow tiTipPosition='left' *ngFor="let column of columns ;index as i"
+            [ngClass]="{'system-line': i!=0}"> <span>{{column.title}}</span> <img src="./assets/img/summary/tooltip.png"
+              class="system-tiTip blockCls" [tiTip]='column.tipStr' tiTipPosition="top-left" *ngIf="i!=0" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of list" class="system-word">
+          <td tiOverflow tiTipPosition='left'>{{item.data1}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data2}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data3}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data4}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data5}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data6}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data7}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="system-item">
+    <h1 class="system-content-title">{{i18n.sys_cof.sum.network_info.offload_title}}</h1>
+    <img src="./assets/img/summary/tooltip.png" class="system-tip blockCls" [tiTip]='offloadTipStr'
+      tiTipMaxWidth='400px' *ngIf="offloadTipStr !='NULL'" tiTipPosition="top-left" />
+    <table class="system-content-table offload" style="margin-top: 2.9vh;">
+      <thead>
+        <tr class="system-titlebar">
+          <th tiOverflow tiTipPosition='left' tiOverflow *ngFor="let column of offloadTitle ;index as i"
+            [ngClass]="{'system-line': i!=0}">{{column.title}} <img src="./assets/img/summary/tooltip.png"
+              class="system-tiTip blockCls" [tiTip]='column.tipStr' tiTipPosition="top-left" *ngIf="i!=0" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of offloadInfo" class="system-word">
+          <td tiOverflow tiTipPosition='left'>{{item.data1}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data2}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data3}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data4}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data5}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data6}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data7}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data8}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data9}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="system-item queue">
+    <h1 class="system-content-title">{{i18n.sys_cof.sum.network_info.queue_title}}</h1>
+    <img src="./assets/img/summary/tooltip.png" class="system-tip blockCls" [tiTip]='listTipStr' tiTipMaxWidth='500px'
+      *ngIf="listTipStr !='NULL'" tiTipPosition="top-left" />
+
+    <table class="system-content-table">
+      <thead>
+        <tr class="system-titlebar">
+          <th tiOverflow tiTipPosition='left' *ngFor="let column of queue ;index as i"> {{column.title}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of queueData" class="system-word">
+          <td tiOverflow tiTipPosition='left'>{{item.data1}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data2}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="system-item">
+    <h1 class="system-content-title">{{i18n.sys_cof.sum.network_info.numa_core_title}}</h1>
+    <img src="./assets/img/summary/tooltip.png" class="system-tip blockCls" [tiTip]='numaTipStr' tiTipMaxWidth='800px'
+      *ngIf="listTipStr !='NULL'" tiTipPosition="top-left" />
+    <table class="system-content-table">
+      <thead>
+        <tr class="system-titlebar">
+          <th tiOverflow tiTipPosition='left' *ngFor="let column of break ;index as i"
+            [ngClass]="{'system-line': i!=0}"> {{column.title}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of breakData" class="system-word">
+          <td tiOverflow tiTipPosition='left'>{{item.data1}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data2}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data3}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.data4}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

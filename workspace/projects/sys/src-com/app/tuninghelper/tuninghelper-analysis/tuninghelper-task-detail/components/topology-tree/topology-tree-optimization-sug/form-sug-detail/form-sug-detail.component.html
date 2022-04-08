@@ -1,0 +1,17 @@
+<div class="form-sug-detail">
+  <ti-formfield [type]="'text'">
+    <ti-item *ngFor="let item of formList">
+      <ti-item-label class="item-label">
+        <span>{{item.name}}</span>
+        <span *ngIf="item.desc" class="about-mask" [tiTip]="item.desc">
+          <hy-theme-content>
+            <app-icon-static [name]="'questionMarkTipDark'" dark></app-icon-static>
+            <app-icon-static [name]="'questionMarkTipLight'" light></app-icon-static>
+          </hy-theme-content>
+        </span>
+      </ti-item-label>
+      <span *ngIf="item.value !== ''" class="item-value">{{item.value }}</span>
+      <span *ngIf="item.value === ''" class="item-value">--</span>
+    </ti-item>
+  </ti-formfield>
+</div>

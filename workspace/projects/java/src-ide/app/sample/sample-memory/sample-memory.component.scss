@@ -1,0 +1,276 @@
+.env-main {
+    padding: 20px 0;
+    position: relative;
+
+    .gc-box {
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+        border-radius: 1px;
+    }
+
+    .gc-config {
+        display: flex;
+        .item-config {
+            flex: 1;
+            width: 33.33%;
+            .config-box {
+                display: flex;
+                align-items: center;
+                .config-left {
+                    display: flex;
+                    font-size: 14px;
+                    color: #aaa;
+                    line-height: 30px;
+                    width: 240px;
+                    min-width: 100px;
+                    
+                    .icon-help {
+                        margin-left: 8px;
+                        
+                        img {
+                            height: 14px;
+                            width: 14px;
+                        }
+                    }
+
+                }
+                .config-value {
+                  line-height: 28px !important;
+                  font-size: 14px;
+                  margin-left: 10px;
+                  min-width: 71px;
+                }
+            }
+        }
+
+        
+    }
+
+    .config-title {
+        font-size: 20px;
+        color: #e8e8e8;
+        margin-bottom: 20px;
+        margin-top: 40px;
+    }
+}
+.table-body {
+    height: 350px;
+}
+
+.table-box {
+    position: relative;
+    display: flex;
+}
+.table-y {
+    width: 8%;
+    height: 100%;
+}
+.table {
+    height: 100%;
+    flex: 1;
+}
+.line {
+    width: 160%;
+    height: 2px;
+    background: #ddd;
+}
+.title-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10%;
+}
+.title-num {
+    text-align: right;
+}
+.tables{
+  margin-top: 20px;
+}
+.loadData {
+    width: 100%;
+    padding: 50px 0px 50px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+}
+.config-value1 {
+    margin-left: 150px;
+}
+.config-value2 {
+    margin-left: 189px;
+}
+.config-value3 {
+    margin-left: 145px;
+}
+@media screen and(max-width:1510px) {
+    .config-value1 {
+        margin-left: 60px;
+    }
+    .config-value2 {
+        margin-left: 80px;
+    }
+    .config-value3 {
+        margin-left: 80px;
+    }
+}
+@media screen and(max-width:1300px) {
+    .config-value1 {
+        margin-left: 60px;
+    }
+    .config-value2 {
+        margin-left: 60px;
+    }
+    .config-value3 {
+        margin-left: 52px;
+    }
+}
+
+//   深色主题
+::ng-deep .vscode-dark {
+    .ti3-table > .ti3-table-fixed-head > .ti3-table-fixed-head-filler {
+        background-color: #2a2a2a !important;
+        border-bottom: 1px solid #2a2a2a !important;
+    }
+    .config-title {
+        color: #e8e8e8 !important;
+    }
+    .config-value {
+        color: #aaa !important;
+    }
+    .tables {
+        .table-head {
+            th {
+                background-color: #2a2a2a !important;
+                border-bottom: 1px solid #545454 !important;
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    color: #aaaaaa !important;
+                    border-bottom: 1px solid #545454 !important;
+                }
+                &:hover {
+                    background-color: #545454 !important ;
+                }
+            }
+        }
+    }
+    #configData {
+        background: #252526;
+    }
+    .config-info-title,
+    .gc-box-title > div {
+        color: #e8e8e8;
+    }
+}
+// 浅色主题
+::ng-deep .vscode-light {
+    .ti3-table > .ti3-table-fixed-head > .ti3-table-fixed-head-filler {
+        border-bottom: 1px solid #d4d9e6 !important;
+    }
+    .config-title {
+        color: #222222 !important;
+    }
+    #configData {
+        border: solid 1px #d4d9e6 !important;
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+        border-radius: 1px;
+    }
+    .config-value {
+        color: #282b33 !important;
+    }
+    .tables {
+        .table-head {
+            th {
+                background-color: #f7faff !important;
+                border-bottom: 1px solid #e1e6ee !important;
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    color: #222222 !important;
+                    border-bottom: 1px solid #e1e6ee !important;
+                }
+                &:hover {
+                    background-color: #f7faff !important;
+                }
+            }
+        }
+    }
+    #Thor-Container
+        .ti3-table
+        > .ti3-table-container
+        > table
+        > tbody
+        > tr:nth-child(odd):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover,
+    #Thor-Container
+        .ti3-table
+        > .ti3-table-container
+        > table
+        > tbody
+        > tr:nth-child(even):not(.ti3-selected-tr):not(.ti3-odd-tr):not(.ti3-even-tr):not(.ti3-details-tr):hover {
+        background-color: #f7faff !important;
+    }
+    .gc-box {
+        background: #fff;
+    }
+    .config-info-title,
+    .gc-box-title > div {
+        color: #222;
+    }
+}
+.ti3-table > .ti3-table-fixed-head + .ti3-table-container {
+    border-bottom: 1px solid #545454 !important;
+    max-height: 350px;
+}
+:host ::ng-deep .config-info {
+    margin-bottom: 20px;
+    .config-info-title {
+        margin-bottom: 6px;
+        font-size: 20px;
+        img {
+            cursor: pointer;
+        }
+    }
+    .rotate {
+        transform: rotate(-90deg);
+    }
+    .gc-box-title {
+        display: flex;
+        align-items: center;
+        height: 44px;
+        line-height: 44px;
+        border-bottom: 1px solid #6e6e6e;
+        padding: 0 20px;
+        > div {
+            flex: 1;
+            font-size: 1.46vh;
+            img {
+                width: 16px;
+                height: 16px;
+                margin-right: 16px;
+            }
+        }
+    }
+    .icon-rotate {
+        transform: rotate(-180deg);
+    }
+    .gc-config {
+        padding: 10px 20px;
+    }
+    .ti3-form .ti3-form-label {
+        font-size: 1.46vh;
+        line-height: 27px;
+        color: #9ea4b3;
+        --ti-formfield-item-padding-bottom: 0;
+    }
+    .ti3-form .ti3-form-content {
+        padding-bottom: 0;
+    }
+}
+#mychart {
+    width: calc(100% + 30px);
+}

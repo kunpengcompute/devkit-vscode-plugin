@@ -1,0 +1,88 @@
+<section id="profillingAnalysisRecordManage">
+    <p class="title">{{ i18n.common_term_profile }}</p>
+    <div class="import-btn-box">
+        <button class="import-btn" type="button" [disabled]="profilingDisplayed.length > 0" (click)="importProfiling()">
+            {{ i18n.plugins_perf_java_profiling_import_record_name }}
+        </button>
+    </div>
+    <div class="record-table">
+        <ti-table [(displayedData)]="profilingDisplayed" [srcData]="profilingSrcData" [columns]="tableColumns">
+            <table>
+                <thead>
+                    <tr>
+                        <th tiOverflow *ngFor="let column of tableColumns" [width]="column.width">
+                            {{ column.title }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of profilingDisplayed">
+                        <td tiOverflow>{{ row.name }}</td>
+                        <td class="td-state" tiOverflow *ngIf="row.state === 'profiling'">
+                            <img src="./assets/img/guardian/guardian-creating.gif">
+                            <span>{{ i18n.common_term_recording }}</span>
+                        </td>
+                        <td class="td-state" tiOverflow *ngIf="row.state === 'downloadProfile'">
+                            <i class="icon-finished"></i>
+                            <span>{{ i18n.common_term_finished }}</span>
+                        </td>
+                        <td tiOverflow>{{ row.createTime }}</td>
+                        <td class="td-operate" tiOverflow>
+                            <button (click)="exportProfiling()">{{ i18n.common_term_export }}</button>
+                            <button (click)="stopProfiling()">{{ i18n.protalserver_profiling_stop_analysis }}</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="profilingDisplayed.length === 0">
+                    <tr style="height: 160px;">
+                        <td tiColspan [hyNodata]="{text: i18n.common_term_no_records }" [nodataShow]="true"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </ti-table>
+    </div>
+</section>
+<section id="samplingAnalysisRecordManage">
+    <p class="title">{{ i18n.common_term_sample }}</p>
+    <div class="import-btn-box">
+        <button class="import-btn" type="button" (click)="importSampling()">
+            {{ i18n.plugins_perf_java_profiling_import_record_name }}
+        </button>
+    </div>
+    <div class="record-table">
+        <ti-table [(displayedData)]="samplingDisplayed" [srcData]="samplingSrcData" [columns]="tableColumns">
+            <table>
+                <thead>
+                    <tr>
+                        <th tiOverflow *ngFor="let column of tableColumns" [width]="column.width">
+                            {{ column.title }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of samplingDisplayed">
+                        <td tiOverflow>{{ row.name }}</td>
+                        <td class="td-state" tiOverflow *ngIf="row.state === 'RECORDING'">
+                            <img src="./assets/img/guardian/guardian-creating.gif">
+                            <span>{{ i18n.common_term_recording }}</span>
+                        </td>
+                        <td class="td-state" tiOverflow *ngIf="row.state === 'FINISHED'">
+                            <i class="icon-finished"></i>
+                            <span>{{ i18n.common_term_finished }}</span>
+                        </td>
+                        <td tiOverflow>{{ row.createTime }}</td>
+                        <td class="td-operate" tiOverflow>
+                            <button (click)="exportSampling(row.id, row.name)">{{ i18n.common_term_export }}</button>
+                            <button (click)="deleteSampling(row.id)">{{ i18n.common_term_operate_del }}</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="samplingDisplayed.length === 0">
+                    <tr style="height: 160px;">
+                        <td tiColspan [hyNodata]="{text: i18n.common_term_no_records }" [nodataShow]="true"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </ti-table>
+    </div>
+</section>

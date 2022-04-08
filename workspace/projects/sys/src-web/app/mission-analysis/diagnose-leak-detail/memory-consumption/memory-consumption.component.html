@@ -1,0 +1,34 @@
+<div class="header">
+  <span *ngFor="let header of headers" class="group-list">
+    <span class="function-label">{{ header.label }}</span>
+    <span class="function-content">{{ ([null, undefined, ''].includes(header.content) ? '--' : header.content) |
+      thousandSeparator }}</span>
+  </span>
+</div>
+<div class="title_bar">
+  <div class="left_title">
+    <span class="selected-title">{{selectedProcess.label}}</span>
+    <ti-select class="hidden-select" *ngIf="isProcessOption"  [ngClass]="{'isExpand': isExpand}" (click)="isExpand = !isExpand" [options]='processOption' [searchable]="true" [(ngModel)]="selectedProcess"
+      (ngModelChange)="selectProcess()">
+    </ti-select>
+    <div *ngIf="isProcessOption" class="select-icon"></div>
+  </div>
+
+  <div class="right_switch">
+    <app-icon-react name="chartView" *ngIf="isTable" (click)="chart()"></app-icon-react>
+    <app-icon-react name="chartViewSelected" *ngIf="!isTable" (click)="chart()"></app-icon-react>
+    <app-icon-react name="tableView" *ngIf="!isTable" (click)="chart()"></app-icon-react>
+    <app-icon-react name="tableViewSelected" *ngIf="isTable" (click)="chart()"></app-icon-react>
+  </div>
+</div>
+
+<!-- echarts -->
+<div class="micarch_echarts svgPage"  [ngClass]="{ifShow: !isTable}">
+  <app-consum-sequence [nodeId]='nodeId' [projectName]='projectName' [taskName]='taskName' [analysisType]='analysisType'
+  [taskId]='taskId' [tableData]='tableData' [pid]='selectedProcess.pid'></app-consum-sequence>
+</div>
+<!-- 表格 -->
+<div class="micarch_table svgPage" [ngClass]="{ifShow: isTable }">
+  <app-consum-table [nodeId]='nodeId' [projectName]='projectName' [taskName]='taskName' [analysisType]='analysisType'
+    [taskId]='taskId' [tableData]='tableData' [pid]='selectedProcess.pid'></app-consum-table>
+</div>

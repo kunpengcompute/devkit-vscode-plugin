@@ -1,0 +1,74 @@
+.node-config {
+  width: calc(100% - 16px);
+  margin-left: 16px;
+  font-size: 14px;
+  margin-top: 16px;
+
+  .config-button {
+    width: 96px;
+    height: 32px;
+    margin: 20px 0px;
+
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6c92fa;
+    color: #ffffff;
+  }
+
+  .table {
+    .config-btn {
+      color: #0067ff;
+      cursor: pointer;
+    }
+  }
+}
+
+.status-icon {
+  border-radius: 50%;
+  vertical-align: middle;
+  display: inline-block;
+  margin-right: 5px;
+  border: 3px solid #63b6f7;
+}
+
+.success-icon {
+  border: 3px solid #7adfa0;
+}
+
+.reserve-icon {
+  border: 3px solid #63b6f7;
+}
+
+.flex {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.tip {
+  display: flex;
+  align-items: center;
+  color: var(--tip-txt-color);
+  padding-left: 16px;
+  margin-top: 16px;
+
+  img {
+    margin-right: 8px;
+    width: 14px;
+    height: 14px;
+  }
+  span {
+    font-size: 12px;
+  }
+}
+
+// 浅色主题
+::ng-deep .vscode-light {
+  --tip-txt-color: #979797;
+}
+// 黑色主题
+::ng-deep .vscode-dark {
+  --tip-txt-color: #aaa;
+}

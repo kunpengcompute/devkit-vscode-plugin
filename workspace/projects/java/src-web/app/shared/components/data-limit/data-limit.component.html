@@ -1,0 +1,108 @@
+<div class="limit-box-body" [appLoading]="isLoading">
+    <div>
+        <div class="database-tab">
+            <span class="item-tab" *ngFor="let tab of dataTabs; let idx = index" (click)="activeChange(dataTabs, idx)">
+                <span class="tab-title" [ngClass]="{ 'tab-active': tab.active }">
+                    {{ tab.title }}
+                </span>
+            </span>
+        </div>
+    </div>
+    <!-- 概览 -->
+    <div [ngStyle]="{display: this.dataTabs[0].active ? 'block' : 'none'}">
+        <app-limit-item [config]="commonConfig['over_view']" (confirm)="handleConfirm($event, 'over_view')"
+            (restore)="handleRestore(commonConfig['over_view'].range[0], 'over_view')"
+            [value]="formItems['over_view'].timeValue"></app-limit-item>
+    </div>
+    <!-- GC -->
+    <div [ngStyle]="{display: this.dataTabs[1].active ? 'block' : 'none'}">
+        <app-limit-item [config]="commonConfig['gcTime']" (confirm)="handleConfirm($event, 'gc')"
+            (restore)="handleRestore(commonConfig['gcTime'].range[0], 'gc')" [value]="formItems['gc'].timeValue">
+        </app-limit-item>
+        <app-limit-item [config]="commonConfig['gcData']" (confirm)="handleConfirm($event, 'gc')"
+            (restore)="handleRestore(commonConfig['gcData'].range[0], 'gc')" [value]="formItems['gc'].dataValue">
+        </app-limit-item>
+    </div>
+    <!-- IO -->
+    <div [ngStyle]="{display: this.dataTabs[2].active ? 'block' : 'none'}">
+        <div>
+            <div class="commonTitle">{{i18n.protalserver_profiling_tab.fileIo}}</div>
+            <app-limit-item [config]="commonConfig['fileIoTime']" (confirm)="handleConfirm($event, 'file_io')"
+                (restore)="handleRestore(commonConfig['fileIoTime'].range[0], 'file_io')"
+                [value]="formItems['file_io'].timeValue"></app-limit-item>
+            <app-limit-item [config]="commonConfig['fileIoData']" (confirm)="handleConfirm($event, 'file_io')"
+                (restore)="handleRestore(commonConfig['fileIoData'].range[0], 'file_io')"
+                [value]="formItems['file_io'].dataValue"></app-limit-item>
+        </div>
+        <div>
+            <div class="commonTitle">{{i18n.protalserver_profiling_tab.socketIo}}</div>
+            <app-limit-item [config]="commonConfig['socketIoTime']" (confirm)="handleConfirm($event, 'socket_io')"
+                (restore)="handleRestore(commonConfig['socketIoTime'].range[0], 'socket_io')"
+                [value]="formItems['socket_io'].timeValue"></app-limit-item>
+            <app-limit-item [config]="commonConfig['socketIoData']" (confirm)="handleConfirm($event, 'socket_io')"
+                (restore)="handleRestore(commonConfig['fileIoData'].range[0], 'socket_io')"
+                [value]="formItems['socket_io'].dataValue"></app-limit-item>
+        </div>
+    </div>
+    <!-- 数据库 -->
+    <div [ngStyle]="{display: this.dataTabs[3].active ? 'block' : 'none'}" class="dataTab">
+        <div>
+            <div class="commonTitle">{{i18n.protalserver_profiling_tab.jdbc}}</div>
+            <app-limit-item [config]="commonConfig['jdbcTime']" (confirm)="handleConfirm($event, 'jdbc')"
+                (restore)="handleRestore(commonConfig['jdbcTime'].range[0], 'jdbc')"
+                [value]="formItems['jdbc'].timeValue"></app-limit-item>
+        </div>
+        <div>
+            <div class="commonTitle">{{i18n.protalserver_profiling_tab.jdbcpool}}</div>
+            <app-limit-item [config]="commonConfig['jdbcpoolData']" (confirm)="handleConfirm($event, 'pool_form')"
+                (restore)="handleRestore(commonConfig['jdbcpoolData'].range[0], 'pool_form')"
+                [value]="formItems['pool_form'].dataValue"></app-limit-item>
+        </div>
+        <div>
+            <div class="commonTitle">{{i18n.protalserver_profiling_tab.mongodb}}</div>
+            <app-limit-item [config]="commonConfig['mongodbTime']" (confirm)="handleConfirm($event, 'mongodb')"
+                (restore)="handleRestore(commonConfig['mongodbTime'].range[0], 'mongodb')"
+                [value]="formItems['mongodb'].timeValue"></app-limit-item>
+        </div>
+        <div>
+            <div class="commonTitle">{{i18n.protalserver_profiling_tab.cassandra}}</div>
+            <app-limit-item [config]="commonConfig['cassandraTime']" (confirm)="handleConfirm($event, 'cassandra')"
+                (restore)="handleRestore(commonConfig['cassandraTime'].range[0], 'cassandra')"
+                [value]="formItems['cassandra'].timeValue"></app-limit-item>
+        </div>
+        <div>
+            <div class="commonTitle">{{i18n.protalserver_profiling_tab.hbase}}</div>
+            <app-limit-item [config]="commonConfig['hbaseTime']" (confirm)="handleConfirm($event, 'hbase')"
+                (restore)="handleRestore(commonConfig['hbaseTime'].range[0], 'hbase')"
+                [value]="formItems['hbase'].timeValue"></app-limit-item>
+        </div>
+    </div>
+    <!-- web -->
+    <div [ngStyle]="{display: this.dataTabs[4].active ? 'block' : 'none'}">
+        <div>
+            <div class="commonTitle">{{i18n.protalserver_profiling_tab.httpRequest}}</div>
+            <app-limit-item [config]="commonConfig['httpTime']" (confirm)="handleConfirm($event, 'http')"
+                (restore)="handleRestore(commonConfig['httpTime'].range[0], 'http')"
+                [value]="formItems['http'].timeValue"></app-limit-item>
+        </div>
+        <div>
+            <div>
+                <div class="commonTitle">SpringBoot--{{i18n.protalserver_profiling_tab.metrics}}</div>
+                <app-limit-item [config]="commonConfig['metricsTime']" (confirm)="handleConfirm($event, 'boot_metrics')"
+                    (restore)="handleRestore(commonConfig['metricsTime'].range[0], 'boot_metrics')"
+                    [value]="formItems['boot_metrics'].timeValue"></app-limit-item>
+            </div>
+            <div>
+                <div class="commonTitle">SpringBoot--{{i18n.protalserver_profiling_tab.http_traces}}</div>
+                <app-limit-item [config]="commonConfig['http_tracesTime']"
+                    (confirm)="handleConfirm($event, 'boot_traces')"
+                    (restore)="handleRestore(commonConfig['http_tracesTime'].range[0], 'boot_traces')"
+                    [value]="formItems['boot_traces'].timeValue"></app-limit-item>
+                <app-limit-item [config]="commonConfig['http_tracesData']"
+                    (confirm)="handleConfirm($event, 'boot_traces')"
+                    (restore)="handleRestore(commonConfig['http_tracesData'].range[0], 'boot_traces')"
+                    [value]="formItems['boot_traces'].dataValue"></app-limit-item>
+            </div>
+        </div>
+    </div>
+</div>

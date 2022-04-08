@@ -1,0 +1,263 @@
+::ng-deep .vscode-dark {
+    .leak-box {
+        .wrap-box {
+            padding-bottom: 20px;
+
+            .no-data {
+                background-color: #161616;
+            }
+        }
+        .leak-table .table_bg {
+            background: #161616;
+        }
+    }
+    .leak-title {
+        color: #e8e8e8;
+    }
+}
+
+::ng-deep .vscode-light {
+    .leak-box {
+        .wrap-box {
+            padding-bottom: 20px;
+
+            .no-data {
+                background-color: #ffffff;
+            }
+        }
+        .leak-table .table_bg {
+            background: #fff;
+        }
+    }
+    .leak-title {
+        color: #222;
+    }
+}
+
+.leak-box {
+    position: relative;
+    padding-top: 20px;
+    .table-search-box {
+        margin-bottom: 20px;
+    }
+
+    .leak-header {
+        justify-content: space-between;
+        display: flex;
+
+        .left {
+            width: 290px;
+            height: 28px;
+
+            .select {
+                border-right: none;
+                color: #222222;
+            }
+
+            .search {
+                color: #979797;
+                width: 308px;
+            }
+
+            input {
+                height: 26px !important;
+            }
+        }
+
+        .right {
+            position: relative;
+
+            img {
+                margin-right: 24px;
+                margin-bottom: -11px;
+                cursor: pointer;
+            }
+
+            .span-num {
+                width: 12px;
+                height: 12px;
+                font-size: 10px;
+                background-color: #ed4b4b;
+                color: #fff;
+                border-radius: 50%;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -ms-flex-align: center;
+                align-items: center;
+                position: absolute;
+                top: -6px;
+                left: 24px;
+            }
+        }
+    }
+
+    .leak-table {
+        display: flex;
+        min-height: 480px;
+
+        .left-table {
+            width: 1000px;
+            position: relative;
+
+            thead {
+                color: #616161;
+            }
+
+            tbody {
+                tr {
+                    &:active {
+                        background-color: rgb(247, 250, 255) !important;
+                    }
+                }
+            }
+        }
+
+        .right-table {
+            width: 720px;
+            margin-left: 22px;
+            position: relative;
+
+            thead {
+                color: #616161;
+            }
+
+            tbody {
+                color: #222222;
+            }
+        }
+
+        .table_bg {
+            height: 443px;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: -1;
+        }
+    }
+
+    .leak-title {
+        font-size: 20px;
+        margin-top: 40px;
+        padding-bottom: 20px;
+        line-height: 26px;
+    }
+}
+
+#myEchart {
+    height: 200px;
+    width: 100.8%;
+}
+
+.suggest {
+    width: 700px;
+    height: 600px;
+    position: absolute;
+    overflow: auto;
+    left: 50%;
+    top: 30%;
+    margin-left: -300px;
+    margin-top: -350px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.1);
+
+    .content {
+        width: 636px;
+        height: 66px;
+        margin: 0 auto;
+        display: flex;
+        border-bottom: 1px dotted #e1e6ee;
+        justify-content: space-between;
+
+        .suggest-title {
+            font-size: 20px;
+            color: #222222;
+            line-height: 65px;
+        }
+
+        img {
+            height: 20px;
+            margin-top: 23px;
+            cursor: pointer;
+        }
+    }
+
+    .ctx {
+        width: 636px;
+        margin: 0 auto;
+        margin-top: 20px;
+        border-bottom: 1px solid #d7dbe7;
+        border-left: 1px solid #d7dbe7;
+        border-right: 1px solid #d7dbe7;
+
+        .sug-header {
+            display: flex;
+            background-color: #f5f9ff;
+            color: #222222;
+            height: 44px;
+            justify-content: space-between;
+            line-height: 44px;
+            font-size: 14px;
+            margin-top: 20px;
+
+            div {
+                padding-left: 24px;
+
+                span {
+                    padding-left: 12px;
+                }
+            }
+
+            .arow {
+                padding-left: 24px;
+                cursor: pointer;
+                transform: rotate(180deg);
+
+                .toggle-up {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+
+        .sug-content {
+            font-size: 14px;
+            padding: 20px 24px 24px 12px;
+            border: 0 1px 1px 1px solid #d7dbe7;
+            height: 400px;
+            overflow: auto;
+        }
+    }
+}
+
+ti-pagination.ti3-page-container .ti3-pag-page:not(.ellipse):hover {
+    background-color: #0067ff !important;
+    color: #fff !important;
+}
+
+.ti3-resize-wrapper {
+    max-height: 411px !important;
+}
+
+ti-pagination.ti3-page-container .ti3-pag-prev:not(.disabled):hover,
+ti-pagination.ti3-page-container .ti3-pag-next:not(.disabled):hover {
+    background-color: #0067ff !important;
+}
+
+
+ti-pagination.ti3-page-container .ti3-pag-page {
+    color: #aaa !important;
+}
+
+:host ::ng-deep .leak-box .ti3-table > .ti3-table-fixed-head + .ti3-table-container {
+    max-height: 411px !important;
+}
+
+.vscode-dark .ti3-table > .ti3-table-container > table > tbody > .isSelect {
+    background-color: #313131 !important;
+}
+
+::ng-deep .vscode-light .ti3-table > .ti3-table-container > table > tbody > .isSelect {
+    background-color: #f5f9ff !important;
+}

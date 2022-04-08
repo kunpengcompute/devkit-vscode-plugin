@@ -1,0 +1,15 @@
+<div class="sys-perf-network-compare">
+    <app-common-table [commonTableData]="networkInfo" [isFilters]="true" [isPagination]="true">
+        <ng-template let-displayed let-tabcolumns="columns">
+            <tbody>
+                <ng-container *ngFor="let row of displayed;">
+                    <tr>
+                        <ng-container *ngFor="let column of tabcolumns;">
+                            <td *ngIf="column.show || column.show === undefined" tiOverflow>{{ row[column.key] | thousandSeparator }}</td>
+                        </ng-container>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </ng-template>
+    </app-common-table>
+</div>

@@ -1,0 +1,140 @@
+<div class="method-box">
+    <div [hidden]="typeSelected.id != 'raw'" style="height: 100%;">
+        <div class="file-list">
+            <div class="select-box" [ngStyle]="{'display': leftState? 'none':'block'}">
+                <ti-select style="width: 120px;" [options]="typeOptions" [(ngModel)]="typeSelected"
+                    placeholder="Please Select" (select)="typeChange($event)" id="myselect">
+                </ti-select>
+            </div>
+            <div class="list-content" [ngStyle]="{'display': leftState? 'none':'block'}">
+                <div id="threadTree">
+                    <ti-tree id="tree" [data]="fileList" [multiple]="multiple" [changedByCheckbox]="true"
+                        (beforeExpand)="beforeExpand($event)" (select)="getAllContent($event)">
+                        <ng-template let-item let-i=index>
+                            <span tiOverflow tiTipPosition="right">
+                                <img *ngIf="currTheme == ColorTheme.Dark&&!item.children"
+                                    src="./assets/img/home/file_icon_dark.png" />
+                                <img *ngIf="currTheme == ColorTheme.Light&&!item.children"
+                                    src="./assets/img/home/file_icon_dark.png" />
+                                <span style="cursor: pointer">{{item.name?item.name:item.fileName}}</span>
+                            </span>
+                        </ng-template>
+                    </ti-tree>
+                </div>
+            </div>
+            <div class="split-line"></div>
+            <div class="file-diff">
+                <app-loading *ngIf="showLoading" [height]="'80vh'" [bgColor]="'none'"></app-loading>
+                <app-diff #diffIns [currentFile]="currentFile"></app-diff>
+            </div>
+            <div class="toggle-btn" (click)='toggleLeft()' [ngClass]="{'activeToggle': leftState}">
+                <img *ngIf="currTheme == ColorTheme.Dark" src="./assets/img/projects/toggle.svg" />
+                <img *ngIf="currTheme == ColorTheme.Light" src="./assets/img/profiling/pull_left_light.svg" />
+            </div>
+        </div>
+    </div>
+    <div [hidden]="typeSelected.id != 'graph'" style="height: 100%" #showFullEl>
+        <div class="file-list">
+            <div class="select-box" [ngStyle]="{'display': leftState? 'none':'block'}">
+                <ti-select style="width: 120px;" [options]="typeOptions" [(ngModel)]="typeSelected"
+                    placeholder="Please Select" (select)="typeChange($event)" id="myselect">
+                </ti-select>
+            </div>
+            <div class="list-content" [ngStyle]="{'display': leftState? 'none':'block'}">
+                <div class="list-item" style="padding-left: 0">
+                    <ul class="item-child-container" style="width: 240px;">
+                        <li tiOverflow class="item-child" [ngClass]="{ active: activeGraph == fileIndex }"
+                            *ngFor="let file of fileList; let fileIndex = index"
+                            (click)="getFileDataAndShowLock(file, fileIndex)">
+                            <img style="margin: 0px 6px 2px 10px;" src="./assets/img/projects/file_icon.svg">
+                            <span>{{ file.name }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="split-line-toggle">
+                <div class="toggle-btn" (click)='toggleLeft()' [ngClass]="{'activeToggle': leftState}">
+                    <img *ngIf="currTheme == ColorTheme.Dark" src="./assets/img/projects/toggle.svg" />
+                    <img *ngIf="currTheme == ColorTheme.Light" src="./assets/img/profiling/pull_left_light.svg" />
+                </div>
+            </div>
+            <div class="file-diff lock-graph" style="background: url(./assets/img/projects/file_diff_background.svg);">
+                <div class="graph-header">
+                    <div class="graph-control">
+                        <div class="obersver">
+                            <div class="control-label">{{i18n.newLockGraph.obersver}}</div>
+                            <div class="control-switch" [tiTip]='obersverContent' tiTipPosition="right-top">
+                                <ti-switch id="myswitch1" [(ngModel)]="obersverSwitch"></ti-switch>
+                            </div>
+                            <div class="control-select" *ngIf="obersverSwitch">
+                                <ti-select style="width: 120px;" [options]='obersverOptions'
+                                    [(ngModel)]="obersverSelect" (ngModelChange)="obersverSelectChange($event)"
+                                    id="myselect1">
+                                </ti-select>
+                            </div>
+                        </div>
+                        <div class="compare">
+                            <div class="control-label">{{i18n.newLockGraph.compare}}</div>
+                            <div class="control-switch" [tiTip]='compareContent' tiTipPosition="right-top">
+                                <ti-switch id="myswitch2" [(ngModel)]="compareSwitch"
+                                    (ngModelChange)="compareSwitchChange()" [disabled]="compareOptions.length === 0">
+                                </ti-switch>
+                            </div>
+                            <div class="control-select" *ngIf="compareSwitch">
+                                <ti-select style="width: 220px;" [options]='compareOptions' [(ngModel)]="compareSelect"
+                                    (ngModelChange)="compareSelectChange($event)" id="myselect2">
+                                </ti-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="graph-status">
+                        <div class="status">
+                            <div><span class="circle green"></span>{{i18n.protalserver_profiling_overview_env.runable}}
+                            </div>
+                            <div><span class="circle red"></span>{{i18n.protalserver_profiling_overview_env.blocked2}}
+                            </div>
+                            <div><span
+                                    class="circle yellow"></span>{{i18n.protalserver_profiling_overview_env.waiting2}}
+                            </div>
+                            <div><span
+                                    class="circle orange"></span>{{i18n.protalserver_profiling_overview_env.waitingTime}}
+                            </div>
+                        </div>
+                        <div class="lines">
+                            <div class="dashLine"><img
+                                    src="./assets/img/projects/dashedLine.svg" /><span>{{i18n.newLockGraph.requestLocked}}</span>
+                            </div>
+                            <div class="solidLine"><img
+                                    src="./assets/img/projects/solidLine.svg" /><span>{{i18n.newLockGraph.hasLocked}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="graph-content">
+                    <div class="graph-svg" #draggable>
+                        <div class="left">
+                            <app-lock-graph #lockGraph [name]="'current'" [threadTime]="currentThreadTime"
+                                [isObersver]="obersverSwitch" [isCompare]="compareSwitch"></app-lock-graph>
+                        </div>
+                        <div class="right" *ngIf="compareSwitch">
+                            <app-lock-graph #lockGraph2 [name]="'compare'" [threadTime]="compareThreadTime"
+                                [isObersver]="obersverSwitch" [isCompare]="compareSwitch"></app-lock-graph>
+                        </div>
+                    </div>
+                </div>
+                <div class="zoom-screen">
+                    <app-zoom-screen [fullEl]="showFullEl" [draggableEl]="draggableEl" [wheelShowScale]="wheelShowScale" 
+                    (zoomBn)="onZoomStatus($event)" (zoomParam)="onZoomParam($event)"  *ngIf="typeSelected.id === 'graph'">
+                    </app-zoom-screen>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #obersverContent>
+    <div [innerHtml]="i18n.newLockGraph.obersverTip"></div>
+</ng-template>
+<ng-template #compareContent>
+    <div [innerHtml]="i18n.newLockGraph.compareTip"></div>
+</ng-template>

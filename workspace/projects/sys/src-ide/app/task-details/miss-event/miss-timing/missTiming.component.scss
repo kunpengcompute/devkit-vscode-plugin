@@ -1,0 +1,179 @@
+.memory-detail {
+  max-height: 640px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  .no-data{
+    margin-top: 16px;
+  }
+}
+.timeLine {
+  margin-top: 16px;
+}
+.table-box {
+  position: relative;
+  display: flex;
+}
+.x-labels {
+  display: flex;
+  color: #999;
+  font-size: 12px;
+  text-align: center;
+  box-sizing: border-box;
+  margin-right: 34px;
+  margin-top: 20px;
+  border-top: 2px solid #383838;
+  .scale {
+    padding-top: 10px;
+  }
+}
+.table-y {
+  width: 53px;
+  height: 100%;
+
+  span {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+  }
+}
+::ng-deep .ti3-tooltip-content {
+  word-break: break-all;
+}
+.table {
+  height: 100%;
+  flex: 1;
+}
+
+.title-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10%;
+}
+
+::ng-deep .title-head1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10%;
+  height: 20px;
+}
+
+.title-num {
+  text-align: right;
+}
+
+.timing_chart_container {
+  padding-top: 20px;
+  text-align: center;
+}
+
+div#normalized-stacked-area-chart {
+  display: inline-block;
+}
+
+.timing_table {
+  margin-top: 20px;
+  max-height: 472px;
+  width: 100%;
+  overflow-x: scroll;
+
+  .timing_table_timeaxis {
+    height: 41px;
+    display: flex;
+    align-items: center;
+
+    .timing_table_timeaxis_col_1 {
+      width: 101px;
+    }
+
+    .timing_table_timeaxis_col_2 {
+      width: 100%;
+    }
+  }
+
+  .timing_table_row {
+    margin-top: 6px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+
+    .timing_table_col_1 {
+      width: 101px;
+    }
+
+    .timing_table_col_2 {
+      height: 50px;
+      width: 100%;
+    }
+  }
+}
+
+.right_bot {
+  display: flex;
+  font-size: 14px;
+  color: #2b313f;
+  align-items: center;
+
+  .dataFilter {
+    display: flex;
+
+    span {
+      display: block;
+      height: 16px;
+      width: 16px;
+      margin-right: 8px;
+    }
+  }
+}
+
+.separate-line {
+  margin: 23px 0px;
+  width: 100%;
+  height: 0px;
+  border-top: solid #e0e1e6 2px;
+}
+
+.timing_table_detail {
+  .timing_table_detail_timeaxis {
+    height: 41px;
+    width: 100%;
+  }
+
+  .timing_table_detail_row {
+    margin-top: 6px;
+    height: 91px;
+    width: 100%;
+  }
+}
+
+.emptyData {
+  min-height: 300px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+}
+
+.x-label {
+  margin-top: 20px;
+}
+
+.timing_contain {
+  display: flex;
+  flex-direction: column;
+}
+
+:host #select ::ng-deep #myselect2_dominator {
+  max-height: 32px !important;
+}
+:host #select ::ng-deep #myselect2_dominator #myselect2_dominator_input {
+  max-height: 32px !important;
+}

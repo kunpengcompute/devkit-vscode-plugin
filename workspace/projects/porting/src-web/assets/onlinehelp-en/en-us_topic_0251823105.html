@@ -1,0 +1,138 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Web Server Certificate Management">
+<meta name="product" content="">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.T21">
+<meta name="brand" content="Huawei Kunpeng Porting Advisor">
+<meta name="DC.Publisher" content="20201230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0251823105">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Web Server Certificate Management</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0251823105"></a><a name="EN-US_TOPIC_0251823105"></a>
+
+<h1 class="topictitle1">Web Server Certificate Management</h1>
+<div id="body1591183242213"><p id="EN-US_TOPIC_0251823105__p8341058155215">The web server certificate is used for security communication between the client browser and a web server. It implements encrypted data transmission between the client and web server. For security purposes, replace the original certificate with your customized certificate and promptly update the certificate.</p>
+<div class="section" id="EN-US_TOPIC_0251823105__section11470129119"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0251823105__p2444451164517">You have logged in to the <span id="EN-US_TOPIC_0251823105__ph997750104712">Kunpeng Porting Advisor</span> WebUI.</p>
+<div class="note" id="EN-US_TOPIC_0251823105__note1647916336186"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0251823105__p1647914333188">Only the administrator <strong id="EN-US_TOPIC_0251823105__b5653102561014">portadmin</strong> can generate a certificate signing request (CSR) file, import the web server certificate, download root certificates, restart the system, and change the working key.</p>
+</div></div>
+</div>
+<div class="section" id="EN-US_TOPIC_0251823105__section8939735152415"><h4 class="sectiontitle">Querying the Current Web Server Certificate</h4><ol id="EN-US_TOPIC_0251823105__ol134453271379"><li id="EN-US_TOPIC_0251823105__li681951883619"><a name="EN-US_TOPIC_0251823105__li681951883619"></a><a name="li681951883619"></a><span>On the WebUI, click <span><img id="EN-US_TOPIC_0251823105__image6116112912174" src="en-us_image_0304782414.png"></span> in the upper right corner and choose <strong id="EN-US_TOPIC_0251823105__b140893813110">Certificate Management</strong>.</span></li><li id="EN-US_TOPIC_0251823105__li164261216201113"><span>View the information of the certificate, as shown in <a href="#EN-US_TOPIC_0251823105__fig13817116161310">Figure 1</a>. <a href="#EN-US_TOPIC_0251823105__table166535474558">Table 1</a> describes the parameters.</span><p><div class="fignone" id="EN-US_TOPIC_0251823105__fig13817116161310"><a name="EN-US_TOPIC_0251823105__fig13817116161310"></a><a name="fig13817116161310"></a><span class="figcap"><b>Figure 1 </b>Certificate management</span><br><span><img id="EN-US_TOPIC_0251823105__image103351437141615" src="en-us_image_0292582436.png" height="99.75" width="523.6875"></span></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0251823105__table166535474558"></a><a name="table166535474558"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0251823105__table166535474558" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Parameter description</caption><colgroup><col style="width:25.979999999999997%"><col style="width:74.02%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0251823105__row19653647105517"><th align="left" class="cellrowborder" valign="top" width="25.979999999999997%" id="mcps1.3.3.2.2.2.2.2.3.1.1"><p id="EN-US_TOPIC_0251823105__p16531147175517">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="74.02%" id="mcps1.3.3.2.2.2.2.2.3.1.2"><p id="EN-US_TOPIC_0251823105__p565311472558">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0251823105__row1865364735510"><td class="cellrowborder" valign="top" width="25.979999999999997%" headers="mcps1.3.3.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0251823105__p1765304712554">Certificate Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="74.02%" headers="mcps1.3.3.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0251823105__p16532478555">Name of the certificate.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251823105__row19653247145514"><td class="cellrowborder" valign="top" width="25.979999999999997%" headers="mcps1.3.3.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0251823105__p9653114725510">Certificate Expiration Times</p>
+</td>
+<td class="cellrowborder" valign="top" width="74.02%" headers="mcps1.3.3.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0251823105__p15653184745517">Time when the certificate will expire.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251823105__row205792116576"><td class="cellrowborder" valign="top" width="25.979999999999997%" headers="mcps1.3.3.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0251823105__p55796110573">Status</p>
+</td>
+<td class="cellrowborder" valign="top" width="74.02%" headers="mcps1.3.3.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0251823105__p8580101165720">Current status of the certificate. The certificate status can be any of the following:</p>
+<ul id="EN-US_TOPIC_0251823105__ul4171152335019"><li id="EN-US_TOPIC_0251823105__li1917192315019"><strong id="EN-US_TOPIC_0251823105__b2017122355018">Valid</strong>: The certificate is valid.</li><li id="EN-US_TOPIC_0251823105__li617112320506"><strong id="EN-US_TOPIC_0251823105__b21711323105014">About to expire</strong>: The remaining validity period of the certificate is less than or equal to the certificate expiration alarm threshold.</li><li id="EN-US_TOPIC_0251823105__li717172335013"><strong id="EN-US_TOPIC_0251823105__b7171123155014">Expired</strong>: The certificate has expired.</li></ul>
+<div class="note" id="EN-US_TOPIC_0251823105__note1974172616215"><span class="notetitle"> NOTE: </span><div class="notebody"><ul id="EN-US_TOPIC_0251823105__ul11341124911219"><li id="EN-US_TOPIC_0251823105__li561320598223">The tool automatically checks and updates the certificate status every day.</li><li id="EN-US_TOPIC_0251823105__li131737464019">The default alarm threshold of the web server certificate is 90 days. The administrator can click <span><img id="EN-US_TOPIC_0251823105__image5712444171013" src="en-us_image_0269825523.png"></span> and choose <strong id="EN-US_TOPIC_0251823105__b4712134411011">System Settings</strong> on the <span id="EN-US_TOPIC_0251823105__ph4493210133414">Kunpeng Porting Advisor</span> home page and set the certificate expiration alarm threshold. The value ranges from 7 to 180 days.</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251823105__row9971511102310"><td class="cellrowborder" valign="top" width="25.979999999999997%" headers="mcps1.3.3.2.2.2.2.2.3.1.1 "><p id="EN-US_TOPIC_0251823105__p1698711112314">Operation</p>
+</td>
+<td class="cellrowborder" valign="top" width="74.02%" headers="mcps1.3.3.2.2.2.2.2.3.1.2 "><p id="EN-US_TOPIC_0251823105__p19141544579">Operations that can be performed. You can perform the following operations:</p>
+<ul id="EN-US_TOPIC_0251823105__ul63211537185810"><li id="EN-US_TOPIC_0251823105__li626212594167">Download a root certificate.<div class="note" id="EN-US_TOPIC_0251823105__note4713191180"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0251823105__en-us_topic_0230797645_p134791571746">If a security alert is displayed when you log in to the <span id="EN-US_TOPIC_0251823105__ph1553794684511"></span> using a browser, you can <a href="en-us_topic_0000001132444575.html">import a root certificate</a> for the tool in the browser to shield the security alert.</p>
+</div></div>
+</li><li id="EN-US_TOPIC_0251823105__li83218370587">Generate a CSR file.<div class="note" id="EN-US_TOPIC_0251823105__note4139101571315"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0251823105__p8707152641913">When a certificate applicant applies for a digital certificate, the encryption service provider (CSP) generates a private key and a CSR. After the certificate applicant submits the CSR file to a Certificate Authority (CA), the CA uses the private key of the root certificate to generate a public key file (certificate).</p>
+</div></div>
+</li><li id="EN-US_TOPIC_0251823105__li7321193765816">Import a web server certificate.</li><li id="EN-US_TOPIC_0251823105__li1932116373581">Restart a service.</li><li id="EN-US_TOPIC_0251823105__li2321237195812">Update the working key.</li></ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li></ol>
+</div>
+<div class="section" id="EN-US_TOPIC_0251823105__section564195416239"><h4 class="sectiontitle">Customizing and Importing a Server Certificate</h4><ol id="EN-US_TOPIC_0251823105__ol1450752662419"><li id="EN-US_TOPIC_0251823105__li070016561753"><span>On the <strong id="EN-US_TOPIC_0251823105__b424010345372">Certificate Management</strong> page, click <strong id="EN-US_TOPIC_0251823105__b897444043714">Generate CSR File</strong>.</span><p><p id="EN-US_TOPIC_0251823105__p052417579719">The <strong id="EN-US_TOPIC_0251823105__b0881185313711">Generate CSR File</strong> page is displayed, as shown in <a href="#EN-US_TOPIC_0251823105__fig542418764017">Figure 2</a>. <a href="#EN-US_TOPIC_0251823105__table2512136142515">Table 2</a> describes the parameters.</p>
+<div class="fignone" id="EN-US_TOPIC_0251823105__fig542418764017"><a name="EN-US_TOPIC_0251823105__fig542418764017"></a><a name="fig542418764017"></a><span class="figcap"><b>Figure 2 </b>Generating a CSR file</span><br><span><img id="EN-US_TOPIC_0251823105__image12649134310259" src="en-us_image_0276310315.png" height="492.76500000000004" width="523.6875"></span></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0251823105__table2512136142515"></a><a name="table2512136142515"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0251823105__table2512136142515" frame="border" border="1" rules="all"><caption><b>Table 2 </b>Parameter description</caption><colgroup><col style="width:15.32%"><col style="width:84.68%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0251823105__row451213692510"><th align="left" class="cellrowborder" valign="top" width="15.32%" id="mcps1.3.4.2.1.2.3.2.3.1.1"><p id="EN-US_TOPIC_0251823105__p185940272125">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="84.68%" id="mcps1.3.4.2.1.2.3.2.3.1.2"><p id="EN-US_TOPIC_0251823105__p35947271122">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0251823105__row45121616258"><td class="cellrowborder" valign="top" width="15.32%" headers="mcps1.3.4.2.1.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0251823105__p056103214123">Country</p>
+</td>
+<td class="cellrowborder" valign="top" width="84.68%" headers="mcps1.3.4.2.1.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0251823105__p59651910136">Country of the user. </p>
+<p id="EN-US_TOPIC_0251823105__p59791336105716">This parameter is mandatory. </p>
+<p id="EN-US_TOPIC_0251823105__p0962191136">The value must be a two-letter country code.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251823105__row125121166256"><td class="cellrowborder" valign="top" width="15.32%" headers="mcps1.3.4.2.1.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0251823105__p14551832141213">Province</p>
+</td>
+<td class="cellrowborder" valign="top" width="84.68%" headers="mcps1.3.4.2.1.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0251823105__p14824322131317">Province of the user.</p>
+<p id="EN-US_TOPIC_0251823105__p1824422141313">The value can contain a maximum of 128 characters, allowing letters, digits, hyphens (-), underscores (_), periods (.), and spaces.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251823105__row851219612513"><td class="cellrowborder" valign="top" width="15.32%" headers="mcps1.3.4.2.1.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0251823105__p654632191218">City</p>
+</td>
+<td class="cellrowborder" valign="top" width="84.68%" headers="mcps1.3.4.2.1.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0251823105__p46396262136">City of the user.</p>
+<p id="EN-US_TOPIC_0251823105__p96399266139">The value can contain a maximum of 128 characters, allowing letters, digits, hyphens (-), underscores (_), periods (.), and spaces.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251823105__row145121062253"><td class="cellrowborder" valign="top" width="15.32%" headers="mcps1.3.4.2.1.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0251823105__p850432201217">Company</p>
+</td>
+<td class="cellrowborder" valign="top" width="84.68%" headers="mcps1.3.4.2.1.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0251823105__p1946413304135">Company of the user.</p>
+<p id="EN-US_TOPIC_0251823105__p144641730191311">The value can contain a maximum of 64 characters, allowing letters, digits, hyphens (-), underscores (_), periods (.), and spaces.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251823105__row105127642518"><td class="cellrowborder" valign="top" width="15.32%" headers="mcps1.3.4.2.1.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0251823105__p14701832131">Department</p>
+</td>
+<td class="cellrowborder" valign="top" width="84.68%" headers="mcps1.3.4.2.1.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0251823105__p114311834131318">Department of the user.</p>
+<p id="EN-US_TOPIC_0251823105__p243110341139">The value can contain a maximum of 64 characters, allowing letters, digits, hyphens (-), underscores (_), periods (.), and spaces.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0251823105__row17512567250"><td class="cellrowborder" valign="top" width="15.32%" headers="mcps1.3.4.2.1.2.3.2.3.1.1 "><p id="EN-US_TOPIC_0251823105__p423071051312">Common Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="84.68%" headers="mcps1.3.4.2.1.2.3.2.3.1.2 "><p id="EN-US_TOPIC_0251823105__p15118193812133">Name of the user.</p>
+<p id="EN-US_TOPIC_0251823105__p1349465510595">The value can contain a maximum of 64 characters, allowing letters, digits, hyphens (-), underscores (_), periods (.), and spaces. </p>
+<p id="EN-US_TOPIC_0251823105__p911823813133">This parameter is mandatory.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="EN-US_TOPIC_0251823105__li526917501775"><span>Click <strong id="EN-US_TOPIC_0251823105__b3158153918428">OK</strong> to generate a CSR file.</span></li><li id="EN-US_TOPIC_0251823105__li114791710151414"><span>Export and send the CSR file to the SSL certificate authority and apply for an SSL certificate.</span><p><p id="EN-US_TOPIC_0251823105__p2365320201416">After obtaining the formal SSL certificate, save it to the client.</p>
+<div class="note" id="EN-US_TOPIC_0251823105__note115479311008"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0251823105__p14547731606">You can also obtain a formal certificate by using a self-signed digital certificate based on the root certificate.</p>
+</div></div>
+</p></li><li id="EN-US_TOPIC_0251823105__li1222618171391"><span>Click <strong id="EN-US_TOPIC_0251823105__b5497112114119">Import Web Server Certificate</strong>.</span><p><p id="EN-US_TOPIC_0251823105__p186566198913">The <strong id="EN-US_TOPIC_0251823105__b1569984919449">Import Web Server Certificate</strong> page is displayed.</p>
+</p></li><li id="EN-US_TOPIC_0251823105__li534363861610"><span>Click <span><img id="EN-US_TOPIC_0251823105__image1479216545229" src="en-us_image_0270874981.png"></span>, select the certificate to be imported, and click <span class="uicontrol" id="EN-US_TOPIC_0251823105__uicontrol18834737389"><b>Import</b></span>.</span><p><div class="note" id="EN-US_TOPIC_0251823105__note88651199483"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0251823105__ul11331847171911"><li id="EN-US_TOPIC_0251823105__li1113344721912">The certificate file to be imported must be in *.crt, *.cer, or *.pem format and cannot exceed 1 MB.</li><li id="EN-US_TOPIC_0251823105__li101334471193">The CSR file generated in <a href="#EN-US_TOPIC_0251823105__li681951883619">1</a> correlates with the server certificate applied from the CA. Do not generate a new CSR file before importing the server certificate. Otherwise, you have to use the new CSR file to apply for a new server certificate from the CA.</li><li id="EN-US_TOPIC_0251823105__li949815583574">If the SSL certificate imported is not obtained from a CA, check whether the browser has the root certificate.</li></ul>
+</div></div>
+</p></li><li id="EN-US_TOPIC_0251823105__li1533213911155"><span>Click <strong id="EN-US_TOPIC_0251823105__b106841330125616">OK</strong> to import the web server certificate.</span></li><li id="EN-US_TOPIC_0251823105__li12171215179"><span>Click <strong id="EN-US_TOPIC_0251823105__b169781494569">More</strong> and choose <strong id="EN-US_TOPIC_0251823105__b435115013574">Restart Service</strong> for the certificate to take effect.</span><p><div class="note" id="EN-US_TOPIC_0251823105__note893610471744"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0251823105__p6936947748">If you manually restart the Nginx service on the server, the certificate does not take effect. You must restart the Nginx service on the WebUI.</p>
+</div></div>
+</p></li></ol>
+</div>
+<div class="section" id="EN-US_TOPIC_0251823105__section10476335132611"><h4 class="sectiontitle">Updating the Working Key</h4><p id="EN-US_TOPIC_0251823105__p15906192135412">The working key is used to encrypt the password for starting the Nginx service. For security purposes, update the working key periodically.</p>
+<ol id="EN-US_TOPIC_0251823105__ol1627484229"><li id="EN-US_TOPIC_0251823105__li195313342150"><span>On the WebUI, click <span><img id="EN-US_TOPIC_0251823105__image231163111183" src="en-us_image_0304782580.png"></span> in the upper right corner and choose <strong id="EN-US_TOPIC_0251823105__b31956286317">Certificate Management</strong>.</span></li><li id="EN-US_TOPIC_0251823105__li1566452017185"><span>Click <strong id="EN-US_TOPIC_0251823105__b93734466610">More</strong> and choose <strong id="EN-US_TOPIC_0251823105__b349314529612">Update Working Key</strong>, as shown in <a href="#EN-US_TOPIC_0251823105__fig819916865318">Figure 3</a>.</span><p><div class="fignone" id="EN-US_TOPIC_0251823105__fig819916865318"><a name="EN-US_TOPIC_0251823105__fig819916865318"></a><a name="fig819916865318"></a><span class="figcap"><b>Figure 3 </b>Updating the working key</span><br><span><img id="EN-US_TOPIC_0251823105__image144269378812" src="en-us_image_0281111088.png" height="110.72250000000001" width="523.6875"></span></div>
+</p></li><li id="EN-US_TOPIC_0251823105__li7515105282013"><span>Click <strong id="EN-US_TOPIC_0251823105__b1818610447716">More</strong> and choose <strong id="EN-US_TOPIC_0251823105__b1718612444717">Restart Service</strong> for the working key to take effect.</span></li></ol>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

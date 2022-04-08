@@ -1,0 +1,40 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="High TLB Miss Rate">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001178722966.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (Tuning Assistant)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001178722984">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>High TLB Miss Rate</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001178722984"></a><a name="EN-US_TOPIC_0000001178722984"></a>
+
+<h1 class="topictitle1">High TLB Miss Rate</h1>
+<div id="body0000001151631292"><div class="section" id="EN-US_TOPIC_0000001178722984__section1078617129618"><h4 class="sectiontitle">Increasing the Page Size (64 KB)</h4><p id="EN-US_TOPIC_0000001178722984__p493113610483">Modify the Linux kernel build options and recompile the kernel. CentOS is used as an example.</p>
+<ol id="EN-US_TOPIC_0000001178722984__ol1272915884819"><li id="EN-US_TOPIC_0000001178722984__li147292844814"><span>Obtain the kernel source code and run the following command in the directory where the kernel source code is stored (for example, <strong id="EN-US_TOPIC_0000001178722984__b18601018752">/root/rpmbuild/BUILD/kernel-alt-4.14.0-115.el7a/linux-4.14.0-115.el7.0.1.aarch64</strong>):</span><p><p id="EN-US_TOPIC_0000001178722984__p1345914614507"><b><span class="cmdname" id="EN-US_TOPIC_0000001178722984__cmdname65461820205110">make menuconfig</span></b></p>
+</p></li><li id="EN-US_TOPIC_0000001178722984__li5501170135016"><span>Set <strong id="EN-US_TOPIC_0000001178722984__b1404112115512">PAGESIZE</strong> to <strong id="EN-US_TOPIC_0000001178722984__b740416215513">64K</strong>.</span><p><pre class="screen" id="EN-US_TOPIC_0000001178722984__screen74191134522">Kernel Features--&gt;Page size(64KB)</pre>
+</p></li><li id="EN-US_TOPIC_0000001178722984__li1269005113242"><span>Recompile and install the kernel by referring to the following link:</span><p><p id="EN-US_TOPIC_0000001178722984__p1368316515253"><a href="https://bbs.huaweicloud.com/forum/thread-24362-1-1.html" target="_blank" rel="noopener noreferrer">https://bbs.huaweicloud.com/forum/thread-24362-1-1.html</a></p>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001178722966.html">%USER</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

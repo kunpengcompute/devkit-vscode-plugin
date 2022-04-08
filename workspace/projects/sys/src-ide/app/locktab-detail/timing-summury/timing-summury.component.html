@@ -1,0 +1,145 @@
+<div>
+    <div class="topDiv" style="position: relative;">
+        <div class="activeSearch">
+            <div class="icon" (click)="showSearch()" (mouseenter)="mouseenter()"
+                (mouseleave)="mouseleave()">
+                <img [src]="sanitizer.bypassSecurityTrustResourceUrl(filterSrc)">
+            </div>
+            <span class="selected">{{i18n.lock.selectedTask}}</span>
+            <ng-container *ngFor="let item of tableSearchList;index as i">
+                <div *ngIf='item.show' class="task" [tiTip]="item.tid">{{item.tid}}
+                    <span class="ti3-close ti3-icon ti3-icon-close" (click)='selectDelete(item)'></span>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="numa-table">
+        <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns"
+            (stateUpdate)="stateUpdate($event)">
+            <div class="ti3-table-fixed-head">
+                <table>
+                    <thead>
+                        <tr>
+                            <th *ngFor="let column of columns.firstRow" width="{{ column.width }}"
+                                [attr.rowspan]="column.rowspan" [attr.colspan]="column.colspan">
+                                <div class="content" [ngClass]="{ center: column.center }">
+                                    <ti-cell-text>{{ column.title }}</ti-cell-text>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th *ngFor="let column of columns.secondRow" width="{{ column.width }}"
+                                [attr.rowspan]="column.rowspan" [attr.colspan]="column.colspan">
+                                <div class="content" [ngClass]="{ center: column.center }">
+                                    <ti-cell-text>{{ column.title }}</ti-cell-text>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <!--通过原生table实现表格的表头和表体-->
+            <div class="ti3-table-container">
+                <table id="selected">
+                    <thead>
+                        <tr>
+                            <th tiOverflow *ngFor="let width of columns.width" width="{{ width }}"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="transform first">
+                        <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                        <tr *ngFor="let node of displayed" [ngClass]="{'child-node': !node.hasChildren}">
+                            <td width="38px">
+                                <span *ngIf="node.hasChildren" class="toggle-icon"
+                                    (click)="toggle(node);$event.stopPropagation()">
+                                    <img src="./assets/img/summary/row.svg" class='title-icon' [ngClass]="{'active-icon': node.expand}">
+                                </span>
+                            </td>
+                            <td [ngStyle]="getLevelStyle(node)" tiOverflow [ngClass]="{'add-border': !node.hasChildren}">
+                                <span>{{ node.tid || (node.lock_time | threePoint:6)}}</span>
+                            </td>
+                            <td tiOverflow>{{node.lock_dso}}</td>
+                            <td tiOverflow>{{node.lock_symbol}}</td>
+                            <td tiOverflow>{{node.lock_call_dso}}</td>
+                            <td tiOverflow>{{node.lock_call_symbol}}</td>
+                            <td tiOverflow>{{node.lock_code}}</td>
+                            <td tiOverflow>{{node.lock_line}}</td>
+                            <td tiOverflow>
+                                <span *ngIf="!node.hasChildren" (click)="addFunctionTab(node,'detail')" class="operate-btn">{{i18n.common_term_view}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <app-loading *ngIf="srcData.data.length === 0 && showLoading" [size]="'min'"></app-loading>
+            <app-default-page *ngIf="srcData.data.length === 0 && !showLoading" [scene]="'noData'">
+            </app-default-page>
+            <ti-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber"
+                *ngIf="srcData.data.length > 0">
+            </ti-pagination>
+        </ti-table>
+
+    </div>
+</div>
+<ng-template #selectMask let-context='context'>
+    <ti-modal-header>{{ i18n.project.selectTask }}</ti-modal-header>
+    <ti-modal-body>
+        <div class="content filterConfig" #container>
+            <div class="selectTableBox">
+                <ti-searchbox
+                [placeholder]="i18n.common_search_input_tip"
+                [(ngModel)]="searchWords"
+                style="width:100%;margin-bottom:10px"></ti-searchbox>
+                <ti-table #table [(displayedData)]="taskDisplayed" [srcData]="taskSrcData" [searchKeys]="searchKeys" [searchWords]="[searchWords]">
+                    <div class="ti3-table-fixed-head">
+                        <table>
+                            <thead>
+                                <tr class="selectTh">
+                                    <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                                    <th checkbox-column>
+                                        <!--全选按钮-->
+                                        <!--如果有分页，全选需要控制当前页时，items接口传入displayed
+                                    如果全选要控制表格所有数据，items接口传入srcData.data-->
+                                        <input type="checkbox" tiCheckgroup [items]="taskDisplayed" [(checkeds)]="checkedList"/>
+                                    </th>
+                                    <th>{{i18n.common_term_task_name}}</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="ti3-table-container ti3-resize-wrapper" style="max-height:316px;">
+                        <table>
+                            <thead>
+                                <tr class="selectTh">
+                                    <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                                    <th checkbox-column></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                                <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+                                <tr *ngFor="let row of taskDisplayed; let index = index">
+                                    <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                                    <td checkbox-column>
+                                        <input type="checkbox" tiCheckitem [item]="row" [disabled]="row.disabled" />
+                                    </td>
+                                    <td tiOverflow>{{row.tid}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <app-default-page *ngIf="taskDisplayed.length === 0" [scene]="'noData'"></app-default-page>
+                    <ti-pagination type="mini" [(totalNumber)]="totalTaskNumber" [pageSize]="taskPageSize" [(currentPage)]="taskCurrentPage"></ti-pagination>
+                </ti-table>
+            </div>
+        </div>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <!-- 确定按钮 -->
+        <div style="display: inline-block;">
+            <button class="little-primary-btn" (click)="confimModal(context)">{{i18n.common_term_operate_ok}}</button>
+            <button class="little-minor-btn" (click)="context.dismiss()">{{i18n.common_term_operate_close}}</button>
+        </div>
+    </ti-modal-footer>
+</ng-template>

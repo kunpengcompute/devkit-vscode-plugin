@@ -1,0 +1,53 @@
+﻿// 深色主题适配
+::ng-deep .vscode-dark{
+    --color-input: #252526;
+    --box-bg:#252526;
+    --mask-border-color:#252526;
+}
+
+// 浅色主题适配
+::ng-deep .vscode-light{
+    --color-input: #FFFFFF;
+    --box-bg:#FFFFFF;
+    --mask-border-color:#f5f9ff;
+}
+
+.modal {
+    background: rgba(0,0,0,.298);
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+
+    &.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.mask{
+    display: none;
+    transition: .4s ease-out;
+    z-index: 1000;
+}
+.mask.active{
+    display: flex;
+    width: 660px;
+}
+.content-box{
+    background-color: var(--d-252526-l-ffffff);
+    transition: .4s ease-out;
+    width: 100%;
+    z-index: 112;
+    border-radius: 2px;
+    display: none;
+    opacity: 0;
+}
+.content-box.active{
+    display: block;
+    opacity: 1;
+}

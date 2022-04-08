@@ -1,0 +1,190 @@
+/*
+ * Copyright 2022 Huawei Technologies Co., Ltd
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { FormGroup, ValidationErrors, AbstractControl, } from '@angular/forms';
+import { Observable } from 'rxjs';
+
+/**
+ * 为同名组件提供：控件交互逻辑处理；控件输入验证等服务
+ *
+ * @publicApi initControlsInteraction: 初始化控件之间的交互逻辑
+ * @publicApi pidInputValidator: pid 的输入的验证器
+ * @publicApi splitStr: 将输入的字符串分隔符分割为数组, 并去掉末尾的空字符
+ */
+export class MissionCreatePidProcessControls {
+    private atMostPid: number;
+    constructor(atMostPid: number) {
+        this.atMostPid = atMostPid;
+    }
+    public type: string;
+
+    /**
+     * 初始化控件之间的交互逻辑
+     * @param ppFormGroup 控件组
+     */
+    public initControlsInteraction(ppFormGroup: FormGroup) {
+        const ctl = ppFormGroup.controls;
+
+        // 可订阅的控件的 valueChanges 主题
+        const pidCheckChange$ = ctl.pidCheck.valueChanges;
+        const processCheckChange$ = ctl.processCheck.valueChanges;
+        const pidInputChange$ = ctl.pidInput.valueChanges;
+
+        // Pid 的 Checkbox 的交互逻辑
+        pidCheckChange$.subscribe((enable: boolean) => {
+            if (enable) {
+                ctl.pidInput.enable({ emitEvent: false });
+                ctl.processCheck.enable({ emitEvent: false });
+            } else {
+                ctl.pidInput.disable({ emitEvent: false });
+                ctl.pidInput.setValue('', { emitEvent: false });
+
+                ctl.processCheck.disable({ emitEvent: false });
+            }
+        });
+
+        // 进程名称的 Checkbox 的交互逻辑
+        processCheckChange$.subscribe((enable: boolean) => {
+            if (enable) {
+                ctl.processInput.enable({ emitEvent: false });
+                ctl.pidCheck.enable({ emitEvent: false });
+            } else {
+                ctl.processInput.disable({ emitEvent: false });
+                ctl.processInput.setValue('', { emitEvent: false });
+
+                ctl.pidCheck.disable({ emitEvent: false });
+            }
+        });
+
+        // Pid 的输入的交互逻辑
+        this.handlePidInputChange(pidInputChange$, ppFormGroup);
+    }
+
+    /**
+     * pid 的输入的验证器
+     */
+    public pidInputValidator(i18n: any) {
+        // 用于记录上一次输入的 pid 值
+        let prevPidList: string[] = [];
+
+        return (control: AbstractControl): ValidationErrors | null => {
+            const pidInput: string = control.value + '';
+            // 分割
+            let pidList = this.splitStr(pidInput);
+            if (this.type === 'java-mixed-mode') {
+                if (pidList.length > 1) {
+                    return { pid: { tiErrorMessage: i18n.mission_create.pid_input_tip_java } };
+                }
+            } else {
+                // 当 pid 的输入大于10个时，输入无效
+                if (pidList.length > this.atMostPid) {
+                    control.setValue(prevPidList.join(','), { emitEvent: false });
+                    pidList = [...prevPidList];
+                } else {
+                    prevPidList = [...pidList];
+                }
+            }
+            // 验证 pid 的合理性
+            const isVaildPid = pidList.every(item => /^[1-9][0-9]*$/.test(item));
+            if (!isVaildPid) {
+                return { pid: { tiErrorMessage: i18n.mission_create.pid_valid_tip } };
+            }
+
+            return null;
+
+        };
+    }
+
+    /**
+     * 将输入的字符串分隔符分割为数组, 并去掉末尾的空字符
+     * @example
+     * 1,2,3 : [1, 2, 3]
+     * 1,2,3, : [1, 2, 3]
+     * @param pidInput pid 输入的字符串
+     * @param separator 分隔符，默认为: ','
+     */
+    public splitStr(str: string, separator: string = ','): string[] {
+        // 为空不判断
+        if (str === '' || str == null) { return []; }
+
+        // 分割 pid
+        const list = str.split(separator);
+
+        // 去尾部的空值
+        const last = list.pop();
+        if (last !== '') {
+            list.push(last);
+        }
+
+        return list;
+    }
+
+    /**
+     * Pid 的输入的交互逻辑
+     * @param pidCheckChange$ Pid 的输入的变化的主题
+     */
+    private handlePidInputChange(pidInputChange$: Observable<any>, ppFormGroup: FormGroup) {
+        const ctl = ppFormGroup.controls;
+
+        let isOnceOverstep = false;
+        let processStateBefore: {
+            inputEnabled: boolean;
+            inputValue: string;
+            checkEnabled: boolean;
+            checkValue: boolean;
+        } = null;
+
+        pidInputChange$.subscribe((input: string) => {
+            // 分割
+            const pidList = this.splitStr(input);
+
+            // 当 pid 的输入大于等于10个时，线程名称输入无效
+            if (pidList.length >= this.atMostPid && !isOnceOverstep) {
+                processStateBefore = {
+                    inputEnabled: ctl.processInput.enabled,
+                    inputValue: ctl.processInput.value,
+                    checkEnabled: ctl.processCheck.enabled,
+                    checkValue: ctl.processCheck.value,
+                };
+
+                ctl.processInput.disable({ emitEvent: false });
+                ctl.processInput.setValue('', { emitEvent: false });
+                ctl.processCheck.disable({ emitEvent: false });
+                ctl.processCheck.setValue(false, { emitEvent: false });
+
+                isOnceOverstep = true;
+            }
+
+            // 当 pid 的输入恢复小于10个时，线程名称的状态恢复恢复从前
+            if (isOnceOverstep && pidList.length < this.atMostPid) {
+                if (processStateBefore.inputEnabled) { ctl.processInput.enable({ emitEvent: false }); }
+                ctl.processInput.setValue(processStateBefore.inputValue, { emitEvent: false });
+                if (processStateBefore.checkEnabled) { ctl.processCheck.enable({ emitEvent: false }); }
+                ctl.processCheck.setValue(processStateBefore.checkValue, { emitEvent: false });
+
+                processStateBefore = null;
+                isOnceOverstep = false;
+            }
+        });
+    }
+    /**
+     * 获取type
+     * @param type type
+     */
+    public getType(type: string) {
+        this.type = type;
+    }
+}

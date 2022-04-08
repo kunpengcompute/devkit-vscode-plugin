@@ -1,0 +1,21 @@
+<!-- 建议反馈图标 -->
+<ng-container>
+  <div class="advice-tip">
+    <ng-template #suggestTip>
+      <div>
+        <p class="suggestSate" [innerHtml]="getSuggestTip()"></p>
+      </div>
+    </ng-template>
+    <div class="img-icon" #draggable>
+      <img *ngIf="currentTheme === 2"
+        src="./assets/img/home/advice-feedback.svg"
+        [tiTip]="suggestTip" tiTipPosition='left' (mouseenter)="onHoverSuggest('advice')"
+        (click)="onImgClick()" (mouseleave)="onHoverSuggest('')" />
+      <img *ngIf="currentTheme === 1" 
+        [src]="sanitizer.bypassSecurityTrustResourceUrl(intelliJFlagDef?'./assets/img/home/intellij-advice-feedback-dark.svg' 
+        : './assets/img/home/advice-feedback-dark.svg')"
+        [tiTip]="suggestTip" tiTipPosition='left' (mouseenter)="onHoverSuggest('advice')"
+        (click)="onImgClick()" (mouseleave)="onHoverSuggest('')" />
+    </div>
+  </div>
+</ng-container>

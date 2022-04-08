@@ -1,0 +1,130 @@
+
+<div class="irp-modal">
+    <div class="headerFilter" >
+      <div class="statusFilter" [ngClass]="{'active': traceHeadShow}" appClickOutside (clickOutside)="traceHeadShow = false">
+        <ti-tree
+          id="tree"
+          [data]="treeData"
+          [multiple]="true"
+          (select)="selectFn()"
+        ></ti-tree>
+      </div>
+    </div>
+    <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns" [searchWords]="processSearchWords"
+    [searchKeys]="processSearchKeys">
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr *ngFor="let thead of theads;index as i">
+              <ng-container *ngFor="let column of thead;">
+                <th
+                  *ngIf="column.checked"
+                  [attr.rowspan]="column.rowspan" [attr.colspan]="column.colspan"
+                  width="{{column.width}}" [ngClass]="{'center': column.textAlign}"
+                >
+                <div class="th-box" *ngIf="!column.sortKey && column.searchKey">
+                  <div tiOverflow>{{column.title}}</div>
+                  <div class="icon searchIcon">
+                    <ti-icon *ngIf="column.searchKey" 
+                      class="search-icon"
+                      [ngClass]="{'active': processSearchPop.isShow || searchWordsSave[column.searchKey]}" 
+                      name="search"
+                      [pop]="processSearchTipContent"
+                      [popContext]="{ key: column.searchKey }"
+                      #processSearchPop="pop"
+                      [popOffset]="{ x: -40, y: 24 }"
+                      popClass="process-search-pop">
+                    </ti-icon>
+                  </div>
+                </div>
+                <ti-cell-text *ngIf="column.sortKey || !column.searchKey">{{column.title}}</ti-cell-text>
+                <ti-head-sort [sortKey]="column.sortKey" *ngIf="column.sortKey"></ti-head-sort>
+              </th>
+              </ng-container>
+              <th *ngIf="!i" [attr.rowspan]="2" width='25px'class="th-filter">
+                  <div class="filter-icon">
+                    <app-icon-react name="arrowDownDouble" (click)="traceHeadShow = !traceHeadShow"></app-icon-react>
+                </div>
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    
+      <div class="ti3-table-container ti3-resize-wrapper" hyNodata [nodataShow]="displayed.length === 0">
+        <table>
+          <thead>
+            <tr>
+              <ng-container *ngFor="let column of columns">
+                <th width="{{column.width}}" *ngIf="column.checked"></th>
+              </ng-container>
+              <th width='25px'></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of displayed;index as i">
+              <td tiOverflow>
+                <a (click)="openNumberMapModal(row, softNumberMapModal)">{{ row.number }}</a>
+              </td>
+              <td tiOverflow *ngIf="columns[1].checked">{{ row.deviceName }}</td>
+              <td tiOverflow *ngIf="columns[2].checked">{{ row.bdf }}</td>
+              <td tiOverflow *ngIf="columns[3].checked">{{ row.eventName }}</td>
+              <td tiOverflow *ngIf="columns[4].checked">{{ row.irqCount }}</td>
+              <td tiOverflow *ngIf="columns[5].checked">{{ row.affinityMask }}</td>
+              <td tiOverflow *ngIf="columns[6].checked">
+                <a (click)="openNameMapModal(row, softNameMapModal)" *ngIf="row.ethName !== '--'">{{ row.ethName }}</a>
+                <span *ngIf="row.ethName === '--'">{{ row.ethName }}</span>
+              </td>
+              <td tiOverflow *ngIf="columns[7].checked">{{ row.queueName }}</td>
+              <td tiOverflow *ngIf="columns[8].checked">{{ row.xpsCpus }}</td>
+              <td tiOverflow *ngIf="columns[9].checked">{{ row.rpxCpus }}</td>
+              <td tiOverflow *ngIf="columns[10].checked">{{ row.rpsFlowCnt }}</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ti-table>
+  </div>
+  
+  <!-- 硬中断编号 分布图 -->
+  <ng-template #softNumberMapModal let-context='context'>
+    <ti-modal-header>{{ 'net_io.xps_rps.hard_info.Interruption_title' | i18n }}</ti-modal-header>
+    <ti-modal-body>
+      <div class="content-warpper">
+        <app-hard-irq-affinity-dist
+        [ipiData]="context.ipiInfo"
+        [hardIrqData]="context.hartData"
+        [bodyTitle]="context.bodyTitle"
+      ></app-hard-irq-affinity-dist>
+      </div>
+    </ti-modal-body>
+    <ti-modal-footer>
+      <button type="button" (click)="context.close()" tiButton>{{ 'common_term_operate_close' | i18n }}</button>
+    </ti-modal-footer>
+  </ng-template>
+  
+  <!-- 网络设备名称中断 分布图 -->
+  <ng-template #softNameMapModal let-context='context'>
+    <ti-modal-header>{{ 'net_io.xps_rps.hard_info.network_Interruption_title' | i18n }}</ti-modal-header>
+    <ti-modal-body>
+      <div class="content-warpper">
+        <app-netport-irq-affinity-dist
+          [irqData]="context.irqData"
+          [bodyTitle]="context.bodyTitle"
+          [ipiData]="context.ipiInfo"
+        ></app-netport-irq-affinity-dist>
+      </div>
+    </ti-modal-body>
+    <ti-modal-footer>
+      <button type="button" (click)="context.close()" tiButton>{{ 'common_term_operate_close' | i18n }}</button>
+    </ti-modal-footer>
+  </ng-template>
+
+  <ng-template #processSearchTipContent let-context="context">
+    <ti-searchbox
+      [ngModel]="searchWordsSave[context.key]"
+      (clear)="onTableHeaderSearch('', context)"
+      (search)="onTableHeaderSearch($event, context)"></ti-searchbox>
+  </ng-template>
+  

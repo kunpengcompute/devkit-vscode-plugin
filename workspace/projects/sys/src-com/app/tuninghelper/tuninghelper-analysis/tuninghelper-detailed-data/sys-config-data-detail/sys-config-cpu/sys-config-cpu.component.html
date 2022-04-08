@@ -1,0 +1,111 @@
+<div class="sys-config-cpu">
+  <section *ngFor="let tableItem of tableData | keyvalue">
+    <h1>{{ tableItem.value.title }}</h1>
+    <div class="other-info" *ngIf="tableItem.value.other">
+      <p *ngFor="let otherInfo of tableItem.value.other">
+        <span class="label">{{ otherInfo.label }}</span>
+        <span class="text">{{ otherInfo.text }}</span>
+      </p>
+    </div>
+    <ti-table [(displayedData)]="tableItem.value.displayed"
+      [srcData]="tableItem.value.srcData"
+      [columns]="tableItem.value.columns">
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr>
+              <th tiOverflow *ngFor="let column of tableItem.value.columns">
+                <ti-cell-text>{{ column.title }}</ti-cell-text>
+                <ti-head-sort
+                  *ngIf="column.sortKey"
+                  [sortKey]="column.sortKey"
+                  [compareFn]="column.compareFn"
+                ></ti-head-sort>
+                <span *ngIf="column.question" class="about-mask">
+                  <hy-theme-content>
+                      <app-icon-static [name]="'questionMarkTipLight'" light  [tiTip]="column.tip"></app-icon-static>
+                      <app-icon-static [name]="'questionMarkTipDark'" dark  [tiTip]="column.tip"></app-icon-static>
+                  </hy-theme-content>
+                </span>
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="ti3-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of tableItem.value.columns"></th>
+            </tr>
+          </thead>
+          <tbody *ngIf="tableItem.value.displayed.length > 0">
+            <tr *ngFor="let row of tableItem.value.displayed">
+              <td tiOverflow *ngFor="let column of tableItem.value.columns">{{ row[column.key] }}</td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="tableItem.value.displayed.length === 0">
+            <tr class="ti3-table-nodata">
+              <td tiColspan>
+                <div [hyNodata]="{ text: 'common_term_task_nodata' | i18n }" [nodataShow]="true" style="height: 272px;"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ti-pagination
+        [autoHide]="true"
+        [(currentPage)]="tableItem.value.pageNo"
+        [pageSize]="tableItem.value.pageSize"
+        [(totalNumber)]="tableItem.value.pageTotal">
+      </ti-pagination>
+    </ti-table>
+  </section>
+  <section class="cache-info-section">
+    <h1>{{ 'tuninghelper.sysConfigDetail.cacheInfo' | i18n }}</h1>
+    <hr>
+    <div class="cache-info-data">
+      <div class="cache-info-item">
+        <div class="label">
+          <span>L1d cache{{cacheDataSufix ? ' (' + cacheDataSufix + ')' : ''}}</span>
+          <hy-theme-content [tiTip]="'tuninghelper.sysConfigDetail.cacheInfoTip1' | i18n">
+            <app-icon-static [name]="'questionMarkTipLight'" light></app-icon-static>
+            <app-icon-static [name]="'questionMarkTipDark'" dark></app-icon-static>
+          </hy-theme-content>
+        </div>
+        <span class="text">{{ cacheData?.L1d }}</span>
+      </div>
+      <div class="cache-info-item">
+        <div class="label">
+          <span>L1i cache{{cacheDataSufix ? ' (' + cacheDataSufix + ')' : ''}}</span>
+          <hy-theme-content [tiTip]="'tuninghelper.sysConfigDetail.cacheInfoTip2' | i18n">
+            <app-icon-static [name]="'questionMarkTipLight'" light></app-icon-static>
+            <app-icon-static [name]="'questionMarkTipDark'" dark></app-icon-static>
+          </hy-theme-content>
+        </div>
+        <span class="text">{{ cacheData?.L1i }}</span>
+      </div>
+      <div class="cache-info-item">
+        <div class="label">
+          <span>L2 cache{{cacheDataSufix ? ' (' + cacheDataSufix + ')' : ''}}</span>
+          <hy-theme-content [tiTip]="'tuninghelper.sysConfigDetail.cacheInfoTip3' | i18n">
+            <app-icon-static [name]="'questionMarkTipLight'" light></app-icon-static>
+            <app-icon-static [name]="'questionMarkTipDark'" dark></app-icon-static>
+          </hy-theme-content>
+        </div>
+        <span class="text">{{ cacheData?.L2 }}</span>
+      </div>
+      <div class="cache-info-item">
+        <div class="label">
+          <span>L3 cache{{cacheDataSufix ? ' (' + cacheDataSufix + ')' : ''}}</span>
+          <hy-theme-content [tiTip]="'tuninghelper.sysConfigDetail.cacheInfoTip4' | i18n">
+            <app-icon-static [name]="'questionMarkTipLight'" light></app-icon-static>
+            <app-icon-static [name]="'questionMarkTipDark'" dark></app-icon-static>
+          </hy-theme-content>
+        </div>
+        <span class="text">{{ cacheData?.L3 }}</span>
+      </div>
+    </div>
+  </section>
+</div>

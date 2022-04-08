@@ -1,0 +1,66 @@
+<div class="tableBox">
+  <p  class="tableTitle"> {{i18n.sys_cof.sum.disk}}</p>
+  <ti-table [(displayedData)]="hardDiskDisplayData" [srcData]="hardDiskContentData" [columns]="hardDiskTitle">
+    <table>
+      <thead>
+        <tr>
+          <th tiOverflow *ngFor="let column of hardDiskTitle;index as i" width="{{column.width}}">
+            <span [ngClass]="{'tableFirstData': i == 0}">{{column.title}}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!ifhardDisk">
+        <tr *ngFor="let row of hardDiskDisplayData;">
+           <td tiOverflow style="border-bottom: 1px solid #d4d9e6;"><span class="tableFirstData">{{row.name}}</span></td>
+           <td tiOverflow style="border-bottom: 1px solid #d4d9e6;">{{row.model}}</td>
+           <td tiOverflow style="border-bottom: 1px solid #d4d9e6;">{{row.capacity}}</td>
+           <td tiOverflow style="border-bottom: 1px solid #d4d9e6;">{{row.type}}</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="ifhardDisk">
+        <tr class="ti3-table-nodata-simple">
+            <td tiColspan>
+              <img style='width:198px;' src='./assets/img/projects/nodata.png' />
+            <div style="font-size: 1rem" >{{hardDisk}}</div>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+    <ti-pagination *ngIf="hardDiskTotalNumber > 10" [(currentPage)]="hardDiskCurrentPage" style="padding-left: 10px;"
+      [pageSize]="hardDiskPageSize"
+      [(totalNumber)]="hardDiskTotalNumber">
+    </ti-pagination>
+  </ti-table>
+  <p  class="tableTitle">{{i18n.sys_cof.sum.raid}}</p>
+  <ti-table [(displayedData)]="RAIDDisplayData" [srcData]="RAIDContentData" [columns]="RAIDTitle">
+    <table>
+      <thead>
+        <tr>
+          <th tiOverflow *ngFor="let column of RAIDTitle;index as i" >
+            <span [ngClass]="{'tableFirstData': i == 0}">{{column.title}}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!ifRAIDTitle">
+        <tr *ngFor="let row of RAIDDisplayData;">
+           <td tiOverflow style="border-bottom: 1px solid #d4d9e6;"><span class="tableFirstData">{{row.Controller}}</span></td>
+           <td tiOverflow style="border-bottom: 1px solid #d4d9e6;">{{row.model}}</td>
+           <td tiOverflow style="border-bottom: 1px solid #d4d9e6;">{{row.size}}</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="ifRAIDTitle">
+        <tr class="ti3-table-nodata-simple">
+            <td tiColspan>
+              <img style='width:198px;' src='./assets/img/projects/nodata.png' />
+            <div style="font-size: 1rem" >{{RAIDTitleData}}</div>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+    <ti-pagination *ngIf="RAIDTotalNumber > 10" [(currentPage)]="RAIDCurrentPage" style="padding-left: 10px;"
+      [pageSize]="RAIDPageSize"
+      [(totalNumber)]="RAIDTotalNumber">
+    </ti-pagination>
+  </ti-table>
+
+</div>

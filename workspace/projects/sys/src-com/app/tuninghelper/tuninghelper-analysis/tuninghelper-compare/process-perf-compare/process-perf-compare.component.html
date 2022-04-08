@@ -1,0 +1,19 @@
+<hy-backtop [target]="{classes: ['ti3-tab-content']}"></hy-backtop>
+<div class="compare-process-perf-data-detail-container">
+    <div class="table-box">
+        <div class="app-process-box" *ngIf="showAppProcess">
+            <div class="table-title">{{'tuninghelper.processDetailData.analyzedApplicationsProcesses' | i18n}}</div>
+            <div class="app-table">
+                <app-compare-process-indicator-info [indiacatorInfoData]="appProcessInfoData"
+                    [isLookCommandDetail]="true" (lookCommandDetail)="lookCommandDetail($event)">
+                </app-compare-process-indicator-info>        
+            </div>
+        </div>
+        <div class="all-process-box">
+            <div class="table-title">{{'tuninghelper.processDetailData.allProcess' | i18n}}</div>
+            <div class="all-table">
+                <app-compare-process-indicator-info [indiacatorInfoData]="allProcessInfoData"></app-compare-process-indicator-info> 
+            </div>
+        </div> 
+    </div>
+</div>

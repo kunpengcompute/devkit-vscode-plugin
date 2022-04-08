@@ -1,0 +1,141 @@
+.method-box {
+  padding: 20px 0 0 0 !important;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .select-box {
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #282b33;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .select-item {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .select-item-title {
+      display: inline-block;
+      height: 28px;
+      line-height: 28px;
+      margin-right: 16px;
+    }
+  }
+
+  .select-item:nth-child(2) {
+    margin-left: 20px;
+  }
+
+  .content {
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    .data-box {
+        width: 100%;
+        height: 100%;
+    }
+  }
+
+  .content > .data-box > .tree {
+    height: 100%;
+  }
+
+  .content > .data-box > .chart {
+    min-height: 740px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .content > .data-box > .chart.nodata {
+    min-height: 0px;
+    height: 0px;
+  }
+
+  .tree {
+    display: flex;
+    flex-direction: column;
+
+    .tree-nodes {
+      width: 100%;
+      max-height: 690px;
+      overflow: auto;
+    }
+
+    .pagenation {
+      margin-top: 20px;
+      height: 28px;
+    }
+
+    .ti3-tree-node-text {
+      overflow: visible !important;
+      text-overflow: visible !important;
+      color: #aaaaaa;
+    }
+
+    .processBar {
+      display: inline-block;
+      min-width: 0.1px;
+      max-width: 150px;
+      height: 10px;
+      background: #3266c3 !important;
+      margin-right: 5px;
+    }
+  }
+
+  .d3-flame-graph rect {
+    stroke: #1e1e1e;
+    fill-opacity: 1;
+  }
+}
+
+#Thor-Container .method-box {
+  .ti3-tree-item-active {
+    .ti3-tree-node-text-wrapper span:not(.processBar) {
+      background: transparent;
+    }
+  }
+  .tree-nodes .ti3-tree-container {
+      max-height: 690px;
+  }
+}
+.expandAll {
+  margin-right: 5px;
+  vertical-align: middle;
+  img {
+    vertical-align: middle;
+  }
+}
+::ng-deep .vscode-dark {
+    .method-box .select-item .select-item-title {
+        color:#ddd;
+    }
+}
+::ng-deep .vscode-light {
+    .method-box .select-item .select-item-title {
+        color:#616161;
+    }
+}
+.d3-flame-graph rect {
+  stroke: none !important;
+}
+.d3-flame-graph rect:hover {
+  stroke: #474747 !important;
+  stroke-width: 0.5 !important;
+  cursor: pointer !important;
+  border: 1px solid #474747 !important;
+}
+.d3-flame-graph foreignObject {
+  border: 1px solid #fff !important;
+}
+.d3-flame-graph foreignObject:hover {
+  stroke: #474747;
+  stroke-width: 0.5;
+  cursor: pointer;
+  border: 1px solid #474747 !important;
+}

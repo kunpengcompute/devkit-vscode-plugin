@@ -1,0 +1,51 @@
+<div id="detail-container" class="custemDetailContainer">
+  <ti-tabs class="custemTabs tabsWithSplitLine tabsWithUnderline">
+    <ti-tab *ngFor="let item of detailList; let index = index" [(active)]="item.active" [disabled]="item.disable" (activeChange)='change()'>
+      <ti-tab-header>
+        <span>{{ item.title }}</span>
+      </ti-tab-header>
+
+      <!--懒加载的内容区必须使用ng-template标签包裹，并且加上#tiTabContent的标识-->
+      <ng-template #tiTabContent>
+        <!-- 任务信息 -->
+        <div class="content-container" *ngIf="item.prop === 'taskInfo'">
+          <app-configuration
+            [nodeid]='nodeid'
+            [projectName]='projectName'
+            [taskName]='taskName'
+            [status]='status'
+            [analysisType]='analysisType'
+            [taskid]='id'
+          ></app-configuration>
+        </div>
+
+        <!-- 任务日志 -->
+        <div class="content-container" *ngIf="item.prop === 'taskLog'">
+          <app-configuration-log
+            [nodeid]='nodeid'
+            [projectName]='projectName'
+            [taskName]='taskName'
+            [analysisType]='analysisType'
+            [status]='status'
+            [taskid]='id'
+          ></app-configuration-log>
+        </div>
+
+        <!-- 总览 -->
+        <div class="content-container" *ngIf="item.prop === 'summary'" tiScroll>
+          <app-res-summary [nodeid]='nodeid' [isActive]="item.active" [taskid]='id'></app-res-summary>
+        </div>
+
+        <!-- CPU调度 -->
+        <div class="content-container" *ngIf="item.prop === 'cpu_schedule'" tiScroll>
+          <app-res-cpu-sche #cpuSche [nodeid]='nodeid' [configuration]="configuration" [taskid]='id' [item]='tpItem'></app-res-cpu-sche>
+        </div>
+
+        <!-- 进程/线程调度 -->
+        <div class="content-container" *ngIf="item.prop === 'pt_schedule'" tiScroll>
+          <app-res-process-sche [nodeid]='nodeid' [taskid]='id' [item]='numaItem'></app-res-process-sche>
+        </div>
+        </ng-template>
+    </ti-tab>
+  </ti-tabs>
+</div>

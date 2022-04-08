@@ -1,0 +1,12 @@
+<div class="selectedTasks" [ngClass]="{'active': isExpand}">
+    <span class="label">{{ label }}{{ i18n.common_term_colon }}</span>
+    <div class="tagBox" [ngClass]="{'active': isExpand}">
+        <ti-tag *ngFor="let item of selected" (delete)="deleteTask(item)">{{
+            item.label }}</ti-tag>
+    </div>
+    <app-icon-react name="more" class="filerIcon" (click)="isExpand = true" [ngClass]="{'active': isExpand}"
+        *ngIf="!isExpand && selected.length > 6"></app-icon-react>
+    <img class="close-box" (click)="closeBox()" (mouseenter)="isHover = true"
+        (mouseleave)="isHover = false" *ngIf="isExpand"
+        [src]="isHover ? './assets/img/home/home-toggle-hover.svg':'./assets/img/home/close-arr.svg'" />
+</div>

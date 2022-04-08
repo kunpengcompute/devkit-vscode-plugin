@@ -1,0 +1,270 @@
+<div id="itemguardianManage" class="guardian-manage">
+    <div class='title'>{{i18n.plugins_perf_javaperfsetting.guardianManage}}</div>
+    <button type="button" class="little-primary-btn" (click)="addGuardian()"
+        style="width:120px;">{{i18n.common_term_add_guardian}}</button>
+    <ti-table [(displayedData)]="displayed" [srcData]="guardiansSrcData" [columns]="columns" tiColsResizable>
+        <div class="ti3-resize-wrapper guardian-list">
+            <table class="guardian-table">
+                <thead>
+                    <tr>
+                        <th tiOverflow *ngFor="let column of columns" width="{{column.width}}">{{column.title}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of displayed">
+                        <td tiOverflow>{{item.name}}</td>
+                        <td tiOverflow *ngIf="item.state === 'CONNECTED'">
+                            <img src="./assets/img/guardian/guardian-connected.svg" alt=""
+                                style="margin-right:8px;vertical-align: middle">
+                            <ti-cell-text>{{item.stateDisplay.name}}</ti-cell-text>
+                        </td>
+                        <td tiOverflow *ngIf="item.state === 'DISCONNECTED'">
+                            <img src="./assets/img/guardian/guardian-disconnected.svg" alt=""
+                                style="margin-right:8px;vertical-align: middle">
+                            <ti-cell-text>{{item.stateDisplay.name}}</ti-cell-text>
+                        </td>
+                        <td tiOverflow *ngIf="item.state !== 'CONNECTED' && item.state !== 'DISCONNECTED'">
+                            <img src="./assets/img/guardian/guardian-creating.gif" alt=""
+                                style="margin-right:8px;vertical-align: middle;width:16px;height:16px;">
+                            <ti-cell-text>{{item.stateDisplay.name}}</ti-cell-text>
+                        </td>
+                        <td tiOverflow>{{item.ip}}</td>
+                        <td tiOverflow>{{item.sshPort}}</td>
+                        <td tiOverflow>{{item.owner.username}}</td>
+                        <td>
+                            <div class="guardian-operate">
+                                <span *ngIf="item.state === 'DISCONNECTED' && item.owner.username === currentUser"
+                                    (click)="restartGuardian(item)">{{i18n.plugins_perf_java_guardianManage_reconnect}}</span>
+                                <span
+                                    (click)="deleteGuardian(item)">{{i18n.plugins_perf_java_guardianManage_delete}}</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <app-loading *ngIf="displayed.length === 0 && showLoading"></app-loading>
+            <!-- 无项目 -->
+            <div class="no-project" *ngIf="displayed.length === 0 && !showLoading">
+                <hy-theme-content>
+                    <img src="./assets/img/guardian/no-project-dark.png" dark>
+                    <img src="./assets/img/guardian/no-project-light.png" light>
+                </hy-theme-content>
+                <p class="text">{{ i18n.plugins_javaperf_guardian_noData }}</p>
+            </div>
+        </div>
+    </ti-table>
+    <!-- 添加guardian -->
+    <app-guardian-create #guardianCreateModalComponent (createGuardianSuccess)="successEvent($event)">
+    </app-guardian-create>
+    <!-- 重启离线Guardian -->
+    <ng-template #guardianRestartModalComponent let-context='context'>
+        <ti-modal-header>
+            {{ i18n.plugins_perf_java_guardianManage_restart }}
+        </ti-modal-header>
+
+        <ti-modal-body>
+            <ti-formfield [formGroup]="restartFormGroup">
+                <ti-item>
+                    <ti-item-label>
+                        <span>{{ i18n.plugins_perf_java_guardianManage_serverIP }}</span>
+                    </ti-item-label>
+                    <span class="ti-item-content">{{context.guardian.ip}}</span>
+                </ti-item>
+                <ti-item>
+                    <ti-item-label>
+                        <span>{{ i18n.plugins_perf_java_guardianManage_port }}</span>
+                    </ti-item-label>
+                    <span class="ti-item-content">{{context.guardian.sshPort}}</span>
+                </ti-item>
+                <ti-item [label]="i18n.plugins_perf_java_guardianManage_userName" required="true">
+                    <input type="text" tiText [tiValidation]='validation' formControlName="userName"
+                        style="width: 400px"
+                        oncopy="return false"
+                        onkeyup="if(event.ctrlKey&&event.keyCode==90){ return false;}"
+                        onkeydown="if(event.ctrlKey&&event.keyCode==90){return false;}"
+                        onpaste="return true"
+                        oncut="return false">
+                </ti-item>
+                <ti-item [label]="i18n.plugins_perf_java_guardianManage_password" required="true">
+                    <div style="position: relative;">
+                        <input [type]="textType.type1" tiText [tiValidation]='validation'
+                        formControlName="password"
+                        oncopy="return false"
+                        onkeyup="if(event.ctrlKey&&event.keyCode==90){ return false;}"
+                        onkeydown="if(event.ctrlKey&&event.keyCode==90){return false;}"
+                        onpaste="return true"
+                        oncut="return false" style="padding-right: 32px;width: 400px">
+                        <div class="eyes">
+                            <span (click)="changeType(1)" *ngIf="textType.type1 == 'text'">
+                                <img src="./assets/img/icon-view.svg" />
+                            </span>
+                            <span (click)="changeType1(1)" *ngIf="textType.type1 == 'password'">
+                                <img src="./assets/img/icon-hide.svg" />
+                            </span>
+                        </div>
+                    </div>
+                </ti-item>
+            </ti-formfield>
+            <div class="guardian-modal-tip">{{ i18n.plugins_perf_java_guardianManage_restart_tip }}</div>
+        </ti-modal-body>
+
+        <ti-modal-footer>
+            <button class="little-primary-btn" type="button" color="primary" style="margin-right: 16px"
+                [disabled]="!restartFormGroup.valid" (click)="confirm(context)">
+                {{ i18n.common_term_operate_ok }}
+            </button>
+
+            <button class="little-minor-btn" type="button" (click)="context.dismiss()">
+                {{ i18n.common_term_operate_cancel }}
+            </button>
+        </ti-modal-footer>
+    </ng-template>
+
+    <!-- 删除在线Guardian -->
+    <ng-template #guardianDeleteModalComponent let-context='context'>
+        <ti-modal-header>
+            {{ context.title }}
+        </ti-modal-header>
+
+        <ti-modal-body style="padding:0;">
+            <div class="modal-tip">
+                <img src="./assets/img/guardian/warn.png" alt="">
+                <div>{{context.tip}}</div>
+            </div>
+        </ti-modal-body>
+
+        <ti-modal-footer>
+            <button class="little-minor-btn" type="button" autofocus (click)="confirm(context)">
+                {{ i18n.common_term_operate_ok }}
+            </button>
+            <button class="little-primary-btn" type="button" color="primary" style="margin-right: 16px"
+                (click)="context.dismiss()">
+                {{ i18n.common_term_operate_cancel }}
+            </button>
+        </ti-modal-footer>
+    </ng-template>
+    <!-- 删除离线Guardian -->
+    <ng-template #guardianOutlineDeleteModalComponent let-context='context'>
+        <ti-modal-header>
+            {{ context.title }}
+        </ti-modal-header>
+
+        <ti-modal-body>
+            <div style="display: flex;align-items: center;margin-bottom:20px;">
+                <span style="width:104px;">{{i18n.plugins_perf_java_guardianManage_delete_type}}</span>
+                <span class="label-radio-all">
+                    <label class="ra-label" for="all">
+                        <i class="ra-common ra-check" *ngIf="deleteType == 'all'"></i>
+                        <i class="ra-common ra-uncheck" *ngIf="deleteType != 'all'"></i>
+                        <input class="radio-size" name="type" type="radio" value='all' id='all' [(ngModel)]='deleteType'
+                            style="height: 20px; display: none" (ngModelChange)="onLocationChange()"
+                            (change)="deleteType == 'all'" />
+                        <span
+                            style="margin-left: 26px;vertical-align: middle;">{{i18n.plugins_perf_java_guardianManage_delete_complete}}</span>
+                    </label>
+                </span>
+                <span class="label-radio-part" style="padding-left: 50px;">
+                    <label class="ra-label" for="part">
+                        <i class="ra-common ra-check" *ngIf="deleteType == 'part'"></i>
+                        <i class="ra-common ra-uncheck" *ngIf="deleteType != 'part'"></i>
+                        <input class="radio-size" name="type" type="radio" value='part' id='part'
+                            [(ngModel)]='deleteType' style="height: 20px; display: none"
+                            (ngModelChange)="onLocationChange()" (change)="deleteType == 'part'" />
+                        <span
+                            style="margin-left: 26px;vertical-align: middle;">{{i18n.plugins_perf_java_guardianManage_delete_part}}</span>
+                    </label>
+                    <img *ngIf="currTheme == ColorTheme.Dark" class="help-icon"
+                        src="./assets/img/mission/icon-help-dark.png" [tiTip]='deleteTip' tiTipPosition="right"
+                        tiTipMaxWidth='248px' />
+                    <img *ngIf="currTheme == ColorTheme.Light" class="help-icon"
+                        src="./assets/img/mission/icon-help-light.svg" [tiTip]='deleteTip' tiTipPosition="right"
+                        tiTipMaxWidth='248px' />
+                </span>
+            </div>
+
+            <div style="display:flex;font-size: 12px;color: #888888;line-height: 18px;">
+                <ti-formfield *ngIf="deleteType == 'all'" [formGroup]="deleteFormGroup">
+                    <ti-item [label]="i18n.common_term_login_name" required="true">
+                        <input type="text" tiText [tiValidation]='validation' style="width: 400px"
+                            formControlName="userName" (blur)="check()"
+                            oncopy="return false"
+                            onkeyup="if(event.ctrlKey&&event.keyCode==90){ return false;}"
+                            onkeydown="if(event.ctrlKey&&event.keyCode==90){return false;}"
+                            onpaste="return true"
+                            oncut="return false">
+                    </ti-item>
+                    <ti-item [label]="i18n.common_term_login_password" required="true">
+                        <div style="position: relative;">
+                            <input [type]="textType.type2" tiText [tiValidation]='validation' formControlName="password"
+                            style="width: 400px ;padding-right: 32px;" (blur)="check()"
+                            oncopy="return false"
+                            onkeyup="if(event.ctrlKey&&event.keyCode==90){ return false;}"
+                            onkeydown="if(event.ctrlKey&&event.keyCode==90){return false;}"
+                            onpaste="return true"
+                            oncut="return false">
+                            <div class="eyes">
+                                <span (click)="changeType(2)" *ngIf="textType.type2 == 'text'">
+                                    <img src="./assets/img/icon-view.svg" />
+                                </span>
+                                <span (click)="changeType1(2)" *ngIf="textType.type2 == 'password'">
+                                    <img src="./assets/img/icon-hide.svg" />
+                                </span>
+                            </div>
+                        </div>
+                    </ti-item>
+                </ti-formfield>
+                <ti-formfield *ngIf="deleteType == 'part'" [formGroup]="deletePartFormGroup">
+                    <ti-item [label]="i18n.common_term_login_name" required="true">
+                        <input type="text" tiText [tiValidation]='validation' formControlName="userName"
+                            style="width: 400px" (blur)="check()">
+                    </ti-item>
+                </ti-formfield>
+            </div>
+            <div *ngIf="showError && errorMessage" class='error-message' style="display: flex;align-items: center;">
+                <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"></span>
+                <span class="ti3-validate-text">{{errorMessage}}</span>
+            </div>
+        </ti-modal-body>
+
+        <ti-modal-footer>
+            <button class="little-primary-btn" type="button" color="primary" style="margin-right: 16px"
+                [disabled]="(deleteType == 'all' && !deleteFormGroup.valid) || (deleteType == 'part' && !deletePartFormGroup.valid)"
+                (click)="confirm(context)">
+                {{ i18n.common_term_operate_ok }}
+            </button>
+
+            <button class="little-minor-btn" type="button" autofocus (click)="context.dismiss()">
+                {{ i18n.common_term_operate_cancel }}
+            </button>
+        </ti-modal-footer>
+    </ng-template>
+</div>
+<!-- 离线删除Guardian告警 -->
+<ng-template #guardianWarnModalComponent let-context='context'>
+    <ti-modal-header>
+        {{ context.title }}
+    </ti-modal-header>
+
+    <ti-modal-body style="padding:0;">
+        <div class="modal-tip">
+            <img src="./assets/img/guardian/warn.png" alt="">
+            <div>{{context.tip}}</div>
+        </div>
+    </ti-modal-body>
+
+    <ti-modal-footer>
+        <button class="little-primary-btn" type="button" color="primary" style="margin-right: 16px"
+            (click)="confirm(context)">
+            {{ i18n.common_term_operate_ok }}
+        </button>
+
+        <button class="little-minor-btn" type="button" (click)="context.dismiss()">
+            {{ i18n.common_term_operate_cancel }}
+        </button>
+    </ti-modal-footer>
+</ng-template>
+<ng-template #deleteTip>
+    <div>{{i18n.plugins_perf_java_guardianManage_partial_deleteTip}}</div>
+</ng-template>

@@ -1,0 +1,18 @@
+<div class="overview-container">
+  <div class="database-tab">
+    <span class="data-tabs" *ngFor="let tab of ioTabs; let idx = index" (click)="activeChange(idx)">
+      <span *ngIf="tab.checked || !isDownload" class="item-tab">
+        <span class="tab-title" [ngClass]="{ 'tab-active': tab.active }">
+          {{ tab.tabName }}
+        </span>
+      </span>
+    </span>
+  </div>
+  <router-outlet></router-outlet>
+</div>
+<!-- 切换页面提示框 -->
+<app-alert-message #leavePage (confirmHandle)="confirmLeavePage($event)">
+  <div class="alert-body checkSty">
+    <input type="checkbox" tiCheckbox [name]='i18n.leavePage.leave_page_tip' [label]= 'i18n.leavePage.leave_page_tip' [(ngModel)]="downloadService.leavePageCheck">
+  </div>
+</app-alert-message>

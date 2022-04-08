@@ -1,0 +1,109 @@
+
+<div class="mem-abnormal-release-table">
+  <ti-table
+    [(displayedData)]="memReleaseDisplayed"
+    [srcData]="memReleaseSrcData[memReleaseTableDataType]"
+    [columns]="memReleaseColumns"
+    [searchWords]="memReleaseSearchWords"
+    [searchKeys]="memReleaseSearchKeys"
+  >
+    <div class="ti3-table-fixed-head">
+      <div class="table-head-top">
+        <div class="is-self-filter">
+          <span>{{
+            memReleaseTableDataType ?
+            i18n.diagnostic.stack.memLeakTable.memReleaseTableChild :
+            i18n.diagnostic.stack.memLeakTable.memReleaseTableSelf
+          }}</span>
+          <ti-icon [tiTip]="memReleaseTableDropDown" name="filter"></ti-icon>
+        </div>
+        <div class="head-second-row">
+          <div class="stack-searcher">
+            <span>{{ i18n.common_term_task_tab_summary_callstack }}</span>
+            <ti-icon [tiTip]="memReleaseTableSearch" name="search"></ti-icon>
+          </div>
+          
+          <div class="cols-toggle">
+            <ti-cols-toggle panelWidth="250px" tipContent=""></ti-cols-toggle>
+            <app-icon-react name="arrowDownDouble"></app-icon-react>
+          </div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th details-icon-column></th>
+            <ng-container *ngFor="let column of memReleaseColumns">
+              <th *ngIf="column.show || column.show === undefined">
+                <ti-cell-text>{{ column.title }}</ti-cell-text>
+                <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+              </th>
+            </ng-container>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <div class="ti3-table-container ti3-resize-wrapper"
+      [appNoData]="!memReleaseDisplayed.length">
+      <table>
+        <thead>
+          <tr>
+            <th details-icon-column></th>
+            <ng-container *ngFor="let column of memReleaseColumns">
+              <th *ngIf="column.show || column.show === undefined"></th>
+            </ng-container>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let row of memReleaseDisplayed">
+            <tr>
+              <td><ti-details-icon [row]="row"></ti-details-icon></td>
+              <td tiOverflow>{{row.stack}}</td>
+              <ng-container *ngFor="let column of memReleaseColumns;index as i;">
+                <td tiOverflow *ngIf="column.show">{{row[column.key]}}</td>
+              </ng-container>
+            </tr>
+            
+            <tr *tiDetailsTr="row">
+              <td tiColspan>
+                <div class="ti3-table-detail-container">
+                  <app-mem-release-sub-table [data]="row"></app-mem-release-sub-table>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <ti-pagination
+      [(currentPage)]="memReleaseTablePagination.currentPage"
+      [pageSize]="memReleaseTablePagination.pageSize"
+      [(totalNumber)]="memReleaseTablePagination.total">
+    </ti-pagination>
+  </ti-table>
+</div>
+
+<!-- 内存异常释放表格过滤下拉菜单 -->
+<ng-template #memReleaseTableDropDown>
+  <div class="table-dropdown">
+    <p (click)="memReleaseTableDataType = 0" [ngClass]="{'active': memReleaseTableDataType === 0}">
+      {{ i18n.diagnostic.stack.memLeakTable.memReleaseTableSelf }}
+    </p>
+    <p (click)="memReleaseTableDataType = 1" [ngClass]="{'active': memReleaseTableDataType === 1}">
+      {{ i18n.diagnostic.stack.memLeakTable.memReleaseTableChild }}
+    </p>
+  </div>
+</ng-template>
+
+<!-- 内存异常释放表格搜索框 -->
+<ng-template #memReleaseTableSearch>
+  <div class="table-search">
+    <ti-searchbox
+      [(ngModel)]="memReleaseTableSearchWord"
+      (search)="handleMemReleaseTableSearch($event)"
+      (clear)="handleMemReleaseTableSearchClear()"
+    >
+    </ti-searchbox>
+  </div>
+</ng-template>

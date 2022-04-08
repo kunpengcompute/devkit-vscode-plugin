@@ -1,0 +1,33 @@
+.cpu-detail {
+  overflow-y: auto;
+  box-sizing: border-box;
+
+  main {
+    margin-top: 20px;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    
+    title {
+      height: 30px;
+      font-size: 20px;
+      line-height: 30px;
+      color: #222222;
+      display: block;
+    }
+
+    .view-switch {
+      display: flex;
+
+      app-icon-react {
+        display: block;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+      }
+    }
+  }
+
+}

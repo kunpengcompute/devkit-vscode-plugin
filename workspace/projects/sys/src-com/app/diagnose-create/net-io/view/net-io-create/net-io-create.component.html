@@ -1,0 +1,163 @@
+<div class="warpper" [ngClass]="theme$ | async">
+  <!-- 表单 -->
+  <div class="form" [formGroup]="formGroup">
+    <!-- 诊断功能选项 -->
+    <div class="control">
+      <ti-formfield [labelWidth]="outsideLabelWidth">
+        <ti-item
+          [label]="'network_diagnositic.taskParams.diagnositic_scen' | i18n"
+          [required]="true"
+        >
+          <app-check-box-control formControlName="functions">
+          </app-check-box-control>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <!-- 网络拨测参数  -->
+    <div class="control prefix-miss" [hidden]="!formOption.dialing.display">
+      <app-netio-collapse [title]="'network_diagnositic.net_dial_test' | i18n">
+        <app-network-dialing
+          formControlName="dialing"
+          [nodeOptions]="nodeOptions"
+          [labelWidth]="insideLabelWidth"
+          content
+        ></app-network-dialing>
+      </app-netio-collapse>
+    </div>
+
+    <!-- 任务节点 -->
+    <div class="control" [hidden]="!formOption.taskNodeIp.display">
+      <ti-formfield [labelWidth]="outsideLabelWidth">
+        <ti-item
+          [label]="'network_diagnositic.taskParams.task_node' | i18n"
+          [required]="true"
+        >
+          <div class="paramsValue">
+            <ti-select
+              [multiple]="true"
+              formControlName="taskNodeIp"
+              [options]="nodeOptions"
+              labelKey="label"
+              valueKey="value"
+              style="width: 326px"
+              [tiValidation]="{ type: 'blur' }"
+              [errorMessageWrapper]="errorTaskNodeIpMsg"
+            >
+            </ti-select>
+            <div class="illustrate">
+              {{ "network_diagnositic.taskParams.task_node_txt" | i18n }}
+            </div>
+            <span class="location" #errorTaskNodeIpMsg></span>
+          </div>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <!-- 丢包诊断参数 -->
+    <div class="control prefix-miss">
+      <app-netio-collapse
+        [title]="'network_diagnositic.packetLoss' | i18n"
+        [hidden]="!formOption.packetLoss.display"
+      >
+        <app-network-packet-loss
+          formControlName="packetLoss"
+          [labelWidth]="insideLabelWidth"
+          content
+        ></app-network-packet-loss>
+      </app-netio-collapse>
+    </div>
+
+    <!-- 网络抓包参数 -->
+    <div class="control prefix-miss">
+      <app-netio-collapse
+        [title]="'network_diagnositic.netCaught' | i18n"
+        [hidden]="!formOption.netCaught.display"
+      >
+        <app-network-caught
+          formControlName="netCaught"
+          [labelWidth]="insideLabelWidth"
+          content
+        ></app-network-caught>
+      </app-netio-collapse>
+    </div>
+
+    <!-- 网路负载监控  -->
+    <div class="control prefix-miss">
+      <app-netio-collapse
+        [title]="'network_diagnositic.load' | i18n"
+        [hidden]="!formOption.load.display"
+      >
+        <app-network-load
+          formControlName="load"
+          [labelWidth]="insideLabelWidth"
+          content
+        ></app-network-load>
+      </app-netio-collapse>
+    </div>
+
+    <!-- 预约定时启动 -->
+    <div
+      class="control prefix-miss up-top"
+      *ngIf="formOption.doOrder.display && !taskDetail.isFromTuningHelper"
+    >
+      <ti-formfield [labelWidth]="outsideLabelWidth">
+        <ti-item [label]="'network_diagnositic.taskParams.reservation' | i18n">
+          <div class="switch-align">
+            <ti-switch formControlName="doOrder"></ti-switch>
+          </div>
+        </ti-item>
+      </ti-formfield>
+    </div>
+
+    <!-- 预约定时编辑控件 -->
+    <div *ngIf="formOption.orderConfig.display">
+      <app-mission-reservation-plus
+        formControlName="orderConfig"
+        [labelWidth]="outsideLabelWidth"
+      >
+      </app-mission-reservation-plus>
+    </div>
+
+    <!-- 立即启动 -->
+    <div class="control prefix-miss" *ngIf="formOption.taskStartNow.display">
+      <div class="immediately">
+        <!-- 来自调优助手创建任务需要禁用 -->
+        <input
+          [disabled]="taskDetail.isFromTuningHelper"
+          tiCheckbox
+          type="checkbox"
+          formControlName="taskStartNow"
+        />
+        <span class="start-now">{{
+          "network_diagnositic.taskParams.immediate" | i18n
+        }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 操作 -->
+  <div class="opreation prefix-miss">
+    <button
+      [disabled]="!formGroup.valid"
+      tiButton
+      type="button"
+      color="primary"
+      (click)="onCreate()"
+    >
+      {{ "network_diagnositic.taskParams.confirm" | i18n }}
+    </button>
+    <button tiButton type="button" (click)="onCancel()">
+      {{ "network_diagnositic.taskParams.cancel" | i18n }}
+    </button>
+    <button
+      *ngIf="!taskDetail.isFromTuningHelper"
+      [disabled]="!formGroup.valid"
+      tiButton
+      type="button"
+      (click)="onSaveTemplate()"
+    >
+      {{ "network_diagnositic.taskParams.save_temp" | i18n }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,180 @@
+<div class="content-container net-capture-source" [id]='boxID'>
+  <div class="header" *ngIf="headers">
+    <span *ngFor="let header of headers" class="group-list">
+      <span class="function-label">{{ header.label }}</span>
+      <span class="function-content" tiOverflow>{{ ([null, undefined, ''].includes(header.content) ? '--' : header.content) |
+        thousandSeparator }}</span>
+    </span>
+  </div>
+
+  <div class="body">
+    <div class="func-main" [ngStyle]="{ height: isFold ? 'calc(100% - 64px)' : 'calc(100% - 326px)' }">
+
+      <!-- 源代码 -->
+      <div class="source-left table-container">
+        <div class="title">
+          <h2>{{ 'common_term_task_tab_function_source' | i18n }}</h2>
+        </div>
+
+        <ti-table [(displayedData)]="sourceData.displayed" [srcData]="sourceData.srcData" [columns]="sourceData.columns">
+          <div class="ti3-table-fixed-head">
+            <table>
+              <thead>
+                <tr>
+                  <th *ngFor="let column of sourceData.columns" tiOverflow [width]="column.width">
+                    <ti-cell-text>{{ column.label }}</ti-cell-text>
+                    <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+                  </th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+
+          <div class="ti3-table-container ti3-resize-wrapper" hyNodata [nodataShow]="!sourceData.displayed.length">
+            <table>
+              <thead>
+                <tr>
+                  <th *ngFor="let column of sourceData.columns" [width]="column.width"></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let row of sourceData.displayed" [ngClass]="{ active: row.active }" [id]="row.id"
+                  (click)="highlight(row)">
+                  <ng-container *ngFor="let column of sourceData.columns">
+                    <td *ngIf="column.prop === 'countAndProportion'; else sourceOtherTd" tiOverflow>
+                      {{ row.count | thousandSeparator }}({{ row.proportion }})
+                    </td>
+
+                    <ng-template #sourceOtherTd>
+                      <td [ngClass]="{codeLine: column.prop === 'line_code'}" tiOverflow>{{ row[column.prop] }}</td>
+                    </ng-template>
+                  </ng-container>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ti-table>
+      </div>
+
+      <!-- 汇编代码 -->
+      <div class="assembly-right table-container">
+        <div class="title">
+          <h2 style="display: inline-block;">{{ 'common_term_task_tab_function_assembley' | i18n }}</h2>
+
+          <div class="operate-box" *ngIf="assemblerData.nonZeroBlock.length">
+              <div class="blockIcon preBlock" [tiTip]="'common_term_preBlock' | i18n" tiTipPosition="top">
+                <hy-theme-content>
+                  <app-icon-react 
+                    light
+                    name="preBtn" [freeze]="!assemblerData.hasLastBlock ? 'disabled' : ''"
+                    (click)='preBlock("pre")'
+                    [ngClass]="{'pre-btn-disabled': !assemblerData.hasLastBlock}"
+                  ></app-icon-react>
+                  <app-icon-react 
+                    dark
+                    name="preBtnDark" [freeze]="!assemblerData.hasLastBlock ? 'disabled' : ''"
+                    (click)='preBlock("pre")'
+                    [ngClass]="{'pre-btn-disabled': !assemblerData.hasLastBlock}"
+                  ></app-icon-react>
+                </hy-theme-content>
+              </div>
+              <div class="blockIcon nextBlock" [tiTip]="'common_term_nextBlock' | i18n" tiTipPosition="top" >
+                <hy-theme-content>
+                  <app-icon-react 
+                    light
+                    name="nextBtn" [freeze]="!assemblerData.hasNextBlock ? 'disabled' : ''"
+                    (click)='preBlock("next")'
+                    [ngClass]="{'pre-btn-disabled': !assemblerData.hasNextBlock}"
+                  ></app-icon-react>
+                  <app-icon-react 
+                    dark
+                    name="nextBtnDark" [freeze]="!assemblerData.hasNextBlock ? 'disabled' : ''"
+                    (click)='preBlock("next")'
+                    [ngClass]="{'pre-btn-disabled': !assemblerData.hasNextBlock}"
+                  ></app-icon-react>
+                </hy-theme-content>
+              </div>
+          </div>
+        </div>
+
+        <ti-table 
+          [(displayedData)]="assemblerData.displayed" [srcData]="assemblerData.srcData" [columns]="assemblerData.columns"
+        >
+          <div class="ti3-table-fixed-head">
+            <table>
+              <thead>
+                <tr>
+                  <th tiOverflow *ngFor="let column of assemblerData.columns;index as index" width="{{column.width}}">
+                    <ti-cell-text>{{ column.label }}</ti-cell-text>
+                    <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+                  </th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+
+          <div 
+            class="ti3-table-container ti3-resize-wrapper" 
+            [appDemandLoading]="demandLoadInfo"
+            (demandData)="onDemandData($event)" (relaseData)="onRelasedata($event)"
+            hyNodata [nodataShow]="!assemblerData.displayed.length"
+          >
+            <table #assembleVisible>
+              <thead>
+                <tr>
+                  <th *ngFor="let column of assemblerData.columns" width="{{column.width}}"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container #assembleContainer>
+                  <ng-container *ngFor="let row of assemblerData.displayed; index as i">
+                    <tr #assembleItem [ngClass]="{ active: row.active }" [id]="row.id" (click)="highlight(row)">
+                      <td details-icon-column class="details-icon-column">
+                        <ti-icon *ngIf="row.children?.length" name="right-1" [ngClass]="{'active': row.showDetails}" 
+                            (click)="row.showDetails = !row.showDetails"></ti-icon>
+                      </td>
+                      <ng-container *ngFor="let column of assemblerData.columns; index as index">
+                        <td tiOverflow *ngIf="index">{{ row[column.prop] }}</td>
+                      </ng-container>
+                    </tr>
+
+                    <ng-container *ngFor="let child of row.children;">
+                      <tr *tiDetailsTr="row">
+                        <td class="details-hd"></td>
+                        <ng-container *ngFor="let column of assemblerData.columns; index as index">
+                          <td tiOverflow *ngIf="index">{{ child[column.prop] }}</td>
+                        </ng-container>
+                      </tr>
+                    </ng-container>
+
+                  </ng-container>
+                </ng-container>
+                
+              </tbody>
+            </table>
+          </div>
+        </ti-table>
+      </div>
+    </div>
+
+    <div class="folding-line" [ngClass]="{ 'active': isFold }"></div>
+
+    <div class="source-img" [ngClass]="{ 'active': isFold }" id='source-img' *ngIf="functionDetails.codeStream">
+      <div class="toggle-btn-top" (click)='toggleTop()'>
+        <img id="user-guide-toggle" src="./assets/img/home/arrow-down.svg" [ngClass]="{ 'active': isFold }" />
+      </div>
+      <h2>{{ 'common_term_task_tab_function_flow' | i18n }}</h2>
+      <div class="source-svg">
+        <hy-theme-content>
+          <img src='./assets/img/header/da.png' style="right: 38px;" (click)="scale(true)" light>
+          <img src='./assets/img/header/xiao.png' (click)="scale(false)" light>
+          <img src='./assets/img/header/da.svg' style="right: 38px;" (click)="scale(true)" dark>
+          <img src='./assets/img/header/xiao.svg' (click)="scale(false)" dark>
+        </hy-theme-content>
+
+        <div id='insvg'></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,169 @@
+.user-management {
+  .create-btn {
+    height: 28px;
+    line-height: 26px;
+  }
+  .ti3-table-container {
+    max-height: 67vh;
+    overflow-y: auto;
+    .user-opt {
+      color: #0067ff;
+      cursor: pointer;
+      &:hover {
+        color: #267dff !important;
+      }
+      &:active {
+        color: #0057d9 !important;
+      }
+    }
+  }
+  .user-table {
+    margin-top: 15px;
+  }
+  .creatUser {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 560px;
+    padding: 0 32px 32px 32px;
+    overflow: hidden;
+    .c-title {
+      height: 66px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px dashed lightgray;
+      font-size: 20px;
+      .close-img {
+        cursor: pointer;
+      }
+    }
+    .edit-box {
+      margin-top: 1vw;
+      width: 100%;
+      .edit-tip {
+        display: flex;
+        align-items: center;
+        line-height: 18px;
+        color: #979797;
+        margin-top: 4px;
+      }
+      .creat-form{
+        margin-top: 18px;
+      }
+    }
+  }
+  .reSettingPwd {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 560px;
+    padding: 0 32px 32px 32px;
+    overflow: hidden;
+    .c-title {
+      height: 40px;
+      width: 80%;
+      margin: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed lightgray;
+    }
+  }
+  .btn-box {
+    margin-top: 32px;
+    text-align: center;
+    width: 100%;
+    button {
+      width: 88px;
+      height: 28px;
+      line-height: 26px;
+    }
+    .user-close-btn {
+      margin-left: 16px;
+    }
+  }
+
+  .deleteUser {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 560px;
+    padding: 0 32px 32px 32px;
+    overflow: hidden;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 66px;
+      font-size: 20px;
+      border-bottom: dashed 1px #e1e6ee;
+      .close {
+        cursor: pointer;
+      }
+    }
+    .main {
+      width: 100%;
+      margin: 22px 0 22px 0;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      img {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+      }
+      span {
+        font-size: 14px;
+        color: #616161;
+        line-height: 24px;
+        flex: 1;
+      }
+    }
+    .msg-content {
+      display: flex;
+      span {
+        font-size: 14px;
+        color: #616161;
+      }
+    }
+    .foot {
+      width: 100%;
+      text-align: center;
+      margin-top: 32px;
+      button {
+        width: 88px;
+        height: 28px;
+        line-height: 26px;
+      }
+      .confirm {
+        margin-right: 16px;
+      }
+    }
+  }
+}
+input {
+  width: var(--input-alert-width);
+}
+ti-select {
+  width: var(--input-alert-width) !important;
+}
+
+:host .content[lang="zh-cn"] ::ng-deep .ti3-form .ti3-form-label {
+  width: 100px;
+}
+:host .content[lang="en-us"] ::ng-deep .ti3-form .ti3-form-label {
+  width: 140px;
+}
+:host ::ng-deep.ti3-unifyvalid-tip-error-container {
+  width: 300px;
+}
+.cert-nodata {
+  width: 74vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 210px;
+  padding-top: 2vw;
+}

@@ -1,0 +1,70 @@
+.table-box{
+    position: relative;
+   display: flex
+}
+.table-y{
+   width: 8%;
+   height: 100%;
+ 
+}
+.table{
+   height: 100%;
+   flex: 1;
+ .ti3-table {
+   .ti3-table-container {
+
+          td {
+            position: relative;
+
+            .pro-rate{
+              position:absolute;
+              top:0;
+              left:0;
+              height:100%;
+              background-color: #D6E4FF;
+            }
+          }
+        }
+
+      }
+}
+.line{
+   width: 115%;
+   height: 2px;
+   background: #ddd
+}
+.title-box{
+   width: 100%;
+    display: flex;
+   flex-direction: column;
+   padding-left: 10%;
+}
+.title-num{
+   text-align: right
+}
+
+.memory-detail{
+    position: relative;
+}
+
+.mask-box{
+    position: absolute;
+    top:0;
+    left:0;
+    width: calc(100% - 176px);
+    margin-left: 144px;
+    display:none;
+    overflow: hidden;
+    z-index: 10000000;
+.brush-box{
+    position: absolute;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    width: 0px;
+    border: solid;
+    border-width: 0px 2px 0px 2px;
+    border-color: #267DFF;
+    background-color: rgba($color: #267DFF, $alpha: 0.1);
+    box-sizing: border-box;
+}}

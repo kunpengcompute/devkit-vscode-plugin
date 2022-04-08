@@ -1,0 +1,169 @@
+// modal 相关样式
+
+$common16: 16px;
+$common18: 18px;
+$common24: 24px;
+$common32: 32px;
+
+$width400: 400px;
+$width560: 560px;
+$width700: 700px;
+
+$col61: #616161;
+$col97: #979797;
+$col222: #222;
+$colE1E6EE: #e1e6ee;
+$col61D274: #61D274;
+$colED4B4B: #ED4B4B;
+
+// 屏幕居中
+.modal-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ti3-modal-footer button:nth-of-type(2) {
+  margin-left: $common16;
+}
+
+.modal400,
+.modal560,
+.dragModal700 {
+  .ti3-modal-header {
+    padding: $common18 $common32 $common24;
+    color: $col222;
+    line-height: inherit;
+  }
+}
+
+.modal400 {
+  width: $width400 !important;
+  .ti3-modal-body {
+    .content {
+      display: flex;
+      .img-box {
+        margin-right: 8px;
+        img {
+          display: inline-block;
+          width: $common24;
+        }
+      }
+    }
+  }
+}
+.modalEn400 {
+  width: 420px !important;
+}
+
+.modal560 {
+  width: $width560;
+  .ti3-modal-header {
+    margin: 0 32px;
+    padding: 18px 0;
+    border-bottom: 1px solid $colE1E6EE;
+    font-size: 20px;
+  }
+  .ti3-modal-body {
+    margin-top: $common18;
+    color: $col61;
+    .tip-box {
+      margin-bottom: $common16;
+      .img-box {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+// 拖拽上传弹框
+.dragModal700 {
+  width: $width700 !important;
+  .ti3-modal-header {
+    margin: 0 $common32;
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom: 1px solid $colE1E6EE;
+  }
+  .ti3-modal-body {
+    margin-top: $common24;
+    .content {
+      .drag-box {
+        height: 300px;
+        border: 1px dashed $colE1E6EE;
+        .drag-no-data {
+          height: 100%;
+          color: $col97;
+          .text {
+            margin: $common32 0 $common24;
+            color: $col61;
+          }
+        }
+      }
+      .file-info {
+        margin-top: 8px;
+        .file-num {
+          span:last-child {
+            margin-left: 8px;
+          }
+        }
+        .progress-bar-container {
+          .progress-bar {
+            width: 150px;
+            margin: 0 10px;
+          }
+        }
+      }
+      .success-status {
+        &::before {
+          position: absolute;
+          display: block;
+          content: '';
+          top: 50%;
+          width: 10px;
+          height: 10px;
+          margin-top: -4px;
+          background-color: $col61D274;
+          border-radius: 50%;
+        }
+        span {
+          margin-left: 18px;
+        }
+      }
+      .fail-status {
+        &::before {
+          background-color: $colED4B4B;
+        }
+      }
+    }
+  }
+}
+
+// 上传重复文件弹框
+.exit-modal-560 {
+  width: 496px;
+  .mask-title {
+    line-height: 30px;
+  }
+  .mask-container {
+    display: flex;
+    .img-box {
+      margin-right: 8px;
+      img {
+        width: 20px;
+      }
+    }
+    .save-as-field {
+      width: 100%;
+      margin-left: -16px;
+      .ti3-form .ti3-form-label {
+        width: 94px;
+        padding-right: 16px;
+      }
+      input {
+        width: 300px;
+      }
+    }
+  }
+}

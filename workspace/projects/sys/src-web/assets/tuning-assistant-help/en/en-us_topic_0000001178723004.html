@@ -1,0 +1,56 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Run Log Management">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001224122729.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (Tuning Assistant)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001178723004">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Run Log Management</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001178723004"></a><a name="EN-US_TOPIC_0000001178723004"></a>
+
+<h1 class="topictitle1">Run Log Management</h1>
+<div id="body1591786100925"><div class="section" id="EN-US_TOPIC_0000001178723004__section11470129119"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0000001178723004__p2444451164517">You have logged in to the <span id="EN-US_TOPIC_0000001178723004__ph1359340104618">Kunpeng Hyper Tuner</span>.</p>
+<div class="note" id="EN-US_TOPIC_0000001178723004__note43463558452"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001178723004__p1143612719349">Only the administrator (<strong id="EN-US_TOPIC_0000001178723004__b152931158787">tunadmin</strong>) can view and download run logs.</p>
+</div></div>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001178723004__section12601177145013"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0000001178723004__ol94441751076"><li id="EN-US_TOPIC_0000001178723004__li4444051572"><span>Click <span><img id="EN-US_TOPIC_0000001178723004__image183215282488" src="en-us_image_0000001178723128.png"></span> in the upper right corner and choose <strong id="EN-US_TOPIC_0000001178723004__b1996608220">Logs</strong>.</span><p><p id="EN-US_TOPIC_0000001178723004__p17126824153913">The <span class="wintitle" id="EN-US_TOPIC_0000001178723004__wintitle13579134514917"><b>Operation Logs</b></span> page is displayed.</p>
+</p></li><li id="EN-US_TOPIC_0000001178723004__li1312775317914"><span>Click the <strong id="EN-US_TOPIC_0000001178723004__b473592517235">Run Logs</strong> tab.</span><p><p id="EN-US_TOPIC_0000001178723004__p16164153412106">The <span class="wintitle" id="EN-US_TOPIC_0000001178723004__wintitle4689172281211"><b>Run Logs</b></span> tab page is displayed, as shown in <a href="#EN-US_TOPIC_0000001178723004__fig201514591112">Figure 1</a>.</p>
+<div class="fignone" id="EN-US_TOPIC_0000001178723004__fig201514591112"><a name="EN-US_TOPIC_0000001178723004__fig201514591112"></a><a name="fig201514591112"></a><span class="figcap"><b>Figure 1 </b>Run Logs tab page</span><br><span><img id="EN-US_TOPIC_0000001178723004__image20140125813503" src="en-us_image_0000001178881686.png"></span></div>
+</p></li><li id="EN-US_TOPIC_0000001178723004__en-us_topic_0239732282_li1716511371323"><span>Locate the log file to be downloaded, and click <strong id="EN-US_TOPIC_0000001178723004__b189858525296">Download</strong> in the <strong id="EN-US_TOPIC_0000001178723004__b139912523293">Operation </strong>column.</span><p><p id="EN-US_TOPIC_0000001178723004__p1322190153817">A confirmation dialog box is displayed.</p>
+</p></li><li id="EN-US_TOPIC_0000001178723004__li175446377379"><span>Click <strong id="EN-US_TOPIC_0000001178723004__b568614425138">OK</strong>.</span><p><div class="note" id="EN-US_TOPIC_0000001178723004__note6329182214220"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001178723004__p986719107343">A package will be created for run logs of every 100 MB.</p>
+</div></div>
+<p id="EN-US_TOPIC_0000001178723004__p5573949195712">The downloaded run logs are in the following format:</p>
+<p id="EN-US_TOPIC_0000001178723004__p54121514145220">Time|Process ID|Thread ID|Module file name: Code line number|Function name|Level| Log details</p>
+<div class="note" id="EN-US_TOPIC_0000001178723004__note1997222119219"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001178723004__p29721021823">The actual log information displayed may vary.</p>
+</div></div>
+<p id="EN-US_TOPIC_0000001178723004__p1067182812528">Example:</p>
+<pre class="screen" id="EN-US_TOPIC_0000001178723004__screen1812164011525">2020-08-18 14:49:44,433|7806:281473041977840|taskqueue.py:165|start_task_in_task_queue|WARNING|taskqueue is empty</pre>
+<p id="EN-US_TOPIC_0000001178723004__p0543183763713">The log level indicates the importance of the log information. The tool run logs are classified into five levels: DEBUG, INFO, WARNING, ERROR and CRITICAL. The default log level is WARNING. The tool records only the logs of the specified level and higher levels.</p>
+<ul id="EN-US_TOPIC_0000001178723004__ul61182209319"><li id="EN-US_TOPIC_0000001178723004__li1511818204318"><strong id="EN-US_TOPIC_0000001178723004__b124617215574">DEBUG</strong>: debugging information for fault locating.</li><li id="EN-US_TOPIC_0000001178723004__li31188202310"><strong id="EN-US_TOPIC_0000001178723004__b128771678572">INFO</strong>: key information about the normal running of the service.</li><li id="EN-US_TOPIC_0000001178723004__li1411802016312"><strong id="EN-US_TOPIC_0000001178723004__b6403181375710">WARNING</strong>: events about the system in unexpected status that does not affect the running of the system.</li><li id="EN-US_TOPIC_0000001178723004__li01181120153115"><strong id="EN-US_TOPIC_0000001178723004__b14260152295715">ERROR</strong>: errors that do not affect the application running.</li><li id="EN-US_TOPIC_0000001178723004__li311852017312"><strong id="EN-US_TOPIC_0000001178723004__b3933122413577">CRITICAL</strong>: errors that may cause system breakdown.</li></ul>
+<div class="note" id="EN-US_TOPIC_0000001178723004__note6473144664711"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0000001178723004__ul1568917199481"><li id="EN-US_TOPIC_0000001178723004__li76891194480">The administrator can click <span><img id="EN-US_TOPIC_0000001178723004__image12378163810489" src="en-us_image_0000001178881690.png"></span> in the upper right corner on the home page of the <span id="EN-US_TOPIC_0000001178723004__ph1621861210352">Kunpeng Hyper Tuner</span> or <span id="EN-US_TOPIC_0000001178723004__ph146096361578">System Profiler</span> WebUI and choose <strong id="EN-US_TOPIC_0000001178723004__b1628184119346">System Settings</strong> to change the level of user management run logs.</li><li id="EN-US_TOPIC_0000001178723004__li1468919199483">The administrator can click <span><img id="EN-US_TOPIC_0000001178723004__image169174784812" src="en-us_image_0000001178723134.png"></span> in the upper right corner on the home page of the <span id="EN-US_TOPIC_0000001178723004__ph89932383377">System Profiler</span> and choose <strong id="EN-US_TOPIC_0000001178723004__b1153852313301">System Settings</strong> to change the value of <strong id="EN-US_TOPIC_0000001178723004__b453816230300">Run Log Level</strong> in the <strong id="EN-US_TOPIC_0000001178723004__b05391723143011">System Profiler Settings</strong> area.</li></ul>
+</div></div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001224122729.html">Log Management</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

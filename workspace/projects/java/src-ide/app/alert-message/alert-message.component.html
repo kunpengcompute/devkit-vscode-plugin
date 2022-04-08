@@ -1,0 +1,43 @@
+<div class="progress-bg" *ngIf="showAlert">
+    <div class="progress-modal" [ngStyle]="{ width: width }">
+        <div class="modal-header">
+            <span class="title" [innerHTML]="title | html"></span>
+            <span class="close-icon" (click)="alert_close()">
+                <img src="./assets/img/home/close.svg" />
+            </span>
+        </div>
+
+        <div class="modal-line"></div>
+
+        <div class="madal-content">
+            <img *ngIf="type === 'warn'" src="./assets/img/profiling/warn.svg" class="icon" />
+            <img *ngIf="type === 'success'" src="../assets/img/profiling/ok.svg" class="icon" />
+            <img *ngIf="type === 'prompt'" src="./assets/img/profiling/tip.svg" class="icon" />
+            <span class="content" [innerHTML]="content | html"></span>
+            <ng-content select=".alert-body"></ng-content>
+        </div>
+
+        <div style="text-align: center;">
+            <ng-container *ngIf="isFoolproof">
+                <button id="user-guide-add-guardian" type="button" class="little-minor-btn" tiButton
+                    (click)="alert_ok()" [disabled]="isDisabled">
+                    {{ i18n.common_term_operate_ok }}
+                </button>
+                <button type="button" class="little-primary-btn" tiButton style="margin-left: 20px;"
+                    (click)="alert_close()">
+                    {{ i18n.common_term_operate_cancel }}
+                </button>
+            </ng-container>
+            <ng-container *ngIf="!isFoolproof">
+                <button id="user-guide-add-guardian" type="button" class="little-primary-btn" tiButton
+                    (click)="alert_ok()" [disabled]="isDisabled">
+                    {{ i18n.common_term_operate_ok }}
+                </button>
+                <button type="button" class="little-minor-btn" tiButton style="margin-left: 20px;"
+                    (click)="alert_close()">
+                    {{ i18n.common_term_operate_cancel }}
+                </button>
+            </ng-container>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,93 @@
+<div class="mem-box">
+    <div class="memory" [appLoading]="isLoading">
+        <p> {{i18n.hpc.hpc_target.memory_width}}</p>
+        <div class="memory-box">
+            <div class="mem-left">
+                <ng-container *ngFor="let target of targetLeftData">
+                    <div class="target-box">
+                        <span class="box-left" [ngStyle]="{'min-width':lang==='en-us'?'154px':'100px'}">
+                            {{target.title}}
+                            <img [src]="target.src" *ngIf="target.src">
+                        </span>
+                        <span>{{target.key}}</span>
+                    </div>
+                    <ng-container *ngFor="let subitem of target.content">
+                        <div class="target-content">
+                            <span class="content-left" [ngStyle]="{'min-width':lang==='en-us'?'138px':'84px'}">
+                                {{subitem.title}}
+                                <img [src]="subitem.src" *ngIf="target.src">
+                            </span>
+                            <span>{{subitem.key}}</span>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+            <div class="mem-right">
+                <ng-container *ngFor="let target of targetRightData">
+                    <div class="target-box">
+                        <span class="box-left">{{target.title}}
+                            <img [src]="target.src" *ngIf="target.src"
+                                [ngStyle]="{'min-width':lang==='en-us'?'154px':'100px'}">
+                        </span>
+                        <span>{{target.key}}</span>
+                    </div>
+                    <ng-container *ngFor="let subitem of target.content">
+                        <div class="target-content">
+                            <span class="content-left" [ngStyle]="{'min-width':lang==='en-us'?'138px':'84px'}">
+                                {{subitem.title}}
+                                <img [src]="subitem.src" *ngIf="target.src">
+                            </span>
+                            <span>{{subitem.key}}
+                            </span>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="intsrt" *ngIf="Topdown" [ngStyle]="{'margin-left':isMem?'0px':'32px'}" [appLoading]="isLoading">
+        <p *ngIf="instrubool.length"> {{i18n.hpc.hpc_target.directives}}</p>
+        <div class="memory-box instruct-box" *ngIf="instrubool.length">
+            <div class="mem-left">
+                <ng-container *ngFor="let target of instructLeftData">
+                    <div class="target-box" *ngIf="target.key">
+                        <span class="box-left">
+                            <span tiOverflow>{{target.title}}</span>
+                            <img [src]="target.src" [tiTip]="target.tip" *ngIf="target.src">
+                        </span>
+                        <span>{{target.key}}</span>
+                    </div>
+                    <ng-container *ngFor="let subitem of target.content">
+                        <div class="target-content" *ngIf="subitem.key">
+                            <span class="content-left">
+                                <span tiOverflow>{{subitem.title}}</span>
+                                <img [src]="subitem.src" [tiTip]="subitem.tip" *ngIf="target.src">
+                            </span>
+                            <span>{{subitem.key}}</span>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+            <div class="mem-right">
+                <ng-container *ngFor="let target of instructRightData">
+                    <div class="target-box" *ngIf="target.key">
+                        <span class="box-left">
+                            <span tiOverflow>{{target.title}}</span>
+                            <img [src]="target.src" [tiTip]="target.tip" *ngIf="target.src&&target.tip">
+                        </span>
+                        <span>{{target.key}}</span>
+                    </div>
+                    <ng-container *ngFor="let subitem of target.content">
+                        <div class="target-content" *ngIf="subitem.key">
+                            <span class="content-left">
+                                <span tiOverflow>{{subitem.title}}</span>
+                                <img [src]="subitem.src" [tiTip]="subitem.tip" *ngIf="target.src">
+                            </span>
+                            <span>{{subitem.key}}</span>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

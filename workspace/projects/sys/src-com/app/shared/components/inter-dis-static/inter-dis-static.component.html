@@ -1,0 +1,151 @@
+<div class="port-inter-dis">
+  <p class="title">{{ 'net_io.xps_rps.inter_dis.info' | i18n }}</p>
+
+  <div class="select-tip-box" *ngIf="showAllData">
+    <div class="stb-box">
+      <!-- 硬中断选项框 -->
+      <div class="select-box">
+        <span class="sb-option">{{ 'tuninghelper.taskDetail.hardInterrupts' | i18n }}</span>
+        <div class="sb-select">
+          <div class="select-box" [tiTip]='tipContent' tiTipPosition='top-left' tiTipMaxWidth='500px'>
+            <span *ngFor="let item of hardSelected">{{item.name}}</span>
+          </div>
+          <app-icon-react name="filter" class="selectIcon" [freeze]="hardSelected?.length > 0 ? 'active' : ''"
+            (click)="openFilterModal()"></app-icon-react>
+        </div>
+      </div>
+
+      <!-- 软中断选项框 -->
+      <div class="select-box">
+        <span class="sb-option">{{ 'tuninghelper.taskDetail.softInterrupts' | i18n }}</span>
+        <div class="sb-select">
+          <ti-select
+            class="software-select"
+            [multiple]="true"
+            [options]="softOption"
+            [(ngModel)]="softSelectd"
+            (ngModelChange)="handleSelectedChange()"
+          ></ti-select>
+        </div>
+      </div>
+      <div class="checkbox-group">
+        <!-- 是否显示所有硬中断频次 -->
+        <div class="checkbox-box">
+          <input
+            type="checkbox"
+            tiCheckbox
+            [name]="checkTitle"
+            [(ngModel)]="checked"
+            [label]="checkTitle"
+            (ngModelChange)="checkBoxChange()"
+          />
+        </div>
+  
+        <!-- 是否显示CPU利用率 -->
+        <div class="checkbox-box" *ngIf="cpuUsageInfo">
+          <input
+            type="checkbox"
+            tiCheckbox
+            [name]="cpuCheckTitle"
+            [(ngModel)]="cpuChecked"
+            [label]="cpuCheckTitle"
+            (ngModelChange)="showCpuUsageChange()"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div (click)="backToAllData()" *ngIf="!showAllData" class="back">
+    <img src="./assets/img/header/back.svg" alt="">
+    <span>{{selectedSeries.seriesName}}</span>
+  </div>
+
+  <div class="echarts-box">
+    <div
+      class="echarts"
+      *ngIf="echartsOption"
+      echarts
+      (chartInit)="onChartInit($event)"
+      [options]="echartsOption"
+    ></div>
+  </div>
+
+  <div
+    class="echarts-box"
+    *ngIf="!echartsOption"
+    hyNodata
+    [nodataShow]="!echartsOption"
+  ></div>
+
+</div>
+
+<ng-template #tipContent let-context='context'>
+  <ng-container *ngFor="let item of hardSelected; index as i">
+    <span *ngIf="i < (hardSelected.length -1)">{{item.name + '; '}}</span>
+    <span *ngIf="i === (hardSelected.length -1)">{{item.name}}</span>
+  </ng-container>
+</ng-template>
+
+<ng-template #hardwareModal let-context='context'>
+  <ti-modal-header>
+    <div class="modal-title">{{ context.title }}</div>
+  </ti-modal-header>
+  <ti-modal-body>
+    <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns">
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr class="selectTh">
+              <th checkbox-column>
+                  <input type="checkbox" tiCheckgroup [items]="displayed" [(checkeds)]="hardPreSelected"/>
+              </th>
+              <th *ngFor="let column of columns;index as i">
+                  <ti-cell-text>{{ column.label }}</ti-cell-text>
+                  <ng-container *ngIf="i === 0 && originData.length > 0">
+                    <span class="ti3-searchbox-search ti3-icon ti3-icon-search" (click)="isSearch = !isSearch">
+                    </span>
+                    <ti-searchbox
+                      class="search-box"
+                      (search)="comSearch($event)"
+                      [(ngModel)]="value"
+                      (clear)="onClear()" 
+                      *ngIf="isSearch"
+                      appClickOutside
+                      (clickOutside)="isSearch = false">
+                    </ti-searchbox>
+                  </ng-container>
+                  <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey" [asc]="column.asc"></ti-head-sort>
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="ti3-table-container ti3-resize-wrapper" style="height:320px;" hyNodata [nodataShow]="displayed.length === 0">
+        <table *ngIf="displayed.length > 0">
+          <thead>
+              <tr>
+                  <th checkbox-column></th>
+                  <th *ngFor="let column of columns"></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let row of displayed" [ngClass]="{'ti3-selected-tr': hardPreSelected.indexOf(row) !== -1}">
+                  <td checkbox-column>
+                      <input type="checkbox" tiCheckitem [item]="row" />
+                  </td>
+                  <td tiOverflow>{{row.name}}</td>
+                  <td>{{row.total | threePoint:2}}</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+      <ti-pagination [type]="'mini'" [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber">
+      </ti-pagination>
+    </ti-table>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" color="primary" (click)="hardSelectedChange(context)" tiButton>{{ 'common_term_operate_ok' | i18n }}</button>
+    <button type="button" (click)="context.dismiss()" tiButton>{{ 'common_term_operate_close' | i18n }}</button>
+  </ti-modal-footer>
+</ng-template>

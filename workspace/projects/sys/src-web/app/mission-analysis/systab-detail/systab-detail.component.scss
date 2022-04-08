@@ -1,0 +1,32 @@
+@import 'projects/sys/src-web/assets/styles/custemTabs.scss';
+@import 'projects/sys/src-web/assets/styles/custemDetailContainer.scss';
+
+#detail-container {
+  > ti-tabs {
+    position: relative;
+  }
+}
+
+.toTopButton{
+  position: fixed;
+  bottom: 40px;
+  right: 10px;
+}
+.beHidden{
+  opacity: 0.02;
+}
+.detail-item {
+    padding-left: 15px;
+    color: #ddd;
+} 
+
+.ti3-close{
+  top: 5px;
+  right: 0px;
+}
+
+:host ::ng-deep .content-box.active {
+  display: block;
+  opacity: 1;
+  height: auto;
+}

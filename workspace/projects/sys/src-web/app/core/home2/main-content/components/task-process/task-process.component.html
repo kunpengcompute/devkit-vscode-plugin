@@ -1,0 +1,53 @@
+<ng-container *ngIf="displayType == 'dataDisplay'">
+  <app-tab-detail *ngIf="analysisType == 'C/C++ Program'" [projectName]="projectName" [taskName]="taskName"
+    [status]="status" [id]="taskId" [nodeid]="nodeid"></app-tab-detail>
+  <app-locktab-detail *ngIf="analysisType == 'system_lock'" [projectName]="projectName" [taskName]="taskName"
+    [status]="status" [id]="taskId" [nodeid]="nodeid"></app-locktab-detail>
+  <app-protab-detail *ngIf="analysisType == 'process-thread-analysis'" [taskName]="taskName" [projectName]="projectName"
+    [status]="status" [id]="taskId" [nodeid]="nodeid"></app-protab-detail>
+  <app-systab-detail *ngIf="analysisType == 'system'" [taskName]="taskName" [projectName]="projectName"
+    [status]="status" [id]="taskId" [nodeid]="nodeid" [tabShowing]="tabShowing"></app-systab-detail>
+  <app-restab-detail *ngIf="analysisType == 'resource_schedule'" [taskName]="taskName" [projectName]="projectName"
+    [status]="status" [id]="taskId" [nodeid]="nodeid"></app-restab-detail>
+  <app-ddrtab-detail *ngIf="analysisType == 'mem_access'" [taskName]="taskName" [projectName]="projectName"
+    [status]="status" [id]="taskId" [nodeid]="nodeid"></app-ddrtab-detail>
+  <app-micarch *ngIf="analysisType == 'microarchitecture'" [taskName]="taskName" [projectName]="projectName"
+    [status]="status" [id]="taskId" [nodeid]="nodeid"></app-micarch>
+  <app-miss-detail *ngIf="analysisType == 'miss_event'" [taskName]="taskName" [projectName]="projectName"
+    [status]="status" [taskid]="taskId" [nodeid]="nodeid"></app-miss-detail>
+  <app-false-sharing *ngIf="analysisType == 'falsesharing'" [taskName]="taskName" [projectName]="projectName"
+    [status]="status" [taskid]="taskId" [nodeid]="nodeid"></app-false-sharing>
+  <app-storage-detail *ngIf="analysisType == 'ioperformance'" [taskName]="taskName" [id]="taskId"
+    [projectName]="projectName" [status]="status" [nodeid]="nodeid"></app-storage-detail>
+  <app-hpctab-detail *ngIf="analysisType === 'hpc_analysis'" [taskName]="taskName" [taskId]="taskId"
+    [projectName]="projectName" [status]="status" [nodeId]="nodeid"></app-hpctab-detail>
+  <app-linkage-detail *ngIf="analysisType == 'task_contrast'" [taskName]="taskName" [projectName]="projectName"
+    [status]="status" [taskId]="taskId" [nodeid]="nodeid"></app-linkage-detail>
+  <app-tuninghelper-compare *ngIf="analysisType === 'tuninghelperCompare'"
+    [status]="status" [taskId]="taskId" [nodeId]="nodeid"></app-tuninghelper-compare>
+  <app-diagnose-leak-detail *ngIf="analysisType === 'memory_diagnostic'" [taskName]="taskName" [taskId]="taskId"
+    [projectName]="projectName" [status]="status" [nodeId]="nodeid" [taskDetail]="taskDetail"></app-diagnose-leak-detail>
+  <app-tuninghelper-task-detail *ngIf="analysisType === 'optimization'" [taskId]="taskId" [nodeId]="nodeid" [status]="status" [ownerId]="ownerId"></app-tuninghelper-task-detail>
+  <app-tuninghelper-record-detail *ngIf="analysisType === 'tuninghelperRelation'" [taskDetail]='taskDetail' [taskName]="taskName" [projectName]="projectName" 
+  ></app-tuninghelper-record-detail>
+  <app-tuninghelper-task-info-log-detail *ngIf="analysisType === 'tuninghelperInfoLog'" [taskDetail]='taskDetail'></app-tuninghelper-task-info-log-detail>
+  <app-net-io-detail *ngIf="analysisType === 'netio_diagnostic'" [taskName]="taskName" [taskId]="taskId"
+    [projectName]="projectName" [status]="status" [nodeId]="nodeid" [tabShowing]="tabShowing"></app-net-io-detail>
+      <!-- 内存诊断存储io分析 -->
+  <app-storage-io-detail *ngIf="analysisType === 'storageio_diagnostic'" [taskId]="taskId" [nodeId]="nodeid" [status]="status"></app-storage-io-detail>
+  <app-tuninghelper-detailed-data *ngIf="analysisType === 'tuninghelperDateiledData'" [taskDetail]='taskDetail'></app-tuninghelper-detailed-data>
+</ng-container>
+<ng-container *ngIf="displayType == 'nodeProcessDisplay'">
+  <div class="process">
+    <div id="user-guide-run">
+      <div>
+        <img style="width: 203px; height: 116px" src="./assets/img/analyzing/images/img_0.gif" />
+      </div>
+      <div [id]="analyzID" class="analyz-gif"></div>
+      <span class="status-text">{{ statusText }}</span>
+      <div class="process-anim" *ngIf="status !== 'Created'">
+        <div class="process-bar"></div>
+      </div>
+    </div>
+  </div>
+</ng-container>

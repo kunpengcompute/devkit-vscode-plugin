@@ -1,0 +1,332 @@
+<div class="overview-container">
+    <div class="thread-tabs" *ngIf="!offlineThreadDump">
+        <div class="item-tab" *ngFor="let tab of threadTabs; let idx = index" (click)="toggleTab(idx)">
+            <div><span class="tab-label" [ngClass]="{ 'item-split-none': idx == 2, 'tab-label-first': idx == 0 }">
+                    <span [ngClass]="{ 'tab-active': tab.selected }">{{
+                        i18n.protalserver_profiling_thread[tab.label]
+                        }}</span>
+                </span>
+            </div>
+            <div class="item-tab-line" style="right: 1px; width: 1px; height: 10px; position: relative;"></div>
+        </div>
+    </div>
+    <div style="height: 100%;" *ngIf="currentTabName == 'list' && !offlineThreadDump">
+        <div class="thread-header">
+            <div class="thread-header-dumpbtn" *ngIf="!isDownload">
+              <button *ngIf="!isDownload" type="button" class="topExecuteBtn operation-anal" color="primary" (click)="dumpHandle()" tiButton
+                      [disabled]="startBtnDisabled">
+                {{ i18n.protalserver_profiling_thread.dumpbtn }}</button>
+                <img *ngIf="currTheme == ColorTheme.Dark" [tiTip]="i18n.protalserver_profiling_thread.dumptips"
+                    tiTipPosition="right"
+                    style="position: relative;top: 2px; width: 12px; height: 12px;margin-left: 10px;"
+                    src="./assets/img/projects/help_dark.png" alt="">
+                <img *ngIf="currTheme == ColorTheme.Light" [tiTip]="i18n.protalserver_profiling_thread.dumptips"
+                    tiTipPosition="right"
+                    style="position: relative;top: 2px; width: 12px; height: 12px;margin-left: 10px;"
+                    src="./assets/img/projects/help.svg" alt="">
+            </div>
+            <app-table-search-box [ngStyle]="{'margin-left' : isDownload ? 0 : '24px'}"
+                [searchOptions]="threadSearchOptions" (searchEvent)="threadSearchEvent($event)"></app-table-search-box>
+            <div class="thread-header-select">
+                <span>{{ i18n.protalserver_profiling_thread.selector.label }}</span>
+                <ti-select id="thread-header-select-comp" [multiple]="true" [selectAll]="true"
+                    [options]="threadSelectorOptions" [(ngModel)]="threadSelectons" (ngModelChange)="onNgModelChange()"
+                    [placeholder]="i18n.protalserver_profiling_thread.selector.placeholder">
+                </ti-select>
+            </div>
+            <div class="thread-legend">
+                <span>
+                    <span class="legend-icon" style="background: #2DA46F"></span>
+                    <span class="legend-label">Runnable</span>
+                </span>
+                <span style="padding-left: 10px;">
+                    <span class="legend-icon" style="background: #E85D54"></span>
+                    <span class="legend-label">Blocked</span>
+                </span>
+                <span style="padding-left: 10px;">
+                    <span class="legend-icon" style="background: #DE9E09"></span>
+                    <span class="legend-label">Waiting</span>
+                </span>
+            </div>
+        </div>
+        <div class="thread-content" *ngIf="tableData && tableData.series.length">
+            <div class="chart-box" id="time-echart-box" [ngStyle]="{ height: timeChartBox + 'px' }">
+                <div class="left">
+                    <div style="text-align: start; font-size: 14px"
+                        [ngStyle]="{ height: echartsContainerHeight + 'px' }">
+                        <div *ngFor="let item of getDatas.spec; let i = index" [ngStyle]="{
+                top: gridInertvalHeight * (i + 1) + 'px',
+                height: gridHeight + 'px',
+                lineHeight: gridHeight + 'px'
+              }" class="thread-list"
+                            [tiTip]="(item.name + '(' + item.id + ')').length > 35 ? item.name + '(' + item.id + ')' : ''">
+                            {{ item.name + '(' + item.id + ')' }}
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="right-bg" [ngStyle]="{
+              top: baseTop + 'px',
+              height: echartsContainerHeight + 'px'
+            }"></div>
+                    <div style="background-color: var(--vscode-editor-background);height: 100% !important;" echarts
+                        [options]="tableData" (chartInit)="onChartInit($event)" [merge]="updateOptions" [ngStyle]="{
+              height: echartsContainerHeight + 'px'
+            }"></div>
+                </div>
+            </div>
+        </div>
+        <div class="x-labels" *ngIf="tableData && tableData.series.length">
+            <div style="flex: 1;" *ngFor="let label of xLabels">{{ label }}</div>
+        </div>
+        <div *ngIf="!tableData || tableData.series.length === 0">
+            <app-loading *ngIf="threadListShowLoading" [size]="'max'" [height]="'80vh'"></app-loading>
+            <app-default-page *ngIf="!threadListShowLoading" [height]="'calc(80vh - 98px)'" [bgColor]="'#1e1e1e'">
+            </app-default-page>
+        </div>
+    </div>
+    <div [hidden]="currentTabName === 'list'" style="height: 100%;" #showFullEl>
+        <div id="before-dump-file" class="dump-nodata" *ngIf="fileList.length === 0">
+            <app-default-page [height]="'80vh'" [bgColor]="'#1e1e1e'"
+                [text]="i18n.plugins_perf_java_profiling_thread_dumpNodata"></app-default-page>
+        </div>
+        <div id="after-dump-file" class="file-list  graph-list" *ngIf="fileList.length !== 0">
+            <div class="list-content" [ngStyle]="{'display': leftState? 'none':'block'}">
+                <div class="leftListHeader">
+                    <ti-select class="thread-datatype" [options]='datatype' [(ngModel)]="selectedType"
+                        (select)="datatypeChange($event)"></ti-select>
+                    <div class="save-delete" *ngIf="!offlineThreadDump">
+                        <div class="save-box">
+                            <div class="profile-save" [ngClass]="{ 'disabled': saveBtnDisable}" tiTipPosition='top'
+                                [tiTip]="saveBtnTip" (click)="openSaveReport()" *ngIf="!isDownload">
+                                <img *ngIf="currTheme === ColorTheme.Dark"
+                                    src="./assets/img/newSvg/td_save_default_dark.svg">
+                                <img *ngIf="currTheme === ColorTheme.Dark"
+                                    src="./assets/img/newSvg/td_save_clicked_dark.svg">
+                                <img *ngIf="currTheme === ColorTheme.Dark"
+                                    src="./assets/img/newSvg/td_save_disable_dark.svg">
+                                <img *ngIf="currTheme === ColorTheme.Light"
+                                    src="./assets/img/newSvg/td_save_default_light.svg">
+                                <img *ngIf="currTheme === ColorTheme.Light"
+                                    src="./assets/img/newSvg/td_save_clicked_light.svg">
+                                <img *ngIf="currTheme === ColorTheme.Light"
+                                    src="./assets/img/newSvg/td_save_disable_light.svg">
+                            </div>
+                        </div>
+                        <span (click)="onDeleteThread()" class="tip-close">
+                            <img tiTipPosition='top' src="./assets/img/newSvg/delete_default.svg">
+                            <img tiTipPosition='top' src="./assets/img/newSvg/delete_hover.svg">
+                            <img tiTipPosition='top' src="./assets/img/newSvg/delete_click.svg">
+                        </span>
+                    </div>
+                </div>
+                <div id="threadTree">
+                    <ti-tree id="tree" [data]="multiple ? treeInnerData :treeInnerData[0].children"
+                        [multiple]="multiple" [changedByCheckbox]="true" (change)="changeFn($event)">
+                        <ng-template let-item let-fileIndex=index>
+                            <span tiOverflow tiTipPosition="right" (click)="selectThread(item,fileIndex)">
+                                <img *ngIf="getImgStatus(item)" src="./assets/img/home/file_icon_dark.png" />
+                                <span style="cursor: pointer">{{item.name}}</span>
+                            </span>
+                        </ng-template>
+                    </ti-tree>
+                </div>
+                <div *ngIf="multiple" class="leftListBt">
+                    <button class="confirm little-primary-btn" type="button" (click)="onConfirmPopDelete()"
+                        [disabled]='selectCount'>{{i18n.plugins_javaperf_button_confirm}}</button>
+                    <button type="button" (click)="onCancel()"
+                        class="little-minor-btn">{{i18n.plugins_javaperf_button_cancel}}</button>
+                </div>
+            </div>
+            <div class="split-line-toggle">
+                <div class="toggle-btn" (click)='toggleLeft()' [ngClass]="{'activeToggle': leftState}">
+                    <img *ngIf="currTheme == ColorTheme.Dark" src="./assets/img/projects/toggle.svg" />
+                    <img *ngIf="currTheme == ColorTheme.Light" src="./assets/img/profiling/pull_left_light.svg" />
+                </div>
+            </div>
+            <div class="file-diff" [hidden]="selectedType.id !== 'dump'">
+                <app-diff #diffIns [currentFile]="currentFile"></app-diff>
+            </div>
+            <div class="file-diff" [hidden]="selectedType.id !== 'graph'"
+                [ngClass]="{ 'lock-graph': selectedType.id === 'graph' }"
+                style="background: url(./assets/img/projects/file_diff_background.svg);">
+                <div class="graph-header">
+                    <div class="graph-control">
+                        <div class="obersver">
+                            <div class="control-label">{{i18n.newLockGraph.obersver}}</div>
+                            <div class="control-switch" [tiTip]='obersverContent' tiTipPosition="right-top">
+                                <ti-switch id="myswitch1" [(ngModel)]="obersverSwitch"></ti-switch>
+                            </div>
+                            <div class="control-select" *ngIf="obersverSwitch">
+                                <ti-select style="width: 120px;" [options]='obersverOptions'
+                                    [(ngModel)]="obersverSelect" (ngModelChange)="obersverSelectChange($event)"
+                                    id="myselect1">
+                                </ti-select>
+                            </div>
+                        </div>
+                        <div class="compare">
+                            <div class="control-label">{{i18n.newLockGraph.compare}}</div>
+                            <div class="control-switch" [tiTip]='compareContent' tiTipPosition="right-top">
+                                <ti-switch id="myswitch2" [(ngModel)]="compareSwitch"
+                                    [disabled]="compareOptions.length === 0" (ngModelChange)="compareSwitchChange()">
+                                </ti-switch>
+                            </div>
+                            <div class="control-select" *ngIf="compareSwitch">
+                                <ti-select style="width: 220px;" [options]='compareOptions' [(ngModel)]="compareSelect"
+                                    (ngModelChange)="compareSelectChange($event)" id="myselect2">
+                                </ti-select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="graph-status">
+                        <div class="status">
+                            <div><span class="circle green"></span>{{i18n.protalserver_profiling_overview_env.runable}}
+                            </div>
+                            <div><span class="circle red"></span>{{i18n.protalserver_profiling_overview_env.blocked2}}
+                            </div>
+                            <div><span
+                                    class="circle yellow"></span>{{i18n.protalserver_profiling_overview_env.waiting2}}
+                            </div>
+                            <div><span
+                                    class="circle orange"></span>{{i18n.protalserver_profiling_overview_env.waitingTime}}
+                            </div>
+                        </div>
+                        <div class="lines">
+                            <div class="dashLine">
+                                <img *ngIf="currTheme == ColorTheme.Dark"
+                                    src="./assets/img/projects/dashedLine_dark.svg" />
+                                <img *ngIf="currTheme == ColorTheme.Light"
+                                    src="./assets/img/projects/dashedLine_light.svg" />
+                                <span>{{i18n.newLockGraph.requestLocked}}</span>
+                            </div>
+                            <div class="solidLine">
+                                <img *ngIf="currTheme == ColorTheme.Dark"
+                                    src="./assets/img/projects/solidLine_dark.svg" />
+                                <img *ngIf="currTheme == ColorTheme.Light"
+                                    src="./assets/img/projects/solidLine_light.svg" />
+                                <span>{{i18n.newLockGraph.hasLocked}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="graph-content" style="min-width: 880px">
+                    <div class="graph-svg" #draggable>
+                        <div class="left" [ngClass]="{'marginLeft200': !compareSwitch}">
+                            <app-lock-graph #lockGraph [name]="'current'" [threadTime]="currentThreadTime"
+                                [isObersver]="obersverSwitch" [isCompare]="compareSwitch"></app-lock-graph>
+                        </div>
+                        <div class="right" *ngIf="compareSwitch">
+                            <app-lock-graph #lockGraph2 [name]="'compare'" [threadTime]="compareThreadTime"
+                                [isObersver]="obersverSwitch" [isCompare]="compareSwitch"></app-lock-graph>
+                        </div>
+                    </div>
+                </div>
+                <div class="zoom-screen">
+                    <app-zoom-screen [fullEl]="showFullEl" [draggableEl]="draggableEl" [wheelShowScale]="wheelShowScale"
+                        (zoomBn)="onZoomStatus($event)" (zoomParam)="onZoomParam($event)"
+                        *ngIf="currentTabName !== 'dump'"></app-zoom-screen>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-loading *ngIf="showLoading" [size]="'max'" [height]="'80vh'" [bgColor]="'transparent'"></app-loading>
+</div>
+<ng-template #obersverContent>
+    <div [innerHtml]="i18n.newLockGraph.obersverTip"></div>
+</ng-template>
+<ng-template #compareContent>
+    <div [innerHtml]="i18n.newLockGraph.compareTip"></div>
+</ng-template>
+
+<ng-template #deleteThread let-context='context'>
+    <!-- 弹框头部定义 -->
+    <ti-modal-header>
+        {{i18n.plugins_javaperf_tip_delThreaad}}
+    </ti-modal-header>
+    <!-- 弹框内容定义 -->
+    <ti-modal-body>
+        <span style="vertical-align: middle;"><img src="./assets/img/guardian/warn.png"></span>
+        <span style="margin-left: 6px;"
+            [tiTip]="i18n.protalserver_profiling_thread.dumptips">{{i18n.plugins_javaperf_tip_delThreaadTip}}</span>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <button type="button" autofocus (click)="onConfirmDelete(context)"
+            class="little-primary-btn">{{i18n.plugins_javaperf_button_confirm}}</button>
+        <button type="button" (click)="context.dismiss()"
+            class="little-minor-btn">{{i18n.plugins_javaperf_button_cancel}}</button>
+    </ti-modal-footer>
+</ng-template>
+<app-alert-modal #saveThreadDump>
+    <div class="content save-content">
+        <div class="header">
+            <span>{{i18n.plugins_common_report.saveThreadDump.saveReport}}</span>
+            <span (click)="onCloseThreadDumpReport()" class="tip-close">
+                <img class="close-icon" src="./assets/img/newSvg/close_icon.svg" />
+                <img class="close-icon" src="./assets/img/newSvg/close_hover.svg">
+            </span>
+        </div>
+        <div class="main-body">
+            <div class="tip">
+                <div class="tip-box" *ngIf="tipActive">
+                    <img class="tip-icon" src="./assets/img/guardian/icon-information.png">
+                    <div class="tip-text">
+                        <span>{{saveReportTip}}</span>
+                        <span>{{this.i18n.plugins_common_report.saveThreadDump.saveReportTip1}}</span>
+                    </div>
+                    <span class="tip-close" (click)="tipActive = false">
+                        <img class="close-icon" src="./assets/img/newSvg/close_icon.svg" />
+                        <img class="close-icon" src="./assets/img/newSvg/close_hover.svg">
+                    </span>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-item">
+                    <div class="info-item-label">{{ i18n.plugins_common_report.saveThreadDump.reportType}}</div>
+                    <div class="info-item-content">{{ i18n.plugins_common_report.saveThreadDump.threadDump }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label">
+                        <span>{{ i18n.plugins_common_report.saveThreadDump.saveRecord }}</span>
+                    </div>
+                    <div class="info-item-content">
+                        <ti-select class="saveRecord" [multiple]="true" [options]='saveRecordOptions'
+                            [(ngModel)]="saveRecordSelecteds" labelKey='label'
+                            (ngModelChange)="onStartTimesChange($event)"
+                            [placeholder]='i18n.plugins_common_report.saveThreadDump.saveRecordHolder'>
+                        </ti-select>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label">
+                        <span>{{ i18n.plugins_common_report.saveThreadDump.reportName}}</span>
+                    </div>
+                    <div class="info-item-content">
+                        <input type="text" [placeholder]="reportNameHolder" [(ngModel)]="reportName" tiText tiValidation
+                            [tiValidation]="reportNameValidation" [formControl]="reportNameControl"
+                            [errorMessageWrapper]="reportNameError" />
+                        <div #reportNameError class="error-tip"></div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-label">
+                        <span>{{ i18n.plugins_common_report.saveThreadDump.reportRemarks }}</span>
+                    </div>
+                    <div class="info-item-content">
+                        <input class="info-input" type="text" [(ngModel)]="reportRemarks" tiText tiValidation
+                            [tiValidation]="reportRemarkValidation" [formControl]="reportRemarkControl"
+                            [placeholder]="i18n.plugins_common_report.input_remark_placehloder" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="foot">
+            <button class="sure-btn" type="button"
+                [disabled]="!reportNameControl.valid || startTimesBtnDisable  || !reportRemarkControl.valid"
+                (click)="onSaveThreadDumpReport()" tiButton>
+                {{ i18n.common_term_operate_ok }}
+            </button>
+            <button class="secondary" type="button" (click)="onCloseThreadDumpReport()" tiButton>{{
+                i18n.common_term_operate_cancel }}</button>
+        </div>
+    </div>
+</app-alert-modal>

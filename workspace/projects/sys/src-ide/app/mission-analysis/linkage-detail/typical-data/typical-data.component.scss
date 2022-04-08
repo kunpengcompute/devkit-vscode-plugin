@@ -1,0 +1,677 @@
+.config-content {
+    --ti-icon-blue: #0067ff;
+    --ti-icon-green: #3ad53e;
+    --ti-icon-red: #e2253b;
+}
+//浅色主题样式
+::ng-deep .vscode-light {
+    --typical-titlebox-bg: #F5F9FF;
+    --select-box-color: #282b33;
+    --filter-box-bg: #f0f3fa;
+    --table-left-border: #f0f3fa;
+    --filter-bg: #fff;
+    --ti3-selected-tr-bg: #fff;
+    --ti3-table-fixed-head-filler-bg: #f5f9ff;
+    --ti3-selected-tr-hover-bg: #f5f9ff;
+    --filter-button-bg: #fff;
+    --filter-button-txt-close-hover-color: #0067ff;
+    --filter-button-border-color: 1px solid #979797;
+    --filter-button-border-hover-color: 1px solid #0067ff;
+    --filter-button-txt-ok-color: #fff;
+    --table-tr-border-color: 1px solid #e1e6ee;
+    --table-shadow-color: #e6ebf5;
+    --icon-border-color: 1px solid #aaa;
+    --icon-border-hover-color: 1px solid #0067ff;
+    --select-txt-color: #222;
+    --select-title-txt-color: #282b33;
+    --ti-filter-bg-color: #fff;
+    --ti-filter-border-color: #0067ff;
+    --ti-filter-span-bg: #fff;
+    --ti-filter-span-hover-bg: #f5f9ff;
+    --msg-border: 1px solid #d7dbe7;
+    --msg-bgc: #edf4ff;
+    --section-title-border: dashed 1px #e1e6ee;
+    --select-title-color: #616161;
+    --header-title-bottom: #e1e6ee;
+    --title-box: #f5f9ff;
+    --distributed-config-box: #f5f9ff;
+    --distributed-config-box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.15), inset 0px -1px 0px 0px #6e6e6e;
+    --distributed-config-content: #161616;
+    --distributed-line: #e1e6ee;
+    --box-first-child-border-top: #E1E6EE;
+    --box-title-bg-hover: #ffffff;
+    --box-title-bg: #f0f3fa;
+}
+
+//深色主题样式
+::ng-deep .vscode-dark {
+    --typical-titlebox-bg: #252526;
+    --select-box-color: #e8e8e8;
+    --filter-box-bg: #252526;
+    --table-left-border: #252526;
+    --filter-bg: #313131;
+    --ti3-selected-tr-bg: #161616;
+    --ti3-table-fixed-head-filler-bg: #2a2a2a;
+    --ti3-selected-tr-hover-bg: #2a2a2a;
+    --filter-button-bg: #252526;
+    --filter-button-txt-close-hover-color: #0067ff;
+    --filter-button-border-color: 1px solid #ddd;
+    --filter-button-border-hover-color: 1px solid #0067ff;
+    --filter-button-txt-ok-color: #fff;
+    --table-tr-border-color: 1px solid #545454;
+    --table-shadow-color: #545454;
+    --icon-border-color: 1px solid #313131;
+    --icon-border-hover-color: 1px solid #313131;
+    --select-txt-color: #e8e8e8;
+    --select-title-txt-color: #aaa;
+    --ti-filter-bg-color: #252526;
+    --ti-filter-border-color: #0067ff;
+    --ti-filter-span-bg: #252526;
+    --ti-filter-span-hover-bg: #313131;
+    --msg-border: 0px solid #d7dbe7;
+    --msg-bgc: #152133;
+    --section-title-border: solid 1px #484a4e;
+    --select-title-color: #aaaaaa;
+    --header-title-bottom: #4b4b4b;
+    --title-box: #12223b;
+    --distributed-config-box: #252526;
+    --distributed-config-box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.15), inset 0px -1px 0px 0px #6e6e6e;
+    --distributed-config-content: #161616;
+    --distributed-line: #484a4e;
+    --box-first-child-border-top: #4b4b4b;
+    --box-title-bg-hover: #383838;
+    --box-title-bg: f0f3fa;
+}
+::ng-deep .vscode-dark .distributedBox {
+    .distributedConfigBox {
+        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.15), inset 0px -1px 0px 0px #6e6e6e;
+    }
+}
+
+::ng-deep .vscode-dark .distributedConfig-content {
+    padding: 24px;
+    background-color: #161616;
+}
+
+::ng-deep .vscode-light .distributedConfig-content {
+    padding: 0px 24px;
+}
+.distributedBox {
+    .titleBox {
+        display: flex;
+        align-items: center;
+        padding: 6px 0 6px 16px;
+        background: var(--title-box);
+        .formContent {
+            display: flex;
+            color: var(--font-color);
+            line-height: 20px;
+            margin-right: 24px;
+            .formTitle {
+                color: var(--formtitle-color);
+                margin-right: 8px;
+            }
+        }
+    }
+    .distributedConfigBox {
+        margin-top: 20px;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        background-color: var(--distributed-config-box);
+        border-bottom: 1px solid var(--border-bottom-color);
+        .istributedConfigIcon {
+            height: 15px;
+            width: 15px;
+            margin-right: 17px;
+        }
+        .istributedConfigContent {
+            font-size: 14px;
+            color: var(--font-color);
+            line-height: 20px;
+
+            span {
+                color: #0067ff;
+                margin-right: 4px;
+                cursor: pointer;
+            }
+
+            span:hover {
+                color: #267dff;
+            }
+        }
+    }
+    .distributedConfig-content {
+        margin-bottom: 20px;
+        .distributedConfig {
+            height: 30px;
+            display: flex;
+
+            p {
+                margin-right: 16px;
+                font-size: 20px;
+                color: var(--font-color);
+                line-height: 30px;
+            }
+
+            div {
+                cursor: pointer;
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        .line {
+            height: 1px;
+            background: var(--line-bg);
+            width: 100%;
+            margin-top: 20px;
+        }
+        .distributedConfigTip {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            .tipBox {
+                display: flex;
+                align-items: center;
+                margin-left: 20px;
+                .tipText {
+                    color: var(--font-color);
+                }
+            }
+        }
+
+        .congfigContent {
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+
+            .distributedHard,
+            .distributedSystem,
+            .distributedComponent {
+                min-width: calc((100% - 80px) / 3);
+                margin-right: 40px;
+                .distributedTitle {
+                    height: 20px;
+                    padding-bottom: 10px;
+                    border-bottom: 1px solid var(--section-title-border);
+                    font-size: 14px;
+                    color: var(--font-color);
+                }
+
+                ti-searchbox {
+                    ::ng-deep input {
+                        height: 100% !important;
+                        background: none !important;
+                    }
+                }
+                .distributedLine {
+                    border: solid 1px var(--distributed-line);
+                }
+
+                .distributedContentBox {
+                    overflow-y: auto;
+                    .common-item {
+                        height: 18px;
+                        display: flex;
+                        align-items: center;
+                        margin-top: 12px;
+                        font-size: 12px;
+
+                        .left-title {
+                            color: var(formtitle-color);
+                            display: flex;
+                            align-items: center;
+
+                            .config-title {
+                                display: flex;
+                                align-items: center;
+                                line-height: 18px;
+
+                                .ti-icon {
+                                    height: 18px !important;
+                                }
+
+                                span {
+                                    width: 148px;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
+                                    color: var(--d-e8e8e8-l-616161);
+                                }
+                            }
+
+                            img {
+                                width: 16px;
+                                height: 16px;
+                            }
+                        }
+
+                        .config-data {
+                            flex-shrink: 0;
+                            height: 18px;
+                            margin-left: 15px;
+                            font-size: 14px;
+                            line-height: 18px;
+
+                            span {
+                                width: 50px;
+                                color: var(--font-color);
+                            }
+                            .viewDetails {
+                                color: #2072ea;
+                                cursor: pointer;
+                            }
+                            .clicked {
+                                color: #004ec1;
+                            }
+                        }
+                    }
+                }
+
+                .distributedContentBox::-webkit-scrollbar {
+                    width: 0;
+                }
+
+                .noData {
+                    height: 173px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 14px;
+                    line-height: 20px;
+
+                    img {
+                        margin-bottom: 8px;
+                    }
+                }
+            }
+            .distributedSystem {
+                .distributedContentBox {
+                  .common-item {
+                    .left-title {
+                      width: 200px;
+                    }
+                  }
+                }
+              }
+              .distributedComponent {
+                margin-right: 0px;
+                .distributedContentBox {
+                  .common-item {
+                    .left-title {
+                      width: 256px;
+                    }
+                  }
+                }
+              }
+        }
+        .noNodeData {
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            line-height: 20px;
+
+            img {
+                margin-bottom: 8px;
+            }
+        }
+    }
+}
+
+.suggestAll {
+    width: 912px;
+    margin-left: -125px;
+}
+
+.viewDetail-mask {
+    height: 600px;
+    padding: 24px 32px;
+    position: relative;
+    background-color: var(--typical-titlebox-bg);
+    border: 1px solid var(--viewDetail-border);
+    box-sizing: border-box;
+    .viewDetail-title {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: dashed 1px var(--header-title-bottom);
+        padding-bottom: 21px;
+        height: 30px;
+        font-size: 20px;
+        line-height: 30px;
+        margin-bottom: 20px;
+    }
+
+    .box {
+        background: var(--filter-box-bg);
+        .raidConfig {
+            height: 80px;
+            .raidConfigContent {
+                height: 20px;
+                margin-top: 20px;
+                display: flex;
+                margin-left: 24px;
+                span {
+                    width: 100px;
+                    font-family: "huawei sans";
+                    font-size: 12px;
+                    color: #616161;
+                    margin-right: 24px;
+                    line-height: 20px;
+                }
+                div {
+                    font-size: 14px;
+                    font-family: "huawei sans";
+                    color: #222222;
+                    line-height: 20px;
+                }
+            }
+        }
+    }
+    .box:first-child {
+        .box-title {
+            border-top: 1px solid var(--box-first-child-border-top);
+        }
+    }
+    .box-title {
+        position: relative;
+        padding-left: 21px;
+        height: 48px;
+        line-height: 48px;
+        background: var(--box-title-bg);
+        box-shadow: inset 0px -1px 0px 0px var(--box-first-child-border-top);
+
+        &:hover {
+            background-color: var(--box-title-bg-hover);
+        }
+
+        .titleDetail {
+            display: flex;
+            align-items: center;
+            height: 18px;
+            top: 15px;
+            position: absolute;
+            right: 0px;
+            z-index: 99;
+            div {
+                width: 130px;
+                border-left: 2px solid #222222;
+                padding: 0px 15px;
+                font-size: 12px;
+                line-height: 18px;
+            }
+        }
+        .left-box {
+            width: 72%;
+            margin-right: 7%;
+        }
+        .right-box {
+            width: 21px;
+        }
+    }
+    .box-content {
+        background: var(--filter-box-bg);
+        margin-left: 41px;
+        border-left: solid 2px #6c92fa;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+    }
+    .box-content.active {
+        max-height: 6000px;
+        transition: max-height 0.1s cubic-bezier(1, 0, 1, 0);
+    }
+    .title-icon {
+        margin-right: 5px;
+        transition: 0.5s linear;
+        position: relative;
+        top: 1px;
+    }
+    .title-icon.active {
+        transform: rotate(-90deg);
+    }
+    // 硬件配置
+    .box-config-content {
+        margin-left: 24px;
+        min-height: 18px;
+        font-size: 12px;
+        margin-top: 20px;
+        line-height: 18px;
+        display: flex;
+        p {
+            min-width: 234px;
+            margin-right: 16px;
+        }
+        div {
+            display: flex;
+            flex-direction: column;
+            max-width: 375px;
+            span {
+                margin-top: 10px;
+                width: 375px;
+            }
+            span:first-child {
+                margin-top: 0px;
+            }
+        }
+    }
+    .box-distributed-content {
+        overflow-y: auto;
+        margin-bottom: 82px;
+        height: 420px;
+        border-bottom: dashed 1px var(--header-title-bottom);
+    }
+    .closeBtn {
+        width: 88px;
+        height: 32px;
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        margin-left: -44px;
+    }
+}
+.configNodata {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #222222;
+}
+.nodeData {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.tableFirstData {
+    margin-left: 14px;
+}
+:host ::ng-deep .ti3-table > table > thead > tr > th {
+    padding: 5px 0 0 10px;
+    background-color: var(--ti3-table-fixed-head-filler-bg) !important;
+}
+//表头分割线颜色
+:host ::ng-deep .box-content .ti3-table > .ti3-resize-wrapper > table > thead > tr > th:not(:last-child)::after,
+.ti3-table > .ti3-table-container > table > thead > tr > th:not(:last-child)::after,
+.ti3-table > .ti3-table-fixed-head > table > thead > tr > th:not(:last-child)::after,
+.ti3-table > table > thead > tr > th:not(:last-child)::after {
+    background: var(--header-title-bottom);
+}
+
+//tr上边线
+:host ::ng-deep .box-content .ti3-table > .ti3-resize-wrapper > table > tbody > tr > td,
+.ti3-table > .ti3-table-container > table > tbody > tr > td,
+.ti3-table > .ti3-table-fixed-head > table > tbody > tr > td,
+.ti3-table > table > tbody > tr > td {
+    border-bottom: 1px solid var(--header-title-bottom);
+}
+:host ::ng-deep .box-content .ti3-table > table > thead > tr > th {
+    border-bottom: 1px solid var(--header-title-bottom);
+}
+.search.ti3-searchbox-container {
+    width: 100%;
+    margin: 10px 0 -2px 0;
+}
+
+.viewDetail-mask .box-content {
+    .splitsClass {
+        position: relative;
+        margin-bottom: 28px;
+        padding-bottom: 28px;
+        border-bottom: 1px dashed #e1e6ee;
+        &:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+    }
+}
+
+.distributedContentBox {
+    max-height: 530px;
+    min-height: 530px;
+}
+.distributedComponent .distributedContentBox {
+    max-height: 500px;
+    min-height: 500px;
+}
+@media only screen and (max-height: 900px) and (min-height: 768px) {
+    .distributedContentBox {
+        max-height: 1000px;
+    }
+    .distributedComponent .distributedContentBox {
+        max-height: 1000px;
+    }
+}
+
+@media only screen and (max-height: 768px) {
+    .distributedContentBox {
+        max-height: 1252px;
+    }
+    .distributedComponent .distributedContentBox {
+        max-height: 1000px;
+    }
+}
+
+.ti-icon {
+    margin-right: 10px;
+    &.blue {
+        color: #0067ff;
+    }
+    &.green {
+        width: 16px;
+        height: 16px;
+        color: #3ad53e;
+    }
+    &.red {
+        margin-bottom: -2px;
+    }
+}
+
+.config-data {
+    span {
+        width: 50px;
+        color: #222;
+    }
+    .viewDetails {
+        color: #2072ea;
+        cursor: pointer;
+    }
+    .clicked {
+        color: #004ec1;
+    }
+}
+
+.content {
+    align-items: center;
+
+    .sort-title {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: calc(100% - 23px);
+    }
+
+    &.center {
+        justify-content: center;
+    }
+}
+
+.thread-screen {
+    padding: 18px 32px;
+    position: relative;
+    height: 100%;
+    .ts-title-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        border-bottom: dashed 1px var(--header-title-bottom);
+    }
+    .header-title {
+        font-size: 20px;
+        line-height: 30px;
+        color: var(--select-txt-color);
+    }
+    .table-wrapper {
+        max-height: 540px;
+        overflow-y: auto;
+    }
+    &.selectContent {
+        width: 596px;
+        box-shadow: -6px 0px 18px 0px rgba(0, 0, 0, 0.1);
+        .devSelectBox {
+            padding-right: 32px;
+        }
+    }
+    .opreation-btn {
+        margin-top: 26px;
+        text-align: center;
+        .primary-btn {
+            border: 0px;
+        }
+        .cancel-btn {
+            border: 1px solid #dddddd;
+        }
+        .btn {
+            width: 88px;
+            border-radius: 2px;
+            height: 30px;
+            line-height: 28px;
+            min-width: 96px;
+        }
+    }
+}
+.closeButton-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .closeButton {
+        width: 88px;
+        height: 32px;
+        bottom: 24px;
+    }
+}
+
+.config-data-view {
+    span {
+        width: 50px;
+        color: #222;
+    }
+    .viewDetails {
+        color: #2072ea;
+        cursor: pointer;
+    }
+    .clicked {
+        color: #004ec1;
+    }
+}

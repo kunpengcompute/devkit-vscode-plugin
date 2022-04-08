@@ -1,0 +1,40 @@
+
+
+<div class="download" style="position: absolute; right:5vw;top:20px"> 
+  <a style="display: block;margin-bottom:5px;"
+           (click)="downloadCsv(items)" [title]="i18n.sys_cof.sum.download_csv">
+        <img src="./assets/img/download.svg"  alt="" />
+       </a> 
+</div>
+<table class="base_info">
+    <tr  *ngFor="let item of items[0] ;index as i ">
+        <td tiOverflow tiTipPosition ='left'  class="tit" >{{item.title}}</td>
+        <td tiOverflow tiTipPosition ='left'>{{item.data}}</td>
+    </tr>
+    <tr class="base_line">
+      <td colspan = '2'><div class="line_td"></div></td> 
+    </tr>
+    <tr  *ngFor="let item of items[1] ;index as i ">
+      <td tiOverflow tiTipPosition ='left'  class="tit" >{{item.title}}<img src="./assets/img/summary/tooltip.png" class="tiTip blockCls" 
+           *ngIf="item.tipStr && item.tipStr !='NULL'" [tiTip]='item.tipStr'
+          tiTipMaxWidth='700px'  tiTipPosition="top-left" /></td>
+      <td tiOverflow tiTipPosition ='left'>{{item.data}}
+        <img  [tiTip]='tipContent1' tiTipPosition="right" [tiTipContext]='item' tiTipMaxWidth='400px' src="./assets/img/rocket.svg" alt="" class="rocket" style="padding-left:8px;vertical-align: middle;" *ngIf="i===1 && item.tipPage">
+      </td>
+  </tr>
+  <tr class="base_line">
+   <td colspan = '2'><div class="line_td" ></div></td> 
+  </tr>
+  <tr  *ngFor="let item of items[2] ;index as i ">
+    <td tiOverflow tiTipPosition ='left'  class="tit" >{{item.title}}<img src="./assets/img/summary/tooltip.png" class="tiTip blockCls" 
+         *ngIf="item.tipStr && item.tipStr !='NULL'" [tiTip]='item.tipStr'
+        tiTipMaxWidth='700px'  tiTipPosition="top-left" /></td>
+    <td tiOverflow tiTipPosition ='left'>{{item.data}}</td>
+</tr>
+</table> 
+
+<ng-template #tipContent1 let-context='context'>
+  <div class="suggest_content">
+    <div [innerHTML]="context.tipPage" class="sug_content"></div>
+  </div>
+</ng-template>

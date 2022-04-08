@@ -1,0 +1,181 @@
+:host ::ng-deep .function {
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  >#myselect {
+    width: 300px;
+    flex: 0 0 auto;
+  }
+
+  >.subModuleFunction {
+    width: 100%;
+    margin-top: 10px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    >.ti3-table-fixed-head {
+      flex: 0 0 auto;
+
+      thead {
+        .center {
+          text-align: center;
+        }
+    
+        th {
+          border-bottom: 1px solid #fff;
+          
+          .content {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+      
+            .ti3-cell-text-container {
+              overflow: hidden;
+              height: 32px;
+      
+              .ti3-cell-text {
+                max-width: 100% !important;
+              }
+            }
+      
+            &.center {
+              justify-content: center;
+            }
+    
+            .tableSort {
+              display: flex;
+              align-items: center;
+            }
+      
+            img {
+              transform: rotate(90deg);
+              margin-left: 6px;
+              vertical-align: middle;
+              cursor: pointer;
+      
+              &.expand {
+                transform: rotate(-90deg);
+              }
+            }
+          }
+    
+          // 解决表格最后一列没有border的显示问题
+          &::after {
+            width: 1px !important;
+            background: #fff;
+            color: transparent;
+            height: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
+            content: "";
+          }
+        }
+      }
+    }
+
+    >.ti3-table-container {
+      flex-grow: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+
+      >.subModuleFunctionTable {
+        >tbody {
+          >tr {
+            &:last-child {
+              >td:not(:first-child) {
+                border-bottom: 1px solid #e1e6ee !important;
+              }
+            }
+    
+            >td:first-child {
+              position: relative;
+              border-bottom: 0;
+              padding: 0;
+        
+              .indentLine {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 0;
+                height: 100%;
+                background: #f0f3fa;
+                border-right: 2px solid #6c92fa;
+              }
+        
+              >.tdContent {
+                padding: 12px 10px;
+                border-bottom: 1px solid #e1e6ee;
+                display: flex;
+              }
+            }
+          }
+     
+          .ti3-details-tr .ti3-details-td .ti3-table-detail-container {
+            padding: 0;
+            background: #f0f3fa;
+            margin-left: 0 !important;
+            border-left: 0;
+      
+            .ti3-table {
+              border-left: 2px solid #6c92fa;
+              background: #fff;
+              margin-left: 18px;
+    
+              td {
+                border-bottom: 1px solid #e1e6ee;
+              }
+            }
+          }
+     
+          .red {
+            color: #ff6d6f;
+          }
+    
+          .tipField {
+            color: #267dff;
+          }
+        }
+      }
+    }
+  }
+  .chen-nodata-td{
+    height: 20vh;
+    padding: 59px 0px 28px;
+  }
+}
+
+:host .subModuleFunctionTable ::ng-deep .ti3-icon-angle-right{
+  transition: .5 linear !important;
+  margin-right: 6px;
+  display: inline-block
+}
+
+:host .subModuleFunctionTable ::ng-deep .ti3-icon-angle-right.active{
+  transform: rotate(90deg);
+  
+}
+:host ::ng-deep .angleBtn {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  min-width: auto !important;
+}
+.canClick{
+  text-decoration: underline;
+  cursor: pointer;
+  color: #0067ff;
+  &.readed{
+    color: #004EC1;
+  }
+}
+.stack-tip{
+  white-space: nowrap;
+  max-width: 470px;
+}

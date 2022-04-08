@@ -1,0 +1,14 @@
+.operateBtn {
+  position: fixed;
+  bottom: 20px;
+  height: 28px !important;
+  width: calc(100% - 110px);
+  justify-content: center;
+  display: flex;
+  .btn {
+    margin-right: 16px;
+  }
+}
+.pid-name{
+  margin-bottom: 20px;
+}

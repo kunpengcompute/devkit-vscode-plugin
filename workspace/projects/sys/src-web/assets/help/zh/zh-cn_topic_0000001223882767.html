@@ -1,0 +1,77 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="用户管理">
+<meta name="product" content="">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具 (系统性能分析)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001223882767">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>用户管理</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001223882767"></a><a name="ZH-CN_TOPIC_0000001223882767"></a>
+
+<h1 class="topictitle1">用户管理</h1>
+<div id="body1591786100926"><div class="section" id="ZH-CN_TOPIC_0000001223882767__section11470129119"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0000001223882767__p2444451164517">已成功登录<span id="ZH-CN_TOPIC_0000001223882767__ph1331116578362">鲲鹏性能分析工具</span>或<span id="ZH-CN_TOPIC_0000001223882767__ph1359340104618">系统性能分析</span>。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001223882767__note43463558452"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001223882767__ul182711231695"><li id="ZH-CN_TOPIC_0000001223882767__li118273234918">只有管理员用户（<strong id="ZH-CN_TOPIC_0000001223882767__b5202139163611">tunadmin</strong>）可以执行创建、修改和删除用户操作。</li><li id="ZH-CN_TOPIC_0000001223882767__li2987122411910">不同角色支持不同的操作权限：<ul id="ZH-CN_TOPIC_0000001223882767__ul982311211263"><li id="ZH-CN_TOPIC_0000001223882767__li682316211362">tunadmin：默认的WebUI登录用户，权限角色为管理员。对所有用户的工程有浏览、修改、删除权限；对所有用户的分析任务有浏览、重启、删除权限。</li><li id="ZH-CN_TOPIC_0000001223882767__li6823152115610">普通用户：支持新建工程、新建分析任务。对自建的工程有浏览、修改、删除权限，对自建的分析任务有浏览、重启、删除权限；对tunadmin管理员的工程、分析任务只有浏览权限；不同普通用户之间只有浏览权限，无其他操作权限（如修改或删除工程、重启或删除分析任务）。</li></ul>
+</li><li id="ZH-CN_TOPIC_0000001223882767__li1982311214612">需要支持普通用户之间能浏览分析结果的权限，是考虑到复杂的性能问题可能需要多人合作定位，用户之间可以相互查看已有的分析结果，可以方便问题定位，加快问题定位速度。</li></ul>
+</div></div>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001223882767__section102361731195015"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0000001223882767__ol1095132424619"><li id="ZH-CN_TOPIC_0000001223882767__li1423863018444"><span>在页面右上角<span><img id="ZH-CN_TOPIC_0000001223882767__image1360715317477" src="zh-cn_image_0000001223882927.png"></span>菜单选项中选择“用户管理”。</span><p><p id="ZH-CN_TOPIC_0000001223882767__p18143132414462">打开“用户管理”界面。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001223882767__li1937381213412"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0000001223882767__uicontrol1548365814476">“新建”</span>。</span><p><p id="ZH-CN_TOPIC_0000001223882767__p185051001566">打开“新建用户”界面，如<a href="#ZH-CN_TOPIC_0000001223882767__fig46441732184712">图1</a>所示，需要配置的参数如<a href="#ZH-CN_TOPIC_0000001223882767__table423624975820">表1</a>所示。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0000001223882767__fig46441732184712"><a name="ZH-CN_TOPIC_0000001223882767__fig46441732184712"></a><a name="fig46441732184712"></a><span class="figcap"><b>图1 </b>新建用户</span><br><span><img id="ZH-CN_TOPIC_0000001223882767__image1721929162412" src="zh-cn_image_0000001178563198.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001223882767__table423624975820"></a><a name="table423624975820"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001223882767__table423624975820" frame="border" border="1" rules="all"><caption><b>表1 </b>新建用户参数说明</caption><colgroup><col style="width:18.360000000000003%"><col style="width:81.64%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001223882767__row323612494584"><th align="left" class="cellrowborder" valign="top" width="18.360000000000003%" id="mcps1.3.2.2.2.2.3.2.3.1.1"><p id="ZH-CN_TOPIC_0000001223882767__p52362498581">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="81.64%" id="mcps1.3.2.2.2.2.3.2.3.1.2"><p id="ZH-CN_TOPIC_0000001223882767__p6236124911583">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001223882767__row2236144985819"><td class="cellrowborder" valign="top" width="18.360000000000003%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882767__p1623604911584">用户名</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.64%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882767__p445915916487">输入新建用户的名称。用户名需要满足如下要求：</p>
+<ul id="ZH-CN_TOPIC_0000001223882767__ul1163512124486"><li id="ZH-CN_TOPIC_0000001223882767__li20636412124812">用户名以英文字母开头</li><li id="ZH-CN_TOPIC_0000001223882767__li5636151284819">默认长度范围为：6~32</li><li id="ZH-CN_TOPIC_0000001223882767__li154788263116">可以包含字母、数字、中划线（-）和下划线（_）</li></ul>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001223882767__row162613493484"><td class="cellrowborder" valign="top" width="18.360000000000003%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882767__p562613491486">管理员密码</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.64%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882767__p4626144974811">输入管理员用户的密码。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001223882767__row156132793516"><td class="cellrowborder" valign="top" width="18.360000000000003%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882767__p4611127133515">密码</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.64%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882767__p561122733511">输入新建用户的密码。密码需要满足如下复杂度要求：</p>
+<ul id="ZH-CN_TOPIC_0000001223882767__ul246764483612"><li id="ZH-CN_TOPIC_0000001223882767__li33757174">密码长度为8~32个字符</li><li id="ZH-CN_TOPIC_0000001223882767__li2313151542013">必须包含大写字母、小写字母、数字、特殊字符（`~!@#$%^&amp;*()-_=+\|[{}];:'",&lt;.&gt;/?）中的两种及以上的字符</li><li id="ZH-CN_TOPIC_0000001223882767__li2089012144415">密码不能是用户名或用户名的逆序</li><li id="ZH-CN_TOPIC_0000001223882767__li4925175019410">密码不能在弱口令字典中</li></ul>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001223882767__row09671924103512"><td class="cellrowborder" valign="top" width="18.360000000000003%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882767__p696712242353">确认密码</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.64%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882767__p2967182410356">再次输入设置的密码。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note" id="ZH-CN_TOPIC_0000001223882767__note39333226266"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001223882767__p20933622122620">普通用户在创建时设置初始密码，在首次登录时强制要求重置密码。为了保证安全，用户应定期修改自己的登录密码。</p>
+</div></div>
+</p></li><li id="ZH-CN_TOPIC_0000001223882767__li466711592581"><span>参考<a href="#ZH-CN_TOPIC_0000001223882767__table423624975820">表1</a>配置新用户后，单击“确认”。</span><p><p id="ZH-CN_TOPIC_0000001223882767__p10535161019115">新建的用户会出现在“用户管理”页面的用户列表中。</p>
+<p id="ZH-CN_TOPIC_0000001223882767__p134671234171919">可单击指定用户“操作列”对应的操作：</p>
+<ul id="ZH-CN_TOPIC_0000001223882767__ul131417168214"><li id="ZH-CN_TOPIC_0000001223882767__li10141101682111">重置密码：输入管理员密码和新密码后重置用户密码。</li><li id="ZH-CN_TOPIC_0000001223882767__li4141161612116">删除：输入管理员密码后删除用户。删除用户后，该用户相关的所有历史数据都会被删除，请谨慎操作。<div class="note" id="ZH-CN_TOPIC_0000001223882767__note2333121822315"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001223882767__p833431812234">如果用户下存在工程，管理员不可以删除用户，必须先删除用户下的工程后才可删除。</p>
+</div></div>
+</li></ul>
+</p></li></ol>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

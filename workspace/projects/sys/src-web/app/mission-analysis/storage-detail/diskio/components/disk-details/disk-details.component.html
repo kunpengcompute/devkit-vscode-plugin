@@ -1,0 +1,131 @@
+<div class="brush-main" [ngClass]="{'active': topState=='active','tips': timeTitle === '--'}">
+    <div class="toggle-btn-top" (click)='toggleTop()' (mouseenter)="onHoverClose('arrowDown')" 
+    (mouseleave)="onHoverClose('')">
+        <img id="user-guide-toggle"
+            [src]="hoverArrow==='arrowDown'?'./assets/img/home/arrow-down_hover.svg':'./assets/img/home/arrow-down.svg'"
+            [ngClass]="{'active': topState=='notActive'}" />
+    </div>
+    <app-brush-tips *ngIf="timeTitle === '--'" [type]="'diskio'" (firstTip) = "topState= 'active'" #brushTips1></app-brush-tips>
+  <div class="content1" *ngIf="timeTitle !== '--'">
+    <div class="page-title">
+        <div class="function-title">
+            <div style="padding-right: 24px;">{{i18n.storageIO.diskio.ioperttion}}</div>
+            <ti-select style="width: 130px;" [searchable]="true" labelKey='label' [options]='devArr'
+                [(ngModel)]="selectDev"  (ngModelChange)="devChange($event)" id="myselect">
+            </ti-select>
+        </div>
+        <div class="time_title">{{i18n.storageIO.ioapis.time_title}}: {{timeTitle}}</div>
+    </div>
+
+
+    <!-- 操作次数/IOPS -->
+    <ti-table [(displayedData)]="diskDisplayedData" [srcData]="diskSrcData" [columns]="diskColumns"
+        [searchWords]="diskSearchWords" [searchKeys]="diskSearchKeys" *ngIf="selectKey === 'iops' || selectKey === 'times'"> 
+        <div class="ti3-table-fixed-head">
+            <table>
+                <thead>
+                    <tr>
+                        <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                        <th details-icon-column width='5%'></th>
+                        <ng-container *ngFor="let column of diskColumns;index as i;">
+                            <th >
+                                <ti-cell-text>{{column.label}}</ti-cell-text>
+                                <ti-head-sort [sortKey]="column.sortKey"></ti-head-sort>
+                            </th>
+                        </ng-container>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <!--.ti3-table-container是表体的容器，它的子元素中的table的thead是用来控制各列宽度，实际不显示；tbody是实际显示的表体-->
+        <!--注意1:此处一定要使用.ti3-table-container样式类-->
+        <!--注意2:用户在有.ti3-table-container样式类的容器上来设置表体的高度或最大高度-->
+        <div class="ti3-table-container suite-box" >
+            <table>
+                <thead>
+                    <tr>
+                        <th details-icon-column width='5%'></th>
+                        <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                        <th *ngFor="let column of diskColumns" ></th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                    <ng-container *ngFor="let obj of diskDisplayedData;index as i;">
+                        <tr>
+                            <td details-icon-column>
+                                <ti-details-icon [row]="obj" [index]="i" (beforeToggle)="beforeToggle($event,i)">
+                                </ti-details-icon>
+                                <!--详情图标设置，传入行数据-->
+                            </td>
+                            <ng-container *ngFor="let item of diskColumns; index as i">
+                                <td tiOverflow> {{obj[item.sortKey] }} </td>
+                            </ng-container>
+
+                        </tr>
+                        <tr *tiDetailsTr="obj" class="tiDetailsTr template" [ngClass]="{'active': obj.showDetails}">
+                        <td colspan="9" class="collapsed">
+                        <app-disk-table [dataList]="tlbData.srcData" [totalPage]="tlbData.total"
+                            [columns]="tlbData.columns" [hasPage]="false"></app-disk-table>
+                        </td>
+                        </tr>
+                    </ng-container>
+                    <ng-container>
+                        <tr *ngIf="diskSrcData.data.length === 0" class="nodataTr">
+                            <td colspan="9" style="padding:0px;">
+                                <div class="nodata" *ngIf="diskSrcData.data.length === 0">
+                                    <img style='width:198px;display:block' src='./assets/img/projects/nodata.png' />
+                                    <div style="font-size: 0.8rem">{{nodataTips}}</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <ti-pagination [(currentPage)]="diskCurrentPage" [pageSize]="diskPageSize" [(totalNumber)]="diskTotalNumber" *ngIf="diskTotalNumber > 10">
+        </ti-pagination>
+    </ti-table>
+
+    <!-- 数据大小/吞吐率 -->
+    <div class="data_size" *ngIf="selectKey2 === 'detail_io_op_size'">
+        <div class="char_box">
+            <app-table-chart [timeLine]='timeLine' [ifDeatlis]="true" (viewDetails)="diskViewDetails($event)" [datas]='dataList' *ngIf="dataList.time.length > 0;else tlbNoData"   #dataTableChart></app-table-chart>
+        </div>
+        <div class="table_box"  *ngIf="showDetailsTable">
+            <span class="ti3-close ti3-icon ti3-icon-close" (click)="closeDetails('detail_io_op_size')"><span>{{i18n.storageIO.diskio.details}}</span></span>
+            <app-disk-table [dataList]="tlbData.srcData" [totalPage]="tlbData.total" class="quene"
+            [columns]="tlbData.columns" [hasPage]="false" ></app-disk-table>   
+        </div>
+        <app-data-block [datas]="blockData" [timeLine]='timeLine' *ngIf="blockData.data.length" #dataBlock></app-data-block>
+    </div>
+
+    <!-- 操作时延 -->
+
+    <div class="delay_content" *ngIf="selectKey2 === 'detail_io_op_delay'">
+        <div class="char_box">
+            <app-table-chart [timeLine]='timeLine' [ifDeatlis]="true" (viewDetails)="diskViewDetails($event)" [datas]='delayList' *ngIf="delayList.time.length > 0;else tlbNoData"   #delayTableChart></app-table-chart>
+        </div>
+        <div class="table_box" *ngIf="showDetailsTable">
+            <span class="ti3-close ti3-icon ti3-icon-close" (click)="closeDetails('detail_io_op_delay')"><span>{{i18n.storageIO.diskio.details}}</span></span>
+            <app-disk-table [dataList]="tlbData.srcData" [totalPage]="tlbData.total" class="quene"
+            [columns]="tlbData.columns" [hasPage]="false" ></app-disk-table>   
+        </div>
+    </div>
+
+    <!-- 队列深度 -->
+    <app-disk-table [dataList]="tlbData.srcData" [totalPage]="tlbData.total" class="quene"
+                            [columns]="tlbData.columns" [hasPage]="true" *ngIf="selectKey2 === 'detail_event_org_data_by_id'"></app-disk-table>
+
+
+    <!-- 无数据 -->
+    <ng-template #tlbNoData>
+        <div class="nodata">
+            <img style='width:198px;display:block' src='./assets/img/projects/nodata.png' />
+            <div style="font-size: 1rem">{{i18n.common_term_task_nodata2}}</div>
+        </div>
+    </ng-template>
+</div>
+</div>

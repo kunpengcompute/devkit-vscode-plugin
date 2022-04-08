@@ -1,0 +1,508 @@
+<div class="performance-container container">
+  <div class="title_bar">
+    <div class="left_title">
+      {{i18n.sys.perfDetail}}
+
+      <app-icon-react name="filter" *ngIf="!isTable" class="selectIcon" [tiTip]='selectTip' tiTipPosition="right"
+        (click)="chartConfig()"></app-icon-react>
+
+      <img src="./assets/img/summary/tooltip.png" *ngIf="isTable" class="tooltip" [tiTip]='IndexExplanation'
+        tiTipMaxWidth='400px' tiTipPosition="right">
+    </div>
+
+    <div class="right_switch">
+      <app-icon-react name="chartView" *ngIf="isTable" (click)="chart()"></app-icon-react>
+      <app-icon-react name="chartViewSelected" *ngIf="!isTable" (click)="chart()"></app-icon-react>
+      <app-icon-react name="tableView" *ngIf="!isTable" (click)="chart()"></app-icon-react>
+      <app-icon-react name="tableViewSelected" *ngIf="isTable" (click)="chart()"></app-icon-react>
+    </div>
+  </div>
+  <div *ngIf="noData" class="empty">
+    <img style='width:198px;display:block' src='./assets/img/projects/nodata.png' />
+    <div style="font-size: 16px;margin-top: 15px;">{{noDataInfo}}</div>
+  </div>
+
+  <!-- echarts -->
+  <div class="micarch_echarts svgPage" [ngClass]="{ifShow: !isTable && !noData,'EchartShow': isTable && !noData}">
+    <app-time-line *ngIf="timeData.length" [timeData]='timeData' [lineData]='timeLine'
+      (timeLineData)='timeLineData($event)' #timeLineDetail></app-time-line>
+    <app-cpu-detail class="svgPage" [ngClass]="{ifShow: echartsShowData.cpuShow}" [taskid]='taskid'
+      [timeLine]='timeLine' [nodeid]='nodeid' #cpuDetail (cpuAverageData)='cpuDetailData($event)'
+      (ZoomData)="dataZoom($event)" (cpuEchartsInstOut)='echartsInstOut($event)'></app-cpu-detail>
+    <app-memory-detail class="svgPage" [ngClass]="{ifShow: echartsShowData.memoryShow}" [timeLine]='timeLine'
+      [taskid]='taskid' [nodeid]='nodeid' #memoryDetail (memorySelectData)='memorySelectData($event)'
+      (ZoomData)="dataZoom($event)" (memoryEchartsInstOut)='echartsInstOut($event)'></app-memory-detail>
+    <app-sys-disk class="svgPage" [ngClass]="{ifShow: echartsShowData.diskShow}" [timeLine]='timeLine' [taskid]='taskid'
+      [nodeid]='nodeid' #diskDetail (diskSelectData)='diskSelectData($event)' (ZoomData)="dataZoom($event)"
+      (diskEchartsInstOut)='echartsInstOut($event)'></app-sys-disk>
+    <app-sys-net class="svgPage" [ngClass]="{ifShow: echartsShowData.netWorkShow}" [timeLine]='timeLine'
+      [taskid]='taskid' [nodeid]='nodeid' #networkDetail (networkSelectData)='networkSelectData($event)'
+      (ZoomData)="dataZoom($event)" (netEchartsInstOut)='echartsInstOut($event)'></app-sys-net>
+    <app-consumption-detail class="svgPage" [ngClass]="{ifShow: echartsShowData.consumption}" [timeLine]='timeLine'
+      [taskid]='taskid' [nodeid]='nodeid' #consumptionDetail (ZoomData)="dataZoom($event)"
+      (consumptionEchartsInstOut)='echartsInstOut($event)'></app-consumption-detail>
+  </div>
+  <!-- 表格 -->
+  <div class="micarch_table svgPage" [ngClass]="{ifShow: isTable && !noData}">
+    <app-performance-table [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+      [analysisType]='analysisType' [taskid]='taskid' [isActive]='isActive' #performanceTable></app-performance-table>
+  </div>
+</div>
+<app-panoramic-mask #timeChartConfig>
+  <div class="content filterConfig">
+    <div class="filterConfig_head">
+      <p> {{i18n.sys.perfDetail}}</p>
+    </div>
+    <div class="filterConfig_contentBox" #container>
+      <!-- CPU -->
+      <div class="filterConfig_content">
+        <!-- title -->
+        <div class="filterConfig_title" [ngClass]="{'filterConfigClose': showData.cpuShow}"
+          (click)="showData.cpuShow =!showData.cpuShow">
+          <span>CPU</span>
+          <img src="./assets/img/summary/Selected.png" alt="" *ngIf="showData.cpuShow">
+          <img src="./assets/img/summary/Unselected.png" alt="" *ngIf="!showData.cpuShow">
+        </div>
+        <!-- 内容 -->
+        <div class="filterCondition" *ngIf="showData.cpuShow">
+          <div class="average">
+            <input type="checkbox" tiCheckbox [(ngModel)]="UtilizationShow">
+            <label for='Utilization' style="cursor: pointer;">{{i18n.sys.titles.cpuUsage}}</label>
+          </div>
+          <div class="filterTitle_box" *ngIf="UtilizationShow">
+            <div class="filterTitle" style="margin-right: 32px;">
+              <p>CPU</p>
+              <ti-select style="width: 100%;" [multiple]="false" [options]='cpuNumsOption' [searchable]="true"
+                [(ngModel)]="cpuNumSelected" (ngModelChange)="cpuTypeChange2(2)">
+              </ti-select>
+            </div>
+            <div class="filterTitle">
+              <p>{{i18n.sys_summary.cpupackage_tabel.index}}</p>
+              <div>
+                <ti-select style="width: 100%;" [multiple]="true" [options]='cpuTypeOption' [searchable]="true"
+                  [(ngModel)]="cpuTypeSelected" (ngModelChange)="cpuTypeChange(3)">
+                </ti-select>
+              </div>
+            </div>
+          </div>
+          <div class="filterTitle cpuTable">
+            <div *ngIf="cpuTableShow" class="selectTable">
+              <div class="switch" (click)="cpuSwitch(true)">
+                <span>{{cpuSelected?cpuSelectData:0}}</span>
+                <span>{{cpuSelected?0:cpuTotalData}}</span>
+                <div [ngClass]="{selectedLeft: cpuSelected,selectedRight: !cpuSelected}">
+                  {{cpuSelected?cpuTotalData:cpuSelectData}}</div>
+              </div>
+              <div class="selectTableBox">
+                <div class="headerFilter" *ngIf="cpuTitle.length>=4">
+                  <img src="./assets/img/micarch/tableHeader.svg" alt="" (click)="cpusHeadShow = !cpusHeadShow">
+                  <div class="statusFilter" [ngClass]="{'active': cpusHeadShow}">
+                    <span *ngFor="let item of cpuHeaderData">
+                      <input type="checkbox" tiCheckitem [item]="item" [disabled]="item.disabled"
+                        [beCheckeds]="cpuCheckedData" [label]="item.title" (change)="onMyChange()">
+                      <span style="padding-left: 10px;"></span>
+                    </span>
+                  </div>
+                </div>
+                <ti-table [(displayedData)]="cpuDisplayData" [srcData]="cpuContentData" [columns]="cpuTitle">
+                  <table>
+                    <thead>
+                      <tr>
+                        <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                        <th checkbox-column>
+                          <!--全选按钮-->
+                          <!--如果有分页，全选需要控制当前页时，items接口传入displayed
+                                  如果全选要控制表格所有数据，items接口传入srcData.data-->
+                          <input type="checkbox" tiCheckgroup [items]="cpuDisplayData" [(checkeds)]="cpuCheckedList"
+                            (change)="checkboxData(1)" />
+                        </th>
+                        <ng-container *ngFor="let item of cpuTitle;index as i">
+                          <th tiOverflow *ngIf="item.show || item.show === undefined">
+                            <ti-cell-text>{{item.title}}</ti-cell-text>
+                            <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                            <ti-head-sort [sortKey]="item.sortKey" [compareFn]="item.compareFn"></ti-head-sort>
+                          </th>
+                        </ng-container>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                      <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+                      <tr *ngFor="let row of cpuDisplayData;index as i;trackBy: trackByFn"
+                        [ngClass]="{'ti3-selected-tr': cpuCheckedList.indexOf(row) !== -1}">
+                        <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                        <td checkbox-column>
+                          <input type="checkbox" tiCheckitem [item]="row" (change)="checkboxData(1)" />
+                        </td>
+                        <ng-container *ngFor="let item of cpuTitle;index as indexData">
+                          <td tiOverflow *ngIf="cpuTitle[indexData].show|| cpuTitle[indexData].show === undefined">
+                            {{row['name'+indexData] | thousandSeparator}}</td>
+                        </ng-container>
+                      </tr>
+                    </tbody>
+
+                  </table>
+                  <ti-pagination [(currentPage)]="cpuCurrentPage" [pageSize]="cpuPageSize"
+                    [(totalNumber)]="cpuTotalNumber">
+                  </ti-pagination>
+                </ti-table>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- 复选框 -->
+          <div class="average">
+            <input type="checkbox" tiCheckbox [(ngModel)]="averageShow">
+            <label for='average' style="cursor: pointer;">{{i18n.sys_summary.cpupackage_tabel.avgLoad}}</label>
+          </div>
+          <ti-select style="width: 100%;margin-top: 6px;margin-bottom: 20px;" [multiple]="true" *ngIf="averageShow"
+            [options]='cpuTypeOption2' [searchable]="true" [(ngModel)]="cpuTypeSelected2"
+            (ngModelChange)="cpuTypeChange2(1)" id="haha">
+          </ti-select>
+        </div>
+      </div>
+
+      <!-- 内存 -->
+      <div class="filterConfig_content">
+        <div class="filterConfig_title" [ngClass]="{'filterConfigClose': showData.memoryShow}"
+          (click)="showData.memoryShow =!showData.memoryShow">
+          <span>{{i18n.sys_cof.sum.mem}}</span>
+          <img src="./assets/img/summary/Selected.png" alt="" *ngIf="showData.memoryShow">
+          <img src="./assets/img/summary/Unselected.png" alt="" *ngIf="!showData.memoryShow">
+
+        </div>
+        <div class="filterCondition" *ngIf="showData.memoryShow">
+          <div class="average">
+            <input type="checkbox" tiCheckbox [(ngModel)]="memoryUtilization">
+            <label for='Memory' style="cursor: pointer;">{{i18n.sys.titles.memUsage}}</label>
+          </div>
+          <ti-select style="width: 100%;margin-top: 6px;margin-bottom: 20px;" [multiple]="true"
+            *ngIf="memoryUtilization" [searchable]="true" [options]='usageTypeOption' [(ngModel)]="usageTypeSelected"
+            (ngModelChange)="cpuTypeChange2(4)">
+          </ti-select>
+
+
+          <div class="average">
+            <input type="checkbox" tiCheckbox [(ngModel)]="Pagination">
+            <label for='Pagination' style="cursor: pointer;">{{i18n.sys.titles.memPag}}</label>
+          </div>
+          <ti-select style="width: 100%;margin-top: 6px;margin-bottom: 20px;" [multiple]="true" *ngIf="Pagination"
+            [options]='pagOption' [searchable]="true" [(ngModel)]="pagSelected" (ngModelChange)="cpuTypeChange2(5)">
+          </ti-select>
+
+
+          <div class="average">
+            <input type="checkbox" tiCheckbox [(ngModel)]="exchange">
+            <label for='exchange' style="cursor: pointer;">{{i18n.sys.titles.memSwap}}</label>
+          </div>
+          <ti-select style="width: 100%;margin-top: 6px;margin-bottom: 20px;" [searchable]="true" [multiple]="true"
+            *ngIf="exchange" [options]='swapOption' [(ngModel)]="swapSelected" (ngModelChange)="cpuTypeChange2(6)">
+          </ti-select>
+        </div>
+      </div>
+
+      <!-- 存储IO -->
+      <div class="filterConfig_content">
+        <!-- title -->
+        <div class="filterConfig_title" [ngClass]="{'filterConfigClose': showData.diskShow}"
+          (click)="showData.diskShow =!showData.diskShow">
+          <span>{{i18n.sys.disk}}</span>
+          <img src="./assets/img/summary/Selected.png" alt="" *ngIf="showData.diskShow">
+          <img src="./assets/img/summary/Unselected.png" alt="" *ngIf="!showData.diskShow">
+
+        </div>
+        <!-- 内容 -->
+        <div class="filterCondition" *ngIf="showData.diskShow">
+          <div class="average">
+            <input type="checkbox" tiCheckbox [(ngModel)]="diskShow">
+            <label for='equipment' style="cursor: pointer;">{{i18n.sys.titles.diskBlock}}</label>
+          </div>
+          <div class="filterTitle_box" *ngIf="diskShow">
+            <div class="filterTitle" style="margin-right: 32px;">
+              <p>{{i18n.sys_summary.cpupackage_tabel.block}}</p>
+              <ti-select style="width: 100%;" [searchable]="true" [multiple]="false" [options]='devOption'
+                [(ngModel)]="devSelected" (ngModelChange)="cpuTypeChange2(7)">
+              </ti-select>
+            </div>
+            <div class="filterTitle">
+              <p>{{i18n.sys_summary.cpupackage_tabel.index}}</p>
+              <div>
+                <ti-select style="width: 100%;" [multiple]="true" [searchable]="true" [options]='typeOption'
+                  [(ngModel)]="typeSelected" (ngModelChange)="diskTypeChange()">
+                </ti-select>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="duskTableShow" class="selectTable">
+            <div class="switch" (click)="diskSwitch(true)">
+              <span>{{diskSelected?diskSelectTableData:0}}</span>
+              <span>{{diskSelected?0:diskTotalData}}</span>
+              <div [ngClass]="{selectedLeft: diskSelected,selectedRight: !diskSelected}" (click)="diskSwitch(true)">
+                {{diskSelected?diskTotalData:diskSelectTableData}}</div>
+            </div>
+            <div class="selectTableBox">
+              <div class="headerFilter" *ngIf="diskTitle.length>=4">
+                <img src="./assets/img/micarch/tableHeader.svg" alt="" (click)="disksHeadShow = !disksHeadShow">
+                <div class="statusFilter" [ngClass]="{'active': disksHeadShow}">
+                  <span *ngFor="let item of diskHeaderData">
+                    <input type="checkbox" tiCheckitem [item]="item" [disabled]="item.disabled"
+                      [beCheckeds]="diskCheckedData" [label]="item.title" (change)="diskHeaderChange()">
+                    <span style="padding-left: 10px;"></span>
+                  </span>
+                </div>
+              </div>
+              <ti-table [(displayedData)]="diskDisplayData" [srcData]="diskContentData" [columns]="diskTitle">
+                <table>
+                  <thead>
+                    <tr>
+                      <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                      <th checkbox-column>
+                        <!--全选按钮-->
+                        <!--如果有分页，全选需要控制当前页时，items接口传入displayed
+                              如果全选要控制表格所有数据，items接口传入srcData.data-->
+                        <input type="checkbox" tiCheckgroup [items]="diskDisplayData" [(checkeds)]="diskCheckedList"
+                          (change)="checkboxData(2)" />
+                      </th>
+                      <ng-container *ngFor="let item of diskTitle;index as i">
+                        <th tiOverflow *ngIf="item.show || item.show === undefined">
+                          <ti-cell-text>{{item.title}}</ti-cell-text>
+                          <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                          <ti-head-sort [sortKey]="item.sortKey"></ti-head-sort>
+                        </th>
+                      </ng-container>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                    <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+                    <tr *ngFor="let row of diskDisplayData;index as i;trackBy: trackByFn"
+                      [ngClass]="{'ti3-selected-tr': diskCheckedList.indexOf(row) !== -1}">
+                      <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                      <td checkbox-column>
+                        <input type="checkbox" tiCheckitem [item]="row" (change)="checkboxData(2)" />
+                      </td>
+                      <ng-container *ngFor="let item of diskTitle;index as indexData">
+                        <td tiOverflow *ngIf="diskTitle[indexData].show|| diskTitle[indexData].show === undefined">
+                          {{row['name'+indexData] | thousandSeparator}}</td>
+                      </ng-container>
+                    </tr>
+                  </tbody>
+
+                </table>
+                <ti-pagination [(currentPage)]="diskCurrentPage" [pageSize]="diskPageSize"
+                  [(totalNumber)]="diskTotalNumber">
+                </ti-pagination>
+              </ti-table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 网络IO -->
+      <div class="filterConfig_content">
+        <!-- title -->
+        <div class="filterConfig_title" [ngClass]="{'filterConfigClose': showData.netWorkShow}"
+          (click)="showData.netWorkShow =!showData.netWorkShow">
+          <span>{{i18n.sys.titles.net}}</span>
+          <img src="./assets/img/summary/Selected.png" alt="" *ngIf="showData.netWorkShow">
+          <img src="./assets/img/summary/Unselected.png" alt="" *ngIf="!showData.netWorkShow">
+        </div>
+        <!-- 内容 -->
+        <div class="filterCondition" *ngIf="showData.netWorkShow">
+          <div class="average">
+            <input type="checkbox" tiCheckbox [(ngModel)]="transmission">
+            <label for='amountData' style="cursor: pointer;">{{i18n.sys.titles.netOk}}</label>
+          </div>
+          <div class="filterTitle_box" *ngIf="transmission">
+            <div class="filterTitle" style="margin-right: 32px;">
+              <p>{{i18n.sys_summary.cpupackage_tabel.interface}}</p>
+              <ti-select style="width: 100%;" [multiple]="false" [options]='okIfaceOption' [searchable]="true"
+                [(ngModel)]="okIfaceSelected" (ngModelChange)="cpuTypeChange2(9)">
+              </ti-select>
+            </div>
+            <div class="filterTitle">
+              <p>{{i18n.sys_summary.cpupackage_tabel.index}}</p>
+              <div>
+                <ti-select style="width: 100%;" [multiple]="true" [options]='okTypeOption' [searchable]="true"
+                  [(ngModel)]="okTypeSelected" (ngModelChange)="okIfaceTypeChange()">
+                </ti-select>
+              </div>
+            </div>
+          </div>
+          <div class="selectTable" *ngIf="okIfaceTableShow&&transmission">
+            <div class="switch" (click)="okIfaceSwitchData(true)">
+              <span>{{okIfaceSwitch?okIfaceSelectTableData:0}}</span>
+              <span>{{okIfaceSwitch?0:okIfaceTotalData}}</span>
+              <div [ngClass]="{selectedLeft: okIfaceSwitch,selectedRight: !okIfaceSwitch}"
+                (click)="okIfaceSwitchData(true)">{{okIfaceSwitch?okIfaceTotalData:okIfaceSelectTableData}}</div>
+            </div>
+            <div class="selectTableBox">
+              <div class="headerFilter" *ngIf="okIfaceTitle.length>=4">
+                <img src="./assets/img/micarch/tableHeader.svg" alt="" (click)="okIfaceHeadShow = !okIfaceHeadShow">
+                <div class="statusFilter" [ngClass]="{'active': okIfaceHeadShow}" style="min-width: 185px;">
+                  <span *ngFor="let item of okIfaceHeaderData">
+                    <input type="checkbox" tiCheckitem [item]="item" [disabled]="item.disabled"
+                      [beCheckeds]="okIfaceCheckedData" [label]="item.title" (change)="okIfaceHeaderChange()">
+                    <span style="padding-left: 10px;"></span>
+                  </span>
+                </div>
+              </div>
+              <ti-table [(displayedData)]="okIfaceDisplayData" [srcData]="okIfaceContentData" [columns]="okIfaceTitle">
+                <table>
+                  <thead>
+                    <tr>
+                      <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                      <th checkbox-column>
+                        <!--全选按钮-->
+                        <!--如果有分页，全选需要控制当前页时，items接口传入displayed
+                                  如果全选要控制表格所有数据，items接口传入srcData.data-->
+                        <input type="checkbox" tiCheckgroup [items]="okIfaceDisplayData"
+                          [(checkeds)]="okIfaceCheckedList" (change)="checkboxData(3)" />
+                      </th>
+                      <ng-container *ngFor="let item of okIfaceTitle;index as i">
+                        <th tiOverflow *ngIf="item.show || item.show === undefined">
+                          <ti-cell-text>{{item.title}}</ti-cell-text>
+                          <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                          <ti-head-sort [sortKey]="item.sortKey"></ti-head-sort>
+                        </th>
+                      </ng-container>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                    <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+                    <tr *ngFor="let row of okIfaceDisplayData;index as i;trackBy: trackByFn"
+                      [ngClass]="{'ti3-selected-tr': okIfaceCheckedList.indexOf(row) !== -1}">
+                      <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                      <td checkbox-column>
+                        <input type="checkbox" tiCheckitem [item]="row" (change)="checkboxData(3)" />
+                      </td>
+                      <ng-container *ngFor="let item of okIfaceTitle;index as indexData">
+                        <td tiOverflow
+                          *ngIf="okIfaceTitle[indexData].show|| okIfaceTitle[indexData].show === undefined">
+                          {{row['name'+indexData] | thousandSeparator}}</td>
+                      </ng-container>
+                    </tr>
+                  </tbody>
+
+                </table>
+                <ti-pagination [(currentPage)]="okIfaceCurrentPage" [pageSize]="okIfacePageSize"
+                  [(totalNumber)]="okIfaceTotalNumber">
+                </ti-pagination>
+              </ti-table>
+            </div>
+
+          </div>
+        </div>
+        <!-- 内容 -->
+        <div class="filterCondition" *ngIf="showData.netWorkShow">
+          <div class="average">
+            <input type="checkbox" tiCheckbox [(ngModel)]="malfunction">
+            <label for='malfunction' style="cursor: pointer;">{{i18n.sys.titles.netError}}</label>
+          </div>
+          <div class="filterTitle_box" *ngIf="malfunction">
+            <div class="filterTitle" style="margin-right: 32px;">
+              <p>{{i18n.sys_summary.cpupackage_tabel.interface}}</p>
+              <ti-select style="width: 100%;" [multiple]="false" [options]='errorIfaceOption' [searchable]="true"
+                [(ngModel)]="errorIfaceSelected" (ngModelChange)="cpuTypeChange2(11)">
+              </ti-select>
+            </div>
+            <div class="filterTitle">
+              <p>{{i18n.sys_summary.cpupackage_tabel.index}}</p>
+              <div>
+                <ti-select style="width: 100%;" [multiple]="true" [searchable]="true" [options]='errorTypeOption'
+                  [(ngModel)]="errorTypeSelected" (ngModelChange)="errorTypeChange()">
+                </ti-select>
+              </div>
+            </div>
+          </div>
+          <div class="selectTable" *ngIf="errorTableShow&&malfunction">
+            <div class="switch" (click)="errorSwitchData(true)">
+              <span>{{errorSwitchShow?errorSelectTableData:0}}</span>
+              <span>{{errorSwitchShow?0:errorTotalData}}</span>
+              <div [ngClass]="{selectedLeft: errorSwitchShow,selectedRight: !errorSwitchShow}"
+                (click)="errorSwitchData(true)">{{errorSwitchShow?errorTotalData:errorSelectTableData}}</div>
+            </div>
+            <div class="selectTableBox">
+              <div class="headerFilter" *ngIf="errorTitle.length>=4">
+                <img src="./assets/img/micarch/tableHeader.svg" alt="" (click)="errorHeadShow = !errorHeadShow">
+                <div class="statusFilter" [ngClass]="{'active': errorHeadShow}" style="min-width: 185px;">
+                  <span *ngFor="let item of errorHeaderData">
+                    <input type="checkbox" tiCheckitem [item]="item" [disabled]="item.disabled"
+                      [beCheckeds]="errorCheckedData" [label]="item.title" (change)="errorHeaderChange()">
+                    <span style="padding-left: 10px;"></span>
+                  </span>
+                </div>
+              </div>
+
+              <ti-table [(displayedData)]="errorDisplayData" [srcData]="errorContentData" [columns]="errorTitle">
+                <table>
+                  <thead>
+                    <tr>
+                      <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                      <th checkbox-column>
+                        <!--全选按钮-->
+                        <!--如果有分页，全选需要控制当前页时，items接口传入displayed
+                                如果全选要控制表格所有数据，items接口传入srcData.data-->
+                        <input type="checkbox" tiCheckgroup [items]="errorDisplayData" [(checkeds)]="errorCheckedList"
+                          (change)="checkboxData(4)" />
+                      </th>
+                      <ng-container *ngFor="let item of errorTitle;index as i">
+                        <th tiOverflow *ngIf="item.show || item.show === undefined">
+                          <ti-cell-text>{{item.title}}</ti-cell-text>
+                          <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                          <ti-head-sort [sortKey]="item.sortKey"></ti-head-sort>
+                        </th>
+                      </ng-container>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                    <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+                    <tr *ngFor="let row of errorDisplayData;index as i;trackBy: trackByFn"
+                      [ngClass]="{'ti3-selected-tr': errorCheckedList.indexOf(row) !== -1}">
+                      <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                      <td checkbox-column>
+                        <input type="checkbox" tiCheckitem [item]="row" (change)="checkboxData(4)" />
+                      </td>
+                      <ng-container *ngFor="let item of errorTitle;index as indexData">
+                        <td tiOverflow *ngIf="errorTitle[indexData].show|| errorTitle[indexData].show === undefined">
+                          {{row['name'+indexData] | thousandSeparator}}</td>
+                      </ng-container>
+                    </tr>
+                  </tbody>
+
+                </table>
+                <ti-pagination [(currentPage)]="errorCurrentPage" [pageSize]="errorPageSize"
+                  [(totalNumber)]="errorTotalNumber">
+                </ti-pagination>
+              </ti-table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 能耗 -->
+      <div class="filterConfig_content">
+        <!-- title -->
+        <div class="filterConfig_title" [ngClass]="{'filterConfigClose': showData.consumption}"
+          (click)="showData.consumption =!showData.consumption">
+          <span>{{i18n.sys_summary.cpupackage_tabel.consumption}}</span>
+          <img src="./assets/img/summary/Selected.png" alt="" *ngIf="showData.consumption">
+          <img src="./assets/img/summary/Unselected.png" alt="" *ngIf="!showData.consumption">
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 确定按钮 -->
+    <div class="filterBtn">
+      <button type="button" style="margin-right: 16px;" color="primary" tiButton
+        (click)="confirmConfig()">{{i18n.common_term_operate_ok}}</button>
+      <button type="button" tiButton (click)="closeMask()">{{i18n.common_term_operate_close}}</button>
+    </div>
+
+  </div>
+</app-panoramic-mask>

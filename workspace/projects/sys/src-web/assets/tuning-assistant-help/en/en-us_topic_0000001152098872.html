@@ -1,0 +1,87 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="High Network IOPS or Traffic">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001151939064.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.T20">
+<meta name="brand" content="Kunpeng Hyper Tuner">
+<meta name="DC.Publisher" content="20210914">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001152098872">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>High Network IOPS or Traffic</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001152098872"></a><a name="EN-US_TOPIC_0000001152098872"></a>
+
+<h1 class="topictitle1">High Network IOPS or Traffic</h1>
+<div id="body0000001152098872"><div class="section" id="EN-US_TOPIC_0000001152098872__section6919149172619"><h4 class="sectiontitle">Network Port Interrupt-Core Binding</h4><ol id="EN-US_TOPIC_0000001152098872__ol925152217264"><li id="EN-US_TOPIC_0000001152098872__li1225132216264"><span>Disable irqbalance.</span><p><p id="EN-US_TOPIC_0000001152098872__p195891727303">Before binding cores to NICs, disable irqbalance.</p>
+<ol type="a" id="EN-US_TOPIC_0000001152098872__ol18550112193413"><li id="EN-US_TOPIC_0000001152098872__li1855011210343">Run the following command to stop the irqbalance service:<p id="EN-US_TOPIC_0000001152098872__p128631357163415"><a name="EN-US_TOPIC_0000001152098872__li1855011210343"></a><a name="li1855011210343"></a><b><span class="cmdname" id="EN-US_TOPIC_0000001152098872__cmdname168916174357">systemctl stop irqbalance.service</span></b></p>
+</li><li id="EN-US_TOPIC_0000001152098872__li1598210210356">Run the following command to disable the irqbalance service, which is permanently valid:<p id="EN-US_TOPIC_0000001152098872__p13473155518358"><a name="EN-US_TOPIC_0000001152098872__li1598210210356"></a><a name="li1598210210356"></a><b><span class="cmdname" id="EN-US_TOPIC_0000001152098872__cmdname17186879366">systemctl disable irqbalance.service</span></b></p>
+</li><li id="EN-US_TOPIC_0000001152098872__li1876111113366">Run the following command to check whether the irqbalance service is stopped:<p id="EN-US_TOPIC_0000001152098872__p115071318373"><a name="EN-US_TOPIC_0000001152098872__li1876111113366"></a><a name="li1876111113366"></a><b><span class="cmdname" id="EN-US_TOPIC_0000001152098872__cmdname1432512234378">systemctl status irqbalance.service</span></b></p>
+</li></ol>
+</p></li><li id="EN-US_TOPIC_0000001152098872__li46355052216"><span>Run the following command to query the PCI device number of the NIC (for example, enp131s0):</span><p><p id="EN-US_TOPIC_0000001152098872__p63121651142312"><b><span class="cmdname" id="EN-US_TOPIC_0000001152098872__cmdname194303815243">ethtool -i enp131s0</span></b></p>
+<p id="EN-US_TOPIC_0000001152098872__p872511502414">The command output is as follows:</p>
+<pre class="screen" id="EN-US_TOPIC_0000001152098872__screen932111119257">driver:hinic
+version:2.3.2.1
+firmware-version:2.3.2.1</pre>
+</p></li><li id="EN-US_TOPIC_0000001152098872__li13232929112617"><span>Run the following command to query the NUMA node to which the PCIe NIC belongs:</span><p><p id="EN-US_TOPIC_0000001152098872__p7209115113714"><b><span class="cmdname" id="EN-US_TOPIC_0000001152098872__cmdname7699181519395">lspci -vvvs &lt;bus-info&gt;</span></b></p>
+<p id="EN-US_TOPIC_0000001152098872__p8555112673719">The command output is as follows:</p>
+<p id="EN-US_TOPIC_0000001152098872__p889134111377"><span><img id="EN-US_TOPIC_0000001152098872__image12162438379" src="en-us_image_0000001151939070.png"></span></p>
+</p></li><li id="EN-US_TOPIC_0000001152098872__li9446145983714"><span>Run the following command to check the core range corresponding to the NUMA node. For example, the range can be bound to 48 to 63.</span><p><p id="EN-US_TOPIC_0000001152098872__p758614562384"><b><span class="cmdname" id="EN-US_TOPIC_0000001152098872__cmdname1795151053917">lscpu</span></b></p>
+<p id="EN-US_TOPIC_0000001152098872__p7660191853915"><span><img id="EN-US_TOPIC_0000001152098872__image1775923113919" src="en-us_image_0000001197938605.png"></span></p>
+</p></li><li id="EN-US_TOPIC_0000001152098872__li1091785211393"><span>Bind the interrupts to 16 cores on the NUMA node. In this example, there are 16 queues for the 1822 NIC and the interrupts are bound to cores 48 to 63 on NUMA node 1.</span><p><p id="EN-US_TOPIC_0000001152098872__p254019574410">The script content is as follows:</p>
+<pre class="screen" id="EN-US_TOPIC_0000001152098872__screen996210265447"><em id="EN-US_TOPIC_0000001152098872__i1914233654413">#!/bin/bash</em>
+irq_list=(`cat /proc/interrupts | grep enp131s0 | awk -F: '{print $1}'`)
+cpunum=48 # Change the value to the first core of the node.
+<strong id="EN-US_TOPIC_0000001152098872__b4142133684410">for</strong> irq in ${irq_list[@]}
+<strong id="EN-US_TOPIC_0000001152098872__b18142736144419">do</strong>
+echo $cpunum &gt; /proc/irq/$irq/smp_affinity_list
+echo `cat /proc/irq/$irq/smp_affinity_list`
+(( cpunum+=1 ))
+<strong id="EN-US_TOPIC_0000001152098872__b1614213610444">done</strong></pre>
+<p id="EN-US_TOPIC_0000001152098872__p49756618438">Run the following command to edit the script:</p>
+<p id="EN-US_TOPIC_0000001152098872__p476495215432"><strong id="EN-US_TOPIC_0000001152098872__b10545840458">bash</strong> <em id="EN-US_TOPIC_0000001152098872__i441985912444">smartIrq.sh</em></p>
+</p></li><li id="EN-US_TOPIC_0000001152098872__li255551114512"><span>Run the following command to check whether the core binding is successful.</span><p><p id="EN-US_TOPIC_0000001152098872__p10763122794715">The script content is as follows:</p>
+<pre class="screen" id="EN-US_TOPIC_0000001152098872__screen98434401486"><em id="EN-US_TOPIC_0000001152098872__i19785165015487">#!/bin/bash</em>
+# NIC name
+intf=$1
+log=irqSet-`date "+%Y%m%d-%H%M%S"`.log
+# Number of available CPUs
+cpuNum=<strong id="EN-US_TOPIC_0000001152098872__b207868501486">$(</strong>cat /proc/cpuinfo |grep processor -c<strong id="EN-US_TOPIC_0000001152098872__b078614508488">)</strong>
+# RX and TX interrupt lists
+irqListRx=<strong id="EN-US_TOPIC_0000001152098872__b1678695020486">$(</strong>cat /proc/interrupts | grep ${intf} | awk -F':' '{print $1}'<strong id="EN-US_TOPIC_0000001152098872__b157861050144818">)</strong>
+irqListTx=<strong id="EN-US_TOPIC_0000001152098872__b11786165020487">$(</strong>cat /proc/interrupts | grep ${intf} | awk -F':' '{print $1}'<strong id="EN-US_TOPIC_0000001152098872__b57863507489">)</strong>
+# Bind the RX interrupt requests (IRQs).
+<strong id="EN-US_TOPIC_0000001152098872__b3786750154812">for</strong> irqRX in ${irqListRx[@]}
+<strong id="EN-US_TOPIC_0000001152098872__b278635013486">do</strong>
+cat /proc/irq/${irqRX}/smp_affinity_list
+<strong id="EN-US_TOPIC_0000001152098872__b878635010486">done</strong>
+# Bind the TX IRQs.
+<strong id="EN-US_TOPIC_0000001152098872__b378612502481">for</strong> irqTX in ${irqListTx[@]}
+<strong id="EN-US_TOPIC_0000001152098872__b17864505485">do</strong>
+cat /proc/irq/${irqTX}/smp_affinity_list
+<strong id="EN-US_TOPIC_0000001152098872__b19786175017487">don</strong></pre>
+<p id="EN-US_TOPIC_0000001152098872__p186281652184715">Run the following script to check whether the core binding is successful:</p>
+<p id="EN-US_TOPIC_0000001152098872__p13213722174920"><strong id="EN-US_TOPIC_0000001152098872__b188851882504">sh</strong> <em id="EN-US_TOPIC_0000001152098872__i2039131319502">irqCheck.sh enp131s0</em></p>
+<p id="EN-US_TOPIC_0000001152098872__p198791150154920">The command output is as follows:</p>
+<p id="EN-US_TOPIC_0000001152098872__p98371957194916"><span><img id="EN-US_TOPIC_0000001152098872__image784692165016" src="en-us_image_0000001152098876.png"></span></p>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001151939064.html">%SOFT</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

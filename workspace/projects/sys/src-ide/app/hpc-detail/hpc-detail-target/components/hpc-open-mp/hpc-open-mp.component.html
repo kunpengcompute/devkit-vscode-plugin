@@ -1,0 +1,205 @@
+<div class="open-mp">
+    <p>{{ i18n.mission_modal.hpc.hpc_target.open_mp }}</p>
+    <!-- 非MPI模式 -->
+    <div class="open-mp-box" *ngIf="!rankData.length">
+        <ti-table [(displayedData)]="paralleDisplayed" [srcData]="paralleData" [columns]="paralleColumns"
+            tiColsResizable class="ti3-table-small">
+            <div class="ti3-table-fixed-head">
+                <table>
+                    <thead>
+                        <tr>
+                            <th tiOverflow *ngFor="let column of paralleColumns" width="{{column.width}}">
+                                <ti-cell-text>{{ column.title }}</ti-cell-text>
+                                <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="ti3-table-container ti3-resize-wrapper mp-box">
+                <table>
+                    <thead>
+                        <tr>
+                            <th *ngFor="let column of paralleColumns" width="{{column.width}}"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of paralleDisplayed">
+                            <td tiOverflow>{{row.title || '--'}}</td>
+                            <td tiOverflow>{{row.potential_gain_value | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.cpu_utiliczation | thousandSeparator}}</td>
+
+                            <td tiOverflow>{{row.Lock | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.Creation | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.Scheduling | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.Tasking | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.Reduction | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.Atomics | thousandSeparator}}</td>
+
+                            <td tiOverflow>{{row.exetime | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.unbalancetime | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.unbalanceratge | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.Spin | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.overhead | thousandSeparator}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <app-default-page *ngIf="paralleData.data.length === 0"></app-default-page>
+            </div>
+        </ti-table>
+        <ti-table [(displayedData)]="barrierDisplayed" [srcData]="barrierData" [columns]="barrierColumns"
+            tiColsResizable class="ti3-table-small barrier">
+            <div class=" ti3-table-fixed-head">
+                <table>
+                    <thead>
+                        <tr>
+                            <th tiOverflow *ngFor="let column of barrierColumns" width="{{ column.width }}">
+                                <ti-cell-text>{{ column.title }}</ti-cell-text>
+                                <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="ti3-table-container ti3-resize-wrapper mp-box">
+                <table>
+                    <thead>
+                        <tr>
+                            <th *ngFor="let column of barrierColumns" width="{{ column.width }}"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of barrierDisplayed">
+                            <td tiOverflow>{{row.title || '--'}}</td>
+                            <td tiOverflow>{{row.potential_gain_value | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.cpu_utiliczation | thousandSeparator}}</td>
+
+                            <td tiOverflow>{{row.Lock | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.Creation | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.Scheduling | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.Tasking | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.Reduction | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.Atomics | thousandSeparator}}</td>
+
+                            <td tiOverflow>{{row.exetime | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.unbalancetime | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.unbalanceratge | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.Spin | thousandSeparator}}</td>
+                            <td tiOverflow>{{row.overhead | thousandSeparator}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <app-default-page *ngIf="barrierData.data.length === 0"></app-default-page>
+            </div>
+        </ti-table>
+    </div>
+    <!-- MPI模式 -->
+    <div class="rank-box" *ngIf="rankData.length">
+        <ng-container *ngFor="let rank of rankData">
+            <div class="rankline">
+                <div class="rank-left">
+                    <img src="./assets/img/summary/row.svg" (click)="toggle(rank)" [ngClass]="{active:rank.expand}">
+                    <span>{{ i18n.mission_modal.hpc.hpc_target.rank }}{{ rank.id | zeros }}</span>
+                </div>
+                <div class="rank-right">
+                    <span>
+                        {{ i18n.mission_modal.hpc.basic.exe_time }}
+                        {{ i18n.common_term_colon }}{{ rank.exe_time }}
+                    </span>
+                    <span>
+                        {{ i18n.mission_modal.hpc.basic.serial_time }}
+                        {{ i18n.common_term_colon }}{{ rank.run_time }}
+                    </span>
+                    <span>
+                        {{ i18n.mission_modal.hpc.basic.parallel_time }}
+                        {{ i18n.common_term_colon }}{{ rank.paraller_time }}
+                    </span>
+                    <span>
+                        {{ i18n.mission_modal.hpc.basic.unbalance_time }}
+                        {{ i18n.common_term_colon }}{{ rank.unbalance_time }}
+                    </span>
+                </div>
+            </div>
+            <div *ngIf="rank.expand" class="rank-mpi">
+                <div class="rank-color">
+                </div>
+                <div class="rank-table">
+                    <ti-table [(displayedData)]="paralleDisplayed" [srcData]="paralleData" [columns]="paralleColumns"
+                        tiColsResizable class="ti3-table-small">
+                        <div class="ti3-table-fixed-head">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th tiOverflow *ngFor="let column of paralleColumns" width="{{ column.width }}">
+                                            <ti-cell-text>{{ column.title }}</ti-cell-text>
+                                            <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey">
+                                            </ti-head-sort>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="ti3-table-container ti3-resize-wrapper mp-box">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let column of paralleColumns" width="{{column.width}}"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of paralleDisplayed">
+                                        <td tiOverflow>{{row.title || '--'}}</td>
+                                        <td tiOverflow>{{row.potential_gain_value | thousandSeparator}}</td>
+                                        <td tiOverflow>{{row.cpu_utiliczation | thousandSeparator}}</td>
+                                        <td tiOverflow>{{row.exetime | thousandSeparator}}</td>
+                                        <td tiOverflow>{{row.unbalancetime | thousandSeparator}}</td>
+                                        <td tiOverflow>{{row.unbalanceratge | thousandSeparator}}</td>
+                                        <td tiOverflow>{{row.Spin | thousandSeparator}}</td>
+                                        <td tiOverflow>{{row.overhead | thousandSeparator}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <app-default-page *ngIf="paralleData.data.length === 0"></app-default-page>
+                        </div>
+                    </ti-table>
+                    <ti-table [(displayedData)]="barrierDisplayed" [srcData]="barrierData" [columns]="barrierColumns"
+                        tiColsResizable class="ti3-table-small barrier">
+                        <div class=" ti3-table-fixed-head">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th tiOverflow *ngFor="let column of barrierColumns" width="{{ column.width }}">
+                                            <ti-cell-text>{{ column.title }}</ti-cell-text>
+                                            <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey">
+                                            </ti-head-sort>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="ti3-table-container ti3-resize-wrapper mp-box">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let column of barrierColumns" width="{{ column.width }}"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of barrierDisplayed">
+                                        <td tiOverflow>{{row.title || '--'}}</td>
+                                        <td tiOverflow>{{row.potential_gain_value | thousandSeparator}}</td>
+                                        <td tiOverflow>{{row.cpu_utiliczation | thousandSeparator}}</td>
+                                        <td tiOverflow>{{row.exetime | thousandSeparator}}</td>
+                                        <td tiOverflow>{{row.unbalancetime | thousandSeparator}}</td>
+                                        <td tiOverflow>{{row.unbalanceratge | thousandSeparator}}</td>
+                                        <td tiOverflow>{{row.Spin | thousandSeparator}}</td>
+                                        <td tiOverflow>{{row.overhead | thousandSeparator}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <app-default-page *ngIf="barrierData.data.length === 0"></app-default-page>
+                        </div>
+                    </ti-table>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+.expectionTab {
+  font-size: 14px;
+  width: 100%;
+  margin-top: 58px;
+  position: relative;
+  .header-left{
+    width: 90%;
+    position: absolute;
+    top: -51px;
+    font-size: 20px;
+    left: 10px;
+    span{
+      max-width: 500px;
+      margin-right: 10px;
+    }
+  }
+  .tabDetail {
+      margin-bottom: 10px;
+      color: #222222;
+    .detail-title {
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      height: 44px;
+      align-items: center;
+      background: #f5f9ff;
+
+      .toggleImg {
+        transition: 0.5s linear;
+      }
+      .toggleImg.active {
+        transform: rotate(180deg);
+      }
+    }
+    .detail-body {
+      border: solid 1px #d7dbe7;
+      border-top: solid 0px #d7dbe7;
+      background: #fff;
+      padding: 0 24px;
+      max-height: 0;
+      transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+      overflow: hidden;
+      .accessType,
+      .exceptionPoint,
+      .Information {
+        font-size: 14px;
+        min-height: 21px;
+        line-height: 21px;
+        margin-bottom: 16px;
+        margin-top: 16px;
+        display: flex;
+        .label {
+          min-width: 100px;
+        }
+      }
+      .more-detail{
+          display: block;
+          margin-bottom: 16px;
+      }
+    }
+    .detail-body.active {
+      max-height: 5000px;
+      overflow: auto;
+      transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
+    }
+  }
+}

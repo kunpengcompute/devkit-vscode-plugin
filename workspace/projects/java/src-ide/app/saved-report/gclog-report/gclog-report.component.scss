@@ -1,0 +1,46 @@
+::ng-deep #savedGclog {
+    padding: 40px 80px 0 80px;
+    ti-tabs {
+        background: var(--vscode-editor-background) !important;
+        .ti3-tab-content {
+            border-top: none;
+        }
+        .ti3-tab-li:not(:last-child):after {
+            display: none;
+        }
+        .ti3-tabs > li > a {
+            font-size: 16px;
+            color: var(--d-aaaaaa-l-616161);
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .ti3-tabs > li.ti3-tab-active:not(.disabled) > a {
+            color: var(--ti-table-sort-color-hover);
+        }
+        .ti3-tabs > li:not(.disabled) > a:hover, .ti3-tabs > li:not(.disabled) > a:focus {
+            color: var(--ti-table-sort-color-hover);
+        }
+        .ti3-tabs + .ti3-tab-slider {
+            border-bottom: 2px solid var(--ti-table-sort-color-hover) !important;
+            margin-top: 2px;
+        }
+
+        .tab-content {
+            padding-top: 20px;
+            height: 860px;
+            .dump-container .histogram .ti3-table-container {
+                max-height: 675px;
+            }
+        }
+    }
+}
+:host ::ng-deep .ti3-tab-slider-container{
+    border-bottom: 2px solid transparent !important;
+    .ti3-tab-slider{
+        border-bottom: 2px solid #0067ff !important;
+        bottom: 0px !important;
+    }
+}
+:host ::ng-deep .ti3-tab-content .ti3-tab-pane{
+    padding-top: 0px !important;
+}

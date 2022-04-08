@@ -1,0 +1,38 @@
+.modal-dialog {
+  width: 900px;
+
+  .modal-content {
+    > p {
+      height: 18px;
+      font-size: 14px;
+      line-height: 18px;
+      color: #222222;
+      display: flex;
+
+      &:first-of-type {
+        margin-bottom: 20px;
+      }
+
+      .label {
+        width: 176px;
+      }
+
+      .text {
+        width: 500px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .source-code-box {
+      height: calc(100% - 100px);
+    }
+
+    .footer {
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+  }
+}

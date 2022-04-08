@@ -1,0 +1,50 @@
+<div class="hot-func-data-detail-container">
+    <div class="basic-info-box" tiOverflow>
+        <ng-container *ngIf="taskData">
+            <span class="info-key">{{'common_term_projiect_name' | i18n}}</span>
+            <span class="info-value">{{ taskData.task_param.projectname || '' }}</span>
+            <span class="info-key">{{'common_term_task_name' | i18n}}</span>
+            <span class="info-value">{{ taskData.task_param.taskname || '' }}</span>
+            <span class="info-key">{{'nodeManagement.nodeName' | i18n}}</span>
+            <span class="info-value">{{ taskData.nodeNickName || '' }}</span>
+            <span class="info-key">{{'common_term_node_ip' | i18n}}</span>
+            <span class="info-value">{{ taskData.nodeIp || '' }}</span>
+            <ng-container *ngIf="taskData.task_param.appDir">
+                <span class="info-key">{{'common_term_task_crate_app_path' | i18n}}</span>
+                <span class="info-value">{{ taskData.task_param.appDir }}</span>
+            </ng-container>
+            <ng-container *ngIf="taskData.task_param.processName">
+                <span class="info-key">{{'mission_create.process_alias' | i18n}}</span>
+                <span class="info-value">{{ taskData.task_param.processName }}</span>
+            </ng-container>
+            <ng-container *ngIf="taskData.task_param.targetPid">
+                <span class="info-key">{{'common_term_task_crate_pid' | i18n}}</span>
+                <span class="info-value">{{ taskData.task_param.targetPid }}</span>
+            </ng-container>
+        </ng-container>
+    </div>
+    <div class="hot-func-tip-box">
+        <div class="hot-func-tip-icon">
+            <app-icon-react name="smallLightBuld"></app-icon-react>
+        </div>
+        <div class="hot-func-tip-text">{{ 'tuninghelper.processDetailData.hotFuncTipText' | i18n}}</div>
+    </div>
+    <div class="content-box">
+        <ti-tabs class="custemTabs tabsWithSplitLine tabsWithUnderline">
+            <hy-backtop [target]="{classes: ['ti3-tab-content']}"></hy-backtop>
+            <ti-tab *ngFor="let item of navTabList; let index = index" [(active)]="item.active" [header]="item.title">
+                <!-- <ti-tab-header>
+                    <span>{{item.title}}</span>
+                </ti-tab-header> -->
+                <ng-template #tiTabContent>
+                    <div class="tab-content" *ngIf="item.type === 'function'">
+                        <app-hot-spot-func-function [taskData]="taskData"></app-hot-spot-func-function>
+                    </div>
+                    <div class="tab-content" *ngIf="item.type === 'module'">
+                        <app-hot-spot-func-module [taskData]="taskData"></app-hot-spot-func-module>
+                    </div>
+                </ng-template>
+            </ti-tab>
+        </ti-tabs>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+<div class="home2">
+  <div class="mian-box">
+    <div class="left" [ngClass]="{'active': leftState}" [ngStyle]="{'maxHeight': maxLeftHeight}">
+      <div class="tab-herder" [ngClass]="{'hide-header':!leftState}"
+        *ngIf="toolType === ToolType.SYSPERF">
+        <div class="project-task task-list" (click)="changeTab('project')" tiTipPosition="bottom">
+          <img *ngIf="tabActive==='project'" src="./assets/img/linkage-analysis/engineering-analysis-clicked.svg" />
+          <img *ngIf="tabActive!=='project'" src="./assets/img/linkage-analysis/engineering-analysis-unclicked.svg" />
+          <span [ngClass]="{'active': tabActive==='project'}">{{i18n.common_term_normal}}</span>
+        </div>
+        <div class="linkage-task task-list" (click)="changeTab('linkage')" tiTipPosition="bottom">
+          <img *ngIf="tabActive==='linkage'" src="./assets/img/linkage-analysis/linkage-analysis-clicked.svg" />
+          <img *ngIf="tabActive!=='linkage'" src="./assets/img/linkage-analysis/linkage-analysis-unclicked.svg" />
+          <span [ngClass]="{'active': tabActive==='linkage'}">{{i18n.common_term_report}}</span>
+        </div>
+      </div>
+      <div class="tab-herder" [ngClass]="{'hide-header':!leftState}"
+      *ngIf="toolType === ToolType.TUNINGHELPER">
+      <div class="project-task task-list" (click)="changeTab('project')" tiTipPosition="bottom">
+        <img *ngIf="tabActive==='project'" src="./assets/img/linkage-analysis/tuningHelper-clicked.svg" />
+        <img *ngIf="tabActive!=='project'" src="./assets/img/linkage-analysis/tuningHelper-unclick.svg" />
+        <span [ngClass]="{'active': tabActive==='project'}">{{i18n.compareCreate.tuningAnalysis}}</span>
+      </div>
+      <div class="linkage-task task-list" (click)="changeTab('linkage')" tiTipPosition="bottom">
+        <img *ngIf="tabActive==='linkage'" src="./assets/img/linkage-analysis/compare-clicked.svg" />
+        <img *ngIf="tabActive!=='linkage'" src="./assets/img/linkage-analysis/compare-unclick.svg" />
+        <span [ngClass]="{'active': tabActive==='linkage'}">{{i18n.compareCreate.comparAnalysis}}</span>
+      </div>
+    </div>
+      <div class="tab-content" [ngClass]="{'diagnose-tuningHelper-tab': toolType === ToolType.DIAGNOSE}">
+        <div class="left-mian" id="user-guide-left-main">
+          <div *ngIf="toolType !== ToolType.TUNINGHELPER" class="manage-box">
+            <app-project-manage [hidden]="tabActive !== 'project'" #Tree
+              (operateTask)='onOperateTask($event)' (sendTreeData)='getTreeData($event)'
+              (selectNode)="onSelectNode($event)" (setDeletingProject)="setDeletingProject($event)">
+            </app-project-manage>
+            <app-linkage-manage #linkage [hidden]="tabActive !== 'linkage'"
+              (operateTask)='onLinkageOperate($event)' (selectTask)="openLinkage($event)">
+            </app-linkage-manage>
+          </div>
+          <div *ngIf="toolType === ToolType.TUNINGHELPER" class="manage-box">
+            <app-tuninghelper-manage *ngIf="tabActive === 'project'" #tuninghelper
+              (operateTask)='onTuninghelperOperateTask($event)' (sendTreeData)='getTreeData($event)'
+              (selectNode)="openTuninghelper($event)" (setDeletingProject)="setDeletingProject($event)">
+            </app-tuninghelper-manage>
+            <app-compare-manage *ngIf="tabActive === 'linkage'" #compare
+              (operateTask)='onLinkageOperate($event)' (selectTask)="showTuninghelperCompare($event)">
+            </app-compare-manage>
+          </div>
+        </div>
+        <div class="toggle-btn" (click)='toggleLeft()' [ngClass]="{'active': !leftState}">
+          <img id='ifUnfold' src="./assets/img/home/toggle.svg" />
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="show-data">
+        <div class="tab-box" *ngIf="tabList.length>0">
+          <div class="tab-main">
+            <ti-tabs class="tab-header">
+              <ti-tab *ngFor="let item of tabList;index as i" [header]="item.title" [(active)]="item.active"
+                (activeChange)="onActiveChange()">
+                <ti-tab-header>
+                  <div class="tab-btn" [ngClass]="{'active': item.active}">
+                    <span class="tab-btn-title" tiOverflow>{{item.title}}</span>
+                    <ti-icon class="tab-close" name="close" (click)='closeTab(i, item.title);$event.stopPropagation()'>
+                    </ti-icon>
+                  </div>
+                </ti-tab-header>
+              </ti-tab>
+            </ti-tabs>
+          </div>
+          <div class="tab-content" id="user-guide-scroll" #indexContent>
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+        <div class="notask" *ngIf="tabList.length<=0">
+          <ng-container *ngIf="toolType === ToolType.TUNINGHELPER">
+            <div *ngIf="tabActive==='project'">
+              <img *ngIf="tuninghelper?.tree?.length>0" class="notask-img" src="./assets/img/projects/nodata.png" />
+              <img *ngIf="tuninghelper?.tree?.length==0" class="notask-img"
+                src="./assets/img/projects/no-project-light.png" />
+            </div>
+            <div *ngIf="tabActive==='linkage'">
+              <img *ngIf="compare?.taskList?.length>0" class="notask-img" src="./assets/img/projects/nodata.png" />
+              <img *ngIf="compare?.taskList?.length==0" class="notask-img"
+                src="./assets/img/projects/no-project-light.png" />
+            </div>
+            <div class="notask-word">{{i18n.common_term_task_nodata2}} </div>
+            <button class="add-button" type="button" size="small" tiButton color='primary'
+              *ngIf="tuninghelper?.tree?.length===1 && (tuninghelper?.tree[0]?.ownerId===userInfo.id)  "
+              (click)='btnNewTuningHelperTask(tuninghelper.tree[0])'>{{i18n.common_term_task_new}}</button>
+          </ng-container>
+          <ng-container *ngIf="toolType !== ToolType.TUNINGHELPER">
+            <div *ngIf="tabActive==='project'">
+              <img *ngIf="Tree?.tree?.length>0" class="notask-img" src="./assets/img/projects/nodata.png" />
+              <img *ngIf="Tree?.tree?.length==0" class="notask-img" src="./assets/img/projects/no-project-light.png" />
+            </div>
+            <div *ngIf="tabActive==='linkage'">
+              <img *ngIf="linkage?.taskList?.length>0" class="notask-img" src="./assets/img/projects/nodata.png" />
+              <img *ngIf="linkage?.taskList?.length==0" class="notask-img"
+                src="./assets/img/projects/no-project-light.png" />
+            </div>
+            <div class="notask-word">{{i18n.common_term_task_nodata2}} </div>
+            <button class="add-button" type="button" size="small" tiButton color='primary'
+              *ngIf="Tree?.tree?.length===1 && (Tree?.tree[0]?.ownerId===userInfo.id)  "
+              (click)='btnNewProject(Tree.tree[0])'>{{i18n.common_term_task_new}}</button>
+          </ng-container>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-delete-modal (closaModal)="closeModal($event)" #deleteModal></app-delete-modal>

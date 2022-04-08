@@ -1,0 +1,48 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Run Log Management">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0243962814.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.T21">
+<meta name="brand" content="Huawei Kunpeng Porting Advisor">
+<meta name="DC.Publisher" content="20201230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0239539015">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Run Log Management</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0239539015"></a><a name="EN-US_TOPIC_0239539015"></a>
+
+<h1 class="topictitle1">Run Log Management</h1>
+<div id="body1587207987316"><div class="section" id="EN-US_TOPIC_0239539015__section11470129119"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0239539015__p2444451164517">You have logged in to the <span id="EN-US_TOPIC_0239539015__ph997750104712">Kunpeng Porting Advisor</span> WebUI.</p>
+<div class="note" id="EN-US_TOPIC_0239539015__note982862815415"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0239539015__ul282814281847"><li id="EN-US_TOPIC_0239539015__li98283289419">Only the administrator <strong id="EN-US_TOPIC_0239539015__b9601207513">portadmin</strong> can view and download run logs and change the run log level.</li><li id="EN-US_TOPIC_0239539015__li48284281441">The administrator can click <span><img id="EN-US_TOPIC_0239539015__image6960162721519" src="en-us_image_0304782234.png"></span> and choose <strong id="EN-US_TOPIC_0239539015__b204203102059">System Settings</strong> to set the log level. The logs of the specified level and higher levels will be recorded.</li></ul>
+</div></div>
+</div>
+<div class="section" id="EN-US_TOPIC_0239539015__section3761131418325"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0239539015__ol94441751076"><li id="EN-US_TOPIC_0239539015__li4444051572"><span>On the WebUI, click <span><img id="EN-US_TOPIC_0239539015__image1022623561517" src="en-us_image_0304782236.png"></span> in the upper right corner and choose <strong id="EN-US_TOPIC_0239539015__b126381736424">Log</strong>.</span><p><div class="p" id="EN-US_TOPIC_0239539015__p20470526191919">On the <strong id="EN-US_TOPIC_0239539015__b1651871922715">Log</strong> page displayed, choose <span class="wintitle" id="EN-US_TOPIC_0239539015__wintitle9518151914279"><b>Run Log</b></span>, as shown in <a href="#EN-US_TOPIC_0239539015__fig13230172620106">Figure 1</a>.<div class="fignone" id="EN-US_TOPIC_0239539015__fig13230172620106"><a name="EN-US_TOPIC_0239539015__fig13230172620106"></a><a name="fig13230172620106"></a><span class="figcap"><b>Figure 1 </b>Run log</span><br><span><img id="EN-US_TOPIC_0239539015__image13674171017523" src="en-us_image_0279177593.png" height="132.66750000000002" width="523.6875"></span></div>
+</div>
+</p></li><li id="EN-US_TOPIC_0239539015__li117991350133511"><span>Click <strong id="EN-US_TOPIC_0239539015__b32202015132611">One-Click Download</strong> to download run logs.</span><p><p id="EN-US_TOPIC_0239539015__p8801431544">The run logs downloaded are in the following format:</p>
+<p id="EN-US_TOPIC_0239539015__p3761845446">[Time] [Log level] [Process ID] [Thread name] [Module name: Function name: Number of lines] Log details</p>
+<p id="EN-US_TOPIC_0239539015__p1433186774">Example:</p>
+<pre class="screen" id="EN-US_TOPIC_0239539015__screen19731315471">[2020-08-20 09:50:21] [INFO] [processID:18508] [MainThread] [solution_api:get_solution_category:143] get_solution_category</pre>
+<div class="p" id="EN-US_TOPIC_0239539015__p1782822813412">The log level indicates the importance of the log information. The default log level is <strong id="EN-US_TOPIC_0239539015__b101451137112414">INFO</strong>. The tool run logs are classified into the following levels:<ul id="EN-US_TOPIC_0239539015__ul18639940172519"><li id="EN-US_TOPIC_0239539015__li14750153343811"><strong id="EN-US_TOPIC_0239539015__b122212421263">DEBUG</strong>: debugging information for fault locating.</li><li id="EN-US_TOPIC_0239539015__li775183383811"><strong id="EN-US_TOPIC_0239539015__b242518116271">INFO</strong>: key information about the normal running of the service. </li><li id="EN-US_TOPIC_0239539015__li16751153343817"><strong id="EN-US_TOPIC_0239539015__b16225142512278">WARNING</strong>: events about the system in unexpected status that does not affect the running of the system.</li><li id="EN-US_TOPIC_0239539015__li10751153311386"><strong id="EN-US_TOPIC_0239539015__b778595172713">ERROR</strong>: errors that do not affect the application running.</li></ul>
+</div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0243962814.html">Log Management</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

@@ -1,0 +1,65 @@
+// 页面布局 分辨率 相关样式
+$com30: 1.5625vw;
+$com80: 4.166vw;
+
+$wi520: 27.08vw;
+
+$minWi: 1366px;
+$maxWi: 1920px;
+
+/**
+  计算最小 1366 和 最大 1920 的元素样式
+  @params $px 当前屏幕宽度
+  @params $px 所占百分比
+*/
+@function computePx($px, $percent) {
+  @return $px * $percent / 100;
+}
+
+/* 主体内容 start */
+.page-content-center {
+  min-width: 790px;
+  width: 1040px;
+}
+.left-container .ti3-form .ti3-form-label {
+  width: 9.58vw;
+  padding-right: 0;
+}
+/* 主体内容 end */
+
+/* 历史记录 start */
+.page-history-right {
+  box-sizing: border-box;
+  padding: 30px $com80 30px $com30;
+  min-width: 333px;
+  width: $wi520;
+  max-width: 520px;
+}
+/* 历史记录 end */
+
+@media screen and (min-width: 1500px) and (max-width: 1560px) { 
+  // 历史记录
+  .page-history-right {
+    padding-right: 2.6vw;
+  }
+}
+@media screen and (max-width: 1500px) {
+  // 历史记录
+  .page-history-right {
+    padding-right: 20px;
+  }
+}
+
+// 低于 1366 时
+@media screen and (max-width: 1366px) { 
+  // 导航 banner
+  .banner-container {
+    min-height: computePx($minWi, 16.5);
+    background-position: 0 -45.528px !important;
+  }
+
+  // 首页主体内容
+  .left-container .ti3-form .ti3-form-label {
+    width: computePx($minWi, 9.58);
+  }
+}

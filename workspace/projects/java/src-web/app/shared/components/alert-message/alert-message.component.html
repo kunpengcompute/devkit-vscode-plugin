@@ -1,0 +1,31 @@
+<div class="progress-bg" *ngIf="showAlert">
+  <div id="user-guide-params" class="progress-modal">
+    <div class="modal-header">
+      <p tiOverflow [innerHTML]="alertTitle | html"></p>
+      <span class="close-icon" (mousedown)="alert_close()" *ngIf="!userGuid" >
+        <img (mouseenter)="onHoverClose('closer')" 
+        (mouseleave)="onHoverClose('')" 
+        [src]="hoverClose==='closer'?'./assets/img/newSvg/close_hover.svg':' ./assets/img/newSvg/close_icon.svg'" />
+      </span>
+      <span *ngIf="userGuid">
+        <img  src="./assets/img/newSvg/close_disabled.svg" alt="">
+      </span>
+    </div>
+    <div class="title1">
+      <img *ngIf="srcType" [src]="srcType" alt="" class="icon" />
+      <span class="text" [innerHTML]="content | html"></span>
+    </div>
+    <div class="madal-content" [ngStyle]="{'display':haveContent ? 'block':'none'}">
+      <ng-content select=".alert-body"></ng-content>
+    </div>
+
+    <div class="state_btns">
+      <button [id]="isContinue ? 'user-guide-continue-guardian' : 'user-guide-add-guardian'" type="button" [color]="!deleteStatu ? 'primary' : ''" tiButton (click)="alert_ok()" [disabled]="confirmBtn">
+        {{ isContinue ? i18n.common_term_operate_continue : i18n.common_term_operate_ok }}
+      </button>
+      <button type="button" class="cancel_left" [ngClass]="{cancel: !userGuid}" tiButton (mousedown)="alert_close()" [disabled]="userGuid" [color]="deleteStatu ? 'primary' : ''">
+        {{ i18n.common_term_operate_cancel }}
+      </button>
+    </div>
+  </div>
+</div>

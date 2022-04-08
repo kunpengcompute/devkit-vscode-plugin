@@ -1,0 +1,45 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Failed to Install Library Files">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001224201323.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (System Profiler)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001224361207">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Failed to Install Library Files</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001224361207"></a><a name="EN-US_TOPIC_0000001224361207"></a>
+
+<h1 class="topictitle1">Failed to Install Library Files</h1>
+<div id="body8662426"><div class="section" id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_section13779133512387"><h4 class="sectiontitle">Symptom</h4><p id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_p08780389510">During library file installation, a message indicating library file installation failure is displayed.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_section1439194518389"><h4 class="sectiontitle">Possible Causes</h4><p id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_p2396145717">The dependency library file does not match the OS version.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_section126261051153814"><h4 class="sectiontitle">Procedure</h4><ul id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_ul48561081187"><li id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_li185312231080">If the following types of library files fail to be installed, manually install library files that match the OS version and then reinstall the tool.<ul id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_ul1576353316814"><li id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_li78565820811">glibc</li><li id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_li2085748486">openssl</li><li id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_li685718816817">libffi-devel</li></ul>
+</li><li id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_li1281541489">If other types of library files fail to be installed, manually install library files that match the OS version and restart the tool. For details about how to restart the tool, see "Restarting the System Profiler".</li></ul>
+<p id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_p180323974013">The following steps use the <strong id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_b1311716421902">perl-devel</strong> library file as an example.</p>
+<ol id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_ol12486334115811"><li id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_li154862348582"><span>Check the installation failure message.</span><p><p id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_p1849984625816"><span><img id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_image14443141104218" src="en-us_image_0000001224201531.png"></span></p>
+</p></li><li id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_li117397435584"><span>Check the logs generated during the installation. The following is an example.</span><p><p id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_p19325195917582"><span><img id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_image182496718471" src="en-us_image_0000001178723240.png"></span></p>
+</p></li><li id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_li35791354125817"><span>The preceding information shows that <strong id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_b13871310923">libdb-5.3.21-25.e17.aarch64</strong> has been installed on the current server, and <strong id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_b176661320416">perl-devel-5.16.3-294.el7_6.aarch64</strong> is the file of the required version. Obtain and install the <strong id="EN-US_TOPIC_0000001224361207__en-us_topic_0000001116382396_en-us_topic_0228009130_en-us_topic_0220116450_b164154111358">perl-devel-5.16.3-294.el7_6.aarch64.rpm</strong> file and restart the tool.</span></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001224201323.html">FAQ</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

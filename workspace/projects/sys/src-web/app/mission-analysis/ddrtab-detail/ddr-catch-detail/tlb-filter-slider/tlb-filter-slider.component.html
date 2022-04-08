@@ -1,0 +1,105 @@
+<app-mission-modal #missionModal (beforeDismiss)="beforeDismiss()">
+  <div class="modal-dialog" [ngClass]="[explorer]">
+
+    <div class="modal-title">{{ i18n.ddr_summury.filterTarget }}</div>
+
+    <div class="modal-content">
+      <main>
+        <div class="content-table">
+          <div class="title">{{ i18n.ddr_summury.poupTitle }}</div>
+          <ti-table
+            [(displayedData)]="displayed"
+            [srcData]="srcData"
+            [columns]="columns"
+            [searchWords]="searchWords"
+            [searchKeys]="searchKeys">
+            <table>
+              <thead>
+                <tr>
+                  <!-- 不使用属性checkbox-column而是写class是因为需要拦截全选按钮的点击事件 -->
+                  <th class="checkbox-column">
+                    <div class="select-all-box">
+                      <input
+                        type="checkbox"
+                        tiCheckgroup
+                        valueKey="core"
+                        [items]="srcData.data"
+                        [(checkeds)]="checkedList"
+                        [disabled]="checkedList.length >= 10"
+                        (checkedsChange)="onCheckedChange($event)"/>
+                      <div class="select-all" (click)="typeSelectAll($event)"></div>
+                    </div>
+                  </th>
+                  <th tiOverflow *ngFor="let column of columns" [width]="column.width">
+                    <ti-cell-text>{{ column.title }}</ti-cell-text>
+                    <ti-head-sort *ngIf="column.sortKey"
+                      [sortKey]="column.sortKey"
+                      [asc]="column.asc">
+                    </ti-head-sort>
+                    <ti-head-filter *ngIf="column.filter"
+                      [options]="column.options"
+                      [(ngModel)]="typeSelected"
+                      (select)="onTypeSelect($event)"
+                      [ngClass]="{'ti3-head-filtered': typeSelected}">
+                    </ti-head-filter>
+                    <ti-icon *ngIf="column.searchable"
+                      class="search-icon"
+                      [ngClass]="{'active': searchWord}"
+                      name="search"
+                      [tiTip]="tipContent"
+                      tiTipTrigger="manual"
+                      #searchPop="tiTip"
+                      [tiTipHasArrow]="false"
+                      tiTipPosition="bottom"
+                      (click)="showSearchPop()">
+                    </ti-icon>
+                  </th>
+                </tr>
+              </thead>
+              <tbody *ngIf="displayed.length > 0">
+                <tr *ngFor="let row of displayed">
+                  <td checkbox-column>
+                    <input type="checkbox" tiCheckitem [item]="row" [disabled]="row.disabled"/>
+                  </td>
+                  <td tiOverflow>{{ row.core }}</td>
+                  <td tiOverflow>{{ row.type }}</td>
+                  <td tiOverflow>{{ row.bandwith }}</td>
+                  <td tiOverflow>{{ row.hitrate }}</td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="displayed.length === 0">
+                <tr class="ti3-table-nodata">
+                  <td tiColspan [appNoData]="true"></td>
+                </tr>
+              </tbody>
+            </table>
+            <ti-pagination
+              type="mini"
+              [(currentPage)]="currentPage"
+              [pageSize]="pageSize"
+              [(totalNumber)]="totalNumber">
+            </ti-pagination>
+          </ti-table>
+        </div>
+      </main>
+      <footer>
+        <button tiButton type="button" class="sure-button" color="primary"  (click)="ok()">
+          {{ i18n.common_term_operate_ok }}
+        </button>
+        <button tiButton type="button" (click)="cancel()">
+          {{ i18n.common_term_operate_cancel }}
+        </button>
+      </footer>
+    </div>
+  </div>
+</app-mission-modal>
+
+<ng-template #tipContent>
+  <ti-searchbox class="search-input"
+    autofocus
+    [(ngModel)]="searchWord"
+    (search)="onSearch($event)"
+    (blur)="onSearchBoxBlur()"
+    (clear)="onSearch('')">
+  </ti-searchbox>
+</ng-template>

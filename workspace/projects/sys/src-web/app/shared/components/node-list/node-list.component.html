@@ -1,0 +1,158 @@
+<app-switch-button *ngIf="selectMode !== 'none'" [selectedNum]="selectedNodeIds.length" [originTotal]="originTotal" (selectClick)="onNodeStatusSelect($event)">
+</app-switch-button>
+<ti-table
+  [(displayedData)]="displayed"
+  [srcData]="srcData"
+  [columns]="columns"
+  tiColsResizable
+  class="custemTable"
+  [appLoading]="obtainingTableData"
+  [searchWords]="search.words"
+  [searchKeys]="search.keys"
+  >
+  <!--.ti3-table-fixed-head是表头的容器，它的子元素中的table(thead)是实际显示的表头-->
+  <!--注意:此处一定要使用.ti3-table-fixed-head样式类-->
+  <div class="ti3-table-fixed-head">
+    <table>
+      <thead>
+        <tr>
+          <th [ngClass]="{'notShow': selectMode !== 'HPC'}" *ngIf="selectMode !== 'none'" checkbox-column>
+            <input type="checkbox" tiCheckgroup [items]="allNodeIds" [checkeds]="selectedNodeIds" [disabled]="selectMode !== 'HPC'"
+             (checkedsChange)="selectedNodeIdsChange.emit($event)"/>
+          </th>
+
+          <ng-container *ngFor="let column of columns">
+            <th tiOverflow width="{{ column.width }}">
+              <div class="thContent" [ngClass]="{center: column.align}">
+                <ti-cell-text>{{ column.title }}</ti-cell-text>
+                <hy-popup-search
+                  *ngIf="column.search"
+                  [(ngModel)]="search.words[column.searchIndex]"
+                ></hy-popup-search>
+                <div
+                  *ngIf="column.filter"
+                  class="filter-icon">
+                  <ti-head-filter 
+                    [options]="column.options"
+                    [(ngModel)]="column.selected"
+                    (select)="onNodeStatusSelect(isSelected)"
+                    [ngClass]="{'ti3-head-filtered': column.selected && column.selected.length}"
+                    [multiple]="column.multiple">
+                  </ti-head-filter>
+                </div>
+                <ti-icon
+                  class="imgIcon"
+                  *ngIf="column.iconTip"
+                  [tiTip]="column.iconTip"
+                  style="margin-left:10px;"
+                  tiTipMaxWidth='370px'
+                  tiTipPosition="bottom"
+                >
+                  <img class="tipImg" src='./assets/img/summary/tooltip.png'>
+                </ti-icon>
+              </div>
+            </th>
+          </ng-container>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+  <div class="ti3-table-container ti3-resize-wrapper" hyNodata [nodataShow]="displayed.length === 0">
+    <table>
+      <thead>
+        <tr>
+          <th *ngIf="selectMode !== 'none'" checkbox-column></th>
+          <th *ngFor="let column of columns" tiOverflow width="{{column.width}}"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let node of displayed; trackBy: trackByFn">
+          <td *ngIf="selectMode !== 'none'" checkbox-column>
+            <input
+              type="checkbox"
+              tiCheckitem
+              [item]="node.id"
+              [disabled]="!selectedNodeIds.includes(node.id) && (node.nodeStatus !== 'on' || selectedNodeIds.length >= nodeNumLimit)"
+            />
+          </td>
+
+          <td *ngFor="let column of columns">
+            <ng-container [ngSwitch]="column.prop">
+              <!-- 节点状态 -->
+              <div *ngSwitchCase="'nodeStatus'" class="nodeStatus">
+                <div *ngIf="['init', 'lock', 'update'].includes(node[column.prop]); else icon_nodeStatus" class="running"></div>
+
+                <ng-template #icon_nodeStatus>
+                  <div class="icon_nodeStatus" [style.background]="nodeStatusList[node[column.prop]].color"></div>
+                </ng-template>
+                
+                <span tiOverflow>
+                  {{ nodeStatusList[node[column.prop]].text }}
+                  {{ node.nodeStatusInfo ? (i18n.common_term_sign_colon + node.nodeStatusInfo) : ''  }}
+                </span>
+              </div> 
+
+              <!-- 运行目录/安装目录 -->
+              <div *ngSwitchCase="['Installation', 'Log'].includes(column.prop) ? column.prop : ''" class="alarmInfo">
+                <span *ngIf="node.nodeStatus === 'failed' || isNull(alarmInfo[node.nodeIP + '.' + column.prop]?.usageRatio); else fillGauge" tiOverflow>--</span>
+
+                <ng-template #fillGauge>
+                  <div
+                    [tiTip]="alarmInfo[node.nodeIP + '.' + column.prop] && alarmInfoTipContent"
+                    [tiTipContext]="alarmInfo[node.nodeIP + '.' + column.prop] || {}"
+                    tiTipPosition="top"
+                    [tiTipMaxWidth]="'360px'"
+                    #t="tiTip"
+                    (mouseenter)="updateGaugeTipContent(t, alarmInfo[node.nodeIP + '.' + column.prop])"
+                  >
+                    <app-liquid-fill-gauge
+                      width="16px"
+                      [value]="alarmInfo[node.nodeIP + '.' + column.prop]?.usageRatio"
+                      [gaugeColor]="alarmInfo[node.nodeIP + '.' + column.prop]?.gaugeColor"
+                    ></app-liquid-fill-gauge>
+                    <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ alarmInfo[node.nodeIP + '.' + column.prop]?.free }}</span>
+                  </div>
+                </ng-template>
+              </div>
+
+              <!-- 操作 -->
+              <div *ngSwitchCase="'operate'" class="operateBox">
+                <ng-container *ngFor="let operate of node[column.prop]; let index = index">
+                  <div class="operate-item">
+                    <span class="operate-btn" (click)="operate.onclick(node)">{{ operate.label }}</span>
+                    <span class="operate-divider"></span>
+                  </div>
+                </ng-container>
+              </div>
+
+              <!-- 其他【只显示文本】 -->
+              <span *ngSwitchDefault tiOverflow style="width: 100%;">{{ node[column.prop] || '--' }}</span>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ti-pagination
+    *ngIf="hasPagination"
+    [autoHide]="true"
+    [showGotoLink]="true"
+    [(currentPage)]="currentPage"
+    [pageSize]="pageSize"
+    [(totalNumber)]="totalNumber">
+  </ti-pagination>
+</ti-table>
+
+
+<!-- 目录信息显示 -->
+<ng-template #alarmInfoTipContent let-context='context'>
+  <div class="alarmTip" >
+    <div class="tipLine">{{ context.total }}</div>
+    <div class="tipLine" *ngIf="context.hasOverflow">{{ context.free }}</div>
+    <div class="tipLine">{{ context.suggest }}</div>
+
+    <p *ngIf="context.suggestion" class="suggestion">{{ context.suggestion }}</p>
+  </div>
+</ng-template>

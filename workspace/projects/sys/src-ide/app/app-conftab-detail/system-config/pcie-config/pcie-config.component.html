@@ -1,0 +1,31 @@
+<div class="download" style="position: absolute; right:5vw;top:20px;z-index: 99;">
+  <a style="display: block;margin-bottom:5px;" (click)="downloadCsv()"
+    [title]="i18n.sys_cof.sum.download_csv">
+    <img src="./assets/img/download.svg" alt="" />
+  </a>
+</div>
+<div class="system-content">
+  <div class="system-item">
+    <h1 class="system-content-title">{{i18n.sys_cof.sum.pcie}}</h1>
+    <img src="./assets/img/summary/tooltip.png" class="system-tip blockCls" *ngIf="tipStr !='' && tipStr !='NULL'"
+      [tiTip]='tipStr' tiTipMaxWidth='500px' tiTipPosition="top-left" />
+    <table class="system-content-table">
+      <thead>
+        <tr class="system-titlebar">
+          <th tiOverflow tiTipPosition *ngFor="let column of columns ;index as i" [ngClass]="{'system-line': i!=0}">
+            {{column.title}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of list" class="system-word">
+          <td tiOverflow tiTipPosition='left'>{{item.identifier}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.deviceID}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.supportSpeed}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.adoptionSpeed}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.maxPayload}}</td>
+          <td tiOverflow tiTipPosition='left'>{{item.details}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

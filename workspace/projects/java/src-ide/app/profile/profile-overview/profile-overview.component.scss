@@ -1,0 +1,277 @@
+.overview-container {
+    height: calc(100% - 50px);
+
+    .params-env {
+        flex: 1;
+        padding-top: 9px;
+        font-size: 14px;
+        line-height: 14px;
+        padding-bottom: 9px;
+        padding-left: 16px;
+        min-width: 950px;
+        margin-bottom: 20px;
+        .var-name {
+            color: #aaaaaa;
+        }
+
+        .var-value+.var-name {
+            margin-left: 40px;
+        }
+
+        .var-value {
+            margin-left: 8px;
+            color: #e8e8e8;
+        }
+    }
+
+    .topExecuteBtn {
+        background: #0067ff;
+        width: 160px;
+        height: 28px;
+        line-height: 28px;
+        margin-top: 20px;
+        border-radius: 2px;
+        font-size: 12px;
+        display: block;
+        color: #ffffff;
+    }
+
+
+    .topExecuteBtn:active {
+        background-color: #0057D9 !important;
+        color: var(--primary-button-font-color) !important;
+    }
+
+    .overview-params {
+        display: flex;
+        width: 50%;
+        color: #aaaaaa;
+
+        .params-args {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .args-value {
+            line-height: 32px;
+            padding-left: 24px;
+            overflow-y: scroll;
+            height: 500px;
+        }
+    }
+
+    .args-title {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+
+    .loading {
+        min-height: 580px;
+        min-width: 950px;
+        margin-top: 20px;
+    }
+
+    .loadData {
+        img {
+            width: 13%;
+            display: block;
+            position: relative;
+            top: -10%;
+        }
+
+        width: 100%;
+        padding: 50px 0px 50px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 60px;
+    }
+
+    .loadData_args {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .overview-prop {
+        margin-bottom: 32px;
+        padding: 20px;
+        width: 50%;
+        .magrin-spec {
+            margin-top: 21px;
+        }
+    }
+
+    .overview-btm {
+        min-width: 950px;
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        margin-top: 20px; 
+    }
+}
+
+
+:host ::ng-deep .ti3-table>.ti3-table-container>table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+}
+
+:host ::ng-deep .vscode-dark .ti3-table>.ti3-table-fixed-head>table>thead>tr>th:not(:last-child)::after {
+    background: #545454 !important;
+}
+
+:host ::ng-deep .ti3-table>.ti3-table-fixed-head>.ti3-table-fixed-head-filler {
+    display: none !important;
+}
+
+:host ::ng-deep .ti3-table>.ti3-table-fixed-head+.ti3-table-container {
+    border-bottom: none !important;
+}
+
+:host ::ng-deep .ti3-table .ti3-table-container::-webkit-scrollbar-thumb {
+    opacity: 0.2;
+    border: 8px solid rgba(232, 232, 232, 0.2) !important;
+    border-radius: 4px;
+}
+
+:host ::ng-deep .ti3-table>.ti3-table-fixed-head>table {
+    width: 100% !important;
+}
+
+.ti3-table-scroll-bar::-webkit-scrollbar,
+.ti3-table>.ti3-table-container::-webkit-scrollbar {
+    width: 5px !important;
+}
+
+.imgs {
+    width: 20%;
+    display: block;
+    position: relative;
+    top: -10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+:host ::ng-deep .ti3-btn-primary:hover {
+    background: #267DFF !important;
+}
+
+:host ::ng-deep .ti3-btn-primary:active {
+    background-color: #0057D9 !important;
+}
+
+:host ::ng-deep .ti3-btn-default[disabled],
+[tiButton][disabled] {
+    border: 0px solid #e6ebf5 !important;
+    background: #313131 !important;
+}
+
+// 深色主題
+:host ::ng-deep .vscode-dark {
+    .overview-container .overview-params .args-value {
+        background: #161616;
+    }
+    .ti3-table>.ti3-table-fixed-head>.ti3-table-fixed-head-filler {
+        background-color: #2a2a2a !important;
+    }
+
+    .overview-container .args-title {
+        color: #e8e8e8;
+    }
+
+    .ti3-table>.ti3-table-container>table>tbody>tr {
+        background-color: #161616 !important;
+        color: #aaaaaa;
+        border-bottom: 1px solid #545454 !important;
+    }
+
+    .overview-params {
+        .params-args {
+            .loadData_args {
+                background-color: #161616;
+                height: 496px;
+            }
+        }
+    }
+
+    .params-env {
+        background-color: rgba(18, 34, 59, 0.73);
+    }
+
+    .ti3-table>.ti3-table-fixed-head>table>thead>tr>th {
+        color: #e8e8e8 !important;
+    }
+
+    .noDataTxt {
+        font-size: 1.1rem;
+        position: relative;
+        color: #aaaaaa;
+        text-align: center;
+    }
+}
+
+//浅色主体
+::ng-deep .vscode-light {
+    .overview-container .overview-params .args-value {
+        background: #ffffff;
+        color: #222;
+        border: 1px solid #e1e2ee;
+    }
+
+    .overview-container .args-title {
+        color: #222;
+    }
+
+    .ti3-table>.ti3-table-container>table>tbody>tr {
+        background-color: #fff !important;
+        color: #222;
+        border-bottom: 1px solid #e1e6ee !important;
+    }
+
+    .overview-params {
+        .params-args {
+            .loadData_args {
+                background-color: #fff;
+                height: 496px;
+                color:#222;
+            }
+        }
+    }
+
+    .params-env {
+        background-color: #fff !important;
+        border: 1px solid #979797 !important;
+        border-radius: 2px !important;
+        .var-name{
+            color: #616161 !important;
+        }
+        .var-value{
+            color: #222 !important;
+        }
+    }
+
+    .ti3-table>.ti3-table-fixed-head>table>thead>tr>th {
+        color: #222 !important;
+    }
+
+    .noDataTxt {
+        font-size: 1.1rem;
+        position: relative;
+        color: var(--ti-table-nodata-td-color);
+        text-align: center;
+    }
+    .topExecuteBtn:disabled {
+        background: #f5f5f5 !important;
+        border: 1px solid #ccc !important;
+        border-radius: 2px;
+    }
+}
+:host ::ng-deep .vscode-dark .overview-prop .ti3-table-container {
+    background: #161616;
+}
+:host ::ng-deep .vscode-light .overview-prop .ti3-table-container {
+    background: #ffffff;
+}

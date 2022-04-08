@@ -1,0 +1,64 @@
+::ng-deep .vscode-dark {
+    --tip-background:#424242;
+    --tip-text-color:#e8e8e8;
+}
+
+::ng-deep .vscode-light {
+    --tip-background:#ffffff;
+    --tip-text-color:#282b33;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    .follow-tooltip {
+        margin: 0px !important;
+        opacity: 0;
+        position: absolute;
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 14px;
+        background-color: var(--tip-background);
+        border-radius: 5px;
+        margin-left: 12px;
+        pointer-events: none;
+        cursor: default;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 3px;
+
+        @for $i from 0 through 100 {
+            $offset: '[offset="#{$i}"]';
+
+            &[placement="left"]#{$offset} {
+                transform: translate(-100%, $i * -1%);
+            }
+
+            &[placement="right"]#{$offset} {
+                transform: translate(0, $i * -1%);
+            }
+        }
+    }
+}
+
+.tip-warpper {
+    background-color: var(--tip-background);
+    font-size: 12px;
+    .time {
+        color: var(--tip-text-color);
+    }
+    .row {
+        display: flex;
+        justify-content: space-between;
+        color: var(--tip-text-color);
+        .label {
+            margin-right: 24px;
+        }
+        & + .row {
+            margin-top: 8px;
+        }
+    }
+}
+.line {
+    width: 100%;
+    height: 0.5px;
+    border-bottom: 0.5px solid #ccc;
+}

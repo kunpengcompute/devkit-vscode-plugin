@@ -1,0 +1,37 @@
+<div class="ti3-tree-container ti3-tree-parent-node custom-expand-tree">
+    <div *ngFor="let node of data; index as i;">
+        <ng-container *ngTemplateOutlet="treeItem; context: {$implicit: node, index: i}"></ng-container>
+    </div>
+</div>
+
+<ng-template #treeItem let-node let-i=index>
+    <div class="ti3-tree-content-box"
+        [id]="appendId(i + '_node')"
+        [ngClass]="{'ti3-tree-item-active' : actived === node, 'ti3-tree-item-leaf': isLeaf(node), 'ti3-tree-content-box-disabled': node.disabled}"
+        (click)="onContentClick(node)">
+        <i (click)="onClickPnodeIcon(node, $event)" [id]="appendId(i + '_icon')"
+            class="ti3-icon expand-icon ti3-icon-right-1"
+            [ngClass]="{'active': node.expanded}">
+        </i>
+        <label class="ti3-tree-checkbox-wrapper" [hidden]="!multiple">
+            <input type="checkbox" [(ngModel)]="node.checked" [disabled]="node.disabled" *ngIf="showCheckboxFn(node)"
+                [indeterminate]="node.checked === 'indeterminate'" (change)="onInputChange(node, $event)" tiCheckbox />
+        </label>
+        <div (click)="onItemWrapperClick(node, $event)" [id]="appendId(i + '_content')" class="ti3-tree-node-text-wrapper">
+            <ng-container *ngIf="itemTemplate else labelTemplate">
+                <ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: node, index: i}">
+                </ng-container>
+            </ng-container>
+            <ng-template #labelTemplate>
+                <i class="{{getItemIcon(node)}}" *ngIf='node.expandIcon || node.collapseIcon'></i>
+                <span class='ti3-tree-node-text'>{{node.label}}</span>
+            </ng-template>
+        </div>
+    </div>
+    <div *ngIf="!isLeaf(node)" class='ti3-tree-parent-node' [hidden]="!node.expanded">
+        <div class='ti3-tree-leaf-node'
+            *ngFor="let children of node.children; index as i; trackBy: trackByFn">
+            <ng-container *ngTemplateOutlet="treeItem; context: {$implicit: children, index: i}"></ng-container>
+        </div>
+    </div>
+</ng-template>

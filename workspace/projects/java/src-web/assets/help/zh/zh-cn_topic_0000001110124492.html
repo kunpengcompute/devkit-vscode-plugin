@@ -1,0 +1,47 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="配置JDK">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0233026414.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="鲲鹏性能分析工具">
+<meta name="DC.Publisher" content="20210406">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001110124492">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>配置JDK</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001110124492"></a><a name="ZH-CN_TOPIC_0000001110124492"></a>
+
+<h1 class="topictitle1">配置JDK</h1>
+<div id="body0000001110124492"><p id="ZH-CN_TOPIC_0000001110124492__p7282717111915"><span id="ZH-CN_TOPIC_0000001110124492__ph1828211781914">Java性能分析</span>辅助软件采用非交互式Shell部署，依赖JDK 8及以上版本运行。需要在目标环境中安装支持版本的JDK，并配置 JAVA_HOME。</p>
+<p id="ZH-CN_TOPIC_0000001110124492__p72827173198">配置JAVA_HOME环境变量，可参考如下方法：</p>
+<ul id="ZH-CN_TOPIC_0000001110124492__ul11282817161915"><li id="ZH-CN_TOPIC_0000001110124492__li142821917131918">对于Debian/Ubuntu/UOS 20/凝思操作系统，上传JDK文件至服务器中，在“ /etc/environment”文件中添加如下内容：<p id="ZH-CN_TOPIC_0000001110124492__p142828179193"><a name="ZH-CN_TOPIC_0000001110124492__li142821917131918"></a><a name="li142821917131918"></a><strong id="ZH-CN_TOPIC_0000001110124492__b728219172192">export JAVA_HOME=</strong>/usr/jdk/jdk1.8.0</p>
+<p id="ZH-CN_TOPIC_0000001110124492__p7281301184">其中 /usr/jdk/jdk1.8.0 是JDK文件的绝对路径，请根据实际场景填写。</p>
+<p id="ZH-CN_TOPIC_0000001110124492__p628211174196">执行以下命令应用JAVA_HOME配置：</p>
+<p id="ZH-CN_TOPIC_0000001110124492__p928281781918"><strong id="ZH-CN_TOPIC_0000001110124492__b1428216174197">source </strong><strong id="ZH-CN_TOPIC_0000001110124492__b1328271701911">/etc/environment</strong></p>
+</li><li id="ZH-CN_TOPIC_0000001110124492__li112821217131914">对于CentOS/EulerOS/openEuler/中标麒麟/麒麟V10/SUSE操作系统，上传JDK文件至服务器中，在“~/.bashrc”文件中配置JAVA_HOME，如果不存在“~/.bashrc”文件，可执行<strong id="ZH-CN_TOPIC_0000001110124492__b42821179194">touch ~/.bashrc</strong>命令创建该文件，并在文件中添加如下内容：<p id="ZH-CN_TOPIC_0000001110124492__p192822176196"><strong id="ZH-CN_TOPIC_0000001110124492__b128211710194">export JAVA_HOME=</strong>/usr/jdk/jdk1.8.0</p>
+<p id="ZH-CN_TOPIC_0000001110124492__p12306132192010">其中 /usr/jdk/jdk1.8.0 是JDK文件的绝对路径，请根据实际场景填写。</p>
+<p id="ZH-CN_TOPIC_0000001110124492__p182828172195">执行以下命令应用JAVA_HOME配置：</p>
+<p id="ZH-CN_TOPIC_0000001110124492__p8282117141920"><strong id="ZH-CN_TOPIC_0000001110124492__b128251711918">source</strong><strong id="ZH-CN_TOPIC_0000001110124492__b5282217121917"> ~/.bashrc</strong></p>
+</li></ul>
+<div class="note" id="ZH-CN_TOPIC_0000001110124492__note16361439173216"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001110124492__p4371339123210">JAVA_HOME配置完成后，如果JDK版本是JDK 8，需要在CLASSPATH环境变量里配置正确的<strong id="ZH-CN_TOPIC_0000001110124492__b7282717101915">tools.jar</strong>路径。</p>
+</div></div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0233026414.html">常用操作</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

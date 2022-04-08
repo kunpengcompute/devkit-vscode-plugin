@@ -1,0 +1,36 @@
+.sys-config-os {
+  display: flex;
+  flex-direction: column;
+
+  .os-info-item {
+    font-size: 12px;
+    line-height: 18px;
+    display: flex;
+
+    .label {
+      display: flex;
+      width: 242px;
+      color: var(--common-color-font-secondary);
+
+      hy-theme-content {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        margin-left: 8px;
+        margin-top: 2px;
+      }
+    }
+
+    .text {
+      color: var(--common-color-font-primary);
+
+      p + p {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .os-info-item + .os-info-item {
+    margin-top: 20px;
+  }
+}

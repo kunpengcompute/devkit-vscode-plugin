@@ -1,0 +1,50 @@
+<ng-template #batchModal let-context="context">
+  <ti-modal-header>
+    {{
+      (batchOptTypeEnum.Import === batchOptType
+        ? "nodeManagement.batchImportNodes"
+        : "nodeManagement.batchDeleteNodes"
+      ) | i18n
+    }}
+    <span class="tip-nodeclose" (click)="onModelClose($event)">
+      <img class="ti3-close" src="./assets/img/analyzing/images/close_icon.svg" />
+      <img class="ti3-close" src="./assets/img/analyzing/images/close_hover.svg">
+    </span>
+  </ti-modal-header>
+  <ti-modal-body>
+    <div class="backvalidfail">
+      <div class="warpper-line"></div>
+      <div class="prompt-information">
+        <p>
+          <img src="./assets/img/tip/warn.png" style="margin-right: 3px;"/>
+          {{
+            (batchOptTypeEnum.Import === batchOptType
+              ? "nodeManagement.pwOrPkNotPequireImport"
+              : "nodeManagement.pwOrPkNotPequireDelete"
+            ) | i18n
+          }}
+        </p>
+      </div>
+      <div class="node-information-display">
+        <app-common-table [commonTableData]="processTableData">
+          <ng-template let-displayed let-tabcolumns="columns">
+            <tbody>
+              <tr *ngFor="let row of displayed; index as i">
+                <ng-container *ngFor="let col of tabcolumns">
+                  <td tiOverflow>
+                    {{ row[col.key] || "--" }}
+                  </td>
+                </ng-container>
+              </tr>
+            </tbody>
+          </ng-template>
+        </app-common-table>
+      </div>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" (click)="onModelClose($event)" tiButton>
+      {{ "common_term_operate_close" | i18n }}
+    </button>
+  </ti-modal-footer>
+</ng-template>

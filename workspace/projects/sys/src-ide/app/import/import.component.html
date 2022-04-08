@@ -1,0 +1,79 @@
+<div>
+    <app-banner></app-banner>
+    <div class="import-box">
+        <div class="import-form">
+            <div class="title">{{i18n.project.importTask}}</div>
+            <div class="formList" class="allforms">
+                <!-- 工程名 -->
+                <div class="form">
+                    <span class="label">{{i18n.common_term_projiect_name}}</span>
+                    <input type="text" tiText id="projectName"
+                        [placeholder]="i18n.project.createImportTaskProjectPlaceholder" [(ngModel)]="projectName"
+                        (blur)="projectName = projectName.trim()"
+                        (ngModelChange)="priojectNameChange($event)" />
+                    <div *ngIf="isShowProjectError" class="info ti3-unifyvalid-error-container">
+                        <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                        <span>{{projectNameVerifyMsg}}</span>
+                    </div>
+                </div>
+                <!-- 任务名 -->
+                <div class="form">
+                    <span class="label">{{i18n.common_term_task_name}}</span>
+                    <input type="text" tiText id="taskName" [placeholder]="i18n.project.createImportTaskTaskPlaceholder"
+                        (blur)="taskName = taskName.trim()"
+                        [(ngModel)]="taskName" (ngModelChange)="taskNameChange($event)" />
+                    <div *ngIf="isShowTaskError" class="info ti3-unifyvalid-error-container">
+                        <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                        <span>{{taskNameVerifyMsg}}</span>
+                    </div>
+                </div>
+                <!-- 导入模式 -->
+                <div class="form mode-choose">
+                    <span class="mode-label">{{i18n.project.importMode}}</span>
+                    <span class="choose-list" *ngFor="let option of importTaskForm.importMode.list; index as index"
+                        [ngStyle]="{'margin-left': index ? '32px' : '0px'}">
+                        <input type="radio" tiRadio [label]="option.label" [value]="option.value"
+                            style="margin-right: 32px;line-height: 28px;" [(ngModel)]="modeClicked"
+                            (ngModelChange)='onModeClick(index)' />
+                    </span>
+                </div>
+            </div>
+            <!-- 上传文件 -->
+            <div class="form" *ngIf="!modeClicked">
+                <span class="label ti3-icon  ti3-icon-staricon">{{i18n.project.uploadFile}}</span>
+                <input type="text" tiText id="uploadFile" [(ngModel)]="uploadFile"
+                    (ngModelChange)="uploadChange($event)" readonly />
+                <button tiButton type="button" color="default" class="uploadBtn"
+                    (click)="toImportTask()">{{ i18n.project.browse }}
+                    <input type="file" accept=".tar" id="upload" style="display: none;"
+                        (change)="toUploadFile($event,'normal')" multiple />
+                </button>
+                <div *ngIf="isShowUploadError" class="info ti3-unifyvalid-error-container">
+                    <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                    <span>{{uploadVerifyMsg}}</span>
+                </div>
+            </div>
+            <!-- 指定文件路径 -->
+            <div class="form" *ngIf="modeClicked">
+                <span class="label ti3-icon  ti3-icon-staricon">{{i18n.project.fileStoragePath}}</span>
+                <input type="text" tiText id="filePath" [(ngModel)]="fileSavePath"
+                    (ngModelChange)="filePathChange($event)" [placeholder]="i18n.project.fileStoragePathPlaceholder" />
+                <div *ngIf="isShowFilePathError" class="info ti3-unifyvalid-error-container">
+                    <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                    <span>{{filePathVerifyMsg}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="btns">
+            <button tiButton class="primary-btn" *ngIf="uploadType ==='web'" type="button" color="primary" style="margin-right: 16px"
+                [disabled]="!uploadFile || isShowProjectError || isShowTaskError" (click)="sureImportTask()">
+                {{ i18n.common_term_operate_ok }} </button>
+            <button tiButton class="primary-btn" *ngIf="uploadType ==='server'" type="button" color="primary" style="margin-right: 16px"
+                [disabled]="!fileSavePath || isShowFilePathError || isShowProjectError || isShowTaskError" (click)="sureImportTask()">
+                {{ i18n.common_term_operate_ok }} </button>
+            <button type="button" class="minor-btn" (click)="cancelOperation()" tiButton>
+                {{ i18n.common_term_operate_cancel }}
+            </button>
+        </div>
+    </div>
+</div>

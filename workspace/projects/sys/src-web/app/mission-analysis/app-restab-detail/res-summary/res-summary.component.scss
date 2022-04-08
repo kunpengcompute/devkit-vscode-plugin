@@ -1,0 +1,21 @@
+:host ::ng-deep .res-summury-container {
+  >.tableContainer {
+    &:not(:first-of-type) {
+      margin-top: 32px;
+    }
+    
+    >.title {
+      font-size: 20px;
+      line-height: 30px;
+      color: #222;
+      padding-bottom: 10px;
+    }
+
+    >.ti3-table {
+      margin-top: 10px;
+    }
+  }
+  .disabledClick{
+    color: #cccccc;
+  }
+}

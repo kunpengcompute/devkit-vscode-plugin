@@ -1,0 +1,16 @@
+<ng-template #viewStack let-context='context'>
+    <ti-modal-header>{{ deleteModelTitle }}</ti-modal-header>
+    <ti-modal-body>
+      <div class="title">
+       <i class="ti3-msg-icon ti3-icon ti3-icon-warn"></i>
+      <span class="deleteModelTip">{{deleteModelTip}}</span> 
+      </div>
+      <app-general-table [dataList]="compareData" [columns]="compareTitle"></app-general-table>
+    </ti-modal-body>
+    <ti-modal-footer>
+      <div>
+        <button tiButton (click)="closeModal(context)">{{ i18n.common_term_operate_ok }}</button>
+        <button tiButton color="primary" (click)="context.dismiss()">{{i18n.mission_modal.cancle}}</button>
+      </div>
+    </ti-modal-footer>
+  </ng-template>

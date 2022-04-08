@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "http://*.*.*.*:7998/",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": "http://*.*.*.*:7998/"
+    }
+  }
+}

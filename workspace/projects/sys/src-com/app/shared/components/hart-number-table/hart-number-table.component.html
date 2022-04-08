@@ -1,0 +1,37 @@
+<div class="hart-number-table">
+  <app-common-table [isDetails]="false" [isFilters]="true" [commonTableData]="interruptData" (trigger)="triggerPop($event, softNumberMapModal, softNameMapModal)"></app-common-table>
+</div>
+
+<!-- 硬中断编号 分布图 -->
+<ng-template #softNumberMapModal let-context='context'>
+  <ti-modal-header>{{ 'net_io.xps_rps.hard_info.Interruption_title' | i18n }}</ti-modal-header>
+  <ti-modal-body>
+    <div class="content-warpper">
+      <app-hard-irq-affinity-dist 
+        [ipiData]="context.ipiData"
+        [hardIrqData]="context.hartData"
+        [bodyTitle]="context.bodyTitle"
+      ></app-hard-irq-affinity-dist>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" (click)="context.close()" tiButton>{{ 'common_term_operate_close' | i18n }}</button>
+  </ti-modal-footer>
+</ng-template>
+
+<!-- 网络设备名称中断 分布图 -->
+<ng-template #softNameMapModal let-context='context'>
+  <ti-modal-header>{{ 'net_io.xps_rps.hard_info.network_Interruption_title' | i18n }}</ti-modal-header>
+  <ti-modal-body>
+    <div class="content-warpper">
+      <app-netport-irq-affinity-dist
+        [ipiData]="context.ipiData"
+        [irqData]="context.irqData"
+        [bodyTitle]="context.bodyTitle"
+      ></app-netport-irq-affinity-dist>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" (click)="context.close()" tiButton>{{ 'common_term_operate_close' | i18n }}</button>
+  </ti-modal-footer>
+</ng-template>

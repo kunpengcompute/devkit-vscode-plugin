@@ -1,0 +1,133 @@
+<div class="bubble-box"
+  [ngClass]="{
+    active: active,
+    'no-gradation': !sysData?.length && !appData?.length,
+    'idle-bubble': status === 'idle',
+    'normal-bubble': status === 'normal',
+    'busy-bubble': status === 'busy'
+  }">
+  <div class="bubble-box-header">
+    <span class="bubble-header-name" *ngIf="active">{{ status | titlecase }}</span>
+    <span class="bubble-header-threshold">{{
+      (threshold?.start | percent) + '~' + (threshold?.end | percent)
+    }}</span>
+  </div>
+  <div class="bubble-shrink-box" *ngIf="!active">
+    <p>{{ status | titlecase }}</p>
+    <p tiOverflow>{{ sysData?.length + appData?.length }} {{ type }}</p>
+  </div>
+  <div #bubbleBox class="bubble-expand-box" *ngIf="active" [ngClass]="{'no-bubble': !sysData?.length && !appData?.length}">
+    <div class="left-bubble-wrapper" *ngIf="sysData?.length > 0 || appData?.length > 0">
+      <p class="bubble-wrapper-title">{{ 'tuninghelper.taskDetail.systemProcessTop50' | i18n }}</p>
+      <hr>
+      <div class="bubble-container">
+        <app-bubble
+          *ngFor="let bubble of (sysData | page:viewPageConfig.sys)"
+          [active]="bubble.id === currShowBubble"
+          [status]="status"
+          (click)="onBubbleClick(bubble.id, 'sys')"
+          [opacity]="bubble.opacity"
+          [shape]="shape"
+          [info]="bubbleInfoMap ? bubbleInfoMap[bubble.id] : {}"
+          [infoTipContent]="bubbleInfoTipContent">
+        </app-bubble>
+      </div>
+      <div class="bubble-page-btn" *ngIf="viewPageConfig.sys.pageArr.length > 1">
+        <hy-theme-content class="bubble-page-left"
+          [ngClass]="{'disabled': viewPageConfig.sys.pageNumber === 1}"
+          (click)="previousPage('sys')">
+          <app-icon-react name="arrowLeftDark" dark
+            [freeze]="viewPageConfig.sys.pageNumber === 1 ? 'disabled' : ''"
+          ></app-icon-react>
+          <app-icon-react name="arrowLeft" light
+            [freeze]="viewPageConfig.sys.pageNumber === 1 ? 'disabled' : ''"
+          ></app-icon-react>
+        </hy-theme-content>
+        <hy-theme-content class="bubble-page-right"
+          [ngClass]="{'disabled': viewPageConfig.sys.pageNumber ===
+            viewPageConfig.sys.idle?.pageArr[viewPageConfig.sys.pageArr.length - 1]}"
+          (click)="nextPage('sys')">
+          <app-icon-react name="arrowLeftDark" dark
+            [freeze]="viewPageConfig.sys.pageNumber ===
+            viewPageConfig.sys.pageArr[viewPageConfig.sys.pageArr.length - 1]
+            ? 'disabled' : ''"
+          ></app-icon-react>
+          <app-icon-react name="arrowLeft" light
+            [freeze]="viewPageConfig.sys.pageNumber ===
+            viewPageConfig.sys.pageArr[viewPageConfig.sys.pageArr.length - 1]
+            ? 'disabled' : ''"
+          ></app-icon-react>
+        </hy-theme-content>
+      </div>
+      <div class="bubble-page-box" *ngIf="viewPageConfig.sys.pageArr.length > 1">
+        <span
+          class="bubble-page-item"
+          *ngFor="let pageNumber of viewPageConfig.sys.pageArr"
+          [ngClass]="{'active': pageNumber === viewPageConfig.sys.pageNumber}"
+        ></span>
+      </div>
+    </div>
+    <div class="right-bubble-wrapper" *ngIf="sysData?.length > 0 || appData?.length > 0">
+      <p class="bubble-wrapper-title">{{ appTitle + ('tuninghelper.taskDetail.relatedProcess' | i18n) }}</p>
+      <hr>
+      <div class="bubble-container">
+        <app-bubble
+          *ngFor="let bubble of (appData | page:viewPageConfig.app)"
+          [active]="bubble.id === currShowBubble"
+          [status]="status"
+          (click)="onBubbleClick(bubble.id, 'app')"
+          [opacity]="bubble.opacity"
+          [shape]="shape"
+          [info]="bubbleInfoMap ? bubbleInfoMap[bubble.id] : {}"
+          [infoTipContent]="bubbleInfoTipContent">
+        </app-bubble>
+      </div>
+      <div class="bubble-page-btn" *ngIf="viewPageConfig.app.pageArr.length > 1">
+        <hy-theme-content class="bubble-page-left"
+          [ngClass]="{'disabled': viewPageConfig.app.pageNumber === 1}"
+          (click)="previousPage('app')">
+          <app-icon-react name="arrowLeftDark" dark
+            [freeze]="viewPageConfig.app.pageNumber === 1 ? 'disabled' : ''"
+          ></app-icon-react>
+          <app-icon-react name="arrowLeft" light
+            [freeze]="viewPageConfig.app.pageNumber === 1 ? 'disabled' : ''"
+          ></app-icon-react>
+        </hy-theme-content>
+        <hy-theme-content class="bubble-page-right"
+          [ngClass]="{'disabled': viewPageConfig.app.pageNumber ===
+            viewPageConfig.app.idle?.pageArr[viewPageConfig.app.pageArr.length - 1]}"
+          (click)="nextPage('app')">
+          <app-icon-react name="arrowLeftDark" dark
+            [freeze]="viewPageConfig.app.pageNumber ===
+            viewPageConfig.app.pageArr[viewPageConfig.app.pageArr.length - 1]
+            ? 'disabled' : ''"
+          ></app-icon-react>
+          <app-icon-react name="arrowLeft" light
+            [freeze]="viewPageConfig.app.pageNumber ===
+            viewPageConfig.app.pageArr[viewPageConfig.app.pageArr.length - 1]
+            ? 'disabled' : ''"
+          ></app-icon-react>
+        </hy-theme-content>
+      </div>
+      <div class="bubble-page-box" *ngIf="viewPageConfig.app.pageArr.length > 1">
+        <span
+          class="bubble-page-item"
+          *ngFor="let pageNumber of viewPageConfig.app.pageArr"
+          [ngClass]="{'active': pageNumber === viewPageConfig.app.pageNumber}"
+        ></span>
+      </div>
+    </div>
+    <span class="no-bubble-text" *ngIf="!sysData?.length && !appData?.length">{{
+      i18n.tuninghelper.taskDetail.coreViewNoDataTip
+    }}</span>
+  </div>
+  <div class="bubble-box-gradation"
+    *ngIf="!active || (active && (sysData?.length > 0 || appData?.length > 0))">
+    <span *ngIf="active" class="start-value">{{
+      threshold.start | percent
+    }}</span>
+    <span *ngIf="active" class="end-value">{{
+      threshold.end | percent
+    }}</span>
+  </div>
+</div>

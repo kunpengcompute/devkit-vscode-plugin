@@ -1,0 +1,467 @@
+:host ::ng-deep .ti3-form .ti3-form-label {
+  padding-right: 0 !important;
+}
+.create {
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  color: #6c7280;
+  margin: 0;
+  padding: 0;
+  margin-top: 35px;
+  input::-webkit-input-placeholder {
+    font-size: 12px !important;
+  }
+  input::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: red !important;
+    font-size: 12px !important;
+  }
+
+  input:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    font-size: 12px !important;
+  }
+  textarea::-webkit-input-placeholder {
+    font-size: 12px !important;
+  }
+  textarea::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    font-size: 12px !important;
+  }
+
+  textarea:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    font-size: 12px !important;
+  }
+  .mission-name {
+    display: flex;
+    justify-content: flex-start;
+    .mission-label {
+      min-width: 115px;
+      height: 32px;
+      line-height: 32px;
+      display: flex;
+      justify-content: flex-start;
+      box-sizing: border-box;
+      padding-right: 24px;
+    }
+    .mission-input-button {
+      display: flex;
+      flex-direction: column;
+      min-height: 56px;
+
+      .mission-input {
+        display: flex;
+        justify-content: flex-start;
+
+        input {
+          margin-right: 8px;
+          min-width: 240px;
+        }
+        
+        .mission-import {
+          button {
+            min-width: 96px;
+          }
+        }
+      }
+      .mission-warn {
+        color: red;
+        display: none;
+        margin-top: 8px;
+        line-height: 16px;
+
+        .imgWarn {
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          background-color: var(--ti-valid-error-color);
+          border-radius: 50%;
+          margin-right: 5px;
+
+          .colonColor {
+            color: #fff;
+            margin-left: 1px;
+          }
+        }
+      }
+
+      .warnShow {
+        display: block;
+      }
+    }
+  }
+  .analysis-target {
+    display: flex;
+    flex-direction: column;
+    .analysis-target-title {
+      font-size: 16px;
+      font-weight: 600;
+      font-family: "huawei sans";
+      color: #282b33;
+    }
+    .analysis-target-lists {
+      width: 20%;
+      margin-top: 8px;
+      display: flex;
+      justify-content: flex-start;
+
+      .analysis-target-list {
+        width: 88px;
+        height: 88px;
+        box-sizing: border-box;
+        margin-right: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        font-weight: normal;
+        flex: 0 0 auto;
+        color: #222;
+        background-color: #ffffff;
+        box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.09);
+        border-radius: 2px;
+
+        .imgBox {
+          margin: 0 auto 10px;
+          width: 40px;
+          height: 40px;
+        }
+
+        p {
+          font-size: 12px;
+          line-height: 15px;
+        }
+      }
+      // 分析对象点击和hover后样式
+      .font-hover,
+      .clicked {
+        color: #0067ff;
+        background-color: #ffffff;
+        cursor: pointer;
+        box-shadow: 0px 2px 10px 0px rgba(0, 103, 255, 0.17);
+        border-radius: 2px;
+      }
+    }
+    .analysis-info {
+      .analysis-target-notice {
+        margin-top: 8px;
+        margin-bottom: 24px;
+        line-height: 20px;
+      }
+      .analysis-target-app-choose {
+        margin-top: 8px;
+        height: 32px;
+        line-height: 32px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .choose-list {
+          margin-left: 64px;
+          display: flex;
+          justify-content: flex-start;
+          box-sizing: border-box;
+          img {
+            margin-right: 8px;
+          }
+        }
+        .choose-list:hover {
+          color: #6c92fa;
+          cursor: pointer;
+        }
+      }
+      .analysis-target-content {
+        .analysis-target-app {
+          display: flex;
+          justify-content: flex-start;
+          margin-bottom: 20px;
+
+          .analysis-target-app-label {
+            min-width: 200px;
+            margin-right: 16px;
+          }
+
+          .analysis-target-app-label-restart {
+            min-width: 240px;
+          }
+
+          .analysis-target-app-value {
+            display: flex;
+            flex-direction: column;
+
+            input {
+              width: 350px;
+            }
+
+            .mission-app-warn,
+            .mission-pid-warn {
+              margin-top: 8px;
+              line-height: 17px;
+              color: red;
+
+              .imgWarn {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                background-color: var(--ti-valid-error-color);
+                border-radius: 50%;
+                margin-right: 5px;
+
+                .colonColor {
+                  color: #fff;
+                  margin-left: 1px;
+                }
+              }
+            }
+
+            .mission-app-input-tip {
+              line-height: 24px;
+              font-size: 12px;
+              color: #616161;
+            }
+
+            .analysis-target-app-input-app {
+              height: 56px;
+            }
+
+            .analysis-target-app-input-params {
+              min-height: 76px;
+            }
+          }
+        }
+
+        .analysis-target-tip {
+          display: flex;
+          width: 952px;
+          margin: 20px 0;
+          padding: 7px 16px;
+          background-color: #f0f6ff;
+          color: #333;
+          border-radius: 2px;
+          border: solid 1px #2072ea;
+          box-sizing: border-box;
+
+          .analysis-target-tip-img {
+              width: 16px;
+              height: 16px;
+          }
+
+          .analysis-target-tip-text {
+              flex: 1;
+              display: flex;
+              margin-left: 8px;
+              flex-direction: column;
+              justify-content: space-between;
+              font-size: 12px;
+              line-height: 18px;
+              letter-spacing: 0px;
+          }
+        }
+
+        .restart-width {
+          width: 256px;
+          margin-right: 0;
+        }
+      }
+      .analysis-target-application,
+      .analysis-target-pid {
+        display: flex;
+        flex-direction: column;
+        z-index: -1;
+        .analysis-target-app-notice,
+        .analysis-target-pid-notice {
+          font-size: 12px;
+          color: #616161;
+          margin-bottom: 18px;
+        }
+        .analysis-target-pid-input {
+          margin-bottom: 15px;
+
+          ::ng-deep .warpper .content .inputValue input {
+            width: 480px;
+          }
+        }
+        .restart ::ng-deep .warpper .ti3-form-label {
+          width: 240px;
+        }
+      }
+    }
+  }
+  .analysis-type {
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+    .analysis-type-title {
+      font-size: 16px;
+      font-weight: 600;
+      font-family: "huawei sans";
+      color: #282b33;
+      margin-bottom: 10px;
+    }
+    .analysis-type-lists {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      transform: translateX(-100%);
+      transition: transform 0.6s;
+      overflow: hidden;
+      width: 960px;
+      height: 0;
+      background: #f8fafd;
+      padding-left: 24px;
+      box-sizing: border-box;
+
+      .typeTitle {
+        padding-bottom: 7px;
+        font-size: 14px;
+        color: #616161;
+      }
+      .typeTitleHover {
+        color: #0067ff;
+        border-bottom: 3px solid #0067ff;
+      }
+      .typeClicked {
+        color: #0067ff;
+        border-bottom: 3px solid #0067ff;
+      }
+      .analysis-type-outer-lists {
+        padding-top: 10px;
+        margin-right: 24px;
+        height: 135px;
+
+        .analysis-type-inside-lists {
+          display: flex;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+          transition: transform 0.6s;
+          overflow: hidden;
+          margin-top: 10px;
+
+          .analysis-type-list {
+            margin-top: 8px;
+            width: 88px;
+            height: 88px;
+            box-sizing: border-box;
+            text-align: center;
+            margin-right: 8px;
+            display: flex;
+            flex-direction: column;
+            flex: 0 0 auto;
+            color: #222;
+            padding: 0 2px;
+            background-color: #ffffff;
+            box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.09);
+            border-radius: 2px;
+
+            .imgBox {
+              margin: 6px auto 0;
+              width: 40px;
+              height: 40px;
+            }
+
+            p {
+              width: 84px;
+              height: 36px;
+              font-size: 12px;
+              line-height: 15px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+            .typeNameClicked,
+            .typeNameHover {
+              color: #0067ff;
+            }
+          }
+          // 分析类型
+          .font-hover,
+          .clicked {
+            color: #0067ff;
+            background-color: #fff;
+            cursor: pointer;
+            box-shadow: 0px 2px 10px 0px rgba(0, 103, 255, 0.17);
+            border-radius: 2px;
+          }
+
+          // 禁用状态
+          .disabled-status {
+            cursor: not-allowed;
+            background-color: #e6ebf5 !important;
+            color: #cccccc !important;
+          }
+        }
+      }
+      .analysis-type-info {
+        margin-bottom: 16px;
+      }
+    }
+
+    .showTypes {
+      transform: translateX(0);
+      height: inherit;
+    }
+  }
+  .analysis-detail {
+    margin-top: 16px;
+  }
+}
+.disabled {
+  cursor: not-allowed !important;
+  color: #b8becc !important;
+  background-color: #e6ebf5;
+}
+input[type="radio"][tiRadio] + .ti3-radio .ti3-radio-skin::after {
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  position: absolute;
+  content: "";
+  left: 4px;
+  top: 4px;
+  height: 6px;
+  width: 6px;
+  background-color: #fff;
+  opacity: 0;
+  border-radius: 50%;
+}
+.margin {
+  margin: 2px 0 0 10px;
+}
+:host ::ng-deep footer {
+  display: flex;
+  justify-content: flex-start;
+  padding: 40px 15px 20px;
+  font-size: 12px;
+  button {
+    height: 28px;
+    line-height: 0px;
+    margin-right: 20px;
+    min-width: 120px;
+    margin-left: 0;
+  }
+  button.toRight {
+    margin-left: 130px;
+  }
+}
+.restart-mission-name,
+.restart-analysis-target-title,
+.restart-analysis-type {
+  display: flex;
+  margin-bottom: 20px;
+  color: #222;
+  .restart-label {
+    width: 256px;
+    color: #616161;
+  }
+}
+.margin_left {
+  margin: 0px 0 0 10px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .margin_left {
+    margin: 2px 0 0 10px;
+  }
+}

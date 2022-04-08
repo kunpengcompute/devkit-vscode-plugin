@@ -1,0 +1,138 @@
+::ng-deep {
+  :root {
+    --ti-pagination-height: 24px;
+  }
+}
+
+.weakBox {
+  .weakTitle {
+    p {
+      font-family: "huawei sans";
+      -webkit-font-smoothing: none;
+      font-size: 20px;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 20px;
+      letter-spacing: 0px;
+      color: #222222;
+      margin-right: 10px;
+    }
+    span {
+      display: block;
+      height: 17px;
+      width: 17px;
+      background: url("../../../assets/img/header/help.png");
+      background-size: 17px 17px;
+      cursor: pointer;
+    }
+  }
+
+  .weakContent {
+    .addWeakPwd {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row-reverse;
+      .search {
+        width: 320px;
+        height: 28px;
+        line-height: 28px;
+
+        .ti3-searchbox-search {
+          height: 16px !important;
+        }
+      }
+
+      button {
+        min-width: 110px;
+        height: 28px;
+        line-height: 28px;
+      }
+    }
+
+    .weakPwdList {
+      margin-top: 10px;
+      height: calc(100% - 80px);
+      font-size: 12px;
+    }
+  }
+
+  .weakEmpty {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #e1e6ee;
+    padding: 24px 0 28px;
+
+    img {
+      width: 320px;
+    }
+
+    div {
+      margin-bottom: 14px;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+
+  img {
+    margin-right: 10px;
+    width: 24px;
+    height: 24px;
+  }
+
+  p {
+    font-family: "huawei sans";
+    color: #222222;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+::ng-deep #addWeakBody {
+  input {
+    width: 300px;
+    height: 28px;
+  }
+}
+
+::ng-deep #weakFooter {
+  background-color: #fff;
+  border: none;
+
+  button {
+    width: 88px !important;
+    height: 28px !important;
+    line-height: 26px !important;
+  }
+}
+
+::ng-deep .search {
+  .ti3-searchbox-search {
+    height: 16px !important;
+  }
+}
+
+::ng-deep .weak {
+  .ti3-modal-content {
+    width: 560px !important;
+  }
+
+  .ti3-form {
+    width: 100% !important;
+
+    .ti3-form-content {
+      ti-item {
+        width: 300px;
+      }
+    }
+  }
+}
+
+::ng-deep .weak .ti3-unifyvalid-error-container .ti3-validate-text {
+  width: 280px !important;
+}

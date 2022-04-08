@@ -1,0 +1,58 @@
+<div class="sys-config-mem">
+  <div class="mem-info">
+    <p>
+      <span class="label">{{ 'tuninghelper.sysConfigDetail.totalSize' | i18n }}</span>
+      <span class="text">{{ memInfo.totalSize }}</span>
+    </p>
+    <p>
+      <span class="label">{{ 'tuninghelper.sysConfigDetail.totalBandwidth' | i18n }}</span>
+      <span class="text">{{ memInfo.totalBandwidth }}</span>
+    </p>
+  </div>
+  <ti-table [(displayedData)]="deviceTableData.displayed"
+    [srcData]="deviceTableData.srcData"
+    [columns]="deviceTableData.columns">
+    <div class="ti3-table-fixed-head">
+      <table>
+        <thead>
+          <tr>
+            <th tiOverflow *ngFor="let column of deviceTableData.columns">
+              {{ column.title }}
+            </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="ti3-table-container">
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let column of deviceTableData.columns"></th>
+          </tr>
+        </thead>
+        <tbody *ngIf="deviceTableData.displayed.length > 0">
+          <tr *ngFor="let row of deviceTableData.displayed">
+            <td tiOverflow [attr.rowspan]="row.socketRowSpan" *ngIf="row.socketRowSpan"
+            style="border-right: 1px solid var(--ti-table-border-bottom-color); padding-left: 24px;">{{ row.socket }}</td>
+            <td tiOverflow>{{ row.channel }}</td>
+            <td tiOverflow>{{ row.dimm }}</td>
+            <td tiOverflow>{{ row.max_speed }}</td>
+            <td tiOverflow>{{ row.data_width }}</td>
+            <td tiOverflow>{{ row.band_width }}</td>
+            <td tiOverflow>{{ row.size }}</td>
+            <td tiOverflow [attr.rowspan]="row.numaNodeRowSpan" *ngIf="row.numaNodeRowSpan"
+              style="border-left: 1px solid var(--ti-table-border-bottom-color);">{{ row.numa_node }}</td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="deviceTableData.displayed.length === 0">
+          <tr class="ti3-table-nodata">
+            <td tiColspan>
+              <div [hyNodata]="{ text: 'common_term_task_nodata' | i18n }" [nodataShow]="true" style="height: 272px;"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </ti-table>
+</div>

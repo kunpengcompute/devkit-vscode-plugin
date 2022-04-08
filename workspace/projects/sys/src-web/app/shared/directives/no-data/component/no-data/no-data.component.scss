@@ -1,0 +1,17 @@
+.warpper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    .photo {
+        img {
+            width: 320px;
+        }
+    }
+    .text {
+        text-align: center;
+        font-size: 16px;
+        margin-top: 15px;
+    }
+}

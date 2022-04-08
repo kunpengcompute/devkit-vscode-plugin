@@ -1,0 +1,35 @@
+<div class="expectionTab" hyThemeClass>
+    <div class="header-left">
+        <span *ngIf="data?.moduleName" tiOverflow>{{ data?.moduleName }}</span>
+        <span tiOverflow>{{ data?.funcName }}</span>
+    </div>
+    <div class="tabDetail" *ngFor="let item of tabDetailList">
+        <div class="detail-title" (click)='expandToggle(item)'>
+            <span>{{i18n.diagnostic.exception.exception_type}}<span>{{item.type}}</span></span>
+            <img class="toggleImg" [ngClass]="{'active': item.open}" src="./assets/img/header/arr-down-8.svg">
+        </div>
+        <div class="detail-body" [ngClass]="{'active': item.open}">
+            <div class="accessType">
+                <div class="label">{{i18n.diagnostic.exception.access_type}}</div>
+                <div class="value">{{item.access_type}}</div>
+            </div>
+            <div class="exceptionPoint">
+                <div class="label">{{i18n.diagnostic.exception.access_stack}}</div>
+                <div class="value">
+                    <div class="txtColor" tiOverflow *ngFor="let codeItem of item.stack.split('\n')"
+                        [ngClass]="{'titleTxtColor': !codeItem.includes('#')}">{{codeItem}}</div>
+                </div>
+            </div>
+            <div class="Information">
+                <div class="label">{{i18n.diagnostic.exception.help}}</div>
+                <div class="value">
+                    <div class="txtColor" tiOverflow *ngFor="let codeItem of item.help.split('\n')"
+                        [ngClass]="{'titleTxtColor': !codeItem.includes('#')}">{{codeItem}}</div>
+                </div>
+            </div>
+            <a class="more-detail"
+                (click)="getInfoDetails(item.detail)">{{i18n.diagnostic.exception.more_detail}}</a>
+        </div>
+    </div>
+</div>
+<app-details-pop-up #exceptionDetailsModal [detailLists]="detailedInformationList"></app-details-pop-up>

@@ -1,0 +1,75 @@
+<div class="migration-container">
+    <div class="migration-content">
+        <div class="right">
+            <div class="migration-content-right-header" style="color:#000;font-size: 20px;">
+                <div *ngIf="routeType === 'DB'">
+                  <p class="title" style="margin-bottom: 8px;">{{ i18n.common_term_migration_sort_DB }}</p>
+                  <p style="margin-bottom:24px;font-size: 14px;color:#616161;">{{ i18n.common_term_migration_sort_DB_desc }}</p>
+                </div>
+                <div *ngIf="routeType === 'HPC'">
+                    <p class="title" style="margin-bottom: 8px;">{{ i18n.common_term_migration_sort_HPC }}</p>
+                    <p style="margin-bottom:24px;font-size: 14px;color:#616161;">{{ i18n.common_term_migration_sort_HPC_desc }}</p>
+                </div>
+                <div *ngIf="routeType === 'BD'||routeType==='undefined'">
+                <p class="title" style="margin-bottom: 8px;">{{ i18n.common_term_migration_sort_BD }}</p>
+                <p style="margin-bottom:24px;font-size: 14px;color:#616161;">{{ i18n.common_term_migration_sort_BD_desc }}</p>
+                </div>
+                <div *ngIf="routeType === 'WEB'">
+                <p class="title" style="margin-bottom: 8px;">{{ i18n.common_term_migration_sort_WEB }}</p>
+                <p style="margin-bottom:24px;font-size: 14px;color:#616161;">{{ i18n.common_term_migration_sort_WEB_desc }}</p>
+                </div>
+            </div>
+            <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns" tiColsResizable>
+              <div class="ti3-table-container ti3-resize-wrapper" style="max-height:360px;max-width:1550px" >
+                    <table>
+                        <thead>
+                            <tr>
+                                <th tiOverflow *ngFor="let column of columns" width="{{column.width}}">{{column.title}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of displayed">
+                                <td tiOverflow class="software-name" (click)="showDetail(item)"><a>{{item.name}}</a></td>
+                                <td tiOverflow>{{item.version}}</td>
+                                <td tiOverflow *ngIf="currLang == 'zh-cn'" [innerHTML]="item.description_cn"></td>
+                                <td tiOverflow *ngIf="currLang == 'en-us'" [innerHTML]="item.description_en"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ti-pagination [(currentPage)]="currentPage" *ngIf="totalNumber>10"
+                       [pageSize]="pageSize"
+                       [(totalNumber)]="totalNumber">
+                </ti-pagination>
+            </ti-table>
+        </div>
+    </div>
+</div>
+
+<!-- 迁移前必读 modal start -->
+<app-modify-pwd #pwd>
+    <div class="content show-box" style="position: relative;">
+        <div class="do-title">
+            <span class="title" style="font-weight: normal;">{{infoArr.title}}</span>
+            <span style="right: 0; position: absolute; cursor: pointer; content: url('./assets/img/header/icon_header_pop_close.svg')" (click)="closeModal()"></span>
+        </div>
+        <div class="ps">
+            <p>
+                <span style="display: block; margin-top: 4px; height: 16px; width: 16px ;">
+                    <img src="./assets/img/home/icon_warn.png" style="display: block;  height: 16px; width: 16px ;" />
+                </span>
+                <span style="margin-left: 16px;">{{infoArr.dsc}}</span>
+            </p>
+        </div>
+        <div class="select">
+          <input type="checkbox" tiCheckbox id="shengming" [(ngModel)]="infoArr.flag" >
+          <label for="shengming" style="cursor: pointer;">{{infoArr.select}}</label>
+        </div>
+        <div class="btn-box">
+            <button tiButton color="primary" (click)="confirmChk()" [disabled]="!infoArr.flag">{{i18n.common_term_operate_ok}}</button>
+            <button tiButton id="mybutton" (click)="closeModal()" type="button" style="margin-left: 16px;">{{i18n.common_term_operate_cancel}}</button>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+</app-modify-pwd>
+<!-- 迁移前必读 modal end -->

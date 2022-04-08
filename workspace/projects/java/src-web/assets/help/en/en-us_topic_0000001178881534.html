@@ -1,0 +1,51 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Viewing Thread Information">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001179041496.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (Java Profiler)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001178881534">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Viewing Thread Information</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001178881534"></a><a name="EN-US_TOPIC_0000001178881534"></a>
+
+<h1 class="topictitle1">Viewing Thread Information</h1>
+<div id="body1575365888696"><div class="section" id="EN-US_TOPIC_0000001178881534__section3882164703911"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0000001178881534__en-us_topic_0209429827_p20936551103910">A profiling task is being performed.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001178881534__section417152614011"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0000001178881534__ol19295162111417"><li id="EN-US_TOPIC_0000001178881534__li4346104015416"><span>On the home page of the <span id="EN-US_TOPIC_0000001178881534__ph12594180204619">Java Profiler</span> WebUI, click the target task name in the <strong id="EN-US_TOPIC_0000001178881534__b19438174016287">Profiling Records</strong> area.</span><p><p id="EN-US_TOPIC_0000001178881534__p5815113211443">The <strong id="EN-US_TOPIC_0000001178881534__b43551317182510">Overview</strong> tab page is displayed.</p>
+</p></li><li id="EN-US_TOPIC_0000001178881534__li2054994314323"><span>Click the <strong id="EN-US_TOPIC_0000001178881534__b11934124918515">CPU</strong> tab.</span><p><div class="p" id="EN-US_TOPIC_0000001178881534__p7448164473212">The <strong id="EN-US_TOPIC_0000001178881534__b10531164154219">Threads</strong> tab page is displayed, as shown in <a href="#EN-US_TOPIC_0000001178881534__fig122661426175319">Figure 1</a>.<div class="note" id="EN-US_TOPIC_0000001178881534__note14438160499"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0000001178881534__ul1669835612111"><li id="EN-US_TOPIC_0000001178881534__li10698155622114">The <strong id="EN-US_TOPIC_0000001178881534__b3960162381714">Thread List</strong> tab page lists the names and status of the threads started by the Java process. The thread can be in one of the following states: <strong id="EN-US_TOPIC_0000001178881534__b035616311919">Runnable</strong>, <strong id="EN-US_TOPIC_0000001178881534__b17357831916">Waiting</strong>, or <strong id="EN-US_TOPIC_0000001178881534__b13576316917">Blocked</strong>.</li><li id="EN-US_TOPIC_0000001178881534__li18317165813211">You can use the thread search box and <strong id="EN-US_TOPIC_0000001178881534__b34495942418">Display Mode</strong> drop-down list to quickly filter data.</li><li id="EN-US_TOPIC_0000001178881534__li1526509112011">You can click the <span class="uicontrol" id="EN-US_TOPIC_0000001178881534__uicontrol1934715507585"><b>Dump</b></span> button to dump the current thread status for subsequent tab page analysis and display.</li></ul>
+</div></div>
+<div class="fignone" id="EN-US_TOPIC_0000001178881534__fig122661426175319"><a name="EN-US_TOPIC_0000001178881534__fig122661426175319"></a><a name="fig122661426175319"></a><span class="figcap"><b>Figure 1 </b>Thread List tab page</span><br><span><img id="EN-US_TOPIC_0000001178881534__image1157817306343" src="en-us_image_0000001178723144.png"></span></div>
+</div>
+</p></li><li id="EN-US_TOPIC_0000001178881534__li97841647164"><span>Click the <strong id="EN-US_TOPIC_0000001178881534__b204361341530">Thread Dump</strong> tab.</span><p><div class="p" id="EN-US_TOPIC_0000001178881534__p177845481616">By default, the <strong id="EN-US_TOPIC_0000001178881534__b19160128338">Lock Analysis</strong> diagram is displayed. Click the specified thread dump to view the thread lock analysis graph, as shown in <a href="#EN-US_TOPIC_0000001178881534__fig5785114161616">Lock analysis</a>.<div class="note" id="EN-US_TOPIC_0000001178881534__note1678410411611"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0000001178881534__ul13784342168"><li id="EN-US_TOPIC_0000001178881534__li1478413471612">In the lock analysis graph, threads are displayed on the left, and lock instances are displayed on the right. The color indicates the thread status. Green indicates <strong id="EN-US_TOPIC_0000001178881534__b440216523316">Runnable</strong>, red indicates <strong id="EN-US_TOPIC_0000001178881534__b84028521131">Blocked</strong>, yellow indicates <strong id="EN-US_TOPIC_0000001178881534__b1640395213316">Waiting</strong>, and orange indicates <strong id="EN-US_TOPIC_0000001178881534__b1740415521934">Timed_waiting</strong>.</li><li id="EN-US_TOPIC_0000001178881534__li1278411416162">The lock analysis diagram uses lines to show the lock occupation by threads. A solid line indicates that the lock is used by the thread, and a dashed line indicates that the thread is blocked on the lock instance and waits for other threads to release the lock.</li><li id="EN-US_TOPIC_0000001178881534__li07841141162"><strong id="EN-US_TOPIC_0000001178881534__b272016431747">Observation</strong>: If it is enabled, the threads and their locks or the locks and their requested threads will be highlighted. You can also click a lock and the lock and its requesting threads are highlighted.</li><li id="EN-US_TOPIC_0000001178881534__li278418415167"><strong id="EN-US_TOPIC_0000001178881534__b104771839517">Comparison</strong>: After enabling this mode, select the thread dump to be compared. By default, the comparison results of the threads and their locks are displayed. By using the comparison mode and the observation mode together, you can better observe the status change of threads and locks at two time points. Under the <strong id="EN-US_TOPIC_0000001178881534__b429295722013">Comparison</strong> mode, you can enable <strong id="EN-US_TOPIC_0000001178881534__b11278154181919">Observation</strong> and click a lock to observe the status change of the lock and its requesting threads at two time points. The comparison mode can be enabled only after two or more thread dumps.</li><li id="EN-US_TOPIC_0000001178881534__li378564191613">Deadlocks can be detected in the target Java application. You can locate the cause of a deadlock based on the thread dump.</li><li id="EN-US_TOPIC_0000001178881534__li157857471618">You can click icons in the lower right corner to zoom in or zoom out the lock analysis diagram and view the diagram in full screen.</li><li id="EN-US_TOPIC_0000001178881534__li22941258143212">You can click <span><img id="EN-US_TOPIC_0000001178881534__image15342412163416" src="en-us_image_0000001178723140.png"></span> to save the current thread dump information. The same thread dump information can be saved only once. You can download the information from the <span class="uicontrol" id="EN-US_TOPIC_0000001178881534__uicontrol8504151816152"><b>Data List</b></span> on the main page.</li></ul>
+</div></div>
+<div class="fignone" id="EN-US_TOPIC_0000001178881534__fig5785114161616"><a name="EN-US_TOPIC_0000001178881534__fig5785114161616"></a><a name="fig5785114161616"></a><span class="figcap"><b>Figure 2 </b>Lock analysis</span><br><span><img id="EN-US_TOPIC_0000001178881534__image47851344169" src="en-us_image_0000001178563180.png"></span></div>
+</div>
+</p></li><li id="EN-US_TOPIC_0000001178881534__li7676724143014"><span>Select <strong id="EN-US_TOPIC_0000001178881534__b1328610463811">Raw data</strong> from the drop-down list.</span><p><div class="p" id="EN-US_TOPIC_0000001178881534__p1922692518308">You can click a thread name to view the event information about the thread, as shown in <a href="#EN-US_TOPIC_0000001178881534__fig99251748135519">Raw data</a>.<div class="note" id="EN-US_TOPIC_0000001178881534__note194051392306"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0000001178881534__ul12852328163111"><li id="EN-US_TOPIC_0000001178881534__li98521928163114">A Java thread dump is a snapshot of all threads running in the JVM at a specified time.</li><li id="EN-US_TOPIC_0000001178881534__li455423413116">You can click <span><img id="EN-US_TOPIC_0000001178881534__image869122323" src="en-us_image_0000001224201429.png"></span> to delete thread dump event information of different time points.</li><li id="EN-US_TOPIC_0000001178881534__li13912029173420">You can click <span><img id="EN-US_TOPIC_0000001178881534__image091182918348" src="en-us_image_0000001224122855.png"></span> to save the current thread dump information. The information about the same thread can be saved only once. You can download the information from the <span class="uicontrol" id="EN-US_TOPIC_0000001178881534__uicontrol2241432185917"><b>Data List</b></span> on the main page.</li></ul>
+</div></div>
+<div class="fignone" id="EN-US_TOPIC_0000001178881534__fig99251748135519"><a name="EN-US_TOPIC_0000001178881534__fig99251748135519"></a><a name="fig99251748135519"></a><span class="figcap"><b>Figure 3 </b>Raw data</span><br><span><img id="EN-US_TOPIC_0000001178881534__image827351517362" src="en-us_image_0000001179041624.png"></span></div>
+</div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001179041496.html">Viewing Analysis Results</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

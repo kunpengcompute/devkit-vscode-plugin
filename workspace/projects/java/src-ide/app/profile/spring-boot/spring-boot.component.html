@@ -1,0 +1,371 @@
+<div class="overview-container" (click)="closeHttpTracesPop($event)">
+    <div class="container" *ngIf="isSpringBoot">
+        <div class="springBoot-login" *ngIf="showLogin === 'true'">
+            <div class="login-form">
+                <p class="login-title1">{{ i18n.plugins_perf_java_profiling_spring_boot.login_form.title1 }}</p>
+                <p class="login-title2">{{ i18n.protalserver_profiling_tab.springBoot }}</p>
+                <form [formGroup]="form">
+                    <div class="login-form-item">
+                        <p class="login-form-item-label">{{ i18n.common_term_login_name }}</p>
+                        <input [ngClass]="{ 'login-failed': isLoginFailed }"
+                            [placeholder]="i18n.plugins_perf_java_profiling_spring_boot.login_form.placeholder_username"
+                            tiValidation formControlName="name" name="loginname" [tiValidation]="nameValidation"
+                            [errorMessageWrapper]="name" tiText oncopy="return false"
+                            onkeyup="if(event.ctrlKey&&event.keyCode==90){ return false;}"
+                            onkeydown="if(event.ctrlKey&&event.keyCode==90){return false;}" onpaste="return true"
+                            oncut="return false" />
+                        <span #name></span>
+                    </div>
+                    <div class="login-form-item">
+                        <p class="login-form-item-label">
+                            {{ i18n.common_term_login_password
+                            }}{{ i18n.plugins_perf_java_profiling_spring_boot.login_form.label_password_suffix }}
+                        </p>
+                        <div class="passwd-box">
+                            <input [ngClass]="{ 'login-failed': isLoginFailed }"
+                                [placeholder]="i18n.plugins_perf_java_profiling_spring_boot.login_form.placeholder_password"
+                                tiValidation formControlName="pwd" name="loginpwd" [type]="textType"
+                                (keyup.enter)="login()" [tiValidation]="pwdValidation" [errorMessageWrapper]="pwd"
+                                tiText oncopy="return false"
+                                onkeyup="if(event.ctrlKey&&event.keyCode==90){ return false;}"
+                                onkeydown="if(event.ctrlKey&&event.keyCode==90){return false;}" onpaste="return true"
+                                oncut="return false" style="padding-right: 32px;" />
+                            <div #pwd></div>
+                            <div class="eyes">
+                                <span (click)="changeType()" *ngIf="textType == 'text'">
+                                    <img src="./assets/img/icon-view.svg" />
+                                </span>
+                                <span (click)="changeType1()" *ngIf="textType == 'password'">
+                                    <img src="./assets/img/icon-hide.svg" />
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="login-failed-msg" *ngIf="isLoginFailed">
+                        {{ i18n.plugins_perf_java_profiling_spring_boot.login_form.login_failed }}
+                    </p>
+                    <span (click)="login()" class="login-btn">{{ i18n.common_term_login_btn }}</span>
+                </form>
+            </div>
+        </div>
+        <div class="dataDteail" *ngIf="showLogin === 'false'">
+            <div class="button-container" *ngIf="!isDownload">
+                <div class="start-button">
+                    <button type="button" class="springBoot-btn" (click)="startSpringBoot()" *ngIf="!isStart"
+                        [disabled]="startBtnDisabled">
+                        {{ i18n.plugins_perf_java_profiling_spring_boot.start_button.start_analysis }}
+                    </button>
+                    <button type="button" class="springBoot-btn" (click)="stopSpringBoot()" *ngIf="isStart"
+                        [disabled]="startBtnDisabled">
+                        {{ i18n.plugins_perf_java_profiling_spring_boot.start_button.stop_analysis }}
+                    </button>
+                    <img [tiTip]="i18n.plugins_perf_java_profiling_spring_boot.start_button.help" tiTipPosition="right"
+                        src="./assets/img/projects/help.svg" alt="" />
+                </div>
+                <div class="threshold-value-box">
+                    <span>{{ i18n.plugins_perf_java_profiling_spring_boot.threshold.label }}</span>
+                    <ti-formfield class="formList" [formGroup]="springbootGroup">
+                        <ti-item>
+                            <input *ngIf="!isIntellij" class="http-spinner" name="spinner" tiValidation tiRequired
+                                   [disabled]="isStart" type="text" (blur)="verifySpinnerValue(springbootBlur)"
+                                formControlName="springboot_threshold" />
+                            <input *ngIf="isIntellij" class="http-spinner" name="spinner" tiValidation tiRequired [readonly]='isStart'
+                                   [disabled]="isStart" type="text" (blur)="verifySpinnerValue(springbootBlur)"
+                                   formControlName="springboot_threshold" />
+                        </ti-item>
+                    </ti-formfield>
+                    <img src="./assets/img/projects/help.svg"
+                        [tiTip]="i18n.plugins_perf_java_profiling_spring_boot.threshold.tip" tiTipMaxWidth="500px"
+                        tiTipPosition="right" alt="" />
+                </div>
+            </div>
+            <div class="spring-boot-tab" *ngIf="showTabs">
+                <span class="item-tab" [ngClass]="{ 'tab-active': tabActive === tab.id }"
+                    *ngFor="let tab of springBootTabs; let idx = index" (click)="activeChange(tab)">
+                    {{ tab.tabName }}
+                </span>
+            </div>
+            <div class="health" *ngIf="tabActive === 'health'">
+                <div class="healthList" *ngIf="showTabs && health.eventName_; else initNodata">
+                    <div class="instance">
+                        <div class="title">{{ i18n.plugins_perf_java_profiling_spring_boot.health.instance }}</div>
+                        <div class="status">
+                            <span [ngStyle]="{ background: health.status_ === 'UP' ? '#61D274' : '#AAAAAA' }"></span>
+                            {{ health.status_ }}
+                        </div>
+                    </div>
+                    <ul class="list">
+                        <li class="list-item" *ngIf="health.diskSpace_.length > 0">
+                            <div class="itemDate">
+                                <div class="title">{{ i18n.plugins_perf_java_profiling_spring_boot.health.disk }}</div>
+                                <div class="status">
+                                    <span
+                                        [ngStyle]="{ background: health.diskSpace_[0].status_ === 'UP' ? '#61D274' : '#AAAAAA' }"></span>
+                                    {{ health.diskSpace_[0].status_ }}
+                                </div>
+                            </div>
+                            <ul class="item-details">
+                                <li class="database">
+                                    <span class="key">{{ i18n.plugins_perf_java_profiling_spring_boot.health.diskTotal
+                                        }}</span>
+                                    <span class="value">{{ libService.onChangeUnit(health.diskSpace_[0].total_)
+                                        }}</span>
+                                </li>
+                                <li class="database">
+                                    <span class="key">{{ i18n.plugins_perf_java_profiling_spring_boot.health.diskFree
+                                        }}</span>
+                                    <span class="value">{{ libService.onChangeUnit(health.diskSpace_[0].free_) }}</span>
+                                </li>
+                                <li class="database">
+                                    <span class="key">{{
+                                        i18n.plugins_perf_java_profiling_spring_boot.health.diskThreshold }}</span>
+                                    <span class="value">{{ libService.onChangeUnit(health.diskSpace_[0].threshold_)
+                                        }}</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="list-item" *ngFor="let item of health.dataBase_">
+                            <div class="itemDate">
+                                <div class="title">{{ item.name_ }}</div>
+                                <div class="status">
+                                    <span
+                                        [ngStyle]="{ background: item.status_ === 'UP' ? '#61D274' : '#AAAAAA' }"></span>
+                                    {{ item.status_ }}
+                                </div>
+                            </div>
+                            <ul class="item-details">
+                                <li class="database">
+                                    <span class="key">{{ i18n.plugins_perf_java_profiling_spring_boot.health.version
+                                        }}</span>
+                                    <span *ngIf="item.version_ !== ''" class="value">{{ item.version_ }}</span>
+                                    <span *ngIf="item.version_ == ''" class="value">- -</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="beans" *ngIf="tabActive === 'beans'">
+                <div class="beansList" *ngIf="showTabs && beans.length > 0; else initNodata">
+                    <ul>
+                        <li class="beans-item" *ngFor="let item of beans; let idx = index">
+                            <div class="beansData" (click)="selectBeans(item, idx)">
+                                <img [ngStyle]="{
+                                        opacity:
+                                            item.dependencies[0] !== '' || (item.resource !== '' && item.resource !== 'null') ? '1' : '0'
+                                    }" class="arrow" [ngClass]="{ active: item.select }"
+                                    src="./assets/img/profiling/springboot/arrow-right.png" alt="" />
+                                <span class="beanName" [tiTip]="item.nameTip" tiOverflow>{{ item.beanName }}</span>
+                                <div class="divider"></div>
+                                <span class="type" [tiTip]="item.typeTip" tiOverflow>{{ item.type }}</span>
+                                <div class="divider"></div>
+                                <span class="scope">{{ item.scope }}</span>
+                            </div>
+                            <div class="beansContent" *ngIf="item.select">
+                                <div class="box">
+                                    <div class="resource" *ngIf="item.resource !== '' && item.resource !== 'null'">
+                                        <span>{{ i18n.plugins_perf_java_profiling_spring_boot.beans.resource }}</span>
+                                        <p>{{ item.resource }}</p>
+                                    </div>
+                                    <div class="dependencies" *ngIf="item.dependencies[0] !== ''">
+                                        <span>{{ i18n.plugins_perf_java_profiling_spring_boot.beans.dependence }}</span>
+                                        <ul>
+                                            <li *ngFor="let depItem of item.dependencies">
+                                                {{ depItem }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="metrics" *ngIf="tabActive === 'metrics'">
+                <div *ngIf="showTabs && metrics.length > 0; else initNodata">
+                    <app-time-line [timeData]="metricsTimeData" (timeLineData)="metricsTimeLineData($event)"
+                        #metricsTimeLine>
+                    </app-time-line>
+                    <div class="echartsList">
+                        <div class="myecharts" id="myChart1" echarts [options]="metricsOpt1"
+                            (chartInit)="metricsEchartsInstances[0] = $event" [merge]="allMetricsOpt.echarts1"
+                            (mousemove)="handleMousemove($event)" (chartDataZoom)="handleMetricsDatazoom($event)"></div>
+                        <div class="myecharts" id="myChart2" echarts [options]="metricsOpt2"
+                            (chartInit)="metricsEchartsInstances[1] = $event" [merge]="allMetricsOpt.echarts2"
+                            (mousemove)="handleMousemove($event)" (chartDataZoom)="handleMetricsDatazoom($event)"></div>
+                        <div class="myecharts" id="myChart3" echarts [options]="metricsOpt3"
+                            (chartInit)="metricsEchartsInstances[2] = $event" [merge]="allMetricsOpt.echarts3"
+                            (mousemove)="handleMousemove($event)" (chartDataZoom)="handleMetricsDatazoom($event)"></div>
+                        <div class="myecharts" id="myChart4" echarts [options]="metricsOpt4"
+                            (chartInit)="metricsEchartsInstances[3] = $event" [merge]="allMetricsOpt.echarts4"
+                            (mousemove)="handleMousemove($event)" (chartDataZoom)="handleMetricsDatazoom($event)"></div>
+                        <div class="myecharts" id="myChart5" echarts [options]="metricsOpt5"
+                            (chartInit)="metricsEchartsInstances[4] = $event" [merge]="allMetricsOpt.echarts5"
+                            (mousemove)="handleMousemove($event)" (chartDataZoom)="handleMetricsDatazoom($event)"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="http-traces" *ngIf="tabActive === 'httpTracs'">
+                <div *ngIf="showTabs && allHttpTraces.length > 0; else initNodata">
+                    <div class="filter-input" *ngIf="!isDownload">
+                        <div class="input-box">
+                            <input type="text" [(ngModel)]="pathInputValue"
+                                [placeholder]="i18n.plugins_perf_java_profiling_spring_boot.http_traces.filter_input.placeholder" />
+                            <span class="count">{{ pathFilterLength }}/{{ httpTracesLength }}</span>
+                        </div>
+                        <button (click)="filterPath()">
+                            {{ i18n.plugins_perf_java_profiling_spring_boot.http_traces.filter_input.button }}
+                        </button>
+                        <img [tiTip]="i18n.plugins_perf_java_profiling_spring_boot.http_traces.filter_input.tip"
+                            tiTipPosition="right" tiTipMaxWidth="500px" src="./assets/img/projects/help.svg" alt="" />
+                    </div>
+                    <div class="echarts">
+                        <app-time-line [timeData]="httpTracesTimeData" (timeLineData)="httpTracesTimeLineData($event)"
+                            #httpTracesTimeLine>
+                        </app-time-line>
+                        <div id="http-echarts" echarts [options]="httpOption" [merge]="httpUpdateOption"
+                            (chartDataZoom)="handleHttptracesDatazoom($event)"></div>
+                    </div>
+                    <div class="tracesTable">
+                        <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="column"
+                            [searchWords]="searchWords" [searchKeys]="searchKeys" tiColsResizable>
+                            <div class="ti3-table-fixed-head">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <!-- 时间戳 -->
+                                            <th style="padding-left: 12px" tiOverflow width="{{ column[0].width }}">
+                                                <ti-cell-text>{{ column[0].title }}</ti-cell-text>
+                                                <span class="timeFilter ti3-icon ti3-icon-filter ti3-head-filter-icon"
+                                                    [ngClass]="{ 'ti3-head-filtered': sureFilter }"
+                                                    (click)="timestampFilter()">
+                                                </span>
+                                            </th>
+                                            <!-- 会话ID -->
+                                            <th style="padding-left: 12px" tiOverflow width="{{ column[1].width }}">
+                                                <ti-cell-text>{{ column[1].title }}</ti-cell-text>
+                                            </th>
+                                            <!-- 方法 -->
+                                            <th style="padding-left: 12px" tiOverflow width="{{ column[2].width }}">
+                                                <ti-cell-text>{{ column[2].title }}</ti-cell-text>
+                                                <ti-head-filter [options]="column[2].options"
+                                                    [(ngModel)]="column[2].selected"
+                                                    (select)="onSelect($event, column[2])" [ngClass]="{
+                                                        'ti3-head-filtered': column[2].selected && column[2].selected.label !== 'ALL'
+                                                    }">
+                                                </ti-head-filter>
+                                            </th>
+                                            <!-- 路径 -->
+                                            <th style="padding-left: 12px" tiOverflow width="{{ column[3].width }}">
+                                                <ti-cell-text>{{ column[3].title }}</ti-cell-text>
+                                            </th>
+                                            <!-- 状态 -->
+                                            <th style="padding-left: 12px" tiOverflow width="{{ column[4].width }}">
+                                                <ti-cell-text>{{ column[4].title }}</ti-cell-text>
+                                                <span class="timeFilter ti3-icon ti3-icon-filter ti3-head-filter-icon"
+                                                    [ngClass]="{ 'ti3-head-filtered': haveFilter }"
+                                                    (click)="statusFilter()">
+                                                </span>
+                                            </th>
+                                            <!-- 内容-类型 -->
+                                            <th style="padding-left: 12px" tiOverflow width="{{ column[5].width }}">
+                                                <ti-cell-text>{{ column[5].title }}</ti-cell-text>
+                                                <ti-head-filter [options]="column[5].options"
+                                                    [(ngModel)]="column[5].selected"
+                                                    (select)="onSelect($event, column[5])" [ngClass]="{
+                                                        'ti3-head-filtered': column[5].selected && column[5].selected.label !== 'all'
+                                                    }">
+                                                </ti-head-filter>
+                                            </th>
+                                            <!-- 耗时 -->
+                                            <th style="padding-left: 12px" tiOverflow width="{{ column[6].width }}">
+                                                <ti-cell-text>{{ column[6].title }}</ti-cell-text>
+                                                <ti-head-sort [sortKey]="column[6].sortKey"></ti-head-sort>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="ti3-table-container ti3-resize-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th [ngStyle]="{ 'padding-left': idx === 0 ? '12px' : 0 }" tiOverflow
+                                                *ngFor="let columnitem of column; let idx = index"
+                                                width="{{ columnitem.width }}"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let row of displayed">
+                                            <td tiOverflow style="padding-left: 12px">{{ row.newTime || '--' }}</td>
+                                            <td tiOverflow style="padding-left: 12px">{{ row.session_ || '--' }}</td>
+                                            <td tiOverflow style="padding-left: 12px">{{ row.method_ || '--' }}</td>
+                                            <td tiOverflow style="padding-left: 12px">{{ row.uri_ || '--' }}</td>
+                                            <td tiOverflow style="padding-left: 12px">{{ row.status_ || '--' }}</td>
+                                            <td tiOverflow style="padding-left: 12px">{{ row.contentType_ || '--' }}
+                                            </td>
+                                            <td tiOverflow style="padding-left: 12px">{{ row.timeTaken_ || '--' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <app-default-page *ngIf="displayed.length === 0" [text]="noDadaInfo"></app-default-page>
+                            </div>
+                            <ti-pagination [(currentPage)]="currentPage" [pageSize]="pageSize"
+                                [(totalNumber)]="totalNumber">
+                            </ti-pagination>
+                        </ti-table>
+                        <div class="select-time" [ngClass]="{ active: filterShow }">
+                            <div class="title">
+                                {{ i18n.plugins_perf_java_profiling_spring_boot.http_traces.select_time.filterTime }}
+                            </div>
+                            <div class="select-time-container">
+                                <p>{{ i18n.plugins_perf_java_profiling_spring_boot.http_traces.select_time.from }}</p>
+                                <div style="margin-top: 5px">
+                                    <input class="data-input" type="text" [(ngModel)]="todayTime" />
+                                    <ti-time [(ngModel)]="stimeValue" [format]="format"> </ti-time>
+                                </div>
+                                <p>{{ i18n.plugins_perf_java_profiling_spring_boot.http_traces.select_time.to }}</p>
+                                <div style="margin-top: 5px">
+                                    <input class="data-input" type="text" [(ngModel)]="todayTime" />
+                                    <ti-time [(ngModel)]="etimeValue" [min]="min" [format]="format"> </ti-time>
+                                </div>
+                            </div>
+                            <div class="time-btn">
+                                <button class="time-btn-ok" type="button" (click)="fliterTime()">
+                                    {{ i18n.common_term_operate_ok }}
+                                </button>
+                                <button class="time-btn-cancel" type="button" (click)="cancleFliterTime()">
+                                    {{ i18n.common_term_operate_cancel }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="status-filter" [ngClass]="{ active: statusShow }">
+                            <span>
+                                <input type="checkbox" id="allCheck1" tiCheckgroup [items]="dataArray1"
+                                    [(checkeds)]="checkedArray1" [label]="i18n.common_term_user_all" />
+                            </span>
+                            <span *ngFor="let item of dataArray1">
+                                <input type="checkbox" tiCheckitem [item]="item" [label]="item.text" />
+                            </span>
+                            <div class="btn-group">
+                                <button type="button" (click)="fliterStatus()">
+                                    {{ i18n.common_term_operate_ok }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-loading *ngIf="!isSpringBoot && showLoading" [size]="'max'" [height]="'80vh'"></app-loading>
+    <app-default-page *ngIf="!isSpringBoot && !showLoading" [height]="'calc(80vh - 98px)'" [bgColor]="'#1e1e1e'"
+        [text]="nodataTip">
+    </app-default-page>
+</div>
+
+<ng-template #initNodata>
+    <app-default-page [height]="'calc(80vh - 98px)'" [bgColor]="'#1e1e1e'"
+        [text]="showTabs ? i18n.common_term_task_nodata : i18n.plugins_perf_java_profiling_spring_boot.init_nodata">
+    </app-default-page>
+</ng-template>

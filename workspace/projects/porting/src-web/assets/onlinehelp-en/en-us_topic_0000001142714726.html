@@ -1,0 +1,84 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Common Issues in Software Porting Template Management">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001191872229.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.T21">
+<meta name="brand" content="Huawei Kunpeng Porting Advisor">
+<meta name="DC.Publisher" content="20201230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001142714726">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Common Issues in Software Porting Template Management</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001142714726"></a><a name="EN-US_TOPIC_0000001142714726"></a>
+
+<h1 class="topictitle1">Common Issues in Software Porting Template Management</h1>
+<div id="body8662426"><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_p43021607507"><a href="#EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_table2012413504013">Table 1</a> provides the common issues in software porting template management and handling suggestions.</p>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_table2012413504013"></a><a name="en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_table2012413504013"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_table2012413504013" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Common software porting template management issues</caption><colgroup><col style="width:24%"><col style="width:23.98%"><col style="width:52.019999999999996%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_row212513519408"><th align="left" class="cellrowborder" valign="top" width="24%" id="mcps1.3.2.2.4.1.1"><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_p9125535154012">Issue</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="23.98%" id="mcps1.3.2.2.4.1.2"><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_p141251235194019">Possible Causes</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="52.019999999999996%" id="mcps1.3.2.2.4.1.3"><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_p51251235104015">Handling Suggestions</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_row94941462516"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.2.2.4.1.1 "><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_p1366013481188">Failed to package or copy the software porting template.</p>
+</td>
+<td class="cellrowborder" valign="top" width="23.98%" headers="mcps1.3.2.2.4.1.2 "><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_p1766084813186">The drive space is insufficient.</p>
+</td>
+<td class="cellrowborder" valign="top" width="52.019999999999996%" headers="mcps1.3.2.2.4.1.3 "><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_p17660184814187">Check the size of the <strong id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_b191739352356">/opt</strong> directory.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_row18273152394320"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.2.2.4.1.1 "><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_p126611748101814">No valid porting template file exists in the software porting template directory.</p>
+</td>
+<td class="cellrowborder" valign="top" width="23.98%" headers="mcps1.3.2.2.4.1.2 "><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_p5661114831814">The software porting template file does not exist.</p>
+</td>
+<td class="cellrowborder" valign="top" width="52.019999999999996%" headers="mcps1.3.2.2.4.1.3 "><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_p466144871812">Check whether the software porting template file exists in the corresponding directory.</p>
+<p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_p1766111488182">Software porting template directory:<strong id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_b1086371573617"> /opt/portadv/resource/migration</strong></p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_row16722194621817"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.2.2.4.1.1 "><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_p066164861813">The software porting template update file does not exist or is incorrect.</p>
+</td>
+<td class="cellrowborder" valign="top" width="23.98%" headers="mcps1.3.2.2.4.1.2 "><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_p666314818182">The software porting template update file does not exist or is incorrect.</p>
+</td>
+<td class="cellrowborder" valign="top" width="52.019999999999996%" headers="mcps1.3.2.2.4.1.3 "><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_p56633485187">Check whether the software porting template update file exists in the corresponding directory, and whether the file format and size are correct. Ensure that the correct update package has been downloaded.</p>
+<p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_en-us_topic_0220949962_p6663648131810">Upgrade directory: <strong id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_b626572163818">/opt/portadv/portadmin/migration_package</strong></p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_row1897145994916"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.2.2.4.1.1 "><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_p151504711338">The software porting template resource package is repeatedly uploaded.</p>
+</td>
+<td class="cellrowborder" valign="top" width="23.98%" headers="mcps1.3.2.2.4.1.2 "><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_p11501977332">The software porting template resource package has been manually uploaded to the server.</p>
+</td>
+<td class="cellrowborder" valign="top" width="52.019999999999996%" headers="mcps1.3.2.2.4.1.3 "><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_p1315012714336">Delete the software porting template resource package from <strong id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_b1619744116423">/opt/portadv/portadmin/migration_package</strong></p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_row133831226508"><td class="cellrowborder" valign="top" width="24%" headers="mcps1.3.2.2.4.1.1 "><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_p17811294522">The software porting template resource package fails to be uploaded.</p>
+</td>
+<td class="cellrowborder" valign="top" width="23.98%" headers="mcps1.3.2.2.4.1.2 "><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_p182061816195217">The existing software porting template is of the latest version.</p>
+</td>
+<td class="cellrowborder" valign="top" width="52.019999999999996%" headers="mcps1.3.2.2.4.1.3 "><p id="EN-US_TOPIC_0000001142714726__en-us_topic_0000001115258876_en-us_topic_0228242370_p66531642184814">No update is required.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001191872229.html">FAQs</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

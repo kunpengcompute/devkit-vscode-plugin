@@ -1,0 +1,335 @@
+.login-box {
+  width: 100%;
+  height: auto;
+  background-image: url("../../../assets/img/login/loginbg.png");
+  background-size: 100%;
+  position: relative;
+  box-sizing: border-box;
+  min-height: 100%;
+  overflow: auto;
+}
+
+.login {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 48px;
+}
+
+.header-left {
+  img,
+  span {
+    vertical-align: middle;
+  }
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.user-container {
+  color: #6c7280;
+  display: flex;
+  align-items: center;
+
+  span {
+    padding: 10px 8px;
+    font-size: 14px;
+    color: #9ea4b3;
+  }
+
+  img {
+    vertical-align: middle;
+  }
+}
+
+.change-lang {
+  display: inline-block;
+
+  &:hover {
+    cursor: pointer;
+
+    .user-list-box {
+      display: block;
+    }
+  }
+
+  .user-list-box {
+    display: none;
+    position: absolute;
+    top: 36px;
+    right: 0;
+    z-index: 100;
+    width: 120px;
+    padding: 5px 0;
+    background-color: #061829;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    color: #9ea4b3;
+    text-align: left;
+
+    li {
+      padding-left: 16px;
+      line-height: 30px;
+      cursor: pointer;
+
+      &:hover {
+        background: #022547;
+      }
+    }
+  }
+}
+
+::ng-deep .first-pwd .ti3-unifyvalid-error-container {
+  max-width: 100%;
+}
+
+.help-img {
+  width: 16px;
+  height: 16px;
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 24px;
+  color: #ffffff;
+  margin-left: 14px;
+  vertical-align: top;
+}
+
+.login-form {
+  box-sizing: border-box;
+  position: absolute;
+  right: 14.58333%;
+  width: 20.3125%;
+  height: auto;
+  margin-top: 6vw;
+  background-color: transparent;
+
+  .login-title1 {
+    font-size: 24px;
+    color: #fff;
+    top: 55px;
+    margin-bottom: 16px;
+  }
+
+  .login-title2 {
+    font-size: 32px;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .login-form-item {
+    margin-top: 1vw;
+
+    .login-form-item-label {
+      font-size: 16px;
+      color: #fff;
+    }
+
+    input {
+      width: 100%;
+      border: none;
+      margin-top: 0.7vw;
+      border-bottom: 1px solid #999;
+      box-shadow: none;
+      background-color: transparent;
+      color: white;
+      border-radius: 0px;
+      font-size: 14px;
+    }
+
+    input:focus {
+      border: none !important;
+      border-bottom: 1px solid #0067ff !important;
+    }
+
+    input:hover {
+      border: none !important;
+      border-bottom: 1px solid #0067ff !important;
+    }
+
+    .codeInput {
+      width: 67%;
+    }
+
+    .codeImg {
+      width: 5.416vw;
+      height: 2.3vw;
+      vertical-align: bottom;
+      margin-left: 0.6vw;
+    }
+
+    .check {
+      display: inline-block;
+    }
+  }
+}
+
+.login-form-en {
+  min-width: 420px;
+}
+
+:host
+  .check
+  ::ng-deep
+  :host
+  input[type="checkbox"][tiCheckbox]
+  + .ti3-checkbox
+  .ti3-checkbox-label {
+  color: #222 !important;
+  font-size: 16px;
+}
+
+:host
+  .check
+  ::ng-deep
+  input[type="checkbox"][tiCheckbox]:not([disabled]):checked
+  + .ti3-checkbox
+  .ti3-checkbox-skin,
+input[type="checkbox"][tiCheckbox]:not([disabled]):checked
+  + .ti3-checkbox
+  .ti3-checkbox-skin:focus {
+  border-color: #0067ff;
+  background-color: #0067ff;
+}
+
+.login-btn {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 100%;
+  height: 48px;
+  margin-top: 40px;
+  border: solid 1px #0067ff !important;
+  font-size: 20px;
+  color: #0067ff;
+  text-align: center;
+  line-height: 48px;
+  cursor: pointer;
+}
+
+.last-info {
+  text-align: center;
+  margin-top: 0.83vw;
+  font-size: 16px;
+}
+
+.footer {
+  font-size: 16px;
+  color: #888;
+  position: absolute;
+  bottom: 1vw;
+  text-align: center;
+  width: 100%;
+}
+
+.tool-version {
+  font-size: 20px;
+  color: #ffffff;
+  margin-top: 10px;
+  margin-bottom: 2.18vw;
+  font-family: "huawei sans";
+}
+
+#user {
+  width: 100%;
+  height: 34px;
+  border-radius: 1px;
+  border-bottom: none;
+  font-family: "huawei sans";
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 18px;
+  letter-spacing: 0px;
+  color: #616161;
+  padding-left: 10px;
+  box-sizing: border-box;
+  background-color: transparent;
+  border-bottom: 1px solid #616161;
+
+  &:hover {
+    border-bottom: 1px solid #616161 !important;
+  }
+}
+
+.fisrstTit {
+  background-color: #F0F6FF;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  border: solid 1px #0067ff;
+  box-sizing: border-box;
+  padding: 11px 16px;
+}
+
+.fisrstTit p {
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 14px;
+  letter-spacing: 0px;
+  color: #282b33;
+
+  img {
+    padding-right: 8px;
+    vertical-align: bottom;
+  }
+}
+
+/* 锁定用户名或密码提示 */
+.lock-info {
+  padding: 10px 18px 10px 10px;
+  border: 1px solid #f45c5e;
+  background-color: rgba(255, 209, 210, 0.75);
+  line-height: 20px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+
+  .img-box {
+    margin-right: 10px;
+
+    img {
+      vertical-align: middle;
+    }
+  }
+
+  .text {
+    margin-right: 10px;
+  }
+
+  .close-icon {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    cursor: pointer;
+  }
+}
+
+#loginpwd[type="password"],
+#Cpwd[type="password"] {
+  background-image: url(data:image/svg+xml,%3Csvg%20version=%221.1%22%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2232%22%20height=%2232%22%3E%3Cpath%20fill%3D%22%23777777%22%20d=%22M1.6%202.925c0.6-0.6%201.4-0.6%201.8%200v0l25.6%2024.2c0.2%200.2%200.4%200.6%200.4%201s-0.2%200.6-0.4%201c-0.2%200.2-0.6%200.4-1%200.4s-0.8-0.2-1-0.4v0l-5-5.2c-2%200.6-4%201-6%201-9.2%200-16-6.6-16-9.8%200-1.8%202-4.6%205.4-6.6v0l-3.6-3.8c-0.6-0.4-0.6-1.2-0.2-1.8zM9%2011.725c-0.4%201-0.6%202.2-0.6%203.4%200%204.4%203.4%208%207.8%208%201.4%200%202.8-0.4%203.8-1v0l-2.4-2.4c-0.4%200.2-1%200.4-1.6%200.4-2.8%200-5-2.2-5-5%200-0.4%200-0.8%200.2-1.2v0l-2.2-2.2zM16%205.325c9.4%200%2016%206.6%2016%209.8%200%201.8-2%204.6-5.6%206.8v0l-3.4-3.2c0.6-1%200.8-2.2%200.8-3.4%200-4.4-3.4-8-7.8-8-1.4%200-2.8%200.4-4%201.2v0%200l-2-2c2-1%204-1.2%206-1.2zM16%209.925c2.8%200%205%202.2%205%205%200%200.4%200%201-0.2%201.4v0l-6.6-6c0.6-0.2%201.2-0.4%201.8-0.4z%22%3E%3C/path%3E%3C/svg%3E) !important;
+}
+
+/* 初始密码弹框 */
+.modal560 {
+  .ti3-close {
+    top: 20px;
+    right: 32px;
+  }
+  .ti3-modal-body {
+    overflow-y: visible;
+    .edit-box {
+      margin-left: -16px;
+      .ti3-form .ti3-form-content {
+        width: 300px;
+      }
+      .ti3-form {
+        .ti3-form-label {
+          width: 94px;
+          padding-right: 16px;
+        }
+      }
+    }
+  }
+}

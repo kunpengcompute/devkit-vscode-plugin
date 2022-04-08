@@ -1,0 +1,54 @@
+<div class="about-more-container">
+  <div>
+    <p class="lh18">{{i18n.about_more.about_more_step1}}</p>
+    <ul class="os-list" [ngStyle]="{'height': i18nService.currLang === i18nService.langType.zh_cn ? '240px' : '210px'}">
+      <li *ngFor="let os of currentSupportOS">{{os}}</li>
+    </ul>
+  </div>
+
+  <div class="about-step2 lh18">
+    <span>{{i18n.about_more.about_more_step2}}</span>
+    <a target="_blank" [href]="depDictoryUrl" class="step2 link">{{i18n.whitelist.whitelistPackage}}</a>{{i18n.period}}
+  </div>
+
+  <div *ngIf="i18nService.currLang === i18nService.langType.zh_cn" class="about-step3">
+    <span>3、获取后，</span>
+    <span *ngIf="!isAdmin">请使用管理员用户登录，</span>
+    <span>在页面右上方选择“</span>
+    <div>
+      <img src="./assets/img/common/icon_setting.svg" alt="设置">
+    </div>
+    <span class="img-right">> 依赖字典”升级依赖字典。（具体操作步骤请参考</span>
+    <a target="_blank" [href]="onlineHelp.ZH_HELP" class="link">联机帮助</a>。）
+  </div>
+  
+  <div *ngIf="i18nService.currLang === i18nService.langType.en_us" class="about-step3">
+    <span *ngIf="!isAdmin">3. Log in as an administrator and choose "</span>
+    <span *ngIf="isAdmin">3. Choose "</span>
+    <div>
+      <img src="./assets/img/common/icon_setting.svg" alt="setting">
+    </div>
+    <span class="img-right">> Dependency Dictionary" in the upper right corner of the page and upgrade the dependency dictionary. (For details, see the </span>
+    <a target="_blank" [href]="onlineHelp.EN_HELP" class="link">online help</a>.)
+  </div> 
+  <div class="about-step4 lh18">
+    <p class="lh18">{{i18n.about_more.about_more_step4}}</p>
+    <div class="step4-desc">
+      <p>{{i18n.about_more.about_more_step4_desc1}}</p>
+      <div *ngIf="i18nService.currLang === i18nService.langType.zh_cn">
+        <span>如果目标操作系统不在列表中，请选择页面右上方“</span>
+        <div>
+          <img src="./assets/img/common/icon_more.svg" alt="更多">
+        </div>
+        <span class="img-right">> 意见反馈”，在论坛中反馈该问题。</span>
+      </div>
+      <div *ngIf="i18nService.currLang === i18nService.langType.en_us">
+        <span>If the target OS is not in the list, click "</span>
+        <div>
+          <img src="./assets/img/common/icon_more.svg" alt="more">
+        </div>
+        <span class="img-right">> Feedback" in the upper right corner of the page to post the problem in the forum.</span>
+      </div>
+    </div>
+  </div>
+</div>

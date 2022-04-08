@@ -1,0 +1,15 @@
+<div>
+    <app-hpc-mem-instruct [nodeId]='nodeId' [projectName]='projectName' [taskName]='taskName'
+        [Topdown]='hpcPreset!==hpcPresetType.Topdown' [taskId]='taskId'>
+    </app-hpc-mem-instruct>
+    <app-hpc-top-down [nodeId]='nodeId' [projectName]='projectName' [taskName]='taskName'
+        *ngIf="hpcPreset!==hpcPresetType.InstrucMix" [taskId]='taskId'>
+    </app-hpc-top-down>
+    <app-hpc-open-mp *ngIf="analysisTarget === analysisTargetEnum.LAUNCH_APPLICATION && mpiStatus !== true" [nodeId]='nodeId'
+        [projectName]='projectName' [taskName]='taskName' [taskId]='taskId'>
+    </app-hpc-open-mp>
+    <app-hpc-mpi-com *ngIf="mpiStatus" [nodeId]='nodeId' [projectName]='projectName' [taskName]='taskName' [taskId]='taskId'>
+    </app-hpc-mpi-com>
+    <app-hpc-pmu [nodeId]='nodeId' [projectName]='projectName' [taskName]='taskName' [taskId]='taskId'>
+    </app-hpc-pmu>
+</div>

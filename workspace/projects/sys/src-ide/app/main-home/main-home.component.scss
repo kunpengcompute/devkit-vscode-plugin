@@ -1,0 +1,286 @@
+::ng-deep html {
+    min-width: 1062px !important;
+    overflow-x: auto !important;
+}
+
+::ng-deep body {
+    overflow: hidden !important;
+}
+.home1 {
+    padding: 0 50px;
+    font-size: 14px;
+    color: #AAAAAA;
+    overflow: scroll;
+    height: calc(100% - 260px);
+
+    .top-title {
+        margin-top: 30px;
+        width: 100%;
+        font-size: 20px;
+        color: #fff;
+        width: 792px;
+
+        .tipimage {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 9px;
+
+        }
+
+        .bottom-tip {
+            margin-left: 30px;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+    }
+
+    .analysis-target {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-top: 100px;
+    }
+}
+
+.disabled {
+    cursor: not-allowed !important;
+    color: #666666;
+    background: #313131;
+    border: 1px solid #616161;
+}
+
+input[type=radio][tiRadio]+.ti3-radio .ti3-radio-skin::after {
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    content: "";
+    left: 4px;
+    top: 4px;
+    height: 6px;
+    width: 6px;
+    background-color: #fff;
+    opacity: 0;
+    border-radius: 50%;
+}
+
+
+
+::ng-deep .vscode-light {
+    --install-color-title-content: #222222;
+    --install-color-content: #616161;
+
+    --install-color-separator: #e1e6ee;
+    --install-color-msgbox-bg: #ffffff;
+    --install-color-msgbox-close: #aaaaaa;
+    --install-color-msgbox-dsc-icon-bg: #ffffff;
+    --install-color-msgbox-content: #616161;
+    --install-color-msgbox-dsc-icon: #0067ff;
+
+    --install-color-btn-p: #ffffff;
+    --install-color-btn-p-bg-dft: #0067ff;
+    --install-color-btn-p-bg-hover: #267dff;
+    --install-color-btn-p-bg-active: #0057d9;
+    --install-color-btn-p-bg-disabled: #f5f5f5;
+    --install-color-btn-m-bg: #ffffff;
+    --install-color-btn-m-dft: #979797;
+    --install-color-btn-m-hover: #267dff;
+    --install-color-btn-m-active: #0057d9;
+    --install-color-btn-m-disabled: #cccccc;
+    --install-color-btn-m-bg-disabled: #f5f5f5;
+    --install-color-btn-text-disabled: #cccccc;
+
+    .top-title {
+        .bottom-tip {
+            color: #616161;
+        }
+
+        .tiptext {
+            height: 26px;
+            color: #222;
+        }
+    }
+}
+
+::ng-deep .vscode-dark {
+    --install-color-title-content: #e8e8e8;
+    --install-color-content: #aaaaaa;
+
+    --install-color-separator: #4b4b4b;
+    --install-color-msgbox-bg: #252526;
+    --install-color-msgbox-close: #aaaaaa;
+    --install-color-msgbox-dsc-icon-bg: #ffffff;
+    --install-color-msgbox-content: #888888;
+    --install-color-msgbox-dsc-icon: #0067ff;
+
+    --install-color-btn-p: #e8e8e8;
+    --install-color-btn-p-bg-dft: #0067ff;
+    --install-color-btn-p-bg-hover: #267dff;
+    --install-color-btn-p-bg-active: #0057d9;
+    --install-color-btn-p-bg-disabled: #313131;
+    --install-color-btn-m-bg: #313131;
+    --install-color-btn-m-dft: #dddddd;
+    --install-color-btn-m-hover: #267dff;
+    --install-color-btn-m-active: #0057d9;
+    --install-color-btn-m-disabled: #616161;
+    --install-color-btn-m-bg-disabled: #313131;
+    --install-color-btn-text-disabled: #666666;
+
+    .top-title {
+        .tiptext {
+            height: 26px;
+            color: #fff;
+        }
+
+        .bottom-tip {
+            color: #888;
+        }
+    }
+}
+
+
+::ng-deep .ti3-form-label {
+    color: #aaa !important;
+}
+
+::ng-deep .create .ti3-form-content {
+    .ti3-spinner-container {
+        width: 104px;
+        background: none !important;
+        border: 1px solid #888888 !important;
+        box-shadow: none !important;
+
+        &:hover,
+        &:active {
+            border: 1px solid #0067ff !important;
+        }
+
+        .ti3-spinner-downicon {
+            border-right: none !important;
+            line-height: 32px;
+            width: 24px;
+            background: none !important;
+            color: #aaa !important;
+
+            &:hover {
+                background: #267DFF !important;
+                color: #E8E8E8 !important;
+
+                &::after {
+                    background: #267DFF !important;
+                }
+            }
+
+            &:active {
+                background: #0057D9 !important;
+                color: #E8E8E8 !important;
+
+                &::after {
+                    background: #0057D9 !important;
+                }
+            }
+
+            &::after {
+                content: '';
+                width: 1px;
+                height: 16px;
+                position: absolute;
+                top: 7px;
+                right: 1px;
+                background: #888;
+            }
+        }
+
+        .ti3-spinner-upicon {
+            border-left: none !important;
+            line-height: 32px;
+            width: 24px;
+            background: none !important;
+            color: #aaa !important;
+
+            &:hover {
+                background: #267DFF !important;
+                color: #E8E8E8 !important;
+
+                &::after {
+                    background: #267DFF !important;
+                }
+            }
+
+            &:active {
+                background: #0057D9 !important;
+                color: #E8E8E8 !important;
+
+                &::after {
+                    background: #0057D9 !important;
+                }
+            }
+
+            &::after {
+                content: '';
+                width: 1px;
+                height: 16px;
+                position: absolute;
+                top: 7px;
+                left: 0;
+                background: #888;
+            }
+        }
+
+        .ti3-spinner-input-box {
+            background: none !important;
+
+            &>input {
+                height: 30px !important;
+                padding: 0;
+                margin-top: 0 !important;
+                border-left: none !important;
+                border-right: none !important;
+            }
+        }
+
+        .ti3-spinner-icon-disabled {
+            &::before {
+                color: #616161 !important;
+            }
+
+            &:hover {
+                background: #313131 !important;
+
+                &::after {
+                    background: #313131 !important;
+                }
+            }
+        }
+
+        .ti3-spinner-input:hover,
+        .ti3-spinner-input:focus {
+            border: none !important;
+        }
+    }
+
+    .ti3-checkbox-label {
+        font-size: 12px !important;
+    }
+}
+
+
+::ng-deep .main {
+    &::-webkit-scrollbar {
+        width: 8px !important;
+        height: 8px !important;
+    }
+}
+
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    app-banner {
+        flex-shrink: 0;
+    }
+    app-guide {
+        flex: 1;
+    }
+}

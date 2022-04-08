@@ -1,0 +1,8 @@
+.common-warpper {
+    .common-item {
+        margin-top: 16px;
+        &+.common-item {
+            margin-top: 24px;
+        }
+    }
+}

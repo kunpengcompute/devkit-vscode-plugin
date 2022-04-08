@@ -1,0 +1,14 @@
+<div class="item-left" [ngStyle]="{'width': labelWidth}">
+  <img [ngClass]="{'hidden': !item.different}" src="./assets/img/linkage/abnormal.svg">
+  <p class="label" tiOverflow>{{item.label}}</p>
+  <hy-theme-content *ngIf="item.tip" [tiTip]="item.tip">
+    <app-icon-static [name]="'questionMarkTipLight'" light></app-icon-static>
+    <app-icon-static [name]="'questionMarkTipDark'" dark></app-icon-static>
+  </hy-theme-content>
+</div>
+<div class="item-right" *ngIf="!isArray(item.value)">{{item.value}}</div>
+<div class="item-right" *ngIf="isArray(item.value)">
+  <p class="item-right-line" *ngFor="let line of item.value">
+    {{line}}
+  </p>
+</div>

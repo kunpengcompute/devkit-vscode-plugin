@@ -1,0 +1,72 @@
+<div class="timing_contain">
+  <!-- 筛选 -->
+  <div class="title_bar" style="display:flex;justify-content: space-between;">
+    <div class="left_select" style="display:flex;">
+      <span class="select-item">
+        <ti-select
+          style="width: 180px;margin-right: 40px;"
+          [multiple]="false"
+          [options]="typeOptions"
+          [searchable]="false"
+          [(ngModel)]="typeSelected"
+          (ngModelChange)="typeChange($event)"
+          id="myselect1"
+        >
+        </ti-select>
+      </span>
+      <span class="select-item" id="select">
+        <ti-select
+          style="width: 180px;"
+          [multiple]="true"
+          [options]="cpuNumsOption"
+          [searchable]="true"
+          [(ngModel)]="cpuSelected"
+          (ngModelChange)="cpuChange($event)"
+          id="myselect2"
+        >
+        </ti-select>
+      </span>
+    </div>
+  </div>
+  <div class="timeLine"  *ngIf="!empty">
+    <app-time-line *ngIf="timeData.length" [timeData]='timeData' [lineData]='timeLine' (timeLineData)='timeLineData($event)' #timeLineDetail></app-time-line>
+  </div>
+
+  <!-- 时序图 -->
+  <div class="memory-detail" [id]="uuid">
+    <div class="no-data" *ngIf="empty">
+      <app-default-page ></app-default-page>
+    </div>
+    <div class="table-box" *ngIf="!empty">
+      <div class="table-y"  style="margin-top: 6px;">
+        <div
+          class="title-box"
+          style="padding: 0;"
+          *ngFor="let item of leftTitleData; let index = index"
+          [ngStyle]="
+            index == 0
+              ? { height: '45px', 'line-height': '35px' }
+              : { height: '38px' }
+          "
+        >
+          <span
+            class="title"
+            style="color:#6c7280;font-size:14px;"
+            tiTipPosition="top-left"
+            >{{ item }}</span
+          >
+        </div>
+      </div>
+      <div class="table">
+        <div
+          echarts
+          [options]="tableData"
+          *ngIf="tableData"
+          (chartInit)="onChartInit($event)"
+          style="height: 100%"
+        ></div>
+      </div>
+    </div>
+  </div>
+  <div class="x-label"></div>
+</div>

@@ -1,0 +1,90 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="替换鲲鹏性能分析工具SSL证书">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0233026414.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="鲲鹏性能分析工具">
+<meta name="DC.Publisher" content="20210406">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="kunpengoper_06_0005">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>替换鲲鹏性能分析工具SSL证书</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="kunpengoper_06_0005"></a><a name="kunpengoper_06_0005"></a>
+
+<h1 class="topictitle1">替换鲲鹏性能分析工具SSL证书</h1>
+<div id="body8662426"><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p8060118">SSL证书通过在客户端浏览器和Web服务器之间建立一条SSL安全通道（访问方式为HTTPS），实现数据信息在客户端和服务器之间的加密传输，可以防止数据信息的泄露。SSL保证了双方传递信息的安全性，而且用户可以通过服务器证书验证他所访问的网站是否是真实可靠。<span id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_ph47691002194">鲲鹏性能分析工具</span>支持SSL证书替换功能，为提高安全性，建议替换成自己的证书和公私钥对，并及时更新证书，确保证书的有效性。</p>
+<ol id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_ol8946153011711"><li id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_li294653019714"><span>用户自行注册域名和申请SSL证书，并将申请的SSL证书文件按如下名称命名：</span><p><ul id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_ul14691160134914"><li id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_li186912003493">服务器证书文件：server.crt</li><li id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_li1069835204919">服务器证书请求文件：server.csr</li><li id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_li6547111610498">私钥文件：server.key</li><li id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_li13834102813495">证书链文件：ca_chain.crt<div class="note" id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_note730818283574"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p13861175251415">一个公钥证书需要其签发CA证明身份，签发CA又需要上一级CA证明身份，验证公钥的过程成为一个迭代过程并形成一个证书链，证书链以根证书为结束点。记录该迭代过程的文件称为证书链文件。</p>
+</div></div>
+</li></ul>
+</p></li><li id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_li6145933155"><span>使用SSH远程登录工具，将获取的证书文件上传至服务器任意目录，例如“/home”目录。</span></li><li id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_zh-cn_topic_0197553145_li12443155544119"><span>使用SSH远程登录工具，以系统用户登录Linux操作系统命令行界面。</span><p><div class="note" id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_note131437313442"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0228009037_p839111901719">该步骤必须在<strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0228009037_b13764559112216">root</strong>用户下执行，若以普通系统用户登录，需要执行<strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0228009037_b11403125814246">su</strong>切换到<strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0228009037_b152921618182912">root</strong>用户下执行后续操作。</p>
+</div></div>
+</p></li><li id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_li173131641172211"><span>执行如下命令进入解压后的<span id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_ph1238532191913">鲲鹏性能分析工具</span>安装包目录（<span class="filepath" id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_filepath17634171815216">“/home”</span>请根据实际情况替换）。</span><p><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p105804316221"><strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_zh-cn_topic_0197553145_b1610193575517">cd </strong><strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_b184143042314">/</strong><em id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_i12109534122310">home</em>/Hyper_tuner</p>
+</p></li><li id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_li72001545171611"><span>执行如下命令替换SSL证书。</span><p><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p6166932102312"><strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_b38931426113314">./install_service_cert.sh</strong> [<strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_b6631152992417">-D</strong><strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_b5988132217453"> </strong><em id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_i878514555310">domain</em>] [<strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_b9548181513320">-s</strong> <em id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_i102141374616">cert directory</em>] [<strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_b18577218163314">-r</strong> <em id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_zh-cn_topic_0192075796_i49112374312">True/False</em>] [<strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_b58091120203310">-c</strong> <em id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_i59877433815">True/False</em>]</p>
+<p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p934494494315">例如：</p>
+<p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p26274844320"><strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_b441619548430">./install_service_cert.sh</strong> <strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_b1219814368451">-D</strong> *.huawei.com <strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_b144823391144">-s</strong> /home</p>
+<div class="note" id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_note935318317565"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p2354103185611">命令行格式的约定：</p>
+<ul id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_ul740018910011"><li id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_li12401189101"><strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_b181471308581">粗体</strong>：命令行关键字（命令中保持不变、必须照输的部分）采用<strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_b57282016135917">加粗</strong>字体表示。</li><li id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_li240114917017"><em id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_i521252212592">斜体</em>：命令行参数（命令中必须由实际值进行替代的部分）采用<em id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_i16474162765919">斜体</em>表示。</li><li id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_li0401791101">[ ]：表示用“[ ]”括起来的部分在命令配置时是可选的。</li></ul>
+</div></div>
+
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_zh-cn_topic_0224252009_table04628341311" frame="border" border="1" rules="all"><caption><b>表1 </b>参数说明</caption><colgroup><col style="width:14.93%"><col style="width:18.32%"><col style="width:66.75%"></colgroup><thead align="left"><tr id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_zh-cn_topic_0224252009_row955803181318"><th align="left" class="cellrowborder" valign="top" width="14.93%" id="mcps1.3.2.5.2.5.2.4.1.1"><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_zh-cn_topic_0224252009_p18736145017482">命令</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="18.32%" id="mcps1.3.2.5.2.5.2.4.1.2"><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_zh-cn_topic_0224252009_p11558238130">参数选项</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="66.75%" id="mcps1.3.2.5.2.5.2.4.1.3"><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_zh-cn_topic_0224252009_p455811316139">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_zh-cn_topic_0224252009_row25581034132"><td class="cellrowborder" valign="top" width="14.93%" headers="mcps1.3.2.5.2.5.2.4.1.1 "><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p123942475266">-D/--domain</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.32%" headers="mcps1.3.2.5.2.5.2.4.1.2 "><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p16393154710265"><em id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_i9910951291">domain</em></p>
+</td>
+<td class="cellrowborder" valign="top" width="66.75%" headers="mcps1.3.2.5.2.5.2.4.1.3 "><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p173921347202610">可选参数，域名。可以输入多个域名，用逗号（,）隔开。配置“-s/--source”参数替换成用户自己的证书时，必须配置该参数。</p>
+</td>
+</tr>
+<tr id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_row43491158115812"><td class="cellrowborder" valign="top" width="14.93%" headers="mcps1.3.2.5.2.5.2.4.1.1 "><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p19391047192619">-s/--source</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.32%" headers="mcps1.3.2.5.2.5.2.4.1.2 "><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p1039064719268"><em id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_i135001121919">cert directory</em></p>
+</td>
+<td class="cellrowborder" valign="top" width="66.75%" headers="mcps1.3.2.5.2.5.2.4.1.3 "><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p338974714265">可选参数，用户上传证书的目录。默认为安装华为证书。</p>
+</td>
+</tr>
+<tr id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_row5517196135912"><td class="cellrowborder" valign="top" width="14.93%" headers="mcps1.3.2.5.2.5.2.4.1.1 "><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p838914716261">-r/--replace</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.32%" headers="mcps1.3.2.5.2.5.2.4.1.2 "><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p638764792616"><em id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_i1494716531785">True/False</em></p>
+</td>
+<td class="cellrowborder" valign="top" width="66.75%" headers="mcps1.3.2.5.2.5.2.4.1.3 "><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p5387124772612">可选参数，是否替换证书。默认为“False”，如果已安装过证书此参数必须设置为“True”。</p>
+</td>
+</tr>
+<tr id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_row7966192019"><td class="cellrowborder" valign="top" width="14.93%" headers="mcps1.3.2.5.2.5.2.4.1.1 "><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p1938664752614">-c/--check-crl</p>
+</td>
+<td class="cellrowborder" valign="top" width="18.32%" headers="mcps1.3.2.5.2.5.2.4.1.2 "><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p1538511479261"><em id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_i166831852581">True/False</em></p>
+</td>
+<td class="cellrowborder" valign="top" width="66.75%" headers="mcps1.3.2.5.2.5.2.4.1.3 "><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p43838472261">可选参数，是否检查CA吊销证书列表。默认为“False”。</p>
+<div class="note" id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_note625718282066"><span class="notetitle"> 说明： </span><div class="notebody"><p id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_p025820286616">检查CA吊销证书列表需要访问外部网络环境从CA证书颁发机构校验。</p>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_li17166113134311"><span>打开本地PC机的浏览器，在地址栏输入<strong id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_b1823413851117">https://</strong><em id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_i96881310101113">域名:端口</em><em id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_i669284951612">号</em>登录<span id="kunpengoper_06_0005__zh-cn_topic_0000001116429070_zh-cn_topic_0251981626_ph185605351917">鲲鹏性能分析工具</span>Web界面。</span></li></ol>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0233026414.html">常用操作</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

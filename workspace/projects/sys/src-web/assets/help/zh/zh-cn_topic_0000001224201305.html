@@ -1,0 +1,161 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="查看分析结果">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001224361247.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具 (系统性能分析)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001224201305">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>查看分析结果</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001224201305"></a><a name="ZH-CN_TOPIC_0000001224201305"></a>
+
+<h1 class="topictitle1">查看分析结果</h1>
+<div id="body1597305321258"><div class="section" id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0189293077_section11470129119"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0189293077_zh-cn_topic_0189293076_p5336201013112">已创建Miss事件分析任务，并且成功完成分析。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001224201305__section1114191619578"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0000001224201305__ol933902084118"><li id="ZH-CN_TOPIC_0000001224201305__li1454719155315"><span>在“工程管理”区域，依次单击指定工程和分析任务名称前的<span><img id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250279621_image4105155811375" src="zh-cn_image_0000001224122785.png"></span>。</span><p><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250279621_p198319584430">展开节点列表。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001224201305__li2339172017410"><span>单击节点名称查看分析结果。</span><p><div class="p" id="ZH-CN_TOPIC_0000001224201305__p14896345205011">默认查看Miss事件的指标时序图，如<a href="#ZH-CN_TOPIC_0000001224201305__fig592992092112">图1</a>所示。<div class="note" id="ZH-CN_TOPIC_0000001224201305__note716319702518"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001224201305__p430281212557">“时序信息”页面提供基于时间轴的指标描述，用于用户基于时间关联不同的指标，识别不同时间段的不同特征。主要包括：进程、线程、模块、CPU四个不同维度的Miss类事件时序图。</p>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001224201305__fig592992092112"><a name="ZH-CN_TOPIC_0000001224201305__fig592992092112"></a><a name="fig592992092112"></a><span class="figcap"><b>图1 </b>时序信息</span><br><span><img id="ZH-CN_TOPIC_0000001224201305__image112141958115314" src="zh-cn_image_0000001178723196.png"></span></div>
+</div>
+<div class="p" id="ZH-CN_TOPIC_0000001224201305__p1022511895512">单击右上方的<span><img id="ZH-CN_TOPIC_0000001224201305__image563919617552" src="zh-cn_image_0000001224361413.png"></span>按钮可以切换视图，查看Miss事件详细信息，如<a href="#ZH-CN_TOPIC_0000001224201305__fig1541714122913">图2</a>所示，参数说明如<a href="#ZH-CN_TOPIC_0000001224201305__table1971874402910">表1</a>所示。<div class="note" id="ZH-CN_TOPIC_0000001224201305__note16414103114283"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001224201305__ul11656515133110"><li id="ZH-CN_TOPIC_0000001224201305__li17539143610311">“详细信息”页面提供按进程/线程/模块/函数统计的Miss事件次数，支持根据事件次数排序。</li><li id="ZH-CN_TOPIC_0000001224201305__li142241619405">“unknown”指没有关联到函数名的地址。</li><li id="ZH-CN_TOPIC_0000001224201305__li1246125344711">“函数/调用栈”下拉按钮可以选择不同维度的函数描述视图：<p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_p4192225164818"><a name="ZH-CN_TOPIC_0000001224201305__li1246125344711"></a><a name="li1246125344711"></a><span class="wintitle" id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_wintitle175881879115">“函数/调用栈”</span>：直接显示函数信息。</p>
+<p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_p3985172994814"><span class="wintitle" id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_wintitle121451106115">“模块/函数/调用栈”</span>：以“模块”维度显示函数信息。</p>
+<p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_p7754173714813"><span class="wintitle" id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_wintitle725718125110">“线程/函数/调用栈”</span>：以“线程”维度显示函数信息。</p>
+<p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_p966525154814"><span class="wintitle" id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_wintitle2618758163">“核/线程/函数/调用栈”</span>：以“核”维度显示函数信息。</p>
+<p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_p10996100114915"><span class="wintitle" id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_wintitle0734706714">“进程/函数/线程/调用栈”</span>：以“进程”维度显示函数信息。</p>
+<p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_p65449106491"><span class="wintitle" id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_wintitle9392539715">“进程/线程/模块/函数/调用栈”</span>：以“进程”维度显示函数信息。</p>
+<p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_p20757220164917"><span class="wintitle" id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_wintitle192741151173">“进程/模块/线程/函数/调用栈”</span>：以“进程”维度显示函数信息。</p>
+<p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_p15301228124913"><span class="wintitle" id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_wintitle583510717715">“进程/模块/函数/线程/调用栈”</span>：以“进程”维度显示函数信息。</p>
+<p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_p1661817619322"><span class="wintitle" id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_wintitle97081217712">“函数/线程/核/调用栈”</span>：以“函数”维度显示函数信息。点击函数名左边的下拉按钮，鼠标悬停于TID上时会显示详细命令行信息。</p>
+</li></ul>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001224201305__fig1541714122913"><a name="ZH-CN_TOPIC_0000001224201305__fig1541714122913"></a><a name="fig1541714122913"></a><span class="figcap"><b>图2 </b>详细信息</span><br><span><img id="ZH-CN_TOPIC_0000001224201305__image445184019217" src="zh-cn_image_0000001224201487.png"></span></div>
+</div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001224201305__table1971874402910"></a><a name="table1971874402910"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001224201305__table1971874402910" frame="border" border="1" rules="all"><caption><b>表1 </b>详细信息页签参数说明</caption><colgroup><col style="width:24.01%"><col style="width:75.99000000000001%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001224201305__row27196446299"><th align="left" class="cellrowborder" valign="top" width="24.01%" id="mcps1.3.2.2.2.2.3.2.3.1.1"><p id="ZH-CN_TOPIC_0000001224201305__p171934413297">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.99000000000001%" id="mcps1.3.2.2.2.2.3.2.3.1.2"><p id="ZH-CN_TOPIC_0000001224201305__p071944411291">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001224201305__row107197440297"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201305__p1117631811302">模块路径</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__p61751018163012">显示模块的绝对路径。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201305__row1171913444298"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201305__p617371803011">Miss次数</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__p121716188309">显示Miss事件次数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201305__row9221249141115"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201305__p10482128102214">PID</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__p16482385220">显示进程ID。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201305__row7903164618117"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201305__p13278111022214">TID</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__p9501144042310">显示线程ID。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p" id="ZH-CN_TOPIC_0000001224201305__p9485516173716">单击指定函数名称查看函数源代码和汇编代码分析详情，如<a href="#ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_fig19195145964111">图3</a>所示，界面参数描述如<a href="#ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_table132761428141514">表2</a>所示。<div class="note" id="ZH-CN_TOPIC_0000001224201305__note78197195914"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001224201305__p38191010591">函数详情页面展示函数内部的热点指令（热点指令即函数内硬件事件占比最高的Top指令）、热点指令对应的高级语言文件及行号。</p>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_fig19195145964111"><a name="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_fig19195145964111"></a><a name="zh-cn_topic_0250422238_fig19195145964111"></a><span class="figcap"><b>图3 </b>函数源码和汇编指令关联详情</span><br><span><img id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_image184813288477" src="zh-cn_image_0000001224201381.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_table132761428141514"></a><a name="zh-cn_topic_0250422238_table132761428141514"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_table132761428141514" frame="border" border="1" rules="all"><caption><b>表2 </b>函数详情页签参数说明</caption><colgroup><col style="width:24.01%"><col style="width:75.99000000000001%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_row02761128111518"><th align="left" class="cellrowborder" valign="top" width="24.01%" id="mcps1.3.2.2.2.2.4.5.2.3.1.1"><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p927612881515">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="75.99000000000001%" id="mcps1.3.2.2.2.2.4.5.2.3.1.2"><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p82766288151">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_row121875724912"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p623112663018">硬件事件</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p20605539743">显示硬件事件类型。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_row132761428191510"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p123096123012">总数</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p162766281158">显示硬件事件总数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_row827652851515"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p9229166153013">文件名</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p127622861517">显示当前函数所在文件名称。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_row5944192718529"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.4.5.2.3.1.1 mcps1.3.2.2.2.2.4.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p1294452775220">源代码</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_row167741028185212"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p69699612313">源代码行号</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p199616445303">显示源代码行号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_row15522192913528"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p6968176163114">源代码</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p8962154433015">显示源代码。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_row1654016300526"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p15966765316">数量(占比)</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p19891622195614">数量：该行源代码对应的硬件事件计数值。</p>
+<p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p1689422135611">占比：硬件事件计数值占该事件总数的百分比。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_row4601544175212"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.4.5.2.3.1.1 mcps1.3.2.2.2.2.4.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p17805194855213">汇编代码</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_row3761114619526"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p3889742534">汇编指令地址</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p7889164155313">显示汇编指令地址。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_row175598019537"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p588984185318">代码行号</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p12889247539">显示汇编指令对应的源码的行号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_row1255116114534"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p6889448539">汇编指令</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p788913419538">显示执行的汇编指令。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_row20491152195312"><td class="cellrowborder" valign="top" width="24.01%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p168893495314">数量(占比)</p>
+</td>
+<td class="cellrowborder" valign="top" width="75.99000000000001%" headers="mcps1.3.2.2.2.2.4.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p1188918435316">数量：该行汇编指令对应的硬件事件计数值。</p>
+<p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250422238_zh-cn_topic_0250422244_p488919411533">占比：硬件事件计数值占该事件总数的百分比。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul id="ZH-CN_TOPIC_0000001224201305__ul173391820184113"><li id="ZH-CN_TOPIC_0000001224201305__li5740144534010">单击“任务信息”页签查看当前节点任务的详细配置信息和采集信息。<div class="note" id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250279621_note1344019461351"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001224201305__zh-cn_topic_0250279621_p84406467353">如果任务执行失败，“任务信息”界面上会显示任务失败的原因。</p>
+</div></div>
+</li><li id="ZH-CN_TOPIC_0000001224201305__li334032014416">单击“任务日志”页签查看任务的日志信息。</li></ul>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001224361247.html">Miss事件分析</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

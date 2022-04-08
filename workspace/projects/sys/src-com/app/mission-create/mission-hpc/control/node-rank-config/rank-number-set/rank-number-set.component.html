@@ -1,0 +1,192 @@
+<ng-template #configRankModal let-context="context">
+  <ti-modal-header>
+    <div class="title">{{ "hpc.mission_create.configRankNum" | i18n }}</div>
+  </ti-modal-header>
+  <ti-modal-body>
+    <div class="rank-config-warpper">
+      <div class="rank-name">
+        <ti-formfield>
+          <ti-item [label]="formData.rankNum.label">
+            <input
+              type="text"
+              tiValidation
+              tiText
+              tiNumber
+              tiDigits
+              tiMinValue="1"
+              tiMaxValue="128"
+              [(ngModel)]="formData.rankNum.value"
+              (blur)="onBlurRankNumVerify()"
+              style="width: 198px"
+            />
+            <span class="tip-text">
+              {{ "common_term_sign_left" | i18n }}1~128
+              {{ "common_term_sign_right" | i18n }}
+            </span>
+          </ti-item>
+          <ti-item [label]="formData.nodeRange.label">
+            <div class="radio-item" [ngClass]="{ select: selectNode === 1 }">
+              <input
+                type="radio"
+                tiRadio
+                name="node-scope"
+                [value]="formData.allNodes.value"
+                [label]="formData.allNodes.label"
+                [(ngModel)]="selectNode"
+                (ngModelChange)="ngModelChange($event)"
+              />
+            </div>
+            <div class="radio-item" [ngClass]="{ select: selectNode === 2 }">
+              <input
+                type="radio"
+                tiRadio
+                name="node-scope"
+                [value]="formData.specifiedNode.value"
+                [label]="formData.specifiedNode.label"
+                [(ngModel)]="selectNode"
+                (ngModelChange)="ngModelChange($event)"
+              />
+            </div>
+          </ti-item>
+        </ti-formfield>
+      </div>
+      <div class="table-wapper">
+        <div class="select-boxs" *ngIf="isShowAll; else showSelect">
+          <div class="select chosen" (click)="onChangeTableInfo(false)">
+            {{ checkedList.length }}
+          </div>
+          <div class="all chosen select-chosen">
+            {{ data.length }}
+          </div>
+        </div>
+        <ng-template #showSelect>
+          <div class="select-boxs">
+            <div class="select chosen select-chosen">
+              {{ checkedList.length }}
+            </div>
+            <div class="all chosen" (click)="onChangeTableInfo(true)">
+              {{ data.length }}
+            </div>
+          </div>
+        </ng-template>
+        <div class="rank-table">
+          <ti-table
+            [(displayedData)]="displayed"
+            [srcData]="srcData"
+            [columns]="columns"
+          >
+            <div class="ti3-table-fixed-head">
+              <table>
+                <thead>
+                  <tr>
+                    <th checkbox-column style="width: 10%;">
+                      <!--全选按钮-->
+                      <!--如果有分页，全选需要控制当前页时，items接口传入displayed
+                        如果全选要控制表格所有数据，items接口传入srcData.data-->
+                      <input
+                        type="checkbox"
+                        tiCheckgroup
+                        [items]="selectNode === 1 ? srcData.data : displayed"
+                        [(checkeds)]="checkedList"
+                        [disabled]="selectNode === 1"
+                      />
+                    </th>
+                    <ng-container *ngFor="let column of columns; index as i">
+                      <th tiOverflow width="{{ column.width }}">
+                        <ti-cell-text>{{ column.title }}</ti-cell-text>
+                        <ti-head-sort
+                          *ngIf="column.showSort"
+                          [sortKey]="column.sortKey"
+                        ></ti-head-sort>
+                        <ng-container *ngIf="column.showSearch">
+                          <ti-icon
+                            name="search"
+                            class="search-icon"
+                            [ngClass]="{
+                              active:
+                                processSearchPop.isShow ||
+                                searchWordsSave[column.searchKey]
+                            }"
+                            [pop]="searchTip"
+                            #processSearchPop="pop"
+                            [popOffset]="{ x: -40, y: 24 }"
+                            popClass="common-table-search-pop"
+                            [popContext]="column"
+                          >
+                          </ti-icon>
+
+                          <ng-template #searchTip let-context="context">
+                            <ti-searchbox
+                              [ngModel]="searchWordsSave[column.searchKey]"
+                              (clear)="onTableHeaderSearch('', context)"
+                              (search)="onTableHeaderSearch($event, context)"
+                            >
+                            </ti-searchbox>
+                          </ng-template>
+                        </ng-container>
+                      </th>
+                    </ng-container>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let row of displayed;
+                      index as i;
+                      trackBy: trackByFn
+                    "
+                  >
+                    <td
+                      checkbox-column
+                      [ngClass]="{ 'ti3-disabled-cell': row.disabled }"
+                    >
+                      <input
+                        type="checkbox"
+                        tiCheckitem
+                        [item]="row"
+                        [disabled]="row.disabled || selectNode === 1"
+                      />
+                    </td>
+                    <td tiOverflow>{{ row.nodeIp }}</td>
+                    <td tiOverflow>{{ row.nickName }}</td>
+                    <td tiOverflow>{{ row.rank }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div hyNodata [nodataShow]="srcData.data.length === 0"></div>
+            </div>
+            <ti-pagination
+              *ngIf="srcData.data.length > 10"
+              [(currentPage)]="currentPage"
+              [pageSize]="pageSize"
+              [(totalNumber)]="totalNumber"
+              [showGotoLink]="true"
+            ></ti-pagination>
+          </ti-table>
+        </div>
+      </div>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button
+      type="button"
+      class="ok"
+      color="primary"
+      (click)="onConfigRankClick(context)"
+      tiButton
+    >
+      {{ "common_term_operate_ok" | i18n }}
+    </button>
+    <button
+      type="button"
+      [disabled]="!checkedList.length"
+      (click)="onApplyClick()"
+      tiButton
+    >
+      {{ "common_term_operate_apply" | i18n }}
+    </button>
+    <button type="button" (click)="context.close()" tiButton>
+      {{ "common_term_operate_cancel" | i18n }}
+    </button>
+  </ti-modal-footer>
+</ng-template>

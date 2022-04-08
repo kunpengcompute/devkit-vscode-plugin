@@ -1,0 +1,172 @@
+<app-mission-modal-header #modal (ongModalClose)="closePopDetail($event)">
+    <div class="content show-box modify-schedule" style="max-height: 600px;">
+        <div class="header">
+            <span class="title"> {{i18n.modifySchedule}}</span>
+            <span (mousedown)="close()" class="tip-close">
+                <img class="close-img" src="./assets/img/header/close_icon.svg" />
+                <img class="close-img" src="./assets/img/header/close_icon_hover.svg">
+            </span>
+        </div>
+        <div class="list-info">
+            <div class="table" *ngIf="scheduleTaskType !== 'memory_diagnostic'">
+                <div class="config-info" *ngFor="let item of configList">
+                    <div class="table-left">{{item.key}}</div>
+                    <div class="table-right">{{item.text}}</div>
+                </div>
+            </div>
+            <div class="analysis-info" *ngIf="scheduleTaskType !== 'memory_diagnostic'">
+                <div class="analysis-target-app" *ngIf="targetClicked===1">
+                    <!-- 输入应用路径或者进程ID -->
+                    <div class="analysis-target-application" *ngIf="modeClicked===0">
+                        <div class="analysis-target-app-label-app">
+                            <div class="label-left">
+                                <ti-icon name="staricon" style="color: red;"></ti-icon>
+                                <!-- 不适用span可能左右会有空格 影响显示 -->
+                                <span>{{i18n.common_term_task_crate_app_path}}</span>
+                                <ti-icon [tiTip]="i18n.mission_create.modeAppNotice" style="margin-left:10px;"
+                                    tiTipMaxWidth='370px' tiTipPosition="bottom">
+                                    <img src='./assets/img/mission/iconTip.png'>
+                                </ti-icon>
+                            </div>
+                            <div class="analysis-target-app-input-app">
+                                <!-- 输入应用路径 -->
+                                <input type="text" #like tiText [placeholder]="modeAppHolder"
+                                    [(ngModel)]="modeApplication" [disabled]="modeAppDisable"
+                                    (blur)="missionAppChange($event)" />
+                                <div class="mission-app-warn" *ngIf="!modeAppValid">{{modeAppWarnMsg}}</div>
+                            </div>
+                        </div>
+                        <div class="analysis-target-app-label-params">
+                            <div class="label-left">
+                                <ti-icon name="staricon" style="color: red;"
+                                    [ngStyle]="{'opacity': analysisTypesDir[typeClicked].type==='java-mixed-mode' ? 1 : 0}">
+                                </ti-icon>
+                                <!-- 不适用span可能左右会有空格 影响显示 -->
+                                <span>{{i18n.common_term_task_crate_parameters}}</span>
+                                <ti-icon [tiTip]="i18n.mission_create.modeAppParamsNotice" style="margin-left:10px;"
+                                    tiTipMaxWidth='370px' tiTipPosition="bottom">
+                                    <img src='./assets/img/mission/iconTip.png'>
+                                </ti-icon>
+                            </div>
+                            <div class="analysis-target-app-input-params">
+                                <!-- 输入应用参数 -->
+                                <textarea tiTextarea type="text" #like class="textarea-params" resize="'vertical'"
+                                    [placeholder]="modeAppParamsHolder" [(ngModel)]="modeAppParams"
+                                    [disabled]="modeAppParamsDisable"
+                                    (ngModelChange)="missionAppParamsChange($event)"></textarea>
+                                <div class="mission-app-warn"
+                                    *ngIf="!modeAppParamsValid && analysisTypesDir[typeClicked].type==='java-mixed-mode'">
+                                    {{modeAppParamsMsg}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="analysis-target-pid" *ngIf="modeClicked===1">
+                        <app-mission-create-pid-process [pidValue]="modePid" [processValue]="modeProcessName"
+                            [isDisable]="modePidDisable" [changeType]="analysisTypesDir[typeClicked].type"
+                            [isModifySchedule]="isModifySchedule" (updateValue)="onPidProcessUpdateValue($event)">
+                        </app-mission-create-pid-process>
+                    </div>
+                </div>
+            </div>
+            <div class="missMobal">
+                <app-mission-hpc #hpc *ngIf="scheduleTaskType === 'hpc_analysis'" [modeApplication]='modeApplication'
+                    [labelWidth]="labelWidth" [modeAppParams]="modeAppParams" [modePid]='modePid'
+                    [modeAppValid]='modeAppValid' [typeId]="hpcTarget"
+                    [taskNameValid]="missionNameValid" [modePidValid]='modePidValid' [projectId]="projectId"
+                    [projectName]="projectName" [taskName]="missionName" [isModifySchedule]="isModifySchedule"
+                    [nodeConfigedData]="nodeConfigedData" [modeProcess]="modeProcessName"
+                    (sendPretable)="handleUpdataPretable($event)" (sendMissionKeep)="saveTemplate($event)"
+                    (sendAppOrPidDisableM)="handleAppAndPidDisable($event)"
+                    [nodeConfigShow]="nodeConfigShow" [modeAppPathAllow]="modeAppPathAllow">
+                </app-mission-hpc>
+                <!-- 内存诊断预约任务 -->
+                <div *ngIf="scheduleTaskType === 'memory_diagnostic'">
+                    <app-diagnose-schedule [taskData]="taskData" [scheduleTaskId]="scheduleTaskId"
+                        [projectId]='projectId'
+                        (cancelModify)="handleUpdataPretable($event)"
+                        (confirmModify)="handleUpdataPretable($event)"
+                        #diagnoseSchedule
+                        *ngIf="showDiagnose">
+                    </app-diagnose-schedule>
+                </div>
+                <app-mission-performance *ngIf="scheduleTaskType === 'system'" [taskNameValid]="missionNameValid"
+                    [scenes]="scenes" [projectId]="projectId" [projectName]="projectName" [taskName]="missionName"
+                    [isModifySchedule]="isModifySchedule" [modeProcess]="modeProcessName"
+                    (sendPretable)="handleUpdataPretable($event)" (sendMissionKeep)="saveTemplate($event)" #performance>
+                </app-mission-performance>
+                <app-mission-process *ngIf="scheduleTaskType === 'process-thread-analysis'"
+                    [taskNameValid]="missionNameValid" [projectId]="projectId" [projectName]="projectName"
+                    [taskName]="missionName" [isModifySchedule]="isModifySchedule" [appParameters]="modeAppParams"
+                    [modePid]='modePid' [appDir]='modeApplication' [modeAppValid]='modeAppValid'
+                    [typeId]="targetClicked+modeClicked" [modeProcess]="modeProcessName" [modePidValid]="modePidValid"
+                    [targetClicked]="targetClicked" [modeClicked]="modeClicked" [labelWidth]="labelWidth"
+                    [modeAppPathAllow]="modeAppPathAllow"
+                    (sendPretable)="handleUpdataPretable($event)" (sendMissionKeep)="saveTemplate($event)" #process>
+                </app-mission-process>
+
+                <app-mission-cplusplus #cplusplus *ngIf="scheduleTaskType === 'C/C++ Program'"
+                    [modeApplication]='modeApplication' [labelWidth]="labelWidth" [modeAppParams]="modeAppParams"
+                    [modePid]='modePid' [modeAppValid]='modeAppValid' [typeId]="targetClicked+modeClicked"
+                    [taskNameValid]="missionNameValid" [modePidValid]='modePidValid' [projectId]="projectId"
+                    [projectName]="projectName" [taskName]="missionName" [isModifySchedule]="isModifySchedule"
+                    [nodeConfigedData]="nodeConfigedData" [modeProcess]="modeProcessName"
+                    (sendPretable)="handleUpdataPretable($event)" (sendMissionKeep)="saveTemplate($event)"
+                    [nodeConfigShow]="nodeConfigShow" [modeAppPathAllow]="modeAppPathAllow"></app-mission-cplusplus>
+
+                <app-mission-mem #mem *ngIf="['mem_access', 'miss_event', 'falsesharing'].includes(scheduleTaskType)"
+                    [modeApplication]='modeApplication' [labelWidth]="labelWidth" [modeAppParams]="modeAppParams"
+                    [modePid]='modePid' [modeAppValid]='modeAppValid' [targetClicked]="targetClicked"
+                    [modeClicked]="modeClicked" [taskNameValid]="missionNameValid" [modePidValid]='modePidValid'
+                    [projectId]="projectId" [projectName]="projectName" [taskName]="missionName"
+                    [isModifySchedule]="isModifySchedule" [nodeConfigedData]="nodeConfigedData"
+                    [nodeConfigShow]="nodeConfigShow" [appendTarget]="'.config-container'" [drawerLevel]="1"
+                    [widthIsLimited]="true" [modeProcess]="modeProcessName" [modeAppRunUserValid]="modeAppRunUserValid"
+                    (sendPretable)="handleUpdataPretable($event)" (sendMissionKeep)="saveTemplate($event)">
+                </app-mission-mem>
+
+                <app-mission-structure #structure *ngIf="scheduleTaskType === 'microarchitecture'"
+                    [modeApplication]='modeApplication' [labelWidth]="labelWidth" [modeAppParams]="modeAppParams"
+                    [modePid]='modePid' [modeAppValid]='modeAppValid' [typeId]="targetClicked+modeClicked"
+                    [taskNameValid]="missionNameValid" [modePidValid]='modePidValid' [modeAppRunUserValid]="modeAppRunUserValid"
+                    [projectName]="projectName" [taskName]="missionName" [isModifySchedule]="isModifySchedule"
+                    [nodeConfigedData]="nodeConfigedData" [modeProcess]="modeProcessName" [projectId]="projectId"
+                    (sendPretable)="handleUpdataPretable($event)" (sendMissionKeep)="saveTemplate($event)"
+                    [nodeConfigShow]="nodeConfigShow" [modeAppPathAllow]="modeAppPathAllow"></app-mission-structure>
+
+                <app-mission-schedule #schedule *ngIf="scheduleTaskType === 'resource_schedule'"
+                    [modeApplication]='modeApplication' [labelWidth]="labelWidth" [modeAppParams]="modeAppParams"
+                    [modePid]='modePid' [modeAppValid]='modeAppValid' [typeId]="targetClicked+modeClicked"
+                    [taskNameValid]="missionNameValid" [modePidValid]='modePidValid' [projectId]="projectId"
+                    [projectName]="projectName" [taskName]="missionName" [isModifySchedule]="isModifySchedule"
+                    [nodeConfigedData]="nodeConfigedData" (sendPretable)="handleUpdataPretable($event)"
+                    [modeProcess]="modeProcessName" (sendMissionKeep)="saveTemplate($event)"
+                    [nodeConfigShow]="nodeConfigShow" [modeAppPathAllow]="modeAppPathAllow"></app-mission-schedule>
+
+                <app-mission-lock #lock *ngIf="scheduleTaskType === 'system_lock'" [modeApplication]='modeApplication'
+                    [labelWidth]="labelWidth" [modeAppParams]="modeAppParams" [modePid]='modePid'
+                    [modeAppValid]='modeAppValid' [typeId]="targetClicked+modeClicked"
+                    [taskNameValid]="missionNameValid" [modePidValid]='modePidValid' [projectId]="projectId"
+                    [projectName]="projectName" [taskName]="missionName" [isModifySchedule]="isModifySchedule"
+                    [nodeConfigedData]="nodeConfigedData" [nodeConfigShow]="nodeConfigShow"
+                    [modeProcess]="modeProcessName" (sendPretable)="handleUpdataPretable($event)"
+                    (sendMissionKeep)="saveTemplate($event)" [modeAppPathAllow]="modeAppPathAllow">
+                </app-mission-lock>
+                <app-mission-io #io *ngIf="scheduleTaskType === 'ioperformance'" [labelWidth]="labelWidth"
+                    [projectName]="projectName" [taskName]="missionName" [taskNameValid]="missionNameValid"
+                    [projectId]="projectId" [actionType]="actionType" [typeId]="targetClicked + modeClicked"
+                    [modeApplication]="modeApplication" [modeAppParams]="modeAppParams" [modeAppValid]="modeAppValid"
+                    [modePid]="modePid" [modeProcess]="modeProcessName" [modePidValid]="modePidValid"
+                    [isModifySchedule]="isModifySchedule" (sendMissionKeep)="saveTemplate($event)"
+                    [nodeConfigShow]="nodeConfigShow" [nodeConfigedData]="nodeConfigedData"
+                    [modeAppPathAllow]="modeAppPathAllow"
+                    (sendPretable)="handleUpdataPretable($event)"
+                    (sendAppOrPidDisable)="handleAppAndPidDisable($event)">
+                </app-mission-io>
+            </div>
+        </div>
+
+    </div>
+</app-mission-modal-header>
+<!-- 保存模板 -->
+
+<app-mission-template-save #keep_modal [data]="keepData"></app-mission-template-save>

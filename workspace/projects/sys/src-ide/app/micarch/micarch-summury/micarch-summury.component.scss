@@ -1,0 +1,236 @@
+::ng-deep .vscode-dark {
+    --title_bar-bg:rgba(18, 34, 59, 0.73);
+    --title_bar-key-color:#aaaaaa;
+    --title_bar-value-color:#e8e8e8;
+    --thead-th-bg:#2a2a2a;
+    --thead-th-color:#AAAAAA;
+    --thead-th-border-color:#545454;
+    --tbody-td-bg:#161616;
+    --tbody-td-color:#AAAAAA;
+    --tbody-td-tab-bg:#252525;
+    --tbody-td-hover-bg:#313131;
+    --tbody-td-border-color:#545454;
+    --tbody-td-border-right-color:#545454;
+}
+::ng-deep .vscode-light{
+    --title_bar-bg:#fff;
+    --title_bar-key-color:#000;
+    --title_bar-value-color:#000;
+    --thead-th-bg:#f5f9ff;
+    --thead-th-color:#616161;
+    --thead-th-border-color:#e1e6ee;
+    --tbody-td-bg:#ffffff;
+    --tbody-td-color:#222222;
+    --tbody-td-tab-bg:#f0f3fa;
+    --tbody-td-hover-bg:#f5f9ff;
+    --tbody-td-border-color:#e1e6ee;
+    --tbody-td-border-right-color:#ffffff;
+}
+.summury-container {
+    width: 100%;
+    height: 100%;
+    .bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .title_bar {
+        padding-left: 10px;
+        padding-right: 0px;
+        background-color: var( --title_bar-bg );
+        height: 32px;
+        line-height: 32px;
+        width: -webkit-fill-available;
+        margin-right: 40px;
+        .left_title {
+            min-width: 800px;
+            span {
+                padding-right: 32px;
+                line-height: 18px;
+                font-size: 14px;
+                color: var(--title_bar-key-color);
+                .font {
+                    margin-left: 8px;
+                    color: var(--title_bar-value-color);
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
+.micarch_echarts {
+    min-width: 1000px;
+}
+.summury_icicle_chart_container {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+table {
+    border-collapse: collapse !important;
+}
+.ti3-table > .ti3-table-fixed-head > table > thead > tr > th {
+    background-color: var(--thead-th-bg) !important;
+    color: var(--thead-th-color) !important;
+    border-bottom: 1px solid var(--thead-th-border-color);
+}
+.ti3-table > .ti3-table-fixed-head > table > thead > tr > th:nth-child(odd) {
+    border-right: 1px solid var(--tbody-td-border-right-color) !important;
+}
+.subModuleFunctionTable {
+    width: 100%;
+    tbody {
+        border-collapse: collapse !important;
+        position: relative !important;
+        display: block !important;
+        overflow: hidden !important;
+        tr {
+            display: table !important;
+            width: 100% !important;
+            .front {
+                background-color: var(--tbody-td-tab-bg) !important;
+                border-right: 2px solid #0067ff;
+                border-bottom: 1px solid var(--tbody-td-tab-bg);
+                border-top: 0px;
+            }
+        }
+    }
+}
+:host .subModuleFunctionTable ::ng-deep .ti3-icon-angle-right {
+    transition: 0.5 linear !important;
+    margin-right: 6px;
+    display: inline-block;
+    color: #888888;
+}
+:host .subModuleFunctionTable ::ng-deep .ti3-icon-angle-right.active {
+    transform: rotate(90deg);
+    color: #888888;
+}
+:host ::ng-deep .micarch_table {
+    margin-right: 5px;
+    .content {
+        display: flex;
+        align-items: center;
+
+        .ti3-cell-text-container {
+            overflow: hidden;
+            height: 32px;
+
+            .ti3-cell-text {
+                line-height: 32px;
+                max-width: 100% !important;
+            }
+        }
+    }
+
+    .angleBtn {
+        padding: none;
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }
+    span {
+        font-size: 14px;
+        line-height: 14px;
+    }
+    .red {
+        color: #ff5558;
+    }
+}
+::ng-deep.ti3-table-fixed-head {
+    th:nth-child(1) {
+        padding-left: 64px !important;
+    }
+    th:nth-child(2) {
+        padding-left: 10px !important;
+    }
+}
+:host .subModuleFunctionTable ::ng-deep tbody tr td {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: left;
+        background-color: var(--tbody-td-bg) !important;
+        color: var(--tbody-td-color);
+        border-bottom: 1px solid var(--tbody-td-border-color);
+    }
+:host .subModuleFunctionTable ::ng-deep tbody tr:hover {
+    td {
+        background-color: none !important;
+        background-color: var(--tbody-td-hover-bg)!important;
+    }
+}
+.ti3-table > .ti3-table-fixed-head > table > thead > tr > th:not(:last-child)::after {
+    width: 0;
+}
+
+.canClick {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.stack-tip {
+    white-space: nowrap;
+    max-width: 470px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+.ti3-table > .ti3-table-fixed-head + .ti3-table-container {
+    border-bottom: none;
+}
+
+
+
+
+// 建议数据表单
+::ng-deep .suggestionsForm {
+    color: #aaaaaa !important;
+    .ti3-form-title {
+        margin: 0px;
+        display: block;
+        padding-bottom: 8px;
+        color: #e8e8e8 !important;
+        font-size: 14px !important;
+        border-bottom: 1px solid #aaaaaa;
+    }
+
+    .ti3-form-label {
+        color: #aaaaaa !important;
+    }
+}
+::ng-deep .ti3-form .ti3-text-form .ti3-text-form-label {
+    padding-right: unset;
+    line-height: 22px !important;
+    padding-bottom: 4px !important;
+    padding-top: 4px !important;
+}
+::ng-deep .ti3-form .ti3-form-content {
+    line-height: 22px !important;
+    padding-bottom: 4px !important;
+    padding-top: 4px !important;
+}
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+}
+
+.right_switch {
+    display: flex;
+    .view-switch {
+        display: flex;
+        app-icon-react {
+            display: block;
+            width: 32px;
+            height: 32px;
+        }
+        app-icon-react + app-icon-react {
+            margin-left: 1px;
+        }
+    }
+    img {
+        cursor: pointer;
+    }
+}

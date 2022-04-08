@@ -1,0 +1,142 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Creating an Overall Analysis Task">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0250262364.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="user guide">
+<meta name="DC.Publisher" content="20210630">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0250279620">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Creating an Overall Analysis Task</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0250279620"></a><a name="EN-US_TOPIC_0250279620"></a>
+
+<h1 class="topictitle1">Creating an Overall Analysis Task</h1>
+<div id="body1590659630676"><div class="section" id="EN-US_TOPIC_0250279620__section71672165013"><h4 class="sectiontitle">Function Description</h4><p id="EN-US_TOPIC_0250279620__p8060118">The tool collects information about CPU, memory, storage I/O, and network I/O resources to obtain metrics such as the utilization, saturation, and number of errors for identifying system bottlenecks. Then, the tool provides tuning suggestions based on existing reference values and experience.</p>
+<p id="EN-US_TOPIC_0250279620__p1570212133715">The tool checks the hardware, system, and component configurations for big data, distributed storage, and database scenarios, displays the configurations that are not optimal, and provides typical hardware configuration and software version information.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0250279620__section11470129119"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0250279620__p99642151324">A project has been created, and the project does not contain a node in <span class="parmvalue" id="EN-US_TOPIC_0250279620__en-us_topic_0206925255_parmvalue11239184764819"><b>Offline</b></span> state.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0250279620__section3384633721"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0250279620__ol15971352649"><li id="EN-US_TOPIC_0250279620__li135970521414"><span>Click <span><img id="EN-US_TOPIC_0250279620__image21541215171214" src="en-us_image_0252395926.png"></span> next to the target project in the project list.</span><p><p id="EN-US_TOPIC_0250279620__p166122471044">The <strong id="EN-US_TOPIC_0250279620__b121531549164219">New Analysis Task</strong> page is displayed.</p>
+</p></li><li id="EN-US_TOPIC_0250279620__li93175216311"><span>Set task parameters by referring to <strong id="EN-US_TOPIC_0250279620__b08701334202410">Task Management</strong> and <a href="#EN-US_TOPIC_0250279620__table240219472097">Table 1</a>.</span><p><div class="p" id="EN-US_TOPIC_0250279620__p137821752123112"><a href="#EN-US_TOPIC_0250279620__fig107620914394">Figure 1</a> shows the page for creating an overall analysis task, using a project of the general scenario as an example.<div class="fignone" id="EN-US_TOPIC_0250279620__fig107620914394"><a name="EN-US_TOPIC_0250279620__fig107620914394"></a><a name="fig107620914394"></a><span class="figcap"><b>Figure 1 </b>Creating an overall analysis task (general scenario)</span><br><span><img id="EN-US_TOPIC_0250279620__image1415081113319" src="en-us_image_0319453308.png"></span></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0250279620__table240219472097"></a><a name="table240219472097"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0250279620__table240219472097" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Parameters for creating an overall analysis task</caption><colgroup><col style="width:26.91%"><col style="width:73.09%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0250279620__row1240320474914"><th align="left" class="cellrowborder" valign="top" width="26.91%" id="mcps1.3.3.2.2.2.1.3.2.3.1.1"><p id="EN-US_TOPIC_0250279620__p417212031911">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="73.09%" id="mcps1.3.3.2.2.2.1.3.2.3.1.2"><p id="EN-US_TOPIC_0250279620__p191721420201911">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0250279620__row04031471914"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p1540344714914">Task Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p114034478915">Name of the task. The task name must meet the following requirements:</p>
+<ul id="EN-US_TOPIC_0250279620__ul1068575510910"><li id="EN-US_TOPIC_0250279620__en-us_topic_0250471713_li9539192134211">Contain only letters, digits, and special characters (including @#$ %^&amp;*()[]&lt;&gt;._-!-+ and spaces).</li><li id="EN-US_TOPIC_0250279620__en-us_topic_0250471713_li1253911219425">Contain 1 to 32 characters.</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250279620__row15573144916101"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p1169124016122">Analysis Object</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p19845154761819">Select <strong id="EN-US_TOPIC_0250279620__b569112333232">System</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250279620__row3468179111417"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p985854313128">Analysis Type</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p18411147111812">Select <strong id="EN-US_TOPIC_0250279620__b147621056154618">Overall Analysis</strong>.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250279620__row964617351252"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p181934671313">Sampling Time (s)</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p141931671313">Sampling duration, in seconds. The default value is <strong id="EN-US_TOPIC_0250279620__b326437185914">300</strong>. The value range is 2 to 300. If the value exceeds the range, a message is displayed, and a backfill is automatically performed after the focus is lost.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250279620__row12361512136"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p11921617138">Sampling Interval (s)</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p819218611310">Sampling interval, in seconds. The default value is <strong id="EN-US_TOPIC_0250279620__b9151152175915">1</strong>. The value range is 1 to 10.</p>
+<div class="note" id="EN-US_TOPIC_0250279620__note13430145716383"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0250279620__p1443119577385">The <strong id="EN-US_TOPIC_0250279620__b18134100172511">Sampling Interval</strong> value must be less than or equal to half of the <strong id="EN-US_TOPIC_0250279620__b11933414142513">Sampling Time</strong> value.</p>
+</div></div>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250279620__row149042052132317"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p777581815243">(Optional) Big Data Test Tool Path</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p7904552122318">This parameter is required only for projects of the big data scenario.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250279620__row1573417580235"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p1661244882515">(Optional) Distributed Storage Component Configuration File Path</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p7612948182512">This parameter is required only for projects of the distributed storage scenario.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250279620__row1572123895919"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p7721123865910">Database Connection IP Address</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p13721138195919">This parameter needs to be configured only for projects created in the <strong id="EN-US_TOPIC_0250279620__b07211372135">Database</strong> scenario.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250279620__row56154243183"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p18616924151819">(Optional) Port</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p36161624191815">This parameter needs to be configured only for projects created in the <strong id="EN-US_TOPIC_0250279620__b0315124661314">Database</strong> scenario.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250279620__row154713308184"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p164717305180">User Name</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p3472193011819">This parameter needs to be configured only for projects created in the <strong id="EN-US_TOPIC_0250279620__b7911355171316">Database</strong> scenario.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250279620__row1280253311810"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p7802163381814">Password</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p6802103320183">This parameter needs to be configured only for projects created in the <strong id="EN-US_TOPIC_0250279620__b1013912131412">Database</strong> scenario.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250279620__row19649185494912"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p2650454194912">(Optional) Collecting Tracing Data</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p0650105404911">This parameter needs to be configured only for projects created in the <strong id="EN-US_TOPIC_0250279620__b83701830103813">Database</strong> scenario. This option is not selected by default.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250279620__row19479221165"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p1594822215613">Collected Data Format</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p1794912224610">This parameter needs to be set only for projects created in the <strong id="EN-US_TOPIC_0250279620__b285264910453">Database</strong> scenario when <strong id="EN-US_TOPIC_0250279620__b14301043468">Collect Tracing Data</strong> is selected.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250279620__row2042264131918"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p144229419191">Collect top active processes</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p642294111912">Whether to run the <strong id="EN-US_TOPIC_0250279620__b11870348637">top</strong> command to collect active processes. This parameter is selected by default.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250279620__row3976049161518"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p19775144711219">Scheduled Startup</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p16218132315190">Whether to create a scheduled analysis task. For details, see <a href="en-us_topic_0250471713.html">Task Management</a>.</p>
+<p id="EN-US_TOPIC_0250279620__p10680155232115">This parameter is unavailable in the <strong id="EN-US_TOPIC_0250279620__b142970901417">Database</strong> scenario.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0250279620__row331350203519"><td class="cellrowborder" valign="top" width="26.91%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.1 "><p id="EN-US_TOPIC_0250279620__p1151875016123">Start Now</p>
+</td>
+<td class="cellrowborder" valign="top" width="73.09%" headers="mcps1.3.3.2.2.2.1.3.2.3.1.2 "><p id="EN-US_TOPIC_0250279620__p20952172511912">Whether to automatically execute a task after it is created. This parameter is selected by default.</p>
+<p id="EN-US_TOPIC_0250279620__p1128710515100">This parameter is unavailable in the <strong id="EN-US_TOPIC_0250279620__b872181831410">Database</strong> scenario.</p>
+<div class="note" id="EN-US_TOPIC_0250279620__note134506150248"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="EN-US_TOPIC_0250279620__en-us_topic_0250471713_p15450171572414">This parameter is not displayed if <span class="uicontrol" id="EN-US_TOPIC_0250279620__en-us_topic_0250471713_uicontrol35519368586"><b>Scheduled Startup</b></span> is enabled.</p>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</p></li><li id="EN-US_TOPIC_0250279620__li92471127563"><span>Click <strong id="EN-US_TOPIC_0250279620__b3799051121214">OK</strong>.</span><p><p id="EN-US_TOPIC_0250279620__p198323110348">You can click the icon next to the task name to perform the following operations:</p>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0250262364.html">Overall Analysis</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

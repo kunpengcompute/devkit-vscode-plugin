@@ -1,0 +1,132 @@
+<ti-formfield [labelWidth]="labelWidth" id="select-modal" [formGroup]="formGroup" [type]="type" class="taskForm"
+    [ngClass]="{textForm: type === 'text', template: from === 'template'}">
+    <ti-item *ngFor="let formItem of allFormElements | keyvalue: trackByFn" [label]="formItem.value.label"
+        [required]="type === 'text' ? false : formItem.value.required"
+        [show]="displayedElementList.includes(formItem.key) && (formItem.value.show ? formItem.value.show() : true)"
+        [verticalAlign]="type === 'text' ? 'middle' : (formItem.value.verticalAlign || undefined)">
+        <!-- expandBtn -->
+        <ti-item-label *ngIf="formItem.value.type === 'expandBtn'; else label" class="expandBtn"
+            (click)="formItem.value.value = !formItem.value.value" [ngClass]="{'active': formItem.value.value}">
+            <button type="button">{{ formItem.value.label }}</button>
+        </ti-item-label>
+
+        <ng-template #label>
+            <ti-item-label>
+                <span>{{ formItem.value.label }}</span>
+
+                <ti-icon *ngIf="type !== 'text' && formItem.value.iconTip" [tiTip]="formItem.value.iconTip"
+                    style="margin-left:10px;" tiTipMaxWidth='370px' tiTipPosition="bottom">
+                    <img src='./assets/img/mission/iconTip.png' alt="">
+                </ti-icon>
+            </ti-item-label>
+        </ng-template>
+
+        <!-- 内容部分 -->
+        <span
+            *ngIf="type === 'text'; else form">{{ [undefined, ''].includes(formItem.value.text) ? '--' : formItem.value.text }}</span>
+
+        <ng-template #form>
+            <div class="formLine">
+                <div class="formContent">
+                    <ng-container [ngSwitch]="formItem.value.type">
+                        <!-- radio -->
+                        <div *ngSwitchCase="'radio'" class="ti_form_radio">
+                            <div *ngFor="let option of formItem.value.list">
+                                <input type="radio" tiRadio [formControlName]="formItem.key" [label]="option.label"
+                                    [value]="option.value"
+                                    (ngModelChange)="formItem.value.change && formItem.value.change($event)" />
+
+                                <ti-icon *ngIf="option.iconTip" [tiTip]="option.iconTip" style="margin-left:10px;"
+                                    tiTipMaxWidth='370px' tiTipPosition="bottom">
+                                    <img src='./assets/img/mission/iconTip.png' alt="">
+                                </ti-icon>
+                            </div>
+                        </div>
+
+                        <!-- select -->
+                        <ti-select *ngSwitchCase="'select'" style="width: 300px;" [formControlName]="formItem.key"
+                            [options]="formItem.value.list" [tiTip]="''" [tipPosition]="'none'"
+                            [tiValidation]='validation'
+                            (ngModelChange)="formItem.value.change && formItem.value.change($event)">
+                            <ng-template #item let-item let-i=index>
+                                <div [tiTip]="item.hoverTip" tiTipPosition="right">
+                                    {{item.label}}
+                                </div>
+                            </ng-template>
+
+                            <ng-template #selected let-item>
+                                <div>{{item.label}}</div>
+                            </ng-template>
+                        </ti-select>
+
+                        <!-- checkbox -->
+                        <div *ngSwitchCase="'checkbox'" style="position: relative;top: -10px" class="sys-type-label">
+                            <div [formArrayName]="formItem.key">
+                                <span *ngFor="let control of formGroup.controls[formItem.key].controls"
+                                    [formGroup]="control"
+                                    style="color:#666 !important;margin-right: 20px;position: relative;margin-top: 20px;font-size:0.78rem;display: inline-block;min-width: 90px">
+                                    <input type="checkbox" formControlName="checked" tiCheckitem
+                                        [beCheckeds]="formItem.value.checked" [label]="control.controls.label.value">
+                                    <span style="padding-left: 10px;"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- spinner -->
+                        <ti-spinner *ngSwitchCase="'spinner'" [formControlName]="formItem.key"
+                            [step]='formItem.value.spinner.step' [format]="formItem.value.spinner.format"
+                            [placeholder]='formItem.value.spinner.placeholder' [max]='formItem.value.spinner.max'
+                            [min]='formItem.value.spinner.min' [tiValidation]='validation' style='width: 200px;'>
+                        </ti-spinner>
+
+                        <!-- input number -->
+                        <input *ngSwitchCase="'inputNumber'" type="number" tiText
+                            [placeholder]="formItem.value.placeholder || ''" [formControlName]="formItem.key"
+                            [tiValidation]='validation' style="width: 300px">
+
+                        <!-- input -->
+                        <input *ngSwitchCase="'input'" [type]="formItem.value.inputType || 'text'" tiText
+                            [placeholder]="formItem.value.placeholder || ''" [formControlName]="formItem.key"
+                            [tiValidation]='validation' style="width: 300px">
+
+                        <!-- textarea -->
+                        <textarea *ngSwitchCase="'textarea'" tiTextarea [formControlName]="formItem.key"
+                            [placeholder]="formItem.value.placeholder || ''"
+                            style="width:300px;font-size: 14px;color: #333;" [tiValidation]='validation'></textarea>
+
+                        <!-- ipv4 -->
+                        <ti-ip *ngSwitchCase="'ipv4'" tiIpv4 [version]="4" [formControlName]="formItem.key"
+                            [tiValidation]='validation' class="ipWidth"></ti-ip>
+
+                        <!-- switch -->
+                        <div *ngSwitchCase="'switch'" class="ti_form_switch">
+                            <ti-switch [formControlName]="formItem.key"
+                                (ngModelChange)="formItem.value.change && formItem.value.change($event)"></ti-switch>
+                        </div>
+
+                        <!-- text -->
+                        <span *ngSwitchCase="'text'">
+                            {{ [undefined, ''].includes(formGroup.controls[formItem.key].value) ? '--' : formGroup.controls[formItem.key].value }}
+                        </span>
+                    </ng-container>
+                </div>
+
+                <!-- 尾后提示 -->
+                <span *ngIf="formItem.value.tailPrompt" class="tailPrompt">
+                    {{ formItem.value.tailPrompt }}
+                </span>
+            </div>
+
+            <!-- tip -->
+            <div *ngIf="formItem.value.tip" class='info-icon' [style.left]="tipInfoLeftPosition">
+                <img style="width: 14px;height: 14px;margin-right: 8px;" src="./assets/img/template/iconWarn.png" />
+                <span style='font-size:0.8rem'>{{ formItem.value.tip }}</span>
+            </div>
+
+            <!-- option tip -->
+            <p *ngIf="formItem.value.optionTip" class="desc-content">
+                {{ formItem.value.optionTip }}
+            </p>
+        </ng-template>
+    </ti-item>
+</ti-formfield>

@@ -1,0 +1,111 @@
+<div id="helperCreateTask">
+  <div class="taskParams">
+    <div class="taskNameInfo">
+      <ti-formfield [formGroup]="taskParamsFormGroup" [labelWidth]="labelWidth">
+        <ti-item [label]="i18n.common_term_projiect_name1">
+          <p class="proName">{{projectName}}</p>
+        </ti-item>
+        <ti-item [label]="i18n.common_term_task_name" [required]="true">
+          <input type="text" tiText class="bigInput" formControlName="taskName" [tiValidation]="validation"
+            [(ngModel)]="taskNameValue" (blur)="onBlur(taskNameValue)">
+        </ti-item>
+        <ti-item *ngIf="actionType !== 'createTuninghelperTask'">
+          <p class="chooseList" *ngIf="actionType ==='reanalyzeTask'">{{i18n.tuninghelper.SelectedNodeList}}</p>
+          <p class="chooseList" *ngIf="actionType ==='reanalyzeServer'">{{i18n.tuninghelper.currentNode}}</p>
+          <app-node-table-info [selectMode]="'none'" [currentNode]="currentNode" [nodeList]="nodeList"
+            [projectId]="projectId" [tableWidth]="tableWidth">
+          </app-node-table-info>
+        </ti-item>
+        <!-- 分析对象 -->
+        <ti-item [label]="i18n.mission_create.analysisTarget" *ngIf="actionType">
+          <div *ngIf="actionType ==='createTuninghelperTask'">
+            <span class="radioBox" *ngFor="let item of analysisTypeList; index as i">
+              <input type="radio" tiRadio name="radio" [(ngModel)]="analysisTarget"
+                [ngModelOptions]="{standalone: true}" (ngModelChange)='onAnalysisTargetClick(i)' [value]="item.value"
+                [label]="item.name" />
+            </span>
+          </div>
+          <span *ngIf="actionType !=='createTuninghelperTask'">
+            {{analysisTarget ? i18n.common_term_task_crate_path : i18n.common_term_projiect_task_system}}
+          </span>
+        </ti-item>
+        <!-- 模式 -->
+        <ti-item [label]="i18n.mission_create.mode" *ngIf="analysisTarget">
+          <div *ngIf="actionType ==='createTuninghelperTask'">
+            <span class="radioBox" *ngFor="let item of modeList; index as i">
+              <input type="radio" tiRadio name="radio1" [(ngModel)]="modeValue" [ngModelOptions]="{standalone: true}"
+                (ngModelChange)='onModeClick(i)' [value]="item.value" [label]="item.name" />
+            </span>
+          </div>
+          <span *ngIf="actionType !=='createTuninghelperTask'">
+            {{modeValue ? i18n.mission_create.attachPid : i18n.mission_create.launchApp}}
+          </span>
+        </ti-item>
+      </ti-formfield>
+    </div>
+    <div class="launchApplication" *ngIf="analysisTarget && !modeValue">
+      <app-app-params-form #appParamsComponent [labelWidth]="labelWidth" [tipWidth]="tipWidth"
+        [appParamsInfos]="appParamsInfo" (checkAppParamVaild)="checkAppParamVaild($event)">
+      </app-app-params-form>
+    </div>
+    <div class="AttachToProcess" *ngIf="analysisTarget && modeValue">
+      <app-process-pid-input #processPidComponent [labelWidth]="labelWidth" [pinProcess]="processPidInfo"
+        (checkProcessPid)="checkProcessPid($event)">
+      </app-process-pid-input>
+    </div>
+    <div class="pathConfig">
+      <ti-formfield [formGroup]="taskParamsFormGroup" [labelWidth]="labelWidth" *ngIf="analysisTarget">
+        <!-- 二进制/符号文件路径 -->
+        <ti-item>
+          <ti-item-label>
+            <span>{{i18n.common_term_task_crate_bs_path}}</span>
+            <ti-icon [tiTip]="i18n.tip_msg.common_term_task_crate_c_bs_tip" tiTipMaxWidth='370px'
+              tiTipPosition="bottom">
+              <img *ngIf="alertTipBox === 'popTip'" src='./assets/img/summary/tooltip_dark.svg' class="imgQuestion">
+              <img *ngIf="alertTipBox !== 'popTip'" src='./assets/img/summary/tooltip.png' class="imgQuestion">
+            </ti-icon>
+          </ti-item-label>
+          <input class="bigInput" tiText type="text" [tiValidation]='validation' formControlName="bs_path">
+        </ti-item>
+      </ti-formfield>
+    </div>
+    <div class="samplingDuration">
+      <ti-formfield [formGroup]="taskParamsFormGroup" [labelWidth]="labelWidth">
+        <!-- 采样时长 -->
+        <ti-item [label]="i18n.common_term_task_crate_duration">
+          <ti-spinner name='spinner' [format]="'N0'" formControlName="duration" tiValidation tiRequired
+            [hySpinnerBlur]="samplingDurationBlur">
+          </ti-spinner>
+          <span class="rangeTip">{{i18n.common_term_task_crate_tuningHelper_duration_range}}</span>
+        </ti-item>
+        <!-- 采集文件大小 -->
+        <ti-item [label]="i18n.mission_create.collection_size">
+          <ti-spinner name='spinner' [format]="'N0'" formControlName="collectSize" tiValidation tiRequired
+            [hySpinnerBlur]="collectSizeBlur">
+          </ti-spinner>
+          <span class="rangeTip">{{i18n.diagnostic.taskParams.collectSize_range}}</span>
+        </ti-item>
+        <ti-item [label]="i18n.mission_create.nodeParamsConfig" *ngIf="analysisTarget && showNodeConfig">
+          <ti-switch id="nodeParams" formControlName="switch"
+            [disabled]="!taskParamsFormGroup.valid || !appParamsValid || !processPidValid" tiTipPosition="right"
+            [(ngModel)]="nodeParamsSwitch" (ngModelChange)="nodeSwitchChange($event)"
+            [tiTip]="!taskParamsFormGroup.valid || !appParamsValid || !processPidValid ? i18n.mission_create.paramsConfigNotice : ''">
+          </ti-switch>
+        </ti-item>
+      </ti-formfield>
+      <div class="nodeConList" *ngIf="nodeParamsSwitch && showNodeConfig && actionType !=='reanalyzeServer'">
+        <app-server-table [nodeList]="nodeConfigList" [tableWidth]="tableWidth"
+          (openNodeConfigPop)='openNodeConfigPop($event)'>
+        </app-server-table>
+      </div>
+    </div>
+    <div class="createBtn">
+      <button type="button" tiButton color='primary' class="btn little-primary-btn"
+        [disabled]="!taskParamsFormGroup.valid || !appParamsValid || !processPidValid" (click)="createTask()">{{
+        i18n.common_term_task_start_analysis }}</button>
+    </div>
+  </div>
+</div>
+<app-node-list-config #nodeConfigModal [modeValue]="modeValue" [nodeConfigList]="nodeConfigList"
+  [alertTipBox]="alertTipBox" [inputWidth]="inputWidth" (handleConfigData)="handleConfigData($event)">
+</app-node-list-config>

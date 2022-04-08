@@ -1,0 +1,51 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="查看线程信息">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001179041496.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具 (Java性能分析)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001178881534">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>查看线程信息</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001178881534"></a><a name="ZH-CN_TOPIC_0000001178881534"></a>
+
+<h1 class="topictitle1">查看线程信息</h1>
+<div id="body1575365888696"><div class="section" id="ZH-CN_TOPIC_0000001178881534__section3882164703911"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0000001178881534__zh-cn_topic_0209429827_p20936551103910">已创建在线分析任务，且分析任务正在进行中。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001178881534__section417152614011"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0000001178881534__ol19295162111417"><li id="ZH-CN_TOPIC_0000001178881534__li4346104015416"><span>登录<span id="ZH-CN_TOPIC_0000001178881534__ph12594180204619">Java性能分析</span>Web界面，单击首页界面“在线分析记录”列表中指定分析任务的名称。</span><p><p id="ZH-CN_TOPIC_0000001178881534__p5815113211443">打开“概览”页面。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001178881534__li2054994314323"><span>单击“CPU”页签。</span><p><div class="p" id="ZH-CN_TOPIC_0000001178881534__p7448164473212">默认打开“线程列表”页面，如<a href="#ZH-CN_TOPIC_0000001178881534__fig122661426175319">图1</a>所示。<div class="note" id="ZH-CN_TOPIC_0000001178881534__note14438160499"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001178881534__ul1669835612111"><li id="ZH-CN_TOPIC_0000001178881534__li10698155622114">“线程列表”列出当前分析的Java进程启动的线程名称和线程状态。线程可以是以下状态之一：Runnable、Waiting或Blocked。</li><li id="ZH-CN_TOPIC_0000001178881534__li18317165813211">可通过线程搜索框和<span class="wintitle" id="ZH-CN_TOPIC_0000001178881534__wintitle12385638132311">“显示用法”</span>快速筛选数据。</li><li id="ZH-CN_TOPIC_0000001178881534__li1526509112011"><span class="uicontrol" id="ZH-CN_TOPIC_0000001178881534__uicontrol1934715507585">“执行线程转储”</span>按钮可转储当前线程状态，便于后续页签分析展示。</li></ul>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001178881534__fig122661426175319"><a name="ZH-CN_TOPIC_0000001178881534__fig122661426175319"></a><a name="fig122661426175319"></a><span class="figcap"><b>图1 </b>线程状态</span><br><span><img id="ZH-CN_TOPIC_0000001178881534__image1157817306343" src="zh-cn_image_0000001178723144.png"></span></div>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0000001178881534__li97841647164"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0000001178881534__uicontrol216144311615">“线程转储”</span>页签。</span><p><div class="p" id="ZH-CN_TOPIC_0000001178881534__p177845481616">默认进入“锁分析图”，点击指定线程转储查看线程锁分析图，如<a href="#ZH-CN_TOPIC_0000001178881534__fig5785114161616">图 锁分析图</a>所示。<div class="note" id="ZH-CN_TOPIC_0000001178881534__note1678410411611"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001178881534__ul13784342168"><li id="ZH-CN_TOPIC_0000001178881534__li1478413471612">在锁分析图中，左侧为线程，其颜色表示线程状态，绿色为RUNNABLE状态，红色为BLOCKED状态，黄色为WAITING状态，橙色为TIMED_WAITING状态；右侧为锁实例。</li><li id="ZH-CN_TOPIC_0000001178881534__li1278411416162">锁分析图通过连线表示线程对锁的占有情况。实线表示线程已占有锁，虚线表示线程阻塞在对应锁实例上，等待其他线程释放锁后占有。</li><li id="ZH-CN_TOPIC_0000001178881534__li07841141162">观察模式：开启后，点击线程，将会高亮显示线程本身与持有锁。也可切换为以锁为观察视角，点击锁，会高亮显示锁本身和与请求的线程。</li><li id="ZH-CN_TOPIC_0000001178881534__li278418415167">对比模式：开启后，需要选择要对比的线程转储，对比结果默认以线程为视角显示两个线程与持有的锁。建议对比模式配合观察模式，方便观察两个时间点线程与持有锁的状态变化。也可以切换为以锁为观察视角，观察两个时间点的某个锁和请求线程的状态变化。只有执行两次及以上线程转储之后才可以开启对比模式。</li><li id="ZH-CN_TOPIC_0000001178881534__li378564191613">如果目标Java应用中存在死锁，会检测出死锁，可以结合线程转储，定位死锁产生原因。</li><li id="ZH-CN_TOPIC_0000001178881534__li157857471618">右下角可根据图标进行“锁分析图”的缩放和全屏查看。</li><li id="ZH-CN_TOPIC_0000001178881534__li22941258143212">点击<span><img id="ZH-CN_TOPIC_0000001178881534__image15342412163416" src="zh-cn_image_0000001178723140.png"></span>按钮可以保存当前线程转储信息，同一线程转储信息只能保存一次，可在主界面<span class="uicontrol" id="ZH-CN_TOPIC_0000001178881534__uicontrol8504151816152">“数据列表”</span>下载。</li></ul>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001178881534__fig5785114161616"><a name="ZH-CN_TOPIC_0000001178881534__fig5785114161616"></a><a name="fig5785114161616"></a><span class="figcap"><b>图2 </b>锁分析图</span><br><span><img id="ZH-CN_TOPIC_0000001178881534__image47851344169" src="zh-cn_image_0000001178563180.png"></span></div>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0000001178881534__li7676724143014"><span>下拉框中选择“原始数据”。</span><p><div class="p" id="ZH-CN_TOPIC_0000001178881534__p1922692518308">点击不同线程名称可以查看线程的事件信息，如<a href="#ZH-CN_TOPIC_0000001178881534__fig99251748135519">图 原始数据</a>所示。<div class="note" id="ZH-CN_TOPIC_0000001178881534__note194051392306"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001178881534__ul12852328163111"><li id="ZH-CN_TOPIC_0000001178881534__li98521928163114">Java的线程转储指的是JVM中在某一个给定的时刻运行的所有线程的快照。</li><li id="ZH-CN_TOPIC_0000001178881534__li455423413116">点击<span><img id="ZH-CN_TOPIC_0000001178881534__image869122323" src="zh-cn_image_0000001224201429.png"></span>按钮可以删除不同时间的线程转储事件信息。</li><li id="ZH-CN_TOPIC_0000001178881534__li13912029173420">点击<span><img id="ZH-CN_TOPIC_0000001178881534__image091182918348" src="zh-cn_image_0000001224122855.png"></span>按钮可以保存当前线程转储信息，同一线程信息只能保存一次，可在主界面<span class="uicontrol" id="ZH-CN_TOPIC_0000001178881534__uicontrol2241432185917">“数据列表”</span>下载。</li></ul>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001178881534__fig99251748135519"><a name="ZH-CN_TOPIC_0000001178881534__fig99251748135519"></a><a name="fig99251748135519"></a><span class="figcap"><b>图3 </b>原始数据</span><br><span><img id="ZH-CN_TOPIC_0000001178881534__image827351517362" src="zh-cn_image_0000001179041624.png"></span></div>
+</div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001179041496.html">查看分析结果</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

@@ -1,0 +1,198 @@
+.modal-dialog {
+  padding: 32px 0px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .header {
+    height: 26px;
+    font-size: 20px; 
+    flex: 0 0 auto;
+  }
+
+  .ti3-table {
+    flex-grow: 1;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .ti3-table-fixed-head {
+      flex: 0 0 auto;
+    }
+
+    .ti3-table-container {
+      flex-grow: 1;
+      overflow: auto;
+      width: 100%;
+      max-height: 410px;
+
+      .taskStatusTdContent {
+        display: flex;
+        align-items: center;
+
+        >.status {
+          width: 16px;
+          height: 16px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          >.statusIcon {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+
+            &.succeeded {
+              background: #61d274;
+            }
+        
+            &.failed {
+              background: #ed4b4b;
+            }
+          }
+
+          >.running {
+            width: 16px;
+            height: 16px;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-size: 105%;
+          }
+        }
+
+        >.info {
+          margin-left: 10px;
+          font-size: 12px;
+          line-height: 18px;
+        }
+      }
+
+      .operateBox {
+        span.operateIcon {
+          color: #0067ff;
+          cursor: pointer;
+          user-select: none;
+          display: inline-block;
+
+          &.disabled {
+            color: #616161;
+            cursor: not-allowed;
+          }
+      
+          &:not(:first-child) {
+            margin-left: 16px;
+          }
+        }
+      }
+    }
+
+    .ti3-page-container {
+      flex: 0 0 auto;
+    }
+  }
+}
+
+.chen-nodata-td {
+    position: static !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    .nodataImg {
+        width: 97px !important;
+        height: 37px !important;
+    } 
+    .nodataText{
+        margin-top: 10px !important;
+        font-size: 12px;
+    }     
+}
+
+::ng-deep ti-pagination.ti3-page-container .ti3-pag-goto{
+    display: none;
+}
+
+:host ::ng-deep {
+    ::-webkit-scrollbar {
+        width: 8px !important;
+        height: 8px !important;
+    }
+}
+// 深色主题适配
+::ng-deep .vscode-dark{
+    .taskStatusTdContent{
+        .info{
+            color: #aaa !important;
+        }
+    }
+    .chen-nodata-td {
+        color: var(--color-body-font);
+        background-color: var(--color-body-background) !important;
+        border-collapse: collapse !important;
+        .nodataText{
+            color: #aaa !important;
+        }      
+    }
+}
+
+// 浅色主题适配
+::ng-deep .vscode-light{
+
+    .taskStatusTdContent{
+        .info{
+            color: #222 !important;
+        }
+    }
+    .chen-nodata-td {
+    
+        .nodataText{
+            color: #222 !important;
+        }      
+    }
+}
+
+::ng-deep #retry-import-modal {
+
+    .tip-close {
+        float: right;
+
+        & > img {
+            display: none;
+
+            &:nth-of-type(1) {
+                display: block;
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        &:active,
+        &:hover {
+            & > img:nth-of-type(1) {
+                display: none;
+            }
+            & > img:nth-of-type(2) {
+                display: block;
+            }
+        }
+    }
+
+    ti-formfield {
+        .ti3-form-label {
+            --ti-formfield-item-required-label-line-height: 28px;
+        }
+
+        .ti3-form-content {
+            input {
+                width: 400px;
+            }
+            .info {
+              width: 400px;
+              margin-top: 5px;
+          }
+        }
+    }
+}

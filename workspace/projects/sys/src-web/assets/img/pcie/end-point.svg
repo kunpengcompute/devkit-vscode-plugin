@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="68px" height="68px" viewBox="0 0 68 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" fill="none">
+        <circle cx="34" cy="34" r="34" stroke="none" fill="#ffffff"/>
+    </g>
+    <g id="Web_SFW/icon/48/PCIE拓扑图/末端" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(18, 18)">
+        <rect id="矩形" fill="#2072EA" x="0" y="0" width="32" height="32" rx="16"></rect>
+        <rect id="BOX" fill="#D8D8D8" opacity="0" x="6" y="6" width="20" height="20"></rect>
+        <g id="编组" transform="translate(7.000000, 6.500000)">
+            <path d="M18,10.0238095 L18,16.5 C18,17.6045695 17.1045695,18.5 16,18.5 L2,18.5 C0.8954305,18.5 1.3527075e-16,17.6045695 0,16.5 L0,10.5238095 L0,10.5238095" id="路径" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M2.5,-4.52970994e-14 L7,-4.52970994e-14 C8.1045695,-4.55000055e-14 9,0.8954305 9,2 L9,10.25 L9,10.25" id="路径-66" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle id="椭圆形" fill="#FFFFFF" cx="9" cy="11.5" r="3"></circle>
+        </g>
+    </g>
+</svg>

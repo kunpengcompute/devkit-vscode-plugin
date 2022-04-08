@@ -1,0 +1,52 @@
+.press-obj {
+    & > .warning-tip {
+        margin: 8px 16px;
+        width: auto;
+        background-color: #fff3e8;
+        border-radius: 2px;
+        border: solid 1px #e66e11;
+        display: flex;
+        padding: 10px 17px;
+        box-sizing: border-box;
+        font-size: 12px;
+        .tip-img{
+            width: 16px;
+            height: 16px;
+            margin-right: 9px;
+        }
+    }
+    .input-width {
+        width: 80%;
+        vertical-align: middle;
+    }
+}
+:host ::ng-deep {
+    .ti3-table {
+        padding: 0 16px;
+        box-sizing: border-box;
+        font-size: 12px;
+    }
+    .form-item .ti3-form {
+        width: 100%;
+    }
+    .require-fix {
+        color: var(--ti-common-color-error);
+    }
+}
+.vscode-dark,
+.vscode-light {
+    :host ::ng-deep {
+        .press-obj {
+            & > .warning-tip {
+                background-color: var(--storeio-warn-color-bg);
+                border: solid 1px var(--storeio-warn-color-border);
+            }
+            .ti3-table {
+                padding: 0;
+            }
+            & > .warning-tip {
+                margin: 8px 0;
+            }
+        }
+    }
+}

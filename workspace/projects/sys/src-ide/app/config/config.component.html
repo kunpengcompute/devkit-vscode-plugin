@@ -1,0 +1,110 @@
+<!--component html goes here -->
+<app-banner></app-banner>
+<div class="config-form">
+    <p class="config-title-gen title">{{ i18n.plugins_common_title_config }}
+        <a [href]="pluginUrlCfg.sysConfig_openFAQ1">
+            <img *ngIf="currTheme == 1" class="help-icon" src="./assets/img/common/icon-help-dark.svg">
+            <img *ngIf="currTheme == 2" class="help-icon" src="./assets/img/common/icon-help-light.svg">
+        </a>
+    </p>
+    <div>
+        <p class="config-title-det">{{ i18n.plugins_common_label_config }}<span class="config-title-det-btn"
+            (click)="openInstallPage()">{{ i18n.plugins_common_button_install }}</span>
+        </p>
+        <p class="config-title-det">{{ i18n.plugins_common_apply_free_env_info }}<span class="config-title-det-btn"
+            (click)="openFreeTrialRemoteEnv()">{{ i18n.plugins_common_apply_free_env_link }}</span>
+        </p>
+    </div>
+    
+    <div class="config-form-item">
+        <div class="ti3-icon ti3-icon-staricon config-form-item-label">{{ i18n.plugins_common_label_ip }}
+        </div>
+        <input type="text" tiText [(ngModel)]="tempIP" [disabled]="this.hasConfig" (blur)="checkIP()"
+            (ngModelChange)="checkIPAndPort()" />
+        <div *ngIf="ipCheck" class="ti3-unifyvalid-error-container">
+            <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+            <span class="ti3-validate-text">{{ i18n.plugins_common_message_ipError }}</span>
+        </div>
+    </div>
+    <div class="config-form-item">
+        <div class="ti3-icon ti3-icon-staricon config-form-item-label">{{i18n.plugins_common_label_configPort}}
+        </div>
+        <input type="text" tiText [(ngModel)]="tempPort" [disabled]="this.hasConfig" (blur)="checkPort()"
+            (ngModelChange)="checkIPAndPort()" [placeholder]="i18n.plugins_common_placeholder_default_port" />
+        <div *ngIf="portCheck" class="ti3-unifyvalid-error-container">
+            <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+            <span class="ti3-validate-text">{{ i18n.plugins_common_message_portError }}</span>
+        </div>
+    </div>
+    <div class="config-form-certificate">
+        <div class="config-form-certificate-label ti3-icon ti3-icon-staricon config-form-item-label">
+            <p class="icontext">
+                {{i18n.plugins_common_service_certificate_settings}}
+                <span [tiTip]='tipContent' tiTipMaxWidth='460px' tiTipPosition="right"><img class="help-icon"
+                        src="./assets/img/common/icon-help-black.svg"></span>
+            </p>
+        </div>
+        <div class="config-form-certificate-radio">
+            <input [disabled]="hasConfig" type="radio" checked="checked" *ngFor="let item of radioList, index as i;"
+                tiRadio name="group1" [(ngModel)]="selected" [value]="item.value" [label]="item.label"
+                (ngModelChange)="ngModelChange($event)" /><br>
+        </div>
+        <div class="config-form-certificate-file" *ngIf="selectCertificate">
+            <input type="text" readonly="readonly" tiText [disabled]="this.hasConfig"
+                class="config-form-certificate-textarea" (blur)="checkFile()" (ngModelChange)="checkIPAndPort()"
+                [(ngModel)]="localfilepath" />
+            <div class="config-form-certificate-bt">
+                <button [disabled]="this.hasConfig" type="button" class="little-minor-btn" (click)="fileUpload()"
+                    style="display: inline-block; width: 110px; height: 28px; margin-left: 10px;color: #aaa;">{{i18n.plugins_common_specifying_local_path}}
+                    <input type="file" accept=".crt,.cer,.pem" id="uploadFile" style="display: none;"
+                        (change)="uploadFile()" />
+                </button>
+            </div>
+        </div>
+        <div *ngIf="!localfilepath && showCertificate && !hasConfig && selectCertificate"
+            class="ti3-unifyvalid-error-container">
+            <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+            <span class="ti3-validate-text">{{ i18n.plugins_common_no_select_certificate }}</span>
+        </div>
+    </div>
+    <div *ngIf="!hasConfig">
+        <button class="primary-btn" (mousedown)="saveConfirm()" [disabled]="saveEvCheck">
+            <span>{{ i18n.plugins_common_button_save }}</span>
+        </button>
+        <div *ngIf="!firstConfig" class="secondary-btn can-btn" (mousedown)="cancel();cancelSelected()">
+            <span>{{ i18n.plugins_common_button_cancel }}</span>
+        </div>
+    </div>
+    <div *ngIf="hasConfig">
+        <div class="primary-btn" (mousedown)="modify()">
+            <span>{{ i18n.plugins_common_button_modifyConfig }}</span>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showLoading" class="loading">
+    <app-loading [height]="'100%'" [size]="'max'"></app-loading>
+</div>
+
+<app-messagebox #saveConfirmTip>
+    <div class="content tip-box">
+        <div class="tip-title">
+            <span class="title-content">{{i18n.plugins_common_title_saveConfirm}}</span>
+            <img src="./assets/img/common/icon-close.png" (click)="cancelMsgTip()">
+        </div>
+        <div class="tip-title-border"></div>
+        <div class="tip-dsc">
+            <img class="img_box" src="./assets/img/common/icon_warning.png">
+            <p>{{i18n.plugins_common_message_saveConfirm}}</p>
+        </div>
+        <div class="tip-confirm">
+            <button type="button"
+                (click)="confirmMsgTip()">{{i18n.plugins_common_message_beforeInstallConfirm}}</button>
+            <button type="button" (click)="cancelMsgTip()">{{i18n.plugins_common_message_beforeInstallCancel}}</button>
+        </div>
+    </div>
+</app-messagebox>
+<ng-template #tipContent>
+    <p class="certificateSettingsTip">{{certificateSettingsTipStr1}}</p>
+    <p class="certificateSettingsTip">{{certificateSettingsTipStr2}}</p>
+</ng-template>

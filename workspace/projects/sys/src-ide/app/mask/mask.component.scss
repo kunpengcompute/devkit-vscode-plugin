@@ -1,0 +1,26 @@
+.mask{
+    background: rgba(0, 0, 0, var(--vscode-editor-background));
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    display: none;
+    transition: .4s ease-out;
+    z-index: 112;
+}
+.mask.active{
+    display: block
+}
+.content-box{
+    position: fixed;
+    right: -100%;
+    background: var(--vscode-editor-background);
+    width: auto;
+    height: 100%;
+    transition: .4s ease-out;
+    top: 0px;
+    z-index: 112;
+}
+.content-box.active{
+    right: 0%;
+}

@@ -1,0 +1,6 @@
+<div
+  [ngClass]="['ti3-sort-container', sortStatus === 'asc' ? 'ti3-sort-ascent' : sortStatus === 'desc' ? 'ti3-sort-descent' : '']"
+  (click)="setSort()"
+>
+  <ti-icon class="ti3-sort" [name]="sortStatus === 'asc' ? 'sort-ascent' : sortStatus === 'desc' ? 'sort-descent' : 'sort'"></ti-icon>
+</div>

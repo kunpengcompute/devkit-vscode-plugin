@@ -1,0 +1,50 @@
+$common12: 12px;
+
+.warpper {
+    margin-bottom: 24px;
+    .input-warpper {
+        position: relative;
+        margin-left: -$common12;
+        .input-form {
+            display: inline-block;
+        }
+        .input-range{
+            top: 4px;
+            position: absolute;
+            margin-left: 8px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .cert-tip {
+            color: #979797;
+            font-size: 12px;
+            margin-left: 251px;
+            margin-top: 5px;
+        }
+        & ::ng-deep .ti3-form .ti3-form-require .ti3-icon, .ti3-form .ti3-form-require .ti3-table-soldout {
+            font-size: $common12;
+        }
+    }
+
+    .btn-warpper {
+        margin-top: 10px;
+        margin-left: 250px;
+        button {
+            width: 88px;
+            min-width: 88px;
+            padding: 0 !important;
+        }
+    }
+    .btn-warpper-en {
+        margin-left: 378px;
+    }
+}
+
+button+button {
+    margin-left: 16px;
+}
+
+button {
+    min-width: 88px;
+}

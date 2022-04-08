@@ -1,0 +1,270 @@
+::ng-deep .vscode-dark {
+    --ti-filter-bg-color: #252526;
+    --ti-span-hover-color: #313131;
+    --select-span-bg:#313131;
+    --select-span-color:#e8e8e8;
+    --check-span-bg:#0067ff;
+    --check-span-color:#e8e8e8;
+}
+
+::ng-deep .vscode-light {
+    --ti-filter-bg-color: #ffffff;
+    --ti-span-hover-color: #f5f6f7;
+    --select-span-bg:#B8BECC;
+    --select-span-color:#2b313f;
+    --check-span-bg:#e0ecff;
+    --check-span-color:#0067ff;
+}
+
+.apis-container {
+    position: relative;
+    height: calc(100vh - 120px);
+}
+
+.time-box {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .title-top {
+        width: calc(100% - 50px);
+        height: 100px;
+    }
+    .filter-btn {
+        height: 32px;
+        width: 32px;
+        margin-top: 4px;
+        img {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+    }
+}
+
+:host ::ng-deep .function_echarts {
+    position: absolute;
+    top: 60px;
+    bottom: 78px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    transition: height 0.2s;
+
+    &.active {
+        bottom: 482px;
+        transition: height 0.2s;
+    }
+    &.active.tips {
+        bottom: 240px;
+        transition: height 0.2s;
+    }
+}
+
+.nodata{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16%;
+    margin: 0px;
+}
+
+::ng-deep #diskFilterThreadModal {
+    .diskFilterThreadModal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) !important;
+        margin: unset;
+    }
+
+
+    ti-modal-body {
+        .table-wrapper {
+            height: min-content;
+            width: 100%;
+
+            &.indi-wra {
+                padding-bottom: 40px;
+                border-bottom: 1px dashed #6e6e6e;
+            }
+        }
+        .table-wrapper.notShow {
+            display: none;
+            overflow: hidden;
+        }
+
+        .select-constent {
+            display: flex;
+            flex-flow: wrap;
+        }
+
+        .filterConfig_title {
+            height: 32px;
+            width: 192px;
+            box-sizing: border-box;
+            background-color: var(--select-span-bg);
+            border-radius: 2px;
+            margin: 0px 2px 2px 0px;
+            position: relative;
+            cursor: pointer;
+            &.filter_top {
+                padding: 10px 6px 10px 6px;
+                width: 142px;
+                height: 54px;
+                line-height: 34px;
+                text-align: center;
+                margin-right: 7px;
+            }
+            &.filterConfigClose {
+                background-color: var(--check-span-bg) !important;
+            }
+
+            span {
+                font-size: 14px;
+                font-weight: normal;
+                font-stretch: normal;
+                line-height: 20px;
+                letter-spacing: 0px;
+                color:var(--select-span-color);
+            }
+            img {
+                position: absolute;
+                right: 0px;
+                bottom: 0px;
+            }
+        }
+
+        .section-title {
+            font-size: 16px;
+            padding-bottom: 12px;
+            margin-top: 32px;
+        }
+
+        .selectTableBox {
+            position: relative;
+            .headerFilter {
+                position: absolute;
+                top: 8px;
+                right: 10px;
+                z-index: 1;
+                img {
+                    cursor: pointer;
+                    height: 9px;
+                    width: 9px;
+                }
+            }
+            .statusFilter {
+                font-size: 14px;
+                display: none;
+                position: relative;
+                position: absolute;
+                top: 25px;
+                right: 5px;
+                max-width: 240px;
+                background-color: var(--ti-filter-bg-color);
+                box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+                border-radius: 4px;
+                padding-top: 15px;
+        
+                .cell-thread {
+                    line-height: 32px;
+                    padding: 0 15px;
+                    box-sizing: border-box;
+                    width: 100%;
+                    height: 32px;
+        
+                    &:hover {
+                        background: var(--ti-span-hover-color);
+                    }
+                }
+            }
+        
+            .statusFilter.active {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        .indicator-box {
+            display: flex;
+            flex-flow: wrap;
+            justify-content: space-between;
+            align-content: space-between;
+            height: 68px;
+
+            .indicator_title {
+                height: 32px;
+                width: 192px;
+                box-sizing: border-box;
+                border-radius: 2px;
+                position: relative;
+                opacity: 1;
+                line-height: 32px;
+                font-size: 14px;
+                text-align: center;
+                cursor: pointer;
+                img {
+                    position: absolute;
+                    right: 0px;
+                    bottom: 0px;
+                }
+            }
+        }
+
+        .ti3-table-container {
+            border-bottom: 1px dashed #6e6e6e;
+            &.table-pid {
+                height: 402px;
+                &::-webkit-scrollbar {
+                    width: 6px !important;
+                }
+            }
+        }
+        .ti3-table-fixed-head-filler {
+            background-color: var(--ti-header-filter-bg-color);
+        }
+
+        .ti3-table-fixed-head thead tr th,
+        .ti3-table-container tbody tr {
+            box-shadow: inset 0px -1px 0px 0px #545454;
+            background-color: var(--ti-td-echart-bg-color);
+        }
+
+        ti-table {
+            max-height: 386px;
+
+            .ti3-table-container {
+                height: 300px;
+            }
+        }
+    }
+    
+}
+::ng-deep .vscode-light{
+    .indicator_title{
+        background-color: rgba($color: #b8becc, $alpha: 0.1);
+        &.active {
+            background-color: #f0f6ff;
+        }
+    }
+
+}
+::ng-deep .vscode-dark{
+    .indicator_title{
+        background-color: #161616;
+        &.active {
+            background-color: rgba($color: #0067ff, $alpha: 0.24);
+        }
+    }
+    .indicator-box span{
+        color: #f0f6ff;
+    }
+
+}
+::ng-deep .ti3-checkbox .ti3-checkbox-label {
+    font-size: 12px;
+}

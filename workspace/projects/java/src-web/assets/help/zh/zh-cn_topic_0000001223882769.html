@@ -1,0 +1,135 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="创建采样分析任务">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001223882779.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具 (Java性能分析)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001223882769">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>创建采样分析任务</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001223882769"></a><a name="ZH-CN_TOPIC_0000001223882769"></a>
+
+<h1 class="topictitle1">创建采样分析任务</h1>
+<div id="body1575358439533"><div class="section" id="ZH-CN_TOPIC_0000001223882769__section11470129119"><h4 class="sectiontitle">前提条件</h4><ul id="ZH-CN_TOPIC_0000001223882769__ul19728115524014"><li id="ZH-CN_TOPIC_0000001223882769__li14728125512402">已成功添加目标环境且目标环境处于在线状态。</li><li id="ZH-CN_TOPIC_0000001223882769__li23356373011">运行Java进程的JDK版本要求为JDK 11及以上。<div class="note" id="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0224496041_note3336101593413"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0224496041_p1336191511347">如果分析辅助软件是用操作系统管理员用户部署的，想对其中非操作系统管理员用户的Java进程进行在线分析，需要确保运行Java进程的JDK版本为JDK 11及以上，并在非交互shell（non-interactive shell）中配置JAVA_HOME环境变量，详细操作请参见“常用操作 &gt; 配置JDK”章节。</p>
+</div></div>
+</li></ul>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001223882769__section106231011124311"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0000001223882769__ol1052162113269"><li id="ZH-CN_TOPIC_0000001223882769__li14522182152620"><span>登录<span id="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0224496041_ph12594180204619">Java性能分析</span>Web界面，在首页界面“目标环境列表”区域选择指定目标环境，在“Java进程列表”区域选择指定的Java进程，如<a href="#ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0224496041_fig06509437438">图1</a>所示。</span><p><div class="fignone" id="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0224496041_fig06509437438"><a name="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0224496041_fig06509437438"></a><a name="zh-cn_topic_0224496041_fig06509437438"></a><span class="figcap"><b>图1 </b>选择Java进程</span><br><span><img id="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0224496041_image16699555123112" src="zh-cn_image_0000001178881648.png"></span></div>
+<p id="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0224496041_p11325102633011">点击<span><img id="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0224496041_image963420574305" src="zh-cn_image_0000001224361301.png"></span>按钮，可以导入之前保存下载过的报告，并在导入的时候进行校验。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001223882769__li13477352184317"><span>单击“采样分析”。</span><p><p id="ZH-CN_TOPIC_0000001223882769__p728813817455">打开“新建采样分析记录”窗口，如<a href="#ZH-CN_TOPIC_0000001223882769__fig93481248174913">图2</a>所示，需要配置的参数如<a href="#ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0189424700_table423624975820">表1</a>所示。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0000001223882769__fig93481248174913"><a name="ZH-CN_TOPIC_0000001223882769__fig93481248174913"></a><a name="fig93481248174913"></a><span class="figcap"><b>图2 </b>新建采样分析记录</span><br><span><img id="ZH-CN_TOPIC_0000001223882769__image14969172395317" src="zh-cn_image_0000001179041574.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0189424700_table423624975820"></a><a name="zh-cn_topic_0189424700_table423624975820"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0189424700_table423624975820" frame="border" border="1" rules="all"><caption><b>表1 </b>新建采样分析记录参数说明</caption><colgroup><col style="width:28.9%"><col style="width:71.1%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0189424700_row323612494584"><th align="left" class="cellrowborder" valign="top" width="28.9%" id="mcps1.3.2.2.2.2.3.2.3.1.1"><p id="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0189424700_p52362498581">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="71.1%" id="mcps1.3.2.2.2.2.3.2.3.1.2"><p id="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0189424700_p6236124911583">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001223882769__row4740132414394"><td class="cellrowborder" valign="top" width="28.9%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882769__p2074072493919">记录方式</p>
+</td>
+<td class="cellrowborder" valign="top" width="71.1%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882769__p574062416393">选择记录方式。可选择以下两种：</p>
+<ul id="ZH-CN_TOPIC_0000001223882769__ul144761532174016"><li id="ZH-CN_TOPIC_0000001223882769__li647673264012">指定记录时长：采样时长可设置。</li><li id="ZH-CN_TOPIC_0000001223882769__li15330205815403">不限制记录时长：采样时长不可设置。<div class="note" id="ZH-CN_TOPIC_0000001223882769__note1398136114612"><span class="notetitle"> 说明： </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001223882769__p739815604612">不限制记录时长时，需要手动停止采样分析。</p>
+</div></div>
+</li></ul>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001223882769__row12255614123413"><td class="cellrowborder" valign="top" width="28.9%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882769__p4228122225211">采样时长（秒）</p>
+</td>
+<td class="cellrowborder" valign="top" width="71.1%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882769__p72561114193413">设置记录的时间。默认为60秒，取值范围1~300秒。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0189424700_row156132793516"><td class="cellrowborder" valign="top" width="28.9%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882769__p1322522285212">方法采样</p>
+</td>
+<td class="cellrowborder" valign="top" width="71.1%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882769__p08532566347">是否启用方法采样。默认打开。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0189424700_row09671924103512"><td class="cellrowborder" valign="top" width="28.9%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882769__p5201322135215">Java方法采样间隔（毫秒）</p>
+</td>
+<td class="cellrowborder" valign="top" width="71.1%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0189424700_p2967182410356">设置Java方法采样间隔。默认为1毫秒，取值范围：1~1000毫秒。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001223882769__note16355133417520"><span class="notetitle"> 说明： </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001223882769__p4355183415210">如果关闭“方法采样”，此参数不可设置。</p>
+</div></div>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001223882769__row144191553175314"><td class="cellrowborder" valign="top" width="28.9%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882769__p94201953175313">Native方法采样间隔（毫秒）</p>
+</td>
+<td class="cellrowborder" valign="top" width="71.1%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882769__p1742017532534">设置Native方法采样间隔。默认为1毫秒，取值范围：1~1000毫秒。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001223882769__note1874111508546"><span class="notetitle"> 说明： </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0209366687_p4355183415210">如果关闭“方法采样”，此参数不可设置。</p>
+</div></div>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001223882769__row18263919549"><td class="cellrowborder" valign="top" width="28.9%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882769__p1882715913544">线程转储</p>
+</td>
+<td class="cellrowborder" valign="top" width="71.1%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882769__p17827594542">是否启用线程转储。默认打开。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001223882769__row16413182512541"><td class="cellrowborder" valign="top" width="28.9%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882769__p44142259545">转储间隔（秒）</p>
+</td>
+<td class="cellrowborder" valign="top" width="71.1%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882769__p7414625185413">设置线程转储的间隔时间。默认为1秒，取值范围1~60秒。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001223882769__note9242745420"><span class="notetitle"> 说明： </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001223882769__ul1704154229"><li id="ZH-CN_TOPIC_0000001223882769__li19081514228">如果关闭“线程转储”，此参数不可设置。</li><li id="ZH-CN_TOPIC_0000001223882769__li601715112216">“转储间隔”应小于或等于“记录时长”。建议设置“转储间隔”为1、5、10、20、30、60秒等常用值，方便使用。</li></ul>
+</div></div>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001223882769__row1843254917517"><td class="cellrowborder" valign="top" width="28.9%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882769__p1143364914511">文件IO采样</p>
+</td>
+<td class="cellrowborder" valign="top" width="71.1%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882769__p643344935118">是否启用文件IO采样。默认关闭。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001223882769__row189761052115117"><td class="cellrowborder" valign="top" width="28.9%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882769__p397635215514">阈值（微秒）</p>
+</td>
+<td class="cellrowborder" valign="top" width="71.1%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882769__p1582019362594">设置文件IO采样阈值。默认为10微秒，取值范围为1~1000微秒。</p>
+<p id="ZH-CN_TOPIC_0000001223882769__p1515119488149">仅开启文件IO采样时需要配置。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001223882769__note51141075174"><span class="notetitle"> 说明： </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001223882769__p51146731712">工具只会抓取耗时超过阈值的文件IO来分析。</p>
+</div></div>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001223882769__row1681413416524"><td class="cellrowborder" valign="top" width="28.9%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882769__p181417343524">Socket IO采样</p>
+</td>
+<td class="cellrowborder" valign="top" width="71.1%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882769__p1281493485218">是否启用Socket IO采样。默认关闭。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001223882769__row58881850145214"><td class="cellrowborder" valign="top" width="28.9%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882769__p188890509523">阈值（毫秒）</p>
+<p id="ZH-CN_TOPIC_0000001223882769__p7493134519103"></p>
+</td>
+<td class="cellrowborder" valign="top" width="71.1%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882769__p3889195065211">设置Socket IO采样阈值。默认为10毫秒，取值范围为1~1000毫秒。</p>
+<p id="ZH-CN_TOPIC_0000001223882769__p5962173214151">仅开启Socket IO采样时需要配置。</p>
+<div class="note" id="ZH-CN_TOPIC_0000001223882769__note194938175179"><span class="notetitle"> 说明： </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001223882769__p184934174170">工具只会抓取耗时超过阈值的Socket IO来分析。</p>
+</div></div>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001223882769__row16687012189"><td class="cellrowborder" valign="top" width="28.9%" headers="mcps1.3.2.2.2.2.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001223882769__p116690017182">老年代对象采样</p>
+</td>
+<td class="cellrowborder" valign="top" width="71.1%" headers="mcps1.3.2.2.2.2.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001223882769__p12669180151819">是否启用老年代对象采样。默认开启。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0000001223882769__li1460549558"><span>参考<a href="#ZH-CN_TOPIC_0000001223882769__zh-cn_topic_0189424700_table423624975820">表1</a>配置任务参数后，单击“确认”。</span><p><div class="p" id="ZH-CN_TOPIC_0000001223882769__p1232853131517">弹出分析进度窗口，如<a href="#ZH-CN_TOPIC_0000001223882769__fig1667016127">图3</a>所示。<div class="fignone" id="ZH-CN_TOPIC_0000001223882769__fig1667016127"><a name="ZH-CN_TOPIC_0000001223882769__fig1667016127"></a><a name="fig1667016127"></a><span class="figcap"><b>图3 </b>分析进度</span><br><span><img id="ZH-CN_TOPIC_0000001223882769__image18177022123311" src="zh-cn_image_0000001224361305.png"></span></div>
+</div>
+<p id="ZH-CN_TOPIC_0000001223882769__p661161517371">单击“停止采样”可以停止分析任务。</p>
+<p id="ZH-CN_TOPIC_0000001223882769__p67909200116">单击“取消采样”可以取消分析任务。</p>
+<p id="ZH-CN_TOPIC_0000001223882769__p870719447424">采样分析任务创建完成后，点击页面右上方的<span><img id="ZH-CN_TOPIC_0000001223882769__image193714444218" src="zh-cn_image_0000001178563120.png"></span>按钮，可以查看所有页签的优化建议汇总。</p>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001223882779.html">采样分析</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

@@ -1,0 +1,26 @@
+<div class="modal-dialog" *ngIf="ifShow">
+    <div class="list-info">
+        <div class="table">
+            <div class="config-info" *ngFor="let item of configList">
+                <div class="table-left" [ngClass]="{'wrap': item.key === strObj.kcore}">{{item.key}}</div>
+                <div class="table-right">{{item.text}}</div>
+            </div>
+
+            <!-- 配置节点参数 -->
+            <div *ngIf="taskData.switch ">
+                <div *ngFor="let item of panelList index as i">
+                    <app-mission-panel
+                        [title]="taskData.nodeConfig[i].nodeName + '(' + taskData.nodeConfig[i].nodeIp + ')'"
+                        [active]="false" *ngIf='taskData.nodeConfig[i].nodeId'>
+                        <div class="content-box">
+                            <div class="config-info" *ngFor="let items of item">
+                                <div class="table-left">{{items.key}}</div>
+                                <div class="table-right">{{items.text}}</div>
+                            </div>
+                        </div>
+                    </app-mission-panel>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

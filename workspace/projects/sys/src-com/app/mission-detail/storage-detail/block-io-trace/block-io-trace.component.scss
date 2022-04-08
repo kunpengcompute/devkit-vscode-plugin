@@ -1,0 +1,147 @@
+.section-title {
+    font-size: 20px;  
+    color: var(--common-color-font-primary);
+    margin-bottom:22px;
+}
+.section-content {
+    position: relative;
+    margin-bottom: 20px;
+    .headerFilter{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        color: var(--ti-checkbox-label-color);
+        img{
+          cursor: pointer;
+          height: 9px;
+          width: 9px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          margin: auto;
+        }
+        .statusFilter {
+            border: 1px solid #0067ff;
+            font-size: 14px;
+            display: none;
+            position: absolute;
+            top: 25px;
+            right: 5px;
+            min-width: 195px;
+            background-color: var(--common-color-background-primary);
+            box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            height: 337px;
+            overflow-y: auto;
+            .filter {
+              overflow: scroll;
+            }
+            span {
+              line-height: 32px;
+              box-sizing: border-box;
+              width: 100%;
+              height: 32px;
+              &:hover {
+                background-color: #f0f3fa;
+              }
+              ::ng-deep .ti3-checkbox{
+                padding: 0 15px !important;
+                width: 100% !important;
+              }
+            }
+        
+        }
+          
+        .statusFilter.active {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+    .tooltip {
+      vertical-align: middle;
+      margin: -2px 0 0 4px;
+      width: 14px;
+      height: 14px;
+    }
+    .center {
+      text-align: center;
+    }
+}
+:host ::ng-deep .ti3-table>table>tbody>.ti3-details-tr {
+    --ti-table-details-bg-color: #f5f9ff;
+    & > td {
+        --ti-table-details-padding: 0
+    }
+}
+:host ::ng-deep .ti3-table>table>thead>tr>th {
+  border-bottom: 1px solid var(--ti-table-border-bottom-color) !important;
+  color: var(--common-color-font-primary) !important;
+}
+:host ::ng-deep .statusFilter .ti3-tree-container {
+  li .ti3-icon {
+    display: none;
+  }
+  .ti3-tree-item-leaf {
+    margin-left: 0
+  }
+}
+.vscode-dark .ti3-table-container .tiDetailsTr td, .vscode-light .ti3-table-container .tiDetailsTr td {
+  padding: 0 0 0 40px
+}
+:host ::ng-deep .ti3-table>table>tbody>.ti3-details-tr>td {
+  overflow: visible;
+  .ti3-table-detail-container {
+    background-color: var(--ti3-details-tr-bg-color);
+  }
+}
+
+::ng-deep {
+  body.vscode-dark {
+    --ti3-details-tr-bg-color: #252525;
+    --table-border-bottom-color: var(--ti-table-border-bottom-color);
+  }
+  :root {
+    --ti3-details-tr-bg-color: var(--common-color-background-base);
+    --table-border-bottom-color: #ffffff;
+  }
+}
+:host ::ng-deep .section-content .ti3-table > .ti3-table-container{
+  overflow: visible;
+  >table>tbody>tr>td {
+    overflow: visible;
+  }
+}
+:host ::ng-deep {
+  .ti3-table > .ti3-resize-wrapper > table > tbody > .ti3-details-tr > td > .ti3-table-detail-container.adapter,
+  .ti3-table > .ti3-table-container > table > tbody > .ti3-details-tr > td > .ti3-table-detail-container.adapter,
+  .ti3-table > table > tbody > .ti3-details-tr > td > .ti3-table-detail-container.adapter{
+    margin-left: 0;
+    border-left: none;
+    background: var(--ti-table-expand-children-margin-background-color);
+  }
+  .ti3-table>.ti3-resize-wrapper>table>thead>tr>th.setBorder,
+  .ti3-table>.ti3-table-container>table>thead>tr>th.setBorder,
+  .ti3-table>.ti3-table-fixed-head>table>thead>tr>th.setBorder,
+  .ti3-table>table>thead>tr>th.setBorder{
+    border-bottom: 1px solid var(--table-border-bottom-color) !important;
+  }
+  .ti3-table>.ti3-table-container>table>thead>tr>th:last-child:not(.last-rowspan-th):after{
+    background: var(--ti-table-th-spacing-line-color);
+    color: transparent;
+    content: "";
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+  }
+  .last-rowspan-th {
+    position: relative;
+    overflow: visible !important;
+  }
+}
+

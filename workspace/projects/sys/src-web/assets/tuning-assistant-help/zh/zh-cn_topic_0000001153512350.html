@@ -1,0 +1,65 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="编译器及编译选项">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001197898711.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="鲲鹏性能分析工具 (调优助手) 联机帮助">
+<meta name="DC.Publisher" content="20211029">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001153512350">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>编译器及编译选项</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001153512350"></a><a name="ZH-CN_TOPIC_0000001153512350"></a>
+
+<h1 class="topictitle1">编译器及编译选项</h1>
+<div id="body0000001153512350"><div class="section" id="ZH-CN_TOPIC_0000001153512350__section070116513275"><h4 class="sectiontitle">使用高版本GCC</h4><p id="ZH-CN_TOPIC_0000001153512350__p11435195313279">将Ubuntu系统中的GCC版本升级到GCC 10.1.0。</p>
+<ol id="ZH-CN_TOPIC_0000001153512350__ol172611656302"><li id="ZH-CN_TOPIC_0000001153512350__li14261195123019"><span>获取GCC的最新源码包。</span><p><p id="ZH-CN_TOPIC_0000001153512350__p1068302611303">源码包获取地址：<a href="http://ftp.gnu.org/gnu/gcc/gcc-10.1.0" target="_blank" rel="noopener noreferrer">http://ftp.gnu.org/gnu/gcc/gcc-10.1.0</a></p>
+<p id="ZH-CN_TOPIC_0000001153512350__p189721729143111"><span><img id="ZH-CN_TOPIC_0000001153512350__image44722569322" src="zh-cn_image_0000001153353030.png" width="523.6875" height="280.036421"></span></p>
+</p></li><li id="ZH-CN_TOPIC_0000001153512350__li8627921183119"><span>执行以下命令解压安装包。</span><p><p id="ZH-CN_TOPIC_0000001153512350__p164512383332"><strong id="ZH-CN_TOPIC_0000001153512350__b1161941348">tar -xzvf gcc-10.1.0.tar.gz</strong></p>
+<p id="ZH-CN_TOPIC_0000001153512350__p928382323410"><span><img id="ZH-CN_TOPIC_0000001153512350__image1325312246344" src="zh-cn_image_0000001153353072.png" width="523.6875" height="97.363182"></span></p>
+</p></li><li id="ZH-CN_TOPIC_0000001153512350__li15300154410348"><span>执行以下命令进入解压缩后的目录，并运行<span class="uicontrol" id="ZH-CN_TOPIC_0000001153512350__uicontrol13545102893615">“download_prerequisites”</span>脚本。</span><p><p id="ZH-CN_TOPIC_0000001153512350__p8684184443611"><strong id="ZH-CN_TOPIC_0000001153512350__b1787982510372">cd gcc-10.1.0/</strong></p>
+<p id="ZH-CN_TOPIC_0000001153512350__p286242613375"><strong id="ZH-CN_TOPIC_0000001153512350__b14406144523720">./contrib/download_prerequisiles</strong></p>
+<div class="note" id="ZH-CN_TOPIC_0000001153512350__note21781322385"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001153512350__p10178162203811"><span class="uicontrol" id="ZH-CN_TOPIC_0000001153512350__uicontrol76669813813">“download_prerequisites”</span>脚本文件会进行下载、配置、安装依赖库。</p>
+</div></div>
+</p></li><li id="ZH-CN_TOPIC_0000001153512350__li918217565388"><span>执行以下命令创建目录，并将所有输出放入该目录。</span><p><p id="ZH-CN_TOPIC_0000001153512350__p1444513343424"><strong id="ZH-CN_TOPIC_0000001153512350__b716111586429">mkdir </strong><em id="ZH-CN_TOPIC_0000001153512350__i1816114588427">gcc_temp</em></p>
+<p id="ZH-CN_TOPIC_0000001153512350__p208667117432"><strong id="ZH-CN_TOPIC_0000001153512350__b1821191213433">cd</strong> <em id="ZH-CN_TOPIC_0000001153512350__i812863194318">gcc_temp</em></p>
+<p id="ZH-CN_TOPIC_0000001153512350__p1329623412431"><strong id="ZH-CN_TOPIC_0000001153512350__b10371144794317">../configure -enable-checking=release -enable-languages=c,c++ -disable-multilib</strong></p>
+<p id="ZH-CN_TOPIC_0000001153512350__p123217127444"><span><img id="ZH-CN_TOPIC_0000001153512350__image181211813134411" src="zh-cn_image_0000001199393591.png" width="523.6875" height="209.84567099999998"></span></p>
+</p></li><li id="ZH-CN_TOPIC_0000001153512350__li92541850194416"><span>执行以下命令进行编译安装。</span><p><ol type="a" id="ZH-CN_TOPIC_0000001153512350__ol11281103117458"><li id="ZH-CN_TOPIC_0000001153512350__li192811331124511">执行以下命令进行编译。<p id="ZH-CN_TOPIC_0000001153512350__p9126114313457"><a name="ZH-CN_TOPIC_0000001153512350__li192811331124511"></a><a name="li192811331124511"></a><strong id="ZH-CN_TOPIC_0000001153512350__b119745674511">make -j32</strong></p>
+<div class="note" id="ZH-CN_TOPIC_0000001153512350__note137396810466"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001153512350__p37392812463">编译过程过程可能持续1~2小时，编译前请注意时间安排。</p>
+</div></div>
+<p id="ZH-CN_TOPIC_0000001153512350__p131548104714"><span><img id="ZH-CN_TOPIC_0000001153512350__image14100121364715" src="zh-cn_image_0000001153513922.png" width="523.6875" height="93.57653900000001"></span></p>
+</li><li id="ZH-CN_TOPIC_0000001153512350__li12479126124712">进行安装。<ul id="ZH-CN_TOPIC_0000001153512350__ul1145610434482"><li id="ZH-CN_TOPIC_0000001153512350__li14561843204819">以root用户执行以下命令进行安装。<p id="ZH-CN_TOPIC_0000001153512350__p63184114916"><a name="ZH-CN_TOPIC_0000001153512350__li14561843204819"></a><a name="li14561843204819"></a><strong id="ZH-CN_TOPIC_0000001153512350__b114301719194915">make install</strong></p>
+</li><li id="ZH-CN_TOPIC_0000001153512350__li11155102720497">以普通用户执行以下命令进行安装。<p id="ZH-CN_TOPIC_0000001153512350__p14784104810493"><a name="ZH-CN_TOPIC_0000001153512350__li11155102720497"></a><a name="li11155102720497"></a><strong id="ZH-CN_TOPIC_0000001153512350__b4313315505">sudo make install</strong></p>
+<div class="fignone" id="ZH-CN_TOPIC_0000001153512350__fig3491204145015"><span class="figcap"><b>图1 </b>安装过程</span><br><span><img id="ZH-CN_TOPIC_0000001153512350__image56231735135014" src="zh-cn_image_0000001153354232.png"></span></div>
+</li></ul>
+</li></ol>
+</p></li><li id="ZH-CN_TOPIC_0000001153512350__li201762567506"><span>安装后检查验证。</span><p><p id="ZH-CN_TOPIC_0000001153512350__p585611229514">执行以下任意命令检查gcc版本信息。</p>
+<p id="ZH-CN_TOPIC_0000001153512350__p1467452511527"><strong id="ZH-CN_TOPIC_0000001153512350__b58401152145216">gcc --version</strong></p>
+<p id="ZH-CN_TOPIC_0000001153512350__p1596943215212"><strong id="ZH-CN_TOPIC_0000001153512350__b14842105255212">gcc -v</strong></p>
+<p id="ZH-CN_TOPIC_0000001153512350__p3731338185214"><strong id="ZH-CN_TOPIC_0000001153512350__b108431552125210">g++ -v</strong></p>
+<div class="note" id="ZH-CN_TOPIC_0000001153512350__note175731563531"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001153512350__p6217102165315">如果显示的gcc版本仍是以前的版本，就需要重启系统；或者执行以下命令查看gcc的安装位置：<strong id="ZH-CN_TOPIC_0000001153512350__b102941146155318">which gcc</strong>；然后执行以下命令查看版本信息 <strong id="ZH-CN_TOPIC_0000001153512350__b146677136549">/usr/local/bin/gcc -v</strong>，通常gcc都安装在该处位置。</p>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001153512350__fig45011379579"><span class="figcap"><b>图2 </b>安装成功页面</span><br><span><img id="ZH-CN_TOPIC_0000001153512350__image74571331165720" src="zh-cn_image_0000001153514404.png" width="523.6875" height="123.828719"></span></div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001197898711.html">%USER</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

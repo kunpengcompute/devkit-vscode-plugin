@@ -1,0 +1,114 @@
+<div class="head-box-tip">
+    <div class="search-box">
+        <app-table-search-box [searchOptions]="searchOptions" (searchEvent)="searchEvent($event)">
+        </app-table-search-box>
+    </div>
+    <app-suggestion-tip [suggetNum]="suggestArr && suggestArr.length" (openSuggest)="openSuggest()">
+    </app-suggestion-tip>
+</div>
+<ti-table #table [(displayedData)]="displayed" tiColsResizable [srcData]="srcData" [columns]="columns"
+    [searchWords]="searchWords" [searchKeys]="searchKeys">
+    <div class="ti3-table-fixed-head">
+        <table>
+            <thead>
+                <tr>
+                    <ng-container *ngFor="let column of columns">
+                        <th width="{{column.width}}">
+                            <ti-cell-text>{{ column.title }}</ti-cell-text>
+                            <ti-head-sort *ngIf="column.isSort" [sortKey]="column.sortKey"></ti-head-sort>
+                        </th>
+                    </ng-container>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="ti3-table-container ti3-resize-wrapper" [ngStyle]="{
+            height: expand ? '400px' : '240px',
+            'min-height': '240px'
+          }">
+        <table>
+            <thead>
+                <tr [ngStyle]="{'opacity': 0}">
+                    <ng-container *ngFor="let column of columns">
+                        <th width="{{column.width}}"></th>
+                    </ng-container>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let row of displayed">
+                    <td tiOverflow>{{row.startTime}}</td>
+                    <td tiOverflow>{{row.gcCause}}</td>
+                    <td tiOverflow>{{row.gcName}}</td>
+                    <td tiOverflow>{{row.gcCommit}}</td>
+                    <td tiOverflow>{{row.gccommitbefore}}</td>
+                    <td tiOverflow>{{row.gccommitafter}}</td>
+                    <td tiOverflow>{{row.gcCircle}}</td>
+                    <td tiOverflow>{{row.gcThreadCount}}</td>
+                    <td tiOverflow>{{row.gcDuration}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <app-default-page *ngIf="displayed && displayed.length === 0" [height]="'100%'"></app-default-page>
+    </div>
+    <div class="table-expand" (click)="onClickExpand()">
+        <hy-theme-content [hidden]="expand">
+            <app-icon-react name="expandDown" light></app-icon-react>
+            <app-icon-react name="expandDownDark" dark></app-icon-react>
+        </hy-theme-content>
+        <hy-theme-content [hidden]="!expand">
+            <app-icon-react name="expandUp" light></app-icon-react>
+            <app-icon-react name="expandUpDark" dark></app-icon-react>
+        </hy-theme-content>
+    </div>
+    <ti-pagination [(currentPage)]="page.pageNo" [pageSize]="page.pageSize" [(totalNumber)]="page.total">
+    </ti-pagination>
+</ti-table>
+<div class="gc-title">{{ i18n.plugins_perf_java_sampling_gc }}</div>
+<div style="width: 100%; margin: 20px 0 34px;">
+    <app-time-line [timeData]='gcTimeData' (timeLineData)='timeLineData($event)' #gcTimeLine></app-time-line>
+</div>
+<div>
+    <div class="table-box">
+        <div class="table-y">
+            <div class="line" style="margin-top: 0px"></div>
+            <div class="title-box" style="height: 85px;">
+                <span class='title-num'>{{yGcact}}</span>
+                <span class='title' style='color: #aaaaaa;font-size: 14px'>{{i18n.profikeGC.GCActivities}}</span>
+                <span class='title-num'>0</span>
+            </div>
+            <div class="line" style="margin-top: 4px"></div>
+            <div class="title-box" style="height: 86px;">
+                <span class='title-num'>{{yGcstore}}</span>
+                <span class='title' style='color: #aaaaaa;font-size: 14px'>{{i18n.profikeGC.Memory}}</span>
+                <span class='title-num'>0</span>
+            </div>
+            <div class="line" style="margin-top: 3px"></div>
+            <div class="title-box" style="height: 86px;">
+                <span class='title-num'>{{ycGcback}}</span>
+                <span class='title' style='color: #aaaaaa;font-size: 14px'>{{i18n.profikeGC.GC}}</span>
+                <span class='title-num'>0</span>
+            </div>
+            <div class="line" style="margin-top: 3px"></div>
+            <div class="title-box" style="height: 86px;">
+                <span class='title-num'>{{yGcpause}}</span>
+                <span class='title' style='color: #aaaaaa;font-size: 14px'>{{i18n.profikeGC.PauseTime}}</span>
+                <span class='title-num'>0</span>
+            </div>
+            <div class="line" style="margin-top: 3px"></div>
+            <div class="title-box" style="height: 86px;">
+                <span class='title-num'>{{yGcthread}}</span>
+                <span class='title' style='color: #aaaaaa;font-size: 14px'>{{i18n.profikeGC.GCThreads}}</span>
+                <span class='title-num'>0</span>
+            </div>
+            <div class="line" style="margin-top: 3px"></div>
+        </div>
+        <div class="table">
+            <div id="myEchart"></div>
+            <div class="addborder"></div>
+        </div>
+    </div>
+</div>
+<app-analysis #analysis [type]="sugtype" [suggestArr]="allSuggestArr" [tabName]="'gc'">
+</app-analysis>

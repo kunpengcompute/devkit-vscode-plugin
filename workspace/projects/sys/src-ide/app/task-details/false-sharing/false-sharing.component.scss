@@ -1,0 +1,17 @@
+::ng-deep .taskDetailsTabs {
+  .ti3-tabs-container {
+    .ti3-tab-content {
+      .ti3-tab-pane {
+        .content-container {
+          &.scroll {
+            overflow: scroll;
+          }
+  
+          .config-container .config-item .config-title {
+            width: 128px !important;
+          }
+        }
+      }
+    }
+  }
+}

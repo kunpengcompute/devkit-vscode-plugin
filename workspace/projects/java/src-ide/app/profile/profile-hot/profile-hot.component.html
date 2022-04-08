@@ -1,0 +1,7 @@
+<div class="hot-container">
+  <app-hot-analysis #hotAnalysis [startBtnDisabled]="startBtnDisabled" [noData]="noDataInf" [hotData]='hotDataInf' [isByteCodeFinished]="isByteCodeFinished"
+    (hotAnalysisBn)="clickHotAnalysis($event)" (cancelHotAnalysisBn)="clickCancelHotAnalysis($event)" [isDisassemblyFinished]="isDisassemblyFinished"
+    (cleared)="clearedHotDataInf($event)" [language] = 'language' (methodBn)="clickMethod($event)" [methodData]='hotMethodInf'
+    (selectVersion) = "selectVersion($event)">
+  </app-hot-analysis>
+</div>

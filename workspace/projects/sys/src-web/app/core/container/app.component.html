@@ -1,0 +1,22 @@
+<div class='content' id="bodyContent">
+  <app-header *ngIf='showHeader'></app-header>
+  <div class='main' #container>
+    <div class='router-content'>
+      <app-mem-info #memInfo></app-mem-info>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <div id='loading-container'>
+
+  </div>
+  <div class="chartTip">
+
+  </div>
+
+  <!-- 导入列表 -->
+  <app-task-list style="z-index: 1010;"></app-task-list>
+  <!-- 建议反馈 -->
+  <app-advice-feedback-icon *ngIf="showAdviceIcon" #adviceIcon>
+  </app-advice-feedback-icon>
+</div>

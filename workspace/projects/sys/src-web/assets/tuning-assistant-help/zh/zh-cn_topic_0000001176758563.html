@@ -1,0 +1,343 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="查看进程/线程性能">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001129506030.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="鲲鹏性能分析工具 (调优助手) 联机帮助">
+<meta name="DC.Publisher" content="20211029">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001176758563">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>查看进程/线程性能</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001176758563"></a><a name="ZH-CN_TOPIC_0000001176758563"></a>
+
+<h1 class="topictitle1">查看进程/线程性能</h1>
+<div id="body0000001176758563"><div class="section" id="ZH-CN_TOPIC_0000001176758563__zh-cn_topic_0189293077_section11470129119"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0000001176758563__zh-cn_topic_0189293077_zh-cn_topic_0189293076_p5336201013112">已创建分析任务，并且成功完成分析。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001176758563__section168948445553"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0000001176758563__ol92117562556"><li id="ZH-CN_TOPIC_0000001176758563__li85521472718"><span>在“工程管理”区域，依次单击指定工程和分析任务名称前的<span><img id="ZH-CN_TOPIC_0000001176758563__image4105155811375" src="zh-cn_image_0000001176879179.png"></span>。</span><p><p id="ZH-CN_TOPIC_0000001176758563__p198319584430">展开节点列表。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001176758563__li779815445566"><span>单击节点名称查看分析结果。</span><p><p id="ZH-CN_TOPIC_0000001176758563__p19449114955616">打开分析结果页面。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0000001176758563__fig1457422021110"><span class="figcap"><b>图1 </b>分析结果页面</span><br><span><img id="ZH-CN_TOPIC_0000001176758563__image457462051112" src="zh-cn_image_0000001176799097.png" height="278.3025" width="523.6875"></span></div>
+<ul id="ZH-CN_TOPIC_0000001176758563__ul174116225149"><li id="ZH-CN_TOPIC_0000001176758563__li19411922151412">选择业务类型。<div class="p" id="ZH-CN_TOPIC_0000001176758563__p15634743201513"><a name="ZH-CN_TOPIC_0000001176758563__li19411922151412"></a><a name="li19411922151412"></a>根据实际情况选择业务类型。可选的类型包括：CPU密集型、网络IO密集型和存储IO密集型。可同时选中多个业务类型。选中后，选项的文字颜色变为蓝色。<div class="fignone" id="ZH-CN_TOPIC_0000001176758563__fig656538141520"><span class="figcap"><b>图2 </b>选择业务类型</span><br><span><img id="ZH-CN_TOPIC_0000001176758563__image1256113831519" src="zh-cn_image_0000001130639270.png" height="78.80250000000001" width="523.6875"></span></div>
+</div>
+</li><li id="ZH-CN_TOPIC_0000001176758563__li1732943162915">查看进程/线程性能分析结果。<div class="fignone" id="ZH-CN_TOPIC_0000001176758563__fig18274115981916"><span class="figcap"><b>图3 </b>进程/线程性能页面</span><br><span><img id="ZH-CN_TOPIC_0000001176758563__image62752594197" src="zh-cn_image_0000001188013335.png" height="281.295" width="523.6875"></span></div>
+<p id="ZH-CN_TOPIC_0000001176758563__p9369112162014">在<span class="wintitle" id="ZH-CN_TOPIC_0000001176758563__wintitle123691522202">“进程/线程性能”</span>页面，可以进行以下操作。</p>
+<ul id="ZH-CN_TOPIC_0000001176758563__ul1446125021919"><li id="ZH-CN_TOPIC_0000001176758563__li1587181832417">在<span class="uicontrol" id="ZH-CN_TOPIC_0000001176758563__uicontrol1458701814248">“CPU指标”</span>下拉选择框中选择要查看的CPU指标。<p id="ZH-CN_TOPIC_0000001176758563__p17587418132418"><a href="#ZH-CN_TOPIC_0000001176758563__table9225175192414">表1</a>描述了可选的CPU指标。</p>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001176758563__table9225175192414"></a><a name="table9225175192414"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001176758563__table9225175192414" frame="border" border="1" rules="all"><caption><b>表1 </b>CPU指标选项说明</caption><colgroup><col style="width:30%"><col style="width:70%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001176758563__row922645122410"><th align="left" class="cellrowborder" valign="top" width="30%" id="mcps1.3.2.2.2.2.3.2.3.1.3.2.3.1.1"><p id="ZH-CN_TOPIC_0000001176758563__p5226195114240">CPU指标</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="70%" id="mcps1.3.2.2.2.2.3.2.3.1.3.2.3.1.2"><p id="ZH-CN_TOPIC_0000001176758563__p1822635192413">描述</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001176758563__row8226205117245"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.2.2.3.2.3.1.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p4226155119245">%user</p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.2.2.3.2.3.1.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p3226115152413">在用户态运行时所占用CPU总时间的百分比。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row1226125192410"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.2.2.3.2.3.1.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p20226125115242">%sys</p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.2.2.3.2.3.1.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p0226251142417">在内核态运行时所占用CPU总时间的百分比。该指标没有包含服务硬件和软件中断所花费的时间。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row1226195172410"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.2.2.3.2.3.1.3.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p20970357125820">%cpu</p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.2.2.3.2.3.1.3.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p20970165710586">CPU使用率（非idle状态下的CPU使用率）。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li><li id="ZH-CN_TOPIC_0000001176758563__li758731820241">单击<span><img id="ZH-CN_TOPIC_0000001176758563__image157941653201310" src="zh-cn_image_0000001181330885.png"></span>设置利用率区间。<div class="p" id="ZH-CN_TOPIC_0000001176758563__p11587141822418">在弹出<span class="wintitle" id="ZH-CN_TOPIC_0000001176758563__wintitle5587171812243">“利用率区间”</span>对话框中设置CPU利用率Normal范围的起始值和结束值，然后单击<span class="uicontrol" id="ZH-CN_TOPIC_0000001176758563__uicontrol175878186243">“确认”</span>。<div class="fignone" id="ZH-CN_TOPIC_0000001176758563__fig258714187247"><span class="figcap"><b>图4 </b>设置利用率区间</span><br><span><img id="ZH-CN_TOPIC_0000001176758563__image1358815187249" src="zh-cn_image_0000001181490805.png" height="181.54500000000002" width="523.6875"></span></div>
+</div>
+</li><li id="ZH-CN_TOPIC_0000001176758563__li165881918172414">把鼠标悬停在一个方块上，查看该CPU核的各项性能数据。<div class="fignone" id="ZH-CN_TOPIC_0000001176758563__fig16588191820245"><span class="figcap"><b>图5 </b>悬停查看CPU核性能数据</span><br><span><img id="ZH-CN_TOPIC_0000001176758563__image14588718202412" src="zh-cn_image_0000001135531276.png" height="186.5325" width="523.6875"></span></div>
+<div class="note" id="ZH-CN_TOPIC_0000001176758563__note03601876346"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001176758563__p836015712347">可点击“查看相关线程”查看CPU核的相关线程（线程用三角形表示）。在线程视图中，可点击左上角的PID返回。</p>
+</div></div>
+</li><li id="ZH-CN_TOPIC_0000001176758563__li16588131822418">单击一个方块，在右边详情区域查看该CPU核的详细进程和线程信息，包括微架构指标、访存指标、CPU亲和性、内存亲和性、操作的函数、操作的文件、操作的网口和操作的系统调用。<div class="fignone" id="ZH-CN_TOPIC_0000001176758563__fig165880181246"><span class="figcap"><b>图6 </b>查看CPU核进程/线程详情</span><br><span><img id="ZH-CN_TOPIC_0000001176758563__image185886185243" src="zh-cn_image_0000001135371490.png" height="290.27250000000004" width="523.6875"></span></div>
+<div class="note" id="ZH-CN_TOPIC_0000001176758563__note4588111818246"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001176758563__p45887188245">可单击可单击<span><img id="ZH-CN_TOPIC_0000001176758563__image20592114154411" src="zh-cn_image_0000001135536502.png"></span>展开详情区域。</p>
+</div></div>
+</li></ul>
+</li></ul>
+</p></li><li id="ZH-CN_TOPIC_0000001176758563__li11871142541316"><span>查看状态为Busy的CPU核的进程/线程性能优化建议拓扑树图。</span><p><ul id="ZH-CN_TOPIC_0000001176758563__ul96821538112310"><li id="ZH-CN_TOPIC_0000001176758563__li12531140102311">当CPU指标设置为%user且有状态为Busy的CPU核时，页面右边可设置相关参数的阈值并查看详情，页面下方为进程/线程性能优化建议拓扑树图。<div class="fignone" id="ZH-CN_TOPIC_0000001176758563__fig2537150171514"><span class="figcap"><b>图7 </b>进程/线程性能优化建议拓扑树</span><br><span><img id="ZH-CN_TOPIC_0000001176758563__image1353845019152" src="zh-cn_image_0000001145978612.png" height="282.2925" width="523.6875"></span></div>
+<p id="ZH-CN_TOPIC_0000001176758563__p169095491213"></p>
+<p id="ZH-CN_TOPIC_0000001176758563__p1292318502213"><a href="#ZH-CN_TOPIC_0000001176758563__table292315018217">表2</a>描述了阈值设置区域的参数。</p>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001176758563__table292315018217"></a><a name="table292315018217"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001176758563__table292315018217" frame="border" border="1" rules="all"><caption><b>表2 </b>阈值设置区域参数说明</caption><colgroup><col style="width:30%"><col style="width:70%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001176758563__row1192365072117"><th align="left" class="cellrowborder" valign="top" width="30%" id="mcps1.3.2.2.3.2.1.1.4.2.3.1.1"><p id="ZH-CN_TOPIC_0000001176758563__p9923950142115">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="70%" id="mcps1.3.2.2.3.2.1.1.4.2.3.1.2"><p id="ZH-CN_TOPIC_0000001176758563__p1692375082113">描述</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001176758563__row13468123915177"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p7468539111713"><span style="color:#616161;">cpu亲和性</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p1468153991717"><span style="color:#666666;">CPU亲和性配置。</span></p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row724335418175"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p1424311548173"><span style="color:#616161;">内存亲和性</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p1624355418172"><span style="color:#666666;">内存亲和性配置。</span></p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row207788114184"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p167781818185"><span>并发数</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p1577891121818">并发数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row76111989182"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p1461118161814"><span style="color:#616161;">branch miss rate (%)</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p754318451659">CPU运行指令分支缺失率。取值为1~100的正整数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row13723016191817"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p47232161185"><span style="color:#616161;">L1-dcache miss rate (%)</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p1154354514511">L1数据缓存缺失率。取值为1~100的正整数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row84437274187"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p84441327171812"><span style="color:#616161;">L1-icache miss rate (%)</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p1254315454513">L1指令缓存缺失率。取值为1~100的正整数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row1659138171811"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p146591638141817"><span style="color:#616161;">dTLB cache miss rate (%)</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p954304515515">数据TLB缓存缺失率。取值为1~100的正整数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row11971114617185"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p5971134610185"><span style="color:#616161;">iTLB cache miss rate (%)</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p954320451355">指令TLB缓存缺失率。取值为1~100的正整数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row18924450152117"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p10924125011214">fault/s</p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p45431945352">每秒系统产生的缺页数。取值为任意正整数。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p id="ZH-CN_TOPIC_0000001176758563__p358514122511"><a href="#ZH-CN_TOPIC_0000001176758563__table152119133314">表3</a>描述了进程/线程性能优化建议拓扑树图上的主要节点。</p>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001176758563__table152119133314"></a><a name="table152119133314"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001176758563__table152119133314" frame="border" border="1" rules="all"><caption><b>表3 </b>进程/线程性能优化建议拓扑树图一级节点</caption><colgroup><col style="width:30%"><col style="width:70%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001176758563__row45291993316"><th align="left" class="cellrowborder" valign="top" width="30%" id="mcps1.3.2.2.3.2.1.1.6.2.3.1.1"><p id="ZH-CN_TOPIC_0000001176758563__p1252719113312">节点</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="70%" id="mcps1.3.2.2.3.2.1.1.6.2.3.1.2"><p id="ZH-CN_TOPIC_0000001176758563__p45213193331">描述</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001176758563__row129262049225"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p492694162211"><span style="color:#666666;">进程及其线程存在在不同NUMA NODE间切换</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p99017353264">一个进程在执行的过程中，在不同的numa node上进行切换</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row16549164672118"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p25492046162114"><span style="color:#222222;">进程/线程跨DIE或跨片访问内存</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p17549174622113">cpu跨片/跨DIE访问内存比例高。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row77811536132118"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p1178118368219"><span style="color:#222222;">并发度：并发度少</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p15837115692714">进程的线程数小于6。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row44531424132117"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p12453324132111"><span style="color:#222222;">Branch：Branch Miss高</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p134531241219">指令运行分支缺失次数较多</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row1318218852113"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p91821782217"><span style="color:#222222;">Cache：Cache Miss高</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p16782193804515">当运算器需要从存储器中提取数据时，它首先在最高级的cache中寻找然后在次高级的cache中寻找。如果在cache中找到，则称为命中hit；反之，则称为不命中miss。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row178481256182017"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p14848356132012"><span style="color:#222222;">TLB：TLB Miss高</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p4848135612019">当需要访问的虚拟内存，不在TLB当中时，我们称之为TLB Miss。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row4829133152012"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p8829203392013"><span style="color:#222222;">内存：page fault高</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p1682963342019">内存产生的缺页数高。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row1860662013203"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p4606182013201"><span style="color:#222222;">JVM：JVM消耗CPU高</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p146063206206">JVM消耗的CPU资源过高。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row7727122216335"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p16384145613515">编译：编译器及编译选项</p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p183841056103514">编译器及编译的选项。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row1418318231332"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p838415633515">内存访问能力评估：采用访存分析功能分析</p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p17384185614355">分析内存的访存相关能力。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row9607152310338"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p203841256103517">热点函数分析：分析TOP热点函数</p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.1.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p9384556203514">分析系统或进程的热点函数。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p id="ZH-CN_TOPIC_0000001176758563__p113874018366">针对<a href="#ZH-CN_TOPIC_0000001176758563__table152119133314">表3</a>中列出的每个问题，可以单击节点查看问题详情并单击下一级节点查看对应的优化建议。</p>
+</li><li id="ZH-CN_TOPIC_0000001176758563__li153911940152415">当CPU指标设置为%sys且有状态为Busy的CPU核时，页面右边可设置相关参数的阈值并查看详情，页面下方为进程/线程性能优化建议拓扑树图。<div class="fignone" id="ZH-CN_TOPIC_0000001176758563__fig1539115408246"><span class="figcap"><b>图8 </b>进程/线程性能优化建议拓扑树</span><br><span><img id="ZH-CN_TOPIC_0000001176758563__image739174017249" src="zh-cn_image_0000001146138416.png" height="281.295" width="523.6875"></span></div>
+<p id="ZH-CN_TOPIC_0000001176758563__p1039184019249"></p>
+<p id="ZH-CN_TOPIC_0000001176758563__p1239174014241"><a href="#ZH-CN_TOPIC_0000001176758563__table14391640132416">表4</a>描述了阈值设置区域的参数。</p>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001176758563__table14391640132416"></a><a name="table14391640132416"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001176758563__table14391640132416" frame="border" border="1" rules="all"><caption><b>表4 </b>阈值设置区域参数说明</caption><colgroup><col style="width:30%"><col style="width:70%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001176758563__row10391154015247"><th align="left" class="cellrowborder" valign="top" width="30%" id="mcps1.3.2.2.3.2.1.2.4.2.3.1.1"><p id="ZH-CN_TOPIC_0000001176758563__p539118403244">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="70%" id="mcps1.3.2.2.3.2.1.2.4.2.3.1.2"><p id="ZH-CN_TOPIC_0000001176758563__p139174022416">描述</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001176758563__row17391134002411"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p8391154012417">应用上下文切换</p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p83911240152412">上下文切换指的是内核（操作系统的核心）在CPU上对进程或者线程进行切换。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row7391124020244"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p1039194011249">应用系统调用</p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p15392174010241">一次系统调用的过程，其实是发生了两次 CPU 上下文切换（用户态-内核态-用户态）。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row939294042418"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p11392174012417">进程majflt/s</p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p639214010246">每秒钟产生的主缺页数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row1039210408246"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.2.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p43921740172415"><span style="color:#616161;">内存消耗 (%)</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.2.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p20392124013245">内存占用高，占比超过30%。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p id="ZH-CN_TOPIC_0000001176758563__p93921340172411"><a href="#ZH-CN_TOPIC_0000001176758563__table12392114032411">表5</a>描述了进程/线程性能优化建议拓扑树图上的主要节点。</p>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001176758563__table12392114032411"></a><a name="table12392114032411"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001176758563__table12392114032411" frame="border" border="1" rules="all"><caption><b>表5 </b>进程/线程性能优化建议拓扑树图一级节点</caption><colgroup><col style="width:30%"><col style="width:70%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001176758563__row193926402246"><th align="left" class="cellrowborder" valign="top" width="30%" id="mcps1.3.2.2.3.2.1.2.6.2.3.1.1"><p id="ZH-CN_TOPIC_0000001176758563__p133926407248">节点</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="70%" id="mcps1.3.2.2.3.2.1.2.6.2.3.1.2"><p id="ZH-CN_TOPIC_0000001176758563__p139204072410">描述</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001176758563__row12392340132419"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.2.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p9392340122413"><span style="color:#222222;">调度开销：上下文切换次数高</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.2.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p53926404248">上下文切换次数过多，会导致耗费大量CPU资源，降低性能。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row1939215407243"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.2.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p11392440112410"><span style="color:#222222;">SWAP：majflt/s高</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.2.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p8392340142412">每秒钟产生的主缺页数过高。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row15392154015246"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.2.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p16392640122420"><span style="color:#222222;">热点函数分析：分析TOP热点函数</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.2.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p9392154014245">分析系统或进程的热点函数。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p id="ZH-CN_TOPIC_0000001176758563__p73930401244">针对<a href="#ZH-CN_TOPIC_0000001176758563__table12392114032411">表5</a>中列出的每个问题，可以单击节点查看问题详情并单击下一级节点查看对应的优化建议。</p>
+</li><li id="ZH-CN_TOPIC_0000001176758563__li198401548112417">当CPU指标设置为%cpu且有状态为Busy的CPU核时，页面右边可设置相关参数的阈值并查看详情，页面下方为进程/线程性能优化建议拓扑树图。<div class="fignone" id="ZH-CN_TOPIC_0000001176758563__fig10840174819242"><span class="figcap"><b>图9 </b>进程/线程性能优化建议拓扑树</span><br><span><img id="ZH-CN_TOPIC_0000001176758563__image158401048152418" src="zh-cn_image_0000001192218261.png" height="283.29" width="523.6875"></span></div>
+<p id="ZH-CN_TOPIC_0000001176758563__p484014872414"></p>
+<p id="ZH-CN_TOPIC_0000001176758563__p784018484241"><a href="#ZH-CN_TOPIC_0000001176758563__table1184024892418">表6</a>描述了阈值设置区域的参数。</p>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001176758563__table1184024892418"></a><a name="table1184024892418"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001176758563__table1184024892418" frame="border" border="1" rules="all"><caption><b>表6 </b>阈值设置区域参数说明</caption><colgroup><col style="width:30%"><col style="width:70%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001176758563__row4840164813242"><th align="left" class="cellrowborder" valign="top" width="30%" id="mcps1.3.2.2.3.2.1.3.4.2.3.1.1"><p id="ZH-CN_TOPIC_0000001176758563__p8840348122415">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="70%" id="mcps1.3.2.2.3.2.1.3.4.2.3.1.2"><p id="ZH-CN_TOPIC_0000001176758563__p18840154810247">描述</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001176758563__row2840248152417"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.3.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p08401748112416"><span style="color:#616161;">每秒平均系统调用</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.3.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p16840204819241">应用每秒调用系统函数的次数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row9840204810249"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.3.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p3840164812249"><span style="color:#616161;">网络收发吞吐量</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.3.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p184013483243">单位时间内通过某个网络（或信道、接口）的数据量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row20840104815242"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.3.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p4840848102418">应用每秒读大小</p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.3.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p10840748192415">进程每秒从硬盘读取的数据量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row48401548102417"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.3.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p684094819246"><span style="color:#616161;">应用每秒写大小</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.3.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p384024872419">进程每秒向硬盘写入的数据量。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row2840104815245"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.3.4.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p17840164802410"><span style="color:#616161;">应用IO延迟</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.3.4.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p384064820246"><span style="color:#222222;">块</span><span style="color:#222222;"> I/O </span><span style="color:#222222;">延迟（</span><span style="color:#222222;">iodelay</span><span style="color:#222222;">），包括等待同步块</span><span style="color:#222222;"> I/O </span><span style="color:#222222;">和换入块</span><span style="color:#222222;"> I/O </span><span style="color:#222222;">结束的时间，单位是时钟周期。</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p id="ZH-CN_TOPIC_0000001176758563__p584144819248"><a href="#ZH-CN_TOPIC_0000001176758563__table1484110485241">表7</a>描述了进程/线程性能优化建议拓扑树图上的主要节点。</p>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001176758563__table1484110485241"></a><a name="table1484110485241"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001176758563__table1484110485241" frame="border" border="1" rules="all"><caption><b>表7 </b>进程/线程性能优化建议拓扑树图一级节点</caption><colgroup><col style="width:30%"><col style="width:70%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001176758563__row1284134882413"><th align="left" class="cellrowborder" valign="top" width="30%" id="mcps1.3.2.2.3.2.1.3.6.2.3.1.1"><p id="ZH-CN_TOPIC_0000001176758563__p3841184810245">节点</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="70%" id="mcps1.3.2.2.3.2.1.3.6.2.3.1.2"><p id="ZH-CN_TOPIC_0000001176758563__p1884114842414">描述</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001176758563__row984118488247"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.3.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p584113486245"><span style="color:#222222;">任务阻塞：阻塞式的系统调用多</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.3.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p17841154811245">阻塞式的系统调用会导致性能下降。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row1984118485242"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.3.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p138411048182411"><span style="color:#222222;">网络IO：网络收发吞吐量和收发数量低</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.3.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p284111480240"><span style="color:#222222;">网络收发吞吐量和收发数量低</span>。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row984174862418"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.3.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p584194812242"><span style="color:#222222;">任务阻塞：采用锁与等待分析功能分析</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.3.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p18463207512">进入系统性能分析，采用锁与等待分析，确定性能瓶颈。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001176758563__row1484164842420"><td class="cellrowborder" valign="top" width="30%" headers="mcps1.3.2.2.3.2.1.3.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001176758563__p48413483240"><span style="color:#222222;">存储IO：进程读写存储量大或延时高</span></p>
+</td>
+<td class="cellrowborder" valign="top" width="70%" headers="mcps1.3.2.2.3.2.1.3.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001176758563__p633417587515"><span style="color:#222222;">进程读写存储量大或延时高。</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p id="ZH-CN_TOPIC_0000001176758563__p3841104812416">针对<a href="#ZH-CN_TOPIC_0000001176758563__table1484110485241">表7</a>中列出的每个问题，可以单击节点查看问题详情并单击下一级节点查看对应的优化建议。</p>
+</li></ul>
+</p></li><li id="ZH-CN_TOPIC_0000001176758563__li1788212282614"><span>根据优化建议拓扑树，进行调优设置。</span><p><ol type="a" id="ZH-CN_TOPIC_0000001176758563__ol149120473019"><li id="ZH-CN_TOPIC_0000001176758563__li39234163018">查看分析结果页面的优化建议拓扑树图，单击根据配置条件<span><img id="ZH-CN_TOPIC_0000001176758563__zh-cn_topic_0000001130798882_image102291941366" src="zh-cn_image_0000001145866444.png" width="26.080502000000003" height="26.068000000000005"></span>，单击<span><img id="ZH-CN_TOPIC_0000001176758563__zh-cn_topic_0000001130798882_image1545302274519" src="zh-cn_image_0000001145861258.png" width="24.550337000000003" height="25.748002000000003"></span>选择对应的调优建议。<div class="fignone" id="ZH-CN_TOPIC_0000001176758563__zh-cn_topic_0000001130798882_fig460235795011"><span class="figcap"><b>图10 </b>优化建议拓扑树图</span><br><span><img id="ZH-CN_TOPIC_0000001176758563__zh-cn_topic_0000001130798882_image96027575507" src="zh-cn_image_0000001191942091.png" height="316.20750000000004" width="523.6875"></span></div>
+</li><li id="ZH-CN_TOPIC_0000001176758563__li221317417301">查看右侧调优建议中的相关配置、指标说明、优化建议及优化指导。单击<span><img id="ZH-CN_TOPIC_0000001176758563__zh-cn_topic_0000001130798882_image893910417140" src="zh-cn_image_0000001145868788.png" width="65.83500000000001" height="23.753002000000002"></span>确定采纳该调优建议，再次单击取消采纳该调优建议。<div class="fignone" id="ZH-CN_TOPIC_0000001176758563__zh-cn_topic_0000001130798882_fig1791211517228"><span class="figcap"><b>图11 </b>调优建议页面</span><br><span><img id="ZH-CN_TOPIC_0000001176758563__zh-cn_topic_0000001130798882_image179120518229" src="zh-cn_image_0000001145899404.png"></span></div>
+</li><li id="ZH-CN_TOPIC_0000001176758563__li1233117623118">已采纳的调优建议将会保留在关联报告中，单击页面右下角<span class="uicontrol" id="ZH-CN_TOPIC_0000001176758563__zh-cn_topic_0000001130798882_uicontrol7421959152812">“关联报告”</span>进入关联报告页面。<p id="ZH-CN_TOPIC_0000001176758563__zh-cn_topic_0000001130798882_p296043062912">关联报告页面会显示已经采纳的所有调优建议，单击任务名称可进行查看。根据采纳的调优建议是否达到预期目标，单击左下角<span class="uicontrol" id="ZH-CN_TOPIC_0000001176758563__zh-cn_topic_0000001130798882_uicontrol2038142201311">“有效”</span>和<span class="uicontrol" id="ZH-CN_TOPIC_0000001176758563__zh-cn_topic_0000001130798882_uicontrol109373681317">“无效”</span>进行确定。</p>
+<div class="fignone" id="ZH-CN_TOPIC_0000001176758563__zh-cn_topic_0000001130798882_fig14809483120"><span class="figcap"><b>图12 </b>关联报告页面</span><br><span><img id="ZH-CN_TOPIC_0000001176758563__zh-cn_topic_0000001130798882_image158034123112" src="zh-cn_image_0000001145901236.png" height="286.2825" width="523.6875"></span></div>
+</li></ol>
+</p></li><li id="ZH-CN_TOPIC_0000001176758563__li191419311510"><span>单击<span class="uicontrol" id="ZH-CN_TOPIC_0000001176758563__uicontrol16128112716525">“进程/线程性能”</span>右侧的<span><img id="ZH-CN_TOPIC_0000001176758563__image0414425536" src="zh-cn_image_0000001189710907.png"></span>查看进程/线程性能详细数据。</span><p><div class="fignone" id="ZH-CN_TOPIC_0000001176758563__fig1010610281911"><span class="figcap"><b>图13 </b>查看进程/线程性能详细数据</span><br><span><img id="ZH-CN_TOPIC_0000001176758563__image2106202810920" src="zh-cn_image_0000001143825272.png" height="280.2975" width="523.6875"></span></div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001129506030.html">查看分析结果</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

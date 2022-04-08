@@ -1,0 +1,62 @@
+<div class="queue-packet-loss" id="queue-packet">
+  <ti-table 
+    [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns"
+    [searchWords]="searchWords" [searchKeys]="searchKeys"
+  >
+    <div class="ti3-table-fixed-head">
+      <table>
+        <thead>
+          <tr>
+            <th tiOverflow *ngFor="let column of columns;index as index" width="{{column.width}}"
+             [ngStyle]="{'padding-left': index === 0?'24px':'10px'}">
+              <ti-cell-text>{{ column.title }}</ti-cell-text>
+              <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey" [compareFn]="sortTableFn"></ti-head-sort>
+              <ng-container *ngIf="column.searchShow" class="searchIcon">
+                <ng-container *ngTemplateOutlet="searchTipContent; context: {$implicit: column}"></ng-container>
+              </ng-container>
+            </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <div class="ti3-table-container ti3-resize-wrapper" hyNodata [nodataShow]="!displayed.length">
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let column of columns" width="{{column.width}}"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of displayed;">
+            <ng-container *ngFor="let column of columns; index as i">
+              <td tiOverflow>{{ row[column.prop] }}</td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ti-pagination
+      *ngIf="totalNumber > 10"
+      class="pagination"
+      [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber"
+      [showGotoLink]="true"
+    ></ti-pagination>
+  </ti-table>
+</div>
+
+<!-- 搜索 tip 弹框 -->
+<ng-template #searchTipContent let-column>
+  <ti-icon name="search" class="search-icon" [ngClass]="{'active': processSearchPop.isShow}" 
+      [pop]="searchTip" #processSearchPop="pop" [popOffset]="{x: -40, y: 24 }" popClass="common-table-search-pop"
+      [popContext]="column">
+  </ti-icon>
+
+  <ng-template #searchTip let-context="context">
+      <ti-searchbox
+        [(ngModel)]="searchWord"
+        (ngModelChange)="searchValueChange($event)">
+      </ti-searchbox>
+  </ng-template>
+</ng-template>

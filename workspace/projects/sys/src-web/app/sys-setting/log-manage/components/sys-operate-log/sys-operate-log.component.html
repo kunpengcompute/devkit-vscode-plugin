@@ -1,0 +1,59 @@
+<div class="operateLogBox" [appLoading]="isLoading">
+  <!-- 下载日志按钮 -->
+  <div class="downloadBtnBox">
+    <button tiButton type="button" class="downloadBtn" [disabled]="srcData.data.length === 0" (click)="downLoadLog()">
+      {{ i18n.operationLog.downLoadLog }}
+    </button>
+    <span class="tip">{{  role === 'Admin' ? i18n.operationLog.adminDownLoadLogTip : i18n.operationLog.downLoadLogTip  }}</span>
+  </div>
+
+  <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns" tiColsResizable (stateUpdate)="logUpdate($event)">
+    <div class="ti3-table-fixed-head">
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let column of columns" tiOverflow width="{{ column.width }}">{{ column.title }}</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <div class="ti3-table-container ti3-resize-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let column of columns" tiOverflow width="{{ column.width }}"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let row of displayed; let index = index">
+            <td tiOverflow tiTipPosition="left">{{ row.username }}</td>
+            <td tiOverflow tiTipPosition="left">{{ row.module_type }}</td>
+            <td tiOverflow tiTipPosition="left">
+              <span class="status-icon" [ngClass]="statusFormat(row.result)"></span>
+              <span>{{ row.result }}</span>
+            </td>
+            <td tiOverflow tiTipPosition="left">{{ row.ipaddr === '-'? '--': row.ipaddr }}</td>
+            <td tiOverflow tiTipPosition="left">{{ row.Time | timeProcess}}</td>
+            <td tiOverflow tiTipPosition="left">{{ row.information }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 无数据 -->
+      <div *ngIf="!displayed.length && !isLoading" class='chen-nodata-td unsetPosition'>
+        <img src='./assets/img/projects/nodata.png' />
+        <div>{{ i18n.common_term_task_nodata }}</div>
+      </div>
+    </div>
+
+    <ti-pagination
+      [(currentPage)]="pageNo"
+      [pageSize]="pageSize"
+      [(totalNumber)]="total"
+      [autoHide]="true"
+      [showGotoLink]="true"
+    ></ti-pagination>
+  </ti-table>
+</div>

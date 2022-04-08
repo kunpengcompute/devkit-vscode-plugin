@@ -1,0 +1,62 @@
+<div class="hpc-summary-detial">
+  <app-hpc-expand-tree id="tree" [data]="summaryDetailData">
+    <ng-template let-item let-i="index">
+      <ng-container *ngIf="item.name !== 'parallel' && item.name !== 'serial'">
+
+        <!-- 没有表格 -->
+        <ng-container *ngIf="!item.showTable">
+          <span>{{ item.name }}<span *ngIf="item.value">{{i18n.common_term_sign_colon}}</span></span>
+          <span>{{ item.value }}</span>
+        </ng-container>
+
+        <!-- 展开显示表格 -->
+        <ng-container *ngIf="item.showTable">
+
+          <!-- Hotspots表格 -->
+          <ng-container *ngIf="item.name === 'hotSpotTable'">
+            <div>
+              <ti-select id="myselect" [options]='facetOptions' [(ngModel)]="currentFacet" (select)="onSelect($event)"
+                valueKey='label' class="hot-spot-select">
+              </ti-select>
+              <app-common-table [commonTableData]="hotSpotsTable">
+                <ng-template let-displayed let-columns="columns">
+                  <tbody>
+                    <ng-container *ngFor="let row of displayed">
+                      <tr>
+                        <ng-container *ngFor="let column of columns">
+                          <ng-container *ngIf="column.key === 'index_name' else other">
+                            <td tiOverflow>{{row[column.key] || '--'}}</td>
+                          </ng-container>
+                          <ng-template #other>
+                            <td tiOverflow>{{ row[column.key] | thousandSeparator }}</td>
+                          </ng-template>
+                        </ng-container>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </ng-template>
+              </app-common-table>
+            </div>
+          </ng-container>
+
+          <!-- 串行时间表格 -->
+          <ng-container *ngIf="item.name === topSerialHotspots">
+            <div>
+              <div class="table-title">{{topSerialHotspots}}</div>
+              <app-common-table [commonTableData]="serialTable"></app-common-table>
+            </div>
+          </ng-container>
+
+          <!-- 不平衡时间表格 -->
+          <ng-container *ngIf="item.name === topParallelHotspots">
+            <div>
+              <div class="table-title">{{topParallelHotspots}}</div>
+              <app-common-table [commonTableData]="parallelTable"></app-common-table>
+            </div>
+          </ng-container>
+
+        </ng-container>
+      </ng-container>
+    </ng-template>
+  </app-hpc-expand-tree>
+</div>

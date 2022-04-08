@@ -1,0 +1,82 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Enabling a Log Level to Obtain GC Logs">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001179041524.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (Java Profiler)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001224201301">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Enabling a Log Level to Obtain GC Logs</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001224201301"></a><a name="EN-US_TOPIC_0000001224201301"></a>
+
+<h1 class="topictitle1">Enabling a Log Level to Obtain GC Logs</h1>
+<div id="body0000001113657632"><p id="EN-US_TOPIC_0000001224201301__p5936137121716">If no data is obtained on the GC log page, check whether the corresponding log level is enabled. That is, add parameters when starting the Java process. After the log level is enabled, you can view the log data. <a href="#EN-US_TOPIC_0000001224201301__table799415487276">Log levels</a> describe the log levels.</p>
+<div class="note" id="EN-US_TOPIC_0000001224201301__note262155012179"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><ul id="EN-US_TOPIC_0000001224201301__ul2090519445519"><li id="EN-US_TOPIC_0000001224201301__li17905044185114">If Java 8 is used, add the <strong id="EN-US_TOPIC_0000001224201301__b1992365944412">-XX:+UseG1GC</strong> parameter when starting the process.</li><li id="EN-US_TOPIC_0000001224201301__li13998194614515">For details about the parameter format in Java 9 and later, visit <a href="http://openjdk.java.net/jeps/158" target="_blank" rel="noopener noreferrer">http://openjdk.java.net/jeps/158</a>.</li></ul>
+</div></div>
+
+<div class="tablenoborder"><a name="EN-US_TOPIC_0000001224201301__table799415487276"></a><a name="table799415487276"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0000001224201301__table799415487276" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Log levels</caption><colgroup><col style="width:10.12%"><col style="width:30.98%"><col style="width:58.9%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0000001224201301__row169951048142714"><th align="left" class="cellrowborder" valign="top" width="10.12%" id="mcps1.3.3.2.4.1.1"><p id="EN-US_TOPIC_0000001224201301__p2923567223">Java Version</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="30.98%" id="mcps1.3.3.2.4.1.2"><p id="EN-US_TOPIC_0000001224201301__p10995184817271">Log Level</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="58.9%" id="mcps1.3.3.2.4.1.3"><p id="EN-US_TOPIC_0000001224201301__p1099544872717">Data Available</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0000001224201301__row0995174842717"><td class="cellrowborder" rowspan="2" valign="top" width="10.12%" headers="mcps1.3.3.2.4.1.1 "><p id="EN-US_TOPIC_0000001224201301__p18647141813228">Java 8</p>
+</td>
+<td class="cellrowborder" valign="top" width="30.98%" headers="mcps1.3.3.2.4.1.2 "><p id="EN-US_TOPIC_0000001224201301__p49951048132714">-verbose:gc</p>
+</td>
+<td class="cellrowborder" valign="top" width="58.9%" headers="mcps1.3.3.2.4.1.3 "><p id="EN-US_TOPIC_0000001224201301__p13995104818271">No data is available in the linearity, GC phases, eden zone, survivor zone, and metadata zone.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001224201301__row189951148132710"><td class="cellrowborder" valign="top" headers="mcps1.3.3.2.4.1.1 "><p id="EN-US_TOPIC_0000001224201301__p1699519486278">-XX:+PrintGCDetails</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.3.2.4.1.2 "><p id="EN-US_TOPIC_0000001224201301__p8995134818273">All data can be displayed. Full GC events are recorded only when they exist in the metadata zone.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001224201301__row16995164814276"><td class="cellrowborder" rowspan="5" valign="top" width="10.12%" headers="mcps1.3.3.2.4.1.1 "><p id="EN-US_TOPIC_0000001224201301__p1663132517222">Java 9 and later</p>
+</td>
+<td class="cellrowborder" rowspan="3" valign="top" width="30.98%" headers="mcps1.3.3.2.4.1.2 "><p id="EN-US_TOPIC_0000001224201301__p29953482272">-Xlog:gc*=info</p>
+</td>
+<td class="cellrowborder" valign="top" width="58.9%" headers="mcps1.3.3.2.4.1.3 "><p id="EN-US_TOPIC_0000001224201301__p199584822711">The <strong id="EN-US_TOPIC_0000001224201301__b324453814472">GC</strong> tab page displays GC pause and heap change information.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001224201301__row15995548122714"><td class="cellrowborder" valign="top" headers="mcps1.3.3.2.4.1.1 "><p id="EN-US_TOPIC_0000001224201301__p18996134811273">The <strong id="EN-US_TOPIC_0000001224201301__b1568433364715">GC</strong> and <strong id="EN-US_TOPIC_0000001224201301__b31391036184719">CPU</strong> tab pages display the linearity information.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001224201301__row89967480271"><td class="cellrowborder" valign="top" headers="mcps1.3.3.2.4.1.1 "><p id="EN-US_TOPIC_0000001224201301__p149961348182713">The <strong id="EN-US_TOPIC_0000001224201301__b22441143114714">GC</strong> and <strong id="EN-US_TOPIC_0000001224201301__b6156124618477">Marking</strong> tab pages display the parallel phase information.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001224201301__row1099616485275"><td class="cellrowborder" rowspan="2" valign="top" headers="mcps1.3.3.2.4.1.1 "><p id="EN-US_TOPIC_0000001224201301__p112841144610">-Xlog:gc*=debug</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.3.2.4.1.2 "><p id="EN-US_TOPIC_0000001224201301__p149961948112719">The <strong id="EN-US_TOPIC_0000001224201301__b32442714482">GC</strong> and <strong id="EN-US_TOPIC_0000001224201301__b1715171184818">Heap</strong> tab pages display the memory changes of the eden, survivor, and metaspace.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001224201301__row1699618480279"><td class="cellrowborder" valign="top" headers="mcps1.3.3.2.4.1.1 "><p id="EN-US_TOPIC_0000001224201301__p399664832715">The <strong id="EN-US_TOPIC_0000001224201301__b298024224818">Phases</strong> tab page displays details about the GC pauses.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001179041524.html">Common Operations</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

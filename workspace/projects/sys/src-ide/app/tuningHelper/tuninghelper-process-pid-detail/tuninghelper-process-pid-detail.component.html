@@ -1,0 +1,4 @@
+<div class="pid-detail-container">
+    <app-runing-process-detail *ngIf="message.showIndicatorInfo" [message]="message"></app-runing-process-detail>
+    <app-process-app-pid-detail *ngIf="!message.showIndicatorInfo" [message]="message"></app-process-app-pid-detail>
+</div>

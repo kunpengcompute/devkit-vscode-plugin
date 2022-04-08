@@ -1,0 +1,41 @@
+<div class="warpper">
+    <form [formGroup]="ppFormGroup">
+        <div class="process-item">
+            <div class="item-checkbox">
+                <!-- 进程名 checbox -->
+                <input type="checkbox" tiCheckbox tiValidation formControlName="processCheck"
+                    [label]="i18n.mission_create.process_alias">
+            </div>
+            <div class="item-input" [hidden]="!ctl.processCheck.value">
+                <ti-formfield [labelWidth]="labelWidth">
+                    <ti-item [label]="i18n.mission_create.process_name" [required]="true">
+                        <!-- 进程名输入框 -->
+                        <input type="text" tiText tiValidation formControlName="processInput"
+                            [placeholder]="i18n.mission_create.process_input_placeholder" [tiValidation]='validation'
+                            [errorMessageWrapper]='processErrorMsgWrapper' [ngStyle]="{'width': inputWidth}"
+                        >
+                        <div #processErrorMsgWrapper></div>
+                    </ti-item>
+                </ti-formfield>
+            </div>
+        </div>
+        <div class="pid-item">
+            <div class="item-checkbox">
+                <!-- Pid checkbox -->
+                <input type="checkbox" tiCheckbox tiValidation formControlName="pidCheck" [label]="'PID'">
+            </div>
+            <div class="item-input" [hidden]="!ctl.pidCheck.value">
+                <ti-formfield [labelWidth]="labelWidth">
+                    <ti-item [label]="'PID'" [required]="true">
+                        <!-- Pid 输入框 -->
+                        <input type="text" tiText tiValidation formControlName="pidInput"
+                            [placeholder]="i18n.mission_create.pid_input_placeholder" [tiValidation]='validation'
+                            [errorMessageWrapper]='pidErrorMsgWrapper' [ngStyle]="{'width': inputWidth}"
+                        >
+                        <div #pidErrorMsgWrapper></div>
+                    </ti-item>
+                </ti-formfield>
+            </div>
+        </div>
+    </form>
+</div>

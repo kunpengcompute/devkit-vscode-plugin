@@ -1,0 +1,39 @@
+.overview-container {
+
+  .database-tab {
+    margin: 10px 0px 20px;
+    font-size: 14px;
+    border-bottom: 1px solid #DFE1E6;
+      .item-tab {
+        padding: 0 12px;
+        border-right: 1px solid #E1E6EE;
+        color: #616161;
+          .tab-title {
+              display: inline-block;
+              padding: 7px 0;
+              cursor: pointer;
+              border-bottom: 2px solid transparent;
+              box-sizing: border-box;
+          }
+
+          .tab-active {
+            color: #0067FF !important;
+            border-bottom: 3px solid #0067FF;
+          }
+      }
+      .item-tab:last-child{
+        border-right: none;
+        }
+        .item-tab:hover{
+            color: #222222;
+        }
+      .item-tab:nth-of-type(1) {
+          padding-left: 0;
+      }
+
+
+  }
+}
+.show{
+  display: none;
+}

@@ -1,0 +1,697 @@
+// 性能分析工具设置页面样式
+.sysPerfSet {
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    background-attachment: fixed;
+    width: 100%;
+    position: relative;
+
+    // 左侧菜单样式
+    .left {
+        width: 160px;
+        height: 100%;
+        box-sizing: border-box;
+        margin-left: 80px;
+        position: relative;
+        padding-top: 40px;
+        margin-right: 40px;
+
+        .clickindex {
+            cursor: pointer;
+            width: 160px;
+            font-size: 16px;
+            padding-bottom: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--clickindex-fontcolor) !important;
+        }
+    }
+
+    // 右侧内容区样式
+    .right {
+        height: 100vh;
+        width: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        box-sizing: border-box;
+        position: relative;
+        padding: 40px 80px 0 40px;
+
+        .titleset {
+            font-size: 20px;
+            padding-bottom: 30px;
+            cursor: default;
+            color: var(--color-titleset) !important;
+        }
+
+        .leftBox {
+            background-color: var(--leftBox-bg-color) !important;
+            border-right: 1px solid #0067ff;
+        }
+
+        .rightBox {
+            background-color: var(--rightBox-bg-color) !important;
+            color: var(--box-font-color) !important;
+        }
+
+        .middle-font {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 20px;
+            color: var(--color-middle-font) !important;
+        }
+
+        .aLink {
+            text-decoration: none;
+            outline: none;
+            color: #0067ff;
+            cursor: pointer;
+        }
+
+        .aLink:hover {
+            color: #267dff;
+        }
+
+        .aLink:active {
+            color: #0057d9;
+        }
+
+        .inputstyle-select {
+            margin-right: 10px !important;
+            width: 400px !important;
+            margin-top: 10px;
+            vertical-align: bottom;
+            border: 1px solid #888888 !important;
+        }
+
+        .inputstyle-select:focus {
+            border: 1px solid #0067ff !important;
+        }
+
+        .inputstyle-select:hover {
+            border: 1px solid #0067ff !important;
+        }
+
+        .inputstyle-select-disable {
+            margin-right: 10px !important;
+            width: 400px !important;
+            margin-top: 10px;
+            vertical-align: bottom;
+            background-color: var(--color-inputstyle-select-disable) !important;
+
+            ::ng-deep .ti3-overflow-padding {
+                color: var(--color-inputstyle-select-disable-font) !important;
+            }
+        }
+
+        // 预约任务管理表格
+        .ti3-table {
+            height: unset;
+            max-height: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .ti3-table-fixed-head {
+                flex: none;
+
+                table > thead > tr > th {
+                    color: var(--color-head-font);
+                    background-color: var(--color-head-background) !important;
+                }
+            }
+
+            .ti3-table-container {
+                flex: 1;
+
+                table > tbody > tr > td {
+                    color: var(--color-body-font);
+                    background-color: var(--color-body-background) !important;
+                }
+            }
+        }
+    }
+}
+
+.little-primary-btn {
+    margin-right: 10px !important;
+}
+
+::ng-deep
+    .ti3-table
+    > .ti3-resize-wrapper
+    > table
+    > tbody
+    > tr
+    > td
+    .ti3-toggle-details,
+::ng-deep
+    .ti3-table
+    > .ti3-table-container
+    > table
+    > tbody
+    > tr
+    > td
+    .ti3-toggle-details {
+    outline: none !important;
+}
+
+.ti3-table tr:hover {
+    background-color: var(--color-tr-hover) !important;
+}
+
+::ng-deep .ti3-table .ti3-table-container tr:hover {
+    background-color: var(--color-tr-hover) !important;
+}
+
+::ng-deep .ti3-table tr:hover {
+    background-color: var(--color-tr-hover) !important;
+}
+
+.ti3-page-container {
+    margin-top: 20px !important;
+}
+
+// pagination分页样式调整
+::ng-deep {
+    ti-pagination > ti-select {
+        height: 24px !important;
+        background-color: var(--d-313131-l-ffffff) !important;
+
+        &:focus {
+            border-color: #747474 !important;
+        }
+
+        &:hover {
+            border-color: #747474 !important;
+        }
+    }
+
+    // 总条数
+    .ti3-pag-total-items {
+        color: var(--d-aaaaaa-l-222222) !important;
+        float: left !important;
+        font-family: FZLTHJW--GB1-0 !important;
+        font-size: 12px !important;
+    }
+
+    // 翻页
+    .ti3-pag-next,
+    .ti3-pag-prev {
+        color: var(--d-aaaaaa-l-222222) !important;
+        background-color: inherit !important;
+        width: 22px !important;
+        height: 22px !important;
+
+        &:hover,
+        &:active {
+            color: #ffffff !important;
+            background-color: var(--mc-color-page-bg-hover) !important;
+        }
+
+        &.disabled {
+            color: var(--mc-color-page-bg-disabled) !important;
+            background-color: inherit !important;
+        }
+    }
+
+    // 页数
+    .ti3-pag-page {
+        color: var(--d-aaaaaa-l-222222) !important;
+        display: inline-block;
+        cursor: pointer;
+        text-decoration: none;
+        vertical-align: middle;
+        text-align: center;
+        font-family: FZLTHJW--GB1-0 !important;
+        font-size: 12px !important;
+        border-radius: 2px !important;
+
+        &:hover {
+            background-color: var(--mc-color-page-bg-hover) !important;
+            color: var(--mc-color-page-hover) !important;
+        }
+
+        // 当前选中
+        &.active {
+            background-color: var(--mc-color-page-bg-active) !important;
+            color: var(--mc-color-page-hover) !important;
+        }
+
+        &:disabled {
+            background-color: var(--mc-color-page-bg-disabled) !important;
+            color: var(--mc-color-page-bg-disabled);
+        }
+    }
+}
+
+// 表头 CheckBox 筛选
+::ng-deep .scheduleTaskList {
+    .ti3-table-fixed-head {
+        overflow: visible !important;
+
+        & > table > thead > tr > th {
+            overflow: visible !important;
+
+            .simpleThContent {
+                display: flex;
+                align-items: center;
+
+                .ti3-cell-text-container {
+                    overflow: hidden;
+                    display: flex;
+
+                    .ti3-cell-text {
+                        max-width: 100% !important;
+                    }
+                }
+
+                .filter-box {
+                    flex-shrink: 0;
+                    position: relative;
+                    display: inline-block;
+                    padding-left: 8px;
+                    padding-top: 2px;
+
+                    .filter-icon {
+                        cursor: pointer;
+                        width: 16px;
+                        height: 16px;
+                    }
+
+                    .filter-box-list {
+                        z-index: 999;
+                        position: absolute;
+                        display: none;
+                        left: 0px;
+                        color: var(--color-middle-font) !important;
+                        background-color: var(--down-list-backcolor) !important;
+                        padding: 20px;
+                        padding: 5px 10px;
+                        border-radius: 2px;
+                        box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2),
+                            0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+                    }
+
+                    &:hover .filter-box-list {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.ti3-table {
+    .ti3-table-container {
+        table {
+            tr {
+                td {
+                    color: var(--color-body-font);
+                    background-color: var(--color-body-background) !important;
+                    border-collapse: collapse !important;
+                }
+
+                .ext_more {
+                    position: relative;
+
+                    p {
+                        margin-left: 10px;
+                    }
+
+                    span {
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    .ti3-table-container::-webkit-scrollbar-thumb {
+        border-radius: 2px !important;
+        background-color: var(--color-tb-scrollbar) !important;
+    }
+
+    .ti3-table-container::-webkit-scrollbar {
+        width: 4px !important;
+        background: var(--vscode-editor-background) !important;
+    }
+
+    .ti3-table-container::-webkit-scrollbar-track {
+        border: none !important;
+    }
+
+    .ti3-table-fixed-head {
+        table {
+            tr {
+                th {
+                    color: var(--color-head-font);
+                    background-color: var(--color-head-background) !important;
+                }
+
+                th:not(:last-child)::after {
+                    background: var(--color-head-border);
+                }
+            }
+        }
+    }
+}
+
+::ng-deep .ti3-table-fixed-head-filler {
+    background-color: var(--color-head-background) !important;
+}
+
+::ng-deep .ti3-modal-dialog {
+    margin: 0;
+}
+
+::ng-deep .ti3-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+::ng-deep .content-box {
+    height: auto !important;
+}
+
+// ti3 TiModal样式修改
+::ng-deep ti-modal-wrapper {
+    .ti3-icon.ti3-close.ti3-icon-close {
+        right: 40px;
+        top: 20px;
+
+        &:hover {
+            transform: none;
+        }
+
+        &::before {
+            content: "";
+            display: block;
+            width: 14px;
+            height: 14px;
+            margin: 3px;
+            border-radius: 2px;
+            background: linear-gradient(
+                    to top right,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 0, 0, 0) calc(50% - 1.5px),
+                    #666 50%,
+                    rgba(0, 0, 0, 0) calc(50% + 1.5px),
+                    rgba(0, 0, 0, 0) 100%
+                ),
+                linear-gradient(
+                    to bottom right,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 0, 0, 0) calc(50% - 1.5px),
+                    #666 50%,
+                    rgba(0, 0, 0, 0) calc(50% + 1.5px),
+                    rgba(0, 0, 0, 0) 100%
+                );
+        }
+    }
+
+    .ti3-modal-header {
+        padding: 20px 0 !important;
+        font-size: 20px !important;
+        color: var(--color-head-font) !important;
+        font-weight: normal !important;
+    }
+
+
+    .ti3-modal-footer {
+
+        // ti3内部按钮样式处理
+        .primary-btn {
+            border: none !important;
+            margin-right: 20px;
+        }
+
+        .cancel-btn {
+            margin: 0 !important;
+        }
+    }
+}
+
+::ng-deep app-pop-mask {
+    .content {
+        padding: 22.8px 40px 32px;
+        box-sizing: border-box;
+
+        .mask-title {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: dashed 1px #4b4b4b;
+            padding-bottom: 20px;
+            height: 20px;
+            font-size: 20px;
+            margin-bottom: -1px;
+        }
+
+        .tip_title {
+            padding-top: 24px;
+            padding-bottom: 8px;
+            font-size: 14px;
+            color: #888888;
+
+            img {
+                margin-bottom: -5px;
+                padding-right: 10px;
+            }
+        }
+
+        .incorrect {
+            position: relative;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+        }
+
+        .footer_button {
+            display: flex;
+            font-size: 12px;
+            padding-top: 40px;
+            justify-content: center;
+
+            .primary-btn {
+                border: 0px !important;
+            }
+
+            .cancel-btn {
+                width: 160px !important;
+                height: 32px !important;
+                line-height: 32px !important;
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+::ng-deep {
+    // 去除输入框聚焦后的橙色外框
+    a:focus,
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: none;
+    }
+
+    // 去除theme-ui3表格列头下边蓝色边框
+    .ti3-table > table > thead > tr > th,
+    .ti3-table > .ti3-resize-wrapper > table > thead > tr > th,
+    .ti3-table > .ti3-table-fixed-head > table > thead > tr > th,
+    .ti3-table > .ti3-table-container > table > thead > tr > th {
+        border-bottom: none;
+    }
+
+    // styles.scss中的样式修正
+    .vscode-dark,
+    .vscode-light {
+        input,
+        ti-select {
+            &.inputstyle-select-disable {
+                border-color: #747474 !important;
+            }
+        }
+
+        .ti3-drop-list-ul {
+            background-color: var(--d-313131-l-ffffff) !important;
+
+            .ti3-dropdown-option {
+                .ti3-overflow-padding {
+                    color: var(--d-aaaaaa-l-222222) !important;
+                }
+            }
+        }
+    }
+
+    // ti-ip输入框高度修正
+    ti-ip.ti_input_ip_container_ipv4 .ti_input_ip_anchor {
+        height: calc(var(--ti-input-height) - 2px) !important;
+    }
+
+    // styles.scss中的ti3-modal-body样式修正
+    .ti3-modal-body {
+        max-height: none !important;
+    }
+
+    // ti3表格样式调整
+    .ti3-table .ti3-table-container {
+        border-bottom: 0 !important;
+
+        table tr td {
+            border-bottom: none;
+        }
+    }
+}
+
+// 预约任务弹出层
+::ng-deep .batchDeleteAppointTaskModalComponent {
+    .ti3-modal-body .ti3-table {
+        padding-right: 0px !important;
+        height: unset;
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .ti3-table-fixed-head {
+            flex: none;
+
+            table > thead > tr > th {
+                color: var(--ti-default-body-bg);
+            }
+        }
+
+        .ti3-table-container {
+            flex: 1;
+
+            table > tbody > tr > td {
+                color: var(--d-aaaaaa-l-222222);
+            }
+        }
+    }
+}
+
+// 深色主题适配
+::ng-deep .vscode-dark {
+    --leftBox-bg-color: #2a2a2a;
+    --rightBox-bg-color: #161616;
+    --box-font-color: #aaaaaa;
+    --color-box-title: #e8e8e8;
+    --color-border-title: #e1e6ee;
+    --color-del-content: #888888;
+    --color-th-bg: #2a2a2a;
+    --mc-color-page-hover: #ffffff;
+    --mc-color-page-bg-disabled: #616161;
+    --color-middle-font: #aaaaaa;
+    --color-inputstyle-select-disable-font: #616161;
+    --color-inputstyle-select-disable: #313131;
+    --color-body-background: #161616;
+    --color-body-font: #aaaaaa;
+    --color-head-font: #e8e8e8;
+    --color-tb-scrollbar: #424242;
+    --color-head-background: #2a2a2a;
+    --color-head-border: #4b4b4b;
+    --color-tr-hover: #313131;
+    --clickindex-fontcolor: #aaaaaa;
+
+    .ti3-table .ti3-table-container {
+        table tr td {
+            border-color: #4b4b4b !important;
+        }
+    }
+}
+
+// 浅色主题适配
+::ng-deep .vscode-light {
+    --leftBox-bg-color: #f5f9ff;
+    --rightBox-bg-color: #aaaaaa;
+    --box-font-color: #222222;
+    --color-box-title: #222222;
+    --color-border-title: #4b4b4b;
+    --color-del-content: #616161;
+    --color-th-bg: #f5f9ff;
+    --mc-color-page-hover: #ffffff;
+    --mc-color-page-bg-disabled: #cccccc;
+    --color-middle-font: #000000;
+    --color-inputstyle-select-disable-font: #cccccc;
+    --color-inputstyle-select-disable: #f5f5f5;
+    --color-body-background: #ffffff;
+    --color-body-font: #222222;
+    --color-tb-scrollbar: #6b708b;
+    --color-head-font: #616161;
+    --color-head-background: #f5f9ff;
+    --color-head-border: #ffffff;
+    --color-tr-hover: #f5f5f5;
+    --clickindex-fontcolor: #616161;
+
+    .ti3-table .ti3-table-container {
+        table tr td {
+            border-color: #e1e6ee !important;
+        }
+    }
+}
+.tip-close {
+    display: inline-block;
+    img:hover {
+        cursor: pointer;
+    }
+    & > img {
+        display: none;
+    }
+    & > img:nth-of-type(1) {
+        display: block;
+    }
+    &:hover {
+        & > img:nth-of-type(1) {
+            display: none;
+        }
+        & > img:nth-of-type(2) {
+            display: block;
+        }
+    }
+    &:active {
+        & > img:nth-of-type(1) {
+            display: none;
+        }
+        & > img:nth-of-type(2) {
+            display: block;
+        }
+    }
+}
+.mr-20 {
+    margin-right: 20px;
+}
+
+::ng-deep .batch-opreation-class {
+    .ti3-modal-content {
+        height: 600px!important;
+        .parse {
+            .progress {
+                margin-left: 75px;
+                .statusBox {
+                    p{
+                        font-size: 14px;
+                        .vstatus-ready {
+                            width: 12px;
+                            height: 12px;
+                        }
+                    }
+                    .greyStyle {
+                        color: #e8e8e8;
+                        font-size: 14px
+                    }
+                }
+            }
+        }
+        .ti3-modal-footer {
+            .ti3-btn-middle {
+                width: 92px;
+            }
+        }
+    }
+}

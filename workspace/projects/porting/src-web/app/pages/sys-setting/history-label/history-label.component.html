@@ -1,0 +1,16 @@
+<div class="modal-dialog">
+    <div class="content flex-column">
+        <span class="create-title">{{i18n.common_term_history_label}}</span>
+        <div class="common-warpper modal-dialog-container">
+            <div class="histroy-tip-container">
+                <img src="./assets/img/home/icon_home_tip.svg" />
+                <span>{{ i18n.thresholdSettings.infoTip }}</span>
+            </div>
+            <div>
+                <app-history-label-item *ngIf="hisVal.length" [config]="hisConfig" [value]="hisVal"
+                    (confirm)="onHisConfirm($event)">
+                </app-history-label-item>
+            </div>
+        </div>
+    </div>
+</div>

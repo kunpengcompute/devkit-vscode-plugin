@@ -1,0 +1,192 @@
+.proformance {
+    padding: 20px 0;
+}
+.info-icon {
+    margin-top: 21px;
+    left: -220px;
+    color: #666;
+    position: relative;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+
+    img {
+        width: 14px;
+        height: 14px;
+        margin-right: 8px;
+    }
+}
+
+footer {
+    display: flex;
+    margin-top: 40px;
+    button {
+        height: 28px;
+        line-height: 0px;
+        margin-right: 20px;
+        min-width: 120px;
+        margin-left: 0;
+    }
+
+    button.toRight {
+        margin-left: 0 !important;
+    }
+}
+
+.footer {
+    position: absolute;
+    bottom: 24px;
+    left: calc(50% - 130px);
+}
+div.infoicon {
+    left: -10px !important;
+    margin-top: 0px;
+    top: 0px !important;
+    position: unset !important;
+    display: inherit;
+    margin-right: 120px;
+    color: #aaaaaa;
+
+    span {
+        color: #aaaaaa;
+        margin-left: 10px;
+    }
+}
+span.configuration-tool {
+    font-size: 12px;
+    float: left;
+    margin-top: 20px;
+}
+
+input.configuration-tool-text {
+    display: inline-block;
+    width: 224px;
+    margin-top: 20px;
+}
+
+::ng-deep .inffont ti-error-msg.ti3-unifyvalid-error-container {
+    margin-left: 200px;
+}
+
+.info-icon.margin-bottom.infoicon {
+    margin-left: -26px;
+}
+
+.acquisition-process {
+    display: block;
+}
+
+.margin-left-10 {
+    display: inline-block;
+    width: 350px;
+    color: var(--d-aaaaaa-l-979797);
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.vertical-align-middle {
+    vertical-align: -webkit-baseline-middle;
+}
+
+// 大数据测试工具配置文件路径 前空白
+:host .proformance ::ng-deep .ti3-form .ti3-form-label {
+    display: none;
+}
+// 创建任务页面 红星多一个
+:host .proformance ::ng-deep .ti3-form .ti3-form-require {
+    display: none;
+}
+:host .proformance ::ng-deep .ti3-form .file-path {
+    font-size: 14px;
+    display: inline-block;
+    width: 200px;
+    margin-right: 24px;
+}
+// 深色主题
+::ng-deep .vscode-dark {
+    .file-path {
+        color: #aaaaaa;
+    }
+    .file-path-text {
+        width: 335px;
+        background-color: transparent;
+    }
+}
+// 浅色主题
+::ng-deep .vscode-light {
+    .file-path {
+        color: #aaaaaa;
+    }
+    .file-path-text {
+        width: 335px;
+        background-color: transparent;
+    }
+}
+
+:host .proformance ::ng-deep .database-config {
+    input {
+        width: 400px;
+    }
+    ti-formfield .ti3-form tbody tr:nth-last-of-type(1) td .ti3-form-content {
+        margin-bottom: 0px;
+    }
+}
+:host .proformance ::ng-deep .tracing-config{
+    input {
+      width: 400px;
+    }
+   .ti3-text-form-content{
+      min-width: 500px;
+    }
+   .tracing_help{
+      line-height: 25px;
+    }
+    .ti-icon-blue{
+      color: #0067ff;
+    } 
+    .ti3-form tr .ti3-form-content {
+        padding-bottom: 0px !important;
+    }
+    .ti3-form-label {
+        display: block;
+    }
+    .icon-tip{
+        padding-left: 8px;
+        img{
+            margin-bottom: -1px;
+        }
+    }
+    ti-formfield .ti3-form tbody tr td .ti3-form-content {
+        margin-bottom: 0px; 
+    }
+    ti-formfield .ti3-form tbody tr td .ti3-form-top-label .ti3-form-top-text {
+        padding-bottom: 10px;
+        padding-top: 10px;
+    } 
+}
+.reservation{
+    padding-top: 20px;
+}
+.node-config-modal{
+    padding-top: 20px;
+}
+
+.node-config-form {
+    ::ng-deep table {
+        margin-top: 20px;
+    }
+    input {
+        width: 300px;
+    }
+}
+.disabledInput .start-now.selected {
+    color: var(--common-color-background-disabled) !important;
+}
+:host ::ng-deep input[type=checkbox][tiCheckbox] + .ti3-checkbox .ti3-checkbox-skin {
+    border: 1px solid var(--ti-checkbox-border-color) !important;
+}

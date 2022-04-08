@@ -1,0 +1,66 @@
+$label-width-en: 400px;
+$label-width-zh: 223px;
+.warpper {
+  .input-warpper {
+    display: flex;
+    align-items: center;
+
+    .input-form {
+      display: inline-block;
+      margin-bottom: 8px;
+      .input-item {
+        width: 400px;
+      }
+    }
+
+    .input-range {
+      margin-left: 8px;
+      margin-top: -6px;
+      font-size: 14px;
+      color: #616161;
+    }
+    .edit {
+      margin-left: 4px;
+      margin-top: -6px;
+      cursor: pointer;
+    }
+  }
+
+  .btn-warpper {
+    &[lang="zh-cn"] {
+      margin-left: $label-width-zh + 32px;
+    }
+    &[lang="en-us"] {
+      margin-left: $label-width-en + 32px;
+    }
+  }
+
+  [tiText] {
+    font-size: 12px !important;
+  }
+  .ti3-select-dominator-text {
+    font-size: 12px !important;
+  }
+}
+
+:host .input-warpper[lang="zh-cn"] ::ng-deep .ti3-form .ti3-form-label {
+  width: $label-width-zh;
+  padding-right: 16px;
+}
+:host .input-warpper[lang="en-us"] ::ng-deep .ti3-form .ti3-form-label {
+  width: $label-width-en;
+  padding-right: 16px;
+}
+
+button + button {
+  margin-left: 16px;
+}
+
+button {
+  width: 88px;
+
+  &[tiButton] {
+    padding: 0;
+  }
+}
+

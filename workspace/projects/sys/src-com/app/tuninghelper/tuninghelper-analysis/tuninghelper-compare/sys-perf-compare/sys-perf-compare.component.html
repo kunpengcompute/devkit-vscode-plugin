@@ -1,0 +1,53 @@
+<div class="sys-perf-compare">
+  <ti-tabs class="custom-ti-tabs tab-split-line">
+    <hy-backtop [target]="{classes: ['ti3-tab-content']}"></hy-backtop>
+    <ti-tab [active]="true">
+      <ti-tab-header>
+        <span [ngClass]="{'diff-icon': sysPerfDiff?.cpu}">
+          CPU
+        </span>
+      </ti-tab-header>
+      <ng-template #tiTabContent>
+        <div class="content-container">
+          <app-compare-cpu></app-compare-cpu>
+        </div>
+      </ng-template>
+    </ti-tab>
+    <ti-tab>
+      <ti-tab-header>
+        <span [ngClass]="{'diff-icon': sysPerfDiff?.cpu}">
+          {{'tuninghelper.detailedData.sysperf_memory' | i18n}}
+        </span>
+      </ti-tab-header>
+      <ng-template #tiTabContent>
+        <div class="content-container">
+          <app-sys-perf-memory-compare></app-sys-perf-memory-compare>
+        </div>
+      </ng-template>
+    </ti-tab>
+    <ti-tab>
+      <ti-tab-header>
+        <span [ngClass]="{'diff-icon': sysPerfDiff?.cpu}">
+          {{'tuninghelper.detailedData.sysperf_Storage' | i18n}}
+        </span>
+      </ti-tab-header>
+      <ng-template #tiTabContent>
+        <div class="content-container">
+          <app-sys-perf-storage-compare></app-sys-perf-storage-compare>
+        </div>
+      </ng-template>
+    </ti-tab>
+    <ti-tab>
+      <ti-tab-header>
+        <span [ngClass]="{'diff-icon': sysPerfDiff?.cpu}">
+          {{'tuninghelper.detailedData.sysperf_network' | i18n}}
+        </span>
+      </ti-tab-header>
+      <ng-template #tiTabContent>
+        <div class="content-container">
+          <app-sys-perf-network-compare></app-sys-perf-network-compare>
+        </div>
+      </ng-template>
+    </ti-tab>
+  </ti-tabs>
+</div>

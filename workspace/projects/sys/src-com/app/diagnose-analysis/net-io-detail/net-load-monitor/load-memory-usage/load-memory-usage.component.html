@@ -1,0 +1,44 @@
+<div class="memory-usage">
+  <div class="cpu-header">
+    <p class="title">{{ 'net_io.memory_usage' | i18n }}</p>
+  </div>
+
+  <div class="cpu-table">
+    <ti-table 
+      [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns"
+      tiColsResizable
+    >
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr>
+              <th tiOverflow *ngFor="let column of columns;index as index" width="{{column.width}}">{{column.title}}</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <div class="ti3-table-container ti3-resize-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of columns" width="{{column.width}}"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of displayed;index as i">
+              <td tiOverflow>{{ row.total }}</td>
+              <td tiOverflow>{{ row.free }}</td>
+              <td tiOverflow>{{ row.used }}</td>
+              <td tiOverflow>{{ row.used1 }}</td>
+              <td tiOverflow>{{ row.avail }}</td>
+              <td tiOverflow>{{ row.buffers }}</td>
+              <td tiOverflow>{{ row.cached }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ti-table>
+  </div>
+</div>
+

@@ -1,0 +1,19 @@
+<app-banner></app-banner>
+<div class="delete-page">
+    <div class="page-title">{{pageTitle}}</div>
+    <div class="notification-list-item-main-row">
+        <img class="notify-img" src="./assets/img/common/icon_warning.png" >
+        <div class="notification-message">
+            <span>{{deleteModelTip}}</span>
+        </div>
+    </div>
+    <app-disk-table [dataList]="compareData" [columns]="compareTitle" [totalPage]="compareData.data.length">
+    </app-disk-table>
+    <div class="opreation-btn">
+        <button  (click)="onSelectConfirm()" class="cancalBtn little-minor-btn ti3-btn-middle">
+            {{i18n.common_term_operate_ok}}
+        </button>
+        <button (click)="onSelectCancel()" color="primary"  style="margin-left: 24px;"
+        class="little-primary-btn ti3-btn-primary ti3-btn-middle"> {{i18n.common_term_Signed}}</button>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+$font20: 20px;
+
+$col61: #616161;
+$cole1e6ee: #e1e6ee;
+
+.page-history-right {
+  height: 100%;
+  width: 26.5vw;
+}
+
+.right-title {
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed $cole1e6ee;
+  .left-text {
+    font-size: $font20;
+    font-weight: 500;
+  }
+}
+
+.right-list {
+  margin-bottom: 20px;
+  padding-top: 20px;
+  line-height: 36px;
+  height: calc(100% - 130px);
+  overflow-y: auto;
+  li {
+    display: flex;
+    font-size: 14px;
+    justify-content: space-between;
+    span {
+      .delete-img {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-left: 24px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.report-left {
+  flex: 1;
+  overflow: hidden;
+  padding-right: 20px;
+  p {
+    &:first-child {
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
+  .time {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: $col61;
+    line-height: 18px;
+  }
+}
+.icon-box {
+  height: 36px;
+}
+
+
+/* 内存一致性 tabs start */
+.tabs-histroy {
+  height: 36px;
+  margin-top: 24px;
+  .ti3-tabs-container1 {
+    border-bottom: 1px dashed $cole1e6ee;
+  }
+}
+/* 内存一致性 tabs end */
+:host ::ng-deep .ti-tip a:hover {
+  color: #267DFF !important;
+}
+
+:host ::ng-deep .ti-tip a {
+  text-decoration: none !important;
+  cursor: pointer !important;
+  color: #0067FF !important;
+}
+
+.del-report-notDown {
+  width: 400px !important;
+}
+
+.btn-box-down {
+  text-align: center;
+  width: 100%;
+  button {
+    min-width: 88px !important;
+  }
+  .user-sure-btn {
+    margin-right: 6px;
+  }
+}

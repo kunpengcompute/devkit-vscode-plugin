@@ -1,0 +1,21 @@
+<div class="webpack-situation-modal" *ngIf="situation == 5">
+  <div class="progress-modal">
+    <div class="madal-content">
+      <p class="situation analyzing">
+        <span *ngIf="progressStatus === portWorkerStatusService.cachecheckTaskRunning">{{i18n.common_cacheline_check.operation}}</span>
+        <span *ngIf="progressStatus !== portWorkerStatusService.cachecheckTaskRunning">
+                    <img class="loading" src="./assets/img/analysis/loading.png" alt="">
+                    <span class="content">{{i18n.common_term_checking + msgInfo}}</span>
+                </span>
+        <img (click)="closeTask()" style="cursor: pointer;" src="./assets/img/common/icon_close.svg" />
+      </p>
+      <div class="progress-bar-bg-cache">
+        <div [ngClass]="{'progress-bar-cache': progressStatus !== portWorkerStatusService.cachecheckTaskScanSuccess}"></div>
+      </div>
+      <div *ngIf="portWorkerStatusService.workerStatusCache === portWorkerStatusService.cachecheckTaskScanSuccess"
+           style="margin-top: 16px;">
+        <app-user-guide-bar [status]="portWorkerStatusService.workerStatusCache"></app-user-guide-bar>
+      </div>
+    </div>
+  </div>
+</div>

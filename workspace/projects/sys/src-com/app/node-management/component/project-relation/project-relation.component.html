@@ -1,0 +1,89 @@
+<ng-template #batchModal let-context="context">
+  <ti-modal-header>
+    {{
+      (batchOptTypeEnum.Import === batchOptType
+        ? "nodeManagement.batchImportNodes"
+        : "nodeManagement.batchDeleteNodes"
+      ) | i18n
+    }}
+    <span class="tip-nodeclose" (click)="onCancel($event)">
+      <img class="ti3-close" src="./assets/img/analyzing/images/close_icon.svg" />
+      <img class="ti3-close" src="./assets/img/analyzing/images/close_hover.svg">
+    </span>
+  </ti-modal-header>
+  <ti-modal-body>
+    <div>
+      <div class="warpper-line"></div>
+      <div class="tip">
+        <img class="imgTip" src="./assets/img/tip/warn.png" />
+        <span>{{ "nodeManagement.deleteNodesTip" | i18n }}</span>
+      </div>
+      <div class="tbBox">
+        <ti-table
+          [(displayedData)]="table.displayed"
+          [srcData]="table.srcData"
+          [columns]="table.columns"
+          tiColsResizable
+          class="custemTable"
+        >
+          <div class="ti3-table-fixed-head">
+            <table>
+              <thead>
+                <tr>
+                  <ng-container *ngFor="let column of table.columns">
+                    <th tiOverflow width="{{ column.width }}">
+                      {{ column.label }}
+                    </th>
+                  </ng-container>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div
+            class="ti3-table-container ti3-resize-wrapper"
+            style="max-height: 352px"
+          >
+            <table>
+              <thead>
+                <tr>
+                  <ng-container *ngFor="let column of table.columns">
+                    <th width="{{ column.width }}"></th>
+                  </ng-container>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of table.displayed">
+                  <td tiOverflow>{{ row.projectname || "--" }}</td>
+                  <td tiOverflow>
+                    {{ attributionTool.get(row.toolType) || "--" }}
+                  </td>
+                  <td tiOverflow>{{ row.related_node || "--" }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- 无数据 -->
+            <div class="nodata" *ngIf="!table.displayed.length">
+              <img src="./assets/img/projects/nodata.png" />
+              <div>{{ "common_term_task_nodata" | i18n }}</div>
+            </div>
+          </div>
+          <ti-pagination
+            *ngIf="table.total > 10"
+            [(currentPage)]="table.pageNo"
+            [pageSize]="table.pageSize"
+            [(totalNumber)]="table.total"
+            [showGotoLink]="true"
+          ></ti-pagination>
+        </ti-table>
+      </div>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" (click)="onContinue($event)" tiButton>
+      {{ "nodeManagement.continue" | i18n }}
+    </button>
+    <button type="button" color="primary" (click)="onCancel($event)" tiButton>
+      {{ "operationLog.cancle" | i18n }}
+    </button>
+  </ti-modal-footer>
+</ng-template>

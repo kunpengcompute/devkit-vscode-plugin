@@ -1,0 +1,44 @@
+<!-- Miss事件统计界面 -->
+<div id="missStatisticsBox">
+  <!-- 描述信息表单 -->
+  <div class="des">
+    <ti-formfield type="text" colsNumber="2" [colsGap]="['60px']" labelWidth="32px">
+      <ti-item *ngFor="let formItem of missEventDes | keyvalue: trackByFn" [label]="formItem.value.label"
+        [show]="formItem.value.show">
+        <span class="formContent">{{ formItem.value.value | thousandSeparator}}</span>
+      </ti-item>
+    </ti-formfield>
+    <div class="right_switch">
+        <hy-theme-content class="view-switch">
+          <app-icon-react light name="chartView" *ngIf="currentView !== 'timeSequence'" (click)="tabChang('timeSequence')"
+          [tiTip]="i18n.ddr.timeSequence"></app-icon-react>
+          <app-icon-react light name="chartViewSelected" *ngIf="currentView === 'timeSequence'" (click)="tabChang('timeSequence')"
+          [tiTip]="i18n.ddr.timeSequence"></app-icon-react>
+          <app-icon-react light name="tableView" *ngIf="currentView !== 'details'" (click)="tabChang('details')"
+          [tiTip]="i18n.ddr.details"></app-icon-react>
+          <app-icon-react light name="tableViewSelected" *ngIf="currentView === 'details'" (click)="tabChang('details')"
+          [tiTip]="i18n.ddr.details"></app-icon-react>
+  
+          <app-icon-react dark name="chartViewDark" *ngIf="currentView !== 'timeSequence'" (click)="tabChang('timeSequence')"
+          [tiTip]="i18n.ddr.timeSequence"></app-icon-react>
+          <app-icon-react dark name="chartViewSelectedDark" *ngIf="currentView === 'timeSequence'" (click)="tabChang('timeSequence')"
+          [tiTip]="i18n.ddr.timeSequence"></app-icon-react>
+          <app-icon-react dark name="tableViewDark" *ngIf="currentView !== 'details'" (click)="tabChang('details')"
+          [tiTip]="i18n.ddr.details"></app-icon-react>
+          <app-icon-react dark name="tableViewSelectedDark" *ngIf="currentView === 'details'" (click)="tabChang('details')"
+          [tiTip]="i18n.ddr.details"></app-icon-react>
+      </hy-theme-content>
+    </div>
+  </div>
+
+  <!-- 折线图 -->
+  <app-miss-timing [hidden]="currentView !== 'timeSequence'" [chartData]="chartData" (obtainType)="obtainType($event)" [taskid]="taskid" [nodeid]="nodeid"
+    [dataType]="dataType" [typeDetail]="typeDetail" [show]="show"></app-miss-timing>
+
+  <app-sub-module-function #subModuleFunction [hidden]="currentView !== 'details'" [taskid]="taskid" [nodeid]="nodeid" [optionList]="optionList"
+    [theads]="theads" [columns]="columns" [srcData]="srcData" [sortList]="srcData.sort.list"
+    [currentPage]="currentPage" [totalNumber]="totalNumber" [pageSize]="pageSize" [analysisType]="analysisType"
+    (selectChange)="selectChange($event)" (getChildren)="getChildren($event)" (getTableData)="getTableData($event)"
+    (sortTableData)="sortTableData($event)" (addFunctionTab)="addFunctionTab($event)"></app-sub-module-function>
+
+</div>

@@ -1,0 +1,75 @@
+.tree-leaf-detail {
+  height: 100%;
+  overflow: auto;
+  padding-right: 32px;
+
+  .can-click {
+    color: #0067ff;
+    cursor: pointer;
+  }
+
+  // 建议采纳
+  .sug-adopted {
+    color: var(--font-d-e8e8e8-l-222222);
+
+    .info {
+      margin-top: 8px;
+      color: var(--button-color-border-secondary);
+
+      .associated-report {
+        color: #0067ff;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .btn-group {
+    button {
+      &:first-of-type {
+        margin-right: 16px;
+      }
+    }
+  }
+}
+
+// 弹框样式
+::ng-deep .create-project-modal {
+  .ti3-modal-content {
+    width: 400px;
+    overflow: hidden;
+    padding: 0;
+
+    .ti3-icon-close {
+      top: 15px;
+    }
+
+    .ti3-modal-header {
+      font-size: 20px !important;
+      line-height: 30px;
+      border-bottom: 1px dashed var(--common-color-divider);
+      box-sizing: border-box;
+      margin: 18px 32px 0;
+      padding: 0 0 18px;
+      color: var(--common-color-font-primary);
+    }
+
+    .ti3-modal-body {
+      overflow-y: auto;
+      max-height: 50vh;
+      margin: 0;
+      padding: 24px 32px 0 32px;
+      box-sizing: border-box;
+      color: var(--common-color-font-primary);
+      font-size: 14px;
+    }
+
+    .ti3-modal-footer {
+      .ti3-btn-middle {
+        min-width: 100px;
+      }
+      button:nth-of-type(2) {
+        margin-left: 16px;
+      }
+    }
+  }
+}

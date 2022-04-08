@@ -1,0 +1,91 @@
+<div class="cpu-detail" #container [appLoading]="obtainingChartData">
+  <div class="headerBox">
+    <div class="left">
+      <!-- 选择CPU核 -->
+      <div class="filterContainer" *ngIf="['cpuStatus', 'durationSummary'].includes(currentType)">
+        <span class="title">{{ filterCPU.title }}</span>
+
+        <div class="content">
+          <!-- 选择CPU种类【应用模式下才有】 -->
+          <ti-select class="cpuCategory" *ngIf="filterCPU.showCpuCategory" [(ngModel)]="filterCPU.selectedCpuCategory"
+            [options]='filterCPU.cpuCategoryList' (ngModelChange)="cpuCategoryChange($event)" panelWidth='auto'>
+          </ti-select>
+
+          <!-- 选择CPU -->
+          <ti-select class="cpuSelected" [multiple]="true" [selectAll]="true" [searchable]="true"
+            [(ngModel)]="filterCPU.cpuSelected" [options]='filterCPU.cpuOption' (ngModelChange)="cpuChange()"
+            panelWidth='auto' style="margin-left: 8px; width: 320px;">
+            <ng-template #item let-item let-i=index>
+              <span *ngIf="item.disabledReason; else otherOption" [tiTip]="item.disabledReason" tiTipPosition="right">
+                {{item?.label}}
+              </span>
+
+              <ng-template #otherOption>
+                <span>{{item?.label}}</span>
+              </ng-template>
+            </ng-template>
+          </ti-select>
+        </div>
+      </div>
+
+      <!-- 运行时长排序 -->
+      <div class="filterContainer" *ngIf="['durationSummary'].includes(currentType)">
+        <span class="title">{{ sortDurationSummary.title }}</span>
+
+        <div class="content">
+          <ti-select [(ngModel)]="sortDurationSummary.selected" [options]='sortDurationSummary.list'
+            (ngModelChange)="switchDurationSummarySortBy()" panelWidth='auto'></ti-select>
+
+          <div class="sortContainer" style="margin-left: 4px;" (click)="switchDurationSummarySortStatus()">
+            <ti-icon class="ti3-sort"
+              [name]="sortDurationSummary.sortStatus === 'asc' ? 'sort-ascent' : 'sort-descent'"></ti-icon>
+          </div>
+        </div>
+      </div>
+
+      <!-- 选择进程/线程 -->
+      <div class="filterBox" [hidden]="!['locatePTid'].includes(currentType)">
+        <app-icon-react name="filter" [freeze]="null" class="filerIcon" [tiTip]="i18n.sys_res.selecThread"
+          (click)="showSelectTaskModal()"></app-icon-react>
+        <app-tag-box [label]='i18n.sys_res.selectedThread' [selecTag]="locatePTidData.selected"
+          (deleteTag)="deleteTask($event)" #tagBox></app-tag-box>
+      </div>
+    </div>
+
+    <!-- 切换图标 -->
+    <div class="right">
+      <div *ngFor="let typeItem of typeList"
+        [ngClass]="['iconBtn', typeItem.prop + 'Icon', typeItem.prop === currentType ? 'active' : '']"
+        (click)="switchType(typeItem)" [tiTip]="typeItem.tip" [tiTipHasArrow]="false"></div>
+    </div>
+  </div>
+
+  <app-time-line #timeLineDetail [hidden]="!timeLineShow" [timeData]='timeData' [lineData]='timeLine'
+    (timeLineData)='timeLineDataChange($event)' style="margin-top: 20px;"
+    [ngStyle]="{display: ['durationSummary'].includes(currentType) ? 'none' : 'block'}"></app-time-line>
+
+  <div class="chartBox" [ngClass]="{'noDataBox': !totalNumber}" #chartBox>
+    <div class="topLine"></div>
+    <div class="left" *ngIf="totalNumber">
+      <div *ngFor="let cpuItem of orderlist" class="cpu-label">{{ cpuItem?.label }}</div>
+    </div>
+
+    <div class="chart" echarts [options]="options" [ngClass]="{ifShow: totalNumber}" [merge]="updateOptions"
+      (chartInit)="onChartInit($event)"></div>
+
+    <!-- 无数据 -->
+    <div *ngIf="!obtainingChartData && !totalNumber" class='chen-nodata-td unsetPosition'>
+      <img src='./assets/img/projects/nodata.png' />
+      <div>{{ noData }}</div>
+    </div>
+
+    <div class="bottomLine"></div>
+  </div>
+
+  <ti-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber" [showGotoLink]="true"
+    (pageUpdate)="onPageUpdate($event)" style="margin-top: 5px;"></ti-pagination>
+</div>
+
+<!-- 选择线程侧滑框 -->
+<app-side-modal [type]="'tpswitch'" [item]='summaryTid' (confimSelect)="confimModal($event)" [taskId]="taskid"
+  [nodeId]="nodeid" #selectTaskModal></app-side-modal>

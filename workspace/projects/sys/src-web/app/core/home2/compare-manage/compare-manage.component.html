@@ -1,0 +1,43 @@
+<div class="linkage-tasks">
+    <div class="head-add">
+      <span>{{i18n.linkage.taskListTitle}}</span>
+      <span class="operate">
+        <!-- add  -->
+        <span id="add-linkage-task" (click)="addLinkageTask();$event.stopPropagation()"[tiTip]='i18n.tipMsg.createM' tiTipPosition="bottom-left">
+          <app-icon-react name="addProject"></app-icon-react>
+        </span>
+      </span>
+    </div>
+    <div class="listBox">
+    <div class="content-list">
+      <ng-container *ngFor="let item of taskList; trackBy:trackByFn">
+        <div class="task-item" [ngClass]="[item.hilight ? 'mytree-checked' : '']"
+          [hyTiTip]="tipContent"
+          [hyTipStyle]="{'pointer-events': 'none'}"
+          [tiTipContext]="item.compare_name"
+          tiTipPosition="top"
+          (click)="onTaskDetailsOpen(item)">
+          <div class="linkage-task">
+            <span class="status-name">
+              <!-- node status -->
+              <span>
+                <span *ngIf="['comparing', 'Waiting'].includes(item.status)" class="node-status waiting"></span>
+                <span *ngIf="['succeed', 'Aborted'].includes(item.status)" class="node-status success "></span>
+                <span *ngIf="['Running'].includes(item.status)" class="node-status running"></span>
+                <span *ngIf="['Failed', 'failed'].includes(item.status)" class="node-status failed"></span>
+              </span>
+              <span class="linkage-name">{{item.compare_name}}</span>
+            </span>
+            <span *ngIf="item.isDeletable" class="icon-btn Delete" (click)='onTaskDelete(item);$event.stopPropagation()'>
+              <app-icon-react name="deleteProject"></app-icon-react>
+            </span>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  
+  <ng-template  #tipContent let-context='context' >
+      <div class="task-tip"><span>{{ context}}</span></div>
+  </ng-template>
+  

@@ -1,0 +1,134 @@
+.light {
+  .echart-modal {
+    background-color: #ffffff;
+  }
+  .topTitle {
+    border-bottom: 1px solid #e1e6ee;
+  }
+  .xTitle {
+    color: #222222;
+  }
+  .topTitle {
+    color: #222222;
+  }
+  .title-box {
+    color: #222222;
+  }
+  .line {
+    background: #e1e6ee;
+  }
+}
+.dark {
+  --color-modal-text: ;
+  --color-echart-bordercolor: ;
+
+  .echart-modal {
+    background-color: #252526;
+  }
+  .topTitle {
+    border-bottom: 1px solid #484a4e;
+  }
+  .xTitle {
+    color: #aaaaaa;
+  }
+  .topTitle {
+    color: #aaaaaa;
+  }
+  .title-box {
+    color: #aaaaaa;
+  }
+  .line {
+    background: #484a4e;
+  }
+}
+
+.echartMask {
+  background: rgba(0, 0, 0, 0.298);
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .echart-modal {
+    z-index: 201;
+    width: 900px;
+    height: 505px;
+    padding: 20px 32px 32px;
+    box-sizing: border-box;
+    .memory-detail {
+      margin-top: 19px;
+      height: 350px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .topTitle {
+      font-size: 20px;
+      height: 36px;
+      position: relative;
+      width: 100%;
+      .achartTitle {
+        position: absolute;
+        left: 0;
+        top: 0px;
+      }
+      .close-icon {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        img {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+  }
+}
+.table-box {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 270px;
+  .table-content {
+    display: flex;
+  }
+}
+.ecahrtBox {
+  width: 680px;
+}
+.table-y {
+  width: 150px;
+  height: 80px;
+  .line {
+    width: 130%;
+    height: 2px;
+  }
+  .title-box {
+    font-size: 14px;
+    height: 81px;
+    padding-left: 0;
+  }
+  .xTitle {
+    margin-top: 8px;
+  }
+}
+
+.title-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10%;
+  .title-text {
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+  }
+}
+.title-num {
+  text-align: right;
+}

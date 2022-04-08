@@ -1,0 +1,23 @@
+.head-img {
+  vertical-align: top;
+  margin-right: 2px;
+}
+.content {
+  max-height: 0px;
+  transition: max-height 250ms;
+  overflow: hidden;
+}
+.content.active {
+  max-height: 100%;
+  height: auto;
+}
+.title {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  line-height: 32px;
+  font-size: 14px;
+  color: #282b33;
+  
+  cursor: pointer;
+}

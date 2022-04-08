@@ -1,0 +1,45 @@
+<div id="detail-container">
+    <ti-tabs>
+        <ti-tab [(active)]="item.active" *ngFor="let item of detailList; let index = index" [disabled]="item.disable"
+            (activeChange)='change()'>
+            <ti-tab-header>
+                <span>{{item.title}}</span>
+            </ti-tab-header>
+            <div class="content-container"
+                *ngIf="item.title == i18n.common_term_task_tab_congration && item.disable==false"
+                [ngClass]="{showDetail: item.active}">
+                <app-configuration [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName' [status]='status'
+                    [analysisType]='analysisType' [taskid]='id'></app-configuration>
+            </div>
+            <div class="content-container" *ngIf="item.title == i18n.common_term_task_tab_log && item.disable==false"
+                [ngClass]="{showDetail: item.active}">
+                <app-configuration-log [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                    [analysisType]='analysisType' [status]='status' [taskid]='id'></app-configuration-log>
+            </div>
+            <div class="content-container"
+                *ngIf="item.title == i18n.common_term_task_tab_summary && item.disable==false"
+                [ngClass]="{showDetail: item.active}">
+                <app-summary [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                    [analysisType]='analysisType' [taskid]='id'></app-summary>
+            </div>
+
+            <div class="content-container"
+                *ngIf="item.title == i18n.common_term_task_tab_function && item.disable==false"
+                [ngClass]="{showDetail: item.active}">
+                <app-function #functionModal [nodeid]='nodeid' [projectName]='projectName' [taskName]='taskName'
+                    [analysisType]='analysisType' [taskid]='id' #functionTab [select]='selectDetail'></app-function>
+            </div>
+            <div class="content-container" *ngIf="item.title == hotFlameName && item.disable==false"
+                [ngClass]="{showDetail: item.active}">
+                <app-flame [nodeid]='nodeid' [Active]='item.active' [projectName]='projectName' [taskName]='taskName'
+                    [flame]="'onCPU'" [taskid]='id'></app-flame>
+            </div>
+            <div class="content-container"
+                *ngIf="item.title == i18n.common_term_task_tab_graph_cold && item.disable==false&&analysisType==='C/C++ Program'"
+                [ngClass]="{showDetail: item.active}">
+                <app-flame [nodeid]='nodeid' [Active]='item.active' [projectName]='projectName' [taskName]='taskName'
+                    [flame]="'offCPU'" [taskid]='id'></app-flame>
+            </div>
+        </ti-tab>
+    </ti-tabs>
+</div>

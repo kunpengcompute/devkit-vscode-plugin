@@ -1,0 +1,607 @@
+:host {
+  width: fit-content !important;
+}
+.modal-dialog {
+  height: calc(100% - 96px);
+  display: flex;
+  flex-direction: column;
+  padding: 0px 32px;
+  overflow: auto;
+}
+.content-box {
+  .lable-right {
+    position: relative;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 20px 0px;
+    .label {
+      width: 33%;
+      color: #9ea4b3;
+    }
+  }
+}
+
+// 弹窗容器样式设置
+:host ::ng-deep app-mission-modal-header {
+  .content-box {
+    padding: 20px 40px 60px;
+    height: auto !important;
+    position: relative;
+
+    .modify-schedule {
+      // 头部
+      .header {
+        font-size: 20px;
+        border-bottom: 1px var(--d-4b4b4b-l-e2e2e2) dashed;
+        margin-left: 16px;
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        img.close-img {
+          cursor: pointer;
+        }
+        .tip-close {
+          display: inline-block;
+          img:hover {
+            cursor: pointer;
+          }
+          & > img {
+            display: none;
+          }
+          & > img:nth-of-type(1) {
+            display: block;
+          }
+          &:hover {
+            & > img:nth-of-type(1) {
+              display: none;
+            }
+            & > img:nth-of-type(2) {
+              display: block;
+            }
+          }
+          &:active {
+            & > img:nth-of-type(1) {
+              display: none;
+            }
+            & > img:nth-of-type(2) {
+              display: block;
+            }
+          }
+        }
+      }
+
+      // 内容
+      .list-info {
+        padding-bottom: 20px;
+        height: 473px;
+        overflow-y: auto;
+        box-sizing: border-box;
+        border-bottom: 1px dashed #4b4b4b;
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+        // 预约任务基本信息列表样式
+        .table {
+          width: 100%;
+          padding-left: 16px;
+          padding-top: 14px;
+          padding-bottom: 10px;
+          box-sizing: border-box;
+
+          .config-info {
+            display: flex;
+            justify-content: flex-start;
+            font-size: 14px;
+            line-height: 18px;
+            padding: 10px 0;
+
+            .table-left {
+              width: 200px;
+              color: var(--d-aaaaaa-l-616161);
+              flex: none;
+              margin-right: 24px;
+            }
+            .table-right {
+              color: var(--d-e8e8e8-l-222222);
+              box-sizing: border-box;
+            }
+          }
+        }
+
+        .analysis-info {
+          padding-left: 16px;
+
+          .analysis-target-app-choose {
+            margin-top: 8px;
+            height: 32px;
+            line-height: 32px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            .choose-list {
+              margin-left: 64px;
+              display: flex;
+              justify-content: flex-start;
+              box-sizing: border-box;
+              img {
+                margin-right: 8px;
+              }
+            }
+            .choose-list:hover {
+              color: #6c92fa;
+              cursor: pointer;
+            }
+          }
+
+          .analysis-target-application > div {
+            margin-bottom: 20px;
+          }
+
+          .analysis-target-application,
+          .analysis-target-pid {
+            display: flex;
+            flex-direction: column;
+            z-index: -1;
+            color: var(--d-aaaaaa-l-616161);
+            font-size: 12px;
+
+            .analysis-target-app-notice,
+            .analysis-target-pid-notice {
+              line-height: 20px;
+              font-size: 16px;
+            }
+
+            .analysis-target-app-label-app {
+              display: flex;
+              justify-content: flex-start;
+              line-height: 28px;
+            }
+
+            .analysis-target-app-label-params {
+              display: flex;
+              justify-content: flex-start;
+              height: 52px;
+            }
+          }
+        }
+
+        // 各任务组件容器样式
+        .missMobal {
+          padding-left: 16px;
+          ::ng-deep .select-nodes{
+            margin-left: 0;
+            
+            .nodes-table .keep{
+              padding-left: 0;
+              width: var(--ti-table-column-icon-width);
+              box-sizing: unset;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.mission-app-warn,
+.mission-pid-warn {
+  line-height: 24px;
+  color: #ff4c4c;
+}
+
+.analysis-target-app-input-app {
+  max-width: 344px;
+
+  input {
+    width: 344px;
+  }
+}
+
+.analysis-target-app-input-params textarea {
+  width: 344px;
+  height: 50px;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  background: none !important;
+}
+
+.label-left {
+  width: 200px;
+  margin-right: 24px;
+
+  span {
+    font-size: 14px;
+  }
+}
+
+// 各组件样式调整
+::ng-deep .modify-schedule .list-info .missMobal {
+  ti-date-range.isdatarang.ti3-date-range-input-container.ng-pristine.ng-valid.ng-touched {
+    width: 264px !important;
+  }
+
+  // * 统一为12px
+  .ti3-icon-staricon:before {
+    font-size: 12px;
+  }
+
+  // 采样间隔样式
+  #direselect {
+    margin-top: 0px !important;
+    height: 32px !important;
+    width: 116px !important;
+
+    .ti3-select-dominator-container {
+      height: 32px;
+      line-height: 32px;
+      border-radius: 2px;
+      background: none !important;
+
+      .ti3-select-dominator-dropdown-btn:after {
+        margin-top: 2px;
+      }
+    }
+  }
+
+  // 所有组件单选框去除背景色
+  input[type="radio"][tiRadio] + .ti3-radio .ti3-radio-skin {
+    background: none !important;
+  }
+
+  app-mission-cplusplus {
+    .structure.strulab {
+      margin-top: 0px;
+    }
+    .structure > ti-formfield > table > tbody > tr {
+      margin-top: 20px;
+
+      &:nth-of-type(1) {
+        margin-top: 0px;
+      }
+    }
+    ti-spinner {
+      width: 116px !important;
+    }
+    .taskForm .ti3-form-content .formContent .tailPrompt {
+      font-size: 12px;
+    }
+  }
+
+  app-mission-lock {
+    .taskForm {
+      &.textForm {
+        .ti3-text-form-label {
+          color: #9ea4b3;
+        }
+      }
+    }
+    footer {
+      height: auto;
+    }
+  }
+
+  app-mission-process {
+    .ti3-form .ti3-form-label {
+      width: 200px;
+    }
+
+    ti-item {
+      position: relative;
+      display: flex;
+    }
+
+    .taskForm {
+      .formContent {
+        > ti-select,
+        > input {
+          width: 344px !important;
+        }
+      }
+    }
+
+    .mem .ti3-form .ti3-form-label {
+      padding-right: 0px !important;
+    }
+    .info-icon.margin-bottom.infoicon {
+      margin-left: 0;
+    }
+
+    span.tiItem {
+      color: #888888 !important;
+      width: 200px;
+      display: inline-block;
+      padding-left: 10px;
+    }
+
+    div.infoicon {
+      left: 0 !important;
+      line-height: 32px;
+      display: inline-block;
+
+      .tiItem {
+        top: 0px !important;
+        display: inline;
+        color: #888888 !important;
+        padding-left: 10px;
+      }
+    }
+
+    span.tiType.ti_type {
+      left: 0 !important;
+      margin-top: 0;
+      margin-bottom: 10px;
+      height: 32px;
+      line-height: 32px;
+    }
+    span.tiType.ti_type:nth-child(3),
+    span.tiType.ti_type:nth-child(4) {
+      margin-bottom: 0;
+    }
+
+    .newCheck.labcheck {
+      margin-left: 0;
+      margin-top: 0;
+      height: auto;
+    }
+
+    ti-switch.changswit {
+      margin-left: 0 !important;
+      height: 32px;
+      display: flex;
+      align-items: center;
+    }
+
+    footer {
+      height: auto;
+    }
+  }
+
+  app-mission-mem {
+    --ti-input-border-color-disabled: #616161;
+
+    app-task-tmpl {
+      .mem {
+        margin-top: 20px;
+
+        .paramsConfigSuggestions {
+          font-size: 12px;
+          color: #888888;
+          margin-bottom: 20px;
+        }
+      }
+    }
+
+    ti-select {
+      width: 344px !important;
+
+      // 下拉输入框
+      .ti3-select-dominator-container {
+        background: none !important;
+      }
+    }
+
+    .formContent > input {
+      width: 344px !important;
+    }
+
+    .node-config-box {
+      .tip {
+        color: #888888 !important;
+        span {
+          font-size: 12px !important;
+        }
+      }
+    }
+
+    .taskForm .info-icon {
+      color: #888888;
+      span {
+        font-size: 12px;
+      }
+    }
+
+    .node-config {
+      width: 100% !important;
+
+      .table {
+        width: 100%;
+
+        .config-btn {
+          color: #0067ff !important;
+        }
+
+        .status-icon.reserve-icon {
+          border-color: #0067ff !important;
+        }
+      }
+    }
+
+    footer {
+      margin: 0;
+      padding: 24px 0;
+    }
+  }
+
+  app-mission-structure {
+    .structure.strulab {
+      margin-top: -20px;
+    }
+
+    .structure > ti-formfield > table > tbody > tr {
+      margin-top: 20px;
+    }
+
+    .margin-left {
+      width: auto !important;
+      position: static;
+      font-size: 12px;
+    }
+
+    // 下拉输入框
+    .ti3-select-dominator-container {
+      background: none !important;
+    }
+
+    footer.tofooter {
+      height: auto;
+    }
+
+    ti-formfield .desc-content1 {
+      color: #888888 !important;
+      font-size: 12px;
+    }
+  }
+
+  app-mission-performance {
+    > .proformance > ti-formfield > table > tbody > tr {
+
+      td.ti3-form-content {
+        position: relative;
+
+        .ti3-icon-staricon {
+          width: 200px;
+          display: inline-block;
+          font-size: 12px;
+          margin-right: 24px;
+
+          &::before {
+            width: 14px;
+            display: inline-block;
+            height: 14px;
+          }
+
+          // tip
+          .margin-left-10 {
+            display: flex;
+            width: 200px;
+            position: absolute;
+            top: 0;
+            left: 340px;
+            height: 32px;
+            align-items: center;
+          }
+        }
+      }
+    }
+    > .proformance {
+      // 预约任务与采集Top活跃进程间隔过大
+      .form {
+        margin-top: 0;
+      }
+      // 预约任务字体大小为12px
+      .file-path,
+      .edit-start-now {
+        font-size: 12px;
+      }
+    }
+  }
+
+  // 多节点通用设置组件样式
+  app-mission-node-config {
+    .node-config {
+      width: 100%;
+
+      .table {
+        width: 100% !important;
+      }
+    }
+  }
+
+  // 预约任务通用设置组件样式
+  app-mission-reservation {
+    .form {
+      .ti3-icon-staricon::before {
+        margin-left: -12px;
+      }
+      .isfunc {
+        margin: 0;
+        padding: 10px 0;
+        p.label.islable {
+          margin: 0;
+          width: 200px !important;
+          margin: 0 24px 0 0 !important;
+        }
+        .radio.flex.radioflex {
+          margin: 0;
+        }
+
+        &.duration-time {
+          padding-bottom: 0;
+        }
+      }
+      .time {
+        .label.flex.islable {
+          width: 200px !important;
+          line-height: 28px;
+          margin-right: 24px !important;
+        }
+      }
+
+      .ti3-datetime-input-container {
+        background: none;
+        .ti3-date-dominator-container {
+          background: none;
+        }
+      }
+    }
+    .point-time > .timeTab .ti3-time-container {
+      background: none !important;
+    }
+    .duration-time
+      > .dataTab
+      .ti3-date-range-input-container
+      .ti3-date-dominator-container {
+      background: none !important;
+    }
+  }
+
+  .duration-time > .dataTab .ti3-date-range-input-container {
+    width: auto !important;
+  }
+
+  .point-time.isfunc > .timeTab > input {
+    width: auto !important;
+  }
+
+  .myradio.newRaio.new_radio {
+    margin-left: 0 !important;
+  }
+
+  .ti3-form .ti3-form-label {
+    padding: 0 24px 0 0 !important;
+    min-width: 200px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    .wrap {
+      display: inline-block;
+      white-space: normal;
+      line-height: 18px !important;
+      height: 35px;
+    }
+  }
+
+  app-mission-io {
+    .io-warpper {
+      .ti3-form .ti3-form-label {
+        color: var(--d-aaaaaa-l-616161);
+      }
+
+      .opreation {
+        margin: 18px 0px 0px 0px;
+      }
+    }
+  }
+
+  app-mission-hpc {
+    .ti3-form .ti3-form-label {
+      color: var(--d-aaaaaa-l-616161);
+    }
+  }
+}

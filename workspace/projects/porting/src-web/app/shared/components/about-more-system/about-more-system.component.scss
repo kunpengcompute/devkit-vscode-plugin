@@ -1,0 +1,65 @@
+$fafafa: #fafafa;
+.about-more-container {
+
+  .os-list {
+    background-color: $fafafa;
+    padding: 5px 0 5px 20px;
+    overflow-y: auto;
+    font-size: 12px;
+    box-sizing: border-box;
+
+    li {
+      padding: 5px 0;
+      color: #616161;
+    }
+  }
+
+  .about-step2,
+  .about-step3,
+  .about-step4 {
+    margin-top: 16px;
+  }
+  
+  .link {
+    &:hover {
+      color: var(--ti-button-default-color-hover);
+    }
+  }
+
+  .about-step2 .link {
+    text-decoration: underline;
+  }
+
+  .about-step3,
+  .about-step4 {
+    div {
+      display: inline-block;
+      position: relative;
+
+      img {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: -13px;
+      }
+    }
+
+    .img-right {
+      margin-left: 20px;
+    }
+  }
+  .about-step4 {
+    .step4-desc {
+      box-sizing: border-box;
+      width: 100%;
+      background-color: $fafafa;
+      padding: 4px 0 4px 20px;
+      font-size: 12px;
+      color: #616161;
+    }
+  }
+}
+
+.lh18 {
+    line-height: 18px;
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>4.组件/2.通用/icon/20/告警</title>
+    <defs>
+        <path d="M10,2 C14.418278,2 18,5.581722 18,10 C18,14.418278 14.418278,18 10,18 C5.581722,18 2,14.418278 2,10 C2,5.581722 5.581722,2 10,2 Z" id="path-1"></path>
+    </defs>
+    <g id="4.组件/2.通用/icon/20/告警" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="蒙版" fill="#3AD53E" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="编组" mask="url(#mask-2)" fill="#ED4B4B">
+            <g id="矩形">
+                <rect x="0" y="0" width="20" height="20"></rect>
+            </g>
+        </g>
+        <path d="M10.463125,7.125 L10.7365625,15.21875 L9.26,15.21875 L9.47875,7.125 L10.463125,7.125 Z M10.681875,4.5 L10.681875,5.9765625 L9.3146875,5.9765625 L9.3146875,4.5 L10.681875,4.5 Z" id="形状结合" fill="#FFFFFF" fill-rule="nonzero" transform="translate(9.998281, 9.859375) scale(1, -1) translate(-9.998281, -9.859375) "></path>
+    </g>
+</svg>

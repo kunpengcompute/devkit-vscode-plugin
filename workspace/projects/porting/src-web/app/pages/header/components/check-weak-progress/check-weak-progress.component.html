@@ -1,0 +1,22 @@
+<div class="progress-bg">
+    <div class="progress-modal">
+        <div class="madal-content">
+            <p>
+                <span>{{ i18n.common_term_weak_check_porting_tip }}</span>
+                <span>
+                    <span style="padding-right: 10px">{{ progessValue }}</span>
+                    <img (click)="closeTask()" style="cursor: pointer;" src="./assets/img/common/icon_close.svg" />
+                </span> 
+            </p>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-zero progress-bar" style="left: 0%;" *ngIf="progess < 1"></div>
+                <div class="progress-bar" [ngStyle]="{'width': barWidth + 'px'}" *ngIf="progess >= 1"></div>
+            </div>
+            <p style="margin-top: 10px;color: #616161;font-size: 12px;">{{ i18n.common_term_weak_check_porting_tip_1 }}</p>
+            <div *ngIf="portWorkerStatusService.workerStatusWeak === portWorkerStatusService.createTaskLackWorkerStatus"
+                style="margin-top: 16px;">
+                <app-user-guide-bar [status]="portWorkerStatusService.workerStatusWeak"></app-user-guide-bar>
+            </div>
+        </div>
+    </div>
+</div>

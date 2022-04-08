@@ -1,0 +1,48 @@
+.warpper {
+    .input-warpper {
+        display: flex;
+        justify-content: flex-start;
+
+        .input-form {
+            display: inline-block;
+        }
+
+        .input-range {
+            height: 28px;
+            line-height: 28px;
+            margin-left: 8px;
+            font-size: 14px;
+            color: #616161;
+        }
+    }
+
+    .btn-warpper {
+        margin-left: 10px;
+    }
+}
+
+:host .input-warpper[lang="zh-cn"] ::ng-deep .ti3-form .ti3-form-label {
+    width: 220px;
+}
+
+:host .input-warpper[lang="en-us"] ::ng-deep .ti3-form .ti3-form-label {
+    width: 500px;
+}
+
+.little-primary-btn{
+    margin-right: 10px;
+}
+
+// 深色主题
+::ng-deep .vscode-dark {
+    .ti3-form .ti3-form-label {
+        color: #aaa;
+    }
+}
+
+// 浅色主题
+::ng-deep .vscode-light {
+    .ti3-form .ti3-form-label {
+        color: #222;
+    }
+}

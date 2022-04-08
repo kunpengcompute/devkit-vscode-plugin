@@ -1,0 +1,32 @@
+.ti3-modal-dialog.hy-mini-modal {
+  width: 400px;
+  .ti3-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+  }
+  
+  .ti3-modal-header {
+    padding: 18px 32px 24px;
+    font-size: 20px;
+    line-height: 30px;
+  }
+  
+  .ti3-modal-body {
+    display: flex;
+    font-size: 14px;
+    word-break: break-all;
+  
+    .hy-nodata-icon {
+      margin-right: 8px;
+    }
+  }
+  
+  .ti3-modal-footer {
+    padding: 32px;
+  }
+  
+  .hy-nodata-msg {
+    word-break: break-all;
+  }
+}

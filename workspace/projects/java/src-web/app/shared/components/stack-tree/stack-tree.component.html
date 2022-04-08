@@ -1,0 +1,23 @@
+<ti-tree *ngIf="tree.length>0" [data]="tree" (beforeExpand)="beforeExpand($event)">
+    <ng-template let-item let-i="index">
+        <span tiOverflow tiTipPosition="right" class="label">
+            <img class="expandAll" (click)="expandAllNode(item)"
+                *ngIf="!item.expanded && item.children && item.children.length" src="./assets/img/profiling/expand.svg">
+            <img class="expandAll" *ngIf="item.expanded  && item.children && item.children.length"
+                src="./assets/img/profiling/noExpand.svg">
+            <span class="stracktrace-rate vertical-align" style="margin-left: 6px;"
+                [ngStyle]="{ width: item.count / item.parentCount * 150 + 'px' }"></span>
+            <span *ngIf="item.label !== moreLabel" class="margin-left vertical-align">{{ item.count | separator }}{{'Count'
+            + ' - ' + strackTraceMap[item.label]}}</span>
+            <span *ngIf="item.label === moreLabel" class="vertical-align">
+                <span class="more-label" (click)="getMoreData(item.current, item.nodes)">{{ moreLabel }}</span>
+                <span>{{ ' ' + item.info + ' ' }}</span>
+            </span>
+        </span>
+    </ng-template>
+</ti-tree>
+<div id="loadingStack" [ngStyle]="{'height': loadingHeight}" [appLoading]="isLoading"></div>
+<div class="nodata" *ngIf="isNodata && !isLoading">
+    <img class='newNoData' src="./assets/img/projects/noData.svg" />
+    <span class="nodata-text">{{ i18n.common_term_task_nodata}}</span>
+</div>

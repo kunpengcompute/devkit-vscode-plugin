@@ -1,0 +1,49 @@
+::ng-deep .vscode-dark {
+  --content-color: #161616;
+}
+
+::ng-deep .vscode-light {
+  --content-color:white;
+}
+
+.advice-contain{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    left: 81px;
+    top: 20px;
+    padding: 20px 32px;
+    font-size: 14px;
+    color: var(--d-e8e8e8-l-222222);
+    .advice-mask{
+      .title{
+        font-size: 20px;
+        img{
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+            display: inline-block;
+        }
+      }
+      .advice-content{
+          margin-top: 20px;
+          padding: 24px;
+          background: var(--d-161616-l-ffffff);
+          background-color: var(--content-color) !important;
+          .failtext2{
+            font-weight: normal;
+          }
+          .failtext3{
+            margin-top: 32px;
+          }
+          .qr-code{
+              margin-top: 32px;
+              img{
+                  width: 160px;
+                  height: 160px;
+              }
+          }
+      }
+  }
+}
+

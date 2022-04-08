@@ -1,0 +1,25 @@
+::ng-deep .oomDetailsModal {
+    text-align: center;
+    .ti3-modal-header{
+      text-align: left;
+    }
+    .ti3-modal-content{
+       width:72.3vh !important;
+       max-height: 600px;
+       overflow: hidden;
+    }
+    #search-box{
+      width: 88%;
+      margin: 12px;
+      height: 32px;
+    }
+    #oomDetailsContent{
+      margin: 0;
+      text-align: left;
+      border-bottom: 1px dashed var(--common-color-divider);
+      max-height: 400px !important;
+      .detail-item{
+        white-space: nowrap;
+      }
+    }
+}

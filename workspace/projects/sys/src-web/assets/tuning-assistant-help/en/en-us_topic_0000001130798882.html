@@ -1,0 +1,95 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Viewing the System Configuration">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001129506030.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.T20">
+<meta name="brand" content="Kunpeng Hyper Tuner">
+<meta name="DC.Publisher" content="20210914">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001130798882">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Viewing the System Configuration</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001130798882"></a><a name="EN-US_TOPIC_0000001130798882"></a>
+
+<h1 class="topictitle1">Viewing the System Configuration</h1>
+<div id="body0000001130798882"><div class="section" id="EN-US_TOPIC_0000001130798882__en-us_topic_0189293077_section11470129119"><h4 class="sectiontitle">Prerequisites</h4><p id="EN-US_TOPIC_0000001130798882__en-us_topic_0189293077_en-us_topic_0189293076_p5336201013112">An analysis task has been created and the analysis is complete.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001130798882__section1080132624618"><h4 class="sectiontitle">Procedure</h4><ol id="EN-US_TOPIC_0000001130798882__ol92117562556"><li id="EN-US_TOPIC_0000001130798882__li85521472718"><span>In the <strong id="EN-US_TOPIC_0000001130798882__b1263215517232">Project Management</strong> area, click <span><img id="EN-US_TOPIC_0000001130798882__image4105155811375" src="en-us_image_0000001130639168.png"></span> before the target project and analysis task.</span><p><p id="EN-US_TOPIC_0000001130798882__p198319584430">The node list is displayed.</p>
+</p></li><li id="EN-US_TOPIC_0000001130798882__li779815445566"><span>Click the name of the target node to view the analysis result.</span><p><p id="EN-US_TOPIC_0000001130798882__p19449114955616">The analysis result page is displayed, which involves four parts: <strong id="EN-US_TOPIC_0000001130798882__b117811385362">System Configuration</strong>, <strong id="EN-US_TOPIC_0000001130798882__b1745484217365">Hotspot Functions</strong>, <strong id="EN-US_TOPIC_0000001130798882__b35753462369">System Performance</strong>, and <strong id="EN-US_TOPIC_0000001130798882__b1394165019361">Process/Thread Performance</strong>. By default, <strong id="EN-US_TOPIC_0000001130798882__b945532433616">System Configuration</strong> is displayed.</p>
+<div class="fignone" id="EN-US_TOPIC_0000001130798882__fig1457422021110"><span class="figcap"><b>Figure 1 </b>Analysis result page</span><br><span><img id="EN-US_TOPIC_0000001130798882__image457462051112" src="en-us_image_0000001176758621.png"></span></div>
+</p></li><li id="EN-US_TOPIC_0000001130798882__li19411922151412"><span>(Optional) Select one or more service types.</span><p><ul id="EN-US_TOPIC_0000001130798882__ul141542911385"><li id="EN-US_TOPIC_0000001130798882__li11572914385">Select the service type as required. Possible options are <strong id="EN-US_TOPIC_0000001130798882__b483542402015">CPU-intensive</strong>, <strong id="EN-US_TOPIC_0000001130798882__b158361224192010">Network I/O-intensive</strong>, or <strong id="EN-US_TOPIC_0000001130798882__b138362249208">Storage I/O-intensive</strong>. You can select one to three service types. The text color of the selected options changes to blue. By default, all the three options are selected.</li><li id="EN-US_TOPIC_0000001130798882__li499817326383">Select the suggestion scope based on the actual situation. You can adjust the topology tree by selecting <span class="uicontrol" id="EN-US_TOPIC_0000001130798882__uicontrol14493422182619"><b>All suggestions</b></span> or <span class="uicontrol" id="EN-US_TOPIC_0000001130798882__uicontrol127522662711"><b>Threshold-filtered suggestions</b></span>.<div class="fignone" id="EN-US_TOPIC_0000001130798882__fig10998732123818"><span class="figcap"><b>Figure 2 </b>Selecting service types</span><br><span><img id="EN-US_TOPIC_0000001130798882__image4998132183813" src="en-us_image_0000001130639270.png"></span></div>
+</li></ul>
+</p></li><li id="EN-US_TOPIC_0000001130798882__li123751537174718"><span>Set tuning parameters based on the system configuration conditions.</span><p><ol type="a" id="EN-US_TOPIC_0000001130798882__ol5810436479"><li id="EN-US_TOPIC_0000001130798882__li15189115631919">You can adjust the <strong id="EN-US_TOPIC_0000001130798882__b181023014335">System Config</strong> parameters on the right based on the system configuration.<div class="fignone" id="EN-US_TOPIC_0000001130798882__fig81611534133013"><span class="figcap"><b>Figure 3 </b>System Config tuning parameters</span><br><span><img id="EN-US_TOPIC_0000001130798882__image121611634203015" src="en-us_image_0000001145971234.png"></span></div>
+<div class="p" id="EN-US_TOPIC_0000001130798882__p18109182922915"><a href="#EN-US_TOPIC_0000001130798882__table15529283293">Table 1</a> describes the parameters related to the <strong id="EN-US_TOPIC_0000001130798882__b7786192794318">System Config</strong>.
+<div class="tablenoborder"><a name="EN-US_TOPIC_0000001130798882__table15529283293"></a><a name="table15529283293"></a><table cellpadding="4" cellspacing="0" summary="" id="EN-US_TOPIC_0000001130798882__table15529283293" frame="border" border="1" rules="all"><caption><b>Table 1 </b>System Config parameters</caption><colgroup><col style="width:30.270000000000003%"><col style="width:69.73%"></colgroup><thead align="left"><tr id="EN-US_TOPIC_0000001130798882__row75118287292"><th align="left" class="cellrowborder" valign="top" width="30.270000000000003%" id="mcps1.3.2.2.4.2.1.1.3.3.2.3.1.1"><p id="EN-US_TOPIC_0000001130798882__p105112882918">Parameter</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="69.73%" id="mcps1.3.2.2.4.2.1.1.3.3.2.3.1.2"><p id="EN-US_TOPIC_0000001130798882__p135110287298">Description</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="EN-US_TOPIC_0000001130798882__row1752128162914"><td class="cellrowborder" valign="top" width="30.270000000000003%" headers="mcps1.3.2.2.4.2.1.1.3.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001130798882__p85172872910">dirty_expire_centiseconds</p>
+</td>
+<td class="cellrowborder" valign="top" width="69.73%" headers="mcps1.3.2.2.4.2.1.1.3.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001130798882__p252328182911">Specifies how long dirty data stays in the cache before written into the drives. If service data is written continuously, set this parameter to a smaller value to prevent burst I/O waiting caused by centralized I/Os.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001130798882__row1052192813295"><td class="cellrowborder" valign="top" width="30.270000000000003%" headers="mcps1.3.2.2.4.2.1.1.3.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001130798882__p9521228142920">dirty_background_ratio</p>
+</td>
+<td class="cellrowborder" valign="top" width="69.73%" headers="mcps1.3.2.2.4.2.1.1.3.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001130798882__p05212820295">Specifies the maximum percentage of pages to the total memory before the dirty pages are written to drive by the <strong id="EN-US_TOPIC_0000001130798882__b2129443334111830">pdflush</strong> process (based on <strong id="EN-US_TOPIC_0000001130798882__b483381718111830">memfree</strong> + <strong id="EN-US_TOPIC_0000001130798882__b1481663486111830">Cached</strong> - <strong id="EN-US_TOPIC_0000001130798882__b1888193393111830">Mapped</strong>). Increasing the value of this parameter will allocate more memory for the write cache, thereby improving the drive write performance. However, for services that mainly involve drive write operations, set this parameter to a smaller value to prevent data from being stacked and causing performance bottlenecks. You can observe the time fluctuation range of <strong id="EN-US_TOPIC_0000001130798882__b599521895111830">await</strong> and the feature of the service for identification.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001130798882__row18525289291"><td class="cellrowborder" valign="top" width="30.270000000000003%" headers="mcps1.3.2.2.4.2.1.1.3.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001130798882__p16521128192912">dirty_ratio</p>
+</td>
+<td class="cellrowborder" valign="top" width="69.73%" headers="mcps1.3.2.2.4.2.1.1.3.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001130798882__p952192816294">Specifies the maximum ratio of dirty pages to the total memory. If the ratio exceeds the value, the system does not add dirty pages and the file read and write operations change to the synchronous mode. After the file read and write operations change to the synchronous mode, the block time of the file read and write operations of the application becomes longer, which slows down the system. For write-intensive services, you can increase the value of this parameter to prevent the drive from entering the synchronous write state too early.</p>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001130798882__row205252813296"><td class="cellrowborder" valign="top" width="30.270000000000003%" headers="mcps1.3.2.2.4.2.1.1.3.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001130798882__p252132817296">dirty_expire_centisecs</p>
+</td>
+<td class="cellrowborder" valign="top" width="69.73%" headers="mcps1.3.2.2.4.2.1.1.3.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001130798882__p8455132545814">Specifies the interval of the <strong id="EN-US_TOPIC_0000001130798882__b1992412211356">pdflush</strong> process for refreshing the dirty data of the kernel, in 1/100s. The default value is <strong id="EN-US_TOPIC_0000001130798882__b861412419215">500</strong> (5 seconds).</p>
+<ul id="EN-US_TOPIC_0000001130798882__ul1296462725816"><li id="EN-US_TOPIC_0000001130798882__li88992291586">If the system writes data continuously, decrease the value of this parameter. In this way, intensive write operations can be split into multiple write operations.</li><li id="EN-US_TOPIC_0000001130798882__li3965142765816">If the system performs intensive write operations in a short period of time and the data volume is not large (dozens of MB each time) and the memory is sufficient, increase the value of this parameter.</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001130798882__row195232872915"><td class="cellrowborder" valign="top" width="30.270000000000003%" headers="mcps1.3.2.2.4.2.1.1.3.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001130798882__p10521528162912">Memory Idle Rate (%)</p>
+</td>
+<td class="cellrowborder" valign="top" width="69.73%" headers="mcps1.3.2.2.4.2.1.1.3.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001130798882__p32073665816">Specifies the memory usage.</p>
+<ul id="EN-US_TOPIC_0000001130798882__ul12949153735814"><li id="EN-US_TOPIC_0000001130798882__li17915442125820">When the memory usage is too high, the server performance deteriorates. In this case, you need to increase the memory idle rate to ensure the normal running of the server.</li><li id="EN-US_TOPIC_0000001130798882__li1094963795818">When the memory usage is low, decrease the value of <strong id="EN-US_TOPIC_0000001130798882__b12583143819277">swappiness</strong> to use the physical memory and reduce the usage of the swap partition. This prevents system performance from being affected by increased I/O operations.</li></ul>
+</td>
+</tr>
+<tr id="EN-US_TOPIC_0000001130798882__row1852192812913"><td class="cellrowborder" valign="top" width="30.270000000000003%" headers="mcps1.3.2.2.4.2.1.1.3.3.2.3.1.1 "><p id="EN-US_TOPIC_0000001130798882__p35292818298">swappiness</p>
+</td>
+<td class="cellrowborder" valign="top" width="69.73%" headers="mcps1.3.2.2.4.2.1.1.3.3.2.3.1.2 "><p id="EN-US_TOPIC_0000001130798882__p55212815298"><strong id="EN-US_TOPIC_0000001130798882__b128002272916">swappiness</strong> is a Linux kernel attribute that sets the balance between swapping pages from the physical memory to the swap space and removing pages from the page cache. It basically defines the frequency at which the system uses the swap space.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul id="EN-US_TOPIC_0000001130798882__ul152162802910"><li id="EN-US_TOPIC_0000001130798882__li1852122872911">Click <span class="uicontrol" id="EN-US_TOPIC_0000001130798882__uicontrol8641185023611"><b>Apply</b></span> and make the modified configuration parameters take effect.</li><li id="EN-US_TOPIC_0000001130798882__li052142812917">Click <span class="uicontrol" id="EN-US_TOPIC_0000001130798882__uicontrol189819207376"><b>Reset</b></span> to restore the default parameter configurations.</li></ul>
+</div>
+</li><li id="EN-US_TOPIC_0000001130798882__li17812434479">View the tuning suggestion topology tree on the analysis result page. Click <span><img id="EN-US_TOPIC_0000001130798882__image102291941366" src="en-us_image_0000001145866444.png"></span> and <span><img id="EN-US_TOPIC_0000001130798882__image1545302274519" src="en-us_image_0000001145861258.png"></span> to select the corresponding tuning suggestions based on the configuration conditions.<div class="fignone" id="EN-US_TOPIC_0000001130798882__fig460235795011"><span class="figcap"><b>Figure 4 </b>Tuning suggestion topology tree</span><br><span><img id="EN-US_TOPIC_0000001130798882__image96027575507" src="en-us_image_0000001191942091.png"></span></div>
+</li><li id="EN-US_TOPIC_0000001130798882__li1288191045215">View the <strong id="EN-US_TOPIC_0000001130798882__b16874151018509">Relevant Configurations</strong>, <strong id="EN-US_TOPIC_0000001130798882__b3264117195010">Indicator Description</strong>, <strong id="EN-US_TOPIC_0000001130798882__b62491036165012">Optimization Suggestion</strong>, and <strong id="EN-US_TOPIC_0000001130798882__b2048010473503">Optimization Guide</strong> on the right. Click <span><img id="EN-US_TOPIC_0000001130798882__image893910417140" src="en-us_image_0000001145868788.png"></span> to adopt the tuning suggestion, or cancel the adoption of the tuning suggestion by clicking it again.<div class="fignone" id="EN-US_TOPIC_0000001130798882__fig1791211517228"><span class="figcap"><b>Figure 5 </b>Tuning suggestion page</span><br><span><img id="EN-US_TOPIC_0000001130798882__image179120518229" src="en-us_image_0000001145899404.png"></span></div>
+</li><li id="EN-US_TOPIC_0000001130798882__li194612814247">The adopted tuning suggestions are saved in the associated report. Click the <span class="uicontrol" id="EN-US_TOPIC_0000001130798882__uicontrol13139181895918"><b>associated report</b></span> in the lower right corner of the page to access the associated report page.<p id="EN-US_TOPIC_0000001130798882__p296043062912">All adopted tuning suggestions are displayed on the associated report page. You can click the task name to view the details. Click <span class="uicontrol" id="EN-US_TOPIC_0000001130798882__uicontrol20860121413216"><b>Valid</b></span> or <span class="uicontrol" id="EN-US_TOPIC_0000001130798882__uicontrol127017201127"><b>Invalid</b></span> in the lower left corner to check whether the tuning suggestion meets the expectation.</p>
+<div class="fignone" id="EN-US_TOPIC_0000001130798882__fig14809483120"><span class="figcap"><b>Figure 6 </b>Associated report</span><br><span><img id="EN-US_TOPIC_0000001130798882__image158034123112" src="en-us_image_0000001145901236.png"></span></div>
+</li></ol>
+</p></li><li id="EN-US_TOPIC_0000001130798882__li107641738517"><span>Click <span><img id="EN-US_TOPIC_0000001130798882__image0414425536" src="en-us_image_0000001189661785.png"></span> on the right of <strong id="EN-US_TOPIC_0000001130798882__b15597110133018">System Configuration</strong> to view system configuration data.</span><p><p id="EN-US_TOPIC_0000001130798882__p1442891212140">The system configuration details include the CPU, memory, storage, network, and OS configuration information. By default, the <strong id="EN-US_TOPIC_0000001130798882__b27864618325">CPU</strong> tab page is displayed.</p>
+<div class="fignone" id="EN-US_TOPIC_0000001130798882__fig9175151845612"><span class="figcap"><b>Figure 7 </b>Viewing system configuration data</span><br><span><img id="EN-US_TOPIC_0000001130798882__image1119611614566" src="en-us_image_0000001189702179.png"></span></div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001129506030.html">Viewing Analysis Results</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

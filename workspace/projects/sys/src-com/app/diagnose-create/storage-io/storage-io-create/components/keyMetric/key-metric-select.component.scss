@@ -1,0 +1,118 @@
+.key-metric-select {
+    margin: 16px 0;
+    width: 100%;
+    overflow: hidden;
+    & > button {
+        margin: 8px 16px;
+    }
+    .checkbox-group {
+        display: flex;
+        line-height: 28px;
+        .checkbox-item {
+            margin-right: 32px;
+        }
+    }
+    .input-width {
+        width: 90% !important;
+        vertical-align: middle;
+    }
+    .error-tip {
+        display: flex;
+        color: var(--ti-common-color-error);
+        line-height: 16px;
+        align-items: center;
+        margin: 8px 0;
+        font-size: 12px;
+        & > .error-icon {
+            margin-right: 8px;
+            &::before{
+                content: "\e915";
+                color: var(--ti-base-color-white);
+                background: var(--ti-common-color-error);
+                border-radius: 50%;
+                font-size: 16px;
+            }
+        }
+    }
+    .rate-input {
+        display: flex;
+        align-items: center;
+        & > input {
+            padding: 0;
+            width: 30px;
+            text-align: center;
+        }
+        & > span.link {
+            margin: 0 8px;
+        }
+    }
+}
+:host ::ng-deep {
+    .ti3-table {
+        margin: 0 16px;
+        box-sizing: border-box;
+        font-size: 12px;
+        table {
+            border-collapse: collapse;
+            .tool-tip {
+                width: 14px;
+                height: 14px;
+                margin-left: 8px;
+                vertical-align: text-bottom;
+            }
+            .hidden-input {
+                input[type=checkbox][tiCheckbox] + .ti3-checkbox {
+                    display: none;
+                }
+            }
+        }
+    }
+    .form-item .ti3-form {
+        width: 100%;
+        display: block;
+        tbody,tr,td {
+            display: block;
+        }
+    }
+    ti-select .ti3-select-dominator-container.ti3-multiselect-container{
+        & > .ti3-select-dominator-text {
+            height: 26px;
+            overflow: hidden;
+        }
+        ti-tag {
+            background: none !important;
+            width: 100%;
+            & > .ti3-box-cell-key {
+                width: 100%;
+            }
+            & > .ti3-icon-close-staic {
+                display: none;
+            }
+        }
+    }
+}
+.vscode-dark,
+.vscode-light {
+    :host ::ng-deep {
+        .key-metric-select {
+            .ti3-table {
+                margin: 0;
+            }
+            & > button {
+                margin: 8px 0;
+            }
+            ti-select .ti3-select-dominator-container.ti3-multiselect-container{
+                ti-tag {
+                    margin-top: 1px !important;
+                    &.ti3-multiselect-box-cell {
+                        border: none !important;
+                    }
+                    & > .ti3-box-cell-key {
+                        color: var(--ti-input-text-color);
+                        font-size: var(--ti-input-font-size);
+                    }
+                }
+            }
+        }
+    }
+}

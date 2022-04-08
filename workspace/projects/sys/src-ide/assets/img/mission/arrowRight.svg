@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path d="M12.4750423,5.5 L4.52468497,5.5 C4.05928566,5.5 3.82401474,6.06187132 4.15442254,6.39042319 L8.12960121,10.3473305 C8.33401693,10.5508898 8.66571037,10.5508898 8.87012609,10.3473305 L12.8453048,6.39042319 C13.1757126,6.06187132 12.9417273,5.5 12.4750423,5.5" id="path-1"></path>
+    </defs>
+    <g id="4.组件/2.通用/icon/实心三角/右" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="表格下展" fill="#888888" transform="translate(8.500000, 8.000000) rotate(-90.000000) translate(-8.500000, -8.000000) " xlink:href="#path-1"></use>
+    </g>
+</svg>

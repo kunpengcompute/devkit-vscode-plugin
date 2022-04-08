@@ -1,0 +1,89 @@
+<div class="congfigContent">
+    <div class="distributedSystem">
+        <p class="distributedTitle">{{i18n.common_term_projiect_task_system}}</p>
+        <div class="distributedContentBox" *ngIf="systemData.length > 0 && !isSummuryDataNull">
+            <div *ngFor="let item of systemData">
+                <p tiOverflow tiTipPosition='left' [ngClass]="{'important': item.important}">{{item.title}}</p>
+                <span tiOverflow tiTipPosition='left'>{{item.data}} {{item.unit}}</span>
+            </div>
+        </div>
+        <app-default-page *ngIf="systemData.length === 0 || isSummuryDataNull" [scene]="'noData'"></app-default-page>
+    </div>
+    <div class="distributedHard">
+        <p class="distributedTitle">{{i18n.diagnostic.consumption.apply}}</p>
+        <div class="distributedContentBox" *ngIf="appData.length > 0 && !isSummuryDataNull">
+            <div *ngFor="let item of appData">
+                <p tiOverflow tiTipPosition='left' [ngClass]="{'important': item.important}">{{item.title}}</p>
+                <span tiOverflow tiTipPosition='left'>{{item.data}} {{item.unit}}</span>
+            </div>
+        </div>
+        <app-default-page *ngIf="appData.length === 0 || isSummuryDataNull" [scene]="'noData'"></app-default-page>
+    </div>
+
+    <div class="distributedComponent">
+        <p class="distributedTitle">{{i18n.diagnostic.consumption.distributor}}</p>
+        <div class="distributedContentBox" *ngIf="distData.length > 0 && !isSummuryDataNull">
+            <div *ngFor="let item of distData">
+                <p tiOverflow tiTipPosition='left' [ngClass]="{'important': item.important}">{{item.title}}</p>
+                <span tiOverflow tiTipPosition='left'>{{item.data}} {{item.unit}}</span>
+            </div>
+        </div>
+        <app-default-page *ngIf="distData.length === 0 || isSummuryDataNull" [scene]="'noData'"></app-default-page>
+
+    </div>
+</div>
+
+<div class="table-title">{{i18n.diagnostic.consumption.process_map}}</div>
+<ti-table tiColsResizable [(displayedData)]="memPagDisplayData" [srcData]="memPagSrcData" [columns]="memPagTitle">
+    <div class="ti3-table-fixed-head">
+        <table>
+            <thead>
+                <tr>
+                    <th *ngFor="let column of memPagTitle;index as i" >
+                        <ti-cell-text>
+                            {{column.title}}
+                        </ti-cell-text>
+                        <span class="ti3-searchbox-search ti3-icon ti3-icon-search" *ngIf='i === 1 && originData.length > 0'
+                            (click)="isSearch = !isSearch">
+                        </span>
+                        <ti-searchbox class="search-box consum-table-search" (search)="comSearch($event)" [(ngModel)]="value" (clear)="onClear()"
+                            *ngIf="isSearch && i === 1 && originData.length > 0">
+                        </ti-searchbox>
+                        <!-- sort接口为排序的属性名(字段，例如‘firstName’)-->
+                        <ti-head-sort [sortKey]="column.key" *ngIf='i > 1'></ti-head-sort>
+
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="ti3-table-container ti3-resize-wrapper" style="overflow-y: auto;max-height: 280px;">
+        <table>
+            <thead>
+                <tr>
+                    <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                    <th *ngFor="let column of memPagTitle"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="memPagDisplayData.length > 0">
+                <tr *ngFor="let row of memPagDisplayData;">
+                    <td tiOverflow *ngFor="let column of memPagTitle;index as i">
+                        <span [ngClass]="{'tableFirstData': i == 0}">
+
+                            <span>{{row[column.key]}}</span>
+                        </span>
+
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="memPagDisplayData.length === 0">
+                <tr class="ti3-table-nodata-simple">
+                    <td tiColspan>
+                        <app-default-page [scene]="'noData'"></app-default-page>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <ti-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalPage"></ti-pagination>
+</ti-table>

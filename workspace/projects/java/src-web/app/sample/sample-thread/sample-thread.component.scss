@@ -1,0 +1,343 @@
+.method-box {
+  padding-top: 1px; // 为设置esc全屏退出时候有标记
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: calc(100vh - 278px);
+  overflow: hidden;
+  --ti-tree-icon-color-active: #0067ff;
+}
+::ng-deep #threadTree {
+  .ti3-tree-container {
+    overflow-y: auto;
+    max-height: 600px;
+    padding-top: 16px;
+    border-top: 1px solid #dfe1e6;
+    .ti3-tree-text-nomultiple-wrapper {
+      margin-left: -20px;
+      padding-left: 25px;
+    }
+    .ti3-icon-plus-square,.ti3-icon-minus-square {
+      z-index: 10;
+    }
+  }
+}
+.select-box {
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #222222;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.file-list {
+  overflow: hidden;
+  vertical-align: top;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  .toggle-line{
+    position: relative;
+  }
+  .list-content {
+    width: 277px;
+    padding-top: 16px;
+    img {
+      vertical-align: text-bottom;
+      margin-right: 8px;
+    }
+    .list-item {
+      line-height: 32px;
+      padding-left: 16px;
+      font-size: 14px;
+      cursor: pointer;
+      overflow-y: auto;
+      height: calc(100% - 45px);
+      padding-top: 16px;
+      border-top: 1px solid #dfe1e6;
+    }
+    .item-child {
+      white-space: nowrap;
+    }
+    .item-child:hover {
+      background-color: var(--ti-table-th-bg-color);
+    }
+    .file-item .active:hover {
+      background-color: var(--ti-table-th-bg-color);
+    }
+  }
+  
+  .file-diff {
+    flex: 1;
+    padding-left: 17px;
+    .echarts-btns {
+      float: right;
+      .btn-box {
+        border: 1px solid #ccc;
+        padding: 3px;
+      }
+    }
+    .echarts-desc {
+      position: relative;
+      &:after {
+        content: "";
+        clear: both;
+        display: block;
+      }
+      .desc-number {
+        float: left;
+      }
+      .line-desc {
+        position: fixed;
+        right: 130px;
+        color: #6c7280;
+      }
+    }
+  }
+}
+
+.toggle-btn {
+  position: absolute;
+  top: calc(50% - 45px);
+  left: -16px;
+  cursor: pointer;
+  img {
+    width: 20px;
+    height: 90px;
+  }
+}
+.activeToggle {
+  left: -3px;
+  transform: rotateY(180deg);
+  z-index: 10;
+}
+
+.file-diff {
+  box-sizing: border-box;
+  float: left;
+  vertical-align: top;
+  overflow-y: auto;
+  .source-area {
+    flex: 1;
+  }
+  .advised-area {
+    flex: 1;
+  }
+  &::ng-deep .d2h-file-diff {
+    overflow-y: visible;
+  }
+}
+
+.split-line {
+  height: 100%;
+  border-left: 1px solid #ccc;
+  padding: 0;
+}
+
+.file-diff {
+  flex: 1;
+  padding-left: 17px;
+  border-left: 1px solid #eff0f5;
+
+  .echarts-btns {
+    float: right;
+
+    .btn-box {
+      border: 1px solid #ccc;
+      padding: 3px;
+    }
+  }
+  &::ng-deep .d2h-code-linenumber {
+    position: static;
+    border-width: 3px 0px;
+  }
+  &::ng-deep .code tbody tr td .d2h-code-line {
+    padding: 0 !important;
+  }
+}
+
+.active {
+  background-color: #e8f5fe;
+}
+
+.overflow-class {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+.circel-running,
+.circel-deadlock {
+  display: inline-block;
+  margin-bottom: 24px;
+  span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #67c78b;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+}
+
+.circel-deadlock {
+  span {
+    background: #f45c5e;
+    margin-left: 20px;
+  }
+}
+
+.lock-graph {
+  background-size: 100%;
+  background-image: url("../../../assets/img/projects/lock_graph_bg.png");
+  background-repeat: repeat;
+}
+
+.graph-header {
+  width: 98%;
+  margin-bottom: 48px;
+  padding: 40px 20px 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+  .graph-control {
+    display: flex;
+    justify-content: flex-start;
+    min-width: 300px;
+    .obersver {
+      margin-right: 8px;
+    }
+    .obersver,
+    .compare {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .control-label {
+        margin-right: 8px;
+      }
+      .control-switch {
+        margin-right: 8px;
+      }
+    }
+  }
+  .graph-status {
+    height: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 377px;
+    .status {
+      display: flex;
+      justify-content: flex-end;
+      div {
+        height: 32px;
+        line-height: 32px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-left: 8px;
+        color: #6c7280;
+        .circle {
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          margin-right: 8px;
+        }
+        .green {
+          background-color: rgba(122, 223, 160, 0.75);
+        }
+        .red {
+          background-color: rgba(244, 92, 94, 0.75);
+        }
+        .yellow {
+          background-color: rgba(236, 232, 95, 1);
+        }
+        .orange {
+          background-color: rgba(232, 153, 84, 1);
+        }
+      }
+    }
+    .lines {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      div {
+        color: #6c7280;
+        display: flex;
+        align-items: center;
+        img {
+          margin-right: 8px;
+        }
+      }
+      .dashLine {
+        margin-right: 24px;
+      }
+    }
+  }
+}
+
+.graph-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-top: 90px;
+  .graph-svg{
+    display: flex;
+    .left {
+      min-width: 600px;
+      height: 100%;
+    }
+    .right {
+      height: 100%;
+      min-width: 600px;
+    }
+  }
+}
+.control-select1 {
+  width: 89px;
+}
+.control-select2 {
+  width: 168px;
+}
+.noData {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  p {
+    color: #616161;
+    font-size: 14px;
+    line-height: 21px;
+    margin-top: 5px;
+    text-align: center;
+  }
+}
+::ng-deep .ti3-tree-parent-node{
+  line-height: 32px;
+  font-size: 14px;
+}
+.obersver-select{
+  display: block;
+  width: 89px;
+}
+.compare-select{
+  display: block;
+  width: 168px;
+}
+.zoom-screen {
+  position: fixed;
+  right: 70px;
+  bottom: 48px;
+}

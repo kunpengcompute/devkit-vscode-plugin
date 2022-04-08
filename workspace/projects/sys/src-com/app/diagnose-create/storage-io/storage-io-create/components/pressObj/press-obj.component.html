@@ -1,0 +1,59 @@
+<div class="press-obj">
+    <ti-formfield labelWidth="210px">
+        <ti-item [label]="'storageIo.pressObj.pressObj' | i18n" [required]="true">
+        </ti-item>
+    </ti-formfield>
+    <div class="warning-tip">
+        <img class="tip-img" src="./assets/img/tip/warn_triangle.svg">
+        <div>
+            <p>{{'storageIo.pressObj.pressTip1' | i18n}}</p>
+            <p>{{'storageIo.pressObj.pressTip2' | i18n}}</p>
+            <p>{{'storageIo.pressObj.pressTip3' | i18n}}</p>
+        </div>
+    </div>
+
+    <ti-table style="width:100%" #mytable [(displayedData)]="displayed" [srcData]="tableData.srcData" [columns]="tableData.columnsTree">
+        <table>   
+            <thead>
+                <tr>
+                    <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                    <th style="width: 42px;" checkbox-column>
+                        <input type="checkbox"
+                                tiCheckgroup
+                                [items]="displayed"
+                                [(checkeds)]="checkedList"
+                                (checkedsChange)="onCheckedChange()"/>
+                    </th>
+                    <th tiOverflow *ngFor="let column of tableData.columnsTree" width="{{column.width}}">
+                        <em class="require-fix" *ngIf="column.required">*</em>
+                        {{column.label}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of displayed;index as i">
+                    <td checkbox-column>
+                        <input type="checkbox"
+                                tiCheckitem
+                                [disabled]="row.disabled"
+                                [item]="row"/>
+                    </td>
+                    <td *ngFor="let column of tableData.columnsTree;">
+                        <ti-formfield *ngIf="column.type === 'input'" [formGroup]="formArray.controls[row.idx]" class="form-item">
+                            <ti-item [ngStyle]="{'margin-left': column.required ? '10px' : '0px'}"> 
+                                <input [placeholder]="column.placeholder" class="input-width" [formControlName]="column.key" tiValidation type="text" tiText [(ngModel)]="row[column.key]">
+                            </ti-item>
+                        </ti-formfield>
+                        <span style="width: 100%" *ngIf="!column.type" tiOverflow>{{row[column.key]}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 在表格中使用分页组件时必须保证其父元素是ti-table -->
+        <ti-pagination [(currentPage)]="currentPage"
+            [pageSize]="pageSize"
+            [(totalNumber)]="totalNumber">
+        </ti-pagination>
+        <div class="ti3-table-container ti3-resize-wrapper" hyNodata [nodataShow]="tableData?.srcData?.length === 0"></div>
+    </ti-table>
+</div>

@@ -1,0 +1,93 @@
+::ng-deep .vscode-dark {
+  --select-task-background-color: #313131;
+  --tag-content-background-color: #404040;
+  --tag-content-background-color-hover: #2a2a2a;
+  --tag-close-background-color: #505050;
+  --tag-close-font-color: #999;
+}
+::ng-deep .vscode-light {
+  --select-task-background-color: #ffffff;
+  --tag-content-background-color: #f5f5f5;
+  --tag-content-background-color-hover: #f0f5ff;
+  --tag-close-background-color: gainsboro;
+  --tag-close-font-color: #979797;
+}
+
+.selectedTasks {
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+    padding-right: 6px;
+    max-width: 750px;
+
+    > .label {
+      float: left;
+      color: var(--common-color-font-primary);
+      line-height: 32px;
+      font-size: 16px;
+      margin-right: 6px;
+      flex: 1 0 auto;
+    }
+  }
+
+  .selectedTasks.active{
+    box-shadow: 0px 0px 18px 0px  rgba(0, 0, 0, 0.1);
+    background-color: var(--select-task-background-color); 
+    position: absolute;      
+    left: 32px;
+    top: 0;
+    padding: 12px 10px;
+    padding-bottom: 0px;
+    max-height: 100px;
+    overflow-y: auto;
+    z-index: 2;
+    align-items: flex-start;
+    > .label {
+        line-height: 20px;
+      }
+  }
+
+  .tagBox{
+    overflow: hidden;
+    height: 25px;
+    min-width: 735px;
+  }
+  .tagBox.active{
+    display: block;
+    height: auto;
+    min-width: unset;
+    .ti3-multiselect-box-cell{
+        margin-bottom: 15px;
+    }
+  }
+
+  .filerIcon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+
+  .close-box{
+      transform: rotate(180deg);
+      margin-left: 10px;
+      cursor: pointer;
+  }
+  .tagBox .ti3-multiselect-box-cell{
+      margin:1px 8px 1px 0px;
+      width: 175px;
+      background-color: var(--tag-content-background-color) !important; 
+  }
+
+:host ::ng-deep {
+  .ti3-multiselect-box-cell .ti3-icon-close-staic{
+    cursor: pointer;
+  }
+  .ti3-multiselect-box-cell.ti3-multiselect-option-disabled .ti3-icon-close-staic{
+    cursor: not-allowed;
+  }
+  .ti3-icon-clear:before {
+    border-radius: 50%;
+    background-color: rgba(151,151,151, 0.2);
+    border: 2px transparent solid;
+  }
+}

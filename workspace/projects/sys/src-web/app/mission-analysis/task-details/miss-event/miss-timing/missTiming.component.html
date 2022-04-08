@@ -1,0 +1,72 @@
+<div class="timing_contain" [appLoading]="obtainingChartData">
+  <!-- 筛选 -->
+  <div class="filterBox">
+    <div class="selectItem">
+      <ti-select
+        [multiple]="false"
+        [options]="typeOptions"
+        [searchable]="false"
+        [(ngModel)]="typeSelected"
+        (ngModelChange)="typeChange($event)"
+        id="myselect1"
+      ></ti-select>
+    </div>
+
+    <div class="selectItem" id="select">
+      <ti-select
+        [selectAll]="true"
+        [multiple]="true"
+        [options]="cpuNumsOption"
+        [searchable]="true"
+        [(ngModel)]="cpuSelected"
+        (ngModelChange)="cpuChange($event)"
+        id="myselect2"
+      ></ti-select>
+    </div>
+  </div>
+
+  <div class="timeLine"  *ngIf="!empty">
+    <app-time-line *ngIf="timeData.length" [timeData]='timeData' [lineData]='timeLine' (timeLineData)='timeLineData($event)' #timeLineDetail></app-time-line>
+  </div>
+
+  <!-- 时序图 -->
+  <div class="memory-detail" [id]="uuid">
+    <div class="emptyData" *ngIf="empty || !timeData.length || !tableData">
+      <img
+        src="./assets/img/projects/nodata.png"
+      />
+      <div style="font-size: 14px">{{ noDataInfo }}</div>
+    </div>
+    <div *ngIf="!empty" class="table-box">
+      <div class="table-y">
+        <div
+          class="title-box"
+          style="padding: 0;"
+          *ngFor="let item of leftTitleData; let index = index"
+          [ngStyle]="
+            index == 0
+              ? { height: '45px', 'line-height': '35px' }
+              : { height: '38px' }
+          "
+        >
+          <span
+            class="title"
+            style="color:#6c7280;font-size:14px;"
+            [tiTip]="item"
+            tiTipPosition="top-left"
+            >{{ item }}</span
+          >
+        </div>
+      </div>
+      <div class="table">
+        <div
+          echarts
+          [options]="tableData"
+          *ngIf="tableData"
+          (chartInit)="onChartInit($event)"
+          style="height: 100%"
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>

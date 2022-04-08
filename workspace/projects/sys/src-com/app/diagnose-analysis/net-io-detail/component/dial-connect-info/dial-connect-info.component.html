@@ -1,0 +1,21 @@
+<div class="warpper">
+    <div class="dial-test-common-table-l1">{{'net_io.connect_info' | i18n}}</div>
+    <ti-table [(displayedData)]="displayed" [srcData]="srcData">
+        <table>
+            <thead>
+                <tr>
+                    <th tiOverflow *ngFor="let column of columns" width="{{column.width}}">{{column.title}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of displayed; trackBy: trackByFn">
+                    <td tiOverflow>{{row?.id || '--'}}</td>
+                    <td tiOverflow>{{row?.local_ip || '--'}}</td>
+                    <td tiOverflow>{{row?.localport || '--'}}</td>
+                    <td tiOverflow>{{row?.remoteiP || '--'}}</td>
+                    <td tiOverflow>{{row?.remoteiPport || '--'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </ti-table>
+</div>

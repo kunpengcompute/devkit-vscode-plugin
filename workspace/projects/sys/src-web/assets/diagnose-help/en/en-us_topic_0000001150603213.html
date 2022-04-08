@@ -1,0 +1,45 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Disabling SELinux">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001098308128.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="user guide">
+<meta name="DC.Publisher" content="20210630">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001150603213">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Disabling SELinux</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001150603213"></a><a name="EN-US_TOPIC_0000001150603213"></a>
+
+<h1 class="topictitle1">Disabling SELinux</h1>
+<div id="body8662426"><ul id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_ul763225315115"><li id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_li10632115312119">To disable SELinux temporarily, perform the following steps:<ol id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_ol617154954019"><li id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_li1195343372520">Run the <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b19953173342520">sestatus</strong> command to query the SELinux status.<p id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_p1258993602512">If <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b14464739523">Current mode</strong> is <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b39071171521">enforcing</strong>, the SELinux enforcing mode is enabled.</p>
+</li><li id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_li21718491405">Run the following command to set the SELinux mode to <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b1115216511522">permissive</strong>:<p id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_p242735854018"><strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b7596151914191">setenforce 0</strong></p>
+</li><li id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_li5550852102514">Run the <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b1555112523253">sestatus</strong> command to query the SELinux status.<p id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_p97765822512">If <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b620365725217">Current mode</strong> is <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b92078578528">permissive</strong>, the SELinux enforcing mode is disabled temporarily.</p>
+</li></ol>
+<div class="notice" id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_note1296720307203"><span class="noticetitle"><img src="public_sys-resources/notice_3.0-en-us.png"> </span><div class="noticebody"><p id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_p19671230192013">The settings become invalid after the server is restarted. When the tool is used, service exceptions may occur.</p>
+</div></div>
+</li><li id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_li54071798120">To disable SELinux permanently, perform the following steps:<ol id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_ol17198132511121"><li id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_li108251529172710">Run the <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b2826192912271">sestatus</strong> command to query the SELinux status.<p id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_p1730811339279">If <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b1416933174216">SELinux status</strong> is <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b9170183744216">enabled</strong>, SELinux is enabled.</p>
+</li><li id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_li18198112516123">Run the following command to open the <span class="uicontrol" id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_uicontrol1449604164218"><b>/etc/selinux/config</b></span> file:<p id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_p34571159102612"><strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b1509011112716">vi /etc/selinux/config</strong></p>
+</li><li id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_li193712056122618">Press <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b0230659164211">i</strong> to enter the edit mode and change <span class="parmvalue" id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_parmvalue153261340112815"><b>SELINUX=enforcing</b></span> to <span class="parmvalue" id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_parmvalue112824492811"><b>SELINUX=disabled</b></span>.</li><li id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_li8848113972710">Press <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b82415219437">Esc</strong>, type <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b192502117436">:wq</strong>, and press <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b62512216430">Enter</strong> to save the settings and exit.</li><li id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_li1344013577275">Run the <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b17133192644319">reboot</strong> command to restart the server.</li><li id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_li12196205219283">Run the <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b1619665292812">sestatus</strong> command to query the SELinux status.<p id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_p136671854152815">If <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b1870311312431">SELinux status</strong> is <strong id="EN-US_TOPIC_0000001150603213__en-us_topic_0276818969_b670383124317">disabled</strong>, SELinux is disabled permanently.</p>
+</li></ol>
+</li></ul>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001098308128.html">Common Operations</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

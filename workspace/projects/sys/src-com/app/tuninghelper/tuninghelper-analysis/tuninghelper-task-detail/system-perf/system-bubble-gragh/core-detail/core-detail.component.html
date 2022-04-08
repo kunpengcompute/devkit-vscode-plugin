@@ -1,0 +1,170 @@
+<div class="core-detail">
+  <header>Core {{ coreId }}</header>
+  <hr>
+  <div class="table-box">
+    <div class="table-wrapper process">
+      <title>{{ i18n.tuninghelper.taskDetail.coreConfig }}</title>
+      <ti-table [(displayedData)]="configDisplayed" [srcData]="configSrcData" [columns]="configColumns"
+        [searchWords]="processSearchWords" [searchKeys]="processSearchKeys">
+        <div class="ti3-table-fixed-head">
+          <table>
+            <thead>
+              <tr>
+                <th details-icon-column></th>
+                <th *ngFor="let column of configColumns">
+                  <ti-cell-text>{{column.title}}</ti-cell-text>
+                  <ti-icon *ngIf="column.sortKey" class="sort-icon" [name]="column.sortStatus"
+                    (click)="processSort(column, column.sortKey)"></ti-icon>
+                  <ti-icon *ngIf="column.searchKey" class="search-icon" [ngClass]="{'active': processSearchPop.isShow}"
+                    name="search" [pop]="processSearchTipContent" [popContext]="{ key: column.searchKey }"
+                    #processSearchPop="pop" [popOffset]="{ y: 16 }" popClass="process-search-pop">
+                  </ti-icon>
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="ti3-table-container">
+          <table>
+            <thead>
+              <tr>
+                <th details-icon-column></th>
+                <th *ngFor="let column of configColumns" [width]="column.width || ''"></th>
+              </tr>
+            </thead>
+            <tbody *ngIf="configDisplayed.length > 0">
+              <ng-container *ngFor="let row of configDisplayed">
+                <tr>
+                  <td details-icon-column>
+                    <ti-icon name="right-1" *ngIf="row.children.length > 0" [ngClass]="{'active': row.showChildren}"
+                      (click)="row.showChildren = !row.showChildren"></ti-icon>
+                  </td>
+                  <td class="pid-cell" (click)="viewThreadsData(row.pid)" tiOverflow>PID{{ row.pid }}</td>
+                  <td tiOverflow>{{ row.usr }}</td>
+                  <td tiOverflow>{{ row.system }}</td>
+                  <td tiOverflow>{{ row.cpu_usage }}</td>
+                  <td tiOverflow>{{ row.command }}</td>
+                </tr>
+                <ng-container *ngFor="let childrenRow of row.children">
+                  <tr *ngIf="row.showChildren">
+                    <td class="details-td" details-icon-column></td>
+                    <td tiOverflow>TID{{ childrenRow.tid }}</td>
+                    <td tiOverflow>{{ childrenRow.usr }}</td>
+                    <td tiOverflow>{{ childrenRow.system }}</td>
+                    <td tiOverflow>{{ childrenRow.cpu_usage }}</td>
+                    <td tiOverflow>{{ childrenRow.command }}</td>
+                  </tr>
+                </ng-container>
+
+              </ng-container>
+            </tbody>
+            <tbody *ngIf="configDisplayed.length === 0">
+              <tr class="ti3-table-nodata">
+                <td tiColspan>
+                  <div [hyNodata]="{ text: i18n.common_term_task_nodata }" [nodataShow]="true" style="height: 272px;">
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ti-pagination type="mini" [(currentPage)]="configPageNo" [pageSize]="configPageSize"
+          [(totalNumber)]="configPageTotal">
+        </ti-pagination>
+      </ti-table>
+    </div>
+    <div class="table-wrapper hard-interrupts">
+      <title>{{ i18n.tuninghelper.taskDetail.hardInterrupts }}</title>
+      <ti-table [(displayedData)]="hardDisplayed" [srcData]="hardSrcData" [columns]="hardColumns">
+        <div class="ti3-table-fixed-head">
+          <table>
+            <thead>
+              <tr>
+                <th tiOverflow *ngFor="let column of hardColumns">
+                  {{ column.title }}
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="ti3-table-container">
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let column of hardColumns"></th>
+              </tr>
+            </thead>
+            <tbody *ngIf="hardDisplayed.length > 0">
+              <tr *ngFor="let row of hardDisplayed">
+                <td tiOverflow>{{ row.device_name }}</td>
+                <td tiOverflow>{{ row.intr_num }}</td>
+                <td tiOverflow>{{ row['intr/s'] }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="hardDisplayed.length === 0">
+              <tr class="ti3-table-nodata">
+                <td tiColspan>
+                  <div [hyNodata]="{ text: i18n.common_term_task_nodata }" [nodataShow]="true" style="height: 272px;">
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ti-pagination type="mini" [(currentPage)]="hardPageNo" [pageSize]="hardPageSize"
+          [(totalNumber)]="hardPageTotal">
+        </ti-pagination>
+      </ti-table>
+    </div>
+    <div class="table-wrapper soft-interrupts">
+      <title>{{ i18n.tuninghelper.taskDetail.softInterrupts }}</title>
+      <ti-table [(displayedData)]="softDisplayed" [srcData]="softSrcData" [columns]="softColumns">
+        <div class="ti3-table-fixed-head">
+          <table>
+            <thead>
+              <tr>
+                <th tiOverflow *ngFor="let column of softColumns">
+                  {{ column.title }}
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="ti3-table-container">
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let column of softColumns"></th>
+              </tr>
+            </thead>
+            <tbody *ngIf="softDisplayed.length > 0">
+              <tr *ngFor="let row of softDisplayed">
+                <td tiOverflow>{{ row.type }}</td>
+                <td tiOverflow>{{ row['intr/s'] }}</td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="softDisplayed.length === 0">
+              <tr class="ti3-table-nodata">
+                <td tiColspan>
+                  <div [hyNodata]="{ text: i18n.common_term_task_nodata }" [nodataShow]="true" style="height: 272px;">
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ti-pagination type="mini" [(currentPage)]="softPageNo" [pageSize]="softPageSize"
+          [(totalNumber)]="softPageTotal">
+        </ti-pagination>
+      </ti-table>
+    </div>
+  </div>
+</div>
+
+<ng-template #processSearchTipContent let-context="context">
+  <ti-searchbox (search)="onProcessSearch(context.key, $event)" (clear)="onProcessSearch(context.key, '')" [ngModel]="searchWordsSave[context.key]">
+  </ti-searchbox>
+</ng-template>

@@ -1,0 +1,37 @@
+#serverNodeInfoTable {
+  width: 512px;
+}
+
+.operateBox {
+  span {
+    color: #0067ff;
+    cursor: pointer;
+
+    &:not(:first-child) {
+      margin-left: 16px;
+    }
+  }
+}
+:host .ti3-table-fixed-head,
+.ti3-table-container {
+  width: 600px;
+}
+.config-btn {
+  color: #6c92fa;
+  cursor: pointer;
+}
+.status-icon {
+  border-radius: 50%;
+  vertical-align: middle;
+  display: inline-block;
+  margin-right: 5px;
+  border: 3px solid #63b6f7;
+}
+
+.success-icon {
+  border: 3px solid #7adfa0;
+}
+
+.reserve-icon {
+  border: 3px solid #63b6f7;
+}

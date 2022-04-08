@@ -1,0 +1,13 @@
+<div class="full-select">
+    <div class="input" tabindex="0" hidefocus="true" (click)="openValue()">
+        <span class="full-select-content">{{optionModel}}</span>
+        <span [ngClass]="{'showList': show }" class="img"></span>
+    </div>
+    <div class="list" *ngIf="show">
+        <ul>
+            <li (click)="getvalue(item)" [ngClass]="{'disabled': item.disabled , 'click' : optionModel == item.label}" *ngFor="let item of Options">
+                <span >{{ item.label }}</span>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+.container {
+    margin-bottom: 32px;
+
+    .title {
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-family: FZLTHJW--GB1-0;
+        color: var(--d-e8e8e8-l-222222);
+    }
+
+    .aerasty {
+        width: 400px;
+        height: 70px;
+        margin-right: 10px;
+        padding: 8px 10px;
+        box-sizing: border-box;
+    }
+
+    .cancelbtn {
+        height: 28px;
+        background: var(--d-313131-l-ffffff);
+        line-height: 28px;
+        color: var(--d-e8e8e8-l-222222);
+        font-size: 12px;
+        margin-left: 8px;
+        width: 100px;
+    }
+
+    .aerasty[disabled] {
+        border: 1px solid var(--ti-input-border-color) !important;
+        background-color: var(--d-252526-l-ffffff) !important;
+        color: grey !important;
+        cursor: not-allowed;
+    }
+    .tipbox {
+        width: 406px;
+    }
+    .tipcontent {
+        display: flex;
+    }
+
+    .middle-font {
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 10px;
+        color: var(--color-middle-font) !important;
+
+        .log-tip-icon {
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            position: relative;
+        }
+    }
+}
+
+.inputstyle-select-disable {
+    margin-right: 10px !important;
+    width: 400px !important;
+    background-color: var(--color-inputstyle-select-disable) !important;
+
+    ::ng-deep .ti3-overflow-padding {
+        color: var(--color-inputstyle-select-disable-font) !important;
+    }
+}
+
+.inputstyle-select {
+    margin-right: 10px !important;
+    width: 400px !important;
+    border: 1px solid var(--ti-input-border-color) !important;
+}
+
+.inputstyle-select:focus {
+    border: 1px solid var(--mc-color-page-bg-hover) !important;
+}
+
+.inputstyle-select:hover {
+    border: 1px solid var(--mc-color-page-bg-hover) !important;
+}
+
+::ng-deep .ok-btn {
+    text-align: center;
+    background: var(--mc-color-page-bg-hover) !important;
+    color: var(--d-e8e8e8-l-222222) !important;
+    font-size: 12px;
+}
+
+::ng-deep .ti3-btn-default:not([disabled]):focus,
+[tiButton]:not([disabled]):focus,
+.ti3-btn-default:not([disabled]):active,
+[tiButton]:not([disabled]):active {
+    color: var(--d-e8e8e8-l-222222) !important;
+}
+
+::ng-deep .ti3-form .ti3-form-label {
+    padding: 0;
+}
+
+.required-icon {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    padding: 1px 0;
+    margin-left: -12px;
+}

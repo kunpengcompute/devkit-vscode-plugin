@@ -1,0 +1,32 @@
+<div class="banner-container">
+    <div class="welcome" [ngStyle]="{ 'margin-top': currLang === 'zh' ? '63px' : '108px' }">
+        <p (mouseenter)="mouseenterChange('growth')" (mouseleave)="mouseleaveChange('growth')">
+            <a (click)="openUrl(pluginUrlCfg.banner_openFAQ_Growth,pluginUrlCfg.banner_openFAQ_GrowthEn)" class="url">
+                {{i18n.home_top_growth}}<img [src]="sanitizer.bypassSecurityTrustResourceUrl(imgSrc.growth)"
+                class="arrow" />
+            </a>
+        </p>
+        <p (mouseenter)="mouseenterChange('advisory')" (mouseleave)="mouseleaveChange('advisory')">
+            <a (click)="openUrl(pluginUrlCfg.banner_openFAQ6,pluginUrlCfg.banner_openFAQ_java)" class="url">
+                {{i18n.home_top_info}}<img [src]="sanitizer.bypassSecurityTrustResourceUrl(imgSrc.advisory)"
+                class="arrow" />
+            </a>
+        </p>
+        <p (mouseenter)="mouseenterChange('info')" (mouseleave)="mouseleaveChange('info')">
+            <a (click)="openUrl(pluginUrlCfg.banner_openFAQ4,pluginUrlCfg.banner_openFAQ8)" class="url">
+                {{i18n.home_top_info1}}<img [src]="sanitizer.bypassSecurityTrustResourceUrl(imgSrc.info)"
+                    class="arrow" />
+            </a>
+        </p>
+        <p *ngIf="currLang === 'zh'" (mouseenter)="mouseenterChange('tool')" (mouseleave)="mouseleaveChange('tool')">
+            <a (click)="openUrl(pluginUrlCfg.banner_openFAQ9, '')" class="url">
+                {{i18n.home_top_info2}}<img [src]="sanitizer.bypassSecurityTrustResourceUrl(imgSrc.tool)"
+                    class="arrow" />
+            </a>
+        </p>
+    </div>
+    <div class="bg">
+        <div class="fit-bg"></div>
+        <img src="./assets/img/banner/banner.png" class="bg-img" />
+    </div>
+</div>

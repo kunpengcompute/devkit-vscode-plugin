@@ -1,0 +1,44 @@
+<div class="body-title">
+  <p>
+    <span>{{ 'net_io.xps_rps.software_info.type' | i18n }}</span>
+    <span>{{ bodyTitle.type }}</span>
+  </p>
+  <p>
+    <span>{{ 'net_io.xps_rps.hard_info.inter_time_text' | i18n }}</span>
+    <span>{{ bodyTitle.frequency }}</span>
+  </p>
+</div>
+
+<div class="warpper">
+  <div class="box" *ngFor="let subList of softIrqList; index as i">
+    <div class="box-title">
+      <span>CPU{{ floor(i/2) + 1 }}</span>
+      <span>NUMA{{ i }}</span>
+    </div>
+    <div class="color-block">
+      <ng-container *ngFor="let item of subList">
+        <div class="core" [hyTiTip]="tipContent" [hyTipStyle]="{ 'pointer-events': 'none' }" [tiTipContext]="item"
+        tiTipPosition="right">
+        <div [ngClass]="{'irqBackground': item.irqCount > 0}" [ngStyle]="{'opacity': item.opacity}"></div>
+      </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #tipContent let-context="context">
+  <ti-formfield [type]="'text'" [textLineHeight]="'30px'">
+    <ti-item [label]="'Core ID'">
+      <span>{{ context.coreId }}</span>
+    </ti-item>
+    <ti-item>
+      <ti-item-label>
+        <span>{{ 'net_io.xps_rps.hard_info.inter_time' | i18n }}</span>
+      </ti-item-label>
+      <span>{{ context.irqCount }}</span>
+    </ti-item>
+    <ti-item [label]="'ksoftirqd %CPU'">
+      <span>{{ context.ksoft }}</span>
+    </ti-item>
+  </ti-formfield>
+</ng-template>

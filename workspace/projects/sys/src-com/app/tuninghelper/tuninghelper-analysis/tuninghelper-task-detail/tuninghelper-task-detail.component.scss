@@ -1,0 +1,389 @@
+@import "../../../tuninghelper/styles/customButton.scss";
+::ng-deep {
+
+  :root {
+    // 业务类型复选框的交互样式变量
+    --color-service-type-item-normal-background: #f6f8fc;
+    --color-service-type-item-normal-hover-background: #e1e8f7;
+    --color-service-type-item-normal-active-background: #d0daee;
+    --color-service-type-item-selected-background: #f6f8fc;
+    --color-service-type-item-selected-hover-background: #e1e8f7;
+    --color-service-type-item-selected-active-background: #d0daee;
+    --color-service-type-item-normal-font: var(--common-color-font-secondary);
+    --color-service-type-item-normal-hover-font: #616161;
+    --color-service-type-item-normal-active-font: #1563d7;
+    --color-service-type-item-selected-font: #0067ff;
+    --color-service-type-item-selected-hover-font: #0067ff;
+    --color-service-type-item-selected-active-font: #1563d7;
+    --color-service-type-item-disabled-background: #edeff4;
+    --color-service-type-item-disabled-font: #cccccc;
+    // tab页签样式变量
+    --style-optimization-tab-icon-dot-border: 2px solid #ffffff;
+    --style-optimization-tab-icon-dot-size: 6px;
+    --style-optimization-tab-box-box-shadow: 0px 0px 4px 0px rgba(37, 110, 255, 0.2);
+    --color-optimization-tab-box-hover-background: rgba(255, 255, 255, 0.74);
+    // 右侧面板样式变量
+    --color-right-panel-background: #ffffff;
+    // 气泡图样式变量
+    --color-bubble-box-idle-border: #c2dbff;
+    --color-bubble-box-normal-border: #c2e9c5;
+    --color-bubble-box-busy-border: #fccfcf;
+    --linear-gradient-bubble-idle-box: linear-gradient(180deg, #66a4ff 0%, rgba(102, 164, 255, .4) 100%);
+    --linear-gradient-bubble-normal-box: linear-gradient(180deg, #69cb71 0%, rgba(195, 234, 198, .4) 100%);
+    --linear-gradient-bubble-busy-box: linear-gradient(180deg, #ef6969 0%, rgba(239, 105, 105, .4) 100%);
+    --color-bubble-box-gradation-label-font: #616161;
+    --color-bubble-idle-border: #5486d0;
+    --color-bubble-normal-border: #5dad63;
+    --color-bubble-busy-border: #d66f6f;
+    --color-bubble-idle-background: #66a4ff;
+    --color-bubble-normal-background: #69cb71;
+    --color-bubble-busy-background: #ef6969;
+    --color-bubble-idle-box-shadow: rgba(102, 164, 255, 0.5);
+    --color-bubble-normal-box-shadow: rgba(105, 203, 113, 0.5);
+    --color-bubble-busy-box-shadow: rgba(247, 139, 139, 0.5);
+    --color-bubble-box-page-item-background: rgba(0, 0, 0, 0.11);
+    --color-bubble-box-page-item-active-background: #f3f3f3;
+    --color-bubble-box-page-item-active-border: #222222;
+
+    // 树图及优化建议相关颜色
+    --border-d-3c3c3c-l-e1e6ee: #E1E6EE;
+    --font-d-e8e8e8-l-222222: #222222;
+    --font-d-e8e8e8-l-616161: #616161;
+    --line-d-888888-l-e1e6ee: #E1E6EE;
+    --font-d-888888-l-979797: #979797;
+    --font-d-aaaaaa-l-616161: #616161;
+    --foot-d-aaaaaa-l-222222: #222222;
+
+    --color-task-failed-tip-text-font: #616161;
+  }
+
+  .vscode-dark .tuninghelper-task-detail,
+  .vscode-dark .task-failed {
+    // 业务类型复选框的交互样式变量
+    --color-service-type-item-normal-background: rgba(255, 255, 255, 0.07);
+    --color-service-type-item-normal-hover-background: rgba(255, 255, 255, 0.16);
+    --color-service-type-item-normal-active-background: rgba(255, 255, 255, 0.04);
+    --color-service-type-item-selected-background: rgba(32, 114, 234, 0.16);
+    --color-service-type-item-selected-hover-background: rgba(0, 103, 255, 0.38);
+    --color-service-type-item-selected-active-background: rgba(0, 50, 123, 0.3);
+    --color-service-type-item-normal-font: var(--common-color-font-secondary);
+    --color-service-type-item-normal-hover-font: #e8e8e8;
+    --color-service-type-item-normal-active-font: #aaaaaa;
+    --color-service-type-item-selected-font: #0067ff;
+    --color-service-type-item-selected-hover-font: #4c94fb;
+    --color-service-type-item-selected-active-font: #1563d7;
+    --color-service-type-item-disabled-background: rgba(255, 255, 255, 0.04);
+    --color-service-type-item-disabled-font: #616161;
+    // tab页签样式变量
+    --style-optimization-tab-icon-dot-border: none;
+    --style-optimization-tab-icon-dot-size: 8px;
+    --style-optimization-tab-box-box-shadow: none;
+    --color-optimization-tab-box-hover-background: #1f1f1f;
+    // 右侧面板样式变量
+    --color-right-panel-background: #232323;
+    // 气泡图样式变量
+    --color-bubble-box-idle-border: #1f4070;
+    --color-bubble-box-normal-border: #3c633f;
+    --color-bubble-box-busy-border: #622c2c;
+    --linear-gradient-bubble-idle-box: linear-gradient(180deg, #2072ea 0%, rgba(32, 114, 234, .4) 100%);
+    --linear-gradient-bubble-normal-box: linear-gradient(180deg, #69cb71 0%, rgba(60, 99, 63, .4) 100%);
+    --linear-gradient-bubble-busy-box: linear-gradient(180deg, #c84242 0%, rgba(98, 44, 44, .4) 100%);
+    --color-bubble-box-gradation-label-font: #e8e8e8;
+    --color-bubble-idle-border: #95c0ff;
+    --color-bubble-normal-border: #b6f4bb;
+    --color-bubble-busy-border: #e58d8d;
+    --color-bubble-idle-background: #2072ea;
+    --color-bubble-normal-background: #69cb71;
+    --color-bubble-busy-background: #c84242;
+    --color-bubble-idle-box-shadow: transparent;
+    --color-bubble-normal-box-shadow: transparent;
+    --color-bubble-busy-box-shadow: transparent;
+    --color-bubble-box-page-item-background: #616161;
+    --color-bubble-box-page-item-active-background: #878787;
+    --color-bubble-box-page-item-active-border: #ffffff;
+
+    // 树图及优化建议相关颜色
+    --border-d-3c3c3c-l-e1e6ee: #3c3c3c;
+    --font-d-e8e8e8-l-222222: #E8E8E8;
+    --font-d-e8e8e8-l-616161: #E8E8E8;
+    --line-d-888888-l-e1e6ee: #888888;
+    --font-d-888888-l-979797: #888888;
+    --font-d-aaaaaa-l-616161: #AAAAAA;
+    --foot-d-aaaaaa-l-222222: #AAAAAA;
+
+    --color-task-failed-tip-text-font: #aaaaaa;
+  }
+}
+
+.tuninghelper-task-detail {
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  padding-right: calc(468px + 2%);
+  box-sizing: border-box;
+  min-width: 1440px;
+
+  .left {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    z-index: 0;
+    
+    header {
+      padding: 24px 0;
+
+      .service-type {
+        display: flex;
+        align-items: center;
+        height: 24px;
+        line-height: 24px;
+        font-size: 14px;
+
+        > span {
+          color: var(--common-color-font-secondary);
+        }
+
+        .service-type-item {
+          margin-left: 24px;
+
+          ::ng-deep {
+
+            // 未选中
+            > input + .ti3-checkbox {
+              height: 24px;
+              border-radius: 12px;
+              padding: 0 16px;
+              background-color: var(--color-service-type-item-normal-background);
+
+              .ti3-checkbox-label {
+                color: var(--color-service-type-item-normal-font);
+              }
+
+              &:hover {
+                background-color: var(--color-service-type-item-normal-hover-background);
+
+                .ti3-checkbox-label {
+                  color: var(--color-service-type-item-normal-hover-font);
+                }
+              }
+
+              &:active {
+                background-color: var(--color-service-type-item-normal-active-background);
+
+                .ti3-checkbox-label {
+                  color: var(--color-service-type-item-normal-active-font);
+                }
+              }
+  
+              .ti3-checkbox-skin {
+                display: none;
+              }
+
+              .ti3-checkbox-label {
+                display: block;
+                font-size: 12px;
+                line-height: 24px;
+              }
+  
+            }
+
+            // 选中
+            > input.checked + .ti3-checkbox {
+              background-color: var(--color-service-type-item-selected-background);
+
+              .ti3-checkbox-label {
+                color: var(--color-service-type-item-selected-font);
+              }
+
+              &:hover {
+                background-color: var(--color-service-type-item-selected-hover-background);
+
+                .ti3-checkbox-label {
+                  color: var(--color-service-type-item-selected-hover-font);
+                }
+              }
+
+              &:active {
+                background-color: var(--color-service-type-item-selected-active-background);
+
+                .ti3-checkbox-label {
+                  color: var(--color-service-type-item-selected-active-font);
+                }
+              }
+            }
+
+            // 禁用
+            > input.disabled + .ti3-checkbox {
+              background-color: var(--color-service-type-item-disabled-background);
+
+              .ti3-checkbox-label {
+                color: var(--color-service-type-item-disabled-font);
+              }
+
+              &:hover {
+                background-color: var(--color-service-type-item-disabled-background);
+
+                .ti3-checkbox-label {
+                  color: var(--color-service-type-item-disabled-font);
+                }
+              }
+
+              &:active {
+                background-color: var(--color-service-type-item-disabled-background);
+
+                .ti3-checkbox-label {
+                  color: var(--color-service-type-item-disabled-font);
+                }
+              }
+            }
+
+          }
+        }
+
+        .suggestion-select-lable {
+          margin: 0 16px 0 32px;
+          max-width: 100px;
+        }
+
+        ti-select {
+          width: 200px;
+        }
+      }
+
+      .optimization-tab {
+        display: flex;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 16px;
+        background: var(--common-color-background-secondary);
+        border-radius: 3px;
+        padding: 5px 7px;
+
+        .optimization-tab-box + .optimization-tab-box {
+          margin-left: 8px;
+        }
+
+        .optimization-tab-box {
+          width: 25%;
+          height: 38px;
+          box-sizing: border-box;
+          cursor: pointer;
+          border-radius: 4px;
+          padding: 7px 8px 7px 16px;
+          display: flex;
+          column-gap: 8px;
+          justify-content: space-between;
+          align-items: center;
+          position: relative;
+
+          &.active {
+            background-color: var(--common-color-background-primary);
+            box-shadow: var(--style-optimization-tab-box-box-shadow);
+          }
+
+          &:hover:not(.active) {
+            background: var(--color-optimization-tab-box-hover-background);
+          }
+
+          &.tab-icon-dot::before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: var(--style-optimization-tab-icon-dot-size);
+            height: var(--style-optimization-tab-icon-dot-size);
+            border-radius: 50%;
+            background: #e2253b;
+            border: var(--style-optimization-tab-icon-dot-border);
+            top: 4px;
+            left: 8px;
+          }
+
+          p {
+            flex: 1;
+            font-size: 16px;
+            color: var(--common-color-font-primary);
+          }
+
+          &.active,
+          &:hover {
+            hy-theme-content {
+              visibility: visible;
+            }
+          }
+
+          hy-theme-content {
+            visibility: hidden;
+            flex-shrink: 0;
+
+            app-icon-react {
+              display: block;
+              width: 16px;
+              height: 16px;
+            }
+          }
+
+        }
+      }
+    }
+
+    main {
+      overflow: auto;
+      width: 100%;
+      height: calc(100% - 136px);
+    }
+  }
+
+  .right {
+    position: absolute;
+    width: 468px;
+    height: 100%;
+    flex-shrink: 0;
+    padding: 20px 0 20px 2%;
+    box-sizing: border-box;
+    border-left: 1px solid var(--common-color-divider);
+    top: 0;
+    right: 0;
+    z-index: 1;
+    background: var(--color-right-panel-background);
+    transition: width .2s;
+
+    &.active {
+      width: calc(100% - 26px);
+
+      .toggle-btn {
+        transform: rotateY(180deg);
+      }
+    }
+
+    .toggle-btn {
+      position: absolute;
+      top: 50%;
+      left: -4px;
+      cursor: pointer;
+      margin-top: -45px;
+    }
+
+    .sug-box {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      overflow-y: auto;
+    }
+  }
+}
+::ng-deep .task-failed {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .text {
+    text-align: center;
+    font-size: 14px;
+    color: var(--color-task-failed-tip-text-font);
+  }
+}

@@ -1,0 +1,138 @@
+<!-- 叶子节点优化建议详情 -->
+<div class="tree-leaf-detail">
+
+  <!-- 相关配置 -->
+  <div *ngIf="hasRelavantConfig">
+    <div class="item-title">{{i18n.tuninghelper.treeDetail.relavantConfig}}</div>
+
+    <!-- 文本表单 -->
+    <div *ngIf="relavantConfigForm.length" class="mb22">
+      <app-form-sug-detail [formList]="relavantConfigForm"></app-form-sug-detail>
+    </div>
+
+    <!-- 一个表格 -->
+    <div *ngIf="relavantConfigTable.srcData.data.length" class="mb22">
+      <app-tree-sug-table-detail [table]="relavantConfigTable"></app-tree-sug-table-detail>
+    </div>
+
+    <!-- 多个表格 系统配置优化建议详情涉及-->
+    <ng-container *ngIf="relavantConfigMultiTableList.length">
+      <ng-container *ngFor="let table of relavantConfigMultiTableList">
+        <!-- 相关配置双层表头的表格 -->
+        <div *ngIf="table.tableName" class="mb22">
+          <app-tree-double-head-table [doubleHeadConfigTable]="table"></app-tree-double-head-table>
+        </div>
+  
+        <!-- 相关配置单层表头的表格 -->
+        <div *ngIf="!table.tableName" class="mb22">
+          <app-tree-sug-table-detail [table]="table"></app-tree-sug-table-detail>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <!-- 相关性能指标 -->
+  <div *ngIf="hasRelavantIndicator">
+    <div class="item-title">{{i18n.tuninghelper.treeDetail.relavantIndicator}}</div>
+
+    <!-- 文本表单 -->
+    <div *ngIf="relavantIndicatorForm.length" class="mb22">
+      <app-form-sug-detail [formList]="relavantIndicatorForm"></app-form-sug-detail>
+    </div>
+
+    <!-- 一个表格 -->
+    <div *ngIf="relavantIndicatorTable.srcData.data.length" class="mb22">
+      <app-tree-sug-table-detail *ngIf="optimizationType !== optimizationTypes.hotFunction" [table]="relavantIndicatorTable">
+      </app-tree-sug-table-detail>
+
+      <!-- 热点函数的详情 -->
+      <app-tree-hotfunction-detail
+        *ngIf="optimizationType === optimizationTypes.hotFunction"
+        [tableData]="relavantIndicatorTable">
+      </app-tree-hotfunction-detail>
+    </div>
+
+    <!-- 多个表格 系统配置优化建议详情涉及-->
+    <ng-container *ngIf="relavantIndicatorMultiTableList.length">
+      <ng-container *ngFor="let table of relavantIndicatorMultiTableList">
+        <!-- 性能指标双层表头的表格 -->
+        <div *ngIf="table.tableName" class="mb22">
+          <app-tree-sug-table-detail *ngIf="table.tableName === 'process_memory_affinity' || table.tableName === 'sub_collumn'" [table]="table">
+          </app-tree-sug-table-detail>
+
+          <!-- 其他双层表头表格 -->
+          <app-tree-double-head-table *ngIf="table.tableName !== 'sub_collumn' && table.tableName !== 'process_memory_affinity' && table.tableName !== undefined "
+            [doubleHeadConfigTable]="table">
+          </app-tree-double-head-table>
+        </div>
+  
+        <!-- 性能指标单层表头的表格 -->
+        <div *ngIf="!table.tableName" class="mb22">
+          <app-tree-sug-table-detail [table]="table"></app-tree-sug-table-detail>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <!-- 指标说明 -->
+  <div *ngIf="indicatorDesc" class="mb32">
+    <div class="item-title">{{i18n.tuninghelper.treeDetail.indicatorDesc}}</div>
+    <div class="info" [innerHtml]="indicatorDesc"></div>
+  </div>
+
+  <!-- 优化建议 -->
+  <div *ngIf="suggestion" class="mb32">
+    <div class="item-title">{{i18n.tuninghelper.treeDetail.optimizationSug}}</div>
+    <div class="info" [innerHtml]="suggestion"></div>
+  </div>
+
+  <!-- 优化指导 -->
+  <div *ngIf="operation" class="mb32">
+    <div class="item-title">{{i18n.tuninghelper.treeDetail.optimizationGuide}}</div>
+    <div class="info">
+      <span [ngClass]="{'can-click': operationPath.length > 0}" (click)="openOperationHelp()" [innerHtml]="operation"></span>
+      <span>{{ operationPath }}</span>
+    </div>
+  </div>
+
+  <!-- 点击跳转其他页面 -->
+  <div *ngIf="analysisType" class="btn-group mb32">
+    <button *ngIf="hasAuthotity" (click)="goToOtherPage()" class="small-primary-button">{{btnText}}</button>
+    <button *ngIf="associatedTaskId" (click)="viewReport()" class="small-primary-button">{{i18n.tuninghelper.treeDetail.viewReport}}</button>
+  </div>
+
+  <!-- 建议采纳 -->
+  <div class="sug-adopted">
+    <app-tag-button
+      [isSelected]="isAdopted"
+      [hasAuthotity]="hasAuthotity"
+      (tagBtnClickEnv)="onAdoptedSug()">
+      {{isAdopted ? i18n.tuninghelper.treeDetail.adopted : i18n.tuninghelper.treeDetail.noAdopted}}
+    </app-tag-button>
+    <div class="info">
+      <span>{{i18n.tuninghelper.treeDetail.adoptedTip1}}</span>
+      <span class="associated-report" (click)="viewAssociatedReport()">{{i18n.tuninghelper.treeDetail.adoptedTip2}}</span>
+      <span>{{i18n.tuninghelper.treeDetail.adoptedTip3}}</span>
+    </div>
+  </div>
+</div>
+
+<!-- 新建工程弹框 -->
+<ng-template #createProjectModal let-context='context'>
+
+  <!-- 弹框头部定义 -->
+  <ti-modal-header>
+    <div>{{ i18n.common_term_operate_add_project }}</div>
+  </ti-modal-header>
+
+  <!-- 弹框内容定义 -->
+  <ti-modal-body>
+    <div>{{modalBodyText}}</div>
+  </ti-modal-body>
+
+  <!-- 弹框底部定义 -->
+  <ti-modal-footer>
+    <button type="button" (click)="newProject()" class="primary-button">{{ i18n.common_term_operate_ok }}</button>
+    <button type="button" (click)="context.dismiss()" class="secondary-button">{{ i18n.common_term_operate_cancel }}</button>
+  </ti-modal-footer>
+</ng-template>

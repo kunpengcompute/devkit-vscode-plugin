@@ -1,0 +1,21 @@
+<div class="memory-detail" [id]='uuid' (mousedown)="onBrush($event)" >
+    <div class="table-box">
+        <div class="table-y">
+            <div class="line" style="margin-top: 38px"></div>
+            <div class="title-box" style="height: 56px">
+                <span class="title-num">1</span>
+                <span class="title">user</span>
+                <span class="title-num">0</span>
+            </div>
+            <div class="line" style="margin-top: 2px"></div>
+        </div>
+        <div class="table">
+            <div echarts [options]="tableData"  *ngIf="tableData" (chartInit)="onChartInit($event)" style="height: 100%" class="echarts-box" [ngClass]="{'first': datas.showLe }"></div>
+        </div>
+    </div>
+    <ng-container >
+    <div class="mask-box" [ngStyle]="{height: gridHeight + 'px',top: baseTop + 'px'}" >
+        <div class="brush-box"></div>
+      </div>
+    </ng-container>
+</div>

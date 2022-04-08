@@ -1,0 +1,50 @@
+$common48: 2.5%;
+
+$col222: #222;
+$col0067ff: #0067ff;
+$colf5f9ff: #f5f9ff;
+
+.nav-bar {
+  height: 100%;
+  .return {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    height: 47px;
+    font-size: 20px;
+    color: $col222;
+    border-bottom: 2px dotted #D4D9E6;
+    padding-bottom: 20px;
+    cursor: pointer;
+    img {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+    }
+  }
+
+  .nav-list {
+    flex: 1;
+    padding-top: 20px;
+    border-right: 2px solid #eff0f5;
+    li {
+      padding-left: 22px;
+      border-left: 2px solid transparent;
+      color: $col222;
+      line-height: 48px;
+      cursor: pointer;
+      &:hover {
+        background-color: $colf5f9ff;
+      }
+      &.active {
+        color: $col0067ff;
+        border-left-color: $col0067ff;
+        background-color: $colf5f9ff;
+      }
+      &.notShow {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+<div class="nav-bar flex-column">
+  <div class="return" (click)="goBack()">
+    <img src="./assets/img/header/icon_header_arrow_back.svg" alt="">
+    {{ i18n.common_term_return }}
+  </div>
+  <ul class="nav-list">
+    <li 
+      tiOverflow 
+      *ngFor="let item of navList" 
+      routerLink="/setting/{{item.path}}" routerLinkActive="active"
+      [ngClass]="{'notShow': item.admin && role !== 'Admin'}" 
+    >{{ item.title }}</li>
+  </ul>
+</div>

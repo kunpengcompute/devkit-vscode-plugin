@@ -1,0 +1,68 @@
+<ng-template #batchModal let-context="context">
+  <ti-modal-header>
+    {{
+      (batchOptTypeEnum.Import === batchOptType
+        ? "nodeManagement.batchImportNodes"
+        : "nodeManagement.batchDeleteNodes"
+      ) | i18n
+    }}
+    <span class="tip-nodeclose" (click)="onModelClose($event)">
+      <img class="ti3-close" src="./assets/img/analyzing/images/close_icon.svg" />
+      <img class="ti3-close" src="./assets/img/analyzing/images/close_hover.svg">
+    </span>
+  </ti-modal-header>
+  <ti-modal-body>
+    <div class="datavalidfail">
+      <div class="warpper-line"></div>
+      <div class="prompt-information">
+        <p>
+          <span style="margin-right: 5px;"><img src="./assets/img/tip/warn.png" /></span
+          >{{ "nodeManagement.nodeNotRequire" | i18n }}
+        </p>
+      </div>
+      <div class="node-information-display">
+        <app-common-table [commonTableData]="processTableData">
+          <ng-template let-displayed let-tabcolumns="columns">
+            <tbody>
+              <ng-container *ngFor="let row of displayed; index as i">
+                <tr>
+                  <ng-container *ngFor="let col of tabcolumns">
+                    <ng-container
+                      *ngIf="isNothing(row[col.key]?.error); else errorInfo"
+                    >
+                      <td tiOverflow>
+                        {{
+                          row[col.key]?.value
+                            ? col.isSecret
+                              ? "******"
+                              : row[col.key]?.value
+                            : "--"
+                        }}
+                      </td>
+                    </ng-container>
+                    <ng-template #errorInfo>
+                      <td class="error-param" [tiTip]="row[col.key]?.error[0]">
+                        {{
+                          row[col.key]?.value
+                            ? col.isSecret
+                              ? "******"
+                              : row[col.key]?.value
+                            : "--"
+                        }}
+                      </td>
+                    </ng-template>
+                  </ng-container>
+                </tr>
+              </ng-container>
+            </tbody>
+          </ng-template>
+        </app-common-table>
+      </div>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" (click)="onModelClose($event)" tiButton>
+      {{ "common_term_operate_close" | i18n }}
+    </button>
+  </ti-modal-footer>
+</ng-template>

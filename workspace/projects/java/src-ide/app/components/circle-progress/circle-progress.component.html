@@ -1,0 +1,42 @@
+<div
+  class="circle-container"
+  [ngStyle]="{ 'border-color': theme == 'white' ? '#ccc' : '#545966' }"
+>
+  <div class="circle-border" [id]="elId + '-border'">
+    <div
+      class="circle"
+      [id]="elId"
+      [ngStyle]="{ background: theme == 'white' ? '#fff' : '#282b33' }"
+    >
+      <div class="circle_left">
+        <div
+          class="left"
+          [ngStyle]="{ background: theme == 'white' ? '#fff' : '#282b33' }"
+        ></div>
+      </div>
+      <div class="circle_right">
+        <div
+          class="right"
+          [ngStyle]="{ background: theme == 'white' ? '#fff' : '#282b33' }"
+        ></div>
+      </div>
+      <div
+        class="circle-mask"
+        [ngStyle]="{
+          background: theme == 'white' ? '#fff' : '#282b33',
+          color: theme == 'white' ? '#282b33' : '#fff'
+        }"
+      >
+        <p style="margin-top: 25px; line-height: 0;">
+          <span class="circle-value">{{ progressData.value }}</span>
+        </p>
+        <p
+          class="label-cls"
+          [ngStyle]="{ 'margin-top': language == 'en-us' ? '0px' : '7px' }"
+        >
+          <span>{{ progressData.label }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

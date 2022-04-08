@@ -1,0 +1,369 @@
+<div class="overview-container" style="min-height: calc(100vh - 200px);">
+  <div class="thread-tabs" *ngIf="!offlineThreadDump">
+    <div class="item-tab" *ngFor="let tab of threadTabs; let idx = index" (click)="toggleTab(idx)">
+      <span *ngIf="tab.checked || !isDownload"
+        [ngClass]="{ 'item-split-none': idx === 1, 'tab-label-first': idx === 0 ,'tab-label': !isDownload }">
+        <span [ngClass]="{ 'tab-active': tab.active }">{{ tab.tabName }}</span>
+      </span>
+    </div>
+  </div>
+  <div style="height: 100%;" *ngIf="currentTabName == 'list' && !offlineThreadDump" [appLoading]="isLoading">
+    <div class="btn-search">
+      <div style="margin-top: 20px;">
+        <button type="button" (click)="dumpHandle()" tiButton color="primary" class="btn-search-btn"
+          [ngClass]="{ 'disable-btn': startBtnDisabled}" [disabled]="startBtnDisabled">
+          {{ i18n.protalserver_profiling_thread.dumpbtn }}
+        </button>
+        <img [tiTip]="i18n.protalserver_profiling_thread.dumptips" tiTipPosition="right"
+          style="position: relative;top: 2px; width: 12px; height: 12px;margin-left: 10px;margin-right: 24px;"
+          src="./assets/img/newSvg/hollowTip.svg" alt="">
+      </div>
+      <ti-searchbox style="width: 260px;" [placeholder]="i18n.protalserver_profiling_thread.thread_list_placehold"
+        (search)="onSelect(selectValue)" (clear)="onClear($event)" [(ngModel)]='searchValue'>
+      </ti-searchbox>
+      <div style="margin: 0 16px 0 24px;">{{ i18n.protalserver_profiling_thread.show_use }}</div>
+      <ti-select style="width: 300px;" [multiple]="true" [maxLine]="1" [selectAll]="true" [options]='selectOptions'
+        [(ngModel)]="selectValue" [placeholder]='i18n.protalserver_profiling_thread.show_placehold'
+        (select)="onSelect(selectValue)" id="myselect">
+      </ti-select>
+    </div>
+    <div *ngIf="xLabels.length > 0">
+      <div class="thread-title-top">
+        <div class="thread-title-top-left">{{ i18n.protalserver_sampling_lock_thread.name }}</div>
+        <div style="text-align: right;">
+          <span>
+            <span style="
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                background: #7adfa0;
+                margin-right: 5px;
+              "></span>
+            <span>Runnable</span>
+          </span>
+          <span style="padding-left: 10px;">
+            <span style="
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                background: #fdca5a;
+                margin-right: 5px;
+              "></span>
+            <span>Waiting</span>
+          </span>
+          <span style="padding-left: 10px;">
+            <span style="
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                background: #f45c5e;
+                margin-right: 5px;
+              "></span>
+            <span>Blocked</span>
+          </span>
+        </div>
+      </div>
+      <div class="x-labels">
+        <div style="flex: 1;" *ngFor="let label of xLabels">{{ label }}</div>
+      </div>
+      <div class="thread-content">
+        <div class="chart-box" id="time-echart-box" *ngIf="getDatas.spec.length">
+          <div class="left">
+            <div class="line" [ngStyle]="{ marginTop: baseTop - 1 + 'px' }"></div>
+            <div style="text-align: left;" [ngStyle]="{ height: echartsContainerHeight + 'px' }">
+              <div *ngFor="let item of getDatas.spec; let i = index" [ngStyle]="{
+                  top: gridInertvalHeight * (i + 1) + 'px',
+                  height: gridHeight + 'px',
+                  lineHeight: gridHeight + 'px'
+                }" class="thread-list"
+                [tiTip]="(item.name + '(' + item.id + ')').length > 35 ? item.name + '(' + item.id + ')' : ''">
+                {{ item.name + '(' + item.id + ')' }}
+              </div>
+            </div>
+          </div>
+          <div class="right">
+            <div echarts [options]="tableData" (chartInit)="onChartInit($event)" [merge]="updateOptions" [ngStyle]="{
+                height: echartsContainerHeight + gridInertvalHeight - 40 + 'px'
+              }"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="getDatas.spec.length === 0" class="thread-nodata">
+      <img class='newNoData' src="./assets/img/projects/noData.svg" />
+      <div class="no-text">{{ i18n.common_term_task_nodata }}</div>
+    </div>
+  </div>
+  <div *ngIf="currentTabName === 'dump'" [hidden]="typeSelected.id !== 'raw'" style="height: calc(100% - 44px);">
+    <div [hidden]="fileList.length === 0">
+      <div class="file-list">
+        <div class="leftTree" [ngStyle]="{'display': leftState? 'none':'block'}">
+          <ti-select class="typeSelected" [options]="typeOptions" [(ngModel)]="typeSelected" placeholder="Please Select"
+            (select)="typeHasChange($event)" id="typeSelect">
+          </ti-select>
+
+          <div class="rightSet" *ngIf="!offlineThreadDump">
+            <div class="save-box" *ngIf="!isDownload">
+              <div *ngIf="threadDumpList < profileDownload.downloadItems.report.maxThreadDumpCount && !startBtnDisabled"
+                (click)="openSaveReport()">
+                <span class="svg-toggle" [tiTip]='i18n.profileMemorydump.saveHeapDump.saveReport' tiTipPosition='top'>
+                  <img tiTipPosition='top' src="./assets/img/newSvg/td_save_default.svg">
+                  <img tiTipPosition='top' src="./assets/img/newSvg/td_save_hover.svg">
+                  <img tiTipPosition='top' src="./assets/img/newSvg/td_save_clicked.svg">
+                </span>
+              </div>
+              <div *ngIf="threadDumpList >= profileDownload.downloadItems.report.maxThreadDumpCount || startBtnDisabled"
+                [tiTip]="!startBtnDisabled ? i18n.profileMemorydump.saveHeapDump.saveTDReportSizeTip : ''">
+                <span>
+                  <img tiTipPosition='top' src="./assets/img/newSvg/td_save_disabled.svg">
+                </span>
+              </div>
+            </div>
+            <img *ngIf="!isDownload" class="deleteIcon" (click)="showDelete()" (mouseenter)="onHoverList('delete')"
+              (mouseleave)="onHoverList()" style="float: right;"
+              [src]="currentHover==='delete' ? './assets/img/newSvg/delete_hover.svg': './assets/img/newSvg/delete_default.svg'"
+              alt="">
+          </div>
+          <div class="list-content">
+            <div class="treeContent">
+              <ti-tree id="tree" [multiple]="multiple" [data]="multiple ? innerData : fileList"
+                [changedByCheckbox]="true" (change)="changeFn($event)">
+                <ng-template let-item let-i=index>
+                  <span class="parentSpan" tiOverflow tiTipPosition="right" (click)="getAllContent(item)">
+                    <img *ngIf="!item.children" src="./assets/img/newSvg/file_icon.svg">
+                    <span style="cursor: pointer">{{item.name}}</span>
+                  </span>
+                </ng-template>
+              </ti-tree>
+            </div>
+            <div class="leftListBt" *ngIf="multiple">
+              <button class="confirm" type="button" color="primary" (click)="showAlertDel()" tiButton
+                [disabled]='selectCount'>{{i18n.common_term_ok}}</button>
+              <button type="button" tiButton (click)="cancelDel()">{{i18n.common_term_operate_cancel}}</button>
+            </div>
+          </div>
+        </div>
+        <div class="split-line">
+          <div class="toggle-btn" (click)='toggleLeft()' [ngClass]="{'activeToggle': leftState}">
+            <img (mouseenter)="libService.onHoverIcon('threadToggle')" (mouseleave)="libService.onHoverIcon()"
+              [src]="libService.hoverIcon === 'threadToggle' ? './assets/img/projects/toggle_hover.svg':'./assets/img/projects/toggle.svg'" />
+          </div>
+        </div>
+        <div class="file-diff" [ngStyle]="{'padding-left': leftState?'37px':'17px'}" [appLoading]="isLoadingList">
+          <app-diff #diffIns [currentFile]="currentFile"></app-diff>
+        </div>
+      </div>
+    </div>
+    <div [hidden]="fileList.length !== 0" class="unDataThread">
+      <img class='newNoData' src="./assets/img/projects/noData.svg" />
+      <div>{{threadDumpNodata}}</div>
+    </div>
+  </div>
+  <div *ngIf="currentTabName === 'dump'" [hidden]="typeSelected.id !== 'graph'" style="height: 100%;" #showFullEl
+    [appLoading]="isOfflineLoading">
+    <div class="file-list graph-list" *ngIf="fileList.length!==0">
+      <div class="leftTree" [ngStyle]="{'display': leftState? 'none':'block'}">
+        <ti-select class="typeSelected" [options]="typeOptions" [(ngModel)]="typeSelected" placeholder="Please Select"
+          (select)="typeHasChange($event)" id="typeSelect">
+        </ti-select>
+        <div class="rightSet" *ngIf="!offlineThreadDump">
+          <div class="save-box" *ngIf="!isDownload">
+            <div *ngIf="threadDumpList < profileDownload.downloadItems.report.maxThreadDumpCount && !isAlermDisk && !startBtnDisabled"
+              (click)="openSaveReport()">
+              <span class="svg-toggle" [tiTip]='i18n.profileMemorydump.saveHeapDump.saveReport' tiTipPosition='top'>
+                <img tiTipPosition='top' src="./assets/img/newSvg/td_save_default.svg">
+                <img tiTipPosition='top' src="./assets/img/newSvg/td_save_hover.svg">
+                <img tiTipPosition='top' src="./assets/img/newSvg/td_save_clicked.svg">
+              </span>
+            </div>
+            <div *ngIf="(threadDumpList >= profileDownload.downloadItems.report.maxThreadDumpCount && !isAlermDisk) || startBtnDisabled"
+              [tiTip]="startBtnDisabled ? '' : i18n.profileMemorydump.saveHeapDump.saveTDReportSizeTip">
+              <span>
+                <img tiTipPosition='top' src="./assets/img/newSvg/td_save_disabled.svg">
+              </span>
+            </div>
+            <div *ngIf="isAlermDisk" [tiTip]='i18n.common_term_upload_disk'>
+              <span>
+                <img tiTipPosition='top' src="./assets/img/newSvg/td_save_disabled.svg">
+              </span>
+            </div>
+          </div>
+          <img *ngIf="!isDownload" class="deleteIcon" (click)="showDelete('graph')" (mouseenter)="onHoverList('delete')"
+            (mouseleave)="onHoverList()"
+            [src]="currentHover==='delete' ? './assets/img/newSvg/delete_hover.svg': './assets/img/newSvg/delete_default.svg'"
+            alt="">
+        </div>
+        <div class="list-content">
+          <div class="list-item" style="padding-left: 0;" *ngIf="!multipleGraph">
+            <ul class="item-child-container">
+              <li class="item-child" [ngClass]="{ active: activeGraph === fileIndex }"
+                *ngFor="let file of fileList; let fileIndex = index" (click)="changeParseSel(file, fileIndex)">
+                <img style="margin: 0px 10px 2px 20px;" src="./assets/img/newSvg/file_icon.svg">
+                <span class="overflow-class" style="white-space: nowrap; width: 100%;">{{ file.name }}</span>
+              </li>
+            </ul>
+          </div>
+          <div class="treeContent" *ngIf="multipleGraph">
+            <ti-tree id="treeGraph" [multiple]="multipleGraph" [data]="innerDataGraph" [changedByCheckbox]="true"
+              (change)="changeFn_g($event)">
+              <ng-template let-item let-i=index>
+                <span class="parentSpan" tiOverflow tiTipPosition="right">
+                  <img *ngIf="!item.children" src="./assets/img/newSvg/file_icon.svg">
+                  <span style="cursor: pointer">{{item.name}}</span>
+                </span>
+              </ng-template>
+            </ti-tree>
+          </div>
+          <div class="leftListBt" *ngIf="multipleGraph">
+            <button class="confirm" type="button" color="primary" (click)="showAlertDel('graph')" tiButton
+              [disabled]='selectCountGraph'>{{i18n.common_term_ok}}</button>
+            <button type="button" tiButton (click)="cancelDel('graph')">{{i18n.common_term_operate_cancel}}</button>
+          </div>
+        </div>
+      </div>
+      <div class="split-line">
+        <div class="toggle-btn" (click)='toggleLeft()' [ngClass]="{'activeToggle': leftState}">
+          <img (mouseenter)="libService.onHoverIcon('graphToggle')" (mouseleave)="libService.onHoverIcon()"
+            [src]="libService.hoverIcon === 'graphToggle' ? './assets/img/projects/toggle_hover.svg':'./assets/img/projects/toggle.svg'" />
+        </div>
+      </div>
+      <div class="file-diff lock-graph graph-view" [ngStyle]="{'padding-left': leftState?'37px':'17px'}"
+        [appLoading]="isLoadingList">
+        <div class="graph-header">
+          <div class="graph-control">
+            <div class="obersver">
+              <div class="control-label">{{i18n.newLockGraph.obersver}}</div>
+              <div class="control-switch" [tiTip]='obersverContent' tiTipPosition="right-top">
+                <ti-switch id="myswitch1" [(ngModel)]="obersverSwitch"></ti-switch>
+              </div>
+              <div class="obersver-select" *ngIf="obersverSwitch">
+                <app-full-select [ngModel]="obersverSelect" [options]='obersverOptions'
+                  (ngModelChange)="obersverSelectChange($event)"></app-full-select>
+              </div>
+            </div>
+            <div class="compare">
+              <div class="control-label">{{i18n.newLockGraph.compare}}</div>
+              <div class="control-switch" [tiTip]='compareContent' tiTipPosition="right-top">
+                <ti-switch id="myswitch2" [(ngModel)]="compareSwitch" (ngModelChange)="compareSwitchChange()"
+                  [disabled]="compareOptions.length < 2"></ti-switch>
+              </div>
+              <div class="compare-select" *ngIf="compareSwitch">
+                <app-full-select [ngModel]="compareSelect" [options]='compareOptions'
+                  (ngModelChange)="compareSelectChange($event)"></app-full-select>
+              </div>
+            </div>
+          </div>
+          <div class="graph-status">
+            <div class="status">
+              <div><span class="circle green"></span>{{i18n.protalserver_profiling_overview_env.runable}}</div>
+              <div><span class="circle red"></span>{{i18n.protalserver_profiling_overview_env.blocked2}}</div>
+              <div><span class="circle yellow"></span>{{i18n.protalserver_profiling_overview_env.waiting2}}</div>
+              <div><span class="circle orange"></span>{{i18n.protalserver_profiling_overview_env.waitingTime}}</div>
+            </div>
+            <div class="lines">
+              <div class="dashLine"><img
+                  src="./assets/img/projects/dashedLine.svg" /><span>{{i18n.newLockGraph.requestLocked}}</span></div>
+              <div class="solidLine"><img
+                  src="./assets/img/projects/solidLine.svg" /><span>{{i18n.newLockGraph.hasLocked}}</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="graph-content">
+          <div class="graph-svg" id="draggableSvg" #draggable>
+            <div class="left">
+              <app-lock-graph #lockGraph [name]="'current'" [threadTime]="currentThreadTime"
+                [isObersver]="obersverSwitch" [isCompare]="compareSwitch"></app-lock-graph>
+            </div>
+            <div class="right" [hidden]="!compareSwitch">
+              <app-lock-graph #lockGraph2 [name]="'compare'" [threadTime]="compareThreadTime"
+                [isObersver]="obersverSwitch" [isCompare]="compareSwitch"></app-lock-graph>
+            </div>
+          </div>
+        </div>
+        <div class="zoom-screen">
+          <app-zoom-screen [fullEl]="showFullEl" [draggableEl]="draggableEl" [wheelShowScale]="wheelShowScale"
+            (zoomBn)="onZoomStatus($event)" (zoomParam)="onZoomParam($event)"></app-zoom-screen>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="fileList.length===0" class="unDataThread">
+      <img class='newNoData' src="./assets/img/projects/noData.svg" />
+      <div>{{threadDumpNodata}}</div>
+    </div>
+  </div>
+</div>
+<ng-template #obersverContent>
+  <div [innerHtml]="i18n.newLockGraph.obersverTip"></div>
+</ng-template>
+<ng-template #compareContent>
+  <div [innerHtml]="i18n.newLockGraph.compareTip"></div>
+</ng-template>
+<app-alert-message #deleteOne (confirmHandle)="confirmHandle_delThread($event)"></app-alert-message>
+<!-- 保存线程转储 -->
+<app-alert-modal #saveThreadDump>
+  <div class="content">
+    <div class="header">
+      <span>{{i18n.profileMemorydump.saveHeapDump.saveReport}}</span>
+      <img class="close" (click)="onCloseThreadDumpReport()" (mouseenter)="onHoverClose('closerDelete')"
+        (mouseleave)="onHoverClose('')"
+        [src]="hoverClose==='closerDelete'?'./assets/img/newSvg/close_hover.svg':' ./assets/img/header/close_icon.svg'">
+    </div>
+    <div class="main-body">
+      <div class="tip">
+        <div class="report-tips" *ngIf="sugReport">
+          <div>
+            <img src="./assets/img/newSvg/tip.svg" alt="" class="report-icon">
+            <span>
+              {{saveReportTip}}
+            </span>
+            <span>
+              {{this.i18n.profileMemorydump.saveHeapDump.saveReportTip1}}
+            </span>
+          </div>
+          <img src="./assets/img/newSvg/close_hover.svg" alt="" class="report-close" (click)="closeReport()">
+        </div>
+      </div>
+      <div class="inputDiv">
+        <span class="leftText">{{i18n.profileMemorydump.saveHeapDump.reportType}}</span>
+        <span class="right text">{{i18n.common_term_thread_dump}}</span>
+      </div>
+      <div class="inputDiv">
+        <span class="leftText">{{i18n.profileMemorydump.saveHeapDump.saveRecord}}</span>
+        <div class="right">
+          <ti-select class="saveRecord" [multiple]="true" [options]='saveRecordOptions'
+            [(ngModel)]="saveRecordSelecteds" labelKey='label' (ngModelChange)="onStartTimesChange($event)"
+            [placeholder]='i18n.profileMemorydump.saveHeapDump.saveRecordHolder'>
+          </ti-select>
+        </div>
+      </div>
+      <form [formGroup]='saveReportForm'>
+        <div class="inputDiv">
+          <span class="leftText">{{i18n.profileMemorydump.saveHeapDump.reportName}}</span>
+          <div class="right">
+            <input type="text" [placeholder]="reportNameHolder" [(ngModel)]="reportName" tiText tiValidation
+              [tiValidation]="reportNameValidation" formControlName='reportName'
+              [errorMessageWrapper]="reportNameError" />
+            <div #reportNameError class="error-tip"></div>
+          </div>
+        </div>
+        <div class="inputDiv">
+          <span class="leftText">{{i18n.profileMemorydump.saveHeapDump.reportRemarks}}</span>
+          <div class="right">
+            <input type="text" [(ngModel)]="reportRemarks" tiText tiValidation
+              [placeholder]="i18n.profileMemorydump.saveHeapDump.input_remark_placehloder"
+              [tiValidation]="reportRemarkValidation" formControlName='reporRemark' />
+          </div>
+        </div>
+      </form>  
+    </div>
+    <div class="foot">
+      <button class="confirm" type="button" tiButton color="primary" (click)="onSaveThreadDumpReport()"
+        [disabled]="startTimesBtnDisable || !saveReportForm.valid">{{i18n.common_term_ok}}</button>
+      <button type="button" tiButton (click)="onCloseThreadDumpReport()">{{i18n.common_term_operate_cancel}}</button>
+    </div>
+  </div>
+</app-alert-modal>
+<div *ngIf="saveReport" class="alertLink">
+  <ti-alert>{{successSaveReportTip}}<span class="see" (click)="goHomeThreadDump()">{{i18n.jdbcpool.look}}</span>
+  </ti-alert>
+</div>

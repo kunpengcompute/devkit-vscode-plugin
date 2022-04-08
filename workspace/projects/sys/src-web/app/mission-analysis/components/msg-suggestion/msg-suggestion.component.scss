@@ -1,0 +1,53 @@
+
+.msg-content {
+   padding-bottom: 20px;
+   .msg-header {
+		padding-bottom: 10px;
+      &:hover {
+        cursor: pointer;
+        }
+    	.title-icon.active{
+    		transform: rotate(90deg)
+    	}
+		span {
+			font-size: 20px;
+			color: #282B33;
+			margin-left: 5px;
+		}
+	}
+
+	.msg-main {
+		border: 1px solid #D7DBE7;
+		.msg-title {
+			display: flex;
+			align-items: center;
+			height: 44px;
+			line-height: 44px;
+			background: #edf4ff;
+			cursor: pointer;
+
+			img {
+				margin: 0 13px 0 20px;
+			}
+
+			.des {
+				flex: auto;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+
+			.arrow-icon {
+				margin-right: 22px;
+			}
+		}
+
+		.msg-body {
+			height: auto;
+			padding: 10px 49px;
+		}
+	}
+	.isNotFirst{
+		margin-top: 8px;
+	}
+}

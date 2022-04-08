@@ -1,0 +1,61 @@
+<div class="system-bubble-gragh">
+  <span>{{ i18n.tuninghelper.taskDetail.cpuTarget }}</span>
+  <ti-select
+    valueKey="value"
+    [options]="cpuTargetOptions"
+    [(ngModel)]="cpuTargetSelected"
+    (ngModelChange)="cpuTargetSelectedChange()">
+  </ti-select>
+  <div class="system-bubble-gragh-btn"
+    [tiTip]="i18n.tuninghelper.taskDetail.thresholdSectionConfigTip"
+    tiTipPosition="top">
+    <hy-theme-content
+      [pop]="thresholdTipContent"
+      [popContext]="getThresholdTipContext()"
+      #coreThresholdPop="pop"
+      [popOffset]="{ y: 32 }"
+      popClass="core-threshold-tip">
+      <app-icon-react name="setting" [freeze]="coreThresholdPop.isShow ? 'active' : ''" light></app-icon-react>
+      <app-icon-react name="settingDark" [freeze]="coreThresholdPop.isShow ? 'active' : ''" dark></app-icon-react>
+    </hy-theme-content>
+  </div>
+</div>
+
+<ng-template #thresholdTipContent let-context="context">
+  <title>{{ i18n.tuninghelper.taskDetail.thresholdSectionConfig }}</title>
+  <div class="value-box">
+    <span>0%</span>
+    <span class="short-line"></span>
+    <app-percent-input
+      [min]="0.01"
+      [max]="context.highValue - 0.01"
+      [(value)]="context.lowValue">
+    </app-percent-input>
+    <span class="short-line"></span>
+    <app-percent-input
+      [min]="context.lowValue + 0.01"
+      [max]="0.99"
+      [(value)]="context.highValue">
+    </app-percent-input>
+    <span class="short-line"></span>
+    <span>100%</span>
+  </div>
+  <div class="divider"></div>
+  <footer>
+    <button
+      type="button"
+      size="small"
+      tiButton
+      (click)="modifyTargetThreshold(context)">
+      {{ i18n.common_term_operate_ok }}
+    </button>
+
+    <button
+      type="button"
+      size="small"
+      tiButton
+      (click)="coreThresholdPop.hide()">
+      {{ i18n.common_term_operate_cancel }}
+    </button>
+  </footer>
+</ng-template>

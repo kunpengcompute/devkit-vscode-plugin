@@ -1,0 +1,37 @@
+<!-- 迁移预检中 -->
+<div class="webpack-situation-modal" *ngIf="situation == 5">
+    <div class="progress-modal">
+        <div class="madal-content">
+            <div class="progress-bar-bg">
+                <div class="progress-bar"></div>
+            </div>
+            <p class="situation analyzing port-check-font" [title]="info">
+                <span *ngIf="progressStatus === progressWaitWorkerStatus">{{i18n.common_term_waiting}}</span>
+                <span *ngIf="progressStatus !== progressWaitWorkerStatus">
+                    {{i18n.common_term_checking}}{{info}}
+                </span>
+            </p>
+            <div class="endTask">
+                <button class="little-primary-btn" style="cursor:pointer"
+                    (click)="endPreCheckTask()">{{i18n.plugins_porting_message_beforeInstallEnd}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 是否终止正在执行的64位运行模式检查任务 -->
+<div class="webpack-situation-modal" *ngIf="situation == 12">
+    <div class="progress-modal">
+        <div class="madal-content">
+            <div class="result">
+                <span>{{stopMsgTip()}}</span>
+            </div>
+            <div class="modal-footer">
+                <button class="little-primary-btn" style="margin-right: 10px;"
+                    (click)="confirmEndTask()">{{i18n.plugins_porting_message_beforeInstallConfirm}}</button>
+                <button class="little-minor-btn"
+                    (click)="cancelEndPreCheckTask()">{{i18n.plugins_porting_message_beforeInstallCancel}}</button>
+            </div>
+        </div>
+    </div>
+</div>

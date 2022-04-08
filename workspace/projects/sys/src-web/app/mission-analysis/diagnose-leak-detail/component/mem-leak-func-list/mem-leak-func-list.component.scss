@@ -1,0 +1,167 @@
+.mem-leak-func-left {
+  height: 100%;
+
+  .exceptionSelect {
+    margin-top: 8px;
+  }
+  .pid-text {
+    width: 100%;
+    height: 28px;
+  }
+
+  .pid-select {
+    width: 100%;
+    height: 28px;
+    margin-bottom: 10px;
+  }
+
+  .memory-exception {
+    display: flex;
+    margin-bottom: 10px;
+
+    .memory-exception-select {
+      width: 239px;
+      margin-right: 2px;
+      height: 28px;
+    }
+
+    .icon {
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+
+      &:last-of-type {
+        margin-left: 2px;
+      }
+
+      .sort {
+        width: 28px;
+        height: 28px;
+        border-radius: 2px;
+        font-size: 16px;
+        box-sizing: border-box;
+        border: solid 1px #979797;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover,
+        &.sort-asc,
+        &.sort-desc {
+          color: #0067ff;
+          border-color: #0067ff;
+        }
+
+        &.sort-normal::before {
+          content: "\e917";
+        }
+
+        &.sort-asc::before {
+          content: "\e92e";
+        }
+
+        &.sort-desc::before {
+          content: "\e92f";
+        }
+      }
+    }
+  }
+
+  .func-input {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .func-list {
+    height: calc(100% - 120px);
+    overflow-y: auto;
+    li {
+      box-sizing: border-box;
+      width: 100%;
+      height: 36px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 14px;
+
+      &:hover {
+        background: #f5f9ff;
+      }
+
+      &.active {
+        background: var(--ti-tree-node-bg-color-checked);
+      }
+
+      .icon {
+        width: 8px;
+        height: 8px;
+        border-radius: 4px;
+        margin: 6px 8px 6px 0;
+
+        &.self {
+          background-color: #ed4b4b;
+        }
+      }
+
+      .left-text {
+        width: 60px;
+        height: 100%;
+        box-sizing: border-box;
+        padding-right: 10px;
+      }
+
+      .func-name {
+        flex: 1;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+.func-list-tip {
+  color: #222222;
+  .name {
+    span:last-of-type {
+      margin-left: 10px;
+    }
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background-color: #e1e6ee;
+    margin: 8px 0;
+  }
+
+  .leak-type {
+    display: grid;
+    grid-template-columns: 170px 170px;
+    grid-column-gap: 24px;
+
+    span {
+      font-size: 12px;
+      line-height: 18px;
+    }
+  }
+}
+
+.seleceLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .summsyNum {
+    color: #222222;
+    display: inline-block;
+    width: 32px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 12px;
+    background: #e5efff;
+    border-radius: 7px;
+    padding-left: 8px;
+  }
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="6px" viewBox="0 0 10 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>4.组件/2.通用/icon/16/实心三角/下</title>
+    <defs>
+        <path d="M11.9750423,5.5 L4.02468497,5.5 C3.55928566,5.5 3.32401474,6.06187132 3.65442254,6.39042319 L7.62960121,10.3473305 C7.83401693,10.5508898 8.16571037,10.5508898 8.37012609,10.3473305 L12.3453048,6.39042319 C12.6757126,6.06187132 12.4417273,5.5 11.9750423,5.5" id="path-1"></path>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="无topo总览" transform="translate(-411.000000, -1073.000000)">
+            <g id="运行时环境信息" transform="translate(384.000000, 1052.000000)">
+                <g id="4.组件/4.数据展示/折叠面板/展开单层" transform="translate(0.000000, 0.000000)">
+                    <g id="编组" transform="translate(24.000000, 16.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Mask" fill="#888888" xlink:href="#path-1"></use>
+                        <g mask="url(#mask-2)" fill="#888888" id="3.颜色/9.辅助文字">
+                            <g>
+                                <rect id="矩形" x="0" y="0" width="16" height="16"></rect>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

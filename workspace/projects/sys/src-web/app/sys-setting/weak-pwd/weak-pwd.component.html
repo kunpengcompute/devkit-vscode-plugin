@@ -1,0 +1,172 @@
+<div class="weakBox configItemBox">
+  <div class="weakTitle boxHeader">
+    <p>{{i18n.passwordDic}}</p>
+    <span [tiTip]='weakPwdTip' tiTipPosition="right-top"></span>
+  </div>
+
+  <div class="weakContent boxMain">
+    <div class="addWeakPwd">
+      <ti-searchbox
+        class="search"
+        [placeholder]="weakPadPlaceholder"
+        (search)="weakPadSearch($event)"
+        (clear)="onClear($event)"
+      >
+      </ti-searchbox>
+      <button
+        *ngIf="role == 'Admin'"
+        type="button"
+        tiButton
+        (click)="addWeakPad(addWeakPwd)"
+      >
+        {{i18n.weakPassword.addWeakPwd}}
+      </button>
+    </div>
+    <div class="weakPwdList" [appLoading]="isLoading">
+      <ti-table
+        [(displayedData)]="displayed"
+        [srcData]="weakPadData"
+        [columns]="columnsWeak"
+        [searchWords]="searchWords"
+        (stateUpdate)="stateUpdate($event)"
+      >
+        <!--.ti3-table-fixed-head是表头的容器，它的子元素中的table(thead)是实际显示的表头-->
+        <!--注意:此处一定要使用.ti3-table-fixed-head样式类-->
+        <div class="ti3-table-fixed-head">
+          <table>
+            <thead>
+              <tr>
+                <ng-container *ngFor="let column of columnsWeak; let index = index">
+                  <!--注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+                  <th
+                    tiOverflow
+                    [ngStyle]="index == 0 ? '' : { width: '30%' }"
+                  >
+                    {{ column.title }}
+                  </th>
+                </ng-container>
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+        <div
+          class="ti3-table-container ti3-resize-wrapper"
+          *ngIf="displayed.length!=0" [ngClass]="{noDataHeight: displayed.length === 0}"
+        >
+          <table>
+            <thead>
+              <tr>
+                <th
+                  tiOverflow
+                  *ngFor="let item of columnsWeak; let index = index"
+                  [ngStyle]="index == 0 ? '' : { width: '30%' }"
+                >
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of displayed">
+                <td tiOverflow>{{ row.weak_password }}</td>
+                <td *ngIf="role == 'Admin'">
+                  <span
+                    style="color: #0067ff;cursor: pointer"
+                    (click)="delePopUp(deleWeak, row.id, row.weak_password)"
+                    >{{i18n.common_term_operate_del}}</span
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="weakEmpty" *ngIf="displayed.length===0 && !isLoading">
+          <img src="./assets/img/projects/nodata.png" />
+          <div>{{i18n.common_term_task_nodata}}</div>
+        </div>
+        <!-- 在表格中使用分页组件时必须保证其父元素是ti-table -->
+        <ti-pagination
+          style="margin-top: 20px;"
+          [(currentPage)]="currentPageWeak"
+          [pageSize]="pageSizeWeak"
+          [(totalNumber)]="totalNumberWeak"
+          [showGotoLink]="true"
+        >
+        </ti-pagination>
+      </ti-table>
+    </div>
+  </div>
+</div>
+<!-- 确认删除弹窗 -->
+<ng-template let-context="context" #deleWeak>
+  <ti-modal-header>{{ i18n.weakPassword.deleWeakPwd }}</ti-modal-header>
+
+  <!-- 弹框内容定义 -->
+  <ti-modal-body>
+    <div class="content">
+      <img src="./assets/img/weakPassword/warn.svg" />
+      <p>{{i18n.weakPassword.confirmdele}}{{i18n.common_term_sign_quotation_left}}{{ weakContent }}{{i18n.common_term_sign_quotation_right}}{{i18n.common_term_sign_question}}</p>
+    </div>
+  </ti-modal-body>
+
+  <ti-modal-footer id="weakFooter">
+    <button
+      type="button"
+      (click)="deleWeakPad(context)"
+      tiButton
+    >
+      {{i18n.common_term_operate_ok}}
+    </button>
+    <button
+      type="button"
+      autofocus
+      color="primary"
+      (click)="context.dismiss()"
+      tiButton
+      style="margin-left: 16px;"
+    >
+    {{i18n.common_term_operate_cancel}}
+    </button>
+  </ti-modal-footer>
+</ng-template>
+
+<!-- 新增弱口令 -->
+<ng-template let-context="context" #addWeakPwd>
+  <ti-modal-header>{{ i18n.weakPassword.addWeakPwdTitle }}</ti-modal-header>
+
+  <!-- 弹框内容定义 -->
+  <ti-modal-body id="addWeakBody">
+    <div class="addWeakContent">
+      <ti-formfield [formGroup]="WeakPad">
+        <ti-item [label]="weakPwdContent" [required]="true">
+          <input
+            tiText
+            [tiValidation]="validation"
+            formControlName="pwd"
+            type="text"
+          />
+        </ti-item>
+      </ti-formfield>
+    </div>
+  </ti-modal-body>
+  
+  <ti-modal-footer id="weakFooter">
+    <button
+      type="button"
+      color="primary"
+      [disabled]="!addWeakPwdBtn"
+      autofocus
+      (click)="confirmWeakPwd(context)"
+      tiButton
+    >
+    {{i18n.common_term_operate_ok}}
+    </button>
+    <button
+      type="button"
+      (click)="context.dismiss()"
+      tiButton
+      style="margin-left: 16px;"
+    >
+    {{i18n.common_term_operate_cancel}}
+    </button>
+  </ti-modal-footer>
+</ng-template>

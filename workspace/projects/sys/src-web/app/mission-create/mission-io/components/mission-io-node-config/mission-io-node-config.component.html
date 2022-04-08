@@ -1,0 +1,46 @@
+<div class="node-config">
+  <div class="table">
+    <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns">
+      <table>
+        <thead>
+          <tr>
+            <th tiOverflow>{{columns[0].title}}</th>
+            <th tiOverflow>{{columns[1].title}}</th>
+            <th tiOverflow>{{columns[2].title}}</th>
+            <th tiOverflow>{{columns[3].title}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of displayed; index as i;">
+            <td tiOverflow>{{row.nickName}}</td>
+            <td tiOverflow>{{row.nodeIp}}</td>
+            <td tiOverflow>
+              <span class="status-icon" [ngClass]="{'success-icon': row.nodeState === 'on'}"></span>
+              <span>{{row.nodeState === 'on' ? i18n.nodeConfig.configed : i18n.nodeConfig.noConfig}}</span>
+            </td>
+            <td tiOverflow><span (click)="onConfigParams(i)" class="config-btn">{{i18n.nodeConfig.configParams}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ti-table>
+  </div>
+</div>
+
+<app-mission-public #missionPublic [labelWidth]="labelWidth" [drawerLevel]="1"
+  [nodeName]="currentNode ? currentNode.nickName : ''" [nodaIP]="currentNode ? currentNode.nodeIp : ''">
+  <div class="model-body" [formGroup]="formGroup">
+    <app-pid-process-input *ngIf="options.pidProcess.display" [labelWidth]="labelWidth" formControlName="pidProcess">
+    </app-pid-process-input>
+    <app-app-params-input *ngIf="options.appAndParams.display" [labelWidth]="labelWidth" formControlName="appAndParams">
+    </app-app-params-input>
+    <app-run-user-input *ngIf="!isModifySchedule && options.runUserInfo.display" [labelWidth]="labelWidth"
+      formControlName="runUserInfo">
+    </app-run-user-input>
+  </div>
+  <footer>
+    <button tiButton type="button" color="primary" style="margin-right: 20px" [disabled]="!formGroup.valid"
+      (click)="onConfirm()">{{i18n.common_term_operate_ok}}</button>
+    <button tiButton type="button" (click)="onClose()"> {{i18n.common_term_operate_cancel}} </button>
+  </footer>
+</app-mission-public>

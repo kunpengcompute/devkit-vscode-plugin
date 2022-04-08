@@ -1,0 +1,283 @@
+$com30: 30px;
+$com40: 40px;
+$font16: 16px;
+$font20: 20px;
+$font48: 48px;
+
+::ng-deep .vscode-dark {
+    --font-clr-1: #AAAAAA;
+    --font-clr-2: #E8E8E8;
+    --font-clr-3: #888888;
+    --border-clr: #424242;
+
+    /* ti3-table样式 start*/
+    .ti3-table tr {
+        background-color: #161616 !important;
+        color: #222222 !important;
+    }
+
+    .ti3-table thead th {
+        background-color: #2a2a2a !important;
+        color: #AAAAAA !important;
+        font-size: 14px !important;
+        padding: 0px 10px !important;
+        border-bottom: none;
+    }
+
+    .ti3-table tr:hover {
+        background-color: #313131 !important;
+    }
+
+    .ti3-table td {
+        font-size: 14px !important;
+    }
+
+    .ti3-table tr td {
+        padding: 5px 10px !important;
+        border-bottom: 1px #4B4B4B solid !important;
+    }
+
+    .ti3-table a {
+        color: #0067ff !important;
+        outline: none;
+    }
+
+    .ti3-table a:hover {
+        color: #267dff !important;
+    }
+
+    .ti3-table a:active {
+        color: #0057D9 !important;
+    }
+
+    .ti3-table .ti3-table-fixed-head table thead tr th {
+        color: #e8e8e8 !important;
+        background-color: #2a2a2a !important;
+    }
+
+    .ti3-table-fixed-head-filler {
+        background-color: #2a2a2a !important;
+    }
+
+    .ti3-table .ti3-table-fixed-head table thead tr th:not(:last-child)::after {
+        background: #4b4b4b !important;
+    }
+
+    .ti3-table .ti3-table-fixed-head+.ti3-table-container {
+        border-bottom-color: #4b4b4b !important;
+    }
+    /* ti3-table样式 end*/
+
+    /* intelijbtn下载按钮 end */
+    .intelijbtn {  
+        background-color: #45494A;
+        color: #dcdcdc;
+        width: 220px;
+        height: 32px;
+        line-height: 32px;
+        font-size: 14px;
+        text-align: center;
+        border: 1px solid #5E5E5E;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #54595a;
+            color: var(--color-se-btn-font-hover);
+        }
+
+        &:active {
+            color: var(--color-se-btn-font-hover);
+            background-color: #3b3e3f;
+            border-color: #476a89;
+        }
+   }
+    /* 下载按钮 end */
+
+    .ti3-tooltip {
+        color: var(--ti3-tooltip-text-color) !important;
+        background-color: var(--ti3-tooltip-background-color) !important;
+        border-color: var(--ti3-tooltip-background-color) !important;
+    }
+
+    .ti3-tooltip-top::after {
+        background-color: var(--ti3-tooltip-background-color) !important;
+    }
+
+    .ti3-tooltip-top::before {
+        background-color: var(--ti3-tooltip-background-color) !important;
+        border-color: var(--ti3-tooltip-background-color) !important;
+    }
+}
+
+::ng-deep .vscode-light {
+    --font-clr-1: #616161;
+    --font-clr-2: #222222;
+    --font-clr-3: #979797;
+    --border-clr: #E1E6EE;
+
+    .ti3-table .ti3-table-fixed-head+.ti3-table-container {
+        border-bottom: 1px solid #e2e2e2 !important;
+    }
+    .ti3-table tr td {
+        border-bottom: 1px #e2e2e2 solid !important;
+    }
+
+    button {
+        background-color: #ffffff !important;
+        color: #222222 !important;
+        border-color: #979797 !important;
+    }
+
+    button:hover {
+        background-color: #ffffff !important;
+        color: #267dff !important;
+        border-color: #267dff !important;
+    }
+
+    button:active {
+        background-color: #ffffff !important;
+        color: #0057d9 !important;
+        border-color: #0057d9 !important;
+    }
+}
+
+.common-container {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 40px 32px 30px;
+    box-sizing: border-box;
+    color: var(--font-clr-1);
+}
+
+/* 公共样式 start */
+.com-text {
+    color: var(--font-clr-2);
+    font-size: $font20;
+}
+
+.com-title {
+    line-height: $com30;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 公共样式 end */
+
+/* 头部信息 end */
+
+/* 配置信息 start */
+.config-setting {
+    margin: 20px 0;
+    width: 100%;
+
+    .config-detail {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .config-left {
+        .config-left-item {
+            margin-top: 20px;
+            color: var(--font-clr-1);
+            font-size: 14px;
+
+            span:first-child {
+                width: 200px;
+                margin-right: 10px;
+            }
+
+            p {
+                display: inline-block;
+                max-width: 370px;
+                width: auto;
+                color: var(--font-clr-2);
+
+                img,
+                span {
+                    vertical-align: middle;
+                }
+
+                img {
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+
+    .config-right {
+        display: flex;
+        height: fit-content;
+        margin-top: 20px;
+        color: var(--font-clr-3);
+        font-size: $font16;
+
+        .config-right-item {
+            width: 140px;
+
+            &:first-child {
+                padding-right: $com40;
+            }
+            &:last-child {
+                padding-left: $com40;
+                border-left: 2px solid var(--border-clr);
+            }
+
+            &:nth-child(2) {
+                margin: 0 $com40;
+            }
+
+            span {
+                &:first-child {
+                    height: 24px;
+                    margin-bottom: 22px;
+                }
+
+                &:last-child {
+                    color: var(--font-clr-2);
+                    font-size: $font48;
+                }
+            }
+        }
+    }
+}
+
+/* 配置信息 end */
+
+/* table-detail start */
+.table-detail {
+    .table-detail-title {
+        margin-bottom: 20px;
+    }
+
+    .cfile-title {
+        margin-top: $com30;
+    }
+}
+
+/* table-detail end */
+
+:host .ti3-table {
+    font-size: 14px;
+}
+
+.normal-height {
+    max-height: 190px;
+  }
+  .table-auto-height {
+    max-height: calc(100vh - 460px);
+  }
+
+.download-btn-en button {
+    width: 230px;
+}

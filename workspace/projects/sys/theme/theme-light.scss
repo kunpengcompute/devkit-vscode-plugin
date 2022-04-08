@@ -1,0 +1,108 @@
+:root {
+  // 背景
+  --common-color-background-base: #ffffff;
+  --common-color-background-primary: #ffffff;
+  --common-color-background-secondary: #f0f3fa;
+  --common-color-background-disabled: #cccccc;
+  --common-color-background-f5f9ff-2a2a2a: #f5f9ff;
+  --active-edf4ff-d4d956: #edf4ff;
+  --color-select-background: rgba(108, 146, 250, 0.149);
+  --color-switch-bgc: rgba(0,103,255,0.1);
+
+  // 表格无数据时背景
+  --table-color-background-nodata: #ffffff;
+
+  // 字体
+  --common-color-font-primary: #222222;
+  --common-color-font-secondary: #616161;
+  --common-color-font-tip: #979797;
+  --color-font-d-aaaaaa-l-222222: #222222;
+
+  // 弹框背景
+  --modal-bg-color-e1e4e8-52565a: #e1e4e8;
+
+  // 弹框字体
+  --modal-col-e8e8e8-818181: #181818;
+
+  // 按钮
+  --button-color-background-secondary: #ffffff;
+  --button-color-border-secondary: #979797;
+
+  // 分割线
+  --common-color-divider: #e1e6ee;
+  --divider-style: 1px dashed #e1e6ee;
+  --divider-d7dbe7-6e6e6e: #d7dbe7;
+  --divider-color-dashed: #e1e6ee;
+  --divider-style-dashed: 1px dashed #e1e6ee;
+  --divider-style-tabs-header: #e1e6ee;
+
+
+  hr {
+    border: none;
+    border-top: 1px dashed #e1e6ee;
+  }
+
+
+  // tab下划线
+  --tab-header-underline-color: #e1e6ee;
+  // tab边框
+  --tab-border-color: #d4d9e6;
+  --tab-bgc-exchange-color: #f5f9ff;
+
+  // switch按钮
+  --switch-background-color: #b8becc;
+
+  // 滚动条颜色
+  --scrollbar-thumb-background-color: rgba(40, 43, 51, 0.4);
+
+  // tiny表格展开距离背景颜色
+  --ti-table-expand-children-margin-background-color: #f5f9ff;
+
+  // 表格奇数行背景色
+  --ti-table-odd-tr-background-color: #f5f9ff;
+  --sub-table-545454-e6ebf5: #e6ebf5;
+  --sub-table-transparent-e6ebf5: #e6ebf5;
+
+
+  // 文本按钮样式
+  .hy-btn-text {
+    background: none;
+    border: none;
+    color: #0067ff;
+    cursor: pointer;
+
+    &:hover {
+      color: #5e9eff;
+    }
+
+    &:active {
+      color: #0057d9;
+    }
+
+    &:disabled {
+      color: #cccccc;
+    }
+  }
+
+  // tiny图标通用样式
+  ti-icon {
+    color: #979797;
+
+    &:hover {
+      color: #5e9eff;
+    }
+
+    &.active {
+      color: #0057d9;
+    }
+
+    &:disabled {
+      color: #cccccc;
+    }
+  }
+
+  // 输入框
+  --color-input-border: #979797;
+  --color-input-placeholder: #979797;
+
+}

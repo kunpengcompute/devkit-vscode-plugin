@@ -1,0 +1,102 @@
+<ng-template #guardianCreateModalComponent let-context='context'>
+    <ti-modal-header>{{ i18n.plugins_javaperf_add_guardian_modalTitle }}
+        <a [href]="pluginUrlCfg.guardian_createFAQ6">
+            <img *ngIf="currTheme == 1" class="help-icon" src="./assets/img/mission/icon-help-dark.png">
+            <img *ngIf="currTheme == 2" class="help-icon" src="./assets/img/mission/icon-help-light.svg">
+        </a>
+    </ti-modal-header>
+    <ti-modal-body>
+        <div class="guardian-tip">
+            <img src="./assets/img/guardian/icon-information.png" style="width:16px;height:16px;">
+            <span>{{i18n.common_term_guardian_forms.add_tips}}</span>
+        </div>
+        <!-- 服务器类型 -->
+        <ti-formfield class="typeForm">
+            <ti-item [label]="i18n.common_term_guardian_forms.environmentType"
+                [required]="addModalForms.selected.required">
+                <div class="radios">
+                    <div class="radio-box">
+                        <input type="radio" tiRadio name="tiRadio" [(ngModel)]="addModalForms.selected.value"
+                            [value]="false" [label]="i18n.common_term_guardian_forms.remoteServer"
+                            (ngModelChange)="changeEnvType($event)" />
+                    </div>
+                    <div class="radio-box">
+                        <input type="radio" tiRadio name="tiRadio" [(ngModel)]="addModalForms.selected.value"
+                            [value]="true" [label]="i18n.common_term_guardian_forms.localServer"
+                            (ngModelChange)="changeEnvType($event)" />
+                    </div>
+                </div>
+            </ti-item>
+        </ti-formfield>
+        <ti-formfield [formGroup]="addFormGroup">
+            <ti-item [label]="i18n.plugins_perf_java_guardianManage_serverIP" [required]="addModalForms.host.required">
+                <input type="text" tiText tiMaxLength="1024" [tiValidation]='validation' formControlName="host"
+                    style="width: 400px;" class="ip-input" (ngModelChange)="guardianChangeIp($event)"/>
+            </ti-item>
+            <ti-item [label]="i18n.plugins_perf_java_guardianManage_port" [required]="addModalForms.sshPort.required">
+                <input type="text" tiText tiMaxLength="1024" [tiValidation]='validation' formControlName="sshPort"
+                    style="width: 400px;" />
+            </ti-item>
+            <ti-item [label]="i18n.plugins_perf_java_guardianManage_userName"
+                [required]="addModalForms.sshUsername.required">
+                <input type="text" tiText tiMaxLength="255" [tiValidation]='validation' formControlName="sshUsername"
+                    (blur)="checkRoot()" style="width: 400px;" oncopy="return false"
+                    onkeyup="if(event.ctrlKey&&event.keyCode==90){ return false;}"
+                    onkeydown="if(event.ctrlKey&&event.keyCode==90){return false;}" onpaste="return true"
+                    oncut="return false" />
+                <div class="root-warn" *ngIf="isRoot">
+                    <img src="./assets/img/newSvg/warn.svg">
+                    <span>{{ i18n.common_term_ensure_root_content }}</span>
+                </div>
+            </ti-item>
+            <ti-item [label]="i18n.plugins_perf_java_guardianManage_password"
+                [required]="addModalForms.sshPassword.required">
+                <div style="position: relative;">
+                    <input [type]="textType" tiText tiMaxLength="1024" [tiValidation]='validation'
+                        formControlName="sshPassword" style="width: 400px;padding-right: 32px;" oncopy="return false"
+                        onkeyup="if(event.ctrlKey&&event.keyCode==90){ return false;}"
+                        onkeydown="if(event.ctrlKey&&event.keyCode==90){return false;}" onpaste="return true"
+                        oncut="return false" />
+                    <div class="eyes">
+                        <span (click)="changeType()" *ngIf="textType == 'text'">
+                            <img src="./assets/img/icon-view.svg" />
+                        </span>
+                        <span (click)="changeType1()" *ngIf="textType == 'password'">
+                            <img src="./assets/img/icon-hide.svg" />
+                        </span>
+                    </div>
+                </div>
+            </ti-item>
+        </ti-formfield>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <button class="little-primary-btn" type="button" color="primary" style="margin-right: 6px;width:160px"
+            (click)="createGuardian(context)" [disabled]="!addFormGroup.valid || isClick">
+            {{ i18n.common_term_operate_ok }}
+        </button>
+        <button class="little-minor-btn" type="button" (click)="context.dismiss()" style="width:160px">
+            {{ i18n.common_term_operate_cancel }}
+        </button>
+    </ti-modal-footer>
+</ng-template>
+<ng-template #guardianCreateConfirmModalComponent let-context='context'>
+    <ti-modal-header>{{i18n.plugins_javaperf_add_guardian_modalTitle}}</ti-modal-header>
+
+    <ti-modal-body>
+        <div style="display:flex;font-size: 12px;color: #888888;line-height: 18px;">
+            <img src="./assets/img/guardian/icon-information.png" style="width:16px;height:16px;">
+            <span style="margin-left:12px;">{{fingerprintTip}}</span>
+        </div>
+    </ti-modal-body>
+
+    <ti-modal-footer>
+        <button class="little-primary-btn" type="button" color="primary" style="margin-right: 16px;width:160px"
+            (click)="confirm(context)">
+            {{ i18n.common_term_operate_ok }}
+        </button>
+
+        <button class="little-minor-btn" type="button" (click)="context.dismiss()" style="width:160px">
+            {{ i18n.common_term_operate_cancel }}
+        </button>
+    </ti-modal-footer>
+</ng-template>

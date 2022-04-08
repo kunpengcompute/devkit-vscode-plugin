@@ -1,0 +1,174 @@
+<div class="config-detail">
+  <div class="bandwidth table">
+    <div class="title">{{i18n.ddr_summury.ddr_acc_brandwidth}}</div>
+
+    <ti-table class="custemTable" [(displayedData)]="bandwidth.displayed"
+      [srcData]="bandwidth.srcData" [columns]="bandwidth.columns" tiColsResizable>
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of bandwidth.columns">
+                <ti-cell-text>{{ column.label }}</ti-cell-text>
+
+                <ti-icon [tiTip]='tipContent' [tiTipContext]='' tiTipMaxWidth='370px' tiTipPosition="right"
+                  style="margin-left:10px;margin-top: 3px;" *ngIf="column.label === i18n.ddr_summury.maxBandWidth">
+                  <img class="tooltipImg" src='./assets/img/summary/tooltip.png'>
+                </ti-icon>
+                <ti-icon [tiTip]='i18n.ddr_summury.maxBandWidthRateTipTitle' tiTipMaxWidth='370px'
+                  style="margin-left:10px;margin-top: 3px;" tiTipPosition="right"
+                  *ngIf="column.label ===  i18n.ddr_summury.maxBandWidthRate">
+                  <img class="tooltipImg" src='./assets/img/summary/tooltip.png'>
+                </ti-icon>
+
+                <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+
+                <ti-head-filter *ngIf="column.filterKey"
+                  [options]="column.options"
+                  [(ngModel)]="column.selected"
+                  (select)="onBandwidthSelect()"
+                  [ngClass]="{'ti3-head-filtered': column.selected?.length !== column.options.length}"
+                  [multiple]="column.multiple"
+                  [selectAll]="column.selectAll"
+                  [searchable]="column.searchable">
+                </ti-head-filter>
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <div class="ti3-table-container ti3-resize-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of bandwidth.columns" [width]="column.width"></th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="bandwidth.displayed.length > 0">
+            <tr *ngFor="let item of bandwidth.displayed">
+              <td tiOverflow tiTipPosition='left'>{{ item['NUMA node'] }}</td>
+              <td tiOverflow tiTipPosition='left'>{{ typeTextMapping[item.type] || item.type }}</td>
+              <td tiOverflow tiTipPosition='left' *ngIf="hasDdrid">{{ item.DDRID | hyThouSeparator }}</td>
+              <td tiOverflow tiTipPosition='left'>{{ item.bandwith | threePoint:2 }}</td>
+              <td tiOverflow tiTipPosition='left'>{{ item.bandwidth_theory_value | threePoint:2 }}</td>
+              <td tiOverflow tiTipPosition='left'>
+                <div class="pro-rate"
+                  [ngStyle]="{'width':(item.bandwidth_percent !== 0 && item.bandwidth_percent < 50 ? item.bandwidth_percent + 1 : item.bandwidth_percent) + '%'}">
+                  <span class="rateContent">{{ item.bandwidth_percent | threePoint:2 }}</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="bandwidth.displayed.length === 0">
+            <tr class="ti3-table-nodata">
+              <td tiColspan>
+                <div hyNodata [nodataShow]="true" style="height: 272px;"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ti-pagination [(currentPage)]="bandwidth.pageNo" [pageSize]="bandwidth.pageSize"
+        [(totalNumber)]="bandwidth.total"></ti-pagination>
+    </ti-table>
+
+  </div>
+
+  <div class="times table">
+    <div class="title">{{i18n.ddr_summury.ddr_acc}}</div>
+
+    <ti-table class="custemTable" [(displayedData)]="count.displayed"
+      [srcData]="count.srcData" [columns]="count.columns">
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr *ngFor="let thead of count.theads">
+              <ng-container *ngFor="let column of thead">
+                <th [attr.rowspan]="column.rowspan" [attr.colspan]="column.colspan" [ngStyle]="{'text-align': column.textAlign}">
+                  <ti-cell-text>{{ column.label }}</ti-cell-text>
+
+                  <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+
+                  <ti-head-filter *ngIf="column.filterKey"
+                    [options]="column.options"
+                    [(ngModel)]="column.selected"
+                    (select)="onCountSelect()"
+                    [ngClass]="{'ti3-head-filtered': column.selected?.length !== column.options.length}"
+                    [multiple]="column.multiple"
+                    [selectAll]="column.selectAll"
+                    [searchable]="column.searchable">
+                  </ti-head-filter>
+                </th>
+              </ng-container>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <div class="ti3-table-container ti3-resize-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of count.columns" [width]="column.width"></th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="count.displayed.length > 0">
+            <tr *ngFor="let item of count.displayed">
+              <td tiOverflow tiTipPosition='left'>{{ item['NUMA node'] }}</td>
+              <td tiOverflow tiTipPosition='left'>{{ typeTextMapping[item.type] || item.type }}</td>
+              <td tiOverflow tiTipPosition='left'>{{ item.acessscount | threePoint:2 }}</td>
+              <td tiOverflow tiTipPosition='left'>
+                <div class="pro-rate"
+                  [ngStyle]="{'width':(item.local_access_per !== 0 && item.local_access_per < 50 ? item.local_access_per + 1 : item.local_access_per) + '%'}">
+                  <span class="rateContent">{{ item.localaccess | threePoint:2 }}({{ item.local_access_per }}%)</span>
+                </div>
+              </td>
+              <td tiOverflow tiTipPosition='left'>
+                <div class="pro-rate"
+                  [ngStyle]="{'width':(item.spandie_per !== 0 && item.spandie_per < 50 ? item.spandie_per + 1 : item.spandie_per) + '%'}">
+                  <span class="rateContent">{{ item.spandie | threePoint:2 }}({{ item.spandie_per }}%)</span>
+                </div>
+              </td>
+              <td tiOverflow tiTipPosition='left'>
+                <div class="pro-rate"
+                  [ngStyle]="{'width':(item.spanchip_per !== 0 && item.spanchip_per < 50 ? item.spanchip_per + 1 : item.spanchip_per) + '%'}">
+                  <span class="rateContent">{{ item.spanchip | threePoint:2 }}({{ item.spanchip_per }}%)</span>
+                </div>
+              </td>
+              <td tiOverflow tiTipPosition='left'>
+                <div class="pro-rate"
+                  [ngStyle]="{'width':(item.ddr_access_per !== 0 && item.ddr_access_per < 50 ? item.ddr_access_per + 1 : item.ddr_access_per ) + '%'}">
+                  <span class="rateContent">{{ item.ddr_access_count | threePoint:2 }}({{ item.ddr_access_per }}%)</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="count.displayed.length === 0">
+            <tr class="ti3-table-nodata">
+              <td [attr.colspan]="7">
+                <div hyNodata [nodataShow]="true" style="height: 272px;"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ti-pagination [(currentPage)]="count.pageNo" [pageSize]="count.pageSize" [(totalNumber)]="count.total">
+      </ti-pagination>
+    </ti-table>
+
+  </div>
+</div>
+
+<ng-template #tipContent let-context='context'>
+  <div class="suggest_content">
+    <p>{{i18n.ddr_summury.maxBandWidthtip1}}</p>
+    <p>{{i18n.ddr_summury.maxBandWidthtip2}}</p>
+    <p>{{i18n.ddr_summury.maxBandWidthtip3}}</p>
+    <p>{{i18n.ddr_summury.maxBandWidthtip4}}</p>
+  </div>
+</ng-template>

@@ -1,0 +1,58 @@
+<div class="irqCompareEchart">
+    <div class="title">{{ 'net_io.xps_rps.inter_dis.info' | i18n }}</div>
+    <div class="compare-container">
+        <div class="viewLeft">
+            <div class="echart" style="width: 100%;height: 422px;" *ngIf="echartsOption" echarts
+                (chartInit)="onChartInit($event)" [options]="echartsOption"></div>
+        </div>
+        <div class="viewRight">
+            <div class="tableTitle">{{ tableTitle }}</div>
+            <div class="tableData">
+                <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns" tiColsResizable>
+                    <div class="ti3-table-fixed-head">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th tiOverflow *ngFor="let column of columns;index as index"
+                                        width="{{column.width}}">
+                                        <ti-cell-text>{{column.label}}</ti-cell-text>
+                                        <ti-head-sort *ngIf="column.sortKey && column.asc==='none'; else sortAsc"
+                                            [sortKey]="column.sortKey">
+                                        </ti-head-sort>
+                                        <ng-template #sortAsc>
+                                            <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"
+                                                [asc]="column.asc"></ti-head-sort>
+                                        </ng-template>
+                                        <ti-head-filter *ngIf="column.filter" [options]="column.options"
+                                            [(ngModel)]="column.selected" (select)="onSelect($event, column)"
+                                            [ngClass]="{'ti3-head-filtered': column.selected && column.selected.length}"
+                                            [multiple]="column.multiple" [selectAll]="column.selectAll"
+                                            [searchable]="column.searchable">
+                                        </ti-head-filter>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="ti3-table-container ti3-resize-wrapper" hyNodata [nodataShow]="displayed.length === 0">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th *ngFor="let column of columns" width="{{column.width}}"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let row of displayed;index as i;">
+                                    <td tiOverflow *ngFor="let column of columns; index as idx">{{ row[column.key] |
+                                        thousandSeparator}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ti-pagination class="pagination" [(currentPage)]="currentPage" [pageSize]="pageSize"
+                        [(totalNumber)]="totalNumber" [showGotoLink]="true"></ti-pagination>
+                </ti-table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Yum Commands Cannot Be Executed During Dedicated Software Porting">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001191872229.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.T21">
+<meta name="brand" content="Huawei Kunpeng Porting Advisor">
+<meta name="DC.Publisher" content="20201230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001155123910">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Yum Commands Cannot Be Executed During Dedicated Software Porting</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001155123910"></a><a name="EN-US_TOPIC_0000001155123910"></a>
+
+<h1 class="topictitle1">Yum Commands Cannot Be Executed During Dedicated Software Porting</h1>
+<div id="body32001227"><div class="section" id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_section19491842204710"><h4 class="sectiontitle">Symptom</h4><p id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_p19483102154813">When you run yum installation commands in a dedicated software porting task, an error message is displayed, as shown in the following figure.</p>
+<p id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_p194796717217"><span><img id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_image5986125621217" src="en-us_image_0000001154914782.png" width="496.75500000000005" height="97.75500000000001"></span></p>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_section118722058194718"><h4 class="sectiontitle">Possible Causes</h4><p id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_p8460419141512">Before startup, a yum process checks whether other yum processes are running in the system. If yes, the yum process waits until other yum processes are stopped. To prevent system resources from being exhausted, the tool checks whether other yum processes exist in the system before running a yum command. If yes, an error message will be displayed and the yum command will be stopped.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_section171517186487"><h4 class="sectiontitle">Procedure</h4><div class="p" id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_p4522522174818">If it takes a long time to run a yum command, this is probably because that the yum source configuration is incorrect or the network cannot be connected. You can perform the following steps to configure the local image source. The following uses CentOS 7.6 as an example.<ol id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_ol135868441336"><li id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_li11190204611410">Mount the image DVD-ROM:<p id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_p623912580416"><a name="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_li11190204611410"></a><a name="en-us_topic_0000001200904905_li11190204611410"></a><strong id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_b799014291572">mount /root/CentOS-7-x86_64-Everything-</strong>1810<strong id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_b299015291371">.iso /media -o loop</strong></p>
+</li><li id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_li1065918594">Back up the original Yum source. In the <strong id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_b940711475816">mv</strong> command, replace <em id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_i4408114125810">path</em> with the actual backup directory.<p id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_p14681819111714"><strong id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_b134461524161711">cd /etc/yum.repos.d/      //Go to the Yum source configuration directory.</strong></p>
+<p id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_p124681119151717"><strong id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_b11651929181714">mv ./</strong><em id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_i19652122971717">* path</em><strong id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_b465122913178">       //Back up the original Yum source configuration.</strong></p>
+</li><li id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_li18586644932">Edit the <strong id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_b178415315590">media.repo</strong> file.<p id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_p20264240141717"><strong id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_b4191044181716">vi /etc/yum.repos.d/media.repo</strong></p>
+</li><li id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_li18866361455">Press <strong id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_b8957183020019">i</strong> to enter the edit mode and add the following information to the <strong id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_b16461243401">media.repo</strong> file:<pre class="screen" id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_screen88281814203210">[InstallMedia]
+name=CentOS7.6 
+metadata_expire=-1 
+gpgcheck=0
+cost=500
+baseurl=file:///media 
+enabled=1</pre>
+</li><li id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_li1258615441830">Press <strong id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_b387312481010">Esc</strong>, type <strong id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_b178781448703">:wq</strong>, and press <strong id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_b887994819014">Enter</strong> to save the settings and exit.</li><li id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_li146382241512">Update the local cache information of the Yum source.<p id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_p14586164412315"><a name="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_li146382241512"></a><a name="en-us_topic_0000001200904905_li146382241512"></a><strong id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_b1140661691517">yum clean all</strong></p>
+<p id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_p7586104414313"><strong id="EN-US_TOPIC_0000001155123910__en-us_topic_0000001200904905_b9407191611158">yum makecache</strong></p>
+</li></ol>
+</div>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001191872229.html">FAQs</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

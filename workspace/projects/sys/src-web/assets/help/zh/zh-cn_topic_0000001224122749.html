@@ -1,0 +1,234 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="查看分析结果">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001223882789.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具 (系统性能分析)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001224122749">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>查看分析结果</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001224122749"></a><a name="ZH-CN_TOPIC_0000001224122749"></a>
+
+<h1 class="topictitle1">查看分析结果</h1>
+<div id="body1590719496407"><div class="section" id="ZH-CN_TOPIC_0000001224122749__zh-cn_topic_0189293077_section11470129119"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0000001224122749__zh-cn_topic_0189293077_zh-cn_topic_0189293076_p5336201013112">已创建访存统计分析任务，并且成功完成分析。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001224122749__section71241582339"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0000001224122749__ol654731511314"><li id="ZH-CN_TOPIC_0000001224122749__li1454719155315"><span>在“工程管理”区域，依次单击指定工程和分析任务名称前的<span><img id="ZH-CN_TOPIC_0000001224122749__zh-cn_topic_0250279621_image4105155811375" src="zh-cn_image_0000001224122785.png"></span>。</span><p><p id="ZH-CN_TOPIC_0000001224122749__zh-cn_topic_0250279621_p198319584430">展开节点列表。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001224122749__li135252039183111"><span>单击节点名称查看分析结果。</span><p><ul id="ZH-CN_TOPIC_0000001224122749__ul1126005818328"><li id="ZH-CN_TOPIC_0000001224122749__li3260358133212">单击节点名称默认进入“总览 ”页签，如<a href="#ZH-CN_TOPIC_0000001224122749__fig1951913614245">图1</a>所示，界面参数描述如<a href="#ZH-CN_TOPIC_0000001224122749__table79691052171111">表1</a>、<a href="#ZH-CN_TOPIC_0000001224122749__table0511719541">表2</a>或<a href="#ZH-CN_TOPIC_0000001224122749__table1249114645511">表3</a>所示。<div class="note" id="ZH-CN_TOPIC_0000001224122749__note3894133083911"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001224122749__ul14793812216"><li id="ZH-CN_TOPIC_0000001224122749__li6605175101617">“总览”页面展示各指标的汇总数据，具体包括：系统信息、Core Cache Miss、iCache Bandwidth、dCache Bandwidth、L3的命中率和带宽、TBL Miss和DDR Bandwidth。</li><li id="ZH-CN_TOPIC_0000001224122749__li17776147391">点击<span class="uicontrol" id="ZH-CN_TOPIC_0000001224122749__uicontrol255094221112">“查看平均值”</span>查看各项指标详细数据，点击<span><img id="ZH-CN_TOPIC_0000001224122749__image93861518131315" src="zh-cn_image_0000001223882999.png"></span>按钮可切换百分比视图和MPKI视图。</li><li id="ZH-CN_TOPIC_0000001224122749__li2482135414351">采集L3C和DDR数据的要求为：操作系统要求openEuler（内核版本要求为4.19及以上）、CentOS 7.6（内核版本要求为4.14.0-115.el7a.0.1/4.15及以上）。基于鲲鹏916的服务器不支持该数据采集。</li><li id="ZH-CN_TOPIC_0000001224122749__li13811185914010">单击右上方的<span><img id="ZH-CN_TOPIC_0000001224122749__image1622017159509" src="zh-cn_image_0000001178881794.png"></span>按钮可以切换时序图和表格视图。</li></ul>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001224122749__fig1951913614245"><a name="ZH-CN_TOPIC_0000001224122749__fig1951913614245"></a><a name="fig1951913614245"></a><span class="figcap"><b>图1 </b>总览</span><br><span><img id="ZH-CN_TOPIC_0000001224122749__image17131164314620" src="zh-cn_image_0000001224201523.png"></span></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001224122749__fig8385154041017"><span class="figcap"><b>图2 </b>总览-L3</span><br><span><img id="ZH-CN_TOPIC_0000001224122749__image1738518405101" src="zh-cn_image_0000001224122951.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001224122749__table79691052171111"></a><a name="table79691052171111"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001224122749__table79691052171111" frame="border" border="1" rules="all"><caption><b>表1 </b>系统信息区域参数说明</caption><colgroup><col style="width:31.59%"><col style="width:68.41000000000001%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001224122749__row45001815012"><th align="left" class="cellrowborder" valign="top" width="31.59%" id="mcps1.3.2.2.2.2.1.1.8.2.3.1.1"><p id="ZH-CN_TOPIC_0000001224122749__p550018151113">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="68.41000000000001%" id="mcps1.3.2.2.2.2.1.1.8.2.3.1.2"><p id="ZH-CN_TOPIC_0000001224122749__p115006151412">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001224122749__row14451514539"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.1.8.2.3.1.1 mcps1.3.2.2.2.2.1.1.8.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p149756429311">系统信息</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row10589729379"><td class="cellrowborder" valign="top" width="31.59%" headers="mcps1.3.2.2.2.2.1.1.8.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p45202056155118">Linux内核版本</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.41000000000001%" headers="mcps1.3.2.2.2.2.1.1.8.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p147001320115819">显示Linux内核版本。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row115003151113"><td class="cellrowborder" valign="top" width="31.59%" headers="mcps1.3.2.2.2.2.1.1.8.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p1751575635119">CPU类型</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.41000000000001%" headers="mcps1.3.2.2.2.2.1.1.8.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p127001120125812">显示CPU类型。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row155058391634"><td class="cellrowborder" valign="top" width="31.59%" headers="mcps1.3.2.2.2.2.1.1.8.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p19725111571920">NUMA NODE</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.41000000000001%" headers="mcps1.3.2.2.2.2.1.1.8.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p1172491571913">显示NUMA节点。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row16930048737"><td class="cellrowborder" valign="top" width="31.59%" headers="mcps1.3.2.2.2.2.1.1.8.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p1872341501914">NUMA NODE0 CPUS</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.41000000000001%" headers="mcps1.3.2.2.2.2.1.1.8.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p772111518191">显示NUMA节点0包含的CPU。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row1499865715319"><td class="cellrowborder" valign="top" width="31.59%" headers="mcps1.3.2.2.2.2.1.1.8.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p2316155921919">NUMA NODE1 CPUS</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.41000000000001%" headers="mcps1.3.2.2.2.2.1.1.8.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p187201315181912">显示NUMA节点1包含的CPU。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row56721125317"><td class="cellrowborder" valign="top" width="31.59%" headers="mcps1.3.2.2.2.2.1.1.8.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p6195110142018">NUMA NODE2 CPUS</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.41000000000001%" headers="mcps1.3.2.2.2.2.1.1.8.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p6718915121913">显示NUMA节点2包含的CPU。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row276910411538"><td class="cellrowborder" valign="top" width="31.59%" headers="mcps1.3.2.2.2.2.1.1.8.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p157571016202">NUMA NODE3 CPUS</p>
+</td>
+<td class="cellrowborder" valign="top" width="68.41000000000001%" headers="mcps1.3.2.2.2.2.1.1.8.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p1271518159190">显示NUMA节点3包含的CPU。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li><li id="ZH-CN_TOPIC_0000001224122749__li1470103694310">单击<span class="uicontrol" id="ZH-CN_TOPIC_0000001224122749__uicontrol1097614816519">“缓存访问”</span>页签查看缓存访问分析结果的折线图，如<a href="#ZH-CN_TOPIC_0000001224122749__fig6939854172515">图3</a>所示，界面参数描述如<a href="#ZH-CN_TOPIC_0000001224122749__table0511719541">表2</a>所示。<div class="note" id="ZH-CN_TOPIC_0000001224122749__note162981816204620"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001224122749__ul25821169816"><li id="ZH-CN_TOPIC_0000001224122749__li10127711287"><span class="uicontrol" id="ZH-CN_TOPIC_0000001224122749__uicontrol5991219440">“缓存访问”</span>页签以折线图方式展示L1C、L2C、L3C、TLB的访问带宽和命中率的时序数据。</li><li id="ZH-CN_TOPIC_0000001224122749__li312711111682">可在“CPU”和“类型”下拉框中选择不同的CPU和类型查看“带宽”、“命中率”或“命中带宽”的折线图。</li><li id="ZH-CN_TOPIC_0000001224122749__li231453432418">可在“NUMA NODE”和“类型”下拉框中选择不同的NUMA NODE和类型查看“带宽”、“命中率”或“命中带宽”的折线图。</li><li id="ZH-CN_TOPIC_0000001224122749__li56071054101617">单击<span><img id="ZH-CN_TOPIC_0000001224122749__image193191254525" src="zh-cn_image_0000001178563266.png"></span>按钮，可筛选CPU核数和带宽或命中率进行查看。</li><li id="ZH-CN_TOPIC_0000001224122749__li15757195134515">单击右上方的<span><img id="ZH-CN_TOPIC_0000001224122749__image14159252204512" src="zh-cn_image_0000001224361451.png"></span>按钮可以切换时序图和表格视图。</li><li id="ZH-CN_TOPIC_0000001224122749__li1664713464177">采集L3C和DDR数据的要求为：操作系统要求openEuler（内核版本要求为4.19及以上）、CentOS 7.6（内核版本要求为4.14.0-115.el7a.0.1/4.15及以上）。基于鲲鹏916的服务器不支持该数据采集。</li></ul>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001224122749__fig6939854172515"><a name="ZH-CN_TOPIC_0000001224122749__fig6939854172515"></a><a name="fig6939854172515"></a><span class="figcap"><b>图3 </b>缓存访问</span><br><span><img id="ZH-CN_TOPIC_0000001224122749__image1216227181617" src="zh-cn_image_0000001224361453.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001224122749__table0511719541"></a><a name="table0511719541"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001224122749__table0511719541" frame="border" border="1" rules="all"><caption><b>表2 </b>缓存访问区域参数说明</caption><colgroup><col style="width:22.29%"><col style="width:77.71000000000001%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001224122749__row45177105419"><th align="left" class="cellrowborder" valign="top" width="22.29%" id="mcps1.3.2.2.2.2.1.2.6.2.3.1.1"><p id="ZH-CN_TOPIC_0000001224122749__p255775417">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="77.71000000000001%" id="mcps1.3.2.2.2.2.1.2.6.2.3.1.2"><p id="ZH-CN_TOPIC_0000001224122749__p1065715541">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001224122749__row126679540"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p3687195412">L1C/L2C/TLB访问带宽和命中率</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row163361848185520"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p18336548185515">CPU</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p1533654875518">选择CPU编号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row11985845125520"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p39863456553">类型</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p18986164514559">选择显示数据类型。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row15615716544"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p16463055414">带宽(MiB/s)</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p6611717546">显示访问带宽。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row7618715544"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p133130205415">命中率</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p166274544">显示访问命中率。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row19614717540"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p11343710145519">L3C访问带宽和命中率</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row48283318141"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p283123331419">NUMA NODE</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p13838338146">选择NUMA NODE编号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row127978542"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p1199992912540">类型</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p16280103914020">显示访问类型。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row1693412267554"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p2934226145514">命中带宽(MiB/s)</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p4293239204">显示访问命中带宽。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row589073412558"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p19891934165520">带宽(MiB/s)</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p1130373910012">显示访问带宽。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row715514366551"><td class="cellrowborder" valign="top" width="22.29%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p215573635510">命中率</p>
+</td>
+<td class="cellrowborder" valign="top" width="77.71000000000001%" headers="mcps1.3.2.2.2.2.1.2.6.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p63121639307">显示访问命中率。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li><li id="ZH-CN_TOPIC_0000001224122749__li89732513536">单击<span class="uicontrol" id="ZH-CN_TOPIC_0000001224122749__uicontrol2252121618917">“DDR访问”</span>页签查看DDR访问分析结果的折线图，如<a href="#ZH-CN_TOPIC_0000001224122749__fig5592161992716">图4</a>所示，界面参数描述如<a href="#ZH-CN_TOPIC_0000001224122749__table1249114645511">表3</a>所示。<div class="note" id="ZH-CN_TOPIC_0000001224122749__note1531318340915"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><ul id="ZH-CN_TOPIC_0000001224122749__ul44711289429"><li id="ZH-CN_TOPIC_0000001224122749__li183065111918"><span class="uicontrol" id="ZH-CN_TOPIC_0000001224122749__uicontrol1768816206448">“DDR访问”</span>页签以折线图方式展示DDR的访问带宽和次数的时序数据。</li><li id="ZH-CN_TOPIC_0000001224122749__li96212129342">可在“DDR访问带宽” 区域选择不同的“NUMA NODE”、“DDR通道ID”或“类型”查看对应的折线图。</li><li id="ZH-CN_TOPIC_0000001224122749__li1068516144348">可在“DDR访问次数” 区域选择不同的“NUMA NODE”或“类型”查看对应的折线图。</li><li id="ZH-CN_TOPIC_0000001224122749__li1570014247268">采集L3C和DDR数据的要求为：操作系统要求openEuler（内核版本要求为4.19及以上）、CentOS 7.6（内核版本要求为4.14.0-115.el7a.0.1/4.15及以上）。基于鲲鹏916的服务器不支持该数据采集。</li></ul>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001224122749__fig5592161992716"><a name="ZH-CN_TOPIC_0000001224122749__fig5592161992716"></a><a name="fig5592161992716"></a><span class="figcap"><b>图4 </b>DDR访问</span><br><span><img id="ZH-CN_TOPIC_0000001224122749__image166509961017" src="zh-cn_image_0000001178723234.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001224122749__table1249114645511"></a><a name="table1249114645511"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001224122749__table1249114645511" frame="border" border="1" rules="all"><caption><b>表3 </b>DDR访问区域参数说明</caption><colgroup><col style="width:9%"><col style="width:15%"><col style="width:76%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001224122749__row22494464555"><th align="left" class="cellrowborder" colspan="2" valign="top" id="mcps1.3.2.2.2.2.1.3.6.2.4.1.1"><p id="ZH-CN_TOPIC_0000001224122749__p182491446195517">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" id="mcps1.3.2.2.2.2.1.3.6.2.4.1.2"><p id="ZH-CN_TOPIC_0000001224122749__p92491746195510">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001224122749__row10249446105512"><td class="cellrowborder" colspan="3" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p824954675514">DDR访问带宽</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row107001229523"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p2070814325216">NUMA NODE</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p187087316524">选择NUMA NODE编号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row1224913468552"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p571091219566">DDR通道ID</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p12491346185517">显示DDR通道编号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row1024917463552"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p16709812165616">类型</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p5249174615518">显示DDR访问类型。可选“读DDR”，“写DDR”。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row724984675516"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p470812128564">带宽 (MiB/s)</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p42491346165512">显示DDR访问带宽。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row1325013462553"><td class="cellrowborder" colspan="3" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p2743133315610">DDR访问次数</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row12250646105516"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p4697101214568">NUMA NODE</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p182501346185511">选择NUMA NODE编号。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row4250184605517"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p5239103918325">类型</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p202395393328">显示DDR访问类型。可选“读DDR”，“写DDR”。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row4871152383214"><td class="cellrowborder" rowspan="5" valign="top" width="9%" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p1828153122417">DDR访问</p>
+</td>
+<td class="cellrowborder" valign="top" width="15%" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p1587111233329">访存总次数/s</p>
+</td>
+<td class="cellrowborder" valign="top" width="76%" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.2 "><p id="ZH-CN_TOPIC_0000001224122749__p08721923103215">显示每秒DDR访问总次数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row17250134620552"><td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p0692151215565">本地访问DDR次数/s (%)</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p185861150593">显示每秒本地访问DDR次数，以及本地访问DDR次数与访存总次数的百分比。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row156195112563"><td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p136175175614">跨DIE访问DDR次数/s (%)</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p1458611501597">显示每秒跨DIE访问DDR次数，以及跨DIE访问DDR次数与访存总次数的百分比。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row46454552566"><td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p26451955155617">跨片访问DDR次数/s (%)</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p85861507920">显示每秒跨芯片访问DDR次数，以及跨芯片访问DDR次数与访存总次数的百分比。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001224122749__row98538581811"><td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p208531458882">访问DDR次数/s (%)</p>
+</td>
+<td class="cellrowborder" valign="top" headers="mcps1.3.2.2.2.2.1.3.6.2.4.1.1 "><p id="ZH-CN_TOPIC_0000001224122749__p685723781615">显示每秒本地访问DDR次数、跨DIE访问DDR次数与跨片访问DDR次数的总和，以及访问DDR次数与访问总次数的百分比。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li><li id="ZH-CN_TOPIC_0000001224122749__li48715314359">单击“任务信息”页签查看当前节点任务的详细配置信息和采集信息。<div class="note" id="ZH-CN_TOPIC_0000001224122749__zh-cn_topic_0250279621_note1344019461351"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001224122749__zh-cn_topic_0250279621_p84406467353">如果任务执行失败，“任务信息”界面上会显示任务失败的原因。</p>
+</div></div>
+</li><li id="ZH-CN_TOPIC_0000001224122749__li82901056564">单击“任务日志”页签查看任务“采集过程”和“数据分析”的日志信息。</li></ul>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001223882789.html">访存统计分析</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

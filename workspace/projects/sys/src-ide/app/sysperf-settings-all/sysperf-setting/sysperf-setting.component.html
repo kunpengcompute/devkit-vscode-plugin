@@ -1,0 +1,329 @@
+<div class="sysPerfSet">
+  <!-- 左侧菜单区 -->
+  <div id="menu" class="left">
+    <!-- 节点管理 -->
+    <div class='clickindex' title='{{i18n.plugins_perf_tip_sysSet.nodeManagement}}'><span
+        (click)="jumpScroll('itemNodeManaga')"
+        id="menuNodeManaga">{{i18n.plugins_perf_tip_sysSet.nodeManagement}}</span></div>
+    <ng-container *ngIf="toolType !== ToolType.TUNINGHELPER">
+      <!-- 预约任务 -->
+      <div class='clickindex' title='{{i18n.preTable.perMission}}'><span (click)="jumpScroll('itemAppointTask')"
+          id="menuAppointTask">{{i18n.preTable.perMission}}</span></div>
+      <!-- 导入/导出任务 -->
+      <div class='clickindex' title='{{i18n.project.importAndExportTask}}'><span
+          (click)="jumpScroll('itemImportAndExportTask')"
+          id="menuImportAndExportManage">{{i18n.project.importAndExportTask}}</span>
+      </div>
+      <!-- 任务模板 -->
+      <div class='clickindex' title='{{i18n.mission_modal.missionTemplate}}'><span (click)="jumpScroll('itemTaskModel')"
+          id="menuTaskModel">{{i18n.mission_modal.missionTemplate}}</span>
+      </div>
+    </ng-container>
+    <!-- 系统性能分析配置 -->
+    <div class='clickindex' title='{{systemConfigText}}'>
+      <span (click)="jumpScroll('applicationPath')" id="menuPath">{{systemConfigText}}</span>
+    </div>
+    <!-- 日志/操作日志 -->
+    <div class='clickindex' title='{{userRoleFlag ? i18n.log : i18n.plugins_perf_tip_sysSet.common_term_admin_log}}'>
+      <span (click)="jumpScroll('itemOperaLog')" id="menuOperaLog">
+        {{userRoleFlag ? i18n.log : i18n.plugins_perf_tip_sysSet.common_term_admin_log}}
+      </span>
+    </div>
+    <!-- Agent服务证书 -->
+    <div class='clickindex' title='{{i18n.plugins_perf_tip_sysSet.agent}}'>
+      <span (click)="jumpScroll('itemAgent')" id="menuAgent">{{i18n.plugins_perf_tip_sysSet.agent}}</span>
+    </div>
+  </div>
+  <!-- 右侧菜单区 -->
+  <div id="content" class="right">
+    <!-- 节点管理 -->
+    <app-node-management></app-node-management>
+    <ng-container *ngIf="toolType !== ToolType.TUNINGHELPER">
+      <!-- 预约任务 -->
+      <div id="itemAppointTask" style="margin-top: 20px;">
+        <p class='titleset'>
+          {{i18n.preTable.perMission}}
+        </p>
+        <div *ngIf="sysPerfAppointTaskSet.displayAppointTask.length" style="margin-top: -10px;">
+          <button class="little-primary-btn" type="button" style="margin-bottom: 10px;" (click)="popBatchDeleteModal()"
+            [disabled]="sysPerfAppointTaskSet.checkAppointTaskList.length === 0">
+            {{i18n.plugins_perf_tip_sysSet.deleteTask}}
+          </button>
+        </div>
+        <ti-table [(displayedData)]="sysPerfAppointTaskSet.displayAppointTask" [srcData]="srcAppointTaskData"
+          [columns]="columAppointTask" class="scheduleTaskList custemTable">
+          <div class="ti3-table-fixed-head">
+            <table>
+              <thead>
+                <tr>
+                  <ng-container *ngFor="let column of columAppointTask">
+                    <!-- 展开图标 -->
+                    <th *ngIf="column.prop === 'detailsIcon'; else theadCheckboxTh" details-icon-column>
+                      {{column.title}}</th>
+
+                    <!--复选框-->
+                    <ng-template #theadCheckboxTh>
+                      <th *ngIf="column.prop === 'checkbox'; else theadSimpleTh" checkbox-column>
+                        <input type="checkbox" tiCheckgroup valueKey="taskId"
+                          [items]="sysPerfAppointTaskSet.displayAppointTask"
+                          [(checkeds)]="sysPerfAppointTaskSet.checkAppointTaskList" />
+                      </th>
+                    </ng-template>
+
+                    <!-- 其他 -->
+                    <ng-template #theadSimpleTh>
+                      <th width="{{column.width}}" [tiColumnFixed]="column.fixed">
+                        <div class="simpleThContent">
+                          <ti-cell-text tiOverflow>{{column.title}}</ti-cell-text>
+
+                          <!-- CheckBox 筛选 -->
+                          <div *ngIf="column.options && column.options.length > 0" class="filter-box">
+                            <img class="filter-icon"
+                              [src]="sanitizer.bypassSecurityTrustResourceUrl(filterImgStatus[column.prop])"
+                              (mouseenter)="imgStatusChange('hover', column.prop)"
+                              (mousedown)="imgStatusChange('click', column.prop)"
+                              (mouseleave)="imgStatusChange('normal', column.prop)"
+                              (mouseup)="imgStatusChange('normal', column.prop)">
+
+                            <div class="filter-box-list">
+                              <div class="filterItem">
+                                <input type="checkbox" tiCheckgroup [items]='column.options'
+                                  [(checkeds)]="column.selected" [label]="i18n.plugins_perf_tip_sysSet.selectAll"
+                                  (checkedsChange)="onSelect()">
+                              </div>
+
+                              <span *ngFor="let item of column.options">
+                                <input type="checkbox" tiCheckitem [item]="item" [label]="item">
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                    </ng-template>
+                  </ng-container>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="ti3-table-container ti3-resize-wrapper" style="max-height: 272px;">
+            <table>
+              <thead>
+                <tr>
+                  <ng-container *ngFor="let column of columAppointTask">
+                    <!-- 展开图标 -->
+                    <th *ngIf="column.prop === 'detailsIcon'; else tbodyCheckboxTh" details-icon-column>
+                    </th>
+
+                    <!--复选框-->
+                    <ng-template #tbodyCheckboxTh>
+                      <th *ngIf="column.prop === 'checkbox'; else tbodySimpleTh" checkbox-column>
+                      </th>
+                    </ng-template>
+
+                    <!-- 其他 -->
+                    <ng-template #tbodySimpleTh>
+                      <th tiOverflow width="{{column.width}}"></th>
+                    </ng-template>
+                  </ng-container>
+                </tr>
+              </thead>
+              <tbody>
+                <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                <ng-container *ngFor="let row of sysPerfAppointTaskSet.displayAppointTask;index as i">
+                  <tr [ngClass]="{'ti3-selected-tr': sysPerfAppointTaskSet.checkAppointTaskList.indexOf(row) !== -1}">
+                    <ng-container *ngFor="let column of columAppointTask">
+                      <!-- 展开图标 -->
+                      <!--使用展开详情图标时，需要给展开详情图标列加 details-icon-column 属性-->
+                      <td *ngIf="column.prop === 'detailsIcon'; else tbodyCheckboxTd" details-icon-column>
+                        <ti-details-icon [row]="row" [index]="i">
+                        </ti-details-icon>
+                      </td>
+
+                      <!--复选框-->
+                      <ng-template #tbodyCheckboxTd>
+                        <td *ngIf="column.prop === 'checkbox'; else tbodyOperateTd" checkbox-column>
+                          <input type="checkbox" tiCheckitem [item]="row" />
+                        </td>
+                      </ng-template>
+
+                      <!-- 操作 -->
+                      <ng-template #tbodyOperateTd>
+                        <td tiColumnFixed='right' *ngIf="column.prop === 'operate'; else tbodySimpleTd" tiOverflow>
+                          <!-- 修改 -->
+                          <a *ngIf="row.scheduleStatus === i18n.preTable.reserve" class="aLink"
+                            style="margin-right: 10px;" href=""
+                            (click)="modifyAppointTask(row)">{{i18n.common_term_operate_edit}}</a>
+
+                          <!-- 删除 -->
+                          <a class="aLink" href=""
+                            (click)="openDeleteAppointTaskModal(row)">{{i18n.plugins_perf_tip_sysSet.delte}}</a>
+                        </td>
+                      </ng-template>
+
+                      <!-- 其他 -->
+                      <ng-template #tbodySimpleTd>
+                        <td tiOverflow>{{row[column.prop]}}</td>
+                      </ng-template>
+                    </ng-container>
+                  </tr>
+                  <tr *tiDetailsTr="row" class="childTr">
+                    <td tiColspan class="ti3-details-td" [ngStyle]="{'padding-left': '40px'}">
+                      <!-- Tiny3.1.3版本新增，theme-ui3主题下不用加此div和类名。 -->
+                      <div class="ti3-table-detail-container">
+                        <div class="indentLine"></div>
+                        <ng-container [ngSwitch]="row.data.analysisType || row.data['analysis-type']">
+                          <app-mission-diagnose-detail *ngSwitchCase="'memory_diagnostic'" [taskInfo]="row.data">
+                          </app-mission-diagnose-detail>
+                          <!-- 内存诊断下拉列表 -->
+                          <app-net-io-temp-detail *ngSwitchCase="'netio_diagnostic'" [taskInfo]="row.data">
+                          </app-net-io-temp-detail>
+                          <!-- 存储io下拉列表 -->
+                          <app-storage-io-temp-detail *ngSwitchCase="'storageio_diagnostic'" [taskInfo]="row.data" [labelpadding]="'20px'">
+                          </app-storage-io-temp-detail>
+                          <app-mission-reservation-listinfo *ngSwitchDefault [taskData]="row.data">
+                          </app-mission-reservation-listinfo>
+                        </ng-container>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+            <app-default-page *ngIf="sysPerfAppointTaskSet.displayAppointTask.length === 0"
+              [text]="i18n.plugins_perf_tip_sysSet.noAppointTaskData" [image]="image">
+            </app-default-page>
+          </div>
+        </ti-table>
+      </div>
+      <!-- 导入导出任务 -->
+      <app-import-and-export-task-list #importExportTaskList></app-import-and-export-task-list>
+      <!-- 任务模板 -->
+      <app-task-template-manage></app-task-template-manage>
+    </ng-container>
+    <!-- 系统性能分析配置 -->
+    <app-sysperf-application-path></app-sysperf-application-path>
+    <!-- 操作日志 -->
+    <app-operalog-manage></app-operalog-manage>
+    <!-- 运行日志 -->
+    <app-sysperf-runlog-manage></app-sysperf-runlog-manage>
+    <!-- Agent服务证书 -->
+    <app-header-certificate-agent></app-header-certificate-agent>
+  </div>
+</div>
+
+<!-- 单独删除预约任务弹框 -->
+<app-pop-mask #deleteAppointTaskModal>
+  <div class="content">
+    <div class="mask-title">
+      <span class="create-title">{{i18n.plugins_term_delete_title_appointment}}</span>
+      <span (click)="deleteAppointTaskModal.Close()" class="tip-close">
+        <img class="incorrect" src="./assets/img/header/close_icon.svg" />
+        <img class="incorrect" src="./assets/img/header/close_icon_hover.svg">
+      </span>
+    </div>
+
+    <div class="tip_title">
+      <img src="./assets/img/mission/warn_arr.svg" alt="">
+      <span>{{i18n.plugins_term_delete_content_appointment}}</span>
+    </div>
+
+    <div class="footer_button">
+      <button class="cancel-btn mr-20" (click)='deleteAppointTaskOk()'>{{i18n.plugins_common_term_operate_ok}}</button>
+      <button class="primary-btn"
+        (click)='deleteAppointTaskModal.Close()'>{{i18n.plugins_common_term_operate_cancel}}</button>
+    </div>
+  </div>
+</app-pop-mask>
+
+<!-- 批量删除预约任务弹窗 -->
+<ng-template #batchDeleteAppointTaskModalComponent let-context='context'>
+  <ti-modal-header>
+    {{ i18n.plugins_term_delete_title_appointment }}
+  </ti-modal-header>
+
+  <!-- 弹框内容定义 -->
+  <ti-modal-body>
+    <div style="width: 100%; height: 30px; display: flex; align-items: center; margin-bottom: 6px;">
+      <img src="./assets/img/mission/warn_arr.svg" alt="">
+      <span style="margin-left: 6px;">{{i18n.plugins_sysperf_message_batch_delete_AppointTask}}</span>
+    </div>
+
+    <ti-table [(displayedData)]="context.displayed" [srcData]="context.srcData" [columns]="context.columns"
+      class="scheduleTaskList">
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr>
+              <ng-container *ngFor="let column of context.columns">
+                <!--复选框-->
+                <th *ngIf="column.prop === 'checkbox'; else deleteModalTheadSimpleTh" checkbox-column>
+                  <!--如果有分页，全选需要控制当前页时，items接口传入displayed如果全选要控制表格所有数据，items接口传入srcData.data-->
+                  <input type="checkbox" tiCheckgroup valueKey="taskId" [items]="context.displayed"
+                    [(checkeds)]="context.checkId" />
+                </th>
+
+                <!-- 其他 -->
+                <ng-template #deleteModalTheadSimpleTh>
+                  <th tiOverflow width="{{column.width}}">{{column.title}}</th>
+                </ng-template>
+              </ng-container>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="ti3-table-container ti3-resize-wrapper" style="max-height: 272px;">
+        <table>
+          <thead>
+            <tr>
+              <ng-container *ngFor="let column of context.columns">
+                <!--复选框-->
+                <th *ngIf="column.prop === 'checkbox'; else deleteModalTbodySimpleTh" checkbox-column>
+                </th>
+
+                <!-- 其他 -->
+                <ng-template #deleteModalTbodySimpleTh>
+                  <th tiOverflow width="{{column.width}}"></th>
+                </ng-template>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+            <ng-container *ngFor="let row of context.displayed;index as i">
+              <tr [ngClass]="{'ti3-selected-tr': context.displayed.indexOf(row) !== -1}">
+                <ng-container *ngFor="let column of context.columns">
+                  <!--复选框-->
+                  <td *ngIf="column.prop === 'checkbox'; else deleteModalTbodySimpleTd" checkbox-column>
+                    <input type="checkbox" tiCheckitem [item]="row" />
+                  </td>
+
+                  <!-- 其他 -->
+                  <ng-template #deleteModalTbodySimpleTd>
+                    <td tiOverflow>{{row[column.prop]}}</td>
+                  </ng-template>
+                </ng-container>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </ti-table>
+  </ti-modal-body>
+
+  <ti-modal-footer>
+    <button class="cancel-btn mr-20" type="button" (click)="context.batchDeleteAppointTask(context)"
+      [disabled]="context.checkId.length === 0">{{
+      i18n.plugins_common_term_operate_ok }}</button>
+
+    <button class="primary-btn" type="button" (click)="context.dismiss()">
+      {{ i18n.plugins_common_term_operate_cancel }}
+    </button>
+  </ti-modal-footer>
+</ng-template>
+
+<!-- 修改预约任务弹框 -->
+<app-modify-schedule #modifyschedule [taskData]="taskData" [anasyname]="anasyname"
+  (sendPretable)="initAppointTaskItems(false)">
+</app-modify-schedule>
+<app-large-modify-schedule #largeModifySchedule [taskData]="taskData"
+(sendPretable)="initAppointTaskItems(false)"></app-large-modify-schedule>

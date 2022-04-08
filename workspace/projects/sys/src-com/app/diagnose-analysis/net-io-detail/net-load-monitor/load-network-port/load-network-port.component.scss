@@ -1,0 +1,26 @@
+.cpu-header{
+    padding-top: 33px;
+    padding-bottom: 20px;
+    display: flex;
+    p{
+        padding-right: 16px;
+    }
+}
+.title-top{
+    padding-bottom: 10px !important;
+}
+.echart-title{
+    padding-bottom: 10px;
+    font-size: 16px;
+    &:nth-child(1){
+        padding-top: 32px;
+    }
+}
+::ng-deep .time-line {
+    .box {
+      width: 98% !important;
+    }
+  }
+.memory-usage ti-select {
+    width: 144px;
+}

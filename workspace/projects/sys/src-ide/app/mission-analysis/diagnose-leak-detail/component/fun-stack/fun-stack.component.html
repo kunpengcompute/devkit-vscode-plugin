@@ -1,0 +1,70 @@
+<div class="box"
+  [appDragBox]="stack"
+  [appZoomBox]="stack"
+  #zoomBox="zoomBox"
+  #dragBox="dragBox"
+>
+  <div class="background1"></div>
+  <div class="background2"></div>
+  <header>
+    <div class="header-left">
+      <span *ngIf="currActiveFunc?.moduleName" tiOverflow>{{ currActiveFunc?.moduleName }}</span>
+      <span tiOverflow>{{ currActiveFunc?.funcName }}</span>
+    </div>
+    <div class="header-right">
+      <span class="node-detail-text">{{ nodeNumInfo }}</span>
+      <div class="invocation-depth">
+        <span>{{ i18n.diagnostic.stack.invocationDepth }}</span>
+        <ti-select
+          valueKey="label"
+          labelKey="labelName"
+          [options]="invocationDepthOptions"
+          [(ngModel)]="invocationDepth"
+          (ngModelChange)="changeInvacationDepth($event)"
+        >
+        </ti-select>
+      </div>
+      <div class="be-invocation-depth">
+        <span>{{ i18n.diagnostic.stack.beInvocationDepth }}</span>
+        <ti-select
+          valueKey="label"
+          labelKey="labelName"
+          [options]="beInvocationDepthOptions"
+          [(ngModel)]="beInvocationDepth"
+          (ngModelChange)="changeBeInvacationDepth($event)"
+        >
+        </ti-select>
+      </div>
+    </div>
+  </header>
+  <div id="stack-box" #stack class="stack">
+    <div class="stack-row" *ngFor="let row of stackNodeInfoList">
+      <ng-container *ngFor="let nodeInfo of row">
+        <app-fun-stack-node
+          *ngIf="nodeInfo.show"
+          [currFuncName]="currActiveFunc.funcName"
+          [nodeInfo]="nodeInfo"
+          [memLeakType]="memLeakType"
+          (nodeInited)="saveNodeComponent(nodeInfo.funcName, $event)"
+          (nodeClick)="handleNodeClick(nodeInfo)"
+        >
+        </app-fun-stack-node>
+      </ng-container>
+    </div>
+    <canvas id="line-box"></canvas>
+  </div>
+  <div class="oprate-btns">
+    <span class="save-btn" (click)="downLandSvg(currActiveFunc?.funcName)">
+      <img src="./assets/img/memDiagnose/save.svg">
+    </span>
+    <div class="zoom-btn">
+      <span (click)="zoomBox.zoomUp()">
+        <ti-icon name="add"></ti-icon>
+      </span>
+      <div class="divider"></div>
+      <span (click)="zoomBox.zoomDown()">
+        <ti-icon name="reduce"></ti-icon>
+      </span>
+    </div>
+  </div>
+</div>

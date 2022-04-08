@@ -1,0 +1,205 @@
+.overview-container {
+    .io-detail-tab {
+        margin-bottom: 20px;
+
+        .tab-content {
+            position: relative;
+
+            .item-tab {
+                padding: 0 16px;
+
+                .tab-title {
+                    display: inline-block;
+                    cursor: pointer;
+                    box-sizing: border-box;
+                    font-size: 14px;
+                    line-height: 20px;
+                    position: relative;
+
+                    .tab-active {
+                        display: inline-block;
+                        padding-bottom: 6px;
+                        color: #267dff;
+                        border-bottom: 2px solid #267dff;
+                    }
+                }
+            }
+
+            .item-tab:hover {
+                color: #0067ff;
+            }
+        }
+
+        .tab-content:nth-of-type(1) {
+            .item-tab {
+                padding-left: 0;
+            }
+        }
+
+        .tab-content:not(:last-child) {
+            .item-tab:after {
+                content: "";
+                position: absolute;
+                height: 10px;
+                width: 1px;
+                right: 0;
+                top: calc(50% - 5px);
+                background-color: #888;
+            }
+        }
+    }
+}
+
+:host ::ng-deep .overview-container {
+    ti-pagination .ti3-icon-angle-right:before {
+        content: "\e90c" !important;
+    }
+
+    .ti3-table>.ti3-page-container {
+        margin: 16px 0 20px;
+    }
+}
+
+::ng-deep ti-drop {
+    &.ti3-dropdown-container {
+        background-color: var(--vscode-editor-background);
+    }
+
+    &.ti3-dropdown-container-border {
+        --ti-select-border-color-focus: #0067ff;
+    }
+
+    &.ti3-head-filter-drop {
+        padding: 0;
+    }
+
+    .ti3-multi-select-checkbox {
+        --ti-checkbox-bg-color: var(--vscode-editor-background);
+        color: var(--vscode-editor-background);
+        font-size: 14px;
+    }
+
+    .ti3-dropdown-option .ti3-multi-select-checkbox-selected,
+    .ti3-dropdown-option-notoverflow .ti3-multi-select-checkbox-selected {
+        --ti-checkbox-bg-color-checked: #0067FF;
+        color: #fff;
+    }
+
+    .ti3-dropdown-option .ti3-multi-select-checkbox-indeterminate,
+    .ti3-dropdown-option-notoverflow .ti3-multi-select-checkbox-indeterminate {
+        --ti-checkbox-bg-color-checked: #0067FF;
+        color: #fff;
+        background-color: #fff;
+    }
+
+    .ti3-head-filter-drop-button-container {
+        --ti-common-font-size-base: 12px;
+    }
+}
+
+::ng-deep .vscode-dark ti-drop .ti3-head-filter-drop-button-container {
+
+    .ti3-head-filter-drop-button-ok,
+    .ti3-head-filter-drop-button-ok+.ti3-btn-small {
+        --ti-button-default-normal-bg-color: #313131;
+        color: #e8e8e8;
+        --ti-button-default-normal-border-color: #DDDDDD;
+
+        &:hover {
+            background: #313131;
+            border: 1px solid #0067FF;
+            color: #0067ff;
+        }
+    }
+}
+
+::ng-deep .vscode-light ti-drop .ti3-head-filter-drop-button-container {
+
+    .ti3-head-filter-drop-button-ok,
+    .ti3-head-filter-drop-button-ok+.ti3-btn-small {
+        --ti-button-default-normal-bg-color: #ffffff;
+        color: --ti-button-default-normal-color;
+        --ti-button-default-normal-border-color: #CCCCCC;
+
+        &:hover {
+            background: #ffffff;
+            border: 1px solid #0067FF;
+            color: #0067ff;
+        }
+    }
+}
+
+:host ::ng-deep .control {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    font-size: 14px;
+
+    .control-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .control-button {
+            font-size: 12px;
+            background: #0067FF;
+            width: 160px;
+            height: 28px;
+            line-height: 28px;
+            border: 1px solid #0067FF;
+            color: var(--primary-button-font-color);
+        }
+
+        .control-button:hover,
+        .control-button:focus {
+            background: #267dff !important;
+            border: 1px solid #267dff !important;
+        }
+
+        .control-button:active {
+            background: #0057D9 !important;
+            border: 1px solid #0057D9 !important;
+        }
+
+        .control-button:disabled {
+            background: #313131 !important;
+            border: none !important;
+            color: #aaa;
+        }
+
+        .tip {
+            margin-left: 9px;
+            margin-right: 24px;
+        }
+
+        .control-value {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            .control-value-title,
+            .control-value-input {
+                color: #E8E8E8;
+                margin-right: 8px;
+            }
+
+            .control-value-input {
+                width: 50px;
+            }
+        }
+    }
+}
+
+//浅色主体
+::ng-deep .vscode-light {
+   .control .control-content .control-value .control-value-title,
+   .control .control-content .control-value .control-value-input {
+       color: #222 !important;
+   }
+   --table-count-fill-bg-color: #5d89d8;
+   --table-tr-active-bg-color: rgb(247, 250, 255);
+}
+::ng-deep .vscode-dark {
+    --table-count-fill-bg-color: #1D55B6;
+    --table-tr-active-bg-color: #313131;
+}

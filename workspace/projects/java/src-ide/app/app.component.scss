@@ -1,0 +1,94 @@
+::ng-deep html,body {
+    min-width: 1062px !important;
+    overflow-x: auto !important;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .main {
+    display: flex;
+    flex: auto;
+    overflow: hidden;
+    flex-direction: row;
+
+    overflow-y: auto;
+
+    .router-content {
+      flex: 1;
+      width: 100%;
+    }
+  }
+}
+
+footer {
+  text-align: center;
+  padding: 8px 0 8px;
+  background: #2e3243;
+  color: white;
+
+  line-height: 26px;
+  font-size: 12px;
+  color: #ffffff;
+}
+
+.bg {
+  width: 56px;
+  height: 56px;
+  background-color: red;
+  -webkit-mask-image: url("../assets/logo-5.6mm.svg");
+  mask-image: url("../assets/logo-5.6mm.svg");
+}
+
+.loading-box {
+  width: 100%;
+  height: 80%;
+  top: 20%;
+  position: absolute;
+  display: none;
+  cursor: not-allowed;
+}
+
+.loading {
+  position: absolute;
+  top: 310px;
+  left: 50%;
+}
+
+.loading h2 {
+  color: #ccc;
+  margin: 0;
+  font: 0.8em verdana;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/*
+   * Loading Dots
+   * Can we use pseudo elements here instead :after?
+   */
+.loading span {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0.6em;
+  height: 0.6em;
+  margin: 0.19em;
+  background: #007db6;
+  border-radius: 0.6em;
+  animation: loading 1s infinite alternate;
+}
+
+/*
+   * Animation keyframes
+   * Use transition opacity instead of keyframes?
+   */
+@keyframes loading {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

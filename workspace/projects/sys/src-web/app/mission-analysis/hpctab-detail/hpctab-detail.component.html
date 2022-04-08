@@ -1,0 +1,39 @@
+<div id="detail-container" class="custemDetailContainer">
+    <ti-tabs class="custemTabs tabsWithSplitLine tabsWithUnderline">
+        <ti-tab [(active)]="item.active" *ngFor="let item of detailList; let index = index" [disabled]="item.disable">
+            <ti-tab-header>
+                <span>{{item.title}}</span>
+            </ti-tab-header>
+            <div class="content-container"
+                *ngIf="item.title === i18n.common_term_task_tab_congration && item.disable===false"
+                [ngClass]="{showDetail: item.active}">
+                <app-configuration (returnConfigInfo)="getConfigInfo($event)" [nodeid]='nodeId'
+                    [projectName]='projectName' [type]='presetType' [taskName]='taskName' [status]='status'
+                    [taskid]='taskId' [analysisType]="'hpc-analysis'">
+                </app-configuration>
+            </div>
+            <ng-template #tiTabContent>
+
+                <div class="content-container" [ngClass]="{showDetail: item.active}"
+                    *ngIf="item.title == i18n.common_term_task_tab_log && item.disable===false">
+                    <app-configuration-log [nodeid]='nodeId' [projectName]='projectName' [taskName]='taskName'
+                        [status]='status' [taskid]='taskId' [analysisType]="'hpc-analysis'">
+                    </app-configuration-log>
+                </div>
+                <div class="content-container" [ngClass]="{showDetail: item.active}"
+                    *ngIf="item.title === i18n.hpc.target && item.disable===false">
+                    <app-hpc-target [nodeId]='nodeId' [projectName]='projectName' [hpcPreset]='presetType'
+                        [taskName]='taskName' [taskId]='taskId' [analysisTarget]='analysisTarget' [mpiStatus]='mpiStatus'>
+                    </app-hpc-target>
+                </div>
+                <div class="content-container" [ngClass]="{showDetail: item.active}">
+                    <ng-container *ngIf="item.title === i18n.hpc.summary && item.disable===false">
+                        <app-hpc-summary-detail [nodeId]='nodeId' [projectName]='projectName'
+                          [taskName]='taskName' [taskId]='taskId'>
+                        </app-hpc-summary-detail>
+                    </ng-container>
+                </div>
+            </ng-template>
+        </ti-tab>
+    </ti-tabs>
+</div>

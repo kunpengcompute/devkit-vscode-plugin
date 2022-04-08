@@ -1,0 +1,120 @@
+<div class="io-warpper">
+    <div class="io-form-warpper">
+        <div>
+            <ti-formfield
+              vertical
+              [formGroup]="formGroup"
+              [labelWidth]="labelWidth"
+              class="taskForm"
+            >
+              <!-- 选择节点 -->
+              <ti-item *ngIf="analysisScene.TYPE_HPC === scenes" [required]="true">
+                <ti-item-label>
+                  {{ i18n.node.selectNode }}
+                  <span class="tint">{{ 'project.HPCSelectNodeTxt' | i18n : ('mission_create.io' | i18n) }}</span>
+                </ti-item-label>
+                <app-not-hpc-select-nodes
+                	[width]="isModifySchedule ? '600px' : '952px'"
+                  [nodeList]="nodeList"
+                  [isSelectNodeDisabled]="isSelectNodeDisabled"
+                  formControlName="nodeList"
+                ></app-not-hpc-select-nodes>
+              </ti-item>
+            </ti-formfield>
+        </div>
+        <div class="part-one">
+            <ti-formfield [formGroup]="formGroup" labelWidth="200px" class="taskForm">
+                <!-- 采样时长（秒） -->
+                <ti-item [label]="commentItems.duration.label" [required]="commentItems.duration.required">
+                    <div class="formContent">
+                        <ti-spinner name='spinner' formControlName="duration" [step]='commentItems.duration.step'
+                            [format]="commentItems.duration.format" [placeholder]='commentItems.duration.placeholder'
+                            tiValidation class="spinner-width" [appSpinnerBlur]="samplingDurationBlur"
+                            [errorMessageWrapper]='sysDurationErrorMsgWrapper'>
+                        </ti-spinner>
+                        <span class="spinner-domain">{{ commentItems.duration.tailPrompt }}</span>
+                    </div>
+                    <!-- 自定义错误提示位置 -->
+                    <div #sysDurationErrorMsgWrapper></div>
+                </ti-item>
+
+                <!-- 统计周期（秒） -->
+                <ti-item [label]="commentItems.statistical.label" [required]="commentItems.statistical.required">
+                    <div class="formContent">
+                        <ti-spinner name='spinner' formControlName="statistical" [step]='commentItems.statistical.step'
+                            [format]="commentItems.statistical.format"
+                            [placeholder]='commentItems.statistical.placeholder' tiValidation class="spinner-width"
+                            [appSpinnerBlur]="intervalBlur" [errorMessageWrapper]='sysStatisticalErrorMsgWrapper'>
+                        </ti-spinner>
+                        <span class="spinner-domain">{{ commentItems.statistical.tailPrompt }}</span>
+                    </div>
+                    <!-- 自定义错误提示位置 -->
+                    <div #sysStatisticalErrorMsgWrapper></div>
+                </ti-item>
+
+                <!-- 采集文件大小（MB） -->
+                <ti-item [required]="commentItems.size.required">
+                    <ti-item-label>
+                        <span>{{ commentItems.size.label }}</span>
+                        <ti-icon [tiTip]="commentItems.size.tip"
+                            style="margin-left:10px; width: 12px;display: inline-block;" tiTipMaxWidth='370px'
+                            tiTipPosition="right">
+                            <img src='./assets/img/template/icon_question.svg' alt="" class="imgQuestion">
+                        </ti-icon>
+                    </ti-item-label>
+                    <div class="formContent">
+                        <ti-spinner name='spinner' formControlName="size" [step]='commentItems.size.step'
+                            [format]="commentItems.size.format" [placeholder]='commentItems.size.placeholder'
+                            tiValidation class="spinner-width" [appSpinnerBlur]="collectFileBlur"
+                            [errorMessageWrapper]='sysSizeErrorMsgWrapper'>
+                        </ti-spinner>
+                        <span class="spinner-domain">{{ commentItems.size.tailPrompt }}</span>
+                    </div>
+                    <!-- 自定义错误提示位置 -->
+                    <div #sysSizeErrorMsgWrapper></div>
+                </ti-item>
+
+                <!--采集调用栈-->
+                <ti-item [label]="i18n.storageIO.mission_create.stack">
+                    <ti-switch formControlName="stack"></ti-switch>
+                </ti-item>
+            </ti-formfield>
+        </div>
+
+        <div class="part-three" *ngIf="formOption.doNodeConfig.display">
+            <app-mission-node-config #nodeConfigC [labelWidth]="labelWidth"
+                [isAbled]="!(opreationEnable && modeAppRunUserValid)" [taskType]="'ioperformance'"
+                [formData]="formDatas" [projectId]="projectId" [nodeConfigShow]="nodeConfigShow"
+                [nodeConfigedData]="nodeConfigedData" [runUserData]="runUserData"
+                [nodeList]="formGroup.get('nodeList').value" (selectNodeDisable)="selectNodeDisable($event)"
+                (onsControlNode)="onControlNode($event)" (onsOpentNode)="handleNodeEmit($event)"
+                [modeAppPathAllow]="modeAppPathAllow" [isModifySchedule]="isModifySchedule">
+            </app-mission-node-config>
+        </div>
+        <div class="part-three">
+            <app-mission-reservation #preSwitchIO [labelWidth]="labelWidth"
+                [isModifySchedule]="isModifySchedule || taskActionType ==='restart' || taskActionType ==='edit'"
+                [switch]="switchState">
+            </app-mission-reservation>
+        </div>
+        <div class="part-four" *ngIf="!(preSwitchIO.switchState || taskActionType ==='restart')">
+            <!-- 立即 -->
+            <div [formGroup]="formGroup" class="immediately">
+                <div *ngIf="switchState" [tiTip]="i18n.mission_create.disableeTip">
+                    <input type="checkbox" formControlName="taskStartNow" tiCheckbox [disabled]='switchState'>
+                </div>
+                <input *ngIf="!switchState" type="checkbox" formControlName="taskStartNow" tiCheckbox>
+                <span class="start-now">{{i18n.common_term_task_start_now}}</span>
+            </div>
+        </div>
+    </div>
+    <footer [ngClass]="{'footer': isModifySchedule}">
+        <button type="button" class="little-primary-btn"
+            [disabled]="!opreationEnable || (preSwitchIO.switchState && !preSwitchIO.previewState)"
+            (click)="onCreateMission()">{{i18n.common_term_operate_ok}}</button>
+        <button type="button" class="little-minor-btn" (click)="onClose()"> {{i18n.common_term_operate_cancel}}
+        </button>
+        <button type="button" *ngIf="!isModifySchedule" class="little-minor-btn little-minor-save"
+            [disabled]="!opreationEnable" (click)="onSaveTemplate()">{{i18n.mission_modal.saveTemplates}}</button>
+    </footer>
+</div>

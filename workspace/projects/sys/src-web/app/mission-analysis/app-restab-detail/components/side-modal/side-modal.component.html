@@ -1,0 +1,97 @@
+<!-- 选择线程 -->
+<app-panoramic-mask (closeMask)="onSelectCancel($event)" #selectTaskModal>
+  <div class="modal-dialog content" [style.width.px]="700">
+    <div class="modal-title">{{ i18n.lock.selectTask }}</div>
+
+    <div class="modal-content">
+      <div class="selectTable">
+        <div class="switch">
+          <span [ngClass]="{'active': !switchShow}" (click)="switchData(false)" tiOverflow>{{ checkedList.length }}</span>
+          <span [ngClass]="{'active': switchShow}" (click)="switchData(true)" tiOverflow>{{ originTotal }}</span>
+        </div>
+        <div class="selectTableBox">
+          <div class="headerFilter">
+            <img src="./assets/img/micarch/tableHeader.svg" alt="" (click)="headShow = !headShow">
+            <div class="statusFilter" [ngClass]="{'active': headShow}">
+              <span *ngFor="let item of filterColumns">
+                <input type="checkbox" tiCheckitem [item]="item" [disabled]="item.disabled" [beCheckeds]="filterColumnsCheckeds"
+                  [label]="item.label" (change)="HeaderChange()">
+              </span>
+            </div>
+          </div>
+
+          <ti-table #tableComponent [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns"
+            (stateUpdate)="onStateUpdate($event)" [appLoading]="isLoading">
+            <table>
+              <thead>
+                <tr class="selectTh">
+                  <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                  <th checkbox-column>
+                    <!--全选按钮-->
+                    <!--如果有分页，全选需要控制当前页时，items接口传入displayed
+                              如果全选要控制表格所有数据，items接口传入srcData.data-->
+                    <input type="checkbox" tiCheckgroup [items]="displayed" [(checkeds)]="checkedList"/>
+                  </th>
+                  <th *ngFor="let column of columns; let index = index">
+                    <ti-cell-text>
+                      <span>{{column.label}}</span>
+                      <ti-icon *ngIf="column.searchKey"
+                        class="search-icon"
+                        [ngClass]="{'active': processSearchPop.isShow || searchWordsSave[column.searchKey]}" 
+                        name="search"
+                        [pop]="processSearchTipContent"
+                        [popContext]="{ key: column.searchKey, index: index }"
+                        #processSearchPop="pop"
+                        [popOffset]="{ x: -40, y: 24 }"
+                        popClass="side-modal-pop">
+                      </ti-icon>
+                    </ti-cell-text>
+                    <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"
+                      [asc]="publicMethodService.calcSortStatus(column.sortStatus)"></ti-head-sort>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+                <tr *ngFor="let row of displayed; let index = index"
+                  [ngClass]="{'ti3-selected-tr': checkedList.indexOf(row) !== -1}">
+                  <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                  <td checkbox-column>
+                    <input type="checkbox" tiCheckitem [item]="row" [disabled]="row.disabled"/>
+                  </td>
+                  <ng-container *ngFor="let item of columns;index as indexData">
+                    <td tiOverflow *ngIf="['task', 'pid', 'tid'].indexOf(item.prop) === -1">
+                      {{row[item.prop] | thousandSeparator}}</td>
+                    <td tiOverflow *ngIf="['task', 'pid', 'tid'].indexOf(item.prop) > -1">
+                      {{row[item.prop]}}</td>
+                  </ng-container>
+                </tr>
+              </tbody>
+
+            </table>
+            <!-- 无数据 -->
+            <div *ngIf="!isLoading && !displayed.length" class='chen-nodata-td unsetPosition'>
+              <img src='./assets/img/projects/nodata.png' />
+              <div>{{ i18n.common_term_task_nodata2 }}</div>
+            </div>
+            <ti-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber">
+            </ti-pagination>
+          </ti-table>
+        </div>
+      </div>
+    </div>
+
+    <footer class="buttonGroup">
+      <button tiButton type="button" color="primary" (click)="confimModal()">{{
+        i18n.common_term_operate_ok }}</button>
+      <button tiButton type="button" (click)="onSelectCancel()">{{ i18n.common_term_operate_close }}</button>
+    </footer>
+  </div>
+</app-panoramic-mask>
+<ng-template #processSearchTipContent let-context="context">
+  <ti-searchbox
+    [ngModel]="searchWordsSave[context.key]"
+    (clear)="onTableHeaderSearch('', context)"
+    (search)="onTableHeaderSearch($event, context)"></ti-searchbox>
+</ng-template>

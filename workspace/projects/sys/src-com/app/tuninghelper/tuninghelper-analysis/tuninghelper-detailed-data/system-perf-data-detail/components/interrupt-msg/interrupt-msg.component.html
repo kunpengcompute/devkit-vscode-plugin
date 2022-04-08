@@ -1,0 +1,41 @@
+<div class="interrupt-msg">
+  <div class="inter-header">
+    <span class="title">{{ 'net_io.xps_rps.hard_info.info' | i18n }}</span>
+    <ti-select class="inter-selected" [options]='interOption' [(ngModel)]="interSelected"></ti-select>
+    <ti-select class="cpu-selected" [options]='cpuOption' [(ngModel)]="cpuSelected" *ngIf="interSelected.index"
+    (ngModelChange)="cpuSelectedChange($event)"></ti-select>
+  </div>
+  <div class="inter-container">
+    <!-- 硬中断编号视图 -->
+    <div class="hart-number-table-container" *ngIf="!interSelected.index">
+      <app-hard-irq [irqAffinityData]="irqAffinityData" [numaNum]="numaNum"></app-hard-irq>
+    </div>
+    <!-- CPU核视图 -->
+    <div class="hart-cpu-table-container" *ngIf="interSelected.index">
+      <app-table-container [tableData]="cpuCoreViewData" (viewDetailClick)="viewDetails($event, boundNumDetailsModal)">
+      </app-table-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #boundNumDetailsModal let-context='context'>
+  <ti-modal-header>{{context.bodyTitle}}</ti-modal-header>
+  <ti-modal-body>
+    <div class="content-warpper">
+      <div class="msg">
+        <div>
+          <span>{{'tuninghelper.sysConfigDetail.cpuCore' | i18n}}</span>
+          <span>{{context.cpu}}</span>
+        </div>
+        <div>
+          <span>{{context.count}}</span>
+          <span>{{context.number}}</span>
+        </div>
+      </div>
+      <app-hard-irq [irqAffinityData]="context.data"></app-hard-irq>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" (click)="context.close()" tiButton>{{'common_term_operate_close' | i18n}}</button>
+  </ti-modal-footer>
+</ng-template>

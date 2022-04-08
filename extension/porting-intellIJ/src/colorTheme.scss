@@ -1,0 +1,218 @@
+:root {
+    --ti-default-font-color: var(--vscode-editor-foreground);
+    --ti-common-color-line-dividing: #0067ff;
+    --ti-scrollbar-width: 6px;
+    --edit-mask-title-size:14px;
+    .vscode-dark {
+        --ti-default-body-bg: #313335;
+		--vscode-editor-background: var(--ti-default-body-bg);
+		--color-box-content:#3c3f41 ;
+		--title-clr: #dcdcdc ;
+        --co-select-step:#447ff5;
+        --co-select-step-iocn:#4b6eaf;
+		--edit-mask-title:#bbbbbb;
+        --ti-table-th-bg-color:#45484A ;
+        --ti-table-tr-bg-color:#2D2F30;
+        --ti-table-sort-icon-color-active:#AFB1B3;
+        --ti-table-th-text-color:#BBBBBB;
+        --ti-table-th-spacing-line-color:#323232 ;
+        --ti-table-border-bottom-color:#2D2F30;
+        // 按钮颜色
+        --btn-font-d-e8e8e8-l-222222: #bbbbbb;
+        --btn-bg-d-313131-l-ffffff: #313131;
+        --btn-border-d-dddddd-l-979797: #DDDDDD;
+        --btn-disabled-font-d-aaaaaa-l-cccccc: #AAAAAA;
+        --btn-disabled-bg-d-313131-l-f5f5f5: #313131;
+        --btn-disabled-border-d-313131-l-cccccc: #313131;
+        --btn-second--disabled-border-d-616161-l-cccccc: #616161;  // 次要按钮
+        --btn-primary-font-d-e8e8e8-l-ffffff: #E8E8E8;
+		--ti-button-default-bg-color-hover: #313131;
+        // 表格颜色
+        --th-font-d-e8e8e8-l-616161: #E8E8E8;
+        --th-bg-d-2a2a2a-l-f5f9ff: #2A2A2A;
+        --th-border_b-d-4b4b4b-l-e1e6ee: #4B4B4B;
+        --th-border_r-d-4b4b4b-l-ffffff: #5e5e5e;
+        --td-font-d-aaaaaa-l-222222: #AAAAAA;
+        --td-bg-d-161616-l-ffffff: #2d2f30;
+
+        --modal-color-separator: #4b4b4b;
+        --d-333333-l-dddddd: #333333;
+        --d-888888-l-616161: #a6a6a6;
+        --op-border-clr: #5e5e5e;
+        --ra-label-span-color: #A6A6A6;
+        --ra-label-span-active: #e8e8e8 !important;
+        --edit-border-hover-clr:#42678d;
+        --executed-num-clr: #4b6eaf;
+        --executed-num-bg: #313335;
+        --executed-num-border: #4b6eaf;
+
+        --ti3-tooltip-text-color:#bbbbbb;
+        --ti3-tooltip-background-color:#3c3f41;
+        --color-se-btn-border-hover: #5E5E5E;
+        --color-se-btn-font-active: #3b3e3f;
+        --color-se-btn-font-hover: #dcdcdc;
+        --ti3-dropdown-container-border-color: #42678d;
+        --font-d-aaaaaa-l-979797: #AAAAAA;
+        --font-d-e8e8e8-l-222222: #dcdcdc;
+        --bg-d-1e1e1e-l-fafafa: #313335;
+        --ti-modal-content-bgcolor: #3c3f41;
+        --ti-modal-content-button2-bgcolor: #45494a;
+        --user-intellij-little-btn-bgcolor: #54595a;
+        --user-intellij-little-btn-active-bgcolor: #5E5E5E;
+        --ti3-searchbox-container-bgcolor: #3c3f41;
+
+        --border-d-888888-l-979797: #888888;
+        --user-intellij-little-btn-color: #dcdcdc;
+        --user-intellij-little-btn-border-color: #5e5e5e;
+        --user-intellij-little-btn-border-color-hover: #5e5e5e;
+        --user-intellij-little-btn-bgcolor-hover: #54595a;
+        --user-intellij-little-btn-color-hover: #dcdcdc;
+        --user-intellij-little-btn-border-color-active: #5e5e5e;
+        --user-intellij-little-btn-color-active: #dcdcdc;
+        --user-intellij-little-btn-bgcolor-active: #54595a;
+        --intellij-struck-title-color: #E8E8E8;
+        --ti-table-tr-bg-color-hover: #2a2a2a;
+        --ti-pagination-text-color: #a6a6a6;
+        --ti-table-tr-bg-color-selected: #2d2f30;
+        --ti-tip-offset: #3c3f41;
+        --ti-tip-bg-color: #3c3f41;
+        --ti-tip-border: #3c3f41;
+
+        --upload_file: #447ff5;;
+
+        --addFile-def_background-color: #45494a;
+        --addFile-hover_background-color: #54595a;
+        --addFile-active_background-color: #3b3e3f;
+        --addFile-color:#dcdcdc;
+        --addFile-def-border_background-color:#5e5e5e;
+        --addFile-active-border_background-color:#476a89;
+
+        --tip-title-clr:#dcdcdc;
+        --tip-title-clr-span:#bbbbbb;
+        --tip-title-clr-a:#447ff5;
+        --desc-clr:#a6a6a6;
+        --des-More-Content:#2D2F30;
+
+        --ti-button-default-normal-color: #dcdcdc;
+        --ti-body-default-font-color: #a6a6a6;
+        --ti-modal-header-color: #BBBBBB;
+        --ti-button-primary-background-color: #365881;
+        --ti-button-primary-bd-color: #476a89;
+        --ti-button-primary-background-color-hover: #365881;
+        --ti-button-primary-bd-color-hover: #476a89;
+        --ti-button-primary-background-color-active: #456d9a;
+        --ti-button-primary-bd-color-active: #476a89;
+        --ti-button-primary-bd-color-focus: #28476a;
+        --ti-button-primary-text-color: #dcdcdc;
+        --ti3-tables-li-a-text-color: #BBBBBB;
+
+        --ra-label-backgroud-color-linear:#5a5d5f;
+        --ra-label-backgroud-color-change:#3c3f41;
+        --ra-label-span-active-color:#dcdcdc;
+        --ra-label-backgroud-color:#3c3f41;
+        --ra-label-soild-color: #3c3f41;
+        --ra-label-soild-color-active:rgba(30,30,30,0.3);
+        --byte-main-border-e1e6ee: #616161;
+        --font-d-e8e8e8-l-282b33: #DCDCDC;
+        --bg-d-313131-l-ffffff: #313131;
+        --border-d-616161-l-979797: #6B708B;
+        --font-d-aaaaaa-l-616161: #aaaaaa;
+        --bg-d-424242-l-ffeeee: #424242;
+        --font-d-616161-l-979797: #616161;
+        --border-d-616161-l-ffffff: #616161;
+        --font-d-aaaaaa-l-222222: #aaaaaa;
+        --font-color-des-p: #A6A6A6;
+    }
+
+    .vscode-light {
+        --ti-default-body-bg: #ffffff;
+		--vscode-editor-background: var(--ti-default-body-bg);
+        --btn-font-d-e8e8e8-l-222222: #222222;
+        --edit-mask-title:#222222;
+        --btn-bg-d-313131-l-ffffff: #FFFFFF;
+        --btn-border-d-dddddd-l-979797: #979797;
+        --btn-disabled-font-d-aaaaaa-l-cccccc: #CCCCCC;
+        --btn-disabled-bg-d-313131-l-f5f5f5: #F5F5F5;
+        --btn-disabled-border-d-313131-l-cccccc: #CCCCCC;
+        --btn-second--disabled-border-d-616161-l-cccccc: #CCCCCC;  // 次要按钮
+        --btn-primary-font-d-e8e8e8-l-ffffff: #FFFFFF; 
+        --ti-table-border-bottom-color:#e1e6ee;
+        // 表格颜色
+        --th-font-d-e8e8e8-l-616161: #616161;
+        --th-bg-d-2a2a2a-l-f5f9ff: #f5f9ff;
+        --th-border_b-d-4b4b4b-l-e1e6ee: #E1E6EE;
+        --th-border_r-d-4b4b4b-l-ffffff: #FFFFFF;
+        --td-font-d-aaaaaa-l-222222: #222222;
+        --td-bg-d-161616-l-ffffff: #FFFFFF;
+
+        --modal-color-separator: #e1e6ee;
+        --d-333333-l-dddddd: #dddddd;
+        --d-888888-l-616161: #616161;
+        --op-border-clr: #cccccc;
+        --ra-label-span-color: #333333;
+        --ra-label-span-active: #000000 !important;
+        --edit-border-hover-clr:#0067FF;
+        --co-select-step: #0067FF;
+        --co-select-step-iocn:var(--co-select-step);
+        --color-se-btn-border-hover: #267dff;
+        --color-se-btn-font-active: #0057d9;
+        --color-se-btn-font-hover: #267dff;
+        --font-d-aaaaaa-l-222222: #222222;
+        --font-d-e8e8e8-l-222222: #222222;
+        --bg-d-1e1e1e-l-fafafa: #FAFAFA;
+        --ti-modal-content-bgcolor: #fff;
+        --ti-modal-content-button2-bgcolor: #fff;
+        --user-intellij-little-btn-bgcolor: #fff;
+        --user-intellij-little-btn-active-bgcolor: #fff;
+        --ti3-searchbox-container-bgcolor: #fff;
+
+        --border-d-888888-l-979797: #979797;
+        --user-intellij-little-btn-color: #222222;
+        --user-intellij-little-btn-border-color: #979797;
+        --user-intellij-little-btn-border-color-hover: #267dff;
+        --user-intellij-little-btn-color-hover: #267dff;
+        --user-intellij-little-btn-bgcolor-hover: #ffffff;
+        --user-intellij-little-btn-border-color-active: #0057d9;
+        --user-intellij-little-btn-color-active: #0057d9;
+        --user-intellij-little-btn-bgcolor-active: #ffffff;
+        --intellij-struck-title-color: #313131;
+
+        --upload_file: #447ff5;
+
+        --addFile-def_background-color: #45494a;
+        --addFile-hover_background-color: #54595a;
+        --addFile-active_background-color: #3b3e3f;
+        --addFile-color:#dcdcdc;
+        --addFile-def-border_background-color:#5e5e5e;
+        --addFile-active-border_background-color:#476a89;
+
+        --tip-title-clr:#222;
+        --tip-title-clr-span:#222;
+        --tip-title-clr-a:#0067ff;
+        --desc-clr: #616161;
+        --des-More-Content:#fafafa;
+
+        --ti-button-default-normal-color: #222222;
+        --ti-body-default-font-color: #222222;
+        --ti-modal-header-color: #333;
+        --ti-button-primary-background-color: #0067ff;
+        --ti-button-primary-bd-color: #0067ff;
+        --ti-button-primary-background-color-hover: #0067ff;
+        --ti-button-primary-bd-color-hover: #0067ff;
+        --ti-button-primary-background-color-active: #0057d9;
+        --ti-button-primary-bd-color-active: #0057d9;
+        --ti-button-primary-bd-color-focus: #0067ff;
+        --ti-button-primary-text-color: #ffffff;
+        --ti3-tables-li-a-text-color: #222222;
+        --byte-main-border-e1e6ee: #e1e6ee;
+        --font-d-e8e8e8-l-282b33: #282b33;
+        --bg-d-313131-l-ffffff: #ffffff;
+        --border-d-616161-l-979797: #979797;
+        --font-d-aaaaaa-l-616161: #616161;
+        --bg-d-424242-l-ffeeee: #ffeeee;
+        --font-d-616161-l-979797: #979797;
+        --border-d-616161-l-ffffff: #ffffff;
+        --font-color-des-p: #222222;
+    }
+	
+}

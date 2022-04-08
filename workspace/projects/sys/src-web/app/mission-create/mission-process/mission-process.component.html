@@ -1,0 +1,164 @@
+<!-- 表单主体 -->
+<div class="process">
+  <ti-formfield
+    vertical
+    [labelWidth]="labelWidth"
+    [formGroup]="processForm"
+    class="taskForm"
+  >
+    <!-- 选择节点 -->
+    <ti-item *ngIf="sceneName === 'HPC'" [required]="true">
+      <ti-item-label>
+        {{ i18n.node.selectNode }}
+        <span class="tint">{{ 'project.HPCSelectNodeTxt' | i18n : ('mission_create.process' | i18n)}}</span>
+      </ti-item-label>
+      <app-not-hpc-select-nodes
+        [width]="isModifySchedule ? '670px' : '952px'"
+        [nodeList]="nodeList"
+        [isSelectNodeDisabled]="isSelectNodeDisabled"
+        formControlName="nodeList"
+      ></app-not-hpc-select-nodes>
+    </ti-item>
+  </ti-formfield>
+  <ti-formfield [labelWidth]="labelWidth" [formGroup]="processForm" class="taskForm">
+    <!-- 采样时长 -->
+    <ti-item [label]="processItems.duration.label" [required]="processItems.duration.required">
+      <div class="formContent">
+        <ti-spinner name='spinner' [step]='processItems.duration.spinner.step'
+          [format]="processItems.duration.spinner.format" [correctable]="false"
+          [placeholder]='processItems.duration.spinner.placeholder' tiValidation formControlName='duration'
+          [appSpinnerBlur]="samplingDurationBlur" style='width: 145px;' [errorMessageWrapper]='durationErrorMsgWrapper'>
+        </ti-spinner>
+
+        <!-- 尾后提示 -->
+        <span class="tailPrompt">
+          {{ processItems.duration.tailPrompt }}
+        </span>
+      </div>
+
+      <!-- 自定义错误提示位置 -->
+      <div #durationErrorMsgWrapper></div>
+    </ti-item>
+
+    <!-- 采样间隔 -->
+    <ti-item [label]="processItems.interval.label" [required]="processItems.interval.required">
+      <div class="formContent">
+        <ti-spinner name='spinner' [step]='processItems.interval.spinner.step'
+          [format]="processItems.interval.spinner.format" [placeholder]='processItems.interval.spinner.placeholder'
+          [correctable]="false" tiValidation formControlName='interval' style='width: 145px;'
+          [errorMessageWrapper]='intervalErrorMsgWrapper' [appSpinnerBlur]="intervalBlur"></ti-spinner>
+
+        <!-- tip【home界面，在输入框的后方显示】 -->
+        <div *ngIf="!widthIsLimited" class='info-icon'>
+          <span>{{ i18n.process.intervalTip1 }}</span>
+        </div>
+      </div>
+
+      <!-- 自定义错误提示位置 -->
+      <div #intervalErrorMsgWrapper></div>
+
+      <!-- tip【修改预约任务界面，在输入框的下方显示】 -->
+      <div *ngIf="widthIsLimited" class='info-icon'>
+        <img src="./assets/img/tip/tip.svg" />
+        <span>{{ i18n.process.intervalTip1 }}</span>
+      </div>
+    </ti-item>
+
+    <!-- 采样类型 -->
+    <ti-item [label]="processItems.type.label" [required]="processItems.duration.required">
+      <div style="width: 300px;position: relative;top: -10px" class="sys-type-label">
+        <span *ngFor="let item of processTypeOptions">
+          <input type="checkbox" tiCheckitem [item]="item" [beCheckeds]="processCheckedTypes" [label]="item.text">
+          <span style="padding-left: 10px;"></span>
+        </span>
+      </div>
+    </ti-item>
+  </ti-formfield>
+
+  <!-- 分析对象为系统时-->
+  <ng-container *ngIf="analysisMode === 'Profile System'">
+    <ti-formfield [labelWidth]="labelWidth" [formGroup]="processForm">
+      <ti-item [required]="processItems.collection.required" class="thread-information">
+        <ti-item-label class="thread-information">
+          <span>{{i18n.process.label.thread}}</span>
+        </ti-item-label>
+        <ti-switch id="collection" formControlName='collection' style="color: red;"></ti-switch>
+      </ti-item>
+    </ti-formfield>
+  </ng-container>
+
+  <!-- 分析对象为应用时 -->
+  <ng-container *ngIf="analysisMode !== 'Profile System'">
+    <ti-formfield [labelWidth]="labelWidth" [formGroup]="processForm">
+      <!-- 采集线程信息 -->
+      <ti-item [required]="processItems.collection.required" class='switch thread-information'>
+        <ti-item-label class="thread-information">
+          <span>{{i18n.process.label.thread}}</span>
+        </ti-item-label>
+        <ti-switch id="collection" formControlName='collection'></ti-switch>
+      </ti-item>
+    </ti-formfield>
+    <!-- 配置节点参数 -->
+    <div class="node-config-modal import-btn">
+      <app-mission-node-config #configNodePara [labelWidth]="labelWidth"
+        [isAbled]="!(processForm.valid  && taskNameValid && (modeAppValid || modePidValid))"
+        [nodeList]="processForm.get('nodeList').value"
+        [taskType]="'process-thread-analysis'" [formData]="formDatas" [projectId]="projectId"
+        [nodeConfigedData]="nodeConfigedData" [nodeConfigShow]="nodeConfigShow" [runUserData]="runUserData"
+        [runUserDataObj]="runUserDataObj" [isModifySchedule]="isModifySchedule" (controlNode)="onControlNode($event)"
+        (opentNode)="handleNodeEmit($event)"
+        (selectNodeDisable)="selectNodeDisable($event)"></app-mission-node-config>
+    </div>
+    <!-- 跟踪系统调用 -->
+    <div style="margin: 15px">
+      <ti-formfield [labelWidth]="labelWidth" [formGroup]="processForm">
+        <ti-item [label]="processItems.trace.label" [required]="processItems.trace.required" class='switch'>
+          <ti-item-label>
+            <span>{{i18n.process.label.trace}}</span>
+            <ti-icon [tiTip]="i18n.process.trace_tip" style="margin-left:10px;" tiTipMaxWidth='370px'
+              tiTipPosition="bottom">
+              <img src='./assets/img/summary/tooltip.png'>
+            </ti-icon>
+          </ti-item-label>
+          <ti-switch id="trace" formControlName='trace'></ti-switch>
+        </ti-item>
+      </ti-formfield>
+    </div>
+  </ng-container>
+
+  <!-- 预约 -->
+  <div class="reservation">
+    <app-mission-reservation #preSwitchProcess [labelWidth]="labelWidth"
+      [isModifySchedule]="isModifySchedule || isRestart || isEdit" [switch]="isShowReserveAndImmedia">
+    </app-mission-reservation>
+    <!-- 立即 -->
+    <div class="immediately" *ngIf='!preSwitchProcess.switchState && !isRestart'>
+      <div *ngIf="isShowReserveAndImmedia" [tiTip]="i18n.mission_create.disableeTip">
+        <input type="checkbox" tiCheckbox [name]='startCheckProcess.title' [(ngModel)]="startCheckProcess.checked"
+          [disabled]="isShowReserveAndImmedia">
+      </div>
+      <div>
+        <input type="checkbox" *ngIf="!isShowReserveAndImmedia" tiCheckbox [name]='startCheckProcess.title'
+          [(ngModel)]="startCheckProcess.checked">
+      </div>
+      <span class="start-now">{{startCheckC.title}}</span>
+    </div>
+  </div>
+  <footer>
+    <button tiButton type="button" color="primary" (click)="createProcess(isEdit)"
+      [ngClass]="{toRight: isModifySchedule}"
+      [disabled]='!(processForm.valid  && processCheckedTypes.length>0 && taskNameValid && (preSwitchProcess.previewState || !preSwitchProcess.switchState) && superParamsValid)'>
+      {{i18n.common_term_operate_ok}}</button>
+    <button tiButton type="button" (click)="close()"> {{i18n.common_term_operate_cancel}} </button>
+    <button tiButton type="button" (click)="saveTemplates()" *ngIf="!isModifySchedule"
+      [disabled]='!(processForm.valid  && processCheckedTypes.length>0 && taskNameValid && (preSwitchProcess.previewState || !preSwitchProcess.switchState) && superParamsValid)'>{{i18n.mission_modal.saveTemplates}}</button>
+  </footer>
+</div>
+
+<!-- Attach to Process: 配置节点参数Model -->
+<app-process-node-config-pid #pidConfigModel [drawerLevel]="drawerLevel" [labelWidth]="labelWidthOfNodeConfig"
+  (confirmConfig)="onPidConfirmConfig($event)"></app-process-node-config-pid>
+
+<!-- launch to application: 配置节点参数Model -->
+<app-process-node-config-app #appConfigModel [drawerLevel]="drawerLevel" [labelWidth]="labelWidthOfNodeConfig"
+  (confirmConfig)="onAppConfirmConfig($event)"></app-process-node-config-app>

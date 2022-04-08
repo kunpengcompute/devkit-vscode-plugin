@@ -1,0 +1,23 @@
+<div class="download" style="position: absolute; right:5vw;top:20px;z-index: 99;"> 
+    <a style="display: block;margin-bottom:5px;"
+             (click)="downloadCsv(items)" [title]="i18n.sys_cof.sum.download_csv">
+          <img src="./assets/img/download.svg"  alt="" />
+         </a> 
+ </div>
+
+ <table class="base_info">
+    <tr  *ngFor="let item of items[0] ;index as i ">
+        <td tiOverflow tiTipPosition ='left'  class="tit" >{{item.title}}</td>
+        <td tiOverflow tiTipPosition ='left'>{{item.data}}</td>
+    </tr>
+    <tr class="base_line" *ngIf="en.length>0">
+      <td colspan = '2'><div class="line_td"></div></td> 
+    </tr>
+    <tr class="base_line" *ngIf="en.length>0">
+      <td style="font-size: 20px;font-weight: bold;padding-bottom:32px;color: #000;">{{i18n.sys_cof.sum.firmware_info.nic_version}}</td> 
+    </tr>
+    <tr  *ngFor="let item of items[1] ;index as i " >
+      <td tiOverflow tiTipPosition ='left'  class="tit" >{{item.title}}</td>
+      <td tiOverflow tiTipPosition ='left'>{{item.data}}</td>
+  </tr>
+</table> 

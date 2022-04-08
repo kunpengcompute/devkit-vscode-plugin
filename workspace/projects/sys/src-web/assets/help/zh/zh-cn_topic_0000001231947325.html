@@ -1,0 +1,44 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Ubuntu系统安装Hyper Tuner后显示设备离线">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001224201323.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具 (系统性能分析)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001231947325">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Ubuntu系统安装Hyper Tuner后显示设备离线</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001231947325"></a><a name="ZH-CN_TOPIC_0000001231947325"></a>
+
+<h1 class="topictitle1">Ubuntu系统安装Hyper Tuner后显示设备离线</h1>
+<div id="body0000001231947325"><div class="section" id="ZH-CN_TOPIC_0000001231947325__zh-cn_topic_0306922091_zh-cn_topic_0220116450_section13779133512387"><h4 class="sectiontitle">现象描述</h4><p id="ZH-CN_TOPIC_0000001231947325__p145051514173319">性能分析工具安装完成，添加Ubuntu 20.04.3的系统节点时，节点显示离线状态。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001231947325__zh-cn_topic_0306922091_zh-cn_topic_0220116450_section1439194518389"><h4 class="sectiontitle">可能原因</h4><p id="ZH-CN_TOPIC_0000001231947325__p14314500326">server端环境变量no_proxy未配置导致白名单添加失败。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001231947325__section9956141318525"><h4 class="sectiontitle">处理步骤</h4><ol id="ZH-CN_TOPIC_0000001231947325__ol11324182613547"><li id="ZH-CN_TOPIC_0000001231947325__li163241526175415"><span>在server端的/etc/profile文件中配置“no_proxy”。</span><p><div class="p" id="ZH-CN_TOPIC_0000001231947325__p59905013211"><strong id="ZH-CN_TOPIC_0000001231947325__b154790207210">vi /etc/profile</strong><pre class="screen" id="ZH-CN_TOPIC_0000001231947325__screen420017598206">export no_proxy=127.0.0.1</pre>
+</div>
+<p id="ZH-CN_TOPIC_0000001231947325__p10200155911208"></p>
+</p></li><li id="ZH-CN_TOPIC_0000001231947325__li1832034105415"><span>使配置生效。</span><p><p id="ZH-CN_TOPIC_0000001231947325__p7590557205413"><strong id="ZH-CN_TOPIC_0000001231947325__b724014265553">source /etc/profile</strong></p>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001224201323.html">FAQ</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

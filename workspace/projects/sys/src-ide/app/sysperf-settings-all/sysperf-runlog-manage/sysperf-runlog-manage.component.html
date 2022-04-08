@@ -1,0 +1,207 @@
+<div id="itemRunLog" *ngIf="isAdmin" class='titlebottom'>
+    <div class='titleset'>{{i18n.plugins_perf_tip_sysSet.workingLog}}</div>
+
+    <!-- 运行日志文件 -->
+    <div *ngIf="isAdmin" class="run-log-container">
+        <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns">
+            <div class="ti3-table-fixed-head">
+                <table>
+                    <thead>
+                        <tr>
+                            <th tiOverflow *ngFor="let column of columns" width="{{ column.width }}">
+                                {{ column.title }}
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="ti3-table-container" style="max-height:439px">
+                <table>
+                    <thead>
+                        <tr>
+                            <th tiOverflow *ngFor="let column of columns" width="{{column.width}}"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let row of displayed; index as i">
+                            <tr>
+                                <td *ngIf="i!==2"></td>
+                                <td details-icon-column *ngIf="i===2">
+                                    <ti-details-icon [row]="row" [index]="i" (beforeToggle)="beforeToggle($event)">
+                                    </ti-details-icon>
+                                </td>
+                                <td tiOverflow>{{ row.title }}</td>
+                                <td tiOverflow><span class="aLink"
+                                        (click)='logDownload(row)'>{{i18n.plugins_perf_tip_sysSet.download}}</span>
+                                </td>
+                            </tr>
+                            <tr *tiDetailsTr="row">
+                                <td tiColspan>
+                                    <div class="ti3-table-detail-container">
+                                        <ti-table [(displayedData)]="displayedDetailsOk" [srcData]="srcDataDetails">
+                                            <div class="ti3-table-fixed-head">
+                                                <table>
+                                                    <thead [hidden]="true">
+                                                        <tr>
+                                                            <th tiOverflow width="70%">{{
+                                                                i18n.plugins_perf_tip_sysSet.logFileName }}</th>
+                                                            <th tiOverflow width="30%">{{
+                                                                i18n.plugins_perf_tip_sysSet.size }}</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                            <div class="ti3-table-container" style="max-height:196px;overflow-y: auto;">
+                                                <table style="border-collapse: collapse;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th tiOverflow width="70%"></th>
+                                                            <th tiOverflow width="30%"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <ng-container
+                                                            *ngFor="let row of displayedDetailsOk;index as i;">
+                                                            <tr
+                                                                *ngIf="(i !== 0 && row.ip !== displayedDetailsOk[i-1].ip) || i === 0">
+                                                                <td tiOverflow style="padding-left: 34px;">{{row.name}}
+                                                                </td>
+                                                                <td tiOverflow style="padding: 0;">
+                                                                    <span class="aLink"
+                                                                        (click)='colletorLogDownload(row)'>{{i18n.operationLog.download}}</span>
+                                                                </td>
+                                                            </tr>
+                                                        </ng-container>
+                                                    </tbody>
+                                                </table>
+                                                <app-default-page *ngIf="displayedDetailsOk.length === 0 && runlogDownloaded"></app-default-page>
+                                                <app-loading *ngIf="displayedDetailsOk.length === 0 && !runlogDownloaded"></app-loading>
+                                            </div>
+                                        </ti-table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <app-default-page *ngIf="displayed.length === 0"></app-default-page>
+            </div>
+        </ti-table>
+        <div *ngIf="showLoading" class="loading">
+            <app-loading [bgColor]="'none'"></app-loading>
+        </div>
+    </div>
+</div>
+
+<!-- 下载运行日志 -->
+<app-pop-mask #downLoad>
+    <div class="content downloadContent">
+        <div class="mask-title">
+            <span class="create-title">{{downLoadTitle}}</span>
+            <span (click)="closeDownloadRunLog()" class="tip-close">
+                <img class="incorrect" src="./assets/img/header/close_icon.svg" />
+                <img class="incorrect" src="./assets/img/header/close_icon_hover.svg">
+            </span>
+        </div>
+
+        <div class="tip_title">
+            <img src="./assets/img/common/icon-information.png">
+            <span>{{i18n.plugins_perf_tip_sysSet.sureDownload}}</span>
+        </div>
+        <div class="content_container">
+            <ti-table [(displayedData)]="displayedOk" [srcData]="srcDataOk" [columns]="columnsOK">
+                <div class="ti3-table-fixed-head">
+                    <table style="table-layout: fixed;">
+                        <thead>
+                            <tr>
+                                <ng-container *ngFor="let column of columnsOK;index as i;">
+                                    <th tiOverflow width='{{column.width}}'>{{column.title}}</th>
+                                </ng-container>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="ti3-table-container">
+                    <table style="border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th *ngFor="let column of columnsOK" width='{{column.width}}'></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <ng-container *ngFor="let row of displayedOk;index as i;">
+                                <tr>
+                                    <td tiOverflow>{{ row.name }}</td>
+                                    <td tiOverflow>{{ row.size || '--'}}</td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                        <app-loading *ngIf="showLoading"></app-loading>
+                    </table>
+                    <app-default-page *ngIf="displayedOk.length === 0"></ app-default-page>
+                </div>
+            </ti-table>
+        </div>
+        <div class="footer_button">
+            <button type="button" class="primary-btn" style="margin-right:20px;" (click)='downloadRunLog()'
+                [disabled]='srcDataOk.data.length === 0'>{{i18n.common_term_operate_ok}}</button>
+            <button type="button" class="cancel-btn"
+                (click)='closeDownloadRunLog()'>{{i18n.common_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-pop-mask>
+
+<!-- 下载采集运行日志 -->
+<app-pop-mask #CollectDownLoad>
+    <div class="content downloadContent">
+        <div class="mask-title">
+            <span class="create-title">{{downLoadTitle}}</span>
+            <span (click)="closeDownloadRunLog()" class="tip-close">
+                <img class="incorrect" src="./assets/img/header/close_icon.svg" />
+                <img class="incorrect" src="./assets/img/header/close_icon_hover.svg">
+            </span>
+        </div>
+
+        <!-- 分割线 -->
+        <div class="dashed-line collect-run-log"></div>
+
+        <div class="tip_title">
+            <img src="./assets/img/common/icon-information.png">
+            <span>{{i18n.plugins_perf_tip_sysSet.sureDownload}}</span>
+        </div>
+        <div class="content_container">
+            <ti-table [(displayedData)]="displayedCollectData" [srcData]="srcCollectData" [columns]="columnsCollect">
+                <table>
+                    <thead>
+                        <tr>
+                            <th checkbox-column>
+                                <input type="checkbox" tiCheckgroup [items]="displayedCollectData"
+                                    [(checkeds)]="checkedList" />
+                            </th>
+                            <th tiOverflow width="{{columnsCollect[1].width}}">{{columnsCollect[1].title}}</th>
+                            <th tiOverflow width="{{columnsCollect[2].width}}">{{columnsCollect[2].title}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of displayedCollectData;index as i;trackBy: trackByFn"
+                            [ngClass]="{'ti3-selected-tr': checkedList.indexOf(row) !== -1}">
+                            <td checkbox-column style="padding-left: 20px;">
+                                <input type="checkbox" tiCheckitem [item]="row" />
+                            </td>
+                            <td tiOverflow>{{ row.name }}</td>
+                            <td tiOverflow>{{ row.size || '--' | thousandSeparator}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <app-default-page *ngIf="displayedCollectData.length === 0"></app-default-page>
+            </ti-table>
+        </div>
+        <div class="footer_button">
+            <button type="button" class="primary-btn" style="margin-right:20px;" (click)='downloadRunLog()'
+                [disabled]='checkedList.length === 0'>{{i18n.common_term_operate_ok}}</button>
+            <button type="button" class="cancel-btn"
+                (click)='closeDownloadRunLog()'>{{i18n.common_term_operate_cancel}}</button>
+        </div>
+    </div>
+</app-pop-mask>

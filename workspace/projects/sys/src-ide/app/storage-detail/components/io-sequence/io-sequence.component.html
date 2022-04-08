@@ -1,0 +1,12 @@
+<div class="ioapis-detail" [id]='uuid' (mousedown)="onBrush($event)">
+    <div class="table-box">
+        <div class="table">
+            <div echarts [options]="tableData" *ngIf="tableData" (chartInit)="onChartInit($event)" class="echarts-box"
+                (mousedown)="$event.stopPropagation()" style="height: 100%">
+            </div>
+        </div>
+    </div>
+    <div class="mask-box">
+        <div class="brush-box"></div>
+    </div>
+</div>

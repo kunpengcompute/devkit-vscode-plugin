@@ -1,0 +1,40 @@
+<div class="top-section">
+    <div class="constent-box" *ngFor="let block of usageData;index as i">
+        <div class="mem-title table-titl">
+            {{usageTitle[i]}}
+            <span class="mem-usage" *ngIf="i === 0" (click)="viewProcess(viewStack)">{{i18n.sysPerfDetailed.processUsage}}</span>
+        </div>
+        <div class="content-section">
+            <div *ngFor="let item of block">
+                <span class="left-title">
+                    <p tiOverflow tiTipPosition='left' [ngClass]="{'important': item.mark}">{{item.title}}</p>
+                    <span *ngIf="item.sug" class="about-mask" [tiTip]="item.sug" tiTipMaxWidth='550px'
+                        tiTipPosition="top">
+                        <hy-theme-content>
+                            <app-icon-static [name]="'questionMarkTipDark'" dark></app-icon-static>
+                            <app-icon-static [name]="'questionMarkTipLight'" light></app-icon-static>
+                        </hy-theme-content>
+                    </span>
+                </span>
+                <span tiOverflow tiTipPosition='left' class="right-data">{{item.data | thousandSeparator}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-section">
+    <div class="table-title">{{i18n.sysPerfDetailed.numa}}</div>
+    <app-general-table [dataList]="numaData" class="quene" [columns]="numaTitle">
+    </app-general-table>
+</div>
+<ng-template #viewStack let-context='context'>
+    <ti-modal-header>{{ i18n.sysPerfDetailed.processUsage }}</ti-modal-header>
+    <ti-modal-body>
+        <app-general-table [dataList]="processData" [columns]="processTitle"
+            (trigger)="viewThreadsData($event, context)"></app-general-table>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <div>
+            <button tiButton (click)="context.dismiss()">{{i18n.common_term_operate_close}}</button>
+        </div>
+    </ti-modal-footer>
+</ng-template>

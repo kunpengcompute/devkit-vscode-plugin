@@ -1,0 +1,7 @@
+<div class="mask" [ngClass]="{'active':myMask}">
+    <div class='content-box' [ngClass]="{'active':myMask}" >
+        <!-- <img src="./assets/img/modify-pwd/close.png" alt="" (click)='myMask=false'> -->
+        <ng-content select='.content'></ng-content>
+    </div>
+</div>
+

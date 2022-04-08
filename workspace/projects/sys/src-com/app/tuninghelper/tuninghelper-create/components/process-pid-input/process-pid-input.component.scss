@@ -1,0 +1,30 @@
+.warpper {
+  margin-top: 20px;
+  .content {
+    display: flex;
+    .label {
+      height: 21px;
+      line-height: 21px;
+    }
+    .inputValue {
+      input {
+        width: 480px;
+        height: 29px;
+        padding: 5px 10px;
+      }
+      textarea {
+        width: 480px;
+        height: 60px;
+        padding: 5px 10px;
+        box-sizing: border-box;
+        border-radius: 2px;
+      }
+    }
+  }
+}
+
+:host ::ng-deep #warpperColor input[type="checkbox"][tiCheckbox][disabled]
+  +   .ti3-checkbox 
+  .ti3-checkbox-label {
+  color: #616161 !important;
+}

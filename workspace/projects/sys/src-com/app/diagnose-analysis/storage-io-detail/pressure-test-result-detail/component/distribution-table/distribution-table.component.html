@@ -1,0 +1,21 @@
+<ti-table [(displayedData)]="displayed" [srcData]="srcData" class="distribution_table">
+  <table>
+    <thead>
+      <tr>
+        <th tiOverflow *ngFor="let column of columns" width="{{column.width}}"
+          [ngClass]="{'percent_th': column.key === 'percent'}">{{column.title}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+      <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+      <tr *ngFor="let row of displayed;trackBy: trackByFn">
+        <td tiOverflow>{{row.scope}}</td>
+        <td tiOverflow class="percent_td">
+          <span class="td_bar" [ngStyle]="{'width': row.percentWidth + 'px'}"></span>
+          <span class="td_value">{{row.percent}}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ti-table>

@@ -1,0 +1,6 @@
+<div class="switch">
+    <span class="switchNode switchleft" [ngClass]="{'active': isSelected}"
+        (click)="buttonClick(true)">{{selectedNum}}</span>
+    <span class="switchNode switchRight" [ngClass]="{'active': !isSelected}"
+        (click)="buttonClick(false)">{{originTotal}}</span>
+</div>

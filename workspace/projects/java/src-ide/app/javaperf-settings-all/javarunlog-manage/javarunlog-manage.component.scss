@@ -1,0 +1,250 @@
+// 深色主题适配
+::ng-deep .vscode-dark {
+    --color-titleset: #e8e8e8;
+    --color-middle-font: #AAAAAA;
+    --color-body-background: #161616;
+    --color-body-font: #AAAAAA;
+    --color-head-font: #E8E8E8;
+    --color-tb-scrollbar: #424242;
+    --color-head-background: #2A2A2A;
+    --color-head-border: #4B4B4B;
+    --down-list-backcolor: #242424;
+    --color-inputstyle-select-disable: #313131;
+    --color-inputstyle-select-disable-font: #616161;
+}
+
+// 浅色主题适配
+::ng-deep .vscode-light {
+    --color-titleset: #222222;
+    --color-middle-font: #000000;
+    --color-body-background: #FFFFFF;
+    --color-body-font: #222222;
+    --color-tb-scrollbar: #6B708B;
+    --color-head-font: #616161;
+    --color-head-background: #F5F9FF;
+    --color-head-border: #FFFFFF;
+    --down-list-backcolor: #fff;
+    --color-inputstyle-select-disable: #f5f5f5;
+    --color-inputstyle-select-disable-font: #cccccc;
+}
+
+.help-icon {
+    position: relative;
+    top: 2px;
+}
+
+.noData {
+    .img {
+        width: 97px !important;
+    }
+}
+
+.content {
+    * {
+        font-family: FZLTHJW--GB1-0;
+    }
+
+    .mask-title {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: dashed 1px var(--color-head-border);
+        padding-bottom: 20px;
+        height: 46px;
+        font-size: 20px;
+        line-height: 26px;
+        color: var(--color-titleset);
+
+        .incorrect {
+            cursor: pointer;
+            & > img {
+                display: none;
+            }
+            & > img:nth-of-type(1) {
+                display: block;
+            }
+            &:hover {
+                & > img:nth-of-type(1) {
+                    display: none;
+                }
+                & > img:nth-of-type(2) {
+                    display: block;
+                }
+            }
+            &:active {
+                & > img:nth-of-type(1) {
+                    display: none;
+                }
+                & > img:nth-of-type(2) {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .tip_title {
+        display: flex;
+        justify-content: flex-start;
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        img {
+            padding-right: 10px;
+        }
+
+        span {
+            font-size: 14px;
+            color: #888888;
+        }
+    }
+
+    .content_container {
+
+        thead {
+            background-color: var(--color-head-background);
+
+            tr {
+                box-shadow: inset 0 -1px 0 0 #4B4B4B;
+            }
+
+            th {
+                color: var(--color-head-font);
+                background: none !important;
+                font-size: 12px;
+            }
+
+            th:not(:last-child)::after {
+                background-color: var(--color-head-border);
+            }
+        }
+
+        tbody>tr {
+            background-color: var(--color-body-background) !important;
+            box-shadow: inset 0 -1px 0 0 #4B4B4B;
+
+            td {
+                color: var(--color-middle-font);
+                border-bottom: 0;
+                font-size: 12px;
+            }
+        }
+
+        .ti3-table {
+            padding: 0 !important;
+        }
+
+        .ti3-table>.ti3-table-fixed-head>table>thead>tr>th:first-child[checkbox-column] {
+            padding-left: 10px !important;
+            padding-right: 45px;
+        }
+
+        .ti3-table>.ti3-table-container {
+            border-bottom: 0px solid transparent;
+        }
+
+        :hose ::ng-deep .ti3-table>.ti3-table-fixed-head+.ti3-table-container {
+            border-bottom: 0px !important;
+        }
+    }
+
+    .footer_button {
+        font-size: 12px;
+        padding-left: 120px;
+        padding-top: 32px;
+
+        button {
+            border-radius: 2px;
+            border: 0;
+        }
+
+        .cancel-btn {
+            width: 160px;
+            height: 32px;
+            line-height: 32px;
+            border: 1px solid #DDDDDD;
+            background-color: var(--color-inputstyle-select-disable);
+        }
+    }
+}
+
+::ng-deep.ti3-table {
+    padding-right: 80px !important;
+}
+
+.titlebottom {
+    margin-bottom: 30px;
+
+    .titleset {
+        font-size: 20px;
+        padding-bottom: 10px;
+        cursor: default;
+        color: var(--color-titleset) !important;
+    }
+
+    ::ng-deep .ti3-overflow-padding {
+        margin-top: 0;
+    }
+
+    .ti3-table {
+        .ti3-table-container {
+            display: block;
+            overflow-y: auto;
+            border-bottom: 0px !important;
+
+            table {
+                tr {
+                    td {
+                        color: var(--color-body-font);
+                        background-color: var(--color-body-background) !important;
+                        border-collapse: collapse !important;
+                    }
+
+                    td:nth-child(4) {
+                        color: #0067FF !important;
+                    }
+
+                    .ext_more {
+                        position: relative;
+
+                        p {
+                            margin-left: 10px;
+                        }
+
+                        span {
+                            margin-left: 10px;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        .ti3-table-container::-webkit-scrollbar-thumb {
+            border-radius: 2px !important;
+            background-color: var(--color-tb-scrollbar) !important;
+        }
+
+        .ti3-table-container::-webkit-scrollbar {
+            width: 4px !important;
+            background: var(--vscode-editor-background) !important;
+        }
+
+        .ti3-table-container::-webkit-scrollbar-track {
+            border: none !important;
+        }
+
+        .ti3-table-fixed-head {
+            table {
+                tr {
+                    th {
+                        color: var(--color-head-font);
+                        background-color: var(--color-head-background) !important;
+                    }
+
+                    th:not(:last-child)::after {
+                        background: var(--color-head-border);
+                    }
+                }
+            }
+        }
+    }
+}

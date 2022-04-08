@@ -1,0 +1,57 @@
+<ul class="steps">
+  <li *ngFor="let step of steps">
+    <div class="step">
+      <div class="status" [ngClass]="[step.status]">
+        <ng-container [ngSwitch]="step.status">
+          <!-- succeeded -->
+          <ti-icon *ngSwitchCase="'succeeded'" name="checkmark" class="checkmark"></ti-icon>
+  
+          <!-- failed -->
+          <ti-icon *ngSwitchCase="'failed'" name="close" class="close"></ti-icon>
+  
+          <!-- running -->
+          <app-step-loading *ngSwitchCase="'running'" class="svg"></app-step-loading>
+  
+          <!-- waiting -->
+          <svg *ngSwitchCase="'waiting'" viewBox="25 25 50 50">
+            <circle cx="50" cy="50" r="20" fill="transparent" stroke="#d7d7d7" stroke-width="10" />
+          </svg>
+  
+          <!-- uploading -->
+          <svg *ngSwitchCase="'uploading'" style="transform: rotate(-90deg);" viewBox="25 25 50 50">
+            <circle
+              cx="50" cy="50" r="20" fill="transparent" stroke="#d7d7d7" stroke-width="10"
+              [attr.stroke-dasharray]="math.PI * 2 * 20" stroke-dashoffset="0"
+            ></circle>
+            <circle
+              cx="50" cy="50" r="20" fill="transparent" stroke="#61d274" stroke-width="10"
+              [attr.stroke-dasharray]="math.PI * 2 * 20" [attr.stroke-dashoffset]="(100 - step.progress) / 100 * math.PI * 2 * 20"
+            ></circle>
+          </svg>
+        </ng-container>
+      </div>
+  
+      <p class="info">{{ step.text }}</p>
+    </div>
+
+    <!-- 失败原因 -->
+    <div class="operateBox" *ngIf="step.status === 'failed'">
+      <p class="info">{{ step.failedReason || taskInfo?.detail_info }}</p>
+
+      <span class="operate" *ngIf="step.prop !== 'uploadFile'" (click)="handleOperate('retry')">{{ i18n.project.retry }}</span>
+    </div>
+  </li>
+
+  <li>
+    <!-- 查看任务 -->
+    <div class="operateBox" *ngIf="uploadSucceeded">
+      <span class="operate" (click)="handleOperate('viewTask')">{{ i18n.project.viewTask }}</span>
+    </div>
+  </li>
+</ul>
+
+<!-- 导入任务 -->
+<app-import-task-modal #importTaskModel></app-import-task-modal>
+
+<!-- 查看任务 -->
+<app-view-task-modal #viewTaskModal></app-view-task-modal>

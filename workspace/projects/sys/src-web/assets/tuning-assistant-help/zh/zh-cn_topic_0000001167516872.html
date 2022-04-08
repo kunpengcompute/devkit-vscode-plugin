@@ -1,0 +1,115 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="配置操作系统安装依赖包">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001129346244.html">
+<meta name="prodname" content="">
+<meta name="version" content="">
+<meta name="brand" content="鲲鹏性能分析工具 (调优助手) 联机帮助">
+<meta name="DC.Publisher" content="20211029">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001167516872">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>配置操作系统安装依赖包</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001167516872"></a><a name="ZH-CN_TOPIC_0000001167516872"></a>
+
+<h1 class="topictitle1">配置操作系统安装依赖包</h1>
+<div id="body8662426"><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p177891314105616">操作系统本地镜像源存在部分安装包缺失的情况，缺失的依赖包如<a href="#ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_table04628341311">表1</a>所示，请自行在对应操作系统官方镜像源网站下载。将下载的安装包上传至服务器，执行如下命令安装依赖包。</p>
+<ul id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_ul92561318851"><li id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_li54211211652">适用于<strong id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_b556135220185">CentOS</strong>操作系统：<p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p1864913221453"><strong id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_b1487618511">rpm -i </strong><em id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_i1381961151">安装包名称</em></p>
+</li><li id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_li04781226654">适用于<strong id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_b72323551181">Debian/Ubuntu/UOS 20</strong>凝思操作系统：<p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p1858714278520"><strong id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_b141326290471">dpkg -i </strong><em id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_i1747065214476">安装包名称</em></p>
+</li></ul>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_table04628341311"></a><a name="zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_table04628341311"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_table04628341311" frame="border" border="1" rules="all"><caption><b>表1 </b>缺失依赖包</caption><colgroup><col style="width:11.87%"><col style="width:11.61%"><col style="width:50.94%"><col style="width:25.590000000000003%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_row955803181318"><th align="left" class="cellrowborder" valign="top" width="11.868813118688132%" id="mcps1.3.3.2.5.1.1"><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_p18736145017482">操作系统</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="11.60883911608839%" id="mcps1.3.3.2.5.1.2"><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_p11558238130">版本</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="50.93490650934906%" id="mcps1.3.3.2.5.1.3"><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_p455811316139">缺失依赖包</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="25.587441255874417%" id="mcps1.3.3.2.5.1.4"><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p11305341723">镜像文件名</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_row13658183719566"><td class="cellrowborder" valign="top" width="11.868813118688132%" headers="mcps1.3.3.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p11313134320563">CentOS</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.60883911608839%" headers="mcps1.3.3.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p1531394318562">8.0/8.1/8.2</p>
+</td>
+<td class="cellrowborder" valign="top" width="50.93490650934906%" headers="mcps1.3.3.2.5.1.3 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p23131343105615">libunwind libunwind-devel</p>
+</td>
+<td class="cellrowborder" valign="top" width="25.587441255874417%" headers="mcps1.3.3.2.5.1.4 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p7938167153614">CentOS-8-aarch64-1905-dvd1.iso/<span style="color:#252B3A;">CentOS-8.1.1911-aarch64-dvd1.iso</span>/CentOS-8.2.2004-aarch64-dvd1.iso</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_row10558438132"><td class="cellrowborder" valign="top" width="11.868813118688132%" headers="mcps1.3.3.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_p3385185719522">Debian</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.60883911608839%" headers="mcps1.3.3.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_p33811857105216">10.1</p>
+</td>
+<td class="cellrowborder" valign="top" width="50.93490650934906%" headers="mcps1.3.3.2.5.1.3 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_p103087412555">numactl tcl-expect expect linux-perf-4.19 libssl-dev lsscsi</p>
+</td>
+<td class="cellrowborder" valign="top" width="25.587441255874417%" headers="mcps1.3.3.2.5.1.4 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p19131193411212">debian-10.1.0-arm64-xfce-CD-1.iso</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_row25581034132"><td class="cellrowborder" valign="top" width="11.868813118688132%" headers="mcps1.3.3.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_p12375175785213">Ubuntu</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.60883911608839%" headers="mcps1.3.3.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_p3372165718527">18.04.1/20.04.1</p>
+</td>
+<td class="cellrowborder" valign="top" width="50.93490650934906%" headers="mcps1.3.3.2.5.1.3 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_p3309162114554">tcl-expect expect zlib1g-dev linux-tools-common linux-tools-$(uname -r) linux-tools-generic libpcrecpp0v5 libpcre32-3 libpcre16-3 libffi-dev graphviz libssl-dev libpcre3-dev</p>
+</td>
+<td class="cellrowborder" valign="top" width="25.587441255874417%" headers="mcps1.3.3.2.5.1.4 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p0131163419212">ubuntu-18.04-server-arm64.iso/ubuntu-20.04.1-live-server-arm64.iso</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_row1371898371"><td class="cellrowborder" valign="top" width="11.868813118688132%" headers="mcps1.3.3.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_p197129113715">UOS 20</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.60883911608839%" headers="mcps1.3.3.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_p871129183713">20 SP1</p>
+</td>
+<td class="cellrowborder" valign="top" width="50.93490650934906%" headers="mcps1.3.3.2.5.1.3 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_p27214912377">linux-perf-4.19 linux-perf libssl-dev graphviz policycoreutils</p>
+</td>
+<td class="cellrowborder" valign="top" width="25.587441255874417%" headers="mcps1.3.3.2.5.1.4 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p51318347210">uos-20-SP1-server-arm64.iso</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_row154202051525"><td class="cellrowborder" valign="top" width="11.868813118688132%" headers="mcps1.3.3.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_p1336315711523">凝思</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.60883911608839%" headers="mcps1.3.3.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_p2036217575527">6.0.90</p>
+</td>
+<td class="cellrowborder" valign="top" width="50.93490650934906%" headers="mcps1.3.3.2.5.1.3 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_zh-cn_topic_0309218457_zh-cn_topic_0223027007_p1581071216551">sudo libssl-dev graphviz</p>
+</td>
+<td class="cellrowborder" valign="top" width="25.587441255874417%" headers="mcps1.3.3.2.5.1.4 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p413118345217">Linx-6.0.90-20190802-arm64-DVD.iso</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_row1524934310"><td class="cellrowborder" valign="top" width="11.868813118688132%" headers="mcps1.3.3.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p13525938310">EulerOS</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.60883911608839%" headers="mcps1.3.3.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p105257310313">2.8</p>
+</td>
+<td class="cellrowborder" valign="top" width="50.93490650934906%" headers="mcps1.3.3.2.5.1.3 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p7525636319">无</p>
+</td>
+<td class="cellrowborder" valign="top" width="25.587441255874417%" headers="mcps1.3.3.2.5.1.4 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p65255320318">EulerOS-V2.0SP8-aarch64-GM-DVD1-1.iso</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_row9246176936"><td class="cellrowborder" valign="top" width="11.868813118688132%" headers="mcps1.3.3.2.5.1.1 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p8246206033">openEuler</p>
+</td>
+<td class="cellrowborder" valign="top" width="11.60883911608839%" headers="mcps1.3.3.2.5.1.2 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p8246563317">20.03(LTS)</p>
+</td>
+<td class="cellrowborder" valign="top" width="50.93490650934906%" headers="mcps1.3.3.2.5.1.3 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p52461062318">无</p>
+</td>
+<td class="cellrowborder" valign="top" width="25.587441255874417%" headers="mcps1.3.3.2.5.1.4 "><p id="ZH-CN_TOPIC_0000001167516872__zh-cn_topic_0000001116269168_zh-cn_topic_0000001133361587_p62461761530">openEuler-20.03-LTS-everything-aarch64-dvd.iso</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001129346244.html">常用操作</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

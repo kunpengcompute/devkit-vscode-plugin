@@ -1,0 +1,32 @@
+<div class="statement-mask" *ngIf="showStatement">
+    <div class="statement-box">
+        <div class="statement">
+            <div class="title">
+                <span>{{i18n.common_term_statement}}</span>
+                <span class="ti3-close ti3-icon ti3-icon-close" (click)='clostStatement()'></span>
+            </div>
+            <div class="contentText">
+                <p style="font-weight: 600;" *ngIf="!statementStatus">{{i18n.statement.title}}</p>
+                <p>{{i18n.statement.content1}}</p>
+                <p>{{i18n.statement.content2}}</p>
+                <p>{{i18n.statement.content3}}</p>
+                <p>{{i18n.statement.content4}}</p>
+                <p>{{i18n.statement.content5}}</p>
+                <p>{{i18n.statement.content6}}</p>
+                <p>{{i18n.statement.content7}}</p>
+            </div>
+            <div class="checkBox" *ngIf="!statementStatus">
+                <input type="checkbox" tiCheckbox [name]='i18n.common_term_read' [(ngModel)]="readChecked"
+                    [label]='i18n.common_term_read'>
+            </div>
+            <div class="stateButton" *ngIf="!statementStatus">
+                <button style="margin-right:16px;" type="button" tiButton color='primary' (click)="getDisclaimer()"
+                    [disabled]='!readChecked'>{{i18n.common_term_agree}}</button>
+                <button type="button" tiButton (click)="clostStatement()">{{i18n.common_term_Signed}}</button>
+            </div>
+            <div class="stateButton" *ngIf="statementStatus">
+                <button type="button" tiButton (click)="clostStatement()">{{i18n.common_term_operate_close}}</button>
+            </div>
+        </div>
+    </div>
+</div>

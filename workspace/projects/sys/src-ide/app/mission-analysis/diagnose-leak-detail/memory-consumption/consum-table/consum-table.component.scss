@@ -1,0 +1,122 @@
+.congfigContent{
+    display: flex;
+    .distributedTitle{
+        font-size: 14px;
+        color:var(--d-e8e8e8-l-222222);
+        height: 30px;
+        border-bottom: 1px dashed #E1E6EE ;
+    }
+    .distributedHard,.distributedSystem,.distributedComponent{
+        min-width: calc((100% - 150px) / 3);    
+        margin-right: 40px;
+        .distributedContentBox{
+            max-height: 250px;
+            padding-right: 10px;   
+            div{
+                height: 18px;
+                display: flex;
+                align-items: center;
+                margin-top: 12px;
+                font-size: 12px;
+                line-height: 18px ;
+                p{
+                    color: #616161;
+                    margin-right: 16px;
+                    font-size: 14px;
+                    line-height: 20px;
+                    min-width: 200px;
+                    max-width: 200px;
+                    padding-left: 10px;
+                    position: relative;
+                }
+                p.important::before{
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 2px;
+	                height: 20px;
+	                background-color: #0067ff;
+                }
+                span{
+                    color: var(--d-e8e8e8-l-222222);
+                }
+                img{
+                    min-height: 16px;
+                    min-width: 16px;
+                    margin-left: 8px;
+                    margin-top: 2px; 
+                    cursor: pointer;
+                }
+            }
+        }
+        .Nodata{
+            height: 173px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .distributedSystem{
+        .distributedContentBox{
+            div{
+                p{
+                    min-width: 200px;
+                    max-width: 200px;
+                }
+            }
+        }
+    }
+    .distributedComponent{
+        margin-right: 0px; 
+        .distributedContentBox{
+            div{
+                p{
+                   min-width: 256px;
+                   max-width: 256px;
+                }
+            }
+        }
+    }
+}
+
+.table-title{
+    font-size: 14px;  
+    color: var(--d-e8e8e8-l-222222);
+    margin-top: 32px;
+    padding-bottom: 20px;
+}
+.ti3-icon-search{
+    padding-left: 8px;
+    cursor: pointer;
+    position: relative;
+    &:hover{
+        color: var(--ti-table-sort-color-hover);
+    }
+    &::before{
+        position: absolute;
+        top: -6px;
+    }
+}
+.search-box{
+    top: 25px;
+    height: 30px;
+    border: 1px solid #0067ff !important;
+    --ti-searchbox-container-width: 240px;
+}
+.ti3-table>div.ti3-table-fixed-head,
+.ti3-table>div.ti3-table-fixed-head>table>thead>tr>th{
+    overflow: unset;
+}
+
+.ti3-table>.ti3-table-fixed-head+.ti3-table-container>table>tbody>tr.ti3-table-nodata-simple>td {
+    border-bottom: 1px solid var(--ti-table-border-bottom-color) !important;
+}
+:host ::ng-deep .ti3-table>.ti3-table-fixed-head+.ti3-table-container>table>thead>tr>th {
+    border-bottom: none;
+}
+:host ::ng-deep .ti3-table>.ti3-table-fixed-head>.ti3-table-fixed-head-filler {
+    --ti-table-th-bg-color: var(--d-2a2a2a-l-f5f9ff);
+}

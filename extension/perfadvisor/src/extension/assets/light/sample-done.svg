@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>3.颜色/1.主色调蓝备份</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="4" cy="4" r="4"></circle>
+    </defs>
+    <g id="页面-1备份" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="71GC" transform="translate(-83.000000, -420.000000)">
+            <g id="编组-15" transform="translate(47.000000, 29.000000)">
+                <g id="编组-10">
+                    <g id="编组-19" transform="translate(10.000000, 185.000000)">
+                        <g id="编组-16备份-2" transform="translate(19.000000, 201.000000)">
+                            <g id="编组-29" transform="translate(7.000000, 5.000000)">
+                                <g id="3.颜色/1.主色调蓝备份" transform="translate(2.000000, 2.000000)">
+                                    <mask id="mask-2" fill="white">
+                                        <use xlink:href="#path-1"></use>
+                                    </mask>
+                                    <use id="蒙版" fill="#D8D8D8" xlink:href="#path-1"></use>
+                                    <g id="3.颜色/2.成功-安全" mask="url(#mask-2)" fill="#61D274">
+                                        <g transform="translate(-4.000000, -4.000000)" id="矩形">
+                                            <rect x="0" y="0" width="16" height="16"></rect>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

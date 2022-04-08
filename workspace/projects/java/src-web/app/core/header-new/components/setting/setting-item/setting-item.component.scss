@@ -1,0 +1,77 @@
+.warpper {
+  .input-warpper {
+    margin-top: 16px;
+
+    .input-form {
+      display: inline-block;
+    }
+    .setting-box {
+      position: relative;
+      .input-range {
+        position: absolute;
+        top: 3px;
+        left: 400px;
+        margin-left: 8px;
+        color: #616161;
+        font-size: 14px;
+      }
+
+      .setting-input {
+        width: 400px;
+      }
+    }
+  }
+
+  .btn-warpper {
+    margin-top: 8px;
+  }
+}
+.thresholds-text {
+  max-width: 560px;
+  color: #979797;
+  margin-top: 4px;
+}
+:host
+  .input-warpper[lang="zh-cn"]
+  .settings
+  ::ng-deep
+  .ti3-form
+  .ti3-form-label {
+  width: 20vw;
+}
+:host
+  .input-warpper[lang="zh-cn"]
+  .thresholds
+  ::ng-deep
+  .ti3-form
+  .ti3-form-label {
+  width: 20vw;
+}
+:host
+  .input-warpper[lang="en-us"]
+  .settings
+  ::ng-deep
+  .ti3-form
+  .ti3-form-label {
+  width: 23vw;
+  white-space: normal;
+}
+:host
+  .input-warpper[lang="en-us"]
+  .thresholds
+  ::ng-deep
+  .ti3-form
+  .ti3-form-label {
+  width: 15vw;
+}
+
+button + button {
+  margin-left: 16px;
+}
+
+button {
+
+  &[tiButton] {
+    padding: 0;
+  }
+}

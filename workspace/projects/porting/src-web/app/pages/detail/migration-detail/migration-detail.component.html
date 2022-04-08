@@ -1,0 +1,321 @@
+<div class="migration-detail" [ngStyle]="{'height': displayStatic !== 1 ? '86%' : '90%'}" id="migration-top">
+  <div class="detail-title">
+    <img class="back" src="./assets/img/migration-center/icon_nav_back.svg" alt="" (click)="goBack()"
+      [tiTip]="goBackTip" tiTipPosition="right" />
+    <h2>{{ i18n.common_term_headerTab2_label }}</h2>
+  </div>
+  <div class="main-content">
+    <!-- 基本信息 -->
+    <div class="sub-info">
+      <h3>{{ i18n.common_term_info_label }}</h3>
+      <div class="info-detail">
+        <li>
+          <span class="title">{{ i18n.common_term_tab2_table_label1 }}</span>
+          <span>{{ detailData.name }}</span>
+        </li>
+        <li>
+          <span class="title">{{ i18n.common_term_tab2_table_label2 }}</span>
+          <span>{{ detailData.ver }}</span>
+        </li>
+        <li>
+          <span class="title">{{ i18n.common_term_tab2_table_label4 }}</span>
+          <span>{{ detailData.target }}</span>
+        </li>
+        <li *ngIf="showMaven">
+          <span class="title title5">{{ i18n.common_term_tab2_table_label5 }}</span>
+          <span>
+            <a *ngFor="let item of mavenUrl" [href]="item" target="_blank" style="display: block;">{{item}}</a>
+          </span>
+        </li>
+        <li>
+          <span class="title title4">{{ i18n.common_term_tab2_table_label3 }}</span>
+          <span *ngIf="currLang == 'zh-cn'" [innerHTML]="detailData.des_cn"></span>
+          <span *ngIf="currLang == 'en-us'" [innerHTML]="detailData.des_en"></span>
+        </li>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="steps-content">
+        <!-- 环境检查 -->
+        <div class="precond" *ngIf="displayStatic !== 1">
+          <p class="title" style="margin-bottom: 10px;">
+            {{ i18n.common_term_precond_label }}
+          </p>
+          <div *ngFor="let precheck of precheckData">
+            <div *ngIf="!precheck.desc">
+              <div class="steps-title">
+                <span style="font-size: 14px;">
+                  <span class="txt">{{ i18n.common_term_check_label }}</span>{{ precheck.step }}</span>
+              </div>
+              <p class="before">{{ precheck.cmd }}</p>
+            </div>
+            <div *ngIf="precheck.desc">
+              <div class="steps-title">
+                <span style="font-size: 14px;">
+                  <span class="txt">{{ i18n.common_term_check_label }}</span>{{ precheck.step }}
+                </span>
+              </div>
+              <p class="before">{{ precheck.desc }}</p>
+            </div>
+          </div>
+        </div>
+        <!-- 执行脚本 -->
+        <div class="batch precond" *ngIf="batchData.length != 0 && displayStatic !== 1" style="margin-bottom:50px;">
+          <p class="title" style="margin-bottom: 10px;">
+            {{ i18n.common_term_batch_label }}
+          </p>
+          <p class="steps-title">
+            <input
+              type="checkbox"
+              tiCheckgroup
+              [items]="batchData"
+              [(checkeds)]="checkBatch"
+              (checkedsChange)="batchChange($event)"
+            />
+            <span *ngIf="currLang == 'zh-cn'">全选</span>
+            <span *ngIf="currLang == 'en-us'">Select All</span>
+          </p>
+          <div *ngFor="let batch of batchData">
+            <div class="steps-title">
+              <input
+                type="checkbox"
+                tiCheckitem
+                [item]="batch"
+                [beCheckeds]="checkBatch"
+              />
+              <span style="font-size: 14px;"><span class="txt">{{ i18n.common_term_steps_label }}</span>{{ batch.step
+                }}</span>
+            </div>
+            <p class="opt-name">
+              <span>{{ i18n.common_term_execute_label }}</span>{{ batch.script }}
+            </p>
+          </div>
+        </div>
+        <!-- 执行步骤 -->
+        <div class="step">
+          <p class="title" [ngClass]="{ mt24: batchData.length == 0 }" *ngIf="displayStatic !== 1">
+            {{ i18n.common_term_steps }}
+          </p>
+          <p class="title" [ngClass]="{ mt24: batchData.length == 0 }" *ngIf="displayStatic === 1">
+            {{i18n.theme_directory_contents}}
+          </p>
+          <div class="option" *ngIf="displayStatic !== 1">
+
+          </div>
+          <p *ngIf="displayStatic !== 1" class="steps-title" style="color: #333;font-weight: bold;">
+            <input
+              type="checkbox"
+              id="allCheck2"
+              tiCheckgroup
+              [items]="allGroupData"
+              [(checkeds)]="checkGroupTitles"
+              [disabled]="hasTaskOrMsg || isX86 || isCheckOs || isExecute"
+            />
+            <span *ngIf="currLang == 'zh-cn'">全选</span>
+            <span *ngIf="currLang == 'en-us'">Select All</span>
+          </p>
+          <div class="steps-execution-content">
+            <div *ngFor="let group of allGroupData">
+              <div>
+                <div>
+                  <p class="steps-title step-group" style="color: #333;font-weight: bold;">
+                    <input
+                      type="checkbox"
+                      tiCheckitem
+                      [item]="group"
+                      [disabled]="hasTaskOrMsg || isX86 || isCheckOs || isExecute"
+                      *ngIf="displayStatic !== 1"
+                    />
+                    <span *ngIf="!group.stepid && currLang == 'zh-cn'">{{group.groupdes_cn}}</span>
+                    <span *ngIf="!group.stepid && currLang == 'en-us'">{{group.groupdes_en}}</span>
+                  </p>
+                  <div *ngIf="displayStatic !== 1">
+                    <div *ngFor="let step of stepsData">
+                      <p class="opt-name" *ngIf="step.file_name && step.group_id === group.group_id">
+                        <span style="padding-right: 5px;" [ngStyle]="{'margin-left': step.status ? '-25px' : '-5px'}">
+                          <img src="./assets/img/home/icon-fail16.svg" class="confirm-status" alt=""
+                            *ngIf="step.status === 'failed'">
+                          <img src="./assets/img/home/icon-ok16.svg" class="confirm-status" alt=""
+                            *ngIf="step.status === 'success'">
+                          <img src="./assets/img/analysis/loading.svg" class="confirm-status loading" alt=""
+                            *ngIf="step.status === 'porting'">
+                        </span>
+                        <span style="color: #333333;font-weight:bold;margin-right: 3px;">
+                          {{i18n.common_term_steps_label + step.step}}
+                        </span>
+                        <span>
+                          {{ step.file_name2 }}
+                        </span>
+                      </p>
+                      <p class="comps"
+                        *ngIf="!step.file_name && currLang == 'zh-cn' && step.step && step.group_id === group.group_id">
+                        <span style="padding-right: 5px;" [ngStyle]="{'margin-left': step.status ? '-25px' : '-5px'}">
+                          <img src="./assets/img/home/icon-fail16.svg" class="confirm-status" alt=""
+                            *ngIf="step.status === 'failed'">
+                          <img src="./assets/img/home/icon-ok16.svg" class="confirm-status" alt=""
+                            *ngIf="step.status === 'success'">
+                          <img src="./assets/img/analysis/loading.svg" class="confirm-status loading" alt=""
+                            *ngIf="step.status === 'porting'">
+                        </span>
+                        <span style="color: #333333;margin-right: 16px;font-weight:bold;">
+
+                          {{ i18n.common_term_steps_label + step.step }}
+                        </span>
+                        <span style="word-break: break-all;">{{ step.des_cn }}</span>
+                      </p>
+                      <p class="comps"
+                        *ngIf="!step.file_name && currLang == 'en-us' && step.step && step.group_id === group.group_id">
+                        <span style="padding-right: 5px;" [ngStyle]="{'margin-left': step.status ? '-25px' : '-5px'}">
+                          <img src="./assets/img/home/icon-fail16.svg" class="confirm-status" alt=""
+                            *ngIf="step.status === 'failed'">
+                          <img src="./assets/img/home/icon-ok16.svg" class="confirm-status" alt=""
+                            *ngIf="step.status === 'success'">
+                          <img src="./assets/img/analysis/loading.svg" class="confirm-status loading" alt=""
+                            *ngIf="step.status === 'porting'">
+                        </span>
+                        <span style="color: #333333;font-weight:bold;margin-right: 3px;">
+                          {{ i18n.common_term_steps_label + step.step }}
+                        </span>
+                        <span style="word-break: break-all;">{{ step.des_en }}</span>
+                      </p>
+                      <div *ngIf="step.group_id === group.group_id">
+                        <div *ngFor="let file of step.file_list">
+                          <p class="com" *ngIf="currLang == 'zh-cn'">
+                            {{ file.check_des_cn }}
+                          </p>
+                          <p class="com" *ngIf="currLang == 'en-us'">
+                            {{ file.check_des_en }}
+                          </p>
+                        </div>
+                      </div>
+                      <p class="com combg" *ngIf="!step.file_name && step.step && step.group_id === group.group_id">
+                        {{ step.cmd }}
+                      </p>
+                      <div *ngIf="step.file_name && step.group_id === group.group_id">
+                        <div class="opt-step" *ngFor="let list of step.op_list; let index = index">
+                          <div>
+                            <div class="opt-item" *ngIf="list.opname == 'replace_once'">
+                              <p class="sub-opt" *ngIf="currLang == 'zh-cn'">
+                                {{ list.optname }}，{{ list.des_cn }}
+                              </p>
+                              <p class="sub-opt" *ngIf="currLang == 'en-us'">
+                                {{ list.optname }} {{ list.des_en }}
+                              </p>
+                              <p class="cmd" *ngIf="currLang == 'zh-cn'">
+                                {{ list.orig
+                                }}<span class="txt2">（{{ i18n.common_term_orig_code }}）</span>
+                                <img class="arrow" src="./assets/img/analysis/arrow.png" alt="" />
+                                {{ list.new }}
+                                <span class="txt2">（{{ i18n.common_term_new_code }}）</span>
+                              </p>
+                              <p class="cmd" *ngIf="currLang == 'en-us'">
+                                {{ list.orig }}&nbsp;<span class="txt2">({{ i18n.common_term_orig_code }})</span>
+                                <img class="arrow" src="./assets/img/analysis/arrow.png" alt="" />
+                                {{ list.new }}&nbsp;<span class="txt2">({{ i18n.common_term_new_code }})</span>
+                              </p>
+                            </div>
+                            <div class="opt-item" *ngIf="list.opname == 'replace_all'">
+                              <p class="sub-opt" *ngIf="currLang == 'zh-cn'">
+                                <span>{{ i18n.common_term_edit_all_line }}，{{
+                                  list.des_cn
+                                  }}</span>
+                              </p>
+                              <p class="sub-opt" *ngIf="currLang == 'en-us'">
+                                <span>{{ i18n.common_term_edit_all_line }},
+                                  {{ list.des_en }}</span>
+                              </p>
+                              <p class="cmd" *ngIf="currLang == 'en-us'">
+                                {{ list.orig }}&nbsp;<span class="txt2">
+                                  ({{ i18n.common_term_orig_code }})
+                                </span>
+                                <img class="arrow" src="./assets/img/analysis/arrow.png" alt="" />
+                                {{ list.new }}&nbsp;<span class="txt2">
+                                  ({{ i18n.common_term_new_code }})
+                                </span>
+                              </p>
+                              <p class="cmd" *ngIf="currLang == 'zh-cn'">
+                                {{ list.orig
+                                }}<span class="txt2">（{{ i18n.common_term_orig_code }}）</span>
+                                <img class="arrow" src="./assets/img/analysis/arrow.png" alt="" />
+                                {{ list.new }}
+                                <span class="txt2">（{{ i18n.common_term_new_code }}）</span>
+                              </p>
+                            </div>
+                            <div class="opt-item" *ngIf="list.opname == 'add_new_line'">
+                              <p class="sub-opt" *ngIf="currLang == 'zh-cn'">
+                                {{ list.optname }}，{{ list.des_cn }}
+                              </p>
+                              <p class="sub-opt" *ngIf="currLang == 'en-us'">
+                                {{ list.optname }} {{ list.des_en }}
+                              </p>
+                              <p class="cmd">
+                                {{ list.new }}
+                              </p>
+                            </div>
+                            <div class="opt-item" *ngIf="list.opname == 'delete_one_line'">
+                              <p class="sub-opt" *ngIf="currLang == 'zh-cn'">
+                                {{ list.optname }}，{{ list.des_cn }}
+                              </p>
+                              <p class="sub-opt" *ngIf="currLang == 'en-us'">
+                                {{ list.optname }} {{ list.des_en }}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="displayStatic === 1" class="displayStatic">
+                    <div class="combgStatic" *ngFor="let step of stepsDataStatic">
+                      <div *ngFor="let desItem of step">
+                        <p class="com"
+                          *ngIf="!desItem.file_name && desItem.step && desItem.group_id === group.group_id &&  currLang == 'zh-cn' && desItem.des_cn !== ''">
+                          {{ desItem.des_cn }}
+                        </p>
+                        <p class="com"
+                          *ngIf="!desItem.file_name && desItem.step && desItem.group_id === group.group_id && currLang == 'en-us' && desItem.des_en !== ''">
+                          {{ desItem.des_en }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!--check group-->
+  <div style="display: none;">
+    <input
+    type="checkbox"
+    tiCheckgroup
+    [items]="batchData"
+    [(checkeds)]="checkBatch"
+    (checkedsChange)="batchChange($event)"
+  />
+    <input
+    type="checkbox"
+    tiCheckgroup
+    [items]="allGroupData"
+    [(checkeds)]="checkGroupTitles"
+    (checkedsChange)="stepsChange($event)"
+  />
+  </div>
+</div>
+<div class="dif-button" *ngIf="displayStatic !== 1">
+  <span [tiTip]="hasTaskOrMsgTip" tiTipPosition="top">
+    <button type="button" tiButton color="primary"
+    [disabled]="isDisabled || hasTaskOrMsg || isX86 || isCheckOs" (click)="submit()">
+    {{ i18n.common_term_migration_execute }}
+  </button>
+  </span>
+</div>
+<div class="to-top" (click)="toTop()">
+  <img src="./assets/img/analysis/to-top.png">
+</div>

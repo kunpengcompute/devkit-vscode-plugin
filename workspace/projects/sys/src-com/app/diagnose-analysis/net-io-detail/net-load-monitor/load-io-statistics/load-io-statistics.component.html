@@ -1,0 +1,79 @@
+<div class="io-statistics">
+  <div class="cpu-header">
+    <p class="title">{{ 'net_io.network_IO' | i18n }}</p>
+  </div>
+
+  <div class="cpu-table">
+    <ti-table 
+      [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns"
+      tiColsResizable
+    >
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr>
+              <th tiOverflow *ngFor="let column of columns;index as index" width="{{column.width}}">
+                <ti-cell-text>{{column.title}}</ti-cell-text>
+                <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey" [compareFn]="compareFn"></ti-head-sort>
+                <ti-icon *ngIf="column.searchShow" style="padding-left: 8px;"
+                class="search-icon"
+                [ngClass]="{'active': searchWord}"
+                name="search"
+                [tiTip]="tipContent"
+                tiTipTrigger="manual"
+                #searchPop="tiTip"
+                [tiTipHasArrow]="false"
+                tiTipPosition="bottom"
+                (click)="showSearchPop(searchPop)">
+                </ti-icon>
+                <ti-cell-icons *ngIf="column.showIcon" class="cell-icon">
+                  <hy-theme-content>
+                    <img src="./assets/img/summary/tooltip_dark.svg" [tiTip]='column.tip' dark />
+                    <img src="./assets/img/summary/tooltip.png" [tiTip]='column.tip' light />
+                  </hy-theme-content>
+                </ti-cell-icons>
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+      <div class="ti3-table-container ti3-resize-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of columns" width="{{column.width}}"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of displayed;index as i">
+              <td tiOverflow>
+                <a class="link-text" (click)="onIfaceClick(row)">{{ row.iface }}</a>
+              </td>
+              <td tiOverflow>{{ row.rxPck }}</td>
+              <td tiOverflow>{{ row.txPck }}</td>
+              <td tiOverflow>{{ row.rxKB }}</td>
+              <td tiOverflow>{{ row.txKB }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ti-pagination
+        *ngIf="totalNumber > 10"
+        class="pagination"
+        [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber"
+        [showGotoLink]="true"   [autoHide]="true"
+      ></ti-pagination>
+    </ti-table>
+  </div>
+</div>
+
+<!-- 搜索 tip 弹框 -->
+<ng-template #tipContent >
+  <ti-searchbox class="search-input"
+    [(ngModel)]="searchWord"
+    (ngModelChange)="searchValueChange($event)"
+    (blur)="onSearchBoxBlur()"
+  ></ti-searchbox>
+</ng-template>
+

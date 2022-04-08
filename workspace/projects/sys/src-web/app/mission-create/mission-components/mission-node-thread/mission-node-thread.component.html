@@ -1,0 +1,27 @@
+<div class="node-config">
+  <div class="table">
+    <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns">
+      <table>
+        <thead>
+          <tr>
+            <th tiOverflow>{{columns[0].title}}</th>
+            <th tiOverflow>{{columns[1].title}}</th>
+            <th tiOverflow>{{columns[2].title}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+          <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+          <tr *ngFor="let row of displayed;index as i;">
+            <td tiOverflow>{{row.nickName}}</td>
+            <td tiOverflow>{{row.node}}</td>
+            <td tiOverflow>
+              <input class="table-input"  [localeable]="localeable" tiText tiNumber type="text" [placeholder]="i18n.nodeConfig.inputTip" [tiTip]='i18n.nodeConfig.inputTip' tiTipPosition="right" [format]="'N0'"
+                (ngModelChange)="getNodeListStatus()" [(ngModel)]="row.params.pid" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ti-table>
+  </div>
+</div>

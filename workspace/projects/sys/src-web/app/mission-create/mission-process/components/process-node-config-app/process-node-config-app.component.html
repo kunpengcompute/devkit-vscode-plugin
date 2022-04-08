@@ -1,0 +1,85 @@
+<app-mission-public #missionPublic [labelWidth]="labelWidth" [drawerLevel]="drawerLevel" [nodeName]="nodeName"
+    [nodaIP]="nodeIP">
+    <div class="analysis-target-application model-body">
+        <div class="analysis-target-content">
+            <div class="analysis-target-content-label" [ngStyle]="{width: labelWidth}">
+                <ti-icon name="staricon" style="color: red;"></ti-icon>
+                <span>{{i18n.common_term_task_crate_app_path}}</span>
+                <ti-icon [tiTip]="i18n.mission_create.modeAppNotice" style="margin-left:10px;" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/summary/tooltip.png'>
+                </ti-icon>
+            </div>
+            <div class="analysis-target-content-value">
+                <input type="text" tiText [placeholder]="i18n.mission_create.modeAppHolder"
+                    [(ngModel)]="modeApplication" (blur)="missionAppChange($event)" />
+                <div class="mission-app-warn" *ngIf="!modeAppValid">{{modeAppWarnMsg}}</div>
+                <div class="mission-app-input-tip" *ngIf="isFirstFocusAppPathInput">{{appPathInputTip}}</div>
+            </div>
+        </div>
+        <div class="analysis-target-content">
+            <div class="analysis-target-content-label" [ngStyle]="{width: labelWidth}">
+                <ti-icon name="staricon" style="color: red; opacity: 0;"></ti-icon>
+                <span>{{i18n.common_term_task_crate_parameters}}</span>
+                <ti-icon [tiTip]="i18n.mission_create.modeAppParamsNotice" style="margin-left:10px;"
+                    tiTipMaxWidth='370px' tiTipPosition="bottom">
+                    <img src='./assets/img/summary/tooltip.png'>
+                </ti-icon>
+            </div>
+            <div class="analysis-target-content-value">
+                <textarea tiTextarea type="text" class="textarea-params" style="width: 328px;height: 50px;"
+                    resize="'vertical'" [placeholder]="i18n.mission_create.modeAppParamsHolder"
+                    [(ngModel)]="modeAppParams" (ngModelChange)="onAppParamChange($event)"></textarea>
+            </div>
+        </div>
+        <div class="analysis-target-content" *ngIf="!isModifySchedule">
+            <div class="analysis-target-content-label" [ngStyle]="{width: labelWidth}">
+                <ti-icon name="staricon" style="color: red; opacity:0"></ti-icon>
+                <!-- 不适用span可能左右会有空格 影响显示 -->
+                <span>{{ i18n.common_term_task_crate_app_runUser }}</span>
+                <ti-icon [tiTip]="i18n.mission_create.modeAppRunUser" style="margin-left:10px;" tiTipMaxWidth='370px'
+                    tiTipPosition="bottom">
+                    <img src='./assets/img/summary/tooltip.png'>
+                </ti-icon>
+            </div>
+            <div class="analysis-target-content-value lineCenter">
+                <ti-switch id="myswitch" ngDefaultControl [(ngModel)]="switchState"
+                    (ngModelChange)="checkUserOrPassWord('switch')">
+                </ti-switch>
+            </div>
+        </div>
+        <div class="analysis-target-content" *ngIf="!isModifySchedule && switchState">
+            <div class="analysis-target-content-label" [ngStyle]="{width: labelWidth}">
+                <ti-icon name="staricon" style="color: red;"></ti-icon>
+                <!-- 不适用span可能左右会有空格 影响显示 -->
+                <span>{{ i18n.common_term_task_crate_app_user }}</span>
+            </div>
+            <div class="analysis-target-content-value">
+                <input type="text" #like tiText [(ngModel)]="modeApplicationUser"
+                    (blur)="checkUserOrPassWord('user')" />
+                <div class="mission-app-warn" *ngIf="!runUserValid">{{ runUserMsg }}
+                </div>
+            </div>
+        </div>
+        <div class="analysis-target-content" *ngIf="!isModifySchedule && switchState">
+            <div class="analysis-target-content-label" [ngStyle]="{width: labelWidth}">
+                <ti-icon name="staricon" style="color: red;"></ti-icon>
+                <!-- 不适用span可能左右会有空格 影响显示 -->
+                <span>{{ i18n.common_term_task_crate_app_passWord }}</span>
+            </div>
+            <div class="analysis-target-content-value">
+                <input type="password" #like tiText [(ngModel)]="modeApplicationPassWord"
+                    (blur)="checkUserOrPassWord('password')" />
+                <div class="mission-app-warn" *ngIf="!runPasswordValid">{{
+                    i18n.tip_msg.system_setting_input_empty_judge
+                    }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <button tiButton type="button" color="primary" [disabled]="!(modeAppValid && modeAppRunUserValid)"
+            style="margin-right: 20px" (click)="confirm()">{{i18n.common_term_operate_ok}}</button>
+        <button tiButton type="button" (click)="close()"> {{i18n.common_term_operate_cancel}} </button>
+    </footer>
+</app-mission-public>

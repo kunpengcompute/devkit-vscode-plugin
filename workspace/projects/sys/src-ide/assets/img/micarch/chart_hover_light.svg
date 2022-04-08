@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <desc>Created with Sketch.</desc>
+    <g id="symbols-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="4.组件/2.通用/按钮/4.图标按钮/视图切换/列表/hover">
+            <g id="编组-5">
+                <g id="列表Hover">
+                    <rect id="bgc" stroke="#267DFF" fill="#fff" x="0.5" y="0.5" width="31" height="31" rx="1"></rect>
+                    <g id="编组-8" transform="translate(8.000000, 8.000000)" fill="#267DFF">
+                        <path d="M7,0 L7,16 L0,16 L0,0 L7,0 Z M16,8 L16,16 L8,16 L8,8 L16,8 Z M5.5,1.5 L1.5,1.5 L1.5,14.5 L5.5,14.5 L5.5,1.5 Z M14.5,9.5 L9.5,9.5 L9.5,14.5 L14.5,14.5 L14.5,9.5 Z M16,0 L16,7 L8,7 L8,0 L16,0 Z M14.5,1.5 L9.5,1.5 L9.5,5.5 L14.5,5.5 L14.5,1.5 Z" id="形状结合"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,76 @@
+::ng-deep {
+  :root {
+    --color-modal-text: #616161;
+    --color-text-value: #222222;
+  }
+  .vscode-dark {
+    --color-modal-text: #888888;
+  }
+  .vscode-dark,
+  .vscode-light {
+    .message-modal .ti3-modal-content {
+      width: 660px !important;
+      .ti3-close {
+        top: 22px !important;
+      }
+      .splittingLine {
+        border-bottom: none !important;
+      }
+    }
+    app-message-modal {
+      ti-modal-header {
+        padding-left: 0px !important;
+      }
+    }
+  }
+}
+::ng-deep .message-modal {
+  .ti3-modal-content {
+    width: 400px;
+
+    .ti3-close {
+      top: 15px;
+    }
+
+    app-message-modal {
+      ti-modal-header {
+        padding: 18px 32px;
+        font-size: 20px;
+        line-height: 30px;
+        color: #222222;
+      }
+      .splittingLine {
+        margin: 0 32px 14px 32px;
+      }
+      ti-modal-body {
+        .content {
+          display: flex;
+
+          > i {
+            margin-right: 8px;
+            font-size: 22px !important;
+
+            &.ti3-icon-check-circle {
+              color: #61d274;
+            }
+            &.ti3-icon-info-circle {
+              color: #0067ff;
+            }
+            &.ti3-icon-warn {
+              color: #ff9b00;
+            }
+            &.ti3-icon-exclamation-circle {
+              color: #ed4b4b;
+            }
+          }
+
+          > p {
+            line-height: 20px;
+            font-size: 14px;
+            color: var(--color-modal-text);
+          }
+        }
+      }
+    }
+  }
+}

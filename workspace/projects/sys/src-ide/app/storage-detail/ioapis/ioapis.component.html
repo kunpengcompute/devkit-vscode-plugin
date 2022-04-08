@@ -1,0 +1,186 @@
+<div class="apis-container">
+    <div class="time-box">
+        <div class="title-top">
+            <app-time-line #timeLineDetail *ngIf="timeData.length" [timeData]='timeData' [lineData]='timeLine'
+                (timeLineData)='timeLineData($event)'></app-time-line>
+        </div>
+        <!-- 筛选器 -->
+        <hy-theme-content class="selectIcon" (click)="onThreadScreenClick()">
+            <app-icon-react name="filter" light></app-icon-react>
+            <app-icon-react name="filterDark" dark></app-icon-react>
+        </hy-theme-content>
+    </div>
+    <!-- echart图例 -->
+    <div class="select_btn">
+        <div class="left_title">
+            <div class="legned">
+                <div class="l1" (click)="clickLegned(index)" *ngFor="let item of legends; index as index">
+                    <div class="pic" [ngStyle]="{'background-color':item.show ? item.color : '#ccc'}"></div>
+                    <div class="til" [ngClass]="{tilNoActive: !item.show}">{{item.title}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="section_line"></div>
+    </div>
+    <div class="function_echarts" [ngClass]="{'active': topState === 'active', 'tips': timeTitle === '--'}">
+        <ng-container *ngFor="let item of selectFunctionList">
+            <app-io-sequence [timeLine]='timeLine' [datas]='item' *ngIf="item" (dataZoom)='dataZoom($event)'
+                (echartsInstOut)='echartsInstOut($event)' (brushOut)='brushOut($event)' #sequenceEchart></app-io-sequence>
+        </ng-container>
+    </div>
+
+    <!-- 框选弹出的详情 -->
+    <app-brush-details [nodeid]="nodeid" [taskid]='taskid' [(timeTitle)]='timeTitle' [(topState)]="topState"
+        [(readChecked)]='readChecked' (toggleTopOut)='toggleTopOut($event)' #brushDetails> </app-brush-details>
+</div>
+
+<ng-template #filterThreadModalComponent let-context='context'>
+    <ti-modal-header>
+        {{ i18n.storageIO.ioapis.siftPid }}
+    </ti-modal-header>
+    <ti-modal-body>
+        <ti-table [(displayedData)]="threadDisplayedData" [srcData]="threadSrcData" [columns]="pidColumns">
+            <div class="ti3-table-fixed-head">
+                <table>
+                    <thead>
+                        <tr>
+                            <!--使用复选框时，需要给复选框列加 checkbox-column 属性-->
+                            <th details-icon-column></th>
+                            <th checkbox-column *ngIf="threadSrcData.data.length !== 0">
+                                <!--全选按钮-->
+                                <!--如果有分页，全选需要控制当前页时，items接口传入displayed 如果全选要控制表格所有数据，items接口传入srcData.data-->
+                                <input type="checkbox" tiCheckgroup [items]="threadDisplayedData"
+                                    [(checkeds)]="checkedListPid" (checkedsChange)="pidSelectChange()" />
+                            </th>
+                            <ng-container *ngFor="let column of pidColumns;index as i;">
+                                <th>
+                                    <ti-cell-text>{{column.title}}</ti-cell-text>
+                                    <ti-head-filter [options]="column.options" [(ngModel)]="column.selected"
+                                        (select)="onProcessSelect($event)" [selectAll]="true"
+                                        [ngClass]="{'ti3-head-filtered': column.selected && column.selected.length}"
+                                        [multiple]="true">
+                                    </ti-head-filter>
+                                </th>
+                            </ng-container>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <!--.ti3-table-container是表体的容器，它的子元素中的table的thead是用来控制各列宽度，实际不显示；tbody是实际显示的表体-->
+            <!--注意1:此处一定要使用.ti3-table-container样式类-->
+            <!--注意2:用户在有.ti3-table-container样式类的容器上来设置表体的高度或最大高度-->
+            <div class="ti3-table-container table-pid">
+                <table>
+                    <thead>
+                        <tr>
+                            <th details-icon-column></th>
+                            <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                            <th checkbox-column></th>
+                            <th *ngFor="let column of pidColumns"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <ng-container *ngFor="let obj of threadDisplayedData;index as i;">
+                            <tr>
+                                <td details-icon-column style="width: 45px !important;">
+                                    <img class="expand-icon" [ngClass]="{active: obj.showDetails}" 
+                                    (click)="beforeToggleFun(obj, i)" src="./assets/img/summary/row.svg">
+                                    <!--详情图标设置，传入行数据-->
+                                </td>
+                                <td checkbox-column *ngIf="threadSrcData.data.length !== 0"
+                                    style="width: 45px !important;">
+                                    <input type="checkbox" tiCheckitem [item]="obj" />
+                                </td>
+                                <td tiOverflow>{{ obj.pid }}</td>
+                                <td tiOverflow>{{ obj.cmd_name || '--'}}</td>
+                            </tr>
+                            <tr *tiDetailsTr="obj" class="tiDetailsTr template" [ngClass]="{'active': obj.showDetails}">
+                                <!--详情内容行tiDetailsTr，传入行数据-->
+                                <!-- tiColspan是为了使得该td（详情内容）占据表格整个宽度(列合并)，tiColspan列合并的值为columns接口传入的对象数组中
+                                            中show属性值不为false的对象的个数。本例中，作用相当于colspan='6' -->
+                                <td colspan="4" class="collapsed">
+                                    <ti-table [(displayedData)]="obj.displayedData" [srcData]="obj.srcData"
+                                        [columns]="threadColumns">
+                                        <div class="ti3-table-fixed-head">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th checkbox-column>
+                                                            <input type="checkbox" tiCheckgroup
+                                                                [items]="obj.displayedData"
+                                                                (checkedsChange)="functionSelectChange(obj)"
+                                                                [(checkeds)]="obj.threadCheckedList" />
+                                                        </th>
+                                                        <th>
+                                                            <ti-cell-text>{{threadColumns[0].title}}
+                                                            </ti-cell-text>
+                                                            <ti-head-filter [options]="obj.options"
+                                                                [(ngModel)]="obj.selected"
+                                                                (select)="functionSelect($event, obj)"
+                                                                [selectAll]="true"
+                                                                [ngClass]="{'ti3-head-filtered': threadColumns[1].selected && threadColumns[1].selected.length}"
+                                                                [multiple]="threadColumns[0].multiple">
+                                                            </ti-head-filter>
+                                                        </th>
+                                                        <ng-container *ngFor="let item of [1,2, 3, 4]">
+                                                            <th>
+                                                                <ti-cell-text>{{threadColumns[item].title}}
+                                                                </ti-cell-text>
+                                                                <ti-head-sort [sortKey]="threadColumns[item].sortKey">
+                                                                </ti-head-sort>
+                                                            </th>
+                                                        </ng-container>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                        <div class="ti3-table-container">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th checkbox-column></th>
+                                                        <th *ngFor="let column of threadColumns"></th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let row of obj.displayedData; index as i;"
+                                                        [ngClass]="{'ti3-selected-tr': obj.threadCheckedList.indexOf(row) !== -1}">
+                                                        <td checkbox-column>
+                                                            <input type="checkbox" tiCheckitem [item]="row" />
+                                                        </td>
+                                                        <ng-container *ngFor="let item of threadColumns; index as i">
+                                                            <ng-container>
+                                                                <td tiOverflow>
+                                                                    {{row[item.key] | thousandSeparator}}
+                                                                </td>
+                                                            </ng-container>
+                                                        </ng-container>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </ti-table>
+
+
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <app-default-page *ngIf="threadDisplayedData.length === 0" [height]="'100%'" [text]="nodataTips"></app-default-page>
+            </div>
+        </ti-table>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <button tiButton color="primary" type="button"
+            (click)="context.confirm(context)">{{ i18n.common_term_operate_ok }}</button>
+        <button tiButton type="button" (click)="context.dismiss()">
+            {{ i18n.common_term_operate_cancel }}
+        </button>
+    </ti-modal-footer>
+</ng-template>
+
+<app-loading *ngIf="showLoading"></app-loading>

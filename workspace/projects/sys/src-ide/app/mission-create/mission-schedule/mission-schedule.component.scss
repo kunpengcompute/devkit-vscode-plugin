@@ -1,0 +1,122 @@
+.node-config-modal {
+  .tip {
+    padding-left: 16px;
+    display: flex;
+    align-items: center;
+    color: #6c7280;
+  }
+}
+
+.schedule.active footer {
+  margin-bottom: 20px;
+}
+
+footer {
+  margin-top: 40px;
+
+  button {
+    height: 28px;
+    line-height: 0px;
+    margin-right: 20px;
+    min-width: 120px;
+    margin-left: 0;
+    padding: 0 !important;
+  }
+
+  button.toRight {
+    margin-left: 0 !important;
+  }
+}
+
+.footer {
+  position: absolute;
+  bottom: 24px;
+  left: calc(50% - 130px);
+}
+
+// 非必填项 设置
+.ml {
+  margin-left: 16px;
+}
+
+:host ::ng-deep .schedule .taskForm:not(.node-select) .ti3-form > tbody tr {
+  display: block;
+
+  &:nth-of-type(n + 3) {
+    margin-top: 10px;
+  }
+}
+
+:host ::ng-deep .schedule.active .taskForm:not(.node-select) .ti3-form > tbody tr {
+  position: relative !important;
+  margin-top: 45px;
+
+  > td {
+    width: 0 !important;
+
+    &:nth-child(1),
+    &:nth-child(2) {
+      position: absolute !important;
+      left: 0px;
+      top: -35px;
+    }
+  }
+}
+
+:host ::ng-deep .ti3-form .ti3-form-content {
+  padding-bottom: 0 !important;
+}
+
+::ng-deep .warn-tip-img {
+  float: left;
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+::ng-deep .warn-tip-msg {
+  float: left;
+  width: calc(100% - 30px);
+}
+
+::ng-deep .ti3-modal-dialog {
+  margin: 0 !important;
+}
+
+::ng-deep .ti3-modal-open .ti3-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-bgc {
+  background-color: var(--d-313131-l-ffffff) !important;
+}
+
+ti-switch.ti3-switch-container {
+  padding-top: 6px;
+}
+
+:host ::ng-deep .schedule .taskForm:not(.node-select) .ti3-form > tbody > tr > td:first-child {
+  width: 0 !important;
+}
+
+.wrap {
+  white-space: normal;
+}
+
+.filesize-img {
+  position: absolute;
+  top: 4px;
+  right: -22px;
+}
+.tint{
+  color: #979797;
+  margin-left: 8px;
+  font-size: 12px;
+  line-height: 21px;
+}
+:host ::ng-deep .schedule .select-nodes {
+  margin-left: 0;
+}

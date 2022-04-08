@@ -1,0 +1,330 @@
+<app-banner></app-banner>
+<div class="home-container">
+    <div class="thread-list">
+        <div class="center-title">
+            <span>{{ i18n.common_term_java_process }}</span>
+            <app-table-search-box #searchBox [searchOptions]="searchOptions" (searchEvent)="searchEvent($event.value)"
+                *ngIf="curGuardian && curGuardian.state === 'CONNECTED'"></app-table-search-box>
+        </div>
+        <div class="database-tab" *ngIf="currentAllJvms.length">
+            <span class="data-tabs" *ngFor="let tab of guardianTabs; let idx = index" (click)="activeChange(idx)">
+                <span *ngIf="tab.checked " class="item-tab" [ngStyle]="{ 'padding': showline ? '0 10px' : '0px' }">
+                    <span class="tab-title" [ngClass]="{ 'tab-active': tab.active }">
+                        {{ tab.tabName }}
+                    </span>
+                </span>
+                <span class="spliteline" *ngIf="showline && idx === 0"></span>
+            </span>
+        </div>
+        <!-- 主机进程与搜索 -->
+        <ti-table [(displayedData)]="primaryJvmDisplayed" [srcData]="primaryJvmData" [columns]="jvmColumns" *ngIf="(curGuardian && curGuardian.state === 'CONNECTED') &&
+            !changeIndex && currentAllJvms.length">
+            <div class="ti3-resize-wrapper ti3-table-container" *ngIf="primaryJvmData.data.length">
+                <table>
+                    <tbody>
+                        <tr *ngFor="let item of primaryJvmData.data; let idx = index" (mouseenter)="selectJvm(item)"
+                            (mouseover)="warnTip(item)">
+                            <td>
+                                <div class="jvm-name" [tiTip]="item.isRunningInContainer
+                                        ? (i18n.plugins_perf_java_guardianHome_containerId + item.containerId)
+                                        : ''" tiTipPosition="right">
+                                    <img src="./assets/img/home/physics.svg">
+                                    <span class="jvm-text" tiOverflow>{{item.name + ' (' + item.lvmid + ')'}}</span>
+                                </div>
+                                <div class="analysis-box">
+                                    <div class="running" *ngIf="item.profileState === 'PROFILING'">
+                                        <img src="./assets/img/home/analysis.gif" alt=""
+                                            style="margin-right:8px;vertical-align: middle;width:16px;height:16px;" />
+                                        <span class="thread-title">{{i18n.plugins_perf_java_profiling_tip}}</span>
+                                    </div>
+                                    <div class="running" *ngIf="item.profileState === 'RECORDING'">
+                                        <img src="./assets/img/home/analysis.gif" alt=""
+                                            style="margin-right:8px;vertical-align: middle;width:16px;height:16px;" />
+                                        <span>{{i18n.plugins_perf_java_sampling_tip}}</span>
+                                    </div>
+                                    <div class="btnWrap" [tiTip]="btnTipFarmat(item,true)" tiTipPosition="top">
+                                        <button class="little-minor-btn" type="button" (click)="startProfiling(item)"
+                                            [disabled]="getProfilingBtnStatus(item)">
+                                            {{ i18n.common_term_profiling }}</button>
+                                    </div>
+                                    <div class="btnWrap" [tiTip]='btnTipFarmat(item,false)' tiTipPosition="top">
+                                        <button class="little-minor-btn" type="button" (click)="createSampling()"
+                                            style="margin-left: 16px;" [disabled]="getSamplingBtnStatus(item)">
+                                            {{ i18n.common_term_sampling }}</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="!primaryJvmData.data.length && !searchValue" class="no-data"
+                [hyNodata]="{ text:i18n.common_term_task_noPrimary }" [nodataShow]="true"></div>
+            <div *ngIf="!primaryJvmData.data.length && searchValue" class="no-data"
+                [hyNodata]="{ text:i18n.plugins_perf_java_search_guardian_nodata }" [nodataShow]="true"></div>
+            <ti-pagination id="pagination" [(currentPage)]="currentPage" [pageSize]="pageSize"
+                [(totalNumber)]="totalNumber" *ngIf="totalNumber > defaultPageSize" (pageUpdate)="onPageUpdate($event)">
+            </ti-pagination>
+        </ti-table>
+        <!-- 容器进程 -->
+        <ti-table [(displayedData)]="containerJvmDisplayed" [srcData]="containerJvmData" [columns]="jvmColumns" *ngIf="(curGuardian && curGuardian.state === 'CONNECTED')
+             && changeIndex && currentAllJvms.length">
+            <div class="ti3-resize-wrapper ti3-table-container" *ngIf="containerJvmData.data.length && !searchValue">
+                <table>
+                    <tbody>
+                        <ng-container *ngFor="let container of containerJvmData.data; index as idx">
+                            <tr>
+                                <td>
+                                    <div class="jvm-name" [tiTip]="container.isRunningInContainer
+                                            ? (i18n.plugins_perf_java_guardianHome_containerId + container.containerId)
+                                            : ''" tiTipPosition="right">
+                                        <img class="toggleBtn" src="./assets/img/home/container_noexpand.svg"
+                                            *ngIf="!container.isShowDetail"
+                                            (click)="toShowContainerDetail(container,idx)">
+                                        <img class="toggleBtn" src="./assets/img/home/container_expand.svg"
+                                            *ngIf="container.isShowDetail"
+                                            (click)="toShowContainerDetail(container,idx)">
+                                        <img src="./assets/img/home/container.svg">
+                                        <span class="jvm-text" tiOverflow>{{container.containerName + ' (' +
+                                            container.containerId + ')'}}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <ng-container *ngIf="container.isShowDetail && container.children">
+                                <tr *ngFor="let item of container.children; let number = index"
+                                    (mouseenter)="selectJvm(item)" (mouseover)="warnTip(item)"
+                                    class="showDetail">
+                                    <div class="leftColorBlock"></div>
+                                    <td>
+                                        <div class="jvm-name firstName">
+                                            <img src="./assets/img/home/container_inner.svg">
+                                            <span tiOverflow>{{item.name + ' (' + item.lvmid + ')'}}</span>
+                                        </div>
+                                        <div class="analysis-box">
+                                            <div class="running" *ngIf="item.profileState === 'PROFILING'">
+                                                <img src="./assets/img/home/analysis.gif"
+                                                    style="margin-right:8px;vertical-align: middle;width:16px;height:16px;" />
+                                                <span
+                                                    class="thread-title">{{i18n.plugins_perf_java_profiling_tip}}</span>
+                                            </div>
+                                            <div class="running" *ngIf="item.profileState === 'RECORDING'">
+                                                <img src="./assets/img/home/analysis.gif"
+                                                    style="margin-right:8px;vertical-align: middle;width:16px;height:16px;" />
+                                                <span>{{i18n.plugins_perf_java_sampling_tip}}</span>
+                                            </div>
+                                            <div class="btnWrap" [tiTip]="btnTipFarmat(item,true)" tiTipPosition="top">
+                                                <button class="little-minor-btn" type="button"
+                                                    (click)="startProfiling(item)" [disabled]="getProfilingBtnStatus(item)">
+                                                    {{ i18n.common_term_profiling }}</button>
+                                            </div>
+                                            <div class="btnWrap" [tiTip]='btnTipFarmat(item,false)' tiTipPosition="top">
+                                                <button class="little-minor-btn" type="button"
+                                                    (click)="createSampling()" style="margin-left: 16px;"
+                                                    [disabled]="getSamplingBtnStatus(item)">
+                                                    {{ i18n.common_term_sampling }}</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+            <div class="ti3-resize-wrapper ti3-table-container" *ngIf="containerJvmData.data.length && searchValue">
+                <table>
+                    <tbody>
+                        <tr *ngFor="let item of containerJvmData.data; let idx = index"
+                            (mouseenter)="selectJvm(item)" (mouseover)="warnTip(item)">
+                            <td>
+                                <div class="jvm-name" [tiTip]="item.isRunningInContainer
+                                        ? (i18n.plugins_perf_java_guardianHome_containerId + item.containerId)
+                                        : ''" tiTipPosition="right">
+                                    <img src="./assets/img/home/container_inner.svg">
+                                    <span class="jvm-text" tiOverflow>{{item.name + ' (' + item.lvmid + ')'}}</span>
+                                </div>
+                                <div class="analysis-box">
+                                    <div class="running" *ngIf="item.profileState === 'PROFILING'">
+                                        <img src="./assets/img/home/analysis.gif" alt=""
+                                            style="margin-right:8px;vertical-align: middle;width:16px;height:16px;" />
+                                        <span class="thread-title">{{i18n.plugins_perf_java_profiling_tip}}</span>
+                                    </div>
+                                    <div class="running" *ngIf="item.profileState === 'RECORDING'">
+                                        <img src="./assets/img/home/analysis.gif" alt=""
+                                            style="margin-right:8px;vertical-align: middle;width:16px;height:16px;" />
+                                        <span>{{i18n.plugins_perf_java_sampling_tip}}</span>
+                                    </div>
+                                    <div class="btnWrap" [tiTip]="btnTipFarmat(item,true)" tiTipPosition="top">
+                                        <button class="little-minor-btn" type="button" (click)="startProfiling(item)"
+                                            [disabled]="getProfilingBtnStatus(item)">
+                                            {{ i18n.common_term_profiling }}</button>
+                                    </div>
+                                    <div class="btnWrap" [tiTip]='btnTipFarmat(item,false)' tiTipPosition="top">
+                                        <button class="little-minor-btn" type="button" (click)="createSampling()"
+                                            style="margin-left: 16px;" [disabled]="getSamplingBtnStatus(item)">
+                                            {{ i18n.common_term_sampling }}</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="!containerJvmData.data.length && !searchValue" class="no-data"
+                [hyNodata]="{ text:i18n.common_term_task_noContainer }" [nodataShow]="true">
+            </div>
+            <div *ngIf="!containerJvmData.data.length && searchValue" class="no-data"
+                [hyNodata]="{ text:i18n.plugins_perf_java_search_guardian_nodata }" [nodataShow]="true">
+            </div>
+            <ti-pagination id="pagination" [(currentPage)]="currentPage" [pageSize]="pageSize"
+                (pageUpdate)="onPageUpdate($event)" [(totalNumber)]="totalNumber" *ngIf="totalNumber > defaultPageSize">
+            </ti-pagination>
+        </ti-table>
+        <app-loading *ngIf="showLoadingProfiling" [size]="'max'" [height]="'100%'">
+        </app-loading>
+        <div *ngIf="(!currentAllJvms.length || curGuardian.state === 'DISCONNECTED') && !showLoading" class="no-data"
+            [hyNodata]="getNodataText()" [nodataShow]="true"></div>
+    </div>
+</div>
+<app-mask #samplingModal>
+    <div class="content modal-container ti3-modal-content">
+        <div class="sampling-modal-title ti3-modal-header">
+            <span class="text-title">
+                {{ i18n.common_term_new_sampling }}
+            </span>
+            <span class="tip-close" (click)="closeMask()">
+                <img src="./assets/img/newSvg/close_icon.svg" />
+                <img src="./assets/img/newSvg/close_hover.svg">
+            </span>
+        </div>
+        <div class="sampling-modal-content sampling-modal ti3-modal-body">
+            <ti-formfield class="formList">
+                <ti-item [label]="i18n.common_term_sampling_forms.recordWay">
+                    <div class="radios">
+                        <div class="radio-box">
+                            <input type="radio" tiRadio name="tiRadio" [(ngModel)]="sampModalForms.selected.value"
+                                [value]="true" [label]="i18n.common_term_sampling_forms.planTime"
+                                (ngModelChange)="sampModalForms.recordDur.value=60" />
+                        </div>
+                        <div class="radio-box">
+                            <input type="radio" tiRadio name="tiRadio" [(ngModel)]="sampModalForms.selected.value"
+                                [value]="false" [label]="i18n.common_term_sampling_forms.noPlanTime" />
+                            <img src="./assets/img/guardian/help.png" [tiTip]='i18n.common_term_sampling_forms.stopTips'
+                                tiTipPosition="right">
+                        </div>
+
+                    </div>
+                    <div *ngIf="showTip && !sampModalForms.selected.value">
+                        <div class="recordTip">
+                            <div class="tipIcon"><img src="./assets/img/newSvg/tip.svg"></div>
+                            <div class="tipText">{{i18n.common_term_sampling_forms.stopTips}}</div>
+                            <div class="closeIcon"><img src="./assets/img/home/close.svg" (click)="showTip=false"></div>
+                        </div>
+                    </div>
+                </ti-item>
+                <ti-item [label]="i18n.common_term_sampling_forms.recordSec"
+                    [show]="sampModalForms.selected.value === true" [required]="sampModalForms.recordDur.required"
+                    [formGroup]="sampleFormGroup">
+                    <ti-spinner name="spinner" [format]="sampModalForms.recordDur.format"
+                        [disabled]="sampModalForms.recordDur.disabled" tiRequired tiValidation
+                        [tiRangeValue]="sampModalForms.recordDur.rangeValue" formControlName="recordSec"
+                        (blur)="changeSpinner(recordDurBlur)">
+                    </ti-spinner>
+                    <span class="range">({{sampModalForms.recordDur.min}}～{{sampModalForms.recordDur.max}})</span>
+                </ti-item>
+                <ti-item [label]="i18n.common_term_sampling_forms.methodSample"
+                    [required]="sampModalForms.methodSamp.required">
+                    <ti-switch id="myswitch" [(ngModel)]="sampModalForms.methodSamp.state"
+                        (ngModelChange)="methodSampChange($event)"></ti-switch>
+                </ti-item>
+                <ti-item [label]="i18n.common_term_sampling_forms.javaMethodInterval"
+                    [required]="sampModalForms.javaMethod.required" [show]="!sampModalForms.javaMethod.disabled"
+                    [formGroup]="sampleFormGroup" style="padding-bottom: 20px !important">
+                    <ti-spinner name="spinner" [format]="sampModalForms.javaMethod.format"
+                        [disabled]="sampModalForms.javaMethod.disabled" tiRequired tiValidation
+                        [tiRangeValue]="sampModalForms.javaMethod.rangeValue" formControlName="javaMethodInterval"
+                        (blur)="changeSpinner(javaMethodBlur)">
+                    </ti-spinner>
+                    <span class="range">({{sampModalForms.javaMethod.min}}～{{sampModalForms.javaMethod.max}})</span>
+                </ti-item>
+                <ti-item [label]="i18n.common_term_sampling_forms.nativeMethodInterval"
+                    [required]="sampModalForms.nativeMethod.required" [show]="!sampModalForms.nativeMethod.disabled"
+                    [formGroup]="sampleFormGroup">
+                    <ti-spinner name="spinner" [format]="sampModalForms.nativeMethod.format"
+                        [disabled]="sampModalForms.nativeMethod.disabled" tiRequired tiValidation
+                        [tiRangeValue]="sampModalForms.nativeMethod.rangeValue" formControlName="nativeMethodInterval"
+                        (blur)="changeSpinner(nativeMethodBlur)">
+                    </ti-spinner>
+                    <span class="range">({{sampModalForms.nativeMethod.min}}～{{sampModalForms.nativeMethod.max}})</span>
+                </ti-item>
+                <ti-item [label]="i18n.common_term_sampling_forms.threadDump"
+                    [required]="sampModalForms.threadDump.required">
+                    <ti-switch id="myswitch" [(ngModel)]="sampModalForms.threadDump.state"
+                        (ngModelChange)="threadDumpChange($event)"></ti-switch>
+                </ti-item>
+                <ti-item [label]="i18n.common_term_sampling_forms.threadDumpInterval"
+                    [required]="sampModalForms.interval.required" [show]="!sampModalForms.interval.disabled"
+                    [formGroup]="sampleFormGroup">
+                    <ti-spinner name="spinner" (blur)="changeSpinner(intervalBlur)" formControlName="threadDumpInterval"
+                        [format]="sampModalForms.interval.format" [disabled]="sampModalForms.interval.disabled"
+                        tiRequired tiValidation [tiRangeValue]="[1, 300]">
+                    </ti-spinner>
+                    <span class="range">(≤{{i18n.common_term_sampling_forms.recordNeedTime}})</span>
+                    <img class="helpTip" *ngIf="!sampModalForms.manuallyStop.state" tiTipPosition="right" tiRequired
+                        [tiTip]="sampleIntervalTip" src="./assets/img/guardian/help.png">
+                </ti-item>
+                <!-- 文件IO -->
+                <ti-item [label]="i18n.common_term_sampling_forms.fileIoSample"
+                    [required]="sampModalForms.fileIoSample.required">
+                    <ti-switch id="myswitch" [(ngModel)]="sampModalForms.fileIoSample.state"
+                        (ngModelChange)="sampModalForms.fileIoSampleThred.value=1"></ti-switch>
+                </ti-item>
+                <ti-item [label]="i18n.jdbcpool.thresholdus" [required]="sampModalForms.fileIoSampleThred.required"
+                    [show]="sampModalForms.fileIoSample.state" [formGroup]="sampleFormGroup">
+                    <ti-spinner name="spinner" [format]="sampModalForms.fileIoSampleThred.format"
+                        [disabled]="sampModalForms.fileIoSampleThred.disabled" tiRequired tiValidation
+                        [tiRangeValue]="sampModalForms.fileIoSampleThred.rangeValue" formControlName="fileIoSampleThred"
+                        (blur)="changeSpinner(fileioBlur)"></ti-spinner>
+                    <span
+                        class="range">({{sampModalForms.fileIoSampleThred.min}}～{{sampModalForms.fileIoSampleThred.max}})</span>
+                    <img class="helpTip" *ngIf="sampModalForms.fileIoSample.state" tiTipPosition="right"
+                        [tiTip]="i18n.io.sfileIoTip" src="./assets/img/guardian/help.png">
+                </ti-item>
+                <!-- SOCKET IO -->
+                <ti-item [label]="i18n.common_term_sampling_forms.socketIoSample"
+                    [required]="sampModalForms.socketIoSample.required">
+                    <ti-switch id="myswitch" [(ngModel)]="sampModalForms.socketIoSample.state"
+                        (ngModelChange)="sampModalForms.socketIoSampleThred.value=1"></ti-switch>
+                </ti-item>
+                <ti-item [label]="i18n.jdbcpool.threshold" [required]="sampModalForms.socketIoSampleThred.required"
+                    [show]="sampModalForms.socketIoSample.state" [formGroup]="sampleFormGroup">
+                    <ti-spinner name="spinner" [format]="sampModalForms.socketIoSampleThred.format"
+                        [disabled]="sampModalForms.socketIoSampleThred.disabled" tiRequired tiValidation
+                        [tiRangeValue]="sampModalForms.socketIoSampleThred.rangeValue"
+                        formControlName="socketIoSampleThred" (blur)="changeSpinner(socketioBlur)">
+                    </ti-spinner>
+                    <span
+                        class="range">({{sampModalForms.socketIoSampleThred.min}}～{{sampModalForms.socketIoSampleThred.max}})</span>
+                    <img class="helpTip" *ngIf="sampModalForms.fileIoSample.state" tiTipPosition="right"
+                        [tiTip]="i18n.io.ssocketIoTip" src="./assets/img/guardian/help.png">
+                </ti-item>
+                <ti-item [label]="i18n.common_term_sampling_forms.leakSample"
+                    [required]="sampModalForms.leakSample.required">
+                    <ti-switch id="myswitch" [(ngModel)]="sampModalForms.leakSample.state"
+                        (ngModelChange)="leakSampleChange($event)"></ti-switch>
+                </ti-item>
+            </ti-formfield>
+        </div>
+        <div class="sampling-footer-btn1 ti3-modal-footer">
+            <button type="button" class="primary" (click)="sampModalOk()" [disabled]="!sampleFormGroup.valid">
+                {{ i18n.common_term_operate_ok }}
+            </button>
+            <button type="button" class="cancel" style="margin-left: 20px;" (click)="closeMask()">
+                {{ i18n.common_term_operate_cancel }}
+            </button>
+        </div>
+    </div>
+</app-mask>
+
+
+<app-cadownload #caFileModal></app-cadownload>

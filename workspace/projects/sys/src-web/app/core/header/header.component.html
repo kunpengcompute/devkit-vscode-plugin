@@ -1,0 +1,178 @@
+<header class='header'>
+  <div class="header-content">
+    <div class="header-left">
+      <img src='./assets/img/header/logo.png' class="logo" (click)='jumpHome()' style="cursor: pointer;" />
+      <ng-container [ngSwitch]="curToolType">
+        <span *ngSwitchCase="toolTypeMenu.SYSPERF" class="title">{{i18n.common_term_pro_name}}</span>
+        <span *ngSwitchCase="toolTypeMenu.DIAGNOSE" class="title">{{i18n.common_term_mem_name}}</span>
+        <span *ngSwitchCase="toolTypeMenu.TUNINGHELPER" class="title">{{i18n.common_tern_tunning_helper_name}}</span>
+        <span *ngSwitchDefault></span>
+      </ng-container>
+    </div>
+    <div class="header-right">
+      <div *ngIf="!isProd" class="user-container" style="padding-right: 0">
+        <div class="header-config header-common"></div>
+        <ul class='user-list-box'>
+          <li>
+            <input type="radio" tiRadio name="themeGroup" [(ngModel)]="themeSelected" [value]="hyTheme.Light"
+              [label]="'浅色'" (ngModelChange)="onThemeChange($event)" />
+            <input type="radio" tiRadio name="themeGroup" [(ngModel)]="themeSelected" [value]="hyTheme.Grey"
+              [label]="'灰色'" (ngModelChange)="onThemeChange($event)" />
+            <input type="radio" tiRadio name="themeGroup" [(ngModel)]="themeSelected" [value]="hyTheme.Dark"
+              [label]="'深色'" (ngModelChange)="onThemeChange($event)" />
+          </li>
+        </ul>
+      </div>
+      <div class="user-container">
+        <div class="header-user header-common"></div>
+        <span>{{username}}</span>
+        <div class="header-up"></div>
+        <ul class='user-list-box login'>
+          <li (click)='updatePassward()'>{{i18n.common_term_admin_change_pwd}}</li>
+          <li (click)='logOut()'>{{i18n.common_term_admin_log_out}}</li>
+        </ul>
+      </div>
+      <div class="user-container" *ngIf='showBack'>
+        <div class="header-home header-common"></div>
+        <ul class='user-list-box'>
+          <li (click)='jumpHome()'>{{i18n.common_term_return_home}}</li>
+        </ul>
+      </div>
+      <!-- 节点管理【管理员权限才有】 -->
+      <div class="user-container">
+        <div class="header-nodeManagement header-common"></div>
+        <ul class='user-list-box'>
+          <li routerLink="/nodeManagement/nodeManagement" routerLinkActive="active" (click)="closeLeftMenu()">
+            {{ i18n.nodeManagement.nodeManagement }}
+          </li>
+          <li routerLink="/nodeManagement/agentTitle" routerLinkActive="active">
+            {{ this.i18n.certificate.agentTitle }}</li>
+        </ul>
+      </div>
+      <div class="user-container" style="padding-right: 0">
+        <div class="header-config header-common"></div>
+        <ul class='user-list-box setting'>
+          <li *ngFor="let item of leftMenuList" (click)="clossHeaderPop()" [ngClass]="{'notShow': item.admin && role !=='Admin'}"
+            routerLinkActive="active" routerLink="/configuration/{{ item.params }}">{{ item.title }}</li>
+        </ul>
+      </div>
+      <div class="user-container">
+        <div class="header-lang header-common"></div>
+        <ul class='user-list-box lang' id="user-guide-ul">
+          <li *ngFor="let item of langOptions" (click)="langChange(item)"
+            [ngClass]="{'notShow': item.id === langSelected.id}">{{item.label}}</li>
+          <li (click)='feedback()' *ngIf="lang === 'zh-cn'">{{i18n.feedback}}</li>
+          <li (click)='openHelp()'>{{i18n.common_term_help}}</li>
+          <li (click)='userGuideLi()' class="user-guide-done" *ngIf="isSysperf">{{i18n.userGuide.liTitle}}</li>
+          <li (click)='onStatementSet()'>{{i18n.common_term_statement}}</li>
+          <li (click)='showAboutMask()'>{{i18n.about}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="header-info" [hidden]="topState !== 'active'">
+    <div class="top-info zh-cn-top-info" *ngIf="lang === 'zh-cn'">
+      <p>
+        <a class="right-arrow" href="{{kunpenggrowthUrl}}" style="position: relative;"
+        target="_blank">{{i18n.home_top_infogrowth}}
+        </a>
+      </p>
+      <p>
+        <a class="right-arrow" href="{{kunpengsptmysqlpracticeUrl}}" style="position: relative;"
+          target="_blank">{{i18n.home_top_info0}}
+        </a> 
+      </p>
+      <p *ngIf="!isSysperf">
+        <a class="right-arrow" href="{{kunpengjavaIntroductionUrl}}"
+          target="_blank">{{i18n.home_top_info1}}<span class="arrow"></span>
+        </a>
+      </p>
+      <p *ngIf="isSysperf">
+        <a  href="{{kunpengjavaIntroductionUrl}}"  style="position: relative;"
+          target="_blank">{{i18n.home_top_info6}}<span id="animation-case"></span>
+        </a>
+      </p>
+      <p>
+        <a class="right-arrow" href="{{kunpengUrl}}" target="_blank">{{i18n.home_top_info2}}</a>
+      </p>
+    </div>
+    <div class="top-info en-us-top-info" *ngIf="lang === 'en-us'">
+      <p>
+        <a class="right-arrow" href="{{kunpenggrowthUrlEn}}"
+          target="_blank">{{i18n.home_top_infogrowth}}</a>
+      </p>
+      <p>
+        <a class="right-arrow" href="{{kunpengsysIntroductionUrlEn}}"
+          target="_blank">{{i18n.home_top_info4}}</a>
+      </p>
+      <p *ngIf="!isSysperf">
+        <a class="right-arrow" href="{{kunpengUrlEn}}" 
+          target="_blank">{{i18n.home_top_info5}}</a>
+      </p>
+      <p *ngIf="isSysperf">
+        <a href="{{kunpengUrlEn}}" style="position: relative;"
+          target="_blank">{{i18n.home_top_info6}}<span id="animation-case"></span></a>
+      </p>
+    </div>
+    <img src="./assets/img/home/bg.png" class="bg-img" />
+  </div>
+  <div class="toggle-btn-top" *ngIf="toggleShow" (click)='toggleTop()' (mouseenter)="onHoverList('toggle')"
+    (mouseleave)="onHoverList()">
+    <!-- user-guide -->
+    <img id="user-guide-toggle"
+      [src]="currentHover === 'toggle' ? './assets/img/home/home-toggle-hover.svg':'./assets/img/home/home-toggle.svg'"
+      [ngClass]="{'active': topState === 'active'}" />
+  </div>
+</header>
+<!-- 修改密码 -->
+<app-pop-mask #mask3>
+  <div class="content mask2" *ngIf="refEyes">
+    <div class="mask-title">
+      <span class="create-title">{{i18n.common_term_admin_change_pwd}}</span>
+      <span class="ti3-close ti3-icon ti3-icon-close" (click)='closeUserPwd()'></span>
+    </div>
+    <div class="edit-box">
+      <ti-formfield [formGroup]='userPwd'>
+        <ti-item [label]="label.oldPwd" [required]='true'>
+          <input tiText [tiValidation]='validation' formControlName='oldPwd' autocomplete="new-password" type="password"
+            style="width: 300px;" appDisableCtrl>
+        </ti-item>
+        <ti-item [label]="label.newPwd" [required]='true'>
+          <input tiText [tiValidation]='validation' formControlName='pwd' type="password"
+            (ngModelChange)='updateConfirmValidator2()' style="width: 300px;" appDisableCtrl>
+        </ti-item>
+        <ti-item [label]="label.Cpwd" [required]='true'>
+          <input tiText [tiValidation]='validation' formControlName='cpwd' type="password" style="width: 300px;"
+            appDisableCtrl>
+        </ti-item>
+      </ti-formfield>
+      <div class="btn-box" style="position:static;margin: 27px 0 0 0;">
+        <button tiButton type="button" color="primary" style="margin-right:18px;width:88px" (click)='setUserPwd()'
+          [disabled]='!userPwd.valid'>{{i18n.common_term_operate_ok}}</button>
+
+        <button type="button" tiButton class="user-close-btn"
+          (click)='closeUserPwd()'>{{i18n.common_term_operate_cancel}}</button>
+      </div>
+    </div>
+  </div>
+</app-pop-mask>
+<!-- 关于对话框 -->
+<app-about #about>
+  <div class="content about-box">
+    <div
+      style="display: flex; justify-content: space-between; align-items: center;border-bottom: 1px dashed #E1E6EE; padding-bottom: 8px;margin-bottom: 4px;">
+      <div style="display: flex;align-items: center;">
+        <img class="logo" src="./assets/img/header/logo.png">
+        <p style="font-size: 1.25rem; color: #222;margin-left: 10px;margin-top: 0;">{{i18n.aboutMsg.name}}</p>
+      </div>
+      <span class="ti3-close ti3-icon ti3-icon-close" (click)='closeAbout()'></span>
+    </div>
+    <p><span></span> {{ i18n.aboutMsg.version }}{{ version }}</p>
+    <p><span></span> {{ i18n.aboutMsg.time }}{{ time }}</p>
+    <p><span></span> {{ i18n.aboutMsg.copyRight.replace('year',year) }}</p>
+  </div>
+</app-about>
+<app-logout #logOutShow></app-logout>
+<!-- 免责声明 -->
+<app-statement #statement></app-statement>
+<app-advice-error-alert #errorAlert></app-advice-error-alert>

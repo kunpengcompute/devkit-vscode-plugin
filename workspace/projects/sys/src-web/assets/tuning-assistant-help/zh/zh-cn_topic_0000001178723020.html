@@ -1,0 +1,62 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Ubuntu系统HPC任务数据采集失败">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001178881562.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具 (调优助手)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001178723020">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Ubuntu系统HPC任务数据采集失败</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001178723020"></a><a name="ZH-CN_TOPIC_0000001178723020"></a>
+
+<h1 class="topictitle1">Ubuntu系统HPC任务数据采集失败</h1>
+<div id="body8662426"><p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p537371412176">由于Ubuntu 13.04及以后版本禁用了perf script中的python scripting功能，创建HPC分析任务进行数据采集时会失败。为了能在Ubuntu操作系统中支持这一功能，需要重新编译并替换系统中的perf。</p>
+<ol id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_ol98621954308"><li id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_li7370185105317"><span>使用SSH远程登录工具，以root用户进入Linux操作系统命令行界面。</span></li><li id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_li15104173713364"><span>执行命令<strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b12449215373">uname -r</strong>，查看当前的内核版本kernel-version。</span><p><p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p0546143116373"><span><img id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_image13217187103812" src="zh-cn_image_0000001224361407.png"></span></p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p865121183718">本例中查询结果如上图所示，则内核版本为4.15.0。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_li167171326131712"><span>执行以下命令下载当前内核对应的perf版本。</span><p><p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p2598115902513"><strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b106713151263">mkdir /home/linux_kernel</strong></p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p14869612201118"><strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b14633163110114">cd /home/linux_kernel</strong></p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p13493182511219"><strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b197159312353">apt-get update</strong></p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p1777544810352"><strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b175023891719">apt-get source linux-source-&lt;</strong><em id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_i17796159161717">kernel-version</em><strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b55031789178">&gt;</strong>, 其中kernel-version为<strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b71561617112013">步骤 2</strong>中的结果。</p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p1044114617416">下载源码如下图所示：</p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p13126455164312"><span><img id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_image495675518435" src="zh-cn_image_0000001223882957.png"></span></p>
+</p></li><li id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_li9201515181820"><span>编译perf。</span><p><p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p1991132414472">执行以下命令看当前版本缺少哪些包。</p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p187051369445"><strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b17869145414450">cd /home/linux_kernel/linux_4.15.0/tools/perf</strong></p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p2642174574611"><strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b19696154944611">make</strong></p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p863921710273"><span><img id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_image1963941782718" src="zh-cn_image_0000001179041678.png"></span></p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p68620388264">控制台提示找不到有些包，需要依据提示信息安装对应包。</p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p163141950192617">python scripting功能需要的包有：python-dev libelf-dev libunwind-dev libaudit-dev libslang2-dev。</p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p144186304444">执行以下命令安装包：</p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p139837507"><strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b262581218502">apt-get install python-dev libelf-dev libunwind-dev libaudit-dev libslang2-dev</strong></p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p088811110515"><strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b43151221205111">make</strong></p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p1790751319514"><strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b633032110514">make install</strong></p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p976793732716"><span><img id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_image8767937142715" src="zh-cn_image_0000001224201475.png"></span></p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p1917411661512">可以发现libaudit, libelf, libpython, libslang, libunwind, lzma, bpf 开关已打开。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_li15828133715530"><span>执行如下命令，检测perf编译是否成功。</span><p><p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p14596143713516"><strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b1449091124111">cd /home/linux_kernel</strong></p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p1318472613414"><strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b10503311415">/home/linux_kernel/linux-4.15.0/tools/perf/perf record</strong></p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p15181334173410"><strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b16517131164114">/home/linux_kernel/linux-4.15.0/tools/perf/perf script -g python</strong></p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p386011597184">目录下生成perf-script.py文件，说明perf编译成功。</p>
+<p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p113298442214"><span><img id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_image15329104472117" src="zh-cn_image_0000001223882949.png"></span></p>
+</p></li><li id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_li101251442016"><span>执行如下命令，替换系统中原有perf，即可在Ubuntu中使用python scripting功能。</span><p><p id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_p127303204404"><strong id="ZH-CN_TOPIC_0000001178723020__zh-cn_topic_0000001118002414_zh-cn_topic_0000001117602894_b1078111710418">cp /home/linux_kernel/linux-4.15.0/tools/perf/perf /usr/bin</strong></p>
+</p></li></ol>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001178881562.html">常用操作</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

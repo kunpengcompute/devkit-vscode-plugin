@@ -1,0 +1,162 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="查看IO分析结果">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001178723010.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具 (Java性能分析)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001178563058">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>查看IO分析结果</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001178563058"></a><a name="ZH-CN_TOPIC_0000001178563058"></a>
+
+<h1 class="topictitle1">查看IO分析结果</h1>
+<div id="body1594868644983"><div class="section" id="ZH-CN_TOPIC_0000001178563058__section1475719453578"><h4 class="sectiontitle">前提条件</h4><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0209366689_p38001313195916">已创建采样分析记录，并完成分析。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001178563058__section11627173174811"><h4 class="sectiontitle">操作步骤</h4><ol id="ZH-CN_TOPIC_0000001178563058__ol82841924144810"><li id="ZH-CN_TOPIC_0000001178563058__li19204194181614"><span>登录<span id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0209366710_ph12594180204619">Java性能分析</span>Web界面，单击首页界面“采样分析记录”列表中指定分析任务的名称。</span></li><li id="ZH-CN_TOPIC_0000001178563058__li17950194621117"><span>单击“IO”页签。</span><p><div class="p" id="ZH-CN_TOPIC_0000001178563058__p1068849101110">打开“文件IO”页面，如<a href="#ZH-CN_TOPIC_0000001178563058__fig410612295515">图1</a>所示，参数说明如<a href="#ZH-CN_TOPIC_0000001178563058__table1668213113920">表1</a>所示。<div class="note" id="ZH-CN_TOPIC_0000001178563058__note18747113243215"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001178563058__p10748133253214">页面下方“栈跟踪”区域显示程序调用堆栈信息。</p>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001178563058__fig410612295515"><a name="ZH-CN_TOPIC_0000001178563058__fig410612295515"></a><a name="fig410612295515"></a><span class="figcap"><b>图1 </b>文件IO</span><br><span><img id="ZH-CN_TOPIC_0000001178563058__image171315645513" src="zh-cn_image_0000001223882905.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001178563058__table1668213113920"></a><a name="table1668213113920"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001178563058__table1668213113920" frame="border" border="1" rules="all"><caption><b>表1 </b>文件IO参数说明</caption><colgroup><col style="width:18.27%"><col style="width:81.73%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row1342503742920"><th align="left" class="cellrowborder" valign="top" width="18.27%" id="mcps1.3.2.2.2.2.1.5.2.3.1.1"><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p1942543711295">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="81.73%" id="mcps1.3.2.2.2.2.1.5.2.3.1.2"><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p1242518375290">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row742593742911"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p16957426143617">文件路径/调用线程</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p794641844016">显示文件路径/调用线程。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row8425103762911"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p13956152619368">I/O总时间</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__p55261331134010">显示文件IO读写的总时间。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row10425337112914"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p1195518260362">计数</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__p892813266369">显示文件IO读写的总次数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row85783157379"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p12579161515371">读取计数</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__p11513993910">显示文件IO读取的次数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row4482322123718"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p1848310229370">写入计数</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__p181533943914">显示文件IO写入的次数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row13925172819379"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p1092517285370">读取的字节数</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__p12710182673911">显示文件IO读取的字节数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row1315113563715"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p131518355374">写入的字节数</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__p271062620395">显示文件IO写入的字节数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row949935410373"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.2.2.1.5.2.3.1.1 mcps1.3.2.2.2.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p1150145410378">文件IO读写速率</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row2354527203817"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p13354122733818">读取速率</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p1728421353914">显示文件IO读取速率。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row2850143212389"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p285013329386">写入速率</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.2.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p12841213113910">显示文件IO写入速率。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</p></li><li id="ZH-CN_TOPIC_0000001178563058__li177321550134418"><span>单击“Socket IO”。</span><p><div class="p" id="ZH-CN_TOPIC_0000001178563058__p1953155115448">打开“Socket IO”分析页面，如<a href="#ZH-CN_TOPIC_0000001178563058__fig1032410475135">图2</a>所示，参数描述如<a href="#ZH-CN_TOPIC_0000001178563058__table632514719137">表2</a>所示。<div class="note" id="ZH-CN_TOPIC_0000001178563058__note1867417230333"><img src="public_sys-resources/note_3.0-zh-cn.png"><span class="notetitle"> </span><div class="notebody"><p id="ZH-CN_TOPIC_0000001178563058__p0674112314333">“栈跟踪”区域显示程序调用堆栈信息。</p>
+</div></div>
+<div class="fignone" id="ZH-CN_TOPIC_0000001178563058__fig1032410475135"><a name="ZH-CN_TOPIC_0000001178563058__fig1032410475135"></a><a name="fig1032410475135"></a><span class="figcap"><b>图2 </b>Socket IO</span><br><span><img id="ZH-CN_TOPIC_0000001178563058__image22449476543" src="zh-cn_image_0000001178881702.png"></span></div>
+
+<div class="tablenoborder"><a name="ZH-CN_TOPIC_0000001178563058__table632514719137"></a><a name="table632514719137"></a><table cellpadding="4" cellspacing="0" summary="" id="ZH-CN_TOPIC_0000001178563058__table632514719137" frame="border" border="1" rules="all"><caption><b>表2 </b>Socket IO参数说明</caption><colgroup><col style="width:18.27%"><col style="width:81.73%"></colgroup><thead align="left"><tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row1816803914448"><th align="left" class="cellrowborder" valign="top" width="18.27%" id="mcps1.3.2.2.3.2.1.5.2.3.1.1"><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p11681539104413">参数</p>
+</th>
+<th align="left" class="cellrowborder" valign="top" width="81.73%" id="mcps1.3.2.2.3.2.1.5.2.3.1.2"><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p1316893920440">说明</p>
+</th>
+</tr>
+</thead>
+<tbody><tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row2168163914449"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p31681139164417">远程地址/端口/调用线程</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p3168173919449">显示远程地址/端口/调用线程。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row1168133911441"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p6168113944414">I/O总时间</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__p01682039114413">显示Socket IO读写的总时间。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row1416811391443"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p14168339144420">计数</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__p8168113914418">显示Socket IO读写的总次数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row1416853944413"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p14168203994416">读取计数</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__p7168103915447">显示Socket IO读取的次数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row816833914413"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p1116863918447">写入计数</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__p7168839164416">显示Socket IO写入的次数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row12168123964410"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p1116815392446">读取的字节数</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__p11168133911448">显示Socket IO读取的字节数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row2016818398444"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p12169113934418">写入的字节数</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__p171690394446">显示Socket IO写入的字节数。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row21691139194412"><td class="cellrowborder" colspan="2" valign="top" headers="mcps1.3.2.2.3.2.1.5.2.3.1.1 mcps1.3.2.2.3.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p9169183917448">Socket IO读写速率</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row3169173914448"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p4169939104411">读取速率</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p3169193964414">显示Socket IO读取速率。</p>
+</td>
+</tr>
+<tr id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_row1416920399448"><td class="cellrowborder" valign="top" width="18.27%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.1 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p171691239144420">写入速率</p>
+</td>
+<td class="cellrowborder" valign="top" width="81.73%" headers="mcps1.3.2.2.3.2.1.5.2.3.1.2 "><p id="ZH-CN_TOPIC_0000001178563058__zh-cn_topic_0262348771_p1116933944416">显示Socket IO写入速率。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001178723010.html">查看分析结果</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

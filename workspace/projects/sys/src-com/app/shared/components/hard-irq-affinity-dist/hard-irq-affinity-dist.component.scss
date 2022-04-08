@@ -1,0 +1,169 @@
+::ng-deep {
+
+  :root {
+    --irq-modal-core-background: #e1e4e8;
+    --irq-modal-core-background-hover: #caccd0;
+    --irq-modal-hard-highlight-background: #ed4b4b;
+    --irq-modal-hard-text-color: rgba(0,0,0,0.7);
+  }
+
+  .vscode-dark app-hard-irq-affinity-dist {
+    --irq-modal-core-background: #5f6468;
+    --irq-modal-core-background-hover: #4c5053;
+    --irq-modal-hard-highlight-background: #e2253b;
+    --irq-modal-hard-text-color: rgba(232,232,232,0.7);
+  }
+}
+
+.body-title {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  p {
+    width: 366px;
+    margin-bottom: 10px;
+    > span:first-child {
+      display: inline-block;
+      min-width: 110px;
+      margin-right: 16px;
+      color: var(--common-color-font-secondary);
+    }
+  }
+}
+
+.legend {
+  display: flex;
+  justify-content: flex-end;
+
+  p {
+    cursor: pointer;
+    margin-left: 26px;
+
+    &.active {
+      .legend-icon {
+        color: var(--modal-col-e8e8e8-818181);
+      }
+
+      .legend-label {
+        color: var(--common-color-font-primary);
+      }
+    }
+    
+    .legend-icon {
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--ti-common-color-icon-disabled);
+    }
+
+    .legend-label {
+      height: 18px;
+      font-size: 12px;
+      line-height: 18px;
+      margin-left: 12px;
+      color: var(--ti-common-color-icon-disabled);
+    }
+  }
+}
+
+.warpper {
+  display: flex;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  > .box:not(:nth-last-of-type(-n + 2)) {
+    margin-bottom: 24px;
+  }
+  .box {
+    width: 414px;
+    min-height: 134px;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--common-color-font-primary);
+    .box-title {
+      height: 24px;
+      margin-bottom: 10px;
+      span:first-child {
+        font-size: 16px;
+        margin-right: 10px;
+      }
+    }
+    .color-block {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+
+      .core {
+        width: 50px;
+        height: 32px;
+        margin-bottom: 2px;
+        flex-shrink: 0;
+        margin-left: 1px;
+        user-select: none;
+        background: var(--irq-modal-core-background);
+
+        .sub-block {
+          display: flex;
+        }
+
+        &:hover {
+          background: var(--irq-modal-core-background-hover);
+        }
+        
+        .inner-block {
+          height: 16px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 12px;
+          line-height: 12px;
+          font-weight: bold;
+          color: var(--irq-modal-hard-text-color);
+
+          span {
+            z-index: 1;
+          }
+
+          &.hard-block {
+            position: relative;
+
+            .highlight-bg {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: var(--irq-modal-hard-highlight-background);
+              z-index: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .hard-irq-tooltip {
+  
+  .label-icon {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+
+    &.irq-count {
+      background-color: #ed4b4b;
+    }
+    &.ipi-num {
+      background-color: #00bfc9;
+    }
+  }
+
+  .label-text {
+    margin-left: 10px;
+    color: var(--common-color-font-secondary);
+  }
+  
+  .value {
+    color: var(--common-color-font-primary);
+  }
+}

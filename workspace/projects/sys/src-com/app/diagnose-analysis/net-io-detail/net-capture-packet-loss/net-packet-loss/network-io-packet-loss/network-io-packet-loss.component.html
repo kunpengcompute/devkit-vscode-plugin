@@ -1,0 +1,108 @@
+<div class="network-io-packet-loss">
+
+  <div class="io-packet-header">
+    <p class="title">{{ 'net_capture_loss.loss.io_packet.title' | i18n }}</p>
+  </div>
+
+  <ti-table 
+    [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns"
+    [searchWords]="searchWords" [searchKeys]="searchKeys"
+  >
+    <div class="ti3-table-fixed-head">
+      <table>
+        <thead>
+          <tr>
+            <th tiOverflow *ngFor="let column of columns;index as index" width="{{column.width}}">
+              <ti-cell-text>{{ column.title }}</ti-cell-text>
+              <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey" [compareFn]="sortTableFn"></ti-head-sort>
+              <ng-container *ngIf="column.searchShow" class="searchIcon">
+                <ng-container *ngTemplateOutlet="searchTipContent; context: {$implicit: column}"></ng-container>
+              </ng-container>
+              <ti-cell-icons *ngIf="column.tip" class="cell-icon">
+                <hy-theme-content>
+                  <img src="./assets/img/summary/tooltip_dark.svg" [tiTip]='column.tip' dark />
+                  <img src="./assets/img/summary/tooltip.png" [tiTip]='column.tip' light />
+                </hy-theme-content>
+              </ti-cell-icons>
+            </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <div class="ti3-table-container ti3-resize-wrapper" hyNodata [nodataShow]="!displayed.length">
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let column of columns" width="{{column.width}}"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let row of displayed; index as i">
+            <tr>
+              <td details-icon-column class="details-icon-column">
+                <ti-icon *ngIf="row.children?.length" name="right-1" [ngClass]="{'active': row.showDetails}" 
+                    (click)="row.showDetails = !row.showDetails"></ti-icon>
+              </td>
+              <ng-container *ngFor="let column of columns; index as index">
+                <td tiOverflow *ngIf="index"> 
+                  <ng-container *ngIf="!row.children?.length && index === 1; else elseTemplate">
+                    <a (click)="showStatisticModal(row, statisticModal)">{{ row[column.prop] }}</a>
+                  </ng-container>
+                  <ng-template #elseTemplate>
+                    <span>{{ row[column.prop] }}</span>
+                  </ng-template>
+                </td>
+              </ng-container>
+            </tr>
+            
+            <ng-container *ngFor="let child of row.children;">
+              <tr *tiDetailsTr="row">
+                <td class="details-hd"></td>
+                <ng-container *ngFor="let column of columns; index as index">
+                  <td tiOverflow *ngIf="index">
+                    <a *ngIf="index === 1" (click)="showStatisticModal(child, statisticModal)">{{ child[column.prop] }}</a>
+                    <span *ngIf="index !== 1">{{ child[column.prop] }}</span>
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+
+    <ti-pagination
+      *ngIf="totalNumber > 10"
+      class="pagination"
+      [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber"
+      [showGotoLink]="true"
+    ></ti-pagination>
+  </ti-table>
+</div>
+
+<!-- 搜索 tip 弹框 -->
+<ng-template #searchTipContent let-column>
+  <ti-icon name="search" class="search-icon" [ngClass]="{'active': processSearchPop.isShow}" 
+      [pop]="searchTip" #processSearchPop="pop" [popOffset]="{x: -40, y: 24 }" popClass="common-table-search-pop"
+      [popContext]="column">
+  </ti-icon>
+
+  <ng-template #searchTip let-context="context">
+      <ti-searchbox
+        [(ngModel)]="searchWord"
+        (ngModelChange)="searchValueChange($event)">
+      </ti-searchbox>
+  </ng-template>
+</ng-template>
+
+<!-- 统计信息弹框 -->
+<ng-template #statisticModal let-context='context'>
+  <ti-modal-header>{{ context.title }}{{ 'net_capture_loss.loss.statistics_title' | i18n }}</ti-modal-header>
+  <ti-modal-body>
+    <p [innerHTML]="context.msg"></p>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" (click)="context.dismiss()" tiButton>{{ 'common_term_operate_close' | i18n }}</button>
+  </ti-modal-footer>
+</ng-template>

@@ -1,0 +1,51 @@
+<div>
+    <div class="mic-container">
+        <span class="mic-content">{{ microTitle.title }}</span>
+        <div>
+            <ul class="mic-introduction">
+                <li *ngFor='let hero of micIntroTitle; let i = index'>
+                    <span class="metrics">{{micIntroTitle[i]}}</span>
+                    <span class="mic-intro-spanColor">{{micIntroValue[i] || '--'}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="containerStyle">
+        <ti-table [(displayedData)]="displayed" [srcData]="srcData" tiColsResizable>
+            <div class="ti3-table-fixed-head">
+                <table>
+                    <thead>
+                        <tr>
+                            <th tiOverflow width="{{columns[0].width}}">
+                                <ti-cell-text>{{columns[0].title}}</ti-cell-text>
+                            </th>
+                            <th tiOverflow width="{{columns[1].width}}">
+                                <ti-cell-text>{{columns[1].title}}</ti-cell-text>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="ti3-table-container ti3-resize-wrapper" hyNodata [nodataShow]="displayed.length === 0">
+                <table>
+                    <thead>
+                        <tr>
+                            <th *ngFor="let column of columns" width="{{column.width}}"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of displayed">
+                            <td tiOverflow>{{row.micfirstname}}</td>
+                            <td tiOverflow>{{row.micfirstvalue | thousandSeparator}}<span
+                                    *ngIf="row.rate">{{'common_term_sign_left' |
+                                    i18n}}{{row.rate}}{{'common_term_sign_right' | i18n}}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ti-pagination id="pagination" [(currentPage)]="currentPage" [pageSize]="pageSize" [showGotoLink]="true"
+                [(totalNumber)]="totalNumber">
+            </ti-pagination>
+        </ti-table>
+    </div>
+</div>

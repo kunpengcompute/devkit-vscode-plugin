@@ -1,0 +1,22 @@
+.setting-title {
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    color: var(--mc-color-td);
+    margin-bottom: 10px;
+}
+.setting-list {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.java-setting {
+    margin-bottom: 40px;
+}
+.required-icon {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    padding: 1px 0;
+    margin-left: -12px;
+}

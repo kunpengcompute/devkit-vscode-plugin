@@ -1,0 +1,78 @@
+<div class="download" style="position: absolute; right:5vw;top:20px;z-index: 99;"> 
+        <a style="display: block;margin-bottom:5px;"
+                 (click)="downloadCsv()" [title]="i18n.sys_cof.sum.download_csv">
+              <img src="./assets/img/download.svg"  alt="" />
+             </a> 
+     </div>
+     
+<div class="system-content">
+    <h1 class="system-content-title">{{i18n.sys_cof.sum.mem_info.normal_msg}}</h1>
+    <div class="system-info">
+        <div class="system-already">
+            <div class="system-info-title total_title">{{i18n.sys_cof.sum.mem_info.total_mem}}</div>
+            <p class="system-info-text">{{mem.total_mem}}</p>
+        </div>
+        <div class="system-info-right">
+            <div class="system-slot" style="margin-bottom: 12px;">
+                <div class="system-info-title">{{i18n.sys_cof.sum.mem_info.mem_slot_0}}</div>
+                <div class="system-slot-btn">
+                        <span class ='active' *ngIf="mem.mem_dimm[0] && mem.mem_dimm[0] != 'Null'">{{mem.mem_dimm[0]}}</span>
+                        <span class ='active' *ngIf="mem.mem_dimm[1] && mem.mem_dimm[1] != 'Null'">{{mem.mem_dimm[1]}}</span>
+                        <span class ='active' *ngIf="mem.mem_dimm[2] && mem.mem_dimm[2] != 'Null'">{{mem.mem_dimm[2]}}</span>
+                        <span class ='active' *ngIf="mem.mem_dimm[3] && mem.mem_dimm[3] != 'Null'">{{mem.mem_dimm[3]}}</span>
+                        <span class ='active' *ngIf="mem.mem_dimm[4] && mem.mem_dimm[4] != 'Null'">{{mem.mem_dimm[4]}}</span>
+                        <span class ='active' *ngIf="mem.mem_dimm[5] && mem.mem_dimm[5] != 'Null'">{{mem.mem_dimm[5]}}</span>
+                        <span class ='active' *ngIf="mem.mem_dimm[6] && mem.mem_dimm[6] != 'Null'">{{mem.mem_dimm[6]}}</span>
+                        <span class ='active' *ngIf="mem.mem_dimm[7] && mem.mem_dimm[7] != 'Null'">{{mem.mem_dimm[7]}}</span>
+                        <span *ngIf= "!mem.mem_dimm[0] || mem.mem_dimm[0] == 'Null'" >{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                        <span *ngIf= "!mem.mem_dimm[1] || mem.mem_dimm[1] == 'Null'" >{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                        <span *ngIf= "!mem.mem_dimm[2] || mem.mem_dimm[2] == 'Null'" >{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                        <span *ngIf= "!mem.mem_dimm[3] || mem.mem_dimm[3] == 'Null'" >{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                        <span *ngIf= "!mem.mem_dimm[4] || mem.mem_dimm[4] == 'Null'" >{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                        <span *ngIf= "!mem.mem_dimm[5] || mem.mem_dimm[5] == 'Null'" >{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                        <span *ngIf= "!mem.mem_dimm[6] || mem.mem_dimm[6] == 'Null'" >{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                        <span *ngIf= "!mem.mem_dimm[7] || mem.mem_dimm[7] == 'Null'" >{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                    </div>
+            </div>
+            <div class="system-slot">
+                    <div class="system-info-title">{{i18n.sys_cof.sum.mem_info.mem_slot_1}}</div>
+                    <div class="system-slot-btn">
+                        <span class='active' *ngIf ="mem.mem_dimm[8] && mem.mem_dimm[8] != 'Null'">{{mem.mem_dimm[8] }}</span>
+                        <span class='active' *ngIf ="mem.mem_dimm[9] && mem.mem_dimm[9] != 'Null'">{{mem.mem_dimm[9] }}</span>
+                        <span class='active' *ngIf ="mem.mem_dimm[10] && mem.mem_dimm[10] != 'Null'" >{{mem.mem_dimm[10] }}</span>
+                        <span class='active' *ngIf ="mem.mem_dimm[11] && mem.mem_dimm[11] != 'Null'" >{{mem.mem_dimm[11] }}</span>
+                        <span class='active' *ngIf ="mem.mem_dimm[12] && mem.mem_dimm[12] != 'Null'" >{{mem.mem_dimm[12] }}</span>
+                        <span class='active' *ngIf ="mem.mem_dimm[13] && mem.mem_dimm[13] != 'Null'" >{{mem.mem_dimm[13] }}</span>
+                        <span class='active' *ngIf ="mem.mem_dimm[14] && mem.mem_dimm[14] != 'Null'" >{{mem.mem_dimm[14] }}</span>
+                        <span class='active' *ngIf ="mem.mem_dimm[15] && mem.mem_dimm[15] != 'Null'" >{{mem.mem_dimm[15] }}</span>
+                        <span *ngIf ="!mem.mem_dimm[8] ||  mem.mem_dimm[8] == 'Null'">{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                        <span *ngIf ="!mem.mem_dimm[9] ||  mem.mem_dimm[9] == 'Null'">{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                        <span *ngIf ="!mem.mem_dimm[10] || mem.mem_dimm[10] == 'Null'" >{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                        <span *ngIf ="!mem.mem_dimm[11] || mem.mem_dimm[11] == 'Null'" >{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                        <span *ngIf ="!mem.mem_dimm[12] || mem.mem_dimm[12] == 'Null'" >{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                        <span *ngIf ="!mem.mem_dimm[13] || mem.mem_dimm[13] == 'Null'" >{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                        <span *ngIf ="!mem.mem_dimm[14] || mem.mem_dimm[14] == 'Null'" >{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                        <span *ngIf ="!mem.mem_dimm[15] || mem.mem_dimm[15] == 'Null'" >{{i18n.sys_cof.sum.mem_info.mem_null}}</span>
+                    </div>
+                </div>
+        </div>
+    </div>
+    
+    <h1 class="system-content-title">{{i18n.sys_cof.sum.mem_info.mem_list}}</h1>
+    <table class="system-content-table" style="margin-top: 3vh;">
+        <thead>  
+        <tr class="system-titlebar">
+          <th tiOverflow tiTipPosition ='left' *ngFor="let column of columns ;index as i" [ngClass]="{'system-line': i!=0}"> {{column.title}}</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let item of list" class="system-word">
+            <td tiOverflow tiTipPosition ='left' >{{item.slot}}</td>
+            <td tiOverflow tiTipPosition ='left' style="width: 25%;">{{item.content}}</td>
+            <td tiOverflow tiTipPosition ='left' style="width: 25%;">{{item.frequency}}</td>
+            <td tiOverflow tiTipPosition ='left' style="width: 25%;">{{item.maxCapacity}}</td>
+        </tr>
+    </tbody>
+    </table>
+</div>

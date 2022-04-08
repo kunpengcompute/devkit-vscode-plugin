@@ -1,0 +1,130 @@
+<div class="apis-container" [appLoading]="obtainingData">
+    <div class="title-top">
+    <app-time-line *ngIf="selectFunctionList.time.length " [timeData]='selectFunctionList.time' [lineData]='timeLine' (timeLineData)='timeLineData($event)' #timeLineDetail></app-time-line>   
+</div>
+<div class="left_title">
+        <app-icon-react name="filter" class="selectIcon" (click)="onThreadScreenClick()"></app-icon-react>
+    </div>
+    <div class="function_echarts" *ngIf="!ifNoData">
+        <ng-container *ngFor="let item of chartList">
+            <app-disk-chart [timeLine]='timeLine'  [datas]='item' *ngIf="item" (dataZoom)='dataZoom($event)'  (brushOut)='brushOut($event)' ></app-disk-chart>
+            <ng-container *ngIf="item.key[0].key === 'data_size' || item.key[0].key === 'd2c_delay_avg' || item.key[0].key === 'i2d_delay_avg'">
+                <app-block-dis [devData] ='disData' [type]='item.key[0].key' ></app-block-dis>
+            </ng-container>
+        </ng-container>
+    </div>
+    <div class="nodata" *ngIf="ifNoData">
+        <img style='width:198px;display:block'
+            src='./assets/img/projects/nodata.png' />
+        <div style="font-size: 0.8rem">{{i18n.common_term_task_nodata2}}</div>
+    </div>
+    
+    <app-panoramic-mask (closeMask)="onSelectCancel($event)" #threadScreenMask>
+        <ng-container class="content">
+            <div class="thread-screen ">
+                <div class="header-title">{{i18n.storageIO.diskio.siftDEV}}</div>
+                <div class="line-between"></div>
+                <div class="table-wrapper">
+                    <div class="select-constent">
+                        <div class="filterConfig_title filter_top" tiOverflow
+                            *ngFor="let item of showTopData;index as index" [ngClass]="{'filterConfigClose': item.ifShow}"
+                            (click)="selectTopData(item ,index)">
+                            <span>{{item.title}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-wrapper" [ngClass]="{'notShow': !custermSelect}">
+                    <div class="section-title">{{i18n.storageIO.diskio.object}}</div>
+                    <div class="selectTableBox">
+                        <div class="headerFilter" >
+                          <img src="./assets/img/micarch/tableHeader.svg" alt="" (click)="disksHeadShow = !disksHeadShow">
+                          <div class="statusFilter" [ngClass]="{'active': disksHeadShow}" appClickOutside (clickOutside)="disksHeadShow = false">
+                            <span *ngFor="let item of threadColumns">
+                                <input type="checkbox" tiCheckitem [item]="item" [beCheckeds]="diskCheckedData" [label]="item.title"  (change)="diskHeaderChange()">
+                            </span>
+                          </div>
+                        </div>
+                    <ti-table [(displayedData)]="threadDisplayedData" [srcData]="threadSrcData" [columns]="diskTitle"
+                        class="ti3-table-small">
+                        <div class="ti3-table-fixed-head">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th checkbox-column >
+                                            <input type="checkbox" tiCheckgroup [items]="threadDisplayedData" 
+                                                [(checkeds)]="threadCheckedList" />
+                                        </th>
+                                        <ng-container *ngFor="let item of diskTitle;">
+                                            <th tiOverflow >
+                                                <ti-cell-text>{{item.title}}</ti-cell-text>
+                                                <ti-head-sort *ngIf="item.sortKey" [sortKey]="item.sortKey"></ti-head-sort>
+                                            </th>
+                                        </ng-container>
+                                        <th width='25px'></th>
+                                    </tr> 
+                                </thead>
+                            </table>
+                        </div>
+                        <!--.ti3-table-container是表体的容器，它的子元素中的table的thead是用来控制各列宽度，实际不显示；tbody是实际显示的表体-->
+                        <!--注意1:此处一定要使用.ti3-table-container样式类-->
+                        <!--注意2:用户在有.ti3-table-container样式类的容器上来设置表体的高度或最大高度-->
+                        <div class="ti3-table-container devTable">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th checkbox-column ></th>
+                                        <!--此处的表头是用来控制各列宽度，实际不显示，所以注意 th 标签内部不要嵌套任何内容。-->
+                                        <th *ngFor="let column of diskTitle" ></th>
+                                        <th width='25px'></th>
+                                    </tr>
+                                </thead> 
+                                <tbody>
+                                    <tr *ngFor="let row of threadDisplayedData; index as i;"
+                                        [ngClass]="{'ti3-selected-tr': threadCheckedList.indexOf(row) !== -1}">
+                                        <td checkbox-column style="width: 46px !important;">
+                                            <input type="checkbox" tiCheckitem [item]="row" />
+                                        </td>
+                                        <ng-container *ngFor="let item of diskTitle; index as i">
+                                            <ng-container *ngIf="i < 2; else elseTemplate">
+                                                <td tiOverflow> {{row[item.key]}} </td>
+                                            </ng-container>
+                                            <ng-template #elseTemplate>
+                                                <td tiOverflow> {{row[item.key]}} </td>
+                                            </ng-template>
+                                        </ng-container>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ti-pagination [(currentPage)]="currentPage" [pageSize]="pageSize" [(totalNumber)]="totalNumber" *ngIf="totalNumber > 10">
+                        </ti-pagination>
+                    </ti-table>
+                </div>
+                </div>
+    
+                <div class="table-wrapper" [ngClass]="{'notShow': !custermSelect}">
+                    <div class="section-title">{{i18n.storageIO.diskio.indicator}}</div>
+                    <div class="select-constent">
+                        <div class="filterConfig_title" tiOverflow *ngFor="let item of showKeys;index as index"
+                            [ngClass]="{'filterConfigClose': item.ifShow}" (click)="keySelect(item,index)">
+                            <span>{{item.title}}</span>
+                            <img src="./assets/img/summary/Selected.png" alt="" *ngIf="item.ifShow">
+                            <img src="./assets/img/summary/Unselected.png" alt="" *ngIf="!item.ifShow">
+                        </div>
+                    </div>
+    
+                </div>
+                <div class="opreation-btn">
+                    <button (click)="onSelectConfirm()" tiButton color="primary" type="button">
+                        {{i18n.common_term_operate_ok}}
+                    </button>
+                    <button (click)="onSelectCancel()" tiButton type="button">
+                         {{i18n.common_term_operate_close}}
+                    </button>
+                </div>
+            </div>
+        </ng-container>
+    </app-panoramic-mask>
+    <app-disk-details [nodeid]="nodeid" [taskid]='taskid' [selectDevArr]='selectFunctionList.devArr'  #brushDetails> </app-disk-details>
+</div>

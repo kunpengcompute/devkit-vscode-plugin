@@ -1,0 +1,67 @@
+.node-config-modal {
+    .tip {
+        padding-left: 16px;
+        display: flex;
+        align-items: center;
+        color: #6c7280;
+    }
+}
+footer {
+    margin-top: 40px;
+    button {
+        height: 28px;
+        line-height: 0px;
+        margin-right: 20px;
+        min-width: 120px;
+        margin-left: 0;
+        padding: 0 !important;
+        text-align: center;
+    }
+
+    button.toRight {
+        margin-left: 0 !important;
+    }
+}
+
+.footer {
+    position: absolute;
+    bottom: 24px;
+    left: calc(50% - 130px)
+}
+.margin-left {
+    display: inline-block;
+    width: 80px;
+    color: #888888;
+    margin-left: 16px;
+    top: 5px;
+    position: absolute;
+}
+.lock{
+    padding: 20px 0;
+}
+:host ::ng-deep .ti3-form .ti3-form-label {
+    padding-bottom: 7.5px;
+}
+:host ::ng-deep .ti3-form .ti3-form-content {
+    position: relative;
+}
+[tiButton]:not([disabled]):focus{
+    background: #313131;
+}
+ti-switch.ti3-switch-container {
+    padding-top: 6px;
+}
+.collect-files {
+    width: 165px;
+}
+
+.tint{
+    color: #979797;
+    margin-left: 8px;
+    font-size: 12px;
+    line-height: 21px;
+  }
+
+:host ::ng-deep .lock .select-nodes {
+      margin-left: 0;
+}

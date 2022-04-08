@@ -1,0 +1,99 @@
+// 初始化元素样式
+$col0067ff: #0067ff;
+
+* {
+  margin: 0;
+  padding: 0;
+  word-wrap: break-word;
+  outline: none;
+}
+
+dl,
+ul,
+ol {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  list-style: none;
+}
+
+:root {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.ti3-tooltip-content a,
+a {
+  color: $col0067ff;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    color: #5E9EFF;
+    text-decoration: none;
+  }
+  &:active {
+    color: #0057D9;
+  }
+  &:visited {
+    color:#004EC1;
+  }
+}
+.ti3-tooltip-content a {
+  color: $col0067ff !important;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    color: #5E9EFF !important;
+    text-decoration: none;
+  }
+  &:active {
+    color: #0057D9 !important;
+  }
+  &:visited {
+    color:#004EC1 !important;
+  }
+}
+.ti3-action-menu-item, .ti3-menu-toggle-menu {
+  color: $col0067ff;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    color: #5E9EFF;
+    text-decoration: none;
+  }
+  &:active {
+    color: #0057D9;
+  }
+}
+.ti3-menu-panel-list-hover {
+  background-color: #0067FF;
+  color: #fff;
+}
+// 设置滚动条样式 谷歌 & 火狐
+// 滚动条-整体样式 必须设置
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: 0 0;
+  cursor: pointer;
+}
+// 滚动条-轨道
+::-webkit-scrollbar-track {
+  background: 0 0;
+}
+::-webkit-scrollbar-track:hover, 
+::-webkit-scrollbar-track:active {
+  background-color: #fafafa;
+  border: 1px solid #e1e6ee;
+}
+// 滚动条-小方块
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: rgba($color: #aaa, $alpha: 0.9);
+  cursor: pointer;
+}
+::-webkit-scrollbar-thumb:hover, 
+::-webkit-scrollbar-thumb:active {
+  border-radius: 6px;
+  background-color: rgba($color: #979797, $alpha: 0.9);
+  cursor: pointer;
+}

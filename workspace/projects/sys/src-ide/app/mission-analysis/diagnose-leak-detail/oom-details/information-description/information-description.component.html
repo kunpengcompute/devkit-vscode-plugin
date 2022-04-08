@@ -1,0 +1,9 @@
+<app-information-title [title]="title"></app-information-title>
+<div class="content">
+    <div class="content-details">
+        <div [ngClass]="['item-detail',column>1?'more-column':'']" *ngFor="let item of data">
+            <span class="detail-key" tiOverflow [ngStyle]="{'width': column>1?'200px':'70px'}">{{item.key}}</span>
+            <span class="detail-value" tiOverflow [ngStyle]="{'width': column>1?'300px':'900px'}">{{item.val}}</span>
+        </div>
+    </div>
+</div>

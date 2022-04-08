@@ -1,0 +1,163 @@
+<app-banner></app-banner>
+<div class='content-main'>
+    <div class="div-p-title">
+        <p class="p-title">{{ i18n.plugins_term_project_add }}</p>
+    </div>
+    <!-- 工程名称 -->
+    <div class="div-p-input-item">
+        <div><span class="ti3-icon ti3-icon-staricon">{{ i18n.plugins_term_project_name }}</span></div>
+        <input *ngIf="isIntellij" tiText class="input" [(ngModel)]="projectName" (blur)='checkProjectName()' [required]="false">
+        <input *ngIf="!isIntellij" tiText class="input" [(ngModel)]="projectName" (blur)='checkProjectName()' [required]="true">
+        <div *ngIf="errorNameMessageFlag" class="ti3-unifyvalid-error-container">
+            <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+            <span class="ti3-validate-text">{{errorNameMessage}}</span>
+        </div>
+    </div>
+    <!-- 场景类型 -->
+    <div class="div-p-input-item">
+        <div><span class="ti3-icon ti3-icon-staricon">{{ projectInfoForm.scene.label }}</span></div>
+        <div class="sceneBox">
+            <div class="sceneItem" *ngFor="let option of projectInfoForm.scene.list; index as index"
+                (click)="projectInfoForm.scene.change(option)" [ngClass]="{active:option.prop==currentScene}"
+                (mouseenter)="option.hover = true" (mouseleave)="option.hover = false">
+                <img [src]="sanitizer.bypassSecurityTrustResourceUrl(option.imgPath_normal)"
+                    *ngIf="(option.prop!=currentScene&&!option.hover && currTheme === colorTheme.Dark)">
+                <img [src]="sanitizer.bypassSecurityTrustResourceUrl(option.imgPath_normal_light)"
+                    *ngIf="(option.prop!=currentScene&&!option.hover) && currTheme === colorTheme.Light">
+                <img [src]="sanitizer.bypassSecurityTrustResourceUrl(option.imgPath_hover)"
+                    *ngIf="(option.prop==currentScene||option.hover) && currTheme === colorTheme.Dark">
+                <img [src]="sanitizer.bypassSecurityTrustResourceUrl(option.imgPath_hover_light)"
+                    *ngIf="(option.prop==currentScene||option.hover) && currTheme === colorTheme.Light">
+                <span>{{ option.label }}</span>
+            </div>
+        </div>
+        <p *ngIf="currentScene === 'general_scenario'" style="margin-top: 8px;">{{ i18n.plugins_project_normor }}</p>
+        <p *ngIf="currentScene === 'big_data'" style="margin-top: 8px;">{{ i18n.plugins_project_bigData }}</p>
+        <p *ngIf="currentScene === 'distributed_storage'" style="margin-top: 8px;">{{ i18n.plugins_project_steps }}</p>
+        <p *ngIf="currentScene === 'HPC'" style="margin-top: 8px;">{{ i18n.plugins_project_hpc }}</p>
+        <p *ngIf="currentScene === 'database'" style="margin-top: 8px;">{{ i18n.plugins_project_database }}</p>
+    </div>
+    <ti-formfield [formGroup]="projectInfoFormGroup" class="formLabelAlign top">
+        <!--大数据-组件 -->
+        <ti-item [label]="projectInfoForm.component.label" [required]="projectInfoForm.component.required"
+            *ngIf="currentScene === 'big_data'">
+            <ti-select [options]="projectInfoForm.component.list" formControlName="component"
+                [placeholder]="projectInfoForm.component.placeholder" style="width: 438px;"
+                (ngModelChange)="projectInfoForm.component.change($event)"></ti-select>
+        </ti-item>
+        <!--大数据-应用场景 -->
+        <ti-item [label]="projectInfoForm.applicationScenario.label"
+            [required]="projectInfoForm.applicationScenario.required" *ngIf="currentScene === 'big_data'">
+            <ti-select [options]="projectInfoFormGroup.get('component').value?._children || []"
+                formControlName="applicationScenario" [placeholder]="projectInfoForm.applicationScenario.placeholder"
+                style="width: 438px;"></ti-select>
+        </ti-item>
+        <!-- 分布式存储- 存储类型-->
+        <ti-item [label]="projectInfoForm.storageType.label" [required]="projectInfoForm.storageType.required"
+            *ngIf="currentScene === 'distributed_storage'">
+            <ti-select [options]="projectInfoForm.storageType.list" formControlName="storageType"
+                [placeholder]="projectInfoForm.storageType.placeholder" style="width: 210px;"
+                (ngModelChange)="projectInfoForm.storageType.change($event)"></ti-select>
+
+            <ti-select [options]="projectInfoFormGroup.get('storageType').value?._children || []"
+                formControlName="storageTypeDetail" [placeholder]="projectInfoForm.storageTypeDetail.placeholder"
+                style="width: 210px; margin-left: 16px;"></ti-select>
+        </ti-item>
+        <!--数据库-组件 -->
+        <ti-item [label]="projectInfoForm.databaseType.label" [required]="true" *ngIf="currentScene === 'database'">
+            <ti-select class="databaseSelect" [options]="projectInfoForm.databaseType.list"
+                formControlName="databaseType" [placeholder]="projectInfoForm.databaseType.placeholder">
+            </ti-select>
+        </ti-item>
+    </ti-formfield>
+    <div class="div-p-description-item-second">
+        <span class="ti3-icon ti3-icon-staricon">{{i18n.node.selectNode}}</span>
+        <p class="p-description-item-second">{{ currentScene === 'HPC' ? i18n.plugins_project_hpc_node
+            :i18n.plugins_term_project_add_description }} <a class="aLink" *ngIf="isAdmin" (click)="addNode()">{{
+                i18n.plugins_term_add_node }}</a></p>
+    </div>
+    <div class="table-detial">
+        <app-switch-button [selectedNum]="currentScene === 'HPC' ? this.checkHpcNodeList.length :
+                this.checkOtherNodeList.length" [originTotal]="originTotal" (selectClick)="onNodeStatusSelect($event)">
+        </app-switch-button>
+        <ti-table [(displayedData)]="agentNodeDisplay" [srcData]="srcAgentNodeData" [columns]="columAgentNode"
+            [searchWords]="search.words" [searchKeys]="search.keys">
+            <div class="ti3-table-fixed-head">
+                <table>
+                    <thead>
+                        <tr>
+                            <!--复选框-->
+                            <th checkbox-column [ngClass]="{'notShow': currentScene !== 'HPC'}">
+                                <input type="checkbox" tiCheckgroup [items]="allNodeIds"
+                                    [(checkeds)]="currentScene === 'HPC' ? checkHpcNodeList : checkOtherNodeList"
+                                    [disabled]="currentScene !== 'HPC'" />
+                            </th>
+                            <th tiOverflow>
+                                {{columAgentNode[1].title}}
+                                <hy-popup-search [(ngModel)]="search.words[0]"></hy-popup-search>
+                            </th>
+                            <th tiOverflow>
+                                {{columAgentNode[2].title}}
+                                <ti-head-filter [options]="columAgentNode[2].options"
+                                    [(ngModel)]="columAgentNode[2].selected"
+                                    (select)="onNodeStatusSelect(isSelected)"
+                                    [ngClass]="{'ti3-head-filtered': columAgentNode[2].selected && columAgentNode[2].selected.length}"
+                                    [multiple]="columAgentNode[2].multiple">
+                                </ti-head-filter>
+                            </th>
+                            <th tiOverflow width="40%">
+                                {{columAgentNode[3].title}}
+                                <hy-popup-search [(ngModel)]="search.words[1]"></hy-popup-search>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="ti3-table-container ti3-resize-wrapper" style="max-height: 272px;" hyNodata
+                [nodataShow]="agentNodeDisplay.length === 0">
+                <table>
+                    <thead>
+                        <tr>
+                            <!--复选框 -->
+                            <th checkbox-column></th>
+                            <th tiOverflow></th>
+                            <th tiOverflow></th>
+                            <th tiOverflow width="40%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                        <tr *ngFor="let row of agentNodeDisplay;index as i">
+                            <td checkbox-column style="padding-left: 20px !important;">
+                                <input type="checkbox" tiCheckitem [item]="row.id"
+                                [disabled]="!checkAgentNodeList.includes(row.id) && (row.nodeStatus !== 'on' || checkAgentNodeList.length >= nodeNumLimit)" />
+                            </td>
+                            <td tiOverflow>{{row.nickName}}</td>
+                            <td tiOverflow>
+                                <div class="nodeStatus">
+                                    <img *ngIf="row.nodeStatus === 'init' || row.nodeStatus === 'lock'" class="running"
+                                        src="./assets/img/loding.svg">
+                                    <div *ngIf="row.nodeStatus !== 'init' && row.nodeStatus !== 'lock'"
+                                        class="icon_nodeStatus"
+                                        [style.background]="nodeStatusList[row.nodeStatus].color">
+                                    </div>
+                                    <span>{{nodeStatusList[row.nodeStatus].text}}</span>
+                                </div>
+                            </td>
+                            <td tiOverflow>{{row.nodeIp}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <ti-pagination  [autoHide]="true" [(currentPage)]="currentPage"
+                [pageSize]="pageSize" [(totalNumber)]="totalNumber">
+            </ti-pagination>
+        </ti-table>
+    </div>
+    <div class="div-button" style="margin-bottom: 20px;">
+        <button type="button" class="main-button" (click)="createProject()"
+            [disabled]="(checkAgentNodeList.length === 0 && !nodeList) || errorNameMessageFlag || !projectInfoFormGroup.valid || !projectName">
+            {{ i18n.plugins_term_project_create }}
+        </button>
+    </div>
+</div>

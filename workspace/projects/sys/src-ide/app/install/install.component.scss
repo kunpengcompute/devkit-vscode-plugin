@@ -1,0 +1,638 @@
+// component css goes here
+::ng-deep html {
+    min-width: 1062px !important;
+    overflow-x: auto !important;
+}
+
+::ng-deep body {
+    overflow: hidden !important;
+}
+
+.install-form {
+    width: 100%;
+    min-width: 400px;
+    height: auto;
+    box-sizing: border-box;
+    top: 10vw;
+    padding-left: 40px;
+    overflow: hidden;
+
+    .install-title-gen {
+        margin-bottom: 10px;
+        margin-left: 40px;
+        margin-top: 40px;
+    }
+
+    .install-title-gent {
+        margin-bottom: 10px;
+        margin-left: 40px;
+        margin-top: 30px;
+    }
+
+    .install-title-installing {
+        width: 768px;
+        margin-top: 30px;
+        display: flex;
+        align-items: flex-start;
+
+        img {
+            margin-top: 16px;
+        }
+
+        &>div {
+            padding-left: 10px;
+        }
+    }
+
+    .install-title-installed {
+        width: 768px;
+        margin-top: 30px;
+    }
+
+    .ssh-type {
+        margin-left: 40px;
+    }
+
+    .ssh-type-title {
+        margin-bottom: 16px;
+        font-size: 14px;
+        margin-top: 20px;
+        display: flex;
+        .help-icon {
+            margin-left: 5px;
+            top: 0px;
+        }
+    }
+
+    .install-title-installed p:nth-child(1) {
+        width: 20px;
+        height: 20px;
+        margin-left: 10px;
+        margin-top: 13px;
+        display: inline-block;
+    }
+
+    .install-title-failed {
+        width: 768px;
+        margin-top: 30px;
+    }
+
+    .install-title-failed p:nth-child(1) {
+        width: 20px;
+        height: 20px;
+        z-index: 1;
+        margin-left: 10px;
+        margin-top: 13px;
+        display: inline-block;
+    }
+
+    ti-select {
+        width: 400px;
+    }
+
+    @keyframes rotate {
+        0% {
+            -webkit-transform: rotate(0deg) scale(1);
+            transform: rotate(0deg) scale(1);
+        }
+
+        50% {
+            -webkit-transform: rotate(180deg) scale(1);
+            transform: rotate(180deg) scale(1);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg) scale(1);
+            transform: rotate(360deg) scale(1);
+        }
+    }
+    .showLoading{
+        height: 57vh;
+    }
+}
+
+#confim-btn {
+    width: 160px;
+    height: 32px;
+    margin-left: 20px;
+    margin-top: 50px;
+    margin-bottom: 45px;
+}
+
+#login-btn {
+    width: 116px;
+    height: 32px;
+    margin-top: 20px;
+    line-height: 32px;
+    margin-left: 40px;
+}
+
+input {
+    width: 400px;
+    height: 28px !important;
+    padding: 5px 10px !important;
+
+    &::placeholder {
+        color: #616161;
+    }
+}
+
+.img_install {
+    position: relative;
+    top: 3px;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+#login-btn {
+    width: 116px;
+    height: 32px;
+    margin-top: 20px;
+    line-height: 32px;
+    margin-left: 40px;
+}
+
+input {
+    width: 400px;
+    height: 28px !important;
+    padding: 5px 10px !important;
+}
+
+.img_install {
+    position: relative;
+    top: 3px;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.tip-box {
+    padding: 0px 40px;
+    padding-bottom: 40px;
+
+    .tip-title {
+        color: var(--install-color-title-content);
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        line-height: 20px;
+
+        font-family: FZLTHJW--GB1-0;
+        font-size: 20px;
+
+        .tip-close {
+            color: var(--install-color-msgbox-close);
+            font-weight: 100;
+            border: solid 1px var(--install-color-msgbox-bg);
+
+            &:hover {
+                border-color: var(--install-color-msgbox-close);
+            }
+        }
+    }
+
+    .tip-title-border {
+        width: 100%;
+        margin-top: 20px;
+        border-top: 1px dashed var(--install-color-separator);
+    }
+
+    .tip-dsc {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        .tip-icon {
+            color: var(--install-color-msgbox-dsc-icon);
+            background-color: var(--install-color-msgbox-dsc-icon-bg);
+            margin-right: 10px;
+            font-size: 16px;
+            border-radius: 30px;
+            top: 2px;
+            width: 16px;
+            height: 16px;
+        }
+
+        p {
+            font-family: FZLTHJW--GB1-0;
+            font-size: 14px;
+            color: var(--install-color-msgbox-content);
+        }
+    }
+
+    .tip-select {
+        color: var(--install-color-msgbox-content);
+        padding-top: 30px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        font-family: FZLTHJW--GB1-0;
+        font-size: 14px;
+        vertical-align: middle;
+
+        span {
+            width: 16px;
+            line-height: 16px;
+            margin-right: 16px;
+            vertical-align: middle;
+        }
+    }
+}
+
+.help-icon {
+    position: relative;
+    top: 2px;
+}
+
+.tip-confirm {
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        width: 100px;
+        line-height: 28px;
+        font-family: FZLTHJW--GB1-0;
+        font-size: 14px;
+        text-align: center;
+        margin: 0px 10px;
+        border-width: 1px;
+        border-style: solid;
+        cursor: pointer;
+
+        &:first-child {
+            color: var(--install-color-btn-p);
+            background-color: var(--install-color-btn-p-bg-dft);
+            border-color: var(--install-color-btn-p-bg-dft);
+
+            &:hover {
+                background-color: var(--install-color-btn-p-bg-hover);
+                border-color: var(--install-color-btn-p-bg-hover);
+            }
+
+            &:active {
+                background-color: var(--install-color-btn-p-bg-active);
+                border-color: var(--install-color-btn-p-bg-active);
+            }
+
+            &:disabled {
+                background-color: var(--install-color-btn-p-bg-disabled);
+                border-color: var(--install-color-btn-p-bg-disabled);
+                color: var(--install-color-btn-text-disabled);
+                cursor: not-allowed;
+            }
+        }
+
+        &:last-child {
+            background-color: var(--install-color-btn-m-bg);
+            border-color: var(--install-color-btn-m-dft);
+            color: var(--install-color-content);
+
+            &:hover {
+                border-color: var(--install-color-btn-m-hover);
+                color: var(--install-color-btn-m-hover);
+            }
+
+            &:active {
+                border-color: var(--install-color-btn-m-active);
+                color: var(--install-color-btn-m-active);
+            }
+
+            &:disabled {
+                background-color: var(--install-color-btn-m-bg-disabled);
+                border-color: var(--install-color-btn-m-disabled);
+                color: var(--install-color-btn-text-disabled);
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+::ng-deep .content-box {
+    background-color: var(--install-color-msgbox-bg) !important;
+    width: 660px !important;
+    padding: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-family: FZLTHJW--GB1-0 !important;
+}
+
+::ng-deep .vscode-light {
+    --install-color-title-content: #222222;
+    --install-color-content: #616161;
+
+    --install-color-separator: #e1e6ee;
+    --install-color-msgbox-bg: #ffffff;
+    --install-color-msgbox-close: #aaaaaa;
+    --install-color-msgbox-dsc-icon-bg: #ffffff;
+    --install-color-msgbox-content: #616161;
+    --install-color-msgbox-dsc-icon: #0067ff;
+
+    --install-color-btn-p: #ffffff;
+    --install-color-btn-p-bg-dft: #0067ff;
+    --install-color-btn-p-bg-hover: #267dff;
+    --install-color-btn-p-bg-active: #0057d9;
+    --install-color-btn-p-bg-disabled: #f5f5f5;
+    --install-color-btn-m-bg: #ffffff;
+    --install-color-btn-m-dft: #979797;
+    --install-color-btn-m-hover: #267dff;
+    --install-color-btn-m-active: #0057d9;
+    --install-color-btn-m-disabled: #cccccc;
+    --install-color-btn-m-bg-disabled: #f5f5f5;
+    --install-color-btn-text-disabled: #cccccc;
+
+    .install-title-installing p:nth-child(1) {
+        font-size: 20px;
+        color: #222222;
+        height: 26px;
+        margin-top: 10px;
+    }
+    .tip-confirm button:first-child:disabled {
+        border: 1px solid #ccc !important;
+    }
+
+    .install-title-installing p:nth-child(2) {
+        font-size: 14px;
+        color: #979797;
+        margin-top: 4px;
+        height: 18px;
+    }
+
+    .install-title-det {
+        line-height: 28px;
+        width: 704px;
+        font-size: 12px;
+        color: #979797;
+        margin-bottom: 30px;
+        margin-left: 40px;
+    }
+
+    .install-form-item {
+        position: relative;
+        margin-top: 20px;
+        margin-left: 40px;
+
+        .install-form-item-label {
+            color: #616161;
+            height: 28px;
+            font-size: 14px;
+
+            .install-form-item-label-req {
+                color: #e02020;
+                margin-left: 4px;
+            }
+        }
+    }
+
+    .install-title-failed p:nth-child(2) {
+        font-size: 20px;
+        color: #222222;
+        margin-left: 20px;
+        height: 26px;
+        margin-top: 10px;
+        display: inline-block;
+    }
+
+    .install-title-failed p:nth-child(3) {
+        font-size: 14px;
+        color: #979797;
+        margin-left: 42px;
+        height: 20px;
+        width: 640px;
+        margin-top: 4px;
+    }
+
+    .install-title-installed p:nth-child(2) {
+        font-size: 20px;
+        color: #222222;
+        margin-left: 20px;
+        height: 26px;
+        margin-top: 10px;
+        display: inline-block;
+    }
+    .ssh-type-title {
+        color: #616161;
+    }
+}
+
+::ng-deep .vscode-dark {
+    --install-color-title-content: #e8e8e8;
+    --install-color-content: #aaaaaa;
+
+    --install-color-separator: #4b4b4b;
+    --install-color-msgbox-bg: #252526;
+    --install-color-msgbox-close: #aaaaaa;
+    --install-color-msgbox-dsc-icon-bg: #ffffff;
+    --install-color-msgbox-content: #888888;
+    --install-color-msgbox-dsc-icon: #0067ff;
+
+    --install-color-btn-p: #e8e8e8;
+    --install-color-btn-p-bg-dft: #0067ff;
+    --install-color-btn-p-bg-hover: #267dff;
+    --install-color-btn-p-bg-active: #0057d9;
+    --install-color-btn-p-bg-disabled: #313131;
+    --install-color-btn-m-bg: #313131;
+    --install-color-btn-m-dft: #dddddd;
+    --install-color-btn-m-hover: #267dff;
+    --install-color-btn-m-active: #0057d9;
+    --install-color-btn-m-disabled: #616161;
+    --install-color-btn-m-bg-disabled: #313131;
+    --install-color-btn-text-disabled: #666666;
+
+    .install-title-installing p:nth-child(1) {
+        font-size: 20px;
+        color: #e8e8e8;
+        height: 26px;
+        margin-top: 10px;
+    }
+
+    .install-title-installing p:nth-child(2) {
+        font-size: 14px;
+        color: #888888;
+        margin-top: 4px;
+        height: 18px;
+    }
+
+    .install-title-det {
+        line-height: 28px;
+        width: 704px;
+        font-size: 12px;
+        color: #aaaaaa;
+        margin-bottom: 30px;
+        margin-left: 40px;
+    }
+
+    .install-form-item {
+        position: relative;
+        margin-top: 20px;
+        margin-left: 40px;
+
+        .install-form-item-label {
+            color: #aaaaaa;
+            height: 28px;
+            font-size: 14px;
+
+            .install-form-item-label-req {
+                color: #e02020;
+                margin-left: 4px;
+            }
+        }
+    }
+
+    .install-title-failed p:nth-child(2) {
+        font-size: 20px;
+        color: #e8e8e8;
+        margin-left: 20px;
+        height: 26px;
+        margin-top: 10px;
+        display: inline-block;
+    }
+
+    .install-title-failed p:nth-child(3) {
+        font-size: 14px;
+        color: #888888;
+        margin-left: 42px;
+        height: 20px;
+        width: 640px;
+        margin-top: 4px;
+    }
+
+    .install-title-installed p:nth-child(2) {
+        font-size: 20px;
+        color: #e8e8e8;
+        margin-left: 20px;
+        height: 26px;
+        margin-top: 10px;
+        display: inline-block;
+    }
+    .ssh-type-title {
+        color: #aaaaaa;
+    }
+}
+
+.tip-tem {
+    margin-left: 4px;
+}
+
+.check-conn-btn {
+    width: 160px;
+    height: 32px;
+    line-height: 32px;
+    margin-left: 40px;
+    margin-top: 50px;
+    position: relative;
+    margin-bottom: 45px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+
+    &:disabled {
+        background-color: var(--install-color-btn-m-bg-disabled);
+        border-color: var(--install-color-btn-m-disabled);
+        color: var(--install-color-btn-text-disabled);
+        cursor: not-allowed;
+    }
+
+    img {
+        margin-right: 5px;
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.img_box {
+    margin-top: 2px;
+    margin-right: 6px;
+}
+
+.install-message-installed {
+    width: 90%;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+.ra-label {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+
+    input {
+        display: none;
+    }
+
+    i.ra-common {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        top: 4px;
+        left: 0;
+        outline: none;
+        border-radius: 50%;
+        transition: 0.3s;
+        -webkit-transition: 0.3s;
+    }
+
+    i.ra-check {
+        border: 1px solid #0067ff;
+    }
+
+    i.ra-check::after {
+        position: absolute;
+        content: "";
+        top: 4px;
+        left: 4px;
+        width: 6px;
+        height: 6px;
+        background-color: #0067ff;
+        border-radius: 50%;
+        transition: 0.8s;
+        -webkit-transition: opacity 0.8s;
+    }
+
+    i.ra-uncheck {
+        border: 1px solid #bdbdbd;
+    }
+}
+
+:host ::ng-deep .progress-modal {
+    left: 50% !important;
+    top: 80% !important;
+    transform: translate(-50%, -10%) !important;
+}
+
+:host ::ng-deep input[type='radio'][tiRadio] + .ti3-radio {
+    height: 21px !important;
+}
+
+:host ::ng-deep .success-modal {
+    left: 50% !important;
+    top: 80% !important;
+    transform: translate(-50%, -10%) !important;
+}
+.eye {
+    position: absolute;
+    left: 375px;
+    top: 6px;
+    width: 20px;
+    height: 20px;
+}
+.tipText{
+    width: 72%;
+}
+
+.eye-box {
+    position: relative;
+}
+.mt20 {
+    margin-top: 20px;
+}

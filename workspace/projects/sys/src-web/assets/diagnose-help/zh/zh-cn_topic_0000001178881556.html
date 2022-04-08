@@ -1,0 +1,45 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-cn" xml:lang="zh-cn">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="节点状态变为离线">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="zh-cn_topic_0000001224122721.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="鲲鹏性能分析工具（系统诊断）">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="ZH-CN_TOPIC_0000001178881556">
+<meta name="DC.Language" content="zh-cn">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>节点状态变为离线</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="ZH-CN_TOPIC_0000001178881556"></a><a name="ZH-CN_TOPIC_0000001178881556"></a>
+
+<h1 class="topictitle1">节点状态变为离线</h1>
+<div id="body8662426"><div class="section" id="ZH-CN_TOPIC_0000001178881556__zh-cn_topic_0000001165912085_zh-cn_topic_0306922091_zh-cn_topic_0220116450_section13779133512387"><h4 class="sectiontitle">现象描述</h4><p id="ZH-CN_TOPIC_0000001178881556__zh-cn_topic_0000001165912085_zh-cn_topic_0306922091_zh-cn_topic_0220116450_p08780389510">节点从在线状态变为离线状态。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001178881556__zh-cn_topic_0000001165912085_zh-cn_topic_0306922091_zh-cn_topic_0220116450_section1439194518389"><h4 class="sectiontitle">可能原因</h4><p id="ZH-CN_TOPIC_0000001178881556__zh-cn_topic_0000001165912085_zh-cn_topic_0306922091_p2023860164312">没有同步更新节点的server和agent证书。</p>
+</div>
+<div class="section" id="ZH-CN_TOPIC_0000001178881556__zh-cn_topic_0000001165912085_section9956141318525"><h4 class="sectiontitle">处理步骤</h4><ol id="ZH-CN_TOPIC_0000001178881556__zh-cn_topic_0000001165912085_zh-cn_topic_0306922091_ol8693162631918"><li id="ZH-CN_TOPIC_0000001178881556__zh-cn_topic_0000001165912085_li450816358401"><span>重新生成证书。</span><p><p id="ZH-CN_TOPIC_0000001178881556__zh-cn_topic_0000001165912085_p571194414013">点击Agent服务证书界面里的生成证书按钮，重新生成证书。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001178881556__zh-cn_topic_0000001165912085_li3779144916415"><span>确认节点。</span><p><p id="ZH-CN_TOPIC_0000001178881556__zh-cn_topic_0000001165912085_p157881858114113">确认该离线节点是本机IP节点还是手动添加的节点。若为本机IP节点则需执行步骤3及步骤4，若为手动添加节点则只需要执行步骤4。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001178881556__zh-cn_topic_0000001165912085_li869051684214"><span>更换证书。</span><p><p id="ZH-CN_TOPIC_0000001178881556__zh-cn_topic_0000001165912085_p123619238423">更换离线节点对应的server证书，点击更换证书。</p>
+<p id="ZH-CN_TOPIC_0000001178881556__zh-cn_topic_0000001165912085_p12964193714429">更换离线节点对应的agent证书，点击更换证书。</p>
+</p></li><li id="ZH-CN_TOPIC_0000001178881556__zh-cn_topic_0000001165912085_li633218415409"><span>确认节点状态。</span><p><p id="ZH-CN_TOPIC_0000001178881556__zh-cn_topic_0000001165912085_p5419191406">等待一段时间，节点状态会变为在线状态。</p>
+</p></li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>父主题：</strong> <a href="zh-cn_topic_0000001224122721.html">FAQ</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">版权所有 &copy; 华为技术有限公司</div></body>
+</html>

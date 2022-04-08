@@ -1,0 +1,92 @@
+<div id="applicationPath" class="container">
+    <p class="title">{{
+        toolType === ToolType.DIAGNOSE ? i18n.system_config.diagnose_config : i18n.system_config.system_tuning
+    }}</p>
+    <!-- 运行日志级别 -->
+    <div style="margin-bottom: 20px;">
+        <div class="middle-font">
+            <img class="required-icon" src="./assets/img/input-required.png" alt="" />
+            {{ i18n.plugins_perf_tip_sysSet.run_log_level }}
+            <img class='log-tip-icon' src='./assets/img/template/icon_question.svg' [tiTip]='tipContent'
+                tiTipPosition="right">
+        </div>
+        <div *ngIf="!isLogModify">
+            <ti-formfield>
+                <ti-item>
+                    <ti-select class='inputstyle-select-disable' [options]='sysTuningConfig.runLogLevel.range'
+                        [(ngModel)]="sysTuningConfig.runLogLevel.value" [disabled]="!isLogModify">
+                    </ti-select>
+                    <button class="little-primary-btn" *ngIf="isAdmin"
+                        (click)="changeRunLogLevel()">{{ i18n.plugins_perf_button_modify }}</button>
+                </ti-item>
+            </ti-formfield>
+        </div>
+        <div *ngIf="isLogModify">
+            <ti-formfield>
+                <ti-item>
+                    <ti-select class='inputstyle-select' [options]='sysTuningConfig.runLogLevel.range'
+                        [(ngModel)]="sysTuningConfig.runLogLevel.value" [disabled]="!isLogModify">
+                    </ti-select>
+                    <button class="little-primary-btn" style="margin-right: 10px;"
+                        (click)="modifyRunLogLevel()">{{ i18n.plugins_perf_button_confirm }}</button>
+                    <button class="little-minor-btn"
+                        (click)="cancelChangeRunLogLevel()">{{ i18n.plugins_perf_button_cancel }}</button>
+                </ti-item>
+            </ti-formfield>
+        </div>
+    </div>
+    <!-- 应用程序路径配置 -->
+    <div>
+        <div class="middle-font">
+            <img class="required-icon" src="./assets/img/input-required.png" alt="" />
+            {{ i18n.plugins_term_path_change }}
+        </div>
+        <div style="display: flex; justify-content: flex-start;">
+            <!-- 表单 -->
+            <div>
+                <form [formGroup]='sysConfForm'>
+                    <textarea class="aerasty" tiTextarea maxlength="1000" resize="vertical"
+                        formControlName='inputValue'></textarea>
+                    <div *ngIf="sysConfForm.invalid" class="tipbox ti3-unifyvalid-error-container">
+                        <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                        <span class="ti3-validate-text">{{strerr}}</span>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <div *ngIf="mode === 'read'">
+                    <button type="button" (click)="onFixConfig(myModal)" class="little-primary-btn"
+                        *ngIf="isAdmin">{{ i18n.plugins_perf_button_modify }}</button>
+                </div>
+                <div *ngIf="mode === 'write'">
+                    <button type="button" tiButton color="primary" (click)="onSubmit($event)" class="little-primary-btn"
+                        [disabled]="sysConfForm.invalid">{{ i18n.plugins_common_term_ok }}</button>
+                    <button type="button" tiButton (click)="onCancel($event)"
+                        class="cancelbtn">{{ i18n.plugins_common_term_cancel }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #myModal let-context='context'>
+    <!-- 弹框头部定义 -->
+    <ti-modal-header>
+        <p>{{ i18n.tipMsg.tiptitle }}</p>
+    </ti-modal-header>
+    <!-- 弹框内容定义 -->
+    <ti-modal-body>
+        <div class="tipcontent" style="display: flex;">
+            <img src="./assets/img/header/warn.png" alt="" style="height: 20px;margin-right: 10px;">
+            <span>{{ i18n.tipMsg.tipcontent }}</span>
+        </div>
+    </ti-modal-body>
+    <ti-modal-footer>
+        <button type="button" autofocus (click)="context.close()" tiButton
+            class="ok-btn">{{ i18n.plugins_common_term_ok }}</button>
+    </ti-modal-footer>
+</ng-template>
+
+<ng-template #tipContent>
+    <span [innerHtml]="i18n.plugins_perf_runLogTip"></span>
+</ng-template>

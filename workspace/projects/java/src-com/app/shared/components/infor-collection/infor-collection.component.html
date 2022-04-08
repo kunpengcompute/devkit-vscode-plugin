@@ -1,0 +1,12 @@
+<div class="infor">
+  <div class="item-dom" *ngFor="let item of infoData">
+    <div class="item-flex">
+      <span class="item-key">{{item.key}}</span>
+      <span class="item-value" [ngClass]="{'item-value-long-infor': item.longInfor}"
+        [ngStyle]="{'max-width': valueMaxWidth >0 ? valueMaxWidth + 'px' : '160px'}">
+        {{item.value.length >0 || item.value ? item.value : '--'}}</span>
+      <span class="item-url" (click)="viewDetail(item)"
+        *ngIf="item.longInfor">{{i18n.protalserver_profiling_hot.viewDetails}}</span>
+    </div>
+  </div>
+</div>

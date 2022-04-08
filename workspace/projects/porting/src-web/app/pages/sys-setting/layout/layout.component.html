@@ -1,0 +1,23 @@
+<div class="layout">
+  <div class="layout-main flex">
+    <!-- nav-bar start -->
+    <div class="nav-bar-container">
+      <app-nav-bar></app-nav-bar>
+    </div>
+    <!-- nav-bar end -->
+
+    <div class="router-main">
+      <app-user *ngIf="nowPath === 'user'"></app-user>
+      <app-weak-pwd *ngIf="nowPath === 'weak'"></app-weak-pwd>
+      <app-system-setting *ngIf="nowPath === 'sys'"></app-system-setting>
+      <app-log-manage *ngIf="nowPath === 'log'"></app-log-manage>
+      <app-whitelist *ngIf="nowPath === 'dep-dictionary'"></app-whitelist>
+      <app-software-port-temp *ngIf="nowPath === 'template'"></app-software-port-temp>
+      <app-setting-label *ngIf="nowPath === 'scan-parameter'"></app-setting-label>
+      <app-history-label *ngIf="nowPath === 'threshold'"></app-history-label>
+      <app-certificate *ngIf="nowPath === 'certificate'"></app-certificate>
+      <app-certificate-revocation-list *ngIf="nowPath === 'certificate-revocation-list'"></app-certificate-revocation-list>
+    </div>
+  </div>
+
+</div>

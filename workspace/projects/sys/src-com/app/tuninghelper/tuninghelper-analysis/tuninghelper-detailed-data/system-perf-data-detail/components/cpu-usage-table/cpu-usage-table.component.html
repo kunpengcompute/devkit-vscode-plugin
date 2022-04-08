@@ -1,0 +1,110 @@
+<div class="cpu-usage-container">
+  <div class="cpu-header">
+    <p class="title">{{ 'sys.titles.cpuUsage' | i18n }}</p>
+    <ti-select class="cpu-selected" [options]='cpuOption' [(ngModel)]="cpuSelected"
+      (ngModelChange)="cpuSelectedChange($event)"></ti-select>
+  </div>
+  <div class="cpu-table">
+    <ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns" [searchWords]="searchWords"
+      [searchKeys]="searchKeys" tiColsResizable>
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr>
+              <th tiOverflow *ngFor="let column of columns;index as index" width="{{column.width}}">
+                <ti-cell-text>{{column.title}}</ti-cell-text>
+                <div *ngIf="column.searchKey" class="icon searchIcon">
+                  <ng-container *ngTemplateOutlet="searchTipContent; context: {$implicit: column}"></ng-container>
+                </div>
+                <ti-head-sort *ngIf="column.sortKey" [sortKey]="column.sortKey"></ti-head-sort>
+                <ti-cell-icons *ngIf="column.showIcon" class="cell-icon">
+                  <hy-theme-content>
+                    <img src="./assets/img/summary/tooltip_dark.svg" [tiTip]='column.tip' dark />
+                    <img src="./assets/img/summary/tooltip.png" [tiTip]='column.tip' light />
+                  </hy-theme-content>
+                </ti-cell-icons>
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="ti3-table-container ti3-resize-wrapper" hyNodata [nodataShow]="displayed.length === 0">
+        <table>
+          <thead>
+            <tr>
+              <th *ngFor="let column of columns" width="{{column.width}}"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let row of displayed;index as i">
+              <tr>
+                <td tiOverflow>
+                  <span class="expendIcon" (click)="row.showSub = !row.showSub" *ngIf="row.subData">
+                    <hy-theme-content>
+                      <img [ngClass]="{'active': row.showSub}" src="./assets/img/summary/row.svg" light>
+                      <img [ngClass]="{'active': row.showSub}" src="./assets/img/summary/row_dark.svg" dark>
+                    </hy-theme-content>
+                  </span>
+                  <span (click)="viewDetails(row,coreDetailsModal)"
+                    [ngClass]="{'clickStyle': row.value!=='all' && !row.subData }">{{
+                    row.value }}</span>
+                </td>
+                <td tiOverflow>{{ row.usr }}</td>
+                <td tiOverflow>{{ row.nice }}</td>
+                <td tiOverflow>{{ row.sys }}</td>
+                <td tiOverflow>{{ row.iowait }}</td>
+                <td tiOverflow>{{ row.irq }}</td>
+                <td tiOverflow>{{ row.soft }}</td>
+                <td tiOverflow>{{ row.idle }}</td>
+              </tr>
+              <ng-container *ngFor="let core of row.subData">
+                <tr *ngIf="row.showSub">
+                  <!--第二级-->
+                  <td style="position: relative;overflow: visible;">
+                    <span class="levelStyle"></span>
+                    <span class="clickStyle levelvalue" (click)="viewDetails(core,coreDetailsModal)">{{ core.value
+                      }}</span>
+                  </td>
+                  <td tiOverflow>{{ core.usr }}</td>
+                  <td tiOverflow>{{ core.nice }}</td>
+                  <td tiOverflow>{{ core.sys }}</td>
+                  <td tiOverflow>{{ core.iowait }}</td>
+                  <td tiOverflow>{{ core.irq }}</td>
+                  <td tiOverflow>{{ core.soft }}</td>
+                  <td tiOverflow>{{ core.idle }}</td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+      <ti-pagination class="pagination" [(currentPage)]="currentPage" [pageSize]="pageSize"
+        [(totalNumber)]="totalNumber" [showGotoLink]="true"></ti-pagination>
+    </ti-table>
+  </div>
+</div>
+<ng-template #coreDetailsModal let-context='context'>
+  <ti-modal-header>core {{context.bodyTitle}}{{'tuninghelper.treeDetail.detail' | i18n}}</ti-modal-header>
+  <ti-modal-body>
+    <div class="content-warpper">
+      <app-core-details [coreData]='context.data' (closeModal)="context.close()" [taskId]="taskId" [nodeid]="nodeid">
+      </app-core-details>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <button type="button" (click)="context.close()" tiButton>{{'common_term_operate_close' | i18n}}</button>
+  </ti-modal-footer>
+</ng-template>
+
+<!-- 搜索 -->
+<ng-template #searchTipContent let-column>
+  <ti-icon name="search" class="search-icon"
+    [ngClass]="{'active': processSearchPop.isShow || searchWordsSave[column.searchKey]}" [pop]="searchTip"
+    #processSearchPop="pop" [popOffset]="{x: -40, y: 24 }" popClass="common-table-search-pop" [popContext]="column">
+  </ti-icon>
+  <ng-template #searchTip let-context="context">
+    <ti-searchbox [ngModel]="searchWordsSave[column.searchKey]" (clear)="onTableHeaderSearch('', context)"
+      (search)="onTableHeaderSearch($event, context)">
+    </ti-searchbox>
+  </ng-template>
+</ng-template>

@@ -1,0 +1,25 @@
+<div *ngIf="!showLoading else loading" class="page-container">
+
+  <app-common-report-detail
+    type="softwarePackage"
+    [currentReport]="currentReport"
+    [settingLeftInfo]="settingLeftInfo"
+    [settingRightInfo]="settingRightInfo"
+    [scanItems]="scanItems"
+    [soFiledisplayed]="soFiledisplayed"
+    [soFileSrcData]="soFileSrcData"
+    [soFileColumns]="soFileColumns"
+    [cFiledisplayed]="cFiledisplayed"
+    [cFileSrcData]="cFileSrcData"
+    [cFileColumns]="cFileColumns"
+    (handleDownloadPackage)="handleDownloadPackage()"
+    (handleDownloadHTML)="handleDownloadHTML()"
+    (handleLink)="handleLink($event)"
+    [intelliJFlagDef]="intelliJFlagDef"
+  ></app-common-report-detail>
+
+</div>
+
+<ng-template #loading>
+    <app-loading [height]="'100%'" [size]="'max'"></app-loading>
+</ng-template>

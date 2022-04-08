@@ -1,0 +1,106 @@
+<!--component html goes here -->
+<app-banner></app-banner>
+<div class="config-form">
+    <p class="config-title-gen title">{{ i18n.plugins_porting_title_config }}
+        <a *ngIf="currLang === 0" [href]="pluginUrlCfg.faqThreeZn">
+            <img *ngIf="currTheme == 1" class="help-icon" src="./assets/img/icon-help-dark.svg">
+            <img *ngIf="currTheme == 2" class="help-icon" src="./assets/img/icon-help-light.svg">
+        </a>
+        <a *ngIf="currLang === 1" [href]="pluginUrlCfg.faqThreeEn">
+            <img *ngIf="currTheme == 1" class="help-icon" src="./assets/img/icon-help-dark.svg">
+            <img *ngIf="currTheme == 2" class="help-icon" src="./assets/img/icon-help-light.svg">
+        </a>
+    </p>
+    <div>
+        <p *ngIf="!isCloudIDE" class="config-title-det">{{ i18n.plugins_porting_label_config }}<span class="config-title-det-btn"
+            (click)="openInstallPage()">{{ i18n.plugins_porting_button_install }}</span></p>
+        <p *ngIf="isCloudIDE" class="config-title-det">{{ i18n.plugins_cloudied_porting_label_config }}</p>
+        <p class="config-title-det">{{ i18n.plugins_porting_apply_free_env_info }}<span class="config-title-det-btn" 
+            (click)="openFreeTrialRemoteEnv()">{{ i18n.plugins_porting_apply_free_env_link }}</span>
+        </p>
+    </div>
+    
+    <div class="config-form-item">
+        <div class="ti3-icon ti3-icon-staricon config-form-item-label">{{ i18n.plugins_porting_label_ip }}
+        </div>
+        <input type="text" tiText [(ngModel)]="tempIP" [disabled]="this.hasConfig" (blur)="checkIP()"/>
+        <div *ngIf="ipCheck" class="ti3-unifyvalid-error-container">
+            <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"></span>
+            <span class="ti3-validate-text">{{ i18n.plugins_porting_message_ipError }}</span>
+        </div>
+    </div>
+    <div class="config-form-item">
+        <div class="ti3-icon ti3-icon-staricon config-form-item-label">{{ i18n.plugins_porting_label_portt }}
+        </div>
+        <input [placeholder]="i18n.plugins_porting_default_port_tip" type="text" tiText [(ngModel)]="tempPort" [disabled]="this.hasConfig" (blur)="checkPort()"/>
+        <div *ngIf="portCheck" class="ti3-unifyvalid-error-container">
+            <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"></span>
+            <span class="ti3-validate-text">{{ i18n.plugins_porting_message_configPortError }}</span>
+        </div>
+    </div>
+    <div class="config-form-certificate">
+        <div class="config-form-certificate-label">
+            <p class="ti3-icon ti3-icon-staricon">{{i18n.plugins_common_service_certificate_settings}}
+                <span [tiTip]='tipContent' tiTipMaxWidth='550px' tiTipPosition="right">
+                    <img  class="help-icon" src="./assets/img/icon-help-dark-1.svg"></span>
+            </p>
+        </div>
+        <div class="config-form-certificate-radio">
+            <input [disabled]="this.hasConfig" type="radio" *ngFor="let item of radioList, index as i;" tiRadio
+                name="group1" [(ngModel)]="selected" [value]="item.value" [label]="item.label"
+                (ngModelChange)="ngModelChange($event)" /><br>
+        </div>
+        <div class="config-form-certificate-file" *ngIf="selectCertificate">
+            <input type="text" readonly="readonly"  tiText [disabled]="this.hasConfig" class="config-form-certificate-textarea"
+                 [(ngModel)]="localfilepath"/>
+            <div class="config-form-certificate-bt">
+                <button [disabled]="this.hasConfig" type="button" class="small-secondary-btn" (click)="fileUpload()"
+                    style="margin-left: 10px;">{{i18n.plugins_common_specifying_local_path}}
+                    <input type="file" accept=".crt,.cer,.pem" id="uploadFile" style="display: none;"
+                        (change)="uploadFile()" />
+                </button>
+            </div>
+        </div>
+        <div *ngIf="!localfilepath && showCertificate && !hasConfig && selectCertificate" class="ti3-unifyvalid-error-container">
+            <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"></span>
+            <span class="ti3-validate-text">{{ i18n.plugins_common_no_select_certificate }}</span>
+        </div>
+    </div>
+    <div *ngIf="!hasConfig" class="btn-group">
+        <button type="button" class="primary-btn" (mousedown)="saveConfirm()" [disabled]="!tempIP || !tempPort || (!localfilepath && selected === 'specifying')">
+            {{ i18n.plugins_porting_button_save }}
+        </button>
+        <button type="button" *ngIf="!firstConfig" class="secondary-btn" (mousedown)="cancel()">
+            {{ i18n.plugins_porting_button_cancel }}
+        </button>
+    </div>
+    <div *ngIf="hasConfig" class="btn-group">
+        <button class="primary-btn" (mousedown)="modify()">{{ i18n.plugins_porting_button_modi }}</button>
+    </div>
+</div>
+
+<div *ngIf="showLoading" class="loading">
+    <app-loading [height]="'100%'" [size]="'max'"></app-loading>
+</div>
+
+<app-messagebox #saveConfirmTip>
+    <div class="content tip-box">
+        <div class="tip-title">
+            <span class="title-content">{{i18n.plugins_porting_title_saveConfirm}}</span>
+            <img src="./assets/img/install/icon-close.png" (click)="cancelMsgTip()">
+        </div>
+        <div class="tip-title-border"></div>
+        <div class="tip-dsc">
+            <img class="img_box" src="./assets/img/install/icon_warn.png">
+            <p>{{i18n.plugins_porting_message_saveConfirm}}</p>
+        </div>
+        <div class="tip-confirm">
+            <button type="button" (click)="confirmMsgTip()">{{i18n.plugins_porting_message_beforeInstallConfirm}}</button>
+            <button type="button" (click)="cancelMsgTip()">{{i18n.plugins_porting_message_beforeInstallCancel}}</button>
+        </div>
+    </div>
+</app-messagebox>
+<ng-template #tipContent>
+    <p class="certificateSettingsTip">{{certificateSettingsTipStr1}}</p>
+    <p class="certificateSettingsTip">{{certificateSettingsTipStr2}}</p>
+</ng-template>

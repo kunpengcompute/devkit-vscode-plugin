@@ -1,0 +1,43 @@
+
+::ng-deep .vscode-dark {
+  --leftBox-bg-color: #2a2a2a;
+}
+// 浅色主题适配
+::ng-deep .vscode-light {
+  --leftBox-bg-color: #f5f9ff;
+}
+.content {
+  .content-details {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 12px;
+    .item-detail {
+      display: flex;
+      align-items: center;
+      height: 26px;
+      font-size: 14px;
+      line-height: 26px;
+      letter-spacing: 0px;
+      margin-bottom: 16px;
+      width: 100%;
+      margin-right: 16px;
+      .detail-key {
+        display: inline-block;
+        margin-right: 16px;
+        width: 200px;
+      }
+      .detail-value {
+        width: 300px;
+      }
+      &:hover {
+        background-color: var(--leftBox-bg-color);
+      }
+    }
+    .more-column {
+      flex: 0 0 48%;
+      width: 50%;
+    }
+  }
+}

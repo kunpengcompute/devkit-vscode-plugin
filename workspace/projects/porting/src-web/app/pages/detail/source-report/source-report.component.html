@@ -1,0 +1,126 @@
+<div class="main-container" style="overflow:scroll;">
+  <div class="main-title">
+      <img src="./assets/img/migration-center/icon_nav_back.svg" alt="" style="cursor: pointer;" (click)="goHome()" [tiTip]='tipStr' tiTipPosition="right"/>
+      <span class="title">{{ currentReport }}</span>
+  </div>
+  <div class="main-content scroll-style" [ngClass]="{'collLeft': !isFileList}">
+      <div class="project-tabs">
+        <ul class="tabs">
+          <li class="tab" *ngFor="let item of reportTabs; let index = index" (click)="changeActiveTab(item)" [ngClass]="{'tab-active': currentTab == index+1}">
+            <span class="tab-title">{{item.title}}</span>
+          </li>
+        </ul>
+        <div>
+          <div class="content-container" *ngIf="currentTab == 1">
+            <app-report-detail *ngIf="type !== 'weakCheck'" [report]="report" (getReportId)="getReportId($event)" (getIsSign)="getSign($event)" (viewSuggestion)="viewSuggestion($event)"></app-report-detail>
+            <app-weak-check-report-detail
+              *ngIf="type === 'weakCheck'"
+              [report]="report" (getReportId)="getReportId($event)"
+              (getIsSign)="getSign($event)"
+              (viewSuggestion)="viewSuggestion($event)"
+              (downloadAutoFixLocked)="downloadAutoFixLocked($event)"
+            >
+            </app-weak-check-report-detail>
+          </div>
+          <div class="content-container" *ngIf="currentTab == 2">
+            <ng-container *ngIf="locked">
+              <app-file-locked></app-file-locked>
+            </ng-container>
+            <ng-container *ngIf="!isSign && !locked">
+              <app-disclaimer></app-disclaimer>
+            </ng-container>
+            <ng-container *ngIf="currentTab == 2 && !locked && isSign">
+              <app-report-diff [report]="report" (confirmFileList)="confirmFileList($event)" [selectFileInfo]="selectFileInfo"></app-report-diff>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div style="height: 40px;"></div>
+</div>
+
+<ng-template #fileLocked let-context="context">
+  <ti-modal-header>
+    <p *ngIf="lockType === 'suggestion'" style="font-size: 20px;">{{i18n.common_term_operate_lockedTitle}}</p>
+    <p *ngIf="lockType === 'autofix'" style="font-size: 20px;">{{i18n.check_weak.lock_auto_fix_title}}</p>
+  </ti-modal-header>
+  <ti-modal-body>
+    <div class="del-content">
+      <div class="title">
+        <img src="./assets/img/home/icon_tip.png" alt="" />
+        <span class="tip1">{{newReporttip}}</span>
+      </div>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <div class="btn-box">
+      <button
+        type="button"
+        color="primary"
+        class="user-sure-btn"
+        (click)="context.close()"
+        tiButton
+      >
+      {{i18n.common_term_operate_check}}
+      </button>
+    </div>
+  </ti-modal-footer>
+</ng-template>
+
+<!-- 免责声明 Modal start -->
+<app-about-mask #disclaimer [isDisclaimer]="true">
+  <div class="content">
+    <app-common-disclaimer
+      [isConfirm]="true"
+      (closeDisclaimer)="closeDisclaimer()"
+      (confirmDisclaimer)="confirmDisclaimer()"
+    ></app-common-disclaimer>
+  </div>
+</app-about-mask>
+<!-- 免责声明 Modal end -->
+
+<!-- 源码迁移建议放弃修改文件 modal start -->
+<ng-template #changeWeb let-context="context">
+  <ti-modal-header>
+    {{i18n.common_term_giveup_tip4}}
+  </ti-modal-header>
+  <ti-modal-body>
+    <div class="del-content">
+      <div class="title">
+        <img src="./assets/img/home/icon_warn.png" style="height: 100%;" alt="">
+        <p class="tip1">
+          {{this.i18n.common_term_sure_giveup_tip1}}
+          <span style="font-weight: bold;word-break: break-all;">{{this.giveupfilename}}</span>
+          {{this.i18n.common_term_sure_giveup_tip3}}
+          {{i18n.common_term_leave_tip2}}
+        </p>
+      </div>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <div class="changeWeb-btn-box">
+      <button type="button" class="user-sure-btn" (click)="context.close()" tiButton>{{i18n.common_term_operate_ok}}</button>
+      <button type="button" color="primary" class="user-close-btn" (click)="context.dismiss()" tiButton>{{i18n.common_term_operate_cancel}}</button>
+    </div>
+  </ti-modal-footer>
+</ng-template>
+<!-- 创建新报告弹窗 -->
+<ng-template #ieShowModal let-context="context">
+  <ti-modal-header>
+    <p style="font-size: 20px; color: #222;">{{i18n.common_term_operate_lockedTitle}}</p>
+  </ti-modal-header>
+  <ti-modal-body>
+    <div class="del-content">
+      <div class="title">
+        <img src="./assets/img/home/icon_tip.png" alt="">
+        <p>{{ showModalWarn}}</p>
+      </div>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <div class="btn-box">
+      <button type="button" class="user-close-btn ti3-btn-primary ti3-btn-middle" (click)="goHomeNew(context)"
+        tiButton>{{showModalBtn}}</button>
+    </div>
+  </ti-modal-footer>
+</ng-template>

@@ -1,0 +1,87 @@
+<div class="warpper">
+  <div class="nodes-table">
+    <ti-table
+      [(displayedData)]="displayed"
+      [srcData]="srcData"
+      [columns]="columns"
+    >
+      <div class="ti3-table-fixed-head">
+        <table>
+          <thead>
+            <tr>
+              <th checkbox-column width="10%">
+                <input
+                  type="checkbox"
+                  tiCheckgroup
+                  [items]="displayed"
+                  [(checkeds)]="checkedList"
+                  [disabled]="selectDisable"
+                  (checkedsChange)="onCheckedsChange()"
+                />
+              </th>
+              <ng-container *ngFor="let column of columns; index as i">
+                <th tiOverflow width="{{ column.width }}">
+                  <ti-cell-text>{{ column.title }}</ti-cell-text>
+                </th>
+              </ng-container>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="ti3-table-container ti3-resize-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th checkbox-column [ngStyle]="{ height: 0 }" width="10%"></th>
+              <ng-container *ngFor="let column of columns; index as i">
+                <th
+                  [ngStyle]="{ height: 0 }"
+                  tiOverflow
+                  width="{{ column.width }}"
+                ></th>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container
+              *ngFor="let row of displayed; index as i; trackBy: trackByFn"
+            >
+              <tr [hidden]="!row.selected && !isShowAll">
+                <td checkbox-column>
+                  <input
+                    type="checkbox"
+                    tiCheckitem
+                    [item]="row"
+                    [disabled]="row.disabled"
+                  />
+                </td>
+                <td>{{ row.nickName }}</td>
+                <td>
+                  <span
+                    class="status-icon"
+                    [ngClass]="{
+                      'reserve-icon': taskStatusEnum.On === row.nodeStatus
+                    }"
+                  ></span
+                  >{{
+                    taskStatusEnum.On === row.nodeStatus
+                      ? ("status_Online" | i18n)
+                      : ("status_Offline" | i18n)
+                  }}
+                </td>
+                <td>{{ row.nodeIp }}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+      <ti-pagination
+        *ngIf="srcData.data.length > 10"
+        [(currentPage)]="currentPage"
+        [pageSize]="pageSize"
+        [(totalNumber)]="totalNumber"
+        [showGotoLink]="true"
+      ></ti-pagination>
+    </ti-table>
+  </div>
+</div>

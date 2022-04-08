@@ -1,0 +1,82 @@
+.config-content{
+    --ti-icon-blue: #0067ff;
+    --ti-icon-green: #3ad53e;
+    --ti-icon-red: #e2253b;
+}
+//浅色主题样式
+::ng-deep .vscode-light {
+  --select-box-color: #282b33;
+  --filter-box-bg: #fff;
+  --table-left-border: #f0f3fa;
+  --filter-bg: #fff;
+  --ti3-selected-tr-bg: #fff;
+  --ti3-table-fixed-head-filler-bg: #f5f9ff;
+  --ti3-selected-tr-hover-bg: #f5f9ff;
+  --filter-button-bg: #fff;
+  --filter-button-txt-close-hover-color: #0067ff;
+  --filter-button-border-color: 1px solid #979797;
+  --filter-button-border-hover-color: 1px solid #0067ff;
+  --filter-button-txt-ok-color: #fff;
+  --table-tr-border-color: 1px solid #e1e6ee;
+  --table-shadow-color: #e6ebf5;
+  --icon-border-color: 1px solid #aaa;
+  --icon-border-hover-color: 1px solid #0067ff;
+  --select-txt-color: #222;
+  --select-title-txt-color: #282b33;
+  --ti-filter-bg-color: #fff;
+  --ti-filter-border-color: #0067ff;
+  --ti-filter-span-bg: #fff;
+  --ti-filter-span-hover-bg: #f5f9ff;
+  --msg-border: 1px solid #D7DBE7;
+  --msg-bgc: #edf4ff;
+  --section-title-border: dashed 1px #e1e6ee;
+  --select-title-color: #616161;
+  --header-title-bottom: #e1e6ee;
+}
+
+//深色主题样式
+::ng-deep .vscode-dark {
+  --select-box-color: #e8e8e8;
+  --filter-box-bg: #252526;
+  --table-left-border: #252526;
+  --filter-bg: #313131;
+  --ti3-selected-tr-bg: #161616;
+  --ti3-table-fixed-head-filler-bg: #2a2a2a;
+  --ti3-selected-tr-hover-bg: #2a2a2a;
+  --filter-button-bg: #252526;
+  --filter-button-txt-close-hover-color: #0067ff;
+  --filter-button-border-color: 1px solid #ddd;
+  --filter-button-border-hover-color: 1px solid #0067ff;
+  --filter-button-txt-ok-color: #fff;
+  --table-tr-border-color: 1px solid #545454;
+  --table-shadow-color: #545454;
+  --icon-border-color: 1px solid #313131;
+  --icon-border-hover-color: 1px solid #313131;
+  --select-txt-color: #e8e8e8;
+  --select-title-txt-color: #aaa;
+  --ti-filter-bg-color: #252526;
+  --ti-filter-border-color: #0067ff;
+  --ti-filter-span-bg: #252526;
+  --ti-filter-span-hover-bg: #313131;
+  --msg-border: 0px solid #D7DBE7;
+  --msg-bgc: #152133;
+  --section-title-border: solid 1px #484a4e;
+  --select-title-color: #aaaaaa;
+  --header-title-bottom: #4b4b4b;
+}
+
+.mpi_runtime{
+    p {
+        font-size: 20px;
+        color: var(--select-txt-color);
+        padding-bottom: 10px;
+        margin-bottom: 8px;
+      }
+    .containerStyle{
+        margin-top: 20px;
+    }
+    .mpi-icon{
+        display: inline-block;
+        margin-left: 10px;
+    }
+}

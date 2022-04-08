@@ -1,0 +1,102 @@
+<ng-container>
+    <h2 class="right-title">
+        {{ i18n.common_term_history_project_label }}
+        <div *ngIf="!(!tabs[0]['num'] && !tabs[1]['num'])" class="drop-down">
+            <ul>
+              <li>
+                <span>{{ i18n.common_term_clear_btn }}</span>
+                <img src="./assets/img/header/select-down.png" />
+              </li>
+              <li class="hover-text" (click)="deleteAll('source')" [ngClass]="{'padding-li': currLanguege === LANG_TYPE.EN}" *ngIf="tabs[0]['num']"><span>{{ i18n.plugins_porting_weakCheck.sourceHistory }}</span></li>
+              <li class="hover-text" [ngClass]="{'disable-text': !tabs[0]['num'],'padding-li': currLanguege === LANG_TYPE.EN}" *ngIf="!tabs[0]['num']"><span>{{ i18n.plugins_porting_weakCheck.sourceHistory }}</span></li>
+              <li class="hover-text" [ngClass]="{'disable-text': !tabs[1]['num'],'padding-li': currLanguege === LANG_TYPE.EN}" *ngIf="!tabs[1]['num']"><span>{{ i18n.plugins_porting_weakCheck.BCHistory }}</span></li>
+              <li class="hover-text" (click)="deleteAll('BC')" [ngClass]="{'padding-li': currLanguege === LANG_TYPE.EN}" *ngIf="tabs[1]['num']"><span>{{ i18n.plugins_porting_weakCheck.BCHistory }}</span></li>
+            </ul>
+        </div>
+        <div *ngIf="!tabs[0]['num'] && !tabs[1]['num']" class="disable-drop">
+            <ul>
+                <li>
+                    <span>{{ i18n.common_term_clear_btn }}</span>
+                    <img src="./assets/img/header/select-down.png" />
+                </li>
+            </ul>
+        </div>
+    </h2>
+    <!-- tab 页签 -->
+    <div class="tabs">
+        <ti-tabs>
+            <ti-tab *ngFor="let tab of tabs" [(active)]="tab.active" (activeChange)="tab.activeChange($event)">
+                <ti-tab-header>
+                    <span style="font-size: 16px !important;">{{ tab.title }}</span>
+                    <span style="font-size: 16px !important;" *ngIf="currLanguege === LANG_TYPE.EN">( {{ tab.num }} ) </span>
+                    <span style="font-size: 16px !important;" *ngIf="currLanguege !== LANG_TYPE.EN">（ {{ tab.num }} ）</span>
+                </ti-tab-header>
+            </ti-tab>
+        </ti-tabs>
+    </div>
+    <div class="right-list scroll-style">
+        <p [ngClass]="{'reportLimit': !intellijFlag, 'intellijReportLimit': intellijFlag}" *ngIf="safeFlag">
+            <ng-container *ngIf="!intellijFlag">
+                <img src="./assets/img/system/icon-warn.svg" class="tip-img" *ngIf="currTheme == 1"/>
+                <img src="./assets/img/system/icon_system_tip_light.svg" class="tip-img" *ngIf="currTheme == 2"/>
+            </ng-container>
+            <ng-container *ngIf="intellijFlag">
+                <img src="./assets/img/system/icon_system_tip_intellij.svg" class="tip-img"/>
+            </ng-container>
+            {{i18n.common_term_report_safe_tit}}</p>
+        <p [ngClass]="{'reportLimiterror': !intellijFlag, 'intellijReportLimiterror': intellijFlag}" *ngIf="dangerFlag">
+            <ng-container *ngIf="!intellijFlag">
+                <img src="./assets/img/system/icon-danger.svg" class="warn-img"/>
+            </ng-container>
+            <ng-container *ngIf="intellijFlag">
+                <img src="./assets/img/tip/error_intellij.svg" class="warn-img" />
+            </ng-container>
+            <ng-container>
+            {{ i18n.common_term_report_danger_tit }}
+            </ng-container>
+        </p>
+        <ul>
+            <li *ngFor="let item of HisoricalReportList">
+                <ng-container *ngIf="tabs[1]['active']">
+                    <div class="report-left">
+                        <p (click)="goReportDetail(item)" style="width: 240px;"><a>{{ item.filename }}</a></p>
+                        <p class="time">{{ item.created }}</p>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="tabs[0]['active']">
+                    <a (click)="goReportDetail(item)" style="width: 240px;">{{ item.created }}
+                    </a>
+                </ng-container>
+                <span>
+                    <span 
+                      style="position: relative;margin-right: 24px;"
+                      [tiTip]="tipContent"
+                      tiTipPosition="bottom"
+                      tiTipMaxWidth='400px'
+                    ><img src="./assets/img/download-dark.svg" style="cursor: pointer;" alt=""/>
+                    </span>
+
+                    <img src="./assets/img/analysis/icon_delete_normal.svg" (click)="deleteReport(item.id)"
+                        style="cursor: pointer;" onmouseover="this.src='./assets/img/analysis/icon_delete_hover.svg'"
+                        onmouseout="this.src='./assets/img/analysis/icon_delete_normal.svg'" />
+                </span>
+                <ng-template #tipContent let-context="context" >
+                  <span (click)="download(item, 'html')" style="cursor: pointer;"
+                    onmouseover="this.style='cursor: pointer; color: #0067FF;'"
+                    onmouseout="this.style='cursor: pointer'"
+                  >{{ i18n.common_term_history_project_downloadh }}
+                  </span>
+                    <br *ngIf="item.autoFix">
+                    <span (click)="downloadAutoFixList(item)" style="cursor: pointer;"
+                    onmouseover="this.style='cursor: pointer; color: #0067FF;'"
+                    onmouseout="this.style='cursor: pointer'"
+                    *ngIf="item.autoFix"
+                    >{{ i18n.plugins_porting_weakCheck.download_compiler_config }}</span>
+                </ng-template>
+            </li>
+        </ul>
+        <div *ngIf="!HisoricalReportList.length" class="no-data" [hyNodata] = "{text: noDataTitle }" [nodataShow]="!HisoricalReportList.length">
+        </div>
+    </div>
+
+</ng-container>

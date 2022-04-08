@@ -1,0 +1,42 @@
+::ng-deep {
+    :root {
+        --box-border-color: #e1e6ee;
+    }
+    .vscode-dark .irqCompareEchart {
+        --box-border-color: #4b4b4b;
+    }
+}
+.irqCompareEchart {
+    .title {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .compare-container {
+        width: 100%;
+        height: 458px;
+        border: 1px solid var(--box-border-color);
+        display: flex;
+        .viewLeft {
+            width: 59%;
+            padding: 18px 24px 17px 16px;
+        }
+        .viewRight {
+            flex: 1;
+            .tableTitle {
+                font-size: 14px;
+                line-height: 20px;
+                margin: 16px 0px 10px 0px;
+            }
+            .tableData {
+                margin-right: 28px;
+                .ti3-table-container {
+                    max-height: 320px;
+                    min-height: 320px;
+                }
+            }
+        }
+    }
+}
+:host .irqCompareEchart ::ng-deep .hy-nodata-container{
+    padding-top: 56px;
+}

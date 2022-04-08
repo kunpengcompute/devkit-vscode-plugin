@@ -1,0 +1,766 @@
+<div class="trace-detail" [ngClass]="{'vscode-trace-detail': platform === 'vscode'}" [id]="pageId">
+    <div class="fl-between">
+        <div class="title">{{i18n.storageIO.summury.statistics}}</div>
+        <div class="right_switch">
+            <hy-theme-content>
+                <app-icon-react light name="chartView" *ngIf="isTable" (click)="isTable = false"></app-icon-react>
+                <app-icon-react light name="chartViewSelected" *ngIf="!isTable" (click)="isTable = false"></app-icon-react>
+                <app-icon-react light name="tableView" *ngIf="!isTable" (click)="isTable = true"></app-icon-react>
+                <app-icon-react light name="tableViewSelected" *ngIf="isTable" (click)="isTable = true"></app-icon-react>
+    
+                <app-icon-react dark name="chartViewDark" *ngIf="isTable" (click)="isTable = false"></app-icon-react>
+                <app-icon-react dark name="chartViewSelectedDark" *ngIf="!isTable" (click)="isTable = false"></app-icon-react>
+                <app-icon-react dark name="tableViewDark" *ngIf="!isTable" (click)="isTable = true"></app-icon-react>
+                <app-icon-react dark name="tableViewSelectedDark" *ngIf="isTable" (click)="isTable = true"></app-icon-react>
+            </hy-theme-content>
+        </div>
+    </div>
+    <div class="trace-detail-chart" [hidden]="isTable">
+        <div class="chart-container" [lang]="language">
+            <div class="fl-between">
+                <div>
+                    <ti-select [options]='typeOptions' [(ngModel)]="selectType" (select)="onTraceTypeChange()" class="select-width"></ti-select>
+                    <ti-select [options]='myOptions' [(ngModel)]="select" (select)="renderThresholdSvg()" class="select-width"></ti-select>
+                </div>
+                <div *ngIf="threshold.length > 1">
+                    <ng-container *ngFor="let item of threshold;index as i">
+                        <span>
+                            <span class="legend" [ngStyle]="{background: color[i]}"></span>
+                            <span>{{item.min}}s-{{item.max}}s</span>
+                        </span>
+                    </ng-container>
+                </div>
+                <div *ngIf="threshold.length === 1">
+                    <span>
+                        <span class="legend" [ngStyle]="{background: color[0]}"></span>
+                        <span>{{threshold[0].min}}s</span>
+                    </span>
+                </div>
+            </div>
+            <div class="info">
+                <div class="main-text">{{i18n.storageIO.summury.q2c_delay}}</div>
+                <div>
+                    <span class="sub-text">{{i18n.storageIO.summury.avg_delay}}</span>
+                    <span class="main-text">{{select.value ? svgData.Q2C.kb_avg : svgData.Q2C.rq_avg}}</span>
+                </div>
+                <div>
+                    <span class="sub-text">{{i18n.storageIO.summury.max_delay}}</span>
+                    <span class="main-text">{{select.value ? svgData.Q2C.kb_max : svgData.Q2C.rq_max}}</span>
+                </div>
+                <div>
+                    <span class="sub-text">{{i18n.storageIO.summury.min_delay}}</span>
+                    <span class="main-text">{{select.value ? svgData.Q2C.kb_min : svgData.Q2C.rq_min}}</span>
+                </div>
+                <div>
+                    <span class="sub-text">{{select.value ? i18n.storageIO.summury.data_volumn : i18n.storageIO.summury.rq_count}}</span>
+                    <span class="main-text">{{select.value ? svgData.Q2C.kb_n : svgData.Q2C.rq_n}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="svg-container" #svgWrapper [appNiceTooltip]="niceTooltipInfo" [niceTooltipShow]="niceTooltipShowCopy">
+            <hy-theme-content>
+                <svg width="100%" height="238px" viewBox="0 0 1116 238" version="1.1" xmlns="http://www.w3.org/2000/svg" light *ngIf="language === 'zh'">
+                    <g id="IO分析" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="1总览_3" transform="translate(-2013.000000, -160.000000)">
+                            <g id="IO-web-中文" transform="translate(2013.000000, 160.000000)">
+                                <g id="Q2M" transform="translate(52.000000, 157.000000)">
+                                    <path id="Down" d="M-2.7554553e-16,-4.5 C2.48528137,-4.5 4.5,-2.48528137 4.5,-2.7554553e-16 C4.5,2.31603406 2.75034205,4.2234136 0.500707444,4.47245735 L0.5,49.5 C0.5,51.9142733 2.40123652,53.8844891 4.7881643,53.995102 L5,54 L163.5,54 L163.5,50.5368599 C163.5,50.2700103 163.694692,50.0486335 163.949778,50.0070266 L164.03686,50 C164.120205,50 164.202405,50.0194048 164.276951,50.0566778 L164.276951,50.0566778 L172.203114,54.0197591 C172.468311,54.1523577 172.575803,54.474835 172.443205,54.7400322 C172.391256,54.8439293 172.307011,54.9281747 172.203114,54.9801233 L172.203114,54.9801233 L164.276951,58.9432046 C164.011754,59.0758032 163.689276,58.9683108 163.556678,58.7031136 C163.519405,58.6285676 163.5,58.5463674 163.5,58.4630225 L163.5,58.4630225 L163.5,55 L5,55 C2.03652085,55 -0.379539137,52.65622 -0.495632796,49.7212071 L-0.5,49.5 L-0.500707444,4.47245735 C-2.75034205,4.2234136 -4.5,2.31603406 -4.5,2.7554553e-16 C-4.5,-2.48528137 -2.48528137,-4.5 -2.7554553e-16,-4.5 Z" fill="#D0021B" fill-rule="nonzero"></path>
+                                    <path d="M0,2 L0,49.5 C3.38176876e-16,52.2614237 2.23857625,54.5 5,54.5 L163,54.5 L163,54.5" id="Top" stroke="#D0021B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </g>
+                                <g [id]="D2C.id" transform="translate(923.000000, 143.500000) rotate(-360.000000) translate(-923.000000, -143.500000) translate(876.000000, 123.000000)" font-size="12">
+                                    <text id="D2CText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#616161">
+                                        <tspan x="0.068" y="37">时延占比  0.002%</tspan>
+                                    </text>
+                                    <text id="D2CName" transform="translate(46.500000, 8.500000) rotate(-360.000000) translate(-46.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#E66E11">
+                                        <tspan x="34.71" y="14">D2C</tspan>
+                                    </text>
+                                </g>
+                                <g id="M2D" transform="translate(336.000000, 157.000000)">
+                                    <path id="Down" d="M431.002066,-0.499995731 L435.464838,8.51852231 L431.464,8.502 L431.270572,55.5227271 C431.258362,58.4775257 428.917796,60.8802108 425.991186,60.9956572 L425.770618,61 L4.47245735,61.0007074 C4.2234136,63.2503421 2.31603406,65 0,65 C-2.48528137,65 -4.5,62.9852814 -4.5,60.5 C-4.5,58.0147186 -2.48528137,56 0,56 C2.31637876,56 4.22398135,57.7501788 4.47256844,60.000297 L425.770618,60 C428.177841,60 430.145005,58.1094412 430.264837,55.7297971 L430.27058,55.5185949 L430.464,8.497 L426.464915,8.48133255 L431.002066,-0.499995731 Z" fill="#D0021B" fill-rule="nonzero"></path>
+                                    <path d="M0,60.5 L425.773981,60.5 C428.526022,60.5 430.760692,58.2760473 430.773923,55.5240382 L431,8.5 L431,8.5" id="Top" stroke="#D0021B"></path>
+                                </g>
+                                <g id="M2I" transform="translate(336.000000, 89.000000)">
+                                    <path id="Down" d="M218,-0.5 L222.5,8.5 L218.5,8.5 L218.5,112.5 C218.5,115.463479 216.15622,117.879539 213.221207,117.995633 L213,118 L4.47245735,118.000707 C4.2234136,120.250342 2.31603406,122 0,122 C-2.48528137,122 -4.5,119.985281 -4.5,117.5 C-4.5,115.014719 -2.48528137,113 0,113 C2.31637876,113 4.22398135,114.750179 4.47256844,117.000297 L213,117 C215.414273,117 217.384489,115.098763 217.495102,112.711836 L217.5,112.5 L217.5,8.5 L213.5,8.5 L218,-0.5 Z" fill="#D0021B" fill-rule="nonzero"></path>
+                                    <path d="M0,117.5 L213,117.5 C215.761424,117.5 218,115.261424 218,112.5 L218,8 L218,8" id="Top" stroke="#D0021B"></path>
+                                </g>
+                                <g id="Q2G" transform="translate(52.000000, 74.000000)">
+                                    <path id="Down" d="M163.5,-4.5 L172.5,0 L163.5,4.5 L163.5,0.5 L5.00475375,0.500185939 C2.59058017,0.522132971 0.637729084,2.44120124 0.548819179,4.82903592 L0.545847092,5.0409074 L0.959646016,50.5231368 C3.21163459,50.751544 4.97875888,52.6430227 4.99981406,54.9590926 C5.02240659,57.4442713 3.02608608,59.4772215 0.540907401,59.4998141 C-1.94427128,59.5224066 -3.97722153,57.5260861 -3.99981406,55.0409074 C-4.02087118,52.7246244 -2.28810582,50.8011905 -0.0403403451,50.5321589 L-0.454111589,5.04999793 C-0.481724685,2.01255732 1.95822261,-0.472159645 4.99566322,-0.499772741 L5.02066193,-0.499943185 L5.02066193,-0.499943185 L5.04566115,-0.5 L163.5,-0.5 L163.5,-4.5 Z" fill="#4DC368" fill-rule="nonzero"></path>
+                                    <path d="M0.5,55 L0.0458677515,5.04545267 C0.0207649365,2.28414302 2.23889884,0.0253094137 5.00020849,0.000206598765 C5.01535898,6.88669663e-05 5.03051003,2.66731848e-15 5.04566115,0 L164,0 L164,0" id="Top" stroke="#4DC368"></path>
+                                </g>
+                                <g id="G2D" transform="translate(281.000000, 20.000000)">
+                                    <path id="Down" d="M517,0 C519.963479,-5.36156485e-16 522.379539,2.34378001 522.495633,5.27879286 L522.5,5.5 L522.5,100.5 L526.5,100.5 L522,109.5 L517.5,100.5 L521.5,100.5 L521.5,5.5 C521.5,3.08572667 519.598763,1.11551091 517.211836,1.00489799 L517,1 L5.00623203,1.00031139 C2.59212575,1.02871264 0.644412271,2.952995 0.561886563,5.34105885 L0.559480925,5.55293751 L0.946674587,38.5218253 C3.19974168,38.7437507 4.97243746,40.6307141 4.99968861,42.9470625 C5.02892519,45.4321719 3.03804691,47.470452 0.552937513,47.4996886 C-1.93217189,47.5289252 -3.97045203,45.5380469 -3.99968861,43.0529375 C-4.02693824,40.736719 -2.29932138,38.8086595 -0.0522831929,38.5336195 L-0.440449878,5.5647014 C-0.475311926,2.60142732 1.83988364,0.157962541 4.77332767,0.00734974199 L4.99446813,0.000380583331 L517,0 Z" fill="#4DC368" fill-rule="nonzero"></path>
+                                    <path d="M0.5,43 L0.059515523,5.55881946 C0.0270304328,2.79758679 2.23911741,0.532831075 5.00035008,0.500345985 C5.01995572,0.50011533 5.03956254,0.5 5.05916954,0.5 L517,0.5 C519.761424,0.5 522,2.73857625 522,5.5 L522,104 L522,104" id="Top" stroke="#4DC368"></path>
+                                </g>
+                                <g id="G2I" transform="translate(335.500000, 74.000000)">
+                                    <path id="Down" d="M154,-4 L163,0.5 L154,5 L154,1 L4.47245735,1.00070744 C4.23104912,3.18136977 2.43143317,4.89224336 0.211835704,4.99510201 L0,5 C-2.48528137,5 -4.5,2.98528137 -4.5,0.5 C-4.5,-1.98528137 -2.48528137,-4 0,-4 C2.3162476,-4 4.22376533,-2.25001939 4.4725262,-8.51613636e-05 L154,0 L154,-4 Z" fill="#4DC368" fill-rule="nonzero"></path>
+                                    <line x1="-6.74373751e-14" y1="0.5" x2="154.5" y2="0.5" id="Top" stroke="#4DC368" transform="translate(77.250000, 0.500000) scale(1, -1) translate(-77.250000, -0.500000) "></line>
+                                </g>
+                                <g id="I2D" transform="translate(609.000000, 75.000000)">
+                                    <path id="Down" d="M4.47245735,0.500707444 C4.2234136,2.75034205 2.31603406,4.5 0,4.5 C-2.48528137,4.5 -4.5,2.48528137 -4.5,0 C-4.5,-2.48528137 -2.48528137,-4.5 0,-4.5 C2.31603406,-4.5 4.2234136,-2.75034205 4.47245735,-0.500707444 L153,-0.5 C155.963479,-0.5 158.379539,1.84378001 158.495633,4.77879286 L158.5,5 L158.5,45.5 L162.5,45.5 L158,54.5 L153.5,45.5 L157.5,45.5 L157.5,5 C157.5,2.58572667 155.598763,0.615510911 153.211836,0.50489799 L153,0.5 Z" fill="#4DC368" fill-rule="nonzero"></path>
+                                    <path d="M0,0 L153,0 C155.761424,-5.07265313e-16 158,2.23857625 158,5 L158,46 L158,46" id="Top" stroke="#4DC368"></path>
+                                </g>
+                                <g id="D2C" transform="translate(841.000000, 143.000000)">
+                                    <path id="Down" d="M153.5,-4 L162.5,0.5 L153.5,5 L153.5,1 L4.47245735,1.00070744 C4.23104912,3.18136977 2.43143317,4.89224336 0.211835704,4.99510201 L0,5 C-2.48528137,5 -4.5,2.98528137 -4.5,0.5 C-4.5,-1.98528137 -2.48528137,-4 0,-4 C2.3162476,-4 4.22376533,-2.25001939 4.4725262,-8.51613636e-05 L153.5,0 L153.5,-4 Z" fill="#E66E11" fill-rule="nonzero"></path>
+                                    <line x1="0" y1="0.5" x2="154" y2="0.5" id="Top" stroke="#E66E11"></line>
+                                </g>
+                                <g id="编组-2" transform="translate(0.000000, 129.000000)">
+                                    <rect id="矩形" stroke="#30363C" fill="#FFFFFF" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                    <text id="queued" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" line-spacing="18" fill="#222222">
+                                        <tspan x="33" y="18">queued</tspan>
+                                    </text>
+                                    <text id="Q" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#222222">
+                                        <tspan x="10" y="21">Q</tspan>
+                                    </text>
+                                </g>
+                                <g id="编组-2" transform="translate(224.000000, 61.000000)">
+                                    <rect id="矩形" stroke="#30363C" fill="#FFFFFF" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                    <text id="get-request" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#222222">
+                                        <tspan x="30" y="19">get request</tspan>
+                                    </text>
+                                    <text id="G" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#222222">
+                                        <tspan x="10" y="21">G</tspan>
+                                    </text>
+                                </g>
+                                <g id="编组-2" transform="translate(498.000000, 61.000000)">
+                                    <rect id="矩形" stroke="#30363C" fill="#FFFFFF" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                    <text id="I" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#222222">
+                                        <tspan x="10" y="21">I</tspan>
+                                    </text>
+                                    <text id="inserted" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#222222">
+                                        <tspan x="23" y="19">inserted</tspan>
+                                    </text>
+                                </g>
+                                <g id="编组-2" transform="translate(224.000000, 197.000000)">
+                                    <rect id="矩形" stroke="#30363C" fill="#FFFFFF" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                    <text id="merged" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#222222">
+                                        <tspan x="33" y="19">merged</tspan>
+                                    </text>
+                                    <text id="M" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#222222">
+                                        <tspan x="10" y="21">M</tspan>
+                                    </text>
+                                </g>
+                                <g id="编组-2" transform="translate(730.000000, 129.000000)">
+                                    <rect id="矩形" stroke="#30363C" fill="#FFFFFF" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                    <text id="issued" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#222222">
+                                        <tspan x="31" y="19">issued</tspan>
+                                    </text>
+                                    <text id="D" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#222222">
+                                        <tspan x="10" y="21">D</tspan>
+                                    </text>
+                                </g>
+                                <g id="编组-2" transform="translate(1004.000000, 129.000000)">
+                                    <rect id="矩形" stroke="#30363C" fill="#FFFFFF" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                    <text id="complete" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#222222">
+                                        <tspan x="27" y="19">complete</tspan>
+                                    </text>
+                                    <text id="C" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#222222">
+                                        <tspan x="8" y="21">C</tspan>
+                                    </text>
+                                </g>
+                                <g [id]="G2I.id" transform="translate(370.000000, 54.000000)" font-size="12">
+                                    <text id="G2IText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#616161">
+                                        <tspan x="0.068" y="37">时延占比  0.002%</tspan>
+                                    </text>
+                                    <text id="G2IName" transform="translate(46.500000, 8.500000) rotate(-360.000000) translate(-46.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#2AA956">
+                                        <tspan x="37.128" y="14">G2I</tspan>
+                                    </text>
+                                </g>
+                                <g [id]="G2D.id" transform="translate(495.000000, 0.000000)" font-size="12">
+                                    <text id="G2DText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#616161">
+                                        <tspan x="0.068" y="37">时延占比  0.002%</tspan>
+                                    </text>
+                                    <text id="G2DName" transform="translate(46.500000, 8.500000) rotate(-360.000000) translate(-46.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#2AA956">
+                                        <tspan x="34.434" y="14">G2D</tspan>
+                                    </text>
+                                </g>
+                                <g [id]="Q2G.id" transform="translate(92.000000, 54.000000)" font-size="12">
+                                    <text id="Q2GText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#616161">
+                                        <tspan x="0.688" y="37">时延占比 0.002%</tspan>
+                                    </text>
+                                    <text id="Q2GName" transform="translate(45.500000, 8.500000) rotate(-360.000000) translate(-45.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#2AA956">
+                                        <tspan x="33.158" y="14">Q2G</tspan>
+                                    </text>
+                                </g>
+                                <g [id]="Q2M.id" transform="translate(91.000000, 190.000000)" font-size="12">
+                                    <text id="Q2MText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#616161">
+                                        <tspan x="0.068" y="37">时延占比  0.002%</tspan>
+                                    </text>
+                                    <text id="Q2MName" transform="translate(46.500000, 8.500000) rotate(-360.000000) translate(-46.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#D0021B">
+                                        <tspan x="33.186" y="14">Q2M</tspan>
+                                    </text>
+                                </g>
+                                <g [id]="I2D.id" transform="translate(691.000000, 74.500000) rotate(-360.000000) translate(-691.000000, -74.500000) translate(644.000000, 54.000000)" font-size="12">
+                                    <text id="I2DText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#616161">
+                                        <tspan x="0.068" y="37">时延占比  0.002%</tspan>
+                                    </text>
+                                    <text id="I2DName" transform="translate(46.500000, 8.500000) rotate(-360.000000) translate(-46.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#2AA956">
+                                        <tspan x="37.026" y="14">I2D</tspan>
+                                    </text>
+                                </g>
+                                <g [id]="M2D.id" transform="translate(576.000000, 197.000000)" font-size="12">
+                                    <text id="M2DText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#616161">
+                                        <tspan x="0.068" y="37">时延占比  0.002%</tspan>
+                                    </text>
+                                    <text id="M2DName" transform="translate(46.500000, 8.500000) rotate(-360.000000) translate(-46.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#D0021B">
+                                        <tspan x="33.462" y="14">M2D</tspan>
+                                    </text>
+                                </g>
+                                <g [id]="M2I.id" transform="translate(554.000000, 149.500000) rotate(-360.000000) translate(-554.000000, -149.500000) translate(507.000000, 132.000000)">
+                                    <rect id="BG" fill="#FFFFFF" opacity="0.8" x="30" y="2" width="38" height="32"></rect>
+                                    <text id="M2IText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-size="12" font-weight="normal" line-spacing="18" fill="#616161">
+                                        <tspan x="0.068" y="31">时延占比  0.002%</tspan>
+                                    </text>
+                                    <text id="M2IName" transform="translate(46.500000, 8.500000) rotate(-360.000000) translate(-46.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-size="12" font-weight="400" fill="#D0021B">
+                                        <tspan x="36.156" y="14">M2I</tspan>
+                                    </text>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg width="100%" height="238px" viewBox="0 0 1116 238" version="1.1" xmlns="http://www.w3.org/2000/svg" light *ngIf="language === 'en'">
+                    <g id="IO分析" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="1总览_3" transform="translate(-264.000000, -667.000000)">
+                            <g id="编组-20备份" transform="translate(64.000000, 508.000000)">
+                                <g id="编组-6-+-矩形-+-编组-15-蒙版" transform="translate(61.000000, 54.000000)">
+                                    <g id="IO-web" transform="translate(139.000000, 105.000000)">
+                                        <g id="Q2M" transform="translate(52.000000, 157.000000)">
+                                            <path id="Down" d="M-2.7554553e-16,-4.5 C2.48528137,-4.5 4.5,-2.48528137 4.5,-2.7554553e-16 C4.5,2.31603406 2.75034205,4.2234136 0.500707444,4.47245735 L0.5,49.5 C0.5,51.9142733 2.40123652,53.8844891 4.7881643,53.995102 L5,54 L163.5,54 L163.5,50.5368599 C163.5,50.2700103 163.694692,50.0486335 163.949778,50.0070266 L164.03686,50 C164.120205,50 164.202405,50.0194048 164.276951,50.0566778 L164.276951,50.0566778 L172.203114,54.0197591 C172.468311,54.1523577 172.575803,54.474835 172.443205,54.7400322 C172.391256,54.8439293 172.307011,54.9281747 172.203114,54.9801233 L172.203114,54.9801233 L164.276951,58.9432046 C164.011754,59.0758032 163.689276,58.9683108 163.556678,58.7031136 C163.519405,58.6285676 163.5,58.5463674 163.5,58.4630225 L163.5,58.4630225 L163.5,55 L5,55 C2.03652085,55 -0.379539137,52.65622 -0.495632796,49.7212071 L-0.5,49.5 L-0.500707444,4.47245735 C-2.75034205,4.2234136 -4.5,2.31603406 -4.5,2.7554553e-16 C-4.5,-2.48528137 -2.48528137,-4.5 -2.7554553e-16,-4.5 Z" fill="#D0021B" fill-rule="nonzero"></path>
+                                            <path d="M0,2 L0,49.5 C3.38176876e-16,52.2614237 2.23857625,54.5 5,54.5 L163,54.5 L163,54.5" id="Top" stroke="#D0021B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </g>
+                                        <g [id]="D2C.id" transform="translate(923.000000, 143.500000) rotate(-360.000000) translate(-923.000000, -143.500000) translate(858.000000, 123.000000)" font-size="12">
+                                            <text id="D2CText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#616161">
+                                                <tspan x="8.458" y="37">Delay Ratio  0.002%</tspan>
+                                            </text>
+                                            <text id="D2CName" transform="translate(64.500000, 8.500000) rotate(-360.000000) translate(-64.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#E66E11">
+                                                <tspan x="52.71" y="14">D2C</tspan>
+                                            </text>
+                                        </g>
+                                        <g id="M2D" transform="translate(336.000000, 157.000000)">
+                                            <path id="Down" d="M431.002066,-0.499995731 L435.464838,8.51852231 L431.464,8.502 L431.270572,55.5227271 C431.258362,58.4775257 428.917796,60.8802108 425.991186,60.9956572 L425.770618,61 L4.47245735,61.0007074 C4.2234136,63.2503421 2.31603406,65 0,65 C-2.48528137,65 -4.5,62.9852814 -4.5,60.5 C-4.5,58.0147186 -2.48528137,56 0,56 C2.31637876,56 4.22398135,57.7501788 4.47256844,60.000297 L425.770618,60 C428.177841,60 430.145005,58.1094412 430.264837,55.7297971 L430.27058,55.5185949 L430.464,8.497 L426.464915,8.48133255 L431.002066,-0.499995731 Z" fill="#D0021B" fill-rule="nonzero"></path>
+                                            <path d="M0,60.5 L425.773981,60.5 C428.526022,60.5 430.760692,58.2760473 430.773923,55.5240382 L431,8.5 L431,8.5" id="Top" stroke="#D0021B"></path>
+                                        </g>
+                                        <g id="M2I" transform="translate(336.000000, 89.000000)">
+                                            <path id="Down" d="M218,-0.5 L222.5,8.5 L218.5,8.5 L218.5,112.5 C218.5,115.463479 216.15622,117.879539 213.221207,117.995633 L213,118 L4.47245735,118.000707 C4.2234136,120.250342 2.31603406,122 0,122 C-2.48528137,122 -4.5,119.985281 -4.5,117.5 C-4.5,115.014719 -2.48528137,113 0,113 C2.31637876,113 4.22398135,114.750179 4.47256844,117.000297 L213,117 C215.414273,117 217.384489,115.098763 217.495102,112.711836 L217.5,112.5 L217.5,8.5 L213.5,8.5 L218,-0.5 Z" fill="#D0021B" fill-rule="nonzero"></path>
+                                            <path d="M0,117.5 L213,117.5 C215.761424,117.5 218,115.261424 218,112.5 L218,8 L218,8" id="Top" stroke="#D0021B"></path>
+                                        </g>
+                                        <g id="Q2G" transform="translate(52.000000, 74.000000)">
+                                            <path id="Down" d="M163.5,-4.5 L172.5,0 L163.5,4.5 L163.5,0.5 L5.00475375,0.500185939 C2.59058017,0.522132971 0.637729084,2.44120124 0.548819179,4.82903592 L0.545847092,5.0409074 L0.959646016,50.5231368 C3.21163459,50.751544 4.97875888,52.6430227 4.99981406,54.9590926 C5.02240659,57.4442713 3.02608608,59.4772215 0.540907401,59.4998141 C-1.94427128,59.5224066 -3.97722153,57.5260861 -3.99981406,55.0409074 C-4.02087118,52.7246244 -2.28810582,50.8011905 -0.0403403451,50.5321589 L-0.454111589,5.04999793 C-0.481724685,2.01255732 1.95822261,-0.472159645 4.99566322,-0.499772741 L5.02066193,-0.499943185 L5.02066193,-0.499943185 L5.04566115,-0.5 L163.5,-0.5 L163.5,-4.5 Z" fill="#4DC368" fill-rule="nonzero"></path>
+                                            <path d="M0.5,55 L0.0458677515,5.04545267 C0.0207649365,2.28414302 2.23889884,0.0253094137 5.00020849,0.000206598765 C5.01535898,6.88669663e-05 5.03051003,2.66731848e-15 5.04566115,0 L164,0 L164,0" id="Top" stroke="#4DC368"></path>
+                                        </g>
+                                        <g id="G2D" transform="translate(281.000000, 20.000000)">
+                                            <path id="Down" d="M517,0 C519.963479,-5.36156485e-16 522.379539,2.34378001 522.495633,5.27879286 L522.5,5.5 L522.5,100.5 L526.5,100.5 L522,109.5 L517.5,100.5 L521.5,100.5 L521.5,5.5 C521.5,3.08572667 519.598763,1.11551091 517.211836,1.00489799 L517,1 L5.00623203,1.00031139 C2.59212575,1.02871264 0.644412271,2.952995 0.561886563,5.34105885 L0.559480925,5.55293751 L0.946674587,38.5218253 C3.19974168,38.7437507 4.97243746,40.6307141 4.99968861,42.9470625 C5.02892519,45.4321719 3.03804691,47.470452 0.552937513,47.4996886 C-1.93217189,47.5289252 -3.97045203,45.5380469 -3.99968861,43.0529375 C-4.02693824,40.736719 -2.29932138,38.8086595 -0.0522831929,38.5336195 L-0.440449878,5.5647014 C-0.475311926,2.60142732 1.83988364,0.157962541 4.77332767,0.00734974199 L4.99446813,0.000380583331 L517,0 Z" fill="#4DC368" fill-rule="nonzero"></path>
+                                            <path d="M0.5,43 L0.059515523,5.55881946 C0.0270304328,2.79758679 2.23911741,0.532831075 5.00035008,0.500345985 C5.01995572,0.50011533 5.03956254,0.5 5.05916954,0.5 L517,0.5 C519.761424,0.5 522,2.73857625 522,5.5 L522,104 L522,104" id="Top" stroke="#4DC368"></path>
+                                        </g>
+                                        <g id="G2I" transform="translate(335.500000, 74.000000)">
+                                            <path id="Down" d="M154,-4 L163,0.5 L154,5 L154,1 L4.47245735,1.00070744 C4.23104912,3.18136977 2.43143317,4.89224336 0.211835704,4.99510201 L0,5 C-2.48528137,5 -4.5,2.98528137 -4.5,0.5 C-4.5,-1.98528137 -2.48528137,-4 0,-4 C2.3162476,-4 4.22376533,-2.25001939 4.4725262,-8.51613636e-05 L154,0 L154,-4 Z" fill="#4DC368" fill-rule="nonzero"></path>
+                                            <line x1="-6.74373751e-14" y1="0.5" x2="154.5" y2="0.5" id="Top" stroke="#4DC368" transform="translate(77.250000, 0.500000) scale(1, -1) translate(-77.250000, -0.500000) "></line>
+                                        </g>
+                                        <g id="I2D" transform="translate(609.000000, 75.000000)">
+                                            <path id="Down" d="M4.47245735,0.500707444 C4.2234136,2.75034205 2.31603406,4.5 0,4.5 C-2.48528137,4.5 -4.5,2.48528137 -4.5,0 C-4.5,-2.48528137 -2.48528137,-4.5 0,-4.5 C2.31603406,-4.5 4.2234136,-2.75034205 4.47245735,-0.500707444 L153,-0.5 C155.963479,-0.5 158.379539,1.84378001 158.495633,4.77879286 L158.5,5 L158.5,45.5 L162.5,45.5 L158,54.5 L153.5,45.5 L157.5,45.5 L157.5,5 C157.5,2.58572667 155.598763,0.615510911 153.211836,0.50489799 L153,0.5 Z" fill="#4DC368" fill-rule="nonzero"></path>
+                                            <path d="M0,0 L153,0 C155.761424,-5.07265313e-16 158,2.23857625 158,5 L158,46 L158,46" id="Top" stroke="#4DC368"></path>
+                                        </g>
+                                        <g id="D2C" transform="translate(841.000000, 143.000000)">
+                                            <path id="Down" d="M153.5,-4 L162.5,0.5 L153.5,5 L153.5,1 L4.47245735,1.00070744 C4.23104912,3.18136977 2.43143317,4.89224336 0.211835704,4.99510201 L0,5 C-2.48528137,5 -4.5,2.98528137 -4.5,0.5 C-4.5,-1.98528137 -2.48528137,-4 0,-4 C2.3162476,-4 4.22376533,-2.25001939 4.4725262,-8.51613636e-05 L153.5,0 L153.5,-4 Z" fill="#E66E11" fill-rule="nonzero"></path>
+                                            <line x1="0" y1="0.5" x2="154" y2="0.5" id="Top" stroke="#E66E11"></line>
+                                        </g>
+                                        <g id="编组-2" transform="translate(0.000000, 129.000000)">
+                                            <rect id="矩形" stroke="#30363C" fill="#FFFFFF" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                            <text id="queued" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" line-spacing="18" fill="#222222">
+                                                <tspan x="33" y="18">queued</tspan>
+                                            </text>
+                                            <text id="Q" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#222222">
+                                                <tspan x="10" y="21">Q</tspan>
+                                            </text>
+                                        </g>
+                                        <g id="编组-2" transform="translate(224.000000, 61.000000)">
+                                            <rect id="矩形" stroke="#30363C" fill="#FFFFFF" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                            <text id="get-request" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#222222">
+                                                <tspan x="30" y="19">get request</tspan>
+                                            </text>
+                                            <text id="G" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#222222">
+                                                <tspan x="10" y="21">G</tspan>
+                                            </text>
+                                        </g>
+                                        <g id="编组-2" transform="translate(498.000000, 61.000000)">
+                                            <rect id="矩形" stroke="#30363C" fill="#FFFFFF" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                            <text id="I" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#222222">
+                                                <tspan x="10" y="21">I</tspan>
+                                            </text>
+                                            <text id="inserted" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#222222">
+                                                <tspan x="23" y="19">inserted</tspan>
+                                            </text>
+                                        </g>
+                                        <g id="编组-2" transform="translate(224.000000, 197.000000)">
+                                            <rect id="矩形" stroke="#30363C" fill="#FFFFFF" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                            <text id="merged" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#222222">
+                                                <tspan x="33" y="19">merged</tspan>
+                                            </text>
+                                            <text id="M" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#222222">
+                                                <tspan x="10" y="21">M</tspan>
+                                            </text>
+                                        </g>
+                                        <g id="编组-2" transform="translate(730.000000, 129.000000)">
+                                            <rect id="矩形" stroke="#30363C" fill="#FFFFFF" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                            <text id="issued" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#222222">
+                                                <tspan x="31" y="19">issued</tspan>
+                                            </text>
+                                            <text id="D" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#222222">
+                                                <tspan x="10" y="21">D</tspan>
+                                            </text>
+                                        </g>
+                                        <g id="编组-2" transform="translate(1004.000000, 129.000000)">
+                                            <rect id="矩形" stroke="#30363C" fill="#FFFFFF" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                            <text id="complete" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#222222">
+                                                <tspan x="27" y="19">complete</tspan>
+                                            </text>
+                                            <text id="C" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#222222">
+                                                <tspan x="8" y="21">C</tspan>
+                                            </text>
+                                        </g>
+                                        <g [id]="G2I.id" transform="translate(352.000000, 54.000000)" font-size="12">
+                                            <text id="G2IText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#616161">
+                                                <tspan x="8.458" y="37">Delay Ratio  0.002%</tspan>
+                                            </text>
+                                            <text id="G2IName" transform="translate(64.500000, 8.500000) rotate(-360.000000) translate(-64.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#2AA956">
+                                                <tspan x="55.128" y="14">G2I</tspan>
+                                            </text>
+                                        </g>
+                                        <g [id]="G2D.id" transform="translate(477.000000, 0.000000)" font-size="12">
+                                            <text id="G2DText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#616161">
+                                                <tspan x="8.458" y="37">Delay Ratio  0.002%</tspan>
+                                            </text>
+                                            <text id="G2DName" transform="translate(64.500000, 8.500000) rotate(-360.000000) translate(-64.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#2AA956">
+                                                <tspan x="52.434" y="14">G2D</tspan>
+                                            </text>
+                                        </g>
+                                        <g [id]="Q2G.id" transform="translate(75.000000, 54.000000)" font-size="12">
+                                            <text id="Q2GText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#616161">
+                                                <tspan x="0.078" y="37">Delay Ratio 0.002%</tspan>
+                                            </text>
+                                            <text id="Q2GName" transform="translate(62.500000, 8.500000) rotate(-360.000000) translate(-62.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#2AA956">
+                                                <tspan x="50.158" y="14">Q2G</tspan>
+                                            </text>
+                                        </g>
+                                        <g [id]="Q2M.id" transform="translate(73.000000, 190.000000)" font-size="12">
+                                            <text id="Q2MText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#616161">
+                                                <tspan x="8.458" y="37">Delay Ratio  0.002%</tspan>
+                                            </text>
+                                            <text id="Q2MName" transform="translate(64.500000, 8.500000) rotate(-360.000000) translate(-64.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#D0021B">
+                                                <tspan x="51.186" y="14">Q2M</tspan>
+                                            </text>
+                                        </g>
+                                        <g [id]="I2D.id" transform="translate(691.000000, 74.500000) rotate(-360.000000) translate(-691.000000, -74.500000) translate(626.000000, 54.000000)" font-size="12">
+                                            <text id="I2DText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#616161">
+                                                <tspan x="8.458" y="37">Delay Ratio  0.002%</tspan>
+                                            </text>
+                                            <text id="I2DName" transform="translate(64.500000, 8.500000) rotate(-360.000000) translate(-64.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#2AA956">
+                                                <tspan x="55.026" y="14">I2D</tspan>
+                                            </text>
+                                        </g>
+                                        <g [id]="M2D.id" transform="translate(558.000000, 197.000000)" font-size="12">
+                                            <text id="M2DText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#616161">
+                                                <tspan x="8.458" y="37">Delay Ratio  0.002%</tspan>
+                                            </text>
+                                            <text id="M2DName" transform="translate(64.500000, 8.500000) rotate(-360.000000) translate(-64.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#D0021B">
+                                                <tspan x="51.462" y="14">M2D</tspan>
+                                            </text>
+                                        </g>
+                                        <g [id]="M2I.id" transform="translate(554.000000, 149.500000) rotate(-360.000000) translate(-554.000000, -149.500000) translate(489.000000, 132.000000)">
+                                            <rect id="BG" fill="#FFFFFF" opacity="0.8" x="48" y="2" width="38" height="32"></rect>
+                                            <text id="M2IText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-size="12" font-weight="normal" line-spacing="18" fill="#616161">
+                                                <tspan x="8.458" y="31">Delay Ratio  0.002%</tspan>
+                                            </text>
+                                            <text id="M2IName" transform="translate(64.500000, 8.500000) rotate(-360.000000) translate(-64.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-size="12" font-weight="400" fill="#D0021B">
+                                                <tspan x="54.156" y="14">M2I</tspan>
+                                            </text>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg width="100%" height="238px" viewBox="0 0 1120 238" version="1.1" xmlns="http://www.w3.org/2000/svg" dark *ngIf="language === 'zh'">
+                    <g id="IO分析" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="1总览_3" transform="translate(-1984.000000, -94.000000)">
+                            <g id="IO-Vscode-中文" transform="translate(1984.000000, 94.000000)">
+                                <g id="Q2M" transform="translate(52.000000, 157.000000)">
+                                    <path id="Down" d="M-2.7554553e-16,-4.5 C2.48528137,-4.5 4.5,-2.48528137 4.5,-2.7554553e-16 C4.5,2.31603406 2.75034205,4.2234136 0.500707444,4.47245735 L0.5,49.5 C0.5,51.9142733 2.40123652,53.8844891 4.7881643,53.995102 L5,54 L163.5,54 L163.5,50.5368599 C163.5,50.2700103 163.694692,50.0486335 163.949778,50.0070266 L164.03686,50 C164.120205,50 164.202405,50.0194048 164.276951,50.0566778 L164.276951,50.0566778 L172.203114,54.0197591 C172.468311,54.1523577 172.575803,54.474835 172.443205,54.7400322 C172.391256,54.8439293 172.307011,54.9281747 172.203114,54.9801233 L172.203114,54.9801233 L164.276951,58.9432046 C164.011754,59.0758032 163.689276,58.9683108 163.556678,58.7031136 C163.519405,58.6285676 163.5,58.5463674 163.5,58.4630225 L163.5,58.4630225 L163.5,55 L5,55 C2.03652085,55 -0.379539137,52.65622 -0.495632796,49.7212071 L-0.5,49.5 L-0.500707444,4.47245735 C-2.75034205,4.2234136 -4.5,2.31603406 -4.5,2.7554553e-16 C-4.5,-2.48528137 -2.48528137,-4.5 -2.7554553e-16,-4.5 Z" fill="#ED4B4B" fill-rule="nonzero"></path>
+                                    <path d="M0,2 L0,49.5 C3.38176876e-16,52.2614237 2.23857625,54.5 5,54.5 L163,54.5 L163,54.5" id="Top" stroke="#ED4B4B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </g>
+                                <g [id]="D2C.id" transform="translate(927.000000, 143.500000) rotate(-360.000000) translate(-927.000000, -143.500000) translate(880.000000, 123.000000)" font-size="12">
+                                    <text id="D2CText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                        <tspan x="0.068" y="37">时延占比  0.002%</tspan>
+                                    </text>
+                                    <text id="D2CName" transform="translate(46.500000, 8.500000) rotate(-360.000000) translate(-46.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#FF9B00">
+                                        <tspan x="34.71" y="14">D2C</tspan>
+                                    </text>
+                                </g>
+                                <g id="M2D" transform="translate(336.000000, 157.000000)">
+                                    <path id="Down" d="M431.002066,-0.499995731 L435.464838,8.51852231 L431.464,8.502 L431.270572,55.5227271 C431.258362,58.4775257 428.917796,60.8802108 425.991186,60.9956572 L425.770618,61 L4.47245735,61.0007074 C4.2234136,63.2503421 2.31603406,65 0,65 C-2.48528137,65 -4.5,62.9852814 -4.5,60.5 C-4.5,58.0147186 -2.48528137,56 0,56 C2.31637876,56 4.22398135,57.7501788 4.47256844,60.000297 L425.770618,60 C428.177841,60 430.145005,58.1094412 430.264837,55.7297971 L430.27058,55.5185949 L430.464,8.497 L426.464915,8.48133255 L431.002066,-0.499995731 Z" fill="#ED4B4B" fill-rule="nonzero"></path>
+                                    <path d="M0,60.5 L425.773981,60.5 C428.526022,60.5 430.760692,58.2760473 430.773923,55.5240382 L431,8.5 L431,8.5" id="Top" stroke="#ED4B4B"></path>
+                                </g>
+                                <g id="M2I" transform="translate(336.000000, 89.000000)">
+                                    <path id="Down" d="M218,-0.5 L222.5,8.5 L218.5,8.5 L218.5,112.5 C218.5,115.463479 216.15622,117.879539 213.221207,117.995633 L213,118 L4.47245735,118.000707 C4.2234136,120.250342 2.31603406,122 0,122 C-2.48528137,122 -4.5,119.985281 -4.5,117.5 C-4.5,115.014719 -2.48528137,113 0,113 C2.31637876,113 4.22398135,114.750179 4.47256844,117.000297 L213,117 C215.414273,117 217.384489,115.098763 217.495102,112.711836 L217.5,112.5 L217.5,8.5 L213.5,8.5 L218,-0.5 Z" fill="#ED4B4B" fill-rule="nonzero"></path>
+                                    <path d="M0,117.5 L213,117.5 C215.761424,117.5 218,115.261424 218,112.5 L218,8 L218,8" id="Top" stroke="#ED4B4B"></path>
+                                </g>
+                                <g id="Q2G" transform="translate(52.000000, 74.000000)">
+                                    <path id="Down" d="M163.5,-4.5 L172.5,0 L163.5,4.5 L163.5,0.5 L5.00475375,0.500185939 C2.59058017,0.522132971 0.637729084,2.44120124 0.548819179,4.82903592 L0.545847092,5.0409074 L0.959646016,50.5231368 C3.21163459,50.751544 4.97875888,52.6430227 4.99981406,54.9590926 C5.02240659,57.4442713 3.02608608,59.4772215 0.540907401,59.4998141 C-1.94427128,59.5224066 -3.97722153,57.5260861 -3.99981406,55.0409074 C-4.02087118,52.7246244 -2.28810582,50.8011905 -0.0403403451,50.5321589 L-0.454111589,5.04999793 C-0.481724685,2.01255732 1.95822261,-0.472159645 4.99566322,-0.499772741 L5.02066193,-0.499943185 L5.02066193,-0.499943185 L5.04566115,-0.5 L163.5,-0.5 L163.5,-4.5 Z" fill="#61D274" fill-rule="nonzero"></path>
+                                    <path d="M0.5,55 L0.0458677515,5.04545267 C0.0207649365,2.28414302 2.23889884,0.0253094137 5.00020849,0.000206598765 C5.01535898,6.88669663e-05 5.03051003,2.66731848e-15 5.04566115,0 L164,0 L164,0" id="Top" stroke="#61D274"></path>
+                                </g>
+                                <g id="G2D" transform="translate(280.000000, 20.000000)">
+                                    <path id="Down" d="M528,-0.5 C530.963479,-0.5 533.379539,1.84378001 533.495633,4.77879286 L533.5,5 L533.5,100.5 L537.5,100.5 L533,109.5 L528.5,100.5 L532.5,100.5 L532.5,5 C532.5,2.58572667 530.598763,0.615510911 528.211836,0.50489799 L528,0.5 L5.00647343,0.500334585 C2.5923796,0.529774754 0.645494425,2.45489514 0.563996439,4.84299429 L0.561681983,5.05487397 L0.945748273,36.5217317 C3.19843495,36.7431479 4.97142159,38.6291326 4.99966542,40.945126 C5.02997147,43.4302226 3.03997056,45.4693594 0.554873968,45.4996654 C-1.93022262,45.5299715 -3.96935936,43.5399706 -3.99966542,41.054874 C-4.02791184,38.7386674 -2.30112489,36.8098646 -0.0542052678,36.5338576 L-0.438243664,5.06706818 C-0.475284399,2.02972791 1.95693894,-0.462550328 4.99427921,-0.499591063 L5.03650678,-0.499939416 L5.03650678,-0.499939416 L5.0613474,-0.5 L528,-0.5 Z" fill="#61D274" fill-rule="nonzero"></path>
+                                    <path d="M0.5,41 L0.0617191595,5.06097108 C0.028045764,2.29975264 2.23915789,0.0340451565 5.00037632,0.000371761033 C5.02069907,0.000123922648 5.04102314,-1.77262333e-15 5.0613474,0 L528,0 C530.761424,-5.07265313e-16 533,2.23857625 533,5 L533,101 L533,101" id="Top" stroke="#61D274"></path>
+                                </g>
+                                <g id="G2I" transform="translate(335.500000, 74.000000)">
+                                    <path id="Down" d="M154,-4 L163,0.5 L154,5 L154,1 L4.47245735,1.00070744 C4.23104912,3.18136977 2.43143317,4.89224336 0.211835704,4.99510201 L0,5 C-2.48528137,5 -4.5,2.98528137 -4.5,0.5 C-4.5,-1.98528137 -2.48528137,-4 0,-4 C2.3162476,-4 4.22376533,-2.25001939 4.4725262,-8.51613636e-05 L154,0 L154,-4 Z" fill="#61D274" fill-rule="nonzero"></path>
+                                    <line x1="-6.74373751e-14" y1="0.5" x2="154.5" y2="0.5" id="Top" stroke="#61D274" transform="translate(77.250000, 0.500000) scale(1, -1) translate(-77.250000, -0.500000) "></line>
+                                </g>
+                                <g id="I2D" transform="translate(609.000000, 75.000000)">
+                                    <path id="Down" d="M4.47245735,0.500707444 C4.2234136,2.75034205 2.31603406,4.5 0,4.5 C-2.48528137,4.5 -4.5,2.48528137 -4.5,0 C-4.5,-2.48528137 -2.48528137,-4.5 0,-4.5 C2.31603406,-4.5 4.2234136,-2.75034205 4.47245735,-0.500707444 L153,-0.5 C155.963479,-0.5 158.379539,1.84378001 158.495633,4.77879286 L158.5,5 L158.5,45.5 L162.5,45.5 L158,54.5 L153.5,45.5 L157.5,45.5 L157.5,5 C157.5,2.58572667 155.598763,0.615510911 153.211836,0.50489799 L153,0.5 Z" fill="#61D274" fill-rule="nonzero"></path>
+                                    <path d="M0,0 L153,0 C155.761424,-5.07265313e-16 158,2.23857625 158,5 L158,46 L158,46" id="Top" stroke="#61D274"></path>
+                                </g>
+                                <g id="D2C" transform="translate(846.000000, 143.000000)">
+                                    <path id="Down" d="M153.5,-4 L162.5,0.5 L153.5,5 L153.5,1 L4.47245735,1.00070744 C4.23104912,3.18136977 2.43143317,4.89224336 0.211835704,4.99510201 L0,5 C-2.48528137,5 -4.5,2.98528137 -4.5,0.5 C-4.5,-1.98528137 -2.48528137,-4 0,-4 C2.3162476,-4 4.22376533,-2.25001939 4.4725262,-8.51613636e-05 L153.5,0 L153.5,-4 Z" fill="#FF9B00" fill-rule="nonzero"></path>
+                                    <line x1="0" y1="0.5" x2="154" y2="0.5" id="Top" stroke="#FF9B00"></line>
+                                </g>
+                                <g id="编组-2" transform="translate(0.000000, 129.000000)">
+                                    <rect id="矩形" stroke="#4B4B4B" fill="#1E1E1E" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                    <text id="queued" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" line-spacing="18" fill="#E8E8E8">
+                                        <tspan x="33" y="18">queued</tspan>
+                                    </text>
+                                    <text id="Q" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#E8E8E8">
+                                        <tspan x="10" y="21">Q</tspan>
+                                    </text>
+                                </g>
+                                <g id="编组-2" transform="translate(224.000000, 61.000000)">
+                                    <rect id="矩形" stroke="#4B4B4B" fill="#1E1E1E" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                    <text id="get-request" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#E8E8E8">
+                                        <tspan x="30" y="19">get request</tspan>
+                                    </text>
+                                    <text id="G" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#E8E8E8">
+                                        <tspan x="10" y="21">G</tspan>
+                                    </text>
+                                </g>
+                                <g id="编组-2" transform="translate(498.000000, 61.000000)">
+                                    <rect id="矩形" stroke="#4B4B4B" fill="#1E1E1E" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                    <text id="I" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#E8E8E8">
+                                        <tspan x="10" y="21">I</tspan>
+                                    </text>
+                                    <text id="inserted" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#E8E8E8">
+                                        <tspan x="23" y="19">inserted</tspan>
+                                    </text>
+                                </g>
+                                <g id="编组-2" transform="translate(224.000000, 197.000000)">
+                                    <rect id="矩形" stroke="#4B4B4B" fill="#1E1E1E" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                    <text id="merged" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#E8E8E8">
+                                        <tspan x="33" y="19">merged</tspan>
+                                    </text>
+                                    <text id="M" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#E8E8E8">
+                                        <tspan x="10" y="21">M</tspan>
+                                    </text>
+                                </g>
+                                <g id="编组-2" transform="translate(734.000000, 129.000000)">
+                                    <rect id="矩形" stroke="#4B4B4B" fill="#1E1E1E" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                    <text id="issued" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#E8E8E8">
+                                        <tspan x="31" y="19">issued</tspan>
+                                    </text>
+                                    <text id="D" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#E8E8E8">
+                                        <tspan x="10" y="21">D</tspan>
+                                    </text>
+                                </g>
+                                <g id="编组-2" transform="translate(1008.000000, 129.000000)">
+                                    <rect id="矩形" stroke="#4B4B4B" fill="#1E1E1E" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                    <text id="complete" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#E8E8E8">
+                                        <tspan x="27" y="19">complete</tspan>
+                                    </text>
+                                    <text id="C" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#E8E8E8">
+                                        <tspan x="8" y="21">C</tspan>
+                                    </text>
+                                </g>
+                                <g [id]="G2I.id" transform="translate(370.000000, 54.000000)" font-size="12">
+                                    <text id="G2IText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                        <tspan x="0.068" y="37">时延占比  0.002%</tspan>
+                                    </text>
+                                    <text id="G2IName" transform="translate(46.500000, 8.500000) rotate(-360.000000) translate(-46.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#61D274">
+                                        <tspan x="37.128" y="14">G2I</tspan>
+                                    </text>
+                                </g>
+                                <g [id]="G2D.id" transform="translate(500.000000, 0.000000)" font-size="12">
+                                    <text id="G2DText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                        <tspan x="0.068" y="37">时延占比  0.002%</tspan>
+                                    </text>
+                                    <text id="G2DName" transform="translate(46.500000, 8.500000) rotate(-360.000000) translate(-46.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#61D274">
+                                        <tspan x="34.434" y="14">G2D</tspan>
+                                    </text>
+                                </g>
+                                <g [id]="Q2G.id" transform="translate(92.000000, 54.000000)" font-size="12">
+                                    <text id="Q2GText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                        <tspan x="0.688" y="37">时延占比 0.002%</tspan>
+                                    </text>
+                                    <text id="Q2GName" transform="translate(45.500000, 8.500000) rotate(-360.000000) translate(-45.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#61D274">
+                                        <tspan x="33.158" y="14">Q2G</tspan>
+                                    </text>
+                                </g>
+                                <g [id]="Q2M.id" transform="translate(91.000000, 190.000000)" font-size="12">
+                                    <text id="Q2MText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                        <tspan x="0.068" y="37">时延占比  0.002%</tspan>
+                                    </text>
+                                    <text id="Q2MName" transform="translate(46.500000, 8.500000) rotate(-360.000000) translate(-46.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#ED4B4B">
+                                        <tspan x="33.186" y="14">Q2M</tspan>
+                                    </text>
+                                </g>
+                                <g [id]="I2D.id" transform="translate(691.000000, 74.500000) rotate(-360.000000) translate(-691.000000, -74.500000) translate(644.000000, 54.000000)" font-size="12">
+                                    <text id="I2DText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                        <tspan x="0.068" y="37">时延占比  0.002%</tspan>
+                                    </text>
+                                    <text id="I2DName" transform="translate(46.500000, 8.500000) rotate(-360.000000) translate(-46.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#61D274">
+                                        <tspan x="37.026" y="14">I2D</tspan>
+                                    </text>
+                                </g>
+                                <g [id]="M2D.id" transform="translate(576.000000, 197.000000)" font-size="12">
+                                    <text id="M2DText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                        <tspan x="0.068" y="37">时延占比  0.002%</tspan>
+                                    </text>
+                                    <text id="M2DName" transform="translate(46.500000, 8.500000) rotate(-360.000000) translate(-46.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#ED4B4B">
+                                        <tspan x="33.462" y="14">M2D</tspan>
+                                    </text>
+                                </g>
+                                <g [id]="M2I.id" transform="translate(554.000000, 149.500000) rotate(-360.000000) translate(-554.000000, -149.500000) translate(507.000000, 132.000000)">
+                                    <rect id="BG" fill="#1E1E1E" opacity="0.4921875" x="30" y="2" width="38" height="32"></rect>
+                                    <text id="M2IText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-size="12" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                        <tspan x="0.068" y="31">时延占比  0.002%</tspan>
+                                    </text>
+                                    <text id="M2IName" transform="translate(46.500000, 8.500000) rotate(-360.000000) translate(-46.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-size="12" font-weight="400" fill="#ED4B4B">
+                                        <tspan x="36.156" y="14">M2I</tspan>
+                                    </text>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg width="100%" height="238px" viewBox="0 0 1120 238" version="1.1" xmlns="http://www.w3.org/2000/svg" dark *ngIf="language === 'en'">
+                    <g id="IO分析" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="1总览_3" transform="translate(-247.000000, -657.000000)">
+                            <g id="编组-20备份-2" transform="translate(61.000000, 498.000000)">
+                                <g id="编组-6-+-矩形-+-编组-15-蒙版" transform="translate(60.000000, 54.000000)">
+                                    <g id="IO-Vscode" transform="translate(126.000000, 105.000000)">
+                                        <g id="Q2M" transform="translate(52.000000, 157.000000)">
+                                            <path id="Down" d="M-2.7554553e-16,-4.5 C2.48528137,-4.5 4.5,-2.48528137 4.5,-2.7554553e-16 C4.5,2.31603406 2.75034205,4.2234136 0.500707444,4.47245735 L0.5,49.5 C0.5,51.9142733 2.40123652,53.8844891 4.7881643,53.995102 L5,54 L163.5,54 L163.5,50.5368599 C163.5,50.2700103 163.694692,50.0486335 163.949778,50.0070266 L164.03686,50 C164.120205,50 164.202405,50.0194048 164.276951,50.0566778 L164.276951,50.0566778 L172.203114,54.0197591 C172.468311,54.1523577 172.575803,54.474835 172.443205,54.7400322 C172.391256,54.8439293 172.307011,54.9281747 172.203114,54.9801233 L172.203114,54.9801233 L164.276951,58.9432046 C164.011754,59.0758032 163.689276,58.9683108 163.556678,58.7031136 C163.519405,58.6285676 163.5,58.5463674 163.5,58.4630225 L163.5,58.4630225 L163.5,55 L5,55 C2.03652085,55 -0.379539137,52.65622 -0.495632796,49.7212071 L-0.5,49.5 L-0.500707444,4.47245735 C-2.75034205,4.2234136 -4.5,2.31603406 -4.5,2.7554553e-16 C-4.5,-2.48528137 -2.48528137,-4.5 -2.7554553e-16,-4.5 Z" fill="#ED4B4B" fill-rule="nonzero"></path>
+                                            <path d="M0,2 L0,49.5 C3.38176876e-16,52.2614237 2.23857625,54.5 5,54.5 L163,54.5 L163,54.5" id="Top" stroke="#ED4B4B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </g>
+                                        <g [id]="D2C.id" transform="translate(927.000000, 143.500000) rotate(-360.000000) translate(-927.000000, -143.500000) translate(862.000000, 123.000000)" font-size="12">
+                                            <text id="D2CText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                                <tspan x="8.458" y="37">Delay Ratio  0.002%</tspan>
+                                            </text>
+                                            <text id="D2CName" transform="translate(64.500000, 8.500000) rotate(-360.000000) translate(-64.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#FF9B00">
+                                                <tspan x="52.71" y="14">D2C</tspan>
+                                            </text>
+                                        </g>
+                                        <g id="M2D" transform="translate(336.000000, 157.000000)">
+                                            <path id="Down" d="M431.002066,-0.499995731 L435.464838,8.51852231 L431.464,8.502 L431.270572,55.5227271 C431.258362,58.4775257 428.917796,60.8802108 425.991186,60.9956572 L425.770618,61 L4.47245735,61.0007074 C4.2234136,63.2503421 2.31603406,65 0,65 C-2.48528137,65 -4.5,62.9852814 -4.5,60.5 C-4.5,58.0147186 -2.48528137,56 0,56 C2.31637876,56 4.22398135,57.7501788 4.47256844,60.000297 L425.770618,60 C428.177841,60 430.145005,58.1094412 430.264837,55.7297971 L430.27058,55.5185949 L430.464,8.497 L426.464915,8.48133255 L431.002066,-0.499995731 Z" fill="#ED4B4B" fill-rule="nonzero"></path>
+                                            <path d="M0,60.5 L425.773981,60.5 C428.526022,60.5 430.760692,58.2760473 430.773923,55.5240382 L431,8.5 L431,8.5" id="Top" stroke="#ED4B4B"></path>
+                                        </g>
+                                        <g id="M2I" transform="translate(336.000000, 89.000000)">
+                                            <path id="Down" d="M218,-0.5 L222.5,8.5 L218.5,8.5 L218.5,112.5 C218.5,115.463479 216.15622,117.879539 213.221207,117.995633 L213,118 L4.47245735,118.000707 C4.2234136,120.250342 2.31603406,122 0,122 C-2.48528137,122 -4.5,119.985281 -4.5,117.5 C-4.5,115.014719 -2.48528137,113 0,113 C2.31637876,113 4.22398135,114.750179 4.47256844,117.000297 L213,117 C215.414273,117 217.384489,115.098763 217.495102,112.711836 L217.5,112.5 L217.5,8.5 L213.5,8.5 L218,-0.5 Z" fill="#ED4B4B" fill-rule="nonzero"></path>
+                                            <path d="M0,117.5 L213,117.5 C215.761424,117.5 218,115.261424 218,112.5 L218,8 L218,8" id="Top" stroke="#ED4B4B"></path>
+                                        </g>
+                                        <g id="Q2G" transform="translate(52.000000, 74.000000)">
+                                            <path id="Down" d="M163.5,-4.5 L172.5,0 L163.5,4.5 L163.5,0.5 L5.00475375,0.500185939 C2.59058017,0.522132971 0.637729084,2.44120124 0.548819179,4.82903592 L0.545847092,5.0409074 L0.959646016,50.5231368 C3.21163459,50.751544 4.97875888,52.6430227 4.99981406,54.9590926 C5.02240659,57.4442713 3.02608608,59.4772215 0.540907401,59.4998141 C-1.94427128,59.5224066 -3.97722153,57.5260861 -3.99981406,55.0409074 C-4.02087118,52.7246244 -2.28810582,50.8011905 -0.0403403451,50.5321589 L-0.454111589,5.04999793 C-0.481724685,2.01255732 1.95822261,-0.472159645 4.99566322,-0.499772741 L5.02066193,-0.499943185 L5.02066193,-0.499943185 L5.04566115,-0.5 L163.5,-0.5 L163.5,-4.5 Z" fill="#61D274" fill-rule="nonzero"></path>
+                                            <path d="M0.5,55 L0.0458677515,5.04545267 C0.0207649365,2.28414302 2.23889884,0.0253094137 5.00020849,0.000206598765 C5.01535898,6.88669663e-05 5.03051003,2.66731848e-15 5.04566115,0 L164,0 L164,0" id="Top" stroke="#61D274"></path>
+                                        </g>
+                                        <g id="G2D" transform="translate(280.000000, 20.000000)">
+                                            <path id="Down" d="M528,-0.5 C530.963479,-0.5 533.379539,1.84378001 533.495633,4.77879286 L533.5,5 L533.5,100.5 L537.5,100.5 L533,109.5 L528.5,100.5 L532.5,100.5 L532.5,5 C532.5,2.58572667 530.598763,0.615510911 528.211836,0.50489799 L528,0.5 L5.00647343,0.500334585 C2.5923796,0.529774754 0.645494425,2.45489514 0.563996439,4.84299429 L0.561681983,5.05487397 L0.945748273,36.5217317 C3.19843495,36.7431479 4.97142159,38.6291326 4.99966542,40.945126 C5.02997147,43.4302226 3.03997056,45.4693594 0.554873968,45.4996654 C-1.93022262,45.5299715 -3.96935936,43.5399706 -3.99966542,41.054874 C-4.02791184,38.7386674 -2.30112489,36.8098646 -0.0542052678,36.5338576 L-0.438243664,5.06706818 C-0.475284399,2.02972791 1.95693894,-0.462550328 4.99427921,-0.499591063 L5.03650678,-0.499939416 L5.03650678,-0.499939416 L5.0613474,-0.5 L528,-0.5 Z" fill="#61D274" fill-rule="nonzero"></path>
+                                            <path d="M0.5,41 L0.0617191595,5.06097108 C0.028045764,2.29975264 2.23915789,0.0340451565 5.00037632,0.000371761033 C5.02069907,0.000123922648 5.04102314,-1.77262333e-15 5.0613474,0 L528,0 C530.761424,-5.07265313e-16 533,2.23857625 533,5 L533,101 L533,101" id="Top" stroke="#61D274"></path>
+                                        </g>
+                                        <g id="G2I" transform="translate(335.500000, 74.000000)">
+                                            <path id="Down" d="M154,-4 L163,0.5 L154,5 L154,1 L4.47245735,1.00070744 C4.23104912,3.18136977 2.43143317,4.89224336 0.211835704,4.99510201 L0,5 C-2.48528137,5 -4.5,2.98528137 -4.5,0.5 C-4.5,-1.98528137 -2.48528137,-4 0,-4 C2.3162476,-4 4.22376533,-2.25001939 4.4725262,-8.51613636e-05 L154,0 L154,-4 Z" fill="#61D274" fill-rule="nonzero"></path>
+                                            <line x1="-6.74373751e-14" y1="0.5" x2="154.5" y2="0.5" id="Top" stroke="#61D274" transform="translate(77.250000, 0.500000) scale(1, -1) translate(-77.250000, -0.500000) "></line>
+                                        </g>
+                                        <g id="I2D" transform="translate(609.000000, 75.000000)">
+                                            <path id="Down" d="M4.47245735,0.500707444 C4.2234136,2.75034205 2.31603406,4.5 0,4.5 C-2.48528137,4.5 -4.5,2.48528137 -4.5,0 C-4.5,-2.48528137 -2.48528137,-4.5 0,-4.5 C2.31603406,-4.5 4.2234136,-2.75034205 4.47245735,-0.500707444 L153,-0.5 C155.963479,-0.5 158.379539,1.84378001 158.495633,4.77879286 L158.5,5 L158.5,45.5 L162.5,45.5 L158,54.5 L153.5,45.5 L157.5,45.5 L157.5,5 C157.5,2.58572667 155.598763,0.615510911 153.211836,0.50489799 L153,0.5 Z" fill="#61D274" fill-rule="nonzero"></path>
+                                            <path d="M0,0 L153,0 C155.761424,-5.07265313e-16 158,2.23857625 158,5 L158,46 L158,46" id="Top" stroke="#61D274"></path>
+                                        </g>
+                                        <g id="D2C" transform="translate(846.000000, 143.000000)">
+                                            <path id="Down" d="M153.5,-4 L162.5,0.5 L153.5,5 L153.5,1 L4.47245735,1.00070744 C4.23104912,3.18136977 2.43143317,4.89224336 0.211835704,4.99510201 L0,5 C-2.48528137,5 -4.5,2.98528137 -4.5,0.5 C-4.5,-1.98528137 -2.48528137,-4 0,-4 C2.3162476,-4 4.22376533,-2.25001939 4.4725262,-8.51613636e-05 L153.5,0 L153.5,-4 Z" fill="#FF9B00" fill-rule="nonzero"></path>
+                                            <line x1="0" y1="0.5" x2="154" y2="0.5" id="Top" stroke="#FF9B00"></line>
+                                        </g>
+                                        <g id="编组-2" transform="translate(0.000000, 129.000000)">
+                                            <rect id="矩形" stroke="#4B4B4B" fill="#1E1E1E" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                            <text id="queued" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" line-spacing="18" fill="#E8E8E8">
+                                                <tspan x="33" y="18">queued</tspan>
+                                            </text>
+                                            <text id="Q" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#E8E8E8">
+                                                <tspan x="10" y="21">Q</tspan>
+                                            </text>
+                                        </g>
+                                        <g id="编组-2" transform="translate(224.000000, 61.000000)">
+                                            <rect id="矩形" stroke="#4B4B4B" fill="#1E1E1E" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                            <text id="get-request" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#E8E8E8">
+                                                <tspan x="30" y="19">get request</tspan>
+                                            </text>
+                                            <text id="G" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#E8E8E8">
+                                                <tspan x="10" y="21">G</tspan>
+                                            </text>
+                                        </g>
+                                        <g id="编组-2" transform="translate(498.000000, 61.000000)">
+                                            <rect id="矩形" stroke="#4B4B4B" fill="#1E1E1E" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                            <text id="I" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#E8E8E8">
+                                                <tspan x="10" y="21">I</tspan>
+                                            </text>
+                                            <text id="inserted" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#E8E8E8">
+                                                <tspan x="23" y="19">inserted</tspan>
+                                            </text>
+                                        </g>
+                                        <g id="编组-2" transform="translate(224.000000, 197.000000)">
+                                            <rect id="矩形" stroke="#4B4B4B" fill="#1E1E1E" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                            <text id="merged" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#E8E8E8">
+                                                <tspan x="33" y="19">merged</tspan>
+                                            </text>
+                                            <text id="M" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#E8E8E8">
+                                                <tspan x="10" y="21">M</tspan>
+                                            </text>
+                                        </g>
+                                        <g id="编组-2" transform="translate(734.000000, 129.000000)">
+                                            <rect id="矩形" stroke="#4B4B4B" fill="#1E1E1E" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                            <text id="issued" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#E8E8E8">
+                                                <tspan x="31" y="19">issued</tspan>
+                                            </text>
+                                            <text id="D" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#E8E8E8">
+                                                <tspan x="10" y="21">D</tspan>
+                                            </text>
+                                        </g>
+                                        <g id="编组-2" transform="translate(1008.000000, 129.000000)">
+                                            <rect id="矩形" stroke="#4B4B4B" fill="#1E1E1E" x="0.5" y="0.5" width="111" height="27" rx="5"></rect>
+                                            <text id="complete" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="20" fill="#E8E8E8">
+                                                <tspan x="27" y="19">complete</tspan>
+                                            </text>
+                                            <text id="C" font-family="HarmonyOS_Sans_SC_Bold, HarmonyOS Sans SC" font-size="16" font-weight="bold" line-spacing="24" fill="#E8E8E8">
+                                                <tspan x="8" y="21">C</tspan>
+                                            </text>
+                                        </g>
+                                        <g [id]="G2I.id" transform="translate(352.000000, 54.000000)" font-size="12">
+                                            <text id="G2IText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                                <tspan x="8.458" y="37">Delay Ratio  0.002%</tspan>
+                                            </text>
+                                            <text id="G2IName" transform="translate(64.500000, 8.500000) rotate(-360.000000) translate(-64.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#61D274">
+                                                <tspan x="55.128" y="14">G2I</tspan>
+                                            </text>
+                                        </g>
+                                        <g [id]="G2D.id" transform="translate(482.000000, 0.000000)" font-size="12">
+                                            <text id="G2DText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                                <tspan x="8.458" y="37">Delay Ratio  0.002%</tspan>
+                                            </text>
+                                            <text id="G2DName" transform="translate(64.500000, 8.500000) rotate(-360.000000) translate(-64.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#61D274">
+                                                <tspan x="52.434" y="14">G2D</tspan>
+                                            </text>
+                                        </g>
+                                        <g [id]="Q2G.id" transform="translate(75.000000, 54.000000)" font-size="12">
+                                            <text id="Q2GText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                                <tspan x="0.078" y="37">Delay Ratio 0.002%</tspan>
+                                            </text>
+                                            <text id="Q2GName" transform="translate(62.500000, 8.500000) rotate(-360.000000) translate(-62.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#61D274">
+                                                <tspan x="50.158" y="14">Q2G</tspan>
+                                            </text>
+                                        </g>
+                                        <g [id]="Q2M.id" transform="translate(73.000000, 190.000000)" font-size="12">
+                                            <text id="Q2MText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                                <tspan x="8.458" y="37">Delay Ratio  0.002%</tspan>
+                                            </text>
+                                            <text id="Q2MName" transform="translate(64.500000, 8.500000) rotate(-360.000000) translate(-64.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#ED4B4B">
+                                                <tspan x="51.186" y="14">Q2M</tspan>
+                                            </text>
+                                        </g>
+                                        <g [id]="I2D.id" transform="translate(691.000000, 74.500000) rotate(-360.000000) translate(-691.000000, -74.500000) translate(626.000000, 54.000000)" font-size="12">
+                                            <text id="I2DText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                                <tspan x="8.458" y="37">Delay Ratio  0.002%</tspan>
+                                            </text>
+                                            <text id="I2DName" transform="translate(64.500000, 8.500000) rotate(-360.000000) translate(-64.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#61D274">
+                                                <tspan x="55.026" y="14">I2D</tspan>
+                                            </text>
+                                        </g>
+                                        <g [id]="M2D.id" transform="translate(558.000000, 197.000000)" font-size="12">
+                                            <text id="M2DText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                                <tspan x="8.458" y="37">Delay Ratio  0.002%</tspan>
+                                            </text>
+                                            <text id="M2DName" transform="translate(64.500000, 8.500000) rotate(-360.000000) translate(-64.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-weight="400" fill="#ED4B4B">
+                                                <tspan x="51.462" y="14">M2D</tspan>
+                                            </text>
+                                        </g>
+                                        <g [id]="M2I.id" transform="translate(554.000000, 149.500000) rotate(-360.000000) translate(-554.000000, -149.500000) translate(489.000000, 132.000000)">
+                                            <rect id="BG" fill="#1E1E1E" opacity="0.4921875" x="48" y="2" width="38" height="32"></rect>
+                                            <text id="M2IText" font-family="HarmonyOS_Sans_SC, HarmonyOS Sans SC" font-size="12" font-weight="normal" line-spacing="18" fill="#AAAAAA">
+                                                <tspan x="8.458" y="31">Delay Ratio  0.002%</tspan>
+                                            </text>
+                                            <text id="M2IName" transform="translate(64.500000, 8.500000) rotate(-360.000000) translate(-64.500000, -8.500000) " font-family="HarmonyOS_Sans_SC_Medium, HarmonyOS Sans SC" font-size="12" font-weight="400" fill="#ED4B4B">
+                                                <tspan x="54.156" y="14">M2I</tspan>
+                                            </text>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </hy-theme-content>
+        </div>
+    </div>
+    <div class="trace-detail-table" *ngIf="isTable">
+        <ti-table [(displayedData)]="displayedData" [srcData]="srcData" [columns]="header">
+            <div class="ti3-table-container" hyNodata [nodataShow]="srcData.data.length === 0">
+                <table>
+                    <thead>
+                        <tr>
+                            <ng-container *ngFor="let item of mainHeader;index as i">
+                                <th tiOverflow
+                                [attr.rowspan]="item.rowspan"
+                                [attr.colspan]="item.colspan"
+                                class="center"
+                                width="{{item.width}}"
+                                [ngClass]="{setBorder: item.colspan && i < mainHeader.length - 1, 'last-rowspan-th': i === mainHeader.length - 1}">
+                                    <ti-cell-text>{{item.title}}</ti-cell-text>
+                                    <ti-head-sort [sortKey]="item.name" *ngIf="item.name === 'percent' && showSort"></ti-head-sort>
+                                    <ti-head-filter *ngIf="i === 0" [options]="item.options"
+                                                [(ngModel)]="item.selected"
+                                                (select)="onSelect()"
+                                                [ngClass]="{'ti3-head-filtered': item.selected && item.selected.length}"
+                                                [multiple]="item.multiple"
+                                                [selectAll]="item.selectAll"></ti-head-filter>
+                                </th>
+                            </ng-container>
+                        </tr>
+                        <tr>
+                            <ng-container *ngFor="let item of header[1]">
+                                <th not-resizable tiOverflow>
+                                    <ti-cell-text>{{item.title}}</ti-cell-text>   
+                                    <ti-head-sort [sortKey]="item.sortKey" *ngIf="showSort"></ti-head-sort>
+                                </th>
+                            </ng-container>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let row of displayedData;index as i">
+                            <tr>
+                                <td tiOverflow [attr.rowspan]="totalStage" *ngIf="i===0||!(i%totalStage)" class="operate">{{row.operateName}}</td>
+                                <td tiOverflow [tiTip]='tipContent' [tiTipContext]='row.stage'>{{row.stage}}</td>
+                                <ng-container *ngFor="let head of header[1]">
+                                    <td tiOverflow>{{row[head.name]}}</td>
+                                </ng-container>
+                                <td>{{row.percent}}</td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </ti-table>
+    </div>
+</div>
+<ng-template #tipContent let-context='context'>
+    <div class="tip-content-title">{{context}}</div>
+    <div class="tip-content-desc" [innerHTML]="descData[context].annotation[language]"></div>
+</ng-template>
+
+
+
+

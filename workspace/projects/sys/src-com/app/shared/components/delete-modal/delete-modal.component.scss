@@ -1,0 +1,15 @@
+.ti3-icon-warn {
+    color: #ff9b00;
+    margin-right: 8px;
+  }
+::ng-deep .compareModal {
+    .title {
+      display: flex;
+      padding: 20px 0;
+      border-top: var(--divider-style-dashed);
+      color: var(--common-color-font-secondary);
+    }
+    .ti3-modal-content {
+    width: 700px;
+    }
+  }

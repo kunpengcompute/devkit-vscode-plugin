@@ -1,0 +1,29 @@
+.queue-packet-loss{
+  margin-left: -20px;
+  margin-bottom: -20px;
+}
+::ng-deep .search-pop {
+  width: 240px;
+  padding: 0 !important;
+  border: none !important;
+
+  .ti3-tooltip-content {
+    padding: 0;
+
+    .search-input {
+      --ti-searchbox-container-width: 238px;
+    }
+  }
+}
+
+:host .queue-packet-loss ::ng-deep {
+  .ti3-table > .ti3-table-container > table > tbody > tr {
+    :first-child {
+      padding-left: 24px;
+    }
+  }
+
+  .ti3-page-container {
+    margin: 20px 0 20px 20px
+  }
+}

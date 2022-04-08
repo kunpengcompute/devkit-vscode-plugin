@@ -1,0 +1,107 @@
+.warpper {
+    position: relative;
+    overflow: visible;
+    margin-bottom: 50px;
+
+    .svg-container {
+        text-align: center;
+        width: auto;
+        height: auto;
+        background-position-x: center;
+    }
+}
+
+/*
+ * 自定义的提示框
+ */
+.nice_tooltip::before {
+    background-color: var(--subsystem-tooltip-bg);
+    box-shadow: 0px 10px 20px 0px rgba(24, 25, 35, 0.14);
+}
+.nice_tooltip {
+    margin: 0px !important;
+    opacity: 0;
+    position: absolute;
+    display: inline-block;
+    height: auto;
+    font-size: 14px;
+    background-color: var(--subsystem-tooltip-bg);
+    line-height: 20px;
+    border-radius: 2px;
+    margin-left: 12px;
+    pointer-events: none;
+    cursor: default;
+    box-shadow: 0px 10px 20px 0px rgba(24, 25, 35, 0.14);
+    width: 342px;
+    box-sizing: border-box;
+    z-index: 999;
+    padding: 16px;
+
+    &:after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+        cursor: default;
+    }
+
+    &[placement="bottom"]:after {
+        top: -8px;
+        margin-left: -8px;
+        border-bottom: 8px solid var(--subsystem-tooltip-bg);
+        border-right: 8px solid transparent;
+        border-top: 0;
+        border-left: 8px solid transparent;
+    }
+
+    &[placement="top"]:after {
+        left: 50%;
+        bottom: -8px;
+        margin-left: -8px;
+        border-bottom: 0;
+        border-right: 8px solid transparent;
+        border-top: 8px solid var(--subsystem-tooltip-bg);
+        border-left: 8px solid transparent;
+    }
+
+    @for $i from 0 through 100 {
+        $bottomProperty: '[placement="bottom"][offset="#{$i}"]';
+        $topProperty: '[placement="top"][offset="#{$i}"]';
+        $transform: $i;
+        $left: $i;
+
+        @if $i < 3 {
+            $transform: 3;
+            $left: 3;
+        }
+
+        @if $i>97 {
+            $transform: 97;
+            $left: 97;
+        }
+
+        &#{$bottomProperty } {
+            transform: translate($transform * -1%, 11px);
+
+            &:after {
+                left: $left * 1%;
+            }
+        }
+
+        &#{$topProperty } {
+            transform: translate($transform * -1%, #{calc(-100% - 11px)});
+
+            &:after {
+                left: $left * 1%;
+            }
+        }
+    }
+}
+.storage-tip-title{
+    color: var(--tips-title-color);
+}
+::ng-deep .vscode-dark {
+    --tips-title-color:#2a2f35;
+}
+::ng-deep .vscode-light {
+    --tips-title-color:#E8E8E8;
+}

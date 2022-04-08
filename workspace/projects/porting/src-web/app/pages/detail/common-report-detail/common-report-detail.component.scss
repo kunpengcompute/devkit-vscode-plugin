@@ -1,0 +1,187 @@
+$com30: 30px;
+$com40: 40px;
+
+$width10: 10px;
+$width20: 1.04%;
+$width30: 20px;
+$width80: 4.16%;
+
+$col61: #616161;
+$col97: #979797;
+$colfff: #fff;
+$col222: #222;
+$colE1E6EE: #E1E6EE;
+
+$font16: 16px;
+$font20: 20px;
+$font48: 48px;
+
+.common-container {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  background-color: $colfff;
+  padding: $width20 $width80 20px $width80;
+}
+
+/* 公共样式 start */
+.com-text {
+  color: $col222;
+  font-size: $font20;
+}
+.com-title {
+  line-height: $com30;
+}
+/* 公共样式 end */
+
+/* 头部信息 start */
+.common-header {
+  display: flex;
+  align-items: center;
+  padding-bottom: $width10;
+  border-bottom: 1px solid $colE1E6EE;
+  line-height: $com30;
+  img,
+  text {
+    vertical-align: middle;
+  }
+  img {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+}
+/* 头部信息 end */
+
+/* 配置信息 start */
+.config-setting {
+  margin: $width30 0;
+  .config-left {
+    .config-left-item {
+      margin-top: 20px;
+      color: $col61;
+      line-height: 18px;
+      > span:first-child{
+        width: 200px;
+        margin-right: 10px;
+      }
+      p {
+        display: inline-block;
+        width: 370px;
+        color: $col222;
+        img,
+        span {
+          vertical-align: middle;
+        }
+        img {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+
+  .config-right {
+    margin-top: 20px;
+    color: $col97;
+    font-size: $font16;
+    .config-right-item {
+      width: 140px;
+      &:first-child {
+        padding-right: $com40;
+      }
+      &:nth-child(2) {
+        margin: 0 $com40;
+      }
+      &:nth-child(3) {
+        border-left: 1px solid $colE1E6EE;
+        padding: 0 40px;
+      }
+      span {
+        &:first-child {
+          height: 24px;
+          margin-bottom: 22px;
+        }
+        &:last-child {
+          color: $col222;
+          font-size: $font48;
+        }
+      }
+    }
+    .config-right-item-en {
+      &:nth-of-type(2) {
+        margin-right: 60px;
+      }
+    }
+  }
+}
+/* 配置信息 end */
+
+/* table-detail start */
+.table-detail {
+  .table-detail-title {
+    margin-bottom: 20px;
+  }
+  .cfile-title {
+    margin-top: $com30;
+  }
+  .isHttp {
+    color: #ccc;
+    cursor: not-allowed;
+  }
+}
+/* table-detail end */
+
+.down-copy {
+  display: flex;
+  height: 32px;
+  .re-copy-link {
+    margin-left: 0;
+    padding-left: 16px;
+  }
+}
+
+/* nestable start */
+.nested-table-container {
+  position: relative;
+  background-color: $colfff;
+  &::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    content: '';
+    width: 24px;
+    border-right: 2px solid #0067FF;
+    background-color: #F5F9FF;
+  }
+}
+/* nestable end */
+
+.ti3-table > .ti3-resize-wrapper > table > tbody > .ti3-details-tr > td.nested-table-container {
+  padding: 0 0 0 26px !important;
+  & > .ti3-table-detail-container {
+    padding: 0 !important;
+  }
+}
+
+:host ::ng-deep .ti3-table-container .hy-nodata-container {
+    border-bottom: 1px solid var(--ti-table-border-bottom-color);
+    padding-bottom: 6px;
+}
+.normal-height {
+  max-height: 161px;
+}
+.table-auto-height {
+  max-height: calc(100vh - 530px);
+}
+
+:host ::ng-deep [tiButton]:not([disabled]):focus {
+  background: var(--ti-button-default-normal-bg-color);
+  border-color: var(--ti-button-default-normal-border-color);
+  color: var(--ti-button-default-normal-color);
+}
+
+:host ::ng-deep [tiButton]:not([disabled]):hover {
+  background: var(--ti-button-default-bg-color-active);
+  border-color: var(--ti-button-default-border-color-active);
+  color: var(--ti-button-default-color-active);
+}

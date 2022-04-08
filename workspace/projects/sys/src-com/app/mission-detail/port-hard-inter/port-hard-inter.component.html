@@ -1,0 +1,26 @@
+<div class="port-hart-inter">
+    <div class="inter-header">
+      <span class="title">{{ 'net_io.xps_rps.hard_info.info' | i18n }}</span>
+      <ti-select class="inter-selected" [options]='interOption' [(ngModel)]="interSelected"
+        (ngModelChange)="interSelectedChange($event)"></ti-select>
+      <ti-select class="cpu-selected" [options]='cpuOption' [(ngModel)]="cpuSelected" *ngIf="interSelected.index"
+      (ngModelChange)="cpuSelectedChange($event)"></ti-select>
+    </div>
+  
+    <div class="inter-container">
+      <!-- 硬中断编号视图 -->
+      <div class="hart-number-table-container" *ngIf="!interSelected.index">
+        <app-hart-number-table 
+        [hartNumberData]="hartNumberData"
+        [ipiInfo]="ipiInfo"
+        [numaNum]="numaNum"
+      ></app-hart-number-table>
+      </div>
+  
+      <!-- CPU核视图 -->
+      <div class="hart-cpu-table-container" *ngIf="interSelected.index">
+        <app-hard-cpu-table [hartCPUData]="hartCPUData" [ipiInfo]="ipiInfo" [numaNum]="numaNum"></app-hard-cpu-table>
+      </div>
+    </div>
+  </div>
+  

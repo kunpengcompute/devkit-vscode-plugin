@@ -1,0 +1,22 @@
+{
+  "libstdcUrl": "http://ftp.cn.debian.org/debian/pool/main/g/gcc-7/libstdc++6-7-dbg_7.4.0-6_arm64.deb",
+  "gccCodeUrl": "https://gcc.gnu.org/",
+  "gccPatchUrl": "https://github.com/kunpengcompute/devkitdriver/tree/main/gccchecker",
+  "GNU_URL": "https://gcc.gnu.org/install/index.html",
+  "depDictoryUrl": "https://mirror.iscas.ac.cn/kunpeng/archive/Porting_Dependency/Packages/",
+  "community": "https://bbs.huaweicloud.com/forum/forum-928-1.html",
+  "libstdcppLink": "http://vault.centos.org/centos/8.2.2004/BaseOS/x86_64/os/Packages/libstdc++-8.3.1-5.el8.0.2.x86_64.rpm",
+  "glibcLink": "http://vault.centos.org/centos/8.2.2004/BaseOS/x86_64/os/Packages/glibc-2.28-101.el8.x86_64.rpm",
+  "bannerUrlZn1": "https://support.huaweicloud.com/kunpengdevps_video/kunpengdevps_video.html",
+  "bannerUrlZn2": "https://support.huaweicloud.com/porting-introduction/kunpengpt_06_0004.html",
+  "bannerUrlZn3": "https://www.hikunpeng.com/zh/",
+  "bannerUrlZn4": "https://bbs.huaweicloud.com/forum/forum-928-1.html",
+  "bannerUrlEn2": "https://support.huaweicloud.com/intl/en-us/porting-introduction/kunpengpt_06_0004.html",
+  "bannerUrlEn3": "https://www.hikunpeng.com/en/",
+  "weakLibstdcDeb": "http://ftp.cn.debian.org/debian/pool/main/g/gcc-7/libstdc++6-7-dbg_7.4.0-6_arm64.deb",
+  "weakLibtinfoDeb": "http://ftp.cn.debian.org/debian/pool/main/n/ncurses/libtinfo5_6.1+20181013-2+deb10u2_arm64.deb",
+  "weakLibstdcRpm": "http://ftp.pbone.net/mirror/ftp.opensuse.org/ports/aarch64/distribution/leap/15.0/repo/oss/aarch64/libstdc++6-7.3.1+r258812-lp150.2.6.aarch64.rpm",
+  "weakLibtinfoRpm": "http://ftp.pbone.net/mirror/ftp.opensuse.org/ports/update/leap/42.3/oss/aarch64/libncurses5-5.9-59.1.aarch64.rpm",
+  "userGuide": "https://support.huaweicloud.com/porting-faq/kunpengpt_06_0118.html",
+  "hikunpengUrl": "https://www.hikunpeng.com/zh/voc?tagindex=0"
+}

@@ -1,0 +1,1545 @@
+{
+    "name": "kunpeng-hyper-tuner-plugin",
+    "displayName": "Kunpeng Hyper Tuner Plugin",
+    "description": "支持系统性能分析和Java性能分析，提供系统全景及常见应用场景下的性能采集和分析能力，同时基于调优专家系统给出优化建议。",
+    "version": "2.3.3",
+    "publisher": "kunpengfamily",
+    "license": "SEE LICENSE IN LICENSE.md",
+    "engines": {
+        "vscode": "^1.38.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "icon": "resources/images/tuning.png",
+    "activationEvents": [
+        "onView:perfadvisorTools"
+    ],
+    "main": "./out/extension/src/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.view.perfUserManagement",
+                "title": "%perfadvisor.user.management%"
+            },
+            {
+                "command": "extension.view.perfLogin",
+                "title": "%perfadvisor.user.login%"
+            },
+            {
+                "command": "extension.view.perfSysConfigure",
+                "title": "%perfadvisor.sys.configure%"
+            },
+            {
+                "command": "extension.view.webServerCert",
+                "title": "%perfadvisor.sys.webserver%"
+            },
+            {
+                "command": "extension.view.weakPassword",
+                "title": "%perfadvisor.sys.weakpassword%"
+            },
+            {
+                "command": "extension.view.agentServerCert",
+                "title": "%perfadvisor.sys.agentserver%"
+            },
+            {
+                "command": "extension.view.sysPerfPath",
+                "title": "%sysperf.performance.analysis.setting%"
+            },
+            {
+                "command": "extension.view.sysPerfImportAndExportTask",
+                "title": "%perfadvisor.sys.sysperfTask%"
+            },
+            {
+                "command": "extension.view.perfLogout",
+                "title": "%perfadvisor.menu.logout%"
+            },
+            {
+                "command": "extension.view.showUser",
+                "title": "%perfadvisor.menu.show.user%"
+            },
+            {
+                "command": "extension.view.perfNodesManagement",
+                "title": "%sysperf.nodes.management%"
+            },
+            {
+                "command": "extension.view.perfTaskTemplateManagement",
+                "title": "%sysperf.task.template%"
+            },
+            {
+                "command": "extension.view.perfReservationTaskManagement",
+                "title": "%sysperf.reservation.task%"
+            },
+            {
+                "command": "extension.view.perfRunningLog",
+                "title": "%perfadvisor.running.log%"
+            },
+            {
+                "command": "extension.view.perfOperationLog",
+                "title": "%perfadvisor.operation.log%"
+            },
+            {
+                "command": "extension.view.perfLog",
+                "title": "%sysperf.log%"
+            },
+            {
+                "command": "extension.view.diagnose.nodesManagement",
+                "title": "%sysperf.nodes.management%"
+            },
+            {
+                "command": "extension.view.diagnose.reservationTaskManagement",
+                "title": "%sysperf.reservation.task%"
+            },
+            {
+                "command": "extension.view.diagnose.importAndExportTask",
+                "title": "%perfadvisor.sys.sysperfTask%"
+            },
+            {
+                "command": "extension.view.diagnose.taskTempManagement",
+                "title": "%sysperf.task.template%"
+            },
+            {
+                "command": "extension.view.diagnose.settings",
+                "title": "%diagnose.setting%"
+            },
+            {
+                "command": "extension.view.diagnose.log",
+                "title": "%sysperf.log%"
+            },
+            {
+                "command": "extension.view.diagnose.agentServerCert",
+                "title": "%perfadvisor.sys.agentserver%"
+            },
+            {
+                "command": "extension.view.diagnose.operationLog",
+                "title": "%sysperf.operation.log%"
+            },
+            {
+                "command": "extension.view.diagnose.createProject",
+                "title": "%sysperf.create.project%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/add.svg",
+                    "light": "src/extension/assets/light/add.svg"
+                }
+            },
+            {
+                "command": "extension.view.diagnose.importTask",
+                "title": "%sysperf.import.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/import.svg",
+                    "light": "src/extension/assets/light/import.svg"
+                }
+            },
+            {
+                "command": "extension.view.diagnose.exportTask",
+                "title": "%sysperf.export.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/export.svg",
+                    "light": "src/extension/assets/light/export.svg"
+                }
+            },
+            {
+                "command": "extension.view.diagnose.createTask",
+                "title": "%sysperf.create.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/add.svg",
+                    "light": "src/extension/assets/light/add.svg"
+                }
+            },
+            {
+                "command": "extension.view.diagnose.deleteProject",
+                "title": "%sysperf.delete.project%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/delete.svg",
+                    "light": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "extension.view.diagnose.modifyProject",
+                "title": "%sysperf.modify.project%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/modify.svg",
+                    "light": "src/extension/assets/light/modify.svg"
+                }
+            },
+            {
+                "command": "extension.view.diagnose.runTask",
+                "title": "%sysperf.run.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/run.svg",
+                    "light": "src/extension/assets/light/run.svg"
+                }
+            },
+            {
+                "command": "extension.view.diagnose.stopTask",
+                "title": "%sysperf.stop.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/stop.svg",
+                    "light": "src/extension/assets/light/stop.svg"
+                }
+            },
+            {
+                "command": "extension.view.diagnose.reanalysisTask",
+                "title": "%sysperf.reanalysis.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/reanalysis.svg",
+                    "light": "src/extension/assets/light/reanalysis.svg"
+                }
+            },
+            {
+                "command": "extension.view.diagnose.modifyTask",
+                "title": "%sysperf.modify.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/modify.svg",
+                    "light": "src/extension/assets/light/modify.svg"
+                }
+            },
+            {
+                "command": "extension.view.diagnose.deleteTask",
+                "title": "%sysperf.delete.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/delete.svg",
+                    "light": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "extension.view.tuningAssistant.nodesManagement",
+                "title": "%sysperf.nodes.management%"
+            },
+            {
+                "command": "extension.view.tuningAssistant.agentServerCert",
+                "title": "%perfadvisor.sys.agentserver%"
+            },
+            {
+                "command": "extension.view.tuningAssistant.settings",
+                "title": "%tuning_assistant_setting%"
+            },
+            {
+                "command": "extension.view.tuningAssistant.log",
+                "title": "%sysperf.log%"
+            },
+            {
+                "command": "extension.view.tuningAssistant.operationLog",
+                "title": "%sysperf.operation.log%"
+            },
+            {
+                "command": "extension.view.tuningAssistant.createProject",
+                "title": "%sysperf.create.project%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/add.svg",
+                    "light": "src/extension/assets/light/add.svg"
+                }
+            },
+            {
+                "command": "extension.view.tuningAssistant.deleteProject",
+                "title": "%sysperf.delete.project%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/delete.svg",
+                    "light": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "extension.view.tuningAssistant.createTask",
+                "title": "%sysperf.create.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/add-task.svg",
+                    "light": "src/extension/assets/light/add-task.svg"
+                }
+            },
+            {
+                "command": "extension.view.tuningAssistant.reanalyzeTask",
+                "title": "%tuningAssistant.reanalyze.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/reanalyze.svg",
+                    "light": "src/extension/assets/light/reanalyze.svg"
+                }
+            },
+            {
+                "command": "extension.view.tuningAssistant.associationTask",
+                "title": "%tuningAssistant.association.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/association.svg",
+                    "light": "src/extension/assets/light/association.svg"
+                }
+            },
+            {
+                "command": "extension.view.tuningAssistant.deleteTask",
+                "title": "%sysperf.delete.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/delete.svg",
+                    "light": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "extension.view.tuningAssistant.stopTask",
+                "title": "%sysperf.stop.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/stop.svg",
+                    "light": "src/extension/assets/light/stop.svg"
+                }
+            },
+            {
+                "command": "extension.view.tuningAssistant.reanalyzeNode",
+                "title": "%tuningAssistant.reanalyze.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/reanalyze.svg",
+                    "light": "src/extension/assets/light/reanalyze.svg"
+                }
+            },
+            {
+                "command": "extension.view.tuningAssistant.associationNode",
+                "title": "%tuningAssistant.association.node%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/association.svg",
+                    "light": "src/extension/assets/light/association.svg"
+                }
+            },
+            {
+                "command": "extension.view.tuningAssistant.viewTaskInfoAndLog",
+                "title": "%tuningAssistant.viewInfoLog.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/view-task-detail.svg",
+                    "light": "src/extension/assets/light/view-task-detail.svg"
+                }
+            },
+            {
+                "command": "extension.view.compare.createTask",
+                "title": "%tuninghelper.create.compare.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/add-task.svg",
+                    "light": "src/extension/assets/light/add-task.svg"
+                }
+            },
+            {
+                "command": "extension.view.compare.deleteTask",
+                "title": "%sysperf.delete.report%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/delete.svg",
+                    "light": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "extension.view.sysPerfOperationLog",
+                "title": "%sysperf.operation.log%"
+            },
+            {
+                "command": "extension.view.sysPerfCreateProject",
+                "title": "%sysperf.create.project%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/add.svg",
+                    "light": "src/extension/assets/light/add.svg"
+                }
+            },
+            {
+                "command": "extension.view.sysPerfImportTask",
+                "title": "%sysperf.import.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/import.svg",
+                    "light": "src/extension/assets/light/import.svg"
+                }
+            },
+            {
+                "command": "extension.view.sysPerfExportTask",
+                "title": "%sysperf.export.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/export.svg",
+                    "light": "src/extension/assets/light/export.svg"
+                }
+            },
+            {
+                "command": "extension.view.sysPerfClearProject",
+                "title": "%sysperf.clear.project%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/delete.svg",
+                    "light": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "extension.view.sysPerfCreateTask",
+                "title": "%sysperf.create.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/add-task.svg",
+                    "light": "src/extension/assets/light/add-task.svg"
+                }
+            },
+            {
+                "command": "extension.view.sysPerfDeleteProject",
+                "title": "%sysperf.delete.project%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/delete.svg",
+                    "light": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "extension.view.sysPerfModifyProject",
+                "title": "%sysperf.modify.project%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/modify.svg",
+                    "light": "src/extension/assets/light/modify.svg"
+                }
+            },
+            {
+                "command": "extension.view.sysPerfRunTask",
+                "title": "%sysperf.run.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/run.svg",
+                    "light": "src/extension/assets/light/run.svg"
+                }
+            },
+            {
+                "command": "extension.view.sysPerfStopTask",
+                "title": "%sysperf.stop.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/stop.svg",
+                    "light": "src/extension/assets/light/stop.svg"
+                }
+            },
+            {
+                "command": "extension.view.sysPerfReanalysisTask",
+                "title": "%sysperf.reanalysis.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/reanalysis.svg",
+                    "light": "src/extension/assets/light/reanalysis.svg"
+                }
+            },
+            {
+                "command": "extension.view.sysPerfModifyTask",
+                "title": "%sysperf.modify.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/modify.svg",
+                    "light": "src/extension/assets/light/modify.svg"
+                }
+            },
+            {
+                "command": "extension.view.sysPerfDeleteTask",
+                "title": "%sysperf.delete.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/delete.svg",
+                    "light": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "extension.view.linkage.createTask",
+                "title": "%sysperf.create.linkage.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/add-task.svg",
+                    "light": "src/extension/assets/light/add-task.svg"
+                }
+            },
+            {
+                "command": "extension.view.linkage.deleteTask",
+                "title": "%sysperf.delete.task%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/delete.svg",
+                    "light": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "extension.view.perfadvisorserverconfig",
+                "title": "%configure.remote.server%"
+            },
+            {
+                "command": "extension.view.perfUninstall",
+                "title": "%plugins_perfadvisor_title_uninstall%"
+            },
+            {
+                "command": "extension.view.feedback",
+                "title": "%perfadvisor.sys.advicefeedback%"
+            },
+            {
+                "command": "extension.view.perfDisclaimer",
+                "title": "%plugins_perfadvisor_title_disclaimer%"
+            },
+            {
+                "command": "extension.view.perfadvfreetrialremoteenvironment",
+                "title": "%free.trial.remote.environment%"
+            },
+            {
+                "command": "extension.view.perfUpgrade",
+                "title": "%plugins_perfadvisor_title_upgrade%"
+            },
+            {
+                "command": "extension.view.perfadvisorlogin",
+                "title": "%plugins_perfadvisor_title_login%"
+            },
+            {
+                "command": "extension.view.perfModifyPassword",
+                "title": "%perfadvisor.modify.password%"
+            },
+            {
+                "command": "javaPerf.view.item.guardianManage",
+                "title": "%plugins_javaperf_menu_guardianManage%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/guardian-config.svg",
+                    "light": "src/extension/assets/light/guardian-config.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.addTargetEnvironment",
+                "title": "%plugins_javaperf_menu_add_target_environment%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/add.svg",
+                    "light": "src/extension/assets/light/add.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.javaSetting",
+                "title": "%plugins_javaperf_menu_javaSetting%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/set.svg",
+                    "light": "src/extension/assets/light/set.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.profillingRecordManage",
+                "title": "%plugins_javaperf_menu_analysisRecordManage%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/record-manage.svg",
+                    "light": "src/extension/assets/light/record-manage.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.samplingRecordManage",
+                "title": "%plugins_javaperf_menu_analysisRecordManage%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/record-manage.svg",
+                    "light": "src/extension/assets/light/record-manage.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.workingKey",
+                "title": "%plugins_javaperf_menu_workingKey%"
+            },
+            {
+                "command": "javaPerf.view.item.profilingConfiguration",
+                "title": "%plugins_javaperf_menu_javaSetting%"
+            },
+            {
+                "command": "javaPerf.view.item.samplingReportManage",
+                "title": "%plugins_javaperf_menu_samplingReportsManage%"
+            },
+            {
+                "command": "javaPerf.view.item.runLog",
+                "title": "%plugins_javaperf_menu_Log%"
+            },
+            {
+                "command": "javaPerf.view.item.operLog",
+                "title": "%plugins_javaperf_menu_operLog%"
+            },
+            {
+                "command": "javaPerf.view.item.secretKey",
+                "title": "%plugins_javaperf_menu_secretKey%"
+            },
+            {
+                "command": "javaPerf.view.item.stopProfiling",
+                "title": "%plugins_javaperf_menu_stopProfiling%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/stop-profiling.svg",
+                    "light": "src/extension/assets/light/stop-profiling.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.importProfiling",
+                "title": "%plugins_javaperf_menu_import_record%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/import.svg",
+                    "light": "src/extension/assets/light/import.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.exportProfiling",
+                "title": "%plugins_javaperf_menu_export_record%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/export.svg",
+                    "light": "src/extension/assets/light/export.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.deleteSampling",
+                "title": "%plugins_javaperf_menu_delete_sampling%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/delete.svg",
+                    "light": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.importSampling",
+                "title": "%plugins_javaperf_menu_import_record%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/import.svg",
+                    "light": "src/extension/assets/light/import.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.exportSampling",
+                "title": "%plugins_javaperf_menu_export_record%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/export.svg",
+                    "light": "src/extension/assets/light/export.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.deleteHeapdumpReport",
+                "title": "%plugins_javaperf_menu_delete_heapdump_report%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/delete.svg",
+                    "light": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.importHeapdumpReport",
+                "title": "%plugins_javaperf_menu_import_heapdump_report%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/import.svg",
+                    "light": "src/extension/assets/light/import.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.exportHeapdumpReport",
+                "title": "%plugins_javaperf_menu_export_heapdump_report%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/export.svg",
+                    "light": "src/extension/assets/light/export.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.deleteThreaddumpReport",
+                "title": "%plugins_javaperf_menu_delete_threaddump_report%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/delete.svg",
+                    "light": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.importThreaddumpReport",
+                "title": "%plugins_javaperf_menu_import_threaddump_report%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/import.svg",
+                    "light": "src/extension/assets/light/import.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.exportThreaddumpReport",
+                "title": "%plugins_javaperf_menu_export_threaddump_report%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/export.svg",
+                    "light": "src/extension/assets/light/export.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.deleteGclogReport",
+                "title": "%plugins_javaperf_menu_delete_gclog_report%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/delete.svg",
+                    "light": "src/extension/assets/light/delete.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.importGclogReport",
+                "title": "%plugins_javaperf_menu_import_gclog_report%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/import.svg",
+                    "light": "src/extension/assets/light/import.svg"
+                }
+            },
+            {
+                "command": "javaPerf.view.item.exportGclogReport",
+                "title": "%plugins_javaperf_menu_export_gclog_report%",
+                "icon": {
+                    "dark": "src/extension/assets/dark/export.svg",
+                    "light": "src/extension/assets/light/export.svg"
+                }
+            }
+        ],
+        "colors": [
+            {
+                "id": "errorLens.infoBackground",
+                "defaults": {
+                    "dark": "#00b7e420",
+                    "light": "#00b7e420",
+                    "highContrast": "#00b7e420"
+                },
+                "description": "Background color used to highlight lines containing info."
+            },
+            {
+                "id": "errorLens.infoMessageBackground",
+                "defaults": {
+                    "dark": "#fff0",
+                    "light": "#fff0",
+                    "highContrast": "#fff0"
+                },
+                "description": "Background color of the info message."
+            },
+            {
+                "id": "errorLens.infoBackgroundLight",
+                "defaults": {
+                    "dark": "#00b7e420",
+                    "light": "#00b7e420",
+                    "highContrast": "#00b7e420"
+                },
+                "description": "Background color used to highlight lines containing info (Only in light themes)."
+            },
+            {
+                "id": "errorLens.infoForeground",
+                "defaults": {
+                    "dark": "#00b7e4",
+                    "light": "#00b7e4",
+                    "highContrast": "#00b7e4"
+                },
+                "description": "Text color used to highlight lines containing info."
+            },
+            {
+                "id": "errorLens.infoForegroundLight",
+                "defaults": {
+                    "dark": "#00b7e4",
+                    "light": "#00b7e4",
+                    "highContrast": "#00b7e4"
+                },
+                "description": "Text color used to highlight lines containing info (Only in light themes)."
+            }
+        ],
+        "viewsWelcome": [
+            {
+                "view": "perfadvisorTools",
+                "contents": "%perfadvisor.configer.server%",
+                "when": "!isPerfadvisorConfigured && ipconfig"
+            },
+            {
+                "view": "perfadvisorTools",
+                "contents": "%perfadvisor.no.login%",
+                "when": "!isPerfadvisorLogined && isPerfadvisorConfigured"
+            },
+            {
+                "view": "perfadvisorTools",
+                "contents": "%perfadvisor.free.trial%",
+                "when": ""
+            }
+        ],
+        "menus": {
+            "view/title": [
+                {
+                    "command": "extension.view.showUser",
+                    "when": "view == perfadvisorTools && isPerfadvisorLogined",
+                    "group": "inline1@1"
+                },
+                {
+                    "command": "extension.view.perfUserManagement",
+                    "when": "view == perfadvisorTools && isPerfadvisorLogined && isAdmin",
+                    "group": "inline1@2"
+                },
+                {
+                    "command": "extension.view.perfModifyPassword",
+                    "when": "view == perfadvisorTools && isPerfadvisorLogined && !isAdmin",
+                    "group": "inline1@3"
+                },
+                {
+                    "command": "extension.view.weakPassword",
+                    "when": "view == perfadvisorTools && isPerfadvisorLogined",
+                    "group": "inline1@4"
+                },
+                {
+                    "command": "extension.view.perfSysConfigure",
+                    "when": "view == perfadvisorTools && isPerfadvisorLogined",
+                    "group": "inline1@5"
+                },
+                {
+                    "command": "extension.view.perfLogin",
+                    "when": "view == perfadvisorTools && isPerfadvisorLogined && isAutoSystem && !isAdmin",
+                    "group": "inline1@6"
+                },
+                {
+                    "command": "extension.view.perfOperationLog",
+                    "when": "view == perfadvisorTools && isPerfadvisorLogined",
+                    "group": "inline1@7"
+                },
+                {
+                    "command": "extension.view.perfRunningLog",
+                    "when": "view == perfadvisorTools && isPerfadvisorLogined && isAdmin",
+                    "group": "inline1@8"
+                },
+                {
+                    "command": "extension.view.webServerCert",
+                    "when": "view == perfadvisorTools && isPerfadvisorLogined",
+                    "group": "inline2@1"
+                },
+                {
+                    "command": "extension.view.perfadvisorserverconfig",
+                    "when": "view == perfadvisorTools && isPerfadvisorConfigured",
+                    "group": "inline2@2"
+                },
+                {
+                    "command": "extension.view.perfadvfreetrialremoteenvironment",
+                    "when": "view == perfadvisorTools && !isPerfadvisorLogined",
+                    "group": "inline2@3"
+                },
+                {
+                    "command": "extension.view.perfadvfreetrialremoteenvironment",
+                    "when": "view == perfadvisorTools && isPerfadvisorLogined",
+                    "group": "inline3@1"
+                },
+                {
+                    "command": "extension.view.perfUpgrade",
+                    "when": "view == perfadvisorTools",
+                    "group": "inline4@2"
+                },
+                {
+                    "command": "extension.view.perfUninstall",
+                    "when": "view == perfadvisorTools",
+                    "group": "inline4@3"
+                },
+                {
+                    "command": "extension.view.feedback",
+                    "when": "view == perfadvisorTools",
+                    "group": "inline5@1"
+                },
+                {
+                    "command": "extension.view.perfDisclaimer",
+                    "when": "view == perfadvisorTools && isPerfadvisorLogined",
+                    "group": "inline5@2"
+                },
+                {
+                    "command": "extension.view.perfLogout",
+                    "when": "view == perfadvisorTools && isPerfadvisorLogined",
+                    "group": "inline6@1"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "extension.view.tuningAssistant.createProject",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantFolderNormalTask",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.createProject",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantFolderNormalTask",
+                    "group": "tuningAssistantFolderNormalTask@1"
+                },
+                {
+                    "command": "extension.view.compare.createTask",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantFolderCompareTask",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.compare.createTask",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantFolderCompareTask",
+                    "group": "tuningAssistantFolderCompareTask@1"
+                },
+                {
+                    "command": "extension.view.compare.deleteTask",
+                    "when": "view == perfadvisorTools && viewItem == isDeletable",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.compare.deleteTask",
+                    "when": "view == perfadvisorTools && viewItem == isDeletable",
+                    "group": "tuningAssistantCompareTask@1"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.nodesManagement",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistant",
+                    "group": "tuningAssistant1@1"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.settings",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistant",
+                    "group": "tuningAssistant2@1"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.log",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistant && isAdmin",
+                    "group": "tuningAssistant2@2"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.operationLog",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistant && !isAdmin",
+                    "group": "tuningAssistant2@3"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.agentServerCert",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistant && isPerfadvisorLogined",
+                    "group": "tuningAssistant2@4"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.createTask",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantProjectSelf",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.deleteProject",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantProjectSelf || viewItem == tuningAssistantProjectAdmin",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.createTask",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantProjectSelf",
+                    "group": "tuningAssistantProject@1"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.deleteProject",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantProjectSelf || viewItem == tuningAssistantProjectAdmin",
+                    "group": "tuningAssistantProject@2"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.stopTask",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantTaskStop",
+                    "group": "tuningAssistantTask@1"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.reanalyzeTask",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantTaskReanalyze",
+                    "group": "tuningAssistantTask@2"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.associationTask",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantTaskReanalyze || viewItem == tuningAssistantTaskStop || viewItem == tuningAssistantTaskDelete || viewItem == tuningAssistantTaskNormal",
+                    "group": "tuningAssistantTask@3"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.deleteTask",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantTaskDelete || viewItem == tuningAssistantTaskReanalyze",
+                    "group": "tuningAssistantTask@4"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.stopTask",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantTaskStop",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.reanalyzeTask",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantTaskReanalyze",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.associationTask",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantTaskReanalyze || viewItem == tuningAssistantTaskStop || viewItem == tuningAssistantTaskDelete || viewItem == tuningAssistantTaskNormal",
+                    "group": "inline@3"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.deleteTask",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantTaskDelete || viewItem == tuningAssistantTaskReanalyze",
+                    "group": "inline@4"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.viewTaskInfoAndLog",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantNodeRA || viewItem == tuningAssistantNodeA",
+                    "group": "tuningAssistantNode@1"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.reanalyzeNode",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantNodeRA",
+                    "group": "tuningAssistantNode@3"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.associationNode",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantNodeRA || viewItem == tuningAssistantNodeA",
+                    "group": "tuningAssistantNode@2"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.viewTaskInfoAndLog",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantNodeRA || viewItem == tuningAssistantNodeA",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.reanalyzeNode",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantNodeRA",
+                    "group": "inline@3"
+                },
+                {
+                    "command": "extension.view.tuningAssistant.associationNode",
+                    "when": "view == perfadvisorTools && viewItem == tuningAssistantNodeRA || viewItem == tuningAssistantNodeA",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "extension.view.diagnose.createProject",
+                    "when": "view == perfadvisorTools && viewItem == diagnose",
+                    "group": "diagnose1@1"
+                },
+                {
+                    "command": "extension.view.diagnose.nodesManagement",
+                    "when": "view == perfadvisorTools && viewItem == diagnose",
+                    "group": "diagnose1@2"
+                },
+                {
+                    "command": "extension.view.diagnose.agentServerCert",
+                    "when": "view == perfadvisorTools && viewItem == diagnose && isPerfadvisorLogined",
+                    "group": "diagnose1@3"
+                },
+                {
+                    "command": "extension.view.diagnose.reservationTaskManagement",
+                    "when": "view == perfadvisorTools && viewItem == diagnose",
+                    "group": "diagnose2@1"
+                },
+                {
+                    "command": "extension.view.diagnose.importTask",
+                    "when": "view == perfadvisorTools && viewItem == diagnose",
+                    "group": "diagnose2@2"
+                },
+                {
+                    "command": "extension.view.diagnose.importAndExportTask",
+                    "when": "view == perfadvisorTools && viewItem == diagnose",
+                    "group": "diagnose2@3"
+                },
+                {
+                    "command": "extension.view.diagnose.taskTempManagement",
+                    "when": "view == perfadvisorTools && viewItem == diagnose",
+                    "group": "diagnose2@4"
+                },
+                {
+                    "command": "extension.view.diagnose.settings",
+                    "when": "view == perfadvisorTools && viewItem == diagnose",
+                    "group": "diagnose3@1"
+                },
+                {
+                    "command": "extension.view.diagnose.operationLog",
+                    "when": "view == perfadvisorTools && viewItem == diagnose && !isAdmin",
+                    "group": "diagnose3@2"
+                },
+                {
+                    "command": "extension.view.diagnose.log",
+                    "when": "view == perfadvisorTools && viewItem == diagnose && isAdmin",
+                    "group": "diagnose3@2"
+                },
+                {
+                    "command": "extension.view.diagnose.createProject",
+                    "when": "view == perfadvisorTools && viewItem == diagnose",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.diagnose.importTask",
+                    "when": "view == perfadvisorTools && viewItem == diagnose",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "extension.view.diagnose.createTask",
+                    "when": "view == perfadvisorTools && viewItem == diagnoseProjectSelf",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.diagnose.modifyProject",
+                    "when": "view == perfadvisorTools && viewItem == diagnoseProjectSelf || viewItem == diagnoseProjectAdmin",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "extension.view.diagnose.deleteProject",
+                    "when": "view == perfadvisorTools && viewItem == diagnoseProjectSelf || viewItem == diagnoseProjectAdmin || viewItem == diagnoseProjectImport",
+                    "group": "inline@3"
+                },
+                {
+                    "command": "extension.view.diagnose.createTask",
+                    "when": "view == perfadvisorTools && viewItem == diagnoseProjectSelf",
+                    "group": "diagnoseProject@1"
+                },
+                {
+                    "command": "extension.view.diagnose.modifyProject",
+                    "when": "view == perfadvisorTools && viewItem == diagnoseProjectSelf || viewItem == diagnoseProjectAdmin",
+                    "group": "diagnoseProject@2"
+                },
+                {
+                    "command": "extension.view.diagnose.deleteProject",
+                    "when": "view == perfadvisorTools && viewItem == diagnoseProjectSelf || viewItem == diagnoseProjectAdmin",
+                    "group": "diagnoseProject@3"
+                },
+                {
+                    "command": "extension.view.diagnose.runTask",
+                    "when": "viewItem == sysPerfProjectTask || viewItem == diagnoseTaskCreatedSelf",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.diagnose.stopTask",
+                    "when": "view == perfadvisorTools && viewItem == diagnoseTaskRunningSelf",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.diagnose.reanalysisTask",
+                    "when": "view == perfadvisorTools && viewItem == diagnoseTaskCompletedSelf || viewItem == diagnoseTaskReservedSelf",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.diagnose.modifyTask",
+                    "when": "view == perfadvisorTools && viewItem == diagnoseTaskCreatedSelf",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "extension.view.diagnose.deleteTask",
+                    "when": "viewItem == diagnoseTaskCompletedSelf || viewItem == diagnoseTaskCreatedSelf || viewItem == diagnoseTaskReservedSelf || viewItem == diagnoseTaskImport",
+                    "group": "inline@3"
+                },
+                {
+                    "command": "extension.view.diagnose.exportTask",
+                    "when": "view == perfadvisorTools && viewItem == diagnoseTaskCompletedSelf || viewItem == diagnoseTaskReservedSelf",
+                    "group": "inline@4"
+                },
+                {
+                    "command": "extension.view.diagnose.runTask",
+                    "when": "viewItem == sysPerfProjectTask || viewItem == diagnoseTaskCreatedSelf",
+                    "group": "sysPerfProjectTask@1"
+                },
+                {
+                    "command": "extension.view.diagnose.stopTask",
+                    "when": "view == perfadvisorTools && viewItem == diagnoseTaskRunningSelf",
+                    "group": "sysPerfProjectTask@1"
+                },
+                {
+                    "command": "extension.view.diagnose.reanalysisTask",
+                    "when": "view == perfadvisorTools && viewItem == diagnoseTaskCompletedSelf || viewItem == diagnoseTaskReservedSelf",
+                    "group": "sysPerfProjectTask@1"
+                },
+                {
+                    "command": "extension.view.diagnose.modifyTask",
+                    "when": "view == perfadvisorTools && viewItem == diagnoseTaskCreatedSelf",
+                    "group": "sysPerfProjectTask@2"
+                },
+                {
+                    "command": "extension.view.diagnose.deleteTask",
+                    "when": "viewItem == diagnoseTaskCompletedSelf || viewItem == diagnoseTaskCreatedSelf || viewItem == diagnoseTaskReservedSelf || viewItem == diagnoseTaskImport",
+                    "group": "sysPerfProjectTask@3"
+                },
+                {
+                    "command": "extension.view.diagnose.exportTask",
+                    "when": "view == perfadvisorTools && viewItem == diagnoseTaskCompletedSelf || viewItem == diagnoseTaskReservedSelf",
+                    "group": "sysPerfProjectTask@4"
+                },
+                {
+                    "command": "extension.view.linkage.createTask",
+                    "when": "view == perfadvisorTools && viewItem == sysFolderLinkageTask",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.linkage.createTask",
+                    "when": "view == perfadvisorTools && viewItem == sysFolderLinkageTask",
+                    "group": "sysFolderLinkageTask@1"
+                },
+                {
+                    "command": "extension.view.linkage.deleteTask",
+                    "when": "view == perfadvisorTools && viewItem == linkageTaskSelf || viewItem == linkageTaskAdmin",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.sysPerfCreateProject",
+                    "when": "view == perfadvisorTools && viewItem == sysFolderNormalTask",
+                    "group": "sysFolderNormalTask1@1"
+                },
+                {
+                    "command": "extension.view.perfNodesManagement",
+                    "when": "view == perfadvisorTools && viewItem == sysPerf",
+                    "group": "sysPerf1@1"
+                },
+                {
+                    "command": "extension.view.agentServerCert",
+                    "when": "view == perfadvisorTools && viewItem == sysPerf && isPerfadvisorLogined",
+                    "group": "sysPerf2@3"
+                },
+                {
+                    "command": "extension.view.perfReservationTaskManagement",
+                    "when": "view == perfadvisorTools && viewItem == sysFolderNormalTask",
+                    "group": "sysFolderNormalTask2@1"
+                },
+                {
+                    "command": "extension.view.sysPerfImportTask",
+                    "when": "view == perfadvisorTools && viewItem == sysFolderNormalTask",
+                    "group": "sysFolderNormalTask2@2"
+                },
+                {
+                    "command": "extension.view.sysPerfImportAndExportTask",
+                    "when": "view == perfadvisorTools && viewItem == sysFolderNormalTask",
+                    "group": "sysFolderNormalTask2@3"
+                },
+                {
+                    "command": "extension.view.perfTaskTemplateManagement",
+                    "when": "view == perfadvisorTools && viewItem == sysFolderNormalTask",
+                    "group": "sysFolderNormalTask2@4"
+                },
+                {
+                    "command": "extension.view.sysPerfPath",
+                    "when": "view == perfadvisorTools && viewItem == sysPerf",
+                    "group": "sysPerf2@1"
+                },
+                {
+                    "command": "extension.view.sysPerfOperationLog",
+                    "when": "view == perfadvisorTools && viewItem == sysPerf && !isAdmin",
+                    "group": "sysPerf2@2"
+                },
+                {
+                    "command": "extension.view.perfLog",
+                    "when": "view == perfadvisorTools && viewItem == sysPerf && isAdmin",
+                    "group": "sysPerf2@2"
+                },
+                {
+                    "command": "extension.view.sysPerfCreateProject",
+                    "when": "view == perfadvisorTools && viewItem == sysFolderNormalTask",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.sysPerfImportTask",
+                    "when": "view == perfadvisorTools && viewItem == sysFolderNormalTask",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "extension.view.sysPerfCreateTask",
+                    "when": "view == perfadvisorTools && viewItem == sysPerfProject_self",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.sysPerfModifyProject",
+                    "when": "view == perfadvisorTools && viewItem == sysPerfProject_self || viewItem == sysPerfProject_noself_admin",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "extension.view.sysPerfDeleteProject",
+                    "when": "view == perfadvisorTools && viewItem == sysPerfProject_self || viewItem == sysPerfProject_noself_admin || viewItem == sysPerfProject_importProject",
+                    "group": "inline@3"
+                },
+                {
+                    "command": "extension.view.sysPerfCreateTask",
+                    "when": "view == perfadvisorTools && viewItem == sysPerfProject_self",
+                    "group": "sysPerfProject@1"
+                },
+                {
+                    "command": "extension.view.sysPerfModifyProject",
+                    "when": "view == perfadvisorTools && viewItem == sysPerfProject_self || viewItem == sysPerfProject_noself_admin",
+                    "group": "sysPerfProject@2"
+                },
+                {
+                    "command": "extension.view.sysPerfDeleteProject",
+                    "when": "view == perfadvisorTools && viewItem == sysPerfProject_self || viewItem == sysPerfProject_noself_admin",
+                    "group": "sysPerfProject@3"
+                },
+                {
+                    "command": "extension.view.sysPerfRunTask",
+                    "when": "viewItem == sysPerfProjectTask || viewItem == sysPerfProjectTask_isCreated_self",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.sysPerfStopTask",
+                    "when": "view == perfadvisorTools && viewItem == sysPerfProjectTask_isRunning_self",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.sysPerfReanalysisTask",
+                    "when": "view == perfadvisorTools && viewItem == sysPerfProjectTask_isCompleted_self || viewItem == sysPerfProjectTask_isReserved_self",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "extension.view.sysPerfModifyTask",
+                    "when": "view == perfadvisorTools && viewItem == sysPerfProjectTask_isCreated_self",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "extension.view.sysPerfDeleteTask",
+                    "when": "viewItem == sysPerfProjectTask_isCompleted_self || viewItem == sysPerfProjectTask_isCreated_self || viewItem == sysPerfProjectTask_isReserved_self || viewItem == sysPerfProject_importTask",
+                    "group": "inline@3"
+                },
+                {
+                    "command": "extension.view.sysPerfExportTask",
+                    "when": "view == perfadvisorTools && viewItem == sysPerfProjectTask_isCompleted_self || viewItem == sysPerfProjectTask_isReserved_self",
+                    "group": "inline@4"
+                },
+                {
+                    "command": "extension.view.sysPerfRunTask",
+                    "when": "viewItem == sysPerfProjectTask || viewItem == sysPerfProjectTask_isCreated_self",
+                    "group": "sysPerfProjectTask@1"
+                },
+                {
+                    "command": "extension.view.sysPerfStopTask",
+                    "when": "view == perfadvisorTools && viewItem == sysPerfProjectTask_isRunning_self",
+                    "group": "sysPerfProjectTask@1"
+                },
+                {
+                    "command": "extension.view.sysPerfReanalysisTask",
+                    "when": "view == perfadvisorTools && viewItem == sysPerfProjectTask_isCompleted_self || viewItem == sysPerfProjectTask_isReserved_self",
+                    "group": "sysPerfProjectTask@1"
+                },
+                {
+                    "command": "extension.view.sysPerfModifyTask",
+                    "when": "view == perfadvisorTools && viewItem == sysPerfProjectTask_isCreated_self",
+                    "group": "sysPerfProjectTask@2"
+                },
+                {
+                    "command": "extension.view.sysPerfDeleteTask",
+                    "when": "viewItem == sysPerfProjectTask_isCompleted_self || viewItem == sysPerfProjectTask_isCreated_self || viewItem == sysPerfProjectTask_isReserved_self || viewItem == sysPerfProject_importTask",
+                    "group": "sysPerfProjectTask@3"
+                },
+                {
+                    "command": "extension.view.sysPerfExportTask",
+                    "when": "view == perfadvisorTools && viewItem == sysPerfProjectTask_isCompleted_self || viewItem == sysPerfProjectTask_isReserved_self",
+                    "group": "sysPerfProjectTask@4"
+                },
+                {
+                    "command": "javaPerf.view.item.javaSetting",
+                    "when": "view == perfadvisorTools && viewItem == javaPerf",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "javaPerf.view.item.addTargetEnvironment",
+                    "when": "view == perfadvisorTools && viewItem == guardianList",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "javaPerf.view.item.guardianManage",
+                    "when": "view == perfadvisorTools && viewItem == guardianList",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "javaPerf.view.item.addTargetEnvironment",
+                    "when": "view == perfadvisorTools && viewItem == guardianList",
+                    "group": "guardianList@1"
+                },
+                {
+                    "command": "javaPerf.view.item.guardianManage",
+                    "when": "view == perfadvisorTools && viewItem == guardianList",
+                    "group": "guardianList@2"
+                },
+                {
+                    "command": "javaPerf.view.item.guardianManage",
+                    "when": "view == perfadvisorTools && viewItem == javaPerf",
+                    "group": "javaPerf@1"
+                },
+                {
+                    "command": "javaPerf.view.item.workingKey",
+                    "when": "view == perfadvisorTools && viewItem == javaPerf && isAdmin",
+                    "group": "javaPerf@2"
+                },
+                {
+                    "command": "javaPerf.view.item.profilingConfiguration",
+                    "when": "view == perfadvisorTools && viewItem == javaPerf && !isAdmin",
+                    "group": "javaPerf@2"
+                },
+                {
+                    "command": "javaPerf.view.item.profilingConfiguration",
+                    "when": "view == perfadvisorTools && viewItem == javaPerf && isAdmin",
+                    "group": "javaPerf@3"
+                },
+                {
+                    "command": "javaPerf.view.item.samplingReportManage",
+                    "when": "view == perfadvisorTools && viewItem == javaPerf && !isAdmin",
+                    "group": "javaPerf@3"
+                },
+                {
+                    "command": "javaPerf.view.item.operLog",
+                    "when": "view == perfadvisorTools && viewItem == javaPerf && !isAdmin",
+                    "group": "javaPerf@4"
+                },
+                {
+                    "command": "javaPerf.view.item.samplingReportManage",
+                    "when": "view == perfadvisorTools && viewItem == javaPerf && isAdmin",
+                    "group": "javaPerf@4"
+                },
+                {
+                    "command": "javaPerf.view.item.runLog",
+                    "when": "view == perfadvisorTools && viewItem == javaPerf && isAdmin",
+                    "group": "javaPerf@5"
+                },
+                {
+                    "command": "javaPerf.view.item.secretKey",
+                    "when": "view == perfadvisorTools && viewItem == javaPerf && isAdmin",
+                    "group": "javaPerf@6"
+                },
+                {
+                    "command": "javaPerf.view.item.stopProfiling",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfProfiling",
+                    "group": "javaPerfProfiling@2"
+                },
+                {
+                    "command": "javaPerf.view.item.stopProfiling",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfProfiling",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "javaPerf.view.item.importProfiling",
+                    "when": "view == perfadvisorTools && viewItem == profillingRecords",
+                    "group": "profillingRecords@1"
+                },
+                {
+                    "command": "javaPerf.view.item.importProfiling",
+                    "when": "view == perfadvisorTools && viewItem == profillingRecords",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "javaPerf.view.item.exportProfiling",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfProfiling",
+                    "group": "javaPerfProfiling@1"
+                },
+                {
+                    "command": "javaPerf.view.item.exportProfiling",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfProfiling",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "javaPerf.view.item.deleteSampling",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfSampling || viewItem == javaPerfSamplingDelete",
+                    "group": "javaPerfSampling@2"
+                },
+                {
+                    "command": "javaPerf.view.item.deleteSampling",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfSampling || viewItem == javaPerfSamplingDelete",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "javaPerf.view.item.importSampling",
+                    "when": "view == perfadvisorTools && viewItem == samplingRecords",
+                    "group": "samplingRecords@1"
+                },
+                {
+                    "command": "javaPerf.view.item.importSampling",
+                    "when": "view == perfadvisorTools && viewItem == samplingRecords",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "javaPerf.view.item.exportSampling",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfSampling",
+                    "group": "javaPerfSampling@1"
+                },
+                {
+                    "command": "javaPerf.view.item.exportSampling",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfSampling",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "javaPerf.view.item.importHeapdumpReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfHeapdumpImport",
+                    "group": "samplingRecords@1"
+                },
+                {
+                    "command": "javaPerf.view.item.importHeapdumpReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfHeapdumpImport",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "javaPerf.view.item.deleteHeapdumpReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfHeapdump || viewItem == javaPerfHeapdumpDelete",
+                    "group": "javaPerfHeapdump@1"
+                },
+                {
+                    "command": "javaPerf.view.item.deleteHeapdumpReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfHeapdump || viewItem == javaPerfHeapdumpDelete",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "javaPerf.view.item.exportHeapdumpReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfHeapdump",
+                    "group": "javaPerfHeapdump@2"
+                },
+                {
+                    "command": "javaPerf.view.item.exportHeapdumpReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfHeapdump",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "javaPerf.view.item.importThreaddumpReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfThreaddumpImport",
+                    "group": "samplingRecords@1"
+                },
+                {
+                    "command": "javaPerf.view.item.importThreaddumpReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfThreaddumpImport",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "javaPerf.view.item.deleteThreaddumpReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfThreaddump || viewItem == javaPerfThreaddumpDelete",
+                    "group": "javaPerfThreaddump@1"
+                },
+                {
+                    "command": "javaPerf.view.item.deleteThreaddumpReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfThreaddump || viewItem == javaPerfThreaddumpDelete",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "javaPerf.view.item.exportThreaddumpReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfThreaddump",
+                    "group": "javaPerfThreaddump@2"
+                },
+                {
+                    "command": "javaPerf.view.item.exportThreaddumpReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfThreaddump",
+                    "group": "inline@2"
+                },
+                {
+                    "command": "javaPerf.view.item.importGclogReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfGclogImport",
+                    "group": "samplingRecords@1"
+                },
+                {
+                    "command": "javaPerf.view.item.importGclogReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfGclogImport",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "javaPerf.view.item.deleteGclogReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfGclog || viewItem == javaPerfGclogDelete",
+                    "group": "javaPerfGclog@1"
+                },
+                {
+                    "command": "javaPerf.view.item.deleteGclogReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfGclog || viewItem == javaPerfGclogDelete",
+                    "group": "inline@1"
+                },
+                {
+                    "command": "javaPerf.view.item.exportGclogReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfGclog",
+                    "group": "javaPerfGclog@2"
+                },
+                {
+                    "command": "javaPerf.view.item.exportGclogReport",
+                    "when": "view == perfadvisorTools && viewItem == javaPerfGclog",
+                    "group": "inline@2"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "extension.view.perfadvisorlogin",
+                    "when": "false"
+                },
+                {
+                    "command": "extension.view.perfadvisorserverconfig",
+                    "when": "false"
+                }
+            ]
+        },
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "kunpengTuning",
+                    "title": "%kunpeng.tuning.suite%",
+                    "icon": "resources/images/tuning.svg"
+                }
+            ]
+        },
+        "views": {
+            "kunpengTuning": [
+                {
+                    "id": "perfadvisorTools",
+                    "name": ""
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "lint": "tslint -p ./",
+        "watch": "tsc -w -p ./",
+        "package": "sh ./build/package.sh",
+        "compile:all": "npm install && tsc -p ./ && cd ../../workspace/ && npm install && npm run build:sys:ide & npm run build:java:ide"
+    },
+    "dependencies": {
+        "axios": "0.21.1",
+        "form-data": "3.0.0",
+        "log4js": "6.3.0",
+        "ssh2": "1.4.0",
+        "jszip": "3.7.0"
+    },
+    "devDependencies": {
+        "@angular/compiler": "~8.0.0",
+        "@angular/core": "~8.0.0",
+        "@types/node": "^12.12.0",
+        "@types/ssh2": "^0.5.43",
+        "@types/jszip": "^3.2.2",
+        "@types/vscode": "^1.38.0",
+        "codelyzer": "^5.0.0",
+        "rxjs": "~6.4.0",
+        "tslint": "^5.19.0",
+        "typescript": "^3.8.3",
+        "vsce": "^1.87.1"
+    }
+}

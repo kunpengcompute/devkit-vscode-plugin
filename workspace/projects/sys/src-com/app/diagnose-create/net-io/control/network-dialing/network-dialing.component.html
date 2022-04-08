@@ -1,0 +1,49 @@
+<div class="form-warpper" [ngClass]="theme$ | async">
+  <div class="form-area">
+    <!-- 拨测场景 -->
+    <div class="control">
+      <ti-formfield [formGroup]="formGroup" [labelWidth]="labelWidth">
+        <ti-item
+          [label]="'network_diagnositic.taskParams.dial_test_scen' | i18n"
+          [required]="true"
+          style="width: 326px"
+        >
+          <ti-select
+            class="unit"
+            [options]="scenesOptions"
+            formControlName="dialScene"
+            valueKey="value"
+            style="width: 326px;"
+          ></ti-select>
+          <div class="illustrate">{{ 'net_io.illustrate' | i18n }}</div>
+        </ti-item>
+      </ti-formfield>
+    </div>
+    <!-- app-dialing-connection -->
+    <div class="control" [formGroup]="formGroup">
+      <div [hidden]="!formOption.connection.display">
+        <app-dialing-connection
+          [nodeList]="nodeOptions"
+          formControlName="connection"
+          [labelWidth]="labelWidth"
+        ></app-dialing-connection>
+      </div>
+      <div [hidden]="!formOption.tcp.display">
+        <app-dialing-tcp-udp
+          [dialingType]="dialTestSceneEmun.Tcp"
+          [nodeList]="nodeOptions"
+          formControlName="tcp"
+          [labelWidth]="labelWidth"
+        ></app-dialing-tcp-udp>
+      </div>
+      <div [hidden]="!formOption.udp.display">
+        <app-dialing-tcp-udp
+          [dialingType]="dialTestSceneEmun.Udp"
+          [nodeList]="nodeOptions"
+          formControlName="udp"
+          [labelWidth]="labelWidth"
+        ></app-dialing-tcp-udp>
+      </div>
+    </div>
+  </div>
+</div>

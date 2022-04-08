@@ -1,0 +1,233 @@
+<app-mission-modal-header #modal class="missionModal" (ongModalClose)="closePopDetail($event)">
+  <div #modalDialog class="modal-dialog"
+    [ngStyle]="{width: scheduleTaskType === 'netio_diagnostic' ? '912px' : '760px'}">
+    <div class="header">
+      {{i18n.modifySchedule}}
+    </div>
+    <!-- 修改列表 -->
+    <ng-container [ngSwitch]="scheduleTaskType">
+      <div *ngSwitchCase="'ioperformance'" style="margin-top:20px;">
+        <app-mission-io-schedule-modify *ngIf="modelReopenSymbol" [taskInfo]="taskData" [projectId]="projectId"
+          [scheduleTaskId]="scheduleTaskId" [isModifySchedule]="isModifySchedule" [labelWidth]="labelWidth"
+          (confirmModify)="handleUpdataPretable($event)" (cancelModify)="handleUpdataPretable($event)">
+        </app-mission-io-schedule-modify>
+      </div>
+      <div *ngSwitchCase="'hpc_analysis'" style="margin-top:20px;">
+        <app-mission-hpc-schedule *ngIf="modelReopenSymbol" [modePidValid]="modePidValid" [taskInfo]="taskData"
+          [projectId]="projectId" [projectName]="projectName" [nodeConfigedData]="nodeConfigedData"
+          [scheduleTaskId]="scheduleTaskId" (confirmModify)="handleUpdataPretable($event)"
+          (handleNodeEmitIndex)="handleNodeEmitIndex($event)" (cancelModify)="handleUpdataPretable($event)">
+        </app-mission-hpc-schedule>
+      </div>
+      <!-- 内存诊断预约任务 -->
+      <div *ngSwitchCase="'memory_diagnostic'" style="margin-top:20px;">
+        <div *ngIf="showDiagnose">
+          <app-diagnose-schedule [taskData]="taskData" [scheduleTaskId]="scheduleTaskId" [projectId]='projectId'
+            (cancelModify)="handleUpdataPretable($event)" (confirmModify)="handleUpdataPretable($event)">
+          </app-diagnose-schedule>
+        </div>
+      </div>
+      <!-- 网络IO诊断预约任务 -->
+      <div *ngSwitchCase="'netio_diagnostic'" class="netio-diagnostic" tiScroll>
+        <div *ngIf="showDiagnose">
+          <app-net-io-schedule [taskData]="taskData" [scheduleTaskId]="scheduleTaskId" [projectId]='projectId'
+            (cancelModify)="handleUpdataPretable($event)" (confirmModify)="handleUpdataPretable($event)">
+          </app-net-io-schedule>
+        </div>
+      </div>
+      <!-- 存储IO诊断预约任务 -->
+      <div *ngSwitchCase="'storageio_diagnostic'" class="netio-diagnostic">
+        <div *ngIf="showDiagnose">
+          <app-storage-io-schedule [taskData]="taskData" [scheduleTaskId]="scheduleTaskId" [projectId]='projectId'
+            (cancelModify)="handleUpdataPretable($event)" (confirmModify)="handleUpdataPretable($event)">
+          </app-storage-io-schedule>
+        </div>
+      </div>
+      <div *ngSwitchDefault>
+        <div class="list-info">
+          <div class="table">
+            <div class="config-info" *ngFor="let item of configList">
+              <div class="table-left" [ngStyle]="{width: labelWidth}">{{item.key}}</div>
+              <div class="table-right">{{item.text}}</div>
+            </div>
+            <!-- 应用信息 -->
+            <div class="analysis-info">
+              <div class="analysis-target-app" *ngIf="targetClicked===1">
+                <!-- 输入应用路径或者-->
+                <div class="analysis-target-application" *ngIf="modeClicked===0">
+                  <div class="analysis-target-application-contnet">
+                    <div class="analysis-target-application-contnet-label" [ngStyle]="{width: labelWidth}">
+                      <ti-icon name="staricon"></ti-icon>
+                      <!-- 不适用span可能左右会有空格 影响显示 -->
+                      <span>{{i18n.common_term_task_crate_app_path}}</span>
+                      <ti-icon [tiTip]="i18n.mission_create.modeAppNotice" style="margin-left:10px;"
+                        tiTipMaxWidth='370px' tiTipPosition="bottom">
+                        <img src='./assets/img/summary/tooltip.png' alt="">
+                      </ti-icon>
+                    </div>
+                    <div class="analysis-target-application-contnet-value">
+                      <!-- 输入应用路径 -->
+                      <input style="width: 300px;" type="text" #like tiText [placeholder]="modeAppHolder"
+                        [(ngModel)]="modeApplication" [disabled]="modeAppDisable" (blur)="missionAppChange($event)" />
+                      <div class="mission-app-warn" *ngIf="!modeAppValid">{{modeAppWarnMsg}}</div>
+                    </div>
+                  </div>
+                  <div class="analysis-target-application-contnet">
+                    <div class="analysis-target-application-contnet-label" [ngStyle]="{width: labelWidth}">
+                      <ti-icon name="staricon"
+                        [ngStyle]="{'opacity': analysisTypesDir[typeClicked].type==='java-mixed-mode' ? 1 : 0}">
+                      </ti-icon>
+                      <!-- 不适用span可能左右会有空格 影响显示 -->
+                      <span>{{i18n.common_term_task_crate_parameters}}</span>
+                      <ti-icon [tiTip]="i18n.mission_create.modeAppParamsNotice" style="margin-left:10px;"
+                        tiTipMaxWidth='370px' tiTipPosition="bottom">
+                        <img src='./assets/img/summary/tooltip.png' alt="">
+                      </ti-icon>
+                    </div>
+                    <div class="analysis-target-application-contnet-value">
+                      <!-- 输入应用参数 -->
+                      <textarea tiTextarea type="text" #like class="textarea-params" style="width: 300px;height: 50px;"
+                        resize="'vertical'" [placeholder]="modeAppParamsHolder" [(ngModel)]="modeAppParams"
+                        [disabled]="modeAppParamsDisable" (ngModelChange)="missionAppParamsChange($event)"></textarea>
+                      <div class="mission-app-warn"
+                        *ngIf="!modeAppParamsValid && analysisTypesDir[typeClicked].type==='java-mixed-mode'">
+                        {{modeAppParamsMsg}}</div>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- 输入进程ID  -->
+                <!-- 输入 Pid 和进程名称 -->
+                <div class="analysis-target-pid" *ngIf="modeClicked===1">
+                  <div class="analysis-target-pid-input" [formGroup]="pidProcessGroup">
+                    <ng-container *ngIf="
+                        analysisTypesDir[typeClicked].type === 'process-thread-analysis'
+                        || analysisTypesDir[typeClicked].type === 'microarchitecture'
+                        || analysisTypesDir[typeClicked].type === 'mem_access_analysis'
+                        || analysisTypesDir[typeClicked].type === 'C/C++ Program'
+                        || analysisTypesDir[typeClicked].type === 'system_lock'
+                        || analysisTypesDir[typeClicked].type === 'ioperformance'
+                        || analysisTypesDir[typeClicked].type === 'resource_schedule'">
+                      <app-pid-process-input formControlName="pidProcess">
+                      </app-pid-process-input>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="missMobal">
+            <app-mission-performance #performance *ngIf="scheduleTaskType === 'system'" [scenes]="scenes"
+              [taskNameValid]="missionNameValid" [labelWidth]="labelWidth" [projectId]="projectId"
+              [projectName]="projectName" [taskName]="missionName" [isModifySchedule]="isModifySchedule"
+              [widthIsLimited]="true" (sendPretable)="handleUpdataPretable($event)"
+              (sendMissionKeep)="saveTemplate($event)" [nodeConfigShow]="nodeConfigShow"
+              [nodeConfigedData]="nodeConfigedData" (handleNodeEmitIndex)="handleNodeEmitIndex($event)">
+            </app-mission-performance>
+
+            <app-mission-process #process *ngIf="scheduleTaskType === 'process-thread-analysis'"
+              [editScheduleTask]="true" [labelWidth]="labelWidth" [drawerLevel]="1" [projectName]="projectName"
+              [taskName]="missionName" [projectId]="projectId" [nodeConfigShow]="nodeConfigShow"
+              [taskNameValid]="missionNameValid" [typeId]="targetClicked+modeClicked"
+              [modeApplication]='modeApplication' [modeAppParams]="modeAppParams" [modeAppValid]="modeAppValid"
+              [modePid]="modePid" [modeProcess]="modeProcess" [modePidValid]="modePidValid"
+              [isModifySchedule]="isModifySchedule" (sendAppOrPidDisable)="handleAppAndPidDisable($event)"
+              (sendMissionKeep)="saveTemplate($event)" (sendPretable)="handleUpdataPretable($event)"
+              (handleNodeEmitIndex)="handleNodeEmitIndex($event)"></app-mission-process>
+
+            <app-mission-schedule #schedule *ngIf="scheduleTaskType === 'resource_schedule'"
+              [modeApplication]='modeApplication' [labelWidth]="labelWidth" [modeAppParams]="modeAppParams"
+              [modePid]='modePid' [modeProcess]="modeProcess" [modeAppValid]='modeAppValid'
+              [typeId]="targetClicked+modeClicked" [taskNameValid]="missionNameValid" [modePidValid]='modePidValid'
+              [projectId]="projectId" [projectName]="projectName" [taskName]="missionName"
+              [isModifySchedule]="isModifySchedule" [nodeConfigedData]="nodeConfigedData"
+              (handleNodeEmitIndex)="handleNodeEmitIndex($event)" (sendPretable)="handleUpdataPretable($event)"
+              (sendMissionKeep)="saveTemplate($event)" [nodeConfigShow]="nodeConfigShow"></app-mission-schedule>
+
+            <app-mission-lock #lock *ngIf="scheduleTaskType === 'system_lock'" [modeApplication]='modeApplication'
+              [labelWidth]="labelWidth" [modeAppParams]="modeAppParams" [modePid]='modePid' [modeProcess]="modeProcess"
+              [modeAppValid]='modeAppValid' [typeId]="targetClicked+modeClicked" [taskNameValid]="missionNameValid"
+              [modePidValid]='modePidValid' [projectId]="projectId" [projectName]="projectName" [taskName]="missionName"
+              [isModifySchedule]="isModifySchedule" [nodeConfigedData]="nodeConfigedData"
+              (handleNodeEmitIndex)="handleNodeEmitIndex($event)" (sendPretable)="handleUpdataPretable($event)"
+              (sendMissionKeep)="saveTemplate($event)" [nodeConfigShow]="nodeConfigShow"></app-mission-lock>
+
+            <app-mission-cplusplus #cplusplus *ngIf="scheduleTaskType === 'C/C++ Program'"
+              [modeApplication]='modeApplication' [labelWidth]="labelWidth" [modeAppParams]="modeAppParams"
+              [modePid]='modePid' [modeProcess]="modeProcess" [modeAppValid]='modeAppValid'
+              [typeId]="targetClicked+modeClicked" [taskNameValid]="missionNameValid" [modePidValid]='modePidValid'
+              [projectId]="projectId" [projectName]="projectName" [taskName]="missionName"
+              [isModifySchedule]="isModifySchedule" [nodeConfigedData]="nodeConfigedData"
+              (handleNodeEmitIndex)="handleNodeEmitIndex($event)" (sendPretable)="handleUpdataPretable($event)"
+              (sendMissionKeep)="saveTemplate($event)" [nodeConfigShow]="nodeConfigShow"></app-mission-cplusplus>
+
+            <app-mission-mem #mem *ngIf="['mem_access', 'miss_event', 'falsesharing'].includes(scheduleTaskType)"
+              [typeId]="targetClicked+modeClicked" [modeApplication]='modeApplication' [labelWidth]="labelWidth"
+              [modeAppParams]="modeAppParams" [modePid]='modePid' [modeProcess]="modeProcess"
+              [modeAppValid]='modeAppValid' [targetClicked]="targetClicked" [modeClicked]="modeClicked"
+              [taskNameValid]="missionNameValid" [modePidValid]='modePidValid' [projectId]="projectId"
+              [projectName]="projectName" [taskName]="missionName" [isModifySchedule]="isModifySchedule"
+              [nodeConfigedData]="nodeConfigedData" [nodeConfigShow]="nodeConfigShow" [drawerLevel]="1"
+              [widthIsLimited]="true" (sendPretable)="handleUpdataPretable($event)"
+              (sendMissionKeep)="saveTemplate($event)"></app-mission-mem>
+
+            <app-mission-structure #structure *ngIf="scheduleTaskType === 'microarchitecture'"
+              [modeApplication]='modeApplication' [labelWidth]="labelWidth" [modeAppParams]="modeAppParams"
+              [modePid]='modePid' [modeProcess]="modeProcess" [modeAppValid]='modeAppValid'
+              [typeId]="targetClicked+modeClicked" [taskNameValid]="missionNameValid" [modePidValid]='modePidValid'
+              [projectId]="projectId" [projectName]="projectName" [taskName]="missionName"
+              [isModifySchedule]="isModifySchedule" [nodeConfigedData]="nodeConfigedData"
+              (handleNodeEmitIndex)="handleNodeEmitIndex($event)" (sendPretable)="handleUpdataPretable($event)"
+              (sendMissionKeep)="saveTemplate($event)" [nodeConfigShow]="nodeConfigShow"></app-mission-structure>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</app-mission-modal-header>
+<!-- 保存模板 -->
+<app-mission-template-save #keep_modal [data]="keepData"></app-mission-template-save>
+
+<!-- c++ attach -->
+<app-mission-c-attach #cAttach [labelWidth]="calcLabelWidth(1)" [drawerLevel]="1"
+  (handleConfigData)="handleConfigData($event)"></app-mission-c-attach>
+<!-- c++ launch -->
+<app-mission-c-launch #cLaunch [labelWidth]="calcLabelWidth(1)" [drawerLevel]="1"
+  (handleConfigData)="handleConfigData($event)"></app-mission-c-launch>
+<!-- c++ profile -->
+<app-mission-c-profile #cProfile [labelWidth]="calcLabelWidth(1)" [drawerLevel]="1"
+  (handleConfigData)="handleConfigData($event)"></app-mission-c-profile>
+<!-- lock attach -->
+<app-mission-l-attach #lAttach [labelWidth]="calcLabelWidth(1)" [drawerLevel]="1"
+  (handleConfigData)="handleConfigData($event)"></app-mission-l-attach>
+<!-- lock launch -->
+<app-mission-l-launch #lLaunch [labelWidth]="calcLabelWidth(1)" [drawerLevel]="1"
+  (handleConfigData)="handleConfigData($event)"></app-mission-l-launch>
+<!-- lock profile -->
+<app-mission-l-profile #lProfile [labelWidth]="calcLabelWidth(1)" [drawerLevel]="1"
+  (handleConfigData)="handleConfigData($event)"></app-mission-l-profile>
+<!-- resource attach -->
+<app-mission-r-attach #rAttach [labelWidth]="calcLabelWidth(1)" [drawerLevel]="1"
+  (handleConfigData)="handleConfigData($event)"></app-mission-r-attach>
+<!-- resource launch -->
+<app-mission-r-launch #rLaunch [labelWidth]="calcLabelWidth(1)" [drawerLevel]="1"
+  (handleConfigData)="handleConfigData($event)"></app-mission-r-launch>
+<!-- resource profile -->
+<app-mission-r-profile #rProfile [labelWidth]="calcLabelWidth(1)" [drawerLevel]="1"
+  (handleConfigData)="handleConfigData($event)"></app-mission-r-profile>
+
+<!-- structure -->
+<app-mission-s-attach #sAttach [labelWidth]="calcLabelWidth(1)" [drawerLevel]="1"
+  (handleConfigData)="handleConfigData($event)"></app-mission-s-attach>
+<app-mission-s-launch #sLaunch [labelWidth]="calcLabelWidth(1)" [drawerLevel]="1"
+  (handleConfigData)="handleConfigData($event)"></app-mission-s-launch>
+<app-mission-s-profile #sProfile [labelWidth]="calcLabelWidth(1)" [drawerLevel]="1"
+  (handleConfigData)="handleConfigData($event)"></app-mission-s-profile>
+
+<!-- database -->
+<app-mission-d-profile #dProfile [labelWidth]="calcLabelWidth(1)" [drawerLevel]="1"
+  (handleConfigData)="handleConfigData($event)"></app-mission-d-profile>
+
+<!-- hpc -->
+<app-mission-hpc-node-params #hpcNodeParams [labelWidth]="calcLabelWidth(1)" [drawerLevel]="1"
+  (handleConfigData)="handleConfigData($event)"></app-mission-hpc-node-params>

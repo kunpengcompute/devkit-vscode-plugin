@@ -1,0 +1,104 @@
+<div class="tableBox">
+    <p class="tableTitle">{{i18n.sys_cof.sum.cpu_info.numa_node}}</p>
+    <ti-table [(displayedData)]="numaNodeDisplayData" [srcData]="numaNodeContentData" [columns]="numaNodeTitle">
+        <table>
+            <thead>
+                <tr>
+                    <th tiOverflow *ngFor="let column of numaNodeTitle;index as i" width="{{column.width}}">
+                        <span [ngClass]="{'tableFirstData': i == 0}">{{column.title}}</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngIf="!ifNumaNoneData">
+                <tr *ngFor="let row of numaNodeDisplayData;">
+                    <td tiOverflow><span class="tableFirstData">{{row.node}}</span></td>
+                    <td tiOverflow>{{row.nodeNuclear}}</td>
+                    <td tiOverflow>{{row.totalRAM}}</td>
+                    <td tiOverflow>{{row.idleRAM}}</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="ifNumaNoneData">
+                <tr class="ti3-table-nodata-simple">
+                    <td tiColspan>
+                        <img *ngIf="currTheme == ColorTheme.Dark" style="width:10%;"
+                            src='./assets/img/projects/nodata-dark.png' />
+                        <img *ngIf="currTheme == ColorTheme.Light" style='width:10%;'
+                            src='./assets/img/projects/nodata-light.png' />
+                        <div style="font-size: 1rem">{{numaNoneData}}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ti-pagination autoHide="true" [(currentPage)]="numaNodeCurrentPage" style="padding-left: 10px;"
+            [pageSize]="numaNodePageSize" [(totalNumber)]="numaNodeTotalNumber">
+        </ti-pagination>
+    </ti-table>
+    <p class="tableTitle">{{i18n.sys_cof.sum.cpu_info.numa_node_dis}}</p>
+    <ti-table [(displayedData)]="numaNodeDistanceDisplayData" [srcData]="numaNodeDistanceContentData"
+        [columns]="numaNodeDistanceTitle">
+        <table>
+            <thead>
+                <tr>
+                    <th tiOverflow *ngFor="let column of numaNodeDistanceTitle;index as i">
+                        <span [ngClass]="{'tableFirstData': i == 0}">{{column.title}}</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngIf="!ifnumaNodeDistance">
+                <tr *ngFor="let row of numaNodeDistanceDisplayData;">
+                    <td tiOverflow> <span class="tableFirstData">{{row.node}}</span> </td>
+                    <td tiOverflow>{{row.zero}}</td>
+                    <td tiOverflow>{{row.one}}</td>
+                    <td tiOverflow>{{row.two}}</td>
+                    <td tiOverflow>{{row.three}}</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="ifnumaNodeDistance">
+                <tr class="ti3-table-nodata-simple">
+                    <td tiColspan>
+                        <img *ngIf="currTheme == ColorTheme.Dark" style='width:10%;'
+                            src='./assets/img/projects/nodata-dark.png' />
+                        <img *ngIf="currTheme == ColorTheme.Light" style='width:10%;'
+                            src='./assets/img/projects/nodata-light.png' />
+                        <div style="font-size: 1rem">{{numaNodeDistance}}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ti-pagination autoHide="true" [(currentPage)]="numaNodeDistanceCurrentPage" style="padding-left: 10px;"
+            [pageSize]="numaNodeDistancePageSize" [(totalNumber)]="numaNodeDistanceTotalNumber">
+        </ti-pagination>
+    </ti-table>
+    <p class="tableTitle">{{i18n.sys_summary.cpupackage_tabel.NUMA_name}}</p>
+    <ti-table [(displayedData)]="numaBalanceDisplayData" [srcData]="numaBalanceContentData"
+        [columns]="numaBalanceTitle">
+        <table>
+            <thead>
+                <tr>
+                    <th tiOverflow *ngFor="let column of numaBalanceTitle;index as i">
+                        <span [ngClass]="{'tableFirstData': i == 0}">{{column.title}}</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngIf="!ifnumaBalance">
+                <tr *ngFor="let row of numaBalanceDisplayData;">
+                    <td tiOverflow> <span class="tableFirstData">{{row.balance}}</span> </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="ifnumaBalance">
+                <tr class="ti3-table-nodata-simple">
+                    <td tiColspan>
+                        <img *ngIf="currTheme == ColorTheme.Dark" style='width:10%;'
+                            src='./assets/img/projects/nodata-dark.png' />
+                        <img *ngIf="currTheme == ColorTheme.Light" style='width:10%;'
+                            src='./assets/img/projects/nodata-light.png' />
+                        <div style="font-size: 1rem">{{numaBalance}}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ti-pagination autoHide="true" [(currentPage)]="numaBalanceCurrentPage" style="padding-left: 10px;"
+            [pageSize]="numaBalancePageSize" [(totalNumber)]="numaBalanceTotalNumber">
+        </ti-pagination>
+    </ti-table>
+</div>

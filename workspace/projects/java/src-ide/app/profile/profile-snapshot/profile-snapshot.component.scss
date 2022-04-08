@@ -1,0 +1,511 @@
+::ng-deep .vscode-dark {
+    --snap--container--bg: transparent;
+    --right-border-color: #313131;
+    --scrollbar-bg: #eae9e9;
+
+    .leftList {
+        .ti3-tree-container {
+            background: transparent !important;
+        }
+    }
+
+    ti-drop.ti3-dropdown-container {
+        background-color: transparent;
+    }
+
+    .ti3-cols-toggle-drop {
+        padding: 0;
+    }
+
+    ti-list::-webkit-scrollbar,
+    ti-menulist::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .ti3-table>.ti3-table-fixed-head>table>thead>tr>th {
+        color: var(--d-e8e8e8-l-222222) !important;
+    }
+}
+
+::ng-deep .vscode-light {
+    --scrollbar-bg: #616161;
+    --right-border-color: #d9d9d9;
+    ti-drop.ti3-dropdown-container {
+        background-color: transparent;
+    }
+
+    .ti3-cols-toggle-drop {
+        padding: 0;
+    }
+
+    ti-list::-webkit-scrollbar,
+    ti-menulist::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .ti3-table > .ti3-table-fixed-head > table > thead > tr > th{
+        color: #222 !important;
+    }
+    .snapshot-container .snapshot-main .snapshot-content {
+      > div {
+      padding-left: 20px;
+      border-left: 1px solid #d9d9d9!important;
+    }
+    }
+}
+
+::ng-deep {
+    // 下拉禁用选项
+    .ti3-dropdown-option-disabled {
+        .ti3-overflow-padding {
+            color: var(--ti-select-no-allow-color) !important;
+        }
+    }
+
+    ti-tree ul>li {
+        .ti3-tree-content-box {
+            color: var(--ti-table-td-text-color);
+        }
+    }
+}
+
+.snapshot-container {
+    height: calc(100vh - 68px);
+    margin-top: -20px;
+
+    .snapshot-main {
+        width: 100%;
+        height: 100%;
+        background-color: var(--snap--container--bg);
+        border-radius: 1px;
+        display: flex;
+
+        .leftList {
+            width: 20%;
+            height: 100%;
+            padding: 0px;
+            transition: all 100ms linear;
+            position: relative;
+
+            .leftListHeader {
+                border-bottom: 1px solid var(--right-border-color);
+                font-size: 0px;
+                padding: 20px 10px 16px;
+
+                .file-list-icon {
+                    padding-right: 8px;
+                    display: inline-block;
+
+                    img:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .toggle-btn {
+                position: absolute;
+                top: calc(50% - 45px);
+                right: -3px;
+                cursor: pointer;
+                width: 20px;
+
+                img {
+                    width: 20px;
+                    height: 90px;
+                }
+            }
+
+            .active {
+                right: -18px;
+                transform: rotateY(180deg);
+                z-index: 10;
+            }
+
+            .file-name {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+
+                .file-list {
+                    cursor: pointer;
+
+                    img {
+                        margin-bottom: -2px;
+                        margin-right: 8px;
+                    }
+                }
+            }
+
+            .leftListBt {
+                width: 100%;
+                text-align: center;
+                margin-top: 30px;
+
+                button {
+                    font-size: 12px;
+                    width: 100px;
+                    height: 28px;
+                    line-height: 14px;
+                }
+
+                .confirm {
+                    margin-right: 20px;
+                }
+            }
+
+            & ::ng-deep .ti3-tree-item-leaf {
+                margin-left: 0px;
+            }
+
+            & ::ng-deep .ti3-tree-container {
+                max-height: calc(100vh - 280px);
+            }
+        }
+
+        .active {
+            width: 0px;
+            padding: 0px;
+        }
+
+        .snapshot-content {
+            flex: 1;
+            width: 80%;
+            min-height: 800px;
+            margin-top: 32px;
+            > div {
+                padding-left: 20px;
+                border-left: 1px solid #313131;
+            }
+            .table-content {
+                margin-top: 20px;
+
+                ::ng-deep .btn-header {
+                    color: var(--ti-table-td-text-color);
+                }
+            }
+        }
+    }
+
+    .no-data {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        ::ng-deep .container {
+            background-color: transparent !important;
+        }
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 660px;
+    padding: 0 32px 32px 32px;
+    overflow: hidden;
+
+    .header {
+        font-size: 20px;
+        color: var(--d-e8e8e8-l-222222);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 66px;
+        border-bottom: dashed 1px#4B4B4B;
+
+        .close {
+            cursor: pointer;
+        }
+    }
+
+    .delete-snap-main {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-top: 20px;
+
+        .delete-tip {
+            margin-left: 10px;
+            color: #888888;
+            font-size: 14px;
+        }
+    }
+
+    .contrast-main {
+        width: 100%;
+        margin-top: 20px;
+
+
+        .selectDiv {
+            margin-top: 15px;
+            height: 30px;
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            .select-required {
+                width: 10px;
+            }
+
+            .selectDivText {
+                font-size: 12px;
+                color: #AAAAAA;
+            }
+
+            & ::ng-deep .ti3-placeholder {
+                color: #616161;
+            }
+        }
+
+        .alertSelect {
+            width: 380px;
+            height: 30px;
+            position: absolute;
+            left: 116px;
+        }
+
+        .snapshotError {
+            width: 380px;
+            height: 25px;
+            font-size: 12px;
+            display: flex;
+            margin-left: 115px;
+
+            .snapshotErrorText {
+                display: flex;
+                line-height: 25px;
+                color: #616161;
+            }
+        }
+    }
+
+    .foot {
+        width: 100%;
+        text-align: center;
+        margin-top: 40px;
+
+        button {
+            width: 160px;
+            height: 32px;
+            line-height: 18px;
+        }
+
+        .confirm {
+            margin-right: 20px;
+        }
+    }
+}
+
+:host ::ng-deep .leftList .ti3-tree-content-box {
+    display: flex;
+    align-items: center;
+
+    & span:last-child {
+        position: relative;
+        width: 100%;
+
+        .ti3-tree-checkbox-wrapper {
+            display: block;
+            font-size: 0;
+            float: left;
+        }
+
+        .ti3-tree-node-text-wrapper {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+}
+
+:host ::ng-deep {
+
+    .ti3-btn-default,
+    [tiButton] {
+        background: var(--d-313131-l-ffffff);
+        color: var(--d-e8e8e8-l-222222);
+        border-color: var(--d-dddddd-l-979797);
+    }
+
+    .ti3-btn-default[disabled],
+    [tiButton][disabled] {
+        background: var(--d-313131-l-ffffff);
+        color: #AAAAAA;
+        border-color: #616161;
+    }
+
+    .ti3-btn-default:not([disabled]):hover,
+    [tiButton]:not([disabled]):hover {
+        background: var(--d-313131-l-ffffff);
+        border-color: #0067FF !important;
+        color: #0067ff;
+    }
+
+    .ti3-btn-default:not([disabled]):focus,
+    .ti3-btn-default:not([disabled]):active,
+    [tiButton]:not([disabled]):focus,
+    [tiButton]:not([disabled]):active {
+        color: #0067FF !important;
+        border-color: #0067FF !important;
+        background: var(--d-313131-l-ffffff);
+    }
+
+    // 写在tiButton后面，不然样式会被覆盖
+    .ti3-btn-primary {
+        color: #fff !important;
+        background: #0067FF !important;
+        border-color: #0067FF !important;
+    }
+
+    .ti3-btn-primary[disabled] {
+        color: var(--ti3-btn-primary-color) !important;
+        background-color: var(--ti3-btn-primary-background-color) !important;
+        border-color: var(--ti3-btn-primary-border-color) !important;
+    }
+
+    .ti3-btn-primary:not([disabled]):hover {
+        background: #0067FF !important;
+        border-color: #0067FF !important;
+    }
+
+    .ti3-btn-primary:not([disabled]):focus,
+    .ti3-btn-primary:not([disabled]):active {
+        color: var(--d-e8e8e8-l-222222) !important;
+        background: #0067FF !important;
+        border-color: #0067FF !important;
+    }
+
+    input[type='checkbox'][tiCheckbox]+.ti3-checkbox .ti3-checkbox-label {
+        display: inline !important;
+    }
+
+    input[type='checkbox'][tiCheckbox]:not([disabled]):indeterminate+.ti3-checkbox .ti3-checkbox-skin {
+        background-color: #0067ff !important;
+        border-color: #0067ff !important;
+    }
+
+    .ti3-tree-container .ti3-icon-minus-square:hover,
+    .ti3-tree-container .ti3-icon-plus-square:hover,
+    .ti3-tree-container .ti3-icon-minus-square,
+    .ti3-tree-container .ti3-icon-plus-square {
+        color: #0067ff;
+        margin-right: 8px !important;
+    }
+
+    .ti3-tree-container .ti3-icon-minus-square:active,
+    .ti3-tree-container .ti3-icon-plus-square:active {
+        color: #0057D9;
+    }
+
+    .ti3-table>.ti3-table-container>table>tbody>tr>td .ti3-table-tree .ti3-icon-minus-square:hover,
+    .ti3-table>.ti3-table-container>table>tbody>tr>td .ti3-table-tree .ti3-icon-plus-square:hover {
+        color: #0067ff;
+    }
+
+    .ti3-table>.ti3-table-container>table>tbody>tr>td .ti3-table-tree .ti3-icon-minus-square:active,
+    .ti3-table>.ti3-table-container>table>tbody>tr>td .ti3-table-tree .ti3-icon-plus-square:active {
+        color: #0057D9;
+        background: transparent;
+    }
+
+    .ti3-table>.ti3-table-container>table>tbody>tr>td .ti3-table-tree .ti3-icon-minus-square {
+        color: #0067ff;
+    }
+
+    .ti3-table>.ti3-table-fixed-head>table>thead>tr>th>.ti3-cell-text-container>.ti3-cell-text,
+    .ti3-table>.ti3-table-container>table>tbody>tr>td>.ti3-cell-text-container>.ti3-cell-text {
+        vertical-align: middle;
+    }
+
+    .ti3-table>.ti3-table-fixed-head>table>thead>tr>th>.ti3-sort-container .ti3-sort,
+    .ti3-table>.ti3-table-container>table>thead>tr>th>.ti3-sort-container .ti3-sort {
+        font-size: 16px;
+        color: var(--d-e8e8e8-l-222222);
+    }
+
+    .ti3-compnent-container-border:not([disabled])[tiFocused],
+    ti-select:not([disabled])[tiFocused] {
+        border-color: #0067ff !important;
+    }
+}
+
+:host ::ng-deep .snapshot-container {
+    & ::-webkit-scrollbar {
+        width: 8px !important;
+        height: 8px !important;
+    }
+
+    & ::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-bg);
+        opacity: 0.2;
+        border-radius: 4px;
+    }
+
+    & ::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+
+    .ti3-table-scroll-bar::-webkit-scrollbar,
+    .ti3-table>.ti3-table-container::-webkit-scrollbar {
+        width: 8px !important;
+        height: 8px !important;
+    }
+
+    .ti3-table {
+        font-size: 14px;
+    }
+
+    input[type='checkbox'][tiCheckbox][disabled]:not(:checked)+.ti3-checkbox .ti3-checkbox-skin {
+        background: var(--d-313131-l-ffffff) !important;
+        border: 1px solid #616161 !important;
+    }
+}
+
+:host ::ng-deep {
+    .ti3-table>.ti3-table-fixed-head>table>thead>tr>th {
+        font-size: 14px;
+        line-height: 1;
+    }
+
+    ti-drop.ti3-dropdown-container {
+        background-color: transparent;
+    }
+
+    .ti3-cols-toggle-drop {
+        padding: 0;
+    }
+
+}
+.tip-close{
+    display: inline-block;
+    img:hover {
+        cursor: pointer;
+    }
+    & > img {
+        display: none;
+    }
+    & > img:nth-of-type(1) {
+        display: block;
+    }
+    &:hover {
+        & > img:nth-of-type(1) {
+            display: none;
+        }
+        & > img:nth-of-type(2) {
+            display: block;
+        }
+    }
+    &:active {
+        & > img:nth-of-type(1) {
+            display: none;
+        }
+        & > img:nth-of-type(2) {
+            display: block;
+        }
+    }
+}

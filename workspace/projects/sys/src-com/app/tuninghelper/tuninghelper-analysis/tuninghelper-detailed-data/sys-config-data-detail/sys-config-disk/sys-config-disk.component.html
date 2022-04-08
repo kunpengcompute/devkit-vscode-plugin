@@ -1,0 +1,37 @@
+<div class="sys-config-disk">
+  <section>
+    <h1>{{ tableData.diskInfo.title }}</h1>
+    <app-common-table [commonTableData]="tableData.diskInfo" [isFilters]="true"></app-common-table>
+  </section>
+  <section>
+    <h1>{{ tableData.raidInfo.title }}</h1>
+    <app-common-table [commonTableData]="tableData.raidInfo" [isFilters]="true"></app-common-table>
+  </section>
+  <section>
+    <h1>{{ tableData.fileSystemInfo.title }}</h1>
+    <app-common-table [commonTableData]="tableData.fileSystemInfo">
+      <ng-template let-displayed let-tabcolumns="columns">
+        <tbody>
+          <ng-container *ngFor="let row of displayed;index as i">
+            <tr>
+              <td tiOverflow *ngIf="row.rowSpan !== 0" [attr.rowspan]="row.rowSpan || 1"
+                style="border-right: 1px solid var(--ti-table-border-bottom-color);">{{ row.fileSystem }}</td>
+              <td tiOverflow *ngIf="row.rowSpan !== 0" [attr.rowspan]="row.rowSpan || 1"
+                style="border-right: 1px solid var(--ti-table-border-bottom-color);">{{ row.mountedOn }}</td>
+              <td tiOverflow *ngIf="row.rowSpan !== 0" [attr.rowspan]="row.rowSpan || 1"
+                style="border-right: 1px solid var(--ti-table-border-bottom-color);">{{ row.mountParameter }}</td>
+              <td tiOverflow *ngIf="row.rowSpan !== 0" [attr.rowspan]="row.rowSpan || 1"
+                style="border-right: 1px solid var(--ti-table-border-bottom-color);">{{ row.type }}</td>
+              <td tiOverflow
+                style="border-right: 1px solid var(--ti-table-border-bottom-color);">{{ row.deviceName }}</td>
+              <td tiOverflow>{{ row.partition }}</td>
+              <td tiOverflow *ngIf="row.rowSpan !== 0" [attr.rowspan]="row.rowSpan || 1"
+                style="border-left: 1px solid var(--ti-table-border-bottom-color);">{{ row.lvm }}</td>
+              <td></td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </ng-template>
+    </app-common-table>
+  </section>
+</div>

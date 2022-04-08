@@ -1,0 +1,48 @@
+.light {
+  --hy-collapse-border: #d7dbe7;
+  --hy-collapse-bg-color: #ffffff;
+  --hy-collapse-title-color: #222;
+  --hy-collapse-title-bg-color: #f5f9ff;
+}
+.dark {
+  --hy-collapse-border: #4b4b4b;
+  --hy-collapse-bg-color: #1e1e1e;
+  --hy-collapse-title-color: #e8e8e8;
+  --hy-collapse-title-bg-color: #1e1e1e;
+}
+.hy-collapse-warpper {
+  background-color: var(--hy-collapse-bg-color);
+  text-align: initial;
+  width: 100%;
+  .hy-collapse-header {
+    display: flex;
+    height: 44px;
+    box-sizing: border-box;
+    padding: 12px 24px;
+    border: solid 1px var(--hy-collapse-border);
+    .hy-collapse-title {
+      font-size: 14px;
+      line-height: 20px;
+      margin-left: 16px;
+      color: var(--hy-collapse-title-color);
+    }
+    .hy-collapse-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      transition: 0.5s linear;
+      cursor: pointer;
+    }
+  }
+  .hy-collapse-content {
+    font-size: 14px;
+    line-height: 20px;
+    box-sizing: border-box;
+    padding: 20px 8px;
+    border-bottom: solid 1px var(--hy-collapse-border);
+    border-left: solid 1px var(--hy-collapse-border);
+    border-right: solid 1px var(--hy-collapse-border);
+  }
+}

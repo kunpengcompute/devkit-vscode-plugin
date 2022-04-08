@@ -1,0 +1,56 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Uploading Files">
+<meta name="abstract" content="If the size of the file to be uploaded is greater than 1 GB or the size of the file after decompression is greater than half of the remaining drive space, you need to free up some drive space or manually upload the file to the server. In other cases, you can use the upload function on the WebUI.">
+<meta name="description" content="If the size of the file to be uploaded is greater than 1 GB or the size of the file after decompression is greater than half of the remaining drive space, you need to free up some drive space or manually upload the file to the server. In other cases, you can use the upload function on the WebUI.">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0263147772.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.T21">
+<meta name="brand" content="Huawei Kunpeng Porting Advisor">
+<meta name="DC.Publisher" content="20201230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0290794906">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/pygments.css">
+<title>Uploading Files</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0290794906"></a><a name="EN-US_TOPIC_0290794906"></a>
+
+<h1 class="topictitle1">Uploading Files</h1>
+<div id="body1604978253802"><p id="shortdesc777564014718">If the size of the file to be uploaded is greater than 1 GB or the size of the file after decompression is greater than half of the remaining drive space, you need to free up some drive space or manually upload the file to the server. In other cases, you can use the upload function on the WebUI.</p>
+<p id="EN-US_TOPIC_0290794906__p1366015515379">In the following example, <strong id="EN-US_TOPIC_0290794906__b3305163316296">/opt/portadv</strong> is the tool installation directory. Replace it with the actual directory.</p>
+<ol id="EN-US_TOPIC_0290794906__ol17660055113713"><li id="EN-US_TOPIC_0290794906__li10660145523713"><span>Obtain the files to be uploaded.</span></li><li id="EN-US_TOPIC_0290794906__li56601055173717"><span>Place the file to be uploaded in the subdirectory of the created user name directory. The following describes how to use the <strong id="EN-US_TOPIC_0290794906__b3511455205313">portadmin</strong> user to upload the source code porting file. For details about the directory, see the upload directory on the page.</span><p><ol type="a" id="EN-US_TOPIC_0290794906__ol1266015511370"><li id="EN-US_TOPIC_0290794906__li266055513715">Use an FTP tool (for example, WinSCP) to log in to the server OS as the <strong id="EN-US_TOPIC_0290794906__b156972485503">root</strong> user.</li><li id="EN-US_TOPIC_0290794906__li56607558379">Upload the source code file to be scanned to the <strong id="EN-US_TOPIC_0290794906__b487020370541">/opt/portadv/portadmin/sourcecode/</strong> directory.</li><li id="EN-US_TOPIC_0290794906__li4660165510374">Decompress the package. If the file does not need to be decompressed, skip this step.<ol class="substepthirdol" id="EN-US_TOPIC_0290794906__ol17660155510379"><li id="EN-US_TOPIC_0290794906__li2660055103714">Use SSH to log in to the OS CLI as the <strong id="EN-US_TOPIC_0290794906__b654401935410">root</strong> user.</li><li id="EN-US_TOPIC_0290794906__li166065516376">Run the following command to switch to the directory where the file is located.<div class="codecoloring" codetype="Bash" id="EN-US_TOPIC_0290794906__screen041173313548"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">cd</span> /opt/portadv/portadmin/sourcecode
+</pre></div>
+</td></tr></table></div>
+</li><li id="EN-US_TOPIC_0290794906__li266145513376">Decompress the file. For example, if the file is in tar.gz format, run the following command:<div class="codecoloring" codetype="Bash" id="EN-US_TOPIC_0290794906__screen188911324185516"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>tar -zxvf xxx.tar.gz
+</pre></div>
+</td></tr></table></div>
+</li></ol>
+</li><li id="EN-US_TOPIC_0290794906__li1758117399361">Change the owner group of the file and change the execute permission on the file. (<em id="EN-US_TOPIC_0290794906__i1393461314550">xxx</em> indicates the folder where the package is extracted or the software installation package uploaded by the user.)<pre class="screen" id="EN-US_TOPIC_0290794906__screen112541020171014">chown -R porting:porting xxx
+chmod -R 600 xxx</pre>
+<div class="note" id="EN-US_TOPIC_0290794906__note11485165518324"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0290794906__p1258243153310">If you want to use the <strong id="EN-US_TOPIC_0290794906__b1115811328585">chmod</strong> command instead of the <strong id="EN-US_TOPIC_0290794906__b1979653195810">chown</strong> command, run the following command:</p>
+<div class="codecoloring" codetype="Bash" id="EN-US_TOPIC_0290794906__screen89871647153316"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>chmod -R o+rw xxx
+</pre></div>
+</td></tr></table></div>
+</div></div>
+</li></ol>
+</p></li></ol>
+<p id="EN-US_TOPIC_0290794906__p1866216105418">After the file is uploaded, click the text box on the WebUI. A drop-down list box is displayed. The drop-down list box displays the uploaded files (up to 50 files). You can select the file to be scanned, or you can enter the file name.</p>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0263147772.html">Configuration Before Using the Tool</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

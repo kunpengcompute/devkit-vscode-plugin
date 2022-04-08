@@ -1,0 +1,86 @@
+<div class="tableBox">
+    <p class="tableTitle">{{i18n.sys_cof.sum.network}}</p>
+    <ti-table [(displayedData)]="networkDisplayData" [srcData]="networkContentData" [columns]="networkTitle">
+        <table>
+            <thead>
+                <tr>
+                    <th tiOverflow *ngFor="let column of networkTitle;index as i">
+                        <span [ngClass]="{'tableFirstData': i == 0}">{{column.title}}</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngIf="!ifnetwork">
+                <tr *ngFor="let row of networkDisplayData;">
+                    <td tiOverflow style="border-bottom: 1px solid #d4d9e6;"><span
+                            class="tableFirstData">{{row.name}}</span></td>
+                    <td tiOverflow style="border-bottom: 1px solid #d4d9e6;">{{row.rxpck}}</td>
+                    <td tiOverflow style="border-bottom: 1px solid #d4d9e6;">{{row.txpck}}</td>
+                    <td tiOverflow style="border-bottom: 1px solid #d4d9e6;">{{row.rxkB}}</td>
+                    <td tiOverflow style="border-bottom: 1px solid #d4d9e6;">{{row.txkB}}</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="ifnetwork">
+                <tr class="ti3-table-nodata-simple">
+                    <td tiColspan>
+                        <img *ngIf="currTheme == ColorTheme.Dark" style='width:10%;' src='./assets/img/projects/nodata-dark.png' />
+                        <img *ngIf="currTheme == ColorTheme.Light" style='width:10%;' src='./assets/img/projects/nodata-light.png' />
+                        <div style="font-size: 1rem">{{network}}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ti-pagination autoHide="true" [(currentPage)]="networkCurrentPage" style="padding-left: 10px;"
+            [pageSize]="networkPageSize" [(totalNumber)]="networkTotalNumber">
+        </ti-pagination>
+    </ti-table>
+</div>
+<div class="tableBox">
+    <p class="tableTitle">{{i18n.sys_summary.cpupackage_tabel.network_port}}</p>
+    <ti-table [(displayedData)]="networkPortDisplayData" [srcData]="networkPortContentData"
+        [columns]="networkPortTitle">
+        <table>
+            <thead>
+                <tr>
+                    <th tiOverflow *ngFor="let column of networkPortTitle;index as i">
+                        <span [ngClass]="{'tableFirstData': i == 0}">{{column.title}}
+                            <img src="./assets/img/summary/compass.svg" class='compass' class="system-tip blockCls"
+                                [tiTip]='column.tipStr' tiTipMaxWidth='550px'
+                                *ngIf="column.tipStr && column.tipStr !='NULL'" tiTipPosition="top-left" />
+                        </span>
+
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngIf="!ifnetworkPortTotal">
+                <tr *ngFor="let row of networkPortDisplayData;">
+                    <td tiOverflow><span class="tableFirstData">{{row.name}}</span></td>
+                    <td tiOverflow>{{row.device}}</td>
+                    <td tiOverflow>{{row.hardware}}</td>
+                    <td tiOverflow>{{row.txkB}}</td>
+                    <td tiOverflow>{{row.rxkB}}</td>
+                    <td tiOverflow>{{row.txpck}}</td>
+                    <td tiOverflow>{{row.rxpck}}</td>
+                    <td tiOverflow>{{row.maxEfficiency}}</td>
+                    <td tiOverflow>{{row.currentEfficiency}}</td>
+                    <td tiOverflow>{{row.load}}</td>
+                    <td tiOverflow>{{row.details}}</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="ifnetworkPortTotal">
+                <tr class="ti3-table-nodata-simple">
+                    <td tiColspan>
+                        <img *ngIf="currTheme == ColorTheme.Dark" style='width:10%;'
+                            src='./assets/img/projects/nodata-dark.png' />
+                        <img *ngIf="currTheme == ColorTheme.Light" style='width:10%;'
+                            src='./assets/img/projects/nodata-light.png' />
+                        <div style="font-size: 1rem">{{networkPortTotal}}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ti-pagination autoHide="true" [(currentPage)]="networkPortCurrentPage" style="padding-left: 10px;"
+            [pageSize]="networkPortPageSize" [(totalNumber)]="networkPortTotalNumber">
+        </ti-pagination>
+    </ti-table>
+</div>

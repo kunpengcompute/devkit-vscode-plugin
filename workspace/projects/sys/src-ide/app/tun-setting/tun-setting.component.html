@@ -1,0 +1,786 @@
+<div class="mainconta">
+    <!-- 菜单栏 -->
+    <div id="menu" class="left">
+        <!-- 用户管理 -->
+        <div *ngIf="userRoleFlag" class='clickindex' title='{{ i18n.plugins_perf_title_setting[0] }}'>
+            <a (click)="jumpScroll('itemUser')" id="menuUser">{{
+                i18n.plugins_perf_title_setting[0] }}</a>
+        </div>
+        <!-- 修改密码 -->
+        <div *ngIf="!userRoleFlag" class='clickindex' title='{{i18n.plugins_perf_title_changePwd}}'>
+            <a (click)="jumpScroll('itemModifypsw')" id="menuModifypsw">{{i18n.plugins_perf_title_changePwd}}</a>
+        </div>
+        <!-- 弱口令字典 -->
+        <div class='clickindex' title='{{i18n.plugins_perf_title_setting[5]}}'>
+            <a (click)="jumpScroll('itemWeakServer')" id="menuWeakServer">{{i18n.plugins_perf_title_setting[5]}}</a>
+        </div>
+        <!-- 公共配置 -->
+        <div class='clickindex' title='{{i18n.plugins_perf_title_setting[3]}}'>
+            <a (click)="jumpScroll('itemSysConfigure')" id="menuSysConfigure">{{i18n.plugins_perf_title_setting[3]}}</a>
+        </div>
+        <!-- 登录配置 -->
+        <div *ngIf="isSystem && !userRoleFlag" class='clickindex' title='{{i18n.plugins_perf_title_loginConfig}}'>
+            <span (click)="jumpScroll('itemLogin')" id="menuLogin">{{i18n.plugins_perf_title_loginConfig}}</span>
+        </div>
+        <!-- 公共操作日志 -->
+        <div class='clickindex' title='{{ i18n.plugins_perf_title_setting[2] }}'>
+            <a (click)="jumpScroll('itemOperationLog')" id="menuOperationLog">{{
+                i18n.plugins_perf_title_setting[2] }}</a>
+        </div>
+        <!-- 公共运行日志 -->
+        <div *ngIf="userRoleFlag" class='clickindex' title='{{i18n.plugins_perf_title_setting[1]}}'>
+            <a (click)="jumpScroll('itemRunningLog')" id="menuRunningLog">{{
+                i18n.plugins_perf_title_setting[1] }}</a>
+        </div>
+        <!-- web服务端证书 -->
+        <div class='clickindex' title='{{i18n.plugins_perf_title_setting[4]}}'>
+            <a (click)="jumpScroll('itemWebServer')" id="menuWebServer">{{i18n.plugins_perf_title_setting[4]}}</a>
+        </div>
+
+    </div>
+    <!-- 内容区 -->
+    <div id="content" class="right">
+        <!-- 用户管理 -->
+        <div *ngIf="userRoleFlag" class="weidheight" id="itemUser">
+            <div id="item4" class='titleset'>{{i18n.plugins_perf_title_setting[0]}}
+                <!-- 创建用户 -->
+                <div class='secondheight'>
+                    <span class="little-primary-btn"
+                        (click)="openUserCreate()">{{i18n.plugins_perf_title_userManager[0]}}</span>
+                </div>
+                <div style="margin-top:10px;margin-right:80px;">
+                    <ti-table [(displayedData)]="displayed" class="user-table" [srcData]="userManager.userList"
+                        [columns]="columns">
+                        <div class="ti3-table-fixed-head">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th tiOverflow *ngFor="let column of columns" width="{{column.width}}">
+                                            {{column.title}}</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="ti3-table-container" style="max-height:38vh;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let column of columns" width="{{column.width}}"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of displayed">
+                                        <td tiOverflow>{{row.username}}</td>
+                                        <td tiOverflow>{{row.displayRole}}</td>
+                                        <td *ngIf="isManager">
+                                            <span>-</span>
+                                            <span>-</span>
+                                        </td>
+                                        <td tiOverflow *ngIf="!isManager">
+                                            <a href="" *ngIf="row.role == 'User'" class="user-opt" style="z-index:22;"
+                                                (click)="openPwdReset(row)">{{i18n.plugins_perf_title_userManager[2]}}</a>
+                                            <a href="" *ngIf="row.role == 'Admin'" class="user-opt" style="z-index:22;"
+                                                (click)="openPwdChange()">{{i18n.plugins_perf_title_userManager[1]}}</a>
+                                            <a href="" *ngIf="row.role == 'User'" class="user-opt" style="z-index:22;"
+                                                (click)="openUserDelete(row)"
+                                                style="margin-left: 30px">{{i18n.plugins_perf_title_userManager[3]}}</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <app-default-page *ngIf="displayed.length === 0"></app-default-page>
+                        </div>
+                    </ti-table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 普通用户密码修改 -->
+        <div class="weidheight" *ngIf="!userRoleFlag" id="itemModifypsw">
+            <!-- 修改密码 -->
+            <div id="item4" style="width: auto" class='titleset'>{{i18n.plugins_perf_title_changePwd}}
+                <div class="secondheight">
+                    <span class="little-primary-btn"
+                        (click)="openPwdChange()">{{i18n.plugins_perf_button_modify}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- 弱口令字典 -->
+        <div class="weidheight" id="itemWeakServer">
+            <app-weak-pwd></app-weak-pwd>
+        </div>
+        <!-- 公共配置 -->
+        <!-- 
+            管理员用户:最大同时在线普通用户数,系统超时时间,用户管理运行日志级别,web服务端证书过期告警阈值,密码过期周期
+            普通用户  :最大同时在线普通用户数,系统超时时间,用户管理运行日志级别,web服务端证书过期告警阈值,密码过期周期
+        -->
+        <div class="weidheight" id="itemSysConfigure">
+            <div id="item4" class='titleset' [ngClass]="{'isShowRedStar':!userRoleFlag}">
+                {{i18n.plugins_perf_title_setting[3]}}
+                <div class="pstyle-second ti3-icon ti3-icon-staricon" style="margin-top: 20px;">
+                    {{i18n.plugins_perf_secondtitle_setting[2]}}</div>
+                <div *ngIf="!sysConfigure.userInput">
+                    <div>
+                        <div>
+                            <input tiText class="input" type="text" [(ngModel)]="sysConfigure.finnaluserNum" disabled>
+                            <span *ngIf="userRoleFlag" class="little-primary-btn"
+                                (click)="sysConfigure.openNumChange()">{{i18n.plugins_perf_button_modify}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="sysConfigure.userInput">
+                    <div>
+                        <div class="pstyle-second" style="margin-bottom: 10px;">
+                        </div>
+                        <div>
+                            <input tiText class="input" type="text" [(ngModel)]="sysConfigure.spinnerValue"
+                                [required]="true" (blur)="sysConfigure.checkNums()" style="margin-top: 0px !important;">
+                            <span>
+                                <button class="little-primary-btn" [disabled]="sysConfigure.userNumsFlag"
+                                    (click)="changeNum()">{{i18n.plugins_perf_button_confirm}}</button>
+                                <span class="little-minor-btn" style="height: 26px; width: 98px;"
+                                    (click)="sysConfigure.closeNumChange()">{{i18n.plugins_perf_button_cancel}}</span>
+                            </span>
+                            <div *ngIf="sysConfigure.userNumsFlag" class="ti3-unifyvalid-error-container">
+                                <span class="ti3-error-icon-bg"><span
+                                        class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                                <span class="ti3-validate-text">{{i18n.validata.overRange}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--系统超时时间-->
+            <div style="padding-bottom: 30px;" [ngClass]="{'isShowRedStar':!userRoleFlag}">
+                <div class="pstyle-second ti3-icon ti3-icon-staricon">
+                    {{i18n.plugins_perf_secondtitle_setting[3]}}</div>
+                <!-- 普通用户 -->
+                <div *ngIf="!timeOutManager.timeInput">
+                    <div>
+                        <div>
+                            <input tiText class="input" type="text" [(ngModel)]="timeOutManager.finnaluserNum" disabled>
+                            <span *ngIf="userRoleFlag" class="little-primary-btn"
+                                (click)="openTimeOutChange()">{{i18n.plugins_perf_button_modify}}</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 管理员用户 -->
+                <div *ngIf="timeOutManager.timeInput">
+                    <div>
+                        <div class="pstyle-second" style="margin-bottom: 10px;">
+                        </div>
+                        <input tiText class="input" type="text" [(ngModel)]="timeOutManager.spinnerValue"
+                            [required]="true" (blur)="timeOutManager.checkNums()" style="margin-top: 0px !important;">
+                        <span>
+                            <button class="little-primary-btn" [disabled]="timeOutManager.userNumsFlag"
+                                (click)="changeTimeOut()">{{i18n.common_term_operate_ok}}</button>
+                            <span class="little-minor-btn" style="height: 26px; width: 98px;"
+                                (click)="closeTimeOut()">{{i18n.common_term_operate_cancel}}</span>
+                        </span>
+                        <div *ngIf="timeOutManager.userNumsFlag" class="ti3-unifyvalid-error-container">
+                            <span class="ti3-error-icon-bg"><span
+                                    class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                            <span class="ti3-validate-text">{{i18n.validata.overRange}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 用户管理运行日志级别日志 -->
+            <div style="padding-bottom: 30px;" [ngClass]="{'isShowRedStar':!userRoleFlag}">
+                <div class="pstyle-second ti3-icon ti3-icon-staricon">{{ i18n.plugins_perf_tip_sysSet.run_log_level }}
+                    <img class='log-tip-icon' src='./assets/img/template/icon_question.svg' [tiTip]='commonRunLog'
+                        tiTipPosition="top">
+                </div>
+                <!-- 普通用户 -->
+                <div *ngIf="!sysConfigure.LogLevelInput">
+                    <div>
+                        <div class="pstyle-second" style="margin-bottom: 10px;">
+                        </div>
+                        <div>
+                            <ti-select class='inputstyle-select' [options]='sysConfigure.LogLevel.options'
+                                [(ngModel)]="sysConfigure.LogLevel.selected" disabled>
+                            </ti-select>
+                            <span *ngIf="userRoleFlag" class="little-primary-btn"
+                                (click)="sysConfigure.openLogLevelChange()">{{i18n.plugins_perf_button_modify}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="sysConfigure.LogLevelInput">
+                    <ti-select class='inputstyle-select' [options]='sysConfigure.LogLevel.options'
+                        [(ngModel)]="sysConfigure.LogLevel.selected" [disabled]='!sysConfigure.levelset'>
+                    </ti-select>
+                    <span>
+                        <span class="little-primary-btn"
+                            (click)="changeLogLevelNum()">{{i18n.plugins_perf_button_confirm}}</span>
+                        <span class="little-minor-btn" style="height: 26px; width: 98px;"
+                            (click)="sysConfigure.closeLogLevelNumChange()">{{i18n.plugins_perf_button_cancel}}</span>
+                    </span>
+                </div>
+            </div>
+            <!--web证书告警时间设置-->
+            <div style="padding-bottom: 30px;" [ngClass]="{'isShowRedStar':!userRoleFlag}">
+                <div class="pstyle-second ti3-icon ti3-icon-staricon">{{i18n.plugins_perf_secondtitle_setting[4]}}</div>
+                <div *ngIf="!webServerManager.webInput">
+                    <div>
+                        <div>
+                            <input tiText class="input" type="text" [(ngModel)]="webServerManager.finnaluserNum"
+                                disabled>
+                            <span *ngIf="userRoleFlag" class="little-primary-btn"
+                                (click)="openWebChange()">{{i18n.plugins_perf_button_modify}}</span>
+
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="webServerManager.webInput">
+                    <div>
+                        <input tiText class="input" type="text" [(ngModel)]="webServerManager.spinnerValue"
+                            [required]="true" (blur)="webServerManager.checkNums()" style="margin-top: 0px !important;">
+                        <span>
+                            <button class="little-primary-btn" [disabled]="webServerManager.userNumsFlag"
+                                (click)="changeWeb()">{{i18n.common_term_operate_ok}}</button>
+                            <span class="little-minor-btn" style="height: 26px; width: 98px;"
+                                (click)="closeWeb()">{{i18n.common_term_operate_cancel}}</span>
+                        </span>
+                        <div *ngIf="webServerManager.userNumsFlag" class="ti3-unifyvalid-error-container">
+                            <span class="ti3-error-icon-bg"><span
+                                    class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                            <span class="ti3-validate-text">{{i18n.validata.overRange}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--密码有效周期-->
+            <div style="padding-bottom: 30px;" [ngClass]="{'isShowRedStar':!userRoleFlag}">
+                <div class="pstyle-second ti3-icon ti3-icon-staricon">{{i18n.plugins_perf_secondtitle_setting[6]}}
+                </div>
+                <div *ngIf="!pwdExpiredManager.pwdInput">
+                    <div>
+                        <div>
+                            <input tiText class="input" type="text" [(ngModel)]="pwdExpiredManager.finnaluserNum"
+                                disabled>
+                            <span *ngIf="userRoleFlag" class="little-primary-btn"
+                                (click)="openPwdPeriodChange()">{{i18n.plugins_perf_button_modify}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="pwdExpiredManager.pwdInput">
+                    <div>
+                        <input tiText class="input" type="text" [(ngModel)]="pwdExpiredManager.spinnerValue"
+                            [required]="true" (blur)="pwdExpiredManager.checkNums()"
+                            style="margin-top: 0px !important;">
+                        <span>
+                            <button class="little-primary-btn" [disabled]="pwdExpiredManager.userNumsFlag"
+                                (click)="changePwdPeriod()">{{i18n.common_term_operate_ok}}</button>
+                            <span class="little-minor-btn" style="height: 26px; width: 98px;"
+                                (click)="closePwdPeriod()">{{i18n.common_term_operate_cancel}}</span>
+                        </span>
+                        <div *ngIf="pwdExpiredManager.userNumsFlag" class="ti3-unifyvalid-error-container">
+                            <span class="ti3-error-icon-bg"><span
+                                    class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                            <span class="ti3-validate-text">{{i18n.validata.overRange}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 登录设置 -->
+        <div *ngIf="isSystem && !userRoleFlag" id="itemLogin">
+            <div class='titleset'>{{i18n.plugins_perf_title_loginConfig}}
+                <div *ngIf="!changeLogin" class="config-form">
+                    <ti-formfield [formGroup]="loginConfigForm" labelWidth="15px">
+                        <ti-item>
+                            <div class="pstyle-second">{{rememberPwdSelect.label}}</div>
+                            <ti-select class='inputstyle-select' [disabled]='!changeLogin'
+                                [options]='rememberPwdSelect.options' formControlName="rememberPwdSelect"
+                                [(ngModel)]="rememberPwdSelect.selected">
+                            </ti-select>
+                        </ti-item>
+                        <ti-item>
+                            <div class="pstyle-second">{{autoLoginSelect.label}}</div>
+                            <ti-select class='inputstyle-select' [disabled]='!changeLogin'
+                                [options]='autoLoginSelect.options' formControlName="autoLoginSelect"
+                                [(ngModel)]="autoLoginSelect.selected">
+                            </ti-select>
+                        </ti-item>
+                    </ti-formfield>
+                    <div *ngIf="loginConfig.disAutoSet" class='secondheight'>
+                        <span class="little-primary-btn"
+                            (click)="modifyLogin()">{{i18n.plugins_common_button_modifyConfig}}</span>
+                    </div>
+                    <div *ngIf="!loginConfig.disAutoSet" class='secondheight'>
+                        <button class="little-primary-btn"
+                            [disabled]="!loginConfig.disAutoSet">{{i18n.plugins_common_button_modifyConfig}}</button>
+                    </div>
+                </div>
+                <div *ngIf="changeLogin" class="config-form">
+                    <ti-formfield [formGroup]="loginConfigForm" labelWidth="15px">
+                        <ti-item>
+                            <div class="pstyle-second">{{rememberPwdSelect.label}}</div>
+                            <ti-select Class="inputstyle-select" [options]='rememberPwdSelect.options'
+                                formControlName="rememberPwdSelect" [(ngModel)]="rememberPwdSelect.selected"
+                                (blur)="getAutoSet()">
+                            </ti-select>
+                        </ti-item>
+                        <ti-item>
+                            <div class="pstyle-second">{{autoLoginSelect.label}}</div>
+                            <ti-select Class="inputstyle-select" [options]='autoLoginSelect.options'
+                                formControlName="autoLoginSelect" [(ngModel)]="autoLoginSelect.selected"
+                                (blur)="getRememberSet()"></ti-select>
+                        </ti-item>
+                    </ti-formfield>
+                    <div class='secondheight'>
+                        <span class="little-primary-btn" (click)="saveConfig()">{{i18n.common_term_operate_ok}}</span>
+                        <span class="little-minor-btn" style="height: 26px; width: 98px;"
+                            (click)="configLoginCancel()">{{i18n.common_term_operate_cancel}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 公共操作日志 -->
+        <div class="weidheight" id="itemOperationLog">
+            <div id="item4" class='titleset'>{{i18n.plugins_perf_title_setting[2]}}
+                <div class='secondheight'>
+                    <!-- 下载操作日志 -->
+                    <div>
+                        <span class="little-primary-btn"
+                            (click)="sysConfigure.downloadOperaLog()">{{i18n.plugins_perf_button_logDownload}}</span>
+                    </div>
+                    <div style="margin-top:10px;margin-right:80px;">
+                        <ti-table [(displayedData)]="displayedLog" class="log-table" [srcData]="operationLog.logList"
+                            [columns]="columsLog" (stateUpdate)="operationLog.logUpdate($event)" style="flex: 1">
+                            <div class="ti3-table-fixed-head">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <!--实际显示的表头。注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+                                            <th tiOverflow *ngFor="let columslog of columsLog"
+                                                width="{{columslog.width}}">
+                                                {{columslog.title}}</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="ti3-table-container ti3-resize-wrapper" style="max-height:75vh;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th *ngFor="let columslog of columsLog" width="{{columslog.width}}"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let log of displayedLog">
+                                            <td tiOverflow tiTipPosition="right">{{log.username}}</td>
+                                            <td tiOverflow tiTipPosition="right">{{log.module_type}}</td>
+                                            <td tiOverflow tiTipPosition="right">
+                                                <span class="status-icon"
+                                                    [ngClass]="operationLog.statusFormat(log.result)"></span>
+                                                <span>{{log.result}}</span>
+                                            </td>
+                                            <td tiOverflow tiTipPosition="right">{{log.ipaddr}}</td>
+                                            <td tiOverflow tiTipPosition="right">{{log.Time}}</td>
+                                            <td tiOverflow tiTipPosition="right">{{log.information}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <app-default-page *ngIf="displayedLog.length === 0"></app-default-page>
+                            </div>
+                            <ti-pagination class="pagination" *ngIf="operationLog.totalNumberLog>20"
+                                [(currentPage)]="operationLog.currentPageLog" [pageSize]="operationLog.pageSizeLog"
+                                style="width:100%" [(totalNumber)]="operationLog.totalNumberLog"
+                                (pageUpdate)="operationLog.onPageUpdateLog($event)">
+                            </ti-pagination>
+                        </ti-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 公共运行日志 -->
+        <div *ngIf="userRoleFlag" class="weidheight" id="itemRunningLog">
+            <div id="item4" class='titleset'>{{i18n.plugins_perf_title_setting[1]}}
+                <div class='secondheight'>
+                    <!-- 运行日志列表 -->
+                    <div style="margin-top:20px;margin-right:80px;">
+                        <ti-table [(displayedData)]="displayedRunningLog" class="log-table" [columns]="columsRunningLog"
+                            style="flex: 1">
+                            <div class="ti3-table-fixed-head">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <!--实际显示的表头。注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+                                            <th tiOverflow *ngFor="let columslog of columsRunningLog"
+                                                width="{{columslog.width}}">
+                                                {{columslog.title}}</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="ti3-table-container" style="max-height:75vh; overflow-y: hidden;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th *ngFor="let columslog of columsRunningLog" width="{{columslog.width}}">
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let log of displayedRunningLog">
+                                            <td tiOverflow tiTipPosition="left">{{log.title}}</td>
+                                            <!-- 下载运行日志 -->
+                                            <td tiOverflow tiTipPosition="left" style="color: #0067ff !important;"
+                                                (click)="openRunningLog()">{{log.operation}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <app-default-page *ngIf="displayedRunningLog.length === 0"></app-default-page>
+                            </div>
+                        </ti-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Web服务端证书 -->
+        <div class="weidheight" id="itemWebServer">
+            <app-webcertficate></app-webcertficate>
+        </div>
+    </div>
+</div>
+
+<ng-template #commonRunLog>
+    <div [innerHtml]="i18n.plugins_perf_runLogTip"></div>
+</ng-template>
+
+<!-- 创建用户 -->
+<app-messagebox #CreateUserPage>
+    <div class="content show-box" [ngClass]="{'en-show-box':currLang}">
+        <div class="do-title">
+            <span class="title">{{i18n.plugins_perf_title_userManager[0]}}</span>
+            <span (mousedown)='closeUserCreate()' class="tip-close">
+                <img class="close-img" src="./assets/img/header/close_icon.svg" />
+                <img class="close-img" src="./assets/img/header/close_icon_hover.svg">
+            </span>
+        </div>
+        <div class="title-border" [ngClass]="{'en-title-border':currLang}"></div>
+        <div class="edit-box" [ngClass]="{'en-edit-box':currLang}">
+            <div *ngIf="isShow" class="ti3-unifyvalid-error-container">
+                <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                <span class="ti3-validate-text">{{msg}}</span>
+            </div>
+            <ti-formfield [formGroup]="createRoleForm" class="form">
+                <ti-item [label]=" label.Name" [required]="true">
+                    <input class="inputJump" type="text" tiText [tiValidation]="validation" formControlName="name">
+                    <p class="name-tip">{{i18n.common_term_create_tip}}</p>
+                </ti-item>
+                <ti-item [label]="label.AdminPwd" [required]="true">
+                    <div style="position: relative; margin-bottom: 8px;">
+                        <input class="inputJump" [type]="tunType.type1" tiText [tiValidation]="validation"
+                            formControlName="cadminPwd"
+                            onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
+                            onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" onpaste="return true"
+                            oncut="return false" oncopy="return false" oncontextmenu="return false"
+                            style="padding-right: 32px;">
+                        <div class="eye">
+                            <span (click)="changeType(1)" *ngIf="tunType.type1 === 'text'">
+                                <img src="./assets/img/common/icon-view.svg" />
+                            </span>
+                            <span (click)="changeType1(1)" *ngIf="tunType.type1 === 'password'">
+                                <img src="./assets/img/common/icon-hide.svg" />
+                            </span>
+                        </div>
+                    </div>
+                </ti-item>
+            </ti-formfield>
+            <ti-formfield [formGroup]="editPwd" class="form">
+                <ti-item [label]="label.Pwd" [required]="true">
+                    <div style="position: relative; margin-bottom: 8px;">
+                        <input tiText class="inputJump" tiText [tiValidation]="validation" formControlName="pwd"
+                            [type]="tunType.type2" autocomplete="new-password"
+                            onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
+                            onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" onpaste="return true"
+                            oncut="return false" oncopy="return false" oncontextmenu="return false"
+                            (ngModelChange)='updateConfirmValidator()' style="padding-right: 32px;">
+                        <div class="eye">
+                            <span (click)="changeType(2)" *ngIf="tunType.type2 === 'text'">
+                                <img src="./assets/img/common/icon-view.svg" />
+                            </span>
+                            <span (click)="changeType1(2)" *ngIf="tunType.type2 === 'password'">
+                                <img src="./assets/img/common/icon-hide.svg" />
+                            </span>
+                        </div>
+                    </div>
+                </ti-item>
+                <ti-item [label]="label.Cpwd" [required]="true">
+                    <div style="position: relative;">
+                        <input class="inputJump" tiText [tiValidation]="validation" formControlName="cpwd"
+                            [type]="tunType.type3" onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
+                            onkeydown="if(event.ctrlKey && event.keyCode==90){return false;}" onpaste="return true"
+                            oncut="return false" oncopy="return false" oncontextmenu="return false"
+                            (keyup.enter)="createUser()" style="padding-right: 32px;">
+                        <div class="eye">
+                            <span (click)="changeType(3)" *ngIf="tunType.type3 === 'text'">
+                                <img src="./assets/img/common/icon-view.svg" />
+                            </span>
+                            <span (click)="changeType1(3)" *ngIf="tunType.type3 === 'password'">
+                                <img src="./assets/img/common/icon-hide.svg" />
+                            </span>
+                        </div>
+                    </div>
+                </ti-item>
+            </ti-formfield>
+            <div class="btn-box">
+                <button type="button" [disabled]='!createRoleForm.valid || !editPwd.valid' tiButton color="primary" class="user-sure-btn" (mousedown)="createUser()">{{i18n.plugins_perf_button_confirm}}</button>
+                <button type="button" tiButton class="user-close-btn" (mousedown)="closeUserCreate()">{{i18n.plugins_perf_button_cancel}}</button>
+            </div>
+        </div>
+    </div>
+</app-messagebox>
+
+<!-- 管理员修改普通用户密码 -->
+<app-messagebox #ResetPwdPage>
+    <div class="content show-box" [ngClass]="{'en-show-box':currLang}">
+        <div class="do-title">
+            <span class="title">{{i18n.plugins_perf_title_userManager[2]}}</span>
+            <span (mousedown)='closePwdReset()' class="tip-close">
+                <img class="close-img" src="./assets/img/header/close_icon.svg" />
+                <img class="close-img" src="./assets/img/header/close_icon_hover.svg">
+            </span>
+        </div>
+        <div class="title-border" [ngClass]="{'en-title-border':currLang}"></div>
+        <div class="edit-box" [ngClass]="{'en-edit-box':currLang}">
+            <div *ngIf="isShow" class="ti3-unifyvalid-error-container">
+                <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                <span class="ti3-validate-text">{{msg}}</span>
+            </div>
+            <ti-formfield [formGroup]="createRoleForm">
+                <ti-item [label]="label.Role">
+                    <input class="inputJump" type="text" tiText [tiValidation]="validation" formControlName="userRole">
+                </ti-item>
+                <ti-item [label]="label.Name" [required]="true">
+                    <input class="inputJump" type="text" tiText [tiValidation]="validation" formControlName="name">
+                </ti-item>
+            </ti-formfield>
+            <ti-formfield [formGroup]="resetPwdForm">
+                <ti-item [label]="label.AdminPwd" [required]="true">
+                    <div style="position: relative;">
+                        <input class="inputJump" [type]="tunType.type4" tiText [tiValidation]="validation"
+                            formControlName="radminPwd" oncopy="return false" oncontextmenu="return false"
+                            onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
+                            onkeydown="if(event.ctrlKey&&event.keyCode === 90){return false;}" onpaste="return true"
+                            oncut="return false" style="padding-right: 32px;">
+                        <div class="eye">
+                            <span (click)="changeType(4)" *ngIf="tunType.type4 === 'text'">
+                                <img src="./assets/img/common/icon-view.svg" />
+                            </span>
+                            <span (click)="changeType1(4)" *ngIf="tunType.type4 === 'password'">
+                                <img src="./assets/img/common/icon-hide.svg" />
+                            </span>
+                        </div>
+                    </div>
+                </ti-item>
+            </ti-formfield>
+            <ti-formfield [formGroup]="editPwd">
+                <ti-item [label]="label.Pwd" [required]="true">
+                    <div style="position: relative;">
+                        <input class="inputJump" tiText [tiValidation]="validation" formControlName="pwd"
+                            [type]="tunType.type5" autocomplete="new-password" oncopy="return false"
+                            oncontextmenu="return false"
+                            onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
+                            onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" onpaste="return true"
+                            (ngModelChange)='updateConfirmValidator3()' oncut="return false"
+                            style="padding-right: 32px;">
+                        <div class="eye">
+                            <span (click)="changeType(5)" *ngIf="tunType.type5 === 'text'">
+                                <img src="./assets/img/common/icon-view.svg" />
+                            </span>
+                            <span (click)="changeType1(5)" *ngIf="tunType.type5 === 'password'">
+                                <img src="./assets/img/common/icon-hide.svg" />
+                            </span>
+                        </div>
+                    </div>
+                </ti-item>
+                <ti-item [label]="label.Cpwd" [required]="true">
+                    <div style="position: relative;">
+                        <input tiText class="inputJump" tiText [tiValidation]="validation" formControlName="cpwd"
+                            [type]="tunType.type6" oncopy="return false" oncontextmenu="return false"
+                            onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
+                            onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" onpaste="return true"
+                            oncut="return false" (keyup.enter)="resetPwd()" style="padding-right: 32px;">
+                        <div class="eye">
+                            <span (click)="changeType(6)" *ngIf="tunType.type6 === 'text'">
+                                <img src="./assets/img/common/icon-view.svg" />
+                            </span>
+                            <span (click)="changeType1(6)" *ngIf="tunType.type6 === 'password'">
+                                <img src="./assets/img/common/icon-hide.svg" />
+                            </span>
+                        </div>
+                    </div>
+                </ti-item>
+            </ti-formfield>
+            <div class="btn-box">
+                <span class="user-sure-btn" (mousedown)="resetPwd()">{{i18n.plugins_perf_button_confirm}}</span>
+                <span class="user-close-btn" (mousedown)="closePwdReset()">{{i18n.plugins_perf_button_cancel}}</span>
+            </div>
+        </div>
+    </div>
+</app-messagebox>
+
+<!-- 删除用户 -->
+<app-messagebox #DelUserPage>
+    <div class="content show-box" [ngClass]="{'en-show-box':currLang}">
+        <div class="do-title">
+            <span class="title">{{i18n.plugins_perf_title_userManager[3]}}</span>
+            <span (mousedown)='closeUserDelete()' class="tip-close">
+                <img class="close-img" src="./assets/img/header/close_icon.svg" />
+                <img class="close-img" src="./assets/img/header/close_icon_hover.svg">
+            </span>
+        </div>
+        <div class="title-border" [ngClass]="{'en-title-border':currLang}"></div>
+        <div class="del-content">
+            <img src="./assets/img/mission/warn_arr.svg" alt="">
+            <p>{{i18n.plugins_perf_tips_delete}}</p>
+        </div>
+        <div class="edit-box" [ngClass]="{'en-edit-box':currLang}" style="margin-left:14px">
+            <div *ngIf="isShow" class="ti3-unifyvalid-error-container">
+                <span class="ti3-error-icon-bg"><span class="ti3-error-icon ti3-icon ti3-icon-alert-warn"></span></span>
+                <span class="ti3-validate-text">{{msg}}</span>
+            </div>
+            <ti-formfield [formGroup]="delRoleForm">
+                <ti-item [required]="true" [label]="label.AdminPwd">
+                    <div style="position: relative;">
+                        <input class="inputJump" [type]="tunType.type7" tiText [tiValidation]="validation"
+                            formControlName="dadminPwd" (ngModelChange)="blurFock()"
+                            onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
+                            onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" onpaste="return true"
+                            oncut="return false" oncopy="return false" oncontextmenu="return false"
+                            style="padding-right: 32px;">
+                        <div class="eye">
+                            <span (click)="changeType(7)" *ngIf="tunType.type7 === 'text'">
+                                <img src="./assets/img/common/icon-view.svg" />
+                            </span>
+                            <span (click)="changeType1(7)" *ngIf="tunType.type7 === 'password'">
+                                <img src="./assets/img/common/icon-hide.svg" />
+                            </span>
+                        </div>
+                    </div>
+                </ti-item>
+            </ti-formfield>
+            <div class="btn-box">
+                <span class="user-close-btn my-close" [ngClass]="{disabled: flag}"
+                    (mousedown)="deleteUser()">{{i18n.plugins_perf_button_confirm}}</span>
+                <span class="user-sure-btn" (mousedown)="closeUserDelete()">{{i18n.plugins_perf_button_cancel}}</span>
+            </div>
+        </div>
+    </div>
+</app-messagebox>
+
+<!-- 登录用户修改密码 -->
+<app-messagebox #ModifyPwdPage>
+    <div class="content show-box" [ngClass]="{'en-show-box':currLang}">
+        <div class="do-title">
+            <span class="title">{{i18n.plugins_perf_title_userManager[1]}}</span>
+            <span (mousedown)='closePwdChange()' class="tip-close">
+                <img class="close-img" src="./assets/img/header/close_icon.svg" />
+                <img class="close-img" src="./assets/img/header/close_icon_hover.svg">
+            </span>
+        </div>
+        <div class="title-border" [ngClass]="{'en-title-border':currLang}"></div>
+        <div class="edit-box" [ngClass]="{'en-edit-box':currLang}">
+            <ti-formfield [formGroup]="changePwdForm">
+                <ti-item [label]="label.oldPwd" [required]="true">
+                    <div style="position: relative; margin-bottom: 7px;">
+                        <input class="inputJump" tiText [tiValidation]="validation" formControlName="oldPwd"
+                            autocomplete="new-password" [type]="tunType.type8"
+                            onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
+                            onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" onpaste="return true"
+                            oncut="return false" oncopy="return false" oncontextmenu="return false"
+                            (blur)="resetConfirmValidator(changePwdForm.controls.pwd)" style="padding-right: 32px;">
+                        <div class="eye">
+                            <span (click)="changeType(8)" *ngIf="tunType.type8 === 'text'">
+                                <img src="./assets/img/common/icon-view.svg" />
+                            </span>
+                            <span (click)="changeType1(8)" *ngIf="tunType.type8 === 'password'">
+                                <img src="./assets/img/common/icon-hide.svg" />
+                            </span>
+                        </div>
+                    </div>
+                </ti-item>
+                <ti-item [label]="label.newPwd" [required]="true">
+                    <div style="position: relative; margin-bottom: 8px;">
+                        <input class="inputJump" tiText [tiValidation]="validation" formControlName="pwd"
+                            [type]="tunType.type9" onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
+                            onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" onpaste="return true"
+                            oncut="return false" oncopy="return false" oncontextmenu="return false"
+                            (ngModelChange)='updateConfirmValidator2()' style="padding-right: 32px;">
+                        <div class="eye">
+                            <span (click)="changeType(9)" *ngIf="tunType.type9 === 'text'">
+                                <img src="./assets/img/common/icon-view.svg" />
+                            </span>
+                            <span (click)="changeType1(9)" *ngIf="tunType.type9 === 'password'">
+                                <img src="./assets/img/common/icon-hide.svg" />
+                            </span>
+                        </div>
+                    </div>
+                </ti-item>
+                <ti-item [label]="label.Cpwd" [required]="true">
+                    <div style="position: relative;">
+                        <input tiText class="inputJump" [tiValidation]="validation" formControlName="cpwd"
+                            [type]="tunType.type10" (keyup.enter)=changePwd()
+                            onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
+                            onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" onpaste="return true"
+                            oncut="return false" oncopy="return false" oncontextmenu="return false"
+                            style="padding-right: 32px;">
+                        <div class="eye">
+                            <span (click)="changeType(10)" *ngIf="tunType.type10 === 'text'">
+                                <img src="./assets/img/common/icon-view.svg" />
+                            </span>
+                            <span (click)="changeType1(10)" *ngIf="tunType.type10 === 'password'">
+                                <img src="./assets/img/common/icon-hide.svg" />
+                            </span>
+                        </div>
+                    </div>
+                </ti-item>
+            </ti-formfield>
+        </div>
+        <div class="btn-box">
+            <button class="little-primary-btn sure-btn" [disabled]="!changePwdForm.valid"
+                (click)="changePwd()">{{i18n.plugins_perf_button_confirm}}</button>
+            <span class="user-close-btn" (mousedown)="closePwdChange()">{{i18n.plugins_perf_button_cancel}}</span>
+        </div>
+    </div>
+</app-messagebox>
+
+<!-- 下载运行日志 -->
+<app-messagebox #DownloadLogPage>
+    <div class="content show-box">
+        <div class="do-title">
+            <span class="title">{{i18n.plugins_perf_title_downloadRunLog}}</span>
+            <img class="close-img" (mousedown)="closeDownloadLog()" src="./assets/img/mission/icon_close.svg" />
+        </div>
+        <div class="title-border"></div>
+        <div class="del-content">
+            <img src="./assets/img/common/icon-information.png">
+            <p>{{i18n.plugins_perf_title_sureDownloadRunLog}}</p>
+        </div>
+        <div class="edit-box">
+            <div class="head-title clearfix">
+                <div class="title1">
+                    {{i18n.plugins_perf_label_logDetail}}</div>
+                <div class="title2">{{i18n.plugins_perf_label_size}}
+                </div>
+            </div>
+            <div class="table-content clearfix" *ngFor="let log of runningLog.logList">
+                <div class="log-name">
+                    {{log && log.name ? log.name : ''}}</div>
+                <div class="log-size">
+                    {{log && log.size ? log.size : ''}}</div>
+            </div>
+        </div>
+        <div class="btn-box">
+            <span class="user-sure-btn" (mousedown)="sureToDownloadRunLog()">{{i18n.plugins_perf_button_confirm}}</span>
+            <span class="user-close-btn" (mousedown)="closeDownloadLog()">{{i18n.plugins_perf_button_cancel}}</span>
+        </div>
+    </div>
+</app-messagebox>

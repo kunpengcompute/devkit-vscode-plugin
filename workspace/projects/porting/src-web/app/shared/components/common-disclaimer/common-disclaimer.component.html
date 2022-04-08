@@ -1,0 +1,29 @@
+  <div class="disclaimer-box p-relative">
+    <div class="header">
+      <p class="title">{{ i18n.user_disclaimer.title }}</p>
+      <img class="close-img" src="./assets/img/header/icon_header_pop_close.svg" (click)='closeMoadl()' />
+    </div>
+    <div class="body" [ngClass]="{'read-body': !isConfirm}">
+      <div class="warn-content">
+        <p class="tip" *ngIf="isConfirm"><img src="./assets/img/home/icon_home_tip.svg" class="warn-img" />{{ i18n.user_disclaimer.list1 }}</p>
+        <p class="tip" *ngIf="!isConfirm">{{ i18n.user_disclaimer.list12 }}</p>
+        <div class="detail-list">
+          <p *ngFor="let detail of detailList">{{ detail }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="read" *ngIf="isConfirm">
+      <input 
+        type="checkbox" tiCheckbox 
+        [name]='checkbox.id' [label]= 'checkbox.label'
+        [(ngModel)]="checkbox.checked"
+      />
+    </div>
+    <div class="footer" *ngIf="isConfirm">
+      <button type="button" tiButton color="primary" [disabled]="!checkbox.checked" (click)="confirmMoadl()" >{{ i18n.common_term_operate_ok }}</button>
+      <button type="button" tiButton (click)="closeMoadl()" class="close-btn">{{ i18n.common_term_operate_cancel }}</button>
+    </div>
+    <div class="read-footer footer" *ngIf="!isConfirm">
+      <button type="button" tiButton (click)="closeMoadl()">{{ i18n.common_term_operate_close }}</button>
+    </div>
+  </div>

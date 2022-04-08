@@ -1,0 +1,62 @@
+<ti-table [(displayedData)]="displayed" [srcData]="srcData" [columns]="columns" (stateUpdate)="stateUpdate($event)"
+    class="histogram" tiColsResizable>
+    <div class="ti3-table-fixed-head">
+        <table>
+            <thead>
+                <tr>
+                    <ng-container>
+                        <th tiOverflow width="{{ columns[0].width }}">
+                            <ti-cell-text class="cellText">{{ columns[0].title}}</ti-cell-text>
+                        </th>
+                    </ng-container>
+                    <th tiOverflow width="{{ columns[1].width }}">
+                        <ti-cell-text class="cellText">{{ columns[1].title}}</ti-cell-text>
+                        <span class="sortIcon" *ngIf="!isDownload && !startBtnDisabled">
+                            <span class="sortList" *ngFor="let item of shallowHeapSort;let idx= index"
+                                (click)="getHistogramSort(idx,'shallowHeap')">
+                                <span class="tip-close">
+                                    <span class="tableIcon" [ngClass]="{colorIcon: item.imgType !== 'sort'}"
+                                        *ngIf="item.show">
+                                        <ti-icon [name]="item.imgType"></ti-icon>
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </th>
+                    <th tiOverflow width="{{ columns[2].width }}">
+                        <ti-cell-text class="cellText">{{ columns[2].title}}</ti-cell-text>
+                        <span class="sortIcon" *ngIf="!isDownload && !startBtnDisabled">
+                            <span class="sortList" *ngFor="let item of retainedHeapSort;let idx= index"
+                                (click)="getHistogramSort(idx,'retainedHeap')">
+                                <span class="tableIcon" [ngClass]="{colorIcon: item.imgType !== 'sort'}"
+                                    *ngIf="item.show">
+                                    <ti-icon [name]="item.imgType"></ti-icon>
+                                </span>
+                            </span>
+                        </span>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="ti3-table-container ti3-resize-wrapper">
+        <table>
+            <thead>
+                <tr [ngStyle]="{'opacity': 0}">
+                    <th tiOverflow *ngFor="let column of columns" width="{{ column.width }}"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="displayed.length> 0">
+                <tr class="histogram_tr" *ngFor="let row of displayed;let idx=index">
+                    <td tiOverflow>{{ row.display }}</td>
+                    <td tiOverflow>{{ row.shallowHeap }}</td>
+                    <td tiOverflow>{{ '>=' }}{{row.retainedHeap }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <app-default-page *ngIf="displayed.length === 0" [height]="'700px'"></app-default-page>
+    </div>
+    <ti-pagination *ngIf="displayed.length> 0" [(currentPage)]="currentPage" [pageSize]="pageSize"
+        [(totalNumber)]="totalNumber">
+    </ti-pagination>
+</ti-table>

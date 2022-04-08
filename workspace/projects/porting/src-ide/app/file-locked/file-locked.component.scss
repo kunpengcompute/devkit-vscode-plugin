@@ -1,0 +1,17 @@
+.del-content {
+    box-sizing: border-box;
+  
+    .title {
+      margin-bottom: 15px;
+  
+      img {
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+      p {
+        display: inline;
+        font-weight: 600;
+        font-size: 1.125rem;
+      }
+    }
+  }

@@ -1,0 +1,221 @@
+<div class="detail-container">
+  <div id="report-arguments" class="detail-items detail-border scroll-style">
+    <h1>{{ i18n.common_term_setting_infor }}</h1>
+    <div class="setting-left" [ngClass]="{'setting-left-zh': curLang === 'zh-cn'}">
+      <div class="setting-left-item" *ngIf="textForm1.firstItem.value.length">
+        <span>{{textForm1.firstItem.label}}</span>
+        <span style="width: 370px;" tiOverflow>{{ textForm1.firstItem.value }}</span>
+      </div>
+      <div class="setting-left-item">
+        <span>{{ textForm1.secondItem.label }}</span>
+        <span>{{ textForm1.secondItem.value }} </span>
+      </div>
+      <div class="setting-left-item">
+        <span>{{textForm1.thirdItem.label}}</span>
+        <span>{{ textForm1.thirdItem.value || '--'}}</span>
+      </div>
+      <div class="setting-left-item">
+        <span>{{textForm1.fourthItem.label}}</span>
+        <span>{{ textForm1.fourthItem.value || '--'}}</span>
+      </div>
+      <div class="setting-left-item">
+        <span>{{textForm1.fifthItem.label}}</span>
+        <span>{{ textForm1.fifthItem.value || '--'}}</span>
+      </div>
+      <div class="setting-left-item">
+        <span>{{textForm1.sixthItem.label}}</span>
+        <span>{{ textForm1.sixthItem.value || '--'}}</span>
+      </div>
+    </div>
+    <div class="setting-right" [ngClass]="{'setting-right-zh': curLang === 'zh-cn'}">
+      <div class="setting-right-top">
+        <div class="setting-right-item">
+          <p>{{ i18n.common_term_report_level0_desc }}</p>
+          <p>{{ soFilesUse }}</p>
+        </div>
+        <div class="setting-right-item">
+          <p>{{ i18n.common_term_report_level2_desc }}</p>
+          <p>{{ soFilesNeed }}</p>
+        </div>
+        <div class="setting-right-item">
+          <p>{{ i18n.common_term_name_total }}</p>
+          <p>{{ soFilesTotal }}</p>
+        </div>
+      </div>
+      <div class="setting-right-bottom" style="margin-top: 30px;">
+        <div class="setting-right-item">
+        <p>{{ i18n.common_term_migrate_result_cFile}}</p>
+        <p>{{ cfileLine }}</p>
+        </div>
+        <div class="setting-right-item">
+        <p>{{ i18n.common_term_migrate_result_lines }}</p>
+        <p [tiTip]='realTotalLine>100000?realTotalLine:""'>{{ totalLine }}</p>
+        </div>
+        <div class="setting-right-item" [ngClass]="{'no-border': !showHumanFlag || !showHumanBudgetNum}">
+          <ng-container *ngIf="showHumanFlag && showHumanBudgetNum">
+            <p>{{ i18n.common_term_report_right_info4 }}</p>
+            <p>{{ humanBudgetNum }}<span>{{ humanBudget }}</span></p>
+          </ng-container>
+        </div>
+      </div>
+        <p class="tit" *ngIf="showHumanFlag && showHumanBudgetNum">{{ humanStandard }}</p>
+    </div>
+  </div>
+  <div class="recognize-items detail-border scroll-style">
+    <div class="report-detail-table">
+      <div class="" *ngFor="let item of scanItems; let index = index;">
+        <div class="table-container" *ngIf="item!=='lines'">
+          <div class="detail-label" [ngClass] = "{'en_width':curLang === 'en-us'}">
+            <span >{{ scanItemsObj[item].label }}</span>
+          </div>
+          <div class="detail-content-tips" *ngIf="item === 'cFile'">
+            {{ scanItemsObj[item].content }}
+            <span *ngIf="item === 'cFile'" style="padding-left: 30px">({{scanItemsObj.lines.content}})</span>
+          </div>
+          <div class="go-tip-div" *ngIf="(item === 'cFile' && goTipSwitch )">
+            <span class="go-tip">{{ goTip }}</span>
+          </div>
+        </div>
+        <div *ngIf="scanItemsObj[item].isOpen" class="items-detail-container">
+          <div *ngIf="item === 'cFile'">
+            <ti-table [(displayedData)]="cfileDetailDisplay" [srcData]="cfileDetailSrcData" [columns]="cfileDetailColumn" tiColsResizable>
+              <div class="ti3-table-fixed-head">
+                <table>
+                  <thead>
+                    <tr>
+                      <!--实际显示的表头。注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+                      <th tiOverflow *ngFor="let column of cfileDetailColumn;index as i;" width="{{column.width}}">
+                        <ti-cell-text>{{column.title}}</ti-cell-text>
+                        <ti-head-filter
+                          [options]="column.options"
+                          [(ngModel)]="column.selected"
+                          (select)="onSelect($event)"
+                          *ngIf="i === 3 && column.title"
+                          [ngClass]="{ 'ti3-head-filtered': column.selected && column.selected.label !== i18n.common_term_report_all }">
+                        </ti-head-filter>
+                        <ti-head-sort [sortKey]="column.sortKey" [compareFn]="compareFn" *ngIf="i === 2 || i === 4 && column.title"></ti-head-sort>
+                      </th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="ti3-table-container ti3-resize-wrapper" style="max-height:161px;" [hyNodata]="{text: i18n.common_term_task_nodata }" [nodataShow]="cfileDetailDisplay.length === 0">
+                  <table>
+                      <thead>
+                          <tr>
+                              <th tiOverflow *ngFor="let column of cfileDetailColumn" width="{{column.width}}"></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                        <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+                        <tr *ngFor="let row of cfileDetailDisplay">
+                          <!-- tiOverflow指令的作用是使文本溢出时出'...'，且hover时出tip-->
+                          <td tiOverflow>{{row.id}}</td>
+                          <td tiOverflow>{{row.filename}}</td>
+                          <td tiOverflow>{{row.path}}</td>
+                          <td tiOverflow>{{row.fileType}}</td>
+                          <td tiOverflow >{{row.linecount}}</td>
+                          <td><a (click)="goReportDiff(row)">{{i18n.common_term_report_view}}</a></td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+            </ti-table>
+          </div>
+
+          <div *ngIf="item === 'soFile'">
+            <ti-table [(displayedData)]="binDetailDisplay" [srcData]="binDetailSrcData" [columns]="binDetailColumns" tiColsResizable [searchWords]="searchWords" [searchKeys]="searchKeys">
+              <div class="ti3-table-fixed-head">
+                  <table>
+                      <thead>
+                          <tr>
+                              <!--实际显示的表头。注意:给表格设置宽度时，给.ti3-table-fixed-head和.ti3-table-container下的对应的th都要设置-->
+                              <ng-container *ngFor="let column of binDetailColumns;index as i;">
+                                <th tiOverflow width="{{ column.width }}" *ngIf="i !== 4">{{column.title}}</th>
+                                <th *ngIf="i === 4" width="{{ column.width }}">
+                                  <!--当表头有排序图标或漏斗排序图标，文本title需要显示不下出省略号及tip时需使用ti-cell-text组件；
+                                      ti-head-sort为表头过滤漏斗图标-->
+                                  <ti-cell-text>{{column.title}}</ti-cell-text>
+                                  <!--ngModel接口可设置和获取headfilter下拉选中值，ti3-head-filtered样式类是
+                                      组件提供的设置有过滤时漏斗的高亮样式，可自定义高亮时机-->
+                                  <ti-head-filter [options]="column.options"
+                                                  [(ngModel)]="column.selected"
+                                                  [panelWidth]="column.panelWidth"
+                                                  (select)="onBinDetailSelect($event, column)"
+                                                  [ngClass]="{ 'ti3-head-filtered': column.selected && column.selected.label !== i18n.common_term_report_all }">
+                                  </ti-head-filter>
+                                </th>
+                              </ng-container>
+                          </tr>
+                      </thead>
+                  </table>
+              </div>
+              <div class="ti3-table-container ti3-resize-wrapper" style="max-height:161px;" [hyNodata]="{ text: i18n.common_term_design_nodata }" [nodataShow]="binDetailDisplay.length === 0" [ngClass]="{ 'table-nodata': binDetailDisplay.length === 0 }">
+                  <table>
+                      <thead>
+                          <tr>
+                              <th tiOverflow *ngFor="let column of binDetailColumns" width="{{ column.width }}"></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                       <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                        <tr *ngFor="let row of binDetailDisplay">
+                          <td tiOverflow>{{ row.number }}</td>
+                          <td tiOverflow >{{ row.name }}</td>
+                          <td tiOverflow style="border-right: 1px solid #E6EBF5;">{{ row.type }}</td>
+                          <td tiOverflow [attr.rowspan]="row.rowSpan" *ngIf="row.showTd" style="border-right: 1px solid #E6EBF5;">{{ row.pathName }}</td>
+                          <td tiOverflow  [attr.rowspan]="row.rowSpan" *ngIf="row.showTd" style="border-right: 1px solid #E6EBF5;">{{ row.oper }}</td>
+                          <td tiOverflow [attr.rowspan]="row.rowSpan" *ngIf="row.showTd">
+                            <span *ngIf="row.url === '--'">{{ row.result }}</span>
+                            <span *ngIf="row.url !== '--' && row.url.lastIndexOf('/') > -1" class="p-relative">
+                              <span *ngIf="row.downloadDesc">{{ row.downloadDesc + ' ' + row.url }}</span>
+                              <ng-container>
+                                <a *ngIf="row.level === '0' && !row.downloadDesc" [ngClass]="{ 'visited': row.uploadVisited, 'isHttp': row.isHTTP }" (click)="downloadSoFile(row)" [tiTip]='row.isHTTP ? i18n.common_isHttp_disable : ""'>{{ row.result }}</a>
+                                <a class="re-copy-link" [ngClass]="{ 'visited': row.copyVisited }" (click)="onCopy(row.url, '.re-copy-inp', copy, row)" [tiTip]='copySuccess' tiTipTrigger='manual' #copy='tiTip'>{{ i18n.common_term_report_detail.copyLink }}</a>
+                                <input class="re-copy-inp" />
+                              </ng-container>
+                              <a [ngClass]="{ 'visited': row.uploadVisited }" *ngIf="row.level !== '0' && !row.downloadDesc && row.result !== '下载源码' && row.result !== 'Download Source Code'" (click)="downloadSoFile(row)">{{ row.result }}</a>
+                              <a *ngIf="row.level !== '0' && !row.downloadDesc && (row.result === '下载源码' || row.result === 'Download Source Code')" [href]="row.url" target="_blank">{{ row.result }}</a>
+                            </span>
+                            <span *ngIf="row.url !== '--' && row.url.lastIndexOf('/') === -1" [tiTip]='i18n.common_upload_unable' class="cursor-default">--</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </ti-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="download-btn">
+    <button class="report-download-btn" tiButton type="button" (click)="downloadReportAsCvs()" style="margin-right: 16px">
+      {{ i18n.common_term_history_project_downloadc }}
+    </button>
+    <button class="report-download-btn" tiButton type="button" (click)="downloadReportAsHtml()">
+      {{ i18n.common_term_history_project_downloadh }}
+    </button>
+  </div>
+</div>
+<!-- 创建新报告弹窗 -->
+<ng-template #ieShowModal let-context="context">
+  <ti-modal-header>
+    <p style="font-size: 20px; color: #222;">{{i18n.common_term_operate_lockedTitle}}</p>
+  </ti-modal-header>
+  <ti-modal-body>
+    <div class="del-content">
+      <div class="title">
+        <img src="./assets/img/home/icon_tip.png" alt="">
+        <p>{{ showModalWarn}}</p>
+      </div>
+    </div>
+  </ti-modal-body>
+  <ti-modal-footer>
+    <div class="btn-box">
+      <button type="button" class="user-close-btn ti3-btn-primary ti3-btn-middle" (click)="goHome(context)"
+        tiButton>{{showModalBtn}}</button>
+    </div>
+  </ti-modal-footer>
+</ng-template>

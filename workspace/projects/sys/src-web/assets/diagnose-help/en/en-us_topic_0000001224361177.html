@@ -1,0 +1,55 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="DC.Type" content="topic">
+<meta name="DC.Title" content="Node Status Changes to Version Unmatched After an Upgrade">
+<meta name="product" content="">
+<meta name="DC.Relation" scheme="URI" content="en-us_topic_0000001224122721.html">
+<meta name="prodname" content="">
+<meta name="version" content="2.3.0">
+<meta name="brand" content="Kunpeng Hyper Tuner (Diagnosis and Debugging)">
+<meta name="DC.Publisher" content="20211230">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="EN-US_TOPIC_0000001224361177">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="public_sys-resources/commonltr.css">
+<title>Node Status Changes to Version Unmatched After an Upgrade</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="EN-US_TOPIC_0000001224361177"></a><a name="EN-US_TOPIC_0000001224361177"></a>
+
+<h1 class="topictitle1">Node Status Changes to Version Unmatched After an Upgrade</h1>
+<div id="body8662426"><div class="section" id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_en-us_topic_0220292241_section13779133512387"><h4 class="sectiontitle">Symptom</h4><p id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_p15674201915107">After the upgrade, the node status displayed on the <strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_b3760921486">Node Management</strong> page is <strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_b17792202412810">Version unmatched</strong>.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_en-us_topic_0220292241_section1439194518389"><h4 class="sectiontitle">Possible Causes</h4><p id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_p97081112141010">During the upgrade, incorrect node server authentication information is entered. As a result, the node fails to be upgraded.</p>
+</div>
+<div class="section" id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_section65722055101613"><h4 class="sectiontitle">Procedure</h4><div class="p" id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_p91981834194318">On the web server, run the upgrade script for the node reporting the error.<ol id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_ol45151141402"><li id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_li451511141007">Run the following command to go to the tool installation directory. (<strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_b15932164953111">/opt/hyper_tuner</strong> is the default tool installation directory. Replace it with the actual directory.)<p id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_p45421181599"><strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_b208129277598">cd</strong> <em id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_i1273920358598">/opt/hyper_tuner</em></p>
+</li><li id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_li4136171810012">Run the following command to upgrade the node reporting the error:<div class="p" id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_p209535391507"><a name="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_li4136171810012"></a><a name="en-us_topic_0000001153639336_en-us_topic_0274640758_li4136171810012"></a><strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_b139451341807">bash deal_agent_mismatch.sh</strong><div class="note" id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_note017611449442"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_p31756449444">During the upgrade, enter the user name for adding the node, absolute installation path of the node, and absolute path of the SSH private key file and password/<strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_b042784933716">root</strong> user password for logging in to the node server to upgrade nodes reporting the error one by one.</p>
+</div></div>
+</div>
+</li></ol>
+</div>
+<p id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_p0859112467"><strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_b1488245134618">If the preceding steps fail, perform the following steps. Otherwise, skip the following steps.</strong></p>
+<p id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_p511118379432">On the <span class="wintitle" id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_wintitle122053922416"><b>Node Management</b></span> page, delete the nodes and add them again. If a node fails to be deleted on the web page, log in to the node server to manually uninstall the node.</p>
+<p id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_p132513171911">To uninstall a node, perform the following steps:</p>
+<ol id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_ol457093920510"><li id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_li14570139205117">Use an SSH remote login tool to log in to the Linux CLI as the system user.<div class="note" id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_note18775162110515"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0228009037_p839111901719">This step must be performed as the <strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0228009037_b1344510412018">root</strong> user. If you log in as a common system user, run the <strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0228009037_b598812532019">su</strong> command to switch to the <strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0228009037_b97421058919">root</strong> user and perform subsequent operations.</p>
+</div></div>
+</li><li id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_li1757011395516">Run the following command to go to the node installation directory. (<strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_b17411103012109">/opt/malluma</strong> is the node installation directory. Replace it with the actual directory.)<p id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_p10542112153715"><strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_b178891520122512">cd</strong> <em id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_i122941523182510">/opt/malluma</em></p>
+</li><li id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_li9570139205118">Run the following command to uninstall the node:<p id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_p1443618717266"><a name="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_li9570139205118"></a><a name="en-us_topic_0000001153639336_en-us_topic_0274640758_li9570139205118"></a><strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_b1166799142613">./malluma_uninstall.sh</strong></p>
+<div class="note" id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0274640758_note11634144310290"><img src="public_sys-resources/note_3.0-en-us.png"><span class="notetitle"> </span><div class="notebody"><p id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0268045597_p52581221122912">If the node fails to be uninstalled, manually delete the <strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0268045597_b1357621514241">/home/malluma/malluma_conf/malluma_install.ini</strong> file, <strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0268045597_b6581121513244">malluma</strong> user, <strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0268045597_b458581562419">/home/malluma</strong> directory, and <strong id="EN-US_TOPIC_0000001224361177__en-us_topic_0000001153639336_en-us_topic_0268045597_b259091502412">/opt/malluma</strong> directory from the node.</p>
+</div></div>
+</li></ol>
+</div>
+</div>
+<div>
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a href="en-us_topic_0000001224122721.html">FAQ</a></div>
+</div>
+</div>
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

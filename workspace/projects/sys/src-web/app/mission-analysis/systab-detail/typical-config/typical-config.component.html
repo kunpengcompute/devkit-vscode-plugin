@@ -1,0 +1,3 @@
+<app-config-information [nodeid]='nodeid' [taskid]='taskid' [sceneSolution]="sceneSolution"></app-config-information>
+<div class="node-list" *ngIf="sceneSolution !== 2">{{ i18n.sys_summary.distributed.node_list }}</div>
+<app-server-node-gplot [nodeId]='nodeid' [taskId]='taskid' [taskName]='taskName' *ngIf="tabShowing && sceneSolution !== 2"></app-server-node-gplot>

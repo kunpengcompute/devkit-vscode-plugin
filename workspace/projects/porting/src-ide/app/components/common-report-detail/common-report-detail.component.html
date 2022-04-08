@@ -1,0 +1,141 @@
+<div class="common-container">
+    <div class="report-time">
+        <p>{{i18n.common_term_report_generation_time}} <span>{{ currentReport }}</span></p>
+    </div>
+    <!-- 配置信息 start -->
+    <div class="config-setting clearfix">
+        <p class="com-title com-text">{{ configTitle }}</p>
+        <div class="config-detail">
+            <div class="config-left">
+                <div class="config-left-item" *ngFor="let con of settingLeftInfo">
+                    <div *ngIf="con.label !== i18n.software_package_detail.time">
+                        <span tiOverflow>{{ con.label }}</span>
+                        <p tiOverflow>
+                            <img *ngIf="con.isSuccessed === 'true'" src="./assets/img/tip/icon_success.svg">
+                            <img *ngIf="con.isSuccessed === 'false'" src="./assets/img/tip/icon_failure.svg">
+                            <span>{{ con.value }}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="config-right">
+                <div class="config-right-item flex-column flex-center" *ngFor="let con of settingRightInfo">
+                    <span tiOverflow>{{ con.title }}</span>
+                    <span tiOverflow>{{ con.value }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 配置信息 end -->
+
+    <!-- table-detail start -->
+    <div class="table-detail">
+        <div class="report-detail-table">
+            <div *ngFor="let item of scanItems.type">
+                <p class="table-detail-title com-text" [ngClass]="{'cfile-title': item === 'cFile'}">{{
+                    scanItems[item].label }}</p>
+                <div class="table-container">
+                    <!-- 已更新依赖文件 -->
+                    <div *ngIf="item === 'soFile'">
+                        <ti-table [(displayedData)]="soFiledisplayed" [srcData]="soFileSrcData" tiColsResizable>
+                            <div class="ti3-table-fixed-head">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th tiOverflow *ngFor="let column of soFileColumns"
+                                                width="{{column.width}}">{{ column.title }}</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="ti3-table-container ti3-resize-wrapper normal-height"
+                                [ngClass]="{'table-auto-height': scanItems.type.length === 1}">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th tiOverflow *ngFor="let column of soFileColumns"
+                                                width="{{column.width}}"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--注意:ngFor中的displayed数据与displayedData传入的数据一致, 初始化设置为[]即可-->
+                                        <!--为了更好的渲染性能，建议在ngFor数据时总是trackBy数据条目中的某个唯一属性值(如id)-->
+                                        <tr *ngFor="let row of soFiledisplayed;">
+                                            <td tiOverflow>{{ row.number }}</td>
+                                            <td tiOverflow>{{ row.name }}</td>
+                                            <td tiOverflow>{{ row.path }}</td>
+                                            <td tiOverflow *ngIf="type === 'softwarePackage'">{{ row.sourceFile }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div *ngIf="soFiledisplayed.length === 0">
+                                    <app-default-page [height]="'190px'" [image]="nodataImage"></app-default-page>
+                                </div>
+                            </div>
+                        </ti-table>
+                    </div>
+
+                    <!-- 缺少的依赖文件 -->
+                    <div *ngIf="item === 'cFile'">
+                        <ti-table [(displayedData)]="cFiledisplayed" [srcData]="cFileSrcData" tiColsResizable>
+                            <div class="ti3-table-fixed-head">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th tiOverflow *ngFor="let column of cFileColumns" width="{{column.width}}">
+                                                {{ column.title }}</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="ti3-table-container ti3-resize-wrapper" style="max-height:190px;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th tiOverflow *ngFor="let column of cFileColumns" width="{{column.width}}">
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let row of cFiledisplayed;">
+                                            <td tiOverflow>{{ row.number }}</td>
+                                            <td tiOverflow>{{ row.name }}</td>
+                                            <td tiOverflow>{{ row.path }}</td>
+                                            <td tiOverflow>{{ row.suggestion }}</td>
+                                            <td tiOverflow *ngIf="row.url">
+                                                <ng-container *ngIf="row.url !== '--' && row.url.lastIndexOf('/') > -1">
+                                                    <a class="re-down-link" (click)="handleSoftwareLink(row.url)">
+                                                        {{ i18n.common_term_operate_download }}</a>
+                                                    <a class="re-copy-link" (click)="onCopy(row.url, copy, row)"
+                                                        [tiTip]='copySuccess' tiTipTrigger='manual' #copy='tiTip'
+                                                        [tiTipHasArrow]="false">
+                                                        {{ i18n.common_term_report_detail.copyLink }}
+                                                    </a>
+                                                </ng-container>
+                                                <span *ngIf="row.url.lastIndexOf('/') === -1"
+                                                    [tiTip]='i18n.common_term_upload_unable'
+                                                    class="cursor-dafult">--</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div *ngIf="cFiledisplayed.length === 0">
+                                    <app-default-page [height]="'190px'" [image]="nodataImage"></app-default-page>
+                                </div>
+                            </div>
+                        </ti-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- table-detail end -->
+
+    <!-- 下载按钮 start -->
+    <div class="download-btn" [ngClass]="{'download-btn-en': i18nService.currLang === i18nService.langType.en, 'border-top-dashed' : !intelliJFlagDef}">
+        <button type="button" *ngIf="type === 'softwarePackage' && scanItems.type.length === 1"
+            (click)="downloadPackage()" [ngClass]="{'intelijbtn' : intelliJFlagDef, 'secondary-btn': !intelliJFlagDef}">{{ i18n.software_package_detail.packageButton }}</button>
+        <button type="button" (click)="downloadHTML()" [ngClass]="{'intelijbtn' : intelliJFlagDef, 'secondary-btn': !intelliJFlagDef}">{{ i18n.common_term_history_project_downloadh}}</button>
+    </div>
+    <!-- 下载按钮 end -->
+</div>
