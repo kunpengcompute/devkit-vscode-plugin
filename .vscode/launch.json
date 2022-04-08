@@ -1,0 +1,25 @@
+// A launch configuration that compiles the extension and then opens it inside a new window
+// Use IntelliSense to learn about possible attributes.
+// Hover to view descriptions of existing attributes.
+// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+// 插件运行配置
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "runtimeExecutable": "${execPath}",
+            // 修改perfadvisor为需要启动的插件。例如：porting
+            "args": [
+                "--extensionDevelopmentPath=${workspaceRoot}/extension/porting"
+            ],
+            "outFiles": [
+                "${workspaceFolder}/out/**/*.js"
+            ],
+            // 修改为task里面的label。例如：npm: compile - extension/porting
+            "preLaunchTask": "npm: compile - extension/porting"
+        }
+    ]
+}
