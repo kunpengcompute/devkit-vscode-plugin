@@ -1,9 +1,0 @@
-<div class="title" (click)='active=!active'>
-  <img class="head-img" 
-  [src]="!active? './assets/img/template/arrowRight.png': './assets/img/template/arrowDown.png'"
->
-  <span>{{title}}</span>
-</div>
-<div class="content" [ngClass]="{'active': active}">
-  <ng-content select=".content-box"></ng-content>
-</div>
