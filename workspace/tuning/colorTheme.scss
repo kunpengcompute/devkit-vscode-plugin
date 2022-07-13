@@ -1,7 +1,4 @@
 :root {
-   
-  
-
     .vscode-dark {
         --ti-default-body-bg: #1E1E1E;
 
@@ -12,7 +9,7 @@
         --btn-disabled-font-d-aaaaaa-l-cccccc: #AAAAAA;
         --btn-disabled-bg-d-313131-l-f5f5f5: #313131;
         --btn-disabled-border-d-313131-l-cccccc: #313131;
-        --btn-second--disabled-border-d-616161-l-cccccc: #616161;  // 次要按钮
+        --btn-second--disabled-border-d-616161-l-cccccc: #616161; // 次要按钮
         --btn-primary-font-d-e8e8e8-l-ffffff: #E8E8E8;
         --btn-primary-bg-d-0067ff-l-0067ff: #0067FF;
         --btn-primary-border-d-0067ff-l-0067ff: #0067FF;
@@ -64,15 +61,15 @@
 
         --upload_file: #0067FF;
 
-        --tip-title-clr-span:#333333;
-        --tip-title-clr-a:#267DFF;
+        --tip-title-clr-span: #333333;
+        --tip-title-clr-a: #267DFF;
 
         --ra-label-backgroud-color-linear: #4b4b4b;
         --ra-label-backgroud-color-change: #1e1e1e;
         --ra-label-span-active-color: #e8e8e8 !important;
         --ra-label-backgroud-color: rgba(30, 30, 30, 0.3);
         --ra-label-soild-color: #5b5b5b;
-        --ra-label-soild-color-active:#5b5b5b;
+        --ra-label-soild-color-active: #5b5b5b;
     }
 
     .vscode-light {
@@ -83,7 +80,7 @@
         --btn-disabled-font-d-aaaaaa-l-cccccc: #CCCCCC;
         --btn-disabled-bg-d-313131-l-f5f5f5: #F5F5F5;
         --btn-disabled-border-d-313131-l-cccccc: #CCCCCC;
-        --btn-second--disabled-border-d-616161-l-cccccc: #CCCCCC;  // 次要按钮
+        --btn-second--disabled-border-d-616161-l-cccccc: #CCCCCC; // 次要按钮
         --btn-primary-font-d-e8e8e8-l-ffffff: #FFFFFF;
         --btn-primary-bg-d-0067ff-l-0067ff: #0067FF;
         --btn-primary-border-d-0067ff-l-0067ff: #0067FF;
@@ -134,8 +131,8 @@
 
         --upload_file: #0067FF;
 
-        --tip-title-clr-span:#888888;
-        --tip-title-clr-a:#267DFF;
+        --tip-title-clr-span: #888888;
+        --tip-title-clr-a: #267DFF;
     }
 
     .color-d-e8-l-22 {

@@ -21,7 +21,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
     @ViewChild('installTip', { static: false }) installTip: { Close: () => void; Open: () => void; };
     @ViewChild('installModal', { static: false }) installModal: { Close: () => void; Open: () => void; };
 
-    @ViewChild('showDialog', {static: false}) showDialog: { Close: () => void; Open: () => void; };
+    @ViewChild('showDialog', { static: false }) showDialog: { Close: () => void; Open: () => void; };
 
     public i18n: any = this.i18nService.I18n();
     public currLang: number;
@@ -75,12 +75,6 @@ export class InstallComponent implements AfterViewInit, OnInit {
     private startInstallDatetime: Date;
     public showLoading = false;
     public pluginUrlCfg: any = {
-        searchToolPort: '',
-        kunpengptSixFifteen: '',
-        kunpengPackages: '',
-        x86Packages: '',
-        downloadVersion: '',
-        faqFive: ''
     };
 
     public dialogShowDetailText = '';
@@ -92,7 +86,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
         public vscodeService: VscodeService) {
         // 获取全局url配置数据
         this.vscodeService.postMessage({ cmd: 'readUrlConfig' }, (resp: any) => {
-            const res =  {
+            const res = {
                 sysInstall_openFAQ1: resp.sysInstall_openFAQ1,
                 vscodeService_openFAQ2: resp.vscodeService_openFAQ2,
                 sysInstall_openFAQ2: resp.sysInstall_openFAQ2,
@@ -100,7 +94,10 @@ export class InstallComponent implements AfterViewInit, OnInit {
                 sysInstall_openFAQ5: resp.sysInstall_openFAQ5,
 
                 checkConn_openFAQ1: resp.checkConn_openFAQ1,
-                checkConn_openFAQ2: resp.checkConn_openFAQ2
+                checkConn_openFAQ2: resp.checkConn_openFAQ2,
+
+                faqFiveZn: resp.faqFiveZn,
+                faqFiveEn: resp.faqFiveEn
             };
             this.pluginUrlCfg = res;
             if (this.currLang === 0) {
@@ -119,7 +116,6 @@ export class InstallComponent implements AfterViewInit, OnInit {
                         1: '</a>'
                     }
                 );
-                this.pluginUrlCfg.kunpengptSixFifteen = resp.kunpengptSixFifteenEN;
             }
         });
         this.radioList = [{ key: 'usepwd', value: this.i18n.plugins_common_title_sshPwd },
@@ -200,7 +196,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
     private getCheckResult() {
         if (!this.ipCheckF && !this.tempPortCheckF && !this.usernameCheckNull &&
             ((this.sshTypeSelected === 'usepwd' && !this.pwdCheckNull) ||
-            (this.sshTypeSelected === 'usekey' && this.localfilepath))) {
+                (this.sshTypeSelected === 'usekey' && this.localfilepath))) {
             return true;
         }
         return false;
@@ -244,42 +240,42 @@ export class InstallComponent implements AfterViewInit, OnInit {
 
         // const isCheckS = this.getCheckResult();
         // if (isCheckS) {
-            if (this.connectChecking) {
-                return;
+        if (this.connectChecking) {
+            return;
+        }
+        this.connectChecking = true;
+        const postData = {
+            cmd: 'checkConn',
+            data: {
+                host: this.tempIP,
+                port: this.tempPort,
+                username: this.username,
+                password: this.pwd,
+                sshType: this.sshTypeSelected,
+                privateKey: this.privateKey,
+                passphrase: this.passphrase
             }
-            this.connectChecking = true;
-            const postData = {
-                cmd: 'checkConn',
-                data: {
-                    host: this.tempIP,
-                    port: this.tempPort,
-                    username: this.username,
-                    password: this.pwd,
-                    sshType: this.sshTypeSelected,
-                    privateKey: this.privateKey,
-                    passphrase: this.passphrase
-                }
-            };
-            this.vscodeService.postMessage(postData, (data: any) => {
-                if (data.search(/SUCCESS/) !== -1) {
-                    this.connected = true;
-                    this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
-                } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
-                    this.connected = false;
-                    this.showInfoBox(this.i18n.plugins_common_tips_connFail, 'error');
-                } else if (data.search(/host fingerprint verification failed/) !== -1) {
-                    this.connected = false;
-                    this.showInfoBox(this.i18n.plugins_common_tips_figerFail, 'error');
-                } else if (data.search(/Timed out while waiting for handshake/) !== -1) {
-                    this.connected = false;
-                    this.showInfoBox(this.i18n.plugins_common_tips_timeOut, 'error');
-                } else if (data.search(/Cannot parse privateKey/) !== -1) {
-                    // 密码短语错误
-                    this.connected = false;
-                    this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
-                }
-                this.connectChecking = false;
-            });
+        };
+        this.vscodeService.postMessage(postData, (data: any) => {
+            if (data.search(/SUCCESS/) !== -1) {
+                this.connected = true;
+                this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
+            } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
+                this.connected = false;
+                this.showInfoBox(this.i18n.plugins_common_tips_connFail, 'error');
+            } else if (data.search(/host fingerprint verification failed/) !== -1) {
+                this.connected = false;
+                this.showInfoBox(this.i18n.plugins_common_tips_figerFail, 'error');
+            } else if (data.search(/Timed out while waiting for handshake/) !== -1) {
+                this.connected = false;
+                this.showInfoBox(this.i18n.plugins_common_tips_timeOut, 'error');
+            } else if (data.search(/Cannot parse privateKey/) !== -1) {
+                // 密码短语错误
+                this.connected = false;
+                this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
+            }
+            this.connectChecking = false;
+        });
         // }
     }
 
@@ -328,7 +324,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
      */
     processInstallInfo(data: any) {
         if (data === 'closeLoading') {
-          this.showLoading = false;
+            this.showLoading = false;
         }
         if (this.installing !== RUNNING) { return; }
         if (data.search(/uploadErr/) !== -1) {
@@ -389,7 +385,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
                 selectCertificate: false,
                 localfilepath: ''
             });
-            const postData = { cmd: 'saveConfig', data: { data: JSON.stringify(data) , selected: 'trust'} };
+            const postData = { cmd: 'saveConfig', data: { data: JSON.stringify(data), selected: 'trust' } };
             this.vscodeService.postMessage(postData, () => {
                 const data1 = { cmd: 'updatePanel' };
                 this.vscodeService.postMessage(data1, null);

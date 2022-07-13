@@ -2,17 +2,18 @@ import * as vscode from 'vscode';
 import * as constant from './constant';
 import { COLOR_THEME } from './constant';
 import { I18nService } from './i18nservice';
-import { ErrorHelper} from './error-helper';
-import { ToolPanelManager} from './panel-manager';
+import { ErrorHelper } from './error-helper';
+import { ToolPanelManager } from './panel-manager';
 import axios, { AxiosRequestConfig } from 'axios';
 import { iframeHtmlStr } from './template';
 import { ProxyManager } from './proxy-manager';
+import Download from './download';
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
 const i18n = I18nService.I18n();
 
-import Download from './download';
+
 
 export class Utils {
     private static axiosInstance = axios.create({
@@ -23,29 +24,20 @@ export class Utils {
      * @param context 插件上下文
      * @param isInitDefaultPort 是否需要初始化端口
      */
-     public static initVscodeCache(context: vscode.ExtensionContext, isInitDefaultPort: boolean = false) {
+    public static initVscodeCache(context: vscode.ExtensionContext, isInitDefaultPort: boolean = false) {
         context.globalState.update('tuningIp', null);
         context.globalState.update('tuningPort', null);
         context.globalState.update('tuningToken', null);
         context.globalState.update('tuningSession', null);
-        context.globalState.update('autoLoginUser', null);
-        context.globalState.update('autoRememberConfig', null);
-        context.globalState.update('autoLoginConfig', null);
         context.globalState.update('autoSystemFlag', null);
         context.globalState.update('closeShowErrorMessage', false);
         if (isInitDefaultPort) {
             context.globalState.update('defaultPort', 3661);
         }
-
         const json = Utils.getConfigJson(context);
         if (json.tuningConfig.length > 0) {
             context.globalState.update('tuningIp', json.tuningConfig[0].ip);
             context.globalState.update('tuningPort', json.tuningConfig[0].port);
-        }
-        if (json.autoLoginConfig.length > 0) {
-            context.globalState.update('autoLoginUser', json.autoLoginConfig[0].user);
-            context.globalState.update('autoRememberConfig', json.autoLoginConfig[0].remember);
-            context.globalState.update('autoLoginConfig', json.autoLoginConfig[0].auto);
         }
         if (os.type() === 'Windows_NT') {
             context.globalState.update('autoSystemFlag', true);
@@ -55,7 +47,7 @@ export class Utils {
      * 获取配置信息
      * @param context 插件上下文
      */
-     public static getConfigJson(context: vscode.ExtensionContext): any {
+    public static getConfigJson(context: vscode.ExtensionContext): any {
         const resourcePath = Utils.getExtensionFileAbsolutePath(context, 'out/assets/config.json');
         const data = fs.readFileSync(resourcePath);
         const buf = Buffer.from(JSON.parse(JSON.stringify(data)));
@@ -65,7 +57,7 @@ export class Utils {
      * 获取URL配置信息
      * @param context 插件上下文
      */
-     public static getURLConfigJson(context: vscode.ExtensionContext): any {
+    public static getURLConfigJson(context: vscode.ExtensionContext): any {
         const resourcePath = Utils.getExtensionFileAbsolutePath(context, 'out/assets/urlConfig.json');
         const data = fs.readFileSync(resourcePath);
         const buf = Buffer.from(JSON.parse(JSON.stringify(data)));
@@ -101,7 +93,7 @@ export class Utils {
      * @param context 上下文
      * @param templatePath 相对于插件根目录的html文件相对路径
      */
-     public static getWebViewContent(context: vscode.ExtensionContext, templatePath: string) {
+    public static getWebViewContent(context: vscode.ExtensionContext, templatePath: string) {
         const resourcePath = this.getExtensionFileAbsolutePath(context, templatePath);
         const dirPath = path.dirname(resourcePath);
         let html = fs.readFileSync(resourcePath, 'utf-8');
@@ -118,7 +110,7 @@ export class Utils {
      * @param context 插件上下文
      * @param templatePath 临时路径
      */
-      public static initPage(context: vscode.ExtensionContext, webview: vscode.Webview, templatePath: string) {
+    public static initPage(context: vscode.ExtensionContext, webview: vscode.Webview, templatePath: string) {
         const resourcePath = this.getExtensionFileAbsolutePath(context, templatePath);
         const dirPath = path.dirname(resourcePath);
         try {
@@ -144,7 +136,7 @@ export class Utils {
                     }
                 }
             });
-        } catch (error) {}
+        } catch (error) { }
     }
 
     /**
@@ -162,14 +154,7 @@ export class Utils {
      * 判断sysPerf是否已登陆
      */
     public static isSysPerfLogin(context: vscode.ExtensionContext): boolean {
-        let isSysPerfLogin = false;
-
-        const webviewSession: any = context.globalState.get('userManagementSession');
-
-        if (context.globalState.get('tuningToken')
-            && webviewSession.isFirst !== constant.USER_FIRST_LOGIN.IS_FIRST_LOGIN) {
-            isSysPerfLogin = true;
-        }
+        const isSysPerfLogin = false;
         return isSysPerfLogin;
     }
 
@@ -179,7 +164,7 @@ export class Utils {
      * @param option 请求信息
      * @param module    模块 ex: 'sysPerf','javaPerf'
      */
-     public static async requestData(context: vscode.ExtensionContext, option: any, module: string) {
+    public static async requestData(context: vscode.ExtensionContext, option: any, module: string) {
         // 设置请求头
         const headers = {
             'content-type': 'application/json',
@@ -204,7 +189,6 @@ export class Utils {
                 resolve(resp);
             }).catch((error: any) => {
                 const respStatus = ((error || {}).response || {}).status;
-
                 if (error?.response?.data && error?.response?.data instanceof Buffer) {
                     const errorRespDataStr = Buffer.from(error?.response?.data).toString();
                     try {
@@ -225,13 +209,6 @@ export class Utils {
                     resp.data = error;
                     return resolve(resp);
                 }
-                // //  网络超时
-                // if (error.code === 'ECONNABORTED' && error.message?.includes('timeout')) {
-                //     vscode.window.showErrorMessage(i18n.plugins_common_message_resqust_timeout);
-                //     resp.status = constant.HTTP_STATUS.HTTP_408_REQUEST_TIMEOUT;
-                //     resp.data = {};
-                //     return resolve(resp);
-                // }
                 if (!respStatus || respStatus === constant.HTTP_STATUS.HTTP_404_NOTFOUND ||
                     error.code === 'ECONNREFUSED' || error.code === 'ETIMEDOUT' || error.code === 'ECONNABORTED') {
                     resp.status = constant.HTTP_STATUS.HTTP_404_NOTFOUND;
@@ -268,13 +245,13 @@ export class Utils {
                 Download.getData(global, msg, 'tuning');
             }
         });
-        ToolPanelManager.loginPanels = [{panel, proxy}];
+        ToolPanelManager.loginPanels = [{ panel, proxy }];
         // 相应panel的关闭事件
         panel.onDidDispose(() => {
             ToolPanelManager.closeLoginPanel();
         }, null);
         const src = `http://127.0.0.1:${defaultPort}`;
-        const ip = global.context.globalState. get('tuningIp');
+        const ip = global.context.globalState.get('tuningIp');
         const port = global.context.globalState.get('tuningPort');
         const pageLoadingText = i18n.page_loading;
         const htmlstr = iframeHtmlStr.replace(/\{pageLoadingText\}/, pageLoadingText).replace(/\{src\}/g, src).replace(/\{ip\}/, ip).replace(/\{port\}/, port).replace(/\{defaultPort\}/, defaultPort + '');
@@ -321,7 +298,7 @@ export class Utils {
      *
      * @param context 上下文
      */
-     public static fingerLengthCheck(global: any) {
+    public static fingerLengthCheck(global: any) {
         const finger = Utils.getConfigJson(global.context).hostVerifier;
         if (finger.length > 100) {
             vscode.window.showWarningMessage(i18n.plugins_common_message_figerWarn);
@@ -334,7 +311,7 @@ export class Utils {
      * @param data 多语言信息
      * @param directDisplay 是否直接显示data.info，否则会取i18n[data.infoKey]
      */
-     public static showMessageByType(messageType: string, data: any, directDisplay: boolean) {
+    public static showMessageByType(messageType: string, data: any, directDisplay: boolean) {
         switch (messageType) {
             case 'info':
                 Utils.showInfoByLangType(data, directDisplay);
@@ -366,7 +343,7 @@ export class Utils {
      * @param data 多语言信息
      * @param directDisplay 是否直接显示data.info，否则会取i18n[data.infoKey]
      */
-     private static showWarningByLangType(data: any, directDisplay: boolean) {
+    private static showWarningByLangType(data: any, directDisplay: boolean) {
         if (directDisplay) {
             Utils.showWarning(data.info);
         } else {
@@ -378,7 +355,7 @@ export class Utils {
      * @param data 多语言信息
      * @param directDisplay 是否直接显示data.info，否则会取i18n[data.infoKey]
      */
-      private static showErrorInfoByLangType(data: any, directDisplay: boolean) {
+    private static showErrorInfoByLangType(data: any, directDisplay: boolean) {
         const language: any = vscode.env.language;
         if (directDisplay) {
             Utils.showError(data.info);
@@ -440,7 +417,6 @@ export class Utils {
      */
     public static openAdviceLink(context: vscode.ExtensionContext, module: string) {
         const pluginUrlCfg = Utils.getURLConfigJson(context);
-        const urlStr = pluginUrlCfg.hikunpengUrl;
         const faq = vscode.Uri.parse(pluginUrlCfg.hikunpengUrl);
         vscode.commands.executeCommand('vscode.open', faq);
     }

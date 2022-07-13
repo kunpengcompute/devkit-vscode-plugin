@@ -259,7 +259,6 @@ export class ConfigComponent implements OnInit {
                 }
                 this.showLoading = false;
             });
-            // this.readConfig();
         }
     }
 
@@ -284,13 +283,6 @@ export class ConfigComponent implements OnInit {
             }
         };
         this.vscodeService.postMessage(data, null);
-        // this.elementRef.nativeElement.querySelectorAll(`input`).forEach((element: any) => {
-        //     element.focus();
-        //     element.blur();
-        // });
-        // this.ipCheck = false;
-        // this.portCheck = false;
-        // this.readConfig();
     }
 
     /**

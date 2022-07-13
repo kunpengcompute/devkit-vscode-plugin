@@ -24,8 +24,8 @@ export const I18N_EN = {
     plugins_common_upgrade_remoteServer: 'Upgrade Hyper Tuner',
     plugins_sysperf_detail: 'detail',
     plugins_common_button_save: 'save',
-    
-    
+
+
     plugins_perf_cert_expiring: 'The cert.pem certificate of the Hyper Tuner backend server will expire on {0}. \
     Please update the certificate in time.',
     plugins_perf_cert_expired: 'The cert.pem certificate of the Hyper Tuner backend server has expired. \
@@ -71,14 +71,11 @@ export const I18N_EN = {
      Check that the network connection is normal.',
 
     plugins_common_cut_server: 'Switch server',
-
-
     plugins_tuning_title_createTime: ' Create Time:',
     plugins_tuning_title_importTime: ' Import Time:',
     plugins_tuning_dowloadPath: 'File downloaded successfully. Save path: {0}',
     plugins_tuning_message_cart: 'After the certificate is imported successfully, \
     restart VS Code for the certificate to take effect.',
-
     page_loading: "Page loading..."
-     
+
 };

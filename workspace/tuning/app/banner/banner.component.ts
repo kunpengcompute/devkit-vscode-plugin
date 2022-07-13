@@ -111,23 +111,4 @@ export class BannerComponent implements OnInit, OnDestroy {
     public mouseleaveChange(key: string) {
         this.imgSrc[key] = './assets/img/banner/arrow.svg';
     }
-
-    /**
-     * 打开建议反馈
-     * @param urlString 路径
-     */
-    openAdvice(urlString: string) {
-        if (this.intelliJFlagDef || this.intellijFlag) {
-            // 打开服务器配置页面
-            const cmdData = {
-                cmd: 'showIntellijDialog',
-                data: {
-                    intellijDialogType: 'noNetworkTipDialog',
-                }
-            };
-            this.vscodeService.postMessage(cmdData, null);
-            return;
-        }
-        this.utils.openVocAdvice(urlString);
-    }
 }

@@ -240,7 +240,12 @@
         </div>
         <div class="tip-select color-d-e8-l-61">
             <input class="pointer" type="checkbox" tiCheckbox [(ngModel)]="flag" id="tip">
-            <label class="pointer" for="tip">{{i18n.plugins_tuning_message_beforeInstallOption}}</label>
+            <!-- <label class="pointer" for="tip">{{i18n.plugins_tuning_message_beforeInstallOption}}</label> -->
+            <label for="tip" class="ti3-checkbox pointer">
+                <span class="ti3-checkbox-skin ti3-icon ti3-icon-checkmark"></span>
+                <span class="ti3-check-label">{{i18n.plugins_tuning_message_beforeInstallOption}}</span>
+            </label>
+            
         </div>
         <div class="tip-confirm">
             <button type="button" class="primary-btn" (click)="confirmMsgTip()"

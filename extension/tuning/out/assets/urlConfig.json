@@ -31,7 +31,12 @@
     "checkConn_openFAQ1": "https://support.huaweicloud.com/vscode-kunpengdevps/kunpengidevscode_10_0005.html",
     "checkConn_openFAQ2": "https://support.huaweicloud.com/vscode-kunpengdevps/kunpengidevscode_10_0043.html",
     "upgrade_checkConn_openFAQ1": "https://support.huaweicloud.com/vscode-kunpengdevps/kunpengidevscode_10_0006.html",
-    "uninstall_checkConn_openFAQ1": "https://support.huaweicloud.com/vscode-kunpengdevps/kunpengidevscode_10_0007.html"
+    "uninstall_checkConn_openFAQ1": "https://support.huaweicloud.com/vscode-kunpengdevps/kunpengidevscode_10_0007.html",
+
+    "faqFiveZn": "https://support.huaweicloud.com/vscode-kunpengdevps/kunpengidevscode_10_0060.html",
+    "faqFiveEn": "https://support.huaweicloud.com/intl/en-us/vscode-kunpengdevps/kunpengidevscode_10_0060.html"
+
+
 
   
 

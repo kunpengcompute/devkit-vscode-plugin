@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import './colorTheme.scss';
+
 html {
     font-size: 100%;
     width: 100%;
@@ -184,13 +185,8 @@ table>tr {
     zoom: 1;
 }
 
-.mg-top20 {
-    margin-top: 20px;
-}
 
-.mg-left10 {
-    margin-left: 10px;
-}
+
 
 .main-container {
     width: 100%;
@@ -200,134 +196,7 @@ table>tr {
     box-sizing: border-box; //todo
 }
 
-.main-title {
-    line-height: 58px;
-    height: 58px;
-    margin-left: 28px;
 
-    img {
-        vertical-align: middle;
-    }
-
-    span {
-        display: inline-block;
-        margin-left: 15px;
-    }
-
-    span:nth-of-type(1) {
-        font-size: 0.875rem;
-        color: #9ea4b3;
-    }
-
-    span:nth-of-type(2) {
-        font-size: 1.25rem;
-        color: #333333;
-    }
-}
-
-.main-content {
-    background-color: #fff;
-    overflow-y: auto;
-    font-size: 0.875rem;
-    height: calc(100% - 58px); //todo
-}
-
-.error-msg-tip {
-    color: #ff4c4c;
-}
-
-// 树形表格的icon样式
-.expand_icon {
-    display: inline-block;
-    border: 5px solid transparent;
-    border-top-color: #6c7280;
-    vertical-align: middle;
-    margin-right: 5px;
-}
-
-.not_expand_icon {
-    display: inline-block;
-    border: 5px solid transparent;
-    border-left-color: #6c7280;
-    vertical-align: middle;
-    margin-right: 5px;
-}
-
-// 重写tiny无数据时的样式
-
-
-
-
-
-
-
-#detail-container,
-.project-tabs ti-tabs .ti3-tab-content {
-    border-top: none !important;
-}
-
-#detail-container .project-tabs ti-tabs .ti3-tabs+.ti3-tab-slider {
-    border-bottom: none;
-}
-
-#detail-container ti-tabs li.ti3-tab-active ti-tab-header span:nth-of-type(1) {
-    color: #7a9cfa;
-    border-bottom: 1px solid #7a9cfa;
-}
-
-#detail-container .ti3-tabs>li {
-    margin-right: 0;
-}
-
-.project-tabs>ti-tabs>ul>li.ti3-tab-li {
-    padding-right: 20px;
-}
-
-.project-tabs>ti-tabs>ul {
-    height: 40px;
-    background: #eef0f5;
-}
-
-.project-tabs ti-tabs .ti3-tab-content {
-    border-top: none !important;
-}
-
-.project-tabs ti-tabs .ti3-tabs+.ti3-tab-slider {
-    border-bottom: none;
-}
-
-.project-tabs>ti-tabs>ul>li.ti3-tab-li ti-tab-header>span.tab-title {
-    display: inline-block;
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    height: 40px;
-    color: #282b33;
-    font-size: 1rem;
-}
-
-
-
-.project-tabs>ti-tabs>ul>li.ti3-tab-li ti-tab-header>span.tab-close {
-    position: absolute;
-    right: -20px;
-    cursor: pointer;
-}
-
-.project-tabs ti-tabs li.ti3-tab-active {
-    background: #fff;
-    height: 40px;
-}
-
-.code .d2h-file-wrapper {
-    border: none !important;
-}
-
-//去掉diff的header
-.code .d2h-file-header {
-    display: none !important;
-}
 
 .ti3-validate-icon {
     margin-right: 5px !important;
@@ -339,52 +208,6 @@ table>tr {
     border-color: #6c92fa !important;
 }
 
-.ti3-modal-header .ti3-border-inline {
-    border-left: 0 !important;
-}
-
-.code .d2h-files-diff {
-    width: auto;
-    white-space: nowrap;
-    display: table;
-}
-
-// 修改highlight颜色及样式
-.code .d2h-file-side-diff:nth-of-type(1) .hljs {
-    background: red !important;
-    padding: 0 !important;
-}
-
-.code .d2h-file-side-diff {
-    overflow-x: visible;
-    overflow-y: visible;
-    width: auto;
-    vertical-align: top;
-}
-
-
-
-
-
-#report-arguments ti-formfield table tbody tr td:nth-of-type(3) {
-    width: 30%;
-    padding-right: 20px;
-}
-
-#report-arguments ti-formfield table tbody tr td:nth-of-type(7) {
-    width: 20%;
-    padding-right: 20px;
-}
-
-#report-arguments ti-formfield table tbody tr td:nth-of-type(11) {
-    width: 20%;
-    padding-right: 20px;
-}
-
-.desc-content {
-    font-size: 0.75rem;
-    color: #888888;
-}
 
 .mytip {
     position: absolute;
@@ -422,81 +245,6 @@ table>tr {
     top: -1px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-.ti3-modal {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-}
-
-.del-report {
-    width: 575px !important;
-
-    .ti3-modal-header {
-        padding: 10px 20px 30px 30px !important;
-    }
-
-    .ti3-modal-footer {
-        padding: 0 0 32px !important;
-    }
-}
-
-.ti3-modal-dialog {
-    margin: 0 !important;
-}
-
-@media screen and (max-width: 1550px) {
-    .ti3-modal-dialog {
-        margin: 0 !important;
-    }
-}
-
-
-
-
-.CodeMirror-merge,
-.CodeMirror-merge-pane {
-    height: 100% !important;
-}
-
-.CodeMirror {
-    height: 100% !important;
-}
-.errorIcon {
-  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxzdmcgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDE2IDE2IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPg0KICAgIDx0aXRsZT7nga/ms6E8L3RpdGxlPg0KICAgIDxnIGlkPSLnga/ms6EiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPg0KICAgICAgICA8cGF0aCBkPSJNOS4yMDU0Mjg3NSwxNS4yMTAzNjQgQzkuNDIyNTc4NjYsMTUuMjEwMzY0IDkuNjAwMjQ2NzYsMTUuMzc4MTYxNiA5LjYxMDExNzIxLDE1LjYwNTE4MiBDOS42MTAxMTcyMSwxNS44MjUzMjI5IDkuNDMzNzcyNDIsMTUuOTg5Nzc2MSA5LjIzNDA4MzczLDE1Ljk5OTU0MDggTDkuMjE1Mjk5MiwxNiBMNi40ODExODQ0NSwxNiBDNi4yNTQxNjQxLDE2IDYuMDg2MzY2NDQsMTUuODIyMzMxOSA2LjA4NjM2NjQ0LDE1LjYwNTE4MiBDNi4wODYzNjY0NCwxNS4zODUwNDEgNi4yNjI3MTEyNCwxNS4yMjA1ODc5IDYuNDYyMzk5OTIsMTUuMjEwODIzMiBMNi40ODExODQ0NSwxNS4yMTAzNjQgTDkuMjA1NDI4NzUsMTUuMjEwMzY0IFogTTkuNzk3NjU1NzcsMTQuMDQ1NjUwOCBDMTAuMDE0ODA1NywxNC4wNDU2NTA4IDEwLjE4MjYwMzMsMTQuMjEzNDQ4NSAxMC4xOTI0NzM4LDE0LjQ0MDQ2ODggQzEwLjE5MjQ3MzgsMTQuNjYwNjA5OCAxMC4wMTYxMjksMTQuODI1MDYyOSA5LjgxNjQ0MDMsMTQuODM0ODI3NiBMOS43OTc2NTU3NywxNC44MzUyODY5IEw1Ljg5ODgyNzg4LDE0LjgzNTI4NjkgQzUuNjcxODA3NTMsMTQuODM1Mjg2OSA1LjUwNDAwOTg3LDE0LjY1NzYxODggNS41MDQwMDk4NywxNC40NDA0Njg4IEM1LjUwNDAwOTg3LDE0LjIyMDMyNzkgNS42ODAzNTQ2NywxNC4wNTU4NzQ4IDUuODgwMDQzMzUsMTQuMDQ2MTEwMSBMNS44OTg4Mjc4OCwxNC4wNDU2NTA4IEw5Ljc5NzY1NTc3LDE0LjA0NTY1MDggWiBNNy44NDMzMDY2LDAgQzExLjA4MDgxNDMsMCAxMy42ODY2MTMyLDIuNjE1NjY5MzQgMTMuNzA2MzU0MSw1Ljg2MzA0NzUgQzEzLjcwNjM1NDEsNy45MjQ4ODU4NyAxMi42MzI1MzcsOS43MzUxOTk1MSAxMS4wMjEyMzA4LDEwLjc3NjgxNDggTDEwLjk3MjIzOTQsMTAuODA4MTQzMSBMMTAuOTcyMjM5NCwxMi44NjExOTY4IEMxMC45NzIyMzk0LDEzLjI3NzYxODEgMTAuNjM5Njg3MSwxMy42Mjc1Mjg5IDEwLjIxNjk2MDIsMTMuNjQwNTg0OCBMMTAuMTkyNDczOCwxMy42NDA5NjI0IEw1LjUxMzg4MDMyLDEzLjY0MDk2MjQgQzUuMDk3NDU5MDYsMTMuNjQwOTYyNCA0Ljc0NzU0ODI1LDEzLjMwODQxMDEgNC43MzQ0OTIzMiwxMi44ODU2ODMyIEw0LjczNDExNDc0LDEyLjg2MTE5NjggTDQuNzM0MTE0NzQsMTAuNzk4MjcyNyBDMy4wODU3NDk1NCw5Ljc3MTc0NTg0IDIsNy45MzU4NDIwNyAyLDUuODUzMTc3MDUgQzIsMi42MDU3OTg4OSA0LjYwNTc5ODg5LDAgNy44NDMzMDY2LDAgWiBNNi4zMzMxMjc3LDIuMTMyMDE3MjcgQzYuMTg1MDcwOTQsMS45MTQ4NjczNyA1Ljg4ODk1NzQzLDEuODU1NjQ0NjYgNS42NzE4MDc1MywyLjAwMzcwMTQyIEM0LjU5NTkyODQ0LDIuNzM0MTE0NzQgMy44MDYyOTI0MSwzLjgxOTg2NDI4IDMuNDQxMDg1NzUsNS4wNjM1NDEwMiBDMy4zNjIxMjIxNSw1LjMyMDE3MjczIDMuNTEwMTc4OSw1LjU3NjgwNDQ0IDMuNzY2ODEwNjEsNS42NTU3NjgwNCBMMy44MjI1NTg5MSw1LjY2Njk4MDg4IEMzLjg0OTMyNzU4LDUuNjcxOTU1NTggMy44NzUzODU1Niw1LjY3NTUwODk1IDMuOTA0OTk2OTIsNS42NzU1MDg5NSBDNC4xMDkxOTM0MSw1LjY3NDYzMTgxIDQuMjg4OTUxOTksNS41NDMxODYyIDQuMzUyNjYwMDIsNS4zNTA4Nzc0MiBMNC4zNTkwMzc2Myw1LjMzMDA0MzE4IEM0LjY2NTAyMTU5LDQuMzEzMzg2OCA1LjMxNjQ3MTMxLDMuNDA1MzA1MzcgNi4yMTQ2ODIyOSwyLjgwMzIwNzkgQzYuNDMxODMyMiwyLjY1NTE1MTE0IDYuNDkxMDU0OSwyLjM1OTAzNzYzIDYuMzMzMTI3NywyLjEzMjAxNzI3IFoiIGlkPSLlvaLnirblpIfku70tMiIgZmlsbD0iI0ZGRTI5MSIgZmlsbC1ydWxlPSJub256ZXJvIj48L3BhdGg+DQogICAgPC9nPg0KPC9zdmc+);
-  background-size: 80% !important;
-  background-position-y: 40%;
-  background-repeat: no-repeat!important;
-  left: 7% !important;
-}
-.CodeMirror-merge-r-deleted,
-.CodeMirror-merge-l-deleted {
-    background-image: none !important;
-}
-
-.CodeMirror-merge-r-chunk-start {
-    border: none !important;
-}
-
-.CodeMirror-merge-r-chunk {
-    background-color: #fcb3b5 !important;
-    opacity: 0.9 !important;
-}
-
-
-
-
-// ******错误提示******
 .mt-10 {
     margin-top: 10px;
 }
@@ -523,36 +271,184 @@ table>tr {
     border: 0 !important;
 }
 
-.ti3-dropdown-searchbox-wrapper-outer {
-    background: var(--vscode-editor-background) !important;
-    padding: 0 !important;
+
+
+// 单选按钮的样式
+input[type="radio"][tiRadio]+.ti3-radio {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
-.ti3-dropdown-container {
+
+input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-skin {
+    display: inline-block;
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #888;
+    border-radius: 50%;
+    margin-right: 8px;
+    box-sizing: border-box;
+
+}
+
+input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin {
+    border-color: #0067ff;
     background-color: var(--vscode-editor-background) !important;
 }
 
-.ti3-searchbox-container {
+input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-skin:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    opacity: 0;
+
+}
+
+input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin:after {
+    background-color: #0067ff;
+    opacity: 1;
+    transform: translate(0) scale(1);
+    transition: opacity .2s ease-out, transform .2s;
+}
+
+input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-label {
+    color: #616161 !important;
+}
+
+input[type="radio"][tiRadio]:not(:disabled):not(:checked)+.ti3-radio .ti3-radio-label {
+    color: #aaa !important;
+}
+
+
+// radio
+input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin {
+    border-color: #0067ff !important;
     background-color: var(--vscode-editor-background) !important;
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-bottom: 1px solid;
+}
+
+input[type="radio"][tiRadio]:not(:disabled):not(:checked)+.ti3-radio .ti3-radio-skin:hover {
     border-color: #0067ff !important;
 }
 
+input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin::after {
+    background-color: #0067ff !important;
+    opacity: 1;
+}
+
+input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-skin {
+    background-color: var(--vscode-editor-background) !important;
+}
+
+// 勾选时label颜色
+input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-label {
+    color: #e8e8e8 !important;
+}
+
+input[type="radio"][tiRadio]:not(:disabled):not(:checked)+.ti3-radio .ti3-radio-label {
+    color: #AAAAAA !important;
+}
+
+// 禁用radio样式
+input[type="radio"][tiRadio]:disabled+.ti3-radio .ti3-radio-skin {
+    border-color: #616161 !important;
+    background-color: #313131 !important;
+}
+
+input[type="radio"][tiRadio]:disabled:checked+.ti3-radio .ti3-radio-skin::after {
+    background-color: #616161 !important;
+}
+
+// 禁用label样式
+input[type="radio"][tiRadio]:disabled+.ti3-radio .ti3-radio-label {
+    color: #616161 !important;
+}
+
+.ti3-radio-label {
+    font-size: 14px;
+}
+
+
+// checkbox的公用样式
+input[type="checkbox"][tiCheckbox] {
+    display: none !important;
+}
+
+input[type="checkbox"][tiCheckbox]+.ti3-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+input[type="checkbox"][tiCheckbox]+.ti3-checkbox .ti3-checkbox-skin {
+    border-collapse: separate;
+    border-radius: 2px;
+    box-sizing: border-box;
+    color: transparent;
+    display: inline-block;
+    height: 16px;
+    line-height: 14px;
+    margin-bottom: 0;
+    margin-right: 10px;
+    position: relative;
+    text-align: center;
+    transition: background-color .15s, border-color .15s;
+    vertical-align: middle;
+    width: 16px;
+}
+
+input[type="checkbox"][tiCheckbox]:checked+.ti3-checkbox .ti3-checkbox-skin::before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 21%;
+    transform: rotate(45deg) translate(-55%, -55%) scale(1);
+    display: table;
+    width: 7px;
+    height: 9px;
+    border-width: 0 2px 2px 0;
+    border-style: solid;
+    box-sizing: border-box;
+    border-color: #fff;
+
+}
+
+// 勾选框样式修改
+input[type="checkbox"][tiCheckbox]:not([disabled]):not(:checked)+.ti3-checkbox .ti3-checkbox-skin {
+    border: 1px solid #b7b7b7 !important;
+}
+
+input[type="checkbox"][tiCheckbox]:not([disabled]):not(:checked)+.ti3-checkbox .ti3-checkbox-skin:hover {
+    border: 1px solid #0067ff !important;
+}
+
+input[type="checkbox"][tiCheckbox]:not([disabled]):not(:checked)+.ti3-checkbox .ti3-checkbox-skin:focus {
+    border-color: #b7b7b7;
+}
+
+
+input[type="checkbox"][tiCheckbox]:not([disabled]):checked+.ti3-checkbox .ti3-checkbox-skin,
+input[type="checkbox"][tiCheckbox]:not([disabled]):checked+.ti3-checkbox .ti3-checkbox-skin:focus {
+    background-color: #0067ff !important;
+}
+
+input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox-skin {
+    background-color: var(--md-color-btn-p-bg-disabled) !important;
+    border: 1px solid var(--ti-checkbox-border-color-checked-disabled);
+    color: var(--ti-checkbox-border-color-checked-disabled);
+}
 
 //黑色主题
 .vscode-dark {
     --default-page-background-c: #161616;
-
-    .disable-drop {
-        background-color: #313131;
-        color: #aaaaaa !important;
-        border-color: #616161;
-    }
-
- 
 
     ti-tip-container.ti3-tooltip-top-left::after {
         background: #424242;
@@ -584,7 +480,7 @@ table>tr {
         border-color: #424242 !important;
     }
 
-  
+
 
     input:focus {
         border: 1px solid #0067ff !important;
@@ -599,112 +495,6 @@ table>tr {
         border-color: #616161 !important;
         background: #313131 !important;
         color: #AAAAAA !important;
-    }
-
-    // ******下拉框控件样式******
-    .ti3-overflow-padding {
-        font-size: 12px;
-        margin-top: -1px;
-    }
-
-    .ti3-dropdown-option {
-        background-color: #252526 !important;
-
-        .ti3-overflow-padding {
-            color: #aaaaaa !important;
-        }
-    }
-    .ti3-dropdown-option-disabled {
-        .ti3-overflow-padding {
-
-            color: #616161 !important;
-            cursor: not-allowed;
-        }
-    }
-
-    .ti3-dropdown-option-hover {
-        background-color: #313131 !important;
-
-        .ti3-overflow-padding {
-            color: #e8e8e8 !important;
-        }
-    }
-
-    .ti3-dropdown-option-selected {
-        background-color: #0067ff !important;
-
-        .ti3-overflow-padding {
-            color: #e8e8e8 !important;
-        }
-    }
-
-    .ti3-dropdown-container-border {
-        border: 1px solid #0067ff !important;
-    }
-
-    ti-select {
-        width: 65%;
-        border-radius: 2px !important;
-        box-shadow: none !important;
-        background: var(--vscode-editor-background) !important;
-        height: 28px !important;
-        font-size: 14px !important;
-        border-color: #747474 !important;
-    }
-
-    ti-select:focus {
-        border: 1px solid #0067ff !important;
-    }
-
-    ti-select:hover {
-        border: 1px solid #0067ff !important;
-    }
-
-    .select_operation[disabled] {
-        border-color: #616161 !important;
-        background: #313131 !important;
-        color: #616161 !important;
-
-        .ti3-placeholder[_ngcontent-iqj-c12] {
-            color: #616161 !important;
-        }
-
-        .ti3-placeholder {
-            color: #616161 !important;
-        }
-    }
-
-    // 大次要按钮控件样式
-    .minor-btn {
-        display: inline-block;
-        text-align: center;
-        background: #313131;
-        color: #e8e8e8;
-        width: 160px;
-        height: 32px;
-        line-height: 32px;
-        font-size: 14px;
-        border-radius: 2px;
-        border: 1px solid #dddddd !important;
-    }
-
-    .minor-btn:hover {
-        background: #313131 !important;
-        color: #267dff !important;
-        border-color: #267dff !important;
-        cursor: pointer;
-    }
-
-    .minor-btn:active {
-        background: #313131 !important;
-        color: #0057d9 !important;
-        border-color: #0057d9 !important;
-    }
-
-    .minor-btn[disabled] {
-        background: #313131 !important;
-        color: #666666 !important;
-        border: 1px solid #616161 !important;
     }
 
     .cancel-btn {
@@ -731,40 +521,6 @@ table>tr {
         color: #0067ff !important;
     }
 
-    // ******大按钮控件样式******//
-
-    // ******小按钮控件样式******//
-    // 小主要按钮控件样式
-    .little-primary-btn:focus,
-    .little-primary-btn {
-        display: inline-block;
-        text-align: center;
-        background: #0067ff;
-        color: #e8e8e8;
-        width: 100px;
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-        border-radius: 2px;
-        border: none;
-    }
-
-    .little-primary-btn:hover {
-        background: #267dff !important;
-        color: #e8e8e8 !important;
-        cursor: pointer;
-    }
-
-    .little-primary-btn:active {
-        background: #0057d9 !important;
-        color: #e8e8e8 !important;
-    }
-
-    .little-primary-btn[disabled] {
-        background: #313131 !important;
-        color: #616161 !important;
-        cursor: not-allowed;
-    }
 
     // 小次要按钮控件样式
     .little-minor-btn {
@@ -800,20 +556,6 @@ table>tr {
         border: 1px solid #616161 !important;
     }
 
-    // ******小按钮控件样式******//
-
-
-    // ******按钮控件样式******
-
-    .mask2 {
-        .ng-invalid.ng-touched:not([tiFocused]) {
-            border: 1px solid #ff4c4c !important;
-        }
-    }
-
-    .ti3-dropdown-searchbox-wrapper-outer {
-        background: #3c3c3c !important;
-    }
 
     .ti3-checkbox-label {
         line-height: 17px;
@@ -831,15 +573,12 @@ table>tr {
     }
 
     input[type="checkbox"][tiCheckbox]+.ti3-checkbox .ti3-checkbox-skin {
-        background-color: unset !important;
-        border: 1px solid #b7b7b7;
-        font-size: 13px;
-        line-height: 18px;
+        background-color: #1e1e1e;
+        border: 1px solid #888;
     }
 
     input[type="checkbox"][tiCheckbox]+.ti3-checkbox .ti3-checkbox-skin:hover {
-        background-color: unset;
-        border: 1px solid #0067ff;
+        border: 1px solid #2072ea;
     }
 
     input[type="checkbox"][tiCheckbox]:not([disabled]):checked+.ti3-checkbox .ti3-checkbox-skin,
@@ -870,7 +609,6 @@ table>tr {
         }
     }
 
-
     textarea:focus,
     textarea:hover {
         border: 1px solid #0067ff !important;
@@ -880,43 +618,11 @@ table>tr {
     [tiText] {
         box-shadow: unset !important;
     }
-
-    .drop-down {
-        color: #e8e8e8e8;
-
-        li {
-            background-color: #313131;
-        }
-    }
-
-    .disable-text {
-        &:hover {
-            background-color: #313131 !important;
-        }
-    }
 }
 
 //浅色主题
 .vscode-light {
     --default-page-background-c: #fff;
-
-
-  
-
-    .disable-drop {
-        border: 1px solid #ccc;
-        background-color: #fff;
-        color: #ccc !important;
-    }
-
-  
-
-    .operation-anal[disabled] {
-        background: #f5f5f5 !important;
-        color: #CCCCCC !important;
-        border: 1px solid #CCCCCC !important;
-        cursor: not-allowed;
-    }
 
     .ra-label {
         i.ra-uncheck {
@@ -938,72 +644,6 @@ table>tr {
         background: #f5f5f5 !important;
         color: #cccccc !important;
         border: 1px solid #cccccc !important;
-    }
-
-    // ******下拉框控件样式******
-    .ti3-overflow-padding {
-        font-size: 12px;
-        color: #222222 !important;
-        margin-top: -1px;
-    }
-
-    .ti3-dropdown-option {
-        margin-top: 0 !important;
-        background-color: #ffffff !important;
-        font-size: 14px !important;
-        border: none !important;
-    }
-
-    .ti3-dropdown-option-hover {
-        background-color: #f5f9ff !important;
-
-        .ti3-overflow-padding {
-            color: #313131 !important;
-        }
-    }
-
-    .ti3-dropdown-option-disabled {
-        .ti3-overflow-padding {
-
-            color: #cccccc !important;
-            cursor: not-allowed;
-        }
-    }
-
-    .ti3-dropdown-option-selected {
-        font-weight: normal !important;
-        background-color: #0067ff !important;
-
-        .ti3-overflow-padding {
-            color: #ffffff !important;
-        }
-    }
-
-    .ti3-dropdown-container-border {
-        border: 1px solid #0067ff !important;
-    }
-
-    ti-select {
-        width: 65%;
-        border-radius: 2px !important;
-        box-shadow: none !important;
-        background: var(--vscode-editor-background) !important;
-        height: 28px !important;
-        font-size: 14px !important;
-    }
-
-    ti-select:focus {
-        border: 1px solid #0067ff !important;
-    }
-
-    ti-select:hover {
-        border: 1px solid #0067ff !important;
-    }
-
-    ti-select:disabled {
-        border: none !important;
-        background: #e6ebf5 !important;
-        color: #b8becc !important;
     }
 
     .cancel-btn {
@@ -1031,34 +671,6 @@ table>tr {
     }
 
     // ******小按钮控件样式******//
-    // 小主要按钮控件样式
-    .little-primary-btn:focus,
-    .little-primary-btn {
-        display: inline-block;
-        text-align: center;
-        background: #0067ff;
-        color: #ffffff;
-        width: 100px;
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-        border-radius: 2px;
-        border: none;
-    }
-
-    .little-primary-btn:hover {
-        background: #267dff !important;
-    }
-
-    .little-primary-btn:active {
-        background: #0057d9 !important;
-    }
-
-    .little-primary-btn[disabled] {
-        background: #f5f5f5 !important;
-        color: #cccccc !important;
-        border: 1px solid #cccccc !important;
-    }
 
     // 小次要按钮控件样式
     .little-minor-btn {
@@ -1091,19 +703,7 @@ table>tr {
         border: 1px solid #cccccc !important;
     }
 
-    // ******小按钮控件样式******//
 
-    // ******按钮控件样式******
-
-    .mask2 {
-        .ng-invalid.ng-touched:not([tiFocused]) {
-            border: 1px solid #ff4c4c !important;
-        }
-    }
-
-    .ti3-dropdown-searchbox-wrapper-outer {
-        background: #ffffff !important;
-    }
 
     .ti3-checkbox-label {
         line-height: 17px;
@@ -1118,14 +718,15 @@ table>tr {
         color: #222222;
     }
 
+
     input[type="checkbox"][tiCheckbox]+.ti3-checkbox .ti3-checkbox-skin {
-        background-color: unset !important;
-        border: 1px solid #b7b7b7;
+        background-color: #fff;
+        border: 1px solid #ccc;
+
     }
 
     input[type="checkbox"][tiCheckbox]+.ti3-checkbox .ti3-checkbox-skin:hover {
-        background-color: unset;
-        border: 1px solid #0067ff;
+        border: 1px solid #39f;
     }
 
     input[type="checkbox"][tiCheckbox]:not([disabled]):indeterminate+.ti3-checkbox .ti3-checkbox-skin,
@@ -1144,43 +745,9 @@ table>tr {
         }
     }
 
-    // ******路径级联列表样式******
-    .areaMatchDiv {
-        border: 1px solid #0067ff;
-        background-color: #ffffff !important;
-
-        li {
-            color: #222222 !important;
-        }
-
-        li:hover {
-            background-color: #f5f5f5 !important;
-            color: #0067ff !important;
-        }
-
-        li:active {
-            background-color: #0067ff !important;
-            color: #ffffff !important;
-        }
-    }
-
     textarea:focus,
     textarea:hover {
         border: 1px solid #0067ff !important;
-    }
-
-    .drop-down {
-        color: #666666;
-
-        li {
-            background-color: #f5f5f5;
-        }
-    }
-
-    .disable-text {
-        &:hover {
-            background-color: #f5f5f5 !important;
-        }
     }
 }
 
@@ -1202,6 +769,11 @@ table>tr {
     font-size: 16px;
 }
 
+.ti3-icon-staricon::before {
+    color: #f45c5e !important;
+    margin-left: -14px !important;
+}
+
 .ti3-icon {
     font-style: normal;
     font-weight: 400;
@@ -1214,82 +786,6 @@ table>tr {
 
 .ti3-validate-icon {
     margin-right: 5px !important;
-}
-
-// ******错误提示******
-.del-user {
-    width: 660px !important;
-
-    .ti3-modal-header {
-        padding: 20px 40px 28px !important;
-        font-size: 20px;
-    }
-
-    .ti3-modal-footer {
-        padding: 20px !important;
-        background-color: #252526;
-    }
-
-    .ti3-modal-body {
-        position: relative;
-        padding: 0 40px;
-        margin-right: 3px;
-        overflow-y: auto;
-        -ms-box-sizing: border-box;
-        box-sizing: border-box;
-        display: block;
-    }
-
-    .ti3-modal-content {
-        position: relative;
-        -ms-box-sizing: border-box;
-        box-sizing: border-box;
-        border-radius: 2px;
-        background-color: #252526;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0);
-        background-clip: padding-box;
-        outline: 0;
-    }
-}
-
-.en-del-user {
-    width: 740px !important;
-
-    .ti3-modal-header {
-        padding: 20px 40px 28px !important;
-        font-size: 20px;
-    }
-
-    .ti3-modal-footer {
-        padding: 20px !important;
-        background-color: #252526;
-    }
-
-    .ti3-modal-body {
-        position: relative;
-        padding: 0 40px;
-        margin-right: 3px;
-        overflow-y: auto;
-        -ms-box-sizing: border-box;
-        box-sizing: border-box;
-        display: block;
-    }
-
-    .ti3-modal-content {
-        position: relative;
-        -ms-box-sizing: border-box;
-        box-sizing: border-box;
-        border-radius: 2px;
-        background-color: #252526;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0);
-        background-clip: padding-box;
-        outline: 0;
-    }
-}
-
-.ti3-icon-staricon::before {
-    color: #f45c5e !important;
-    margin-left: -14px !important;
 }
 
 .ra-label {
@@ -1335,87 +831,12 @@ table>tr {
     }
 }
 
-// ******路径级联列表样式******
-.areaMatchDiv {
-    position: absolute;
-    width: 400px;
-    box-sizing: border-box;
-    border: 1px solid #0067ff;
-    background-color: #252526;
-    z-index: 9;
-    max-height: 300px;
-    overflow-y: auto;
-    margin-top: -1px;
 
-    li {
-        font-size: 12px;
-        color: #AAAAAA;
-        line-height: 28px;
-        padding: 8px 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        p {
-            display: inline-block;
-            line-height: 20px;
-            width: calc(100% - 32px);
-        }
-
-        div {
-            width: 16px;
-            height: 16px;
-            float: right;
-            font-size: 0;
-        }
-    }
-
-    li:hover {
-        background-color: #313131;
-        color: #e8e8e8;
-    }
-
-    li:active {
-        background-color: #0067ff;
-        color: #e8e8e8;
-    }
-}
 
 a {
     &:focus {
         outline-style: none;
     }
-}
-
-.operation-anal {
-    margin-left: 26px;
-    background-color: #0067ff;
-    border: none;
-    color: #e0e0e0;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 6px;
-    padding-top: 6px;
-    font-size: 14px;
-}
-
-.operation-anal:hover {
-    background-color: #267dff;
-    color: #fff;
-    cursor: pointer;
-}
-
-.operation-anal:active {
-    background-color: #0057d9;
-    color: #fff;
-}
-
-.operation[disabled],
-.operation-anal[disabled] {
-    background: #313131;
-    color: #575757;
-    border: none;
-    cursor: not-allowed;
 }
 
 .config-modal {
@@ -1484,11 +905,7 @@ a {
             margin: 20px 0 32px;
         }
     }
-
-
 }
-
-
 
 img[src$="dark-nodata.png"] {
     width: 218px;
@@ -1509,29 +926,7 @@ img[src$="dark-nodata.png"] {
 }
 
 
-// 勾选框样式修改
-input[type="checkbox"][tiCheckbox]:not([disabled]):not(:checked)+.ti3-checkbox .ti3-checkbox-skin{
-    border: 1px solid #b7b7b7 !important;
-}
-input[type="checkbox"][tiCheckbox]:not([disabled]):not(:checked)+.ti3-checkbox .ti3-checkbox-skin:hover {
-    border: 1px solid #0067ff !important;
-}
 
-input[type="checkbox"][tiCheckbox]:not([disabled]):not(:checked)+.ti3-checkbox .ti3-checkbox-skin:focus {
-    border-color: #b7b7b7;
-}
-
-
-input[type="checkbox"][tiCheckbox]:not([disabled]):checked+.ti3-checkbox .ti3-checkbox-skin,
-input[type="checkbox"][tiCheckbox]:not([disabled]):checked+.ti3-checkbox .ti3-checkbox-skin:focus {
-    background-color: #0067ff !important;
-}
-
-input[type="checkbox"][tiCheckbox][disabled]:checked + .ti3-checkbox .ti3-checkbox-skin {
-    background-color: var(--md-color-btn-p-bg-disabled) !important;
-    border: 1px solid var(--ti-checkbox-border-color-checked-disabled);
-    color: var(--ti-checkbox-border-color-checked-disabled);
-}
 
 // 复制下载链接
 .re-copy-link {
@@ -1543,161 +938,6 @@ input[type="checkbox"][tiCheckbox][disabled]:checked + .ti3-checkbox .ti3-checkb
 // 下载链接
 .re-down-link {
     color: #0067ff;
-}
-
-
-
-
-
-// radio
-input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin {
-    border-color: #0067ff !important;
-    background-color: var(--vscode-editor-background) !important;
-}
-
-input[type="radio"][tiRadio]:not(:disabled):not(:checked)+.ti3-radio .ti3-radio-skin:hover {
-    border-color: #0067ff !important;
-}
-
-input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin::after {
-    background-color: #0067ff !important;
-    opacity: 1;
-}
-
-input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-skin {
-    background-color: var(--vscode-editor-background) !important;
-}
-
-// 勾选时label颜色
-input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-label {
-    color: #e8e8e8 !important;
-}
-
-input[type="radio"][tiRadio]:not(:disabled):not(:checked)+.ti3-radio .ti3-radio-label {
-    color: #AAAAAA !important;
-}
-
-// 禁用radio样式
-input[type="radio"][tiRadio]:disabled+.ti3-radio .ti3-radio-skin {
-    border-color: #616161 !important;
-    background-color: #313131 !important;
-}
-
-input[type="radio"][tiRadio]:disabled:checked+.ti3-radio .ti3-radio-skin::after {
-    background-color: #616161 !important;
-}
-
-// 禁用label样式
-input[type="radio"][tiRadio]:disabled+.ti3-radio .ti3-radio-label {
-    color: #616161 !important;
-}
-
-.ti3-radio-label {
-    font-size: 14px;
-}
-
-.drop-down {
-    overflow: hidden;
-    max-width: 142px;
-    height: 32px;
-    margin-bottom: -72px;
-    border: 1px solid #e8e8e8;
-    font-size: 16px;
-    text-align: center;
-    border-radius: 1px;
-    width: 100px;
-    float: right;
-    font-size: 14px;
-    cursor: pointer;
-
-    li {
-        padding-left: 18px;
-        padding-right: 10px;
-        height: 32px;
-        line-height: 32px;
-        cursor: pointer;
-
-        img {
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-    }
-
-    .hover-text {
-        height: 0;
-
-        &:hover {
-            background-color: #0067FF;
-            color: #fff;
-        }
-    }
-
-    &:hover {
-        img {
-            transform: rotate(180deg);
-            transition: all 0.5s;
-        }
-
-        height: auto;
-        border-color: #0067FF;
-
-        .hover-text {
-            position: relative;
-            z-index: 66;
-            height: 32px;
-        }
-    }
-}
-
-.disable-drop {
-    overflow: hidden;
-    max-width: 142px;
-    height: 32px;
-    margin-bottom: -72px;
-    font-size: 16px;
-    text-align: center;
-    border-radius: 1px;
-    width: 100px;
-    float: right;
-    font-size: 14px;
-    cursor: pointer;
-
-    li {
-        padding-left: 18px;
-        padding-right: 10px;
-        height: 32px;
-        line-height: 32px;
-        cursor: pointer;
-
-        img {
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-    }
-
-    &:hover {
-        height: 32px;
-        border-color: #ccc;
-    }
-
-    li:first-child {
-        cursor: not-allowed;
-    }
-}
-
-.disable-text {
-    background-color: #313131;
-    color: #aaaaaa;
-
-    &:hover {
-        color: #aaaaaa !important;
-        cursor: not-allowed !important;
-    }
-}
-
-.ti3-tabs>li.ti3-tab-active:not(.disabled)>a {
-    color: #0067FF !important;
-    font-size: 16px !important;
 }
 
 // 文本按钮控件样式
@@ -1718,23 +958,6 @@ input[type="radio"][tiRadio]:disabled+.ti3-radio .ti3-radio-label {
 .text-btn[disabled] {
     color: #616161;
     cursor: not-allowed;
-}
-
-// 下拉详情图标
-.ti3-icon-angle-transform-down-thin {
-    transform: rotate(0);
-}
-
-.ti3-icon-angle-transform-up-thin {
-    transform: rotate(90deg);
-}
-
-.ti3-toggle-details .ti3-icon {
-    color: var(--ti-table-details-icon-color) !important;
-}
-
-.ti3-toggle-details .ti3-icon:hover {
-    color: #0067FF !important;
 }
 
 // 按钮样式start
@@ -1772,64 +995,39 @@ ti-tip-container.ti3-tooltip {
     span {
         color: var(--ti-button-primary-normal-bg-color);
         cursor: pointer;
+
         &:hover {
             color: var(--ti-button-primary-bg-color-hover);
         }
     }
 }
 
-// 了解更多弹框
-.modal-about-more {
-    .modal-box {
-        .modal-title {
-            .close-btn {
-                color: var(--btn-font-d-e8e8e8-l-222222);
-                cursor: pointer;
-            }
-        }
-        .modal-container {
-            margin-top: 15px;
-            border-bottom: 1px dashed var(--modal-color-separator);
-        }
 
-        .modal-footer {
-            margin-top: 32px;
-            text-align: center;
-        }
-    }
-}
+
 /** 输入框错误提示图标 start **/
-.ti3-error-icon{
+.ti3-error-icon {
     position: relative;
 }
+
 .ti3-error-icon-bg {
     margin-top: 3px;
 }
+
 .ti3-icon-alert-warn:before {
     margin-top: -1px;
     position: absolute;
     margin-left: -7px;
 }
+
 /** 输入框错误提示图标 end **/
 
-/** ti3 pagination start **/
-.ti3-page-container {
-    .ti3-pag-next.disabled:hover,
-    .ti3-pag-prev.disabled:hover {
-        background-color: inherit !important;
-    }
 
-    .ti3-pag-next:not(.disabled):hover,
-    .ti3-pag-prev:not(.disabled):hover {
-        color: #FFFFFF !important;
-    }
-}
-/** ti3 pagination end **/
 
 /** icon-close start **/
-.icon-close{
+.icon-close {
     img {
         display: none;
+
         &:hover {
             cursor: pointer;
         }
@@ -1844,15 +1042,16 @@ ti-tip-container.ti3-tooltip {
         img:nth-of-type(1) {
             display: none;
         }
+
         img:nth-of-type(2) {
             display: block;
         }
     }
 }
+
 /** icon-close end **/
 
-/** 主要、次要按钮 start **/
-// 大按钮
+
 .primary-btn,
 .secondary-btn {
     width: 160px;
@@ -1869,6 +1068,7 @@ ti-tip-container.ti3-tooltip {
     border-style: solid;
     box-sizing: border-box;
 }
+
 // 小按钮
 .small-primary-btn,
 .small-secondary-btn {
@@ -1895,10 +1095,12 @@ ti-tip-container.ti3-tooltip {
         background-color: #267dff !important;
         border-color: #267dff !important;
     }
+
     &:active {
         background-color: #0057d9 !important;
         border-color: #0057d9 !important;
     }
+
     &:disabled {
         color: var(--btn-disabled-font-d-aaaaaa-l-cccccc) !important;
         background-color: var(--btn-disabled-bg-d-313131-l-f5f5f5) !important;
@@ -1944,11 +1146,11 @@ input {
     height: 28px !important;
     font-size: 12px !important;
     color: var(--font-d-e8e8e8-l-222222) !important;
-   
+
 }
 
 textarea {
-    
+
     background-color: var(--vscode-editor-background) !important;
     font-size: 12px !important;
     color: var(--font-d-e8e8e8-l-222222) !important;
@@ -1961,6 +1163,7 @@ textarea {
         outline: 1px solid #0067ff;
     }
 }
+
 /** input end**/
 
 /** 弹框样式 start **/
@@ -2010,6 +1213,7 @@ textarea {
         color: var(--font-d-aaaaaa-l-222222);
     }
 }
+
 /** 弹框样式 end**/
 
 .checkconnection-btn-en {
@@ -2022,57 +1226,7 @@ textarea {
     }
 }
 
-// 单选按钮的样式
-input[type="radio"][tiRadio]+.ti3-radio {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-// 默认的颜色
-input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-skin {
-    display: inline-block;
-    position: relative;
-    width: 16px;
-    height: 16px;
-    border: 1px solid #888;
-    border-radius: 50%;
-    margin-right: 8px;
-    box-sizing: border-box;
-    
-}
 
-input[type="radio"][tiRadio]:not(:disabled):checked +.ti3-radio .ti3-radio-skin {
-    border-color: #0067ff;
-    background-color: var(--vscode-editor-background)!important;
-}
-input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-skin:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    box-sizing: border-box;
-    opacity: 0;
-    
-}
-input[type="radio"][tiRadio]:not(:disabled):checked +.ti3-radio .ti3-radio-skin:after {
-    background-color: #0067ff;
-    opacity: 1;
-    transform: translate(0) scale(1);
-    transition: opacity .2s ease-out, transform .2s; 
-}
-
-input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-label {
-    color: #616161 !important;
-}
-input[type="radio"][tiRadio]:not(:disabled):not(:checked)+.ti3-radio .ti3-radio-label {
-    color: #aaa !important;
-}
 .pointer {
     cursor: pointer;
 }

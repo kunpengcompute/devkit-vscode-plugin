@@ -51,14 +51,10 @@ export const I18N_ZH = {
     plugins_common_message_responseError: '服务器未响应，请确认服务器端工具已部署且网络连接正常。',
     plugins_common_message_responseError_deployScenario: '服务器未响应，请检查网络连接是否正常。',
 
-
     plugins_common_cut_server: '是否切换服务器？',
-
-
     plugins_tuning_title_createTime: ' 创建时间：',
     plugins_tuning_title_importTime: ' 导入时间：',
     plugins_tuning_dowloadPath: '文件下载成功，保存路径：{0}',
     plugins_tuning_message_cart: '证书导入成功后，重新启动VSCode生效',
-
     page_loading: "页面加载中..."
 };

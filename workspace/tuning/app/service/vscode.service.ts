@@ -475,8 +475,7 @@ export class VscodeService {
             message.data.realStatus = message.data.status;
             const arr = String(message.data.status).split('');
             const str = arr[arr.length - 2];
-            // message.data.status = Number(String(message.data.status).substr(-2, 1));  // 返回倒数第二位状态码
-            message.data.status = Number(str);  // 返回倒数第二位状态码
+            message.data.status = Number(str);
         }
         this.messageHandler[message.cmd](message);
     }

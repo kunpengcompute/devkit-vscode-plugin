@@ -35,14 +35,14 @@ end_info()
 build_sys_java()
 {
   cd ${webview_dir}
-  npm install --unsafe-perm | tee
+  npm install --legacy-peer-deps --unsafe-perm 
   npm run build:tuning:ide & wait
 }
 
 generate_vsix()
 {
     cd ${root_dir}
-    npm install --unsafe-perm | tee
+    npm install --legacy-peer-deps --unsafe-perm
     echo y | ${vsce_dir} package -o $tool_name
     mv *.vsix ${out_dir}
 }

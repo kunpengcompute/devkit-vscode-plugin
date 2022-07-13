@@ -15,7 +15,7 @@ export class RegService {
   public commandReg(value: string): boolean {
     const reg = new RegExp(/^\s*\bc?make\b\s*/);
     const regGo = new RegExp(/^\s*\bgo\b\s*/);
-    return reg.test(value) || regGo.test(value) ;
+    return reg.test(value) || regGo.test(value);
   }
 
   /**
@@ -23,7 +23,7 @@ export class RegService {
    * @param value 任意字符串
    * @param pattern 任意匹配模式
    */
-   public commonReg(value: string, pattern: any): boolean {
+  public commonReg(value: string, pattern: any): boolean {
     const reg = new RegExp(pattern);
     return reg.test(value);
   }

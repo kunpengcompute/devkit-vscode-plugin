@@ -1,9 +1,8 @@
 import * as vscode from 'vscode';
 import * as constant from './constant';
 import { I18nService } from './I18nService';
-import { Utils  } from './utils';
+import { Utils } from './utils';
 const fs = require('fs');
-const https = require('https');
 const i18n = I18nService.I18n();
 
 class Download {
@@ -55,7 +54,7 @@ class Download {
                 }
                 vscode.window.showInformationMessage(
                     I18nService.I18nReplace(i18n.plugins_tuning_dowloadPath,
-                    { 0: file.fsPath })
+                        { 0: file.fsPath })
                 );
             }
             if (data.contentType === 'arraybuffer') {
@@ -66,7 +65,7 @@ class Download {
                 await fs.writeFile(file.fsPath, data.fileContent, 'utf-8', fileWriteCallback);
             }
             // Utils.invokeCallback(global.toolPanel.getPanel(), message, file.fsPath);
-            Download.openCaFile(global, {Path: file.fsPath});
+            Download.openCaFile(global, { Path: file.fsPath });
         } catch (error) {
         }
     }
@@ -84,7 +83,7 @@ class Download {
             terminal.dispose();
         }, 3000);
 
-        Utils.showMessageByType('info', {info: i18n.plugins_tuning_message_cart}, true);
+        Utils.showMessageByType('info', { info: i18n.plugins_tuning_message_cart }, true);
     }
 
 }
