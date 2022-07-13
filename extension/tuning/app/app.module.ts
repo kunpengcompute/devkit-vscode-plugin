@@ -20,7 +20,6 @@ import { FreeRemoteEnvironmentComponent } from './free-remote-environment/free-r
 import { UnInstallComponent } from './uninstall/uninstall.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import { ErrorInstructionComponent } from './error-instruction/error-instruction.component';
-import { IFrameComponent } from './iframe/iframe.component';
 
 import { LoadingComponent } from './loading/loading.component';
 import { BannerComponent } from './banner/banner.component';
@@ -43,7 +42,6 @@ const LANGUAGE_TYPE_ZH = 0;
         UnInstallComponent,
         UpgradeComponent,
         ErrorInstructionComponent,
-        IFrameComponent,
         BannerComponent,
         MessageboxComponent,
         LoadingComponent
