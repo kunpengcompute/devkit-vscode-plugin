@@ -332,29 +332,8 @@ export class VscodeService {
             for (const handler of handlers) {
                 handler(message.data);
             }
-        },
-
-        /**
-         * 此方法响应vscode消息处理
-         * @param message 事件参数
-         */
-        uploadMigrateFile(message: any) {
-            if (that.callbacks[message.cbid]) {
-                that.callbacks[message.cbid](message.data);
-                delete that.callbacks[message.cbid];
-            }
-        },
-
-        /**
-         * 此方法响应vscode消息处理
-         * @param message 事件参数
-         */
-        uploadPortingFile(message: any) {
-            if (that.callbacks[message.cbid]) {
-                that.callbacks[message.cbid](message.data);
-                delete that.callbacks[message.cbid];
-            }
         }
+
     };
 
     /**

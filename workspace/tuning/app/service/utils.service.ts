@@ -113,7 +113,7 @@ export class UtilsService {
 
         // 工作空间不足提示
         if (this.diskMessage.alarmStatus === AlarmStatus.WorkRedAlarm
-          || this.diskMessage.alarmStatus === AlarmStatus.WorkYellowAlarm) {
+            || this.diskMessage.alarmStatus === AlarmStatus.WorkYellowAlarm) {
             const workTotal = parseInt(this.diskMessage.workTotal.toFixed(), Radix.Decimal);
             const workRemain = this.diskMessage.workRemain > 0 ? parseFloat(this.diskMessage.workRemain.toFixed(2)) : 0;
             const workRecommand = workTotal * thresholdPercent;
@@ -130,7 +130,7 @@ export class UtilsService {
 
         // 磁盘空间不足提示
         if (this.diskMessage.alarmStatus === AlarmStatus.DiskRedAlarm
-          || this.diskMessage.alarmStatus === AlarmStatus.DiskYellowAlarm) {
+            || this.diskMessage.alarmStatus === AlarmStatus.DiskYellowAlarm) {
             const diskTotal = parseInt(this.diskMessage.diskTotal.toFixed(), Radix.Decimal);
             const diskRemain = this.diskMessage.diskRemain > 0 ? parseFloat(this.diskMessage.diskRemain.toFixed(2)) : 0;
             const diskRecommand = parseFloat((diskTotal * thresholdPercent).toFixed(2));
@@ -185,8 +185,8 @@ export class UtilsService {
                 if (!uuid[i]) {
                     r = Math.round(window.crypto.getRandomValues(new Uint32Array(1))[0] * 0.001 * 16);
                     uuid[i] = chars[i === 19
-                      ? Math.round(window.crypto.getRandomValues(new Uint32Array(1))[0] * 0.001 * 4) + 8
-                      : r];
+                        ? Math.round(window.crypto.getRandomValues(new Uint32Array(1))[0] * 0.001 * 4) + 8
+                        : r];
                 }
             }
         }
@@ -236,45 +236,13 @@ export class UtilsService {
     }
 
     /**
-     * 点击建议反馈图标
-     */
-    public openVocAdvice(event: any) {
-      const msgData = { cmd: 'readConfig' };
-      this.vscodeService.postMessage(msgData, (data: any) => {
-        if (data.portConfig.length === 0) {
-          this.openFeedback(event);
-        } else {
-          const option = {
-          noToken: 'true',
-          url: '/users/admin/status/',
-          timeout: 3000,
-          advFeedback: true
-          };
-          this.vscodeService.get(option, (res: any) => {
-          if (res === 'timeout') {
-            const message = {
-              cmd: 'openAdviceLinkError',
-              data: {
-                module: 'porting'
-              }
-            };
-            this.vscodeService.postMessage(message, null);
-          } else {
-            this.openFeedback(event);
-          }
-          });
-        }
-      });
-    }
-
-    /**
      * 跳转建议反馈链接
      */
     public openFeedback(event: any) {
-      const a = document.createElement('a');
-      a.setAttribute('href', event);
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+        const a = document.createElement('a');
+        a.setAttribute('href', event);
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     }
 }

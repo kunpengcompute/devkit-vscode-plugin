@@ -13,7 +13,7 @@ export class ConfigComponent implements OnInit {
     private static CONFIG_RADIX = 10;
     @ViewChild('saveConfirmTip') saveConfirmTip: { Close: () => void; Open: () => void; };
 
-    @ViewChild('showDialog', {static: false}) showDialog: { Close: () => void; Open: () => void; };
+    @ViewChild('showDialog', { static: false }) showDialog: { Close: () => void; Open: () => void; };
 
     public i18n: any;
     public tempIP: string;
@@ -57,7 +57,7 @@ export class ConfigComponent implements OnInit {
     ngOnInit() {
         // 获取全局url配置数据
         this.vscodeService.postMessage({ cmd: 'readUrlConfig' }, (resp: any) => {
-            this.pluginUrlCfg = {sysConfig_openFAQ1: resp.sysConfig_openFAQ1};
+            this.pluginUrlCfg = { sysConfig_openFAQ1: resp.sysConfig_openFAQ1 };
         });
         // vscode颜色主题
         if (document.body.className === 'vscode-light') {
@@ -104,7 +104,7 @@ export class ConfigComponent implements OnInit {
     /**
      * 读取ip端口配置
      */
-     readConfig() {
+    readConfig() {
         this.vscodeService.postMessage({ cmd: 'readConfig' }, (data: any) => {
             this.config = data;
             if (this.config.tuningConfig.length > 0) {

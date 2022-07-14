@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>porting-advisor</title>
+    <title>Kunpeng Hyper Tuner</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -146,7 +146,7 @@
      *  由于webview 中不能使用sessionStorage， 以及localStorage, 此处添加 self.webviewSession 处理session
      *  self.webviewSession 提供了与 session 一样的 get\set 操作 
      **/
-     self.webviewSession = self.webviewSession || {
+    self.webviewSession = self.webviewSession || {
         setItem: function (key, value) {
             self.webviewSession[key] = value;
         },

@@ -114,11 +114,4 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       msg => {
       });
   }
-
-  /**
-   * 点击建议反馈图标
-   */
-  public openAdvice(event: any) {
-    this.utils.openVocAdvice(event);
-  }
 }
