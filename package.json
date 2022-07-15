@@ -1,7 +1,6 @@
 {
-  "name": "tuning-vscode-plugin",
-  "version": "2.3.0",
-  "description": "tuning-vscode-plugin",
+  "name": "tuning-Kunpeng_DevKit_Frontend-plugin",
+  "version": "0.0.1",
   "main": "index.js",
   "scripts": {
     "install": "cd workspace && npm install --unsafe-perm && cd ../extension/tuning && npm install",
