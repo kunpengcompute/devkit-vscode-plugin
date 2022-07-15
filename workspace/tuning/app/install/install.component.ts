@@ -2,7 +2,6 @@ import { Component, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angula
 import { I18nService } from '../service/i18n.service';
 import { VscodeService, COLOR_THEME } from '../service/vscode.service';
 import { Router } from '@angular/router';
-declare function aa(): any;
 
 const installStatusStart = -1;
 const RUNNING = 0;
@@ -49,7 +48,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
     public pwdCheckNull = false;
 
     public currTheme = COLOR_THEME.Dark;
-    // 迁移前必读相关
+    // 部署前必读相关
     public needFlag = true;
     public flag = false;
     // 是否检测连接成功

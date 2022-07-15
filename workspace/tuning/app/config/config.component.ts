@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { I18nService } from '../service/i18n.service';
 import { VscodeService, COLOR_THEME, DEFAULT_PORT } from '../service/vscode.service';
 import { ActivatedRoute } from '@angular/router';
-import { DEFAULT_IP, ENV_APP_NAME, HttpStatus } from '../service/constant';
+import { HttpStatus } from '../service/constant';
 
 @Component({
     selector: 'app-config',
