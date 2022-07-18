@@ -1,9 +1,0 @@
-<div class="process-perf-sug-detail" [hyNodata]="{ text: i18n.tuninghelper.taskDetail.noObjectView }" [nodataShow]="!currOptimization">
-  <app-process-info-detail
-    [hidden]="currOptimization !== CurrOptimization.processDetail">
-  </app-process-info-detail>
-  <app-topology-tree-optimization-sug
-    [hidden]="currOptimization !== CurrOptimization.processTreeSug"
-    [optimizationType]="optimizationType">
-  </app-topology-tree-optimization-sug>
-</div>

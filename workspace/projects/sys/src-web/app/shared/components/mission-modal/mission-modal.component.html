@@ -1,7 +1,0 @@
-<div [ngClass]="['modal-box', drawerClass, showModal ? 'show-modal' : '', appendTarget ? 'absolute' : '']" #modalBox>
-  <div class="modal-background" (click)="dismiss();"></div>
-
-  <div class="modal-container" [ngClass]="{'show-container': showContent}">
-    <ng-content select=".modal-dialog"></ng-content>
-  </div>
-</div>

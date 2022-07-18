@@ -1,0 +1,156 @@
+{
+  "name": "kunpeng-hyper-tuner-plugin",
+  "displayName": "Kunpeng Hyper Tuner Plugin",
+  "description": "Kunpeng Hyper Tuner Plugin",
+  "version": "2.3.0",
+  "publisher": "kunpengfamily",
+  "engines": {
+    "vscode": "^1.53.0"
+  },
+  "icon": "resources/images/tuning.png",
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:perfadvisorTools"
+  ],
+  "main": "./out/extension/src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.view.perfadvisorserverconfig",
+        "title": "%configure.remote.server%"
+      },
+      {
+        "command": "extension.view.perfadvfreetrialremoteenvironment",
+        "title": "%free.trial.remote.environment%"
+      },
+      {
+        "command": "extension.view.perfadvisorlogin",
+        "title": "%plugins_perfadvisor_title_login%"
+      },
+      {
+        "command": "extension.view.perfUpgrade",
+        "title": "%plugins_perfadvisor_title_upgrade%"
+      },
+      {
+        "command": "extension.view.perfUninstall",
+        "title": "%plugins_perfadvisor_title_uninstall%"
+      },
+      {
+        "command": "extension.view.feedback",
+        "title": "%perfadvisor.sys.advicefeedback%"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "extension.view.perfadvisorserverconfig",
+          "when": "view == perfadvisorTools && isPerfadvisorConfigured",
+          "group": "inline2@2"
+        },
+        {
+          "command": "extension.view.perfadvfreetrialremoteenvironment",
+          "when": "view == perfadvisorTools && !isPerfadvisorLogined",
+          "group": "inline2@3"
+        },
+        {
+          "command": "extension.view.perfadvfreetrialremoteenvironment",
+          "when": "view == perfadvisorTools && isPerfadvisorLogined",
+          "group": "inline3@1"
+        },
+        {
+          "command": "extension.view.perfUpgrade",
+          "when": "view == perfadvisorTools",
+          "group": "inline4@2"
+        },
+        {
+          "command": "extension.view.perfUninstall",
+          "when": "view == perfadvisorTools",
+          "group": "inline4@3"
+        },
+        {
+          "command": "extension.view.feedback",
+          "when": "view == perfadvisorTools",
+          "group": "inline5@1"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "extension.view.perfadvisorlogin",
+          "when": "false"
+        },
+        {
+          "command": "extension.view.perfadvisorserverconfig",
+          "when": "false"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "kunpengTuning",
+          "title": "kunpeng hyper tuner plugin",
+          "icon": "resources/images/tuning.svg"
+        }
+      ]
+    },
+    "views": {
+      "kunpengTuning": [
+        {
+          "id": "perfadvisorTools",
+          "name": ""
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "perfadvisorTools",
+        "contents": "%perfadvisor.configer.server%",
+        "when": "!isPerfadvisorConfigured && !ipconfig"
+      },
+      {
+        "view": "perfadvisorTools",
+        "contents": "%perfadvisor.no.login%",
+        "when": "!isPerfadvisorLogined && isPerfadvisorConfigured"
+      },
+      {
+        "view": "perfadvisorTools",
+        "contents": "%perfadvisor.again.configer.server%",
+        "when": "ipconfig"
+      },
+      {
+        "view": "perfadvisorTools",
+        "contents": "%perfadvisor.free.trial%",
+        "when": ""
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "tslint -p ./",
+    "test": "node ./out/test/runTest.js",
+    "package": "sh ./build/package.sh"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.0",
+    "@types/node": "14.x",
+    "@types/ssh2": "^0.5.52",
+    "@types/vscode": "^1.53.0",
+    "glob": "^7.2.0",
+    "mocha": "^9.2.2",
+    "tslint": "~6.1.0",
+    "typescript": "^4.5.5",
+    "vsce": "^2.9.0"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "http-proxy": "^1.18.1",
+    "nan": "^2.16.0",
+    "ssh2": "^1.11.0"
+  }
+}

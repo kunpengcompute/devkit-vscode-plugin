@@ -22,23 +22,11 @@
     ],
     "paths": {
       "hyper": [
-        "projects/hyper"
+        "./hyper"
       ],
       "jszip": [
         "node_modules/jszip/dist/jszip.min.js"
       ],
-      "porting/*": [
-        "projects/porting/*"
-      ],
-      "sys/*": [
-        "projects/sys/*"
-      ],
-      "java/*": [
-        "projects/java/*"
-      ],
-      "user/*": [
-        "projects/sys/*"
-      ]
     },
     "lib": [
       "es2020",

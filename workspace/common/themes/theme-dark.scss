@@ -1,0 +1,13 @@
+:root,
+:root .vscode-light,
+:root .vscode-dark {
+    /*不同主题下通用的色值*/
+  button {
+    min-width: 88px !important;
+  }
+}
+
+:root .vscode-dark {
+  --ti-default-body-bg: #1e1e1e;
+
+}

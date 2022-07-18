@@ -1,0 +1,6 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+.idea
+node_modules
+out/sysperfanalysis/
+out/extension/
+out/Kunpeng-DevKit-IDE-hyper-tuner-plugin_2.3.4.vsix

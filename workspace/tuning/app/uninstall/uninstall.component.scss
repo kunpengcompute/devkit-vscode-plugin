@@ -1,0 +1,595 @@
+// component css goes here
+::ng-deep html {
+    min-width: 1062px !important;
+    overflow-x: auto !important;
+}
+
+::ng-deep body {
+    overflow: hidden !important;
+
+    // radio
+    input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin {
+        border-color: #0067ff !important;
+        background-color: var(--vscode-editor-background) !important;
+    }
+
+    input[type="radio"][tiRadio]:not(:disabled):not(:checked)+.ti3-radio .ti3-radio-skin:hover {
+        border-color: #0067ff !important;
+    }
+
+    input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin::after {
+        background-color: #0067ff !important;
+        opacity: 1;
+    }
+
+    input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-skin {
+        background-color: var(--vscode-editor-background) !important;
+    }
+
+    input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-label {
+        color: #e8e8e8 !important;
+    }
+}
+
+::ng-deep .vscode-light {
+    --uninstall-color-title-content: #222222;
+    --uninstall-color-content: #616161;
+
+    --uninstall-color-separator: #e1e6ee;
+    --uninstall-color-msgbox-bg: #ffffff;
+    --uninstall-color-msgbox-close: #aaaaaa;
+    --uninstall-color-msgbox-dsc-icon-bg: #ffffff;
+    --uninstall-color-msgbox-content: #616161;
+    --uninstall-color-msgbox-dsc-icon: #0067ff;
+
+    --uninstall-color-btn-p: #ffffff;
+    --uninstall-color-btn-p-bg-dft: #0067ff;
+    --uninstall-color-btn-p-bg-hover: #267dff;
+    --uninstall-color-btn-p-bg-active: #0057d9;
+    --uninstall-color-btn-p-bg-disabled: #f5f5f5;
+    --uninstall-color-btn-m-bg: #ffffff;
+    --uninstall-color-btn-m-dft: #979797;
+    --uninstall-color-btn-m-hover: #267dff;
+    --uninstall-color-btn-m-active: #0057d9;
+    --uninstall-color-btn-m-disabled: #cccccc;
+    --uninstall-color-btn-m-bg-disabled: #f5f5f5;
+    --uninstall-color-btn-text-disabled: #cccccc;
+
+    .uninstall-title-det {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-left: 40px;
+        width: 704px;
+        margin-bottom: 30px;
+        .tip-icon {
+            color: #0067ff;
+            background-color: #ffffff;
+            margin-right: 10px;
+            font-size: 16px;
+            border-radius: 30px;
+            top: 2px;
+            width: 16px;
+            height: 16px;
+        }
+    }
+    .uninstall-form-item {
+        position: relative;
+        margin-top: 20px;
+        margin-left: 40px;
+        .uninstall-form-item-label {
+            color: #616161;
+            height: 28px;
+            font-size: 14px;
+            .uninstall-form-item-label-req {
+                color: #e02020;
+                margin-left: 4px;
+            }
+        }
+        .upload-btn {
+            vertical-align: bottom;
+            position: relative;
+            top: -4px;
+        }
+    }
+    .uninstall-title-failed p:nth-child(2) {
+        font-size: 20px;
+        color: #222222;
+        margin-left: 20px;
+        height: 26px;
+        margin-top: 10px;
+        display: inline-block;
+    }
+    .uninstall-title-failed p:nth-child(3) {
+        font-size: 14px;
+        color: #979797;
+        margin-left: 42px;
+        height: 20px;
+        width: 240px;
+        margin-top: 4px;
+    }
+    .uninstall-title-uninstalled p:nth-child(2) {
+        font-size: 20px;
+        color: #222222;
+        margin-left: 20px;
+        height: 26px;
+        margin-top: 10px;
+        display: inline-block;
+    }
+}
+
+::ng-deep .vscode-dark {
+    --uninstall-color-title-content: #e8e8e8;
+    --uninstall-color-content: #aaaaaa;
+
+    --uninstall-color-separator: #4b4b4b;
+    --uninstall-color-msgbox-bg: #252526;
+    --uninstall-color-msgbox-close: #aaaaaa;
+    --uninstall-color-msgbox-dsc-icon-bg: #ffffff;
+    --uninstall-color-msgbox-content: #888888;
+    --uninstall-color-msgbox-dsc-icon: #0067ff;
+
+    --uninstall-color-btn-p: #e8e8e8;
+    --uninstall-color-btn-p-bg-dft: #0067ff;
+    --uninstall-color-btn-p-bg-hover: #267dff;
+    --uninstall-color-btn-p-bg-active: #0057d9;
+    --uninstall-color-btn-p-bg-disabled: #313131;
+    --uninstall-color-btn-m-bg: #313131;
+    --uninstall-color-btn-m-dft: #dddddd;
+    --uninstall-color-btn-m-hover: #267dff;
+    --uninstall-color-btn-m-active: #0057d9;
+    --uninstall-color-btn-m-disabled: #616161;
+    --uninstall-color-btn-m-bg-disabled: #313131;
+    --uninstall-color-btn-text-disabled: #666666;
+
+    .uninstall-title-det {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-left: 40px;
+        width: 704px;
+        margin-bottom: 30px;
+        .tip-icon {
+            color: #0067ff;
+            background-color: #ffffff;
+            margin-right: 10px;
+            font-size: 16px;
+            border-radius: 30px;
+            top: 2px;
+            width: 16px;
+            height: 16px;
+        }
+    }
+    .uninstall-form-item {
+        position: relative;
+        margin-top: 20px;
+        margin-left: 40px;
+        .uninstall-form-item-label {
+            color: var(--uninstall-color-content);
+            height: 28px;
+            font-size: 14px;
+            .uninstall-form-item-label-req {
+                color: #e02020;
+                margin-left: 4px;
+            }
+        }
+        .upload-btn {
+            vertical-align: bottom;
+            position: relative;
+            top: -4px;
+        }
+    }
+    .uninstall-title-failed p:nth-child(2) {
+        font-size: 20px;
+        color: #e8e8e8;
+        margin-left: 20px;
+        height: 26px;
+        margin-top: 10px;
+        display: inline-block;
+    }
+    .uninstall-title-failed p:nth-child(3) {
+        font-size: 14px;
+        color: #888888;
+        margin-left: 42px;
+        height: 20px;
+        width: 240px;
+        margin-top: 4px;
+    }
+    .uninstall-title-uninstalled p:nth-child(2) {
+        font-size: 20px;
+        color: #e8e8e8;
+        margin-left: 20px;
+        height: 26px;
+        margin-top: 10px;
+        display: inline-block;
+    }
+}
+
+.uninstall-form {
+    width: 100%;
+    min-width: 300px;
+    height: auto;
+    box-sizing: border-box;
+    top: 10vw;
+    padding-left: 40px;
+    .uninstall-title-gen {
+        margin-bottom: 10px;
+        margin-left: 40px;
+        margin-top: 40px;
+    }
+    .uninstall-title-gent {
+        margin-bottom: 10px;
+        margin-left: 40px;
+        margin-top: 30px;
+    }
+    .uninstall-title-uninstalling {
+        margin-top: 30px;
+    }
+    .uninstall-title-uninstalled {
+        width: 768px;
+        margin-top: 30px;
+    }
+    .ssh-type {
+        margin-left: 40px;
+    }
+    .ssh-type-title {
+        margin-bottom: 16px;
+        color: var(--uninstall-color-content);
+        font-size: 14px;
+        margin-top: 20px;
+
+        .help-icon {
+            height: 14px;
+        }
+    }
+    .uninstall-title-uninstalled p:nth-child(1) {
+        width: 20px;
+        height: 20px;
+        margin-left: 10px;
+        margin-top: 13px;
+        display: inline-block;
+    }
+    .uninstall-title-failed {
+        width: 768px;
+        margin-top: 30px;
+    }
+    .uninstall-title-failed p:nth-child(1) {
+        width: 20px;
+        height: 20px;
+        z-index: 1;
+        margin-left: 10px;
+        margin-top: 13px;
+        display: inline-block;
+    }
+    ti-select {
+        width: 400px;
+        height: 28px;
+    }
+    @keyframes rotate {
+        0% {
+            -webkit-transform: rotate(0deg) scale(1);
+            transform: rotate(0deg) scale(1);
+        }
+
+        50% {
+            -webkit-transform: rotate(180deg) scale(1);
+            transform: rotate(180deg) scale(1);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg) scale(1);
+            transform: rotate(360deg) scale(1);
+        }
+    }
+    .showLoading{
+      height: 57vh;
+    }
+}
+
+#login-btn {
+    width: 116px;
+    height: 32px;
+    margin-top: 20px;
+    line-height: 32px;
+    margin-left: 40px;
+}
+input {
+    width: 400px;
+    height: 28px !important;
+    padding: 5px 10px !important;
+}
+.img_uninstall {
+    position: relative;
+    top: 3px;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+}
+.tip-box {
+    padding: 0px 40px;
+    padding-bottom: 40px;
+
+    .tip-title {
+        color: var(--uninstall-color-title-content);
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        line-height: 20px;
+
+        font-size: 20px;
+
+        .tip-close {
+            color: var(--uninstall-color-msgbox-close);
+            font-weight: 100;
+            border: solid 1px var(--uninstall-color-msgbox-bg);
+
+            &:hover {
+                border-color: var(--uninstall-color-msgbox-close);
+            }
+        }
+    }
+
+    .tip-title-border {
+        width: 100%;
+        margin-top: 20px;
+        border-top: 1px dashed var(--uninstall-color-separator);
+    }
+
+    .tip-dsc {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        .tip-icon {
+            color: var(--uninstall-color-msgbox-dsc-icon);
+            background-color: var(--uninstall-color-msgbox-dsc-icon-bg);
+            margin-right: 10px;
+            font-size: 16px;
+            border-radius: 30px;
+            top: 2px;
+            width: 16px;
+            height: 16px;
+        }
+
+        p {
+            font-size: 14px;
+            color: var(--uninstall-color-msgbox-content);
+        }
+    }
+
+    .tip-select {
+        color: var(--uninstall-color-msgbox-content);
+        padding-top: 30px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        font-size: 14px;
+        vertical-align: middle;
+
+        span {
+            width: 16px;
+            line-height: 16px;
+            margin-right: 16px;
+            vertical-align: middle;
+        }
+    }
+}
+.help-icon {
+    position: relative;
+    top: 2px;
+}
+.tip-confirm {
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        min-width: 100px;
+        line-height: 28px;
+        font-size: 14px;
+        text-align: center;
+        margin: 0px 10px;
+        border-width: 1px;
+        border-style: solid;
+        cursor: pointer;
+
+        &:first-child {
+            color: var(--uninstall-color-btn-p);
+            background-color: var(--uninstall-color-btn-p-bg-dft);
+            border-color: var(--uninstall-color-btn-p-bg-dft);
+
+            &:hover {
+                background-color: var(--uninstall-color-btn-p-bg-hover);
+                border-color: var(--uninstall-color-btn-p-bg-hover);
+            }
+
+            &:active {
+                background-color: var(--uninstall-color-btn-p-bg-active);
+                border-color: var(--uninstall-color-btn-p-bg-active);
+            }
+
+            &:disabled {
+                background-color: var(--uninstall-color-btn-p-bg-disabled);
+                border-color: var(--uninstall-color-btn-p-bg-disabled);
+                color: var(--uninstall-color-btn-text-disabled);
+                cursor: not-allowed;
+            }
+        }
+
+        &:last-child {
+            background-color: var(--uninstall-color-btn-m-bg);
+            border-color: var(--uninstall-color-btn-m-dft);
+            color: var(--uninstall-color-content);
+
+            &:hover {
+                border-color: var(--uninstall-color-btn-m-hover);
+                color: var(--uninstall-color-btn-m-hover);
+            }
+
+            &:active {
+                border-color: var(--uninstall-color-btn-m-active);
+                color: var(--uninstall-color-btn-m-active);
+            }
+
+            &:disabled {
+                background-color: var(--uninstall-color-btn-m-bg-disabled);
+                border-color: var(--uninstall-color-btn-m-disabled);
+                color: var(--uninstall-color-btn-text-disabled);
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+::ng-deep .content-box {
+    background-color: var(--uninstall-color-msgbox-bg) !important;
+    width: 660px !important;
+    padding: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.tip-tem {
+    margin-left: 4px;
+}
+
+.check-conn-btn {
+    margin-right: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+
+    img {
+        margin-right: 5px;
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.img_box {
+    margin-top: 2px;
+    margin-right: 6px;
+}
+.eye {
+    position: absolute;
+    left: 375px;
+    width: 20px;
+    height: 20px;
+    top: 0px;
+    bottom: 0px;
+    margin: auto 0;
+}
+:host .ra-label {
+    display: flex;
+}
+
+.btn-group {
+    margin: 40px 0 40px 40px;
+}
+
+.usekey-input {
+    box-sizing: border-box;
+    min-height: 28px;
+    padding: 0 10px;
+    width: 290px;
+    height: 28px;
+    line-height: 26px;
+}
+
+.uninstall-title-det {
+    .top-tips {
+        font-size: 14px;
+        color: var(--font-d-aaaaaa-l-979797);
+    }
+}
+
+.ssh-type .ra-label {
+    display: flex;
+    align-items: center;
+}
+.ssh-type .ra-label input {
+    margin-right: 5px;
+    display: none!important;
+    width: 16px!important;
+    height: 16px!important;
+    outline: none;
+}
+
+
+// root和非root的提示样式
+.tip-box {
+    .tip-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        line-height: 20px;
+        font-size: 20px;
+    }
+
+    .tip-title-border {
+        width: 0;
+        border-top: 1px dashed var(--th-border_b-d-4b4b4b-l-e1e6ee);
+    }
+
+    .tip-dsc {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        border-top: 1px dashed var(--th-border_b-d-4b4b4b-l-e1e6ee);
+        padding-top: 20px;
+
+        .mb10 {
+            margin-bottom: 10px;
+        }
+
+        div {
+            font-size: 14px;
+
+            p {
+                a {
+                    color: #0067FF;
+                    &:hover {
+                        color: #267DFF;
+                    }
+                }
+            }
+
+        }
+    }
+
+    .tip-select {
+        padding-top: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        font-size: 14px;
+        vertical-align: middle;
+
+        span {
+            width: 16px;
+            line-height: 16px;
+            margin-right: 16px;
+            vertical-align: middle;
+        }
+        input {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+        }
+    }
+
+    .tip-confirm {
+        padding-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

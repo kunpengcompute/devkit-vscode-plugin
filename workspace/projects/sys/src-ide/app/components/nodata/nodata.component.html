@@ -1,7 +1,0 @@
-<div>
-    <img [ngStyle]="{'width': imgSize}" *ngIf="currTheme == ColorTheme.Dark"
-        src="./assets/img/projects/nodata-dark.png" />
-    <img [ngStyle]="{'width': imgSize}" *ngIf="currTheme == ColorTheme.Light"
-        src="./assets/img/projects/nodata-light.png" />
-    <p [ngStyle]="{'font-size': fontSize}">{{ tip || i18n.common_term_task_nodata }}</p>
-</div>
