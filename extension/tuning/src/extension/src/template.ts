@@ -23,7 +23,7 @@ export const iframeHtmlStr = `
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                background: rgb(30,30,30);
+                background: var(--vscode-editor-background);
             }
             .maskBox  .circleBox {position: relative;width: 100px;height: 100px;}
             .maskBox .circleItem {position: absolute;top: 37.5px;left: 37.5px;width: 25px;height: 25px;}
