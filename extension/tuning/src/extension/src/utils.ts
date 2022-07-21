@@ -64,6 +64,14 @@ export class Utils {
         return JSON.parse(buf.toString());
     }
 
+    public static checkVersion(context: vscode.ExtensionContext, serverVersion: any) {
+        if (!serverVersion) {
+            return false;
+        }
+        const configVersion = Utils.getConfigJson(context).configVersion;
+        return configVersion.includes(serverVersion);
+    }
+
     /**
      * 获取某个扩展文件绝对路径
      * @param context 上下文
