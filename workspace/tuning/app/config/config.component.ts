@@ -33,7 +33,7 @@ export class ConfigComponent implements OnInit {
     public isAffinity = false;
     public fileName = '';
     public isSingle: string; // 是否单文件
-    public radioList: Array<any> = [];
+
     public selected = 'trust';
     public primitiveSelected = '';
     public selectCertificate = false;
@@ -90,13 +90,7 @@ export class ConfigComponent implements OnInit {
         this.currLang = I18nService.getLang();
         this.certificateSettingsTipStr1 = this.i18n.plugins_common_service_certificate_settings_tip1;
         this.certificateSettingsTipStr2 = this.i18n.plugins_common_service_certificate_settings_tip2;
-        this.radioList = [{
-            value: 'specifying',
-            label: this.i18n.plugins_common_specifying_root_certificate
-        }, {
-            value: 'trust',
-            label: this.i18n.plugins_common_trust_current_service_certificate
-        }];
+
         this.readConfig();
         this.portToolTip = this.i18nService.I18nReplace(this.i18n.plugins_tuning_label_default_port,
             { 0: DEFAULT_PORT.PORTING_DEFAULT_PORT });
@@ -108,7 +102,6 @@ export class ConfigComponent implements OnInit {
         this.vscodeService.postMessage({ cmd: 'readConfig' }, (data: any) => {
             this.config = data;
             if (this.config.tuningConfig.length > 0) {
-                this.selected = this.radioList[1].value;
                 this.hasConfig = false;
                 this.firstConfig = false;
                 this.tempIP = this.config.tuningConfig[0].ip;
@@ -119,11 +112,7 @@ export class ConfigComponent implements OnInit {
                 this.savePort = this.config.tuningConfig[0].port;
                 this.saveLocalfilepath = this.config.tuningConfig[0].localfilepath;
             }
-            if (this.selectCertificate) {
-                this.selected = this.radioList[0].value;
-            } else {
-                this.selected = this.radioList[1].value;
-            }
+
             this.primitiveSelected = this.selected;
             this.firstConfig = false;
         });
@@ -141,21 +130,6 @@ export class ConfigComponent implements OnInit {
         } else if ($event === 'specifying') {
             this.selectCertificate = true;
         }
-    }
-    /**
-     * 上传证书
-     */
-    fileUpload() {
-        this.elementRef.nativeElement.querySelector('#uploadFile').value = '';
-        this.elementRef.nativeElement.querySelector('#uploadFile').click();
-    }
-
-    /**
-     * 导入证书
-     */
-    uploadFile() {
-        const localFile = this.elementRef.nativeElement.querySelector('#uploadFile').files[0];
-        this.localfilepath = localFile.path.replace(/\\/g, '/');
     }
     /**
      * ip校验
@@ -261,12 +235,10 @@ export class ConfigComponent implements OnInit {
             });
         }
     }
-
     /**
      * 修改配置
      */
     modify() {
-        this.selected = this.radioList[1].value;
         this.selectCertificate = false;
         this.hasConfig = false;
         this.firstConfig = false;

@@ -98,7 +98,7 @@ export const iframeHtmlStr = `
                 var type = e.data.messageType;
                 if (type === 'openUrl') {
                     var a = document.createElement('a');
-                    a.setAttribute('href', e.data.url);
+                    a.setAttribute('href', e.data.ideUrl);
                     document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a);

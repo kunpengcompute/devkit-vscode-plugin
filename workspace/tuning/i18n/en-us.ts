@@ -19,7 +19,7 @@ export const I18N_US = {
     and the following special characters: < > | # ; & ` %.',
   common_term_valition_rule6: 'The compilation command must start with make or cmake, for example, make xxx.',
   common_term_required_tip: 'This parameter cannot be empty.',
- 
+
   common_term_filename_tip: 'The value cannot be empty.',
   plugins_tuning_setting_label: 'Configuration',
   common_term_no: 'No',
@@ -43,7 +43,7 @@ export const I18N_US = {
       for example: /home/pathname.',
 
   plugins_tuning_label_cFile_path: 'Path',
-  
+
   plugins_tuning_message_beforeInstall: 'Before You Start ',
   plugins_tuning_message_beforeInstallDsc1: '1. If the yum/apt/zypper source of the OS is correctly configured \
     and the network connection is normal, the installation tool automatically downloads the required \
@@ -62,7 +62,7 @@ export const I18N_US = {
   plugins_tuning_message_arm_download_link: 'ARM installation package',
   plugins_tuning_message_x86_download_link: 'X86 installation package',
   plugins_tuning_message_beforeInstallOption: 'I have read the above information. ',
-  
+
   plugins_tuning_message_beforeInstallCancel: 'Cancel',
 
   plugins_tuning_button_uninstallConfirm: 'Uninstall',
@@ -74,7 +74,7 @@ export const I18N_US = {
   plugins_tuning_button_install: 'Click here to deploy',
   plugins_tuning_label_ip: 'IP Address',
   plugins_tuning_label_port: 'SSH Port',
-  
+
   plugins_common_service_certificate_settings: 'Service Certificate Settings',
   plugins_common_service_certificate_settings_tip1: '1. Before selecting "Specify Root Certificate", \
     you need to obtain a CSR file on "Web Server Certificates" as the administrator, use the CSR file to \
@@ -106,7 +106,7 @@ export const I18N_US = {
   plugins_tuning_label_installPwd: 'OS User Password',
   plugins_tuning_message_ipError: 'Enter a correct IP address.',
   plugins_tuning_message_portError: 'Enter a correct port number range.(1-65535)',
- 
+
   plugins_tuning_button_installConfirm: 'Install',
   plugins_tuning_message_installingInfo: 'Deploy the tool as prompted. ',
   plugins_tuning_title_installed: 'Tool deployed successfully.',
@@ -119,7 +119,7 @@ export const I18N_US = {
     failure causes provided on the {0}official website{1}.',
   plugins_tuning_message_uninstallingInfo: 'Uninstall the tool as prompted.',
   plugins_tuning_message_upgradingInfo: 'Upgrade the tool as prompted.',
- 
+
   plugins_tuning_message_comm: 'Visit the Kunpeng community to learn about Kunpeng DevKit',
 
   plugins_common_button_term_operate_ok: 'OK',
@@ -130,7 +130,7 @@ export const I18N_US = {
     'It must contain 8 to 32 characters and at least two types of the following characters: uppercase letters, \
       lowercase letters, digits, and special characters (`~!@#$%^&*()-_=+\\|[{}];:\'",<.>/?), \
       and cannot contain spaces.',
-  
+
   plugins_common_button_checkConn: 'Check Connection',
   plugins_common_tips_connOk: 'SSH connection check succeeded.',
   plugins_common_tips_connFail: 'The SSH connection check failed. Check whether the user name, password, \
@@ -156,10 +156,10 @@ export const I18N_US = {
   common_term_valition_realpath: 'Enter a proper absolute path, for example, /home/pathname/',
   common_term_valition_path_length: 'The path name can contain a maximum of 1024 characters.',
   plugins_common_tips_sshError: 'SSH connection exception. Please try again.',
-  
-  
+
+
   plugins_common_tips_uploadError: 'Failed to upload the script file to your server.',
- 
+
   plugins_common_title_ipSelect: 'The tool is about to send a login request to IP address {0}.\
     This IP address is the web server address specified during the installation or modified after the installation.\
     Check whether the current address {1} is correct.',
@@ -169,19 +169,19 @@ export const I18N_US = {
   plugins_common_tips_ipFault: 'Confirm the IP address {0} is correct',
   plugins_common_tips_ipSSH: 'Use the IP address {0} entered for SSH connection',
   plugins_common_tips_ipExtra: 'Set IP address',
-  
+
   plugins_tuning_weakPassword: {
     pwd_rule: 'The weak password must contain at least two types of the following characters: \
         uppercase letters, lowercase letters, digits, and special characters (`~!@#$%^&*()-_=+\\|[{}];:\'",<.>/?). \
         The length ranges from 8 to 32 characters.Spaces are not allowed.',
   },
- 
+
   plugins_tuning_weakCheck: {
     report_list_tip: 'Total Modifications',
     report_suggestion: 'Suggestion',
     common_term_cFile_suggestion_label: 'Number of Recommended Modifications',
   },
-  
+
   period: '.',
   semicolon: '; ',
   plugins_tuning_apply_free_env_info: 'You can also apply for a free trial environment.',
@@ -193,7 +193,7 @@ export const I18N_US = {
   plugins_common_button_install: 'click here to deploy',
   plugins_common_apply_free_env_info: 'You can also apply for a free trial environment.',
   plugins_common_apply_free_env_link: 'Click here',
-  lugins_common_label_ip: 'IP Address',
+  plugins_common_label_ip: 'IP Address',
   plugins_common_message_ipError: 'Enter a correct IP address.',
   plugins_common_label_configPort: 'HTTPS Port',
   plugins_common_placeholder_default_port: 'Default port: 8086',
