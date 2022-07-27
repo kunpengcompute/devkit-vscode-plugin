@@ -75,19 +75,10 @@ export const I18N_US = {
   plugins_tuning_label_ip: 'IP Address',
   plugins_tuning_label_port: 'SSH Port',
 
-  plugins_common_service_certificate_settings: 'Service Certificate Settings',
-  plugins_common_service_certificate_settings_tip1: '1. Before selecting "Specify Root Certificate", \
-    you need to obtain a CSR file on "Web Server Certificates" as the administrator, use the CSR file to \
-    generate a standard X.509 certificate in the CA system or signature certificate system, and sign and \
-    import the certificate. Then, you can specify the root certificate to set up a secure connection.',
-  plugins_common_service_certificate_settings_tip2: '2. If you select Trust the current service certificate, \
-    you trust the connection set up with the server.',
-  plugins_common_specifying_root_certificate: 'Specify root certificate',
-  plugins_common_trust_current_service_certificate: 'Trust the current service certificate ',
-  plugins_common_specifying_local_path: 'Specify local path',
-  plugins_common_no_select_certificate: 'No certificate selected',
+
+
   plugins_tuning_label_default_port: 'Default Port:{0}',
-  plugins_tuning_title_config: 'Configure Remote Server',
+
   plugins_cloudied_tuning_label_config: 'Configure the remote server address for installing porting advisor.',
   plugins_tuning_button_save: 'Save',
   plugins_tuning_button_modi: 'Modify',
@@ -287,6 +278,6 @@ export const I18N_US = {
   plugins_public_text_tip: 'Tips',
   plugins_public_button_confirm: 'OK',
   plugins_public_button_cancel: 'cancel',
-  pligins_public_message_confirm: 'Yes',
-  pligins_public_message_cancel: 'No',
+  plugins_public_message_confirm: 'Yes',
+  plugins_public_message_cancel: 'No',
 };

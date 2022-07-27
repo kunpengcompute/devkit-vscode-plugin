@@ -158,13 +158,6 @@ export class Utils {
             panel.webview.postMessage({ cmd: message.cmd, data: resp, cbid: message.cbid });
         }
     }
-    /**
-     * 判断sysPerf是否已登陆
-     */
-    public static isSysPerfLogin(context: vscode.ExtensionContext): boolean {
-        const isSysPerfLogin = false;
-        return isSysPerfLogin;
-    }
 
     /**
      * 调用接口获取数据,并更新token

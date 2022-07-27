@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { I18nService } from '../service/i18n.service';
 import { VscodeService } from '../service/vscode.service';
-import { UtilsService } from '../service/utils.service';
 
 export const enum LANGUAGE_TYPE {
     // ZH表示界面语言为中文
@@ -46,8 +45,7 @@ export class BannerComponent implements OnInit, OnDestroy {
         public sanitizer: DomSanitizer,
         private vscodeService: VscodeService,
         private changeDetectorRef: ChangeDetectorRef,
-        public i18nService: I18nService,
-        public utils: UtilsService
+        public i18nService: I18nService
     ) {
         this.i18n = this.i18nService.I18n();
     }

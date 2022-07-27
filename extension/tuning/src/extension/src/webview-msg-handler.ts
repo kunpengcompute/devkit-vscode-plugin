@@ -24,16 +24,6 @@ export const messageHandler = {
         Utils.invokeCallback(global.toolPanel.getPanel(), message, json);
     },
 
-    /**
-     * 判断是否登录
-     * @param global: 插件上下文，以及当前的panel
-     * @param message: 来自webview的消息内容
-     */
-    async isLogin(global: any, message: any) {
-        const flag = Utils.isSysPerfLogin(global.context);
-        Utils.invokeCallback(global.toolPanel.getPanel(), message, flag);
-    },
-
     // 保存ip与port到json配置文件
     async saveConfig(global: any, message: any) {
         if (!message.data.openConfigServer) {  // 点击弹窗中的是openConfigServer为true

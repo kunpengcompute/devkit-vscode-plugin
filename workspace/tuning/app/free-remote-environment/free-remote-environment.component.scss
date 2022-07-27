@@ -2,13 +2,18 @@
     min-width: 1062px !important;
     overflow-x: auto !important;
 }
+
 ::ng-deep .vscode-dark {
     --list-info-color: #888888;
+    --ti-default-body-bg: #1e1e1e;
 }
+
 ::ng-deep .vscode-light {
     --list-info-color: #aaaaaa;
+    --ti-default-body-bg: #ffffff
 }
-.main-container{
+
+.main-container {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -17,7 +22,7 @@
     overflow: auto;
     padding: 0 80px;
     box-sizing: border-box;
-    
+
     .header-title {
         margin-top: 40px;
         font-size: 20px;
@@ -72,7 +77,7 @@
                 font-size: 14px;
                 color: var(--btn-font-d-e8e8e8-l-222222);
             }
-            
+
             .link_btn {
                 margin-top: 16px;
                 font-size: 14px;

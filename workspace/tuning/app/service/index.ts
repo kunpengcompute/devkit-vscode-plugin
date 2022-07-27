@@ -16,8 +16,5 @@
 
 export { MessageService } from './message.service';
 export { I18nService, LANGUAGE_TYPE } from './i18n.service';
-export { MytipService } from './mytip.service';
-
 export { RegService } from './reg.service';
-export { UtilsService } from './utils.service';
 export { VscodeService, COLOR_THEME } from './vscode.service';
