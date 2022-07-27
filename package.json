@@ -1,6 +1,6 @@
 {
   "name": "tuning-Kunpeng_DevKit_Frontend-plugin",
-  "version": "0.0.1",
+  "version": "2.3.5",
   "main": "index.js",
   "scripts": {
     "install": "cd workspace && npm install --unsafe-perm && cd ../extension/tuning && npm install",
