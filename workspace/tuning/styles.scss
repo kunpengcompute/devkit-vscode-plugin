@@ -68,15 +68,12 @@ a:active {
     color: #0057d9 !important;
 }
 
-table>tr {
-    vertical-align: baseline;
-}
-
-.clear {
-    clear: both;
-    overflow: hidden;
-    height: 0px;
-    width: 0px;
+:root,
+:root .vscode-light,
+:root .vscode-dark {
+    button {
+        min-width: 88px !important;
+    }
 }
 
 /**
@@ -155,39 +152,6 @@ table>tr {
     }
 }
 
-.cl {
-    clear: both;
-}
-
-.clearfix:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-    zoom: 1;
-}
-
-.clearfix {
-    display: inline-block;
-}
-
-* html .clearfix {
-    height: 1%;
-}
-
-.clearfix:after {
-    content: "";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-    zoom: 1;
-}
-
-
-
-
 .main-container {
     width: 100%;
     height: 100%;
@@ -196,18 +160,9 @@ table>tr {
     box-sizing: border-box; //todo
 }
 
-
-
 .ti3-validate-icon {
     margin-right: 5px !important;
 }
-
-
-.ti3-btn-danger {
-    background-color: #6c92fa !important;
-    border-color: #6c92fa !important;
-}
-
 
 .mytip {
     position: absolute;
@@ -245,33 +200,11 @@ table>tr {
     top: -1px;
 }
 
-.mt-10 {
-    margin-top: 10px;
-}
-
-.mt-15 {
-    margin-top: 15px;
-}
-
-.mt-20 {
-    margin-top: 20px;
-}
-
-.mb-8 {
-    margin-bottom: 8px;
-}
-
 .required {
     color: #e02020 !important;
     font-size: 14px;
     line-height: 20px;
 }
-
-.ti3-btn {
-    border: 0 !important;
-}
-
-
 
 // 单选按钮的样式
 input[type="radio"][tiRadio]+.ti3-radio {
@@ -279,7 +212,6 @@ input[type="radio"][tiRadio]+.ti3-radio {
     align-items: center;
     cursor: pointer;
 }
-
 
 input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-skin {
     display: inline-block;
@@ -290,7 +222,6 @@ input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-skin {
     border-radius: 50%;
     margin-right: 8px;
     box-sizing: border-box;
-
 }
 
 input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin {
@@ -311,7 +242,6 @@ input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-skin:after {
     border-radius: 50%;
     box-sizing: border-box;
     opacity: 0;
-
 }
 
 input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin:after {
@@ -329,8 +259,6 @@ input[type="radio"][tiRadio]:not(:disabled):not(:checked)+.ti3-radio .ti3-radio-
     color: #aaa !important;
 }
 
-
-// radio
 input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin {
     border-color: #0067ff !important;
     background-color: var(--vscode-editor-background) !important;
@@ -377,8 +305,6 @@ input[type="radio"][tiRadio]:disabled+.ti3-radio .ti3-radio-label {
     font-size: 14px;
 }
 
-
-// checkbox的公用样式
 input[type="checkbox"][tiCheckbox] {
     display: none !important;
 }
@@ -418,7 +344,6 @@ input[type="checkbox"][tiCheckbox]:checked+.ti3-checkbox .ti3-checkbox-skin::bef
     border-style: solid;
     box-sizing: border-box;
     border-color: #fff;
-
 }
 
 // 勾选框样式修改
@@ -434,7 +359,6 @@ input[type="checkbox"][tiCheckbox]:not([disabled]):not(:checked)+.ti3-checkbox .
     border-color: #b7b7b7;
 }
 
-
 input[type="checkbox"][tiCheckbox]:not([disabled]):checked+.ti3-checkbox .ti3-checkbox-skin,
 input[type="checkbox"][tiCheckbox]:not([disabled]):checked+.ti3-checkbox .ti3-checkbox-skin:focus {
     background-color: #0067ff !important;
@@ -448,40 +372,6 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
 
 //黑色主题
 .vscode-dark {
-    --default-page-background-c: #161616;
-
-    ti-tip-container.ti3-tooltip-top-left::after {
-        background: #424242;
-    }
-
-    ti-tip-container.ti3-tooltip-top-left::before {
-        background: #424242 !important;
-        border-right: none !important;
-        border-left: none !important;
-        border-bottom: none !important;
-    }
-
-    //提示框
-    .ti3-tooltip {
-        color: #AAAAAA !important;
-        background-color: #424242 !important;
-        border-color: #424242 !important;
-        font-size: 14px !important;
-    }
-
-    .ti3-tooltip-top::after,
-    .ti3-tooltip-right::after {
-        background-color: #424242 !important;
-    }
-
-    .ti3-tooltip-top::before,
-    .ti3-tooltip-right::before {
-        background-color: #424242 !important;
-        border-color: #424242 !important;
-    }
-
-
-
     input:focus {
         border: 1px solid #0067ff !important;
         outline: 1px solid #0067ff;
@@ -521,7 +411,6 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
         color: #0067ff !important;
     }
 
-
     // 小次要按钮控件样式
     .little-minor-btn {
         display: inline-block;
@@ -555,7 +444,6 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
         color: #666666 !important;
         border: 1px solid #616161 !important;
     }
-
 
     .ti3-checkbox-label {
         line-height: 17px;
@@ -598,7 +486,6 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
         margin-top: 1px;
     }
 
-
     input[type="checkbox"][tiCheckbox]:not([disabled]):indeterminate+.ti3-checkbox .ti3-checkbox-skin,
     input[type="checkbox"][tiCheckbox]:not([disabled]):indeterminate+.ti3-checkbox .ti3-checkbox-skin:hover {
         background-color: #ffffff !important;
@@ -622,14 +509,11 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
 
 //浅色主题
 .vscode-light {
-    --default-page-background-c: #fff;
-
     .ra-label {
         i.ra-uncheck {
             border: 1px solid #a4a4a4;
         }
     }
-
 
     input:focus {
         border: 1px solid #0067ff !important;
@@ -671,8 +555,6 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
     }
 
     // ******小按钮控件样式******//
-
-    // 小次要按钮控件样式
     .little-minor-btn {
         display: inline-block;
         text-align: center;
@@ -703,8 +585,6 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
         border: 1px solid #cccccc !important;
     }
 
-
-
     .ti3-checkbox-label {
         line-height: 17px;
         font-size: 14px;
@@ -718,11 +598,9 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
         color: #222222;
     }
 
-
     input[type="checkbox"][tiCheckbox]+.ti3-checkbox .ti3-checkbox-skin {
         background-color: #fff;
         border: 1px solid #ccc;
-
     }
 
     input[type="checkbox"][tiCheckbox]+.ti3-checkbox .ti3-checkbox-skin:hover {
@@ -831,133 +709,16 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
     }
 }
 
-
-
 a {
     &:focus {
         outline-style: none;
     }
 }
 
-.config-modal {
-    .mask-title {
-        font-size: 20px;
-        color: var(--btn-font-d-e8e8e8-l-222222);
-        padding-bottom: 20px;
-        border-bottom: 1px dashed var(--th-border_b-d-4b4b4b-l-e1e6ee);
-        position: relative;
-
-        .close-btn {
-            position: absolute;
-            right: 0;
-
-            .tip-title-close {
-                cursor: pointer;
-            }
-        }
-    }
-
-    .mask-container {
-        .saveAs {
-            height: 30px;
-            position: relative;
-            margin: 30px 0 32px;
-            vertical-align: middle;
-
-            span {
-                font-size: 12px;
-                color: var(--font-d-aaaaaa-l-979797);
-            }
-
-            .formArea {
-                position: absolute;
-                top: 0;
-                left: 90px;
-
-                .command-input {
-                    width: 400px;
-                    background: var(--dropdown-bk-clr) !important;
-                }
-            }
-        }
-
-        .des {
-            display: flex;
-            margin: 20px 0;
-
-            .des-warn-icon {
-                width: 20px;
-                height: 20px;
-                margin-right: 10px;
-            }
-
-            .noSpace {
-                margin-right: 5px;
-            }
-
-            p {
-                color: var(--font-d-aaaaaa-l-222222);
-                font-size: 14px;
-            }
-        }
-
-        .del {
-            margin: 20px 0 32px;
-        }
-    }
-}
 
 img[src$="dark-nodata.png"] {
     width: 218px;
     height: 84px;
-}
-
-.normal-btn:hover {
-    color: #267DFF !important;
-}
-
-.normal-btn:active {
-    color: #0057d9 !important;
-}
-
-
-.tap-bottom:hover {
-    color: #267dff;
-}
-
-
-
-
-// 复制下载链接
-.re-copy-link {
-    margin-left: 16px;
-    color: #0067ff;
-    cursor: pointer;
-}
-
-// 下载链接
-.re-down-link {
-    color: #0067ff;
-}
-
-// 文本按钮控件样式
-.text-btn {
-    color: #0067FF;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.text-btn:hover {
-    color: #267dff;
-}
-
-.text-btn:active {
-    color: #0057d9;
-}
-
-.text-btn[disabled] {
-    color: #616161;
-    cursor: not-allowed;
 }
 
 // 按钮样式start
@@ -969,59 +730,6 @@ img[src$="dark-nodata.png"] {
     border-color: var(--btn-disabled-border-d-313131-l-cccccc) !important;
     cursor: not-allowed;
 }
-
-
-
-ti-tip-container.ti3-tooltip {
-    font-size: 14px;
-}
-
-.cursor-dafult {
-    cursor: default;
-}
-
-// 了解更多按钮
-.btn-about-more {
-    height: 18px;
-    font-family: FZLTHJW--GB1-0;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    line-height: 18px;
-    letter-spacing: 0px;
-    padding: 6px 0 6px 10px;
-    border-top: 1px solid var(--th-border_b-d-4b4b4b-l-e1e6ee);
-
-    span {
-        color: var(--ti-button-primary-normal-bg-color);
-        cursor: pointer;
-
-        &:hover {
-            color: var(--ti-button-primary-bg-color-hover);
-        }
-    }
-}
-
-
-
-/** 输入框错误提示图标 start **/
-.ti3-error-icon {
-    position: relative;
-}
-
-.ti3-error-icon-bg {
-    margin-top: 3px;
-}
-
-.ti3-icon-alert-warn:before {
-    margin-top: -1px;
-    position: absolute;
-    margin-left: -7px;
-}
-
-/** 输入框错误提示图标 end **/
-
-
 
 /** icon-close start **/
 .icon-close {
@@ -1069,24 +777,9 @@ ti-tip-container.ti3-tooltip {
     box-sizing: border-box;
 }
 
-// 小按钮
-.small-primary-btn,
-.small-secondary-btn {
-    font-size: 12px;
-    padding: 0 20px;
-    height: 28px;
-    display: inline-block;
-    line-height: 18px;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 2px;
-    border-width: 1px;
-    border-style: solid;
-    box-sizing: border-box;
-}
 
-.primary-btn,
-.small-primary-btn {
+
+.primary-btn {
     background-color: #0067ff !important;
     border-color: #0067ff !important;
     color: #FFFFFF !important;
@@ -1106,11 +799,9 @@ ti-tip-container.ti3-tooltip {
         background-color: var(--btn-disabled-bg-d-313131-l-f5f5f5) !important;
         border-color: var(--btn-disabled-border-d-313131-l-cccccc) !important;
     }
-
 }
 
-.secondary-btn,
-.small-secondary-btn {
+.secondary-btn {
     background-color: var(--btn-bg-d-313131-l-ffffff);
     border-color: var(--btn-border-d-dddddd-l-979797);
     color: var(--btn-font-d-e8e8e8-l-222222);
@@ -1133,7 +824,6 @@ ti-tip-container.ti3-tooltip {
     }
 }
 
-
 /** input start**/
 input {
     width: 65%;
@@ -1146,11 +836,9 @@ input {
     height: 28px !important;
     font-size: 12px !important;
     color: var(--font-d-e8e8e8-l-222222) !important;
-
 }
 
 textarea {
-
     background-color: var(--vscode-editor-background) !important;
     font-size: 12px !important;
     color: var(--font-d-e8e8e8-l-222222) !important;
@@ -1164,58 +852,6 @@ textarea {
     }
 }
 
-/** input end**/
-
-/** 弹框样式 start **/
-.modal-box {
-    .modal-title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 20px;
-        line-height: 26px;
-        height: 26px;
-        font-size: 20px;
-        color: var(--font-d-e8e8e8-l-222222);
-        border-bottom: 1px dashed var(--th-border_b-d-4b4b4b-l-e1e6ee);
-
-        .modal-close-icon {
-            cursor: pointer;
-
-            &>img:nth-of-type(1) {
-                display: block;
-            }
-
-            &>img:nth-of-type(2) {
-                display: none;
-            }
-
-            &:hover,
-            &.active {
-                &>img:nth-of-type(1) {
-                    display: none;
-                }
-
-                &>img:nth-of-type(2) {
-                    display: block;
-                }
-            }
-        }
-
-    }
-
-    .modal-title-border {
-        width: 0;
-        border-top: 1px dashed var(--th-border_b-d-4b4b4b-l-e1e6ee);
-    }
-
-    .modal-content {
-        color: var(--font-d-aaaaaa-l-222222);
-    }
-}
-
-/** 弹框样式 end**/
-
 .checkconnection-btn-en {
     button {
         width: 172px;
@@ -1225,7 +861,6 @@ textarea {
         width: 192px;
     }
 }
-
 
 .pointer {
     cursor: pointer;

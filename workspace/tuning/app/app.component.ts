@@ -3,10 +3,9 @@ import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular
 import { MessageService } from './service/message.service';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { VscodeService, COLOR_THEME } from './service/vscode.service';
 import { HyTheme, HyThemeService } from 'hyper';
-import { UtilsService } from './service/utils.service';
 
 const THEME_DICT = new Map<COLOR_THEME, HyTheme>([
   [COLOR_THEME.Dark, HyTheme.Dark],
@@ -46,14 +45,12 @@ interface INavigatorPage {
 export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public subscription: Subscription;
-  public showAdviceIcon = false;
   @ViewChild('adviceIcon') adviceIcon: any;
   constructor(
     public messageervice: MessageService,
     public translate: TranslateService,
     public router: Router,
     public vscodeService: VscodeService,
-    public utils: UtilsService,
     private themeServe: HyThemeService,
   ) { }
 
@@ -106,10 +103,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     this.subscription.unsubscribe();
   }
   ngAfterViewInit(): void {
-    (self as any).webviewSession.getItem('language') === 'zh-cn'
-      ? this.showAdviceIcon = true
-      : this.showAdviceIcon = false;
-
     this.subscription = this.messageervice.getMessage().subscribe(
       msg => {
       });

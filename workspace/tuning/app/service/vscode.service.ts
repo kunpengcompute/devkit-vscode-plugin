@@ -6,11 +6,6 @@ import { MessageService } from './message.service';
 let that: any;
 declare function acquireVsCodeApi(): any;
 const vscode = acquireVsCodeApi();
-// const vscode = {
-//     postMessage(msg:any) {
-//     }
-// }
-
 @Injectable({
     providedIn: 'root'
 })
@@ -64,7 +59,6 @@ export class VscodeService {
                 delete that.callbacks[data.cbid];
             }
         },
-
         /**
          * 判断是否登录绑定回调函数
          *
@@ -76,42 +70,12 @@ export class VscodeService {
                 delete that.callbacks[data.cbid];
             }
         },
-
         /**
          * 保存ip 端口设置绑定回调函数
          *
          * @param data 发送的事件参数
          */
         saveConfig(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
-
-        getpwd(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
-        /**
-         * 修改完密码，重置加密文件中的密码
-         *
-         * @param data 发送的事件参数
-         */
-        setPwd(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
-        /**
-         * 删除加密文件中保存的密码
-         *
-         * @param data 发送的事件参数
-         */
-        deletePwd(data: any) {
             if (that.callbacks[data.cbid]) {
                 that.callbacks[data.cbid](data.data);
                 delete that.callbacks[data.cbid];
@@ -237,28 +201,8 @@ export class VscodeService {
             }
         },
 
-        /**
-         * 设置全局变量绑定回调函数
-         *
-         * @param data 发送的事件参数
-         */
-        setGlobleState(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
-        /**
-         * 获取全局变量绑定回调函数
-         *
-         * @param data 发送的事件参数
-         */
-        getGlobleState(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
+
+
         /**
          * 此方法响应vscode 消息事件，返回接口数据
          * @param data 发送的事件参数
@@ -294,30 +238,6 @@ export class VscodeService {
          */
         sendMessage(message: any) {
             that.msgService.sendMessage(message.data);
-        },
-
-        /**
-         * 此方法响应vscode 回调处理
-         * @param message 事件参数
-         */
-        callbackProcess(message: any) {
-            if (that.callbacks[message.cbid]) {
-                that.callbacks[message.cbid](message.data);
-                delete that.callbacks[message.cbid];
-            }
-        },
-
-        /**
-         * 此方法响应vscode 回调处理
-         * @param message 事件参数
-         */
-        processVscodeMsg(message: any) {
-            if (that.callbacks[message.cbid]) {
-                that.callbacks[message.cbid](message.data);
-                if (message.data.enable) {
-                    delete that.callbacks[message.cbid];
-                }
-            }
         },
 
         /**
@@ -375,7 +295,6 @@ export class VscodeService {
 
         vscode.postMessage(messageReq);
     }
-
     /**
      * webview 通过 vscode调用接口
      * @param url 访问地址
@@ -466,8 +385,3 @@ export const enum COLOR_THEME {
     Light = 2
 }
 
-// 端口号
-export const enum DEFAULT_PORT {
-    DEP_DEFAULT_PORT = '8082',
-    PORTING_DEFAULT_PORT = '8084'
-}

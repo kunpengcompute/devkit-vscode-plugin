@@ -41,15 +41,10 @@ export const I18N_ZH = {
     plugins_tuning_button_install: '点击此处部署',
     plugins_tuning_label_ip: 'IP地址',
     plugins_tuning_label_port: 'SSH端口',
-   
-    plugins_common_service_certificate_settings: '服务证书设置',
-    plugins_common_service_certificate_settings_tip1: '1.选择“指定根证书”前，请管理员在“web服务端证书”设置中获取CSR文件并用该CSR文件在CA系统或自签名证书系统生成标\
-    准的X.509证书，完成签名后导入证书，完成后通过指定根证书建立安全连接。',
-    plugins_common_service_certificate_settings_tip2: '2.选择“信任当前服务证书”则意味着用户信任同服务端建立的连接。',
-    plugins_common_specifying_root_certificate: '指定根证书',
-    plugins_common_trust_current_service_certificate: '信任当前服务证书',
-    plugins_common_specifying_local_path: '指定本地路径',
-    plugins_common_no_select_certificate: '未选择证书',
+
+
+
+
     plugins_tuning_label_default_port: '默认端口：{0}',
     plugins_tuning_label_config: '请配置代码迁移工具的远程服务器地址，如果当前您尚未在服务器上部署工具',
     plugins_cloudied_tuning_label_config: '请配置代码迁移工具的远程服务器地址',
@@ -109,7 +104,7 @@ export const I18N_ZH = {
     plugins_common_message_sslKeyTip: '请导入id_rsa私钥文件',
     plugins_common_message_passphrase: '请输入私钥文件的密码短语',
     plugins_common_message_sshkeyFail: '请导入正确的id_rsa私钥文件',
-    
+
     plugins_common_message_passphraseFail: '请输入正确的密码短语',
     plugins_common_message_sshkeyExceedMaxSize: '私钥文件大小超过10MB',
     plugins_common_label_installsshkey: '私钥',
@@ -131,7 +126,7 @@ export const I18N_ZH = {
         common_term_cFile_suggestion_label: '建议修改点数量',
     },
     period: '。',
-    semicolon: '；', 
+    semicolon: '；',
     plugins_tuning_apply_free_env_info: '您也可以申请免费试用环境',
     plugins_tuning_apply_free_env_link: '点击此处',
     plugins_tuning_free_trial_remote_environment: '申请试用远程实验室',
@@ -216,8 +211,8 @@ export const I18N_ZH = {
     plugins_public_text_tip: '提示',
     plugins_public_button_confirm: '确认',
     plugins_public_button_cancel: '取消',
-    pligins_public_message_confirm: '是',
-    pligins_public_message_cancel: '否',
-    
-   
+    plugins_public_message_confirm: '是',
+    plugins_public_message_cancel: '否',
+
+
 };
