@@ -24,30 +24,20 @@ export const messageHandler = {
         Utils.invokeCallback(global.toolPanel.getPanel(), message, json);
     },
 
-    /**
-     * 判断是否登录
-     * @param global: 插件上下文，以及当前的panel
-     * @param message: 来自webview的消息内容
-     */
-    async isLogin(global: any, message: any) {
-        const flag = Utils.isSysPerfLogin(global.context);
-        Utils.invokeCallback(global.toolPanel.getPanel(), message, flag);
-    },
-
     // 保存ip与port到json配置文件
     async saveConfig(global: any, message: any) {
         if (!message.data.openConfigServer) {  // 点击弹窗中的是openConfigServer为true
             if (ToolPanelManager.loginPanels.length > 0) {
                 // 弹窗提示是否切换服务器
                 const panel = global.toolPanel.getPanel();
-                panel.webview.postMessage({cmd: 'handleVscodeMsg', type: 'showCustomDialog', data: {show: true}});
+                panel.webview.postMessage({ cmd: 'handleVscodeMsg', type: 'showCustomDialog', data: { show: true } });
                 return;
             }
         }
         let tuningConfig;
         try {
             tuningConfig = JSON.parse(message.data.data).tuningConfig;
-        }catch (err) {
+        } catch (err) {
             tuningConfig = {};
         }
         const tuningConfigObj = Array.isArray(tuningConfig) ? tuningConfig[0] : tuningConfig;
@@ -56,24 +46,44 @@ export const messageHandler = {
         data = fs.writeFileSync(resourcePath, message.data.data);
         global.context.globalState.update('tuningIp', tuningConfigObj.ip);
         global.context.globalState.update('tuningPort', tuningConfigObj.port);
-        const {proxyServerPort, proxy} =
+        const { proxyServerPort, proxy } =
             await ProxyManager.createProxyServer(global.context, tuningConfigObj.ip, tuningConfigObj.port);
         global.context.globalState.update('defaultPort', proxyServerPort);
-        const queryOptions = {
-            url: `http://127.0.0.1:${proxyServerPort}/user-management/api/v2.2/users/admin-status/`,
+
+        const queryVersionOptions = {
+            url: `http://127.0.0.1:${proxyServerPort}/user-management/api/v2.2/users/version/`,
             method: 'GET'
         };
-        const resp: any = await Utils.requestData(global.context, queryOptions as any, message.module);
-        if (resp.status === constant.HTTP_STATUS.HTTP_200_OK) {
-            vscode.commands.executeCommand('setContext', 'ipconfig', true);
-            Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
-            ToolPanelManager.closeLoginPanel();
-            Utils.navToIFrame(global, proxyServerPort, proxy);
-            ToolPanelManager.closePanelsByRemained(message.module, []);
+        const respVersion: any = await Utils.requestData(global.context, queryVersionOptions as any, message.module);
+        if (respVersion.status === constant.HTTP_STATUS.HTTP_200_OK) {
+            const serverVersion = respVersion?.data?.data?.version;
+
+            if (!Utils.checkVersion(global.context, serverVersion)) {
+                const info = I18nService.I18nReplace(i18n.plugins_tuning_message_versionCompatibility, {
+                    0: Utils.getConfigJson(global.context).configVersion[0],
+                    1: serverVersion
+                });
+                Utils.showMessageByType('warn', { info }, true);
+            }
+            const queryOptions = {
+                url: `http://127.0.0.1:${proxyServerPort}/user-management/api/v2.2/users/admin-status/`,
+                method: 'GET'
+            };
+            const resp: any = await Utils.requestData(global.context, queryOptions as any, message.module);
+            if (resp.status === constant.HTTP_STATUS.HTTP_200_OK) {
+                vscode.commands.executeCommand('setContext', 'ipconfig', true);
+                Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
+                ToolPanelManager.closeLoginPanel();
+                Utils.navToIFrame(global, proxyServerPort, proxy);
+                ToolPanelManager.closePanelsByRemained(message.module, []);
+            } else {
+                proxy.close();
+                Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
+            }
         } else {
-             Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
+            proxy.close();
+            Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
         }
-        // Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
     },
 
     /**
@@ -82,7 +92,7 @@ export const messageHandler = {
      * @param global 全局上下文
      * @param message 消息内容
      */
-     openNewPage(global: any, message: any) {
+    openNewPage(global: any, message: any) {
         const session = {
             language: vscode.env.language
         };
@@ -289,7 +299,7 @@ export const messageHandler = {
      * @param global 全局上下文
      * @param message 消息内容
      */
-     async install(global: any, message: any) {
+    async install(global: any, message: any) {
         let server: any = {};
         let terminal: vscode.Terminal;
         const ssh2Tools = new SSH2Tools();
@@ -375,7 +385,7 @@ export const messageHandler = {
      * @param global 全局上下文
      * @param message 消息内容
      */
-     async uninstall(global: any, message: any) {
+    async uninstall(global: any, message: any) {
         let server: any = {};
         let terminal: vscode.Terminal;
         const ssh2Tools = new SSH2Tools();
@@ -466,7 +476,7 @@ export const messageHandler = {
         return Utils.getConfigJson(global.context).key;
     },
 
-     // 清理json配置文件中的ip和port
+    // 清理json配置文件中的ip和port
     async cleanConfig(global: any, message: any) {
         global.context.globalState.update('closeShowErrorMessage', true);
 
@@ -480,7 +490,7 @@ export const messageHandler = {
         global.context.globalState.update(message.module + 'uploadProcessFlag', 0);
     },
 
-     // 关闭所有panel
+    // 关闭所有panel
     closeAllPanel(global: any, message: any) {
         this.closePanel(global, message);
     },

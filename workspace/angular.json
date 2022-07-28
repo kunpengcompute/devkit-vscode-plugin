@@ -32,8 +32,6 @@
               }
             ],
             "styles": [
-              "./common/themes/theme-light.scss",
-              "./common/themes/theme-dark.scss",
               "tuning/styles.scss"
             ],
             "scripts": [
@@ -81,26 +79,7 @@
           "options": {
             "browserTarget": "tuning-ide:build"
           }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "tuning/test.ts",
-            "polyfills": "tuning/polyfills.ts",
-            "tsConfig": "tuning/tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "assets": [
-              "tuning/favicon.ico",
-              "tuning/assets"
-            ],
-            "styles": [
-              "tuning/styles.scss"
-            ],
-            "scripts": []
-          }
         }
-       
-        
       }
     }
   },

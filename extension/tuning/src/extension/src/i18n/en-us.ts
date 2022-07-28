@@ -76,6 +76,9 @@ export const I18N_EN = {
     plugins_tuning_dowloadPath: 'File downloaded successfully. Save path: {0}',
     plugins_tuning_message_cart: 'After the certificate is imported successfully, \
     restart VS Code for the certificate to take effect.',
-    page_loading: "Page loading..."
+    page_loading: "Page loading...",
+    plugins_tuning_message_versionCompatibility: 'The plugin version does not match the software version on the server. \
+    Unpredictable errors may occur if you continue. You are advised to use a plugin version that matches the software \
+    version on the server. Software versions that match the current plugin: {0}. Current software version on the server: {1}.',
 
 };

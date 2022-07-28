@@ -64,6 +64,14 @@ export class Utils {
         return JSON.parse(buf.toString());
     }
 
+    public static checkVersion(context: vscode.ExtensionContext, serverVersion: any) {
+        if (!serverVersion) {
+            return false;
+        }
+        const configVersion = Utils.getConfigJson(context).configVersion;
+        return configVersion.includes(serverVersion);
+    }
+
     /**
      * 获取某个扩展文件绝对路径
      * @param context 上下文
@@ -149,13 +157,6 @@ export class Utils {
         if (panel) {
             panel.webview.postMessage({ cmd: message.cmd, data: resp, cbid: message.cbid });
         }
-    }
-    /**
-     * 判断sysPerf是否已登陆
-     */
-    public static isSysPerfLogin(context: vscode.ExtensionContext): boolean {
-        const isSysPerfLogin = false;
-        return isSysPerfLogin;
     }
 
     /**

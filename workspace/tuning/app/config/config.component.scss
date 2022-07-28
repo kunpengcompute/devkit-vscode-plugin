@@ -20,75 +20,10 @@
             line-height: 14px;
             font-size: 14px;
             padding-bottom: 10px;
-
-            .config-form-item-label-req {
-                color: #e02020;
-                margin-left: 4px;
-            }
-        }
-
-        .codeInput {
-            width: 67%;
-        }
-
-        .codeImg {
-            width: 5.416vw;
-            height: 2.3vw;
-            vertical-align: bottom;
-            margin-left: 0.6vw;
         }
 
         .check {
             display: inline-block;
-        }
-    }
-
-    .config-form-certificate {
-        margin-top: 20px;
-
-        .config-form-certificate-label {
-            margin-bottom: 10px;
-            font-size: 14px;
-            color: var(--config-form-item-label-color);
-
-            .help-icon {
-                height: 14px;
-            }
-        }
-
-        .config-form-certificate-radio {
-            height: 20px;
-            display: flex;
-        }
-        .config-form-certificate-radio-item {
-            display: flex;
-            align-items: center;
-            input {
-                display: none;
-                margin-right: 5px;
-                width: 16px!important;
-                height: 16px!important;
-                outline: none;
-                
-            }
-            &:nth-child(2) {
-                margin-left: 20px;
-            }
-        }
-
-        .config-form-certificate-file {
-            margin-top: 10px;
-
-            .config-form-certificate-textarea {
-                resize: none;
-                width: 400px;
-                height: 28px;
-                line-height: 26px;
-            }
-
-            .config-form-certificate-bt {
-                display: inline-block;
-            }
         }
     }
 
@@ -164,28 +99,14 @@
         }
     }
 
-    .ti3-tooltip {
-        color: #222222 !important;
-        background-color: var(--vscode-editor-background) !important;
-    }
 
-    .ti3-tooltip-right-top::after {
-        background-color: var(--vscode-editor-background) !important;
-    }
 
-    .ti3-tooltip-right-top::before {
-        background-color: var(--vscode-editor-background) !important;
-        border-color: var(--vscode-editor-background) !important;
-    }
 
-    .ti3-tooltip-right::after {
-        background-color: var(--vscode-editor-background) !important;
-    }
 
-    .ti3-tooltip-right::before {
-        background-color: var(--vscode-editor-background) !important;
-        border-color: var(--vscode-editor-background) !important;
-    }
+
+
+
+
 }
 
 ::ng-deep .vscode-dark {
@@ -222,7 +143,7 @@
     --btn-disabled-color: #616161;
     --btn-disabled-border-color: #313131;
 
-    --color-content-shadow-tip:rgba(0, 0, 0, 0.8);
+    --color-content-shadow-tip: rgba(0, 0, 0, 0.8);
 
     .config-title-det {
         font-size: 14px;
@@ -240,29 +161,7 @@
         }
     }
 
-    .ti3-tooltip {
-        color: #aaaaaa !important;
-        background-color: var(--dark-tooltip-background-color) !important;
-        border-color: var(--dark-tooltip-background-color) !important;
-    }
 
-    .ti3-tooltip-right-top::after {
-        background-color: var(--dark-tooltip-background-color) !important;
-    }
-
-    .ti3-tooltip-right-top::before {
-        background-color: var(--dark-tooltip-background-color) !important;
-        border-color: var(--dark-tooltip-background-color) !important;
-    }
-
-    .ti3-tooltip-right::after {
-        background-color: var(--dark-tooltip-background-color) !important;
-    }
-
-    .ti3-tooltip-right::before {
-        background-color: var(--dark-tooltip-background-color) !important;
-        border-color: var(--dark-tooltip-background-color) !important;
-    }
 }
 
 ::ng-deep .content-box {
@@ -460,40 +359,16 @@
         color: var(--radio-disabled-border-color) !important;
     }
 }
+
 .config-title-det-btn {
     color: #0067ff;
     margin-left: 6px;
     cursor: pointer;
 }
+
 .config-title-det-btn:hover {
     color: #267DFF;
 }
-
-.tip-box1 {
-    position: relative;
-    .tip-box-mask {
-        position: absolute;
-        top: 0;
-        left: 20px;
-        transform: translateY(-50%);
-        width: 460px;
-        box-sizing: border-box;
-        padding: 10px;
-        padding-top: 1px;
-        padding-bottom: 1px;
-        background-color: var(--install-color-msgbox-bg);
-        font-size: 12px;
-        color: var(--install-color-msgbox-content);
-        box-shadow: 0px 3px 6px 0px var(--color-content-shadow-tip);
-        z-index: 10;
-        p {
-            margin: 10px 0;
-            line-height: 1.4em;
-        }
-    }
-}
-
-
 
 
 // 是否切换服务器的样式
@@ -529,34 +404,13 @@
             p {
                 a {
                     color: #0067FF;
+
                     &:hover {
                         color: #267DFF;
                     }
                 }
             }
 
-        }
-    }
-
-    .tip-select {
-        padding-top: 20px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        text-align: center;
-        font-size: 14px;
-        vertical-align: middle;
-
-        span {
-            width: 16px;
-            line-height: 16px;
-            margin-right: 16px;
-            vertical-align: middle;
-        }
-        input {
-            width: 16px;
-            height: 16px;
-            margin-right: 5px;
         }
     }
 

@@ -9,16 +9,16 @@
     </p>
     <div>
         <p class="config-title-det">{{ i18n.plugins_common_label_config }}<span class="config-title-det-btn"
-            (click)="openInstallPage()">{{ i18n.plugins_common_button_install }}</span></p>
-        <p class="config-title-det">{{ i18n.plugins_common_apply_free_env_info }}<span class="config-title-det-btn" 
-            (click)="openFreeTrialRemoteEnv()">{{ i18n.plugins_common_apply_free_env_link }}</span>
+                (click)="openInstallPage()">{{ i18n.plugins_common_button_install }}</span></p>
+        <p class="config-title-det">{{ i18n.plugins_common_apply_free_env_info }}<span class="config-title-det-btn"
+                (click)="openFreeTrialRemoteEnv()">{{ i18n.plugins_common_apply_free_env_link }}</span>
         </p>
     </div>
-    
+
     <div class="config-form-item">
         <div class="ti3-icon ti3-icon-staricon config-form-item-label">{{ i18n.plugins_common_label_ip }}
         </div>
-        <input type="text" tiText [(ngModel)]="tempIP" [disabled]="this.hasConfig" (blur)="checkIP()"/>
+        <input type="text" tiText [(ngModel)]="tempIP" (blur)="checkIP()" />
         <div *ngIf="ipCheck" class="ti3-unifyvalid-error-container">
             <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"></span>
             <span class="ti3-validate-text">{{ i18n.plugins_common_message_ipError }}</span>
@@ -27,79 +27,28 @@
     <div class="config-form-item">
         <div class="ti3-icon ti3-icon-staricon config-form-item-label">{{ i18n.plugins_common_label_configPort }}
         </div>
-        <input [placeholder]="i18n.plugins_common_placeholder_default_port" type="text" tiText [(ngModel)]="tempPort" [disabled]="this.hasConfig" (blur)="checkPort()"/>
+        <input [placeholder]="i18n.plugins_common_placeholder_default_port" type="text" tiText [(ngModel)]="tempPort"
+            (blur)="checkPort()" />
         <div *ngIf="portCheck" class="ti3-unifyvalid-error-container">
             <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"></span>
             <span class="ti3-validate-text">{{ i18n.plugins_common_message_portError }}</span>
         </div>
     </div>
-    <!-- 已修改 -->
 
-    <div class="config-form-certificate">
-        <div class="config-form-certificate-label">
-            <!-- 服务证书设置 -->
-            <p class="ti3-icon ti3-icon-staricon">{{i18n.plugins_common_service_certificate_settings}}
-                <span class="tip-box1" (mouseenter)="mouseenterTip()" (mouseleave)="mouseleaveTip()">
-                    <img class="help-icon" src="./assets/img/icon-help-dark-1.svg">
-                    <div class="tip-box-mask" *ngIf="tipShow">
-                        <p class="certificateSettingsTip">{{certificateSettingsTipStr1}}</p>
-                        <p class="certificateSettingsTip">{{certificateSettingsTipStr2}}</p>
-                    </div>
-                </span>
-            </p>
-        </div>
-        <div class="config-form-certificate-radio">
-           <div class="config-form-certificate-radio-item" *ngFor="let item of radioList, index as i;">
-                <input [disabled]="this.hasConfig" type="radio"  tiRadio [id]="item.value"
-                name="group1" [(ngModel)]="selected" [value]="item.value" 
-                (ngModelChange)="ngModelChange($event)" />
-                <!-- <label [for]="item.value">{{item.label}}</label> -->
-                <label [for]="item.value" class="ti3-radio">
-                    <span class="ti3-radio-skin"></span>
-                    <span class="ti3-radio-label">{{item.label}}</span>
-                </label>
-           </div>
-            <br>
-        </div>
-        <div class="config-form-certificate-file" *ngIf="selectCertificate">
-            <input type="text" readonly="readonly"  tiText [disabled]="this.hasConfig" class="config-form-certificate-textarea"
-                 [(ngModel)]="localfilepath"/>
-            <div class="config-form-certificate-bt">
-                <button [disabled]="this.hasConfig" type="button" class="small-secondary-btn" (click)="fileUpload()"
-                    style="margin-left: 10px;">{{i18n.plugins_common_specifying_local_path}}
-                    <input type="file" accept=".crt,.cer,.pem" id="uploadFile" style="display: none;"
-                        (change)="uploadFile()" />
-                </button>
-            </div>
-        </div>
-        <div *ngIf="!localfilepath && showCertificate && !hasConfig && selectCertificate" class="ti3-unifyvalid-error-container">
-            <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"></span>
-            <span class="ti3-validate-text">{{ i18n.plugins_common_no_select_certificate }}</span>
-        </div>
-    </div>
-    <div *ngIf="!hasConfig" class="btn-group">
-        <button type="button" class="primary-btn" (mousedown)="saveConfirm()" [disabled]="!tempIP || !tempPort || (!localfilepath && selected === 'specifying')">
+    <div class="btn-group">
+        <button type="button" class="primary-btn" (mousedown)="saveConfirm()" [disabled]="!tempIP || !tempPort">
             {{ i18n.plugins_tuning_button_save }}
         </button>
-        <button type="button" *ngIf="!firstConfig" class="secondary-btn" (mousedown)="cancel()">
+        <button type="button" class="secondary-btn" (mousedown)="cancel()">
             {{ i18n.plugins_tuning_button_cancel }}
         </button>
     </div>
-    <!-- 修改配置 -->
-    <div *ngIf="hasConfig" class="btn-group">
-        <button class="primary-btn" (mousedown)="modify()">{{ i18n.plugins_tuning_button_modi }}</button>
-    </div>
-</div>
 
+</div>
 
 <div *ngIf="showLoading" class="loading">
     <app-loading [height]="'100%'" [size]="'max'"></app-loading>
 </div>
-
-<ng-template #tipContent>
-    <p class="certificateSettingsTip">{{certificateSettingsTipStr1}}</p>
-    <p class="certificateSettingsTip">{{certificateSettingsTipStr2}}</p>
-</ng-template>
 
 <!-- 是否切换服务器 -->
 <app-messagebox #showDialog>
@@ -121,8 +70,10 @@
             </div>
         </div>
         <div class="tip-confirm">
-            <button type="button" class="primary-btn" (click)="confirmDialogMsgTip()">{{i18n.pligins_public_message_confirm}}</button>
-            <button type="button" class="secondary-btn" (click)="cancelDiglogMsgTip()">{{i18n.pligins_public_message_cancel}}</button>
+            <button type="button" class="primary-btn"
+                (click)="confirmDialogMsgTip()">{{i18n.plugins_public_message_confirm}}</button>
+            <button type="button" class="secondary-btn"
+                (click)="cancelDiglogMsgTip()">{{i18n.plugins_public_message_cancel}}</button>
         </div>
     </div>
 </app-messagebox>
