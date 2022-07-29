@@ -56,8 +56,5 @@ export const I18N_ZH = {
     plugins_tuning_title_importTime: ' 导入时间：',
     plugins_tuning_dowloadPath: '文件下载成功，保存路径：{0}',
     plugins_tuning_message_cart: '证书导入成功后，重新启动VSCode生效',
-    page_loading: "页面加载中...",
-
-    plugins_tuning_message_versionCompatibility: '本插件与服务端性能分析工具版本不匹配，继续使用可能会产生不可预知的错误，建议您确保版本匹配后再使用。\
-    本插件可匹配性能分析工具版本：{0}; 当前服务端性能分析工具版本：{1}',
+    page_loading: "页面加载中..."
 };

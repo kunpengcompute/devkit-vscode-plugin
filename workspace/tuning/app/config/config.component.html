@@ -54,7 +54,7 @@
 <app-messagebox #showDialog>
     <div class="content tip-box">
         <div class="tip-title color-d-e8-l-22">
-            <span class="title-content">{{i18n.plugins_public_text_tip}}</span>
+            <span class="title-content">{{i18n.plugins_common_title_config}}</span>
             <span (click)="cancelDiglogMsgTip()" class="icon-close">
                 <img src="./assets/img/close_icon.svg">
                 <img src="./assets/img/close_hover.svg">
@@ -76,4 +76,31 @@
                 (click)="cancelDiglogMsgTip()">{{i18n.plugins_public_message_cancel}}</button>
         </div>
     </div>
+</app-messagebox>
+
+<!-- 版本不匹配 -->
+<app-messagebox #versionDialog>
+    <div class="content tip-box">
+        <div class="tip-title color-d-e8-l-22">
+            <span class="title-content">{{i18n.plugins_common_title_config}}</span>
+            <span (click)="cancelVersionDiglogMsgTip()" class="icon-close">
+                <img src="./assets/img/close_icon.svg">
+                <img src="./assets/img/close_hover.svg">
+            </span>
+        </div>
+        <div class="tip-title-border"></div>
+        <div class="tip-dsc">
+            <img class="img_box" src="./assets/img/tip/icon_information.svg">
+            <div class="color-d-e8-l-61">
+                <p class="mb10">
+                    {{versionMismatch}}
+                </p>
+            </div>
+        </div>
+        <div class="tip-confirm">
+            <button type="button" class="secondary-btn single-btn"
+                (click)="cancelVersionDiglogMsgTip()">{{i18n.plugins_public_message_close}}</button>
+        </div>
+    </div>
+
 </app-messagebox>
