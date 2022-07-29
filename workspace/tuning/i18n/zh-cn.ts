@@ -213,6 +213,9 @@ export const I18N_ZH = {
     plugins_public_button_cancel: '取消',
     plugins_public_message_confirm: '是',
     plugins_public_message_cancel: '否',
+    plugins_public_message_close: '关闭',
 
+
+    plugins_tuning_message_versionCompatibility: '插件版本与服务端的软件版本不匹配。本插件可匹配的性能分析工具服务端版本为：{0}；当前性能分析工具服务端版本为：{1}。请您升级服务端版本至匹配版本。',
 
 };

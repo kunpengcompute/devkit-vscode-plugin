@@ -9,6 +9,8 @@ import { VscodeService, COLOR_THEME } from '../service/vscode.service';
 export class ConfigComponent implements OnInit {
     @ViewChild('saveConfirmTip') saveConfirmTip: { Close: () => void; Open: () => void; };
     @ViewChild('showDialog', { static: false }) showDialog: { Close: () => void; Open: () => void; };
+    @ViewChild('versionDialog', { static: false }) versionDialog: { Close: () => void; Open: () => void; };
+
     private static CONFIG_RADIX = 10;
     public i18n: any;
     public tempIP: string;
@@ -21,6 +23,7 @@ export class ConfigComponent implements OnInit {
     public pluginUrlCfg: any = {};
     public showLoading = false;
     public showIfServerDialog = false; // 显示是否切换服务器
+    public versionMismatch = ""
 
     constructor(
         private i18nService: I18nService,
@@ -121,6 +124,14 @@ export class ConfigComponent implements OnInit {
             };
             this.vscodeService.postMessage(data, (res: any) => {
                 this.showLoading = false;
+                // 版本不匹配
+                if (res.type === 'VERSIONMISMATCH') {
+                    this.versionMismatch = this.i18nService.I18nReplace(this.i18n.plugins_tuning_message_versionCompatibility, {
+                        0: res.configVersion,
+                        1: res.serverVersion
+                    })
+                    this.versionDialog.Open()
+                }
             });
         }
     }
@@ -185,5 +196,11 @@ export class ConfigComponent implements OnInit {
     public cancelDiglogMsgTip() {
         this.showDialog.Close();
         this.showLoading = false;
+    }
+    /**
+     * 版本不匹配取消
+     */
+    cancelVersionDiglogMsgTip() {
+        this.versionDialog.Close()
     }
 }

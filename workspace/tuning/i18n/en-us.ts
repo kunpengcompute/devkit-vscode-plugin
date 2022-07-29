@@ -280,4 +280,10 @@ export const I18N_US = {
   plugins_public_button_cancel: 'cancel',
   plugins_public_message_confirm: 'Yes',
   plugins_public_message_cancel: 'No',
+  plugins_public_message_close: 'Close',
+
+  plugins_tuning_message_versionCompatibility: 'The plugin version does not match the software version of the server. \
+  The server version of the code migration tool that this plugin can match is: {0}; \
+  the current server version of the code migration tool is: {1}. \
+  Please upgrade the server version to the matching version.'
 };
