@@ -25,6 +25,10 @@
         .check {
             display: inline-block;
         }
+
+        input[tiText] {
+            padding: 5px 10px;
+        }
     }
 
     .btn-group {
@@ -294,7 +298,7 @@
             border-color: var(--install-color-btn-m-dft);
             color: var(--install-color-content);
 
-            &:hover {
+            form &:hover {
                 border-color: var(--install-color-btn-m-hover);
                 color: var(--install-color-btn-m-hover);
             }
