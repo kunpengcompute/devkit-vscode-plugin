@@ -112,6 +112,14 @@ export const iframeHtmlStr = `
                         themeColorMessage.themeColor = 'vscode-light'
                     };
                     myFrame.contentWindow.postMessage(JSON.stringify(themeColorMessage), '{src}');
+                } else if (type === 'login') {
+                    var hostMessage = {
+                        serverAddr: '{ip}',
+                        serverPort: '{port}',
+                        ideType: 'isVscode',
+                        ideAddress: '{src}'
+                    }
+                    myFrame.contentWindow.postMessage(JSON.stringify(hostMessage), '{src}');
                 }
             }
         })
