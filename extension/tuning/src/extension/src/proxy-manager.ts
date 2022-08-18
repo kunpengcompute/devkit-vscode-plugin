@@ -59,11 +59,8 @@ export class ProxyManager {
             if (index !== -1) {
                 newRes['Content-Type'] = proxyRes.rawHeaders[index + 1];
             }
-            if (proxyRes.rawHeaders.includes('WWW-Authenticate')) {
-                res.writeHead(401, newRes);
-            } else {
-                res.writeHead(200, newRes);
-            }
+            const statusCode = proxyRes.statusCode;
+            res.writeHead(statusCode, newRes);
         });
         return Promise.resolve({ proxyServerPort, proxy });
     }
