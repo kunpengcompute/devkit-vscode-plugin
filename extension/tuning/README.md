@@ -32,7 +32,7 @@
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.3.5</td>
-            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.RC2</td>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.RC1.1</td>
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.3.3</td>
@@ -267,7 +267,7 @@ This plug-in needs to run with the background service, which must be installed o
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.3.5</td>
-            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.RC2</td>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.RC1.1</td>
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.3.3</td>

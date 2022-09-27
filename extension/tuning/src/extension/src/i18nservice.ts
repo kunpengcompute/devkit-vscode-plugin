@@ -1,4 +1,3 @@
-
 import * as vscode from 'vscode';
 import { I18N_ZH } from './i18n/zh-cn';
 import { I18N_EN } from './i18n/en-us';
@@ -14,7 +13,7 @@ export const LANGUAGE_TYPE = {
 
 export class I18nService {
 
-    constructor() {}
+    constructor() { }
 
     /** vscode判断界面语言类型的公共方法
      * 当界面语言为英文时，返回LANGUAGE_TYPE.EN

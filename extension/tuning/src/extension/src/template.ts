@@ -104,14 +104,14 @@ export const iframeHtmlStr = `
                     document.body.removeChild(a);
                 } else if (type === 'receivedSuccess') {
                     clearInterval(time)
-                } else if (type === 'changeTheme') {
-                    var themeColorMessage = {
-                        themeColor: 'vscode-dark'
-                    };
-                    if (e.data.theme !== 1) {
-                        themeColorMessage.themeColor = 'vscode-light'
-                    };
-                    myFrame.contentWindow.postMessage(JSON.stringify(themeColorMessage), '{src}');
+                } else if (type === 'login') {
+                    var hostMessage = {
+                        serverAddr: '{ip}',
+                        serverPort: '{port}',
+                        ideType: 'isVscode',
+                        ideAddress: '{src}'
+                    }
+                    myFrame.contentWindow.postMessage(JSON.stringify(hostMessage), '{src}');
                 }
             }
         })

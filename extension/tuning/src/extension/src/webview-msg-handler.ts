@@ -59,11 +59,12 @@ export const messageHandler = {
             const serverVersion = respVersion?.data?.data?.version;
 
             if (!Utils.checkVersion(global.context, serverVersion)) {
-                const info = I18nService.I18nReplace(i18n.plugins_tuning_message_versionCompatibility, {
-                    0: Utils.getConfigJson(global.context).configVersion[0],
-                    1: serverVersion
-                });
-                Utils.showMessageByType('warn', { info }, true);
+                proxy.close();
+                const configVersion = Utils.getConfigJson(global.context).configVersion[0];
+                // 版本不匹配
+                data = { type: 'VERSIONMISMATCH', configVersion, serverVersion };
+                Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
+                return;
             }
             const queryOptions = {
                 url: `http://127.0.0.1:${proxyServerPort}/user-management/api/v2.2/users/admin-status/`,

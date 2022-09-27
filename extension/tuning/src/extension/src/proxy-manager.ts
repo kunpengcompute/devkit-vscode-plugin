@@ -28,8 +28,8 @@ export class ProxyManager {
     static async createProxyServer(context: vscode.ExtensionContext, ip: string, port: string | number) {
         const sessionDefaultPort = context.globalState.get('defaultPort');
         let proxyServerPort = sessionDefaultPort
-                              ? Number(sessionDefaultPort)
-                              : 3661;
+            ? Number(sessionDefaultPort)
+            : 3661;
 
         const resFlag = await ProxyManager.isPortOpen(proxyServerPort);
         if (resFlag) {
@@ -52,16 +52,17 @@ export class ProxyManager {
             if (index !== -1) {
                 const token = 'token';
                 authValue = proxyRes.rawHeaders[index + 1];
-                newRes[token] =  authValue;
+                newRes[token] = authValue;
                 ProxyManager.authValue = authValue;
             }
             index = proxyRes.rawHeaders.indexOf('Content-Type');
             if (index !== -1) {
-                newRes['Content-Type'] =  proxyRes.rawHeaders[index + 1];
+                newRes['Content-Type'] = proxyRes.rawHeaders[index + 1];
             }
-            res.writeHead(200, newRes);
+            const statusCode = proxyRes.statusCode;
+            res.writeHead(statusCode, newRes);
         });
-        return Promise.resolve({proxyServerPort, proxy});
+        return Promise.resolve({ proxyServerPort, proxy });
     }
 }
 
