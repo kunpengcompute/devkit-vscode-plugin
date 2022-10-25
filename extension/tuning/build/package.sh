@@ -4,6 +4,7 @@
 set -e
 
 build_dir=$(cd $(dirname $0); pwd)
+build_dir="$build_dir"
 root_dir=${build_dir}/..
 out_dir=${root_dir}/out
 webview_dir=${root_dir}/../../workspace
@@ -34,17 +35,17 @@ end_info()
 
 build_sys_java()
 {
-  cd ${webview_dir}
+  cd "$webview_dir"
   npm install --legacy-peer-deps --unsafe-perm 
   npm run build:tuning:ide & wait
 }
 
 generate_vsix()
 {
-    cd ${root_dir}
+    cd "$root_dir"
     npm install --legacy-peer-deps --unsafe-perm
-    echo y | ${vsce_dir} package -o $tool_name
-    mv *.vsix ${out_dir}
+    echo y | "$vsce_dir" package -o $tool_name
+    mv *.vsix "$out_dir"
 }
 
 main()
