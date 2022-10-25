@@ -17,6 +17,11 @@ clean()
     if [ -d "${out_dir}" ]; then
         rm -rf ${out_dir}/extension
     fi
+    echo build_dir: "$build_dir"
+    echo root_dir: "$root_dir"
+    echo out_dir: "$out_dir"
+    echo webview_dir: "$webview_dir"
+    echo \n
 }
 
 start_info()
