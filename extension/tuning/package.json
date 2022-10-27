@@ -90,7 +90,7 @@
       "activitybar": [
         {
           "id": "kunpengTuning",
-          "title": "kunpeng hyper tuner plugin",
+          "title": "%kunpeng.tuning.suite%",
           "icon": "resources/images/tuning.svg"
         }
       ]
