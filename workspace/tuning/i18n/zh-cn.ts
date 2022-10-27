@@ -132,7 +132,7 @@ export const I18N_ZH = {
     plugins_tuning_free_trial_remote_environment: '申请试用远程实验室',
     commonAdviceFeedback: '建议反馈',
     commonConnectFail: '连接失败',
-    plugins_common_title_config: '配置远端服务器',
+    plugins_common_title_config: '配置性能分析工具远端服务器',
     plugins_common_label_config: '请配置性能分析工具的远程服务器地址，如您未在服务器上部署工具',
     plugins_common_button_install: '点击此处部署',
     plugins_common_apply_free_env_info: '您也可以申请免费试用环境',
