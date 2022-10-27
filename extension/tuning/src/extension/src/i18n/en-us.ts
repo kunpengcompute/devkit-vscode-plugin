@@ -10,6 +10,7 @@ export const I18N_EN = {
     plugins_sysperf_button_cancel: 'cancel',
     plugins_common_message_sshClientCheck: 'The SSH client is not installed on the device. Obtain and install the SSH client.',
     plugins_common_configure_remoteServer: 'Hyper Tuner – Configure Remote Server',
+    common_install_panel_title: 'Hyper Tuner - Deployment tool',
     plugins_perfadvisor_free_trial_remote_environment: 'Applying for a Remote Lab Trial',
     plugins_common_message_configSuccess: 'Configuration saved successfully.',
     plugins_common_button_login: 'Log In',

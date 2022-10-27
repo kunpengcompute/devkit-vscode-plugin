@@ -40,13 +40,22 @@
       {
         "command": "extension.view.feedback",
         "title": "%perfadvisor.sys.advicefeedback%"
+      },
+      {
+        "command": "extension.view.deployserverend",
+        "title": "%deploy.server.end%"
       }
     ],
     "menus": {
       "view/title": [
         {
+          "command": "extension.view.deployserverend",
+          "when": "view == perfadvisorTools",
+          "group": "inline2@1"
+        },
+        {
           "command": "extension.view.perfadvisorserverconfig",
-          "when": "view == perfadvisorTools && isPerfadvisorConfigured",
+          "when": "view == perfadvisorTools && !isPerfadvisorConfigured",
           "group": "inline2@2"
         },
         {

@@ -226,6 +226,32 @@ export class ToolPanelManager {
                 Utils.openAdviceLink(context, 'tuning');
             }
         ));
+        //部署服务端
+        context.subscriptions.push(vscode.commands.registerCommand('extension.view.deployserverend',
+            () => {
+                const sysPerfSession = {
+                    language: vscode.env.language
+                };
+                const message = Utils.generateMessage('navigate', { page: '/install', webSession: sysPerfSession });
+                const panelOption = {
+                    panelId: constant.PANEL_ID.tuningInstall,
+                    viewType: constant.VIEW_TYPE.install,
+                    viewTitle: i18n.common_install_panel_title,
+                    module: 'tuning',
+                    message
+                };
+                ToolPanelManager.createOrShowPanel(panelOption, context);
+                // const data = {
+                //     cmd: 'openNewPage',
+                //     data: {
+                //         router: 'install',
+                //         panelId: 'tuningInstall',
+                //         viewTitle: i18n.common_install_panel_title,
+                //         message: {}
+                //     }
+                // };
+                // vscodeService.postMessage(data, null);
+            }));
     }
     /**
      * 打开选择的webview
