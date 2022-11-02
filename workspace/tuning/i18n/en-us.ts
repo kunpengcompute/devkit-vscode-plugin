@@ -191,7 +191,7 @@ export const I18N_US = {
   plugins_common_message_portError: 'Enter a correct port number range.(1024-65535)',
   plugins_tuning_title_upgradeDt: 'Upgrade Hyper Tuner',
   plugins_tuning_title_uninstallDt: 'Uninstall Hyper Tuner',
-  plugins_tuning_title_installDt: 'Install Hyper Tuner',
+  plugins_tuning_title_installDt: 'Deploy Hyper Tuner',
   plugins_common_message_beforeInstall: 'Before You Start ',
   plugins_common_message_beforeInstallDsc4: '1. This tool identifies your system status based on the information \
     you entered \
