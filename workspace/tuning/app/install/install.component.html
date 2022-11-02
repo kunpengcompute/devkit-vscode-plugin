@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="install-form-item color-d-aa-l-61">
-        <div class="ti3-icon ti3-icon-staricon install-form-item-label">{{ i18n.plugins_tuning_label_port }}
+        <div class="ti3-icon ti3-icon-staricon install-form-item-label"><img class="img_box" src="./assets/img/required-field.svg">{{ i18n.plugins_tuning_label_port }}
         </div>
         <input type="text" tiText [(ngModel)]="tempPort" (blur)="checkTempPort()" placeholder="22"
             (change)="connected=false">
