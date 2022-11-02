@@ -266,6 +266,7 @@ export const I18N_US = {
      instructions provided in {0}.',
 
   // config 弹框
+  plugins_common_cur_server_title: 'Save the configuration of remote server',
   plugins_common_cut_server: 'Do I need to close the page and switch server configurations? Click OK to exit the current server?',
 
   // 检查ssh2链接时候

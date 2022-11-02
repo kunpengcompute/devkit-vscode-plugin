@@ -200,6 +200,7 @@ export const I18N_ZH = {
 
 
     // config 弹框
+    plugins_common_cur_server_title: '保存远端服务器配置',
     plugins_common_cut_server: '是否需要关闭页面并切换服务器配置？点击确认后将退出当前服务器。',
 
     // 检查ssh2链接 弹框
