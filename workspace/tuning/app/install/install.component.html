@@ -22,7 +22,7 @@
     <!-- <p class="install-title-gent title">{{ i18n.plugins_common_title_installTs }}</p> -->
     <div class="install-form-item color-d-aa-l-61">
         <!-- <img class="img_box" src="./assets/img/required-field.svg"> -->
-        <div class="ti3-icon ti3-icon-staricon install-form-item-label"><img class="img_box" src="./assets/img/required-field.svg">{{ i18n.plugins_tuning_label_ip }}
+        <div class="ti3-icon ti3-icon-staricon install-form-item-label"><img src="./assets/img/required-field.svg">{{ i18n.plugins_tuning_label_ip }}
         </div>
         <input type="text" tiText [(ngModel)]="tempIP" (blur)="checkIP()" (change)="connected=false">
         <div *ngIf="ipCheckF" class="ti3-unifyvalid-error-container">
@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="install-form-item color-d-aa-l-61">
-        <div class="ti3-icon ti3-icon-staricon install-form-item-label"><img class="img_box" src="./assets/img/required-field.svg">{{ i18n.plugins_tuning_label_port }}
+        <div class="ti3-icon ti3-icon-staricon install-form-item-label"><img src="./assets/img/required-field.svg">{{ i18n.plugins_tuning_label_port }}
         </div>
         <input type="text" tiText [(ngModel)]="tempPort" (blur)="checkTempPort()" placeholder="22"
             (change)="connected=false">
@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="install-form-item color-d-aa-l-61">
-        <div class="ti3-icon ti3-icon-staricon install-form-item-label">{{ i18n.plugins_tuning_label_installUser }}
+        <div class="ti3-icon ti3-icon-staricon install-form-item-label"><img src="./assets/img/required-field.svg">{{ i18n.plugins_tuning_label_installUser }}
         </div>
         <input id="username" type="text" tiText [(ngModel)]="username" (blur)="checkUsername()"
             (change)="connected=false" oncopy="return false"
@@ -57,7 +57,7 @@
         <div>
             <!-- radio -->
             <div>
-                <div class="ssh-type-title color-d-aa-l-61">{{ i18n.plugins_common_label_selectSSHType }}
+                <div class="ssh-type-title color-d-aa-l-61"><img src="./assets/img/required-field.svg">{{ i18n.plugins_common_label_selectSSHType }}
                     <a *ngIf="i18nService.currLang === i18nService.langType.zh_cn" [href]="pluginUrlCfg.sysInstall_openFAQ2">
                         <img *ngIf="currTheme === 1" class="help-icon" src="./assets/img/icon-help-dark-1.svg">
                         <img *ngIf="currTheme === 2" class="help-icon" src="./assets/img/icon-help-light.svg">
@@ -83,7 +83,7 @@
     </div>
     <!-- 密码 -->
     <div *ngIf="sshTypeSelected === 'usepwd'" class="install-form-item color-d-aa-l-61">
-        <div class="ti3-icon ti3-icon-staricon install-form-item-label">{{ i18n.plugins_tuning_label_installPwd }}
+        <div class="ti3-icon ti3-icon-staricon install-form-item-label"><img src="./assets/img/required-field.svg">{{ i18n.plugins_tuning_label_installPwd }}
         </div>
         <div style="position: relative;">
             <input id="pwd" [type]="installType" tiText [(ngModel)]="pwd" (blur)="checkPwd()" (change)="connected=false"
@@ -106,7 +106,7 @@
     </div>
     <!-- 密匙 -->
     <div *ngIf="sshTypeSelected === 'usekey'" class="install-form-item color-d-aa-l-61">
-        <div class="ti3-icon ti3-icon-staricon install-form-item-label">{{ i18n.plugins_common_label_installsshkey }}
+        <div class="ti3-icon ti3-icon-staricon install-form-item-label"><img src="./assets/img/required-field.svg">{{ i18n.plugins_common_label_installsshkey }}
         </div>
         <textarea resize="horizontal" tiTextarea class="usekey-input" [placeholder]="sshUploadKey"
             [(ngModel)]="localfilepath" readonly></textarea>
@@ -116,7 +116,7 @@
                 <input type="file" id="uploadFile" style="display: none;" (change)="uploadFile()">
             </button>
         </div>
-        <div class="install-form-item-label" style="margin-top: 20px;">{{ i18n.plugins_common_label_passphrase }}
+        <div class="install-form-item-label" style="margin-top: 20px;"><img src="./assets/img/required-field.svg">{{ i18n.plugins_common_label_passphrase }}
         </div>
         <div style="position: relative;">
             <input [type]="installType" tiText placeholder="{{i18n.plugins_common_message_passphrase}}"
