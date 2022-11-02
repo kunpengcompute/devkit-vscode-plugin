@@ -12,16 +12,17 @@
         </a>
     </p>
     <div class="install-title-det color-d-aa-l-97">
-        <img class="img_box" src="./assets/img/tip/icon_information.svg">
+        <!-- <img class="img_box" src="./assets/img/tip/icon_information.svg"> -->
         <span class="top-tips">
             {{ i18n.plugins_common_message_installDt1 }}
             <a [href]="pluginUrlCfg.vscodeService_openFAQ2">{{i18n.plugins_common_message_installDt2}}</a>
             {{ i18n.plugins_common_message_installDt3 }}
         </span>
     </div>
-    <p class="install-title-gent title">{{ i18n.plugins_common_title_installTs }}</p>
+    <!-- <p class="install-title-gent title">{{ i18n.plugins_common_title_installTs }}</p> -->
     <div class="install-form-item color-d-aa-l-61">
-        <div class="ti3-icon ti3-icon-staricon install-form-item-label">{{ i18n.plugins_tuning_label_ip }}
+        <!-- <img class="img_box" src="./assets/img/required-field.svg"> -->
+        <div class="ti3-icon ti3-icon-staricon install-form-item-label"><img class="img_box" src="./assets/img/required-field.svg">{{ i18n.plugins_tuning_label_ip }}
         </div>
         <input type="text" tiText [(ngModel)]="tempIP" (blur)="checkIP()" (change)="connected=false">
         <div *ngIf="ipCheckF" class="ti3-unifyvalid-error-container">
