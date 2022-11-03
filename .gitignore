@@ -4,3 +4,4 @@
 .vscode
 extension/common
 node_modules
+extension/tuning/out/sys

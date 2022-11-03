@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { I18nService } from '../service/i18n.service';
-import { VscodeService, COLOR_THEME } from '../service/vscode.service';
+import { VscodeService, COLOR_THEME, currentTheme} from '../service/vscode.service';
 import { Router } from '@angular/router';
 
 
@@ -96,9 +96,8 @@ export class UpgradeComponent implements OnInit {
         this.validation.errorMessage = this.i18n.common_term_filename_tip;
 
         // vscode颜色主题
-        if (document.body.className === 'vscode-light') {
-            this.currTheme = COLOR_THEME.Light;
-        }
+        this.currTheme = currentTheme();
+        console.log(this.currTheme)
 
         this.vscodeService.regVscodeMsgHandler('colorTheme', (msg: any) => {
             this.currTheme = msg.colorTheme;
