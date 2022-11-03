@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';       // 表单
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';         // 解决打包后刷新404问题
+import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';         // 解决打包后刷新404问题
 
 
 import { HttpClient } from '@angular/common/http'; // 国际化
@@ -64,7 +64,7 @@ const LANGUAGE_TYPE_ZH = 0;
     ],
     providers: [
         // 解决打包后刷新404问题
-        { provide: LocationStrategy, useClass: PathLocationStrategy }
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
         // tiny的服务
     ],
     bootstrap: [AppComponent]
