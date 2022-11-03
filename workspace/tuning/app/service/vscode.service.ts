@@ -6,6 +6,245 @@ import { MessageService } from './message.service';
 let that: any;
 declare function acquireVsCodeApi(): any;
 const windowJava: any = window;
+
+/**
+ * 存放所有消息回调函数，根据 message.cmd 来决定调用哪个方法
+ *
+ */
+const messageHandler: { [key: string]: any } = {
+
+    /**
+     * 此方法响应vscode 消息事件，页面进行跳转
+     * @param message vscode 发送的事件参数
+     */
+    navigate(message: any) {
+        console.log(message)
+        if (message.data.webSession) {
+            const webSession = message.data.webSession;
+            ((self as any).webviewSession || {}).setItem('role', webSession.role);
+            ((self as any).webviewSession || {}).setItem('username', webSession.username);
+            ((self as any).webviewSession || {}).setItem('loginId', webSession.loginId);
+            ((self as any).webviewSession || {}).setItem('isFirst', webSession.isFirst);
+            ((self as any).webviewSession || {}).setItem('language', webSession.language);
+            if (webSession.language === 'zh-cn') {
+                HyLocale.setLocale(HyLocale.ZH_CN);
+            } else {
+                HyLocale.setLocale(HyLocale.EN_US);
+            }
+            ((self as any).webviewSession || {}).setItem('workspace', webSession.workspace);
+            ((self as any).webviewSession || {}).setItem('migrationTip', webSession.migrationTip);
+            ((self as any).webviewSession || {}).setItem('showCheckEnvTips', webSession.showCheckEnvTips);
+        }
+        that.router.navigate([message.data.page], message.data.pageParams);
+    },
+    /**
+     * 文件下载
+     *
+     * @param data 发送的事件参数
+     */
+    downloadFile(data: any) {
+        if (that.callbacks[data.cbid]) {
+            that.callbacks[data.cbid](data.data);
+            delete that.callbacks[data.cbid];
+        }
+    },
+    /**
+     * 判断是否登录绑定回调函数
+     *
+     * @param data 发送的事件参数
+     */
+    isLogin(data: any) {
+        if (that.callbacks[data.cbid]) {
+            that.callbacks[data.cbid](data.data);
+            delete that.callbacks[data.cbid];
+        }
+    },
+    /**
+     * 保存ip 端口设置绑定回调函数
+     *
+     * @param data 发送的事件参数
+     */
+    saveConfig(data: any) {
+        if (that.callbacks[data.cbid]) {
+            that.callbacks[data.cbid](data.data);
+            delete that.callbacks[data.cbid];
+        }
+    },
+    /**
+     * 绑定回调
+     *
+     * @param data vscode发送的消息数据
+     */
+    checkConn(data: any) {
+        if (that.callbacks[data.cbid]) {
+            that.callbacks[data.cbid](data.data);
+            delete that.callbacks[data.cbid];
+        }
+    },
+
+    /**
+     * 读取ip 端口设置绑定回调函数
+     *
+     * @param data 发送的事件参数
+     */
+    readConfig(data: any) {
+        if (that.callbacks[data.cbid]) {
+            that.callbacks[data.cbid](data.data);
+            delete that.callbacks[data.cbid];
+        }
+    },
+
+    /**
+     * 读取ip 端口设置绑定回调函数
+     *
+     * @param data 发送的事件参数
+     */
+    readUrlConfig(data: any) {
+        if (that.callbacks[data.cbid]) {
+            that.callbacks[data.cbid](data.data);
+            delete that.callbacks[data.cbid];
+        }
+    },
+
+    /**
+     * 查询文件夹绑定回调函数
+     *
+     * @param data 发送的事件参数
+     */
+    checkDir(data: any) {
+        if (that.callbacks[data.cbid]) {
+            that.callbacks[data.cbid](data.data);
+            delete that.callbacks[data.cbid];
+        }
+    },
+
+    /**
+     * 调用部署流程绑定回调函数
+     *
+     * @param data 发送的事件参数
+     */
+    install(data: any) {
+        if (that.callbacks[data.cbid]) {
+            that.callbacks[data.cbid](data.data);
+            if (data.data.search(/Error/) !== -1) {
+                delete that.callbacks[data.cbid];
+            } else if (data.data.search(/failed/) !== -1) {
+                delete that.callbacks[data.cbid];
+            }
+        }
+    },
+
+    /**
+     * 调用卸载流程绑定回调函数
+     *
+     * @param data vscode发送的消息数据
+     */
+    uninstall(data: any) {
+        if (that.callbacks[data.cbid]) {
+            that.callbacks[data.cbid](data.data);
+            if (data.data.search(/Error/) !== -1) {
+                delete that.callbacks[data.cbid];
+            } else if (data.data.search(/failed/) !== -1) {
+                delete that.callbacks[data.cbid];
+            }
+        }
+    },
+
+    /**
+     * 调用升级流程绑定回调函数
+     *
+     * @param data vscode发送的消息数据
+     */
+    upgrade(data: any) {
+        if (that.callbacks[data.cbid]) {
+            that.callbacks[data.cbid](data.data);
+            if (data.data.search(/Error/) !== -1) {
+                delete that.callbacks[data.cbid];
+            } else if (data.data.search(/failed/) !== -1) {
+                delete that.callbacks[data.cbid];
+            }
+        }
+    },
+
+    /**
+     * 清理配置文件绑定回调函数
+     *
+     * @param data 发送的事件参数
+     */
+    cleanConfig(data: any) {
+        if (that.callbacks[data.cbid]) {
+            that.callbacks[data.cbid](data.data);
+            delete that.callbacks[data.cbid];
+        }
+    },
+
+    /**
+     * 调用privateKeyCheck绑定回调函数
+     *
+     * @param data vscode发送的消息数据
+     */
+    privateKeyCheck(data: any) {
+        if (that.callbacks[data.cbid]) {
+            that.callbacks[data.cbid](data.data);
+            delete that.callbacks[data.cbid];
+        }
+    },
+
+
+
+    /**
+     * 此方法响应vscode 消息事件，返回接口数据
+     * @param data 发送的事件参数
+     */
+    getData(data: any) {
+        if (that.callbacks[data.cbid]) {
+            that.callbacks[data.cbid](data.data);
+            delete that.callbacks[data.cbid];
+        }
+    },
+    /**
+     * 此方法响应vscode 消息事件，返回readVersionConfig接口数据
+     * @param data 发送的事件参数
+     */
+    readVersionConfig(data: any) {
+        if (that.callbacks[data.cbid]) {
+            that.callbacks[data.cbid](data.data);
+            delete that.callbacks[data.cbid];
+        }
+    },
+
+    /**
+     * 此方法响应vscode 消息事件，更新webviewsession中的language
+     * @param data 发送的事件参数
+     */
+    getLocale(data: any) {
+        ((self as any).webviewSession || {}).setItem('language', data.data);
+    },
+
+    /**
+     * 此方法单独发送消息至组件接受，消息订阅模式
+     * @param message 发送的事件参数
+     */
+    sendMessage(message: any) {
+        that.msgService.sendMessage(message.data);
+    },
+
+    /**
+     * 此方法响应vscode消息处理
+     * @param message 事件参数
+     */
+    handleVscodeMsg(message: any) {
+        const handlers = that.msgHandlers.get(message.type);
+        if (!handlers) {
+            return;
+        }
+        for (const handler of handlers) {
+            handler(message.data);
+        }
+    }
+
+};
+
 @Injectable({
     providedIn: 'root'
 })
@@ -18,244 +257,6 @@ export class VscodeService {
     constructor(public router: Router, private msgService: MessageService) {
         that = this;
     }
-
-    /**
-     * 存放所有消息回调函数，根据 message.cmd 来决定调用哪个方法
-     *
-     */
-    messageHandler: { [key: string]: any } = {
-
-        /**
-         * 此方法响应vscode 消息事件，页面进行跳转
-         * @param message vscode 发送的事件参数
-         */
-        navigate(message: any) {
-            console.log(message)
-            if (message.data.webSession) {
-                const webSession = message.data.webSession;
-                ((self as any).webviewSession || {}).setItem('role', webSession.role);
-                ((self as any).webviewSession || {}).setItem('username', webSession.username);
-                ((self as any).webviewSession || {}).setItem('loginId', webSession.loginId);
-                ((self as any).webviewSession || {}).setItem('isFirst', webSession.isFirst);
-                ((self as any).webviewSession || {}).setItem('language', webSession.language);
-                if (webSession.language === 'zh-cn') {
-                    HyLocale.setLocale(HyLocale.ZH_CN);
-                } else {
-                    HyLocale.setLocale(HyLocale.EN_US);
-                }
-                ((self as any).webviewSession || {}).setItem('workspace', webSession.workspace);
-                ((self as any).webviewSession || {}).setItem('migrationTip', webSession.migrationTip);
-                ((self as any).webviewSession || {}).setItem('showCheckEnvTips', webSession.showCheckEnvTips);
-            }
-            that.router.navigate([message.data.page], message.data.pageParams);
-        },
-        /**
-         * 文件下载
-         *
-         * @param data 发送的事件参数
-         */
-        downloadFile(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
-        /**
-         * 判断是否登录绑定回调函数
-         *
-         * @param data 发送的事件参数
-         */
-        isLogin(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
-        /**
-         * 保存ip 端口设置绑定回调函数
-         *
-         * @param data 发送的事件参数
-         */
-        saveConfig(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
-        /**
-         * 绑定回调
-         *
-         * @param data vscode发送的消息数据
-         */
-        checkConn(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
-
-        /**
-         * 读取ip 端口设置绑定回调函数
-         *
-         * @param data 发送的事件参数
-         */
-        readConfig(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
-
-        /**
-         * 读取ip 端口设置绑定回调函数
-         *
-         * @param data 发送的事件参数
-         */
-        readUrlConfig(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
-
-        /**
-         * 查询文件夹绑定回调函数
-         *
-         * @param data 发送的事件参数
-         */
-        checkDir(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
-
-        /**
-         * 调用部署流程绑定回调函数
-         *
-         * @param data 发送的事件参数
-         */
-        install(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                if (data.data.search(/Error/) !== -1) {
-                    delete that.callbacks[data.cbid];
-                } else if (data.data.search(/failed/) !== -1) {
-                    delete that.callbacks[data.cbid];
-                }
-            }
-        },
-
-        /**
-         * 调用卸载流程绑定回调函数
-         *
-         * @param data vscode发送的消息数据
-         */
-        uninstall(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                if (data.data.search(/Error/) !== -1) {
-                    delete that.callbacks[data.cbid];
-                } else if (data.data.search(/failed/) !== -1) {
-                    delete that.callbacks[data.cbid];
-                }
-            }
-        },
-
-        /**
-         * 调用升级流程绑定回调函数
-         *
-         * @param data vscode发送的消息数据
-         */
-        upgrade(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                if (data.data.search(/Error/) !== -1) {
-                    delete that.callbacks[data.cbid];
-                } else if (data.data.search(/failed/) !== -1) {
-                    delete that.callbacks[data.cbid];
-                }
-            }
-        },
-
-        /**
-         * 清理配置文件绑定回调函数
-         *
-         * @param data 发送的事件参数
-         */
-        cleanConfig(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
-
-        /**
-         * 调用privateKeyCheck绑定回调函数
-         *
-         * @param data vscode发送的消息数据
-         */
-        privateKeyCheck(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
-
-
-
-        /**
-         * 此方法响应vscode 消息事件，返回接口数据
-         * @param data 发送的事件参数
-         */
-        getData(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
-        /**
-         * 此方法响应vscode 消息事件，返回readVersionConfig接口数据
-         * @param data 发送的事件参数
-         */
-        readVersionConfig(data: any) {
-            if (that.callbacks[data.cbid]) {
-                that.callbacks[data.cbid](data.data);
-                delete that.callbacks[data.cbid];
-            }
-        },
-
-        /**
-         * 此方法响应vscode 消息事件，更新webviewsession中的language
-         * @param data 发送的事件参数
-         */
-        getLocale(data: any) {
-            ((self as any).webviewSession || {}).setItem('language', data.data);
-        },
-
-        /**
-         * 此方法单独发送消息至组件接受，消息订阅模式
-         * @param message 发送的事件参数
-         */
-        sendMessage(message: any) {
-            that.msgService.sendMessage(message.data);
-        },
-
-        /**
-         * 此方法响应vscode消息处理
-         * @param message 事件参数
-         */
-        handleVscodeMsg(message: any) {
-            const handlers = that.msgHandlers.get(message.type);
-            if (!handlers) {
-                return;
-            }
-            for (const handler of handlers) {
-                handler(message.data);
-            }
-        }
-
-    };
 
     /**
      * 注册vscode消息处理接口
@@ -378,7 +379,7 @@ export class VscodeService {
         if (typeof message.data === 'string') {
             message.data = JSON.parse(message.data);
         }
-        this.messageHandler[message.cmd](message);
+        messageHandler[message.cmd](message);
     }
 }
 
