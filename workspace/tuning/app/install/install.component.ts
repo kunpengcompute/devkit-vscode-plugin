@@ -77,6 +77,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
     };
 
     public dialogShowDetailText = '';
+    public dialogTitle = '';
 
     constructor(
         private router: Router,
@@ -217,8 +218,10 @@ export class InstallComponent implements AfterViewInit, OnInit {
             return;
         }
         if (this.username.toLocaleLowerCase() === 'root') {
+            this.dialogTitle = this.i18n.plugins_common_tips_checkConn_root_title;
             this.dialogShowDetailText = this.i18n.plugins_common_tips_checkConn_root;
         } else {
+            this.dialogTitle = this.i18n.plugins_public_text_tip;
             this.dialogShowDetailText = this.i18n.plugins_common_tips_checkConn_noroot.replace(/\{0\}/g, this.username);
         }
         this.showDialog.Open();

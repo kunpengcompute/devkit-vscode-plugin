@@ -270,10 +270,11 @@ export const I18N_US = {
   plugins_common_cut_server: 'Do I need to close the page and switch server configurations? Click OK to exit the current server?',
 
   // 检查ssh2链接时候
-  plugins_common_tips_checkConn_root: 'You are using the root user account. A common user account is recommended. For details , see FAQs. Continue?',
+  plugins_common_tips_checkConn_root_title: 'Deployment of root user',
+  plugins_common_tips_checkConn_root: 'You are using the root user account. A common user account is recommended. For details , see references. Continue?',
   plugins_common_tips_checkConn_noroot: 'You are using a common user account {0}. Check that the following conditions are met: \r\n\
-        The common user {0} has been added to user group wheel. For details, see FAQs. Continue?',
-  plugins_common_tips_checkConn_openFAQ: 'Open FAQ',
+        The common user {0} has been added to user group wheel. For details, see references. Continue?',
+  plugins_common_tips_checkConn_openFAQ: 'Open reference',
 
 
   plugins_public_text_tip: 'Tips',
