@@ -5,7 +5,7 @@ import { MessageService } from './message.service';
 
 let that: any;
 declare function acquireVsCodeApi(): any;
-const vscode = acquireVsCodeApi();
+const windowJava: any = window;
 @Injectable({
     providedIn: 'root'
 })
@@ -30,6 +30,7 @@ export class VscodeService {
          * @param message vscode 发送的事件参数
          */
         navigate(message: any) {
+            console.log(message)
             if (message.data.webSession) {
                 const webSession = message.data.webSession;
                 ((self as any).webviewSession || {}).setItem('role', webSession.role);
@@ -293,7 +294,12 @@ export class VscodeService {
             this.callbacks[callbackId] = callback;
         }
 
-        vscode.postMessage(messageReq);
+        windowJava.sendMessageToJava({
+            request: JSON.stringify(messageReq),
+            persistent: false,
+            onSuccess: (response: any) => { },
+            onFailure: (errorCode: any, errorMessage: any) => { }
+        });
     }
     /**
      * webview 通过 vscode调用接口
@@ -369,11 +375,8 @@ export class VscodeService {
      */
     public handleEvent(message: any) {
         // 直接调用对应的函数 message = { cmd: 'navigate', data: {page:'/home',pageParam:'',token:''}};
-        if (message.data && message.data.status && !message.data.realStatus) {   // 真实状态码不存在，则获取真实状态码
-            message.data.realStatus = message.data.status;
-            const arr = String(message.data.status).split('');
-            const str = arr[arr.length - 2];
-            message.data.status = Number(str);
+        if (typeof message.data === 'string') {
+            message.data = JSON.parse(message.data);
         }
         this.messageHandler[message.cmd](message);
     }
