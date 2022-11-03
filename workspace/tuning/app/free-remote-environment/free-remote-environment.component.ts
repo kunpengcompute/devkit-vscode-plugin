@@ -1,6 +1,6 @@
 import { I18nService, LANGUAGE_TYPE } from '../service/i18n.service';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { COLOR_THEME, VscodeService } from '../service/vscode.service';
+import { COLOR_THEME, VscodeService , currentTheme} from '../service/vscode.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
@@ -36,9 +36,7 @@ export class FreeRemoteEnvironmentComponent implements OnInit {
         // 获取当前语言
         this.currLang = I18nService.getLang();
         // vscode颜色主题适配
-        if (document.body.className.indexOf('vscode-light') > -1) {
-            this.currTheme = COLOR_THEME.Light;
-        }
+        this.currTheme = currentTheme();
         this.vscodeService.regVscodeMsgHandler('colorTheme', (msg: any) => {
             this.currTheme = msg.colorTheme;
             this.changeDetectorRef.markForCheck();

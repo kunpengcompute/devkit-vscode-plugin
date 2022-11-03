@@ -383,6 +383,15 @@ export class VscodeService {
     }
 }
 
+export function currentTheme() {
+    if (document.body.className === 'vscode-light' || document.body.className.includes('intellij-light')) {
+        return COLOR_THEME.Light;
+    } else {
+        return COLOR_THEME.Dark;
+    }
+}
+export const isLightTheme = document.body.className === 'vscode-light' || document.body.className.includes('intellij-light');
+
 // 颜色主题
 export const enum COLOR_THEME {
     Dark = 1,
