@@ -67,10 +67,10 @@ export const I18N_US = {
 
   plugins_tuning_button_uninstallConfirm: 'Uninstall',
   plugins_tuning_button_upgradeConfirm: 'Upgrade',
-  plugins_tuning_title_uninstalled: 'The tool is uninstalled successfully.',
+  plugins_tuning_title_uninstalled: 'Profiler Advisor is uninstalled successfully.',
   plugins_tuning_title_upgraded: 'The tool is upgraded successfully.',
-  plugins_tuning_title_uninstallFailed: 'Failed to uninstall the tool.',
-  plugins_tuning_title_upgradeFailed: 'Failed to upgrade the tool.',
+  plugins_tuning_title_uninstallFailed: 'Failed to uninstall the Profiler Advisor.',
+  plugins_tuning_title_upgradeFailed: 'Failed to upgrade the Profiler Advisor.',
   plugins_tuning_button_install: 'Click here to deploy',
   plugins_tuning_label_ip: 'IP Address',
   plugins_tuning_label_port: 'SSH Port',
