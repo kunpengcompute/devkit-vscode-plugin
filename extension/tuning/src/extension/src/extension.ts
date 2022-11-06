@@ -9,7 +9,7 @@ export function activate(context: vscode.ExtensionContext) {
    Utils.initVscodeCache(context, true);
    // 响应perfadvisor左侧菜单树所有按钮的命令来打开不同的webview
    ToolPanelManager.createOrShowPanelForPerfCommand(context);
-
+   
 }
 
 export function deactivate() { }

@@ -241,16 +241,6 @@ export class ToolPanelManager {
                     message
                 };
                 ToolPanelManager.createOrShowPanel(panelOption, context);
-                // const data = {
-                //     cmd: 'openNewPage',
-                //     data: {
-                //         router: 'install',
-                //         panelId: 'tuningInstall',
-                //         viewTitle: i18n.common_install_panel_title,
-                //         message: {}
-                //     }
-                // };
-                // vscodeService.postMessage(data, null);
             }));
     }
     /**
