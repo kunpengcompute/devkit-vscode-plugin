@@ -18,6 +18,7 @@
     <div class="config-form-item">
         <div class="ti3-icon ti3-icon-staricon config-form-item-label"><img src="./assets/img/required-field.svg">{{ i18n.plugins_common_label_ip }}
         </div>
+        <!-- {{ipCheck}}-->
         <input type="text" tiText [(ngModel)]="tempIP" (blur)="checkIP()" />
         <div *ngIf="ipCheck" class="ti3-unifyvalid-error-container">
             <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"></span>

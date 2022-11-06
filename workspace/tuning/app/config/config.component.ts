@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { I18nService } from '../service/i18n.service';
 import { VscodeService, COLOR_THEME } from '../service/vscode.service';
+
+
 @Component({
     selector: 'app-config',
     templateUrl: './config.component.html',
@@ -71,6 +73,7 @@ export class ConfigComponent implements OnInit {
      * @returns 校验结果
      */
     checkIP() {
+        // console.log("Checked at checkIP()")
         const reg = /^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$/;
         const invalidIp = /0.0.0.0|255.255.255.255/;
         this.ipCheck = !reg.test(this.tempIP) || invalidIp.test(this.tempIP);
@@ -82,6 +85,8 @@ export class ConfigComponent implements OnInit {
      * @returns 校验结果
      */
     checkPort() {
+        // console.log("Checked at checkPort()")
+        
         if ((/^[1-9]\d*$/.test(this.tempPort)
             && 1024 <= parseInt(this.tempPort, ConfigComponent.CONFIG_RADIX)
             && parseInt(this.tempPort, ConfigComponent.CONFIG_RADIX) <= 65535)) {
@@ -95,6 +100,8 @@ export class ConfigComponent implements OnInit {
      * 登录时弹窗确认
      */
     saveConfirm() {
+        console.log("Checked at saveConfirm()")
+        
         this.save();
     }
 
@@ -103,6 +110,7 @@ export class ConfigComponent implements OnInit {
      * @param openConfigServer 是否直接打开登录页面
      */
     save(openConfigServer: boolean = false) {
+        // console.log("Checked at save()")
         this.elementRef.nativeElement.querySelectorAll(`input`).forEach((element: any) => {
             element.focus();
             element.blur();
@@ -124,6 +132,7 @@ export class ConfigComponent implements OnInit {
             };
             this.vscodeService.postMessage(data, (res: any) => {
                 this.showLoading = false;
+                console.log(data)
                 // 版本不匹配
                 if (res.type === 'VERSIONMISMATCH') {
                     this.versionMismatch = this.i18nService.I18nReplace(this.i18n.plugins_tuning_message_versionCompatibility, {
@@ -141,6 +150,7 @@ export class ConfigComponent implements OnInit {
      * 取消配置操作(关闭页面)
      */
     cancel() {
+        // console.log("Checked at cancel()")
         const data = {
             cmd: 'closePanel',
             data: {
@@ -154,6 +164,7 @@ export class ConfigComponent implements OnInit {
      * 跳转install页面
      */
     openInstallPage() {
+        // console.log("Checked at openInstallPage()")
         const data = {
             cmd: 'openNewPage',
             data: {
@@ -170,6 +181,7 @@ export class ConfigComponent implements OnInit {
      * 跳转免费试用远程服务页面
      */
     openFreeTrialRemoteEnv() {
+        // console.log("Checked at openFreeTrialRemoteEnv()")
         const data = {
             cmd: 'openNewPage',
             data: {
@@ -186,6 +198,7 @@ export class ConfigComponent implements OnInit {
      * 切换服务器确认
      */
     public confirmDialogMsgTip() {
+        // console.log("Checked at confirmDialogMsgTip()")
         this.showDialog.Close();
         this.save(true);
     }
@@ -194,6 +207,7 @@ export class ConfigComponent implements OnInit {
      * 切换服务器取消
      */
     public cancelDiglogMsgTip() {
+        // console.log("Checked at cancelDiglogMsgTip()")
         this.showDialog.Close();
         this.showLoading = false;
     }
@@ -201,6 +215,7 @@ export class ConfigComponent implements OnInit {
      * 版本不匹配取消
      */
     cancelVersionDiglogMsgTip() {
+        // console.log("Checked at cancelVersionDiglogMsgTip()")
         this.versionDialog.Close()
     }
 }
