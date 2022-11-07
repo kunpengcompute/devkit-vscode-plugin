@@ -52,7 +52,8 @@ export enum VIEW_TYPE {
     uninstall = 'uninstall',
     install = 'install',
     upgrade = 'upgrade',
-    serverError = 'serverError'
+    serverError = 'serverError',
+    login = 'login'
 }
 
 
