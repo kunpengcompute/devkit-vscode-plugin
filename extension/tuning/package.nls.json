@@ -13,6 +13,7 @@
 
 
     "configure.remote.server": "配置远端服务器",
-    "plugins_perfadvisor_title_login": "登录性能分析工具"
+    "plugins_perfadvisor_title_login": "登录性能分析工具",
+    "kunpeng.tuning.activitybar": "鲲鹏性能分析插件"
     
 }

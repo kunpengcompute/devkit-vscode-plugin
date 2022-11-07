@@ -1,0 +1,139 @@
+OPEN SOURCE SOFTWARE NOTICE
+
+Please note we provide an open source software notice along with this product and/or this product firmware (in the following just ��this product��). The open source software licenses are granted by the respective right holders. And the open source licenses prevail all other license information with regard to the respective open source software contained in the product, including but not limited to End User Software Licensing Agreement. This notice is provided on behalf of Huawei Technologies Co. Ltd. and any of its local subsidiaries which may have provided this product to you in your local country.
+
+Warranty Disclaimer
+THE OPEN SOURCE SOFTWARE IN THIS PRODUCT IS DISTRIBUTED IN THE HOPE THAT IT WILL BE USEFUL, BUT WITHOUT ANY WARRANTY, WITHOUT EVEN THE IMPLIED WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. SEE THE APPLICABLE LICENSES FOR MORE DETAILS.
+
+Copyright Notice and License Texts
+
+
+Software: asn1 0.2.6
+Copyright notice: 
+Copyright (c) 2011 Mark Cavage, All rights reserved.
+
+License: MIT License
+Please see above.
+
+
+Software: asynckit 0.4.0
+Copyright notice: 
+Copyright (c) 2016 Alex Indigo.
+
+License: MIT License
+Please see above.
+
+
+Software: bcrypt-pbkdf 1.0.2
+Copyright notice: 
+Copyright (c) 2013 Ted Unangst <tedu@openbsd.org>
+Copyright 2016, Joyent Inc.
+
+License: MIT License
+Please see above.
+
+
+Software: combined-stream	1.0.8
+Copyright notice: 
+Copyright (c) 2011 Debuggable Limited <felix@debuggable.com>.
+
+License: MIT License
+Please see above.
+
+
+Software: delayed-stream 1.0.0
+Copyright notice: 
+Copyright (c) 2011 Debuggable Limited <felix@debuggable.com>
+
+License: MIT License
+Please see above.
+
+
+Software: eventemitter3	4.0.7
+Copyright notice: 
+Copyright (c) 2014 Arnout Kazemier
+
+License: MIT License
+Please see above.
+
+
+Software: follow-redirects 1.15.0
+Copyright notice: 
+Copyright 2014–present Olivier Lalonde <olalonde@gmail.com>, James Talmage <james@talmage.io>, Ruben Verborgh
+
+License: MIT License
+Please see above.
+
+
+Software: form-data	4.0.0
+Copyright notice: 
+Copyright (c) 2012 Felix Geisendörfer (felix@debuggable.com) and contributors
+
+License: MIT License
+Please see above.
+
+
+Software: http-proxy	1.18.1
+Copyright notice: 
+Copyright (c) 2010-2016 Charlie Robbins, Jarrett Cruger & the Contributors.
+
+License: MIT License
+Please see above.
+
+
+Software: mime-db 1.52.0
+Copyright notice: 
+Copyright (c) 2014 Jonathan Ong <me@jongleberry.com>
+Copyright (c) 2015-2022 Douglas Christopher Wilson <doug@somethingdoug.com>.
+
+License: MIT License
+Please see above.
+
+
+Software: mime-types 2.1.35
+Copyright notice: 
+Copyright (c) 2014 Jonathan Ong <me@jongleberry.com>
+Copyright (c) 2015 Douglas Christopher Wilson <doug@somethingdoug.com>.
+
+License: MIT License
+Please see above.
+
+
+Software: nan 2.16.0
+Copyright notice: 
+Copyright (c) 2018 [NAN contributors](<https://github.com/nodejs/nan#wg-members--collaborators>).
+
+License: MIT License
+Please see above.
+
+
+Software: requires-port	1.0.0
+Copyright notice: 
+Copyright (c) 2015 Unshift.io, Arnout Kazemier,  the Contributors..
+
+License: MIT License
+Please see above.
+
+
+Software: safer-buffer 2.1.2
+Copyright notice: 
+Copyright (c) 2018 Nikita Skovoroda <chalkerx@gmail.com>.
+
+License: MIT License
+Please see above.
+
+
+Software: ssh2	1.11.0
+Copyright notice: 
+Copyright Brian White. All rights reserved.
+
+License: MIT License
+Please see above.
+
+
+Software: tweetnacl	0.14.5
+Copyright notice: 
+No copyright notice found in source files of this software.
+
+License: The Unlicense
+Please see above.

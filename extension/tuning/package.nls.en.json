@@ -10,5 +10,6 @@
     "perfadvisor.sys.advicefeedback": "Advice Feedback",
 
     "configure.remote.server": "Configure Remote Server",
-    "plugins_perfadvisor_title_login": "Login Hyper Tuner"
+    "plugins_perfadvisor_title_login": "Login Hyper Tuner",
+    "kunpeng.tuning.activitybar": "Kunpeng Hyper Tuner Plugin"
 }
