@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as constant from './constant';
 import { Utils } from './utils';
-import { I18nService } from './i18nservice';
+import { I18nService } from './I18nService';
 import { messageHandler } from './webview-msg-handler';
 
 const i18n = I18nService.I18n();

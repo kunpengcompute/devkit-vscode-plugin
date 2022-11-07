@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as constant from './constant';
 import { COLOR_THEME } from './constant';
-import { I18nService } from './i18nservice';
+import { I18nService } from './I18nService';
 import { ErrorHelper } from './error-helper';
 import { ToolPanelManager } from './panel-manager';
 import axios, { AxiosRequestConfig } from 'axios';

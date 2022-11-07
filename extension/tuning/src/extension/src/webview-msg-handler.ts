@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as constant from './constant';
 import { Utils } from './utils';
 import { ToolPanelManager } from './panel-manager';
-import { I18nService } from './i18nservice';
+import { I18nService } from './I18nService';
 import { SSH2Tools } from './ssh2Tools';
 import { ErrorHelper } from './error-helper';
 import { ProxyManager } from './proxy-manager';
