@@ -233,6 +233,9 @@ export class Utils {
             enableScripts: true,
             retainContextWhenHidden: true,
         });
+        console.log("check at utils.ts at navToIFrame");
+        console.log(JSON.stringify(panel));
+        console.log("check at utils.ts at navToIFrame check panel done");
         panel.webview.onDidReceiveMessage((message) => {
             const msg = {
                 data: {
