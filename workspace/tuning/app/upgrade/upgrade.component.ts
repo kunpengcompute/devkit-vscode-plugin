@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { I18nService } from '../service/i18n.service';
 import { VscodeService, COLOR_THEME, currentTheme} from '../service/vscode.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 
 
 const UPGRADE_STATUS_START = -1;
@@ -71,8 +71,11 @@ export class UpgradeComponent implements OnInit {
 
     public dialogShowDetailText = '';
 
+    intelliJFlagDef = false;
+
     constructor(
         private router: Router,
+        private route: ActivatedRoute,
         public i18nService: I18nService,
         private elementRef: ElementRef,
         public vscodeService: VscodeService) {
@@ -97,7 +100,6 @@ export class UpgradeComponent implements OnInit {
 
         // vscode颜色主题
         this.currTheme = currentTheme();
-        console.log(this.currTheme)
 
         this.vscodeService.regVscodeMsgHandler('colorTheme', (msg: any) => {
             this.currTheme = msg.colorTheme;
@@ -106,6 +108,14 @@ export class UpgradeComponent implements OnInit {
 
     ngOnInit() {
         this.currLang = ((self as any).webviewSession || {}).getItem('language');
+        // 判断是不是intellij
+        this.route.queryParams.subscribe((data) => {
+            if (data.intelliJFlag === undefined) {
+                this.intelliJFlagDef = data.intellijFlag === 'true';
+            } else {
+                this.intelliJFlagDef = data.intelliJFlag === 'true';
+            }
+        });
     }
 
     /**
@@ -176,6 +186,10 @@ export class UpgradeComponent implements OnInit {
             }
         };
         this.vscodeService.postMessage(postData, (data: any) => {
+            if(this.intelliJFlagDef){
+                data=JSON.stringify(data)
+            }
+            console.log(data)
             if (data.search(/SUCCESS/) !== -1) {
                 this.connected = true;
                 this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
@@ -241,7 +255,10 @@ export class UpgradeComponent implements OnInit {
      * @param data 流程信息
      */
     processupgradeInfo(data: any) {
-        if (data === 'closeLoading') {
+        if(this.intelliJFlagDef){
+            data=JSON.stringify(data);
+        }
+        if (data.search(/closeLoading/)) {
           this.showLoading = false;
         }
         if (this.upgrading !== RUNNING) { return; }
@@ -484,11 +501,24 @@ export class UpgradeComponent implements OnInit {
         if (this.username.toLocaleLowerCase() !== 'root') {
             url = this.pluginUrlCfg.checkConn_openFAQ2;
         }
-        const a = document.createElement('a');
-        a.setAttribute('href', url);
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+
+        const postData = {
+            cmd: 'openUrlInBrowser',
+            data: {
+                url: url,
+            }
+        };
+        if(this.intelliJFlagDef){
+            // 如果是intellij就调用java方法唤起默认浏览器打开网页
+            this.vscodeService.postMessage(postData, null);
+        }
+        else{
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
         this.showDialog.Close();
     }
     /**

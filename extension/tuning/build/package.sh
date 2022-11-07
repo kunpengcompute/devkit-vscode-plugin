@@ -53,6 +53,7 @@ zip_move_idea_dir()
 {
     cd ${root_dir}
     mv out tuning
+    rm -rf tuning.zip
     zip -r tuning.zip tuning
     cp -rf tuning.zip ${idea_dir}
     mv tuning out
@@ -62,8 +63,7 @@ main()
 {
     clean
     start_info
-    build_sys_java    
-    generate_vsix
+    build_sys_java
     zip_move_idea_dir
     end_info
 }

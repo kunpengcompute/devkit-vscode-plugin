@@ -56,6 +56,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     windowJava.JavaMessageBridge = this.vscodeService.handleEvent;
+    windowJava.switchTheme = this.vscodeService.handleSwitchTheme;
     // 此变量作为占位符，其内容值会被替换，用于页面第一次跳转
     const data = (self as any).navigatorPage.data as INavigatorPage;
 

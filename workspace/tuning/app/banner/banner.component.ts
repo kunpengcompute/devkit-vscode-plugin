@@ -91,11 +91,23 @@ export class BannerComponent implements OnInit, OnDestroy {
         } else {
             url = this.currLang === 0 ? url1 : url2;
         }
-        const a = document.createElement('a');
-        a.setAttribute('href', url);
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        const postData = {
+            cmd: 'openUrlInBrowser',
+            data: {
+                url: url,
+            }
+        };
+        if(this.intelliJFlagDef){
+            // 如果是intellij就调用java方法唤起默认浏览器打开网页
+            this.vscodeService.postMessage(postData, null);
+        }
+        else{
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
     }
     /**
      * 监听 mouseenter 事件

@@ -5,3 +5,5 @@
 extension/common
 node_modules
 extension/tuning/out/sys
+extension/tuning/out/Kunpeng-DevKit-IDE-hyper-tuner-plugin_2.3.5.vsix
+extension/tuning/tuning.zip

@@ -381,6 +381,29 @@ export class VscodeService {
         }
         messageHandler[message.cmd](message);
     }
+
+    /**
+     * 切换主题颜色
+     *
+     * @param msg 发送事件参数
+     */
+     public handleSwitchTheme(msg: string) {
+        let theme = COLOR_THEME.Dark;
+        if (msg === 'light') {
+            document.body.className = 'vscode-light intellij-light';
+            theme = COLOR_THEME.Light;
+        } else {
+           document.body.className = 'vscode-dark  intellij-dark';
+        }
+        const message = {
+            type : 'colorTheme',
+            data : {
+                colorTheme : theme
+            }
+        };
+        const cmd = 'handleVscodeMsg';
+        messageHandler[cmd](message);
+    }
 }
 
 export function currentTheme() {

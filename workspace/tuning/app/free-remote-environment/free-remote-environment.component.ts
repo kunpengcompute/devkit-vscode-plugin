@@ -23,6 +23,8 @@ export class FreeRemoteEnvironmentComponent implements OnInit {
         freeTrialRemoteEnv: ''
     };
 
+    intelliJFlagDef = false;
+
     constructor(
         private i18nService: I18nService,
         private vscodeService: VscodeService,
@@ -55,6 +57,15 @@ export class FreeRemoteEnvironmentComponent implements OnInit {
             this.changeDetectorRef.detectChanges();
         });
         // this.initIntroduceList()
+
+        // 判断是不是intellij
+        this.route.queryParams.subscribe((data) => {
+            if (data.intelliJFlag === undefined) {
+                this.intelliJFlagDef = data.intellijFlag === 'true';
+            } else {
+                this.intelliJFlagDef = data.intelliJFlag === 'true';
+            }
+        });
     }
 
     private initIntroduceList() {
@@ -152,7 +163,8 @@ export class FreeRemoteEnvironmentComponent implements OnInit {
                 router: 'config',
                 panelId: 'tuningNonServerConfig',
                 viewTitle: this.i18n.plugins_tuning_configure_remote_server,
-                message: {}
+                message: {},
+                closePage:"true"
             }
         };
         this.vscodeService.postMessage(cmdData, null);
@@ -160,7 +172,9 @@ export class FreeRemoteEnvironmentComponent implements OnInit {
         const message = {
             cmd: 'closePanel'
         };
-        this.vscodeService.postMessage(message, null);
+        if(!this.intelliJFlagDef){
+            this.vscodeService.postMessage(message, null);
+        }
     }
 
     /**
@@ -168,11 +182,23 @@ export class FreeRemoteEnvironmentComponent implements OnInit {
      * @param url 路径
      */
     openUrl(url: string) {
-        const a = document.createElement('a');
-        a.setAttribute('href', url);
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        const postData = {
+            cmd: 'openUrlInBrowser',
+            data: {
+                url: url,
+            }
+        };
+        if(this.intelliJFlagDef){
+            // 如果是intellij就调用java方法唤起默认浏览器打开网页
+            this.vscodeService.postMessage(postData, null);
+        }
+        else{
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
     }
 
 }
