@@ -319,7 +319,7 @@ export class ToolPanelManager {
             }
         };
         const message = Utils.generateMessage('navigate',
-            { page: 'login', pageParams: param, webSession: sysPerfSession });
+            { page: '/login', pageParams: param, webSession: sysPerfSession });
         console.log("Message:");
         console.log(message);
         console.log(JSON.stringify(message));
