@@ -16,6 +16,8 @@ export class ConfigComponent implements OnInit {
     public tempIP: string;
     public tempPort = '';
     public config: any;
+    public hasConfig = false;
+    public firstConfig = true;
     public ipCheck = false;
     public portCheck = false;
     public currLang: number;
@@ -36,13 +38,14 @@ export class ConfigComponent implements OnInit {
             this.pluginUrlCfg = { sysConfig_openFAQ1: resp.sysConfig_openFAQ1 };
         });
         // vscode颜色主题
-        if (document.body.className === 'vscode-light') {
+        if (document.body.className === 'vscode-light intellij-light') {
             this.currTheme = COLOR_THEME.Light;
         }
 
         this.vscodeService.regVscodeMsgHandler('colorTheme', (msg: any) => {
             this.currTheme = msg.colorTheme;
         });
+        // TODO ?
         this.vscodeService.regVscodeMsgHandler('showCustomDialog', (msg: any) => {
             this.showIfServerDialog = true;
             this.showDialog.Open();
@@ -60,6 +63,8 @@ export class ConfigComponent implements OnInit {
         this.vscodeService.postMessage({ cmd: 'readConfig' }, (data: any) => {
             this.config = data;
             if (this.config.tuningConfig.length > 0) {
+                this.hasConfig = true;
+                this.firstConfig = false;
                 this.tempIP = this.config.tuningConfig[0].ip;
                 this.tempPort = this.config.tuningConfig[0].port;
             }
@@ -95,6 +100,7 @@ export class ConfigComponent implements OnInit {
      * 登录时弹窗确认
      */
     saveConfirm() {
+        console.log("=========this is saveConfig =============");
         this.save();
     }
 
@@ -103,27 +109,37 @@ export class ConfigComponent implements OnInit {
      * @param openConfigServer 是否直接打开登录页面
      */
     save(openConfigServer: boolean = false) {
+        console.log("============this is save ==============");
+        console.log("ip is ", this.tempIP);
+        console.log("port is ", this.tempPort);
+        console.log("this.config is ", this.config);
+        // this.config赋值
+        this.config = {}; // 
         this.elementRef.nativeElement.querySelectorAll(`input`).forEach((element: any) => {
             element.focus();
             element.blur();
         });
         if (!this.ipCheck && !this.portCheck) {
             this.showLoading = true;
-            this.config.tuningConfig = [];
-            this.config.tuningConfig.push({
+            this.config.tuningConfig = {
                 ip: this.tempIP,
                 port: this.tempPort
+            };
+            // this.config.tuningConfig.push({
+            //     ip: this.tempIP,
+            //     port: this.tempPort
 
-            });
+            // });
             let data = {
                 cmd: 'saveConfig', data: {
-                    data: JSON.stringify(this.config),
+                    data: JSON.stringify(this.config.tuningConfig),
                     showInfoBox: true,
                     openConfigServer
                 }
             };
             this.vscodeService.postMessage(data, (res: any) => {
                 this.showLoading = false;
+                console.log(res);
                 // 版本不匹配
                 if (res.type === 'VERSIONMISMATCH') {
                     this.versionMismatch = this.i18nService.I18nReplace(this.i18n.plugins_tuning_message_versionCompatibility, {
@@ -133,6 +149,8 @@ export class ConfigComponent implements OnInit {
                     this.versionDialog.Open()
                 }
             });
+            this.hasConfig = true;
+            // this.readConfig();
         }
     }
 
