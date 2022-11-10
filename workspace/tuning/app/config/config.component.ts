@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { notificationType } from '../notification-box/notification-box.component';
 import { I18nService } from '../service/i18n.service';
 import { VscodeService, COLOR_THEME } from '../service/vscode.service';
 @Component({
@@ -10,6 +11,7 @@ export class ConfigComponent implements OnInit {
     @ViewChild('saveConfirmTip') saveConfirmTip: { Close: () => void; Open: () => void; };
     @ViewChild('showDialog', { static: false }) showDialog: { Close: () => void; Open: () => void; };
     @ViewChild('versionDialog', { static: false }) versionDialog: { Close: () => void; Open: () => void; };
+    @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; close: () => void};
 
     private static CONFIG_RADIX = 10;
     public i18n: any;
@@ -121,10 +123,13 @@ export class ConfigComponent implements OnInit {
         });
         if (!this.ipCheck && !this.portCheck) {
             this.showLoading = true;
+            this.notificationBox.setType(notificationType.success);
+            this.notificationBox.show();
             this.config.tuningConfig = {
                 ip: this.tempIP,
                 port: this.tempPort
             };
+            // this.showDialog.Open();
             // this.config.tuningConfig.push({
             //     ip: this.tempIP,
             //     port: this.tempPort
@@ -159,6 +164,7 @@ export class ConfigComponent implements OnInit {
      * 取消配置操作(关闭页面)
      */
     cancel() {
+        console.log("closing panel");
         const data = {
             cmd: 'closePanel',
             data: {
