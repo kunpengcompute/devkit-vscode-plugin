@@ -60,11 +60,7 @@ export class FreeRemoteEnvironmentComponent implements OnInit {
 
         // 判断是不是intellij
         this.route.queryParams.subscribe((data) => {
-            if (data.intelliJFlag === undefined) {
-                this.intelliJFlagDef = data.intellijFlag === 'true';
-            } else {
-                this.intelliJFlagDef = data.intelliJFlag === 'true';
-            }
+            this.intelliJFlagDef = data.intellijFlag === 'true';
         });
     }
 

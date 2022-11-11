@@ -2,11 +2,11 @@
 <app-banner></app-banner>
 <div *ngIf="installing == -1" class="install-form">
     <p class="install-title-gen title">{{ i18n.plugins_tuning_title_installDt }}
-        <a *ngIf="i18nService.currLang === i18nService.langType.zh_cn" [href]="pluginUrlCfg.sysInstall_openFAQ1">
+        <a *ngIf="i18nService.currLang === i18nService.langType.zh_cn" (click)="clickFAQ(pluginUrlCfg.sysInstall_openFAQ1)">
             <img *ngIf="currTheme === 1" class="help-icon" src="./assets/img/icon-help-dark.svg">
             <img *ngIf="currTheme === 2" class="help-icon" src="./assets/img/icon-help-light.svg">
         </a>
-        <a *ngIf="i18nService.currLang === i18nService.langType.en" [href]="pluginUrlCfg.sysInstall_openFAQ1">
+        <a *ngIf="i18nService.currLang === i18nService.langType.en" (click)="clickFAQ(pluginUrlCfg.sysInstall_openFAQ1)">
             <img *ngIf="currTheme === 1" class="help-icon" src="./assets/img/icon-help-dark.svg">
             <img *ngIf="currTheme === 2" class="help-icon" src="./assets/img/icon-help-light.svg">
         </a>
@@ -15,7 +15,7 @@
         <img class="img_box" src="./assets/img/tip/icon_information.svg">
         <span class="top-tips">
             {{ i18n.plugins_common_message_installDt1 }}
-            <a [href]="pluginUrlCfg.vscodeService_openFAQ2">{{i18n.plugins_common_message_installDt2}}</a>
+            <a (click)="clickFAQ(pluginUrlCfg.vscodeService_openFAQ2)">{{i18n.plugins_common_message_installDt2}}</a>
             {{ i18n.plugins_common_message_installDt3 }}
         </span>
     </div>
@@ -57,11 +57,11 @@
             <!-- radio -->
             <div>
                 <div class="ssh-type-title color-d-aa-l-61">{{ i18n.plugins_common_label_selectSSHType }}
-                    <a *ngIf="i18nService.currLang === i18nService.langType.zh_cn" [href]="pluginUrlCfg.sysInstall_openFAQ2">
+                    <a *ngIf="i18nService.currLang === i18nService.langType.zh_cn" (click)="clickFAQ(pluginUrlCfg.sysInstall_openFAQ2)">
                         <img *ngIf="currTheme === 1" class="help-icon" src="./assets/img/icon-help-dark-1.svg">
                         <img *ngIf="currTheme === 2" class="help-icon" src="./assets/img/icon-help-light.svg">
                     </a>
-                    <a *ngIf="i18nService.currLang === i18nService.langType.en" [href]="pluginUrlCfg.sysInstall_openFAQ2">
+                    <a *ngIf="i18nService.currLang === i18nService.langType.en" (click)="clickFAQ(pluginUrlCfg.sysInstall_openFAQ2)">
                         <img *ngIf="currTheme === 1" class="help-icon" src="./assets/img/icon-help-dark-1.svg">
                         <img *ngIf="currTheme === 2" class="help-icon" src="./assets/img/icon-help-light.svg">
                     </a>
@@ -232,9 +232,9 @@
                 <p class="mb10">{{i18n.plugins_common_message_beforeInstallDsc5}}</p>
                 <p class="mb10">{{i18n.plugins_tuning_message_beforeInstallDsc6}}</p>
                 <p>
-                    <a [href]="pluginUrlCfg.sysInstall_openFAQ4">{{i18n.plugins_tuning_message_pg_download_link}}</a>
+                    <a (click)="clickFAQ(pluginUrlCfg.sysInstall_openFAQ4)">{{i18n.plugins_tuning_message_pg_download_link}}</a>
                     <span>{{i18n.semicolon}}</span>
-                    <a class="ml5" [href]="pluginUrlCfg.sysInstall_openFAQ5">{{i18n.plugins_tuning_message_pg_vfc_tool_download_link}}</a>
+                    <a class="ml5" (click)="clickFAQ(pluginUrlCfg.sysInstall_openFAQ5)">{{i18n.plugins_tuning_message_pg_vfc_tool_download_link}}</a>
                 </p>
             </div>
         </div>

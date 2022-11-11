@@ -2,11 +2,11 @@
 <app-banner></app-banner>
 <div *ngIf="uninstalling === -1" class="uninstall-form">
     <p class="uninstall-title-gen title">{{ i18n.plugins_tuning_title_uninstallDt }}
-        <a *ngIf="i18nService.currLang === i18nService.langType.zh_cn" [href]="pluginUrlCfg.uninstall_openFAQ1">
+        <a *ngIf="i18nService.currLang === i18nService.langType.zh_cn" (click)="clickFAQ(pluginUrlCfg.uninstall_openFAQ1)">
             <img *ngIf="currTheme === 1" class="help-icon" src="./assets/img/icon-help-dark.svg">
             <img *ngIf="currTheme === 2" class="help-icon" src="./assets/img/icon-help-light.svg">
         </a>
-        <a *ngIf="i18nService.currLang === i18nService.langType.en" [href]="pluginUrlCfg.uninstall_openFAQ1">
+        <a *ngIf="i18nService.currLang === i18nService.langType.en" (click)="clickFAQ(pluginUrlCfg.uninstall_openFAQ1)">
             <img *ngIf="currTheme === 1" class="help-icon" src="./assets/img/icon-help-dark.svg">
             <img *ngIf="currTheme === 2" class="help-icon" src="./assets/img/icon-help-light.svg">
         </a>
@@ -54,11 +54,11 @@
         <div>
             <div>
                 <div class="ssh-type-title">{{ i18n.plugins_common_label_selectSSHType }}
-                    <a *ngIf="i18nService.currLang === i18nService.langType.zh_cn" [href]="pluginUrlCfg.uninstall_openFAQ2">
+                    <a *ngIf="i18nService.currLang === i18nService.langType.zh_cn" (click)="clickFAQ(pluginUrlCfg.uninstall_openFAQ2)">
                         <img *ngIf="currTheme === 1" class="help-icon" src="./assets/img/icon-help-dark-1.svg">
                         <img *ngIf="currTheme === 2" class="help-icon" src="./assets/img/icon-help-light.svg">
                     </a>
-                    <a *ngIf="i18nService.currLang === i18nService.langType.en" [href]="pluginUrlCfg.uninstall_openFAQ2">
+                    <a *ngIf="i18nService.currLang === i18nService.langType.en" (click)="clickFAQ(pluginUrlCfg.uninstall_openFAQ2)">
                         <img *ngIf="currTheme === 1" class="help-icon" src="./assets/img/icon-help-dark-1.svg">
                         <img *ngIf="currTheme === 2" class="help-icon" src="./assets/img/icon-help-light.svg">
                     </a>

@@ -65,11 +65,7 @@ export class BannerComponent implements OnInit, OnDestroy {
         });
         this.currLang = I18nService.getLang();
         this.route.queryParams.subscribe((data) => {
-            if (data.intelliJFlag === undefined) {
-                this.intelliJFlagDef = data.intellijFlag === 'true';
-            } else {
-                this.intelliJFlagDef = data.intelliJFlag === 'true';
-            }
+            this.intelliJFlagDef = data.intellijFlag === 'true';
         });
 
     }
