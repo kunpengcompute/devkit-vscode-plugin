@@ -1,0 +1,6 @@
+<div class="notification-box" [ngClass]="{'active':isShow}">
+    <!-- notification type icon -->
+    <div class="notification-icon" [ngClass]="{'success': 'success', 'info': 'info', 'warn': 'warn', 'error': 'error'}[type]"></div>
+    <!-- notification message -->
+    <ng-content select=".notification-message"></ng-content>
+</div>
