@@ -65,7 +65,7 @@ export const I18N_EN = {
      Too many retries will also cause the check failure.',
     plugins_common_message_sshAlgError: 'Connection detection failed. The algorithm on the client side does not match that on the \
      server side. For details about how to configure a security algorithm, see FAQ.',
-    common_login: 'Hyper Tuner',
+    common_login: 'Kunpeng Hyper Tuner Tool',
     plugins_common_message_resqust_timeout: 'Network timeout.',
     plugins_common_message_responseError: 'The server does not respond. \
      Check that the tool has been deployed on the server and the network connection is normal.',

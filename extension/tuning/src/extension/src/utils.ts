@@ -233,9 +233,14 @@ export class Utils {
             enableScripts: true,
             retainContextWhenHidden: true,
         });
-        console.log("check at utils.ts at navToIFrame");
-        console.log(JSON.stringify(panel));
-        console.log("check at utils.ts at navToIFrame check panel done");
+
+        console.log("global at navtoiframe");
+        console.log(global);
+        console.log("default port at navtoiframe");
+        console.log(defaultPort);
+        console.log("proxy at navtoiframe");
+        console.log(proxy)
+        
         panel.webview.onDidReceiveMessage((message) => {
             const msg = {
                 data: {
