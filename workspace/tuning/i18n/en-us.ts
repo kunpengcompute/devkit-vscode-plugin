@@ -285,5 +285,6 @@ export const I18N_US = {
   plugins_tuning_message_versionCompatibility: 'The plugin version does not match the software version of the server. \
   The server version of the code migration tool that this plugin can match is: {0}; \
   the current server version of the code migration tool is: {1}. \
-  Please upgrade the server version to the matching version.'
+  Please upgrade the server version to the matching version.',
+  plugins_tuning_message_config_server_success: 'Config remote server success',
 };

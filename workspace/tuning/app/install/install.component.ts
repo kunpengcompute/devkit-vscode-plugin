@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angula
 import { I18nService } from '../service/i18n.service';
 import { VscodeService, COLOR_THEME } from '../service/vscode.service';
 import { Router } from '@angular/router';
+import { notificationType } from '../notification-box/notification-box.component';
 
 const installStatusStart = -1;
 const RUNNING = 0;
@@ -21,6 +22,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
     @ViewChild('installModal', { static: false }) installModal: { Close: () => void; Open: () => void; };
 
     @ViewChild('showDialog', { static: false }) showDialog: { Close: () => void; Open: () => void; };
+    @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; };
 
     public i18n: any = this.i18nService.I18n();
     public currLang: number;
@@ -77,6 +79,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
     };
 
     public dialogShowDetailText = '';
+    public notificationMessage = ''; // 执行结果提示
 
     constructor(
         private router: Router,
@@ -192,6 +195,12 @@ export class InstallComponent implements AfterViewInit, OnInit {
         this.vscodeService.postMessage(message, null);
     }
 
+    setNotificationBox(type: notificationType, info: string) {
+        this.notificationBox.setType(type);
+        this.notificationMessage = info;
+        this.notificationBox.show();
+    }
+
     private getCheckResult() {
         if (!this.ipCheckF && !this.tempPortCheckF && !this.usernameCheckNull &&
             ((this.sshTypeSelected === 'usepwd' && !this.pwdCheckNull) ||
@@ -258,20 +267,25 @@ export class InstallComponent implements AfterViewInit, OnInit {
         this.vscodeService.postMessage(postData, (data: any) => {
             if (data.search(/SUCCESS/) !== -1) {
                 this.connected = true;
-                this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
+                this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
+                // this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
             } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
                 this.connected = false;
-                this.showInfoBox(this.i18n.plugins_common_tips_connFail, 'error');
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
+                // this.showInfoBox(this.i18n.plugins_common_tips_connFail, 'error');
             } else if (data.search(/host fingerprint verification failed/) !== -1) {
                 this.connected = false;
-                this.showInfoBox(this.i18n.plugins_common_tips_figerFail, 'error');
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_figerFail);
+                // this.showInfoBox(this.i18n.plugins_common_tips_figerFail, 'error');
             } else if (data.search(/Timed out while waiting for handshake/) !== -1) {
                 this.connected = false;
-                this.showInfoBox(this.i18n.plugins_common_tips_timeOut, 'error');
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_timeOut);
+                // this.showInfoBox(this.i18n.plugins_common_tips_timeOut, 'error');
             } else if (data.search(/Cannot parse privateKey/) !== -1) {
                 // 密码短语错误
                 this.connected = false;
-                this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_passphraseFail);
+                // this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
             }
             this.connectChecking = false;
         });
@@ -328,11 +342,13 @@ export class InstallComponent implements AfterViewInit, OnInit {
         if (this.installing !== RUNNING) { return; }
         if (data.search(/uploadErr/) !== -1) {
             this.installing = FAILED;
-            this.showInfoBox(this.i18n.plugins_common_tips_uploadError, 'error');
+            // this.showInfoBox(this.i18n.plugins_common_tips_uploadError, 'error');
+            this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_uploadError);
             this.clearPwd();
         } else if (data.search(/Error:/) !== -1) {
             this.installing = FAILED;
-            this.showInfoBox(this.i18n.plugins_common_tips_sshError, 'error');
+            this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_sshError);
+            // this.showInfoBox(this.i18n.plugins_common_tips_sshError, 'error');
             this.clearPwd();
         } else if (data.search(/listen/) !== -1) {
             const matchIpPort = /(\d{1,3}\.){3}\d{1,3}:\d+/;
@@ -497,7 +513,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
         this.localfilepath = localFile.path.replace(/\\/g, '/');
         const size = localFile.size / 1024 / 1024;
         if (size > 10) {
-            this.showInfoBox(this.i18n.plugins_common_message_sshkeyExceedMaxSize, 'warn');
+            this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshkeyExceedMaxSize);
+            // this.showInfoBox(this.i18n.plugins_common_message_sshkeyExceedMaxSize, 'warn');
             this.localfilepath = '';
             return;
         }
@@ -515,7 +532,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
         };
         this.vscodeService.postMessage(postData, (isPrivateKey: any) => {
             if (!isPrivateKey) {
-                this.showInfoBox(this.i18n.plugins_common_message_sshkeyFail, 'warn');
+                this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshkeyFail);
+                // this.showInfoBox(this.i18n.plugins_common_message_sshkeyFail, 'warn');
                 this.localfilepath = '';
                 return;
             }

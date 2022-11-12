@@ -11,7 +11,7 @@ export class ConfigComponent implements OnInit {
     @ViewChild('saveConfirmTip') saveConfirmTip: { Close: () => void; Open: () => void; };
     @ViewChild('showDialog', { static: false }) showDialog: { Close: () => void; Open: () => void; };
     @ViewChild('versionDialog', { static: false }) versionDialog: { Close: () => void; Open: () => void; };
-    @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; close: () => void};
+    @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; };
 
     private static CONFIG_RADIX = 10;
     public i18n: any;
@@ -27,7 +27,8 @@ export class ConfigComponent implements OnInit {
     public pluginUrlCfg: any = {};
     public showLoading = false;
     public showIfServerDialog = false; // 显示是否切换服务器
-    public versionMismatch = ""
+    public versionMismatch = "";
+    public notificationMessage = ""; // 配置远端服务器执行结果提示
 
     constructor(
         private i18nService: I18nService,
@@ -106,6 +107,12 @@ export class ConfigComponent implements OnInit {
         this.save();
     }
 
+    setNotificationBox(type: notificationType, info: string) {
+        this.notificationBox.setType(type);
+        this.notificationMessage = info;
+        this.notificationBox.show();
+    }
+
     /**
      * 将ip port配置写入配置文件
      * @param openConfigServer 是否直接打开登录页面
@@ -123,8 +130,7 @@ export class ConfigComponent implements OnInit {
         });
         if (!this.ipCheck && !this.portCheck) {
             this.showLoading = true;
-            this.notificationBox.setType(notificationType.success);
-            this.notificationBox.show();
+            this.setNotificationBox(notificationType.success, this.i18n.plugins_tuning_message_config_server_success);
             this.config.tuningConfig = {
                 ip: this.tempIP,
                 port: this.tempPort
