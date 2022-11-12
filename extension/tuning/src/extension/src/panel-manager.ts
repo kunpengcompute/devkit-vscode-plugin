@@ -5,6 +5,8 @@ import { I18nService } from './i18nservice';
 import { messageHandler } from './webview-msg-handler';
 
 const i18n = I18nService.I18n();
+
+
 class ToolPanel {
     private panelId: string;
     private panel: vscode.WebviewPanel;
@@ -22,6 +24,8 @@ class ToolPanel {
         this.module = panelOption.module;
         this.needAsycnUpdate = panelOption.needAsycnUpdate || false;
         this.createTime = panelOption.createTime || new Date();
+
+    
 
         // 调用vscode 接口创建一个存放webview的panel
         const panel = vscode.window.createWebviewPanel(
@@ -184,9 +188,7 @@ export class ToolPanelManager {
         // 打开登录panel
         context.subscriptions.push(vscode.commands.registerCommand('extension.view.perfadvisorlogin',
             () => {
-                console.log("check at panel-manager.ts at context.subscriptions.push blah")
                 ToolPanelManager.openPerfLoginPanel(context, 'login');
-                console.log("end subscriptions check");
             }));
 
         // 升级性能分析工具
@@ -242,6 +244,8 @@ export class ToolPanelManager {
                     module: 'tuning',
                     message
                 };
+                console.log("Message:")
+                console.log(message)
                 ToolPanelManager.createOrShowPanel(panelOption, context);
             }));
     }
@@ -251,10 +255,6 @@ export class ToolPanelManager {
      * param context vscode上下文信息
      */
     public static createOrShowPanel(panelOption: any, context: vscode.ExtensionContext) {
-        console.log("check at panel-managere.ts at creatOrShowPanel");
-        console.log(panelOption);
-        console.log("this is sysPerfToolPanels content before the loop");
-        console.log(ToolPanelManager.sysPerfToolPanels);
         for (const toolPanel of ToolPanelManager.sysPerfToolPanels) {
             if (toolPanel.getPanelId() === panelOption.panelId) {
                 // 临时解决创建工程页面图片丢失的情况
@@ -267,10 +267,6 @@ export class ToolPanelManager {
         }
         const newToolPanel: ToolPanel = new ToolPanel(panelOption, ToolPanelManager.closeToolPanel, context);
         const newPanelId = newToolPanel.getPanelId().split('-');
-        console.log("next one is newToolPanel");
-        console.log(newToolPanel);
-        console.log("newPanelId:");
-        console.log(newPanelId);
 
         // FIX alreadyExistPanelId 的为真判断会使有的窗口不能被重复打开，只用通过简单的过滤来
         if (!newPanelId.includes('tuninghelperInfoLog')
@@ -285,9 +281,7 @@ export class ToolPanelManager {
                 ToolPanelManager.closePanel([alreadyExistPanelId.getPanelId()], 'tuning');
             }
         }
-        console.log("before the call of sysPerfToolPanels");
         ToolPanelManager.sysPerfToolPanels.push(newToolPanel);
-        console.log(ToolPanelManager.sysPerfToolPanels);
         return newToolPanel;
     }
 
@@ -297,11 +291,7 @@ export class ToolPanelManager {
      * @param context 插件上下文
      */
      public static openPerfLoginPanel(context: vscode.ExtensionContext, loginType: string) {
-        console.log("check at panel-manager.ts at openPerfLoginPanel method");
-        console.log("context:");
-        console.log(context)
         let sysPerfSession: any = context.globalState.get('tuningSession');
-        console.log(sysPerfSession);
         // 如果是首次登录只需要将语言传递给webview
         if (null === sysPerfSession) {
             sysPerfSession = {
@@ -309,33 +299,50 @@ export class ToolPanelManager {
             };
         }
 
-        // 通过logintype来区分是正常登录还是切换账户：
-        const toolVersions = Utils.getConfigJson(context).sysPerfVersion;
-        const param = {
-            queryParams: {
-                loginType,
-                toolVersions,
-                panelId: constant.PANEL_ID.tuningNonLogin
-            }
-        };
-        const message = Utils.generateMessage('navigate',
-            { page: '/login', pageParams: param, webSession: sysPerfSession });
-        console.log("Message:");
-        console.log(message);
-        console.log(JSON.stringify(message));
+        /**以下注释为旧的、没成功的login页面调用过程 */
+        // // 通过logintype来区分是正常登录还是切换账户：
+        // const toolVersions = Utils.getConfigJson(context).sysPerfVersion;
+        // const param = {
+        //     queryParams: {
+        //         loginType,
+        //         toolVersions,
+        //         panelId: constant.PANEL_ID.tuningNonLogin
+        //     }
+        // };
+        // const message = Utils.generateMessage('navigate',
+        //     { page: '/login', pageParams: param, webSession: sysPerfSession });
         const panelOption = {
             panelId: constant.PANEL_ID.tuningNonLogin,
             viewType: constant.VIEW_TYPE.login,
             viewTitle: i18n.perfadvisor_login,
             module: 'tuning',
-            message
         };
-        console.log(panelOption);
-        console.log("before createOrShowPanel method");
+        // // 展示页面面板
+        // ToolPanelManager.createOrShowPanel(panelOption, context);
+        /**旧的、没成功的login页面调用过程到此为止 */
 
-        // 展示页面面板
-        ToolPanelManager.createOrShowPanel(panelOption, context);
-        console.log("end check openPerfLoginPanel");
+        /**以下代码为新的、暂时的login页面调用 */
+        const panel = new ToolPanel(panelOption,  ToolPanelManager.closeToolPanel, context)
+        ToolPanelManager.sysPerfToolPanels.push(panel)
+        const config = Utils.getConfigJson(context);
+        let message= {
+            cmd: 'saveConfig',
+            data: {
+                data: JSON.stringify(config),
+                showInfoBox: true,
+                openConfigServer: true,
+            }
+        }
+        // const messageReq = {
+        //     cbid: new Date().getTime() * 100000,
+        //     cmd: message.cmd ? message.cmd : 'getData',
+        //     module: 'tuning',
+        //     data: message.data
+        // }
+        console.log("Here is panel manager call cmd")
+        const global = {context, toolPanel: panel};
+        messageHandler.saveConfig(global, message);
+        
     }
     /**
      * 关闭对应工具的panel

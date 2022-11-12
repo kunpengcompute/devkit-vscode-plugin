@@ -48,7 +48,7 @@ export const I18N_ZH = {
     plugins_common_tips_checkConn_openFAQ: '打开资料',
     plugins_common_tips_connFail: 'SSH连接检测失败，请检查用户名，密码或者私钥是否输入正确，重试次数过多也将导致检测失败',
     plugins_common_message_sshAlgError: '连接检测失败。客户端算法与服务器端算法不匹配，请参考FAQ配置安全算法。',
-    common_login: '性能分析',
+    common_login: '鲲鹏性能分析工具',
     plugins_common_message_resqust_timeout: '网络超时',
     plugins_common_message_responseError: '服务器未响应，请确认服务器端工具已部署且网络连接正常。',
     plugins_common_message_responseError_deployScenario: '服务器未响应，请检查网络连接是否正常。',
