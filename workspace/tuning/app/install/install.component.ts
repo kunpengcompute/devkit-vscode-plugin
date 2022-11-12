@@ -1,8 +1,8 @@
 import { Component, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { I18nService } from '../service/i18n.service';
 import { VscodeService, COLOR_THEME } from '../service/vscode.service';
-import { Router } from '@angular/router';
 import { notificationType } from '../notification-box/notification-box.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 const installStatusStart = -1;
 const RUNNING = 0;
@@ -80,9 +80,11 @@ export class InstallComponent implements AfterViewInit, OnInit {
 
     public dialogShowDetailText = '';
     public notificationMessage = ''; // 执行结果提示
+    intelliJFlagDef = false;
 
     constructor(
         private router: Router,
+        private route: ActivatedRoute,
         public i18nService: I18nService,
         private elementRef: ElementRef,
         public vscodeService: VscodeService) {
@@ -143,6 +145,9 @@ export class InstallComponent implements AfterViewInit, OnInit {
 
     ngOnInit() {
         this.currLang = I18nService.getLang();
+        this.route.queryParams.subscribe((data) => {
+            this.intelliJFlagDef = data.intellijFlag === 'true';
+        });
     }
 
     /**
@@ -236,18 +241,6 @@ export class InstallComponent implements AfterViewInit, OnInit {
      * 检测ssh连接是否通畅
      */
     public checkConn() {
-        // 对每个输入框进行提交前校验
-        // this.elementRef.nativeElement.querySelectorAll(`input`).forEach((element: any) => {
-        //     element.focus();
-        //     element.blur();
-        // });
-        // this.elementRef.nativeElement.querySelectorAll(`textarea`).forEach((element: any) => {
-        //     element.focus();
-        //     element.blur();
-        // });
-
-        // const isCheckS = this.getCheckResult();
-        // if (isCheckS) {
         if (this.connectChecking) {
             return;
         }
@@ -265,6 +258,9 @@ export class InstallComponent implements AfterViewInit, OnInit {
             }
         };
         this.vscodeService.postMessage(postData, (data: any) => {
+            if(this.intelliJFlagDef){
+                data=JSON.stringify(data)
+            }
             if (data.search(/SUCCESS/) !== -1) {
                 this.connected = true;
                 this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
@@ -569,11 +565,24 @@ export class InstallComponent implements AfterViewInit, OnInit {
         if (this.username.toLocaleLowerCase() !== 'root') {
             url = this.pluginUrlCfg.checkConn_openFAQ2;
         }
-        const a = document.createElement('a');
-        a.setAttribute('href', url);
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+
+        const postData = {
+            cmd: 'openUrlInBrowser',
+            data: {
+                url: url,
+            }
+        };
+        if(this.intelliJFlagDef){
+            // 如果是intellij就调用java方法唤起默认浏览器打开网页
+            this.vscodeService.postMessage(postData, null);
+        }
+        else{
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
         this.showDialog.Close();
     }
     /**
@@ -589,5 +598,26 @@ export class InstallComponent implements AfterViewInit, OnInit {
      */
     public cancelDiglogMsgTip() {
         this.showDialog.Close();
+    }
+
+    public clickFAQ(url:any) {
+        console.log(url)
+        const postData = {
+            cmd: 'openUrlInBrowser',
+            data: {
+                url: url,
+            }
+        };
+        if(this.intelliJFlagDef){
+            // 如果是intellij就调用java方法唤起默认浏览器打开网页
+            this.vscodeService.postMessage(postData, null);
+        }
+        else{
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
     }
 }

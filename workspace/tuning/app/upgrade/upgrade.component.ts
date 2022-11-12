@@ -115,11 +115,7 @@ export class UpgradeComponent implements OnInit {
         this.currLang = ((self as any).webviewSession || {}).getItem('language');
         // 判断是不是intellij
         this.route.queryParams.subscribe((data) => {
-            if (data.intelliJFlag === undefined) {
-                this.intelliJFlagDef = data.intellijFlag === 'true';
-            } else {
-                this.intelliJFlagDef = data.intelliJFlag === 'true';
-            }
+            this.intelliJFlagDef = data.intellijFlag === 'true';
         });
     }
 
@@ -271,9 +267,11 @@ export class UpgradeComponent implements OnInit {
      * @param data 流程信息
      */
     processupgradeInfo(data: any) {
+        console.log(this.intelliJFlagDef)
         if(this.intelliJFlagDef){
             data=JSON.stringify(data);
         }
+        console.log(data)
         if (data.search(/closeLoading/)) {
           this.showLoading = false;
         }
@@ -554,5 +552,26 @@ export class UpgradeComponent implements OnInit {
      */
     public cancelDiglogMsgTip() {
         this.showDialog.Close();
+    }
+
+    public clickFAQ(url:any) {
+        console.log(url)
+        const postData = {
+            cmd: 'openUrlInBrowser',
+            data: {
+                url: url,
+            }
+        };
+        if(this.intelliJFlagDef){
+            // 如果是intellij就调用java方法唤起默认浏览器打开网页
+            this.vscodeService.postMessage(postData, null);
+        }
+        else{
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
     }
 }

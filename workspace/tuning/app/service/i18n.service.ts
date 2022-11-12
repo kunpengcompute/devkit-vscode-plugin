@@ -22,7 +22,12 @@ export class I18nService {
     public currLang: string;
 
     constructor() {
-        this.currLang = ((self as any).webviewSession || {}).getItem('language');
+        const language: string = ((self as any).webviewSession || {}).getItem('language');
+        if (language) {
+            this.currLang= language.indexOf('en') !== -1 ? this.langType.en : this.langType.zh_cn;
+        } else {
+            this.currLang= this.langType.zh_cn;
+        }
     }
 
     /** vscode判断界面语言类型的公共方法

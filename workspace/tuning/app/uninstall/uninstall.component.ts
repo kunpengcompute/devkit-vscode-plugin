@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { notificationType } from '../notification-box/notification-box.component';
 import { I18nService } from '../service/i18n.service';
 import { VscodeService, COLOR_THEME } from '../service/vscode.service';
+import { ActivatedRoute} from '@angular/router';
 
 
 const UNINSTALL_STATUS_START = -1;
@@ -63,9 +64,11 @@ export class UnInstallComponent implements OnInit{
 
     public dialogShowDetailText = '';
     public notificationMessage = ''; // 执行结果提示
+    intelliJFlagDef = false;
 
     constructor(
         public i18nService: I18nService,
+        private route: ActivatedRoute,
         private elementRef: ElementRef,
         public vscodeService: VscodeService) {
         // 获取全局url配置数据
@@ -100,6 +103,9 @@ export class UnInstallComponent implements OnInit{
 
     ngOnInit() {
         this.currLang = ((self as any).webviewSession || {}).getItem('language');
+        this.route.queryParams.subscribe((data) => {
+            this.intelliJFlagDef = data.intellijFlag === 'true';
+        });
     }
 
     /**
@@ -176,6 +182,9 @@ export class UnInstallComponent implements OnInit{
             }
         };
         this.vscodeService.postMessage(postData, (data: any) => {
+            if(this.intelliJFlagDef){
+                data=JSON.stringify(data)
+            }
             if (data.search(/SUCCESS/) !== -1) {
                 this.connected = true;
                 this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
@@ -428,11 +437,23 @@ export class UnInstallComponent implements OnInit{
         if (this.username.toLocaleLowerCase() !== 'root') {
             url = this.pluginUrlCfg.checkConn_openFAQ2;
         }
-        const a = document.createElement('a');
-        a.setAttribute('href', url);
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        const postData = {
+            cmd: 'openUrlInBrowser',
+            data: {
+                url: url,
+            }
+        };
+        if(this.intelliJFlagDef){
+            // 如果是intellij就调用java方法唤起默认浏览器打开网页
+            this.vscodeService.postMessage(postData, null);
+        }
+        else{
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
         this.showDialog.Close();
     }
     /**
@@ -448,5 +469,26 @@ export class UnInstallComponent implements OnInit{
      */
     public cancelDiglogMsgTip() {
         this.showDialog.Close();
+    }
+
+    public clickFAQ(url:any) {
+        console.log(url)
+        const postData = {
+            cmd: 'openUrlInBrowser',
+            data: {
+                url: url,
+            }
+        };
+        if(this.intelliJFlagDef){
+            // 如果是intellij就调用java方法唤起默认浏览器打开网页
+            this.vscodeService.postMessage(postData, null);
+        }
+        else{
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
     }
 }
