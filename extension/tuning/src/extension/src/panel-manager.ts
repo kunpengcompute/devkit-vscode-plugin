@@ -3,6 +3,7 @@ import * as constant from './constant';
 import { Utils } from './utils';
 import { I18nService } from './i18nservice';
 import { messageHandler } from './webview-msg-handler';
+import { ProxyManager } from './proxy-manager';
 
 const i18n = I18nService.I18n();
 
@@ -324,24 +325,24 @@ export class ToolPanelManager {
         /**以下代码为新的、暂时的login页面调用 */
         const panel = new ToolPanel(panelOption,  ToolPanelManager.closeToolPanel, context)
         ToolPanelManager.sysPerfToolPanels.push(panel)
-        const config = Utils.getConfigJson(context);
-        let message= {
-            cmd: 'saveConfig',
-            data: {
-                data: JSON.stringify(config),
-                showInfoBox: true,
-                openConfigServer: true,
-            }
-        }
+        // const config = Utils.getConfigJson(context);
+        // let message= {
+        //     cmd: 'openLoginByButton',
+        //     data: {
+        //         data: JSON.stringify(config),
+        //         showInfoBox: true,
+        //         openConfigServer: true,
+        //     }
+        // }
         // const messageReq = {
         //     cbid: new Date().getTime() * 100000,
         //     cmd: message.cmd ? message.cmd : 'getData',
         //     module: 'tuning',
         //     data: message.data
         // }
-        console.log("Here is panel manager call cmd")
+        // console.log("Here is panel manager call cmd")
         const global = {context, toolPanel: panel};
-        messageHandler.saveConfig(global, message);
+        messageHandler.openLoginByButton(global);
         
     }
     /**

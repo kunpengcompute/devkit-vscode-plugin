@@ -234,12 +234,12 @@ export class Utils {
             retainContextWhenHidden: true,
         });
 
-        console.log("global at navtoiframe");
-        console.log(global);
-        console.log("default port at navtoiframe");
-        console.log(defaultPort);
-        console.log("proxy at navtoiframe");
-        console.log(proxy)
+        // console.log("global at navtoiframe");
+        // console.log(global);
+        // console.log("default port at navtoiframe");
+        // console.log(defaultPort);
+        // console.log("proxy at navtoiframe");
+        // console.log(proxy)
         
         panel.webview.onDidReceiveMessage((message) => {
             const msg = {

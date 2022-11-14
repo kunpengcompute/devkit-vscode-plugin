@@ -110,13 +110,23 @@
     "viewsWelcome": [
       {
         "view": "perfadvisorTools",
+        "contents": "%ip.address%",
+        "when": "isPerfadvisorConfigured"
+      },
+      {
+        "view": "perfadvisorTools",
+        "contents": "%port%",
+        "when": "isPerfadvisorConfigured"
+      },
+      {
+        "view": "perfadvisorTools",
         "contents": "%perfadvisor.configer.server%",
         "when": "!isPerfadvisorConfigured && !ipconfig"
       },
       {
         "view": "perfadvisorTools",
         "contents": "%perfadvisor.no.login%",
-        "when": "ipconfig"
+        "when": "isPerfadvisorConfigured"
       },
       {
         "view": "perfadvisorTools",

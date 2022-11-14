@@ -26,64 +26,60 @@ export const messageHandler = {
 
     // 保存ip与port到json配置文件
     async saveConfig(global: any, message: any) {
-        console.log("GLOBAL.context at messagehandler");
-        console.log(global.context);
-        console.log("GLOBAL.toolPanel at messagehandler");
-        console.log(global.toolPanel);
-        console.log("Content of message.data.openConfigServer");
-        console.log(message);
+        // console.log("GLOBAL.context at messagehandler");
+        // console.log(global.context);
+        // console.log("GLOBAL.toolPanel at messagehandler");
+        // console.log(global.toolPanel);
+        // console.log("Content of message.data.openConfigServer");
+        // console.log(message);
         if (!message.data.openConfigServer) {  // 点击弹窗中的是openConfigServer为true
-            console.log("Position 0.");
+            // console.log("Position 0.");
             if (ToolPanelManager.loginPanels.length > 0) {
                 // 弹窗提示是否切换服务器
-                console.log("Position 1.");
+                // console.log("Position 1.");
                 const panel = global.toolPanel.getPanel();
-                console.log("Position 2.");
+                // console.log("Position 2.");
                 panel.webview.postMessage({ cmd: 'handleVscodeMsg', type: 'showCustomDialog', data: { show: true } });
-                console.log("Position 3.");
+                // console.log("Position 3.");
                 return;
             }
         }
-        console.log("Checkpoint after the first if");
+        // console.log("Checkpoint after the first if");
         let tuningConfig;
         try {
             tuningConfig = JSON.parse(message.data.data).tuningConfig;
-            console.log("Position 4.");
+            // console.log("Position 4.");
         } catch (err) {
             tuningConfig = {};
         }
-        console.log("Position 5.");
+        // console.log("Position 5.");
         const tuningConfigObj = Array.isArray(tuningConfig) ? tuningConfig[0] : tuningConfig;
-        console.log("Position 6.")
+        // console.log("Position 6.")
         let data: any;
-        console.log("Position 7.")
+        // console.log("Position 7.")
         const resourcePath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
-        console.log("Position 8.")
-        console.log(resourcePath);
-        console.log(message.data.data);
-        console.log("Position 8.5.");
-        data = fs.writeFileSync(resourcePath, message.data.data, 'utf-8');
-        const res = fs.readFileSync(resourcePath, 'utf-8', 0);
-        console.log("Content of the configuration information just saved:");
-        console.log(res);
-        console.log("Position 9.")
+        // console.log("Position 8.")
+        // console.log(resourcePath);
+        // console.log(message.data.data);
+        // console.log("Position 8.5.");
+        data = fs.writeFileSync(resourcePath, message.data.data);
         global.context.globalState.update('tuningIp', tuningConfigObj.ip);
-        console.log("Position 10.")
+        // console.log("Position 10.")
         global.context.globalState.update('tuningPort', tuningConfigObj.port);
-        console.log("Position 11.")
+        // console.log("Position 11.")
         const { proxyServerPort, proxy } =
             await ProxyManager.createProxyServer(global.context, tuningConfigObj.ip, tuningConfigObj.port);
-            console.log("Position 12.")
-            global.context.globalState.update('defaultPort', proxyServerPort);
+        // console.log("Position 12.")
+        global.context.globalState.update('defaultPort', proxyServerPort);
 
-        console.log("Position 13.")
+        // console.log("Position 13.")
         const queryVersionOptions = {
             url: `http://127.0.0.1:${proxyServerPort}/user-management/api/v2.2/users/version/`,
             method: 'GET'
         };
-        console.log("Position 14.")
+        // console.log("Position 14.")
         const respVersion: any = await Utils.requestData(global.context, queryVersionOptions as any, message.module);
-        console.log("Position 15.")
+        // console.log("Position 15.")
         if (respVersion.status === constant.HTTP_STATUS.HTTP_200_OK) {
             const serverVersion = respVersion?.data?.data?.version;
 
@@ -99,20 +95,19 @@ export const messageHandler = {
                 url: `http://127.0.0.1:${proxyServerPort}/user-management/api/v2.2/users/admin-status/`,
                 method: 'GET'
             };
-            const config_ = Utils.getConfigJson(global.context);
-            console.log(config_);
             const resp: any = await Utils.requestData(global.context, queryOptions as any, message.module);
             if (resp.status === constant.HTTP_STATUS.HTTP_200_OK) {
                 vscode.commands.executeCommand('setContext', 'ipconfig', true);
+                vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
                 ToolPanelManager.closeLoginPanel();
-                console.log("Position 16.");
-                if (message.data.openConfigServer){
-                    console.log("Position 17.");
+                if (message.data.openLogin){
                     Utils.navToIFrame(global, proxyServerPort, proxy);
-                    console.log("Position 18.");
                 }
-                ToolPanelManager.closePanelsByRemained(message.module, []);
+                // console.log("Message.module");
+                // console.log(message.module)
+                // ToolPanelManager.closePanelsByRemained(message.module, []);
+                vscode.commands.executeCommand('setContext', 'currentIpAddress', "IP端口 "+tuningConfigObj.ip);
             } else {
                 proxy.close();
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
@@ -121,6 +116,29 @@ export const messageHandler = {
             proxy.close();
             Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
         }
+    },
+
+    /**
+     * 登录指令请求跳转登录页面
+     * 
+     * @param global 
+     * @param message 
+     */
+    async openLoginByButton(global: any) {
+        const resourcePath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
+        const configData = fs.readFileSync(resourcePath);
+        let tuningConfig;
+        try {
+            tuningConfig = JSON.parse(configData).tuningConfig;
+        } catch (err) {
+            tuningConfig = {};
+        }
+        const tuningConfigObj = Array.isArray(tuningConfig) ? tuningConfig[0] : tuningConfig;
+
+        const { proxyServerPort, proxy } = 
+            await ProxyManager.createProxyServer(global.context, tuningConfigObj.ip, tuningConfigObj.port);
+        Utils.navToIFrame(global, proxyServerPort, proxy);
+        ToolPanelManager.closePanelsByRemained('tuning', []);
     },
 
     /**
