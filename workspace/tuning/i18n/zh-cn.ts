@@ -49,7 +49,7 @@ export const I18N_ZH = {
     plugins_tuning_label_config: '请配置代码迁移工具的远程服务器地址，如果当前您尚未在服务器上部署工具',
     plugins_cloudied_tuning_label_config: '请配置代码迁移工具的远程服务器地址',
     plugins_tuning_button_save: '保存',
-    plugins_tuning_button_modi: '修改配置',
+    plugins_tuning_button_modi: '修改',
     plugins_tuning_button_cancel: '取消',
     plugins_common_message_installDt1: '请确保远端运行服务器的操作系统及版本在',
     plugins_common_message_installDt2: '兼容列表',
@@ -218,4 +218,5 @@ export const I18N_ZH = {
 
     plugins_tuning_message_versionCompatibility: '插件版本与服务端的软件版本不匹配。本插件可匹配的性能分析工具服务端版本为：{0}；当前性能分析工具服务端版本为：{1}。请您升级服务端版本至匹配版本。',
     plugins_tuning_message_config_server_success: '配置远端服务器成功',
+    plugins_tuning_message_save_config_success: '保存配置成功！',
 };

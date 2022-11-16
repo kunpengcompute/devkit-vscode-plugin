@@ -36,10 +36,13 @@
     </div>
 
     <div class="btn-group">
-        <button type="button" class="primary-btn" (mousedown)="saveConfirm()" [disabled]="!tempIP || !tempPort">
+        <button type="button" class="primary-btn" (mousedown)="saveConfirm()" *ngIf="!hasConfig || isModify" [disabled]="!tempIP || !tempPort">
             {{ i18n.plugins_tuning_button_save }}
         </button>
-        <button type="button" class="secondary-btn" (mousedown)="cancel()">
+        <button type="button" class="primary-btn" (mousedown)="modifyConfig()" *ngIf="hasConfig">
+            {{ i18n.plugins_tuning_button_modi }}
+        </button>
+        <button type="button" class="secondary-btn" (mousedown)="cancel()" *ngIf="isModify">
             {{ i18n.plugins_tuning_button_cancel }}
         </button>
     </div>
@@ -108,3 +111,10 @@
 <app-notification-box #notificationBox>
     <div class="notification-message">{{notificationMessage}}</div>
 </app-notification-box>
+
+<app-notification-with-action #notificationWithActionBox>
+    <span class="notification-message">{{i18n.plugins_tuning_message_save_config_success}}</span>
+    <div class="action-content">
+        <button type="button" class="primary-btn login-button" (click)="goToLogin()">{{i18n.plugins_tuning_button_login}}</button>
+    </div>
+</app-notification-with-action>

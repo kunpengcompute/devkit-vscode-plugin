@@ -12,6 +12,7 @@ export class ConfigComponent implements OnInit {
     @ViewChild('showDialog', { static: false }) showDialog: { Close: () => void; Open: () => void; };
     @ViewChild('versionDialog', { static: false }) versionDialog: { Close: () => void; Open: () => void; };
     @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; };
+    @ViewChild('notificationWithActionBox') notificationWithActionBox: {setType: (type: notificationType) => void; show: () => void; };
 
     private static CONFIG_RADIX = 10;
     public i18n: any;
@@ -29,6 +30,7 @@ export class ConfigComponent implements OnInit {
     public showIfServerDialog = false; // 显示是否切换服务器
     public versionMismatch = "";
     public notificationMessage = ""; // 配置远端服务器执行结果提示
+    public isModify = false; // 是否为修改配置状态
 
     constructor(
         private i18nService: I18nService,
@@ -48,7 +50,7 @@ export class ConfigComponent implements OnInit {
         this.vscodeService.regVscodeMsgHandler('colorTheme', (msg: any) => {
             this.currTheme = msg.colorTheme;
         });
-        // TODO ?
+        // TODO 
         this.vscodeService.regVscodeMsgHandler('showCustomDialog', (msg: any) => {
             this.showIfServerDialog = true;
             this.showDialog.Open();
@@ -135,12 +137,8 @@ export class ConfigComponent implements OnInit {
                 ip: this.tempIP,
                 port: this.tempPort
             };
-            // this.showDialog.Open();
-            // this.config.tuningConfig.push({
-            //     ip: this.tempIP,
-            //     port: this.tempPort
-
-            // });
+            // TODO saveConfig逻辑
+            // this.notificationWithActionBox.show();
             let data = {
                 cmd: 'saveConfig', data: {
                     data: JSON.stringify(this.config.tuningConfig),
@@ -153,31 +151,30 @@ export class ConfigComponent implements OnInit {
                 console.log(res);
                 // 版本不匹配
                 if (res.type === 'VERSIONMISMATCH') {
+                    console.log("version mismatch");
                     this.versionMismatch = this.i18nService.I18nReplace(this.i18n.plugins_tuning_message_versionCompatibility, {
                         0: res.configVersion,
                         1: res.serverVersion
-                    })
-                    this.versionDialog.Open()
+                    });
+                    this.versionDialog.Open();
+                } else if (res.type === 'FAIL') {
+                    console.log("save config error");
+                } else {
+                    console.log("save config success!!!");
+                    this.notificationWithActionBox.show();
+                    this.hasConfig = true;
                 }
             });
-            this.hasConfig = true;
             // this.readConfig();
         }
     }
 
 
     /**
-     * 取消配置操作(关闭页面)
+     * 取消修改操作
      */
     cancel() {
-        console.log("closing panel");
-        const data = {
-            cmd: 'closePanel',
-            data: {
-                panelId: 'tuningNonServerConfig',
-            }
-        };
-        this.vscodeService.postMessage(data, null);
+        console.log("cancel modify config");
     }
 
     /**
@@ -213,6 +210,20 @@ export class ConfigComponent implements OnInit {
     }
 
     /**
+     * 跳转登录页面
+     */
+    goToLogin() {
+        // TODO 打开登录页面逻辑
+        // intellij：调用postMessage打开页面
+        const data = {
+            // cmd: 'openNewPage',
+            // data: {
+
+            // }
+        }
+    }
+
+    /**
      * 切换服务器确认
      */
     public confirmDialogMsgTip() {
@@ -232,5 +243,12 @@ export class ConfigComponent implements OnInit {
      */
     cancelVersionDiglogMsgTip() {
         this.versionDialog.Close()
+    }
+
+    /**
+     * 已经配置服务器成功后点击修改
+     */
+    modifyConfig() {
+        console.log("going to modify config");
     }
 }

@@ -287,4 +287,5 @@ export const I18N_US = {
   the current server version of the code migration tool is: {1}. \
   Please upgrade the server version to the matching version.',
   plugins_tuning_message_config_server_success: 'Config remote server success',
+  plugins_tuning_message_save_config_success: 'Save config success!',
 };
