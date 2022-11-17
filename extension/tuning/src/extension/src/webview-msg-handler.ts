@@ -104,10 +104,19 @@ export const messageHandler = {
                 if (message.data.openLogin){
                     Utils.navToIFrame(global, proxyServerPort, proxy);
                 }
-                // console.log("Message.module");
-                // console.log(message.module)
-                // ToolPanelManager.closePanelsByRemained(message.module, []);
-                
+                const nlsPath = Utils.getExtensionFileAbsolutePath(global.context, './package.nls.json');
+                const enNlsPath = Utils.getExtensionFileAbsolutePath(global.context, './package.nls.en.json');
+                const configData = JSON.parse(fs.readFileSync(nlsPath, 'utf-8'));
+                const configDataEn = fs.readFileSync(enNlsPath, 'utf-8');
+                console.log('CN nls');
+                console.log(configData);
+                // console.log('EN nls');
+                // console.log(configDataEn);
+                let newContent = this.updateIpAndPortCN(global, configData);
+                console.log('before write');
+                console.log(newContent)
+                fs.writeFileSync(nlsPath, JSON.stringify(newContent))
+                console.log(fs.readFileSync(nlsPath, 'utf-8'))
             } else {
                 proxy.close();
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
@@ -117,12 +126,28 @@ export const messageHandler = {
             Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
         }
     },
-
+    /**
+     * 更新ip与端口的显示内容
+     * @param originalContent 更新之前的
+     */
+    updateIpAndPortCN(global:any, originalContent: any){
+        let newConfigPath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
+        let data = JSON.parse(fs.readFileSync(newConfigPath));
+        console.log('Here is new config');
+        console.log(data.tuningConfig[0].ip);
+        console.log('Here is old config');
+        console.log(originalContent.ip_address_port);
+        var temp = 'IP地址'+' '+JSON.stringify(data.tuningConfig[0].ip)+'\n'+
+                   '端口'+'   '+JSON.stringify(data.tuningConfig[0].port);
+        originalContent.ip_address_port = temp;
+        console.log('Here is changed config');
+        console.log(originalContent);
+        return originalContent;
+    },
     /**
      * 登录指令请求跳转登录页面
-     * 
-     * @param global 
-     * @param message 
+     * @param global global
+     * @param message message
      */
     async openLoginByButton(global: any) {
         const resourcePath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
@@ -134,9 +159,8 @@ export const messageHandler = {
             tuningConfig = {};
         }
         const tuningConfigObj = Array.isArray(tuningConfig) ? tuningConfig[0] : tuningConfig;
-
-        const { proxyServerPort, proxy } = 
-            await ProxyManager.createProxyServer(global.context, tuningConfigObj.ip, tuningConfigObj.port);
+        // tslint:disable-next-line:max-line-length
+        const { proxyServerPort, proxy } = await ProxyManager.createProxyServer(global.context, tuningConfigObj.ip, tuningConfigObj.port);
         Utils.navToIFrame(global, proxyServerPort, proxy);
         ToolPanelManager.closePanelsByRemained('tuning', []);
     },
