@@ -249,6 +249,9 @@ export class ToolPanelManager {
                 console.log(message)
                 ToolPanelManager.createOrShowPanel(panelOption, context);
             }));
+        context.subscriptions.push(vscode.commands.registerCommand('perfadvisorTools.openChild', args => {
+            vscode.window.showInformationMessage(args);
+        }))
     }
     /**
      * 打开选择的webview

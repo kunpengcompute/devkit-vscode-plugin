@@ -107,7 +107,7 @@ export const messageHandler = {
                 // console.log("Message.module");
                 // console.log(message.module)
                 // ToolPanelManager.closePanelsByRemained(message.module, []);
-                vscode.commands.executeCommand('setContext', 'currentIpAddress', "IP端口 "+tuningConfigObj.ip);
+                
             } else {
                 proxy.close();
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data);

@@ -44,6 +44,10 @@
       {
         "command": "extension.view.deployserverend",
         "title": "%deploy.server.end%"
+      },
+      {
+        "command": "perfadvisorTools.openChild",
+        "title": "树结构"
       }
     ],
     "menus": {
@@ -110,12 +114,7 @@
     "viewsWelcome": [
       {
         "view": "perfadvisorTools",
-        "contents": "%ip.address%",
-        "when": "isPerfadvisorConfigured"
-      },
-      {
-        "view": "perfadvisorTools",
-        "contents": "%port%",
+        "contents": "%ip.address.port%",
         "when": "isPerfadvisorConfigured"
       },
       {
