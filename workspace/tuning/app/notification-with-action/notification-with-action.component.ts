@@ -26,7 +26,6 @@ export class NotificationWithActionComponent implements OnInit {
   public close() {
     console.log("closing notification with action");
     this.isShow = false;
-    $('.notification-action-box').css('display', 'none');
   }
 
   public setType(type: notificationType) {

@@ -132,13 +132,10 @@ export class ConfigComponent implements OnInit {
         });
         if (!this.ipCheck && !this.portCheck) {
             this.showLoading = true;
-            this.setNotificationBox(notificationType.success, this.i18n.plugins_tuning_message_config_server_success);
             this.config.tuningConfig = {
                 ip: this.tempIP,
                 port: this.tempPort
             };
-            // TODO saveConfig逻辑
-            // this.notificationWithActionBox.show();
             let data = {
                 cmd: 'saveConfig', data: {
                     data: JSON.stringify(this.config.tuningConfig),
@@ -147,6 +144,7 @@ export class ConfigComponent implements OnInit {
                 }
             };
             this.vscodeService.postMessage(data, (res: any) => {
+                // TODO 页面元素更新缓慢，无法及时更新
                 this.showLoading = false;
                 console.log(res);
                 // 版本不匹配
@@ -158,23 +156,16 @@ export class ConfigComponent implements OnInit {
                     });
                     this.versionDialog.Open();
                 } else if (res.type === 'FAIL') {
+                    this.setNotificationBox(notificationType.error, '配置服务器失败');
                     console.log("save config error");
                 } else {
                     console.log("save config success!!!");
+                    this.setNotificationBox(notificationType.success, this.i18n.plugins_tuning_message_config_server_success);
                     this.notificationWithActionBox.show();
                     this.hasConfig = true;
                 }
             });
-            // this.readConfig();
         }
-    }
-
-
-    /**
-     * 取消修改操作
-     */
-    cancel() {
-        console.log("cancel modify config");
     }
 
     /**
@@ -213,7 +204,7 @@ export class ConfigComponent implements OnInit {
      * 跳转登录页面
      */
     openLogin() {
-        // TODO 打开登录页面逻辑
+        // TODO vscode端的打开登录页面逻辑
         // intellij：调用postMessage打开页面
         console.log("open login page");
         const data = {
@@ -252,5 +243,15 @@ export class ConfigComponent implements OnInit {
      */
     modifyConfig() {
         console.log("going to modify config");
+        this.isModify = true;
+
+    }
+
+    /**
+     * 取消修改操作
+     */
+     cancel() {
+        console.log("cancel modify config");
+        this.isModify = false;
     }
 }

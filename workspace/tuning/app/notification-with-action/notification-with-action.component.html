@@ -1,4 +1,4 @@
-<div class="notification-action-box" [ngClass]="{'active': isShow}">
+<div class="notification-action-box" *ngIf="isShow">
     <div class="title">
         <!-- notification type icon -->
         <div class="title-notification">
