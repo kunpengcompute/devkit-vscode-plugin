@@ -212,15 +212,17 @@ export class ConfigComponent implements OnInit {
     /**
      * 跳转登录页面
      */
-    goToLogin() {
+    openLogin() {
         // TODO 打开登录页面逻辑
         // intellij：调用postMessage打开页面
+        console.log("open login page");
         const data = {
-            // cmd: 'openNewPage',
-            // data: {
-
-            // }
+            cmd: 'openNewPage',
+            data: {
+                router: 'login'
+            }
         }
+        this.vscodeService.postMessage(data, null);
     }
 
     /**
