@@ -114,7 +114,7 @@
     "viewsWelcome": [
       {
         "view": "perfadvisorTools",
-        "contents": "%ip.address.port%",
+        "contents": "%ip_address_port%",
         "when": "isPerfadvisorConfigured"
       },
       {
