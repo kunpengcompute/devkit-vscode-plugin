@@ -277,7 +277,7 @@ export const I18N_US = {
 
   plugins_public_text_tip: 'Tips',
   plugins_public_button_confirm: 'OK',
-  plugins_public_button_cancel: 'cancel',
+  plugins_public_button_cancel: 'Cancel',
   plugins_public_message_confirm: 'Yes',
   plugins_public_message_cancel: 'No',
   plugins_public_message_close: 'Close',
@@ -288,4 +288,7 @@ export const I18N_US = {
   Please upgrade the server version to the matching version.',
   plugins_tuning_message_config_server_success: 'Config remote server success',
   plugins_tuning_message_save_config_success: 'Save config success!',
+  plugins_tuning_title_save_config: 'Save Remote Server Config',
+  // TODO 翻译
+  plugins_tuning_save_config_modify: '是否确认保存当前修改？点击确认后将登出当前用户。(eng ver)'
 };

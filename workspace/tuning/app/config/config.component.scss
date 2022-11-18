@@ -431,6 +431,22 @@
     }
 }
 
+::ng-deep .save-modify-box {
+    width: 400px !important;   
+
+    .tip-box {
+        padding-bottom: 32px !important;
+    }
+
+    .tip-dsc {
+        border-top: none !important;
+    }
+
+    .tip-confirm button {
+        width: 80px !important;
+    }
+}
+
 .login-button {
     width: 80px;
     height: 26px;

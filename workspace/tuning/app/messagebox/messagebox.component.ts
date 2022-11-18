@@ -32,4 +32,12 @@ export class MessageboxComponent implements OnInit {
     public clearLang() {
         this.currLang = '';
     }
+
+    /**
+     * 修改content-box宽度
+     * @param width
+     */
+    public setContentBoxWidth(width: string) {
+        $('.content-box')[0].style.setProperty( 'width', width, 'important' );
+    }
 }

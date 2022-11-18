@@ -10,6 +10,7 @@ import { VscodeService, COLOR_THEME } from '../service/vscode.service';
 export class ConfigComponent implements OnInit {
     @ViewChild('saveConfirmTip') saveConfirmTip: { Close: () => void; Open: () => void; };
     @ViewChild('showDialog', { static: false }) showDialog: { Close: () => void; Open: () => void; };
+    @ViewChild('saveModifyDialog', { static: false}) saveModifyDialog: { Close: () => void; Open: () => void; setContentBoxWidth: (width: string) => void};
     @ViewChild('versionDialog', { static: false }) versionDialog: { Close: () => void; Open: () => void; };
     @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; };
     @ViewChild('notificationWithActionBox') notificationWithActionBox: {setType: (type: notificationType) => void; show: () => void; };
@@ -106,7 +107,14 @@ export class ConfigComponent implements OnInit {
      */
     saveConfirm() {
         console.log("=========this is saveConfig =============");
-        this.save();
+        // TODO 如果是修改模式，点击保存时弹框提示是否确认保存配置
+        if (this.isModify) {
+            // 单独设置保存修改配置对话框宽度
+            this.saveModifyDialog.setContentBoxWidth('400px');
+            this.saveModifyDialog.Open();
+        } else {
+            this.save();
+        }
     }
 
     setNotificationBox(type: notificationType, info: string) {
@@ -117,7 +125,7 @@ export class ConfigComponent implements OnInit {
 
     /**
      * 将ip port配置写入配置文件
-     * @param openConfigServer 是否直接打开登录页面
+     * @param openConfigServer 是否直接打开登录页面 ?有True的时候吗
      */
     save(openConfigServer: boolean = false) {
         console.log("============this is save ==============");
@@ -231,6 +239,21 @@ export class ConfigComponent implements OnInit {
         this.showDialog.Close();
         this.showLoading = false;
     }
+
+    /**
+     * 修改服务器配置确认保存
+     */
+    public confirmModifyConfigDialog() {
+        this.save();
+    }
+
+    /**
+     * 修改服务器配置取消保存
+     */
+    public cancelModifyConfigDialog() {
+        this.saveModifyDialog.Close();
+    }
+
     /**
      * 版本不匹配取消
      */
