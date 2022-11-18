@@ -2,8 +2,8 @@
  * 颜色主题
  */
 export const enum COLOR_THEME {
-    Dark = 1,
-    Light = 2
+    Dark = 'dark',
+    Light = 'light'
 }
 
 /**
