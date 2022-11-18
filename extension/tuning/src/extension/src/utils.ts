@@ -379,13 +379,15 @@ export class Utils {
       pageLoadingText: i18n.page_loading,
     };
     if (vscode.env.appName === 'code-server' && vscode.env.uiKind === 2) {
-      const params: any = this.getConfigJson(global.context).tuningAccount[0];
+      const params: any = this.getConfigJson(global.context).codeServerConfig;
+      const iframeParams: any = params[0];
+      const requestParams: any = params[1];
       const userSessionUrl = `http://127.0.0.1:${defaultPort}/user-management/api/v2.2/users/session/`;
-      this.codeServerAutoLogin(params, userSessionUrl)
+      this.codeServerAutoLogin(requestParams, userSessionUrl)
         .then((response) => {
           htmlDatas = {
             ...htmlDatas,
-            src: `https://${htmlDatas.ip}:${htmlDatas.port}`,
+            src: `https://${iframeParams.ip}:${iframeParams.port}`,
             ideType: 'isCodeServer',
             token: response.headers.token,
             username: response.data.data.username,
@@ -399,6 +401,8 @@ export class Utils {
         .catch((error) => {
           console.log(error);
         });
+    } else {
+      panel.webview.html = this.getHtml(htmlDatas);
     }
   }
 

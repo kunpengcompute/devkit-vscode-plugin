@@ -24,7 +24,7 @@ The Tuning Assistant systematically organizes and analyzes performance metrics, 
 ### Build the Hyper Tuner client.
 - cd workspace
 - npm install
-- cd extension/runing 
-- npm install 
+- cd extension/runing
+- npm install
 - npm run package
 
