@@ -85,10 +85,10 @@
 
 <!-- 是否保存远端服务器配置 -->
 <app-messagebox #saveModifyDialog>
-    <div class="content tip-box save-modify-box">
+    <div class="content tip-box save-modify-box" style="width: 340px;">
         <div class="tip-title color-d-e8-l-22">
             <span class="title-content">{{i18n.plugins_tuning_title_save_config}}</span>
-            <span (click)="cancelDiglogMsgTip()" class="icon-close">
+            <span (click)="cancelModifyConfigDialog()" class="icon-close">
                 <img src="./assets/img/close_icon.svg">
                 <img src="./assets/img/close_hover.svg">
             </span>
@@ -104,7 +104,7 @@
         <div class="tip-confirm">
             <button type="button" class="primary-btn"
                 (click)="confirmModifyConfigDialog()">{{i18n.plugins_public_button_confirm}}</button>
-            <button type="button" class="secondary-btn"
+            <button type="button" class="secondary-btn rightest-btn"
                 (click)="cancelModifyConfigDialog()">{{i18n.plugins_public_button_cancel}}</button>
         </div>
     </div>
@@ -112,7 +112,7 @@
 
 <!-- 版本不匹配 -->
 <app-messagebox #versionDialog>
-    <div class="content tip-box">
+    <div class="content tip-box" style="width: 660px;">
         <div class="tip-title color-d-e8-l-22">
             <span class="title-content">{{i18n.plugins_common_title_config}}</span>
             <span (click)="cancelVersionDiglogMsgTip()" class="icon-close">

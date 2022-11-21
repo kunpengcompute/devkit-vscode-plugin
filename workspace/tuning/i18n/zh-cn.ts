@@ -203,14 +203,15 @@ export const I18N_ZH = {
     plugins_common_cut_server: '是否需要关闭页面并切换服务器配置？点击确认后将退出当前服务器。',
 
     // 检查ssh2链接 弹框
-    plugins_common_tips_checkConn_root: '您当前使用的是root用户，建议使用普通用户，相关加固操作请参考FAQ，是否确认继续操作？',
+    plugins_common_tips_checkConn_root: '您当前使用的是root用户，建议使用普通用户，相关加固操作请参考资料，请确认是否继续？',
     plugins_common_tips_checkConn_noroot: '您当前使用的是普通用户{0}，请检查以下条件是否满足：\r\n普通用户{0}已加入用户组wheel，详细命令可参考FAQ，是否确认继续操作？',
-    plugins_common_tips_checkConn_openFAQ: '打开FAQ',
+    plugins_common_tips_checkConn_openFAQ: '打开资料',
 
 
     plugins_public_text_tip: '提示',
     plugins_public_button_confirm: '确认',
     plugins_public_button_cancel: '取消',
+    plugins_public_button_continue: '继续',
     plugins_public_message_confirm: '是',
     plugins_public_message_cancel: '否',
     plugins_public_message_close: '关闭',
@@ -221,5 +222,6 @@ export const I18N_ZH = {
     plugins_tuning_message_save_config_success: '保存配置成功！',
     // TODO 配置服务器失败提示？
     plugins_tuning_title_save_config: '保存远端服务器配置',
-    plugins_tuning_save_config_modify: '是否确认保存当前修改？点击确认后将登出当前用户。'
+    plugins_tuning_save_config_modify: '是否确认保存当前修改？点击确认后将登出当前用户。',
+    plugins_tuning_title_root_deploy: 'root用户部署'
 };

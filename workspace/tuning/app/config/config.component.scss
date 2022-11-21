@@ -102,15 +102,6 @@
             cursor: pointer;
         }
     }
-
-
-
-
-
-
-
-
-
 }
 
 ::ng-deep .vscode-dark {
@@ -170,22 +161,15 @@
 
 ::ng-deep .content-box {
     background-color: var(--install-color-msgbox-bg) !important;
-    width: 660px !important;
-    padding: 0 !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
+    // width: 660px !important;
+    // justify-content: center !important;
+    // align-items: center !important;
 }
 
 
 .tip-box {
-    padding: 0px 40px;
-    padding-bottom: 40px;
-    width: 660px;
-
     .tip-title {
         color: var(--install-color-title-content);
-        margin-top: 20px;
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
@@ -260,9 +244,8 @@
     align-items: center;
 
     button {
-        width: 160px;
         line-height: 32px;
-        font-size: 14px;
+        font-size: 12px;
         text-align: center;
         margin: 0px 10px;
         border-width: 1px;
@@ -432,18 +415,8 @@
 }
 
 ::ng-deep .save-modify-box {
-    width: 400px !important;   
-
-    .tip-box {
-        padding-bottom: 32px !important;
-    }
-
     .tip-dsc {
         border-top: none !important;
-    }
-
-    .tip-confirm button {
-        width: 80px !important;
     }
 }
 

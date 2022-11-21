@@ -214,7 +214,7 @@
 
 <!-- 部署须知 -->
 <app-messagebox #installTip *ngIf="needFlag">
-    <div class="content tip-box">
+    <div class="content tip-box" style="width: 630px;">
         <div class="tip-title color-d-e8-l-22">
             <span class="title-content">{{i18n.plugins_common_message_beforeInstall}}</span>
             <span (click)="cancelMsgTip()" class="icon-close">
@@ -250,7 +250,7 @@
         <div class="tip-confirm">
             <button type="button" class="primary-btn" (click)="confirmMsgTip()"
                 [disabled]="!flag">{{i18n.plugins_common_button_term_operate_ok}}</button>
-            <button type="button" class="secondary-btn" (click)="cancelMsgTip()">{{i18n.plugins_tuning_message_beforeInstallCancel}}</button>
+            <button type="button" class="secondary-btn rightest-btn" (click)="cancelMsgTip()">{{i18n.plugins_tuning_message_beforeInstallCancel}}</button>
         </div>
     </div>
 </app-messagebox>
@@ -258,9 +258,9 @@
 
 <!-- 确认弹框 -->
 <app-messagebox #showDialog>
-    <div class="content tip-box">
+    <div class="content tip-box root-deploy-box" style="width: 400px;">
         <div class="tip-title color-d-e8-l-22">
-            <span class="title-content">{{i18n.plugins_public_text_tip}}</span>
+            <span class="title-content">{{i18n.plugins_tuning_title_root_deploy}}</span>
             <span (click)="cancelDiglogMsgTip()" class="icon-close">
                 <img src="./assets/img/close_icon.svg">
                 <img src="./assets/img/close_hover.svg">
@@ -276,9 +276,9 @@
             </div>
         </div>
         <div class="tip-confirm">
-            <button type="button" class="primary-btn" (click)="openFAQ()">{{i18n.plugins_common_tips_checkConn_openFAQ}}</button>
-            <button type="button" class="secondary-btn" (click)="confirmDialogMsgTip()">{{i18n.plugins_public_button_confirm}}</button>
+            <button type="button" class="primary-btn" (click)="confirmDialogMsgTip()">{{i18n.plugins_public_button_continue}}</button>
             <button type="button" class="secondary-btn" (click)="cancelDiglogMsgTip()">{{i18n.plugins_public_button_cancel}}</button>
+            <button type="button" class="secondary-btn rightest-btn" (click)="openFAQ()">{{i18n.plugins_common_tips_checkConn_openFAQ}}</button>
         </div>
     </div>
 </app-messagebox>

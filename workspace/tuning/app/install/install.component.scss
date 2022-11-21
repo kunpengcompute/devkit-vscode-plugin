@@ -54,6 +54,10 @@
 
 }
 
+// ::ng-deep .content-box {
+    // width: 700px !important;
+// }
+
 .install-form {
     padding: 40px 0 40px 80px;
     min-width: 300px;
@@ -398,5 +402,11 @@
         button {
             min-width: 100px;
         }
+    }
+}
+
+::ng-deep .root-deploy-box {
+    .tip-dsc {
+        border: none !important;
     }
 }

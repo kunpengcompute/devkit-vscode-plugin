@@ -27,10 +27,10 @@
 }
 
 .content-box {
-    box-sizing: content-box;
-    display: none;
-    width: 580px;
-    padding: 20px 40px 40px 40px;
+    box-sizing: border-box;
+    // content-box宽度自适应内容，方便使用的组件自定义宽度
+    width: fit-content;
+    padding: 20px 32px 32px 32px;
     background-color: var(--color-box-content);
     box-shadow: 0px 3px 6px 0px var(--color-content-shadow);
     margin: auto !important;
@@ -39,6 +39,8 @@
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
+    justify-content: center;
+    align-items: center;
 
     img {
         position: absolute;
@@ -53,5 +55,5 @@
 }
 
 .content-box.active {
-    display: block;
+    display: flex;
 }

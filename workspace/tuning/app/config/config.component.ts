@@ -10,7 +10,7 @@ import { VscodeService, COLOR_THEME } from '../service/vscode.service';
 export class ConfigComponent implements OnInit {
     @ViewChild('saveConfirmTip') saveConfirmTip: { Close: () => void; Open: () => void; };
     @ViewChild('showDialog', { static: false }) showDialog: { Close: () => void; Open: () => void; };
-    @ViewChild('saveModifyDialog', { static: false}) saveModifyDialog: { Close: () => void; Open: () => void; setContentBoxWidth: (width: string) => void};
+    @ViewChild('saveModifyDialog', { static: false}) saveModifyDialog: { Close: () => void; Open: () => void; };
     @ViewChild('versionDialog', { static: false }) versionDialog: { Close: () => void; Open: () => void; };
     @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; };
     @ViewChild('notificationWithActionBox') notificationWithActionBox: {setType: (type: notificationType) => void; show: () => void; };
@@ -107,10 +107,9 @@ export class ConfigComponent implements OnInit {
      */
     saveConfirm() {
         console.log("=========this is saveConfig =============");
-        // TODO 如果是修改模式，点击保存时弹框提示是否确认保存配置
+        // 如果是修改模式，点击保存时弹框提示是否确认保存配置
         if (this.isModify) {
             // 单独设置保存修改配置对话框宽度
-            this.saveModifyDialog.setContentBoxWidth('400px');
             this.saveModifyDialog.Open();
         } else {
             this.save();

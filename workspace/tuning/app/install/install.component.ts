@@ -232,10 +232,11 @@ export class InstallComponent implements AfterViewInit, OnInit {
         }
         if (this.username.toLocaleLowerCase() === 'root') {
             this.dialogShowDetailText = this.i18n.plugins_common_tips_checkConn_root;
+            // 如果是root用户，提示root用户部署弹窗
+            this.showDialog.Open();
         } else {
             this.dialogShowDetailText = this.i18n.plugins_common_tips_checkConn_noroot.replace(/\{0\}/g, this.username);
         }
-        this.showDialog.Open();
     }
     /**
      * 检测ssh连接是否通畅
@@ -462,7 +463,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
     }
 
     /**
-     * 检查是否为非root用户
+     * 检查用户名非空
      *
      * @returns 校验结果
      */
