@@ -406,8 +406,26 @@ export class UnInstallComponent implements OnInit{
     }
 
     fileUpload() {
-        this.elementRef.nativeElement.querySelector('#uploadFile').value = '';
-        this.elementRef.nativeElement.querySelector('#uploadFile').click();
+        if (this.intelliJFlagDef) {
+            const postData = {
+                cmd: 'uploadPrivateKey',
+            };
+            this.vscodeService.postMessage(postData, (data: any) => {
+                if (data.checkPrivateKey == "true") {
+                    this.localfilepath = data.localfilepath.replace(/\\/g, '/');
+                    this.privateKey = this.localfilepath;
+                }
+                else{
+                    this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshkeyFail);
+                    this.localfilepath = '';
+                    return;
+                }
+            });
+        }
+        else {
+            this.elementRef.nativeElement.querySelector('#uploadFile').value = '';
+            this.elementRef.nativeElement.querySelector('#uploadFile').click();
+        }
     }
 
     /**
