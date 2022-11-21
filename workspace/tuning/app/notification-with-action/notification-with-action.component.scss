@@ -12,27 +12,33 @@
     --color-message: #616161;
 }
 
-.notification-box {
+.notification-action-box {
     background-color: var(--color-box-content);
     box-shadow: 0px 3px 6px 0px var(--color-content-shadow);
     position: fixed;
-    width: fit-content;
-    height: 35px;
-    top: 30px;
-    left: 50%;
-    display: none;
-    padding: 0 10px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
+    width: 280px;
+    height: fit-content;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 10px;
     z-index: 999;
-    transform: translateX(-50%);
-
-    font-size: 13px;
-    color: var(--color-message);
+    display: block;
 }
 
-.notification-box.active {
+// .notification-action-box.active {
+//     display: block;
+// }
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+
+.title-notification {
+    font-size: 13px;
+    color: var(--color-message);
     display: flex;
 }
 
@@ -57,4 +63,16 @@
 
 .notification-icon.warn {
     background-image: url(../../assets/img/tip/warn.svg);
+}
+
+.action {
+    position: relative;
+    bottom: 5px;
+    right: 0;
+    float: right;
+}
+
+.icon-close img {
+    width: 15px;
+    cursor: pointer;
 }

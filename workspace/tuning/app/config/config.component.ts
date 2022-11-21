@@ -10,8 +10,10 @@ import { VscodeService, COLOR_THEME } from '../service/vscode.service';
 export class ConfigComponent implements OnInit {
     @ViewChild('saveConfirmTip') saveConfirmTip: { Close: () => void; Open: () => void; };
     @ViewChild('showDialog', { static: false }) showDialog: { Close: () => void; Open: () => void; };
+    @ViewChild('saveModifyDialog', { static: false}) saveModifyDialog: { Close: () => void; Open: () => void; setContentBoxWidth: (width: string) => void};
     @ViewChild('versionDialog', { static: false }) versionDialog: { Close: () => void; Open: () => void; };
-    @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; close: () => void};
+    @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; };
+    @ViewChild('notificationWithActionBox') notificationWithActionBox: {setType: (type: notificationType) => void; show: () => void; };
 
     private static CONFIG_RADIX = 10;
     public i18n: any;
@@ -27,7 +29,9 @@ export class ConfigComponent implements OnInit {
     public pluginUrlCfg: any = {};
     public showLoading = false;
     public showIfServerDialog = false; // 显示是否切换服务器
-    public versionMismatch = ""
+    public versionMismatch = "";
+    public notificationMessage = ""; // 配置远端服务器执行结果提示
+    public isModify = false; // 是否为修改配置状态
 
     constructor(
         private i18nService: I18nService,
@@ -47,7 +51,7 @@ export class ConfigComponent implements OnInit {
         this.vscodeService.regVscodeMsgHandler('colorTheme', (msg: any) => {
             this.currTheme = msg.colorTheme;
         });
-        // TODO ?
+        // TODO 
         this.vscodeService.regVscodeMsgHandler('showCustomDialog', (msg: any) => {
             this.showIfServerDialog = true;
             this.showDialog.Open();
@@ -103,12 +107,25 @@ export class ConfigComponent implements OnInit {
      */
     saveConfirm() {
         console.log("=========this is saveConfig =============");
-        this.save();
+        // TODO 如果是修改模式，点击保存时弹框提示是否确认保存配置
+        if (this.isModify) {
+            // 单独设置保存修改配置对话框宽度
+            this.saveModifyDialog.setContentBoxWidth('400px');
+            this.saveModifyDialog.Open();
+        } else {
+            this.save();
+        }
+    }
+
+    setNotificationBox(type: notificationType, info: string) {
+        this.notificationBox.setType(type);
+        this.notificationMessage = info;
+        this.notificationBox.show();
     }
 
     /**
      * 将ip port配置写入配置文件
-     * @param openConfigServer 是否直接打开登录页面
+     * @param openConfigServer 是否直接打开登录页面 ?有True的时候吗
      */
     save(openConfigServer: boolean = false) {
         console.log("============this is save ==============");
@@ -123,18 +140,10 @@ export class ConfigComponent implements OnInit {
         });
         if (!this.ipCheck && !this.portCheck) {
             this.showLoading = true;
-            this.notificationBox.setType(notificationType.success);
-            this.notificationBox.show();
             this.config.tuningConfig = {
                 ip: this.tempIP,
                 port: this.tempPort
             };
-            // this.showDialog.Open();
-            // this.config.tuningConfig.push({
-            //     ip: this.tempIP,
-            //     port: this.tempPort
-
-            // });
             let data = {
                 cmd: 'saveConfig', data: {
                     data: JSON.stringify(this.config.tuningConfig),
@@ -143,35 +152,28 @@ export class ConfigComponent implements OnInit {
                 }
             };
             this.vscodeService.postMessage(data, (res: any) => {
+                // TODO 页面元素更新缓慢，无法及时更新
                 this.showLoading = false;
                 console.log(res);
                 // 版本不匹配
                 if (res.type === 'VERSIONMISMATCH') {
+                    console.log("version mismatch");
                     this.versionMismatch = this.i18nService.I18nReplace(this.i18n.plugins_tuning_message_versionCompatibility, {
                         0: res.configVersion,
                         1: res.serverVersion
-                    })
-                    this.versionDialog.Open()
+                    });
+                    this.versionDialog.Open();
+                } else if (res.type === 'FAIL') {
+                    this.setNotificationBox(notificationType.error, '配置服务器失败');
+                    console.log("save config error");
+                } else {
+                    console.log("save config success!!!");
+                    this.setNotificationBox(notificationType.success, this.i18n.plugins_tuning_message_config_server_success);
+                    this.notificationWithActionBox.show();
+                    this.hasConfig = true;
                 }
             });
-            this.hasConfig = true;
-            // this.readConfig();
         }
-    }
-
-
-    /**
-     * 取消配置操作(关闭页面)
-     */
-    cancel() {
-        console.log("closing panel");
-        const data = {
-            cmd: 'closePanel',
-            data: {
-                panelId: 'tuningNonServerConfig',
-            }
-        };
-        this.vscodeService.postMessage(data, null);
     }
 
     /**
@@ -207,6 +209,22 @@ export class ConfigComponent implements OnInit {
     }
 
     /**
+     * 跳转登录页面
+     */
+    openLogin() {
+        // TODO vscode端的打开登录页面逻辑
+        // intellij：调用postMessage打开页面
+        console.log("open login page");
+        const data = {
+            cmd: 'openNewPage',
+            data: {
+                router: 'login'
+            }
+        }
+        this.vscodeService.postMessage(data, null);
+    }
+
+    /**
      * 切换服务器确认
      */
     public confirmDialogMsgTip() {
@@ -221,10 +239,42 @@ export class ConfigComponent implements OnInit {
         this.showDialog.Close();
         this.showLoading = false;
     }
+
+    /**
+     * 修改服务器配置确认保存
+     */
+    public confirmModifyConfigDialog() {
+        this.save();
+    }
+
+    /**
+     * 修改服务器配置取消保存
+     */
+    public cancelModifyConfigDialog() {
+        this.saveModifyDialog.Close();
+    }
+
     /**
      * 版本不匹配取消
      */
     cancelVersionDiglogMsgTip() {
         this.versionDialog.Close()
+    }
+
+    /**
+     * 已经配置服务器成功后点击修改
+     */
+    modifyConfig() {
+        console.log("going to modify config");
+        this.isModify = true;
+
+    }
+
+    /**
+     * 取消修改操作
+     */
+     cancel() {
+        console.log("cancel modify config");
+        this.isModify = false;
     }
 }

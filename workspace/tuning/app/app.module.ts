@@ -29,6 +29,7 @@ import { I18nService } from './service/i18n.service';
 
 import { HyLocale, HyLocaleModule, HyThemeServiceModule } from 'hyper';
 import { NotificationBoxComponent } from './notification-box/notification-box.component';
+import { NotificationWithActionComponent } from './notification-with-action/notification-with-action.component';
 
 // ZH表示界面语言为中文
 const LANGUAGE_TYPE_ZH = 0;
@@ -45,7 +46,8 @@ const LANGUAGE_TYPE_ZH = 0;
         BannerComponent,
         MessageboxComponent,
         LoadingComponent,
-        NotificationBoxComponent
+        NotificationBoxComponent,
+        NotificationWithActionComponent
     ],
     imports: [
         TranslateModule.forRoot({

@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { notificationType } from '../notification-box/notification-box.component';
 import { I18nService } from '../service/i18n.service';
 import { VscodeService, COLOR_THEME } from '../service/vscode.service';
 import { ActivatedRoute} from '@angular/router';
@@ -25,6 +26,8 @@ export class UnInstallComponent implements OnInit{
             required: ''
         }
     };
+    @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; };
+
     public i18n: any = this.i18nService.I18n();
     public tempIP: string;
     public tempPort = '22';
@@ -60,6 +63,7 @@ export class UnInstallComponent implements OnInit{
     public showLoading = false;
 
     public dialogShowDetailText = '';
+    public notificationMessage = ''; // 执行结果提示
     intelliJFlagDef = false;
 
     constructor(
@@ -120,6 +124,12 @@ export class UnInstallComponent implements OnInit{
         this.vscodeService.postMessage(message, null);
     }
 
+    setNotificationBox(type: notificationType, info: string) {
+        this.notificationBox.setType(type);
+        this.notificationMessage = info;
+        this.notificationBox.show();
+    }
+
     private getCheckResult() {
         if (!this.ipCheckF && !this.tempPortCheckF && !this.usernameCheckNull &&
             ((this.sshTypeSelected === 'usepwd' && !this.pwdCheckNull) ||
@@ -174,20 +184,25 @@ export class UnInstallComponent implements OnInit{
         this.vscodeService.postMessage(postData, (data: any) => {
             if (data.search(/SUCCESS/) !== -1) {
                 this.connected = true;
-                this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
+                this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
+                // this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
             } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
                 this.connected = false;
-                this.showInfoBox(this.i18n.plugins_common_tips_connFail, 'error');
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
+                // this.showInfoBox(this.i18n.plugins_common_tips_connFail, 'error');
             } else if (data.search(/host fingerprint verification failed/) !== -1) {
                 this.connected = false;
-                this.showInfoBox(this.i18n.plugins_common_tips_figerFail, 'error');
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_figerFail);
+                // this.showInfoBox(this.i18n.plugins_common_tips_figerFail, 'error');
             } else if (data.search(/Timed out while waiting for handshake/) !== -1) {
                 this.connected = false;
-                this.showInfoBox(this.i18n.plugins_common_tips_timeOut, 'error');
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_timeOut);
+                // this.showInfoBox(this.i18n.plugins_common_tips_timeOut, 'error');
             } else if (data.search(/Cannot parse privateKey/) !== -1) {
                 // 密码短语错误
                 this.connected = false;
-                this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_passphraseFail);
+                // this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
             }
             this.connectChecking = false;
         });
@@ -246,11 +261,13 @@ export class UnInstallComponent implements OnInit{
         if (this.uninstalling !== RUNNING) { return; }
         if (data.search(/uploadErr/) !== -1) {
             this.uninstalling = FAILED;
-            this.showInfoBox(this.i18n.plugins_common_tips_uploadError, 'error');
+            this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_uploadError);
+            // this.showInfoBox(this.i18n.plugins_common_tips_uploadError, 'error');
             this.clearPwd();
         } else if (data.search(/Error:/) !== -1) {
             this.uninstalling = FAILED;
-            this.showInfoBox(this.i18n.plugins_common_tips_sshError, 'error');
+            this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_sshError);
+            // this.showInfoBox(this.i18n.plugins_common_tips_sshError, 'error');
             this.clearPwd();
         } else if (data.search(/success/) !== -1) {
             this.cleanConfig();
@@ -361,7 +378,8 @@ export class UnInstallComponent implements OnInit{
         this.localfilepath = localFile.path.replace(/\\/g, '/');
         const size = localFile.size / 1024 / 1024;
         if (size > 10) {
-            this.showInfoBox(this.i18n.plugins_common_message_sshkeyExceedMaxSize, 'warn');
+            this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshkeyExceedMaxSize);
+            // this.showInfoBox(this.i18n.plugins_common_message_sshkeyExceedMaxSize, 'warn');
             this.localfilepath = undefined;
             return;
         }
@@ -379,7 +397,8 @@ export class UnInstallComponent implements OnInit{
         };
         this.vscodeService.postMessage(postData, (data: any) => {
             if (data !== true) {
-                this.showInfoBox(this.i18n.plugins_common_message_sshkeyFail, 'warn');
+                this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshkeyFail);
+                // this.showInfoBox(this.i18n.plugins_common_message_sshkeyFail, 'warn');
                 this.localfilepath = undefined;
                 return;
             }
