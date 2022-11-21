@@ -249,9 +249,6 @@ export class InstallComponent implements AfterViewInit, OnInit {
             }
         };
         this.vscodeService.postMessage(postData, (data: any) => {
-            if(this.intelliJFlagDef){
-                data=JSON.stringify(data)
-            }
             if (data.search(/SUCCESS/) !== -1) {
                 this.connected = true;
                 this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
@@ -373,14 +370,14 @@ export class InstallComponent implements AfterViewInit, OnInit {
     saveConfig() {
         const command = { cmd: 'readConfig' };
         this.vscodeService.postMessage(command, (data: any) => {
-            data.tuningConfig = [];
-            data.tuningConfig.push({
+            data.tuningConfig={
                 ip: this.finalIP,
                 port: this.webPort,
                 selectCertificate: false,
                 localfilepath: ''
-            });
-            const postData = { cmd: 'saveConfig', data: { data: JSON.stringify(data), selected: 'trust' } };
+            };
+            const postData = { cmd: 'saveConfig', data: { data: JSON.stringify(data.tuningConfig), selected: 'trust' } };
+            console.log(postData)
             this.vscodeService.postMessage(postData, () => {
                 const data1 = { cmd: 'updatePanel' };
                 this.vscodeService.postMessage(data1, null);

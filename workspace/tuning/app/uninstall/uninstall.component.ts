@@ -172,9 +172,6 @@ export class UnInstallComponent implements OnInit{
             }
         };
         this.vscodeService.postMessage(postData, (data: any) => {
-            if(this.intelliJFlagDef){
-                data=JSON.stringify(data)
-            }
             if (data.search(/SUCCESS/) !== -1) {
                 this.connected = true;
                 this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
