@@ -190,6 +190,18 @@ const messageHandler: { [key: string]: any } = {
         }
     },
 
+    /**
+     * 调用uploadPrivateKey绑定回调函数
+     *
+     * @param data vscode发送的消息数据
+     */
+    uploadPrivateKey(data: any) {
+        if (that.callbacks[data.cbid]) {
+            that.callbacks[data.cbid](data.data);
+            delete that.callbacks[data.cbid];
+        }
+    },
+
 
 
     /**

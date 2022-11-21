@@ -182,9 +182,6 @@ export class UnInstallComponent implements OnInit{
             }
         };
         this.vscodeService.postMessage(postData, (data: any) => {
-            if(this.intelliJFlagDef){
-                data=JSON.stringify(data)
-            }
             if (data.search(/SUCCESS/) !== -1) {
                 this.connected = true;
                 this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
@@ -409,8 +406,26 @@ export class UnInstallComponent implements OnInit{
     }
 
     fileUpload() {
-        this.elementRef.nativeElement.querySelector('#uploadFile').value = '';
-        this.elementRef.nativeElement.querySelector('#uploadFile').click();
+        if (this.intelliJFlagDef) {
+            const postData = {
+                cmd: 'uploadPrivateKey',
+            };
+            this.vscodeService.postMessage(postData, (data: any) => {
+                if (data.checkPrivateKey == "true") {
+                    this.localfilepath = data.localfilepath.replace(/\\/g, '/');
+                    this.privateKey = this.localfilepath;
+                }
+                else{
+                    this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshkeyFail);
+                    this.localfilepath = '';
+                    return;
+                }
+            });
+        }
+        else {
+            this.elementRef.nativeElement.querySelector('#uploadFile').value = '';
+            this.elementRef.nativeElement.querySelector('#uploadFile').click();
+        }
     }
 
     /**

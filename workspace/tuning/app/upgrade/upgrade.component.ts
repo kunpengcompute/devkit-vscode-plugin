@@ -193,10 +193,6 @@ export class UpgradeComponent implements OnInit {
             }
         };
         this.vscodeService.postMessage(postData, (data: any) => {
-            if(this.intelliJFlagDef){
-                data=JSON.stringify(data)
-            }
-            console.log(data)
             if (data.search(/SUCCESS/) !== -1) {
                 this.connected = true;
                 this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
@@ -267,10 +263,6 @@ export class UpgradeComponent implements OnInit {
      * @param data 流程信息
      */
     processupgradeInfo(data: any) {
-        console.log(this.intelliJFlagDef)
-        if(this.intelliJFlagDef){
-            data=JSON.stringify(data);
-        }
         console.log(data)
         if (data.search(/closeLoading/)) {
           this.showLoading = false;
@@ -327,15 +319,19 @@ export class UpgradeComponent implements OnInit {
     /**
      * 保存ip与端口到配置文件与全局变量
      */
-    saveConfig() {
+    saveConfig(openConfigServer: boolean = false) {
         const command = { cmd: 'readConfig' };
         this.vscodeService.postMessage(command, (data: any) => {
-            data.tuningConfig = [];
-            data.tuningConfig.push({
+            data.tuningConfig = {
                 ip: this.finalIP,
                 port: this.webPort
-            });
-            const postData = { cmd: 'saveConfig', data: { data: JSON.stringify(data) } };
+            };
+            const postData = { cmd: 'saveConfig', data: { 
+                data: JSON.stringify(data.tuningConfig),
+                showInfoBox: true,
+                openConfigServer
+            } };
+            console.log(postData)
             this.vscodeService.postMessage(postData, () => {
                 const data1 = { cmd: 'updatePanel' };
                 this.vscodeService.postMessage(data1, null);
@@ -424,10 +420,10 @@ export class UpgradeComponent implements OnInit {
     goLogin() {
         if (this.ipSelected === 0) {
             this.finalIP = this.tempIP;
-            this.saveConfig();
+            this.saveConfig(true);
         } else if (this.ipSelected === 1) {
             this.finalIP = this.faultIP;
-            this.saveConfig();
+            this.saveConfig(true);
         } else if (this.ipSelected === 2) {
             // 对输入的IP进行提交前校验
             this.elementRef.nativeElement.querySelectorAll(`input`).forEach((element: any) => {
@@ -436,7 +432,7 @@ export class UpgradeComponent implements OnInit {
             });
             this.finalIP = this.extraIP;
             if (!this.extraIpCheckF) {
-                this.saveConfig();
+                this.saveConfig(true);
             }
         }
     }
@@ -477,8 +473,26 @@ export class UpgradeComponent implements OnInit {
     }
 
     fileUpload() {
-        this.elementRef.nativeElement.querySelector('#uploadFile').value = '';
-        this.elementRef.nativeElement.querySelector('#uploadFile').click();
+        if (this.intelliJFlagDef) {
+            const postData = {
+                cmd: 'uploadPrivateKey',
+            };
+            this.vscodeService.postMessage(postData, (data: any) => {
+                if (data.checkPrivateKey == "true") {
+                    this.localfilepath = data.localfilepath.replace(/\\/g, '/');
+                    this.privateKey = this.localfilepath;
+                }
+                else{
+                    this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshkeyFail);
+                    this.localfilepath = '';
+                    return;
+                }
+            });
+        }
+        else {
+            this.elementRef.nativeElement.querySelector('#uploadFile').value = '';
+            this.elementRef.nativeElement.querySelector('#uploadFile').click();
+        }
     }
 
     /**
