@@ -147,7 +147,8 @@ export class ConfigComponent implements OnInit {
                 cmd: 'saveConfig', data: {
                     data: JSON.stringify(this.config.tuningConfig),
                     showInfoBox: true,
-                    openConfigServer
+                    openConfigServer,
+                    openLogin: false
                 }
             };
             this.vscodeService.postMessage(data, (res: any) => {
