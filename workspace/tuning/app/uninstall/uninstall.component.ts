@@ -65,6 +65,7 @@ export class UnInstallComponent implements OnInit{
     public dialogShowDetailText = '';
     public notificationMessage = ''; // 执行结果提示
     intelliJFlagDef = false;
+    closeAll=false;
 
     constructor(
         public i18nService: I18nService,
@@ -291,9 +292,12 @@ export class UnInstallComponent implements OnInit{
     cleanConfig() {
         const command = { cmd: 'readConfig' };
         this.vscodeService.postMessage(command, (data: any) => {
-            data.tuningConfig = [];
-            const postData = { cmd: 'cleanConfig', data: { data: JSON.stringify(data) } };
-            this.vscodeService.postMessage(postData, () => {
+            const tmp_data = {
+                ip: this.tempIP
+            };
+            const postData = { cmd: 'cleanConfig', data: { data: JSON.stringify(tmp_data) } };
+            this.vscodeService.postMessage(postData, (res:any) => {
+                this.closeAll=res
                 this.uninstalling = SUCCESS;
             });
         });
@@ -303,7 +307,7 @@ export class UnInstallComponent implements OnInit{
      * 退出
      */
     exit() {
-        const data = { cmd: 'closeAllPanel' };
+        const data = { cmd: 'closeAllPanel', data: { closeAll:this.closeAll } };
         this.vscodeService.postMessage(data, null);
     }
 
