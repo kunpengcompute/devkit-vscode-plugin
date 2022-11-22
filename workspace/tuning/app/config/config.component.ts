@@ -243,6 +243,7 @@ export class ConfigComponent implements OnInit {
      * 修改服务器配置确认保存
      */
     public confirmModifyConfigDialog() {
+        this.saveModifyDialog.Close();
         this.save();
     }
 
