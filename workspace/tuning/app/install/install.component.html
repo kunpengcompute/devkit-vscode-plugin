@@ -260,7 +260,7 @@
 <app-messagebox #showDialog>
     <div class="content tip-box root-deploy-box" style="width: 400px;">
         <div class="tip-title color-d-e8-l-22">
-            <span class="title-content">{{i18n.plugins_tuning_title_root_deploy}}</span>
+            <span class="title-content">{{userDeployDialogTitle}}</span>
             <span (click)="cancelDiglogMsgTip()" class="icon-close">
                 <img src="./assets/img/close_icon.svg">
                 <img src="./assets/img/close_hover.svg">
@@ -279,6 +279,22 @@
             <button type="button" class="primary-btn" (click)="confirmDialogMsgTip()">{{i18n.plugins_public_button_continue}}</button>
             <button type="button" class="secondary-btn" (click)="cancelDiglogMsgTip()">{{i18n.plugins_public_button_cancel}}</button>
             <button type="button" class="secondary-btn rightest-btn" (click)="openFAQ()">{{i18n.plugins_common_tips_checkConn_openFAQ}}</button>
+        </div>
+    </div>
+</app-messagebox>
+
+<!-- 指纹弹框 -->
+<app-messagebox #fingerDialog>
+    <div class="content tip-box finger-box" style="width: 360px;">
+        <div class="tip-dsc">
+            <img class="img_box" src="./assets/img/tip/icon_information.svg">
+            <div class="color-d-e8-l-61">
+                <p>{{fingerLoseText}}</p>
+            </div>
+        </div>
+        <div class="tip-confirm">
+            <button type="button" class="primary-btn" (click)="confirmFingerDialog()">{{i18n.plugins_public_message_confirm}}</button>
+            <button type="button" class="secondary-btn" (click)="cancelFingerDialog()">{{i18n.plugins_public_message_cancel}}</button>
         </div>
     </div>
 </app-messagebox>

@@ -197,6 +197,7 @@ export const I18N_ZH = {
     plugins_common_message_CommunityTipLink: '<a href={0}>鲲鹏社区</a>',
     plugins_common_message_serverErrorResult2Link: '<a href={0}>"如何排查服务端状态异常问题"</a>',
     plugins_common_message_serverErrorResult2: '-异常，请参考{0}处理。',
+    plugins_common_message_figerLose: '主机 {0} 的可信度不能确定，指纹为SHA256:{1}，是否继续连接（是/否）？',
 
 
     // config 弹框
@@ -204,7 +205,7 @@ export const I18N_ZH = {
 
     // 检查ssh2链接 弹框
     plugins_common_tips_checkConn_root: '您当前使用的是root用户，建议使用普通用户，相关加固操作请参考资料，请确认是否继续？',
-    plugins_common_tips_checkConn_noroot: '您当前使用的是普通用户{0}，请检查以下条件是否满足：\r\n普通用户{0}已加入用户组wheel，详细命令可参考FAQ，是否确认继续操作？',
+    plugins_common_tips_checkConn_noroot: '您当前使用的是普通用户{0}，请检查以下条件是否满足：\r\n普通用户{0}已加入用户组wheel，详细命令可参考资料，是否确认继续操作？',
     plugins_common_tips_checkConn_openFAQ: '打开资料',
 
 
@@ -223,5 +224,5 @@ export const I18N_ZH = {
     // TODO 配置服务器失败提示？
     plugins_tuning_title_save_config: '保存远端服务器配置',
     plugins_tuning_save_config_modify: '是否确认保存当前修改？点击确认后将登出当前用户。',
-    plugins_tuning_title_root_deploy: 'root用户部署'
+    plugins_tuning_title_root_deploy: 'root用户部署',
 };
