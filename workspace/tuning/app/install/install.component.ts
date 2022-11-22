@@ -444,7 +444,13 @@ export class InstallComponent implements AfterViewInit, OnInit {
                 selectCertificate: false,
                 localfilepath: ''
             };
-            const postData = { cmd: 'saveConfig', data: { data: JSON.stringify(data.tuningConfig), selected: 'trust' } };
+            const postData = {
+                cmd: 'saveConfig', data: {
+                    data: JSON.stringify(data.tuningConfig),
+                    showInfoBox: true,
+                    openLogin: true
+                }
+            };
             console.log(postData)
             this.vscodeService.postMessage(postData, () => {
                 const data1 = { cmd: 'updatePanel' };
