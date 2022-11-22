@@ -305,13 +305,11 @@ input {
     width: 20px;
     height: 20px;
 }
-.tip-box {
-    padding: 0px 40px;
-    padding-bottom: 40px;
 
+.tip-box {
+    width: 400px;
     .tip-title {
         color: var(--uninstall-color-title-content);
-        margin-top: 20px;
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
@@ -447,10 +445,6 @@ input {
 ::ng-deep .content-box {
     background-color: var(--uninstall-color-msgbox-bg) !important;
     width: 660px !important;
-    padding: 0 !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
 }
 
 .tip-tem {

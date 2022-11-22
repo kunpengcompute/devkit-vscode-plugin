@@ -103,7 +103,7 @@ export class ConfigComponent implements OnInit {
     }
 
     /**
-     * 登录时弹窗确认
+     * 保存服务器配置
      */
     saveConfirm() {
         console.log("=========this is saveConfig =============");

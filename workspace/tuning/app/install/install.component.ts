@@ -20,8 +20,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
 
     @ViewChild('installTip', { static: false }) installTip: { Close: () => void; Open: () => void; };
     @ViewChild('installModal', { static: false }) installModal: { Close: () => void; Open: () => void; };
-
     @ViewChild('showDialog', { static: false }) showDialog: { Close: () => void; Open: () => void; };
+    @ViewChild('fingerDialog', { static: false }) fingerDialog: { Close: () => void; Open: () => void; };
     @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; };
 
     public i18n: any = this.i18nService.I18n();
@@ -48,6 +48,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
     public usernameCheckNull = false;
     public installType = 'password';
     public pwdCheckNull = false;
+    public tempFinger: string; // 读取的finger，用于发送保存finger
 
     public currTheme = COLOR_THEME.Dark;
     // 部署前必读相关
@@ -78,8 +79,10 @@ export class InstallComponent implements AfterViewInit, OnInit {
     public pluginUrlCfg: any = {
     };
 
-    public dialogShowDetailText = '';
+    public userDeployDialogTitle = ''; // 确认弹框标题
+    public dialogShowDetailText = ''; // 确认弹框内容
     public notificationMessage = ''; // 执行结果提示
+    public fingerLoseText = ''; // 指纹弹框消息内容
     intelliJFlagDef = false;
 
     constructor(
@@ -231,21 +234,70 @@ export class InstallComponent implements AfterViewInit, OnInit {
             return;
         }
         if (this.username.toLocaleLowerCase() === 'root') {
+            this.userDeployDialogTitle = this.i18n.plugins_tuning_title_root_deploy;
             this.dialogShowDetailText = this.i18n.plugins_common_tips_checkConn_root;
-            // 如果是root用户，提示root用户部署弹窗
-            this.showDialog.Open();
         } else {
+            this.userDeployDialogTitle = this.i18n.plugins_public_text_tip;
             this.dialogShowDetailText = this.i18n.plugins_common_tips_checkConn_noroot.replace(/\{0\}/g, this.username);
         }
+        this.showDialog.Open();
     }
+
     /**
-     * 检测ssh连接是否通畅
+     * 检测指纹，检测连接前调用
+     */
+    public checkFinger() {
+        console.log("checking finger");
+        // TODO 发送readFinger message
+        const postData = {
+            cmd: 'readFinger',
+            data: {
+                host: this.tempIP,
+                port: this.tempPort,
+                username: this.username,
+                password: this.pwd,
+                sshType: this.sshTypeSelected,
+                privateKey: this.privateKey,
+                passphrase: this.passphrase
+            }
+        }
+        this.vscodeService.postMessage(postData, (data: any) => {
+            console.log(data);
+            // TODO 返回结果处理
+            if (data === "noFirst") {
+                // 可以直接checkConn
+                this.realCheckConn();
+            } else if (data === "ERROR") {
+                // 读取指纹出错
+                this.setNotificationBox(notificationType.error, "host fingerprint verification failed");
+            } else {
+                // 首次连接
+                this.tempFinger = data;
+                this.fingerLoseText = this.i18nService.I18nReplace(this.i18n.plugins_common_message_figerLose, {
+                    0: this.tempIP,
+                    1: this.tempFinger
+                });
+                this.fingerDialog.Open();
+            }
+        });
+    }
+
+    /**
+     * 点击检测连接按钮后
      */
     public checkConn() {
         if (this.connectChecking) {
             return;
         }
+        this.checkFinger();
+    }
+
+    /**
+     * 实际执行检测ssh连接
+     */
+    public realCheckConn() {
         this.connectChecking = true;
+        console.log("finally checking ssh connection!");
         const postData = {
             cmd: 'checkConn',
             data: {
@@ -258,32 +310,31 @@ export class InstallComponent implements AfterViewInit, OnInit {
                 passphrase: this.passphrase
             }
         };
-        this.vscodeService.postMessage(postData, (data: any) => {
-            if (data.search(/SUCCESS/) !== -1) {
-                this.connected = true;
-                this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
-                // this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
-            } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
-                this.connected = false;
-                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
-                // this.showInfoBox(this.i18n.plugins_common_tips_connFail, 'error');
-            } else if (data.search(/host fingerprint verification failed/) !== -1) {
-                this.connected = false;
-                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_figerFail);
-                // this.showInfoBox(this.i18n.plugins_common_tips_figerFail, 'error');
-            } else if (data.search(/Timed out while waiting for handshake/) !== -1) {
-                this.connected = false;
-                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_timeOut);
-                // this.showInfoBox(this.i18n.plugins_common_tips_timeOut, 'error');
-            } else if (data.search(/Cannot parse privateKey/) !== -1) {
-                // 密码短语错误
-                this.connected = false;
-                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_passphraseFail);
-                // this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
-            }
-            this.connectChecking = false;
-        });
-        // }
+        // this.vscodeService.postMessage(postData, (data: any) => {
+        //     if (data.search(/SUCCESS/) !== -1) {
+        //         this.connected = true;
+        //         this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
+        //         // this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
+        //     } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
+        //         this.connected = false;
+        //         this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
+        //         // this.showInfoBox(this.i18n.plugins_common_tips_connFail, 'error');
+        //     } else if (data.search(/host fingerprint verification failed/) !== -1) {
+        //         this.connected = false;
+        //         this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_figerFail);
+        //         // this.showInfoBox(this.i18n.plugins_common_tips_figerFail, 'error');
+        //     } else if (data.search(/Timed out while waiting for handshake/) !== -1) {
+        //         this.connected = false;
+        //         this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_timeOut);
+        //         // this.showInfoBox(this.i18n.plugins_common_tips_timeOut, 'error');
+        //     } else if (data.search(/Cannot parse privateKey/) !== -1) {
+        //         // 密码短语错误
+        //         this.connected = false;
+        //         this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_passphraseFail);
+        //         // this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
+        //     }
+        //     this.connectChecking = false;
+        // });
     }
 
     /**
@@ -614,6 +665,42 @@ export class InstallComponent implements AfterViewInit, OnInit {
      */
     public cancelDiglogMsgTip() {
         this.showDialog.Close();
+    }
+
+    /**
+     * 指纹弹框确认连接
+     */
+    public confirmFingerDialog() {
+        // TODO 发送saveFinger message
+        this.fingerDialog.Close();
+        const postData = {
+            cmd: 'saveFinger',
+            data: {
+                ip: this.tempIP,
+                finger: this.tempFinger
+            }
+        }
+        this.vscodeService.postMessage(postData, (data: any) => {
+            console.log(data);
+            // TODO 返回结果处理
+            if (data === "SUCCESS") {
+                // 保存指纹成功，可检测连接
+
+            } else {
+                // 保存失败，但不应该影响连接
+                this.setNotificationBox(notificationType.warn, "host fingerprint saved failed");
+            }
+        });
+        this.realCheckConn();
+    }
+
+    /**
+     * 指纹弹框取消连接
+     */
+    public cancelFingerDialog() {
+        // TODO 不saveFinger的话，无法检测连接？
+        this.setNotificationBox(notificationType.warn, "host fingerprint verfication canceled");
+        this.fingerDialog.Close();
     }
 
     public clickFAQ(url:any) {

@@ -147,6 +147,8 @@ export const I18N_US = {
   common_term_valition_realpath: 'Enter a proper absolute path, for example, /home/pathname/',
   common_term_valition_path_length: 'The path name can contain a maximum of 1024 characters.',
   plugins_common_tips_sshError: 'SSH connection exception. Please try again.',
+  plugins_common_message_figerLose: 'The authenticity of host {0} can\'t be established. The fingerprint is SHA256:{1}. \
+  Are you sure you want to continue connecting (Yes/No)?',
 
 
   plugins_common_tips_uploadError: 'Failed to upload the script file to your server.',

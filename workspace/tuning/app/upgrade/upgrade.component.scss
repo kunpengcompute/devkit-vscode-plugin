@@ -263,12 +263,10 @@ input {
 }
 
 .tip-box {
-    padding: 0px 40px;
-    padding-bottom: 40px;
-
+    width: 400px;
+    
     .tip-title {
         color: var(--upgrade-color-title-content);
-        margin-top: 20px;
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
@@ -404,10 +402,6 @@ input {
 ::ng-deep .content-box {
     background-color: var(--upgrade-color-msgbox-bg) !important;
     width: 660px !important;
-    padding: 0 !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
 }
 
 .tip-tem {
@@ -490,7 +484,6 @@ input {
 
 // root和非root的提示样式
 .tip-box {
-
     .tip-title {
         display: flex;
         justify-content: space-between;
