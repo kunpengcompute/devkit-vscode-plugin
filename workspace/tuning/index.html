@@ -37,6 +37,14 @@
             }
         }
 
+        .vscode-dark {
+            background-color: #313131 !important;
+        }
+
+        .vscode-light {
+            background-color: #fff !important;
+        }
+
         .maskBox {
             width: 100%;
             height: 100vh;
@@ -173,12 +181,11 @@
         (self.webviewSession || {}).setItem('migrationTip', webSession.migrationTip);
         (self.webviewSession || {}).setItem('showCheckEnvTips', webSession.showCheckEnvTips);
     }
-
 </script>
 
 <body class="vscode-dark intellij-dark">
     <app-root>
-        <div class="maskBox">
+        <div class="maskBox" id="maskBox">
             <div class="containerBox">
                 <div class="circleBox">
                     <div class="circleItem circleItem1">
