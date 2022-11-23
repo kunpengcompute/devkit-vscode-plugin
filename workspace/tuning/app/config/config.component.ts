@@ -132,8 +132,6 @@ export class ConfigComponent implements OnInit {
         console.log("ip is ", this.tempIP);
         console.log("port is ", this.tempPort);
         console.log("this.config is ", this.config);
-        // this.config赋值
-        this.config = {}; // 
         this.elementRef.nativeElement.querySelectorAll(`input`).forEach((element: any) => {
             element.focus();
             element.blur();

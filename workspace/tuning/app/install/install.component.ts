@@ -438,15 +438,16 @@ export class InstallComponent implements AfterViewInit, OnInit {
     saveConfig() {
         const command = { cmd: 'readConfig' };
         this.vscodeService.postMessage(command, (data: any) => {
-            data.tuningConfig={
+            data.portConfig = [];
+            data.portConfig.push({
                 ip: this.finalIP,
                 port: this.webPort,
                 selectCertificate: false,
                 localfilepath: ''
-            };
+            });
             const postData = {
                 cmd: 'saveConfig', data: {
-                    data: JSON.stringify(data.tuningConfig),
+                    data: JSON.stringify(data),
                     showInfoBox: true,
                     openLogin: true
                 }

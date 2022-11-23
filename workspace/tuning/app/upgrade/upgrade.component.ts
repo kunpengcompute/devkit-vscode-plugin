@@ -322,13 +322,14 @@ export class UpgradeComponent implements OnInit {
     saveConfig(openConfigServer: boolean = false) {
         const command = { cmd: 'readConfig' };
         this.vscodeService.postMessage(command, (data: any) => {
-            data.tuningConfig = {
+            data.portConfig = [];
+            data.portConfig.push({
                 ip: this.finalIP,
                 port: this.webPort
-            };
+            });
             const postData = {
                 cmd: 'saveConfig', data: {
-                    data: JSON.stringify(data.tuningConfig),
+                    data: JSON.stringify(data),
                     showInfoBox: true,
                     openConfigServer,
                     openLogin: true
