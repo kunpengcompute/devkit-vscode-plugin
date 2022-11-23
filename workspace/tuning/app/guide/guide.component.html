@@ -1,0 +1,34 @@
+<!--guide html goes here -->
+<app-banner></app-banner>
+<div class="main-container">
+    <div class="header-title">{{ i18n.plugins_common_title_guide }}</div>
+    <div>
+        <p class="header-title-det">{{ i18n.plugins_common_label_guide }}</p>
+    </div>
+
+    <div class="content-box">
+        <div class="list-item" *ngFor="let item of guideList">
+            <div class="list-item-top">
+                <img class="number-icon" [src]="sanitizer.bypassSecurityTrustResourceUrl(currTheme === colorTheme.Dark ? item.numberIcon.dark : item.numberIcon.light)">
+                <div class="list-item-det">
+                    <div class="list-item-title">{{ item.title }}</div>
+                    <div class="list-item-info">{{ item.info }}</div>
+                </div>
+            </div>
+            <div class="list-item-center">
+                <img class="icon" [src]="sanitizer.bypassSecurityTrustResourceUrl(currTheme === colorTheme.Dark ? item.icon.dark : item.icon.light)">
+            </div>
+            <div class="list-item-bottom">
+                <p>
+                    <a class="link-url" *ngIf="item.urlId === 0" (click)="openConfigPage(item.href)">{{ item.linkBtnText }}
+                        <img class="link-arrow" [src]="sanitizer.bypassSecurityTrustResourceUrl(item.arrowIcon)">
+                    </a>
+                    <a class="link-url" *ngIf="item.urlId === 1" (click)="openInstallPage(item.href)">{{ item.linkBtnText }}
+                        <img class="link-arrow" [src]="sanitizer.bypassSecurityTrustResourceUrl(item.arrowIcon)">
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
