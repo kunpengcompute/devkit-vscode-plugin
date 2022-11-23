@@ -71,7 +71,8 @@
                             <span class="ti3-radio-skin"></span>
                             <span class="ti3-radio-label"></span>
                         </label>
-                        <span class="pointer" style="display: inline-block; font-size: 14px;">{{item.value}}</span>
+                        <span class="pointer color-d-e8-l-22">{{item.value}}</span>
+                        <!-- <span class="pointer" style="display: inline-block; font-size: 14px;">{{item.value}}</span> -->
                     </label>
                 </div>
             </div>
@@ -169,7 +170,7 @@
         <div>
             <div>
                 <div>
-                    <p [innerHtml]="selectIPInfo"></p>
+                    <p class="color-d-88-l-61" [innerHtml]="selectIPInfo"></p>
                     <div *ngFor="let item of ipList index as i">
                         <label class="ra-label" [for]="item.key" style="margin-top: 10px;">
                             <i class="ra-common ra-check" *ngIf="ipSelected === item.key"></i>
