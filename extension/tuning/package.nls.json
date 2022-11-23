@@ -14,6 +14,8 @@
 
 
     "configure.remote.server": "配置远程服务器",
-    "plugins_perfadvisor_title_login": "登录性能分析工具"
+    "plugins_perfadvisor_title_login": "登录性能分析工具",
+
+    "check_state": "查看全局变量状态\n[查看状态](command:extension.checkglobalstate)"
     
 }

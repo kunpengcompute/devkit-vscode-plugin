@@ -36,64 +36,37 @@ export const messageHandler = {
 
     // 保存ip与port到json配置文件
     async saveConfig(global: any, message: any) {
-        // console.log("GLOBAL.context at messagehandler");
-        // console.log(global.context);
-        // console.log("GLOBAL.toolPanel at messagehandler");
-        // console.log(global.toolPanel);
-        // console.log("Content of message.data.openConfigServer");
-        // console.log(message);
         if (!message.data.openConfigServer) {  // 点击弹窗中的是openConfigServer为true
-            // console.log("Position 0.");
             if (ToolPanelManager.loginPanels.length > 0) {
                 // 弹窗提示是否切换服务器
-                // console.log("Position 1.");
                 const panel = global.toolPanel.getPanel();
-                // console.log("Position 2.");
                 panel.webview.postMessage({ cmd: 'handleVscodeMsg', type: 'showCustomDialog', data: { show: true } });
-                // console.log("Position 3.");
                 return;
             }
         }
-        // console.log("Checkpoint after the first if");
         let tuningConfig;
         try {
             tuningConfig = JSON.parse(message.data.data).tuningConfig;
-            // console.log("Position 4.");
         } catch (err) {
             tuningConfig = {};
         }
-        // console.log("Position 5.");
         const tuningConfigObj = Array.isArray(tuningConfig) ? tuningConfig[0] : tuningConfig;
-        // console.log("Position 6.")
         let data: any;
-        // console.log("Position 7.")
         const resourcePath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
-        // console.log("Position 8.")
-        // console.log(resourcePath);
-        // console.log(message.data.data);
-        // console.log("Position 8.5.");
         data = fs.writeFileSync(resourcePath, message.data.data);
         global.context.globalState.update('tuningIp', tuningConfigObj.ip);
-        // console.log("Position 10.")
         global.context.globalState.update('tuningPort', tuningConfigObj.port);
-        // console.log("Position 11.")
         const { proxyServerPort, proxy } =
             await ProxyManager.createProxyServer(global.context, tuningConfigObj.ip, tuningConfigObj.port);
-        // console.log("Position 12.")
         global.context.globalState.update('defaultPort', proxyServerPort);
 
-        // console.log("Position 13.")
         const queryVersionOptions = {
             url: `http://127.0.0.1:${proxyServerPort}/user-management/api/v2.2/users/version/`,
             method: 'GET'
         };
-        // console.log("Position 14.")
         const respVersion: any = await Utils.requestData(global.context, queryVersionOptions as any, message.module);
-        console.log("Position 15.")
         if (respVersion.status === constant.HTTP_STATUS.HTTP_200_OK) {
-            console.log(("Position 16."))
             const serverVersion = respVersion?.data?.data?.version;
-
             if (!Utils.checkVersion(global.context, serverVersion)) {
                 proxy.close();
                 const configVersion = Utils.getConfigJson(global.context).configVersion[0];
@@ -107,6 +80,8 @@ export const messageHandler = {
                 method: 'GET'
             };
             const resp: any = await Utils.requestData(global.context, queryOptions as any, message.module);
+            console.log("REQUEST DATA RESPONSE");
+            console.log(resp)
             if (resp.status === constant.HTTP_STATUS.HTTP_200_OK) {
                 vscode.commands.executeCommand('setContext', 'ipconfig', true);
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
@@ -119,13 +94,10 @@ export const messageHandler = {
                     currentSideViewProviderHandler.dispose()
                 }
                 const provider = new SideViewProvider(global.context.extensionUri);
-                console.log("Position 17.")
                 currentSideViewProvider = provider
-                // global.context.subscriptions.push(
                 let previous_dispose_handler =  vscode.window.registerWebviewViewProvider(SideViewProvider.viewType, provider)
                 isRegistered = true
                 currentSideViewProviderHandler = previous_dispose_handler
-                // );
                 this.updateIpAndPort(global, provider)
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', false);
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
@@ -145,7 +117,7 @@ export const messageHandler = {
     updateIpAndPort(global:any, provider: SideViewProvider){
         let newConfigPath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
         let data = JSON.parse(fs.readFileSync(newConfigPath));
-        console.log(data.tuningConfig[0].ip);
+        // console.log(data.tuningConfig[0].ip);
         var new_ip = data.tuningConfig[0].ip;
         var new_port = data.tuningConfig[0].port;
         provider.updateServerConfiguration(new_ip, new_port)
