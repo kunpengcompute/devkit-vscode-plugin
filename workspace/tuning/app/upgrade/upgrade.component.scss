@@ -285,12 +285,6 @@ input {
         }
     }
 
-    .tip-title-border {
-        width: 100%;
-        margin-top: 20px;
-        border-top: 1px dashed var(--upgrade-color-separator);
-    }
-
     .tip-dsc {
         margin-top: 20px;
         display: flex;
@@ -401,7 +395,6 @@ input {
 }
 ::ng-deep .content-box {
     background-color: var(--upgrade-color-msgbox-bg) !important;
-    width: 660px !important;
 }
 
 .tip-tem {
@@ -428,9 +421,8 @@ input {
     margin-right: 6px;
 }
 .upgrade-message-upgraded {
-    width: 1200px;
+    width: 800px;
     margin-top: 10px;
-    margin-left: 20px;
 }
 .eye {
     position: absolute;
@@ -492,11 +484,6 @@ input {
         font-size: 20px;
     }
 
-    .tip-title-border {
-        width: 0;
-        border-top: 1px dashed var(--th-border_b-d-4b4b4b-l-e1e6ee);
-    }
-
     .tip-dsc {
         margin-top: 20px;
         display: flex;
@@ -551,5 +538,17 @@ input {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+}
+
+.user-deploy-box {
+    .tip-dsc {
+        margin-top: 0 !important;
+        padding-top: 32px !important;
+        border: none !important;
+    }
+    
+    .tip-confirm {
+        padding-top: 32px !important;
     }
 }

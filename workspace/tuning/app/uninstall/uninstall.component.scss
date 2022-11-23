@@ -328,12 +328,6 @@ input {
         }
     }
 
-    .tip-title-border {
-        width: 100%;
-        margin-top: 20px;
-        border-top: 1px dashed var(--uninstall-color-separator);
-    }
-
     .tip-dsc {
         margin-top: 20px;
         display: flex;
@@ -444,7 +438,6 @@ input {
 }
 ::ng-deep .content-box {
     background-color: var(--uninstall-color-msgbox-bg) !important;
-    width: 660px !important;
 }
 
 .tip-tem {
@@ -585,5 +578,17 @@ input {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+}
+
+.user-deploy-box {
+    .tip-dsc {
+        margin-top: 0 !important;
+        padding-top: 32px !important;
+        border: none !important;
+    }
+    
+    .tip-confirm {
+        padding-top: 32px !important;
     }
 }

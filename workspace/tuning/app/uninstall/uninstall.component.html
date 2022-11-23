@@ -186,7 +186,7 @@
 
 <!-- 确认弹框 -->
 <app-messagebox #showDialog>
-    <div class="content tip-box">
+    <div class="content tip-box user-deploy-box">
         <div class="tip-title color-d-e8-l-22">
             <span class="title-content">{{i18n.plugins_public_text_tip}}</span>
             <span (click)="cancelDiglogMsgTip()" class="icon-close">
@@ -194,13 +194,10 @@
                 <img src="./assets/img/close_hover.svg">
             </span>
         </div>
-        <div class="tip-title-border"></div>
         <div class="tip-dsc">
             <img class="img_box" src="./assets/img/tip/icon_information.svg">
             <div class="color-d-e8-l-61">
-                <p class="mb10">
-                    {{dialogShowDetailText}}
-                </p>
+                <p>{{dialogShowDetailText}}</p>
             </div>
         </div>
         <div class="tip-confirm">

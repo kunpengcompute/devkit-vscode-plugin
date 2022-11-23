@@ -310,31 +310,31 @@ export class InstallComponent implements AfterViewInit, OnInit {
                 passphrase: this.passphrase
             }
         };
-        // this.vscodeService.postMessage(postData, (data: any) => {
-        //     if (data.search(/SUCCESS/) !== -1) {
-        //         this.connected = true;
-        //         this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
-        //         // this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
-        //     } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
-        //         this.connected = false;
-        //         this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
-        //         // this.showInfoBox(this.i18n.plugins_common_tips_connFail, 'error');
-        //     } else if (data.search(/host fingerprint verification failed/) !== -1) {
-        //         this.connected = false;
-        //         this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_figerFail);
-        //         // this.showInfoBox(this.i18n.plugins_common_tips_figerFail, 'error');
-        //     } else if (data.search(/Timed out while waiting for handshake/) !== -1) {
-        //         this.connected = false;
-        //         this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_timeOut);
-        //         // this.showInfoBox(this.i18n.plugins_common_tips_timeOut, 'error');
-        //     } else if (data.search(/Cannot parse privateKey/) !== -1) {
-        //         // 密码短语错误
-        //         this.connected = false;
-        //         this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_passphraseFail);
-        //         // this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
-        //     }
-        //     this.connectChecking = false;
-        // });
+        this.vscodeService.postMessage(postData, (data: any) => {
+            if (data.search(/SUCCESS/) !== -1) {
+                this.connected = true;
+                this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
+                // this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
+            } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
+                this.connected = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
+                // this.showInfoBox(this.i18n.plugins_common_tips_connFail, 'error');
+            } else if (data.search(/host fingerprint verification failed/) !== -1) {
+                this.connected = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_figerFail);
+                // this.showInfoBox(this.i18n.plugins_common_tips_figerFail, 'error');
+            } else if (data.search(/Timed out while waiting for handshake/) !== -1) {
+                this.connected = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_timeOut);
+                // this.showInfoBox(this.i18n.plugins_common_tips_timeOut, 'error');
+            } else if (data.search(/Cannot parse privateKey/) !== -1) {
+                // 密码短语错误
+                this.connected = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_passphraseFail);
+                // this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
+            }
+            this.connectChecking = false;
+        });
     }
 
     /**

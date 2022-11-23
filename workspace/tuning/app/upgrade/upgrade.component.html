@@ -163,7 +163,7 @@
             <img class="img_install" src="./assets/img/tip/icon_failure.svg">
             <p class="install-failed-tip1"> {{ i18n.plugins_tuning_title_upgradeFailed }} </p>
         </div>
-        <p class="install-failed-tip2">{{ i18n.plugins_tuning_message_installFailedInfo}}</p>
+        <p class="install-failed-tip2">{{ i18n.plugins_tuning_message_installFailedInfo }}</p>
     </div>
 
     <div *ngIf="upgrading === 1" class="upgrade-message-upgraded">
@@ -177,7 +177,7 @@
                             <i class="ra-common ra-uncheck" *ngIf="ipSelected !== item.key"></i>
                             <input type="radio" name="ipType" [(ngModel)]="ipSelected" [value]="item.key"
                                 [id]="item.key" (change)="ipSelected === item.key">
-                            <span style="margin-left: 30px; ">{{item.value}}</span>
+                            <span class="color-d-e8-l-22" style="margin-left: 30px; font-size: 14px;">{{item.value}}</span>
                         </label>
                         <div *ngIf="ipSelected === 2 && i === ipList.length - 1">
                             <input type="text" tiText [(ngModel)]="extraIP" (blur)="checkExtraIP()"
@@ -210,7 +210,7 @@
 
 <!-- 确认弹框 -->
 <app-messagebox #showDialog>
-    <div class="content tip-box">
+    <div class="content tip-box user-deploy-box">
         <div class="tip-title color-d-e8-l-22">
             <span class="title-content">{{i18n.plugins_public_text_tip}}</span>
             <span (click)="cancelDiglogMsgTip()" class="icon-close">
@@ -218,13 +218,10 @@
                 <img src="./assets/img/close_hover.svg">
             </span>
         </div>
-        <div class="tip-title-border"></div>
         <div class="tip-dsc">
             <img class="img_box" src="./assets/img/tip/icon_information.svg">
             <div class="color-d-e8-l-61">
-                <p class="mb10">
-                    {{dialogShowDetailText}}
-                </p>
+                <p>{{dialogShowDetailText}}</p>
             </div>
         </div>
         <div class="tip-confirm">

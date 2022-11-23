@@ -185,12 +185,18 @@
             height: 20px;
             margin-top: 4px;
         }
+
+        a {
+            color: #0067FF !important;
+            &:hover {
+                color: #267DFF !important;
+            }
+        }
     }
 
     .install-message-installed {
-        width: 1200px;
+        width: 800px;
         margin-top: 10px;
-        margin-left: 20px;
     }
     #login-btn,
     #reinstall-btn {
@@ -259,11 +265,6 @@
         align-items: flex-start;
         line-height: 20px;
         font-size: 20px;
-    }
-
-    .tip-title-border {
-        width: 0;
-        border-top: 1px dashed var(--th-border_b-d-4b4b4b-l-e1e6ee);
     }
 
     .tip-dsc {
@@ -360,13 +361,7 @@
         font-size: 20px;
     }
 
-    .tip-title-border {
-        width: 0;
-        border-top: 1px dashed var(--th-border_b-d-4b4b4b-l-e1e6ee);
-    }
-
     .tip-dsc {
-        margin-top: 20px;
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
@@ -413,9 +408,15 @@
     }
 }
 
-::ng-deep .root-deploy-box {
+.user-deploy-box {
     .tip-dsc {
+        margin-top: 0 !important;
+        padding-top: 32px !important;
         border: none !important;
+    }
+
+    .tip-confirm {
+        padding-top: 32px !important;
     }
 }
 
