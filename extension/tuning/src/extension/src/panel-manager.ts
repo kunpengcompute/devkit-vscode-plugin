@@ -152,7 +152,10 @@ export class ToolPanelManager {
      * @param context 插件上下文
      */
      public static createOrShowPanelForPerfCommand(context: vscode.ExtensionContext) {
-
+        context.subscriptions.push(vscode.commands.registerCommand('extension.checkglobalstate',
+            () => {
+                console.log(context.globalState.get('tuningToken'))
+            }))
 
         // 打开服务器配置panel
         context.subscriptions.push(vscode.commands.registerCommand('extension.view.perfadvisorserverconfig',

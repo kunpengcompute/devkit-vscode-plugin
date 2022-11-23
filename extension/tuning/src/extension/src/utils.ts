@@ -177,6 +177,8 @@ export class Utils {
             method: 'GET'
         };
         req.url = option.url;
+        console.log("REQUEST URL");
+        console.log(req.url)
         if (option.token) {
             if (req.headers) {
                 req.headers.Authorization = option.token;
@@ -233,14 +235,7 @@ export class Utils {
             enableScripts: true,
             retainContextWhenHidden: true,
         });
-
-        // console.log("global at navtoiframe");
-        // console.log(global);
-        // console.log("default port at navtoiframe");
-        // console.log(defaultPort);
-        // console.log("proxy at navtoiframe");
-        // console.log(proxy)
-        
+        console.log("Position 1?");
         panel.webview.onDidReceiveMessage((message) => {
             const msg = {
                 data: {
@@ -250,12 +245,23 @@ export class Utils {
                 },
                 module: 'tuning'
             };
+            console.log("Position 2?");
+            console.log("ProxyManager.authValue:");
+            console.log(msg.data.token)
+            console.log(message.messageType)
             if (message.messageType === 'downloadFile') {
+                console.log("Position 6?")
+                console.log(message)
                 Download.getData(global, msg, 'tuning');
             }
+            else if (message.messageType === 'login'){
+                vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedIn', true)
+            }
         });
+        console.log("Position 3?");
         ToolPanelManager.loginPanels = [{ panel, proxy }];
         // 相应panel的关闭事件
+        console.log("Position 4?");
         panel.onDidDispose(() => {
             ToolPanelManager.closeLoginPanel();
         }, null);
@@ -263,8 +269,12 @@ export class Utils {
         const ip = global.context.globalState.get('tuningIp');
         const port = global.context.globalState.get('tuningPort');
         const pageLoadingText = i18n.page_loading;
+        console.log("Position 5?");
         const htmlstr = iframeHtmlStr.replace(/\{pageLoadingText\}/, pageLoadingText).replace(/\{src\}/g, src).replace(/\{ip\}/, ip).replace(/\{port\}/, port).replace(/\{defaultPort\}/, defaultPort + '');
+        console.log("HTMLstr CONTENT");
+        console.log(htmlstr)
         panel.webview.html = htmlstr;
+
     }
 
     /**
