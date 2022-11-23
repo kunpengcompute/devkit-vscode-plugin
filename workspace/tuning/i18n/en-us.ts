@@ -266,6 +266,18 @@ export const I18N_US = {
   the Server in Abnormal Status?"</a>',
   plugins_common_message_serverErrorResult2: '- If no, rectify the fault by following the \
      instructions provided in {0}.',
+  
+  plugins_common_title_guide: 'Configuration Guidelines',
+  plugins_common_label_guide: 'Please configure the remote server after completing the deployment of Kunpeng performance analysis tool. \
+    If you have completed the tool deployment, you can directly configure the remote server.',
+  plugins_common_guide: {
+      install_serve: 'Deploy Server',
+      install_serve_info: 'Deploy Kunpeng performance analysis tool to remote server.',
+      install_now: 'Start Deployment',
+      config_serve: 'Configure Remote Server',
+      config_serve_info: 'Connect to the remote server where Kunpeng performance analysis tool has been deployed.',
+      config_now: 'Start Configuration'
+  },
 
   // config 弹框
   plugins_common_cut_server: 'Do I need to close the page and switch server configurations? Click OK to exit the current server?',

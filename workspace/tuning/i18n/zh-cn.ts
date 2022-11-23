@@ -199,6 +199,16 @@ export const I18N_ZH = {
     plugins_common_message_serverErrorResult2: '-异常，请参考{0}处理。',
     plugins_common_message_figerLose: '主机 {0} 的可信度不能确定，指纹为SHA256:{1}，是否继续连接（是/否）？',
 
+    plugins_common_title_guide: '配置指引',
+    plugins_common_label_guide: '请在完成鲲鹏性能分析工具部署后配置远端服务器，若您已经完成工具部署则可直接配置远端服务器。',
+    plugins_common_guide: {
+        install_serve: '部署服务端',
+        install_serve_info: '部署鲲鹏性能分析工具到远端服务器。',
+        install_now: '开始部署',
+        config_serve: '配置远端服务器',
+        config_serve_info: '连接已部署鲲鹏性能分析工具的远端服务器。',
+        config_now: '开始配置'
+    },
 
     // config 弹框
     plugins_common_cut_server: '是否需要关闭页面并切换服务器配置？点击确认后将退出当前服务器。',
