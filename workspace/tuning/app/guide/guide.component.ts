@@ -64,8 +64,8 @@ export class GuideComponent implements OnInit {
             {
                 id: 'install_serve',
                 numberIcon: {
-                    dark: '',
-                    light: ''
+                    dark: './assets/img/guide/number-one-dark.png',
+                    light: './assets/img/guide/number-one-light.png'
                 },
                 icon: {
                     dark: './assets/img/guide/install-serve-dark.png',
@@ -81,8 +81,8 @@ export class GuideComponent implements OnInit {
             {
                 id: 'config_serve',
                 numberIcon: {
-                    dark: '',
-                    light: ''
+                    dark: './assets/img/guide/number-two-dark.png',
+                    light: './assets/img/guide/number-two-light.png'
                 },
                 icon: {
                     dark: './assets/img/guide/config-serve-dark.png',
