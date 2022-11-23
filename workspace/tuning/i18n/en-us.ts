@@ -293,6 +293,6 @@ export const I18N_US = {
   plugins_tuning_message_save_config_success: 'Save config success!',
   plugins_tuning_title_save_config: 'Save Remote Server Config',
   // TODO 翻译
-  plugins_tuning_save_config_modify: '是否确认保存当前修改？点击确认后将登出当前用户。(eng ver)',
+  plugins_tuning_save_config_modify: 'Save current modification? Click OK to exit the current user.',
   plugins_tuning_title_root_deploy: 'root User Deploy'
 };
