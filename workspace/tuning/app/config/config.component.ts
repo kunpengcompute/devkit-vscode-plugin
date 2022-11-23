@@ -51,7 +51,7 @@ export class ConfigComponent implements OnInit {
         this.vscodeService.regVscodeMsgHandler('colorTheme', (msg: any) => {
             this.currTheme = msg.colorTheme;
         });
-        // TODO 
+        // ? 这是啥
         this.vscodeService.regVscodeMsgHandler('showCustomDialog', (msg: any) => {
             this.showIfServerDialog = true;
             this.showDialog.Open();
@@ -67,12 +67,13 @@ export class ConfigComponent implements OnInit {
      */
     readConfig() {
         this.vscodeService.postMessage({ cmd: 'readConfig' }, (data: any) => {
+            console.log("read config data is: ", data);
             this.config = data;
-            if (this.config.tuningConfig.length > 0) {
+            if (this.config.portConfig.length > 0 && this.config.portConfig[0].ip != "") {
                 this.hasConfig = true;
                 this.firstConfig = false;
-                this.tempIP = this.config.tuningConfig[0].ip;
-                this.tempPort = this.config.tuningConfig[0].port;
+                this.tempIP = this.config.portConfig[0].ip;
+                this.tempPort = this.config.portConfig[0].port;
             }
         });
     }
@@ -124,7 +125,7 @@ export class ConfigComponent implements OnInit {
 
     /**
      * 将ip port配置写入配置文件
-     * @param openConfigServer 是否直接打开登录页面 ?有True的时候吗
+     * @param openConfigServer 是否直接打开登录页面
      */
     save(openConfigServer: boolean = false) {
         console.log("============this is save ==============");
@@ -139,20 +140,22 @@ export class ConfigComponent implements OnInit {
         });
         if (!this.ipCheck && !this.portCheck) {
             this.showLoading = true;
-            this.config.tuningConfig = {
+            this.config.portConfig = [];
+            this.config.portConfig.push({
                 ip: this.tempIP,
                 port: this.tempPort
-            };
+
+            });
             let data = {
                 cmd: 'saveConfig', data: {
-                    data: JSON.stringify(this.config.tuningConfig),
+                    data: JSON.stringify(this.config),
                     showInfoBox: true,
                     openConfigServer,
                     openLogin: false
                 }
             };
             this.vscodeService.postMessage(data, (res: any) => {
-                // TODO 页面元素更新缓慢，无法及时更新
+                // FIXME 页面元素更新缓慢，无法及时更新
                 this.showLoading = false;
                 console.log(res);
                 // 版本不匹配
@@ -164,6 +167,7 @@ export class ConfigComponent implements OnInit {
                     });
                     this.versionDialog.Open();
                 } else if (res.type === 'FAIL') {
+                    // FIXME 配置服务器失败提示中英文
                     this.setNotificationBox(notificationType.error, '配置服务器失败');
                     console.log("save config error");
                 } else {

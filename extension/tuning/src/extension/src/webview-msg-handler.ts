@@ -26,17 +26,9 @@ export const messageHandler = {
 
     // 保存ip与port到json配置文件
     async saveConfig(global: any, message: any) {
-        if (!message.data.openConfigServer) {  // 点击弹窗中的是openConfigServer为true
-            if (ToolPanelManager.loginPanels.length > 0) {
-                // 弹窗提示是否切换服务器
-                const panel = global.toolPanel.getPanel();
-                panel.webview.postMessage({ cmd: 'handleVscodeMsg', type: 'showCustomDialog', data: { show: true } });
-                return;
-            }
-        }
         let tuningConfig;
         try {
-            tuningConfig = JSON.parse(message.data.data).tuningConfig;
+            tuningConfig = JSON.parse(message.data.data).portConfig;
         } catch (err) {
             tuningConfig = {};
         }
