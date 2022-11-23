@@ -78,5 +78,16 @@ export const I18N_EN = {
     plugins_tuning_dowloadPath: 'File downloaded successfully. Save path: {0}',
     plugins_tuning_message_cart: 'After the certificate is imported successfully, \
     restart VS Code for the certificate to take effect.',
-    page_loading: "Page loading..."
+    page_loading: "Page loading...",
+
+    server_not_configered: '您还未链接远端服务器',
+    button_configure_server: '配置远程服务器',
+    free_trial_tip: '您也可申请免费试用鲲鹏远程实验室，该环境已预装鲲鹏代码迁移工具、鲲鹏编译器、鲲鹏性能分析工具、动态二进制翻译工具（ExaGear）。',
+    free_trial_button: '免费试用',
+    no_login_tip: "您还未登录",
+    no_login_button: "登录",
+    configure_server_again: "您已经连接远端服务器",
+    configure_server_again_button: "重新配置服务器",
+    ip_address_title: "IP地址",
+    port_title: "端口"
 };

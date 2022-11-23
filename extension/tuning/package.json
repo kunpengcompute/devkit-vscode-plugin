@@ -12,11 +12,22 @@
     "Other"
   ],
   "activationEvents": [
-    "onView:perfadvisorTools"
+    "onView:perfadvisorTools",
+    "onView:configurationInfo"
   ],
   "main": "./out/extension/src/extension.js",
   "contributes": {
     "commands": [
+      {
+        "command": "calicoColors.addColor",
+        "catagory": "Calico Colors",
+        "title": "Add Color"
+      },
+      {
+        "command": "calicoColors.clearColors",
+        "catagory": "Calico Colors",
+        "title": "Clear Colors"
+      },
       {
         "command": "extension.view.perfadvisorserverconfig",
         "title": "%configure.remote.server%"
@@ -106,17 +117,18 @@
     "views": {
       "kunpengTuning": [
         {
+          "type": "webview",
+          "id": "configurationInfo",
+          "name": "",
+          "when": "isPerfadvisorConfigured"
+        },
+        {
           "id": "perfadvisorTools",
           "name": ""
         }
       ]
     },
     "viewsWelcome": [
-      {
-        "view": "perfadvisorTools",
-        "contents": "%ip_address_port%",
-        "when": "isPerfadvisorConfigured"
-      },
       {
         "view": "perfadvisorTools",
         "contents": "%perfadvisor.configer.server%",

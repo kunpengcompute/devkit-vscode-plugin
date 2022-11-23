@@ -4,6 +4,7 @@ import { Utils } from './utils';
 import { I18nService } from './i18nservice';
 import { messageHandler } from './webview-msg-handler';
 import { ProxyManager } from './proxy-manager';
+import {SideViewProvider} from "./SideView/SideViewProvider";
 
 const i18n = I18nService.I18n();
 
@@ -144,12 +145,15 @@ export class ToolPanelManager {
     public static sysPerfToolPanels: Array<ToolPanel> = [];
     public static loginPanels: Array<any> = [];
 
+
     /**
      * perfadvisor响应不同的命令来打开panel
      *
      * @param context 插件上下文
      */
      public static createOrShowPanelForPerfCommand(context: vscode.ExtensionContext) {
+
+
         // 打开服务器配置panel
         context.subscriptions.push(vscode.commands.registerCommand('extension.view.perfadvisorserverconfig',
             () => {

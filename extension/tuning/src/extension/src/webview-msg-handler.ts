@@ -6,10 +6,20 @@ import { I18nService } from './i18nservice';
 import { SSH2Tools } from './ssh2Tools';
 import { ErrorHelper } from './error-helper';
 import { ProxyManager } from './proxy-manager';
+import {SideViewProvider} from "./SideView/SideViewProvider";
+import {glob} from "glob";
+import {Disposable} from "vscode";
+
 const fs = require('fs');
 const i18n = I18nService.I18n();
 let terminalStatusInterval: any;
 let terminalCloseEvent: any;
+// declare global{
+    var currentSideViewProvider: SideViewProvider
+    var currentSideViewProviderHandler: Disposable
+    var isRegistered = false
+// }
+// isRegistered = false
 
 export const messageHandler = {
     // 从配置文件读取ip与port
@@ -79,8 +89,9 @@ export const messageHandler = {
         };
         // console.log("Position 14.")
         const respVersion: any = await Utils.requestData(global.context, queryVersionOptions as any, message.module);
-        // console.log("Position 15.")
+        console.log("Position 15.")
         if (respVersion.status === constant.HTTP_STATUS.HTTP_200_OK) {
+            console.log(("Position 16."))
             const serverVersion = respVersion?.data?.data?.version;
 
             if (!Utils.checkVersion(global.context, serverVersion)) {
@@ -104,19 +115,20 @@ export const messageHandler = {
                 if (message.data.openLogin){
                     Utils.navToIFrame(global, proxyServerPort, proxy);
                 }
-                const nlsPath = Utils.getExtensionFileAbsolutePath(global.context, './package.nls.json');
-                const enNlsPath = Utils.getExtensionFileAbsolutePath(global.context, './package.nls.en.json');
-                const configData = JSON.parse(fs.readFileSync(nlsPath, 'utf-8'));
-                const configDataEn = fs.readFileSync(enNlsPath, 'utf-8');
-                console.log('CN nls');
-                console.log(configData);
-                // console.log('EN nls');
-                // console.log(configDataEn);
-                let newContent = this.updateIpAndPortCN(global, configData);
-                console.log('before write');
-                console.log(newContent)
-                fs.writeFileSync(nlsPath, JSON.stringify(newContent))
-                console.log(fs.readFileSync(nlsPath, 'utf-8'))
+                if(isRegistered){
+                    currentSideViewProviderHandler.dispose()
+                }
+                const provider = new SideViewProvider(global.context.extensionUri);
+                console.log("Position 17.")
+                currentSideViewProvider = provider
+                // global.context.subscriptions.push(
+                let previous_dispose_handler =  vscode.window.registerWebviewViewProvider(SideViewProvider.viewType, provider)
+                isRegistered = true
+                currentSideViewProviderHandler = previous_dispose_handler
+                // );
+                this.updateIpAndPort(global, provider)
+                vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', false);
+                vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
             } else {
                 proxy.close();
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
@@ -130,19 +142,14 @@ export const messageHandler = {
      * 更新ip与端口的显示内容
      * @param originalContent 更新之前的
      */
-    updateIpAndPortCN(global:any, originalContent: any){
+    updateIpAndPort(global:any, provider: SideViewProvider){
         let newConfigPath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
         let data = JSON.parse(fs.readFileSync(newConfigPath));
-        console.log('Here is new config');
         console.log(data.tuningConfig[0].ip);
-        console.log('Here is old config');
-        console.log(originalContent.ip_address_port);
-        var temp = 'IP地址'+' '+JSON.stringify(data.tuningConfig[0].ip)+'\n'+
-                   '端口'+'   '+JSON.stringify(data.tuningConfig[0].port);
-        originalContent.ip_address_port = temp;
-        console.log('Here is changed config');
-        console.log(originalContent);
-        return originalContent;
+        var new_ip = data.tuningConfig[0].ip;
+        var new_port = data.tuningConfig[0].port;
+        provider.updateServerConfiguration(new_ip, new_port)
+        // SideViewProvider.
     },
     /**
      * 登录指令请求跳转登录页面
