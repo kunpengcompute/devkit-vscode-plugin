@@ -262,14 +262,20 @@ export class InstallComponent implements AfterViewInit, OnInit {
             }
         }
         this.vscodeService.postMessage(postData, (data: any) => {
-            console.log(data);
+            console.log("finger read get: ", data);
             // TODO 返回结果处理
             if (data === "noFirst") {
                 // 可以直接checkConn
+                this.tempFinger = "noFirst";
                 this.realCheckConn();
-            } else if (data === "ERROR") {
+            } else if (data.search(/host fingerprint verification failed/) !== -1) {
                 // 读取指纹出错
-                this.setNotificationBox(notificationType.error, "host fingerprint verification failed");
+                this.connectChecking = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_figerFail);
+            } else if (data.search(/Timed out while waiting for handshake/) !== -1) {
+                // 连接超时
+                this.connectChecking = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_timeOut);
             } else {
                 // 首次连接
                 this.tempFinger = data;
@@ -289,6 +295,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
         if (this.connectChecking) {
             return;
         }
+        this.connectChecking = true;
         this.checkFinger();
     }
 
@@ -298,6 +305,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
     public realCheckConn() {
         this.connectChecking = true;
         console.log("finally checking ssh connection!");
+        console.log("tempFinger is ", this.tempFinger);
         const postData = {
             cmd: 'checkConn',
             data: {
@@ -307,7 +315,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
                 password: this.pwd,
                 sshType: this.sshTypeSelected,
                 privateKey: this.privateKey,
-                passphrase: this.passphrase
+                passphrase: this.passphrase,
+                finger: this.tempFinger,
             }
         };
         this.vscodeService.postMessage(postData, (data: any) => {
@@ -315,18 +324,6 @@ export class InstallComponent implements AfterViewInit, OnInit {
                 this.connected = true;
                 this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
                 // this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
-            } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
-                this.connected = false;
-                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
-                // this.showInfoBox(this.i18n.plugins_common_tips_connFail, 'error');
-            } else if (data.search(/host fingerprint verification failed/) !== -1) {
-                this.connected = false;
-                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_figerFail);
-                // this.showInfoBox(this.i18n.plugins_common_tips_figerFail, 'error');
-            } else if (data.search(/Timed out while waiting for handshake/) !== -1) {
-                this.connected = false;
-                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_timeOut);
-                // this.showInfoBox(this.i18n.plugins_common_tips_timeOut, 'error');
             } else if (data.search(/Cannot parse privateKey/) !== -1) {
                 // 密码短语错误
                 this.connected = false;
@@ -335,6 +332,31 @@ export class InstallComponent implements AfterViewInit, OnInit {
             }
             this.connectChecking = false;
         });
+        // this.vscodeService.postMessage(postData, (data: any) => {
+        //     if (data.search(/SUCCESS/) !== -1) {
+        //         this.connected = true;
+        //         this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
+        //         // this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
+        //     } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
+        //         this.connected = false;
+        //         this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
+        //         // this.showInfoBox(this.i18n.plugins_common_tips_connFail, 'error');
+        //     } else if (data.search(/host fingerprint verification failed/) !== -1) {
+        //         this.connected = false;
+        //         this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_figerFail);
+        //         // this.showInfoBox(this.i18n.plugins_common_tips_figerFail, 'error');
+        //     } else if (data.search(/Timed out while waiting for handshake/) !== -1) {
+        //         this.connected = false;
+        //         this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_timeOut);
+        //         // this.showInfoBox(this.i18n.plugins_common_tips_timeOut, 'error');
+        //     } else if (data.search(/Cannot parse privateKey/) !== -1) {
+        //         // 密码短语错误
+        //         this.connected = false;
+        //         this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_passphraseFail);
+        //         // this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
+        //     }
+        //     this.connectChecking = false;
+        // });
     }
 
     /**
@@ -705,8 +727,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
      * 指纹弹框取消连接
      */
     public cancelFingerDialog() {
-        // TODO 不saveFinger的话，无法检测连接？
-        this.setNotificationBox(notificationType.warn, "host fingerprint verfication canceled");
+        this.connectChecking = false;
+        // this.setNotificationBox(notificationType.warn, "host fingerprint verfication canceled");
         this.fingerDialog.Close();
     }
 

@@ -28,7 +28,7 @@ export class NotificationBoxComponent implements OnInit {
 
   public show() {
     this.isShow = true;
-    setTimeout(this.close, 3000);
+    setTimeout(this.close, 6000);
   }
 
   public close() {
