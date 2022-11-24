@@ -347,7 +347,7 @@ input {
 
         p {
             font-size: 14px;
-            color: var(--uninstall-color-msgbox-content);
+            // color: var(--uninstall-color-msgbox-content);
         }
     }
 
@@ -415,7 +415,7 @@ input {
         &:last-child {
             background-color: var(--uninstall-color-btn-m-bg);
             border-color: var(--uninstall-color-btn-m-dft);
-            color: var(--uninstall-color-content);
+            // color: var(--uninstall-color-content);
 
             &:hover {
                 border-color: var(--uninstall-color-btn-m-hover);

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { notificationType } from '../notification-box/notification-box.component';
 import { I18nService } from '../service/i18n.service';
 import { VscodeService, COLOR_THEME } from '../service/vscode.service';
@@ -74,6 +74,7 @@ export class UnInstallComponent implements OnInit{
         public i18nService: I18nService,
         private route: ActivatedRoute,
         private elementRef: ElementRef,
+        private changeDetectorRef: ChangeDetectorRef,
         public vscodeService: VscodeService) {
         // 获取全局url配置数据
         this.vscodeService.postMessage({ cmd: 'readUrlConfig' }, (resp: any) => {
@@ -208,6 +209,8 @@ export class UnInstallComponent implements OnInit{
                 });
                 this.fingerDialog.Open();
             }
+            this.changeDetectorRef.markForCheck();
+            this.changeDetectorRef.detectChanges();
         });
     }
 
@@ -220,6 +223,8 @@ export class UnInstallComponent implements OnInit{
         }
         this.connectChecking = true;
         this.checkFinger();
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     
@@ -227,7 +232,6 @@ export class UnInstallComponent implements OnInit{
      * 实际执行检测ssh连接
      */
      public realCheckConn() {
-        this.connectChecking = true;
         console.log("finally checking ssh connection!");
         console.log("tempFinger is ", this.tempFinger);
         const postData = {
@@ -255,6 +259,8 @@ export class UnInstallComponent implements OnInit{
                 // this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
             }
             this.connectChecking = false;
+            this.changeDetectorRef.markForCheck();
+            this.changeDetectorRef.detectChanges();
         });
     }
 
@@ -297,6 +303,8 @@ export class UnInstallComponent implements OnInit{
                 this.processUninstallInfo(msg);
             });
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -324,6 +332,8 @@ export class UnInstallComponent implements OnInit{
         } else if (data.search(/failed/) !== -1) {
             this.uninstalling = FAILED;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -434,10 +444,14 @@ export class UnInstallComponent implements OnInit{
             this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshkeyExceedMaxSize);
             // this.showInfoBox(this.i18n.plugins_common_message_sshkeyExceedMaxSize, 'warn');
             this.localfilepath = undefined;
+            this.changeDetectorRef.markForCheck();
+            this.changeDetectorRef.detectChanges();
             return;
         }
         this.privateKeyCheck();
         this.privateKey = this.localfilepath;
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     // 检查导入文件是否是私钥文件
@@ -467,10 +481,14 @@ export class UnInstallComponent implements OnInit{
                 if (data.checkPrivateKey == "true") {
                     this.localfilepath = data.localfilepath.replace(/\\/g, '/');
                     this.privateKey = this.localfilepath;
+                    this.changeDetectorRef.markForCheck();
+                    this.changeDetectorRef.detectChanges();
                 }
                 else{
                     this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshkeyFail);
                     this.localfilepath = '';
+                    this.changeDetectorRef.markForCheck();
+                    this.changeDetectorRef.detectChanges();
                     return;
                 }
             });
@@ -562,6 +580,8 @@ export class UnInstallComponent implements OnInit{
             } else {
                 // 保存失败，但不应该影响连接
                 this.setNotificationBox(notificationType.warn, "host fingerprint saved failed");
+                this.changeDetectorRef.markForCheck();
+                this.changeDetectorRef.detectChanges();
             }
         });
         this.realCheckConn();
@@ -572,7 +592,6 @@ export class UnInstallComponent implements OnInit{
      */
     public cancelFingerDialog() {
         this.connectChecking = false;
-        // this.setNotificationBox(notificationType.warn, "host fingerprint verfication canceled");
         this.fingerDialog.Close();
     }
 

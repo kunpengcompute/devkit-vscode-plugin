@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, OnInit, ChangeDetectorRef } from '@angular/core';
 import { I18nService } from '../service/i18n.service';
 import { VscodeService, COLOR_THEME } from '../service/vscode.service';
 import { notificationType } from '../notification-box/notification-box.component';
@@ -90,6 +90,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
         private route: ActivatedRoute,
         public i18nService: I18nService,
         private elementRef: ElementRef,
+        private changeDetectorRef: ChangeDetectorRef,
         public vscodeService: VscodeService) {
         // 获取全局url配置数据
         this.vscodeService.postMessage({ cmd: 'readUrlConfig' }, (resp: any) => {
@@ -165,6 +166,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
      * 部署前必读提示取消
      */
     public cancelMsgTip() {
+        // ? 部署必读取消为什么还要发送closePanel？？
         this.installTip.Close();
         const message = {
             cmd: 'closePanel'
@@ -284,6 +286,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
                     1: this.tempFinger
                 });
                 this.fingerDialog.Open();
+                this.changeDetectorRef.markForCheck();
+                this.changeDetectorRef.detectChanges();
             }
         });
     }
@@ -296,6 +300,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
             return;
         }
         this.connectChecking = true;
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
         this.checkFinger();
     }
 
@@ -303,7 +309,6 @@ export class InstallComponent implements AfterViewInit, OnInit {
      * 实际执行检测ssh连接
      */
     public realCheckConn() {
-        this.connectChecking = true;
         console.log("finally checking ssh connection!");
         console.log("tempFinger is ", this.tempFinger);
         const postData = {
@@ -331,6 +336,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
                 // this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
             }
             this.connectChecking = false;
+            this.changeDetectorRef.markForCheck();
+            this.changeDetectorRef.detectChanges();
         });
         // this.vscodeService.postMessage(postData, (data: any) => {
         //     if (data.search(/SUCCESS/) !== -1) {
@@ -395,6 +402,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
                 this.processInstallInfo(resp);
             });
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -443,6 +452,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
         } else if (data.search(/failed/) !== -1) {
             this.installing = FAILED;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -590,10 +601,14 @@ export class InstallComponent implements AfterViewInit, OnInit {
             this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshkeyExceedMaxSize);
             // this.showInfoBox(this.i18n.plugins_common_message_sshkeyExceedMaxSize, 'warn');
             this.localfilepath = '';
+            this.changeDetectorRef.markForCheck();
+            this.changeDetectorRef.detectChanges();
             return;
         }
         this.privateKeyCheck();
         this.privateKey = this.localfilepath;
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     // 检查导入文件是否是私钥文件
@@ -623,10 +638,14 @@ export class InstallComponent implements AfterViewInit, OnInit {
                 if (data.checkPrivateKey == "true") {
                     this.localfilepath = data.localfilepath.replace(/\\/g, '/');
                     this.privateKey = this.localfilepath;
+                    this.changeDetectorRef.markForCheck();
+                    this.changeDetectorRef.detectChanges();
                 }
                 else{
                     this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshkeyFail);
                     this.localfilepath = '';
+                    this.changeDetectorRef.markForCheck();
+                    this.changeDetectorRef.detectChanges();
                     return;
                 }
             });
@@ -718,6 +737,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
             } else {
                 // 保存失败，但不应该影响连接
                 this.setNotificationBox(notificationType.warn, "host fingerprint saved failed");
+                this.changeDetectorRef.markForCheck();
+                this.changeDetectorRef.detectChanges();
             }
         });
         this.realCheckConn();
@@ -730,6 +751,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
         this.connectChecking = false;
         // this.setNotificationBox(notificationType.warn, "host fingerprint verfication canceled");
         this.fingerDialog.Close();
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     public clickFAQ(url:any) {

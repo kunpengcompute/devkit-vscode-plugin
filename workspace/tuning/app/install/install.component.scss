@@ -54,9 +54,9 @@
 
 }
 
-// ::ng-deep .content-box {
-    // width: 700px !important;
-// }
+.mb10 {
+    margin-bottom: 10px;
+}
 
 .install-form {
     padding: 40px 0 40px 80px;
@@ -367,10 +367,6 @@
         align-items: flex-start;
         border-top: 1px dashed var(--th-border_b-d-4b4b4b-l-e1e6ee);
         padding-top: 20px;
-
-        .mb10 {
-            margin-bottom: 10px;
-        }
 
         div {
             font-size: 14px;

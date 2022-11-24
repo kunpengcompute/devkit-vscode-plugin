@@ -397,6 +397,10 @@ input {
     background-color: var(--upgrade-color-msgbox-bg) !important;
 }
 
+.mb10 {
+    margin-bottom: 10px;
+}
+
 .tip-tem {
     margin-left: 4px;
 }
@@ -491,10 +495,6 @@ input {
         align-items: flex-start;
         border-top: 1px dashed var(--th-border_b-d-4b4b4b-l-e1e6ee);
         padding-top: 20px;
-
-        .mb10 {
-            margin-bottom: 10px;
-        }
 
         div {
             font-size: 14px;
