@@ -114,11 +114,6 @@ export class GuideComponent implements OnInit {
             }
         };
         this.vscodeService.postMessage(cmdData, null);
-        // 关闭当前页面
-        const message = {
-            cmd: 'closePanel'
-        };
-        this.vscodeService.postMessage(message, null);
     }
 
     /**
@@ -137,11 +132,6 @@ export class GuideComponent implements OnInit {
             }
         };
         this.vscodeService.postMessage(cmdData, null);
-        // 关闭当前页面
-        const message = {
-            cmd: 'closePanel'
-        };
-        this.vscodeService.postMessage(message, null);
     }
 
 }
