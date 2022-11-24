@@ -168,8 +168,7 @@ export class ConfigComponent implements OnInit {
                     });
                     this.versionDialog.Open();
                 } else if (res.type === 'FAIL') {
-                    // FIXME 配置服务器失败提示中英文
-                    this.setNotificationBox(notificationType.error, '配置服务器失败');
+                    this.setNotificationBox(notificationType.error, this.i18n.plugins_tuning_message_config_server_failed);
                     console.log("save config error");
                 } else {
                     console.log("save config success!!!");

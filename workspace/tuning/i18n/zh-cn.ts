@@ -230,6 +230,7 @@ export const I18N_ZH = {
 
     plugins_tuning_message_versionCompatibility: '插件版本与服务端的软件版本不匹配。本插件可匹配的性能分析工具服务端版本为：{0}；当前性能分析工具服务端版本为：{1}。请您升级服务端版本至匹配版本。',
     plugins_tuning_message_config_server_success: '配置远端服务器成功',
+    plugins_tuning_message_config_server_failed: '配置远端服务器失败',
     plugins_tuning_message_save_config_success: '保存配置成功！',
     // TODO 配置服务器失败提示？
     plugins_tuning_title_save_config: '保存远端服务器配置',
