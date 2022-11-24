@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { I18nService } from '../service/i18n.service';
 import { VscodeService, COLOR_THEME, currentTheme} from '../service/vscode.service';
 import { ActivatedRoute,Router } from '@angular/router';
@@ -86,6 +86,7 @@ export class UpgradeComponent implements OnInit {
         private route: ActivatedRoute,
         public i18nService: I18nService,
         private elementRef: ElementRef,
+        private changeDetectorRef: ChangeDetectorRef,
         public vscodeService: VscodeService) {
         // 获取全局url配置数据
         this.vscodeService.postMessage({ cmd: 'readUrlConfig' }, (resp: any) => {
@@ -217,6 +218,8 @@ export class UpgradeComponent implements OnInit {
                 });
                 this.fingerDialog.Open();
             }
+            this.changeDetectorRef.markForCheck();
+            this.changeDetectorRef.detectChanges();
         });
     }
 
@@ -228,6 +231,8 @@ export class UpgradeComponent implements OnInit {
             return;
         }
         this.connectChecking = true;
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
         this.checkFinger();
     }
 
@@ -235,7 +240,6 @@ export class UpgradeComponent implements OnInit {
      * 实际执行检测ssh连接
      */
     public realCheckConn() {
-        this.connectChecking = true;
         console.log("finally checking ssh connection!");
         console.log("tempFinger is ", this.tempFinger);
         const postData = {
@@ -263,6 +267,8 @@ export class UpgradeComponent implements OnInit {
                 // this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
             }
             this.connectChecking = false;
+            this.changeDetectorRef.markForCheck();
+            this.changeDetectorRef.detectChanges();
         });
     }
 
@@ -354,6 +360,8 @@ export class UpgradeComponent implements OnInit {
         } else if (data.search(/failed/) !== -1) {
             this.upgrading = FAILED;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -501,10 +509,14 @@ export class UpgradeComponent implements OnInit {
             this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshkeyExceedMaxSize);
             // this.showInfoBox(this.i18n.plugins_common_message_sshkeyExceedMaxSize, 'warn');
             this.localfilepath = '';
+            this.changeDetectorRef.markForCheck();
+            this.changeDetectorRef.detectChanges();
             return;
         }
         this.privateKeyCheck();
         this.privateKey = this.localfilepath;
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     // 检查导入文件是否是私钥文件
@@ -643,6 +655,8 @@ export class UpgradeComponent implements OnInit {
             } else {
                 // 保存失败，但不应该影响连接
                 this.setNotificationBox(notificationType.warn, "host fingerprint saved failed");
+                this.changeDetectorRef.markForCheck();
+                this.changeDetectorRef.detectChanges();
             }
         });
         this.realCheckConn();
@@ -653,7 +667,6 @@ export class UpgradeComponent implements OnInit {
      */
     public cancelFingerDialog() {
         this.connectChecking = false;
-        // this.setNotificationBox(notificationType.warn, "host fingerprint verfication canceled");
         this.fingerDialog.Close();
     }
 

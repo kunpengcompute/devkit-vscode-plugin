@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { notificationType } from '../notification-box/notification-box.component';
 import { I18nService } from '../service/i18n.service';
 import { VscodeService, COLOR_THEME } from '../service/vscode.service';
@@ -35,6 +35,7 @@ export class ConfigComponent implements OnInit {
 
     constructor(
         private i18nService: I18nService,
+        private changeDetectorRef: ChangeDetectorRef,
         private elementRef: ElementRef, public vscodeService: VscodeService) {
     }
 
@@ -51,11 +52,10 @@ export class ConfigComponent implements OnInit {
         this.vscodeService.regVscodeMsgHandler('colorTheme', (msg: any) => {
             this.currTheme = msg.colorTheme;
         });
-        // ? 这是啥
-        this.vscodeService.regVscodeMsgHandler('showCustomDialog', (msg: any) => {
-            this.showIfServerDialog = true;
-            this.showDialog.Open();
-        });
+        // this.vscodeService.regVscodeMsgHandler('showCustomDialog', (msg: any) => {
+        //     this.showIfServerDialog = true;
+        //     this.showDialog.Open();
+        // });
         // 设置国际化
         this.i18n = this.i18nService.I18n();
         this.currLang = I18nService.getLang();
@@ -74,6 +74,8 @@ export class ConfigComponent implements OnInit {
                 this.firstConfig = false;
                 this.tempIP = this.config.portConfig[0].ip;
                 this.tempPort = this.config.portConfig[0].port;
+                this.changeDetectorRef.markForCheck();
+                this.changeDetectorRef.detectChanges();
             }
         });
     }
@@ -112,6 +114,8 @@ export class ConfigComponent implements OnInit {
         if (this.isModify) {
             // 单独设置保存修改配置对话框宽度
             this.saveModifyDialog.Open();
+            this.changeDetectorRef.markForCheck();
+            this.changeDetectorRef.detectChanges();
         } else {
             this.save();
         }
@@ -153,7 +157,6 @@ export class ConfigComponent implements OnInit {
                 }
             };
             this.vscodeService.postMessage(data, (res: any) => {
-                // FIXME 页面元素更新缓慢，无法及时更新
                 this.showLoading = false;
                 console.log(res);
                 // 版本不匹配
@@ -174,6 +177,8 @@ export class ConfigComponent implements OnInit {
                     this.notificationWithActionBox.show();
                     this.hasConfig = true;
                 }
+                this.changeDetectorRef.markForCheck();
+                this.changeDetectorRef.detectChanges();
             });
         }
     }
@@ -270,7 +275,8 @@ export class ConfigComponent implements OnInit {
     modifyConfig() {
         console.log("going to modify config");
         this.isModify = true;
-
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -279,5 +285,7 @@ export class ConfigComponent implements OnInit {
      cancel() {
         console.log("cancel modify config");
         this.isModify = false;
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 }

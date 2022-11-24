@@ -172,7 +172,7 @@
                 <div>
                     <p class="color-d-88-l-61" [innerHtml]="selectIPInfo"></p>
                     <div *ngFor="let item of ipList index as i">
-                        <label class="ra-label" [for]="item.key" style="margin-top: 10px;">
+                        <label class="ra-label" [for]="item.key" style="margin-top: 20px;">
                             <i class="ra-common ra-check" *ngIf="ipSelected === item.key"></i>
                             <i class="ra-common ra-uncheck" *ngIf="ipSelected !== item.key"></i>
                             <input type="radio" name="ipType" [(ngModel)]="ipSelected" [value]="item.key"
