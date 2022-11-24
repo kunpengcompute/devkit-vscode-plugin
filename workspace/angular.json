@@ -16,7 +16,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../extension/tuning/out/sys",
+            "outputPath": "../extension/tuning/out/sysperfanalysis",
             "index": "tuning/index.html",
             "main": "tuning/main.ts",
             "polyfills": "tuning/polyfills.ts",

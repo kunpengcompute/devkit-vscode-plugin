@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "install": "cd workspace && npm install --unsafe-perm && cd ../extension/tuning && npm install",
-    "package": "cd extension/tuning && npm run package"
+    "package:vscode": "cd extension/tuning && npm run package",
+    "package:intellij": "cd extension/tuning-intellIJ && sh build/build-webview.sh"
   },
   "author": "",
   "license": "ISC",

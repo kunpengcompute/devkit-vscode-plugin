@@ -1,9 +1,7 @@
 # 鲲鹏性能分析插件
 
-## 2.3.5（2022-07-30）
-* 修复内存诊断功能在openEuler 22.03不兼容问题
-* 修复HPC场景分析功能在部分场景下cpu使用率和实际不一致问题
-* 优化MPI timeline卡顿问题
+## 2.3.5（2022-08-30）
+* 插件通过配置服务器方式集成性能分析工具WEB端，在性能分析工具服务端2.5.RC1.1版本以后，插件端与WEB浏览器端保持一致
 
 ## 2.3.3（2021-12-30）
 * 系统诊断新增存储IO功能，压测存储IO，获得存储设备最大能力，为存储IO性能优化提供基础参考数据
@@ -81,11 +79,6 @@
 * 完成鲲鹏性能分析插件主体功能
 
 # Kunpeng Hyper Tuner Plugin
-
-## 2.3.5（2022-07-30）
-* Fixed the issue that the memory diagnosis function is incompatible with openEuler22.03.
-* Fixed the issue that the CPU usage of the HPC scenario analysis function is inconsistent with the actual CPU usage in some scenarios.
-* Fixed the MPI timeline frame freezing problem
 
 ## 2.3.3 (2021-12-30)
 * The system diagnosis can now diagnose storage I/O issues through pressure tests, which can obtain the maximum storage device capability and thus provide data reference for optimizing storage I/O performance.

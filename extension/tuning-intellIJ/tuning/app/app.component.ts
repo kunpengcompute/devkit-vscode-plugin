@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { VscodeService, COLOR_THEME } from './service/vscode.service';
 import { HyTheme, HyThemeService } from 'hyper';
-
+const windowJava: any = window;
 const THEME_DICT = new Map<COLOR_THEME, HyTheme>([
   [COLOR_THEME.Dark, HyTheme.Dark],
   [COLOR_THEME.Light, HyTheme.Light]
@@ -55,6 +55,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   ) { }
 
   ngOnInit() {
+    windowJava.JavaMessageBridge = this.vscodeService.handleEvent;
+    windowJava.switchTheme = this.vscodeService.handleSwitchTheme;
     // 此变量作为占位符，其内容值会被替换，用于页面第一次跳转
     const data = (self as any).navigatorPage.data as INavigatorPage;
 
