@@ -19,10 +19,6 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.checkglobalstate",
-        "title": "check_state"
-      },
-      {
         "command": "calicoColors.addColor",
         "catagory": "Calico Colors",
         "title": "Add Color"
@@ -59,10 +55,6 @@
       {
         "command": "extension.view.deployserverend",
         "title": "%deploy.server.end%"
-      },
-      {
-        "command": "perfadvisorTools.openChild",
-        "title": "树结构"
       }
     ],
     "menus": {
@@ -74,12 +66,12 @@
         },
         {
           "command": "extension.view.perfadvisorserverconfig",
-          "when": "view == perfadvisorTools && !isPerfadvisorConfigured",
+          "when": "view == perfadvisorTools",
           "group": "inline2@2"
         },
         {
           "command": "extension.view.perfadvfreetrialremoteenvironment",
-          "when": "view == perfadvisorTools && !isPerfadvisorLogined",
+          "when": "view == perfadvisorTools",
           "group": "inline2@3"
         },
         {
@@ -135,11 +127,6 @@
     "viewsWelcome": [
       {
         "view": "perfadvisorTools",
-        "contents": "%check_state%",
-        "when": "true"
-      },
-      {
-        "view": "perfadvisorTools",
         "contents": "%perfadvisor.configer.server%",
         "when": "!isPerfadvisorConfigured"
       },
@@ -150,13 +137,19 @@
       },
       {
         "view": "perfadvisorTools",
+        "contents": "%perfadvisor.logged.in%",
+        "enablement": "false",
+        "when": "isPerfadvisorConfigured && isPerfadvisorLoggedIn"
+      },
+      {
+        "view": "perfadvisorTools",
         "contents": "%perfadvisor.again.configer.server%",
-        "when": "isPerfadvisorConfigured"
+        "when": "isPerfadvisorConfigured && !isPerfadvisorLoggedIn && !isPerfadvisorLoggedInJustClosed"
       },
       {
         "view": "perfadvisorTools",
         "contents": "%perfadvisor.free.trial%",
-        "when": ""
+        "when": "!isPerfadvisorLoggedIn"
       }
     ]
   },

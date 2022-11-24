@@ -80,8 +80,6 @@ export const messageHandler = {
                 method: 'GET'
             };
             const resp: any = await Utils.requestData(global.context, queryOptions as any, message.module);
-            console.log("REQUEST DATA RESPONSE");
-            console.log(resp)
             if (resp.status === constant.HTTP_STATUS.HTTP_200_OK) {
                 vscode.commands.executeCommand('setContext', 'ipconfig', true);
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
@@ -101,6 +99,7 @@ export const messageHandler = {
                 this.updateIpAndPort(global, provider)
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', false);
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
+                vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedInJustClosed', false);
             } else {
                 proxy.close();
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data);

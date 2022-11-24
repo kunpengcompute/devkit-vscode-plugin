@@ -152,11 +152,6 @@ export class ToolPanelManager {
      * @param context 插件上下文
      */
      public static createOrShowPanelForPerfCommand(context: vscode.ExtensionContext) {
-        context.subscriptions.push(vscode.commands.registerCommand('extension.checkglobalstate',
-            () => {
-                console.log(context.globalState.get('tuningToken'))
-            }))
-
         // 打开服务器配置panel
         context.subscriptions.push(vscode.commands.registerCommand('extension.view.perfadvisorserverconfig',
             () => {
@@ -256,9 +251,6 @@ export class ToolPanelManager {
                 console.log(message)
                 ToolPanelManager.createOrShowPanel(panelOption, context);
             }));
-        context.subscriptions.push(vscode.commands.registerCommand('perfadvisorTools.openChild', args => {
-            vscode.window.showInformationMessage(args);
-        }))
     }
     /**
      * 打开选择的webview
@@ -309,48 +301,16 @@ export class ToolPanelManager {
                 language: vscode.env.language
             };
         }
-
-        /**以下注释为旧的、没成功的login页面调用过程 */
-        // // 通过logintype来区分是正常登录还是切换账户：
-        // const toolVersions = Utils.getConfigJson(context).sysPerfVersion;
-        // const param = {
-        //     queryParams: {
-        //         loginType,
-        //         toolVersions,
-        //         panelId: constant.PANEL_ID.tuningNonLogin
-        //     }
-        // };
-        // const message = Utils.generateMessage('navigate',
-        //     { page: '/login', pageParams: param, webSession: sysPerfSession });
         const panelOption = {
             panelId: constant.PANEL_ID.tuningNonLogin,
             viewType: constant.VIEW_TYPE.login,
             viewTitle: i18n.perfadvisor_login,
             module: 'tuning',
         };
-        // // 展示页面面板
-        // ToolPanelManager.createOrShowPanel(panelOption, context);
-        /**旧的、没成功的login页面调用过程到此为止 */
 
         /**以下代码为新的、暂时的login页面调用 */
         const panel = new ToolPanel(panelOption,  ToolPanelManager.closeToolPanel, context)
         ToolPanelManager.sysPerfToolPanels.push(panel)
-        // const config = Utils.getConfigJson(context);
-        // let message= {
-        //     cmd: 'openLoginByButton',
-        //     data: {
-        //         data: JSON.stringify(config),
-        //         showInfoBox: true,
-        //         openConfigServer: true,
-        //     }
-        // }
-        // const messageReq = {
-        //     cbid: new Date().getTime() * 100000,
-        //     cmd: message.cmd ? message.cmd : 'getData',
-        //     module: 'tuning',
-        //     data: message.data
-        // }
-        // console.log("Here is panel manager call cmd")
         const global = {context, toolPanel: panel};
         messageHandler.openLoginByButton(global);
         
@@ -411,5 +371,6 @@ export class ToolPanelManager {
             }
             ToolPanelManager.loginPanels = [];
         }
+
     }
 }
