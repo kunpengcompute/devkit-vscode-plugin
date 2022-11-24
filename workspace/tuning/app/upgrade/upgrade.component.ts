@@ -25,6 +25,7 @@ export class UpgradeComponent implements OnInit {
             required: ''
         }
     };
+    @ViewChild('fingerDialog', { static: false }) fingerDialog: { Close: () => void; Open: () => void; };
     @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; };
 
     public i18n: any = this.i18nService.I18n();
@@ -71,12 +72,14 @@ export class UpgradeComponent implements OnInit {
     };
     public currLang: string;
     public showLoading = false;
+    public tempFinger: string; // 读取的finger，用于发送保存finger
 
     public dialogShowDetailText = '';
 
     intelliJFlagDef = false;
 
     public notificationMessage = ""; // 执行结果提示
+    public fingerLoseText = ''; // 指纹弹框消息内容
 
     constructor(
         private router: Router,
@@ -173,13 +176,68 @@ export class UpgradeComponent implements OnInit {
         this.showDialog.Open();
     }
     /**
-     * 检测ssh连接是否通畅
+     * 检测指纹，检测连接前调用
+     */
+     public checkFinger() {
+        console.log("checking finger");
+        // TODO 发送readFinger message
+        const postData = {
+            cmd: 'readFinger',
+            data: {
+                host: this.tempIP,
+                port: this.tempPort,
+                username: this.username,
+                password: this.pwd,
+                sshType: this.sshTypeSelected,
+                privateKey: this.privateKey,
+                passphrase: this.passphrase
+            }
+        }
+        this.vscodeService.postMessage(postData, (data: any) => {
+            console.log("finger read get: ", data);
+            // TODO 返回结果处理
+            if (data === "noFirst") {
+                // 可以直接checkConn
+                this.tempFinger = "noFirst";
+                this.realCheckConn();
+            } else if (data.search(/host fingerprint verification failed/) !== -1) {
+                // 读取指纹出错
+                this.connectChecking = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_figerFail);
+            } else if (data.search(/Timed out while waiting for handshake/) !== -1) {
+                // 连接超时
+                this.connectChecking = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_timeOut);
+            } else {
+                // 首次连接
+                this.tempFinger = data;
+                this.fingerLoseText = this.i18nService.I18nReplace(this.i18n.plugins_common_message_figerLose, {
+                    0: this.tempIP,
+                    1: this.tempFinger
+                });
+                this.fingerDialog.Open();
+            }
+        });
+    }
+
+    /**
+     * 点击检测连接按钮后
      */
     public checkConn() {
         if (this.connectChecking) {
             return;
         }
         this.connectChecking = true;
+        this.checkFinger();
+    }
+
+    /**
+     * 实际执行检测ssh连接
+     */
+    public realCheckConn() {
+        this.connectChecking = true;
+        console.log("finally checking ssh connection!");
+        console.log("tempFinger is ", this.tempFinger);
         const postData = {
             cmd: 'checkConn',
             data: {
@@ -190,6 +248,7 @@ export class UpgradeComponent implements OnInit {
                 sshType: this.sshTypeSelected,
                 privateKey: this.privateKey,
                 passphrase: this.passphrase,
+                finger: this.tempFinger,
             }
         };
         this.vscodeService.postMessage(postData, (data: any) => {
@@ -197,15 +256,6 @@ export class UpgradeComponent implements OnInit {
                 this.connected = true;
                 this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
                 // this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
-            } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
-                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
-                // this.showInfoBox(this.i18n.plugins_common_tips_connFail, 'error');
-            } else if (data.search(/host fingerprint verification failed/) !== -1) {
-                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_figerFail);
-                // this.showInfoBox(this.i18n.plugins_common_tips_figerFail, 'error');
-            } else if (data.search(/Timed out while waiting for handshake/) !== -1) {
-                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_timeOut);
-                // this.showInfoBox(this.i18n.plugins_common_tips_timeOut, 'error');
             } else if (data.search(/Cannot parse privateKey/) !== -1) {
                 // 密码短语错误
                 this.connected = false;
@@ -569,6 +619,42 @@ export class UpgradeComponent implements OnInit {
      */
     public cancelDiglogMsgTip() {
         this.showDialog.Close();
+    }
+    
+    /**
+     * 指纹弹框确认连接
+     */
+     public confirmFingerDialog() {
+        // TODO 发送saveFinger message
+        this.fingerDialog.Close();
+        const postData = {
+            cmd: 'saveFinger',
+            data: {
+                ip: this.tempIP,
+                finger: this.tempFinger
+            }
+        }
+        this.vscodeService.postMessage(postData, (data: any) => {
+            console.log(data);
+            // TODO 返回结果处理
+            if (data === "SUCCESS") {
+                // 保存指纹成功，可检测连接
+
+            } else {
+                // 保存失败，但不应该影响连接
+                this.setNotificationBox(notificationType.warn, "host fingerprint saved failed");
+            }
+        });
+        this.realCheckConn();
+    }
+
+    /**
+     * 指纹弹框取消连接
+     */
+    public cancelFingerDialog() {
+        this.connectChecking = false;
+        // this.setNotificationBox(notificationType.warn, "host fingerprint verfication canceled");
+        this.fingerDialog.Close();
     }
 
     public clickFAQ(url:any) {
