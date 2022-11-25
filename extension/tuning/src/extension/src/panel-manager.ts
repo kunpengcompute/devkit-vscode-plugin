@@ -3,8 +3,12 @@ import * as constant from './constant';
 import { Utils } from './utils';
 import { I18nService } from './i18nservice';
 import { messageHandler } from './webview-msg-handler';
+import { ProxyManager } from './proxy-manager';
+import {SideViewProvider} from "./SideView/SideViewProvider";
 
 const i18n = I18nService.I18n();
+
+
 class ToolPanel {
     private panelId: string;
     private panel: vscode.WebviewPanel;
@@ -22,6 +26,8 @@ class ToolPanel {
         this.module = panelOption.module;
         this.needAsycnUpdate = panelOption.needAsycnUpdate || false;
         this.createTime = panelOption.createTime || new Date();
+
+    
 
         // 调用vscode 接口创建一个存放webview的panel
         const panel = vscode.window.createWebviewPanel(
@@ -139,6 +145,7 @@ export class ToolPanelManager {
     public static sysPerfToolPanels: Array<ToolPanel> = [];
     public static loginPanels: Array<any> = [];
 
+
     /**
      * perfadvisor响应不同的命令来打开panel
      *
@@ -226,6 +233,24 @@ export class ToolPanelManager {
                 Utils.openAdviceLink(context, 'tuning');
             }
         ));
+        //部署服务端
+        context.subscriptions.push(vscode.commands.registerCommand('extension.view.deployserverend',
+            () => {
+                const sysPerfSession = {
+                    language: vscode.env.language
+                };
+                const message = Utils.generateMessage('navigate', { page: '/install', webSession: sysPerfSession });
+                const panelOption = {
+                    panelId: constant.PANEL_ID.tuningInstall,
+                    viewType: constant.VIEW_TYPE.install,
+                    viewTitle: i18n.common_install_panel_title,
+                    module: 'tuning',
+                    message
+                };
+                console.log("Message:")
+                console.log(message)
+                ToolPanelManager.createOrShowPanel(panelOption, context);
+            }));
     }
     /**
      * 打开选择的webview
@@ -270,35 +295,25 @@ export class ToolPanelManager {
      */
      public static openPerfLoginPanel(context: vscode.ExtensionContext, loginType: string) {
         let sysPerfSession: any = context.globalState.get('tuningSession');
-
         // 如果是首次登录只需要将语言传递给webview
         if (null === sysPerfSession) {
             sysPerfSession = {
                 language: vscode.env.language
             };
         }
-
-        // 通过logintype来区分是正常登录还是切换账户：
-        const toolVersions = Utils.getConfigJson(context).sysPerfVersion;
-        const param = {
-            queryParams: {
-                loginType,
-                toolVersions,
-                panelId: constant.PANEL_ID.tuningNonLogin
-            }
-        };
-        const message = Utils.generateMessage('navigate',
-            { page: '/login', pageParams: param, webSession: sysPerfSession });
         const panelOption = {
             panelId: constant.PANEL_ID.tuningNonLogin,
-            viewType: 'login',
+            viewType: constant.VIEW_TYPE.login,
             viewTitle: i18n.perfadvisor_login,
             module: 'tuning',
-            message
         };
 
-        // 展示页面面板
-        ToolPanelManager.createOrShowPanel(panelOption, context);
+        /**以下代码为新的、暂时的login页面调用 */
+        const panel = new ToolPanel(panelOption,  ToolPanelManager.closeToolPanel, context)
+        ToolPanelManager.sysPerfToolPanels.push(panel)
+        const global = {context, toolPanel: panel};
+        messageHandler.openLoginByButton(global);
+        
     }
     /**
      * 关闭对应工具的panel
@@ -356,5 +371,6 @@ export class ToolPanelManager {
             }
             ToolPanelManager.loginPanels = [];
         }
+
     }
 }

@@ -16,7 +16,7 @@
     </div>
 
     <div class="config-form-item">
-        <div class="ti3-icon ti3-icon-staricon config-form-item-label">{{ i18n.plugins_common_label_ip }}
+        <div class="ti3-icon ti3-icon-staricon config-form-item-label"><img src="./assets/img/required-field.svg">{{ i18n.plugins_common_label_ip }}
         </div>
         <input type="text" tiText [(ngModel)]="tempIP" (blur)="checkIP()" *ngIf="!hasConfig || isModify" />
         <input type="text" tiText [placeholder]="tempIP" disabled *ngIf="hasConfig && !isModify"/>
@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="config-form-item">
-        <div class="ti3-icon ti3-icon-staricon config-form-item-label">{{ i18n.plugins_common_label_configPort }}
+        <div class="ti3-icon ti3-icon-staricon config-form-item-label"><img src="./assets/img/required-field.svg">{{ i18n.plugins_common_label_configPort }}
         </div>
         <input [placeholder]="i18n.plugins_common_placeholder_default_port" type="text" tiText [(ngModel)]="tempPort"
             (blur)="checkPort()" *ngIf="!hasConfig || isModify"/>
@@ -59,7 +59,7 @@
 <!-- <app-messagebox #showDialog>
     <div class="content tip-box">
         <div class="tip-title color-d-e8-l-22">
-            <span class="title-content">{{i18n.plugins_common_title_config}}</span>
+            <span class="title-content">{{i18n.plugins_common_cur_server_title}}</span>
             <span (click)="cancelDiglogMsgTip()" class="icon-close">
                 <img src="./assets/img/close_icon.svg">
                 <img src="./assets/img/close_hover.svg">

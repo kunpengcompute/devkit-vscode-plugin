@@ -12,11 +12,22 @@
     "Other"
   ],
   "activationEvents": [
-    "onView:perfadvisorTools"
+    "onView:perfadvisorTools",
+    "onView:configurationInfo"
   ],
   "main": "./out/extension/src/extension.js",
   "contributes": {
     "commands": [
+      {
+        "command": "calicoColors.addColor",
+        "catagory": "Calico Colors",
+        "title": "Add Color"
+      },
+      {
+        "command": "calicoColors.clearColors",
+        "catagory": "Calico Colors",
+        "title": "Clear Colors"
+      },
       {
         "command": "extension.view.perfadvisorserverconfig",
         "title": "%configure.remote.server%"
@@ -40,39 +51,43 @@
       {
         "command": "extension.view.feedback",
         "title": "%perfadvisor.sys.advicefeedback%"
+      },
+      {
+        "command": "extension.view.deployserverend",
+        "title": "%deploy.server.end%"
       }
     ],
     "menus": {
       "view/title": [
         {
+          "command": "extension.view.deployserverend",
+          "when": "view == perfadvisorTools",
+          "group": "inline2@1"
+        },
+        {
           "command": "extension.view.perfadvisorserverconfig",
-          "when": "view == perfadvisorTools && isPerfadvisorConfigured",
+          "when": "view == perfadvisorTools",
           "group": "inline2@2"
         },
         {
           "command": "extension.view.perfadvfreetrialremoteenvironment",
-          "when": "view == perfadvisorTools && !isPerfadvisorLogined",
+          "when": "view == perfadvisorTools",
           "group": "inline2@3"
-        },
-        {
-          "command": "extension.view.perfadvfreetrialremoteenvironment",
-          "when": "view == perfadvisorTools && isPerfadvisorLogined",
-          "group": "inline3@1"
         },
         {
           "command": "extension.view.perfUpgrade",
           "when": "view == perfadvisorTools",
-          "group": "inline4@2"
+          "group": "inline3@1"
         },
         {
           "command": "extension.view.perfUninstall",
           "when": "view == perfadvisorTools",
-          "group": "inline4@3"
+          "group": "inline3@2"
         },
         {
           "command": "extension.view.feedback",
           "when": "view == perfadvisorTools",
-          "group": "inline5@1"
+          "group": "inline4@1"
         }
       ],
       "commandPalette": [
@@ -90,13 +105,19 @@
       "activitybar": [
         {
           "id": "kunpengTuning",
-          "title": "kunpeng hyper tuner plugin",
+          "title": "%kunpeng.tuning.suite%",
           "icon": "resources/images/tuning.svg"
         }
       ]
     },
     "views": {
       "kunpengTuning": [
+        {
+          "type": "webview",
+          "id": "configurationInfo",
+          "name": "",
+          "when": "isPerfadvisorConfigured"
+        },
         {
           "id": "perfadvisorTools",
           "name": ""
@@ -107,22 +128,28 @@
       {
         "view": "perfadvisorTools",
         "contents": "%perfadvisor.configer.server%",
-        "when": "!isPerfadvisorConfigured && !ipconfig"
+        "when": "!isPerfadvisorConfigured"
       },
       {
         "view": "perfadvisorTools",
         "contents": "%perfadvisor.no.login%",
-        "when": "!isPerfadvisorLogined && isPerfadvisorConfigured"
+        "when": "isPerfadvisorConfigured && !isPerfadvisorLoggedIn"
+      },
+      {
+        "view": "perfadvisorTools",
+        "contents": "%perfadvisor.logged.in%",
+        "enablement": "false",
+        "when": "isPerfadvisorConfigured && isPerfadvisorLoggedIn"
       },
       {
         "view": "perfadvisorTools",
         "contents": "%perfadvisor.again.configer.server%",
-        "when": "ipconfig"
+        "when": "isPerfadvisorConfigured && !isPerfadvisorLoggedIn && !isPerfadvisorLoggedInJustClosed"
       },
       {
         "view": "perfadvisorTools",
         "contents": "%perfadvisor.free.trial%",
-        "when": ""
+        "when": "!isPerfadvisorLoggedIn"
       }
     ]
   },

@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@an
 import { notificationType } from '../notification-box/notification-box.component';
 import { I18nService } from '../service/i18n.service';
 import { VscodeService, COLOR_THEME } from '../service/vscode.service';
+
+
 @Component({
     selector: 'app-config',
     templateUrl: './config.component.html',

@@ -177,6 +177,8 @@ export class Utils {
             method: 'GET'
         };
         req.url = option.url;
+        console.log("REQUEST URL");
+        console.log(req.url)
         if (option.token) {
             if (req.headers) {
                 req.headers.Authorization = option.token;
@@ -245,6 +247,13 @@ export class Utils {
             if (message.messageType === 'downloadFile') {
                 Download.getData(global, msg, 'tuning');
             }
+            else if (message.messageType === 'login'){
+                vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedIn', true)
+            }
+            panel.onDidDispose(() => {
+                vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedIn', false)
+                vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedInJustClosed', true);
+            })
         });
         ToolPanelManager.loginPanels = [{ panel, proxy }];
         // 相应panel的关闭事件
@@ -257,6 +266,7 @@ export class Utils {
         const pageLoadingText = i18n.page_loading;
         const htmlstr = iframeHtmlStr.replace(/\{pageLoadingText\}/, pageLoadingText).replace(/\{src\}/g, src).replace(/\{ip\}/, ip).replace(/\{port\}/, port).replace(/\{defaultPort\}/, defaultPort + '');
         panel.webview.html = htmlstr;
+
     }
 
     /**

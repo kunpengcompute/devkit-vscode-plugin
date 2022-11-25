@@ -67,10 +67,10 @@ export const I18N_US = {
 
   plugins_tuning_button_uninstallConfirm: 'Uninstall',
   plugins_tuning_button_upgradeConfirm: 'Upgrade',
-  plugins_tuning_title_uninstalled: 'The tool is uninstalled successfully.',
+  plugins_tuning_title_uninstalled: 'Profiler Advisor is uninstalled successfully.',
   plugins_tuning_title_upgraded: 'The tool is upgraded successfully.',
-  plugins_tuning_title_uninstallFailed: 'Failed to uninstall the tool.',
-  plugins_tuning_title_upgradeFailed: 'Failed to upgrade the tool.',
+  plugins_tuning_title_uninstallFailed: 'Failed to uninstall the Profiler Advisor.',
+  plugins_tuning_title_upgradeFailed: 'Failed to upgrade the Profiler Advisor.',
   plugins_tuning_button_install: 'Click here to deploy',
   plugins_tuning_label_ip: 'IP Address',
   plugins_tuning_label_port: 'SSH Port',
@@ -193,7 +193,7 @@ export const I18N_US = {
   plugins_common_message_portError: 'Enter a correct port number range.(1024-65535)',
   plugins_tuning_title_upgradeDt: 'Upgrade Hyper Tuner',
   plugins_tuning_title_uninstallDt: 'Uninstall Hyper Tuner',
-  plugins_tuning_title_installDt: 'Install Hyper Tuner',
+  plugins_tuning_title_installDt: 'Deploy Hyper Tuner',
   plugins_common_message_beforeInstall: 'Before You Start ',
   plugins_common_message_beforeInstallDsc4: '1. This tool identifies your system status based on the information \
     you entered \
@@ -280,13 +280,15 @@ export const I18N_US = {
   },
 
   // config 弹框
+  plugins_common_cur_server_title: 'Save the configuration of remote server',
   plugins_common_cut_server: 'Do I need to close the page and switch server configurations? Click OK to exit the current server?',
 
   // 检查ssh2链接时候
-  plugins_common_tips_checkConn_root: 'You are using the root user account. A common user account is recommended. For details , see FAQs. Continue?',
+  plugins_common_tips_checkConn_root_title: 'Deployment of root user',
+  plugins_common_tips_checkConn_root: 'You are using the root user account. A common user account is recommended. For details , see references. Continue?',
   plugins_common_tips_checkConn_noroot: 'You are using a common user account {0}. Check that the following conditions are met: \r\n\
-        The common user {0} has been added to user group wheel. For details, see FAQs. Continue?',
-  plugins_common_tips_checkConn_openFAQ: 'Open FAQ',
+        The common user {0} has been added to user group wheel. For details, see references. Continue?',
+  plugins_common_tips_checkConn_openFAQ: 'Open reference',
 
 
   plugins_public_text_tip: 'Tips',

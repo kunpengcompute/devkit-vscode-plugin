@@ -6,10 +6,20 @@ import { I18nService } from './i18nservice';
 import { SSH2Tools } from './ssh2Tools';
 import { ErrorHelper } from './error-helper';
 import { ProxyManager } from './proxy-manager';
+import {SideViewProvider} from "./SideView/SideViewProvider";
+import {glob} from "glob";
+import {Disposable} from "vscode";
+
 const fs = require('fs');
 const i18n = I18nService.I18n();
 let terminalStatusInterval: any;
 let terminalCloseEvent: any;
+// declare global{
+    var currentSideViewProvider: SideViewProvider
+    var currentSideViewProviderHandler: Disposable
+    var isRegistered = false
+// }
+// isRegistered = false
 
 export const messageHandler = {
     // 从配置文件读取ip与port
@@ -57,7 +67,6 @@ export const messageHandler = {
         const respVersion: any = await Utils.requestData(global.context, queryVersionOptions as any, message.module);
         if (respVersion.status === constant.HTTP_STATUS.HTTP_200_OK) {
             const serverVersion = respVersion?.data?.data?.version;
-
             if (!Utils.checkVersion(global.context, serverVersion)) {
                 proxy.close();
                 const configVersion = Utils.getConfigJson(global.context).configVersion[0];
@@ -73,10 +82,24 @@ export const messageHandler = {
             const resp: any = await Utils.requestData(global.context, queryOptions as any, message.module);
             if (resp.status === constant.HTTP_STATUS.HTTP_200_OK) {
                 vscode.commands.executeCommand('setContext', 'ipconfig', true);
+                vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
                 ToolPanelManager.closeLoginPanel();
-                Utils.navToIFrame(global, proxyServerPort, proxy);
-                ToolPanelManager.closePanelsByRemained(message.module, []);
+                if (message.data.openLogin){
+                    Utils.navToIFrame(global, proxyServerPort, proxy);
+                }
+                if(isRegistered){
+                    currentSideViewProviderHandler.dispose()
+                }
+                const provider = new SideViewProvider(global.context.extensionUri);
+                currentSideViewProvider = provider
+                let previous_dispose_handler =  vscode.window.registerWebviewViewProvider(SideViewProvider.viewType, provider)
+                isRegistered = true
+                currentSideViewProviderHandler = previous_dispose_handler
+                this.updateIpAndPort(global, provider)
+                vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', false);
+                vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
+                vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedInJustClosed', false);
             } else {
                 proxy.close();
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
@@ -85,6 +108,39 @@ export const messageHandler = {
             proxy.close();
             Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
         }
+    },
+    /**
+     * 更新ip与端口的显示内容
+     * @param originalContent 更新之前的
+     */
+    updateIpAndPort(global:any, provider: SideViewProvider){
+        let newConfigPath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
+        let data = JSON.parse(fs.readFileSync(newConfigPath));
+        // console.log(data.tuningConfig[0].ip);
+        var new_ip = data.tuningConfig[0].ip;
+        var new_port = data.tuningConfig[0].port;
+        provider.updateServerConfiguration(new_ip, new_port)
+        // SideViewProvider.
+    },
+    /**
+     * 登录指令请求跳转登录页面
+     * @param global global
+     * @param message message
+     */
+    async openLoginByButton(global: any) {
+        const resourcePath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
+        const configData = fs.readFileSync(resourcePath);
+        let tuningConfig;
+        try {
+            tuningConfig = JSON.parse(configData).tuningConfig;
+        } catch (err) {
+            tuningConfig = {};
+        }
+        const tuningConfigObj = Array.isArray(tuningConfig) ? tuningConfig[0] : tuningConfig;
+        // tslint:disable-next-line:max-line-length
+        const { proxyServerPort, proxy } = await ProxyManager.createProxyServer(global.context, tuningConfigObj.ip, tuningConfigObj.port);
+        Utils.navToIFrame(global, proxyServerPort, proxy);
+        ToolPanelManager.closePanelsByRemained('tuning', []);
     },
 
     /**
