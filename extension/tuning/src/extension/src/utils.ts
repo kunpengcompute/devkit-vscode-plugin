@@ -460,4 +460,40 @@ export class Utils {
         });
     }
 
+    /**
+     * 获取URL配置信息
+     * @param context 插件上下文
+     */
+     private static getPackageJson(context: vscode.ExtensionContext): any {
+        const resourcePath = Utils.getExtensionFileAbsolutePath(context, 'package.json');
+        const data = fs.readFileSync(resourcePath);
+        const buf = Buffer.from(JSON.parse(JSON.stringify(data)));
+        return JSON.parse(buf.toString());
+    }
+
+    /**
+    * 设置项打开关于对话框
+    * @param context 插件上下文
+    */
+    public static openAboutDialog(context: vscode.ExtensionContext) {
+        const header = "";
+                let tuningVersion = Utils.getPackageJson(context).version;
+                let configVersion = Utils.getConfigJson(context).configVersion;
+                let detailTuningVersion = i18n.plugins_common_about_detail.tuningVersion;
+                let detailConfigVersion = i18n.plugins_common_about_detail.configVersion;
+                let detailCopyright = i18n.plugins_common_about_detail.copyright;
+                let ipConfig = context.globalState.get('ipConfig');
+                let detailMessage;
+                if(!ipConfig){
+                    detailMessage = `${detailTuningVersion}${tuningVersion}\n${detailCopyright}`;
+                } else {
+                    detailMessage = `${detailTuningVersion}${tuningVersion}\n${detailConfigVersion}${configVersion}\n${detailCopyright}`;
+                }
+                let options = {
+                    detail: detailMessage,
+                    modal: true
+                };
+                vscode.window.showInformationMessage(header, options);
+    }
+
 }

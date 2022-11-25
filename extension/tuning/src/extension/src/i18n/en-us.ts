@@ -71,6 +71,12 @@ export const I18N_EN = {
      Check that the tool has been deployed on the server and the network connection is normal.',
     plugins_common_message_responseError_deployScenario: 'The server does not respond. \
      Check that the network connection is normal.',
+    plugins_common_about_detail: {
+        tuningVersion: 'Hyper Tuner Plugin Version：',
+        configVersion: 'Server Version：',
+        copyright: 'Copyright © Huawei Technologies Co., Ltd. 2022. All Rights Reserved'
+    },
+
 
     plugins_common_cut_server: 'Switch server',
     plugins_tuning_title_createTime: ' Create Time:',

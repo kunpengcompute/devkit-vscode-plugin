@@ -52,6 +52,11 @@ export const I18N_ZH = {
     plugins_common_message_resqust_timeout: '网络超时',
     plugins_common_message_responseError: '服务器未响应，请确认服务器端工具已部署且网络连接正常。',
     plugins_common_message_responseError_deployScenario: '服务器未响应，请检查网络连接是否正常。',
+    plugins_common_about_detail: {
+        tuningVersion: '性能分析插件版本：',
+        configVersion: '服务端版本：',
+        copyright: '版权所有 © 华为技术有限公司 2022 保留一切权利'
+    },
 
     plugins_common_cut_server: '是否切换服务器？',
     plugins_tuning_title_createTime: ' 创建时间：',

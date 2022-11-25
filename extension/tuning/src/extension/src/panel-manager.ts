@@ -233,6 +233,12 @@ export class ToolPanelManager {
                 Utils.openAdviceLink(context, 'tuning');
             }
         ));
+        // 关于
+        context.subscriptions.push(vscode.commands.registerCommand('extension.view.about',
+        () => {
+            Utils.openAboutDialog(context);
+        }
+    ));
         //部署服务端
         context.subscriptions.push(vscode.commands.registerCommand('extension.view.deployserverend',
             () => {

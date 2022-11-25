@@ -53,6 +53,10 @@
         "title": "%perfadvisor.sys.advicefeedback%"
       },
       {
+        "command": "extension.view.about",
+        "title": "%plugins_perfadvisor_title_about%"
+      },
+      {
         "command": "extension.view.deployserverend",
         "title": "%deploy.server.end%"
       }
@@ -88,6 +92,11 @@
           "command": "extension.view.feedback",
           "when": "view == perfadvisorTools",
           "group": "inline4@1"
+        },
+        {
+          "command": "extension.view.about",
+          "when": "view == perfadvisorTools",
+          "group": "inline5@2"
         }
       ],
       "commandPalette": [

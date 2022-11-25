@@ -68,6 +68,7 @@ export const messageHandler = {
         if (respVersion.status === constant.HTTP_STATUS.HTTP_200_OK) {
             const serverVersion = respVersion?.data?.data?.version;
             if (!Utils.checkVersion(global.context, serverVersion)) {
+                global.context.globalState.update('ipConfig', false);
                 proxy.close();
                 const configVersion = Utils.getConfigJson(global.context).configVersion[0];
                 // 版本不匹配
@@ -83,6 +84,7 @@ export const messageHandler = {
             if (resp.status === constant.HTTP_STATUS.HTTP_200_OK) {
                 vscode.commands.executeCommand('setContext', 'ipconfig', true);
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
+                global.context.globalState.update('ipConfig', true);
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
                 ToolPanelManager.closeLoginPanel();
                 if (message.data.openLogin){
@@ -101,10 +103,12 @@ export const messageHandler = {
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedInJustClosed', false);
             } else {
+                global.context.globalState.update('ipConfig', false);
                 proxy.close();
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
             }
         } else {
+            global.context.globalState.update('ipConfig', false);
             proxy.close();
             Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
         }
