@@ -460,7 +460,7 @@ export class Utils {
     }
 
     /**
-     * 获取URL配置信息
+     * 获取package信息
      * @param context 插件上下文
      */
      private static getPackageJson(context: vscode.ExtensionContext): any {
