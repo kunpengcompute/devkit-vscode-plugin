@@ -117,7 +117,11 @@ export class ConfigComponent implements OnInit {
     saveConfirm() {
         console.log("=========this is saveConfig =============");
         // 如果是修改模式，点击保存时弹框提示是否确认保存配置
-        if (this.isModify) {
+        this.elementRef.nativeElement.querySelectorAll(`input`).forEach((element: any) => {
+            element.focus();
+            element.blur();
+        });
+        if (this.isModify && !this.ipCheck && !this.portCheck) {
             // 单独设置保存修改配置对话框宽度
             this.saveModifyDialog.Open();
             this.changeDetectorRef.markForCheck();
@@ -184,6 +188,7 @@ export class ConfigComponent implements OnInit {
                     this.savedIp = this.tempIP;
                     this.savedPort = this.tempPort;
                     this.hasConfig = true;
+                    this.isModify = false;
                     this.changeDetectorRef.markForCheck();
                     this.changeDetectorRef.detectChanges();
                 }
