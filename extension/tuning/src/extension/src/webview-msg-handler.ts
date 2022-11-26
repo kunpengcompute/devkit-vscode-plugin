@@ -14,12 +14,9 @@ const fs = require('fs');
 const i18n = I18nService.I18n();
 let terminalStatusInterval: any;
 let terminalCloseEvent: any;
-// declare global{
-    var currentSideViewProvider: SideViewProvider
-    var currentSideViewProviderHandler: Disposable
-    var isRegistered = false
-// }
-// isRegistered = false
+var currentSideViewProvider: SideViewProvider
+var currentSideViewProviderHandler: Disposable
+var isRegistered = false
 
 export const messageHandler = {
     // 从配置文件读取ip与port
@@ -100,7 +97,7 @@ export const messageHandler = {
                 currentSideViewProviderHandler = previous_dispose_handler
                 const resourcePath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
                 data = fs.writeFileSync(resourcePath, message.data.data);
-                this.updateIpAndPort(global, provider)
+                this.updateIpAndPort(global.context, provider)
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', false);
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedInJustClosed', false);
@@ -119,8 +116,8 @@ export const messageHandler = {
      * 更新ip与端口的显示内容
      * @param originalContent 更新之前的
      */
-    updateIpAndPort(global:any, provider: SideViewProvider){
-        let newConfigPath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
+    updateIpAndPort(context: vscode.ExtensionContext, provider: SideViewProvider){
+        let newConfigPath = Utils.getExtensionFileAbsolutePath(context, 'out/assets/config.json');
         let data = JSON.parse(fs.readFileSync(newConfigPath));
         // console.log(data.tuningConfig[0].ip);
         var new_ip = data.portConfig[0].ip;
