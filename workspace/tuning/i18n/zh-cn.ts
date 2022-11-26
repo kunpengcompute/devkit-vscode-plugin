@@ -238,4 +238,8 @@ export const I18N_ZH = {
     plugins_tuning_title_save_config: '保存远端服务器配置',
     plugins_tuning_save_config_modify: '是否确认保存当前修改？点击确认后将登出当前用户。',
     plugins_tuning_title_root_deploy: 'root用户部署',
+    plugins_common_title_errorInstruction: '服务器异常',
+    plugins_common_button_checkErrorDetails: '修复建议',
+    plugins_common_message_responseError: '服务器未响应，请确认服务器端工具已部署且网络连接正常。',
+    plugins_common_message_responseError_deployScenario: '服务器未响应，请检查网络连接是否正常。',
 };

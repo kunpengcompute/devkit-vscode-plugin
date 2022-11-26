@@ -16,11 +16,11 @@
     background-color: var(--color-box-content);
     box-shadow: 0px 3px 6px 0px var(--color-content-shadow);
     position: fixed;
-    width: 280px;
+    min-width: 280px;
     height: fit-content;
     bottom: 10px;
     right: 10px;
-    padding: 10px 10px;
+    padding: 15px;
     z-index: 999;
     display: block;
 }
@@ -32,14 +32,15 @@
 .title {
     display: flex;
     justify-content: space-between;
-    line-height: 20px;
-    margin-bottom: 10px;
+    line-height: 15px;
+    margin-bottom: 24px;
 }
 
 .title-notification {
     font-size: 13px;
     color: var(--color-message);
     display: flex;
+    line-height: 15px;
 }
 
 .notification-icon {

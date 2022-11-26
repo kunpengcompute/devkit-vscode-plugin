@@ -15,7 +15,9 @@ export class ConfigComponent implements OnInit {
     @ViewChild('saveModifyDialog', { static: false}) saveModifyDialog: { Close: () => void; Open: () => void; };
     @ViewChild('versionDialog', { static: false }) versionDialog: { Close: () => void; Open: () => void; };
     @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; };
-    @ViewChild('notificationWithActionBox') notificationWithActionBox: {setType: (type: notificationType) => void; show: () => void; close: () => void; };
+    @ViewChild('canLoginBox') canLoginBox: {setType: (type: notificationType) => void; show: () => void; close: () => void; };
+    @ViewChild('serverErrorBox') serverErrorBox: {setType: (type: notificationType) => void; show: () => void; close: () => void; };
+
 
     private static CONFIG_RADIX = 10;
     public i18n: any;
@@ -33,6 +35,7 @@ export class ConfigComponent implements OnInit {
     public showIfServerDialog = false; // 显示是否切换服务器
     public versionMismatch = "";
     public notificationMessage = ""; // 配置远端服务器执行结果提示
+    public errorMessage = ""; // 右下角错误提示弹框提示信息
     public isModify = false; // 是否为修改配置状态
     public savedIp: string; // 已成功保存的IP，便于cancel时恢复
     public savedPort: string; // 已成功保存的Port
@@ -177,14 +180,19 @@ export class ConfigComponent implements OnInit {
                     });
                     this.versionDialog.Open();
                 } else if (res.type === 'FAIL') {
-                    this.setNotificationBox(notificationType.error, this.i18n.plugins_tuning_message_config_server_failed);
+                    // TODO 打开右下角错误提示弹框，res需要带错误提示信息
+                    // this.setNotificationBox(notificationType.error, this.i18n.plugins_tuning_message_config_server_failed);
+                    // this.errorMessage = res.message;
+                    this.canLoginBox.close();
+                    this.serverErrorBox.setType(notificationType.error);
+                    this.serverErrorBox.show();
                     console.log("save config error");
                     this.changeDetectorRef.markForCheck();
                     this.changeDetectorRef.detectChanges();
                 } else {
                     console.log("save config success!!!");
                     this.setNotificationBox(notificationType.success, this.i18n.plugins_tuning_message_config_server_success);
-                    this.notificationWithActionBox.show();
+                    this.canLoginBox.show();
                     this.savedIp = this.tempIP;
                     this.savedPort = this.tempPort;
                     this.hasConfig = true;
@@ -238,7 +246,25 @@ export class ConfigComponent implements OnInit {
             data: {
                 router: 'login'
             }
-        }
+        };
+        this.vscodeService.postMessage(data, null);
+    }
+
+    /**
+     * 跳转错误指示页面
+     */
+    openErrorInstruction() {
+        console.log("opening error instruction page from server config");
+        const data = {
+            cmd: 'openNewPage',
+            data: {
+                router: 'errorInstruction',
+                panelId: 'tuningErrorInstruction',
+                viewTitle: this.i18n.plugins_common_title_errorInstruction,
+                message: { ip: this.tempIP, port: this.tempPort },
+                closePage:"true"
+            }
+        };
         this.vscodeService.postMessage(data, null);
     }
 

@@ -308,5 +308,11 @@ export const I18N_US = {
   plugins_tuning_message_save_config_success: 'Save config success!',
   plugins_tuning_title_save_config: 'Save Remote Server Config',
   plugins_tuning_save_config_modify: 'Save current modification? Click OK to exit the current user.',
-  plugins_tuning_title_root_deploy: 'root User Deploy'
+  plugins_tuning_title_root_deploy: 'root User Deploy',
+  plugins_common_title_errorInstruction: 'Server Exception',
+  plugins_common_button_checkErrorDetails: 'Handling Suggestions',
+  plugins_common_message_responseError: 'The server does not respond. \
+     Check that the tool has been deployed on the server and the network connection is normal.',
+    plugins_common_message_responseError_deployScenario: 'The server does not respond. \
+     Check that the network connection is normal.',
 };

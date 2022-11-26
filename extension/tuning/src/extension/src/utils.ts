@@ -217,7 +217,7 @@ export class Utils {
                     resp.status = constant.HTTP_STATUS.HTTP_404_NOTFOUND;
                     resp.data = error;
                     // 清除当前会话信息，显示登录操作和错误提示信息
-                    ErrorHelper.errorHandler(context, module, error?.response?.statusText);
+                    // ErrorHelper.errorHandler(context, module, error?.response?.statusText);
                     return resolve(resp);
                 }
                 resolve(resp);
