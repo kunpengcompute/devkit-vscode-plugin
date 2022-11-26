@@ -20,13 +20,11 @@
     "commands": [
       {
         "command": "extension.view.perfadvisorserverconfig",
-        "title": "%configure.remote.server%",
-        "when": "!isPerfadvisorConfigured"
+        "title": "%configure.remote.server%"
       },
       {
-        "command": "extension.view.perfadvisorserverconfig",
-        "title": "%configure.remote.server.again%",
-        "when": "isPerfadvisorConfigured"
+        "command": "extension.view.perfadvisorserverconfigagain",
+        "title": "%configure.remote.server.again%"
       },
       {
         "command": "extension.view.perfadvfreetrialremoteenvironment",
@@ -70,9 +68,9 @@
           "group": "inline2@2"
         },
         {
-          "command": "extension.view.perfadvisorserverconfig",
+          "command": "extension.view.perfadvisorserverconfigagain",
           "when": "view == perfadvisorTools && isPerfadvisorConfigured",
-          "group": "inline2@3"
+          "group": "inline2@2"
         },
         {
           "command": "extension.view.perfadvfreetrialremoteenvironment",
