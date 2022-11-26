@@ -13,8 +13,8 @@
     "plugins_perfadvisor_title_about": "关于",
     "deploy.server.end": "部署服务端",
 
-
-    "configure.remote.server": "配置远程服务器",
+    "configure.remote.server.again": "重新配置远端服务器",
+    "configure.remote.server": "配置远端服务器",
     "plugins_perfadvisor_title_login": "登录性能分析工具"
 
 }

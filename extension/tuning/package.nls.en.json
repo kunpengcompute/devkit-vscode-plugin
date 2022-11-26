@@ -12,6 +12,7 @@
     "plugins_perfadvisor_title_about": "About",
     "deploy.server.end": "Deploy Hyper Tuner",
 
+    "configure.remote.server.again": "Configure Remote Server Again",
     "configure.remote.server": "Configure Remote Server",
     "plugins_perfadvisor_title_login": "Login Hyper Tuner"
 } 
