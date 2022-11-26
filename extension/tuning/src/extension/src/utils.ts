@@ -35,9 +35,9 @@ export class Utils {
             context.globalState.update('defaultPort', 3661);
         }
         const json = Utils.getConfigJson(context);
-        if (json.tuningConfig.length > 0) {
-            context.globalState.update('tuningIp', json.tuningConfig[0].ip);
-            context.globalState.update('tuningPort', json.tuningConfig[0].port);
+        if (json.portConfig.length > 0) {
+            context.globalState.update('tuningIp', json.portConfig[0].ip);
+            context.globalState.update('tuningPort', json.portConfig[0].port);
         }
         if (os.type() === 'Windows_NT') {
             context.globalState.update('autoSystemFlag', true);
@@ -266,7 +266,6 @@ export class Utils {
         const pageLoadingText = i18n.page_loading;
         const htmlstr = iframeHtmlStr.replace(/\{pageLoadingText\}/, pageLoadingText).replace(/\{src\}/g, src).replace(/\{ip\}/, ip).replace(/\{port\}/, port).replace(/\{defaultPort\}/, defaultPort + '');
         panel.webview.html = htmlstr;
-
     }
 
     /**
@@ -461,7 +460,7 @@ export class Utils {
     }
 
     /**
-     * 获取URL配置信息
+     * 获取package信息
      * @param context 插件上下文
      */
      private static getPackageJson(context: vscode.ExtensionContext): any {

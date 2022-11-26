@@ -28,6 +28,7 @@ export class NotificationBoxComponent implements OnInit {
 
   public show() {
     this.isShow = true;
+    $('.notification-box').css('display', 'flex');
     setTimeout(this.close, 6000);
   }
 

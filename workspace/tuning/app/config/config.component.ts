@@ -15,7 +15,7 @@ export class ConfigComponent implements OnInit {
     @ViewChild('saveModifyDialog', { static: false}) saveModifyDialog: { Close: () => void; Open: () => void; };
     @ViewChild('versionDialog', { static: false }) versionDialog: { Close: () => void; Open: () => void; };
     @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; };
-    @ViewChild('notificationWithActionBox') notificationWithActionBox: {setType: (type: notificationType) => void; show: () => void; };
+    @ViewChild('notificationWithActionBox') notificationWithActionBox: {setType: (type: notificationType) => void; show: () => void; close: () => void; };
 
     private static CONFIG_RADIX = 10;
     public i18n: any;
@@ -34,6 +34,8 @@ export class ConfigComponent implements OnInit {
     public versionMismatch = "";
     public notificationMessage = ""; // 配置远端服务器执行结果提示
     public isModify = false; // 是否为修改配置状态
+    public savedIp: string; // 已成功保存的IP，便于cancel时恢复
+    public savedPort: string; // 已成功保存的Port
 
     constructor(
         private i18nService: I18nService,
@@ -74,6 +76,8 @@ export class ConfigComponent implements OnInit {
             if (this.config.portConfig.length > 0 && this.config.portConfig[0].ip != "") {
                 this.hasConfig = true;
                 this.firstConfig = false;
+                this.savedIp = this.config.portConfig[0].ip;
+                this.savedPort = this.config.portConfig[0].port;
                 this.tempIP = this.config.portConfig[0].ip;
                 this.tempPort = this.config.portConfig[0].port;
                 this.changeDetectorRef.markForCheck();
@@ -113,7 +117,11 @@ export class ConfigComponent implements OnInit {
     saveConfirm() {
         console.log("=========this is saveConfig =============");
         // 如果是修改模式，点击保存时弹框提示是否确认保存配置
-        if (this.isModify) {
+        this.elementRef.nativeElement.querySelectorAll(`input`).forEach((element: any) => {
+            element.focus();
+            element.blur();
+        });
+        if (this.isModify && !this.ipCheck && !this.portCheck) {
             // 单独设置保存修改配置对话框宽度
             this.saveModifyDialog.Open();
             this.changeDetectorRef.markForCheck();
@@ -148,7 +156,6 @@ export class ConfigComponent implements OnInit {
             this.config.portConfig.push({
                 ip: this.tempIP,
                 port: this.tempPort
-
             });
             let data = {
                 cmd: 'saveConfig', data: {
@@ -172,14 +179,19 @@ export class ConfigComponent implements OnInit {
                 } else if (res.type === 'FAIL') {
                     this.setNotificationBox(notificationType.error, this.i18n.plugins_tuning_message_config_server_failed);
                     console.log("save config error");
+                    this.changeDetectorRef.markForCheck();
+                    this.changeDetectorRef.detectChanges();
                 } else {
                     console.log("save config success!!!");
                     this.setNotificationBox(notificationType.success, this.i18n.plugins_tuning_message_config_server_success);
                     this.notificationWithActionBox.show();
+                    this.savedIp = this.tempIP;
+                    this.savedPort = this.tempPort;
                     this.hasConfig = true;
+                    this.isModify = false;
+                    this.changeDetectorRef.markForCheck();
+                    this.changeDetectorRef.detectChanges();
                 }
-                this.changeDetectorRef.markForCheck();
-                this.changeDetectorRef.detectChanges();
             });
         }
     }
@@ -220,8 +232,6 @@ export class ConfigComponent implements OnInit {
      * 跳转登录页面
      */
     openLogin() {
-        // TODO vscode端的打开登录页面逻辑
-        // intellij：调用postMessage打开页面
         console.log("open login page");
         const data = {
             cmd: 'openNewPage',
@@ -283,9 +293,11 @@ export class ConfigComponent implements OnInit {
     /**
      * 取消修改操作
      */
-     cancel() {
+     cancelModify() {
         console.log("cancel modify config");
         this.isModify = false;
+        this.tempIP = this.savedIp;
+        this.tempPort = this.tempPort;
         this.changeDetectorRef.markForCheck();
         this.changeDetectorRef.detectChanges();
     }

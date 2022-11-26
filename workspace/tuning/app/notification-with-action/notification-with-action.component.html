@@ -2,7 +2,12 @@
     <div class="title">
         <!-- notification type icon -->
         <div class="title-notification">
-            <span class="notification-icon" [ngClass]="{'success': 'success', 'info': 'info', 'warn': 'warn', 'error': 'error'}[type]"></span>
+            <span class="notification-icon">
+                <img *ngIf="type == 'success'" src="./assets/img/tip/icon_success.svg">
+                <img *ngIf="type == 'info' " src="./assets/img/tip/icon_information.svg">
+                <img *ngIf="type == 'warn' " src="./assets/img/tip/warn.svg">
+                <img *ngIf="type == 'error' " src="./assets/img/tip/icon_failure.svg">
+            </span>
             <!-- notification message -->
             <ng-content select=".notification-message"></ng-content>
         </div>

@@ -44,7 +44,7 @@
         <button type="button" class="primary-btn" (mousedown)="modifyConfig()" *ngIf="hasConfig && !isModify">
             {{ i18n.plugins_tuning_button_modi }}
         </button>
-        <button type="button" class="secondary-btn" (mousedown)="cancel()" *ngIf="isModify">
+        <button type="button" class="secondary-btn" (mousedown)="cancelModify()" *ngIf="isModify">
             {{ i18n.plugins_tuning_button_cancel }}
         </button>
     </div>

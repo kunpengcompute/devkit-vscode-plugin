@@ -36,21 +36,22 @@ export const messageHandler = {
 
     // 保存ip与port到json配置文件
     async saveConfig(global: any, message: any) {
-        if (!message.data.openConfigServer) {  // 点击弹窗中的是openConfigServer为true
-            if (ToolPanelManager.loginPanels.length > 0) {
-                // 弹窗提示是否切换服务器
-                const panel = global.toolPanel.getPanel();
-                panel.webview.postMessage({ cmd: 'handleVscodeMsg', type: 'showCustomDialog', data: { show: true } });
-                return;
-            }
-        }
+        // if (!message.data.openConfigServer) {  // 点击弹窗中的是openConfigServer为true
+        //     if (ToolPanelManager.loginPanels.length > 0) {
+        //         // 弹窗提示是否切换服务器
+        //         const panel = global.toolPanel.getPanel();
+        //         panel.webview.postMessage({ cmd: 'handleVscodeMsg', type: 'showCustomDialog', data: { show: true } });
+        //         return;
+        //     }
+        // }
         let tuningConfig;
         try {
-            tuningConfig = JSON.parse(message.data.data).tuningConfig;
+            tuningConfig = JSON.parse(message.data.data).portConfig;
         } catch (err) {
             tuningConfig = {};
         }
         const tuningConfigObj = Array.isArray(tuningConfig) ? tuningConfig[0] : tuningConfig;
+        console.log("tuningConfigObj is: ", tuningConfigObj);
         let data: any;
         const resourcePath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
         data = fs.writeFileSync(resourcePath, message.data.data);
@@ -85,6 +86,7 @@ export const messageHandler = {
                 vscode.commands.executeCommand('setContext', 'ipconfig', true);
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
                 global.context.globalState.update('ipConfig', true);
+                data = { type: 'SUCCESS'};
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
                 ToolPanelManager.closeLoginPanel();
                 if (message.data.openLogin){
@@ -103,11 +105,13 @@ export const messageHandler = {
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedInJustClosed', false);
             } else {
+                data = { type: 'FAIL'};
                 global.context.globalState.update('ipConfig', false);
                 proxy.close();
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
             }
         } else {
+            data = { type: 'FAIL'};
             global.context.globalState.update('ipConfig', false);
             proxy.close();
             Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
@@ -121,8 +125,8 @@ export const messageHandler = {
         let newConfigPath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
         let data = JSON.parse(fs.readFileSync(newConfigPath));
         // console.log(data.tuningConfig[0].ip);
-        var new_ip = data.tuningConfig[0].ip;
-        var new_port = data.tuningConfig[0].port;
+        var new_ip = data.portConfig[0].ip;
+        var new_port = data.portConfig[0].port;
         provider.updateServerConfiguration(new_ip, new_port)
         // SideViewProvider.
     },
@@ -136,7 +140,7 @@ export const messageHandler = {
         const configData = fs.readFileSync(resourcePath);
         let tuningConfig;
         try {
-            tuningConfig = JSON.parse(configData).tuningConfig;
+            tuningConfig = JSON.parse(configData).portConfig;
         } catch (err) {
             tuningConfig = {};
         }
@@ -162,6 +166,10 @@ export const messageHandler = {
             navMessage = Utils.generateMessage('navigate', {
                 page: '/' + message.data.router, pageParams: { queryParams: message.data.message }, webSession: session
             });
+        } else if (message.data.router === 'login') {
+            // 利用openNewPage打开登录页
+            messageHandler.openLoginByButton(global);
+            return;
         } else {
             navMessage = Utils.generateMessage('navigate', {
                 page: '/' + message.data.router, webSession: session

@@ -46,23 +46,9 @@
     width: 15px;
     height: 15px;
     margin-right: 10px;
-    background-size: 15px 15px;
-}
-
-.notification-icon.success {
-    background-image: url(../../assets/img/tip/icon_success.svg);
-}
-
-.notification-icon.info {
-    background-image: url(../../assets/img/tip/icon_information.svg);
-}
-
-.notification-icon.error {
-    background-image: url(../../assets/img/tip/icon_failure.svg);
-}
-
-.notification-icon.warn {
-    background-image: url(../../assets/img/tip/warn.svg);
+    img {
+        size: 15px 15px;
+    }
 }
 
 .action {
