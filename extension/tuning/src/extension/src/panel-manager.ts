@@ -169,23 +169,23 @@ export class ToolPanelManager {
             };
             ToolPanelManager.createOrShowPanel(panelOption, context);
         }));
-        // // 打开服务器配置panel
-        // context.subscriptions.push(vscode.commands.registerCommand('extension.view.perfadvisorserverconfig',
-        //     () => {
-        //         const sysPerfSession = {
-        //             language: vscode.env.language
-        //         };
-        //         const message = Utils.generateMessage('navigate',
-        //             { page: '/' + constant.NAVIGATE_PAGE.config, webSession: sysPerfSession });
-        //         const panelOption = {
-        //             panelId: constant.PANEL_ID.tuningNonServerConfig,
-        //             viewType: constant.VIEW_TYPE.serverConfig,
-        //             viewTitle: i18n.plugins_common_configure_remoteServer,
-        //             module: 'tuning',
-        //             message
-        //         };
-        //         ToolPanelManager.createOrShowPanel(panelOption, context);
-        //     }));
+        // 打开服务器配置panel
+        context.subscriptions.push(vscode.commands.registerCommand('extension.view.perfadvisorserverconfigagain',
+            () => {
+                const sysPerfSession = {
+                    language: vscode.env.language
+                };
+                const message = Utils.generateMessage('navigate',
+                    { page: '/' + constant.NAVIGATE_PAGE.config, webSession: sysPerfSession });
+                const panelOption = {
+                    panelId: constant.PANEL_ID.tuningNonServerConfig,
+                    viewType: constant.VIEW_TYPE.serverConfig,
+                    viewTitle: i18n.plugins_common_configure_remoteServer,
+                    module: 'tuning',
+                    message
+                };
+                ToolPanelManager.createOrShowPanel(panelOption, context);
+            }));
 
         // 打开免费试用远程服务器panel
         context.subscriptions.push(
