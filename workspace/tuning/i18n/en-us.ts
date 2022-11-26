@@ -228,8 +228,8 @@ export const I18N_US = {
     early_release_or_extended_use_info: 'You can release resources before expiration or \
       extend the use on the webpage where you applied for the cloud server.'
   },
-  common_install_panel_title: 'Hyper Tuner - Deployment tool',
-  plugins_tuning_configure_remote_server: 'Hyper Tuner – Configure Remote Server',
+  common_install_panel_title: 'Deployment tool',
+  plugins_tuning_configure_remote_server: 'Configure Remote Server',
   common_term_no_label: 'No.',
   common_bc_suggestion_position: 'Code Location',
   common_term_name_label: 'File Name',

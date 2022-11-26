@@ -87,8 +87,8 @@ export class GuideComponent implements OnInit {
         const cmdData = {
             cmd: 'openNewPage',
             data: {
-                router: 'install',
-                panelId: 'tuningNonServerInstall',
+                router: 'config',
+                panelId: 'tuningNonServerConfig',
                 viewTitle: this.i18n.plugins_tuning_configure_remote_server,
                 message: {}
             }
@@ -103,9 +103,9 @@ export class GuideComponent implements OnInit {
         const cmdData = {
             cmd: 'openNewPage',
             data: {
-                router: 'config',
-                panelId: 'tuningNonServerConfig',
-                viewTitle: this.i18n.plugins_tuning_configure_remote_server,
+                router: 'install',
+                panelId: 'tuningNonServerInstall',
+                viewTitle: this.i18n.common_install_panel_title,
                 message: {}
             }
         };

@@ -167,8 +167,8 @@ export const I18N_ZH = {
         early_release_or_extended_use: '提前释放/延长使用',
         early_release_or_extended_use_info: '申请成功后，可以在服务器申请网页提前释放资源或延长使用时间。'
     },
-    common_install_panel_title: '性能分析-部署工具',
-    plugins_tuning_configure_remote_server: '性能分析-配置远端服务器',
+    common_install_panel_title: '部署服务端',
+    plugins_tuning_configure_remote_server: '配置远端服务器',
 
 
     common_term_no_label: '序号',

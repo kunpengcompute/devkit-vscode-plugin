@@ -176,7 +176,6 @@ export class Utils {
             headers,
             method: 'GET'
         };
-        console.log("Position 31");
         req.url = option.url;
         console.log("REQUEST URL");
         console.log(req.url)
@@ -185,79 +184,43 @@ export class Utils {
                 req.headers.Authorization = option.token;
             }
         }
-        console.log("Position 321");
         // 调用接口逻辑
         return new Promise((resolve, reject) => {
-            console.log("Position 32");
             const resp = { status: constant.HTTP_STATUS.HTTP_200_OK, data: {} };
-            console.log("Position 33");
-            console.log("HERE IS REQ");
-            console.log(req)
             this.axiosInstance.request(req).then((response: any) => {
                 resp.data = response.data;
-                console.log("HERE IS THEN RESPONSE DATA");
-                console.log(response);
-                console.log("Position 34");
                 resolve(resp);
-                console.log("Position 35");
             }).catch((error: any) => {
-                console.log("HERE IS THEN ERROR DATA");
-                console.log(error);
-                // console.log(JSON.stringify(error?.response?.config));
-                // console.log(JSON.stringify(error?.response?.request));
-                console.log("Position 36");
                 const respStatus = ((error || {}).response || {}).status;
-                console.log("Position 37");
                 if (error?.response?.data && error?.response?.data instanceof Buffer) {
-                    console.log("Position 38");
                     const errorRespDataStr = Buffer.from(error?.response?.data).toString();
-                    console.log("Position 39");
                     try {
-                        console.log("Position 40");
                         const errorRespData = JSON.parse(errorRespDataStr || '{}');
-                        console.log("Position 41");
                         error.response.data = errorRespData;
-                        console.log("Position 42");
                     } catch (err) {
-                        console.log("Position 43");
                         error.response.data = errorRespDataStr;
-                        console.log("Position 44");
                     }
                 }
                 //  证书验证失败，请重新选择
                 if (error.code === 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
                     && resp.status === constant.HTTP_STATUS.HTTP_200_OK) {
-                    console.log("Position 45");
                     vscode.window.showErrorMessage(i18n.plugins_common_certificate_verification_failed);
-                    console.log("Position 46");
                     resp.status = constant.HTTP_STATUS.HTTP_404_NOTFOUND;
-                    console.log("Position 47");
                     if (respStatus === constant.HTTP_STATUS.HTTP_502_SERVERERROR) {
-                        console.log("Position 48");
                         resp.status = constant.HTTP_STATUS.HTTP_502_SERVERERROR;
-                        console.log("Position 49");
                     }
-                    console.log("Position 50");
                     resp.data = error;
-                    console.log("Position 51");
                     return resolve(resp);
-                    console.log("Position 52");
                 }
                 if (!respStatus || respStatus === constant.HTTP_STATUS.HTTP_404_NOTFOUND ||
                     error.code === 'ECONNREFUSED' || error.code === 'ETIMEDOUT' || error.code === 'ECONNABORTED') {
-                    console.log("Position 53");
                     resp.status = constant.HTTP_STATUS.HTTP_404_NOTFOUND;
-                    console.log("Position 54");
                     resp.data = error;
-                    console.log("Position 55");
                     // 清除当前会话信息，显示登录操作和错误提示信息
                     ErrorHelper.errorHandler(context, module, error?.response?.statusText);
-                    console.log("Position 56");
                     return resolve(resp);
                 }
-                console.log("Position 57");
                 resolve(resp);
-                console.log("Position 58");
             });
         });
     }
