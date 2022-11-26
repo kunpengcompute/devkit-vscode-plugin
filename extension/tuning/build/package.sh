@@ -4,17 +4,17 @@
 set -e
 
 build_dir=$(cd $(dirname $0); pwd)
-root_dir="$build_dir"/..
-out_dir="$root_dir"/out
-webview_dir="$root_dir"/../../workspace
-vsce_dir="$root_dir"/node_modules/.bin/vsce
+root_dir=${build_dir}/..
+out_dir=${root_dir}/out
+webview_dir=${root_dir}/../../workspace
+vsce_dir=${root_dir}/node_modules/.bin/vsce
 # 构建结束后名字
 tool_name='Kunpeng-DevKit-IDE-hyper-tuner-plugin_2.3.5.vsix'
 
 clean()
 {
-    if [ -d "$out_dir" ]; then
-        rm -rf "$out_dir"/extension
+    if [ -d ${out_dir} ]; then
+        rm -rf ${out_dir}/extension
     fi
 }
 
@@ -34,18 +34,18 @@ end_info()
 
 build_sys_java()
 {
-  cp -rf "$root_dir"/../vscode_source/tuning/* "$webview_dir"/tuning
-  cd "$webview_dir"
+  cp -rf ${root_dir}/../vscode_source/tuning/* ${webview_dir}/tuning
+  cd ${webview_dir}
   npm install --legacy-peer-deps --unsafe-perm
   npm run build:tuning:ide & wait
 }
 
 generate_vsix()
 {
-    cd "$root_dir"
+    cd ${root_dir}
     npm install --legacy-peer-deps --unsafe-perm
-    echo y | "$vsce_dir" package -o "$tool_name"
-    mv *.vsix "$out_dir"
+    echo y | ${vsce_dir} package -o ${tool_name}
+    mv *.vsix ${out_dir}
 }
 
 main()
@@ -59,4 +59,4 @@ main()
 
 main
 result=$?
-exit "$result"
+exit ${result}

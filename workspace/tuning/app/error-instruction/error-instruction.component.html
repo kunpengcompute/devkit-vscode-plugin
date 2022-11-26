@@ -25,10 +25,14 @@
         <div class="instruction-step" [ngStyle]="{'display': isDeployFlag ? 'none':'inherit'}">
             <p>{{ i18n.plugins_common_message_serverErrorTip }}</p>
             <p class="normal-suggestion">{{ i18n.plugins_common_message_serverErrorResult1 }}</p>
-            <p class="exception-suggestion" id="server-error"></p>
+            <span class="exception-suggestion">{{ i18n.plugins_common_message_serverErrorResult2_1 }}</span>
+            <a (click)="openUrl(pluginUrlCfg.error_tipFAQ8)">{{ i18n.plugins_common_message_serverErrorResult2Link }}</a>
+            <span>{{ i18n.plugins_common_message_serverErrorResult2_2 }}</span>
         </div>
         <div class="instruction-step">
-            <p id="access-community"></p>
+            <span id="access-community"></span>
+            <a (click)="openUrl(pluginUrlCfg.error_tipFAQ9)">{{ i18n.plugins_common_message_CommunityTipLink }}</a>
+            <span >{{i18n.plugins_common_message_CommunityTip2}}</span>
         </div>
     </div>
 </div>

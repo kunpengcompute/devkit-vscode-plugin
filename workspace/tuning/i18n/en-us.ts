@@ -106,8 +106,10 @@ export const I18N_US = {
   plugins_tuning_button_install_failed_retry: 'Retry',
   plugins_tuning_title_installFailed: 'Failed to deploy the tool.',
   plugins_tuning_message_installFailedInfo: 'Perform operations as prompted.',
-  plugins_tuning_message_install_failed: 'Rectify the fault based on the installation \
-    failure causes provided on the {0}official website{1}.',
+  plugins_tuning_message_install_failed_1: 'Rectify the fault based on the installation \
+    failure causes provided on the ',
+  plugins_tuning_message_install_failed_2: 'official website',
+  plugins_tuning_message_install_failed_3: '.',
   plugins_tuning_message_uninstallingInfo: 'Uninstall the tool as prompted.',
   plugins_tuning_message_upgradingInfo: 'Upgrade the tool as prompted.',
 
@@ -260,13 +262,15 @@ export const I18N_US = {
   plugins_common_message_serverErrorTip: '3.  Log in to the server OS and check the host or \
      container services are running properly.',
   plugins_common_message_serverErrorResult1: '- If yes, go to Step 4.',
-  plugins_common_message_CommunityTip: '{0}. Report your problem on the {1}.',
-  plugins_common_message_CommunityTipLink: '<a href={0}>Kunpeng Community</a>',
-  plugins_common_message_serverErrorResult2Link: '<a href={0}> "How Do I Troubleshoot \
-  the Server in Abnormal Status?"</a>',
-  plugins_common_message_serverErrorResult2: '- If no, rectify the fault by following the \
-     instructions provided in {0}.',
-  
+  plugins_common_message_CommunityTip1: '{0}. Report your problem on the ',
+  plugins_common_message_CommunityTip2: '.',
+  plugins_common_message_CommunityTipLink: 'Kunpeng Community',
+  plugins_common_message_serverErrorResult2Link: '"How Do I Troubleshoot \
+  the Server in Abnormal Status?"',
+  plugins_common_message_serverErrorResult2_1: '- If no, rectify the fault by following the \
+     instructions provided in ',
+  plugins_common_message_serverErrorResult2_2: '.',
+
   plugins_common_title_guide: 'Configuration Guidelines',
   plugins_common_label_guide: 'Please configure the remote server after completing the deployment of Kunpeng performance analysis tool. \
     If you have completed the tool deployment, you can directly configure the remote server.',
@@ -314,4 +318,7 @@ export const I18N_US = {
      Check that the tool has been deployed on the server and the network connection is normal.',
   plugins_common_message_responseError_deployScenario: 'The server does not respond. \
      Check that the network connection is normal.',
+  plugins_common_message_sshAlgError: 'Connection detection failed. The algorithm on the client side does not match that on the \
+     server side. For details about how to configure a security algorithm, see FAQ.',
+     plugins_common_message_sshClientCheck: 'The SSH client is not installed on the device. Obtain and install the SSH client.',
 };
