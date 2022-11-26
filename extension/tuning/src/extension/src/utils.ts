@@ -359,9 +359,9 @@ export class Utils {
       ToolPanelManager.closeLoginPanel();
     }, null);
     interface HtmlDatas {
-      src: string;
-      ip: string;
-      port: string;
+      ideAddress: string;
+      serverAddr: string;
+      serverPort: string;
       defaultPort: number;
       ideType: string;
       pageLoadingText: string;
@@ -371,36 +371,42 @@ export class Utils {
       id?: number;
     }
     let htmlDatas: HtmlDatas = {
-      src: `http://127.0.0.1:${defaultPort}`,
-      ip: global.context.globalState.get('tuningIp'),
-      port: global.context.globalState.get('tuningPort'),
+      ideAddress: `http://127.0.0.1:${defaultPort}`,
+      serverAddr: global.context.globalState.get('tuningIp'),
+      serverPort: global.context.globalState.get('tuningPort'),
       defaultPort,
       ideType: 'isVscode',
       pageLoadingText: i18n.page_loading,
     };
     if (vscode.env.appName === 'code-server' && vscode.env.uiKind === 2) {
-      const params: any = this.getConfigJson(global.context).codeServerConfig;
-      const iframeParams: any = params[0];
-      const requestParams: any = params[1];
-      const userSessionUrl = `http://127.0.0.1:${defaultPort}/user-management/api/v2.2/users/session/`;
-      this.codeServerAutoLogin(requestParams, userSessionUrl)
-        .then((response) => {
-          htmlDatas = {
-            ...htmlDatas,
-            src: `https://${iframeParams.ip}:${iframeParams.port}`,
-            ideType: 'isCodeServer',
-            token: response.headers.token,
-            username: response.data.data.username,
-            id: response.data.data.id,
-            role: response.data.data.role,
-          };
-        })
-        .then(() => {
-          panel.webview.html = this.getHtml(htmlDatas);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      htmlDatas.ideAddress = `https://${htmlDatas.serverAddr}:${htmlDatas.serverPort}`;
+      const codeServerCfg = this.getConfigJson(global.context).codeServerConfig;
+      if (vscode.env.remoteName === codeServerCfg[0].remoteName) {
+        const requestParams: any = codeServerCfg[1];
+
+        const userSessionUrl = `http://127.0.0.1:${defaultPort}/user-management/api/v2.2/users/session/`;
+        htmlDatas.ideAddress = `https://${codeServerCfg[0].remoteName}${codeServerCfg[0].loginPath}`;
+        htmlDatas.ideType = 'isCodeServer';
+        this.codeServerAutoLogin(requestParams, userSessionUrl)
+          .then((response) => {
+            htmlDatas = {
+              ...htmlDatas,
+              token: response.headers.token,
+              username: response.data.data.username,
+              id: response.data.data.id,
+              role: response.data.data.role,
+            };
+          })
+          .then(() => {
+            panel.webview.html = this.getHtml(htmlDatas);
+          })
+          .catch((error) => {
+            console.log(error);
+            panel.webview.html = this.getHtml(htmlDatas);
+          });
+      } else {
+        panel.webview.html = this.getHtml(htmlDatas);
+      }
     } else {
       panel.webview.html = this.getHtml(htmlDatas);
     }
@@ -650,7 +656,7 @@ export class Utils {
   }
 
   private static getHtml(data: any) {
-    const { pageLoadingText, src } = data;
+    const { pageLoadingText, ideAddress } = data;
     return `
         <!DOCTYPE html>
         <html lang="en">
@@ -739,18 +745,18 @@ export class Utils {
                     <div class="text">${pageLoadingText}</div>
                 </div>
                 <iframe id="myFrame" style="width:100vw;height:100vh;" onload="loadFinish()" frameborder="no" border="0"
-                src="${src}">
+                src="${ideAddress}">
                 </iframe>
                 <script>
-                var time
-                var myFrame = document.getElementById('myFrame');
-                var vscode = acquireVsCodeApi()
+                let time
+                let myFrame = document.getElementById('myFrame');
+                let vscode = acquireVsCodeApi()
                 window.addEventListener('message', (e) => {
                     vscode.postMessage(e.data)
                     if(e.data.messageType) {
-                        var type = e.data.messageType;
+                        let type = e.data.messageType;
                         if (type === 'openUrl') {
-                            var a = document.createElement('a');
+                            let a = document.createElement('a');
                             a.setAttribute('href', e.data.ideUrl);
                             document.body.appendChild(a);
                             a.click();
@@ -760,27 +766,24 @@ export class Utils {
                         } else if (type === 'login') {
                             myFrame.contentWindow.postMessage('${JSON.stringify(
                               data
-                            )}', '${src}');
-                        } else if (type === 'changeTheme') {
-                            myFrame.contentWindow.postMessage(JSON.stringify(e.data), '${src}');
+                            )}', '${ideAddress}');
+                        } else if (type === 'complete'){
+                            ;
+                        }
+                        else if (type === 'changeTheme') {
+                            myFrame.contentWindow.postMessage(JSON.stringify(e.data), '${ideAddress}');
                         }
                     }
                 })
                 function sendMsgToWeb() {
-                    var hostMessage = {
-                        serverAddr: '{ip}',
-                        serverPort: '{port}',
-                        ideType: 'isVscode',
-                        ideAddress: '{src}'
-                    }
                     time = setInterval(() => {
                         myFrame.contentWindow.postMessage('${JSON.stringify(
                           data
-                        )}', '${src}')
+                        )}', '${ideAddress}')
                     }, 500)
                 }
                 function loadFinish() {
-                    var mask = document.getElementById('maskBox');
+                    let mask = document.getElementById('maskBox');
                     mask.style.display = 'none';
                     myFrame.style.opacity = 1;
                 }
