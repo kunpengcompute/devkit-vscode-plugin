@@ -25,6 +25,7 @@ export const messageHandler = {
     // 从配置文件读取ip与port
     readConfig(global: any, message: any) {
         const json = Utils.getConfigJson(global.context);
+
         Utils.invokeCallback(global.toolPanel.getPanel(), message, json);
     },
 
@@ -53,8 +54,6 @@ export const messageHandler = {
         const tuningConfigObj = Array.isArray(tuningConfig) ? tuningConfig[0] : tuningConfig;
         console.log("tuningConfigObj is: ", tuningConfigObj);
         let data: any;
-        const resourcePath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
-        data = fs.writeFileSync(resourcePath, message.data.data);
         global.context.globalState.update('tuningIp', tuningConfigObj.ip);
         global.context.globalState.update('tuningPort', tuningConfigObj.port);
         const { proxyServerPort, proxy } =
@@ -99,6 +98,8 @@ export const messageHandler = {
                 let previous_dispose_handler =  vscode.window.registerWebviewViewProvider(SideViewProvider.viewType, provider)
                 isRegistered = true
                 currentSideViewProviderHandler = previous_dispose_handler
+                const resourcePath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
+                data = fs.writeFileSync(resourcePath, message.data.data);
                 this.updateIpAndPort(global, provider)
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', false);
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
