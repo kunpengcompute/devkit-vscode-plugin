@@ -273,6 +273,11 @@ input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin::
     opacity: 1;
 }
 
+input[type="radio"][tiRadio]:disabled:checked+.ti3-radio .ti3-radio-skin::after {
+    background-color: #616161 !important;
+    opacity: 1;
+}
+
 input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-skin {
     background-color: var(--vscode-editor-background) !important;
 }
@@ -679,7 +684,6 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
         position: absolute;
         width: 14px;
         height: 14px;
-        top: 4px;
         left: 0;
         outline: none;
         border-radius: 50%;
@@ -762,19 +766,24 @@ img[src$="dark-nodata.png"] {
 
 .primary-btn,
 .secondary-btn {
-    width: 160px;
+    width: 120px;
     font-size: 12px !important;
-    padding: 0 24px;
+    padding: 0 20px;
     height: 32px;
     display: inline-block;
     line-height: 18px;
     text-align: center;
-    margin-right: 20px;
+    margin-right: 16px;
     cursor: pointer;
     border-radius: 2px;
     border-width: 1px;
     border-style: solid;
     box-sizing: border-box;
+}
+
+// 最右侧的按钮取消margin-right
+.rightest-btn {
+    margin-right: 0 !important;
 }
 
 
