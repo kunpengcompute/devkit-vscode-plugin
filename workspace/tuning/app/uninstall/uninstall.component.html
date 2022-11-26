@@ -16,9 +16,9 @@
         <span class="top-tips"> {{i18n.plugins_common_message_uninstallDt }}
         </span>
     </div>
-    <p class="uninstall-title-gent title">{{ i18n.plugins_common_title_installTs }}</p>
+<!--    <p class="uninstall-title-gent title">{{ i18n.plugins_common_title_installTs }}</p>-->
     <div class="uninstall-form-item">
-        <div class="ti3-icon ti3-icon-staricon uninstall-form-item-label">{{ i18n.plugins_tuning_label_ip }}
+        <div class="ti3-icon ti3-icon-staricon uninstall-form-item-label"><img src="./assets/img/required-field.svg">{{ i18n.plugins_tuning_label_ip }}
         </div>
         <input type="text" tiText [(ngModel)]="tempIP" (blur)="checkIP()" (change)="connected=false" />
         <div *ngIf="ipCheckF" class="ti3-unifyvalid-error-container">
@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="uninstall-form-item">
-        <div class="ti3-icon ti3-icon-staricon uninstall-form-item-label">{{ i18n.plugins_tuning_label_port }}
+        <div class="ti3-icon ti3-icon-staricon uninstall-form-item-label"><img src="./assets/img/required-field.svg">{{ i18n.plugins_tuning_label_port }}
         </div>
         <input type="text" tiText [(ngModel)]="tempPort" (blur)="checkTempPort()" placeholder="22"
             (change)="connected=false" />
@@ -38,7 +38,7 @@
     </div>
     <div class="uninstall-form-item">
         <div class="ti3-icon
-         ti3-icon-staricon uninstall-form-item-label">{{ i18n.plugins_tuning_label_installUser }}
+         ti3-icon-staricon uninstall-form-item-label"><img src="./assets/img/required-field.svg">{{ i18n.plugins_tuning_label_installUser }}
         </div>
         <input id="username" type="text" tiText [(ngModel)]="username" (blur)="checkUsername()"
             (change)="connected=false" oncopy="return false"
@@ -53,7 +53,7 @@
     <div class="ssh-type">
         <div>
             <div>
-                <div class="ssh-type-title">{{ i18n.plugins_common_label_selectSSHType }}
+                <div class="ssh-type-title"><img src="./assets/img/required-field.svg">{{ i18n.plugins_common_label_selectSSHType }}
                     <a *ngIf="i18nService.currLang === i18nService.langType.zh_cn" (click)="clickFAQ(pluginUrlCfg.uninstall_openFAQ2)">
                         <img *ngIf="currTheme === 1" class="help-icon" src="./assets/img/icon-help-dark-1.svg">
                         <img *ngIf="currTheme === 2" class="help-icon" src="./assets/img/icon-help-light.svg">
@@ -80,7 +80,7 @@
     </div>
     <!-- 密码 -->
     <div *ngIf="sshTypeSelected === 'usepwd'" class="uninstall-form-item">
-        <div class="ti3-icon ti3-icon-staricon uninstall-form-item-label">{{ i18n.plugins_tuning_label_installPwd }}
+        <div class="ti3-icon ti3-icon-staricon uninstall-form-item-label"><img src="./assets/img/required-field.svg">{{ i18n.plugins_tuning_label_installPwd }}
         </div>
         <div style="position: relative;">
             <input id="pwd" [type]="uninstallType" tiText [(ngModel)]="pwd" (blur)="checkPwd()"
@@ -104,7 +104,7 @@
     </div>
     <!-- 密匙 -->
     <div *ngIf="sshTypeSelected === 'usekey'" class="uninstall-form-item">
-        <div class="ti3-icon ti3-icon-staricon uninstall-form-item-label">{{ i18n.plugins_common_label_installsshkey }}
+        <div class="ti3-icon ti3-icon-staricon uninstall-form-item-label"><img src="./assets/img/required-field.svg">{{ i18n.plugins_common_label_installsshkey }}
         </div>
         <textarea resize="horizontal" tiTextarea class="usekey-input" [placeholder]="sshUploadKey"
             [(ngModel)]="localfilepath" readonly>
@@ -119,7 +119,7 @@
             <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"></span>
             <span class="ti3-validate-text tip-tem">{{ i18n.plugins_common_message_sshkeyFail }}</span>
         </div>
-        <div class="uninstall-form-item-label" style="margin-top: 20px;">{{ i18n.plugins_common_label_passphrase }}
+        <div class="uninstall-form-item-label" style="margin-top: 20px;"><img src="./assets/img/required-field.svg">{{ i18n.plugins_common_label_passphrase }}
         </div>
         <div style="position: relative;">
             <input [type]="uninstallType" tiText placeholder="{{i18n.plugins_common_message_passphrase}}"
@@ -201,9 +201,9 @@
             </div>
         </div>
         <div class="tip-confirm">
-            <button type="button" class="primary-btn" (click)="openFAQ()">{{i18n.plugins_common_tips_checkConn_openFAQ}}</button>
-            <button type="button" class="secondary-btn" (click)="confirmDialogMsgTip()">{{i18n.plugins_public_button_confirm}}</button>
+            <button type="button" class="primary-btn" (click)="confirmDialogMsgTip()">{{i18n.plugins_public_button_continue}}</button>
             <button type="button" class="secondary-btn" (click)="cancelDiglogMsgTip()">{{i18n.plugins_public_button_cancel}}</button>
+            <button type="button" class="secondary-btn" (click)="openFAQ()">{{i18n.plugins_common_tips_checkConn_openFAQ}}</button>
         </div>
     </div>
 </app-messagebox>
