@@ -50,6 +50,7 @@ export const messageHandler = {
         } catch (err) {
             tuningConfig = {};
         }
+        console.log("Position 0");
         const tuningConfigObj = Array.isArray(tuningConfig) ? tuningConfig[0] : tuningConfig;
         console.log("tuningConfigObj is: ", tuningConfigObj);
         let data: any;
@@ -57,61 +58,91 @@ export const messageHandler = {
         data = fs.writeFileSync(resourcePath, message.data.data);
         global.context.globalState.update('tuningIp', tuningConfigObj.ip);
         global.context.globalState.update('tuningPort', tuningConfigObj.port);
+        console.log("Position 1");
         const { proxyServerPort, proxy } =
             await ProxyManager.createProxyServer(global.context, tuningConfigObj.ip, tuningConfigObj.port);
         global.context.globalState.update('defaultPort', proxyServerPort);
 
+        console.log("Position 2");
         const queryVersionOptions = {
             url: `http://127.0.0.1:${proxyServerPort}/user-management/api/v2.2/users/version/`,
             method: 'GET'
         };
         const respVersion: any = await Utils.requestData(global.context, queryVersionOptions as any, message.module);
+        console.log("Position 3");
         if (respVersion.status === constant.HTTP_STATUS.HTTP_200_OK) {
+            console.log("Position 4");
             const serverVersion = respVersion?.data?.data?.version;
+            console.log("Position 5");
             if (!Utils.checkVersion(global.context, serverVersion)) {
+                console.log("Position 6");
                 proxy.close();
+                console.log("Position 7");
                 const configVersion = Utils.getConfigJson(global.context).configVersion[0];
+                console.log("Position 8");
                 // 版本不匹配
                 data = { type: 'VERSIONMISMATCH', configVersion, serverVersion };
+                console.log("Position 9");
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
+                console.log("Position 10");
                 return;
             }
+            console.log("Position 11");
             const queryOptions = {
                 url: `http://127.0.0.1:${proxyServerPort}/user-management/api/v2.2/users/admin-status/`,
                 method: 'GET'
             };
+            console.log("Position 12");
             const resp: any = await Utils.requestData(global.context, queryOptions as any, message.module);
+            console.log("Position 13");
             if (resp.status === constant.HTTP_STATUS.HTTP_200_OK) {
+                console.log("Position 14");
                 vscode.commands.executeCommand('setContext', 'ipconfig', true);
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
                 global.context.globalState.update('ipConfig', true);
                 data = { type: 'SUCCESS'};
+                console.log("Position 15");
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
+                console.log("Position 16");
                 ToolPanelManager.closeLoginPanel();
+                console.log("Position 17");
                 if (message.data.openLogin){
+                    console.log("Position 18");
                     Utils.navToIFrame(global, proxyServerPort, proxy);
                 }
+                console.log("Position 19");
                 if(isRegistered){
                     currentSideViewProviderHandler.dispose()
                 }
+                console.log("Position 20");
                 const provider = new SideViewProvider(global.context.extensionUri);
-                currentSideViewProvider = provider
-                let previous_dispose_handler =  vscode.window.registerWebviewViewProvider(SideViewProvider.viewType, provider)
-                isRegistered = true
-                currentSideViewProviderHandler = previous_dispose_handler
-                this.updateIpAndPort(global, provider)
+                currentSideViewProvider = provider;
+                let previous_dispose_handler =  vscode.window.registerWebviewViewProvider(SideViewProvider.viewType, provider);
+                isRegistered = true;
+                currentSideViewProviderHandler = previous_dispose_handler;
+                console.log("Position 21");
+                this.updateIpAndPort(global, provider);
+                console.log("Position 22");
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', false);
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedInJustClosed', false);
             } else {
+                console.log("Position 23");
                 data = { type: 'FAIL'};
+                console.log("Position 24");
                 proxy.close();
+                console.log("Position 25");
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
+                console.log("Position 26");
             }
         } else {
+            console.log("Position 27");
             data = { type: 'FAIL'};
+            console.log("Position 28");
             proxy.close();
+            console.log("Position 29");
             Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
+            console.log("Position 30");
         }
     },
     /**
