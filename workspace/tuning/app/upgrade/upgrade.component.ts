@@ -27,6 +27,7 @@ export class UpgradeComponent implements OnInit {
     };
     @ViewChild('fingerDialog', { static: false }) fingerDialog: { Close: () => void; Open: () => void; };
     @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; };
+    @ViewChild('serverErrorBox') serverErrorBox: {setType: (type: notificationType) => void; show: () => void; close: () => void; };
 
     public i18n: any = this.i18nService.I18n();
     public tempIP: string;
@@ -668,6 +669,24 @@ export class UpgradeComponent implements OnInit {
     public cancelFingerDialog() {
         this.connectChecking = false;
         this.fingerDialog.Close();
+    }
+
+    /**
+     * 打开错误指示页面
+     */
+    openErrorInstruction() {
+        console.log("opening error instruction page from install");
+        const data = {
+            cmd: 'openNewPage',
+            data: {
+                router: 'errorInstruction',
+                panelId: 'tuningErrorInstruction',
+                viewTitle: this.i18n.plugins_common_title_errorInstruction,
+                // 检测连接的错误指示页面不需要ip和port值
+                message: { ip: '', port: '', deployIp: this.tempIP },
+            }
+        };
+        this.vscodeService.postMessage(data, null);
     }
 
     public clickFAQ(url:any) {

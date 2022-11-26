@@ -313,6 +313,6 @@ export const I18N_US = {
   plugins_common_button_checkErrorDetails: 'Handling Suggestions',
   plugins_common_message_responseError: 'The server does not respond. \
      Check that the tool has been deployed on the server and the network connection is normal.',
-    plugins_common_message_responseError_deployScenario: 'The server does not respond. \
+  plugins_common_message_responseError_deployScenario: 'The server does not respond. \
      Check that the network connection is normal.',
 };
