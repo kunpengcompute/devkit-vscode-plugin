@@ -227,8 +227,6 @@ export class ConfigComponent implements OnInit {
      * 跳转登录页面
      */
     openLogin() {
-        // TODO vscode端的打开登录页面逻辑
-        // intellij：调用postMessage打开页面
         console.log("open login page");
         const data = {
             cmd: 'openNewPage',

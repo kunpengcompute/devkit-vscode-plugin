@@ -166,6 +166,10 @@ export const messageHandler = {
             navMessage = Utils.generateMessage('navigate', {
                 page: '/' + message.data.router, pageParams: { queryParams: message.data.message }, webSession: session
             });
+        } else if (message.data.router === 'login') {
+            // 利用openNewPage打开登录页
+            messageHandler.openLoginByButton(global);
+            return;
         } else {
             navMessage = Utils.generateMessage('navigate', {
                 page: '/' + message.data.router, webSession: session
