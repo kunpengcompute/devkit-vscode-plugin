@@ -35,7 +35,6 @@ export class ConfigComponent implements OnInit {
     public showIfServerDialog = false; // 显示是否切换服务器
     public versionMismatch = "";
     public notificationMessage = ""; // 配置远端服务器执行结果提示
-    public errorMessage = ""; // 右下角错误提示弹框提示信息
     public isModify = false; // 是否为修改配置状态
     public savedIp: string; // 已成功保存的IP，便于cancel时恢复
     public savedPort: string; // 已成功保存的Port
@@ -181,8 +180,6 @@ export class ConfigComponent implements OnInit {
                     this.versionDialog.Open();
                 } else if (res.type === 'FAIL') {
                     // TODO 打开右下角错误提示弹框，res需要带错误提示信息
-                    // this.setNotificationBox(notificationType.error, this.i18n.plugins_tuning_message_config_server_failed);
-                    // this.errorMessage = res.message;
                     this.canLoginBox.close();
                     this.serverErrorBox.setType(notificationType.error);
                     this.serverErrorBox.show();
