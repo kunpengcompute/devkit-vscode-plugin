@@ -27,6 +27,7 @@ export const enum HTTP_STATUS {
  */
 export const enum NAVIGATE_PAGE {
     config = 'config',
+    guide = 'guide',
     freeTrialProcessEnvironment = 'freeTrialProcessEnvironment',
 }
 
@@ -40,7 +41,8 @@ export enum PANEL_ID {
     tuningInstall = 'tuningInstall',
     tuningUpgrade = 'tuningUpgrade',
     tuningNonLogin = 'tuningNonLogin',
-    tuningErrorInstruction = 'tuningErrorInstruction'
+    tuningErrorInstruction = 'tuningErrorInstruction',
+    tuningGuide = 'tuningConfigGuide',
 }
 
 /**
@@ -53,7 +55,8 @@ export enum VIEW_TYPE {
     install = 'install',
     upgrade = 'upgrade',
     serverError = 'serverError',
-    login = 'login'
+    login = 'login',
+    guide = 'guide'
 }
 
 

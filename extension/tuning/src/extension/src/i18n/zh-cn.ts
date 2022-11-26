@@ -15,6 +15,7 @@ export const I18N_ZH = {
     plugins_common_button_login: '立即登录',
     plugin_common_button_look: '立即查看',
     plugins_common_title_login: '登录性能分析工具',
+    plugins_common_title_guide: '配置指引',
     plugins_common_term_login_other: '您已在其他终端登录，请确认并重新登录',
     plugins_common_term_report_401: '登录超时或您还未登录。',
     common_term_timeout: '登录超时，请重试',
