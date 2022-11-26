@@ -8,12 +8,17 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { iframeHtmlStr } from './template';
 import { ProxyManager } from './proxy-manager';
 import Download from './download';
+import {SideViewProvider} from "./SideView/SideViewProvider";
+import {Disposable} from "vscode";
+import {messageHandler} from "./webview-msg-handler";
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
 const i18n = I18nService.I18n();
 
-
+var currentSideViewProvider: SideViewProvider
+var currentSideViewProviderHandler: Disposable
+var isRegistered = false
 
 export class Utils {
     private static axiosInstance = axios.create({
@@ -42,6 +47,47 @@ export class Utils {
         if (os.type() === 'Windows_NT') {
             context.globalState.update('autoSystemFlag', true);
         }
+    }
+
+    /**
+     * 加载配置信息
+     * @param context 插件上下文
+     */
+    public static reloadConfigurations(context: vscode.ExtensionContext): any{
+        let data = this.getConfigJson(context);
+        if(data.portConfig.length == 0){
+            this._setUpToBeNotConfigured()
+        }
+        else{
+            this._setUpToBeConfigured(context)
+        }
+    }
+
+    /**
+     * 判断为已配置，显示配置信息
+     */
+    private static _setUpToBeConfigured(context: vscode.ExtensionContext){
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedIn', false);
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedInJustClosed', false);
+
+        const provider = new SideViewProvider(context.extensionUri);
+        currentSideViewProvider = provider
+        let previous_dispose_handler =  vscode.window.registerWebviewViewProvider(SideViewProvider.viewType, provider)
+        isRegistered = true
+        currentSideViewProviderHandler = previous_dispose_handler
+        messageHandler.updateIpAndPort(context, provider);
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', false);
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedInJustClosed', false);
+    }
+
+    /**
+     * 判断为未配置
+     */
+    private static _setUpToBeNotConfigured(){
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', false);
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedIn', false);
     }
     /**
      * 获取配置信息
