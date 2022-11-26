@@ -262,7 +262,6 @@ export class ConfigComponent implements OnInit {
                 panelId: 'tuningErrorInstruction',
                 viewTitle: this.i18n.plugins_common_title_errorInstruction,
                 message: { ip: this.tempIP, port: this.tempPort },
-                closePage:"true"
             }
         };
         this.vscodeService.postMessage(data, null);

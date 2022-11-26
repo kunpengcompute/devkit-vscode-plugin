@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { I18nService } from '../service/i18n.service';
 import { COLOR_THEME, VscodeService } from '../service/vscode.service';
@@ -14,6 +14,7 @@ export class ErrorInstructionComponent implements OnInit {
         private route: ActivatedRoute,
         private I18n: I18nService,
         public vscodeService: VscodeService,
+        private changeDetectorRef: ChangeDetectorRef,
     ) {
         this.i18n = this.I18n.I18n();
         // vscode颜色主题
@@ -78,6 +79,7 @@ export class ErrorInstructionComponent implements OnInit {
             const accessCommunity = document.getElementById('access-community');
             const errorLink1 = this.I18n.I18nReplace(this.i18n.plugins_common_message_CommunityTipLink,
                 { 0: this.pluginUrlCfg.error_tipFAQ9 });
+            console.log("error link: ", errorLink1);
             if (this.isDeployFlag) {
                 this.networkErrorTip =
                  this.I18n.I18nReplace(this.i18n.plugins_common_message_networkErrorTip_deployScenario,
@@ -89,6 +91,7 @@ export class ErrorInstructionComponent implements OnInit {
             } else {
                 this.networkErrorTip = this.I18n.I18nReplace(this.i18n.plugins_common_message_networkErrorTip,
                     { 0: this.serverIp, 1: this.servicePort });
+                console.log(this.networkErrorTip);
                 this.networkErrorYunTip = this.i18n.plugins_common_message_networkErrorYunTip;
                 accessCommunity.innerHTML = this.I18n.I18nReplace(this.i18n.plugins_common_message_CommunityTip,
                     { 0: '4', 1: errorLink1 });
@@ -101,6 +104,8 @@ export class ErrorInstructionComponent implements OnInit {
                 serverErrorNoCase.innerHTML = this.I18n.I18nReplace(this.i18n.plugins_common_message_serverErrorResult2,
                     { 0: errorLink });
             }
+            this.changeDetectorRef.markForCheck();
+            this.changeDetectorRef.detectChanges();
         });
     }
 
