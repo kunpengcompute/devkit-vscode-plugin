@@ -19,18 +19,14 @@
   "contributes": {
     "commands": [
       {
-        "command": "calicoColors.addColor",
-        "catagory": "Calico Colors",
-        "title": "Add Color"
-      },
-      {
-        "command": "calicoColors.clearColors",
-        "catagory": "Calico Colors",
-        "title": "Clear Colors"
+        "command": "extension.view.perfadvisorserverconfig",
+        "title": "%configure.remote.server%",
+        "when": "!isPerfadvisorConfigured"
       },
       {
         "command": "extension.view.perfadvisorserverconfig",
-        "title": "%configure.remote.server%"
+        "title": "%configure.remote.server.again%",
+        "when": "isPerfadvisorConfigured"
       },
       {
         "command": "extension.view.perfadvfreetrialremoteenvironment",
@@ -70,8 +66,13 @@
         },
         {
           "command": "extension.view.perfadvisorserverconfig",
-          "when": "view == perfadvisorTools",
+          "when": "view == perfadvisorTools && !isPerfadvisorConfigured",
           "group": "inline2@2"
+        },
+        {
+          "command": "extension.view.perfadvisorserverconfig",
+          "when": "view == perfadvisorTools && isPerfadvisorConfigured",
+          "group": "inline2@3"
         },
         {
           "command": "extension.view.perfadvfreetrialremoteenvironment",
