@@ -168,7 +168,9 @@
             <img class="img_install" src="./assets/img/tip/icon_failure.svg">
             <p class="install-failed-tip1 color-d-e8-l-22"> {{ i18n.plugins_tuning_title_installFailed }} </p>
         </div>
-        <p class="install-failed-tip2 color-d-88-l-97" [innerHtml]="installFailedInfo"></p>
+        <span class="install-failed-tip2 color-d-88-l-97">{{i18n.plugins_tuning_message_install_failed_1}}</span>
+        <a class="install-failed-tip3" (click)="openUrl(pluginUrlCfg.faqFiveZn,pluginUrlCfg.faqFiveEn)">{{i18n.plugins_tuning_message_install_failed_2}}</a>
+        <span class="install-failed-tip3 color-d-88-l-97">{{i18n.plugins_tuning_message_install_failed_3}}</span>
     </div>
 
     <div *ngIf="installing === 1" class="install-message-installed">

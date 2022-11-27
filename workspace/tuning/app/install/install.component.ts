@@ -109,23 +109,6 @@ export class InstallComponent implements AfterViewInit, OnInit {
                 faqFiveEn: resp.faqFiveEn
             };
             this.pluginUrlCfg = res;
-            if (this.currLang === 0) {
-                this.installFailedInfo = this.i18nService.I18nReplace(
-                    this.i18n.plugins_tuning_message_install_failed,
-                    {
-                        0: `<a href="${this.pluginUrlCfg.faqFiveZn}">`,
-                        1: '</a>'
-                    }
-                );
-            } else {
-                this.installFailedInfo = this.i18nService.I18nReplace(
-                    this.i18n.plugins_tuning_message_install_failed,
-                    {
-                        0: `<a href="${this.pluginUrlCfg.faqFiveEn}">`,
-                        1: '</a>'
-                    }
-                );
-            }
         });
         this.radioList = [{ key: 'usepwd', value: this.i18n.plugins_common_title_sshPwd },
         { key: 'usekey', value: this.i18n.plugins_common_title_sshKey }];
@@ -265,9 +248,15 @@ export class InstallComponent implements AfterViewInit, OnInit {
             }
         }
         this.vscodeService.postMessage(postData, (data: any) => {
-            console.log("finger read get: ", data);
+            console.log("finger read get: ", data);      
             // TODO 返回结果处理
-            if (data === "noFirst") {
+            if (data.search(/no matching/) !== -1) {
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_sshAlgError);
+            }
+            if (data.search(/sshClientCheck/) !== -1) {
+                this.connectChecking = false;
+                this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshClientCheck);
+            } else if (data === "noFirst") {
                 // 可以直接checkConn
                 this.tempFinger = "noFirst";
                 this.realCheckConn();
@@ -279,6 +268,16 @@ export class InstallComponent implements AfterViewInit, OnInit {
                 // 连接超时
                 this.connectChecking = false;
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_timeOut);
+            } else if (data === "errorHandler") {
+                this.connectChecking = false;
+            } else if (data.search(/Cannot parse privateKey/) !== -1) {
+                // 密码短语错误
+                this.connectChecking = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_passphraseFail);
+                // this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
+            } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
+                this.connectChecking = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
             } else {
                 // 首次连接
                 this.tempFinger = data;
@@ -335,6 +334,9 @@ export class InstallComponent implements AfterViewInit, OnInit {
                 this.connected = false;
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_passphraseFail);
                 // this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
+            }else if (data.search(/USERAUTH_FAILURE/) !== -1) {
+                this.connected = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
             }
             this.connectChecking = false;
             this.changeDetectorRef.markForCheck();
@@ -504,6 +506,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
         this.connected = false;
         const data = { cmd: 'hideTerminal' };
         this.vscodeService.postMessage(data, null);
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -776,6 +780,35 @@ export class InstallComponent implements AfterViewInit, OnInit {
 
     public clickFAQ(url:any) {
         console.log(url)
+        const postData = {
+            cmd: 'openUrlInBrowser',
+            data: {
+                url: url,
+            }
+        };
+        if(this.intelliJFlagDef){
+            // 如果是intellij就调用java方法唤起默认浏览器打开网页
+            this.vscodeService.postMessage(postData, null);
+        }
+        else{
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    }
+    /**
+     * 打开超链接
+     * @param url 路径
+     */
+     openUrl(url1: any, url2: any) {
+        let url = '';
+        if (url2 === '') {
+            url = url1;
+        } else {
+            url = this.currLang === 0 ? url1 : url2;
+        }
         const postData = {
             cmd: 'openUrlInBrowser',
             data: {

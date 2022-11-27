@@ -208,7 +208,7 @@ export const messageHandler = {
                     const finger = Utils.getConfigJson(global.context).hostVerifier;
                     const tempip = message.data.host;
                     Utils.fingerCheck(global, tempip, hashedKey, finger).then((data: any) => {
-                        callback1(data);
+                        callback1(true);
                     });
                 }
             };
@@ -230,7 +230,7 @@ export const messageHandler = {
                     const finger = Utils.getConfigJson(global.context).hostVerifier;
                     const tempip = message.data.host;
                     Utils.fingerCheck(global, tempip, hashedKey, finger).then((data: any) => {
-                        callback1(data);
+                        callback1(true);
                     });
                 }
             };
@@ -245,13 +245,108 @@ export const messageHandler = {
                 }
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data.toString());
             } else {
-                Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
+                Utils.invokeCallback(global.toolPanel.getPanel(), message, data.toString());
             }
         };
         new SSH2Tools().connectTest(server, () => { }, callback);
         this.clearPwd(message.data.password);
         this.clearPwd(message.data.privateKey);
     },
+
+    async readFinger(global: any, message: any) {
+        const ssh2Tools = new SSH2Tools();
+        const sshCheckResult = await ssh2Tools.sshClientCheck();
+        var currentFinger: any ;
+        var fingerExist: any = false;
+        if (!sshCheckResult) {
+            Utils.invokeCallback(global.toolPanel.getPanel(), message, 'sshClientCheck');
+            this.clearPwd(message.data.password);
+            this.clearPwd(message.data.privateKey);
+            return;
+        }
+        let server: any = {};
+        if (message.data.sshType === 'usepwd') {
+            server = {
+                host: message.data.host,
+                port: message.data.port,
+                username: message.data.username,
+                password: message.data.password,
+                hostHash: 'sha256',
+                hostVerifier: (hashedKey: any, callback1: any) => {
+                    currentFinger = hashedKey
+                    const tempip = message.data.host;
+                    const finger = Utils.getConfigJson(global.context).hostVerifier;
+                    Utils.fingerCheck(global, tempip, hashedKey, finger).then((data: boolean) => {
+                        fingerExist = data
+                    })
+                    callback1(true)
+                }
+            };
+        } else {
+            // 检测秘钥文件是否有秘钥短语
+            if (!ssh2Tools.checkRealExistPassphrase(message.data)) {
+                Utils.invokeCallback(global.toolPanel.getPanel(), message, 'USERAUTH_FAILURE');
+                return;
+            }
+            server = {
+                host: message.data.host,
+                port: message.data.port,
+                username: message.data.username,
+                privateKey: fs.readFileSync(message.data.privateKey),
+                passphrase: message.data.passphrase,
+                hostHash: 'sha256',
+                hostVerifier: (hashedKey: any, callback1: any) => {
+                    currentFinger = hashedKey
+                    const tempip = message.data.host;
+                    const finger = Utils.getConfigJson(global.context).hostVerifier;
+                    Utils.fingerCheck(global, tempip, hashedKey, finger).then((data: boolean) => {
+                        fingerExist = data
+                    })
+                    callback1(true)
+                }
+            };
+        }
+        const callback = (data: any) => {
+            console.log(data)
+            if (data instanceof Error) {
+                if (data.message.search(/ETIMEDOUT/) !== -1 || data.message.search(/ECONNREFUSED/) !== -1) {
+                    ErrorHelper.errorHandler(global.context, message.module, data.message, server.host);
+                } else if (data.message.search(/no matching/) !== -1) {
+                    vscode.window.showErrorMessage(i18n.plugins_common_message_sshAlgError);
+                }
+                Utils.invokeCallback(global.toolPanel.getPanel(), message, 'errorHandler');
+            } else {
+                if (data.search(/SUCCESS/) !== -1) {
+                    if (fingerExist) {
+                        Utils.invokeCallback(global.toolPanel.getPanel(), message, "noFirst");
+                    }
+                    else {
+                        Utils.invokeCallback(global.toolPanel.getPanel(), message, currentFinger.toString());
+                    }
+                }
+                else{
+                    Utils.invokeCallback(global.toolPanel.getPanel(), message, data.toString());
+                }
+            }
+        };
+        new SSH2Tools().connectTest(server, () => { }, callback);
+        this.clearPwd(message.data.password);
+        this.clearPwd(message.data.privateKey);
+    },
+
+    async saveFinger(global: any, message: any) {
+        const tempip = message.data.ip;
+        const tempfinger = message.data.finger;
+        Utils.savefinger(global, tempip, tempfinger).then((data: any) => {
+            if(data){
+                Utils.invokeCallback(global.toolPanel.getPanel(), message, "SUCCESS");
+            }
+            else{
+                Utils.invokeCallback(global.toolPanel.getPanel(), message, "FAIL");
+            } 
+        });
+    },
+
     /**
      * 密码释放
      * @param message: 来自webview的消息内容

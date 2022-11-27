@@ -252,6 +252,26 @@ export class VscodeService {
             for (const handler of handlers) {
                 handler(message.data);
             }
+        },
+
+        /**
+         * 读取指纹
+         */
+        readFinger(data: any) {
+            if (that.callbacks[data.cbid]) {
+                that.callbacks[data.cbid](data.data);
+                delete that.callbacks[data.cbid];
+            }
+        },
+
+        /**
+          * 保存指纹
+          */
+        saveFinger(data: any) {
+            if (that.callbacks[data.cbid]) {
+                that.callbacks[data.cbid](data.data);
+                delete that.callbacks[data.cbid];
+            }
         }
 
     };

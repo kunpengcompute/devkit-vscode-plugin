@@ -35,6 +35,7 @@ export class ErrorInstructionComponent implements OnInit {
     public networkErrorTip: any;
     public networkErrorYunTip: any;
     public connIssueTwoDesc: any;
+    intelliJFlagDef = false;
     // 获取主题颜色
     public ColorTheme = {
         Dark: COLOR_THEME.Dark,
@@ -64,6 +65,9 @@ export class ErrorInstructionComponent implements OnInit {
             this.servicePort = data.port;
             this.deployIP = data.deployIP;
         });
+        this.route.queryParams.subscribe((data) => {
+            this.intelliJFlagDef = data.intellijFlag === 'true';
+        });
 
         // 获取全局url配置数据
         this.vscodeService.postMessage({ cmd: 'readUrlConfig' }, (resp: any) => {
@@ -77,24 +81,20 @@ export class ErrorInstructionComponent implements OnInit {
                 this.isDeployFlag = true;
             }
             const accessCommunity = document.getElementById('access-community');
-            const errorLink1 = this.I18n.I18nReplace(this.i18n.plugins_common_message_CommunityTipLink,
-                { 0: this.pluginUrlCfg.error_tipFAQ9 });
-            console.log("error link: ", errorLink1);
             if (this.isDeployFlag) {
                 this.networkErrorTip =
                  this.I18n.I18nReplace(this.i18n.plugins_common_message_networkErrorTip_deployScenario,
                     { 0: this.deployIP });
                 this.networkErrorYunTip = this.i18n.plugins_common_message_networkErrorYunTip_deployScenario;
-                accessCommunity.innerHTML = this.I18n.I18nReplace(this.i18n.plugins_common_message_CommunityTip,
-                    { 0: '3', 1: errorLink1 });
+                accessCommunity.innerHTML = this.I18n.I18nReplace(this.i18n.plugins_common_message_CommunityTip1,
+                    { 0: '3' });
                 this.connIssueTwoDesc = this.i18n.plugins_common_message_connIssue2_deployScenario;
             } else {
                 this.networkErrorTip = this.I18n.I18nReplace(this.i18n.plugins_common_message_networkErrorTip,
                     { 0: this.serverIp, 1: this.servicePort });
-                console.log(this.networkErrorTip);
                 this.networkErrorYunTip = this.i18n.plugins_common_message_networkErrorYunTip;
-                accessCommunity.innerHTML = this.I18n.I18nReplace(this.i18n.plugins_common_message_CommunityTip,
-                    { 0: '4', 1: errorLink1 });
+                accessCommunity.innerHTML = this.I18n.I18nReplace(this.i18n.plugins_common_message_CommunityTip1,
+                    { 0: '4' });
                 this.connIssueTwoDesc =
                 this.I18n.I18nReplace(this.i18n.plugins_common_message_connIssue2, { 0: this.servicePort });
                 const serverErrorNoCase = document.getElementById('server-error');
@@ -107,6 +107,30 @@ export class ErrorInstructionComponent implements OnInit {
             this.changeDetectorRef.markForCheck();
             this.changeDetectorRef.detectChanges();
         });
+    }
+
+    /**
+     * 打开超链接
+     * @param url 路径
+     */
+    openUrl(url: any) {
+        const postData = {
+            cmd: 'openUrlInBrowser',
+            data: {
+                url: url,
+            }
+        };
+        if (this.intelliJFlagDef) {
+            // 如果是intellij就调用java方法唤起默认浏览器打开网页
+            this.vscodeService.postMessage(postData, null);
+        }
+        else {
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
     }
 
 }

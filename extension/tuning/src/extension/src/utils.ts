@@ -321,34 +321,34 @@ export class Utils {
      */
     public static async fingerCheck(global: any, tempip: any, hashedKey: any, figer: any) {
         let figerexist: any;
+        console.log("hashedKey"+hashedKey)
         // 查询配置文件中是否有指纹匹配当前连接服务器的指纹
         for (const element of figer) {
             if (element.localfiger === hashedKey) {
                 figerexist = true;
             }
         }
-        // 指纹不存在前端提示添加该指纹到配置文件中
-        const message = I18nService.I18nReplace(i18n.plugins_common_message_figerLose, {
-            0: tempip,
-            1: hashedKey
-        });
         if (figerexist === undefined) {
-            await vscode.window.showInformationMessage(message, i18n.pligins_common_message_confirm,
-                i18n.pligins_common_message_cancel).then((select) => {
-                    if (select === i18n.pligins_common_message_confirm) {
-                        const data = this.getConfigJson(global.context);
-                        data.hostVerifier.push({ ip: tempip, localfiger: hashedKey });
-                        const configPath = 'out/assets/config.json';
-                        const resourcePath = Utils.getExtensionFileAbsolutePath(global.context, configPath);
-                        fs.writeFileSync(resourcePath, JSON.stringify(data));
-                        figerexist = true;
-                    } else {
-                        figerexist = false;
-                    }
-                });
+            figerexist = false;
         }
         return figerexist;
     }
+
+    public static async savefinger(global: any, tempip: any, hashedKey: any) {
+        try {
+            const data = this.getConfigJson(global.context);
+            data.hostVerifier.push({ ip: tempip, localfiger: hashedKey });
+            const configPath = 'out/assets/config.json';
+            const resourcePath = Utils.getExtensionFileAbsolutePath(global.context, configPath);
+            fs.writeFileSync(resourcePath, JSON.stringify(data));
+            return true;
+        }
+        catch(err){
+            console.log(err)
+            return false;
+        }
+    }
+
     /**
      * 判断配置文件中的指纹存储是否大于100
      *

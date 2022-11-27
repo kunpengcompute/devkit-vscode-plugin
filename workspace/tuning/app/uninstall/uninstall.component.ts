@@ -187,9 +187,16 @@ export class UnInstallComponent implements OnInit{
             }
         }
         this.vscodeService.postMessage(postData, (data: any) => {
-            console.log("finger read get: ", data);
+            console.log("data:"+data)
+            console.log("finger read get: ", data);      
             // TODO 返回结果处理
-            if (data === "noFirst") {
+            if (data.search(/no matching/) !== -1) {
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_sshAlgError);
+            }
+            if (data.search(/sshClientCheck/) !== -1) {
+                this.connectChecking = false;
+                this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshClientCheck);
+            } else if (data === "noFirst") {
                 // 可以直接checkConn
                 this.tempFinger = "noFirst";
                 this.realCheckConn();
@@ -201,6 +208,16 @@ export class UnInstallComponent implements OnInit{
                 // 连接超时
                 this.connectChecking = false;
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_timeOut);
+            } else if (data === "errorHandler") {
+                this.connectChecking = false;
+            } else if (data.search(/Cannot parse privateKey/) !== -1) {
+                // 密码短语错误
+                this.connectChecking = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_passphraseFail);
+                // this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
+            } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
+                this.connectChecking = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
             } else {
                 // 首次连接
                 this.tempFinger = data;
@@ -209,9 +226,9 @@ export class UnInstallComponent implements OnInit{
                     1: this.tempFinger
                 });
                 this.fingerDialog.Open();
+                this.changeDetectorRef.markForCheck();
+                this.changeDetectorRef.detectChanges();
             }
-            this.changeDetectorRef.markForCheck();
-            this.changeDetectorRef.detectChanges();
         });
     }
 
