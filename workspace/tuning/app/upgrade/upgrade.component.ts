@@ -212,17 +212,15 @@ export class UpgradeComponent implements OnInit {
                 // 读取指纹出错
                 this.connectChecking = false;
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_figerFail);
-            } else if (data.search(/Timed out while waiting for handshake/) !== -1) {
+            } else if (data.search(/TIMEOUT/) !== -1) {
                 // 连接超时
                 this.connectChecking = false;
-                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_timeOut);
-            } else if (data === "errorHandler") {
-                this.connectChecking = false;
+                this.serverErrorBox.setType(notificationType.error);
+                this.serverErrorBox.show();
             } else if (data.search(/Cannot parse privateKey/) !== -1) {
                 // 密码短语错误
                 this.connectChecking = false;
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_passphraseFail);
-                // this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
             } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
                 this.connectChecking = false;
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
@@ -234,9 +232,9 @@ export class UpgradeComponent implements OnInit {
                     1: this.tempFinger
                 });
                 this.fingerDialog.Open();
-                this.changeDetectorRef.markForCheck();
-                this.changeDetectorRef.detectChanges();
             }
+            this.changeDetectorRef.markForCheck();
+            this.changeDetectorRef.detectChanges();
         });
     }
 

@@ -61,7 +61,7 @@ export const I18N_EN = {
         'You are using the root user account. A common user account is recommended. For details , see references. Continue?',
     plugins_common_tips_checkConn_noroot: 'You are using a common user account {0}. Check that the following conditions are met: \r\n\
         The common user {0} has been added to user group wheel. For details, see FAQs. Continue?',
-    plugins_common_tips_checkConn_openFAQ: 'Open reference',
+    plugins_common_tips_checkConn_openFAQ: 'Open FAQ',
     plugins_common_tips_connFail: 'Failed to check the SSH connection. Check whether the user name and password are correct.\
      Too many retries will also cause the check failure.',
     plugins_common_message_sshAlgError: 'Connection detection failed. The algorithm on the client side does not match that on the \

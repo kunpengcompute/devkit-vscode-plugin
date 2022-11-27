@@ -314,7 +314,7 @@ export const messageHandler = {
                 } else if (data.message.search(/no matching/) !== -1) {
                     vscode.window.showErrorMessage(i18n.plugins_common_message_sshAlgError);
                 }
-                Utils.invokeCallback(global.toolPanel.getPanel(), message, 'errorHandler');
+                Utils.invokeCallback(global.toolPanel.getPanel(), message, 'TIMEOUT');
             } else {
                 if (data.search(/SUCCESS/) !== -1) {
                     if (fingerExist) {

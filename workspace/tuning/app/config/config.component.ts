@@ -179,7 +179,7 @@ export class ConfigComponent implements OnInit {
                     });
                     this.versionDialog.Open();
                 } else if (res.type === 'FAIL') {
-                    // TODO 打开右下角错误提示弹框，res需要带错误提示信息
+                    // 打开右下角错误提示弹框
                     this.canLoginBox.close();
                     this.serverErrorBox.setType(notificationType.error);
                     this.serverErrorBox.show();
