@@ -683,7 +683,7 @@ export class UpgradeComponent implements OnInit {
                 panelId: 'tuningErrorInstruction',
                 viewTitle: this.i18n.plugins_common_title_errorInstruction,
                 // 检测连接的错误指示页面不需要ip和port值
-                message: { ip: '', port: '', deployIp: this.tempIP },
+                message: { ip: '', port: '', deployIP: this.tempIP },
             }
         };
         this.vscodeService.postMessage(data, null);
