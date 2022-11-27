@@ -208,7 +208,7 @@ export const messageHandler = {
                     const finger = Utils.getConfigJson(global.context).hostVerifier;
                     const tempip = message.data.host;
                     Utils.fingerCheck(global, tempip, hashedKey, finger).then((data: any) => {
-                        callback1(data);
+                        callback1(true);
                     });
                 }
             };
@@ -230,7 +230,7 @@ export const messageHandler = {
                     const finger = Utils.getConfigJson(global.context).hostVerifier;
                     const tempip = message.data.host;
                     Utils.fingerCheck(global, tempip, hashedKey, finger).then((data: any) => {
-                        callback1(data);
+                        callback1(true);
                     });
                 }
             };
@@ -245,7 +245,7 @@ export const messageHandler = {
                 }
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data.toString());
             } else {
-                Utils.invokeCallback(global.toolPanel.getPanel(), message, data);
+                Utils.invokeCallback(global.toolPanel.getPanel(), message, data.toString());
             }
         };
         new SSH2Tools().connectTest(server, () => { }, callback);
@@ -309,7 +309,11 @@ export const messageHandler = {
         const callback = (data: any) => {
             console.log(data)
             if (data instanceof Error) {
-                ErrorHelper.errorHandler(global.context, message.module, data.message, server.host);
+                if (data.message.search(/ETIMEDOUT/) !== -1 || data.message.search(/ECONNREFUSED/) !== -1) {
+                    ErrorHelper.errorHandler(global.context, message.module, data.message, server.host);
+                } else if (data.message.search(/no matching/) !== -1) {
+                    vscode.window.showErrorMessage(i18n.plugins_common_message_sshAlgError);
+                }
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, 'errorHandler');
             } else {
                 if (data.search(/SUCCESS/) !== -1) {

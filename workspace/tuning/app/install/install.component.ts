@@ -248,7 +248,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
             }
         }
         this.vscodeService.postMessage(postData, (data: any) => {
-            console.log("finger read get: ", data);
+            console.log("finger read get: ", data);      
             // TODO 返回结果处理
             if (data.search(/no matching/) !== -1) {
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_sshAlgError);
@@ -270,9 +270,16 @@ export class InstallComponent implements AfterViewInit, OnInit {
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_timeOut);
             } else if (data === "errorHandler") {
                 this.connectChecking = false;
-            }else {
+            } else if (data.search(/Cannot parse privateKey/) !== -1) {
+                // 密码短语错误
+                this.connectChecking = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_passphraseFail);
+                // this.showInfoBox(this.i18n.plugins_common_message_passphraseFail, 'error');
+            } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
+                this.connectChecking = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
+            } else {
                 // 首次连接
-                console.log(data)
                 this.tempFinger = data;
                 this.fingerLoseText = this.i18nService.I18nReplace(this.i18n.plugins_common_message_figerLose, {
                     0: this.tempIP,

@@ -321,6 +321,7 @@ export class Utils {
      */
     public static async fingerCheck(global: any, tempip: any, hashedKey: any, figer: any) {
         let figerexist: any;
+        console.log("hashedKey"+hashedKey)
         // 查询配置文件中是否有指纹匹配当前连接服务器的指纹
         for (const element of figer) {
             if (element.localfiger === hashedKey) {
