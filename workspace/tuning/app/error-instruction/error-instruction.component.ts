@@ -108,7 +108,6 @@ export class ErrorInstructionComponent implements OnInit {
      * @param url 路径
      */
     openUrl(url: any) {
-        console.log(213)
         const postData = {
             cmd: 'openUrlInBrowser',
             data: {
