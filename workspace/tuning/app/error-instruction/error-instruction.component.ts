@@ -97,12 +97,6 @@ export class ErrorInstructionComponent implements OnInit {
                     { 0: '4' });
                 this.connIssueTwoDesc =
                 this.I18n.I18nReplace(this.i18n.plugins_common_message_connIssue2, { 0: this.servicePort });
-                const serverErrorNoCase = document.getElementById('server-error');
-
-                const errorLink = this.I18n.I18nReplace(this.i18n.plugins_common_message_serverErrorResult2Link,
-                    { 0: this.pluginUrlCfg.error_tipFAQ8 });
-                serverErrorNoCase.innerHTML = this.I18n.I18nReplace(this.i18n.plugins_common_message_serverErrorResult2,
-                    { 0: errorLink });
             }
             this.changeDetectorRef.markForCheck();
             this.changeDetectorRef.detectChanges();
@@ -114,6 +108,7 @@ export class ErrorInstructionComponent implements OnInit {
      * @param url 路径
      */
     openUrl(url: any) {
+        console.log(213)
         const postData = {
             cmd: 'openUrlInBrowser',
             data: {
