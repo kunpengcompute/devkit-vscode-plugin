@@ -190,8 +190,7 @@ export const messageHandler = {
         const ssh2Tools = new SSH2Tools();
         const sshCheckResult = await ssh2Tools.sshClientCheck();
         if (!sshCheckResult) {
-            Utils.showMessageByType('warn', { info: i18n.plugins_common_message_sshClientCheck }, true);
-            Utils.invokeCallback(global.toolPanel.getPanel(), message, '');
+            Utils.invokeCallback(global.toolPanel.getPanel(), message, 'sshClientCheck');
             this.clearPwd(message.data.password);
             this.clearPwd(message.data.privateKey);
             return;
@@ -215,8 +214,7 @@ export const messageHandler = {
         } else {
             // 检测秘钥文件是否有秘钥短语
             if (!ssh2Tools.checkRealExistPassphrase(message.data)) {
-                vscode.window.showErrorMessage(I18nService.I18n().plugins_common_tips_connFail);
-                Utils.invokeCallback(global.toolPanel.getPanel(), message, '');
+                Utils.invokeCallback(global.toolPanel.getPanel(), message, 'USERAUTH_FAILURE');
                 return;
             }
             server = {
@@ -235,13 +233,12 @@ export const messageHandler = {
                 }
             };
         }
-        Utils.fingerLengthCheck(global);
         const callback = (data: any) => {
             if (data instanceof Error) {
                 if (data.message.search(/ETIMEDOUT/) !== -1 || data.message.search(/ECONNREFUSED/) !== -1) {
                     ErrorHelper.errorHandler(global.context, message.module, data.message, server.host);
                 } else if (data.message.search(/no matching/) !== -1) {
-                    vscode.window.showErrorMessage(i18n.plugins_common_message_sshAlgError);
+                    Utils.invokeCallback(global.toolPanel.getPanel(), message, data.toString());
                 }
                 Utils.invokeCallback(global.toolPanel.getPanel(), message, data.toString());
             } else {
@@ -338,12 +335,17 @@ export const messageHandler = {
         const tempip = message.data.ip;
         const tempfinger = message.data.finger;
         Utils.savefinger(global, tempip, tempfinger).then((data: any) => {
+            let response='';
             if(data){
-                Utils.invokeCallback(global.toolPanel.getPanel(), message, "SUCCESS");
+                response="SUCCESS"
             }
             else{
-                Utils.invokeCallback(global.toolPanel.getPanel(), message, "FAIL");
-            } 
+                response="FAIL"
+            }
+            if(!Utils.fingerLengthCheck(global)){
+                response=response.concat('_oversize')
+            }
+            Utils.invokeCallback(global.toolPanel.getPanel(), message, response);
         });
     },
 

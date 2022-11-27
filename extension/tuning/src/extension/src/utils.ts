@@ -356,9 +356,10 @@ export class Utils {
      */
     public static fingerLengthCheck(global: any) {
         const finger = Utils.getConfigJson(global.context).hostVerifier;
-        if (finger.length > 100) {
-            vscode.window.showWarningMessage(i18n.plugins_common_message_figerWarn);
+        if (finger.length >100) {
+            return false;
         }
+        return true;
     }
 
     /**

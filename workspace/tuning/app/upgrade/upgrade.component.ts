@@ -196,7 +196,7 @@ export class UpgradeComponent implements OnInit {
             }
         }
         this.vscodeService.postMessage(postData, (data: any) => {
-            console.log("finger read get: ", data);      
+            console.log("finger read get: ", data);
             // TODO 返回结果处理
             if (data.search(/no matching/) !== -1) {
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_sshAlgError);
@@ -647,7 +647,7 @@ export class UpgradeComponent implements OnInit {
     public cancelDiglogMsgTip() {
         this.showDialog.Close();
     }
-    
+
     /**
      * 指纹弹框确认连接
      */
@@ -664,6 +664,9 @@ export class UpgradeComponent implements OnInit {
         this.vscodeService.postMessage(postData, (data: any) => {
             console.log(data);
             // TODO 返回结果处理
+            if(data.search(/oversize/)!==-1){
+                this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_figerWarn);
+            }
             if (data === "SUCCESS") {
                 // 保存指纹成功，可检测连接
 

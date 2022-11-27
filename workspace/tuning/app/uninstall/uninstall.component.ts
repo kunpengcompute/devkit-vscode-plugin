@@ -188,7 +188,7 @@ export class UnInstallComponent implements OnInit{
         }
         this.vscodeService.postMessage(postData, (data: any) => {
             console.log("data:"+data)
-            console.log("finger read get: ", data);      
+            console.log("finger read get: ", data);
             // TODO 返回结果处理
             if (data.search(/no matching/) !== -1) {
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_sshAlgError);
@@ -243,7 +243,7 @@ export class UnInstallComponent implements OnInit{
         this.changeDetectorRef.detectChanges();
     }
 
-    
+
     /**
      * 实际执行检测ssh连接
      */
@@ -588,6 +588,9 @@ export class UnInstallComponent implements OnInit{
         this.vscodeService.postMessage(postData, (data: any) => {
             console.log(data);
             // TODO 返回结果处理
+            if(data.search(/oversize/)!==-1){
+                this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_figerWarn);
+            }
             if (data === "SUCCESS") {
                 // 保存指纹成功，可检测连接
 
