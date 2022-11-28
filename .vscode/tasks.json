@@ -4,26 +4,19 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "npm: compile - extension/perfadvisor",
 			"type": "npm",
-			"script": "compile",
-			"path": "extension/perfadvisor/",
-			"group": "build",
-			"problemMatcher": "$tsc",
+			"script": "watch",
+			"problemMatcher": "$tsc-watch",
+			"path": "/extension/tuning",
+			"isBackground": true,
 			"presentation": {
 				"reveal": "never"
 			},
-		},
-		{
-			"label": "npm: compile - extension/porting",
-			"type": "npm",
-			"script": "compile",
-			"path": "extension/porting/",
-			"group": "build",
-			"problemMatcher": "$tsc",
-			"presentation": {
-				"reveal": "never"
-			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+			
 		}
 	]
 }

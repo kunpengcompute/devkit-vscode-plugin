@@ -1,0 +1,437 @@
+// component css goes here
+::ng-deep html {
+    min-width: 1062px !important;
+    overflow-x: auto !important;
+}
+
+
+::ng-deep .vscode-light {
+    --install-color-title-content: #222222;
+    --install-color-content: #616161;
+
+    --install-color-msgbox-bg: #ffffff;
+    --install-color-msgbox-close: #aaaaaa;
+    --install-color-msgbox-dsc-icon-bg: #ffffff;
+    --install-color-msgbox-content: #616161;
+    --install-color-msgbox-dsc-icon: #0067ff;
+
+    --install-color-btn-p: #ffffff;
+    --install-color-btn-p-bg-dft: #0067ff;
+    --install-color-btn-p-bg-hover: #267dff;
+    --install-color-btn-p-bg-active: #0057d9;
+    --install-color-btn-p-bg-disabled: #f5f5f5;
+    --install-color-btn-m-bg: #ffffff;
+    --install-color-btn-m-dft: #979797;
+    --install-color-btn-m-hover: #267dff;
+    --install-color-btn-m-active: #0057d9;
+    --install-color-btn-m-disabled: #cccccc;
+    --install-color-btn-m-bg-disabled: #f5f5f5;
+    --install-color-btn-text-disabled: #cccccc;
+}
+
+::ng-deep .vscode-dark {
+    --install-color-title-content: #e8e8e8;
+    --install-color-content: #aaaaaa;
+
+    --install-color-msgbox-bg: #252526;
+    --install-color-msgbox-close: #aaaaaa;
+    --install-color-msgbox-dsc-icon-bg: #ffffff;
+    --install-color-msgbox-content: #888888;
+    --install-color-msgbox-dsc-icon: #0067ff;
+
+    --install-color-btn-p: #e8e8e8;
+    --install-color-btn-p-bg-dft: #0067ff;
+    --install-color-btn-p-bg-hover: #267dff;
+    --install-color-btn-p-bg-active: #0057d9;
+    --install-color-btn-p-bg-disabled: #313131;
+    --install-color-btn-m-bg: #313131;
+    --install-color-btn-m-dft: #dddddd;
+    --install-color-btn-m-hover: #267dff;
+    --install-color-btn-m-active: #0057d9;
+    --install-color-btn-m-disabled: #616161;
+    --install-color-btn-m-bg-disabled: #313131;
+    --install-color-btn-text-disabled: #666666;
+
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.install-form {
+    padding: 40px 0 40px 80px;
+    min-width: 300px;
+    box-sizing: border-box;
+
+    .install-title-gen {
+        margin-bottom: 16px;
+    }
+
+    .install-title-det {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 704px;
+        margin-bottom: 30px;
+
+        .top-tips {
+            font-size: 14px;
+
+            a {
+                color: #0067ff;
+                &:hover {
+                    color: #267DFF;
+                }
+            }
+        }
+    }
+
+    .install-title-gent {
+        margin-bottom: 10px;
+        margin-top: 30px;
+    }
+
+    .install-form-item {
+        position: relative;
+        margin-top: 20px;
+
+        .install-form-item-label {
+            height: 28px;
+            font-size: 14px;
+
+            .install-form-item-label-req {
+                color: #e02020;
+                margin-left: 4px;
+            }
+        }
+        .upload-btn {
+            vertical-align: bottom;
+            position: relative;
+            top: -4px;
+        }
+
+        .tip-tem {
+            margin-left: 4px;
+        }
+
+        .eye {
+            position: absolute;
+            left: 375px;
+            width: 20px;
+            height: 20px;
+            top: 0px;
+            bottom: 0px;
+            margin: auto 0;
+        }
+    }
+
+    .ssh-type {
+        .ssh-type-title {
+            margin-bottom: 16px;
+            font-size: 14px;
+            margin-top: 20px;
+
+            .help-icon {
+                height: 14px;
+            }
+        }
+
+        .ssh-type-radio {
+            display: inline-block;
+            margin-right: 40px;
+
+            span {
+                display: inline-block;
+                font-size: 14px;
+            }
+        }
+    }
+    .install-title-installed {
+        width: 768px;
+        margin-left: -28px;
+        display: flex;
+        align-items: center;
+
+        p {
+            font-size: 16px;
+            margin-left: 12px;
+            height: 24px;
+            line-height: 24px;
+            display: inline-block;
+        }
+    }
+
+    .install-title-failed,
+    .install-title-installing {
+        width: 768px;
+        margin-left: -28px;
+
+        .install-failed-tip {
+            display: flex;
+            align-items: center;
+
+            .install-failed-tip1 {
+                font-size: 20px;
+                margin-left: 12px;
+                height: 26px;
+                line-height: 26px;
+                display: inline-block;
+            }
+        }
+
+        .install-failed-tip2 {
+            font-size: 14px;
+            margin-left: 28px;
+            height: 20px;
+            margin-top: 4px;
+        }
+
+        .install-failed-tip3 {
+            font-size: 14px;
+            height: 20px;
+            margin-top: 4px;
+        }
+
+        a {
+            color: #0067FF !important;
+            &:hover {
+                color: #267DFF !important;
+            }
+        }
+    }
+
+    .install-message-installed {
+        width: 800px;
+        margin-top: 10px;
+    }
+    #login-btn,
+    #reinstall-btn {
+        width: 116px;
+        height: 32px;
+        margin-top: 30px;
+        line-height: 32px;
+    }
+
+    .img_install {
+        width: 16px;
+        height: 16px;
+    }
+
+    input {
+        width: 400px;
+        height: 28px !important;
+        padding: 5px 10px !important;
+    }
+
+    .help-icon {
+        position: relative;
+        top: 2px;
+    }
+
+    .btn-group {
+        margin-top: 40px;
+
+        .check-conn-btn {
+            margin-right: 20px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            float: left;
+
+            img {
+                margin-right: 5px;
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
+
+    .usekey-input {
+        box-sizing: border-box;
+        min-height: 28px;
+        padding: 0 10px;
+        width: 290px;
+        height: 28px;
+        line-height: 26px;
+    }
+
+    .ra-label {
+        display: flex;
+    }
+    .showLoading{
+      height: 57vh;
+    }
+}
+
+.tip-box {
+    .tip-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        line-height: 20px;
+        font-size: 20px;
+    }
+
+    .tip-dsc {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        border-top: 1px dashed var(--th-border_b-d-4b4b4b-l-e1e6ee);
+        padding-top: 20px;
+
+        .mb10 {
+            margin-bottom: 10px;
+        }
+
+        div {
+            font-size: 14px;
+
+            p {
+                a {
+                    color: #0067FF;
+                    &:hover {
+                        color: #267DFF;
+                    }
+                }
+            }
+
+        }
+    }
+
+    .tip-select {
+        padding-top: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        font-size: 14px;
+        vertical-align: middle;
+
+
+    }
+
+    .tip-confirm {
+        padding-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.finger-box {
+    .tip-dsc {
+        border: none !important;
+        margin: 0 !important;
+        padding-top: 12px !important;
+    }
+}
+
+.img_box {
+    margin-right: 6px;
+}
+
+:host ::ng-deep .progress-modal {
+    left: 50% !important;
+    top: 80% !important;
+    transform: translate(-50%, -10%) !important;
+}
+
+:host ::ng-deep .success-modal {
+    left: 50% !important;
+    top: 80% !important;
+    transform: translate(-50%, -10%) !important;
+}
+
+.ssh-type .ra-label {
+    display: flex;
+    align-items: center;
+}
+.ssh-type .ra-label input {
+    margin-right: 5px;
+    display: none!important;
+    width: 16px!important;
+    height: 16px!important;
+    outline: none;
+}
+
+
+// root和非root的提示样式
+.tip-box {
+    .tip-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        line-height: 20px;
+        font-size: 20px;
+    }
+
+    .tip-dsc {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        border-top: 1px dashed var(--th-border_b-d-4b4b4b-l-e1e6ee);
+        padding-top: 20px;
+
+        div {
+            font-size: 14px;
+
+            p {
+                a {
+                    color: #0067FF;
+                    &:hover {
+                        color: #267DFF;
+                    }
+                }
+            }
+
+        }
+    }
+
+    .tip-select {
+        padding-top: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        font-size: 14px;
+        vertical-align: middle;
+    }
+
+    .tip-confirm {
+        padding-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button {
+            min-width: 100px;
+        }
+    }
+}
+
+.user-deploy-box {
+    .tip-dsc {
+        margin-top: 0 !important;
+        padding-top: 32px !important;
+        border: none !important;
+    }
+
+    .tip-confirm {
+        padding-top: 32px !important;
+    }
+}
+
+.finger-box {
+    .tip-dsc {
+        border: none !important;
+        margin: 0 !important;
+        padding-top: 12px !important;
+    }
+}
+
+.error-instruction-button {
+    width: auto !important;
+    margin-right: 0;
+    height: 26px;
+}

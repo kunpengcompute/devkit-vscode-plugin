@@ -1,9 +1,0 @@
-<div class="warpper">
-    <div class="crumb-item" *ngFor="let item of crumbList; index as i">
-        <span class="title" (click)="onBreadClick(i)">
-            <img src="./assets/img/micarch/delete.svg" alt="" *ngIf="i===0">
-            {{item.title}}
-        </span>
-        <span class="arrow">{{'>'}}</span>
-    </div>
-</div>

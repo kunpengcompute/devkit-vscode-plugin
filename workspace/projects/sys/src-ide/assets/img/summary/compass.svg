@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>icon/12/指南针</title>
-    <g id="icon/12/指南针" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <circle id="椭圆形" stroke="#979797" stroke-width="0.6" cx="6" cy="6" r="5.7"></circle>
-        <path d="M6.03786339,2.58881876 L4.51849558,5.13917104 C4.21920967,5.64154082 4.21782408,6.26716769 4.51488184,6.77085822 L6.02337467,9.32865558 L6.02337467,9.32865558 L7.53669693,6.80311178 C7.83661051,6.30259387 7.84027332,5.67849694 7.54625524,5.17449326 L6.03786339,2.58881876 L6.03786339,2.58881876 Z" id="路径-25" stroke="#979797" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(6.028020, 5.958737) rotate(-315.000000) translate(-6.028020, -5.958737) "></path>
-        <line x1="4.62078539" y1="4.70824183" x2="7.19494039" y2="7.23864806" id="路径-28" stroke="#979797" stroke-width="0.6"></line>
-    </g>
-</svg>

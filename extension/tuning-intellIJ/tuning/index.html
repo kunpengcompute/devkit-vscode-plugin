@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Kunpeng Hyper Tuner</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        @-webkit-keyframes ball-spin-fade-loader {
+            50% {
+                -webkit-transform: scale(0.4);
+                transform: scale(0.4);
+                opacity: 0.3;
+            }
+
+            100% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes ball-spin-fade-loader {
+            50% {
+                -webkit-transform: scale(0.4);
+                transform: scale(0.4);
+                opacity: 0.3;
+            }
+
+            100% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .vscode-dark {
+            background-color: #313131 !important;
+        }
+
+        .vscode-light {
+            background-color: #fff !important;
+        }
+
+        .maskBox {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .containerBox {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .circleBox {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        .circleItem {
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            top: 37.5px;
+            left: 37.5px;
+        }
+
+        .circleItem1 {
+            transform: rotate(0) translate(37.5px);
+        }
+
+        .circleItem2 {
+            transform: rotate(45deg) translate(37.5px);
+        }
+
+        .circleItem3 {
+            transform: rotate(90deg) translate(37.5px);
+        }
+
+        .circleItem4 {
+            transform: rotate(135deg) translate(37.5px);
+        }
+
+        .circleItem5 {
+            transform: rotate(180deg) translate(37.5px);
+        }
+
+        .circleItem6 {
+            transform: rotate(225deg) translate(37.5px);
+        }
+
+        .circleItem7 {
+            transform: rotate(270deg) translate(37.5px);
+        }
+
+        .circleItem8 {
+            transform: rotate(315deg) translate(37.5px);
+        }
+
+        .circle {
+            width: 100%;
+            height: 100%;
+            animation-fill-mode: both;
+            background-color: #0067ff;
+            border-radius: 50%;
+        }
+
+        .circle1 {
+            animation: ball-spin-fade-loader 1s 0.875s infinite linear
+        }
+
+        .circle2 {
+            animation: ball-spin-fade-loader 1s 0.75s infinite linear
+        }
+
+        .circle3 {
+            animation: ball-spin-fade-loader 1s 0.625s infinite linear
+        }
+
+        .circle4 {
+            animation: ball-spin-fade-loader 1s 0.5s infinite linear
+        }
+
+        .circle5 {
+            animation: ball-spin-fade-loader 1s 0.375s infinite linear
+        }
+
+        .circle6 {
+            animation: ball-spin-fade-loader 1s 0.25s infinite linear
+        }
+
+        .circle7 {
+            animation: ball-spin-fade-loader 1s 0.125s infinite linear
+        }
+
+        .circle8 {
+            animation: ball-spin-fade-loader 1s 0s infinite linear
+        }
+    </style>
+</head>
+<script>
+    // 此变量作为占位符，其内容值会被替换，用于页面第一次跳转
+    self.navigatorPage;
+
+    /**
+     *  由于webview 中不能使用sessionStorage， 以及localStorage, 此处添加 self.webviewSession 处理session
+     *  self.webviewSession 提供了与 session 一样的 get\set 操作 
+     **/
+    self.webviewSession = self.webviewSession || {
+        setItem: function (key, value) {
+            self.webviewSession[key] = value;
+        },
+
+        getItem: function (key) {
+            return self.webviewSession[key];
+        },
+
+        removeItem: function (key) {
+            delete self.webviewSession[key];
+        }
+
+    }
+
+    // 初始化页面session
+    const webSession = ((self.navigatorPage || {}).data || {}).webSession;
+    if (webSession) {
+        (self.webviewSession || {}).setItem('role', webSession.role);
+        (self.webviewSession || {}).setItem('username', webSession.username);
+        (self.webviewSession || {}).setItem('loginId', webSession.loginId);
+        (self.webviewSession || {}).setItem('isFirst', webSession.isFirst);
+        (self.webviewSession || {}).setItem('language', webSession.language);
+        (self.webviewSession || {}).setItem('workspace', webSession.workspace);
+        (self.webviewSession || {}).setItem('migrationTip', webSession.migrationTip);
+        (self.webviewSession || {}).setItem('showCheckEnvTips', webSession.showCheckEnvTips);
+    }
+</script>
+
+<body class="vscode-dark intellij-dark">
+    <app-root>
+        <div class="maskBox" id="maskBox">
+            <div class="containerBox">
+                <div class="circleBox">
+                    <div class="circleItem circleItem1">
+                        <div class="circle circle1"></div>
+                    </div>
+                    <div class="circleItem circleItem2">
+                        <div class="circle circle2"></div>
+                    </div>
+                    <div class="circleItem circleItem3">
+                        <div class="circle circle3"></div>
+                    </div>
+                    <div class="circleItem circleItem4">
+                        <div class="circle circle4"></div>
+                    </div>
+                    <div class="circleItem circleItem5">
+                        <div class="circle circle5"></div>
+                    </div>
+                    <div class="circleItem circleItem6">
+                        <div class="circle circle6"></div>
+                    </div>
+                    <div class="circleItem circleItem7">
+                        <div class="circle circle7"></div>
+                    </div>
+                    <div class="circleItem circleItem8">
+                        <div class="circle circle8"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-root>
+</body>
+
+</html>
