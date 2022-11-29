@@ -8,6 +8,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { iframeHtmlStr } from './template';
 import { ProxyManager } from './proxy-manager';
 import Download from './download';
+import { getPwd, saveData } from '.';
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
@@ -49,6 +50,7 @@ export class Utils {
    * @param context 插件上下文
    */
   public static getConfigJson(context: vscode.ExtensionContext): any {
+    // saveData('tunadmin', 'admin100', '10.208.211.194');
     const resourcePath = Utils.getExtensionFileAbsolutePath(
       context,
       'out/assets/config.json'
@@ -306,7 +308,7 @@ export class Utils {
    * @param defaultPort 代理服务的端口
    * @param proxy 代理后的对象
    */
-  static async codeServerAutoLogin(params: any, url: string) {
+  static async codeServerAutoLogin(params: any, url: string, pwd: any) {
     const headers = {
       'content-type': 'application/json',
       'Accept-Language': I18nService.getLang().language,
@@ -314,7 +316,7 @@ export class Utils {
     };
     const data = {
       username: params.username,
-      password: params.password,
+      password: pwd,
     };
     const req = {
       headers,
@@ -382,12 +384,17 @@ export class Utils {
       htmlDatas.ideAddress = `https://${htmlDatas.serverAddr}:${htmlDatas.serverPort}`;
       const codeServerCfg = this.getConfigJson(global.context).codeServerConfig;
       if (vscode.env.remoteName === codeServerCfg[0].remoteName) {
+        const pwd = new Promise<any>((resolve) => {
+          getPwd('tunadmin', '10.208.211.194', (pwd) => {
+            resolve(pwd);
+          });
+        });
         const requestParams: any = codeServerCfg[1];
 
         const userSessionUrl = `http://127.0.0.1:${defaultPort}/user-management/api/v2.2/users/session/`;
         htmlDatas.ideAddress = `https://${codeServerCfg[0].remoteName}${codeServerCfg[0].loginPath}`;
         htmlDatas.ideType = 'isCodeServer';
-        this.codeServerAutoLogin(requestParams, userSessionUrl)
+        this.codeServerAutoLogin(requestParams, userSessionUrl, pwd)
           .then((response) => {
             htmlDatas = {
               ...htmlDatas,

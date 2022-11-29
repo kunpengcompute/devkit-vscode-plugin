@@ -13,6 +13,6 @@
     },
     { "username": "", "password": "" }
   ],
-  "tuningVersion": ["2.5.T30"],
-  "configVersion": ["2.5.T30"]
+  "tuningVersion": ["2.5.RC1.1"],
+  "configVersion": ["2.5.RC1.1"]
 }
