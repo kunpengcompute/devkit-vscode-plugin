@@ -50,7 +50,7 @@ export class Utils {
    * @param context 插件上下文
    */
   public static getConfigJson(context: vscode.ExtensionContext): any {
-    // saveData('tunadmin', 'admin100', '10.208.211.194');
+    saveData('tunadmin', 'admin100', '10.208.211.194');
     const resourcePath = Utils.getExtensionFileAbsolutePath(
       context,
       'out/assets/config.json'
@@ -384,38 +384,35 @@ export class Utils {
       htmlDatas.ideAddress = `https://${htmlDatas.serverAddr}:${htmlDatas.serverPort}`;
       const codeServerCfg = this.getConfigJson(global.context).codeServerConfig;
       if (vscode.env.remoteName === codeServerCfg[0].remoteName) {
-        const pwd = new Promise<any>((resolve) => {
+        const getPwdPms = new Promise<any>((resolve) => {
           getPwd('tunadmin', '10.208.211.194', (pwd) => {
             resolve(pwd);
           });
         });
-        const requestParams: any = codeServerCfg[1];
-
-        const userSessionUrl = `http://127.0.0.1:${defaultPort}/user-management/api/v2.2/users/session/`;
-        htmlDatas.ideAddress = `https://${codeServerCfg[0].remoteName}${codeServerCfg[0].loginPath}`;
-        htmlDatas.ideType = 'isCodeServer';
-        this.codeServerAutoLogin(requestParams, userSessionUrl, pwd)
-          .then((response) => {
-            htmlDatas = {
-              ...htmlDatas,
-              token: response.headers.token,
-              username: response.data.data.username,
-              id: response.data.data.id,
-              role: response.data.data.role,
-            };
-          })
-          .then(() => {
-            panel.webview.html = this.getHtml(htmlDatas);
-          })
-          .catch((error) => {
-            console.log(error);
-            panel.webview.html = this.getHtml(htmlDatas);
-          });
-      } else {
+        getPwdPms.then((pwd) => {
+          console.log('pwd', pwd);
+          const requestParams: any = codeServerCfg[1];
+          const userSessionUrl = `  /user-management/api/v2.2/users/session/`;
+          htmlDatas.ideAddress = `https://${codeServerCfg[0].remoteName}${codeServerCfg[0].loginPath}`;
+          htmlDatas.ideType = 'isCodeServer';
+          this.codeServerAutoLogin(requestParams, userSessionUrl, pwd)
+            .then((response) => {
+              htmlDatas = {
+                ...htmlDatas,
+                token: response.headers.token,
+                username: response.data.data.username,
+                id: response.data.data.id,
+                role: response.data.data.role,
+              };
+              console.log('token', htmlDatas.token);
+            })
+            .then(() => {
+              panel.webview.html = this.getHtml(htmlDatas);
+              return;
+            });
+        });
         panel.webview.html = this.getHtml(htmlDatas);
       }
-    } else {
-      panel.webview.html = this.getHtml(htmlDatas);
     }
   }
 
