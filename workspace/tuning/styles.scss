@@ -481,6 +481,7 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
         width: 16px;
         height: 16px;
         font-weight: lighter;
+        border: none !important;
     }
 
     input[type="checkbox"][tiCheckbox]:not([disabled]):checked+.ti3-checkbox .ti3-checkbox-skin:active {
@@ -837,7 +838,9 @@ img[src$="dark-nodata.png"] {
 
 /** input start**/
 input {
-    width: 65%;
+    // width: 65%;
+    width: 380px !important;
+    padding: 5px 10px !important;
     border-style: solid;
     border-width: 1px;
     border-color: var(--border-d-888888-l-979797) !important;
