@@ -60,7 +60,7 @@
         justify-content: flex-start;
         align-items: flex-start;
         width: 704px;
-        margin-bottom: 30px;
+        margin-bottom: 24px;
         .tip-icon {
             color: #0067ff;
             background-color: #ffffff;
@@ -121,7 +121,7 @@
         justify-content: flex-start;
         align-items: flex-start;
         width: 704px;
-        margin-bottom: 30px;
+        margin-bottom: 24px;
         .tip-icon {
             color: #0067ff;
             background-color: #ffffff;
@@ -155,11 +155,11 @@
 
 .upgrade-form {
     width: 100%;
-    padding: 40px 0 40px 80px;
+    padding: 24px 0 40px 80px;
     min-width: 300px;
     box-sizing: border-box;
     .upgrade-title-gen {
-        margin-bottom: 10px;
+        margin-bottom: 4px;
     }
     .upgrade-title-gent {
         margin-bottom: 10px;
@@ -332,59 +332,6 @@
 
     button {
         min-width: 100px;
-        line-height: 28px;
-        font-size: 14px;
-        text-align: center;
-        margin: 0px 10px;
-        border-width: 1px;
-        border-style: solid;
-        cursor: pointer;
-
-        &:first-child {
-            color: var(--upgrade-color-btn-p);
-            background-color: var(--upgrade-color-btn-p-bg-dft);
-            border-color: var(--upgrade-color-btn-p-bg-dft);
-
-            &:hover {
-                background-color: var(--upgrade-color-btn-p-bg-hover);
-                border-color: var(--upgrade-color-btn-p-bg-hover);
-            }
-
-            &:active {
-                background-color: var(--upgrade-color-btn-p-bg-active);
-                border-color: var(--upgrade-color-btn-p-bg-active);
-            }
-
-            &:disabled {
-                background-color: var(--upgrade-color-btn-p-bg-disabled);
-                border-color: var(--upgrade-color-btn-p-bg-disabled);
-                color: var(--upgrade-color-btn-text-disabled);
-                cursor: not-allowed;
-            }
-        }
-
-        &:last-child {
-            background-color: var(--upgrade-color-btn-m-bg);
-            border-color: var(--upgrade-color-btn-m-dft);
-            color: var(--upgrade-color-content);
-
-            &:hover {
-                border-color: var(--upgrade-color-btn-m-hover);
-                color: var(--upgrade-color-btn-m-hover);
-            }
-
-            &:active {
-                border-color: var(--upgrade-color-btn-m-active);
-                color: var(--upgrade-color-btn-m-active);
-            }
-
-            &:disabled {
-                background-color: var(--upgrade-color-btn-m-bg-disabled);
-                border-color: var(--upgrade-color-btn-m-disabled);
-                color: var(--upgrade-color-btn-text-disabled);
-                cursor: not-allowed;
-            }
-        }
     }
 }
 ::ng-deep .content-box {
@@ -411,9 +358,17 @@
 }
 
 .img_box {
-    margin-top: 2px;
+    width: 22px;
+    height: 22px;
+    margin-top: 3px;
     margin-right: 6px;
 }
+
+.title-info-img-box {
+    margin-right: 6px;
+    margin-top: 2px;
+}
+
 .upgrade-message-upgraded {
     width: 800px;
     margin-top: 10px;

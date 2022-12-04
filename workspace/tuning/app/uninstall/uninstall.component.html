@@ -12,7 +12,7 @@
         </a>
     </p>
     <div class="uninstall-title-det">
-        <img class="img_box" src="./assets/img/tip/icon_information.svg">
+        <img class="title-info-img-box" src="./assets/img/tip/icon_information.svg">
         <span class="top-tips"> {{i18n.plugins_common_message_uninstallDt }}
         </span>
     </div>
@@ -186,7 +186,7 @@
 
 <!-- 确认弹框 -->
 <app-messagebox #showDialog>
-    <div class="content tip-box user-deploy-box">
+    <div class="content tip-box user-deploy-box" style="width: 336px;">
         <div class="tip-title color-d-e8-l-22">
             <span class="title-content">{{i18n.plugins_public_text_tip}}</span>
             <span (click)="cancelDiglogMsgTip()" class="icon-close">
@@ -196,14 +196,14 @@
         </div>
         <div class="tip-dsc">
             <img class="img_box" src="./assets/img/tip/icon_information.svg">
-            <div class="color-d-e8-l-61">
+            <div class="color-d-aa-l-61">
                 <p>{{dialogShowDetailText}}</p>
             </div>
         </div>
         <div class="tip-confirm">
             <button type="button" class="primary-btn" (click)="confirmDialogMsgTip()">{{i18n.plugins_public_button_continue}}</button>
             <button type="button" class="secondary-btn" (click)="cancelDiglogMsgTip()">{{i18n.plugins_public_button_cancel}}</button>
-            <button type="button" class="secondary-btn" (click)="openFAQ()">{{i18n.plugins_common_tips_checkConn_openFAQ}}</button>
+            <button type="button" class="secondary-btn rightest-btn" (click)="openFAQ()">{{i18n.plugins_common_tips_checkConn_openFAQ}}</button>
         </div>
     </div>
 </app-messagebox>

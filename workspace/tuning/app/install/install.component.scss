@@ -59,12 +59,12 @@
 }
 
 .install-form {
-    padding: 40px 0 40px 80px;
+    padding: 24px 0 40px 80px;
     min-width: 300px;
     box-sizing: border-box;
 
     .install-title-gen {
-        margin-bottom: 16px;
+        margin-bottom: 4px;
     }
 
     .install-title-det {
@@ -72,7 +72,7 @@
         justify-content: flex-start;
         align-items: flex-start;
         width: 704px;
-        margin-bottom: 30px;
+        margin-bottom: 24px;
 
         .top-tips {
             font-size: 14px;
@@ -319,6 +319,9 @@
 }
 
 .img_box {
+    width: 22px;
+    height: 22px;
+    margin-top: 3px;
     margin-right: 6px;
 }
 
