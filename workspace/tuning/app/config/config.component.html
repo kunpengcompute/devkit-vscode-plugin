@@ -18,7 +18,7 @@
     <div class="config-form-item">
         <div class="ti3-icon ti3-icon-staricon config-form-item-label">{{ i18n.plugins_common_label_ip }}
         </div>
-        <input type="text" tiText [(ngModel)]="tempIP" (blur)="checkIP()" *ngIf="!hasConfig || isModify" />
+        <input type="text" [ngClass]="{'border-red': ipCheck}" tiText [(ngModel)]="tempIP" (blur)="checkIP()" *ngIf="!hasConfig || isModify" />
         <input type="text" tiText [placeholder]="tempIP" disabled *ngIf="hasConfig && !isModify"/>
         <div *ngIf="ipCheck" class="ti3-unifyvalid-error-container">
             <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"><img src="./assets/img/tip/icon_failure.svg"></span>
@@ -28,7 +28,7 @@
     <div class="config-form-item">
         <div class="ti3-icon ti3-icon-staricon config-form-item-label">{{ i18n.plugins_common_label_configPort }}
         </div>
-        <input [placeholder]="i18n.plugins_common_placeholder_default_port" type="text" tiText [(ngModel)]="tempPort"
+        <input [placeholder]="i18n.plugins_common_placeholder_default_port" type="text" tiText [(ngModel)]="tempPort" [ngClass]="{'border-red': portCheck}"
             (blur)="checkPort()" *ngIf="!hasConfig || isModify"/>
         <input type="text" tiText [placeholder]="tempPort" disabled *ngIf="hasConfig && !isModify"/>
         <div *ngIf="portCheck" class="ti3-unifyvalid-error-container">

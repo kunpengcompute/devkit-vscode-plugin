@@ -24,7 +24,7 @@
         <!-- <img class="img_box" src="./assets/img/required-field.svg"> -->
         <div class="ti3-icon ti3-icon-staricon install-form-item-label">{{ i18n.plugins_tuning_label_ip }}
         </div>
-        <input type="text" tiText [(ngModel)]="tempIP" (blur)="checkIP()" (change)="connected=false" [disabled]="connectChecking">
+        <input type="text" tiText [(ngModel)]="tempIP" (blur)="checkIP()" (change)="connected=false" [disabled]="connectChecking" [ngClass]="{'border-red': ipCheckF}">
         <div *ngIf="ipCheckF" class="ti3-unifyvalid-error-container">
             <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"><img src="./assets/img/tip/icon_failure.svg"></span>
             <span class="ti3-validate-text">{{ i18n.plugins_tuning_message_ipError }}</span>
@@ -33,7 +33,7 @@
     <div class="install-form-item color-d-aa-l-61">
         <div class="ti3-icon ti3-icon-staricon install-form-item-label">{{ i18n.plugins_tuning_label_port }}
         </div>
-        <input type="text" tiText [(ngModel)]="tempPort" (blur)="checkTempPort()" placeholder="22"
+        <input type="text" tiText [(ngModel)]="tempPort" (blur)="checkTempPort()" placeholder="22" [ngClass]="{'border-red': tempPortCheckF}"
             (change)="connected=false" [disabled]="connectChecking">
         <div *ngIf="tempPortCheckF" class="ti3-unifyvalid-error-container">
             <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"><img src="./assets/img/tip/icon_failure.svg"></span>
@@ -44,7 +44,7 @@
         <div class="ti3-icon ti3-icon-staricon install-form-item-label">{{ i18n.plugins_tuning_label_installUser }}
         </div>
         <input id="username" type="text" tiText [(ngModel)]="username" (blur)="checkUsername()" [disabled]="connectChecking"
-            (change)="connected=false" oncopy="return false"
+            (change)="connected=false" oncopy="return false" [ngClass]="{'border-red': usernameCheckNull}"
             onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
             onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" onpaste="return true"
             oncut="return false">
@@ -87,7 +87,7 @@
         <div class="ti3-icon ti3-icon-staricon install-form-item-label">{{ i18n.plugins_tuning_label_installPwd }}
         </div>
         <div style="position: relative;">
-            <input id="pwd" [type]="installType" tiText [(ngModel)]="pwd" (blur)="checkPwd()" (change)="connected=false" [disabled]="connectChecking"
+            <input id="pwd" [type]="installType" tiText [(ngModel)]="pwd" (blur)="checkPwd()" (change)="connected=false" [disabled]="connectChecking" [ngClass]="{'border-red': pwdCheckNull}"
                 oncopy="return false" onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
                 onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" onpaste="return true"
                 oncut="return false" style="padding-right: 32px;" noeye>

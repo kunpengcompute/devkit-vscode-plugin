@@ -20,7 +20,7 @@
     <div class="uninstall-form-item">
         <div class="ti3-icon ti3-icon-staricon uninstall-form-item-label">{{ i18n.plugins_tuning_label_ip }}
         </div>
-        <input type="text" tiText [(ngModel)]="tempIP" (blur)="checkIP()" (change)="connected=false" [disabled]="connectChecking"/>
+        <input type="text" tiText [(ngModel)]="tempIP" (blur)="checkIP()" (change)="connected=false" [disabled]="connectChecking" [ngClass]="{'border-red': ipCheckF}"/>
         <div *ngIf="ipCheckF" class="ti3-unifyvalid-error-container">
             <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"><img src="./assets/img/tip/icon_failure.svg"></span>
             <span class="ti3-validate-text">{{ i18n.plugins_tuning_message_ipError }}</span>
@@ -30,7 +30,7 @@
         <div class="ti3-icon ti3-icon-staricon uninstall-form-item-label">{{ i18n.plugins_tuning_label_port }}
         </div>
         <input type="text" tiText [(ngModel)]="tempPort" (blur)="checkTempPort()" placeholder="22"
-            (change)="connected=false" [disabled]="connectChecking"/>
+            (change)="connected=false" [disabled]="connectChecking" [ngClass]="{'border-red': tempPortCheckF}"/>
         <div *ngIf="tempPortCheckF" class="ti3-unifyvalid-error-container">
             <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"><img src="./assets/img/tip/icon_failure.svg"></span>
             <span class="ti3-validate-text">{{ i18n.plugins_tuning_message_portError }}</span>
@@ -40,7 +40,7 @@
         <div class="ti3-icon
          ti3-icon-staricon uninstall-form-item-label">{{ i18n.plugins_tuning_label_installUser }}
         </div>
-        <input id="username" type="text" tiText [(ngModel)]="username" (blur)="checkUsername()" [disabled]="connectChecking"
+        <input id="username" type="text" tiText [(ngModel)]="username" (blur)="checkUsername()" [disabled]="connectChecking" [ngClass]="{'border-red': usernameCheckNull}"
             (change)="connected=false" oncopy="return false"
             onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
             onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" onpaste="return true"
@@ -83,7 +83,7 @@
         <div class="ti3-icon ti3-icon-staricon uninstall-form-item-label">{{ i18n.plugins_tuning_label_installPwd }}
         </div>
         <div style="position: relative;">
-            <input id="pwd" [type]="uninstallType" tiText [(ngModel)]="pwd" (blur)="checkPwd()" [disabled]="connectChecking"
+            <input id="pwd" [type]="uninstallType" tiText [(ngModel)]="pwd" (blur)="checkPwd()" [disabled]="connectChecking" [ngClass]="{'border-red': pwdCheckNull}"
                 (change)="connected=false" oncopy="return false"
                 onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
                 onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" onpaste="return true"
@@ -106,7 +106,7 @@
     <div *ngIf="sshTypeSelected === 'usekey'" class="uninstall-form-item">
         <div class="ti3-icon ti3-icon-staricon uninstall-form-item-label">{{ i18n.plugins_common_label_installsshkey }}
         </div>
-        <textarea resize="horizontal" tiTextarea class="usekey-input" [placeholder]="sshUploadKey"  [disabled]="connectChecking"
+        <textarea resize="horizontal" tiTextarea class="usekey-input" [placeholder]="sshUploadKey"  [disabled]="connectChecking" [ngClass]="{'border-red': sshkeyCheckNull}"
             [(ngModel)]="localfilepath" readonly>
         </textarea>
         <div style="display: inline-block;" class="upload-btn">
