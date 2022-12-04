@@ -655,11 +655,6 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
     font-size: 16px;
 }
 
-.ti3-icon-staricon::before {
-    color: #f45c5e !important;
-    margin-left: -14px !important;
-}
-
 .ti3-icon {
     font-style: normal;
     font-weight: 400;
@@ -672,6 +667,25 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
 
 .ti3-validate-icon {
     margin-right: 5px !important;
+}
+
+.ti3-icon-staricon:before {
+    content: '*';
+    color: #f45c5e !important;
+    margin-left: -8px;
+    margin-right: 1px;
+    font-size: 14px !important;
+    line-height: 18px !important;
+}
+
+.ti3-icon-exclamation-circle {
+    width: 13px !important;
+    height: 13px !important;
+}
+
+.ti3-unifyvalid-error-container {
+    max-width: 100%;
+    line-height: 16px;
 }
 
 .ra-label {
