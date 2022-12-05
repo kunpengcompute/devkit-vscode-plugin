@@ -645,6 +645,9 @@ export class InstallComponent implements AfterViewInit, OnInit {
      * @param type 明文或密文
      */
     public changInputType(type: string) {
+        if (this.connectChecking) {
+            return;
+        }
         this.installType = type;
     }
 
