@@ -236,7 +236,7 @@ export const messageHandler = {
         const callback = (data: any) => {
             if (data instanceof Error) {
                 if (data.message.search(/ETIMEDOUT/) !== -1 || data.message.search(/ECONNREFUSED/) !== -1) {
-                    ErrorHelper.errorHandler(global.context, message.module, data.message, server.host);
+                    // ErrorHelper.errorHandler(global.context, message.module, data.message, server.host);
                 } else if (data.message.search(/no matching/) !== -1) {
                     Utils.invokeCallback(global.toolPanel.getPanel(), message, data.toString());
                 }
@@ -307,11 +307,11 @@ export const messageHandler = {
             console.log(data)
             if (data instanceof Error) {
                 if (data.message.search(/ETIMEDOUT/) !== -1 || data.message.search(/ECONNREFUSED/) !== -1) {
-                    ErrorHelper.errorHandler(global.context, message.module, data.message, server.host);
+                    Utils.invokeCallback(global.toolPanel.getPanel(), message, 'TIMEOUT');
                 } else if (data.message.search(/no matching/) !== -1) {
-                    vscode.window.showErrorMessage(i18n.plugins_common_message_sshAlgError);
+                    // vscode.window.showErrorMessage(i18n.plugins_common_message_sshAlgError);
+                    Utils.invokeCallback(global.toolPanel.getPanel(), message, data.message);
                 }
-                Utils.invokeCallback(global.toolPanel.getPanel(), message, 'TIMEOUT');
             } else {
                 if (data.search(/SUCCESS/) !== -1) {
                     if (fingerExist) {

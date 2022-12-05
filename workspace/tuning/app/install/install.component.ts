@@ -150,7 +150,6 @@ export class InstallComponent implements AfterViewInit, OnInit {
      * 部署前必读提示取消
      */
     public cancelMsgTip() {
-        // ? 部署必读取消为什么还要发送closePanel？？
         this.installTip.Close();
         const message = {
             cmd: 'closePanel'
@@ -234,7 +233,6 @@ export class InstallComponent implements AfterViewInit, OnInit {
      */
     public checkFinger() {
         console.log("checking finger");
-        // TODO 发送readFinger message
         const postData = {
             cmd: 'readFinger',
             data: {
@@ -249,7 +247,6 @@ export class InstallComponent implements AfterViewInit, OnInit {
         }
         this.vscodeService.postMessage(postData, (data: any) => {
             console.log("finger read get: ", data);
-            // TODO 返回结果处理
             if (data.search(/no matching/) !== -1) {
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_sshAlgError);
             }
@@ -698,7 +695,6 @@ export class InstallComponent implements AfterViewInit, OnInit {
      * 指纹弹框确认连接
      */
     public confirmFingerDialog() {
-        // TODO 发送saveFinger message
         this.fingerDialog.Close();
         const postData = {
             cmd: 'saveFinger',
@@ -709,7 +705,6 @@ export class InstallComponent implements AfterViewInit, OnInit {
         }
         this.vscodeService.postMessage(postData, (data: any) => {
             console.log(data);
-            // TODO 返回结果处理
             if(data.search(/oversize/)!==-1){
                 this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_figerWarn);
             }
