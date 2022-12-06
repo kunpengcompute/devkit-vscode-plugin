@@ -96,5 +96,5 @@ export const I18N_EN = {
     configure_server_again: "您已经连接远端服务器",
     configure_server_again_button: "重新配置服务器",
     ip_address_title: "IP地址",
-    port_title: "端口"
+    port_title: "HTTPS端口"
 };
