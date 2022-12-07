@@ -55,7 +55,7 @@ export const I18N_ZH = {
     plugins_common_message_installDt2: '列表清单',
     plugins_common_message_installDt3: '中，并且处于联网状态。系统将为您自动完成安装。',
     plugins_common_message_upgradeDt1: '请确保远端运行服务器的操作系统及版本在',
-    plugins_common_message_upgradeDt2: '兼容列表',
+    plugins_common_message_upgradeDt2: '列表清单',
     plugins_common_message_upgradeDt3: '清单中，并且处于联网状态。系统将为您自动完成升级。',
     plugins_common_message_uninstallDt: '请确保目标服务器正常，系统将为您自动完成卸载。',
     plugins_common_title_installTs: '目标服务器',
