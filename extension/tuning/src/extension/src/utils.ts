@@ -64,6 +64,14 @@ export class Utils {
     }
 
     /**
+     * 刷新侧边栏服务器配置信息
+     */
+    public static updateConfigurationInfoBox(){
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', false);
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
+    }
+
+    /**
      * 判断为已配置，显示配置信息
      */
     private static _setUpToBeConfigured(context: vscode.ExtensionContext){
@@ -77,8 +85,6 @@ export class Utils {
         isRegistered = true
         currentSideViewProviderHandler = previous_dispose_handler
         messageHandler.updateIpAndPort(context, provider);
-        vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', false);
-        vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
         vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedInJustClosed', false);
     }
 

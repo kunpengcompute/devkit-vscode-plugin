@@ -54,10 +54,23 @@
       {
         "command": "extension.view.deployserverend",
         "title": "%deploy.server.end%"
+      },
+      {
+        "command": "configurationInfo.refreshEntry",
+        "title": "Refresh",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
       }
     ],
     "menus": {
       "view/title": [
+        {
+          "command": "configurationInfo.refreshEntry",
+          "when": "view == configurationInfo",
+          "group": "navigation"
+        },
         {
           "command": "extension.view.deployserverend",
           "when": "view == perfadvisorTools",
