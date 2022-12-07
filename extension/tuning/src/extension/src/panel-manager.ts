@@ -1,9 +1,9 @@
 import * as vscode from 'vscode';
 import * as constant from './constant';
-import { Utils } from './utils';
-import { I18nService } from './i18nservice';
-import { messageHandler } from './webview-msg-handler';
-import { ProxyManager } from './proxy-manager';
+import {Utils} from './utils';
+import {I18nService} from './i18nservice';
+import {messageHandler} from './webview-msg-handler';
+import {ProxyManager} from './proxy-manager';
 import {SideViewProvider} from "./SideView/SideViewProvider";
 
 const i18n = I18nService.I18n();
@@ -27,7 +27,6 @@ class ToolPanel {
         this.needAsycnUpdate = panelOption.needAsycnUpdate || false;
         this.createTime = panelOption.createTime || new Date();
 
-    
 
         // 调用vscode 接口创建一个存放webview的panel
         const panel = vscode.window.createWebviewPanel(
@@ -53,7 +52,7 @@ class ToolPanel {
         this.panel.onDidDispose(() => this.dispose(), null, this.disposables);
 
         // 侦听来自webview的消息
-        const global = { context, toolPanel: this };
+        const global = {context, toolPanel: this};
         this.panel.webview.onDidReceiveMessage(message => {
             if (messageHandler[message.cmd]) {
                 messageHandler[message.cmd](global, message);
@@ -62,7 +61,8 @@ class ToolPanel {
 
         // 侦听面板的状态改变事件
         this.panel.onDidChangeViewState(
-            e => { },
+            e => {
+            },
             null,
             this.disposables
         );
@@ -140,6 +140,7 @@ class ToolPanel {
         }
     }
 }
+
 export class ToolPanelManager {
     // 存储sysPerf的面板
     public static sysPerfToolPanels: Array<ToolPanel> = [];
@@ -151,24 +152,24 @@ export class ToolPanelManager {
      *
      * @param context 插件上下文
      */
-     public static createOrShowPanelForPerfCommand(context: vscode.ExtensionContext) {
+    public static createOrShowPanelForPerfCommand(context: vscode.ExtensionContext) {
         // 配置服务器按钮打开配置指引页面
         context.subscriptions.push(vscode.commands.registerCommand('extension.view.perfadvisorserverconfig',
-        () => {
-            const sysPerfSession = {
-                language: vscode.env.language
-            };
-            const message = Utils.generateMessage('navigate',
-                { page: '/' + constant.NAVIGATE_PAGE.guide, webSession: sysPerfSession });
-            const panelOption = {
-                panelId: constant.PANEL_ID.tuningGuide,
-                viewType: constant.VIEW_TYPE.guide,
-                viewTitle: i18n.plugins_common_title_guide,
-                module: 'tuning',
-                message
-            };
-            ToolPanelManager.createOrShowPanel(panelOption, context);
-        }));
+            () => {
+                const sysPerfSession = {
+                    language: vscode.env.language
+                };
+                const message = Utils.generateMessage('navigate',
+                    {page: '/' + constant.NAVIGATE_PAGE.guide, webSession: sysPerfSession});
+                const panelOption = {
+                    panelId: constant.PANEL_ID.tuningGuide,
+                    viewType: constant.VIEW_TYPE.guide,
+                    viewTitle: i18n.plugins_common_title_guide,
+                    module: 'tuning',
+                    message
+                };
+                ToolPanelManager.createOrShowPanel(panelOption, context);
+            }));
         // 打开服务器配置panel
         context.subscriptions.push(vscode.commands.registerCommand('extension.view.perfadvisorserverconfigagain',
             () => {
@@ -176,7 +177,7 @@ export class ToolPanelManager {
                     language: vscode.env.language
                 };
                 const message = Utils.generateMessage('navigate',
-                    { page: '/' + constant.NAVIGATE_PAGE.config, webSession: sysPerfSession });
+                    {page: '/' + constant.NAVIGATE_PAGE.config, webSession: sysPerfSession});
                 const panelOption = {
                     panelId: constant.PANEL_ID.tuningNonServerConfig,
                     viewType: constant.VIEW_TYPE.serverConfig,
@@ -190,20 +191,20 @@ export class ToolPanelManager {
         // 打开免费试用远程服务器panel
         context.subscriptions.push(
             vscode.commands.registerCommand('extension.view.perfadvfreetrialremoteenvironment', () => {
-            const tuningPerfSession = {
-                language: vscode.env.language
-            };
-            const message = Utils.generateMessage('navigate',
-                { page: '/' + constant.NAVIGATE_PAGE.freeTrialProcessEnvironment, webSession: tuningPerfSession });
-            const panelOption = {
-                panelId: constant.PANEL_ID.tuningFreeTrialRemoteEnvironment,
-                viewType: constant.VIEW_TYPE.freeTrialRemoteEnvironment,
-                viewTitle: i18n.plugins_perfadvisor_free_trial_remote_environment,
-                module: 'tuning',
-                message
-            };
-            ToolPanelManager.createOrShowPanel(panelOption, context);
-        }));
+                const tuningPerfSession = {
+                    language: vscode.env.language
+                };
+                const message = Utils.generateMessage('navigate',
+                    {page: '/' + constant.NAVIGATE_PAGE.freeTrialProcessEnvironment, webSession: tuningPerfSession});
+                const panelOption = {
+                    panelId: constant.PANEL_ID.tuningFreeTrialRemoteEnvironment,
+                    viewType: constant.VIEW_TYPE.freeTrialRemoteEnvironment,
+                    viewTitle: i18n.plugins_perfadvisor_free_trial_remote_environment,
+                    module: 'tuning',
+                    message
+                };
+                ToolPanelManager.createOrShowPanel(panelOption, context);
+            }));
 
         // 打开登录panel
         context.subscriptions.push(vscode.commands.registerCommand('extension.view.perfadvisorlogin',
@@ -217,7 +218,7 @@ export class ToolPanelManager {
                 const sysPerfSession = {
                     language: vscode.env.language
                 };
-                const message = Utils.generateMessage('navigate', { page: '/upgrade', webSession: sysPerfSession });
+                const message = Utils.generateMessage('navigate', {page: '/upgrade', webSession: sysPerfSession});
                 const panelOption = {
                     panelId: constant.PANEL_ID.tuningUpgrade,
                     viewType: constant.VIEW_TYPE.upgrade,
@@ -234,7 +235,7 @@ export class ToolPanelManager {
                 const sysPerfSession = {
                     language: vscode.env.language
                 };
-                const message = Utils.generateMessage('navigate', { page: '/uninstall', webSession: sysPerfSession });
+                const message = Utils.generateMessage('navigate', {page: '/uninstall', webSession: sysPerfSession});
                 const panelOption = {
                     panelId: constant.PANEL_ID.tuningUninstall,
                     viewType: constant.VIEW_TYPE.uninstall,
@@ -252,17 +253,24 @@ export class ToolPanelManager {
         ));
         // 关于
         context.subscriptions.push(vscode.commands.registerCommand('extension.view.about',
-        () => {
-            Utils.openAboutDialog(context);
-        }
-    ));
+            () => {
+                Utils.openAboutDialog(context);
+            }
+        ));
+        //刷新配置信息
+        context.subscriptions.push(vscode.commands.registerCommand('configurationInfo.refreshEntry',
+            () => {
+                Utils.updateConfigurationInfoBox();
+            }
+        ));
+
         //部署服务端
         context.subscriptions.push(vscode.commands.registerCommand('extension.view.deployserverend',
             () => {
                 const sysPerfSession = {
                     language: vscode.env.language
                 };
-                const message = Utils.generateMessage('navigate', { page: '/install', webSession: sysPerfSession });
+                const message = Utils.generateMessage('navigate', {page: '/install', webSession: sysPerfSession});
                 const panelOption = {
                     panelId: constant.PANEL_ID.tuningInstall,
                     viewType: constant.VIEW_TYPE.install,
@@ -275,6 +283,7 @@ export class ToolPanelManager {
                 ToolPanelManager.createOrShowPanel(panelOption, context);
             }));
     }
+
     /**
      * 打开选择的webview
      * param panelOption webview信息
@@ -316,7 +325,7 @@ export class ToolPanelManager {
      *
      * @param context 插件上下文
      */
-     public static openPerfLoginPanel(context: vscode.ExtensionContext, loginType: string) {
+    public static openPerfLoginPanel(context: vscode.ExtensionContext, loginType: string) {
         let sysPerfSession: any = context.globalState.get('tuningSession');
         // 如果是首次登录只需要将语言传递给webview
         if (null === sysPerfSession) {
@@ -332,12 +341,13 @@ export class ToolPanelManager {
         };
 
         /**以下代码为新的、暂时的login页面调用 */
-        const panel = new ToolPanel(panelOption,  ToolPanelManager.closeToolPanel, context)
+        const panel = new ToolPanel(panelOption, ToolPanelManager.closeToolPanel, context)
         ToolPanelManager.sysPerfToolPanels.push(panel)
         const global = {context, toolPanel: panel};
         messageHandler.openLoginByButton(global);
-        
+
     }
+
     /**
      * 关闭对应工具的panel
      *
@@ -351,6 +361,7 @@ export class ToolPanelManager {
             delPanel.getPanel().dispose();
         }
     }
+
     /**
      * 关闭webview所在的panel
      * @param toolPanel panel
@@ -366,7 +377,7 @@ export class ToolPanelManager {
      * @param module 模块
      * @param remainPanelIds 需要保留的panel的id,如传空则关闭所有的panel
      */
-     static closePanelsByRemained(module: string, remainPanelIds: Array<string>) {
+    static closePanelsByRemained(module: string, remainPanelIds: Array<string>) {
         const deletePanleIds: Array<string> = [];
         // 获取需要关闭的panelid列表
         ToolPanelManager.sysPerfToolPanels.forEach(element => {

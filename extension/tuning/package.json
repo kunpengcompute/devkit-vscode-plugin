@@ -13,7 +13,8 @@
   ],
   "activationEvents": [
     "onView:perfadvisorTools",
-    "onView:configurationInfo"
+    "onView:configurationInfo",
+    "onView:perfPanelbeforeConfigured"
   ],
   "main": "./out/extension/src/extension.js",
   "contributes": {
@@ -53,10 +54,23 @@
       {
         "command": "extension.view.deployserverend",
         "title": "%deploy.server.end%"
+      },
+      {
+        "command": "configurationInfo.refreshEntry",
+        "title": "Refresh",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
       }
     ],
     "menus": {
       "view/title": [
+        {
+          "command": "configurationInfo.refreshEntry",
+          "when": "view == configurationInfo",
+          "group": "navigation"
+        },
         {
           "command": "extension.view.deployserverend",
           "when": "view == perfadvisorTools",
@@ -95,7 +109,48 @@
         {
           "command": "extension.view.about",
           "when": "view == perfadvisorTools",
-          "group": "inline5@2"
+          "group": "inline4@2"
+        },
+
+        {
+          "command": "extension.view.deployserverend",
+          "when": "view == perfPanelbeforeConfigured",
+          "group": "inline2@1"
+        },
+        {
+          "command": "extension.view.perfadvisorserverconfig",
+          "when": "view == perfPanelbeforeConfigured && !isPerfadvisorConfigured",
+          "group": "inline2@2"
+        },
+        {
+          "command": "extension.view.perfadvisorserverconfigagain",
+          "when": "view == perfPanelbeforeConfigured && isPerfadvisorConfigured",
+          "group": "inline2@2"
+        },
+        {
+          "command": "extension.view.perfadvfreetrialremoteenvironment",
+          "when": "view == perfPanelbeforeConfigured",
+          "group": "inline2@3"
+        },
+        {
+          "command": "extension.view.perfUpgrade",
+          "when": "view == perfPanelbeforeConfigured",
+          "group": "inline3@1"
+        },
+        {
+          "command": "extension.view.perfUninstall",
+          "when": "view == perfPanelbeforeConfigured",
+          "group": "inline3@2"
+        },
+        {
+          "command": "extension.view.feedback",
+          "when": "view == perfPanelbeforeConfigured",
+          "group": "inline4@1"
+        },
+        {
+          "command": "extension.view.about",
+          "when": "view == perfPanelbeforeConfigured",
+          "group": "inline4@2"
         }
       ],
       "commandPalette": [
@@ -123,12 +178,18 @@
         {
           "type": "webview",
           "id": "configurationInfo",
-          "name": "",
+          "name": "%server_configure_column_title%",
           "when": "isPerfadvisorConfigured"
         },
         {
           "id": "perfadvisorTools",
-          "name": ""
+          "name": "%views_welcome_column_title%",
+          "when": "isPerfadvisorConfigured"
+        },
+        {
+          "id": "perfPanelbeforeConfigured",
+          "name": "",
+          "when": "!isPerfadvisorConfigured"
         }
       ]
     },
@@ -152,10 +213,36 @@
       {
         "view": "perfadvisorTools",
         "contents": "%perfadvisor.again.configer.server%",
-        "when": "isPerfadvisorConfigured && !isPerfadvisorLoggedIn && !isPerfadvisorLoggedInJustClosed"
+        "when": "false"
       },
       {
         "view": "perfadvisorTools",
+        "contents": "%perfadvisor.free.trial%",
+        "when": "!isPerfadvisorLoggedIn"
+      },
+      {
+        "view": "perfPanelbeforeConfigured",
+        "contents": "%perfadvisor.configer.server%",
+        "when": "!isPerfadvisorConfigured"
+      },
+      {
+        "view": "perfPanelbeforeConfigured",
+        "contents": "%perfadvisor.no.login%",
+        "when": "isPerfadvisorConfigured && !isPerfadvisorLoggedIn"
+      },
+      {
+        "view": "perfPanelbeforeConfigured",
+        "contents": "%perfadvisor.logged.in%",
+        "enablement": "false",
+        "when": "isPerfadvisorConfigured && isPerfadvisorLoggedIn"
+      },
+      {
+        "view": "perfPanelbeforeConfigured",
+        "contents": "%perfadvisor.again.configer.server%",
+        "when": "false"
+      },
+      {
+        "view": "perfPanelbeforeConfigured",
         "contents": "%perfadvisor.free.trial%",
         "when": "!isPerfadvisorLoggedIn"
       }
@@ -168,7 +255,8 @@
     "pretest": "npm run compile && npm run lint",
     "lint": "tslint -p ./",
     "test": "node ./out/test/runTest.js",
-    "package": "sh ./build/package.sh"
+    "package": "sh ./build/package.sh",
+    "package0": "sh ./build/package0.sh"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",

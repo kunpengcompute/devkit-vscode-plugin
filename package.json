@@ -5,7 +5,9 @@
   "scripts": {
     "install": "cd workspace && npm install --unsafe-perm && cd ../extension/tuning && npm install",
     "package:vscode": "cd extension/tuning && npm run package",
-    "package:intellij": "cd extension/tuning-intellIJ && sh build/build-webview.sh"
+    "package:intellij": "cd extension/tuning-intellIJ && sh build/build-webview.sh",
+
+    "package0": "cd extension/tuning && npm run package0"
   },
   "author": "",
   "license": "ISC",
