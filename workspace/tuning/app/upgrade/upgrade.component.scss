@@ -177,6 +177,16 @@
         }
     }
 
+    .ssh-type-radio {
+        display: inline-block;
+        margin-right: 40px;
+
+        span {
+            display: inline-block;
+            font-size: 14px;
+        }
+    }
+
     .upgrade-title-upgraded {
         width: 768px;
         margin-left: -28px;
