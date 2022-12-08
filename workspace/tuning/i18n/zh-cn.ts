@@ -72,7 +72,7 @@ export const I18N_ZH = {
     plugins_tuning_title_installed: '工具部署成功',
     plugins_tuning_title_uninstalled: '工具卸载成功',
     plugins_tuning_title_upgraded: '工具升级成功',
-    plugins_tuning_button_login: '立即登录',
+    plugins_tuning_button_login: '登录',
     plugins_tuning_button_retry: '重试',
     plugins_tuning_button_install_failed_retry: '重新部署',
     plugins_tuning_title_installFailed: '性能分析工具部署失败',
@@ -235,8 +235,7 @@ export const I18N_ZH = {
 
 
     plugins_tuning_message_versionCompatibility: '插件版本与服务端的软件版本不匹配。本插件可匹配的性能分析工具服务端版本为：{0}；当前性能分析工具服务端版本为：{1}。请您升级服务端版本至匹配版本。',
-    plugins_tuning_message_config_server_success: '配置远端服务器成功',
-    plugins_tuning_message_save_config_success: '保存配置成功！',
+    plugins_tuning_message_save_config_success: '远端服务器配置成功！',
     plugins_tuning_title_save_config: '保存远端服务器配置',
     plugins_tuning_save_config_modify: '是否确认保存当前修改？点击确认后将登出当前用户。',
     plugins_tuning_title_root_deploy: 'root用户部署',

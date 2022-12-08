@@ -101,7 +101,7 @@ export const I18N_US = {
   plugins_tuning_button_installConfirm: 'Install',
   plugins_tuning_message_installingInfo: 'Deploy the tool as prompted. ',
   plugins_tuning_title_installed: 'Tool deployed successfully.',
-  plugins_tuning_button_login: 'Log In',
+  plugins_tuning_button_login: 'Login',
   plugins_tuning_button_retry: 'Retry',
   plugins_tuning_button_install_failed_retry: 'Retry',
   plugins_tuning_title_installFailed: 'Failed to deploy the tool.',
@@ -307,8 +307,7 @@ export const I18N_US = {
   The server version of the code migration tool that this plugin can match is: {0}; \
   the current server version of the code migration tool is: {1}. \
   Please upgrade the server version to the matching version.',
-  plugins_tuning_message_config_server_success: 'Config remote server success',
-  plugins_tuning_message_save_config_success: 'Save config success!',
+  plugins_tuning_message_save_config_success: 'Configure remote server successfully!',
   plugins_tuning_title_save_config: 'Save Remote Server Config',
   plugins_tuning_save_config_modify: 'Save current modification? Click OK to exit the current user.',
   plugins_tuning_title_root_deploy: 'root User Deploy',

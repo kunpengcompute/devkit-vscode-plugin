@@ -188,8 +188,8 @@ export class ConfigComponent implements OnInit {
                     this.changeDetectorRef.detectChanges();
                 } else {
                     console.log("save config success!!!");
-                    this.setNotificationBox(notificationType.success, this.i18n.plugins_tuning_message_config_server_success);
                     this.serverErrorBox.close();
+                    this.canLoginBox.setType(notificationType.success);
                     this.canLoginBox.show();
                     this.savedIp = this.tempIP;
                     this.savedPort = this.tempPort;
