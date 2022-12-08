@@ -35,7 +35,7 @@ export const I18N_ZH = {
     plugins_common_show_user_admin_user: '管理员',
     plugins_common_show_user: '用户',
     plugins_common_show_user_btn_true: '知道了',
-    plugins_common_message_figerLose: '主机 {0} 的可信度不能确定，指纹为SHA256:{1}，是否继续连接（是/否）？',
+    plugins_common_message_figerLose: '主机 {0} 的可信度不能确定，指纹为SHA256:{1}，是否继续连接？',
     pligins_common_message_confirm: '是',
     pligins_common_message_cancel: '否',
     plugins_common_message_figerWarn: '当前本地配置文件储存指纹超过100个，请到本插件安装目录的src/extension/assets/config.json中自行删除指纹',

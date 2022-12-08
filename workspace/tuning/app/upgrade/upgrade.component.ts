@@ -80,6 +80,7 @@ export class UpgradeComponent implements OnInit {
     intelliJFlagDef = false;
 
     public notificationMessage = ""; // 执行结果提示
+    public fingerDialogTitle = ''; // 指纹弹框标题
     public fingerLoseText = ''; // 指纹弹框消息内容
 
     constructor(
@@ -229,6 +230,7 @@ export class UpgradeComponent implements OnInit {
                     0: this.tempIP,
                     1: this.tempFinger
                 });
+                this.fingerDialogTitle = this.i18n.plugins_tuning_title_finger_confirm;
                 this.fingerDialog.Open();
             }
             this.changeDetectorRef.markForCheck();

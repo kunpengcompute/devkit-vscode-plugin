@@ -201,7 +201,7 @@ export const I18N_ZH = {
     plugins_common_message_serverErrorResult2Link: '"如何排查服务端状态异常问题"',
     plugins_common_message_serverErrorResult2_1: '-异常，请参考',
     plugins_common_message_serverErrorResult2_2: '处理。',
-    plugins_common_message_figerLose: '主机 {0} 的可信度不能确定，指纹为SHA256:{1}，是否继续连接（是/否）？',
+    plugins_common_message_figerLose: '主机 {0} 的可信度不能确定，指纹为SHA256:{1}，是否继续连接？',
 
     plugins_common_title_guide: '配置指引',
     plugins_common_label_guide: '请在完成鲲鹏性能分析工具部署后配置远端服务器，若您已经完成工具部署则可直接配置远端服务器。',
@@ -246,4 +246,6 @@ export const I18N_ZH = {
     plugins_common_message_responseError_deployScenario: '服务器未响应，请检查网络连接是否正常。',
     plugins_common_message_sshAlgError: '连接检测失败。客户端算法与服务器端算法不匹配，请参考FAQ配置安全算法。',
     plugins_common_message_sshClientCheck: '检测到该机器未安装SSH Client，请自行获取并安装。',
+    plugins_tuning_title_finger_confirm: '确认指纹',
+    plugins_tuning_button_continue_connect: '继续连接',
 };

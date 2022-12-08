@@ -66,6 +66,7 @@ export class UnInstallComponent implements OnInit{
     public tempFinger: string; // 读取的finger，用于发送保存finger
 
     public dialogShowDetailText = '';
+    public fingerDialogTitle = ''; // 指纹弹框标题
     public fingerLoseText = ''; // 指纹弹框消息内容
     public notificationMessage = ''; // 执行结果提示
     intelliJFlagDef = false;
@@ -221,6 +222,7 @@ export class UnInstallComponent implements OnInit{
                     0: this.tempIP,
                     1: this.tempFinger
                 });
+                this.fingerDialogTitle = this.i18n.plugins_tuning_title_finger_confirm;
                 this.fingerDialog.Open();
             }
             this.changeDetectorRef.markForCheck();

@@ -150,7 +150,7 @@ export const I18N_US = {
   common_term_valition_path_length: 'The path name can contain a maximum of 1024 characters.',
   plugins_common_tips_sshError: 'SSH connection exception. Please try again.',
   plugins_common_message_figerLose: 'The authenticity of host {0} can\'t be established. The fingerprint is SHA256:{1}. \
-  Are you sure you want to continue connecting (Yes/No)?',
+  Are you sure you want to continue connecting?',
 
 
   plugins_common_tips_uploadError: 'Failed to upload the script file to your server.',
@@ -320,5 +320,7 @@ export const I18N_US = {
      Check that the network connection is normal.',
   plugins_common_message_sshAlgError: 'Connection detection failed. The algorithm on the client side does not match that on the \
      server side. For details about how to configure a security algorithm, see FAQ.',
-     plugins_common_message_sshClientCheck: 'The SSH client is not installed on the device. Obtain and install the SSH client.',
+  plugins_common_message_sshClientCheck: 'The SSH client is not installed on the device. Obtain and install the SSH client.',
+  plugins_tuning_title_finger_confirm: 'Confirm Finger',  
+  plugins_tuning_button_continue_connect: 'Continue',
 };

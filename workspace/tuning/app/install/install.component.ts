@@ -83,6 +83,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
     public userDeployDialogTitle = ''; // 确认弹框标题
     public dialogShowDetailText = ''; // 确认弹框内容
     public notificationMessage = ''; // 执行结果提示
+    public fingerDialogTitle = ''; // 指纹弹框标题
     public fingerLoseText = ''; // 指纹弹框消息内容
     intelliJFlagDef = false;
 
@@ -280,6 +281,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
                     0: this.tempIP,
                     1: this.tempFinger
                 });
+                this.fingerDialogTitle = this.i18n.plugins_tuning_title_finger_confirm;
                 this.fingerDialog.Open();
             }
             this.changeDetectorRef.markForCheck();

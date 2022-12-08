@@ -311,19 +311,11 @@
     }
 }
 
-.finger-box {
-    .tip-dsc {
-        border: none !important;
-        margin: 0 !important;
-        padding-top: 12px !important;
-    }
-}
-
 .img_box {
     width: 22px;
     height: 22px;
     margin-top: 3px;
-    margin-right: 6px;
+    margin-right: 8px;
 }
 
 :host ::ng-deep .progress-modal {
@@ -420,7 +412,11 @@
     .tip-dsc {
         border: none !important;
         margin: 0 !important;
-        padding-top: 12px !important;
+        padding-top: 24px !important;
+    }
+
+    .tip-confirm button {
+        width: 92px !important;
     }
 }
 
