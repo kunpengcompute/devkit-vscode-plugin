@@ -125,7 +125,10 @@ export const I18N_US = {
       and cannot contain spaces.',
 
   plugins_common_button_checkConn: 'Check Connection',
-  plugins_common_tips_connOk: 'SSH connection check succeeded.',
+  plugins_common_tips_connOk: 'Connection check succeeded. ',
+  plugins_common_tips_start_deploy: 'Click [Install] to start installing Hyper Tuner',
+  plugins_common_tips_start_uninstall: 'Click [Uninstall] to start uninstalling Hyper Tuner',
+  plugins_common_tips_start_upgrade: 'Click [Upgrade] to start upgrading Hyper Tuner',
   plugins_common_tips_connFail: 'The SSH connection check failed. Check whether the user name, password, \
       or private key is correct. A large number of retries also causes the check failure.',
   plugins_common_tips_figerFail: 'Failed to set up the connection because the host fingerprint verification failed.',

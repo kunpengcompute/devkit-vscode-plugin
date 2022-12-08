@@ -91,7 +91,10 @@ export const I18N_ZH = {
     common_term_valition_password:
         '必须包含大写字母、小写字母、数字以及特殊字符（`~!@#$%^&*()-_=+\\|[{}];:\'",<.>/?）中两种及以上类型的组合，不能含空格，长度为8~32个字符。',
     plugins_common_button_checkConn: '检测连接',
-    plugins_common_tips_connOk: 'SSH连接检测成功',
+    plugins_common_tips_connOk: '连接检测成功，',
+    plugins_common_tips_start_deploy: '点击【开始部署】进行工具安装。',
+    plugins_common_tips_start_uninstall: '点击【开始卸载】进行工具卸载。',
+    plugins_common_tips_start_upgrade: '点击【开始升级】进行工具升级。',
     plugins_common_tips_connFail: 'SSH连接检测失败，请检查用户名，密码或者私钥是否输入正确，重试次数过多也将导致检测失败',
     plugins_common_message_fileName: '文件名称只能由字母、数字、“.”、“-”、“+”、“()”和“_”组成，长度为1~64个字符且不能以“.”开头。',
     plugins_common_message_fileName_length: '单个文件名限制最长不超过255个字符',

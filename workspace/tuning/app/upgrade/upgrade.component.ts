@@ -273,8 +273,7 @@ export class UpgradeComponent implements OnInit {
         this.vscodeService.postMessage(postData, (data: any) => {
             if (data.search(/SUCCESS/) !== -1) {
                 this.connected = true;
-                this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
-                // this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
+                this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk + this.i18n.plugins_common_tips_start_upgrade);
             } else if (data.search(/Cannot parse privateKey/) !== -1) {
                 // 密码短语错误
                 this.connected = false;

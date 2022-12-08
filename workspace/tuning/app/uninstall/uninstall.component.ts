@@ -266,7 +266,7 @@ export class UnInstallComponent implements OnInit{
         this.vscodeService.postMessage(postData, (data: any) => {
             if (data.search(/SUCCESS/) !== -1) {
                 this.connected = true;
-                this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
+                this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk + this.i18n.plugins_common_tips_start_uninstall);
             } else if (data.search(/Cannot parse privateKey/) !== -1) {
                 // 密码短语错误
                 this.connected = false;
