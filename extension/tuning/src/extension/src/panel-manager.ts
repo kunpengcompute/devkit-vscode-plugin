@@ -260,6 +260,8 @@ export class ToolPanelManager {
         //刷新配置信息
         context.subscriptions.push(vscode.commands.registerCommand('configurationInfo.refreshEntry',
             () => {
+
+                messageHandler.testConnection(context);
                 Utils.updateConfigurationInfoBox();
             }
         ));
@@ -319,6 +321,7 @@ export class ToolPanelManager {
         ToolPanelManager.sysPerfToolPanels.push(newToolPanel);
         return newToolPanel;
     }
+
 
     /**
      * 打开perfadvisor登录页面

@@ -97,9 +97,8 @@ export const messageHandler = {
                 currentSideViewProviderHandler = previous_dispose_handler
                 const resourcePath = Utils.getExtensionFileAbsolutePath(global.context, 'out/assets/config.json');
                 data = fs.writeFileSync(resourcePath, message.data.data);
-                this.updateIpAndPort(global.context, provider)
-                vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', false);
-                vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
+                this.updateIpAndPort(global.context, provider);
+                Utils.updateConfigurationInfoBox();
                 vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedInJustClosed', false);
             } else {
                 data = { type: 'FAIL'};
@@ -113,6 +112,76 @@ export const messageHandler = {
         }
     },
     /**
+     * 检测已配置的服务器是否能够连接
+     * @param context
+     */
+    async testConnection(context: vscode.ExtensionContext){
+        let newConfigPath = Utils.getExtensionFileAbsolutePath(context, 'out/assets/config.json');
+        let data = JSON.parse(fs.readFileSync(newConfigPath));
+        var ip = data.portConfig[0].ip;
+        var port = data.portConfig[0].port;
+        context.globalState.update('tuningIp', ip);
+        context.globalState.update('tuningPort', port);
+        const { proxyServerPort, proxy } =
+            await ProxyManager.createProxyServer(context, ip, port);
+        context.globalState.update('defaultPort', proxyServerPort);
+        const queryVersionOptions = {
+            url: `http://127.0.0.1:${proxyServerPort}/user-management/api/v2.2/users/version/`,
+            method: 'GET'
+        };
+        const respVersion: any = await Utils.requestData(context, queryVersionOptions as any, 'tuning');
+        if (respVersion.status === constant.HTTP_STATUS.HTTP_200_OK) {
+        // if (true) {
+            const serverVersion = respVersion?.data?.data?.version;
+            if (!Utils.checkVersion(context, serverVersion)) {
+            // if (true) {
+                proxy.close();
+                const configVersion = Utils.getConfigJson(context).configVersion[0];
+                // 版本不匹配
+                data = { type: 'VERSIONMISMATCH', configVersion, serverVersion };
+                let old_ip = currentSideViewProvider.getIp();
+                let old_port = currentSideViewProvider.getPort();
+                if(isRegistered){
+                    currentSideViewProviderHandler.dispose()
+                }
+                const provider = new SideViewProvider(context.extensionUri);
+                currentSideViewProvider = provider
+                let previous_dispose_handler =  vscode.window.registerWebviewViewProvider(SideViewProvider.viewType, provider)
+                isRegistered = true
+                currentSideViewProviderHandler = previous_dispose_handler;
+                provider.shouldFailureInfoShown(true);
+                provider.updateServerConfiguration(old_ip, old_port);
+                provider.FailureArbeitUpdaten(i18n.version_mismatch_failure);
+                return;
+            }
+            console.log("Position 3");
+            const queryOptions = {
+                url: `http://127.0.0.1:${proxyServerPort}/user-management/api/v2.2/users/admin-status/`,
+                method: 'GET'
+            };
+            const resp: any = await Utils.requestData(context, queryOptions as any, 'tuning');
+            console.log("Position 4");
+            if(resp.status !== constant.HTTP_STATUS.HTTP_200_OK) {
+                let old_ip = currentSideViewProvider.getIp();
+                let old_port = currentSideViewProvider.getPort();
+                if(isRegistered){
+                    currentSideViewProviderHandler.dispose()
+                }
+                const provider = new SideViewProvider(context.extensionUri);
+                currentSideViewProvider = provider
+                let previous_dispose_handler =  vscode.window.registerWebviewViewProvider(SideViewProvider.viewType, provider)
+                isRegistered = true
+                currentSideViewProviderHandler = previous_dispose_handler;
+                provider.shouldFailureInfoShown(true);
+                provider.updateServerConfiguration(old_ip, old_port);
+                provider.FailureArbeitUpdaten(i18n.connection_failure);
+                return;
+            }
+
+        }
+    }
+,
+    /**
      * 更新ip与端口的显示内容
      * @param originalContent 更新之前的
      */
@@ -122,7 +191,8 @@ export const messageHandler = {
         // console.log(data.tuningConfig[0].ip);
         var new_ip = data.portConfig[0].ip;
         var new_port = data.portConfig[0].port;
-        provider.updateServerConfiguration(new_ip, new_port)
+        provider.shouldFailureInfoShown(false);
+        provider.updateServerConfiguration(new_ip, new_port);
         // SideViewProvider.
     },
     /**
