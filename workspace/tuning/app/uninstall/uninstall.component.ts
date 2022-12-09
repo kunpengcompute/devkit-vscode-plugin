@@ -66,6 +66,7 @@ export class UnInstallComponent implements OnInit{
     public tempFinger: string; // 读取的finger，用于发送保存finger
 
     public dialogShowDetailText = '';
+    public fingerDialogTitle = ''; // 指纹弹框标题
     public fingerLoseText = ''; // 指纹弹框消息内容
     public notificationMessage = ''; // 执行结果提示
     intelliJFlagDef = false;
@@ -221,6 +222,7 @@ export class UnInstallComponent implements OnInit{
                     0: this.tempIP,
                     1: this.tempFinger
                 });
+                this.fingerDialogTitle = this.i18n.plugins_tuning_title_finger_confirm;
                 this.fingerDialog.Open();
             }
             this.changeDetectorRef.markForCheck();
@@ -264,7 +266,7 @@ export class UnInstallComponent implements OnInit{
         this.vscodeService.postMessage(postData, (data: any) => {
             if (data.search(/SUCCESS/) !== -1) {
                 this.connected = true;
-                this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
+                this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk + this.i18n.plugins_common_tips_start_uninstall);
             } else if (data.search(/Cannot parse privateKey/) !== -1) {
                 // 密码短语错误
                 this.connected = false;

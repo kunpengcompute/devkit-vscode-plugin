@@ -67,10 +67,10 @@ export const I18N_US = {
 
   plugins_tuning_button_uninstallConfirm: 'Uninstall',
   plugins_tuning_button_upgradeConfirm: 'Upgrade',
-  plugins_tuning_title_uninstalled: 'Profiler Advisor is uninstalled successfully.',
+  plugins_tuning_title_uninstalled: 'Hyper Tuner is uninstalled successfully.',
   plugins_tuning_title_upgraded: 'The tool is upgraded successfully.',
-  plugins_tuning_title_uninstallFailed: 'Failed to uninstall the Profiler Advisor.',
-  plugins_tuning_title_upgradeFailed: 'Failed to upgrade the Profiler Advisor.',
+  plugins_tuning_title_uninstallFailed: 'Failed to uninstall the Hyper Tuner.',
+  plugins_tuning_title_upgradeFailed: 'Failed to upgrade the Hyper Tuner.',
   plugins_tuning_button_install: 'Click here to deploy',
   plugins_tuning_label_ip: 'IP Address',
   plugins_tuning_label_port: 'SSH Port',
@@ -101,7 +101,7 @@ export const I18N_US = {
   plugins_tuning_button_installConfirm: 'Install',
   plugins_tuning_message_installingInfo: 'Deploy the tool as prompted. ',
   plugins_tuning_title_installed: 'Tool deployed successfully.',
-  plugins_tuning_button_login: 'Log In',
+  plugins_tuning_button_login: 'Login',
   plugins_tuning_button_retry: 'Retry',
   plugins_tuning_button_install_failed_retry: 'Retry',
   plugins_tuning_title_installFailed: 'Failed to deploy the tool.',
@@ -125,7 +125,10 @@ export const I18N_US = {
       and cannot contain spaces.',
 
   plugins_common_button_checkConn: 'Check Connection',
-  plugins_common_tips_connOk: 'SSH connection check succeeded.',
+  plugins_common_tips_connOk: 'Connection check succeeded. ',
+  plugins_common_tips_start_deploy: 'Click [Install] to start installing Hyper Tuner',
+  plugins_common_tips_start_uninstall: 'Click [Uninstall] to start uninstalling Hyper Tuner',
+  plugins_common_tips_start_upgrade: 'Click [Upgrade] to start upgrading Hyper Tuner',
   plugins_common_tips_connFail: 'The SSH connection check failed. Check whether the user name, password, \
       or private key is correct. A large number of retries also causes the check failure.',
   plugins_common_tips_figerFail: 'Failed to set up the connection because the host fingerprint verification failed.',
@@ -150,7 +153,7 @@ export const I18N_US = {
   common_term_valition_path_length: 'The path name can contain a maximum of 1024 characters.',
   plugins_common_tips_sshError: 'SSH connection exception. Please try again.',
   plugins_common_message_figerLose: 'The authenticity of host {0} can\'t be established. The fingerprint is SHA256:{1}. \
-  Are you sure you want to continue connecting (Yes/No)?',
+  Are you sure you want to continue connecting?',
 
 
   plugins_common_tips_uploadError: 'Failed to upload the script file to your server.',
@@ -307,8 +310,7 @@ export const I18N_US = {
   The server version of the code migration tool that this plugin can match is: {0}; \
   the current server version of the code migration tool is: {1}. \
   Please upgrade the server version to the matching version.',
-  plugins_tuning_message_config_server_success: 'Config remote server success',
-  plugins_tuning_message_save_config_success: 'Save config success!',
+  plugins_tuning_message_save_config_success: 'Configure remote server successfully!',
   plugins_tuning_title_save_config: 'Save Remote Server Config',
   plugins_tuning_save_config_modify: 'Save current modification? Click OK to exit the current user.',
   plugins_tuning_title_root_deploy: 'root User Deploy',
@@ -320,5 +322,7 @@ export const I18N_US = {
      Check that the network connection is normal.',
   plugins_common_message_sshAlgError: 'Connection detection failed. The algorithm on the client side does not match that on the \
      server side. For details about how to configure a security algorithm, see FAQ.',
-     plugins_common_message_sshClientCheck: 'The SSH client is not installed on the device. Obtain and install the SSH client.',
+  plugins_common_message_sshClientCheck: 'The SSH client is not installed on the device. Obtain and install the SSH client.',
+  plugins_tuning_title_finger_confirm: 'Confirm Finger',  
+  plugins_tuning_button_continue_connect: 'Continue',
 };

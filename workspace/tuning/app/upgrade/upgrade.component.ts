@@ -80,6 +80,7 @@ export class UpgradeComponent implements OnInit {
     intelliJFlagDef = false;
 
     public notificationMessage = ""; // 执行结果提示
+    public fingerDialogTitle = ''; // 指纹弹框标题
     public fingerLoseText = ''; // 指纹弹框消息内容
 
     constructor(
@@ -229,6 +230,7 @@ export class UpgradeComponent implements OnInit {
                     0: this.tempIP,
                     1: this.tempFinger
                 });
+                this.fingerDialogTitle = this.i18n.plugins_tuning_title_finger_confirm;
                 this.fingerDialog.Open();
             }
             this.changeDetectorRef.markForCheck();
@@ -271,8 +273,7 @@ export class UpgradeComponent implements OnInit {
         this.vscodeService.postMessage(postData, (data: any) => {
             if (data.search(/SUCCESS/) !== -1) {
                 this.connected = true;
-                this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
-                // this.showInfoBox(this.i18n.plugins_common_tips_connOk, 'info');
+                this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk + this.i18n.plugins_common_tips_start_upgrade);
             } else if (data.search(/Cannot parse privateKey/) !== -1) {
                 // 密码短语错误
                 this.connected = false;

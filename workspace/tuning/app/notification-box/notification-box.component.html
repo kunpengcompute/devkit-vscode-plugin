@@ -1,4 +1,4 @@
-<div class="notification-box" [ngClass]="{'active':isShow}">
+<div class="notification-box" *ngIf="isShow">
     <!-- notification type icon -->
     <div class="notification-icon">
         <img *ngIf="type == 'success'" src="./assets/img/tip/icon_success.svg">
@@ -8,4 +8,8 @@
     </div>
     <!-- notification message -->
     <ng-content select=".notification-message"></ng-content>
+    <div class="icon-close" (click)="close()">
+        <img src="./assets/img/close_icon.svg">
+        <img src="./assets/img/close_hover.svg">
+    </div>
 </div>

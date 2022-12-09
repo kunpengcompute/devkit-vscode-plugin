@@ -41,7 +41,7 @@ export const I18N_EN = {
     plugins_common_show_user: 'user',
     plugins_common_show_user_btn_true: 'OK',
     plugins_common_message_figerLose: 'The authenticity of host {0} can\'t be established. The fingerprint is SHA256:{1}. \
-    Are you sure you want to continue connecting (Yes/No)?',
+    Are you sure you want to continue connecting?',
     pligins_common_message_confirm: 'Yes',
     pligins_common_message_cancel: 'No',
     plugins_common_message_figerWarn: 'The number of fingerprints stored in the local configuration file exceeds 100. \

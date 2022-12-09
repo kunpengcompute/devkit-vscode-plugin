@@ -286,16 +286,23 @@
 
 <!-- 指纹弹框 -->
 <app-messagebox #fingerDialog>
-    <div class="content tip-box finger-box" style="width: 360px;">
+    <div class="content tip-box finger-box" style="width: 336px;">
+        <div class="tip-title color-d-e8-l-22">
+            <span class="title-content">{{fingerDialogTitle}}</span>
+            <span (click)="cancelFingerDialog()" class="icon-close">
+                <img src="./assets/img/close_icon.svg">
+                <img src="./assets/img/close_hover.svg">
+            </span>
+        </div>
         <div class="tip-dsc">
             <img class="img_box" src="./assets/img/tip/icon_information.svg">
-            <div class="color-d-e8-l-61">
+            <div class="color-d-aa-l-61">
                 <p>{{fingerLoseText}}</p>
             </div>
         </div>
         <div class="tip-confirm">
-            <button type="button" class="primary-btn" (click)="confirmFingerDialog()">{{i18n.plugins_public_message_confirm}}</button>
-            <button type="button" class="secondary-btn" (click)="cancelFingerDialog()">{{i18n.plugins_public_message_cancel}}</button>
+            <button type="button" class="primary-btn" (click)="confirmFingerDialog()">{{i18n.plugins_tuning_button_continue_connect}}</button>
+            <button type="button" class="secondary-btn" (click)="cancelFingerDialog()">{{i18n.plugins_public_button_cancel}}</button>
         </div>
     </div>
 </app-messagebox>

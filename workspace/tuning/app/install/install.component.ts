@@ -83,6 +83,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
     public userDeployDialogTitle = ''; // 确认弹框标题
     public dialogShowDetailText = ''; // 确认弹框内容
     public notificationMessage = ''; // 执行结果提示
+    public fingerDialogTitle = ''; // 指纹弹框标题
     public fingerLoseText = ''; // 指纹弹框消息内容
     intelliJFlagDef = false;
 
@@ -280,6 +281,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
                     0: this.tempIP,
                     1: this.tempFinger
                 });
+                this.fingerDialogTitle = this.i18n.plugins_tuning_title_finger_confirm;
                 this.fingerDialog.Open();
             }
             this.changeDetectorRef.markForCheck();
@@ -322,7 +324,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
         this.vscodeService.postMessage(postData, (data: any) => {
             if (data.search(/SUCCESS/) !== -1) {
                 this.connected = true;
-                this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk);
+                this.serverErrorBox.close();
+                this.setNotificationBox(notificationType.success, this.i18n.plugins_common_tips_connOk + this.i18n.plugins_common_tips_start_deploy);
             } else if (data.search(/Cannot parse privateKey/) !== -1) {
                 // 密码短语错误
                 this.connected = false;

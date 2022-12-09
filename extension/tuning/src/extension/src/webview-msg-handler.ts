@@ -32,8 +32,6 @@ export const messageHandler = {
         Utils.invokeCallback(global.toolPanel.getPanel(), message, json);
     },
 
-
-
     // 保存ip与port到json配置文件
     async saveConfig(global: any, message: any) {
         // if (!message.data.openConfigServer) {  // 点击弹窗中的是openConfigServer为true
