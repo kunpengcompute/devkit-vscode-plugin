@@ -1,0 +1,11 @@
+<svg width="8" height="10" xmlns="http://www.w3.org/2000/svg">
+ <title>Red</title>
+ <g>
+  <title>Layer 1</title>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_3" y="218.93716" x="264.18744" stroke-width="0" stroke="#000" fill="#ec4b4b">*</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="24" id="svg_2" y="25.43716" x="9.18744" stroke-width="0" stroke="#000" fill="#000000"/>
+  <ellipse stroke-width="0" stroke="#000" ry="4.18744" rx="4.18745" id="svg_4" cy="20.78091" cx="4.18745" fill="#ed4b4b"/>
+  <ellipse stroke="#000" stroke-width="0" ry="4.0937" rx="3.56245" id="svg_5" cy="5.49999" cx="4" fill="#ed4b4b"/>
+ </g>
+
+</svg>
