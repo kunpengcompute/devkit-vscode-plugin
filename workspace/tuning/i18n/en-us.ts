@@ -131,6 +131,7 @@ export const I18N_US = {
   plugins_common_tips_start_upgrade: 'Click [Upgrade] to start upgrading Hyper Tuner',
   plugins_common_tips_connFail: 'The SSH connection check failed. Check whether the user name, password, \
       or private key is correct. A large number of retries also causes the check failure.',
+  plugins_common_tips_connTimeout: 'The SSH connection check failed. Check whether the ip or the port is correct.',
   plugins_common_tips_figerFail: 'Failed to set up the connection because the host fingerprint verification failed.',
   plugins_common_tips_timeOut: 'Connection timed out. Please try again.',
   plugins_common_title_sshKey: 'Key authentication',

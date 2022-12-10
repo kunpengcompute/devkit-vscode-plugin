@@ -14,7 +14,7 @@ export class ConfigComponent implements OnInit {
     @ViewChild('showDialog', { static: false }) showDialog: { Close: () => void; Open: () => void; };
     @ViewChild('saveModifyDialog', { static: false}) saveModifyDialog: { Close: () => void; Open: () => void; };
     @ViewChild('versionDialog', { static: false }) versionDialog: { Close: () => void; Open: () => void; };
-    @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; };
+    @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; close: () => void; };
     @ViewChild('canLoginBox') canLoginBox: {setType: (type: notificationType) => void; show: () => void; close: () => void; };
     @ViewChild('serverErrorBox') serverErrorBox: {setType: (type: notificationType) => void; show: () => void; close: () => void; };
 
@@ -170,6 +170,7 @@ export class ConfigComponent implements OnInit {
             this.vscodeService.postMessage(data, (res: any) => {
                 this.showLoading = false;
                 console.log(res);
+                this.notificationBox.close();
                 // 版本不匹配
                 if (res.type === 'VERSIONMISMATCH') {
                     console.log("version mismatch");

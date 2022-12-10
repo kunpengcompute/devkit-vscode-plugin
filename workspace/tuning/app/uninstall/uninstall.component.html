@@ -231,14 +231,17 @@
     </div>
 </app-messagebox>
 
-<app-notification-box #notificationBox>
-    <div class="notification-message">{{notificationMessage}}</div>
-</app-notification-box>
 
-<!-- 带按钮的错误提示弹框 -->
-<app-notification-with-action #serverErrorBox>
-    <span class="notification-message">{{i18n.plugins_common_message_responseError_deployScenario}}</span>
-    <div class="action-content">
-        <button type="button" class="primary-btn error-instruction-button" (click)="openErrorInstruction()">{{i18n.plugins_common_button_checkErrorDetails}}</button>
-    </div>
-</app-notification-with-action>
+<div class="notification-container">
+    <app-notification-box #notificationBox>
+        <div class="notification-message">{{notificationMessage}}</div>
+    </app-notification-box>
+    
+    <!-- 带按钮的错误提示弹框 -->
+    <app-notification-with-action #serverErrorBox>
+        <span class="notification-message">{{i18n.plugins_common_message_responseError_deployScenario}}</span>
+        <div class="action-content">
+            <button type="button" class="primary-btn error-instruction-button" (click)="openErrorInstruction()">{{i18n.plugins_common_button_checkErrorDetails}}</button>
+        </div>
+    </app-notification-with-action>
+</div>

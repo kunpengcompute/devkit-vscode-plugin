@@ -13,25 +13,19 @@
 .notification-action-box {
     background-color: var(--color-box-content);
     box-shadow: 0px 8px 30px 0px var(--color-content-shadow);
-    position: fixed;
     width: 448px;
     height: fit-content;
-    bottom: 10px;
-    right: 10px;
     padding: 16px;
-    z-index: 999;
+    margin-bottom: 10px;
     display: block;
-
-    .notification-message {
-        width: 388px;
-    }
+    overflow: hidden;
 }
 
 .title {
     display: flex;
     justify-content: space-between;
     line-height: 15px;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
 
 .title-notification {
@@ -52,9 +46,6 @@
 }
 
 .action {
-    position: relative;
-    bottom: 5px;
-    right: 0;
     float: right;
 }
 
@@ -63,6 +54,9 @@
     height: 20px;
     position: absolute;
     right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
     img {
         width: 14px;
         cursor: pointer;

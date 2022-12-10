@@ -12,15 +12,12 @@
 
 .notification-box {
     background-color: var(--color-box-content);
-    box-shadow: 0px 3px 6px 0px var(--color-content-shadow);
-    position: fixed;
+    box-shadow: 0px 8px 30px 0px var(--color-content-shadow);
 
     width: 448px;
     height: fit-content;
     padding: 16px;
-    bottom: 10px;
-    right: 10px;
-    z-index: 998;
+    margin-bottom: 10px;
     display: flex;
     font-size: 14px;
     color: var(--color-message);

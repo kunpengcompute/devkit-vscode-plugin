@@ -22,7 +22,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
     @ViewChild('installModal', { static: false }) installModal: { Close: () => void; Open: () => void; };
     @ViewChild('showDialog', { static: false }) showDialog: { Close: () => void; Open: () => void; };
     @ViewChild('fingerDialog', { static: false }) fingerDialog: { Close: () => void; Open: () => void; };
-    @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; };
+    @ViewChild('notificationBox') notificationBox: {setType: (type: notificationType) => void; show: () => void; close: () => void; };
     @ViewChild('serverErrorBox') serverErrorBox: {setType: (type: notificationType) => void; show: () => void; close: () => void; };
 
     public i18n: any = this.i18nService.I18n();
@@ -249,10 +249,12 @@ export class InstallComponent implements AfterViewInit, OnInit {
         this.vscodeService.postMessage(postData, (data: any) => {
             console.log("finger read get: ", data);
             if (data.search(/no matching/) !== -1) {
+                this.serverErrorBox.close();
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_sshAlgError);
             }
             if (data.search(/sshClientCheck/) !== -1) {
                 this.connectChecking = false;
+                this.serverErrorBox.close();
                 this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshClientCheck);
             } else if (data === "noFirst") {
                 // 可以直接checkConn
@@ -261,19 +263,24 @@ export class InstallComponent implements AfterViewInit, OnInit {
             } else if (data.search(/host fingerprint verification failed/) !== -1) {
                 // 读取指纹出错
                 this.connectChecking = false;
+                this.serverErrorBox.close();
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_figerFail);
             } else if (data.search(/TIMEOUT/) !== -1) {
                 // 连接超时
                 this.connectChecking = false;
+                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connTimeout);
                 this.serverErrorBox.setType(notificationType.error);
                 this.serverErrorBox.show();
             } else if (data.search(/Cannot parse privateKey/) !== -1) {
                 // 密码短语错误
                 this.connectChecking = false;
+                this.serverErrorBox.close();
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_passphraseFail);
             } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
                 this.connectChecking = false;
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
+                this.serverErrorBox.setType(notificationType.error);
+                this.serverErrorBox.show();
             } else {
                 // 首次连接
                 this.tempFinger = data;
@@ -329,10 +336,13 @@ export class InstallComponent implements AfterViewInit, OnInit {
             } else if (data.search(/Cannot parse privateKey/) !== -1) {
                 // 密码短语错误
                 this.connected = false;
+                this.serverErrorBox.close();
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_message_passphraseFail);
             }else if (data.search(/USERAUTH_FAILURE/) !== -1) {
                 this.connected = false;
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
+                this.serverErrorBox.setType(notificationType.error);
+                this.serverErrorBox.show();
             }
             this.connectChecking = false;
             this.changeDetectorRef.markForCheck();
@@ -345,6 +355,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
      */
     install() {
         this.showLoading = true;
+        this.serverErrorBox.close();
+        this.notificationBox.close();
         // 对每个输入框进行提交前校验
         this.elementRef.nativeElement.querySelectorAll(`input`).forEach((element: any) => {
             element.focus();
@@ -392,13 +404,13 @@ export class InstallComponent implements AfterViewInit, OnInit {
         if (this.installing !== RUNNING) { return; }
         if (data.search(/uploadErr/) !== -1) {
             this.installing = FAILED;
-            // this.showInfoBox(this.i18n.plugins_common_tips_uploadError, 'error');
+            this.serverErrorBox.close();
             this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_uploadError);
             this.clearPwd();
         } else if (data.search(/Error:/) !== -1) {
             this.installing = FAILED;
+            this.serverErrorBox.close();
             this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_sshError);
-            // this.showInfoBox(this.i18n.plugins_common_tips_sshError, 'error');
             this.clearPwd();
         } else if (data.search(/listen/) !== -1) {
             const matchIpPort = /(\d{1,3}\.){3}\d{1,3}:\d+/;
@@ -574,8 +586,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
         this.localfilepath = localFile.path.replace(/\\/g, '/');
         const size = localFile.size / 1024 / 1024;
         if (size > 10) {
+            this.serverErrorBox.close();
             this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshkeyExceedMaxSize);
-            // this.showInfoBox(this.i18n.plugins_common_message_sshkeyExceedMaxSize, 'warn');
             this.localfilepath = '';
             this.changeDetectorRef.markForCheck();
             this.changeDetectorRef.detectChanges();
@@ -597,9 +609,11 @@ export class InstallComponent implements AfterViewInit, OnInit {
         };
         this.vscodeService.postMessage(postData, (isPrivateKey: any) => {
             if (!isPrivateKey) {
+                this.serverErrorBox.close();
                 this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshkeyFail);
-                // this.showInfoBox(this.i18n.plugins_common_message_sshkeyFail, 'warn');
                 this.localfilepath = '';
+                this.changeDetectorRef.markForCheck();
+                this.changeDetectorRef.detectChanges();
                 return;
             }
         });
@@ -618,6 +632,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
                     this.changeDetectorRef.detectChanges();
                 }
                 else{
+                    this.serverErrorBox.close();
                     this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_sshkeyFail);
                     this.localfilepath = '';
                     this.changeDetectorRef.markForCheck();
@@ -709,13 +724,17 @@ export class InstallComponent implements AfterViewInit, OnInit {
         this.vscodeService.postMessage(postData, (data: any) => {
             console.log(data);
             if(data.search(/oversize/)!==-1){
+                this.serverErrorBox.close();
                 this.setNotificationBox(notificationType.warn, this.i18n.plugins_common_message_figerWarn);
+                this.changeDetectorRef.markForCheck();
+                this.changeDetectorRef.detectChanges();
             }
             if (data === "SUCCESS") {
                 // 保存指纹成功，可检测连接
 
             } else {
                 // 保存失败，但不应该影响连接
+                this.serverErrorBox.close();
                 this.setNotificationBox(notificationType.warn, "host fingerprint saved failed");
                 this.changeDetectorRef.markForCheck();
                 this.changeDetectorRef.detectChanges();
@@ -729,7 +748,6 @@ export class InstallComponent implements AfterViewInit, OnInit {
      */
     public cancelFingerDialog() {
         this.connectChecking = false;
-        // this.setNotificationBox(notificationType.warn, "host fingerprint verfication canceled");
         this.fingerDialog.Close();
         this.changeDetectorRef.markForCheck();
         this.changeDetectorRef.detectChanges();

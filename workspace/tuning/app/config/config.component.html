@@ -137,20 +137,23 @@
 
 </app-messagebox>
 
-<app-notification-box #notificationBox>
-    <div class="notification-message">{{notificationMessage}}</div>
-</app-notification-box>
 
-<app-notification-with-action #canLoginBox>
-    <span class="notification-message">{{i18n.plugins_tuning_message_save_config_success}}</span>
-    <div class="action-content">
-        <button type="button" class="primary-btn login-button" (click)="openLogin()">{{i18n.plugins_tuning_button_login}}</button>
-    </div>
-</app-notification-with-action>
-
-<app-notification-with-action #serverErrorBox>
-    <span class="notification-message">{{i18n.plugins_common_message_responseError}}</span>
-    <div class="action-content">
-        <button type="button" class="primary-btn error-instruction-button" (click)="openErrorInstruction()">{{i18n.plugins_common_button_checkErrorDetails}}</button>
-    </div>
-</app-notification-with-action>
+<div class="notification-container">
+    <app-notification-box #notificationBox>
+        <div class="notification-message">{{notificationMessage}}</div>
+    </app-notification-box>
+    
+    <app-notification-with-action #canLoginBox>
+        <span class="notification-message">{{i18n.plugins_tuning_message_save_config_success}}</span>
+        <div class="action-content">
+            <button type="button" class="primary-btn login-button" (click)="openLogin()">{{i18n.plugins_tuning_button_login}}</button>
+        </div>
+    </app-notification-with-action>
+    
+    <app-notification-with-action #serverErrorBox>
+        <span class="notification-message">{{i18n.plugins_common_message_responseError}}</span>
+        <div class="action-content">
+            <button type="button" class="primary-btn error-instruction-button" (click)="openErrorInstruction()">{{i18n.plugins_common_button_checkErrorDetails}}</button>
+        </div>
+    </app-notification-with-action>
+</div>

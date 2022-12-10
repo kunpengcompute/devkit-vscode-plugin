@@ -307,14 +307,18 @@
     </div>
 </app-messagebox>
 
-<app-notification-box #notificationBox>
-    <div class="notification-message">{{notificationMessage}}</div>
-</app-notification-box>
+<!-- 右下角弹框 -->
+<div class="notification-container">
+    <!-- 右下角的纯文字提示弹框，可能需要与下方带按钮的同时出现 -->
+    <app-notification-box #notificationBox>
+        <div class="notification-message">{{notificationMessage}}</div>
+    </app-notification-box>
 
-<!-- 带按钮的错误提示弹框 -->
-<app-notification-with-action #serverErrorBox>
-    <span class="notification-message">{{i18n.plugins_common_message_responseError_deployScenario}}</span>
-    <div class="action-content">
-        <button type="button" class="primary-btn error-instruction-button" (click)="openErrorInstruction()">{{i18n.plugins_common_button_checkErrorDetails}}</button>
-    </div>
-</app-notification-with-action>
+    <!-- 带按钮的错误提示弹框 -->
+    <app-notification-with-action #serverErrorBox>
+        <span class="notification-message">{{i18n.plugins_common_message_responseError_deployScenario}}</span>
+        <div class="action-content">
+            <button type="button" class="primary-btn error-instruction-button" (click)="openErrorInstruction()">{{i18n.plugins_common_button_checkErrorDetails}}</button>
+        </div>
+    </app-notification-with-action>
+</div>
