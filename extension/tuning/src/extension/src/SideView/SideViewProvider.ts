@@ -105,7 +105,7 @@ export class SideViewProvider implements vscode.WebviewViewProvider {
 				<link href="${styleResetUri}" rel="stylesheet">
 				<link href="${styleVSCodeUri}" rel="stylesheet">
 				<link href="${styleMainUri}" rel="stylesheet">
-				<title>Cat Colors</title>
+				<title>Configuration Information</title>
 			</head>
 			<body>
 			    <table border="0" class="info-box">
@@ -162,7 +162,7 @@ export class SideViewProvider implements vscode.WebviewViewProvider {
             	<link href="${styleResetUri}" rel="stylesheet">
             	<link href="${styleVSCodeUri}" rel="stylesheet">
             	<link href="${styleMainUri}" rel="stylesheet">
-            	<title>Cat Colors</title>
+            	<title>Configuration Information</title>
             </head>
             <body>
                 <table border="0" class="info-box">

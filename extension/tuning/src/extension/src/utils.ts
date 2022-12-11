@@ -50,20 +50,6 @@ export class Utils {
     }
 
     /**
-     * 加载配置信息
-     * @param context 插件上下文
-     */
-    public static reloadConfigurations(context: vscode.ExtensionContext): any{
-        let data = this.getConfigJson(context);
-        if(data.portConfig.length == 0){
-            this._setUpToBeNotConfigured()
-        }
-        else{
-            this._setUpToBeConfigured(context)
-        }
-    }
-
-    /**
      * 刷新侧边栏服务器配置信息
      */
     public static updateConfigurationInfoBox(){
@@ -71,30 +57,6 @@ export class Utils {
         vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
     }
 
-    /**
-     * 判断为已配置，显示配置信息
-     */
-    private static _setUpToBeConfigured(context: vscode.ExtensionContext){
-        vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
-        vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedIn', false);
-        vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedInJustClosed', false);
-
-        const provider = new SideViewProvider(context.extensionUri);
-        currentSideViewProvider = provider
-        let previous_dispose_handler =  vscode.window.registerWebviewViewProvider(SideViewProvider.viewType, provider)
-        isRegistered = true
-        currentSideViewProviderHandler = previous_dispose_handler
-        messageHandler.updateIpAndPort(context, provider);
-        vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedInJustClosed', false);
-    }
-
-    /**
-     * 判断为未配置
-     */
-    private static _setUpToBeNotConfigured(){
-        vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', false);
-        vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedIn', false);
-    }
     /**
      * 获取配置信息
      * @param context 插件上下文
