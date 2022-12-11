@@ -71,6 +71,6 @@ export const I18N_ZH = {
     server_connection_status: "连接状态",
     failure_cause: "失败原因",
 
-    version_mismatch_failure: "版本不匹配",
-    connection_failure:"连接失败"
+    version_mismatch_failure: "版本不匹配。",
+    connection_failure:"连接失败。"
 };

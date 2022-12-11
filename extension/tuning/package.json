@@ -197,23 +197,28 @@
       {
         "view": "perfadvisorTools",
         "contents": "%perfadvisor.configer.server%",
-        "when": "!isPerfadvisorConfigured"
+        "when": "!isPerfadvisorConfigured && !refreshFailure"
       },
       {
         "view": "perfadvisorTools",
         "contents": "%perfadvisor.no.login%",
-        "when": "isPerfadvisorConfigured && !isPerfadvisorLoggedIn"
+        "when": "isPerfadvisorConfigured && !isPerfadvisorLoggedIn && !refreshFailure"
       },
       {
         "view": "perfadvisorTools",
         "contents": "%perfadvisor.logged.in%",
         "enablement": "false",
-        "when": "isPerfadvisorConfigured && isPerfadvisorLoggedIn"
+        "when": "isPerfadvisorConfigured && isPerfadvisorLoggedIn && !refreshFailure"
       },
       {
         "view": "perfadvisorTools",
         "contents": "%perfadvisor.again.configer.server%",
         "when": "false"
+      },
+      {
+        "view": "perfadvisorTools",
+        "contents": "%perfadvisor.server.refresh.failure%",
+        "when": "isPerfadvisorConfigured && refreshFailure"
       },
       {
         "view": "perfadvisorTools",

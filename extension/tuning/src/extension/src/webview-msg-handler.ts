@@ -32,6 +32,46 @@ export const messageHandler = {
         Utils.invokeCallback(global.toolPanel.getPanel(), message, json);
     },
 
+    /**
+     * 加载配置信息
+     * @param context 插件上下文
+     */
+     reloadConfigurations(context: vscode.ExtensionContext): any{
+        let data = Utils.getConfigJson(context);
+        if(data.portConfig.length == 0){
+            this._setUpToBeNotConfigured()
+        }
+        else{
+            this._setUpToBeConfigured(context)
+        }
+    },
+
+    /**
+     * 判断为已配置，显示配置信息
+     */
+    _setUpToBeConfigured(context: vscode.ExtensionContext){
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', true);
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedIn', false);
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedInJustClosed', false);
+
+        const provider = new SideViewProvider(context.extensionUri);
+        currentSideViewProvider = provider
+        let previous_dispose_handler =  vscode.window.registerWebviewViewProvider(SideViewProvider.viewType, provider)
+        isRegistered = true
+        currentSideViewProviderHandler = previous_dispose_handler
+        messageHandler.updateIpAndPort(context, provider);
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedInJustClosed', false);
+    },
+
+    /**
+     * 判断为未配置
+     */
+    _setUpToBeNotConfigured(){
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorConfigured', false);
+        vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedIn', false);
+        vscode.commands.executeCommand('setContext', 'refreshFailure', false);
+    },
+
     // 保存ip与port到json配置文件
     async saveConfig(global: any, message: any) {
         // if (!message.data.openConfigServer) {  // 点击弹窗中的是openConfigServer为true
@@ -155,6 +195,7 @@ export const messageHandler = {
                 provider.shouldFailureInfoShown(true);
                 provider.updateServerConfiguration(old_ip, old_port);
                 provider.FailureArbeitUpdaten(i18n.version_mismatch_failure);
+                vscode.commands.executeCommand('setContext', 'refreshFailure', true);
                 return;
             }
             console.log("Position 3");
@@ -178,6 +219,8 @@ export const messageHandler = {
                 provider.shouldFailureInfoShown(true);
                 provider.updateServerConfiguration(old_ip, old_port);
                 provider.FailureArbeitUpdaten(i18n.connection_failure);
+                vscode.commands.executeCommand('setContext', 'refreshFailure', true);
+                vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedIn', false);
                 return;
             }
             else{
@@ -193,6 +236,7 @@ export const messageHandler = {
                 currentSideViewProviderHandler = previous_dispose_handler;
                 provider.shouldFailureInfoShown(false);
                 provider.updateServerConfiguration(old_ip, old_port);
+                vscode.commands.executeCommand('setContext', 'refreshFailure', false);
                 return;
             }
         }
@@ -210,6 +254,8 @@ export const messageHandler = {
             provider.shouldFailureInfoShown(true);
             provider.updateServerConfiguration(old_ip, old_port);
             provider.FailureArbeitUpdaten(i18n.connection_failure);
+            vscode.commands.executeCommand('setContext', 'refreshFailure', true);
+            vscode.commands.executeCommand('setContext', 'isPerfadvisorLoggedIn', false);
             return;
         }
     }
@@ -226,6 +272,7 @@ export const messageHandler = {
         var new_port = data.portConfig[0].port;
         provider.shouldFailureInfoShown(false);
         provider.updateServerConfiguration(new_ip, new_port);
+        vscode.commands.executeCommand('setContext', 'refreshFailure', false);
         // SideViewProvider.
     },
     /**
