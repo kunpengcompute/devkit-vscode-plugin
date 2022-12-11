@@ -124,14 +124,17 @@ export const messageHandler = {
         context.globalState.update('tuningPort', port);
         const { proxyServerPort, proxy } =
             await ProxyManager.createProxyServer(context, ip, port);
+        console.log("Position 5")
         context.globalState.update('defaultPort', proxyServerPort);
         const queryVersionOptions = {
             url: `http://127.0.0.1:${proxyServerPort}/user-management/api/v2.2/users/version/`,
             method: 'GET'
         };
         const respVersion: any = await Utils.requestData(context, queryVersionOptions as any, 'tuning');
+        console.log("Position 0")
         if (respVersion.status === constant.HTTP_STATUS.HTTP_200_OK) {
         // if (true) {
+            console.log("Position 1")
             const serverVersion = respVersion?.data?.data?.version;
             if (!Utils.checkVersion(context, serverVersion)) {
             // if (true) {
@@ -161,7 +164,7 @@ export const messageHandler = {
             };
             const resp: any = await Utils.requestData(context, queryOptions as any, 'tuning');
             console.log("Position 4");
-            if(resp.status !== constant.HTTP_STATUS.HTTP_200_OK) {
+            if(resp.status != constant.HTTP_STATUS.HTTP_200_OK) {
                 let old_ip = currentSideViewProvider.getIp();
                 let old_port = currentSideViewProvider.getPort();
                 if(isRegistered){
@@ -177,7 +180,37 @@ export const messageHandler = {
                 provider.FailureArbeitUpdaten(i18n.connection_failure);
                 return;
             }
-
+            else{
+                let old_ip = currentSideViewProvider.getIp();
+                let old_port = currentSideViewProvider.getPort();
+                if(isRegistered){
+                    currentSideViewProviderHandler.dispose()
+                }
+                const provider = new SideViewProvider(context.extensionUri);
+                currentSideViewProvider = provider
+                let previous_dispose_handler =  vscode.window.registerWebviewViewProvider(SideViewProvider.viewType, provider)
+                isRegistered = true
+                currentSideViewProviderHandler = previous_dispose_handler;
+                provider.shouldFailureInfoShown(false);
+                provider.updateServerConfiguration(old_ip, old_port);
+                return;
+            }
+        }
+        else{
+            let old_ip = currentSideViewProvider.getIp();
+            let old_port = currentSideViewProvider.getPort();
+            if(isRegistered){
+                currentSideViewProviderHandler.dispose()
+            }
+            const provider = new SideViewProvider(context.extensionUri);
+            currentSideViewProvider = provider
+            let previous_dispose_handler =  vscode.window.registerWebviewViewProvider(SideViewProvider.viewType, provider)
+            isRegistered = true
+            currentSideViewProviderHandler = previous_dispose_handler;
+            provider.shouldFailureInfoShown(true);
+            provider.updateServerConfiguration(old_ip, old_port);
+            provider.FailureArbeitUpdaten(i18n.connection_failure);
+            return;
         }
     }
 ,
