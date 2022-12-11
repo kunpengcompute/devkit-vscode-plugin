@@ -92,6 +92,6 @@ export const I18N_EN = {
     server_connection_status: "Connection Status",
     failure_cause: "Cause of Disconnection",
 
-    version_mismatch_failure: "Version Mismatch",
-    connection_failure:"Connection Failure"
+    version_mismatch_failure: "Version Mismatch.",
+    connection_failure:"Connection Failure."
 };
