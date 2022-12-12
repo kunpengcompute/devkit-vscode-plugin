@@ -59,12 +59,12 @@
 }
 
 .install-form {
-    padding: 40px 0 40px 80px;
+    padding: 24px 0 40px 80px;
     min-width: 300px;
     box-sizing: border-box;
 
     .install-title-gen {
-        margin-bottom: 16px;
+        margin-bottom: 4px;
     }
 
     .install-title-det {
@@ -72,7 +72,7 @@
         justify-content: flex-start;
         align-items: flex-start;
         width: 704px;
-        margin-bottom: 30px;
+        margin-bottom: 24px;
 
         .top-tips {
             font-size: 14px;
@@ -110,10 +110,6 @@
             top: -4px;
         }
 
-        .tip-tem {
-            margin-left: 4px;
-        }
-
         .eye {
             position: absolute;
             left: 375px;
@@ -133,6 +129,7 @@
 
             .help-icon {
                 height: 14px;
+                margin-left: 8px;
             }
         }
 
@@ -216,13 +213,7 @@
         width: 16px;
         height: 16px;
     }
-
-    input {
-        width: 400px;
-        height: 28px !important;
-        padding: 5px 10px !important;
-    }
-
+    
     .help-icon {
         position: relative;
         top: 2px;
@@ -320,16 +311,11 @@
     }
 }
 
-.finger-box {
-    .tip-dsc {
-        border: none !important;
-        margin: 0 !important;
-        padding-top: 12px !important;
-    }
-}
-
 .img_box {
-    margin-right: 6px;
+    width: 22px;
+    height: 22px;
+    margin-top: 3px;
+    margin-right: 8px;
 }
 
 :host ::ng-deep .progress-modal {
@@ -426,7 +412,11 @@
     .tip-dsc {
         border: none !important;
         margin: 0 !important;
-        padding-top: 12px !important;
+        padding-top: 24px !important;
+    }
+
+    .tip-confirm button {
+        width: 92px !important;
     }
 }
 

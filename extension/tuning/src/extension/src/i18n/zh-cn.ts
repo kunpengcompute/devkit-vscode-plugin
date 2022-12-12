@@ -35,7 +35,7 @@ export const I18N_ZH = {
     plugins_common_show_user_admin_user: '管理员',
     plugins_common_show_user: '用户',
     plugins_common_show_user_btn_true: '知道了',
-    plugins_common_message_figerLose: '主机 {0} 的可信度不能确定，指纹为SHA256:{1}，是否继续连接（是/否）？',
+    plugins_common_message_figerLose: '主机 {0} 的可信度不能确定，指纹为SHA256:{1}，是否继续连接？',
     pligins_common_message_confirm: '是',
     pligins_common_message_cancel: '否',
     plugins_common_message_figerWarn: '当前本地配置文件储存指纹超过100个，请到本插件安装目录的src/extension/assets/config.json中自行删除指纹',
@@ -65,14 +65,12 @@ export const I18N_ZH = {
     plugins_tuning_dowloadPath: '文件下载成功，保存路径：{0}',
     plugins_tuning_message_cart: '证书导入成功后，重新启动VSCode生效',
     page_loading: "页面加载中...",
-    server_not_configered: '您还未连接远端服务器',
-    button_configure_server: '配置远程服务器',
-    free_trial_tip: '您也可申请免费试用鲲鹏远程实验室，该环境已预装鲲鹏代码迁移工具、鲲鹏编译器、鲲鹏性能分析工具、动态二进制翻译工具（ExaGear）。',
-    free_trial_button: '免费试用',
-    no_login_tip: "您还未登录",
-    no_login_button: "登录",
-    configure_server_again: "您已经连接远端服务器",
-    configure_server_again_button: "重新配置服务器",
+
     ip_address_title: "IP地址",
-    port_title: "端口"
+    port_title: "HTTPS端口",
+    server_connection_status: "连接状态",
+    failure_cause: "失败原因",
+
+    version_mismatch_failure: "版本不匹配。",
+    connection_failure:"连接失败。"
 };

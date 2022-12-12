@@ -61,7 +61,7 @@
         align-items: flex-start;
         margin-left: 40px;
         width: 704px;
-        margin-bottom: 30px;
+        margin-bottom: 24px;
         .tip-icon {
             color: #0067ff;
             background-color: #ffffff;
@@ -148,7 +148,7 @@
         align-items: flex-start;
         margin-left: 40px;
         width: 704px;
-        margin-bottom: 30px;
+        margin-bottom: 24px;
         .tip-icon {
             color: #0067ff;
             background-color: #ffffff;
@@ -213,9 +213,9 @@
     top: 10vw;
     padding-left: 40px;
     .uninstall-title-gen {
-        margin-bottom: 10px;
+        margin-bottom: 4px;
         margin-left: 40px;
-        margin-top: 40px;
+        margin-top: 24px;
     }
     .uninstall-title-gent {
         margin-bottom: 10px;
@@ -240,8 +240,20 @@
 
         .help-icon {
             height: 14px;
+            margin-left: 8px;
         }
     }
+
+    .ssh-type-radio {
+        display: inline-block;
+        margin-right: 40px;
+
+        span {
+            display: inline-block;
+            font-size: 14px;
+        }
+    }
+
     .uninstall-title-uninstalled p:nth-child(1) {
         width: 20px;
         height: 20px;
@@ -292,11 +304,6 @@
     margin-top: 20px;
     line-height: 32px;
     margin-left: 40px;
-}
-input {
-    width: 400px;
-    height: 28px !important;
-    padding: 5px 10px !important;
 }
 .img_uninstall {
     position: relative;
@@ -380,67 +387,10 @@ input {
 
     button {
         min-width: 100px;
-        line-height: 28px;
-        font-size: 14px;
-        text-align: center;
-        margin: 0px 10px;
-        border-width: 1px;
-        border-style: solid;
-        cursor: pointer;
-
-        &:first-child {
-            color: var(--uninstall-color-btn-p);
-            background-color: var(--uninstall-color-btn-p-bg-dft);
-            border-color: var(--uninstall-color-btn-p-bg-dft);
-
-            &:hover {
-                background-color: var(--uninstall-color-btn-p-bg-hover);
-                border-color: var(--uninstall-color-btn-p-bg-hover);
-            }
-
-            &:active {
-                background-color: var(--uninstall-color-btn-p-bg-active);
-                border-color: var(--uninstall-color-btn-p-bg-active);
-            }
-
-            &:disabled {
-                background-color: var(--uninstall-color-btn-p-bg-disabled);
-                border-color: var(--uninstall-color-btn-p-bg-disabled);
-                color: var(--uninstall-color-btn-text-disabled);
-                cursor: not-allowed;
-            }
-        }
-
-        &:last-child {
-            background-color: var(--uninstall-color-btn-m-bg);
-            border-color: var(--uninstall-color-btn-m-dft);
-            // color: var(--uninstall-color-content);
-
-            &:hover {
-                border-color: var(--uninstall-color-btn-m-hover);
-                color: var(--uninstall-color-btn-m-hover);
-            }
-
-            &:active {
-                border-color: var(--uninstall-color-btn-m-active);
-                color: var(--uninstall-color-btn-m-active);
-            }
-
-            &:disabled {
-                background-color: var(--uninstall-color-btn-m-bg-disabled);
-                border-color: var(--uninstall-color-btn-m-disabled);
-                color: var(--uninstall-color-btn-text-disabled);
-                cursor: not-allowed;
-            }
-        }
     }
 }
 ::ng-deep .content-box {
     background-color: var(--uninstall-color-msgbox-bg) !important;
-}
-
-.tip-tem {
-    margin-left: 4px;
 }
 
 .check-conn-btn {
@@ -459,9 +409,18 @@ input {
 }
 
 .img_box {
-    margin-top: 2px;
-    margin-right: 6px;
+    width: 22px;
+    height: 22px;
+    margin-top: 3px;
+    margin-right: 8px;
 }
+
+.title-info-img-box {
+    margin-right: 6px;
+    margin-top: 2px;
+}
+
+
 .eye {
     position: absolute;
     left: 375px;
@@ -596,7 +555,11 @@ input {
     .tip-dsc {
         border: none !important;
         margin: 0 !important;
-        padding-top: 12px !important;
+        padding-top: 24px !important;
+    }
+
+    .tip-confirm button {
+        width: 92px !important;
     }
 }
 

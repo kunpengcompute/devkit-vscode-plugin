@@ -55,7 +55,7 @@ export const I18N_ZH = {
     plugins_common_message_installDt2: '列表清单',
     plugins_common_message_installDt3: '中，并且处于联网状态。系统将为您自动完成安装。',
     plugins_common_message_upgradeDt1: '请确保远端运行服务器的操作系统及版本在',
-    plugins_common_message_upgradeDt2: '兼容列表',
+    plugins_common_message_upgradeDt2: '列表清单',
     plugins_common_message_upgradeDt3: '清单中，并且处于联网状态。系统将为您自动完成升级。',
     plugins_common_message_uninstallDt: '请确保目标服务器正常，系统将为您自动完成卸载。',
     plugins_common_title_installTs: '目标服务器',
@@ -72,7 +72,7 @@ export const I18N_ZH = {
     plugins_tuning_title_installed: '工具部署成功',
     plugins_tuning_title_uninstalled: '工具卸载成功',
     plugins_tuning_title_upgraded: '工具升级成功',
-    plugins_tuning_button_login: '立即登录',
+    plugins_tuning_button_login: '登录',
     plugins_tuning_button_retry: '重试',
     plugins_tuning_button_install_failed_retry: '重新部署',
     plugins_tuning_title_installFailed: '性能分析工具部署失败',
@@ -91,8 +91,12 @@ export const I18N_ZH = {
     common_term_valition_password:
         '必须包含大写字母、小写字母、数字以及特殊字符（`~!@#$%^&*()-_=+\\|[{}];:\'",<.>/?）中两种及以上类型的组合，不能含空格，长度为8~32个字符。',
     plugins_common_button_checkConn: '检测连接',
-    plugins_common_tips_connOk: 'SSH连接检测成功',
-    plugins_common_tips_connFail: 'SSH连接检测失败，请检查用户名，密码或者私钥是否输入正确，重试次数过多也将导致检测失败',
+    plugins_common_tips_connOk: '连接检测成功，',
+    plugins_common_tips_start_deploy: '点击【开始部署】进行工具安装。',
+    plugins_common_tips_start_uninstall: '点击【开始卸载】进行工具卸载。',
+    plugins_common_tips_start_upgrade: '点击【开始升级】进行工具升级。',
+    plugins_common_tips_connFail: '连接检测失败，请检查用户名，密码或者私钥是否输入正确，重试次数过多也将导致检测失败。',
+    plugins_common_tips_connTimeout: '连接检测失败，请检查IP端口是否正确。',
     plugins_common_message_fileName: '文件名称只能由字母、数字、“.”、“-”、“+”、“()”和“_”组成，长度为1~64个字符且不能以“.”开头。',
     plugins_common_message_fileName_length: '单个文件名限制最长不超过255个字符',
     plugins_common_message_command_length: '命令输入框限制最长不超过1024个字符',
@@ -201,7 +205,7 @@ export const I18N_ZH = {
     plugins_common_message_serverErrorResult2Link: '"如何排查服务端状态异常问题"',
     plugins_common_message_serverErrorResult2_1: '-异常，请参考',
     plugins_common_message_serverErrorResult2_2: '处理。',
-    plugins_common_message_figerLose: '主机 {0} 的可信度不能确定，指纹为SHA256:{1}，是否继续连接（是/否）？',
+    plugins_common_message_figerLose: '主机 {0} 的可信度不能确定，指纹为SHA256:{1}，是否继续连接？',
 
     plugins_common_title_guide: '配置指引',
     plugins_common_label_guide: '请在完成鲲鹏性能分析工具部署后配置远端服务器，若您已经完成工具部署则可直接配置远端服务器。',
@@ -235,8 +239,7 @@ export const I18N_ZH = {
 
 
     plugins_tuning_message_versionCompatibility: '插件版本与服务端的软件版本不匹配。本插件可匹配的性能分析工具服务端版本为：{0}；当前性能分析工具服务端版本为：{1}。请您升级服务端版本至匹配版本。',
-    plugins_tuning_message_config_server_success: '配置远端服务器成功',
-    plugins_tuning_message_save_config_success: '保存配置成功！',
+    plugins_tuning_message_save_config_success: '远端服务器配置成功！',
     plugins_tuning_title_save_config: '保存远端服务器配置',
     plugins_tuning_save_config_modify: '是否确认保存当前修改？点击确认后将登出当前用户。',
     plugins_tuning_title_root_deploy: 'root用户部署',
@@ -246,4 +249,6 @@ export const I18N_ZH = {
     plugins_common_message_responseError_deployScenario: '服务器未响应，请检查网络连接是否正常。',
     plugins_common_message_sshAlgError: '连接检测失败。客户端算法与服务器端算法不匹配，请参考FAQ配置安全算法。',
     plugins_common_message_sshClientCheck: '检测到该机器未安装SSH Client，请自行获取并安装。',
+    plugins_tuning_title_finger_confirm: '确认指纹',
+    plugins_tuning_button_continue_connect: '继续连接',
 };

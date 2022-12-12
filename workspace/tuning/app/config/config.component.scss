@@ -1,14 +1,10 @@
 .config-form {
     box-sizing: border-box;
-    padding: 40px 80px;
+    padding: 24px 80px;
 
     .config-title-gen {
         margin-bottom: 4px;
         height: 26px;
-    }
-
-    input {
-        width: 400px;
     }
 
     .config-form-item {
@@ -26,9 +22,6 @@
             display: inline-block;
         }
 
-        input[tiText] {
-            padding: 5px 10px;
-        }
     }
 
     .btn-group {
@@ -93,7 +86,7 @@
         line-height: 20px;
 
         &:last-child {
-            margin-bottom: 40px;
+            margin-bottom: 24px;
         }
 
         .config-title-det-btn {
@@ -146,7 +139,7 @@
         line-height: 20px;
 
         &:last-child {
-            margin-bottom: 40px;
+            margin-bottom: 24px;
         }
 
         .config-title-det-btn {
@@ -421,8 +414,8 @@
 }
 
 .login-button {
-    width: 100px;
-    height: 26px;
+    width: 88px;
+    height: 28px;
     margin-right: 0;
     cursor: pointer;
 }
