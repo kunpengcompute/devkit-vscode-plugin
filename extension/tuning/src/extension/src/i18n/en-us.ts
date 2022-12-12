@@ -41,7 +41,7 @@ export const I18N_EN = {
     plugins_common_show_user: 'user',
     plugins_common_show_user_btn_true: 'OK',
     plugins_common_message_figerLose: 'The authenticity of host {0} can\'t be established. The fingerprint is SHA256:{1}. \
-    Are you sure you want to continue connecting (Yes/No)?',
+    Are you sure you want to continue connecting?',
     pligins_common_message_confirm: 'Yes',
     pligins_common_message_cancel: 'No',
     plugins_common_message_figerWarn: 'The number of fingerprints stored in the local configuration file exceeds 100. \
@@ -87,14 +87,11 @@ export const I18N_EN = {
     restart VS Code for the certificate to take effect.',
     page_loading: "Page loading...",
 
-    server_not_configered: '您还未链接远端服务器',
-    button_configure_server: '配置远程服务器',
-    free_trial_tip: '您也可申请免费试用鲲鹏远程实验室，该环境已预装鲲鹏代码迁移工具、鲲鹏编译器、鲲鹏性能分析工具、动态二进制翻译工具（ExaGear）。',
-    free_trial_button: '免费试用',
-    no_login_tip: "您还未登录",
-    no_login_button: "登录",
-    configure_server_again: "您已经连接远端服务器",
-    configure_server_again_button: "重新配置服务器",
-    ip_address_title: "IP地址",
-    port_title: "端口"
+    ip_address_title: "IP Address",
+    port_title: "HTTPS Port",
+    server_connection_status: "Connection Status",
+    failure_cause: "Cause of Disconnection",
+
+    version_mismatch_failure: "Version Mismatch.",
+    connection_failure:"Connection Failure."
 };

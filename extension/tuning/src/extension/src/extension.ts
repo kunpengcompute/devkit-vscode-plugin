@@ -3,6 +3,7 @@ import {Utils} from './utils';
 import {ToolPanelManager} from './panel-manager';
 import * as sidebar from './TreeViewProvider';
 import {SideViewProvider} from './SideView/SideViewProvider';
+import {messageHandler} from './webview-msg-handler';
 
 export function activate(context: vscode.ExtensionContext) {
     // 响应VSCode配置修改
@@ -11,7 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
     Utils.initVscodeCache(context, true);
     // 响应perfadvisor左侧菜单树所有按钮的命令来打开不同的webview
     // console.log('here')
-    Utils.reloadConfigurations(context);
+    messageHandler.reloadConfigurations(context);
     ToolPanelManager.createOrShowPanelForPerfCommand(context);
 
     // const sidebar_test = new sidebar.TreeViewProvider();

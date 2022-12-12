@@ -1,46 +1,50 @@
 ::ng-deep .vscode-dark {
     --color-box-content: #252526;
-    $linkColor: #000000;
-    --color-content-shadow: rgba($linkColor, 0.8);
-    --color-message: #ffffff;
+    --color-content-shadow: rgba(0, 0, 0, 0.4);
+    --color-message: #e8e8e8;
 }
 
 ::ng-deep .vscode-light {
     --color-box-content: #FFFFFF;
-    $linkColor: #000000;
-    --color-content-shadow: rgba($linkColor, 0.1);
-    --color-message: #616161;
+    --color-content-shadow: rgba(0, 0, 0, 0.2);
+    --color-message: #222222;
 }
 
 .notification-box {
     background-color: var(--color-box-content);
-    box-shadow: 0px 3px 6px 0px var(--color-content-shadow);
-    position: fixed;
-    width: fit-content;
-    height: 35px;
-    top: 30px;
-    left: 50%;
-    display: none;
-    padding: 0 10px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    z-index: 999;
-    transform: translateX(-50%);
+    box-shadow: 0px 8px 30px 0px var(--color-content-shadow);
 
-    font-size: 13px;
+    width: 448px;
+    height: fit-content;
+    padding: 16px;
+    margin-bottom: 10px;
+    display: flex;
+    font-size: 14px;
     color: var(--color-message);
 }
 
-.notification-box.active {
+.notification-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
     display: flex;
+    align-items: center;
+    img {
+        width: 16px !important;
+        height: 16px !important;
+    }
 }
 
-.notification-icon {
-    width: 15px;
-    height: 15px;
-    margin-right: 10px;
+.icon-close {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    position: absolute;
+    right: 16px;
     img {
-        size: 15px 15px;
+        width: 14px;
+        cursor: pointer;
     }
 }

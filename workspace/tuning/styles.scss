@@ -481,6 +481,7 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
         width: 16px;
         height: 16px;
         font-weight: lighter;
+        border: none !important;
     }
 
     input[type="checkbox"][tiCheckbox]:not([disabled]):checked+.ti3-checkbox .ti3-checkbox-skin:active {
@@ -654,11 +655,6 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
     font-size: 16px;
 }
 
-.ti3-icon-staricon::before {
-    color: #f45c5e !important;
-    margin-left: -14px !important;
-}
-
 .ti3-icon {
     font-style: normal;
     font-weight: 400;
@@ -671,6 +667,25 @@ input[type="checkbox"][tiCheckbox][disabled]:checked+.ti3-checkbox .ti3-checkbox
 
 .ti3-validate-icon {
     margin-right: 5px !important;
+}
+
+.ti3-icon-staricon:before {
+    content: '*';
+    color: #f45c5e !important;
+    margin-left: -8px;
+    margin-right: 1px;
+    font-size: 14px !important;
+    line-height: 18px !important;
+}
+
+.ti3-icon-exclamation-circle img {
+    width: 13px !important;
+    height: 13px !important;
+}
+
+.ti3-unifyvalid-error-container {
+    max-width: 100%;
+    line-height: 16px;
 }
 
 .ra-label {
@@ -771,7 +786,7 @@ img[src$="dark-nodata.png"] {
     width: 120px;
     font-size: 12px !important;
     padding: 0 20px;
-    height: 32px;
+    height: 28px;
     display: inline-block;
     line-height: 18px;
     text-align: center;
@@ -837,14 +852,16 @@ img[src$="dark-nodata.png"] {
 
 /** input start**/
 input {
-    width: 65%;
+    // width: 65%;
+    width: 380px !important;
+    padding: 5px 10px !important;
     border-style: solid;
     border-width: 1px;
     border-color: var(--border-d-888888-l-979797) !important;
     background-color: var(--vscode-editor-background) !important;
     border-radius: 2px !important;
     box-shadow: none !important;
-    height: 28px !important;
+    height: 18px !important;
     font-size: 12px !important;
     color: var(--font-d-e8e8e8-l-222222) !important;
 }
@@ -875,4 +892,18 @@ textarea {
 
 .pointer {
     cursor: pointer;
+}
+
+.border-red {
+    border: #ff4c4c 1px solid !important;
+}
+
+.notification-message {
+    width: 392px;
+}
+
+.notification-container {
+    position: fixed;
+    right: 10px;
+    bottom: 0px;
 }

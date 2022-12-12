@@ -16,23 +16,23 @@
     </div>
 
     <div class="config-form-item">
-        <div class="ti3-icon ti3-icon-staricon config-form-item-label"><img src="./assets/img/required-field.svg">{{ i18n.plugins_common_label_ip }}
+        <div class="ti3-icon ti3-icon-staricon config-form-item-label">{{ i18n.plugins_common_label_ip }}
         </div>
-        <input type="text" tiText [(ngModel)]="tempIP" (blur)="checkIP()" *ngIf="!hasConfig || isModify" />
+        <input type="text" [ngClass]="{'border-red': ipCheck}" tiText [(ngModel)]="tempIP" (blur)="checkIP()" *ngIf="!hasConfig || isModify" />
         <input type="text" tiText [placeholder]="tempIP" disabled *ngIf="hasConfig && !isModify"/>
         <div *ngIf="ipCheck" class="ti3-unifyvalid-error-container">
-            <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"></span>
+            <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"><img src="./assets/img/tip/icon_failure.svg"></span>
             <span class="ti3-validate-text">{{ i18n.plugins_common_message_ipError }}</span>
         </div>
     </div>
     <div class="config-form-item">
-        <div class="ti3-icon ti3-icon-staricon config-form-item-label"><img src="./assets/img/required-field.svg">{{ i18n.plugins_common_label_configPort }}
+        <div class="ti3-icon ti3-icon-staricon config-form-item-label">{{ i18n.plugins_common_label_configPort }}
         </div>
-        <input [placeholder]="i18n.plugins_common_placeholder_default_port" type="text" tiText [(ngModel)]="tempPort"
+        <input [placeholder]="i18n.plugins_common_placeholder_default_port" type="text" tiText [(ngModel)]="tempPort" [ngClass]="{'border-red': portCheck}"
             (blur)="checkPort()" *ngIf="!hasConfig || isModify"/>
         <input type="text" tiText [placeholder]="tempPort" disabled *ngIf="hasConfig && !isModify"/>
         <div *ngIf="portCheck" class="ti3-unifyvalid-error-container">
-            <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"></span>
+            <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"><img src="./assets/img/tip/icon_failure.svg"></span>
             <span class="ti3-validate-text">{{ i18n.plugins_common_message_portError }}</span>
         </div>
     </div>
@@ -55,7 +55,7 @@
     <app-loading [height]="'100%'" [size]="'max'"></app-loading>
 </div>
 
-<!-- TODO 是否切换服务器? 这个是在什么场景下有出现的 好像没用 -->
+<!-- 是否切换服务器? 这个是在什么场景下有出现的 好像没用 -->
 <!-- <app-messagebox #showDialog>
     <div class="content tip-box">
         <div class="tip-title color-d-e8-l-22">
@@ -137,20 +137,23 @@
 
 </app-messagebox>
 
-<app-notification-box #notificationBox>
-    <div class="notification-message">{{notificationMessage}}</div>
-</app-notification-box>
 
-<app-notification-with-action #canLoginBox>
-    <span class="notification-message">{{i18n.plugins_tuning_message_save_config_success}}</span>
-    <div class="action-content">
-        <button type="button" class="primary-btn login-button" (click)="openLogin()">{{i18n.plugins_tuning_button_login}}</button>
-    </div>
-</app-notification-with-action>
-
-<app-notification-with-action #serverErrorBox>
-    <span class="notification-message">{{i18n.plugins_common_message_responseError}}</span>
-    <div class="action-content">
-        <button type="button" class="primary-btn error-instruction-button" (click)="openErrorInstruction()">{{i18n.plugins_common_button_checkErrorDetails}}</button>
-    </div>
-</app-notification-with-action>
+<div class="notification-container">
+    <app-notification-box #notificationBox>
+        <div class="notification-message">{{notificationMessage}}</div>
+    </app-notification-box>
+    
+    <app-notification-with-action #canLoginBox>
+        <span class="notification-message">{{i18n.plugins_tuning_message_save_config_success}}</span>
+        <div class="action-content">
+            <button type="button" class="primary-btn login-button" (click)="openLogin()">{{i18n.plugins_tuning_button_login}}</button>
+        </div>
+    </app-notification-with-action>
+    
+    <app-notification-with-action #serverErrorBox>
+        <span class="notification-message">{{i18n.plugins_common_message_responseError}}</span>
+        <div class="action-content">
+            <button type="button" class="primary-btn error-instruction-button" (click)="openErrorInstruction()">{{i18n.plugins_common_button_checkErrorDetails}}</button>
+        </div>
+    </app-notification-with-action>
+</div>
