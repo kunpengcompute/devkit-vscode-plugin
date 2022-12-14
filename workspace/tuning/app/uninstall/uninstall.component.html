@@ -86,7 +86,7 @@
                 (change)="connected=false" oncopy="return false"
                 onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
                 onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" onpaste="return true"
-                oncut="return false" style="padding-right: 32px;" noeye />
+                oncut="return false" style="padding-right: 32px !important; width: 358px !important;" noeye />
             <div class="eye">
                 <span (click)="changInputType('password')" *ngIf="uninstallType === 'text'">
                     <img src="./assets/img/icon-view.svg" />
@@ -126,6 +126,7 @@
                 (change)="connected = false"
                 [ngClass]="{'border-red': passphraseCheckNull}"
                 (blur)="checkPassPhrase()"
+                style="padding-right: 32px !important; width: 358px !important;"
                 oncopy="return false"
                 onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
                 onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}"

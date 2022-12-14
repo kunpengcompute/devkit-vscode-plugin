@@ -859,6 +859,7 @@ input {
     border-width: 1px;
     border-color: var(--border-d-888888-l-979797) !important;
     background-color: var(--vscode-editor-background) !important;
+    font-family: "huawei sans";
     border-radius: 2px !important;
     box-shadow: none !important;
     height: 18px !important;
@@ -874,7 +875,7 @@ textarea {
     box-shadow: unset !important;
     resize: vertical;
     border-radius: 2px !important;
-
+    font-family: "huawei sans";
     &:focus {
         outline: 1px solid #0067ff;
     }

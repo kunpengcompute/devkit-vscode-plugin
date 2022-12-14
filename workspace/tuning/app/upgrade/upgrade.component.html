@@ -84,7 +84,7 @@
             <input id="pwd" [type]="upgradeType" tiText [(ngModel)]="pwd" (blur)="checkPwd()" (change)="connected=false" [disabled]="connectChecking" [ngClass]="{'border-red': pwdCheckNull}"
                 oncopy="return false" onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
                 onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" onpaste="return true"
-                oncut="return false" style="padding-right: 32px;" noeye>
+                oncut="return false" style="padding-right: 32px !important; width: 358px !important;" noeye>
             <div class="eye">
                 <span (click)="changInputType('password')" *ngIf="upgradeType === 'text'">
                     <img src="./assets/img/icon-view.svg">
@@ -124,6 +124,7 @@
                 (change)="connected = false"
                 [ngClass]="{'border-red': passphraseCheckNull}"
                 (blur)="checkPassPhrase()"
+                style="padding-right: 32px !important; width: 358px !important;"
                 oncopy="return false"
                 onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
                 onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}"
