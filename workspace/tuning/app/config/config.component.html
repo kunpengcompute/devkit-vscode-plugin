@@ -38,7 +38,7 @@
     </div>
 
     <div class="btn-group">
-        <button type="button" class="primary-btn" (mousedown)="saveConfirm()" *ngIf="!hasConfig || isModify" [disabled]="!tempIP || !tempPort">
+        <button type="button" class="primary-btn" (mousedown)="saveConfirm()" *ngIf="!hasConfig || isModify">
             {{ i18n.plugins_tuning_button_save }}
         </button>
         <button type="button" class="primary-btn" (mousedown)="modifyConfig()" *ngIf="hasConfig && !isModify">

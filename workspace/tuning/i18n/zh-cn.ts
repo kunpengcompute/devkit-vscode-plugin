@@ -106,7 +106,7 @@ export const I18N_ZH = {
     plugins_common_tips_timeOut: '连接超时，请重试',
     plugins_common_title_sshKey: '密钥认证',
     plugins_common_title_sshPwd: '密码认证',
-    plugins_common_label_selectSSHType: '选择SSH连接方式',
+    plugins_common_label_selectSSHType: 'SSH连接方式',
     plugins_common_message_sslKeyTip: '请导入id_rsa私钥文件',
     plugins_common_message_passphrase: '请输入私钥文件的密码短语',
     plugins_common_message_sshkeyFail: '请导入正确的id_rsa私钥文件',

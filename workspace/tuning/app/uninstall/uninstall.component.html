@@ -105,7 +105,7 @@
     <div *ngIf="sshTypeSelected === 'usekey'" class="uninstall-form-item">
         <div class="ti3-icon ti3-icon-staricon uninstall-form-item-label">{{ i18n.plugins_common_label_installsshkey }}
         </div>
-        <textarea resize="horizontal" tiTextarea class="usekey-input" [placeholder]="sshUploadKey"  [disabled]="connectChecking" [ngClass]="{'border-red': sshkeyCheckNull}"
+        <textarea resize="horizontal" tiTextarea class="usekey-input" [placeholder]="sshUploadKey"  [disabled]="connectChecking" (blur)="checkSshKey()" [ngClass]="{'border-red': sshkeyCheckNull}"
             [(ngModel)]="localfilepath" readonly>
         </textarea>
         <div style="display: inline-block;" class="upload-btn">
@@ -124,6 +124,8 @@
             <input [type]="uninstallType" tiText placeholder="{{i18n.plugins_common_message_passphrase}}" [disabled]="connectChecking"
                 [(ngModel)]="passphrase"
                 (change)="connected = false"
+                [ngClass]="{'border-red': passphraseCheckNull}"
+                (blur)="checkPassPhrase()"
                 oncopy="return false"
                 onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
                 onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}"
@@ -138,12 +140,16 @@
                 </span>
             </div>
         </div>
+        <div *ngIf="passphraseCheckNull" class="ti3-unifyvalid-error-container">
+            <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"><img src="./assets/img/tip/icon_failure.svg"></span>
+            <span class="ti3-validate-text">{{ i18n.common_term_required_tip }}</span>
+        </div>
     </div>
 
     <div class="btn-group" [ngClass]="{'checkconnection-btn-en': i18nService.currLang === i18nService.langType.en}">
         <!-- 检测连接 -->
         <button type="button" class="secondary-btn check-conn-btn" [ngClass]="{'checking-btn': connectChecking}" (click)="checkConnBefore()"
-            [disabled]="connectChecking || (sshTypeSelected === 'usekey' && !localfilepath)">
+            [disabled]="connectChecking">
             <img *ngIf="connectChecking && currTheme === 1" src="./assets/img/loading-disabled.gif">
             <img *ngIf="connectChecking && currTheme === 2" src="./assets/img/loading-white.gif">
             <span>{{ i18n.plugins_common_button_checkConn }}</span>

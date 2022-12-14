@@ -46,6 +46,8 @@ export class UpgradeComponent implements OnInit {
     public tempPortCheckF = false;
     public usernameCheckNull = false;
     public pwdCheckNull = false;
+    public sshkeyCheckNull = false;
+    public passphraseCheckNull = false;
     public upgradeType = 'password';
     public currTheme = COLOR_THEME.Dark;
     // 是否检测连接成功
@@ -150,7 +152,7 @@ export class UpgradeComponent implements OnInit {
     private getCheckResult() {
         if (!this.ipCheckF && !this.tempPortCheckF && !this.usernameCheckNull &&
             ((this.sshTypeSelected === 'usepwd' && !this.pwdCheckNull) ||
-            (this.sshTypeSelected === 'usekey' && this.localfilepath))) {
+            (this.sshTypeSelected === 'usekey' && !this.sshkeyCheckNull && !this.passphraseCheckNull))) {
             return true;
         }
         return false;
@@ -217,7 +219,7 @@ export class UpgradeComponent implements OnInit {
             } else if (data.search(/TIMEOUT/) !== -1) {
                 // 连接超时
                 this.connectChecking = false;
-                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connTimeout);
+                // this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connTimeout);
                 this.serverErrorBox.setType(notificationType.error);
                 this.serverErrorBox.show();
             } else if (data.search(/Cannot parse privateKey/) !== -1) {
@@ -228,8 +230,8 @@ export class UpgradeComponent implements OnInit {
             } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
                 this.connectChecking = false;
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
-                this.serverErrorBox.setType(notificationType.error);
-                this.serverErrorBox.show();
+                // this.serverErrorBox.setType(notificationType.error);
+                // this.serverErrorBox.show();
             } else {
                 // 首次连接
                 this.tempFinger = data;
@@ -490,6 +492,28 @@ export class UpgradeComponent implements OnInit {
             this.tempPortCheckF = false;
         } else {
             this.tempPortCheckF = true;
+        }
+    }
+
+    /**
+     * 检查私钥非空
+     */
+    checkSshKey() {
+        if (this.localfilepath === '' || this.localfilepath === undefined) {
+            this.sshkeyCheckNull = true;
+        } else {
+            this.sshkeyCheckNull = false;
+        }
+    }
+
+    /**
+     * 检查密钥密码短语非空
+     */
+    checkPassPhrase() {
+        if (this.passphrase === '' || this.passphrase === undefined) {
+            this.passphraseCheckNull = true;
+        } else {
+            this.passphraseCheckNull = false;
         }
     }
 

@@ -425,3 +425,10 @@
     margin-right: 0;
     height: 26px;
 }
+
+.btn-group {
+    button {
+        width: 96px !important;
+        height: 32px !important;
+    }
+}

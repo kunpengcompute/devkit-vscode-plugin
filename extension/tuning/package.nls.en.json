@@ -17,7 +17,7 @@
     "server_configure_column_title": "Remote Server",
     "views_welcome_column_title": "Launchpad",
 
-    "configure.remote.server.again": "Reconfigure Remote Server",
+    "configure.remote.server.again": "Configure Remote Server",
     "configure.remote.server": "Configure Remote Server",
     "plugins_perfadvisor_title_login": "Login Hyper Tuner"
 } 
