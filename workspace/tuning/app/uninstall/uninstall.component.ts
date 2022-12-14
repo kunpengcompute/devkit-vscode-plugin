@@ -370,6 +370,8 @@ export class UnInstallComponent implements OnInit{
         this.pwd = '';
         this.privateKey = '';
         this.passphrase = '';
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -385,6 +387,8 @@ export class UnInstallComponent implements OnInit{
             this.vscodeService.postMessage(postData, (res:any) => {
                 this.closeAll=res
                 this.uninstalling = SUCCESS;
+                this.changeDetectorRef.markForCheck();
+                this.changeDetectorRef.detectChanges();
             });
         });
     }
@@ -406,6 +410,8 @@ export class UnInstallComponent implements OnInit{
         const reg = /^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$/;
         const invalidIp = /0.0.0.0|255.255.255.255/;
         this.ipCheckF = !reg.test(this.tempIP) || invalidIp.test(this.tempIP);
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -419,6 +425,8 @@ export class UnInstallComponent implements OnInit{
         } else {
             this.usernameCheckNull = false;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -432,6 +440,8 @@ export class UnInstallComponent implements OnInit{
         } else {
             this.pwdCheckNull = false;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -447,6 +457,8 @@ export class UnInstallComponent implements OnInit{
         } else {
             this.tempPortCheckF = true;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
     
     /**
@@ -458,6 +470,8 @@ export class UnInstallComponent implements OnInit{
         } else {
             this.sshkeyCheckNull = false;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -469,6 +483,8 @@ export class UnInstallComponent implements OnInit{
         } else {
             this.passphraseCheckNull = false;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
     
     /**
@@ -558,6 +574,8 @@ export class UnInstallComponent implements OnInit{
      public checkChange(item: any) {
         this.sshTypeSelected = item.key;
         this.uninstallType = 'password';
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
     /**
      * 改变密码明文或密文
@@ -565,6 +583,8 @@ export class UnInstallComponent implements OnInit{
      */
     public changInputType(type: string) {
         this.uninstallType = type;
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**

@@ -96,6 +96,8 @@ export class ConfigComponent implements OnInit {
         const reg = /^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$/;
         const invalidIp = /0.0.0.0|255.255.255.255/;
         this.ipCheck = !reg.test(this.tempIP) || invalidIp.test(this.tempIP);
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -111,6 +113,8 @@ export class ConfigComponent implements OnInit {
         } else {
             this.portCheck = true;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**

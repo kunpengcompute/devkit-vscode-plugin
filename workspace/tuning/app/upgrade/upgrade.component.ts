@@ -402,6 +402,8 @@ export class UpgradeComponent implements OnInit {
         this.pwd = '';
         this.privateKey = '';
         this.passphrase = '';
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
 
@@ -441,6 +443,8 @@ export class UpgradeComponent implements OnInit {
         const reg = /^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$/;
         const invalidIp = /0.0.0.0|255.255.255.255/;
         this.ipCheckF = !reg.test(this.tempIP) || invalidIp.test(this.tempIP);
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -452,6 +456,8 @@ export class UpgradeComponent implements OnInit {
         const reg = /^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$/;
         const invalidIp = /0.0.0.0|255.255.255.255/;
         this.extraIpCheckF = !reg.test(this.extraIP) || invalidIp.test(this.extraIP);
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -465,6 +471,8 @@ export class UpgradeComponent implements OnInit {
         } else {
             this.usernameCheckNull = false;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -478,6 +486,8 @@ export class UpgradeComponent implements OnInit {
         } else {
             this.pwdCheckNull = false;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -493,6 +503,8 @@ export class UpgradeComponent implements OnInit {
         } else {
             this.tempPortCheckF = true;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -504,6 +516,8 @@ export class UpgradeComponent implements OnInit {
         } else {
             this.sshkeyCheckNull = false;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -515,6 +529,8 @@ export class UpgradeComponent implements OnInit {
         } else {
             this.passphraseCheckNull = false;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -625,6 +641,8 @@ export class UpgradeComponent implements OnInit {
      */
     upgradeType0() {
         this.upgradeType = 'password';
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
    /**
@@ -632,6 +650,8 @@ export class UpgradeComponent implements OnInit {
     */
    upgradeType1() {
         this.upgradeType = 'text';
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -641,6 +661,8 @@ export class UpgradeComponent implements OnInit {
      public checkChange(item: any) {
         this.sshTypeSelected = item.key;
         this.upgradeType = 'password';
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
     /**
      * 改变密码明文或密文
@@ -648,6 +670,8 @@ export class UpgradeComponent implements OnInit {
      */
     public changInputType(type: string) {
         this.upgradeType = type;
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
