@@ -58,6 +58,7 @@ export class UnInstallComponent implements OnInit{
     public sshUploadKey: any;
     public localfilepath: any;
     public sshkeyCheckNull = false;
+    public passphraseCheckNull = false;
     // 开始卸载的时间
     private startUninstallDatetime: Date;
     public pluginUrlCfg: any = {};
@@ -140,7 +141,7 @@ export class UnInstallComponent implements OnInit{
     private getCheckResult() {
         if (!this.ipCheckF && !this.tempPortCheckF && !this.usernameCheckNull &&
             ((this.sshTypeSelected === 'usepwd' && !this.pwdCheckNull) ||
-            (this.sshTypeSelected === 'usekey' && this.localfilepath))) {
+            (this.sshTypeSelected === 'usekey' && !this.sshkeyCheckNull && !this.passphraseCheckNull))) {
             return true;
         }
         return false;
@@ -209,7 +210,7 @@ export class UnInstallComponent implements OnInit{
             } else if (data.search(/TIMEOUT/) !== -1) {
                 // 连接超时
                 this.connectChecking = false;
-                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connTimeout);
+                // this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connTimeout);
                 this.serverErrorBox.setType(notificationType.error);
                 this.serverErrorBox.show();
             } else if (data.search(/Cannot parse privateKey/) !== -1) {
@@ -220,8 +221,8 @@ export class UnInstallComponent implements OnInit{
             } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
                 this.connectChecking = false;
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
-                this.serverErrorBox.setType(notificationType.error);
-                this.serverErrorBox.show();
+                // this.serverErrorBox.setType(notificationType.error);
+                // this.serverErrorBox.show();
             } else {
                 // 首次连接
                 this.tempFinger = data;
@@ -369,6 +370,8 @@ export class UnInstallComponent implements OnInit{
         this.pwd = '';
         this.privateKey = '';
         this.passphrase = '';
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -384,6 +387,8 @@ export class UnInstallComponent implements OnInit{
             this.vscodeService.postMessage(postData, (res:any) => {
                 this.closeAll=res
                 this.uninstalling = SUCCESS;
+                this.changeDetectorRef.markForCheck();
+                this.changeDetectorRef.detectChanges();
             });
         });
     }
@@ -405,6 +410,8 @@ export class UnInstallComponent implements OnInit{
         const reg = /^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$/;
         const invalidIp = /0.0.0.0|255.255.255.255/;
         this.ipCheckF = !reg.test(this.tempIP) || invalidIp.test(this.tempIP);
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -418,6 +425,8 @@ export class UnInstallComponent implements OnInit{
         } else {
             this.usernameCheckNull = false;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -431,6 +440,8 @@ export class UnInstallComponent implements OnInit{
         } else {
             this.pwdCheckNull = false;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -446,8 +457,36 @@ export class UnInstallComponent implements OnInit{
         } else {
             this.tempPortCheckF = true;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
+    }
+    
+    /**
+     * 检查私钥非空
+     */
+    checkSshKey() {
+        if (this.localfilepath === '' || this.localfilepath === undefined) {
+            this.sshkeyCheckNull = true;
+        } else {
+            this.sshkeyCheckNull = false;
+        }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
+    /**
+     * 检查密钥密码短语非空
+     */
+    checkPassPhrase() {
+        if (this.passphrase === '' || this.passphrase === undefined) {
+            this.passphraseCheckNull = true;
+        } else {
+            this.passphraseCheckNull = false;
+        }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
+    }
+    
     /**
      * 重试
      */
@@ -535,6 +574,8 @@ export class UnInstallComponent implements OnInit{
      public checkChange(item: any) {
         this.sshTypeSelected = item.key;
         this.uninstallType = 'password';
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
     /**
      * 改变密码明文或密文
@@ -542,6 +583,8 @@ export class UnInstallComponent implements OnInit{
      */
     public changInputType(type: string) {
         this.uninstallType = type;
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**

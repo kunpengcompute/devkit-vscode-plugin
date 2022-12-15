@@ -12,7 +12,6 @@
         </a>
     </p>
     <div class="upgrade-title-det">
-        <img class="title-info-img-box" src="./assets/img/tip/icon_information.svg">
         <span class="top-tips"> {{i18n.plugins_common_message_upgradeDt1 }}
             <a (click)="clickFAQ(pluginUrlCfg.vscodeService_openFAQ2)">
                 {{i18n.plugins_common_message_upgradeDt2}}</a>
@@ -85,7 +84,7 @@
             <input id="pwd" [type]="upgradeType" tiText [(ngModel)]="pwd" (blur)="checkPwd()" (change)="connected=false" [disabled]="connectChecking" [ngClass]="{'border-red': pwdCheckNull}"
                 oncopy="return false" onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
                 onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}" onpaste="return true"
-                oncut="return false" style="padding-right: 32px;" noeye>
+                oncut="return false" style="padding-right: 32px !important; width: 358px !important;" noeye>
             <div class="eye">
                 <span (click)="changInputType('password')" *ngIf="upgradeType === 'text'">
                     <img src="./assets/img/icon-view.svg">
@@ -104,7 +103,7 @@
     <div *ngIf="sshTypeSelected === 'usekey'" class="upgrade-form-item">
         <div class="ti3-icon ti3-icon-staricon upgrade-form-item-label">{{ i18n.plugins_common_label_installsshkey }}
         </div>
-        <textarea resize="horizontal" tiTextarea class="usekey-input" [placeholder]="sshUploadKey" [disabled]="connectChecking"
+        <textarea resize="horizontal" tiTextarea class="usekey-input" [placeholder]="sshUploadKey" [disabled]="connectChecking" (blur)="checkSshKey()" [ngClass]="{'border-red': sshkeyCheckNull}"
             [(ngModel)]="localfilepath" readonly>
         </textarea>
         <div style="display: inline-block;" class="upload-btn">
@@ -113,12 +112,19 @@
                 <input type="file" id="uploadFile" style="display: none;" (change)="uploadFile()" [disabled]="connectChecking">
             </button>
         </div>
+        <div *ngIf="sshkeyCheckNull" class="ti3-unifyvalid-error-container">
+            <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"><img src="./assets/img/tip/icon_failure.svg"></span>
+            <span class="ti3-validate-text">{{ i18n.plugins_common_message_sshkeyFail }}</span>
+        </div>
         <div class="upgrade-form-item-label ti3-icon-staricon" style="margin-top: 20px;">{{ i18n.plugins_common_label_passphrase }}
         </div>
         <div style="position: relative;">
             <input [type]="upgradeType" tiText placeholder="{{i18n.plugins_common_message_passphrase}}" [disabled]="connectChecking"
                 [(ngModel)]="passphrase"
                 (change)="connected = false"
+                [ngClass]="{'border-red': passphraseCheckNull}"
+                (blur)="checkPassPhrase()"
+                style="padding-right: 32px !important; width: 358px !important;"
                 oncopy="return false"
                 onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
                 onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}"
@@ -133,11 +139,15 @@
                 </span>
             </div>
         </div>
+        <div *ngIf="passphraseCheckNull" class="ti3-unifyvalid-error-container">
+            <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"><img src="./assets/img/tip/icon_failure.svg"></span>
+            <span class="ti3-validate-text">{{ i18n.common_term_required_tip }}</span>
+        </div>
     </div>
     <div class="btn-group" [ngClass]="{'checkconnection-btn-en': i18nService.currLang === i18nService.langType.en}">
         <!-- 检测连接 -->
         <button type="button" class="secondary-btn check-conn-btn" [ngClass]="{'checking-btn': connectChecking}" (click)="checkConnBefore()"
-            [disabled]="connectChecking || (sshTypeSelected === 'usekey' && !localfilepath)">
+            [disabled]="connectChecking">
             <img *ngIf="connectChecking && currTheme === 1" src="./assets/img/loading-disabled.gif">
             <img *ngIf="connectChecking && currTheme === 2" src="./assets/img/loading-white.gif">
             <span>{{ i18n.plugins_common_button_checkConn }}</span>

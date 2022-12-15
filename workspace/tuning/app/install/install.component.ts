@@ -47,6 +47,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
     public extraIpCheckF = false;
     public tempPortCheckF = false;
     public usernameCheckNull = false;
+    public sshkeyCheckNull = false;
+    public passphraseCheckNull = false;
     public installType = 'password';
     public pwdCheckNull = false;
     public tempFinger: string; // 读取的finger，用于发送保存finger
@@ -198,7 +200,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
     private getCheckResult() {
         if (!this.ipCheckF && !this.tempPortCheckF && !this.usernameCheckNull &&
             ((this.sshTypeSelected === 'usepwd' && !this.pwdCheckNull) ||
-                (this.sshTypeSelected === 'usekey' && this.localfilepath))) {
+                (this.sshTypeSelected === 'usekey' && !this.sshkeyCheckNull && !this.passphraseCheckNull))) {
             return true;
         }
         return false;
@@ -268,7 +270,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
             } else if (data.search(/TIMEOUT/) !== -1) {
                 // 连接超时
                 this.connectChecking = false;
-                this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connTimeout);
+                // this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connTimeout);
                 this.serverErrorBox.setType(notificationType.error);
                 this.serverErrorBox.show();
             } else if (data.search(/Cannot parse privateKey/) !== -1) {
@@ -279,8 +281,6 @@ export class InstallComponent implements AfterViewInit, OnInit {
             } else if (data.search(/USERAUTH_FAILURE/) !== -1) {
                 this.connectChecking = false;
                 this.setNotificationBox(notificationType.error, this.i18n.plugins_common_tips_connFail);
-                this.serverErrorBox.setType(notificationType.error);
-                this.serverErrorBox.show();
             } else {
                 // 首次连接
                 this.tempFinger = data;
@@ -449,6 +449,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
         this.pwd = '';
         this.privateKey = '';
         this.passphrase = '';
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -525,6 +527,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
         const reg = /^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$/;
         const invalidIp = /0.0.0.0|255.255.255.255/;
         this.ipCheckF = !reg.test(this.tempIP) || invalidIp.test(this.tempIP);
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -536,6 +540,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
         const reg = /^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$/;
         const invalidIp = /0.0.0.0|255.255.255.255/;
         this.extraIpCheckF = !reg.test(this.extraIP) || invalidIp.test(this.extraIP);
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -549,6 +555,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
         } else {
             this.usernameCheckNull = false;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -562,6 +570,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
         } else {
             this.pwdCheckNull = false;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -577,7 +587,36 @@ export class InstallComponent implements AfterViewInit, OnInit {
         } else {
             this.tempPortCheckF = true;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
+
+    /**
+     * 检查私钥非空
+     */
+    checkSshKey() {
+        if (this.localfilepath === '' || this.localfilepath === undefined) {
+            this.sshkeyCheckNull = true;
+        } else {
+            this.sshkeyCheckNull = false;
+        }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
+    }
+
+    /**
+     * 检查密钥密码短语非空
+     */
+    checkPassPhrase() {
+        if (this.passphrase === '' || this.passphrase === undefined) {
+            this.passphraseCheckNull = true;
+        } else {
+            this.passphraseCheckNull = false;
+        }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
+    }
+    
     /**
      * 导入私钥
      */
@@ -664,6 +703,8 @@ export class InstallComponent implements AfterViewInit, OnInit {
             return;
         }
         this.installType = type;
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**

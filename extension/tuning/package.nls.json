@@ -8,8 +8,8 @@
     "perfadvisor.logged.in": "您已登录。\n[登录](command:extension.view.perfadvisorlogin)",
     "kunpeng.tuning.suite": "鲲鹏性能分析插件",
     "free.trial.remote.environment": "申请试用远程实验室",
-    "plugins_perfadvisor_title_upgrade": "升级服务器",
-    "plugins_perfadvisor_title_uninstall": "卸载服务器",
+    "plugins_perfadvisor_title_upgrade": "升级服务端",
+    "plugins_perfadvisor_title_uninstall": "卸载服务端",
     "perfadvisor.sys.advicefeedback": "建议反馈",
     "plugins_perfadvisor_title_about": "关于",
     "deploy.server.end": "部署服务端",
@@ -17,7 +17,7 @@
     "server_configure_column_title": "远端服务器",
     "views_welcome_column_title": "启动台",
 
-    "configure.remote.server.again": "重新配置远端服务器",
+    "configure.remote.server.again": "配置远端服务器",
     "configure.remote.server": "配置远端服务器",
     "plugins_perfadvisor_title_login": "登录性能分析工具"
 
