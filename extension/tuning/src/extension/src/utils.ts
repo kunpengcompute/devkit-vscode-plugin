@@ -111,8 +111,7 @@ export class Utils {
     if (!serverVersion) {
       return false;
     }
-    const configVersion = Utils.getConfigJson(context).configVersion;
-    return configVersion.includes(serverVersion);
+    return true;
   }
 
   /**
@@ -657,16 +656,14 @@ export class Utils {
   public static openAboutDialog(context: vscode.ExtensionContext) {
     const header = '';
     let tuningVersion = Utils.getPackageJson(context).version;
-    let configVersion = Utils.getConfigJson(context).configVersion;
     let detailTuningVersion = i18n.plugins_common_about_detail.tuningVersion;
-    let detailConfigVersion = i18n.plugins_common_about_detail.configVersion;
     let detailCopyright = i18n.plugins_common_about_detail.copyright;
     let ipConfig = context.globalState.get('ipConfig');
     let detailMessage;
     if (!ipConfig) {
       detailMessage = `${detailTuningVersion}${tuningVersion}\n${detailCopyright}`;
     } else {
-      detailMessage = `${detailTuningVersion}${tuningVersion}\n${detailConfigVersion}${configVersion}\n${detailCopyright}`;
+      detailMessage = `${detailTuningVersion}${tuningVersion}\n${detailCopyright}`;
     }
     let options = {
       detail: detailMessage,
