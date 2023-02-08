@@ -455,16 +455,27 @@
     </div>
   </div>
 
-  <div
-    *ngIf="this.installing === 1"
+  <button
+    *ngIf="this.installing === 1 && !this.serviceConnecting"
     id="login-btn"
+    type="button"
     class="primary-btn"
     (click)="goLogin()"
   >
     <span>
       {{ i18n.plugins_tuning_button_login }}
     </span>
-  </div>
+  </button>
+  <button
+    *ngIf="this.installing === 1 && this.serviceConnecting"
+    id="login-btn"
+    type="button"
+    class="primary-btn"
+    [disabled]="this.serviceConnecting"
+  >
+    <img *ngIf="currTheme === 1" src="./assets/img/loading-disabled.gif" />
+    <img *ngIf="currTheme === 2" src="./assets/img/loading-white.gif" />
+  </button>
   <div
     *ngIf="this.installing === 2"
     id="reinstall-btn"

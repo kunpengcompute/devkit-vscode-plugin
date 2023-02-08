@@ -71,6 +71,7 @@ export class InstallComponent implements AfterViewInit, OnInit {
   public pwd = '';
   public installSteps: any[] = [];
   public installing = installStatusStart;
+  public serviceConnecting = false;
   public ipCheckF = false;
   public extraIpCheckF = false;
   public extraPortCheckF = false;
@@ -570,10 +571,18 @@ export class InstallComponent implements AfterViewInit, OnInit {
         },
       };
       console.log(postData);
+      this.serviceConnecting = true;
       this.vscodeService.postMessage(postData, () => {
         const data1 = { cmd: 'updatePanel' };
         this.vscodeService.postMessage(data1, null);
-        this.router.navigate(['/login']);
+        this.serverErrorBox.close();
+        this.serviceConnecting = false;
+        this.router.navigate(['/login']).catch(() => {
+          this.setNotificationBox(
+            notificationType.error,
+            this.i18n.plugins_common_message_responseError
+          );
+        });
       });
     });
   }
