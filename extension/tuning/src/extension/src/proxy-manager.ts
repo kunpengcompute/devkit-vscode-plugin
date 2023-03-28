@@ -56,8 +56,12 @@ export class ProxyManager {
                 ProxyManager.authValue = authValue;
             }
             index = proxyRes.rawHeaders.indexOf('Content-Type');
+            const encoding_index = proxyRes.rawHeaders.indexOf('Content-Encoding');
             if (index !== -1) {
                 newRes['Content-Type'] = proxyRes.rawHeaders[index + 1];
+            }
+            if (encoding_index !== -1) {
+                newRes['Content-Encoding'] = proxyRes.rawHeaders[encoding_index + 1];
             }
             const statusCode = proxyRes.statusCode;
             res.writeHead(statusCode, newRes);

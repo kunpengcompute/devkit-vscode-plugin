@@ -137,8 +137,8 @@ export const messageHandler = {
       queryVersionOptions as any,
       message.module
     );
-    if (respVersion.status === constant.HTTP_STATUS.HTTP_200_OK) {
-      const serverVersion = respVersion?.data?.data?.version;
+    if (respVersion.status === constant.HTTP_STATUS.HTTP_200_OK || respVersion.status === constant.HTTP_STATUS.HTTP_401_UNAUTHORIZED) {
+      const serverVersion = respVersion?.data?.data?.version || 'higher';
       if (!Utils.checkVersion(global.context, serverVersion)) {
         proxy.close();
         const configVersion = Utils.getConfigJson(global.context)
@@ -235,9 +235,9 @@ export const messageHandler = {
       queryVersionOptions as any,
       'tuning'
     );
-    if (respVersion.status === constant.HTTP_STATUS.HTTP_200_OK) {
+    if (respVersion.status === constant.HTTP_STATUS.HTTP_200_OK || respVersion.status === constant.HTTP_STATUS.HTTP_401_UNAUTHORIZED) {
       // if (true) {
-      const serverVersion = respVersion?.data?.data?.version;
+      const serverVersion = respVersion?.data?.data?.version || 'higher';
       if (!Utils.checkVersion(context, serverVersion)) {
         // if (true) {
         proxy.close();
