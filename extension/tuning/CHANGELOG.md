@@ -1,5 +1,13 @@
 # 鲲鹏性能分析插件
 
+## 23.0.0（2023-03-30）
+
+- 修复版本匹配验证问题
+- 增强 HPC 一致性检查能力
+- 优化热点函数分析功能采集时长
+- 优化资源调度分析功能采集时长
+- OpenMP/MPI 分析任务支持 MPICH 应用的分析
+
 ## 2.5.5（2023-01-30）
 
 - 移除服务端版本限制
@@ -112,6 +120,14 @@
 - 完成鲲鹏性能分析插件主体功能
 
 # Kunpeng Hyper Tuner Plugin
+
+## 23.0.0（2023-03-30）
+
+- Resolved the version matching verification issue.
+- Enhanced the HPC consistency check capability.
+- Optimized the collection duration for hotspot function analysis.
+- Optimized the collection duration for resource scheduling analysis.
+- Supports MPICH applications for OpenMP/MPI analysis.
 
 ## 2.5.5（2023-01-30）
 

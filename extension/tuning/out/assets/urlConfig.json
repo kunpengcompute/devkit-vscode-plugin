@@ -11,7 +11,7 @@
   "freeTrialRemoteEnvEn": "https://www.hikunpeng.com/en/developer/cloud-lab",
   "sysInstall_openFAQ1": "https://www.hikunpeng.com/document/detail/zh/kunpengdevps/vscode/usermanual/kunpengidevscode_10_0005.html",
   "sysInstall_openFAQ2": "https://www.hikunpeng.com/document/detail/zh/kunpengdevps/vscode/usermanual/kunpengidevscode_10_0044.html",
-  "sysInstall_openFAQ4": "https://kunpeng-repo.obs.cn-north-4.myhuaweicloud.com/Hyper%20Tuner/Hyper%20Tuner%202.5.T30/Hyper-Tuner_2.5.T30_linux.tar.gz",
+  "sysInstall_openFAQ4": "https://kunpeng-repo.obs.cn-north-4.myhuaweicloud.com/Hyper%20Tuner/Hyper%20Tuner%2023.0.RC1/Hyper-Tuner_23.0.RC1_linux.tar.gz",
   "sysInstall_openFAQ4_inner_bak": "https://cmc-szver-artifactory.cmc.tools.huawei.com/artifactory/cmc-software-release/Hyper%20Tuner/Hyper%20Tuner%202/Hyper%20Tuner%202.5.T20.B010/Hyper-Tuner_2.5.T20_linux.tar.gz",
   "sysInstall_openFAQ5": "https://download.huawei.com/edownload/e/download.do?actionFlag=download&mid=SUPE_SERTOOL_VERSION&nid=TV1100000147&partNo=2005",
   "uninstall_openFAQ1": "https://www.hikunpeng.com/document/detail/zh/kunpengdevps/vscode/usermanual/kunpengidevscode_10_0007.html",

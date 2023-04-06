@@ -1,7 +1,7 @@
 {
   "name": "kunpeng-hyper-tuner-plugin",
   "displayName": "Kunpeng Hyper Tuner Plugin",
-  "description": "Kunpeng Hyper Tuner Plugin",
+  "description": "支持系统性能分析和 Java 性能分析，提供系统全景及常见应用场景下的性能采集和分析能力，同时基于调优系统给出优化建议。",
   "version": "23.0.0",
   "publisher": "kunpengfamily",
   "engines": {
