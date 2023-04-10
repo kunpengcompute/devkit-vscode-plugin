@@ -8,6 +8,10 @@
 - 优化资源调度分析功能采集时长
 - OpenMP/MPI 分析任务支持 MPICH 应用的分析
 
+## 2.5.6（2023-02-28）
+
+- 修复开源软件漏洞
+
 ## 2.5.5（2023-01-30）
 
 - 移除服务端版本限制
@@ -128,6 +132,10 @@
 - Optimized the collection duration for hotspot function analysis.
 - Optimized the collection duration for resource scheduling analysis.
 - Supports MPICH applications for OpenMP/MPI analysis.
+
+## 2.5.6（2023-02-28）
+
+- Fixed vulnerabilities in open source software.
 
 ## 2.5.5（2023-01-30）
 

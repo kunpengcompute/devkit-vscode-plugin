@@ -33,11 +33,15 @@
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">23.0.0</td>
-            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">*</td>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">23.0.RC1,*</td>
+        </tr>
+        <tr>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.6</td>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.0.1,*</td>
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.5</td>
-            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">*</td>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.T30,*</td>
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.0</td>
@@ -259,11 +263,15 @@ This plug-in needs to run with the background service, which must be installed o
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">23.0.0</td>
-            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">*</td>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">23.0.RC1,*</td>
+        </tr>
+        <tr>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.6</td>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.0.1,*</td>
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.5</td>
-            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">*</td>
+            <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.T30,*</td>
         </tr>
         <tr>
             <td style="height:32px; border: 1px solid gray; border-top: none; border-left: none;padding: 8px;">2.5.0</td>
