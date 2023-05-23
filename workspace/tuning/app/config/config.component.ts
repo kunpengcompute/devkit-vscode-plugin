@@ -26,6 +26,12 @@ export class ConfigComponent implements OnInit {
     public config: any;
     public hasConfig = false;
     public firstConfig = true;
+    public firstInput = true;
+    public certInstalled = false;
+    public savedDomainName: string;
+    public savedDomainEnabled = false;
+    public tempDomainName: string;
+    public tempDomainEnabled = false;
     public ipCheck = false;
     public portCheck = false;
     public currLang: number;
@@ -82,6 +88,12 @@ export class ConfigComponent implements OnInit {
                 this.savedPort = this.config.portConfig[0].port;
                 this.tempIP = this.config.portConfig[0].ip;
                 this.tempPort = this.config.portConfig[0].port;
+                if (this.config.wss.cert_installed) {
+                    this.certInstalled = this.config.wss.cert_installed;
+                    this.tempDomainName = this.config.wss.domain_name;
+                    this.tempDomainEnabled = this.config.wss.enabled;
+                    console.log(this.tempDomainEnabled);
+                }
                 this.changeDetectorRef.markForCheck();
                 this.changeDetectorRef.detectChanges();
             }
@@ -96,6 +108,13 @@ export class ConfigComponent implements OnInit {
         const reg = /^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$/;
         const invalidIp = /0.0.0.0|255.255.255.255/;
         this.ipCheck = !reg.test(this.tempIP) || invalidIp.test(this.tempIP);
+        if (!this.tempIP && this.firstInput) {
+            this.ipCheck = false;
+        }
+    }
+
+    firstChange() {
+        this.firstInput = false;
     }
 
     /**
@@ -159,6 +178,7 @@ export class ConfigComponent implements OnInit {
                 ip: this.tempIP,
                 port: this.tempPort
             });
+            this.config.wss.enabled = this.tempDomainEnabled;
             let data = {
                 cmd: 'saveConfig', data: {
                     data: JSON.stringify(this.config),
@@ -321,7 +341,10 @@ export class ConfigComponent implements OnInit {
         console.log("cancel modify config");
         this.isModify = false;
         this.tempIP = this.savedIp;
-        this.tempPort = this.tempPort;
+        this.tempPort = this.savedPort;
+        this.tempDomainEnabled = this.savedDomainEnabled;
+        this.checkIP();
+        this.checkPort();
         this.changeDetectorRef.markForCheck();
         this.changeDetectorRef.detectChanges();
     }

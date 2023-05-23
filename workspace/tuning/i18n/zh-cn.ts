@@ -167,6 +167,7 @@ export const I18N_ZH = {
   plugins_common_apply_free_env_link: '点击此处',
   plugins_common_label_ip: 'IP地址',
   plugins_common_message_ipError: ' 请输入正确格式的IP地址',
+  plugins_common_enable_dns_name: '启用证书域名',
   plugins_common_label_configPort: 'HTTPS端口',
   plugins_common_placeholder_default_port: '默认端口为8086',
   plugins_common_message_portError: ' 请输入正确范围(1024~65535)的端口',

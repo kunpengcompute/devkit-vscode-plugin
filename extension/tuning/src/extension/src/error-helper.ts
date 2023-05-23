@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as constant from './constant';
 import { ToolPanelManager } from './panel-manager';
-import { I18nService } from './I18nService';
+import { I18nService } from './i18nservice';
 import { Utils } from './utils';
 
 const i18n = I18nService.I18n();

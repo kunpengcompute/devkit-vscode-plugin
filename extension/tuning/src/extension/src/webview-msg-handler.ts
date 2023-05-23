@@ -2,8 +2,8 @@ import * as vscode from 'vscode';
 import * as constant from './constant';
 import { Utils } from './utils';
 import { ToolPanelManager } from './panel-manager';
-import { I18nService } from './I18nService';
-import { SSH2Tools } from './ssh2Tools';
+import { I18nService } from './i18nservice';
+import { SSH2Tools } from './ssh2tools';
 import { ErrorHelper } from './error-helper';
 import { ProxyManager } from './proxy-manager';
 import { SideViewProvider } from './SideView/SideViewProvider';
@@ -108,9 +108,11 @@ export const messageHandler = {
     //         return;
     //     }
     // }
-    let tuningConfig;
+    let tuningConfig, wssConfig;
     try {
-      tuningConfig = JSON.parse(message.data.data).portConfig;
+      let jsonData = JSON.parse(message.data.data);
+      tuningConfig = jsonData.portConfig;
+      wssConfig = jsonData.wss;
     } catch (err) {
       tuningConfig = {};
     }
@@ -123,7 +125,7 @@ export const messageHandler = {
     global.context.globalState.update('tuningPort', tuningConfigObj.port);
     const { proxyServerPort, proxy } = await ProxyManager.createProxyServer(
       global.context,
-      tuningConfigObj.ip,
+      wssConfig.enabled ? wssConfig.domain_name : tuningConfigObj.ip,
       tuningConfigObj.port
     );
     global.context.globalState.update('defaultPort', proxyServerPort);
@@ -246,6 +248,7 @@ export const messageHandler = {
         data = { type: 'VERSIONMISMATCH', configVersion, serverVersion };
         let old_ip = currentSideViewProvider.getIp();
         let old_port = currentSideViewProvider.getPort();
+        let old_domain = currentSideViewProvider.getDomain();
         if (isRegistered) {
           currentSideViewProviderHandler.dispose();
         }
@@ -259,7 +262,7 @@ export const messageHandler = {
         isRegistered = true;
         currentSideViewProviderHandler = previous_dispose_handler;
         provider.shouldFailureInfoShown(true);
-        provider.updateServerConfiguration(old_ip, old_port);
+        provider.updateServerConfiguration(old_ip, old_port, old_domain);
         provider.FailureArbeitUpdaten(i18n.version_mismatch_failure);
         vscode.commands.executeCommand('setContext', 'refreshFailure', true);
         return;
@@ -278,6 +281,7 @@ export const messageHandler = {
       if (resp.status != constant.HTTP_STATUS.HTTP_200_OK) {
         let old_ip = currentSideViewProvider.getIp();
         let old_port = currentSideViewProvider.getPort();
+        let old_domain = currentSideViewProvider.getDomain();
         if (isRegistered) {
           currentSideViewProviderHandler.dispose();
         }
@@ -291,7 +295,7 @@ export const messageHandler = {
         isRegistered = true;
         currentSideViewProviderHandler = previous_dispose_handler;
         provider.shouldFailureInfoShown(true);
-        provider.updateServerConfiguration(old_ip, old_port);
+        provider.updateServerConfiguration(old_ip, old_port, old_domain);
         provider.FailureArbeitUpdaten(i18n.connection_failure);
         vscode.commands.executeCommand('setContext', 'refreshFailure', true);
         vscode.commands.executeCommand(
@@ -303,6 +307,7 @@ export const messageHandler = {
       } else {
         let old_ip = currentSideViewProvider.getIp();
         let old_port = currentSideViewProvider.getPort();
+        let old_domain = currentSideViewProvider.getDomain();
         if (isRegistered) {
           currentSideViewProviderHandler.dispose();
         }
@@ -316,13 +321,14 @@ export const messageHandler = {
         isRegistered = true;
         currentSideViewProviderHandler = previous_dispose_handler;
         provider.shouldFailureInfoShown(false);
-        provider.updateServerConfiguration(old_ip, old_port);
+        provider.updateServerConfiguration(old_ip, old_port, old_domain);
         vscode.commands.executeCommand('setContext', 'refreshFailure', false);
         return;
       }
     } else {
       let old_ip = currentSideViewProvider.getIp();
       let old_port = currentSideViewProvider.getPort();
+      let old_domain = currentSideViewProvider.getDomain();
       if (isRegistered) {
         currentSideViewProviderHandler.dispose();
       }
@@ -335,7 +341,7 @@ export const messageHandler = {
       isRegistered = true;
       currentSideViewProviderHandler = previous_dispose_handler;
       provider.shouldFailureInfoShown(true);
-      provider.updateServerConfiguration(old_ip, old_port);
+      provider.updateServerConfiguration(old_ip, old_port, old_domain);
       provider.FailureArbeitUpdaten(i18n.connection_failure);
       vscode.commands.executeCommand('setContext', 'refreshFailure', true);
       vscode.commands.executeCommand(
@@ -362,8 +368,9 @@ export const messageHandler = {
     // console.log(data.tuningConfig[0].ip);
     var new_ip = data.portConfig[0].ip;
     var new_port = data.portConfig[0].port;
+    let new_domain = data.wss.enabled ? `(${data.wss.domain_name})` : '';
     provider.shouldFailureInfoShown(false);
-    provider.updateServerConfiguration(new_ip, new_port);
+    provider.updateServerConfiguration(new_ip, new_port, new_domain);
     vscode.commands.executeCommand('setContext', 'refreshFailure', false);
     // SideViewProvider.
   },
@@ -379,8 +386,10 @@ export const messageHandler = {
     );
     const configData = fs.readFileSync(resourcePath);
     let tuningConfig;
+    let wssConfig;
     try {
       tuningConfig = JSON.parse(configData).portConfig;
+      wssConfig = JSON.parse(configData).wss;
     } catch (err) {
       tuningConfig = {};
     }
@@ -390,7 +399,7 @@ export const messageHandler = {
     // tslint:disable-next-line:max-line-length
     const { proxyServerPort, proxy } = await ProxyManager.createProxyServer(
       global.context,
-      tuningConfigObj.ip,
+      wssConfig.enabled ? wssConfig.domain_name : tuningConfigObj.ip,
       tuningConfigObj.port
     );
     Utils.navToIFrame(global, proxyServerPort, proxy);

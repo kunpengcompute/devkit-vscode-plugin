@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import * as constant from './constant';
-import { I18nService } from './I18nService';
+import { I18nService } from './i18nservice';
 import { Utils } from './utils';
 const fs = require('fs');
 const i18n = I18nService.I18n();
@@ -86,6 +86,7 @@ class Download {
       }
       // Utils.invokeCallback(global.toolPanel.getPanel(), message, file.fsPath);
       Download.openCaFile(global, { Path: file.fsPath });
+      Download.changeCertInstallTag(global);
     } catch (error) {}
   }
 
@@ -96,7 +97,7 @@ class Download {
    * @param filePath 证书路径
    */
   private static openCaFile(global: any, data: any) {
-    const terminal = vscode.window.createTerminal();
+    const terminal = vscode.window.createTerminal('Install Cert', process.env.COMSPEC);
     terminal.sendText('rundll32.exe cryptext.dll,CryptExtAddCER ' + data.Path);
     setTimeout(() => {
       terminal.dispose();
@@ -107,6 +108,18 @@ class Download {
       { info: i18n.plugins_tuning_message_cart },
       true
     );
+  }
+
+  private static changeCertInstallTag(global: any) {
+    const resourcePath = Utils.getExtensionFileAbsolutePath(
+      global.context,
+      'out/assets/config.json'
+    );
+    let data = JSON.parse(fs.readFileSync(resourcePath, 'utf-8'));
+    data.wss.cert_installed = true;
+    data.wss.enabled = true;
+    data.wss.domain_name = 'HyperTuner';
+    fs.writeFileSync(resourcePath, JSON.stringify(data));
   }
 }
 

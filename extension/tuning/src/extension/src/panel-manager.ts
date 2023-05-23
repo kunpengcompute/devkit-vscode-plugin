@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as constant from './constant';
 import { Utils } from './utils';
-import { I18nService } from './I18nService';
+import { I18nService } from './i18nservice';
 import { messageHandler } from './webview-msg-handler';
 import { ProxyManager } from './proxy-manager';
 import { SideViewProvider } from './SideView/SideViewProvider';

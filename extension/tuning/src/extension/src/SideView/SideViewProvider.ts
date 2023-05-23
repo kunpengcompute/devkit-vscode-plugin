@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { I18nService } from '../I18nService';
+import { I18nService } from '../i18nservice';
 import path = require('path');
 
 const i18n = I18nService.I18n();
@@ -10,6 +10,7 @@ export class SideViewProvider implements vscode.WebviewViewProvider {
   // private static  _test_content = '';
 
   private _ip_address = '';
+  private _alter_domain_name = '';
   private _port = '';
   private _test_content = '';
 
@@ -20,11 +21,17 @@ export class SideViewProvider implements vscode.WebviewViewProvider {
   private _view?: vscode.WebviewView;
 
   constructor(private readonly _extensionUri: vscode.Uri) {}
+
   public getIp() {
     return this._ip_address;
   }
+
   public getPort() {
     return this._port;
+  }
+
+  public getDomain() {
+    return this._alter_domain_name;
   }
 
   public dispose() {
@@ -35,9 +42,10 @@ export class SideViewProvider implements vscode.WebviewViewProvider {
     this._failure_info = failure_info;
   }
 
-  public updateServerConfiguration(new_ip_address: string, new_port: string) {
+  public updateServerConfiguration(new_ip_address: string, new_port: string, new_domain_name: string) {
     this._ip_address = new_ip_address;
     this._port = new_port;
+    this._alter_domain_name = new_domain_name;
   }
 
   public updateTestContent(new_content: string) {
@@ -131,7 +139,7 @@ export class SideViewProvider implements vscode.WebviewViewProvider {
                     <tr class="info-line">
                       <td class="info-cell">${i18n.ip_address_title}</td>
                       <td class="info-cell">&emsp;&emsp;</div></td>
-                      <td class="info-cell">${this._ip_address}</td>
+                      <td class="info-cell">${this._ip_address} ${this._alter_domain_name}</td>
                     </tr>
                     <tr class="info-line">
                       <td class="info-cell">${i18n.port_title}</td>
@@ -187,7 +195,7 @@ export class SideViewProvider implements vscode.WebviewViewProvider {
                     <tr class="info-line">
                       <td class="info-cell">${i18n.ip_address_title}</td>
                       <td class="info-cell">&emsp;&emsp;</div></td>
-                      <td class="info-cell">${this._ip_address}</td>
+                      <td class="info-cell">${this._ip_address} ${this._alter_domain_name}</td>
                     </tr>
                     <tr class="info-line">
                       <td class="info-cell">${i18n.port_title}</td>

@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as constant from './constant';
 import { COLOR_THEME } from './constant';
-import { I18nService } from './I18nService';
+import { I18nService } from './i18nservice';
 import { ErrorHelper } from './error-helper';
 import { ToolPanelManager } from './panel-manager';
 import axios, { AxiosRequestConfig } from 'axios';
@@ -44,6 +44,8 @@ export class Utils {
   ) {
     context.globalState.update('tuningIp', null);
     context.globalState.update('tuningPort', null);
+    context.globalState.update('tuningDomainName', null);
+    context.globalState.update('tuningEnableDN', null);
     context.globalState.update('tuningToken', null);
     context.globalState.update('tuningSession', null);
     context.globalState.update('autoSystemFlag', null);
@@ -55,6 +57,11 @@ export class Utils {
     if (json.portConfig.length > 0) {
       context.globalState.update('tuningIp', json.portConfig[0].ip);
       context.globalState.update('tuningPort', json.portConfig[0].port);
+    }
+    if (json.wss.enabled) {
+      context.globalState.update('tuningDomainName', json.wss.domain_name);
+      context.globalState.update('tuningEnableDN', json.wss.enabled);
+
     }
     if (os.type() === 'Windows_NT') {
       context.globalState.update('autoSystemFlag', true);
@@ -390,7 +397,7 @@ export class Utils {
     }
     let htmlDatas: HtmlDatas = {
       ideAddress: `http://127.0.0.1:${defaultPort}`,
-      serverAddr: global.context.globalState.get('tuningIp'),
+      serverAddr: global.context.globalState.get('tuningEnableDN') ? global.context.globalState.get('tuningDomainName') : global.context.globalState.get('tuningIp'),
       serverPort: global.context.globalState.get('tuningPort'),
       defaultPort,
       ideType: 'isVscode',

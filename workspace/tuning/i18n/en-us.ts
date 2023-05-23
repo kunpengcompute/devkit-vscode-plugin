@@ -243,6 +243,7 @@ export const I18N_US = {
   plugins_common_apply_free_env_link: 'Click here',
   plugins_common_label_ip: 'IP Address',
   plugins_common_message_ipError: 'Enter a correct IP address.',
+  plugins_common_enable_dns_name: 'Enable Certificate Domain Name',
   plugins_common_label_configPort: 'HTTPS Port',
   plugins_common_placeholder_default_port: 'Default port: 8086',
   plugins_common_message_portError:
