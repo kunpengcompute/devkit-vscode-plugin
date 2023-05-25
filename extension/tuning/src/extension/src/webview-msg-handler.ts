@@ -123,6 +123,7 @@ export const messageHandler = {
     let data: any;
     global.context.globalState.update('tuningIp', tuningConfigObj.ip);
     global.context.globalState.update('tuningPort', tuningConfigObj.port);
+    global.context.globalState.update('tuningEnableDN', wssConfig.enabled);
     const { proxyServerPort, proxy } = await ProxyManager.createProxyServer(
       global.context,
       wssConfig.enabled ? wssConfig.domain_name : tuningConfigObj.ip,
