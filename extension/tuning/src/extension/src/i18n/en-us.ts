@@ -12,7 +12,7 @@ export const I18N_EN = {
     plugins_common_configure_remoteServer: 'Configure Remote Server',
     common_install_panel_title: 'Deployment tool',
     plugins_common_title_guide: 'Configuration Guidelines',
-    plugins_perfadvisor_free_trial_remote_environment: 'Applying for a Remote Lab Trial',
+    plugins_perfadvisor_free_trial_remote_environment: 'Apply for Trial Remote Lab',
     plugins_common_message_configSuccess: 'Configuration saved successfully.',
     plugins_common_button_login: 'Log In',
     plugin_common_button_look: 'View Now',

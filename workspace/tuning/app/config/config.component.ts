@@ -22,7 +22,7 @@ export class ConfigComponent implements OnInit {
     private static CONFIG_RADIX = 10;
     public i18n: any;
     public tempIP: string;
-    public tempPort = '';
+    public tempPort = '8086';
     public config: any;
     public hasConfig = false;
     public firstConfig = true;
@@ -92,11 +92,12 @@ export class ConfigComponent implements OnInit {
                     this.certInstalled = this.config.wss.cert_installed;
                     this.tempDomainName = this.config.wss.domain_name;
                     this.tempDomainEnabled = this.config.wss.enabled;
+                    this.savedDomainEnabled = this.config.wss.enabled;
                     console.log(this.tempDomainEnabled);
                 }
-                this.changeDetectorRef.markForCheck();
-                this.changeDetectorRef.detectChanges();
             }
+            this.changeDetectorRef.markForCheck();
+            this.changeDetectorRef.detectChanges();
         });
     }
     /**
@@ -111,6 +112,8 @@ export class ConfigComponent implements OnInit {
         if (!this.tempIP && this.firstInput) {
             this.ipCheck = false;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     firstChange() {
@@ -130,6 +133,8 @@ export class ConfigComponent implements OnInit {
         } else {
             this.portCheck = true;
         }
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
     }
 
     /**
@@ -214,6 +219,7 @@ export class ConfigComponent implements OnInit {
                     this.canLoginBox.show();
                     this.savedIp = this.tempIP;
                     this.savedPort = this.tempPort;
+                    this.savedDomainEnabled = this.tempDomainEnabled;
                     this.hasConfig = true;
                     this.isModify = false;
                     this.changeDetectorRef.markForCheck();

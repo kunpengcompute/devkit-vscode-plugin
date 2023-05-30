@@ -29,9 +29,9 @@
         <div class="config-form-item-label">{{ i18n.plugins_common_enable_dns_name }}
         </div>
         <!-- <input type="text" [ngClass]="{'border-red': ipCheck}" tiText [(ngModel)]="tempIP" (blur)="checkIP()" *ngIf="!hasConfig || isModify" /> -->
-        <input type="checkbox" [(ngModel)]="tempDomainEnabled" style="width:20px !important;vertical-align:middle;margin-right:10px;margin-left:10px;" *ngIf="!hasConfig || isModify"/>
-        <input type="checkbox" [(ngModel)]="tempDomainEnabled" style="width:20px !important;vertical-align:middle;margin-right:10px;margin-left:10px;" disabled *ngIf="hasConfig && !isModify"/>
-        <input type="text" tiText [placeholder]="tempDomainName" style="width:340px !important" disabled/>
+        <input type="checkbox" [(ngModel)]="tempDomainEnabled" style="width:20px !important;vertical-align:middle;margin-right:10px;" *ngIf="!hasConfig || isModify"/>
+        <input type="checkbox" [(ngModel)]="tempDomainEnabled" style="width:20px !important;vertical-align:middle;margin-right:10px;" disabled *ngIf="hasConfig && !isModify"/>
+        <input type="text" tiText [placeholder]="tempDomainName" style="width:350px !important" disabled/>
     </div>
     <div class="config-form-item">
         <div class="ti3-icon ti3-icon-staricon config-form-item-label">{{ i18n.plugins_common_label_configPort }}

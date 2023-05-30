@@ -271,25 +271,25 @@ export const I18N_US = {
   plugins_common_message_beforeInstallOption:
     'I have read the above information. ',
   plugins_common_remote_env: {
-    use_process: 'Process of Applying for a Remote Lab Trial',
-    apply_remote_env: 'Applying for a Remote Lab Trial',
+    use_process: 'Apply for Trial Remote Lab',
+    apply_remote_env: 'Submit an Application',
     apply_remote_env_info:
       'Kunpeng Porting Advisor, Kunpeng Compiler, Kunpeng Hyper Tuner, \
       and dynamic binary instruction translation tool (ExaGear) have been installed and \
       deployed on the remote cloud server.',
     remaining_places: 'Remaining Free Trial Quota: ',
     immediately: 'Apply Now',
-    check_email: 'Receive the email notification',
+    check_email: 'Check the Email',
     check_email_info:
       'After your application is approved, the cloud server information \
       will be sent to your reserved email box.',
-    config_serve: 'Configure the cloud server',
+    config_serve: 'Configure the Cloud Server',
     config_serve_info:
       'Follow the information in the email to configure remote login for the cloud server. \
       You can also configure the IP address of a local server that has the Kunpeng DevKit deployed.',
     config_now: 'Configure Now',
     early_release_or_extended_use:
-      'Release before expiration or extend the use',
+      'Release Before Expiration or Extend the Use',
     early_release_or_extended_use_info:
       'You can release resources before expiration or \
       extend the use on the webpage where you applied for the cloud server.',
