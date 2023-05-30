@@ -1,5 +1,13 @@
 # 鲲鹏性能分析插件
 
+## 23.0.1（2023-06-30）
+
+- 新增对麒麟 Kylin V10 SP3 for ARM 的支持
+- 优化热点函数分析效率
+- 集群检查支持扫描分析 hosts 配置的有效性，新增网卡队列参数检查
+- 支持导入导出 GC 日志分析报告
+- 修复公网环境下证书 IP 不匹配导致的 WSS 握手失败，连接关闭问题
+
 ## 23.0.0（2023-03-30）
 
 - 修复版本匹配验证问题
@@ -124,6 +132,14 @@
 - 完成鲲鹏性能分析插件主体功能
 
 # Kunpeng Hyper Tuner Plugin
+
+## 23.0.1（2023-06-30）
+
+- Added support for Kylin V10 SP3 for ARM.
+- Optimized the efficiency of analyzing hotspot functions.
+- Added cluster check items: hosts configuration validity and NIC queue parameters.
+- Added the ability to import and export GC log analysis reports in Java Profiler.
+- Resolved the WebSocket Secure (WSS) handshake failure and connection termination problems in Java Profiler caused by mismatched certificate IP addresses in the Internet.
 
 ## 23.0.0（2023-03-30）
 

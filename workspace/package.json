@@ -1,6 +1,6 @@
 {
   "name": "workspace",
-  "version": "23.0.0",
+  "version": "23.0.1",
   "scripts": {
     "ng": "ng",
     "start:tuning:ide": "node --max_old_space_size=12288 ./node_modules/@angular/cli/bin/ng build tuning-ide --watch --base-href ./",
