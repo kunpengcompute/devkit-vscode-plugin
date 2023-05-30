@@ -31,7 +31,6 @@ main()
 {
     clean
     generate_vsix
-    end_info
 }
 
 main
