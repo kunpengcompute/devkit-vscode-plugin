@@ -156,7 +156,8 @@ export class Utils {
    */
   public static getWebViewContent(
     context: vscode.ExtensionContext,
-    templatePath: string
+    templatePath: string,
+    webview: vscode.Webview
   ) {
     const resourcePath = this.getExtensionFileAbsolutePath(
       context,
@@ -170,10 +171,8 @@ export class Utils {
       (m: any, $1: any, $2: any) => {
         return (
           $1 +
-          vscode.Uri.file(path.resolve(dirPath, $2))
-            .with({ scheme: 'vscode-resource' })
-            .toString() +
-          '"'
+          webview.asWebviewUri(vscode.Uri.file(path.resolve(dirPath, $2)))
+          + '"'
         );
       }
     );
@@ -211,8 +210,7 @@ export class Utils {
               /\.\/assets\S+?\.(png|jpg|svg|gif|js)/g,
               (m: any) => {
                 return webview
-                  .asWebviewUri(vscode.Uri.file(path.resolve(dirPath, m)))
-                  .toString();
+                  .asWebviewUri(vscode.Uri.file(path.resolve(dirPath, m)));
               }
             );
             fs.writeFileSync(fPath, js);
@@ -223,8 +221,7 @@ export class Utils {
               /\.\/assets\S+?\.(png|jpg|svg|gif|js)/g,
               (m: any) => {
                 return webview
-                  .asWebviewUri(vscode.Uri.file(path.resolve(dirPath, m)))
-                  .toString();
+                  .asWebviewUri(vscode.Uri.file(path.resolve(dirPath, m)));
               }
             );
             fs.writeFileSync(fPath, js);

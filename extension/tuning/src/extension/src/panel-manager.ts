@@ -82,7 +82,7 @@ class ToolPanel {
   private setWebViewHtml(context: vscode.ExtensionContext) {
     this.panel.webview.html = Utils.getWebViewContent(
       context,
-      'out/sysperfanalysis/index.html'
+      'out/sysperfanalysis/index.html', this.panel.webview
     );
   }
 
