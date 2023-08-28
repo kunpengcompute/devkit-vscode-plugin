@@ -1,8 +1,0 @@
-<div>
-  <ng-container *ngIf="!showSourceCode">
-    <app-suggestion (showJdbcCheck)="showJdbcCheck($event)"></app-suggestion>
-  </ng-container>
-  <ng-container *ngIf="showSourceCode">
-    <app-jdbc></app-jdbc>
-  </ng-container>
-</div>

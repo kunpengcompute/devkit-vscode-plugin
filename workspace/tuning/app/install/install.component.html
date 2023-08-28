@@ -1,0 +1,653 @@
+<!--component html goes here -->
+<app-banner></app-banner>
+<div *ngIf="installing == -1" class="install-form">
+  <p class="install-title-gen title">
+    {{ i18n.plugins_tuning_title_installDt }}
+    <a
+      *ngIf="i18nService.currLang === i18nService.langType.zh_cn"
+      (click)="clickFAQ(pluginUrlCfg.sysInstall_openFAQ1)"
+    >
+      <img
+        *ngIf="currTheme === 1"
+        class="help-icon"
+        src="./assets/img/icon-help-dark.svg"
+      />
+      <img
+        *ngIf="currTheme === 2"
+        class="help-icon"
+        src="./assets/img/icon-help-light.svg"
+      />
+    </a>
+    <a
+      *ngIf="i18nService.currLang === i18nService.langType.en"
+      (click)="clickFAQ(pluginUrlCfg.sysInstall_openFAQ1)"
+    >
+      <img
+        *ngIf="currTheme === 1"
+        class="help-icon"
+        src="./assets/img/icon-help-dark.svg"
+      />
+      <img
+        *ngIf="currTheme === 2"
+        class="help-icon"
+        src="./assets/img/icon-help-light.svg"
+      />
+    </a>
+  </p>
+  <div class="install-title-det color-d-aa-l-97">
+    <!-- <img class="img_box" src="./assets/img/tip/icon_information.svg"> -->
+    <span class="top-tips">
+      {{ i18n.plugins_common_message_installDt1 }}
+      <a (click)="clickFAQ(pluginUrlCfg.vscodeService_openFAQ2)">{{
+        i18n.plugins_common_message_installDt2
+      }}</a>
+      {{ i18n.plugins_common_message_installDt3 }}
+    </span>
+  </div>
+  <!-- <p class="install-title-gent title">{{ i18n.plugins_common_title_installTs }}</p> -->
+  <div class="install-form-item color-d-aa-l-61">
+    <!-- <img class="img_box" src="./assets/img/required-field.svg"> -->
+    <div class="ti3-icon ti3-icon-staricon install-form-item-label">
+      {{ i18n.plugins_tuning_label_ip }}
+    </div>
+    <input
+      type="text"
+      tiText
+      [(ngModel)]="tempIP"
+      (blur)="checkIP()"
+      (change)="connected = false"
+      [disabled]="connectChecking"
+      [ngClass]="{ 'border-red': ipCheckF }"
+    />
+    <div *ngIf="ipCheckF" class="ti3-unifyvalid-error-container">
+      <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"
+        ><img src="./assets/img/tip/icon_failure.svg"
+      /></span>
+      <span class="ti3-validate-text">{{
+        i18n.plugins_tuning_message_ipError
+      }}</span>
+    </div>
+  </div>
+  <div class="install-form-item color-d-aa-l-61">
+    <div class="ti3-icon ti3-icon-staricon install-form-item-label">
+      {{ i18n.plugins_tuning_label_port }}
+    </div>
+    <input
+      type="text"
+      tiText
+      [(ngModel)]="tempPort"
+      (blur)="checkTempPort()"
+      placeholder="22"
+      [ngClass]="{ 'border-red': tempPortCheckF }"
+      (change)="connected = false"
+      [disabled]="connectChecking"
+    />
+    <div *ngIf="tempPortCheckF" class="ti3-unifyvalid-error-container">
+      <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"
+        ><img src="./assets/img/tip/icon_failure.svg"
+      /></span>
+      <span class="ti3-validate-text">{{
+        i18n.plugins_tuning_message_portError
+      }}</span>
+    </div>
+  </div>
+  <div class="install-form-item color-d-aa-l-61">
+    <div class="ti3-icon ti3-icon-staricon install-form-item-label">
+      {{ i18n.plugins_tuning_label_installUser }}
+    </div>
+    <input
+      id="username"
+      type="text"
+      tiText
+      [(ngModel)]="username"
+      (blur)="checkUsername()"
+      [disabled]="connectChecking"
+      (change)="connected = false"
+      oncopy="return false"
+      [ngClass]="{ 'border-red': usernameCheckNull }"
+      onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
+      onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}"
+      onpaste="return true"
+      oncut="return false"
+    />
+    <div *ngIf="usernameCheckNull" class="ti3-unifyvalid-error-container">
+      <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"
+        ><img src="./assets/img/tip/icon_failure.svg"
+      /></span>
+      <span class="ti3-validate-text">{{ i18n.common_term_required_tip }}</span>
+    </div>
+  </div>
+  <div class="ssh-type">
+    <div>
+      <!-- radio -->
+      <div>
+        <div class="ssh-type-title color-d-aa-l-61 ti3-icon-staricon">
+          {{ i18n.plugins_common_label_selectSSHType }}
+          <a
+            *ngIf="i18nService.currLang === i18nService.langType.zh_cn"
+            (click)="clickFAQ(pluginUrlCfg.sysInstall_openFAQ2)"
+          >
+            <img
+              *ngIf="currTheme === 1"
+              class="help-icon"
+              src="./assets/img/icon-help-dark-1.svg"
+            />
+            <img
+              *ngIf="currTheme === 2"
+              class="help-icon"
+              src="./assets/img/icon-help-light.svg"
+            />
+          </a>
+          <a
+            *ngIf="i18nService.currLang === i18nService.langType.en"
+            (click)="clickFAQ(pluginUrlCfg.sysInstall_openFAQ2)"
+          >
+            <img
+              *ngIf="currTheme === 1"
+              class="help-icon"
+              src="./assets/img/icon-help-dark-1.svg"
+            />
+            <img
+              *ngIf="currTheme === 2"
+              class="help-icon"
+              src="./assets/img/icon-help-light.svg"
+            />
+          </a>
+        </div>
+        <div *ngFor="let item of radioList" class="ssh-type-radio">
+          <label class="ra-label" [for]="item.key">
+            <input
+              tiRadio
+              type="radio"
+              name="sshType"
+              [(ngModel)]="sshTypeSelected"
+              [value]="item.key"
+              [id]="item.key"
+              (change)="checkChange(item)"
+              [disabled]="connectChecking"
+            />
+            <label [for]="item.key" class="ti3-radio">
+              <span class="ti3-radio-skin"></span>
+              <span class="ti3-radio-label"></span>
+            </label>
+            <span class="pointer color-d-e8-l-22">{{ item.value }}</span>
+            <!-- <span class="pointer" [ngClass]="{'color-d-e8-l-22': sshTypeSelected === item.key}">{{item.value}}</span> -->
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 密码 -->
+  <div
+    *ngIf="sshTypeSelected === 'usepwd'"
+    class="install-form-item color-d-aa-l-61"
+  >
+    <div class="ti3-icon ti3-icon-staricon install-form-item-label">
+      {{ i18n.plugins_tuning_label_installPwd }}
+    </div>
+    <div style="position: relative">
+      <input
+        id="pwd"
+        [type]="installType"
+        tiText
+        [(ngModel)]="pwd"
+        (blur)="checkPwd()"
+        (change)="connected = false"
+        [disabled]="connectChecking"
+        [ngClass]="{ 'border-red': pwdCheckNull }"
+        oncopy="return false"
+        onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
+        onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}"
+        onpaste="return true"
+        oncut="return false"
+        style="padding-right: 32px"
+        noeye
+      />
+      <div class="eye">
+        <span
+          (click)="changInputType('password')"
+          *ngIf="installType === 'text'"
+        >
+          <img src="./assets/img/icon-view.svg" />
+        </span>
+        <span
+          (click)="changInputType('text')"
+          *ngIf="installType === 'password'"
+        >
+          <img src="./assets/img/icon-hide.svg" />
+        </span>
+      </div>
+    </div>
+    <div *ngIf="pwdCheckNull" class="ti3-unifyvalid-error-container">
+      <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"
+        ><img src="./assets/img/tip/icon_failure.svg"
+      /></span>
+      <span class="ti3-validate-text">{{ i18n.common_term_required_tip }}</span>
+    </div>
+  </div>
+  <!-- 密匙 -->
+  <div
+    *ngIf="sshTypeSelected === 'usekey'"
+    class="install-form-item color-d-aa-l-61"
+  >
+    <div class="ti3-icon ti3-icon-staricon install-form-item-label">
+      {{ i18n.plugins_common_label_installsshkey }}
+    </div>
+    <textarea
+      resize="horizontal"
+      tiTextarea
+      class="usekey-input"
+      [placeholder]="sshUploadKey"
+      [disabled]="connectChecking"
+      [(ngModel)]="localfilepath"
+      readonly
+    ></textarea>
+    <div style="display: inline-block" class="upload-btn">
+      <button
+        type="button"
+        class="little-minor-btn"
+        (click)="fileUpload()"
+        style="
+          display: inline-block;
+          width: 100px;
+          height: 28px;
+          margin-left: 10px;
+        "
+        [disabled]="connectChecking"
+      >
+        {{ i18n.plugins_common_message_sshkeyUpload }}
+        <input
+          type="file"
+          id="uploadFile"
+          style="display: none"
+          (change)="uploadFile()"
+          [disabled]="connectChecking"
+        />
+      </button>
+    </div>
+    <div
+      class="install-form-item-label ti3-icon-staricon"
+      style="margin-top: 20px"
+    >
+      {{ i18n.plugins_common_label_passphrase }}
+    </div>
+    <div style="position: relative">
+      <input
+        [type]="installType"
+        tiText
+        placeholder="{{ i18n.plugins_common_message_passphrase }}"
+        [disabled]="connectChecking"
+        [(ngModel)]="passphrase"
+        (change)="connected = false"
+        oncopy="return false"
+        onkeyup="if(event.ctrlKey && event.keyCode === 90){ return false;}"
+        onkeydown="if(event.ctrlKey && event.keyCode === 90){return false;}"
+        onpaste="return true"
+        oncut="return false"
+        noeye
+      />
+      <div class="eye">
+        <span
+          (click)="changInputType('password')"
+          *ngIf="installType === 'text'"
+        >
+          <img src="./assets/img/icon-view.svg" />
+        </span>
+        <span
+          (click)="changInputType('text')"
+          *ngIf="installType === 'password'"
+        >
+          <img src="./assets/img/icon-hide.svg" />
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="btn-group"
+    [ngClass]="{
+      'checkconnection-btn-en': i18nService.currLang === i18nService.langType.en
+    }"
+  >
+    <button
+      type="button"
+      class="secondary-btn check-conn-btn"
+      [ngClass]="{ 'checking-btn': connectChecking }"
+      (click)="checkConnBefore()"
+      [disabled]="
+        connectChecking || (sshTypeSelected === 'usekey' && !localfilepath)
+      "
+    >
+      <img
+        *ngIf="connectChecking && currTheme === 1"
+        src="./assets/img/loading-disabled.gif"
+      />
+      <img
+        *ngIf="connectChecking && currTheme === 2"
+        src="./assets/img/loading-white.gif"
+      />
+      <span>{{ i18n.plugins_common_button_checkConn }}</span>
+    </button>
+    <button
+      type="button"
+      class="primary-btn big-primary-btn"
+      (click)="install()"
+      [disabled]="!connected"
+    >
+      <span>{{ i18n.plugins_tuning_button_installConfirm }}</span>
+    </button>
+  </div>
+</div>
+
+<div *ngIf="installing !== -1" class="install-form">
+  <!-- 部署中 -->
+  <div *ngIf="installing === 0" class="install-title-installing">
+    <div class="color-d-e8-l-22">
+      {{ i18n.plugins_tuning_message_installingInfo }}
+    </div>
+  </div>
+  <!-- 部署成功 -->
+  <div *ngIf="installing === 1" class="install-title-installed">
+    <img class="img_install" src="./assets/img/tip/icon_success.svg" />
+    <p class="color-d-e8-l-22">{{ i18n.plugins_tuning_title_installed }}</p>
+  </div>
+  <!-- 部署失败 -->
+  <div *ngIf="installing === 2" class="install-title-failed">
+    <div class="install-failed-tip">
+      <img class="img_install" src="./assets/img/tip/icon_failure.svg" />
+      <p class="install-failed-tip1 color-d-e8-l-22">
+        {{ i18n.plugins_tuning_title_installFailed }}
+      </p>
+    </div>
+    <span class="install-failed-tip2 color-d-88-l-97">{{
+      i18n.plugins_tuning_message_install_failed_1
+    }}</span>
+    <a
+      class="install-failed-tip3"
+      (click)="openUrl(pluginUrlCfg.faqFiveZn, pluginUrlCfg.faqFiveEn)"
+      >{{ i18n.plugins_tuning_message_install_failed_2 }}</a
+    >
+    <span class="install-failed-tip3 color-d-88-l-97">{{
+      i18n.plugins_tuning_message_install_failed_3
+    }}</span>
+  </div>
+
+  <div *ngIf="installing === 1" class="install-message-installed">
+    <div>
+      <div>
+        <div>
+          <p class="color-d-88-l-61" [innerHtml]="selectIPInfo"></p>
+          <div *ngFor="let item of ipList; index as i">
+            <label class="ra-label" [for]="item.key" style="margin-top: 20px">
+              <i class="ra-common ra-check" *ngIf="ipSelected === item.key"></i>
+              <i
+                class="ra-common ra-uncheck"
+                *ngIf="ipSelected !== item.key"
+              ></i>
+              <input
+                type="radio"
+                name="ipType"
+                [(ngModel)]="ipSelected"
+                [value]="item.key"
+                [id]="item.key"
+                (change)="(ipSelected === item.key)"
+              />
+              <span
+                class="color-d-e8-l-22"
+                style="margin-left: 30px; font-size: 14px"
+                >{{ item.value }}</span
+              >
+            </label>
+            <div *ngIf="ipSelected === 2 && i === ipList.length - 1">
+              <div
+                style="
+                  width: 380px;
+                  display: flex;
+                  justify-content: center;
+                  margin-top: 10px;
+                "
+              >
+                <input
+                  type="text"
+                  tiText
+                  [(ngModel)]="extraIP"
+                  (blur)="checkExtraIP()"
+                  placeholder="{{ i18n.plugins_tuning_label_ip }}"
+                />
+                <div style="margin-left: 4px; margin-right: 4px">:</div>
+                <input
+                  type="text"
+                  tiText
+                  [(ngModel)]="extraPort"
+                  (blur)="checkExtraPort()"
+                  style="width: 100px !important"
+                  placeholder="{{ i18n.plugins_common_label_configPort }}"
+                />
+              </div>
+              <div
+                *ngIf="extraIpCheckF || extraPortCheckF"
+                class="ti3-unifyvalid-error-container"
+              >
+                <span
+                  class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"
+                  ><img src="./assets/img/tip/icon_failure.svg"
+                /></span>
+                <span
+                  *ngIf="extraIpCheckF && !extraPortCheckF"
+                  class="ti3-validate-text"
+                  >{{ i18n.plugins_tuning_message_ipError }}</span
+                >
+                <span
+                  *ngIf="!extraIpCheckF && extraPortCheckF"
+                  class="ti3-validate-text"
+                  >{{ i18n.plugins_tuning_message_portError }}</span
+                >
+                <span
+                  *ngIf="extraIpCheckF && extraPortCheckF"
+                  class="ti3-validate-text"
+                  >{{ i18n.plugins_tuning_message_bothError }}</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button
+    *ngIf="this.installing === 1 && !this.serviceConnecting"
+    id="login-btn"
+    type="button"
+    class="primary-btn"
+    (click)="goLogin()"
+  >
+    <span>
+      {{ i18n.plugins_tuning_button_login }}
+    </span>
+  </button>
+  <button
+    *ngIf="this.installing === 1 && this.serviceConnecting"
+    id="login-btn"
+    type="button"
+    class="primary-btn"
+    [disabled]="this.serviceConnecting"
+  >
+    <img *ngIf="currTheme === 1" src="./assets/img/loading-disabled.gif" />
+    <img *ngIf="currTheme === 2" src="./assets/img/loading-white.gif" />
+  </button>
+  <div
+    *ngIf="this.installing === 2"
+    id="reinstall-btn"
+    class="primary-btn"
+    (click)="retry()"
+  >
+    <span>
+      {{ i18n.plugins_tuning_button_install_failed_retry }}
+    </span>
+  </div>
+  <div class="showLoading" *ngIf="showLoading">
+    <app-loading [height]="'100%'" [size]="'max'"></app-loading>
+  </div>
+</div>
+
+<!-- 部署须知 -->
+<app-messagebox #installTip *ngIf="needFlag">
+  <div class="content tip-box" style="width: 630px">
+    <div class="tip-title color-d-e8-l-22">
+      <span class="title-content">{{
+        i18n.plugins_common_message_beforeInstall
+      }}</span>
+      <span (click)="cancelMsgTip()" class="icon-close">
+        <img src="./assets/img/close_icon.svg" />
+        <img src="./assets/img/close_hover.svg" />
+      </span>
+    </div>
+    <div class="tip-title-border"></div>
+    <div class="tip-dsc">
+      <img class="img_box" src="./assets/img/tip/icon_information.svg" />
+      <div class="color-d-e8-l-61">
+        <p class="mb10">
+          {{ i18n.plugins_common_message_beforeInstallDsc4 }}
+        </p>
+        <p class="mb10">{{ i18n.plugins_common_message_beforeInstallDsc5 }}</p>
+        <p class="mb10">{{ i18n.plugins_tuning_message_beforeInstallDsc6 }}</p>
+        <p>
+          <a (click)="clickFAQ(pluginUrlCfg.sysInstall_openFAQ4)">{{
+            i18n.plugins_tuning_message_pg_download_link
+          }}</a>
+          <span>{{ i18n.semicolon }}</span>
+          <a class="ml5" (click)="clickFAQ(pluginUrlCfg.sysInstall_openFAQ5)">{{
+            i18n.plugins_tuning_message_pg_vfc_tool_download_link
+          }}</a>
+        </p>
+      </div>
+    </div>
+    <div class="tip-select color-d-e8-l-61">
+      <input
+        class="pointer"
+        type="checkbox"
+        tiCheckbox
+        [(ngModel)]="flag"
+        id="tip"
+      />
+      <!-- <label class="pointer" for="tip">{{i18n.plugins_tuning_message_beforeInstallOption}}</label> -->
+      <label for="tip" class="ti3-checkbox pointer">
+        <span class="ti3-checkbox-skin ti3-icon ti3-icon-checkmark"></span>
+        <span class="ti3-check-label">{{
+          i18n.plugins_tuning_message_beforeInstallOption
+        }}</span>
+      </label>
+    </div>
+    <div class="tip-confirm">
+      <button
+        type="button"
+        class="primary-btn"
+        (click)="confirmMsgTip()"
+        [disabled]="!flag"
+      >
+        {{ i18n.plugins_common_button_term_operate_ok }}
+      </button>
+      <button
+        type="button"
+        class="secondary-btn rightest-btn"
+        (click)="cancelMsgTip()"
+      >
+        {{ i18n.plugins_tuning_message_beforeInstallCancel }}
+      </button>
+    </div>
+  </div>
+</app-messagebox>
+
+<!-- 确认弹框 -->
+<app-messagebox #showDialog>
+  <div class="content tip-box user-deploy-box" style="width: 336px">
+    <div class="tip-title color-d-e8-l-22">
+      <span class="title-content">{{ userDeployDialogTitle }}</span>
+      <span (click)="cancelDiglogMsgTip()" class="icon-close">
+        <img src="./assets/img/close_icon.svg" />
+        <img src="./assets/img/close_hover.svg" />
+      </span>
+    </div>
+    <div class="tip-dsc">
+      <img class="img_box" src="./assets/img/tip/icon_information.svg" />
+      <div class="color-d-aa-l-61">
+        <p>{{ dialogShowDetailText }}</p>
+      </div>
+    </div>
+    <div class="tip-confirm">
+      <button type="button" class="primary-btn" (click)="confirmDialogMsgTip()">
+        {{ i18n.plugins_public_button_continue }}
+      </button>
+      <button
+        type="button"
+        class="secondary-btn"
+        (click)="cancelDiglogMsgTip()"
+      >
+        {{ i18n.plugins_public_button_cancel }}
+      </button>
+      <button
+        type="button"
+        class="secondary-btn rightest-btn"
+        (click)="openFAQ()"
+      >
+        {{ i18n.plugins_common_tips_checkConn_openFAQ }}
+      </button>
+    </div>
+  </div>
+</app-messagebox>
+
+<!-- 指纹弹框 -->
+<app-messagebox #fingerDialog>
+  <div class="content tip-box finger-box" style="width: 336px">
+    <div class="tip-title color-d-e8-l-22">
+      <span class="title-content">{{ fingerDialogTitle }}</span>
+      <span (click)="cancelFingerDialog()" class="icon-close">
+        <img src="./assets/img/close_icon.svg" />
+        <img src="./assets/img/close_hover.svg" />
+      </span>
+    </div>
+    <div class="tip-dsc">
+      <img class="img_box" src="./assets/img/tip/icon_information.svg" />
+      <div class="color-d-aa-l-61">
+        <p>{{ fingerLoseText }}</p>
+      </div>
+    </div>
+    <div class="tip-confirm">
+      <button type="button" class="primary-btn" (click)="confirmFingerDialog()">
+        {{ i18n.plugins_tuning_button_continue_connect }}
+      </button>
+      <button
+        type="button"
+        class="secondary-btn"
+        (click)="cancelFingerDialog()"
+      >
+        {{ i18n.plugins_public_button_cancel }}
+      </button>
+    </div>
+  </div>
+</app-messagebox>
+
+<!-- 右下角弹框 -->
+<div class="notification-container">
+  <!-- 右下角的纯文字提示弹框，可能需要与下方带按钮的同时出现 -->
+  <app-notification-box #notificationBox>
+    <div class="notification-message">{{ notificationMessage }}</div>
+  </app-notification-box>
+
+  <!-- 带按钮的错误提示弹框 -->
+  <app-notification-with-action #serverErrorBox>
+    <span class="notification-message">{{
+      i18n.plugins_common_message_responseError_deployScenario
+    }}</span>
+    <div class="action-content">
+      <button
+        type="button"
+        class="primary-btn error-instruction-button"
+        (click)="openErrorInstruction()"
+      >
+        {{ i18n.plugins_common_button_checkErrorDetails }}
+      </button>
+    </div>
+  </app-notification-with-action>
+</div>

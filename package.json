@@ -1,30 +1,23 @@
 {
-  "name": "Kunpeng_DevKit_Frontend",
-  "version": "0.0.1",
+  "name": "tuning-Kunpeng_DevKit_Frontend-plugin",
+  "version": "23.0.1",
+  "main": "index.js",
   "scripts": {
-    "install": "cd workspace && npm install --unsafe-perm && cd ../extension/perfadvisor && npm install && cd ../porting && npm install",
-    "install:ide:porting": "cd workspace && npm install --unsafe-perm && cd ../extension/porting && npm install",
-    "install:ide:tuner": "cd workspace && npm install --unsafe-perm && cd ../extension/perfadvisor && npm install",
-    "package:web:porting": "cd workspace && sh ./build/porting_package.sh",
-    "package:web:java": "cd workspace && npm install && npm run build:java:web && node build/java_zip.js",
-    "package:web:sys": "cd workspace && npm install && npm run build:sys:web && node build/sys_zip.js",
-    "package:web:user": "cd workspace && npm install && npm run build:user && node build/user_zip.js",
-    "package:ide:sys-java": "cd extension/perfadvisor && npm run package",
-    "package:ide:porting": "cd extension/porting && npm run package",
-    "package:intellij:porting": "cd extension/porting-intellIJ && sh build/build-webview.sh",
-    "package:intellij:tuning": "cd extension/tuning-intellIJ && sh build/build-webview.sh",
-    "package:kunpeng": "cd extension/kunpengplugin && sh build/build.sh",
-    "install:lint": "npm install husky@6.0.0 lint-staged@11.0.0 tslint@6.1.3 typescript@3.9.7 -D",
-    "start:lint": "npm run install:lint && husky install"
+    "install": "cd workspace && npm install --unsafe-perm && cd ../extension/tuning && npm install",
+    "package:vscode": "cd extension/tuning && npm run package",
+    "package:intellij": "cd extension/tuning-intellIJ && sh build/build-webview.sh",
+    "package0": "cd extension/tuning && npm run package0"
   },
+  "author": "",
+  "license": "ISC",
   "lint-staged": {
     "workspace/**/*.ts": "tslint -c ./workspace/tslint.json",
-    "extension/**/*.ts": "tslint -c ./extension/tslint.json"
+    "extension/**/*.ts": "tslint -c ./extension/tuning/tslint.json"
   },
   "devDependencies": {
-    "husky": "^6.0.0",
-    "lint-staged": "^11.0.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^12.5.0",
     "tslint": "^6.1.3",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.10"
   }
 }

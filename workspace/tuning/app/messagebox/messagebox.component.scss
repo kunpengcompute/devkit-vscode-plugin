@@ -1,0 +1,59 @@
+::ng-deep .vscode-dark {
+    --color-box-content: #252526;
+    $linkColor: #000000;
+    --color-content-shadow: rgba($linkColor, 0.8);
+}
+
+::ng-deep .vscode-light {
+    --color-box-content: #FFFFFF;
+    $linkColor: #000000;
+    --color-content-shadow: rgba($linkColor, 0.1);
+}
+
+.mask {
+    background: rgba(0, 0, 0, 0.298);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    display: none;
+    transition: .4s ease-out;
+    z-index: 113;
+}
+
+.mask.active {
+    display: block;
+    overflow-y: hidden;
+}
+
+.content-box {
+    box-sizing: border-box;
+    // content-box宽度自适应内容，方便使用的组件自定义宽度
+    width: fit-content;
+    padding: 20px 32px 32px 32px;
+    background-color: var(--color-box-content);
+    box-shadow: 0px 3px 6px 0px var(--color-content-shadow);
+    margin: auto !important;
+    z-index: 114;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    justify-content: center;
+    align-items: center;
+
+    img {
+        position: absolute;
+        top: 20px;
+        right: 40px;
+        cursor: pointer;
+    }
+}
+.intelliJpadding{
+    padding: 8px 18px 18px 18px !important;
+    width: 524px !important;
+}
+
+.content-box.active {
+    display: flex;
+}

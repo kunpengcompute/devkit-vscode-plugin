@@ -1,0 +1,528 @@
+// component css goes here
+::ng-deep html {
+    min-width: 1062px !important;
+    overflow-x: auto !important;
+}
+
+::ng-deep body {
+    overflow: hidden !important;
+
+    // radio
+    input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin {
+        border-color: #0067ff !important;
+        background-color: var(--vscode-editor-background) !important;
+    }
+
+    input[type="radio"][tiRadio]:not(:disabled):not(:checked)+.ti3-radio .ti3-radio-skin:hover {
+        border-color: #0067ff !important;
+    }
+
+    input[type="radio"][tiRadio]:not(:disabled):checked+.ti3-radio .ti3-radio-skin::after {
+        background-color: #0067ff !important;
+        opacity: 1;
+    }
+
+    input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-skin {
+        background-color: var(--vscode-editor-background) !important;
+    }
+
+    input[type="radio"][tiRadio]+.ti3-radio .ti3-radio-label {
+        color: #e8e8e8 !important;
+    }
+}
+
+::ng-deep .vscode-light {
+    --upgrade-color-title-content: #222222;
+    --upgrade-color-content: #616161;
+
+    --upgrade-color-separator: #e1e6ee;
+    --upgrade-color-msgbox-bg: #ffffff;
+    --upgrade-color-msgbox-close: #aaaaaa;
+    --upgrade-color-msgbox-dsc-icon-bg: #ffffff;
+    --upgrade-color-msgbox-content: #616161;
+    --upgrade-color-msgbox-dsc-icon: #0067ff;
+
+    --upgrade-color-btn-p: #ffffff;
+    --upgrade-color-btn-p-bg-dft: #0067ff;
+    --upgrade-color-btn-p-bg-hover: #267dff;
+    --upgrade-color-btn-p-bg-active: #0057d9;
+    --upgrade-color-btn-p-bg-disabled: #f5f5f5;
+    --upgrade-color-btn-m-bg: #ffffff;
+    --upgrade-color-btn-m-dft: #979797;
+    --upgrade-color-btn-m-hover: #267dff;
+    --upgrade-color-btn-m-active: #0057d9;
+    --upgrade-color-btn-m-disabled: #cccccc;
+    --upgrade-color-btn-m-bg-disabled: #f5f5f5;
+    --upgrade-color-btn-text-disabled: #cccccc;
+
+    .upgrade-title-det {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 704px;
+        margin-bottom: 24px;
+        .tip-icon {
+            color: #0067ff;
+            background-color: #ffffff;
+            margin-right: 10px;
+            font-size: 16px;
+            border-radius: 30px;
+            top: 2px;
+            width: 16px;
+            height: 16px;
+        }
+    }
+    .upgrade-form-item {
+        position: relative;
+        margin-top: 20px;
+        .upgrade-form-item-label {
+            color: #616161;
+            height: 28px;
+            font-size: 14px;
+            .upgrade-form-item-label-req {
+                color: #e02020;
+                margin-left: 4px;
+            }
+        }
+        .upload-btn {
+            vertical-align: bottom;
+            position: relative;
+            top: -4px;
+        }
+    }
+}
+
+::ng-deep .vscode-dark {
+    --upgrade-color-title-content: #e8e8e8;
+    --upgrade-color-content: #aaaaaa;
+
+    --upgrade-color-separator: #4b4b4b;
+    --upgrade-color-msgbox-bg: #252526;
+    --upgrade-color-msgbox-close: #aaaaaa;
+    --upgrade-color-msgbox-dsc-icon-bg: #ffffff;
+    --upgrade-color-msgbox-content: #888888;
+    --upgrade-color-msgbox-dsc-icon: #0067ff;
+
+    --upgrade-color-btn-p: #e8e8e8;
+    --upgrade-color-btn-p-bg-dft: #0067ff;
+    --upgrade-color-btn-p-bg-hover: #267dff;
+    --upgrade-color-btn-p-bg-active: #0057d9;
+    --upgrade-color-btn-p-bg-disabled: #313131;
+    --upgrade-color-btn-m-bg: #313131;
+    --upgrade-color-btn-m-dft: #dddddd;
+    --upgrade-color-btn-m-hover: #267dff;
+    --upgrade-color-btn-m-active: #0057d9;
+    --upgrade-color-btn-m-disabled: #616161;
+    --upgrade-color-btn-m-bg-disabled: #313131;
+    --upgrade-color-btn-text-disabled: #666666;
+
+    .upgrade-title-det {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 704px;
+        margin-bottom: 24px;
+        .tip-icon {
+            color: #0067ff;
+            background-color: #ffffff;
+            margin-right: 10px;
+            font-size: 16px;
+            border-radius: 30px;
+            top: 2px;
+            width: 16px;
+            height: 16px;
+        }
+    }
+    .upgrade-form-item {
+        position: relative;
+        margin-top: 20px;
+        .upgrade-form-item-label {
+            color: var(--upgrade-color-content);
+            height: 28px;
+            font-size: 14px;
+            .upgrade-form-item-label-req {
+                color: #e02020;
+                margin-left: 4px;
+            }
+        }
+        .upload-btn {
+            vertical-align: bottom;
+            position: relative;
+            top: -4px;
+        }
+    }
+}
+
+.upgrade-form {
+    width: 100%;
+    padding: 24px 0 40px 80px;
+    min-width: 300px;
+    box-sizing: border-box;
+    .upgrade-title-gen {
+        margin-bottom: 4px;
+    }
+    .upgrade-title-gent {
+        margin-bottom: 10px;
+        margin-top: 30px;
+    }
+    .ssh-type-title {
+        margin-bottom: 16px;
+        color: var(--upgrade-color-content);
+        font-size: 14px;
+        margin-top: 20px;
+
+        .help-icon {
+            height: 14px;
+            margin-left: 8px;
+        }
+    }
+
+    .ssh-type-radio {
+        display: inline-block;
+        margin-right: 40px;
+
+        span {
+            display: inline-block;
+            font-size: 14px;
+        }
+    }
+
+    .upgrade-title-upgraded {
+        width: 768px;
+        margin-left: -28px;
+        display: flex;
+        align-items: center;
+
+        p {
+            color: var(--font-d-e8e8e8-l-222222);
+            font-size: 16px;
+            margin-left: 12px;
+            height: 24px;
+            line-height: 24px;
+            display: inline-block;
+        }
+    }
+
+    .upgrade-title-upgrading,
+    .upgrade-title-failed {
+        width: 768px;
+        margin-left: -28px;
+
+        .install-failed-tip {
+            display: flex;
+            align-items: center;
+
+            .install-failed-tip1 {
+                color: var(--font-d-e8e8e8-l-222222);
+                font-size: 20px;
+                margin-left: 12px;
+                height: 26px;
+                line-height: 26px;
+                display: inline-block;
+            }
+        }
+
+        .install-failed-tip2 {
+            color: var(--border-d-888888-l-979797);
+            font-size: 14px;
+            margin-left: 28px;
+            height: 20px;
+            margin-top: 4px;
+        }
+    }
+
+    .img_install {
+        width: 16px;
+        height: 16px;
+    }
+
+    ti-select {
+        width: 400px;
+        height: 28px;
+    }
+    @keyframes rotate {
+        0% {
+            -webkit-transform: rotate(0deg) scale(1);
+            transform: rotate(0deg) scale(1);
+        }
+
+        50% {
+            -webkit-transform: rotate(180deg) scale(1);
+            transform: rotate(180deg) scale(1);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg) scale(1);
+            transform: rotate(360deg) scale(1);
+        }
+    }
+    .showLoading{
+      height: 57vh;
+    }
+}
+
+#login-btn {
+    width: 116px;
+    height: 32px;
+    margin-top: 30px;
+    line-height: 32px;
+}
+
+.tip-box {
+    width: 400px;
+    
+    .tip-title {
+        color: var(--upgrade-color-title-content);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        line-height: 20px;
+
+        font-size: 20px;
+
+        .tip-close {
+            color: var(--upgrade-color-msgbox-close);
+            font-weight: 100;
+            border: solid 1px var(--upgrade-color-msgbox-bg);
+
+            &:hover {
+                border-color: var(--upgrade-color-msgbox-close);
+            }
+        }
+    }
+
+    .tip-dsc {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        .tip-icon {
+            color: var(--upgrade-color-msgbox-dsc-icon);
+            background-color: var(--upgrade-color-msgbox-dsc-icon-bg);
+            margin-right: 10px;
+            font-size: 16px;
+            border-radius: 30px;
+            top: 2px;
+            width: 16px;
+            height: 16px;
+        }
+
+        p {
+            font-size: 14px;
+        }
+    }
+
+    .tip-select {
+        color: var(--upgrade-color-msgbox-content);
+        padding-top: 30px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        font-size: 14px;
+        vertical-align: middle;
+
+        span {
+            width: 16px;
+            line-height: 16px;
+            margin-right: 16px;
+            vertical-align: middle;
+        }
+    }
+}
+.help-icon {
+    position: relative;
+    top: 2px;
+}
+.tip-confirm {
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        min-width: 100px;
+    }
+}
+::ng-deep .content-box {
+    background-color: var(--upgrade-color-msgbox-bg) !important;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.check-conn-btn {
+    margin-right: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+
+    img {
+        margin-right: 5px;
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.img_box {
+    width: 22px;
+    height: 22px;
+    margin-top: 3px;
+    margin-right: 8px;
+}
+
+.title-info-img-box {
+    margin-right: 6px;
+    margin-top: 2px;
+}
+
+.upgrade-message-upgraded {
+    width: 800px;
+    margin-top: 10px;
+}
+.eye {
+    position: absolute;
+    left: 375px;
+    width: 20px;
+    height: 20px;
+    top: 0px;
+    bottom: 0px;
+    margin: auto 0;
+}
+:host .ra-label {
+    display: flex;
+}
+
+.btn-group {
+    margin: 40px 0;
+}
+
+.usekey-input {
+    box-sizing: border-box;
+    min-height: 28px;
+    padding: 0 10px;
+    width: 290px;
+    height: 28px;
+    line-height: 26px;
+}
+
+.upgrade-title-det {
+    .top-tips {
+        font-size: 14px;
+        color: var(--font-d-aaaaaa-l-979797);
+        a {
+            color: #0067ff;
+            &:hover {
+                color: #267DFF;
+            }
+        }
+    }
+}
+.ssh-type .ra-label {
+    display: flex;
+    align-items: center;
+}
+.ssh-type .ra-label input {
+    margin-right: 5px;
+    display: none!important;
+    width: 16px!important;
+    height: 16px!important;
+    outline: none;
+}
+
+// root和非root的提示样式
+.tip-box {
+    .tip-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        line-height: 20px;
+        font-size: 20px;
+    }
+
+    .tip-dsc {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        border-top: 1px dashed var(--th-border_b-d-4b4b4b-l-e1e6ee);
+        padding-top: 20px;
+
+        div {
+            font-size: 14px;
+
+            p {
+                a {
+                    color: #0067FF;
+                    &:hover {
+                        color: #267DFF;
+                    }
+                }
+            }
+
+        }
+    }
+
+    .tip-select {
+        padding-top: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        font-size: 14px;
+        vertical-align: middle;
+
+        span {
+            width: 16px;
+            line-height: 16px;
+            margin-right: 16px;
+            vertical-align: middle;
+        }
+        input {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+        }
+    }
+
+    .tip-confirm {
+        padding-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.user-deploy-box {
+    .tip-dsc {
+        margin-top: 0 !important;
+        padding-top: 32px !important;
+        border: none !important;
+    }
+    
+    .tip-confirm {
+        padding-top: 32px !important;
+    }
+}
+
+.finger-box {
+    .tip-dsc {
+        border: none !important;
+        margin: 0 !important;
+        padding-top: 24px !important;
+    }
+
+    .tip-confirm button {
+        width: 92px !important;
+    }
+}
+
+.error-instruction-button {
+    width: auto !important;
+    margin-right: 0;
+    height: 26px;
+}

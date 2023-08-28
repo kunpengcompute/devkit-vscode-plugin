@@ -6,25 +6,23 @@ set -e
 build_dir=$(cd $(dirname $0); pwd)
 root_path=${build_dir}/..
 workspace_path=${build_dir}/../../../workspace
-sys_path=${workspace_path}/projects/sys
-java_path=${workspace_path}/projects/java
 
 echo "************* copy src-ide to src-intellij ************"
-cp -rf ${root_path}/sys/* ${sys_path}/src-ide
-cp -rf ${root_path}/java/* ${java_path}/src-ide
+cp -rf ${root_path}/tuning/* ${workspace_path}/tuning
 echo "*******************start build webview!****************"
 cd ${workspace_path}
 if [ ! -d "node_modules" ];then npm install; fi
-npm run build:sys:ide
-npm run build:java:ide
+npm run build:tuning:ide & wait
 
 echo "*******************Start zip tuning files*************"
+if [ -d "${root_path}/out/" ]; then
+  rm -rf ${root_path}/out/
+fi
 mkdir ${root_path}/out/
-mkdir ${root_path}/out/tuning
-mkdir ${root_path}/out/tuning/sys
-mkdir ${root_path}/out/tuning/java
-cp -rf ${root_path}/../perfadvisor/out/sysperfanalysis/* ${root_path}/out/tuning/sys
-cp -rf ${root_path}/../perfadvisor/out/javaperfanalysis/* ${root_path}/out/tuning/java
+mkdir ${root_path}/out/tuning/
+cp -rf ${root_path}/../tuning/out/* ${root_path}/out/tuning
 cd ${root_path}/out
+mv ${root_path}/out/tuning/sysperfanalysis ${root_path}/out/tuning/sys
+rm -rf tuning.zip
 zip -r tuning.zip tuning
 echo "*********Finish build vscode-webview to Intellj*********"

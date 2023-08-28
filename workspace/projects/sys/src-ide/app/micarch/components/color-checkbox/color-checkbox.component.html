@@ -1,9 +1,0 @@
-<div class="warpper">
-    <ng-container *ngFor="let item of optionCheckList; index as i">
-        <div class="block" (click)="onClick(i)">
-            <div [ngClass]="{'color': true, 'checkout': !item.isChecked}" [ngStyle]="{'background-color': item.color}">
-            </div>
-            <div [ngClass]="{'name': true, 'checkout': !item.isChecked}">{{ item.name }}</div>
-        </div>
-    </ng-container>
-</div>

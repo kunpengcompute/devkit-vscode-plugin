@@ -1,0 +1,167 @@
+<!--component html goes here -->
+<app-banner></app-banner>
+<div class="config-form">
+    <p class="config-title-gen title">{{ i18n.plugins_common_title_config }}
+        <a [href]="pluginUrlCfg.sysConfig_openFAQ1">
+            <img *ngIf="currTheme == 1" class="help-icon" src="./assets/img/icon-help-dark.svg">
+            <img *ngIf="currTheme == 2" class="help-icon" src="./assets/img/icon-help-light.svg">
+        </a>
+    </p>
+    <div>
+        <p class="config-title-det">{{ i18n.plugins_common_label_config }}<span class="config-title-det-btn"
+                (click)="openInstallPage()">{{ i18n.plugins_common_button_install }}</span></p>
+        <p class="config-title-det">{{ i18n.plugins_common_apply_free_env_info }}<span class="config-title-det-btn"
+                (click)="openFreeTrialRemoteEnv()">{{ i18n.plugins_common_apply_free_env_link }}</span>
+        </p>
+    </div>
+
+    <div class="config-form-item">
+        <div class="ti3-icon ti3-icon-staricon config-form-item-label">{{ i18n.plugins_common_label_ip }}
+        </div>
+        <input type="text" [ngClass]="{'border-red': ipCheck}" tiText [(ngModel)]="tempIP" (blur)="checkIP()" *ngIf="!hasConfig || isModify" (change)="firstChange()"/>
+        <input type="text" tiText [placeholder]="tempIP" disabled *ngIf="hasConfig && !isModify"/>
+        <div *ngIf="ipCheck" class="ti3-unifyvalid-error-container">
+            <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"><img src="./assets/img/tip/icon_failure.svg"></span>
+            <span class="ti3-validate-text">{{ i18n.plugins_common_message_ipError }}</span>
+        </div>
+    </div>
+    <div *ngIf="certInstalled" class="config-form-item">
+        <div class="config-form-item-label">{{ i18n.plugins_common_enable_dns_name }}
+        </div>
+        <!-- <input type="text" [ngClass]="{'border-red': ipCheck}" tiText [(ngModel)]="tempIP" (blur)="checkIP()" *ngIf="!hasConfig || isModify" /> -->
+        <input type="checkbox" [(ngModel)]="tempDomainEnabled" style="width:20px !important;vertical-align:middle;margin-right:10px;" *ngIf="!hasConfig || isModify"/>
+        <input type="checkbox" [(ngModel)]="tempDomainEnabled" style="width:20px !important;vertical-align:middle;margin-right:10px;" disabled *ngIf="hasConfig && !isModify"/>
+        <input type="text" tiText [placeholder]="tempDomainName" style="width:350px !important" disabled/>
+    </div>
+    <div class="config-form-item">
+        <div class="ti3-icon ti3-icon-staricon config-form-item-label">{{ i18n.plugins_common_label_configPort }}
+        </div>
+        <input [placeholder]="i18n.plugins_common_placeholder_default_port" type="text" tiText [(ngModel)]="tempPort" [ngClass]="{'border-red': portCheck}"
+            (blur)="checkPort()" *ngIf="!hasConfig || isModify"/>
+        <input type="text" tiText [placeholder]="tempPort" disabled *ngIf="hasConfig && !isModify"/>
+        <div *ngIf="portCheck" class="ti3-unifyvalid-error-container">
+            <span class="ti3-validate-icon ti3-icon ti3-icon-exclamation-circle"><img src="./assets/img/tip/icon_failure.svg"></span>
+            <span class="ti3-validate-text">{{ i18n.plugins_common_message_portError }}</span>
+        </div>
+    </div>
+
+    <div class="btn-group">
+        <button type="button" class="primary-btn" (mousedown)="saveConfirm()" *ngIf="!hasConfig || isModify" [disabled]="!tempIP || !tempPort">
+            {{ i18n.plugins_tuning_button_save }}
+        </button>
+        <button type="button" class="primary-btn" (mousedown)="modifyConfig()" *ngIf="hasConfig && !isModify">
+            {{ i18n.plugins_tuning_button_modi }}
+        </button>
+        <button type="button" class="secondary-btn" (mousedown)="cancelModify()" *ngIf="isModify">
+            {{ i18n.plugins_tuning_button_cancel }}
+        </button>
+    </div>
+
+</div>
+
+<div *ngIf="showLoading" class="loading">
+    <app-loading [height]="'100%'" [size]="'max'"></app-loading>
+</div>
+
+<!-- 是否切换服务器? 这个是在什么场景下有出现的 好像没用 -->
+<!-- <app-messagebox #showDialog>
+    <div class="content tip-box">
+        <div class="tip-title color-d-e8-l-22">
+            <span class="title-content">{{i18n.plugins_common_cur_server_title}}</span>
+            <span (click)="cancelDiglogMsgTip()" class="icon-close">
+                <img src="./assets/img/close_icon.svg">
+                <img src="./assets/img/close_hover.svg">
+            </span>
+        </div>
+        <div class="tip-title-border"></div>
+        <div class="tip-dsc">
+            <img class="img_box" src="./assets/img/tip/icon_information.svg">
+            <div class="color-d-e8-l-61">
+                <p class="mb10">
+                    {{i18n.plugins_common_cut_server}}
+                </p>
+            </div>
+        </div>
+        <div class="tip-confirm">
+            <button type="button" class="primary-btn"
+                (click)="confirmDialogMsgTip()">{{i18n.plugins_public_message_confirm}}</button>
+            <button type="button" class="secondary-btn"
+                (click)="cancelDiglogMsgTip()">{{i18n.plugins_public_message_cancel}}</button>
+        </div>
+    </div>
+</app-messagebox> -->
+
+<!-- 是否保存远端服务器配置 -->
+<app-messagebox #saveModifyDialog>
+    <div class="content tip-box save-modify-box" style="width: 340px;">
+        <div class="tip-title color-d-e8-l-22">
+            <span class="title-content">{{i18n.plugins_tuning_title_save_config}}</span>
+            <span (click)="cancelModifyConfigDialog()" class="icon-close">
+                <img src="./assets/img/close_icon.svg">
+                <img src="./assets/img/close_hover.svg">
+            </span>
+        </div>
+        <div class="tip-dsc">
+            <img class="img_box" src="./assets/img/tip/icon_information.svg">
+            <div class="color-d-e8-l-61">
+                <p class="mb10">
+                    {{i18n.plugins_tuning_save_config_modify}}
+                </p>
+            </div>
+        </div>
+        <div class="tip-confirm">
+            <button type="button" class="primary-btn"
+                (click)="confirmModifyConfigDialog()">{{i18n.plugins_public_button_confirm}}</button>
+            <button type="button" class="secondary-btn rightest-btn"
+                (click)="cancelModifyConfigDialog()">{{i18n.plugins_public_button_cancel}}</button>
+        </div>
+    </div>
+</app-messagebox>
+
+<!-- 版本不匹配 -->
+<app-messagebox #versionDialog>
+    <div class="content tip-box" style="width: 660px;">
+        <div class="tip-title color-d-e8-l-22">
+            <span class="title-content">{{i18n.plugins_common_title_config}}</span>
+            <span (click)="cancelVersionDiglogMsgTip()" class="icon-close">
+                <img src="./assets/img/close_icon.svg">
+                <img src="./assets/img/close_hover.svg">
+            </span>
+        </div>
+        <div class="tip-title-border"></div>
+        <div class="tip-dsc">
+            <img class="img_box" src="./assets/img/tip/icon_information.svg">
+            <div class="color-d-e8-l-61">
+                <p class="mb10">
+                    {{versionMismatch}}
+                </p>
+            </div>
+        </div>
+        <div class="tip-confirm">
+            <button type="button" class="secondary-btn single-btn"
+                (click)="cancelVersionDiglogMsgTip()">{{i18n.plugins_public_message_close}}</button>
+        </div>
+    </div>
+
+</app-messagebox>
+
+
+<div class="notification-container">
+    <app-notification-box #notificationBox>
+        <div class="notification-message">{{notificationMessage}}</div>
+    </app-notification-box>
+    
+    <app-notification-with-action #canLoginBox>
+        <span class="notification-message">{{i18n.plugins_tuning_message_save_config_success}}</span>
+        <div class="action-content">
+            <button type="button" class="primary-btn login-button" (click)="openLogin()">{{i18n.plugins_tuning_button_login}}</button>
+        </div>
+    </app-notification-with-action>
+    
+    <app-notification-with-action #serverErrorBox>
+        <span class="notification-message">{{i18n.plugins_common_message_responseError}}</span>
+        <div class="action-content">
+            <button type="button" class="primary-btn error-instruction-button" (click)="openErrorInstruction()">{{i18n.plugins_common_button_checkErrorDetails}}</button>
+        </div>
+    </app-notification-with-action>
+</div>

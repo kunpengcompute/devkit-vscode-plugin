@@ -1,0 +1,64 @@
+::ng-deep .vscode-dark {
+    --color-box-content: #252526;
+    --color-content-shadow: rgba(0, 0, 0, 0.4);
+    --color-message: #e8e8e8;
+}
+
+::ng-deep .vscode-light {
+    --color-box-content: #FFFFFF;
+    --color-content-shadow: rgba(0, 0, 0, 0.2);
+    --color-message: #222222;
+}
+
+.notification-action-box {
+    background-color: var(--color-box-content);
+    box-shadow: 0px 8px 30px 0px var(--color-content-shadow);
+    width: 448px;
+    height: fit-content;
+    padding: 16px;
+    margin-bottom: 10px;
+    display: block;
+    overflow: hidden;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    line-height: 15px;
+    margin-bottom: 16px;
+}
+
+.title-notification {
+    font-size: 14px;
+    color: var(--color-message);
+    display: flex;
+    line-height: 15px;
+}
+
+.notification-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    img {
+        width: 16px !important;
+        height: 16px !important;
+    }
+}
+
+.action {
+    float: right;
+}
+
+.icon-close {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    img {
+        width: 14px;
+        cursor: pointer;
+    }
+}

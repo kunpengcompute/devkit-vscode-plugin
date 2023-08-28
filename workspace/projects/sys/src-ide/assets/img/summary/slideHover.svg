@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="9px" height="22px" viewBox="0 0 9 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>组件/滑动条/抓手Hover</title>
-    <g id="组件/滑动条/抓手Hover" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect id="矩形" stroke="#0067FF" fill="#3A3A3A" x="0.5" y="0.5" width="8" height="21" rx="2"></rect>
-        <rect id="矩形备份-4" fill="#0067FF" x="5" y="6" width="1" height="10"></rect>
-        <rect id="矩形备份-5" fill="#0067FF" x="3" y="6" width="1" height="10"></rect>
-    </g>
-</svg>

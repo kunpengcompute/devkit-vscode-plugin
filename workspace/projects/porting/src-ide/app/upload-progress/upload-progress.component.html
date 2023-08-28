@@ -1,9 +1,0 @@
-<div class="upload-container" *ngIf="isShow">
-    <div class="top">{{i18n.common_term_upload_list}}</div>
-    <div class="content">
-        <span>{{info.filename}} ({{info.filesize}}MB)-{{uploadProgress}}</span>
-        <div class="progress-bar-bg">
-            <div class="progress-bar" [ngStyle]="{'width': uploadProgress}" ></div>
-        </div>
-    </div>
-</div>

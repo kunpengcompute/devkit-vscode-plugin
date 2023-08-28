@@ -1,0 +1,175 @@
+::ng-deep html {
+    min-width: 1062px !important;
+    overflow-x: auto !important;
+}
+
+::ng-deep .vscode-dark {
+    --list-info-color: #888888;
+    --ti-default-body-bg: #1e1e1e;
+
+    .list-item {
+        background-color: #292a2b;
+        box-shadow: 0px 2px 16px 0px 
+		  rgba(0, 0, 0, 0.31), 
+		    0px 8px 16px 0px 
+		  rgba(0, 0, 0, 0.1);
+    }
+
+    .list-item:hover {
+        background-color: #363739;
+	    box-shadow: 0px 9px 16px 0px 
+		  rgba(0, 0, 0, 0.2), 
+		    0px 8px 16px 0px 
+		  rgba(0, 0, 0, 0.1);
+    }
+}
+
+::ng-deep .vscode-light {
+    --list-info-color: #aaaaaa;
+    --ti-default-body-bg: #ffffff;
+
+    .list-item {
+        background-color: #ffffff;
+        box-shadow: 0px 2px 16px 0px 
+		  rgba(0, 0, 0, 0.1), 
+		    0px 8px 16px 0px 
+		  rgba(0, 0, 0, 0.1);
+    }
+
+    .list-item:hover {
+        background-color: #ffffff;
+	    box-shadow: 0px 4px 16px 0px 
+		  rgba(0, 0, 0, 0.2), 
+		    0px 8px 16px 0px 
+		  rgba(0, 0, 0, 0.1);
+    }
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    background-color: var(--ti-default-body-bg);
+    overflow: auto;
+    padding: 40px 80px;
+    box-sizing: border-box;
+
+    .header-title {
+        margin-bottom: 4px;
+        height: 30px;
+        font-size: 20px;
+        font-weight: normal;
+        color: var(--font-d-e8e8e8-l-222222);
+    }
+    
+    .header-title-det {
+        width: 730px;
+        font-size: 14px;
+        line-height: 20px;
+        color: var(--font-d-888888-l-979797);
+    }
+
+    .content-box {
+        display: flex;
+        width: 100%;
+        margin-top: 20px;
+        justify-content: flex-start;
+        border-radius: 6px;
+
+        .list-item {
+            width: 300px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 24px 24px 0 24px;
+            box-sizing: border-box;
+            margin-right: 80px;
+            border-radius: 6px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            .list-item-top {
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                width: 100%;
+                height: 60px;
+                box-sizing: border-box;
+                margin-bottom: 40px;
+
+                .number-icon {
+                    width: 48px;
+	                height: 48px;
+                    margin-right: 4px;
+                }
+
+                .list-item-det {
+                    width: 200px;
+	                height: 60px;
+                    display: flex;
+                    flex-direction: column;
+
+                    .list-item-title {
+                        width: 100%;
+                        height: 20px;
+                        font-size: 14px;
+                        line-height: 20px;
+                        margin-bottom: 4px;
+                        color: var(--font-d-e8e8e8-l-222222);
+                    }
+
+                    .list-item-info {
+                        width: 100%;
+                        height: 36px;
+                        font-size: 12px;
+                        line-height: 18px;
+                        color: var(--font-d-aaaaaa-l-616161);
+                    }
+                }
+            }
+
+            .list-item-center {
+                display: flex;
+		        justify-content: center;
+                width: 100%;
+                margin-bottom: 48px;
+
+                .icon {
+                    width: 160px;
+                    height: 160px;
+                }
+            }
+
+            .list-item-bottom {
+                display: flex;
+		        justify-content: center;
+                width: 100%;
+
+                p {
+                    font-size: 14px;
+                    line-height: 20px;
+
+                    .link-url {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        min-width: 80px;
+                        text-decoration: none;
+                        cursor: pointer;
+                        color: #0067ff;
+                        vertical-align: middle;
+                    }
+
+                    .link-arrow {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,283 @@
+{
+  "name": "kunpeng-hyper-tuner-plugin",
+  "displayName": "Kunpeng Hyper Tuner Plugin",
+  "description": "支持系统性能分析和 Java 性能分析，提供系统全景及常见应用场景下的性能采集和分析能力，同时基于调优系统给出优化建议。",
+  "version": "23.0.1",
+  "publisher": "kunpengfamily",
+  "engines": {
+    "vscode": "^1.53.0"
+  },
+  "icon": "resources/images/tuning.png",
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:perfadvisorTools",
+    "onView:configurationInfo",
+    "onView:perfPanelbeforeConfigured"
+  ],
+  "main": "./out/extension/src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.view.perfadvisorserverconfig",
+        "title": "%configure.remote.server%"
+      },
+      {
+        "command": "extension.view.perfadvisorserverconfigagain",
+        "title": "%configure.remote.server.again%"
+      },
+      {
+        "command": "extension.view.perfadvfreetrialremoteenvironment",
+        "title": "%free.trial.remote.environment%"
+      },
+      {
+        "command": "extension.view.perfadvisorlogin",
+        "title": "%plugins_perfadvisor_title_login%"
+      },
+      {
+        "command": "extension.view.perfUpgrade",
+        "title": "%plugins_perfadvisor_title_upgrade%"
+      },
+      {
+        "command": "extension.view.perfUninstall",
+        "title": "%plugins_perfadvisor_title_uninstall%"
+      },
+      {
+        "command": "extension.view.feedback",
+        "title": "%perfadvisor.sys.advicefeedback%"
+      },
+      {
+        "command": "extension.view.about",
+        "title": "%plugins_perfadvisor_title_about%"
+      },
+      {
+        "command": "extension.view.deployserverend",
+        "title": "%deploy.server.end%"
+      },
+      {
+        "command": "configurationInfo.refreshEntry",
+        "title": "Refresh",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "configurationInfo.refreshEntry",
+          "when": "view == configurationInfo",
+          "group": "navigation"
+        },
+        {
+          "command": "extension.view.deployserverend",
+          "when": "view == perfadvisorTools",
+          "group": "inline2@1"
+        },
+        {
+          "command": "extension.view.perfadvisorserverconfig",
+          "when": "view == perfadvisorTools && !isPerfadvisorConfigured",
+          "group": "inline2@2"
+        },
+        {
+          "command": "extension.view.perfadvisorserverconfigagain",
+          "when": "view == perfadvisorTools && isPerfadvisorConfigured",
+          "group": "inline2@2"
+        },
+        {
+          "command": "extension.view.perfadvfreetrialremoteenvironment",
+          "when": "view == perfadvisorTools",
+          "group": "inline2@3"
+        },
+        {
+          "command": "extension.view.perfUpgrade",
+          "when": "view == perfadvisorTools",
+          "group": "inline3@1"
+        },
+        {
+          "command": "extension.view.perfUninstall",
+          "when": "view == perfadvisorTools",
+          "group": "inline3@2"
+        },
+        {
+          "command": "extension.view.feedback",
+          "when": "view == perfadvisorTools",
+          "group": "inline4@1"
+        },
+        {
+          "command": "extension.view.about",
+          "when": "view == perfadvisorTools",
+          "group": "inline4@2"
+        },
+        {
+          "command": "extension.view.deployserverend",
+          "when": "view == perfPanelbeforeConfigured",
+          "group": "inline2@1"
+        },
+        {
+          "command": "extension.view.perfadvisorserverconfig",
+          "when": "view == perfPanelbeforeConfigured && !isPerfadvisorConfigured",
+          "group": "inline2@2"
+        },
+        {
+          "command": "extension.view.perfadvisorserverconfigagain",
+          "when": "view == perfPanelbeforeConfigured && isPerfadvisorConfigured",
+          "group": "inline2@2"
+        },
+        {
+          "command": "extension.view.perfadvfreetrialremoteenvironment",
+          "when": "view == perfPanelbeforeConfigured",
+          "group": "inline2@3"
+        },
+        {
+          "command": "extension.view.perfUpgrade",
+          "when": "view == perfPanelbeforeConfigured",
+          "group": "inline3@1"
+        },
+        {
+          "command": "extension.view.perfUninstall",
+          "when": "view == perfPanelbeforeConfigured",
+          "group": "inline3@2"
+        },
+        {
+          "command": "extension.view.feedback",
+          "when": "view == perfPanelbeforeConfigured",
+          "group": "inline4@1"
+        },
+        {
+          "command": "extension.view.about",
+          "when": "view == perfPanelbeforeConfigured",
+          "group": "inline4@2"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "extension.view.perfadvisorlogin",
+          "when": "false"
+        },
+        {
+          "command": "extension.view.perfadvisorserverconfig",
+          "when": "false"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "kunpengTuning",
+          "title": "%kunpeng.tuning.suite%",
+          "icon": "resources/images/tuning.svg"
+        }
+      ]
+    },
+    "views": {
+      "kunpengTuning": [
+        {
+          "type": "webview",
+          "id": "configurationInfo",
+          "name": "%server_configure_column_title%",
+          "when": "isPerfadvisorConfigured"
+        },
+        {
+          "id": "perfadvisorTools",
+          "name": "%views_welcome_column_title%",
+          "when": "isPerfadvisorConfigured"
+        },
+        {
+          "id": "perfPanelbeforeConfigured",
+          "name": "",
+          "when": "!isPerfadvisorConfigured"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "perfadvisorTools",
+        "contents": "%perfadvisor.configer.server%",
+        "when": "!isPerfadvisorConfigured && !refreshFailure"
+      },
+      {
+        "view": "perfadvisorTools",
+        "contents": "%perfadvisor.no.login%",
+        "when": "isPerfadvisorConfigured && !isPerfadvisorLoggedIn && !refreshFailure"
+      },
+      {
+        "view": "perfadvisorTools",
+        "contents": "%perfadvisor.logged.in%",
+        "enablement": "false",
+        "when": "isPerfadvisorConfigured && isPerfadvisorLoggedIn && !refreshFailure"
+      },
+      {
+        "view": "perfadvisorTools",
+        "contents": "%perfadvisor.again.configer.server%",
+        "when": "false"
+      },
+      {
+        "view": "perfadvisorTools",
+        "contents": "%perfadvisor.server.refresh.failure%",
+        "when": "isPerfadvisorConfigured && refreshFailure"
+      },
+      {
+        "view": "perfadvisorTools",
+        "contents": "%perfadvisor.free.trial%",
+        "when": "!isPerfadvisorLoggedIn"
+      },
+      {
+        "view": "perfPanelbeforeConfigured",
+        "contents": "%perfadvisor.configer.server%",
+        "when": "!isPerfadvisorConfigured"
+      },
+      {
+        "view": "perfPanelbeforeConfigured",
+        "contents": "%perfadvisor.no.login%",
+        "when": "isPerfadvisorConfigured && !isPerfadvisorLoggedIn"
+      },
+      {
+        "view": "perfPanelbeforeConfigured",
+        "contents": "%perfadvisor.logged.in%",
+        "enablement": "false",
+        "when": "isPerfadvisorConfigured && isPerfadvisorLoggedIn"
+      },
+      {
+        "view": "perfPanelbeforeConfigured",
+        "contents": "%perfadvisor.again.configer.server%",
+        "when": "false"
+      },
+      {
+        "view": "perfPanelbeforeConfigured",
+        "contents": "%perfadvisor.free.trial%",
+        "when": "!isPerfadvisorLoggedIn"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "tslint -p ./",
+    "test": "node ./out/test/runTest.js",
+    "package": "sh ./build/package.sh",
+    "package0": "sh ./build/simp.sh"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.0",
+    "@types/node": "14.x",
+    "@types/ssh2": "^0.5.52",
+    "@types/vscode": "^1.53.0",
+    "glob": "^7.2.0",
+    "mocha": "^9.2.2",
+    "tslint": "~6.1.0",
+    "typescript": "^4.5.5",
+    "vsce": "^2.9.0"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "http-proxy": "^1.18.1",
+    "nan": "^2.16.0",
+    "ssh2": "^1.11.0"
+  }
+}

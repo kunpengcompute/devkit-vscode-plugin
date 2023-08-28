@@ -1,0 +1,8 @@
+body {
+    background-color: transparent;
+}
+
+.info-box{
+    border-collapse:separate;
+    border-spacing:0px 16px;
+}

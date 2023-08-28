@@ -1,0 +1,27 @@
+.main {
+  height: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+
+  .main {
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+    background-color: var(--ti-default-body-bg);
+
+    .router-content {
+      flex: 1;
+      overflow-x: hidden;
+      overflow-y: auto !important;
+    }
+
+  }
+}
+
+
